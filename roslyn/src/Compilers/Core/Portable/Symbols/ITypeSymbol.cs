@@ -89,13 +89,13 @@ namespace Microsoft.CodeAnalysis
         new ITypeSymbol OriginalDefinition { get; }
 
         /// <summary>
-        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>. 
+        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>.
         /// Returns <see cref="Microsoft.CodeAnalysis.SpecialType.None"/> if the type is not special.
         /// </summary>
         SpecialType SpecialType { get; }
 
         /// <summary>
-        /// Returns the corresponding symbol in this type or a base type that implements 
+        /// Returns the corresponding symbol in this type or a base type that implements
         /// interfaceMember (either implicitly or explicitly), or null if no such symbol exists
         /// (which might be either because this type doesn't implement the container of
         /// interfaceMember, or this type doesn't supply a member that successfully implements
@@ -141,7 +141,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="topLevelNullability">The top-level nullability to use for formatting.</param>
         /// <param name="format">Format or null for the default.</param>
         /// <returns>A formatted string representation of the symbol with the given nullability.</returns>
-        string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat? format = null);
+        string ToDisplayString(
+            NullableFlowState topLevelNullability,
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Converts a symbol to an array of string parts, each of which has a kind. Useful
@@ -150,7 +153,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="topLevelNullability">The top-level nullability to use for formatting.</param>
         /// <param name="format">Format or null for the default.</param>
         /// <returns>A read-only array of string parts.</returns>
-        ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat? format = null);
+        ImmutableArray<SymbolDisplayPart> ToDisplayParts(
+            NullableFlowState topLevelNullability,
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Converts a symbol to a string that can be displayed to the user. May be tailored to a
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis
             SemanticModel semanticModel,
             NullableFlowState topLevelNullability,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Convert a symbol to an array of string parts, each of which has a kind. May be tailored
@@ -182,7 +189,8 @@ namespace Microsoft.CodeAnalysis
             SemanticModel semanticModel,
             NullableFlowState topLevelNullability,
             int position,
-            SymbolDisplayFormat? format = null);
+            SymbolDisplayFormat? format = null
+        );
 
         /// <summary>
         /// Nullable annotation associated with the type, or <see cref="NullableAnnotation.None"/> if there are none.
@@ -197,7 +205,7 @@ namespace Microsoft.CodeAnalysis
     }
 
     // Intentionally not extension methods. We don't want them ever be called for symbol classes
-    // Once Default Interface Implementations are supported, we can move these methods into the interface. 
+    // Once Default Interface Implementations are supported, we can move these methods into the interface.
     internal static class ITypeSymbolHelpers
     {
         internal static bool IsNullableType([NotNullWhen(returnValue: true)] ITypeSymbol? typeOpt)
@@ -226,12 +234,16 @@ namespace Microsoft.CodeAnalysis
             return type?.SpecialType == SpecialType.System_Object;
         }
 
-        internal static bool IsSignedIntegralType([NotNullWhen(returnValue: true)] ITypeSymbol? type)
+        internal static bool IsSignedIntegralType(
+            [NotNullWhen(returnValue: true)] ITypeSymbol? type
+        )
         {
             return type?.SpecialType.IsSignedIntegralType() == true;
         }
 
-        internal static bool IsUnsignedIntegralType([NotNullWhen(returnValue: true)] ITypeSymbol? type)
+        internal static bool IsUnsignedIntegralType(
+            [NotNullWhen(returnValue: true)] ITypeSymbol? type
+        )
         {
             return type?.SpecialType.IsUnsignedIntegralType() == true;
         }

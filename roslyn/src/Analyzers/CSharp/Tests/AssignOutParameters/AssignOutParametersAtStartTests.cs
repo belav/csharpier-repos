@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        AssignOutParametersAtStartCodeFixProvider>;
+        AssignOutParametersAtStartCodeFixProvider
+    >;
 
     /// <summary>
     /// Note: many of these tests will validate that there is no fix offered here. That's because for many of them, that
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestForSimpleReturn()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(out int i)
     {
@@ -42,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestForSwitchSectionReturn()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -53,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -64,13 +66,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
                 return 'a';
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWhenVariableAssigned()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(out int i)
     {
@@ -86,7 +90,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestWhenNotAssignedThroughAllPaths1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -96,7 +100,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         {|CS0177:return 'a';|}
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -106,14 +110,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
 
         return 'a';
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWhenNotAssignedThroughAllPaths2()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     bool M(out int i1, out int i2)
     {
@@ -133,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         [Fact]
         public async Task TestMissingWhenAssignedThroughAllPaths()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -153,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestMultiple()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(out int i, out string s)
     {
@@ -168,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestMultiple_AssignedInReturn1()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     string M(out int i, out string s)
     {
@@ -183,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestMultiple_AssignedInReturn2()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     string M(out int i, out string s)
     {
@@ -198,7 +208,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestNestedReturn()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -208,7 +218,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -218,14 +228,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             return 'a';
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedReturnNoBlock()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -233,7 +244,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             {|CS0177:return 'a';|}
     }
 }",
-@"class C
+                @"class C
 {
     char M(out int i)
     {
@@ -241,14 +252,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         if (true)
             return 'a';
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedReturnEvenWhenWrittenAfter()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -261,7 +273,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         throw null;
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -274,14 +286,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         i = 1;
         throw null;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestForExpressionBodyMember()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(out int i) => {|CS0177:'a'|};
 }";
@@ -293,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestForLambdaExpressionBody()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     delegate char D(out int i);
     void X()
@@ -309,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestMissingForLocalFunctionExpressionBody()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     void X()
     {
@@ -325,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestForLambdaBlockBody()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     delegate char D(out int i);
     void X()
@@ -344,7 +361,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestForLocalFunctionBlockBody()
         {
             // Handled by other fixer
-            var code = @"class C
+            var code =
+                @"class C
 {
     void X()
     {
@@ -363,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         [Fact]
         public async Task TestForOutParamInSinglePath()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     char M(bool b, out int i)
     {
@@ -385,7 +404,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         public async Task TestFixAll1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -399,7 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -414,14 +433,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             return 'a';
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll1_MultipleMethods()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -446,7 +466,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -475,14 +495,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             return 'a';
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -492,7 +513,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             {|CS0177:{|CS0177:return 'a';|}|}
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -503,14 +524,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         else
             return 'a';
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2_MultipleMethods()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -527,7 +549,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             {|CS0177:{|CS0177:return 'a';|}|}
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -548,14 +570,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         else
             return 'a';
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -571,7 +594,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -588,14 +611,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             return 'a';
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll3_MultipleMethods()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -624,7 +648,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
         }
     }
 }",
-@"class C
+                @"class C
 {
     char M(bool b, out int i, out int j)
     {
@@ -657,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AssignOutParameters
             return 'a';
         }
     }
-}");
+}"
+            );
         }
     }
 }

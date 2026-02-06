@@ -9,14 +9,20 @@ namespace System.Runtime.DurableInstancing
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Xml.Linq;
     using System.Threading;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceView
     {
-        static readonly ReadOnlyDictionaryInternal<XName, InstanceValue> emptyProperties = new ReadOnlyDictionaryInternal<XName, InstanceValue>(new Dictionary<XName, InstanceValue>(0));
-        static readonly ReadOnlyDictionaryInternal<Guid, InstanceKeyView> emptyKeys = new ReadOnlyDictionaryInternal<Guid, InstanceKeyView>(new Dictionary<Guid, InstanceKeyView>(0));
+        static readonly ReadOnlyDictionaryInternal<XName, InstanceValue> emptyProperties =
+            new ReadOnlyDictionaryInternal<XName, InstanceValue>(
+                new Dictionary<XName, InstanceValue>(0)
+            );
+        static readonly ReadOnlyDictionaryInternal<Guid, InstanceKeyView> emptyKeys =
+            new ReadOnlyDictionaryInternal<Guid, InstanceKeyView>(
+                new Dictionary<Guid, InstanceKeyView>(0)
+            );
 
         IDictionary<XName, InstanceValue> data;
         IDictionary<XName, InstanceValue> metadata;
@@ -49,10 +55,14 @@ namespace System.Runtime.DurableInstancing
         InstanceView()
         {
             this.instanceVersion = -1;
-            InstanceDataConsistency = InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
-            InstanceMetadataConsistency = InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
-            InstanceOwnerMetadataConsistency = InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
-            InstanceKeysConsistency = InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
+            InstanceDataConsistency =
+                InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
+            InstanceMetadataConsistency =
+                InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
+            InstanceOwnerMetadataConsistency =
+                InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
+            InstanceKeysConsistency =
+                InstanceValueConsistency.InDoubt | InstanceValueConsistency.Partial;
         }
 
         InstanceView(InstanceView source)
@@ -85,7 +95,8 @@ namespace System.Runtime.DurableInstancing
                     keys.Add(key.Key, key.Value.Clone());
                 }
             }
-            InstanceKeys = keys == null ? null : new ReadOnlyDictionaryInternal<Guid, InstanceKeyView>(keys);
+            InstanceKeys =
+                keys == null ? null : new ReadOnlyDictionaryInternal<Guid, InstanceKeyView>(keys);
         }
 
         public Guid InstanceId { get; private set; }
@@ -94,18 +105,12 @@ namespace System.Runtime.DurableInstancing
         public InstanceOwner InstanceOwner { get; private set; }
         public bool IsBoundToInstanceOwner
         {
-            get
-            {
-                return InstanceOwner != null;
-            }
+            get { return InstanceOwner != null; }
         }
 
         public bool IsBoundToLock
         {
-            get
-            {
-                return this.instanceVersion >= 0;
-            }
+            get { return this.instanceVersion >= 0; }
         }
 
         public InstanceState InstanceState { get; internal set; }
@@ -115,10 +120,7 @@ namespace System.Runtime.DurableInstancing
         public InstanceValueConsistency InstanceDataConsistency { get; internal set; }
         public IDictionary<XName, InstanceValue> InstanceData
         {
-            get
-            {
-                return this.data ?? InstanceView.emptyProperties;
-            }
+            get { return this.data ?? InstanceView.emptyProperties; }
             internal set
             {
                 Fx.AssertAndThrow(!IsViewFrozen, "Setting Data on frozen View.");
@@ -133,7 +135,10 @@ namespace System.Runtime.DurableInstancing
             {
                 IDictionary<XName, InstanceValue> pendingWrites = this.accumulatedMetadataWrites;
                 this.accumulatedMetadataWrites = null;
-                this.metadata = pendingWrites.ReadOnlyMergeInto(this.metadata ?? InstanceView.emptyProperties, true);
+                this.metadata = pendingWrites.ReadOnlyMergeInto(
+                    this.metadata ?? InstanceView.emptyProperties,
+                    true
+                );
                 return this.metadata;
             }
             internal set
@@ -160,9 +165,13 @@ namespace System.Runtime.DurableInstancing
         {
             get
             {
-                IDictionary<XName, InstanceValue> pendingWrites = this.accumulatedOwnerMetadataWrites;
+                IDictionary<XName, InstanceValue> pendingWrites =
+                    this.accumulatedOwnerMetadataWrites;
                 this.accumulatedOwnerMetadataWrites = null;
-                this.ownerMetadata = pendingWrites.ReadOnlyMergeInto(this.ownerMetadata ?? InstanceView.emptyProperties, true);
+                this.ownerMetadata = pendingWrites.ReadOnlyMergeInto(
+                    this.ownerMetadata ?? InstanceView.emptyProperties,
+                    true
+                );
                 return this.ownerMetadata;
             }
             internal set
@@ -187,10 +196,7 @@ namespace System.Runtime.DurableInstancing
         public InstanceValueConsistency InstanceKeysConsistency { get; internal set; }
         public IDictionary<Guid, InstanceKeyView> InstanceKeys
         {
-            get
-            {
-                return this.keys ?? InstanceView.emptyKeys;
-            }
+            get { return this.keys ?? InstanceView.emptyKeys; }
             internal set
             {
                 Fx.AssertAndThrow(!IsViewFrozen, "Setting Keys on frozen View.");
@@ -198,22 +204,30 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        // Arch prefers ReadOnlyCollection here to ICollection.   
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
-            Justification = "property is of ReadOnlyCollection type")]
+        // Arch prefers ReadOnlyCollection here to ICollection.
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
+            Justification = "property is of ReadOnlyCollection type"
+        )]
         public ReadOnlyCollection<InstanceStoreQueryResult> InstanceStoreQueryResults
         {
             get
             {
                 if (this.queryResults == null)
                 {
-                    this.queryResults = new ReadOnlyCollection<InstanceStoreQueryResult>(QueryResultsBacking);
+                    this.queryResults = new ReadOnlyCollection<InstanceStoreQueryResult>(
+                        QueryResultsBacking
+                    );
                 }
                 return this.queryResults;
             }
             internal set
             {
-                Fx.AssertAndThrow(!IsViewFrozen, "Setting InstanceStoreQueryResults on frozen View.");
+                Fx.AssertAndThrow(
+                    !IsViewFrozen,
+                    "Setting InstanceStoreQueryResults on frozen View."
+                );
                 this.queryResults = null;
                 if (value == null)
                 {
@@ -247,7 +261,9 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(owner != null, "Null owner passed to BindOwner.");
             if (IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToOwner));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextAlreadyBoundToOwner)
+                );
             }
             InstanceOwner = owner;
         }
@@ -258,7 +274,9 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceId != Guid.Empty, "Null instanceId passed to BindInstance.");
             if (IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToInstance));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextAlreadyBoundToInstance)
+                );
             }
             InstanceId = instanceId;
             IsBoundToInstance = true;
@@ -270,15 +288,21 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceVersion >= 0, "Negative instanceVersion passed to BindLock.");
             if (!IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToOwner));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextMustBeBoundToOwner)
+                );
             }
             if (!IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToInstance));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextMustBeBoundToInstance)
+                );
             }
             if (Interlocked.CompareExchange(ref this.instanceVersion, instanceVersion, -1) != -1)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToLock));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextAlreadyBoundToLock)
+                );
             }
         }
 
@@ -290,15 +314,27 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(instanceVersion >= 0, "Negative instanceVersion passed to StartBindLock.");
             if (!IsBoundToInstanceOwner)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToOwner));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextMustBeBoundToOwner)
+                );
             }
             if (!IsBoundToInstance)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextMustBeBoundToInstance));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextMustBeBoundToInstance)
+                );
             }
-            if (Interlocked.CompareExchange(ref this.instanceVersion, checked(-instanceVersion - 2), -1) != -1)
+            if (
+                Interlocked.CompareExchange(
+                    ref this.instanceVersion,
+                    checked(-instanceVersion - 2),
+                    -1
+                ) != -1
+            )
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.ContextAlreadyBoundToLock));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.ContextAlreadyBoundToLock)
+                );
             }
         }
 
@@ -309,8 +345,15 @@ namespace System.Runtime.DurableInstancing
             Fx.Assert(IsBoundToInstanceOwner, "Must be bound to owner, checked in StartBindLock.");
             Fx.Assert(IsBoundToInstance, "Must be bound to instance, checked in StartBindLock.");
 
-            long result = Interlocked.CompareExchange(ref this.instanceVersion, instanceVersion, -instanceVersion - 2);
-            Fx.AssertAndThrow(result == -instanceVersion - 2, "FinishBindLock called with mismatched instance version.");
+            long result = Interlocked.CompareExchange(
+                ref this.instanceVersion,
+                instanceVersion,
+                -instanceVersion - 2
+            );
+            Fx.AssertAndThrow(
+                result == -instanceVersion - 2,
+                "FinishBindLock called with mismatched instance version."
+            );
         }
 
         internal void MakeReadOnly()

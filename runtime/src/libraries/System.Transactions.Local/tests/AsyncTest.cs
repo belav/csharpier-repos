@@ -43,7 +43,6 @@ namespace System.Transactions.Tests
             });
         }
 
-
         [Fact]
         public void AsyncFail2()
         {
@@ -67,6 +66,7 @@ namespace System.Transactions.Tests
 
         private AsyncCallback _callback = null;
         private static int s_state = 0;
+
         /* Callback called ? */
         private static bool s_called = false;
         private static ManualResetEvent s_mr = new ManualResetEvent(false);

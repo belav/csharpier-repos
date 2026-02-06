@@ -23,11 +23,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             private readonly IComparer<T> _comparer;
 
-            internal InverseComparer(IComparer<T> comparer)
-                => _comparer = comparer;
+            internal InverseComparer(IComparer<T> comparer) => _comparer = comparer;
 
-            public int Compare(T? x, T? y)
-                => _comparer.Compare(y, x);
+            public int Compare(T? x, T? y) => _comparer.Compare(y, x);
         }
     }
 }

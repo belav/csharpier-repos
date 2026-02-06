@@ -10,7 +10,12 @@ public class Hello1
     [Fact]
     public static void TestEntryPoint()
     {
-        int i, j, k, l, m, t;
+        int i,
+            j,
+            k,
+            l,
+            m,
+            t;
 
         i = j = k = l = m = 0;
 
@@ -19,7 +24,7 @@ public class Hello1
             i++;
         }
 
-    LOOP_START:
+        LOOP_START:
 
         switch (i)
         {
@@ -44,8 +49,7 @@ public class Hello1
                 break;
         }
 
-
-    LOOPEXIT:
+        LOOPEXIT:
 
         t = i;
         System.Console.WriteLine("i is {0}", t);
@@ -57,6 +61,5 @@ public class Hello1
         System.Console.WriteLine("l is {0}", t);
         t = m;
         System.Console.WriteLine("m is {0}", t);
-
     }
 }

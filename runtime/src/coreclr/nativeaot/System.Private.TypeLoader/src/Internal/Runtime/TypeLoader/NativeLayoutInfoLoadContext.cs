@@ -1,12 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-
 using Internal.NativeFormat;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
@@ -36,7 +34,10 @@ namespace Internal.Runtime.TypeLoader
             for (uint i = 0; i < arity; i++)
                 typeArguments[i] = GetType(ref parser);
 
-            return _typeSystemContext.ResolveGenericInstantiation(typeDefinition, new Instantiation(typeArguments));
+            return _typeSystemContext.ResolveGenericInstantiation(
+                typeDefinition,
+                new Instantiation(typeArguments)
+            );
         }
 
         private TypeDesc GetModifierType(ref NativeParser parser, TypeModifierKind modifier)
@@ -111,7 +112,9 @@ namespace Internal.Runtime.TypeLoader
 
                 case TypeSignatureKind.Variable:
                     uint index = data >> 1;
-                    return (((data & 0x1) != 0) ? _methodArgumentHandles : _typeArgumentHandles)[checked((int)index)];
+                    return (((data & 0x1) != 0) ? _methodArgumentHandles : _typeArgumentHandles)[
+                        checked((int)index)
+                    ];
 
                 case TypeSignatureKind.Instantiation:
                     return GetInstantiationType(ref parser, data);
@@ -123,51 +126,54 @@ namespace Internal.Runtime.TypeLoader
                     return GetExternalType(data);
 
                 case TypeSignatureKind.MultiDimArray:
+                {
+                    TypeDesc elementType = GetType(ref parser);
+                    int rank = (int)data;
+
+                    // Skip encoded bounds and lobounds
+                    uint boundsCount = parser.GetUnsigned();
+                    while (boundsCount > 0)
                     {
-                        TypeDesc elementType = GetType(ref parser);
-                        int rank = (int)data;
-
-                        // Skip encoded bounds and lobounds
-                        uint boundsCount = parser.GetUnsigned();
-                        while (boundsCount > 0)
-                        {
-                            parser.GetUnsigned();
-                            boundsCount--;
-                        }
-
-                        uint loBoundsCount = parser.GetUnsigned();
-                        while (loBoundsCount > 0)
-                        {
-                            parser.GetUnsigned();
-                            loBoundsCount--;
-                        }
-
-                        return _typeSystemContext.GetArrayType(elementType, rank);
+                        parser.GetUnsigned();
+                        boundsCount--;
                     }
+
+                    uint loBoundsCount = parser.GetUnsigned();
+                    while (loBoundsCount > 0)
+                    {
+                        parser.GetUnsigned();
+                        loBoundsCount--;
+                    }
+
+                    return _typeSystemContext.GetArrayType(elementType, rank);
+                }
 
                 case TypeSignatureKind.BuiltIn:
                     return _typeSystemContext.GetWellKnownType((WellKnownType)data);
 
                 case TypeSignatureKind.FunctionPointer:
-                    {
-                        var callConv = (MethodCallingConvention)parser.GetUnsigned();
-                        Debug.Assert((callConv & MethodCallingConvention.Generic) == 0);
+                {
+                    var callConv = (MethodCallingConvention)parser.GetUnsigned();
+                    Debug.Assert((callConv & MethodCallingConvention.Generic) == 0);
 
-                        uint numParams = parser.GetUnsigned();
+                    uint numParams = parser.GetUnsigned();
 
-                        TypeDesc returnType = GetType(ref parser);
-                        TypeDesc[] parameters = new TypeDesc[numParams];
-                        for (uint i = 0; i < parameters.Length; i++)
-                            parameters[i] = GetType(ref parser);
+                    TypeDesc returnType = GetType(ref parser);
+                    TypeDesc[] parameters = new TypeDesc[numParams];
+                    for (uint i = 0; i < parameters.Length; i++)
+                        parameters[i] = GetType(ref parser);
 
-                        return _typeSystemContext.GetFunctionPointerType(
-                            new MethodSignature(
-                                (callConv & MethodCallingConvention.Unmanaged) != 0 ? MethodSignatureFlags.UnmanagedCallingConvention : 0,
-                                0,
-                                returnType,
-                                parameters
-                                ));
-                    }
+                    return _typeSystemContext.GetFunctionPointerType(
+                        new MethodSignature(
+                            (callConv & MethodCallingConvention.Unmanaged) != 0
+                                ? MethodSignatureFlags.UnmanagedCallingConvention
+                                : 0,
+                            0,
+                            returnType,
+                            parameters
+                        )
+                    );
+                }
 
                 default:
                     NativeParser.ThrowBadImageFormatException();
@@ -175,7 +181,11 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        internal MethodDesc GetMethod(ref NativeParser parser, out RuntimeSignature methodNameSig, out RuntimeSignature methodSig)
+        internal MethodDesc GetMethod(
+            ref NativeParser parser,
+            out RuntimeSignature methodNameSig,
+            out RuntimeSignature methodSig
+        )
         {
             MethodFlags flags = (MethodFlags)parser.GetUnsigned();
 
@@ -184,7 +194,13 @@ namespace Internal.Runtime.TypeLoader
                 functionPointer = GetExternalReferencePointer(parser.GetUnsigned());
 
             DefType containingType = (DefType)GetType(ref parser);
-            MethodNameAndSignature nameAndSignature = TypeLoaderEnvironment.GetMethodNameAndSignature(ref parser, _module.Handle, out methodNameSig, out methodSig);
+            MethodNameAndSignature nameAndSignature =
+                TypeLoaderEnvironment.GetMethodNameAndSignature(
+                    ref parser,
+                    _module.Handle,
+                    out methodNameSig,
+                    out methodSig
+                );
 
             bool unboxingStub = (flags & MethodFlags.IsUnboxingStub) != 0;
 
@@ -193,11 +209,24 @@ namespace Internal.Runtime.TypeLoader
             {
                 TypeDesc[] typeArguments = GetTypeSequence(ref parser);
                 Debug.Assert(typeArguments.Length > 0);
-                retVal = this._typeSystemContext.ResolveGenericMethodInstantiation(unboxingStub, containingType, nameAndSignature, new Instantiation(typeArguments), functionPointer, (flags & MethodFlags.FunctionPointerIsUSG) != 0);
+                retVal = this._typeSystemContext.ResolveGenericMethodInstantiation(
+                    unboxingStub,
+                    containingType,
+                    nameAndSignature,
+                    new Instantiation(typeArguments),
+                    functionPointer,
+                    (flags & MethodFlags.FunctionPointerIsUSG) != 0
+                );
             }
             else
             {
-                retVal = this._typeSystemContext.ResolveRuntimeMethod(unboxingStub, containingType, nameAndSignature, functionPointer, (flags & MethodFlags.FunctionPointerIsUSG) != 0);
+                retVal = this._typeSystemContext.ResolveRuntimeMethod(
+                    unboxingStub,
+                    containingType,
+                    nameAndSignature,
+                    functionPointer,
+                    (flags & MethodFlags.FunctionPointerIsUSG) != 0
+                );
             }
 
             if ((flags & MethodFlags.FunctionPointerIsUSG) != 0)

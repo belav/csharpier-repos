@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,65 +28,81 @@ using System.Windows.Markup;
 
 namespace System.Xaml
 {
-	internal class XamlNodeQueueReader : XamlReader, IXamlLineInfo
-	{
-		XamlNodeQueue source;
-		XamlNodeLineInfo node;
+    internal class XamlNodeQueueReader : XamlReader, IXamlLineInfo
+    {
+        XamlNodeQueue source;
+        XamlNodeLineInfo node;
 
-		public XamlNodeQueueReader (XamlNodeQueue source)
-		{
-			this.source = source;
-			node = default (XamlNodeLineInfo);
-		}
+        public XamlNodeQueueReader(XamlNodeQueue source)
+        {
+            this.source = source;
+            node = default(XamlNodeLineInfo);
+        }
 
-		public override bool IsEof {
-			get { return node.Node.NodeType == XamlNodeType.None; }
-		}
-		
-		public override XamlMember Member {
-			get { return NodeType != XamlNodeType.StartMember ? null : node.Node.Member.Member; }
-		}
+        public override bool IsEof
+        {
+            get { return node.Node.NodeType == XamlNodeType.None; }
+        }
 
-		public override NamespaceDeclaration Namespace {
-			get { return NodeType != XamlNodeType.NamespaceDeclaration ? null : (NamespaceDeclaration) node.Node.Value; }
-		}
+        public override XamlMember Member
+        {
+            get { return NodeType != XamlNodeType.StartMember ? null : node.Node.Member.Member; }
+        }
 
-		public override XamlNodeType NodeType {
-			get { return node.Node.NodeType; }
-		}
+        public override NamespaceDeclaration Namespace
+        {
+            get
+            {
+                return NodeType != XamlNodeType.NamespaceDeclaration
+                    ? null
+                    : (NamespaceDeclaration)node.Node.Value;
+            }
+        }
 
-		public override XamlSchemaContext SchemaContext {
-			get { return source.SchemaContext; }
-		}
+        public override XamlNodeType NodeType
+        {
+            get { return node.Node.NodeType; }
+        }
 
-		public override XamlType Type {
-			get { return NodeType != XamlNodeType.StartObject ? null : node.Node.Object.Type; }
-		}
+        public override XamlSchemaContext SchemaContext
+        {
+            get { return source.SchemaContext; }
+        }
 
-		public override object Value {
-			get { return NodeType != XamlNodeType.Value ? null : node.Node.Value; }
-		}
+        public override XamlType Type
+        {
+            get { return NodeType != XamlNodeType.StartObject ? null : node.Node.Object.Type; }
+        }
 
-		public override bool Read ()
-		{
-			if (source.IsEmpty) {
-				node = default (XamlNodeLineInfo);
-				return false;
-			}
-			node = source.Dequeue ();
-			return true;
-		}
+        public override object Value
+        {
+            get { return NodeType != XamlNodeType.Value ? null : node.Node.Value; }
+        }
 
-		public bool HasLineInfo {
-			get { return node.LineNumber > 0; }
-		}
-		
-		public int LineNumber {
-			get { return node.LineNumber; }
-		}
+        public override bool Read()
+        {
+            if (source.IsEmpty)
+            {
+                node = default(XamlNodeLineInfo);
+                return false;
+            }
+            node = source.Dequeue();
+            return true;
+        }
 
-		public int LinePosition {
-			get { return node.LinePosition; }
-		}
-	}
+        public bool HasLineInfo
+        {
+            get { return node.LineNumber > 0; }
+        }
+
+        public int LineNumber
+        {
+            get { return node.LineNumber; }
+        }
+
+        public int LinePosition
+        {
+            get { return node.LinePosition; }
+        }
+    }
 }

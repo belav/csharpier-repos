@@ -25,7 +25,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Log()
         {
-            Debugger.Log(10, "category", "This is a test log message raised in the System.Diagnostics.Debug tests for the .NET Debugger class.");
+            Debugger.Log(
+                10,
+                "category",
+                "This is a test log message raised in the System.Diagnostics.Debug tests for the .NET Debugger class."
+            );
         }
 
         [Fact]

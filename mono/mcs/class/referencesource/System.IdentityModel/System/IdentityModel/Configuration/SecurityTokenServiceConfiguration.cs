@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.Security.Cryptography.X509Certificates;
 using SecurityTokenTypes = System.IdentityModel.Tokens.SecurityTokenTypes;
 using STS = System.IdentityModel.SecurityTokenService;
-using System.Security.Cryptography.X509Certificates;
-using System.IdentityModel.Protocols.WSTrust;
 
 namespace System.IdentityModel.Configuration
 {
@@ -30,16 +30,19 @@ namespace System.IdentityModel.Configuration
         int _defaultSymmetricKeySizeInBits = DefaultKeySizeInBitsConstant;
         int _defaultMaxSymmetricKeySizeInBits = 1024;
         bool _disableWsdl;
-        
+
         Type _securityTokenServiceType;
 
-        // 
+        //
         // Trust Serializers.
         //
         WSTrust13RequestSerializer _wsTrust13RequestSerializer = new WSTrust13RequestSerializer();
-        WSTrust13ResponseSerializer _wsTrust13ResponseSerializer = new WSTrust13ResponseSerializer();
-        WSTrustFeb2005RequestSerializer _wsTrustFeb2005RequestSerializer = new WSTrustFeb2005RequestSerializer();
-        WSTrustFeb2005ResponseSerializer _wsTrustFeb2005ResponseSerializer = new WSTrustFeb2005ResponseSerializer();
+        WSTrust13ResponseSerializer _wsTrust13ResponseSerializer =
+            new WSTrust13ResponseSerializer();
+        WSTrustFeb2005RequestSerializer _wsTrustFeb2005RequestSerializer =
+            new WSTrustFeb2005RequestSerializer();
+        WSTrustFeb2005ResponseSerializer _wsTrustFeb2005ResponseSerializer =
+            new WSTrustFeb2005ResponseSerializer();
 
         /// <summary>
         /// Initializes an instance of <see cref="SecurityTokenServiceConfiguration"/>
@@ -48,9 +51,7 @@ namespace System.IdentityModel.Configuration
         /// IssuerName must be set before the <see cref="SecurityTokenService"/> is used to create a token.
         /// </remarks>
         public SecurityTokenServiceConfiguration()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="SecurityTokenServiceConfiguration"/>
@@ -60,9 +61,7 @@ namespace System.IdentityModel.Configuration
         /// IssuerName must be set before the <see cref="SecurityTokenService"/> is used to create a token.
         /// </remarks>
         public SecurityTokenServiceConfiguration(bool loadConfig)
-            : this(null, null, loadConfig)
-        {
-        }
+            : this(null, null, loadConfig) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="SecurityTokenServiceConfiguration"/>
@@ -73,9 +72,7 @@ namespace System.IdentityModel.Configuration
         /// is used to create a token.
         /// </remarks>
         public SecurityTokenServiceConfiguration(string issuerName)
-            : this(issuerName, null)
-        {
-        }
+            : this(issuerName, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="SecurityTokenServiceConfiguration"/>
@@ -87,9 +84,7 @@ namespace System.IdentityModel.Configuration
         /// is used to create a token.
         /// </remarks>
         public SecurityTokenServiceConfiguration(string issuerName, bool loadConfig)
-            : this(issuerName, null, loadConfig)
-        {
-        }
+            : this(issuerName, null, loadConfig) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="SecurityTokenServiceConfiguration"/>
@@ -100,7 +95,10 @@ namespace System.IdentityModel.Configuration
         /// If issuerName is null, IssuerName must be set before the <see cref="SecurityTokenService"/>
         /// is used to create a token.
         /// </remarks>
-        public SecurityTokenServiceConfiguration(string issuerName, SigningCredentials signingCredentials)
+        public SecurityTokenServiceConfiguration(
+            string issuerName,
+            SigningCredentials signingCredentials
+        )
             : base()
         {
             _tokenIssuerName = issuerName;
@@ -117,7 +115,11 @@ namespace System.IdentityModel.Configuration
         /// If issuerName is null, IssuerName must be set before the <see cref="SecurityTokenService"/>
         /// is used to create a token.
         /// </remarks>
-        public SecurityTokenServiceConfiguration(string issuerName, SigningCredentials signingCredentials, bool loadConfig)
+        public SecurityTokenServiceConfiguration(
+            string issuerName,
+            SigningCredentials signingCredentials,
+            bool loadConfig
+        )
             : base(loadConfig)
         {
             _tokenIssuerName = issuerName;
@@ -134,7 +136,11 @@ namespace System.IdentityModel.Configuration
         /// If issuerName is null, IssuerName must be set before the <see cref="SecurityTokenService"/>
         /// is used to create a token.
         /// </remarks>
-        public SecurityTokenServiceConfiguration(string issuerName, SigningCredentials signingCredentials, string serviceName)
+        public SecurityTokenServiceConfiguration(
+            string issuerName,
+            SigningCredentials signingCredentials,
+            string serviceName
+        )
             : base(serviceName)
         {
             _tokenIssuerName = issuerName;
@@ -147,10 +153,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The provided value is null.</exception>
         public Type SecurityTokenService
         {
-            get
-            {
-                return _securityTokenServiceType;
-            }
+            get { return _securityTokenServiceType; }
             set
             {
                 if (value == null)
@@ -160,7 +163,10 @@ namespace System.IdentityModel.Configuration
 
                 if (!typeof(System.IdentityModel.SecurityTokenService).IsAssignableFrom(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID2069));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID2069)
+                    );
                 }
 
                 _securityTokenServiceType = value;
@@ -185,7 +191,9 @@ namespace System.IdentityModel.Configuration
 
             if (!typeof(STS).IsAssignableFrom(stsType))
             {
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID2074, stsType, typeof(STS)));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID2074, stsType, typeof(STS))
+                );
             }
 
             return Activator.CreateInstance(stsType, this) as STS;
@@ -199,15 +207,15 @@ namespace System.IdentityModel.Configuration
         /// </remarks>
         public int DefaultSymmetricKeySizeInBits
         {
-            get
-            {
-                return _defaultSymmetricKeySizeInBits;
-            }
+            get { return _defaultSymmetricKeySizeInBits; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", SR.GetString(SR.ID0002));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        SR.GetString(SR.ID0002)
+                    );
                 }
 
                 _defaultSymmetricKeySizeInBits = value;
@@ -223,15 +231,15 @@ namespace System.IdentityModel.Configuration
         /// </remarks>
         public int DefaultMaxSymmetricKeySizeInBits
         {
-            get
-            {
-                return _defaultMaxSymmetricKeySizeInBits;
-            }
+            get { return _defaultMaxSymmetricKeySizeInBits; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", SR.GetString(SR.ID0002));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        SR.GetString(SR.ID0002)
+                    );
                 }
 
                 _defaultMaxSymmetricKeySizeInBits = value;
@@ -243,10 +251,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public TimeSpan DefaultTokenLifetime
         {
-            get
-            {
-                return _defaultTokenLifetime;
-            }
+            get { return _defaultTokenLifetime; }
             set
             {
 
@@ -261,10 +266,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentException">The provided value is not defined in the token handlers.</exception>
         public string DefaultTokenType
         {
-            get
-            {
-                return _defaultTokenType;
-            }
+            get { return _defaultTokenType; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -274,7 +276,10 @@ namespace System.IdentityModel.Configuration
 
                 if (SecurityTokenHandlers[value] == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID2015, value));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID2015, value)
+                    );
                 }
 
                 _defaultTokenType = value;
@@ -287,31 +292,24 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public bool DisableWsdl
         {
-            get
-            {
-                return _disableWsdl;
-            }
-            set
-            {
-                _disableWsdl = value;
-            }
+            get { return _disableWsdl; }
+            set { _disableWsdl = value; }
         }
 
-        
         /// <summary>
         /// Gets or sets the maximum token lifetime for issued tokens.
         /// </summary>
         public TimeSpan MaximumTokenLifetime
         {
-            get
-            {
-                return _maximumTokenLifetime;
-            }
+            get { return _maximumTokenLifetime; }
             set
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", SR.GetString(SR.ID0016));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        SR.GetString(SR.ID0016)
+                    );
                 }
                 _maximumTokenLifetime = value;
             }
@@ -322,15 +320,8 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public SigningCredentials SigningCredentials
         {
-            get
-            {
-                return _signingCredentials;
-            }
-            set
-            {
-                _signingCredentials = value;
-            }
-
+            get { return _signingCredentials; }
+            set { _signingCredentials = value; }
         }
 
         /// <summary>
@@ -339,10 +330,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The value being set is null or empty string.</exception>
         public string TokenIssuerName
         {
-            get
-            {
-                return _tokenIssuerName;
-            }
+            get { return _tokenIssuerName; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -360,10 +348,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The provided value is null.</exception>
         public WSTrust13RequestSerializer WSTrust13RequestSerializer
         {
-            get
-            {
-                return _wsTrust13RequestSerializer;
-            }
+            get { return _wsTrust13RequestSerializer; }
             set
             {
                 if (value == null)
@@ -381,10 +366,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The provided value is null.</exception>
         public WSTrust13ResponseSerializer WSTrust13ResponseSerializer
         {
-            get
-            {
-                return _wsTrust13ResponseSerializer;
-            }
+            get { return _wsTrust13ResponseSerializer; }
             set
             {
                 if (value == null)
@@ -402,10 +384,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The provided value is null.</exception>
         public WSTrustFeb2005RequestSerializer WSTrustFeb2005RequestSerializer
         {
-            get
-            {
-                return _wsTrustFeb2005RequestSerializer;
-            }
+            get { return _wsTrustFeb2005RequestSerializer; }
             set
             {
                 if (value == null)
@@ -423,10 +402,7 @@ namespace System.IdentityModel.Configuration
         /// <exception cref="ArgumentNullException">The provided value is null.</exception>
         public WSTrustFeb2005ResponseSerializer WSTrustFeb2005ResponseSerializer
         {
-            get
-            {
-                return _wsTrustFeb2005ResponseSerializer;
-            }
+            get { return _wsTrustFeb2005ResponseSerializer; }
             set
             {
                 if (value == null)

@@ -5,8 +5,8 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     struct ObjectReferenceStack
     {
@@ -63,7 +63,6 @@ namespace System.Runtime.Serialization
                     }
                     else if (count == isReferenceArray.Length)
                     {
-
                         Array.Resize<bool>(ref isReferenceArray, isReferenceArray.Length * 2);
                     }
                     isReferenceArray[count - 1] = true;
@@ -95,7 +94,11 @@ namespace System.Runtime.Serialization
             }
             for (int i = (currentCount - 1); i >= 0; i--)
             {
-                if (Object.ReferenceEquals(obj, objectArray[i]) && isReferenceArray != null && !isReferenceArray[i])
+                if (
+                    Object.ReferenceEquals(obj, objectArray[i])
+                    && isReferenceArray != null
+                    && !isReferenceArray[i]
+                )
                     return true;
             }
             return false;
@@ -105,8 +108,5 @@ namespace System.Runtime.Serialization
         {
             get { return count; }
         }
-
     }
-
 }
-

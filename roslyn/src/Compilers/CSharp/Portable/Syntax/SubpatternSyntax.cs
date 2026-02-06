@@ -10,11 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     {
         public NameColonSyntax? NameColon => ExpressionColon as NameColonSyntax;
 
-        public SubpatternSyntax WithNameColon(NameColonSyntax? nameColon)
-            => WithExpressionColon(nameColon);
+        public SubpatternSyntax WithNameColon(NameColonSyntax? nameColon) =>
+            WithExpressionColon(nameColon);
 
-        public SubpatternSyntax Update(NameColonSyntax? nameColon, PatternSyntax pattern)
-            => Update((BaseExpressionColonSyntax?)nameColon, pattern);
+        public SubpatternSyntax Update(NameColonSyntax? nameColon, PatternSyntax pattern) =>
+            Update((BaseExpressionColonSyntax?)nameColon, pattern);
     }
 }
 
@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static SubpatternSyntax Subpattern(NameColonSyntax? nameColon, PatternSyntax pattern)
-            => Subpattern((BaseExpressionColonSyntax?)nameColon, pattern);
+        public static SubpatternSyntax Subpattern(
+            NameColonSyntax? nameColon,
+            PatternSyntax pattern
+        ) => Subpattern((BaseExpressionColonSyntax?)nameColon, pattern);
     }
 }

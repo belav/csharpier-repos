@@ -12,7 +12,8 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider()
         {
             // Arrange
-            HttpFileCollectionValueProviderFactory factory = new HttpFileCollectionValueProviderFactory();
+            HttpFileCollectionValueProviderFactory factory =
+                new HttpFileCollectionValueProviderFactory();
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(o => o.HttpContext.Request.Files.Count).Returns(0);
@@ -28,11 +29,17 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider_ThrowsIfControllerContextIsNull()
         {
             // Arrange
-            HttpFileCollectionValueProviderFactory factory = new HttpFileCollectionValueProviderFactory();
+            HttpFileCollectionValueProviderFactory factory =
+                new HttpFileCollectionValueProviderFactory();
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

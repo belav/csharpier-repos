@@ -11,20 +11,33 @@ namespace System.Security.Cryptography
 {
     internal static partial class KeyFormatHelper
     {
-        internal delegate void KeyReader<TRet>(ReadOnlyMemory<byte> key, in AlgorithmIdentifierAsn algId, out TRet ret);
+        internal delegate void KeyReader<TRet>(
+            ReadOnlyMemory<byte> key,
+            in AlgorithmIdentifierAsn algId,
+            out TRet ret
+        );
 
         internal static unsafe void ReadSubjectPublicKeyInfo<TRet>(
             string[] validOids,
             ReadOnlySpan<byte> source,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
-                    ReadSubjectPublicKeyInfo(validOids, manager.Memory, keyReader, out bytesRead, out ret);
+                    ReadSubjectPublicKeyInfo(
+                        validOids,
+                        manager.Memory,
+                        keyReader,
+                        out bytesRead,
+                        out ret
+                    );
                 }
             }
         }
@@ -32,7 +45,8 @@ namespace System.Security.Cryptography
         internal static ReadOnlyMemory<byte> ReadSubjectPublicKeyInfo(
             string[] validOids,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             SubjectPublicKeyInfoAsn spki;
             int read;
@@ -63,7 +77,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> source,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             SubjectPublicKeyInfoAsn spki;
             int read;
@@ -94,11 +109,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
                     ReadPkcs8(validOids, manager.Memory, keyReader, out bytesRead, out ret);
                 }
@@ -108,7 +126,8 @@ namespace System.Security.Cryptography
         internal static ReadOnlyMemory<byte> ReadPkcs8(
             string[] validOids,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             try
             {
@@ -135,7 +154,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> source,
             KeyReader<TRet> keyReader,
             out int bytesRead,
-            out TRet ret)
+            out TRet ret
+        )
         {
             try
             {
@@ -161,7 +181,8 @@ namespace System.Security.Cryptography
         internal static AsnWriter WritePkcs8(
             AsnWriter algorithmIdentifierWriter,
             AsnWriter privateKeyWriter,
-            AsnWriter? attributesWriter = null)
+            AsnWriter? attributesWriter = null
+        )
         {
             // Ensure both algorithm identifier and key writers are balanced.
             int algorithmIdentifierLength = algorithmIdentifierWriter.GetEncodedLength();

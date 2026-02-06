@@ -20,21 +20,34 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
 {
     using static SimplifyBooleanExpressionConstants;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.SimplifyConditionalExpression), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.SimplifyConditionalExpression
+        ),
+        Shared
+    ]
     internal sealed class SimplifyConditionalCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public SimplifyConditionalCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public SimplifyConditionalCodeFixProvider() { }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.SimplifyConditionalExpressionDiagnosticId);
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, AnalyzersResources.Simplify_conditional_expression, nameof(AnalyzersResources.Simplify_conditional_expression));
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Simplify_conditional_expression,
+                nameof(AnalyzersResources.Simplify_conditional_expression)
+            );
             return Task.CompletedTask;
         }
 
@@ -43,7 +56,8 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
@@ -53,25 +67,48 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
             // outermost ones. Also, use ApplyExpressionLevelSemanticEditsAsync so that we can appropriately understand
             // the semantics of conditional nodes if we changed what was inside of them.
 
-            await editor.ApplyExpressionLevelSemanticEditsAsync(
-                document,
-                diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start).ToImmutableArray(),
-                d => d.Location.FindNode(getInnermostNodeForTie: true, cancellationToken),
-                canReplace: (_, _, _) => true,
-                (semanticModel, root, diagnostic, current) => root.ReplaceNode(current, SimplifyConditional(semanticModel, diagnostic, current)),
-                cancellationToken).ConfigureAwait(false);
+            await editor
+                .ApplyExpressionLevelSemanticEditsAsync(
+                    document,
+                    diagnostics
+                        .OrderByDescending(d => d.Location.SourceSpan.Start)
+                        .ToImmutableArray(),
+                    d => d.Location.FindNode(getInnermostNodeForTie: true, cancellationToken),
+                    canReplace: (_, _, _) => true,
+                    (semanticModel, root, diagnostic, current) =>
+                        root.ReplaceNode(
+                            current,
+                            SimplifyConditional(semanticModel, diagnostic, current)
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return;
 
-            SyntaxNode SimplifyConditional(SemanticModel semanticModel, Diagnostic diagnostic, SyntaxNode expr)
+            SyntaxNode SimplifyConditional(
+                SemanticModel semanticModel,
+                Diagnostic diagnostic,
+                SyntaxNode expr
+            )
             {
                 if (!syntaxFacts.IsConditionalExpression(expr))
                     return expr;
 
-                syntaxFacts.GetPartsOfConditionalExpression(expr, out var condition, out var whenTrue, out var whenFalse);
+                syntaxFacts.GetPartsOfConditionalExpression(
+                    expr,
+                    out var condition,
+                    out var whenTrue,
+                    out var whenFalse
+                );
 
                 if (diagnostic.Properties.ContainsKey(Negate))
-                    condition = generator.Negate(generatorInternal, condition, semanticModel, cancellationToken);
+                    condition = generator.Negate(
+                        generatorInternal,
+                        condition,
+                        semanticModel,
+                        cancellationToken
+                    );
 
                 var replacement = condition;
                 if (diagnostic.Properties.ContainsKey(Or))

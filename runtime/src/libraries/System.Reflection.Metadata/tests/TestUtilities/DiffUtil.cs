@@ -43,14 +43,31 @@ namespace System.Reflection.Metadata.Tests
                 _comparer = comparer;
             }
 
-            protected override bool ItemsEqual(IList<T> sequenceA, int indexA, IList<T> sequenceB, int indexB)
+            protected override bool ItemsEqual(
+                IList<T> sequenceA,
+                int indexA,
+                IList<T> sequenceB,
+                int indexB
+            )
             {
                 return _comparer.Equals(sequenceA[indexA], sequenceB[indexB]);
             }
 
-            public IEnumerable<string> CalculateDiff(IList<T> sequenceA, IList<T> sequenceB, Func<T, string> toString)
+            public IEnumerable<string> CalculateDiff(
+                IList<T> sequenceA,
+                IList<T> sequenceB,
+                Func<T, string> toString
+            )
             {
-                foreach (var edit in base.GetEdits(sequenceA, sequenceA.Count, sequenceB, sequenceB.Count).Reverse())
+                foreach (
+                    var edit in base.GetEdits(
+                            sequenceA,
+                            sequenceA.Count,
+                            sequenceB,
+                            sequenceB.Count
+                        )
+                        .Reverse()
+                )
                 {
                     switch (edit.Kind)
                     {
@@ -70,7 +87,13 @@ namespace System.Reflection.Metadata.Tests
             }
         }
 
-        public static string DiffReport<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer, Func<T, string> toString, string separator)
+        public static string DiffReport<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            IEqualityComparer<T> comparer,
+            Func<T, string> toString,
+            string separator
+        )
         {
             var lcs = (comparer != null) ? new LCS<T>(comparer) : LCS<T>.Default;
             toString = toString ?? new Func<T, string>(obj => obj.ToString());
@@ -118,9 +141,19 @@ namespace System.Reflection.Metadata.Tests
             private const int InsertCost = 1;
             private const int UpdateCost = 2;
 
-            protected abstract bool ItemsEqual(TSequence sequenceA, int indexA, TSequence sequenceB, int indexB);
+            protected abstract bool ItemsEqual(
+                TSequence sequenceA,
+                int indexA,
+                TSequence sequenceB,
+                int indexB
+            );
 
-            protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
@@ -145,7 +178,12 @@ namespace System.Reflection.Metadata.Tests
                 }
             }
 
-            protected IEnumerable<Edit> GetEdits(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected IEnumerable<Edit> GetEdits(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 int[,] d = ComputeCostMatrix(sequenceA, lengthA, sequenceB, lengthB);
                 int i = lengthA;
@@ -192,7 +230,12 @@ namespace System.Reflection.Metadata.Tests
             /// Returns a distance [0..1] of the specified sequences.
             /// The smaller distance the more of their elements match.
             /// </summary>
-            protected double ComputeDistance(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            protected double ComputeDistance(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 Debug.Assert(lengthA >= 0 && lengthB >= 0);
 
@@ -232,7 +275,12 @@ namespace System.Reflection.Metadata.Tests
             /// In every vertex the cheapest outgoing edge is selected.
             /// The number of diagonal edges on the path from (0,0) to (lengthA, lengthB) is the length of the longest common subsequence.
             /// </remarks>
-            private int[,] ComputeCostMatrix(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+            private int[,] ComputeCostMatrix(
+                TSequence sequenceA,
+                int lengthA,
+                TSequence sequenceB,
+                int lengthB
+            )
             {
                 var la = lengthA + 1;
                 var lb = lengthB + 1;
@@ -256,7 +304,9 @@ namespace System.Reflection.Metadata.Tests
                 {
                     for (int j = 1; j <= lengthB; j++)
                     {
-                        int m1 = d[i - 1, j - 1] + (ItemsEqual(sequenceA, i - 1, sequenceB, j - 1) ? 0 : UpdateCost);
+                        int m1 =
+                            d[i - 1, j - 1]
+                            + (ItemsEqual(sequenceA, i - 1, sequenceB, j - 1) ? 0 : UpdateCost);
                         int m2 = d[i - 1, j] + DeleteCost;
                         int m3 = d[i, j - 1] + InsertCost;
                         d[i, j] = Math.Min(Math.Min(m1, m2), m3);

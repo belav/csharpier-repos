@@ -58,7 +58,10 @@ internal static class CodeActionRequestPriorityExtensions
     /// Clamps the value of <paramref name="priority"/> (which could be any integer) to the legal range of values
     /// present in <see cref="CodeActionRequestPriority"/>.
     /// </summary>
-    public static CodeActionRequestPriority Clamp(this CodeActionRequestPriority priority, ImmutableArray<string> customTags)
+    public static CodeActionRequestPriority Clamp(
+        this CodeActionRequestPriority priority,
+        ImmutableArray<string> customTags
+    )
     {
         // Note: we intentionally clamp things lower than 'Low' (including 'Lowest') priorities to 'Low'.  The 'Lowest'
         // value is only for use by specialized suppression/configuration providers.  Any values returned by an actual
@@ -69,16 +72,19 @@ internal static class CodeActionRequestPriorityExtensions
         if (priority > CodeActionRequestPriority.High)
             priority = CodeActionRequestPriority.High;
 
-        if (priority == CodeActionRequestPriority.High && !customTags.Contains(CodeAction.CanBeHighPriorityTag))
+        if (
+            priority == CodeActionRequestPriority.High
+            && !customTags.Contains(CodeAction.CanBeHighPriorityTag)
+        )
             priority = CodeActionRequestPriority.Default;
 
         return priority;
     }
 
-    public static int GetPriorityInt(this CodeActionRequestPriority? priority)
-        => priority switch
+    public static int GetPriorityInt(this CodeActionRequestPriority? priority) =>
+        priority switch
         {
             null => 0,
-            { } nonNull => (int)nonNull
+            { } nonNull => (int)nonNull,
         };
 }

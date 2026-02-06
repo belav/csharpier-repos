@@ -12,17 +12,20 @@ namespace Microsoft.CodeAnalysis.CSharp.OrderModifiers
     {
         public static readonly CSharpOrderModifiersHelper Instance = new();
 
-        private CSharpOrderModifiersHelper()
-        {
-        }
+        private CSharpOrderModifiersHelper() { }
 
         protected override int GetKeywordKind(string trimmed)
         {
             var kind = SyntaxFacts.GetKeywordKind(trimmed);
-            return (int)(kind == SyntaxKind.None ? SyntaxFacts.GetContextualKeywordKind(trimmed) : kind);
+            return (int)(
+                kind == SyntaxKind.None ? SyntaxFacts.GetContextualKeywordKind(trimmed) : kind
+            );
         }
 
-        protected override bool TryParse(string value, [NotNullWhen(true)] out Dictionary<int, int>? parsed)
+        protected override bool TryParse(
+            string value,
+            [NotNullWhen(true)] out Dictionary<int, int>? parsed
+        )
         {
             if (!base.TryParse(value, out parsed))
                 return false;

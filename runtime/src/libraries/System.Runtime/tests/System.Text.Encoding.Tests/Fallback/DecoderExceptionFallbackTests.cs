@@ -18,7 +18,12 @@ namespace System.Text.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new DecoderExceptionFallback(), new DecoderExceptionFallback(), true };
+            yield return new object[]
+            {
+                new DecoderExceptionFallback(),
+                new DecoderExceptionFallback(),
+                true,
+            };
             yield return new object[] { new DecoderExceptionFallback(), new object(), false };
             yield return new object[] { new DecoderExceptionFallback(), null, false };
         }

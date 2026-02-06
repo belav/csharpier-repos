@@ -9,6 +9,7 @@ public abstract class RelationalTestStoreFactory : ITestStoreFactory
     public abstract TestStore GetOrCreate(string storeName);
     public abstract IServiceCollection AddProviderServices(IServiceCollection serviceCollection);
 
-    public virtual ListLoggerFactory CreateListLoggerFactory(Func<string, bool> shouldLogCategory)
-        => new TestSqlLoggerFactory(shouldLogCategory);
+    public virtual ListLoggerFactory CreateListLoggerFactory(
+        Func<string, bool> shouldLogCategory
+    ) => new TestSqlLoggerFactory(shouldLogCategory);
 }

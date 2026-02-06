@@ -18,7 +18,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(request); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -67,7 +73,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(controller); }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -149,8 +161,13 @@ namespace System.Web.Http.Results
             NotFoundResult result = CreateProductUnderTest(controller);
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -192,8 +209,6 @@ namespace System.Web.Http.Results
             return new HttpRequestMessage();
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

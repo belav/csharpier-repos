@@ -4,48 +4,70 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
+    using System.CodeDom.Compiler;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Compilation;
-    using System.Reflection;
     using System.Web.Hosting;
     using System.Web.UI;
-    using System.CodeDom.Compiler;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     // CompilerCollection
-    public sealed class Compiler : ConfigurationElement {
+    public sealed class Compiler : ConfigurationElement
+    {
         private const string compilerOptionsAttribName = "compilerOptions";
 
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propLanguage =
-            new ConfigurationProperty("language", typeof(string), String.Empty, ConfigurationPropertyOptions.None );
-        private static readonly ConfigurationProperty _propExtension =
-            new ConfigurationProperty("extension", typeof(string), String.Empty, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propType =
-            new ConfigurationProperty("type", typeof(string), String.Empty, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsTypeStringTransformationRequired);
-        private static readonly ConfigurationProperty _propWarningLevel =
-            new ConfigurationProperty("warningLevel",
-                                        typeof(int),
-                                        0,
-                                        null,
-                                        new IntegerValidator(0, 4),
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propLanguage = new ConfigurationProperty(
+            "language",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propExtension = new ConfigurationProperty(
+            "extension",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propType = new ConfigurationProperty(
+            "type",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsTypeStringTransformationRequired
+        );
+        private static readonly ConfigurationProperty _propWarningLevel = new ConfigurationProperty(
+            "warningLevel",
+            typeof(int),
+            0,
+            null,
+            new IntegerValidator(0, 4),
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCompilerOptions =
-            new ConfigurationProperty(compilerOptionsAttribName, typeof(string), String.Empty, ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                compilerOptionsAttribName,
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
 
         private CompilerType _compilerType;
 
-        static Compiler() {
+        static Compiler()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propLanguage);
@@ -55,11 +77,17 @@ namespace System.Web.Configuration {
             _properties.Add(_propCompilerOptions);
         }
 
-        internal Compiler() {
-        }
+        internal Compiler() { }
 
-        public Compiler(String compilerOptions, String extension, String language, String type, int warningLevel)
-            : this() {
+        public Compiler(
+            String compilerOptions,
+            String extension,
+            String language,
+            String type,
+            int warningLevel
+        )
+            : this()
+        {
             base[_propCompilerOptions] = compilerOptions;
             base[_propExtension] = extension;
             base[_propLanguage] = language;
@@ -67,17 +95,15 @@ namespace System.Web.Configuration {
             base[_propWarningLevel] = warningLevel;
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("language", DefaultValue = "", IsRequired = true, IsKey = true)]
-        public string Language {
-            get {
-                return (string)base[_propLanguage];
-            }
+        public string Language
+        {
+            get { return (string)base[_propLanguage]; }
             // Remove to satisfy defect number 178343
             //set
             //{
@@ -86,10 +112,9 @@ namespace System.Web.Configuration {
         }
 
         [ConfigurationProperty("extension", DefaultValue = "")]
-        public string Extension {
-            get {
-                return (string)base[_propExtension];
-            }
+        public string Extension
+        {
+            get { return (string)base[_propExtension]; }
             // Remove to satisfy defect number 178343
             //set
             //{
@@ -98,10 +123,9 @@ namespace System.Web.Configuration {
         }
 
         [ConfigurationProperty("type", IsRequired = true, DefaultValue = "")]
-        public string Type {
-            get {
-                return (string)base[_propType];
-            }
+        public string Type
+        {
+            get { return (string)base[_propType]; }
             // Remove to satisfy defect number 178343
             //set
             //{
@@ -109,15 +133,26 @@ namespace System.Web.Configuration {
             //}
         }
 
-        internal CompilerType CompilerTypeInternal {
-            get {
-                if (_compilerType == null) {
-                    lock (this) {
-                        if (_compilerType == null) {
+        internal CompilerType CompilerTypeInternal
+        {
+            get
+            {
+                if (_compilerType == null)
+                {
+                    lock (this)
+                    {
+                        if (_compilerType == null)
+                        {
                             Type codeDomProviderType = CompilationUtil.LoadTypeWithChecks(
-                            Type, typeof(CodeDomProvider), null, this, "type");
+                                Type,
+                                typeof(CodeDomProvider),
+                                null,
+                                this,
+                                "type"
+                            );
 
-                            System.CodeDom.Compiler.CompilerParameters compilParams = new CompilerParameters();
+                            System.CodeDom.Compiler.CompilerParameters compilParams =
+                                new CompilerParameters();
                             compilParams.WarningLevel = WarningLevel;
 
                             // Need to be false if the warning level is 0
@@ -127,9 +162,13 @@ namespace System.Web.Configuration {
                             string compilerOptions = CompilerOptions;
 
                             // Only allow the use of compilerOptions when we have UnmanagedCode access (ASURT 73678)
-                            CompilationUtil.CheckCompilerOptionsAllowed(compilerOptions, true /*config*/,
+                            CompilationUtil.CheckCompilerOptionsAllowed(
+                                compilerOptions,
+                                true /*config*/
+                                ,
                                 ElementInformation.Properties[compilerOptionsAttribName].Source,
-                                ElementInformation.Properties[compilerOptionsAttribName].LineNumber);
+                                ElementInformation.Properties[compilerOptionsAttribName].LineNumber
+                            );
 
                             compilParams.CompilerOptions = compilerOptions;
 
@@ -144,10 +183,9 @@ namespace System.Web.Configuration {
 
         [ConfigurationProperty("warningLevel", DefaultValue = 0)]
         [IntegerValidator(MinValue = 0, MaxValue = 4)]
-        public int WarningLevel {
-            get {
-                return (int)base[_propWarningLevel];
-            }
+        public int WarningLevel
+        {
+            get { return (int)base[_propWarningLevel]; }
             // Remove to satisfy defect number 178343
             //set
             //{
@@ -156,16 +194,14 @@ namespace System.Web.Configuration {
         }
 
         [ConfigurationProperty(compilerOptionsAttribName, DefaultValue = "")]
-        public string CompilerOptions {
-            get {
-                return (string)base[_propCompilerOptions];
-            }
+        public string CompilerOptions
+        {
+            get { return (string)base[_propCompilerOptions]; }
             // Remove to satisfy defect number 178343
             //set
             //{
             //    base[_propCompilerOptions] = value;
             //}
         }
-
     } // class Compiler
 }

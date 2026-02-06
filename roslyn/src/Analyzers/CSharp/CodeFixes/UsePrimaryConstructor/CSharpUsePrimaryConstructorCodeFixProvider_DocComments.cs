@@ -31,26 +31,37 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
 
     // trivial helpers for working xml doc comments nodes/trivia
 
-    private static SyntaxTrivia GetDocComment(SyntaxNode node)
-        => GetDocComment(node.GetLeadingTrivia());
+    private static SyntaxTrivia GetDocComment(SyntaxNode node) =>
+        GetDocComment(node.GetLeadingTrivia());
 
-    private static SyntaxTrivia GetDocComment(SyntaxTriviaList trivia)
-        => trivia.LastOrDefault(t => t.IsSingleLineDocComment());
+    private static SyntaxTrivia GetDocComment(SyntaxTriviaList trivia) =>
+        trivia.LastOrDefault(t => t.IsSingleLineDocComment());
 
-    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxNode node)
-        => GetDocCommentStructure(node.GetLeadingTrivia());
+    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxNode node) =>
+        GetDocCommentStructure(node.GetLeadingTrivia());
 
-    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxTriviaList trivia)
-        => GetDocCommentStructure(GetDocComment(trivia));
+    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(
+        SyntaxTriviaList trivia
+    ) => GetDocCommentStructure(GetDocComment(trivia));
 
-    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxTrivia trivia)
-        => (DocumentationCommentTriviaSyntax?)trivia.GetStructure();
+    private static DocumentationCommentTriviaSyntax? GetDocCommentStructure(SyntaxTrivia trivia) =>
+        (DocumentationCommentTriviaSyntax?)trivia.GetStructure();
 
-    private static bool IsXmlElement(XmlNodeSyntax node, string name, [NotNullWhen(true)] out XmlElementSyntax? element)
+    private static bool IsXmlElement(
+        XmlNodeSyntax node,
+        string name,
+        [NotNullWhen(true)] out XmlElementSyntax? element
+    )
     {
-        element = node is XmlElementSyntax { StartTag.Name.LocalName.ValueText: var elementName } xmlElement && elementName == name
-            ? xmlElement
-            : null;
+        element =
+            node
+                is XmlElementSyntax
+                {
+                    StartTag.Name.LocalName.ValueText: var elementName
+                } xmlElement
+            && elementName == name
+                ? xmlElement
+                : null;
         return element != null;
     }
 
@@ -58,7 +69,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
     {
         return xmlElement.ReplaceTokens(
             new[] { xmlElement.StartTag.Name.LocalName, xmlElement.EndTag.Name.LocalName },
-            (token, _) => Identifier(name).WithTriviaFrom(token));
+            (token, _) => Identifier(name).WithTriviaFrom(token)
+        );
     }
 
     private static SyntaxTriviaList CreateFinalTypeDeclarationLeadingTrivia(
@@ -66,22 +78,39 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
         ConstructorDeclarationSyntax constructorDeclaration,
         IMethodSymbol constructor,
         ImmutableDictionary<string, string?> properties,
-        ImmutableDictionary<ISymbol, SyntaxNode> removedMembers)
+        ImmutableDictionary<ISymbol, SyntaxNode> removedMembers
+    )
     {
         // First, take the constructor doc comments and merge those into the type's doc comments.
         // Then, take any removed fields/properties and merge their comments into the type's doc comments.
 
-        var typeDeclarationLeadingTrivia = MergeTypeDeclarationAndConstructorDocComments(typeDeclaration, constructorDeclaration);
-        var finalLeadingTrivia = MergeTypeDeclarationAndRemovedMembersDocComments(constructor, properties, removedMembers, typeDeclarationLeadingTrivia);
+        var typeDeclarationLeadingTrivia = MergeTypeDeclarationAndConstructorDocComments(
+            typeDeclaration,
+            constructorDeclaration
+        );
+        var finalLeadingTrivia = MergeTypeDeclarationAndRemovedMembersDocComments(
+            constructor,
+            properties,
+            removedMembers,
+            typeDeclarationLeadingTrivia
+        );
 
         return finalLeadingTrivia;
 
-        static IEnumerable<XmlNodeSyntax> ConvertSummaryToParam(IEnumerable<XmlNodeSyntax> content, string parameterName)
+        static IEnumerable<XmlNodeSyntax> ConvertSummaryToParam(
+            IEnumerable<XmlNodeSyntax> content,
+            string parameterName
+        )
         {
             foreach (var node in content)
             {
                 yield return IsXmlElement(node, s_summaryTagName, out var xmlElement)
-                    ? ConvertXmlElementName(xmlElement, s_paramTagName).AddStartTagAttributes(XmlNameAttribute(CSharpSyntaxFacts.Instance.EscapeIdentifier(parameterName)))
+                    ? ConvertXmlElementName(xmlElement, s_paramTagName)
+                        .AddStartTagAttributes(
+                            XmlNameAttribute(
+                                CSharpSyntaxFacts.Instance.EscapeIdentifier(parameterName)
+                            )
+                        )
                     : node;
             }
         }
@@ -98,7 +127,8 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
 
         static SyntaxTriviaList MergeTypeDeclarationAndConstructorDocComments(
             TypeDeclarationSyntax typeDeclaration,
-            ConstructorDeclarationSyntax constructorDeclaration)
+            ConstructorDeclarationSyntax constructorDeclaration
+        )
         {
             var typeDeclarationLeadingTrivia = typeDeclaration.GetLeadingTrivia();
 
@@ -115,10 +145,17 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
                 typeDeclarationLeadingTrivia,
                 existingTypeDeclarationDocComment == default
                     ? existingConstructorDocComment
-                    : MergeDocComments(existingTypeDeclarationDocComment, existingConstructorDocComment));
+                    : MergeDocComments(
+                        existingTypeDeclarationDocComment,
+                        existingConstructorDocComment
+                    )
+            );
         }
 
-        static SyntaxTriviaList InsertOrReplaceDocComments(SyntaxTriviaList leadingTrivia, SyntaxTrivia newDocComment)
+        static SyntaxTriviaList InsertOrReplaceDocComments(
+            SyntaxTriviaList leadingTrivia,
+            SyntaxTrivia newDocComment
+        )
         {
             newDocComment = newDocComment.WithAdditionalAnnotations(Formatter.Annotation);
 
@@ -136,7 +173,10 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             return leadingTrivia.Insert(insertionIndex, newDocComment);
         }
 
-        static SyntaxTrivia MergeDocComments(SyntaxTrivia typeDeclarationDocComment, SyntaxTrivia constructorDocComment)
+        static SyntaxTrivia MergeDocComments(
+            SyntaxTrivia typeDeclarationDocComment,
+            SyntaxTrivia constructorDocComment
+        )
         {
             var typeStructure = GetDocCommentStructure(typeDeclarationDocComment)!;
             var constructorStructure = GetDocCommentStructure(constructorDocComment)!;
@@ -149,39 +189,56 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             // then add the constructor comments.  If the type decl already had a summary tag then convert the
             // constructor's summary tag to a 'remarks' tag to keep around the info while not stomping on the
             // existing summary.
-            var constructorContents = typeStructure.Content.Any(n => n is XmlElementSyntax { StartTag.Name.LocalName.ValueText: s_summaryTagName })
+            var constructorContents = typeStructure.Content.Any(n =>
+                n is XmlElementSyntax { StartTag.Name.LocalName.ValueText: s_summaryTagName }
+            )
                 ? ConvertSummaryToRemarks(constructorStructure.Content)
                 : constructorStructure.Content;
 
             content.AddRange(constructorContents);
 
-            return Trivia(DocumentationCommentTrivia(
-                SyntaxKind.SingleLineDocumentationCommentTrivia,
-                List(content),
-                typeStructure.EndOfComment));
+            return Trivia(
+                DocumentationCommentTrivia(
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    List(content),
+                    typeStructure.EndOfComment
+                )
+            );
         }
 
         static SyntaxTriviaList MergeTypeDeclarationAndRemovedMembersDocComments(
             IMethodSymbol constructor,
             ImmutableDictionary<string, string?> properties,
             ImmutableDictionary<ISymbol, SyntaxNode> removedMembers,
-            SyntaxTriviaList typeDeclarationLeadingTrivia)
+            SyntaxTriviaList typeDeclarationLeadingTrivia
+        )
         {
             // now, if we're removing any members, and they had doc comments, and we don't already have doc comments for
             // that parameter in our final doc comment, then move them to there, converting from `<summary>` doc comments to
             // `<param name="x">` doc comments.
 
             // Keep the <param> tags ordered by the order they are in the constructor parameters.
-            var orderedKVPs = properties.OrderBy(kvp => constructor.Parameters.FirstOrDefault(p => p.Name == kvp.Value)?.Ordinal);
-            using var _1 = ArrayBuilder<(string parameterName, DocumentationCommentTriviaSyntax docComment)>.GetInstance(out var docCommentsToMove);
+            var orderedKVPs = properties.OrderBy(kvp =>
+                constructor.Parameters.FirstOrDefault(p => p.Name == kvp.Value)?.Ordinal
+            );
+            using var _1 = ArrayBuilder<(
+                string parameterName,
+                DocumentationCommentTriviaSyntax docComment
+            )>.GetInstance(out var docCommentsToMove);
             foreach (var (memberName, parameterName) in orderedKVPs)
             {
-                var (removedMember, memberDeclaration) = removedMembers.FirstOrDefault(kvp => kvp.Key.Name == memberName);
+                var (removedMember, memberDeclaration) = removedMembers.FirstOrDefault(kvp =>
+                    kvp.Key.Name == memberName
+                );
                 if (removedMember is null)
                     continue;
 
                 var removedMemberDocComment = GetDocCommentStructure(
-                    memberDeclaration is VariableDeclaratorSyntax { Parent.Parent: FieldDeclarationSyntax field } ? field : memberDeclaration);
+                    memberDeclaration
+                        is VariableDeclaratorSyntax { Parent.Parent: FieldDeclarationSyntax field }
+                        ? field
+                        : memberDeclaration
+                );
                 if (removedMemberDocComment != null)
                     docCommentsToMove.Add((parameterName, removedMemberDocComment)!);
             }
@@ -192,7 +249,9 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             using var _2 = PooledHashSet<string>.GetInstance(out var existingParamNodeNames);
             using var _3 = ArrayBuilder<XmlNodeSyntax>.GetInstance(out var allContent);
 
-            var existingTypeDeclarationDocComment = GetDocCommentStructure(typeDeclarationLeadingTrivia);
+            var existingTypeDeclarationDocComment = GetDocCommentStructure(
+                typeDeclarationLeadingTrivia
+            );
             if (existingTypeDeclarationDocComment != null)
             {
                 allContent.AddRange(existingTypeDeclarationDocComment.Content);
@@ -204,7 +263,9 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
                         foreach (var attribute in paramElement.StartTag.Attributes)
                         {
                             if (attribute is XmlNameAttributeSyntax nameAttribute)
-                                existingParamNodeNames.Add(nameAttribute.Identifier.Identifier.ValueText);
+                                existingParamNodeNames.Add(
+                                    nameAttribute.Identifier.Identifier.ValueText
+                                );
                         }
                     }
                 }
@@ -213,12 +274,20 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             foreach (var (parameterName, commentToMove) in docCommentsToMove)
             {
                 if (!existingParamNodeNames.Contains(parameterName))
-                    allContent.AddRange(ConvertSummaryToParam(commentToMove.Content, parameterName));
+                    allContent.AddRange(
+                        ConvertSummaryToParam(commentToMove.Content, parameterName)
+                    );
             }
 
             return InsertOrReplaceDocComments(
                 typeDeclarationLeadingTrivia,
-                Trivia(DocumentationCommentTrivia(SyntaxKind.SingleLineDocumentationCommentTrivia, List(allContent))));
+                Trivia(
+                    DocumentationCommentTrivia(
+                        SyntaxKind.SingleLineDocumentationCommentTrivia,
+                        List(allContent)
+                    )
+                )
+            );
         }
     }
 }

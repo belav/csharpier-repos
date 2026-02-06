@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Runtime;
+using System.Text;
 
 namespace System.ServiceModel.Security
 {
@@ -18,22 +18,29 @@ namespace System.ServiceModel.Security
         /// </summary>
         public TimeSpan CachingTimeSpan
         {
-            get
-            {
-                return this.cachingTime;
-            }
+            get { return this.cachingTime; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.cachingTime = value;
@@ -45,19 +52,20 @@ namespace System.ServiceModel.Security
         /// </summary>
         public int CacheSize
         {
-            get
-            {
-                return this.maxCachedNonces;
-            }
+            get { return this.maxCachedNonces; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maxCachedNonces = value;
-
             }
         }
 

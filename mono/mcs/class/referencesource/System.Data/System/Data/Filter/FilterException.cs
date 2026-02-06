@@ -7,7 +7,8 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.Diagnostics;
     using System.Globalization;
@@ -17,286 +18,414 @@ namespace System.Data {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [Serializable]
-    public class InvalidExpressionException : DataException {
+    public class InvalidExpressionException : DataException
+    {
         protected InvalidExpressionException(SerializationInfo info, StreamingContext context)
-        : base(info, context) {
-        }
+            : base(info, context) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public InvalidExpressionException() : base() {}
+        public InvalidExpressionException()
+            : base() { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public InvalidExpressionException(string s) : base(s) {}
-        
-        public InvalidExpressionException(string message, Exception innerException)  : base(message, innerException) {}
+        public InvalidExpressionException(string s)
+            : base(s) { }
+
+        public InvalidExpressionException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [Serializable]
-    public class EvaluateException : InvalidExpressionException {
+    public class EvaluateException : InvalidExpressionException
+    {
         protected EvaluateException(SerializationInfo info, StreamingContext context)
-        : base(info, context) {
-        }
+            : base(info, context) { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public EvaluateException() : base() {}
+        public EvaluateException()
+            : base() { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public EvaluateException(string s) : base(s) {}
-        
-        public EvaluateException(string message, Exception innerException)  : base(message, innerException) {}
+        public EvaluateException(string s)
+            : base(s) { }
+
+        public EvaluateException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [Serializable]
-    public class SyntaxErrorException : InvalidExpressionException {
+    public class SyntaxErrorException : InvalidExpressionException
+    {
         protected SyntaxErrorException(SerializationInfo info, StreamingContext context)
-        : base(info, context) {
-        }
+            : base(info, context) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SyntaxErrorException() : base() {}
+        public SyntaxErrorException()
+            : base() { }
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SyntaxErrorException(string s) : base(s) {}
-        
-        public SyntaxErrorException(string message, Exception innerException)  : base(message, innerException) {}
+        public SyntaxErrorException(string s)
+            : base(s) { }
+
+        public SyntaxErrorException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 
-    internal sealed class ExprException {
-        private ExprException() { /* prevent utility class from being insantiated*/ }
+    internal sealed class ExprException
+    {
+        private ExprException()
+        { /* prevent utility class from being insantiated*/
+        }
 
-        static private OverflowException _Overflow(string error) {
+        private static OverflowException _Overflow(string error)
+        {
             OverflowException e = new OverflowException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
-        static private InvalidExpressionException _Expr(string error) {
+
+        private static InvalidExpressionException _Expr(string error)
+        {
             InvalidExpressionException e = new InvalidExpressionException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
-        static private SyntaxErrorException _Syntax(string error) {
+
+        private static SyntaxErrorException _Syntax(string error)
+        {
             SyntaxErrorException e = new SyntaxErrorException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
-        static private EvaluateException _Eval(string error) {
+
+        private static EvaluateException _Eval(string error)
+        {
             EvaluateException e = new EvaluateException(error);
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
-        static private EvaluateException _Eval(string error, Exception innerException) {
-            EvaluateException e = new EvaluateException(error/*, innerException*/); // 
+
+        private static EvaluateException _Eval(string error, Exception innerException)
+        {
+            EvaluateException e = new EvaluateException(
+                error /*, innerException*/
+            ); //
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
 
-        static public Exception InvokeArgument() {
+        public static Exception InvokeArgument()
+        {
             return ExceptionBuilder._Argument(Res.GetString(Res.Expr_InvokeArgument));
         }
 
-        static public Exception NYI(string moreinfo) {
+        public static Exception NYI(string moreinfo)
+        {
             string err = Res.GetString(Res.Expr_NYI, moreinfo);
             Debug.Fail(err);
             return _Expr(err);
         }
 
-        static public Exception MissingOperand(OperatorInfo before) {
+        public static Exception MissingOperand(OperatorInfo before)
+        {
             return _Syntax(Res.GetString(Res.Expr_MissingOperand, Operators.ToString(before.op)));
         }
 
-        static public Exception MissingOperator(string token) {
+        public static Exception MissingOperator(string token)
+        {
             return _Syntax(Res.GetString(Res.Expr_MissingOperand, token));
         }
 
-        static public Exception TypeMismatch(string expr) {
+        public static Exception TypeMismatch(string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_TypeMismatch, expr));
         }
 
-        static public Exception FunctionArgumentOutOfRange(string arg, string func) {
-            return ExceptionBuilder._ArgumentOutOfRange(arg, Res.GetString(Res.Expr_ArgumentOutofRange, func));
+        public static Exception FunctionArgumentOutOfRange(string arg, string func)
+        {
+            return ExceptionBuilder._ArgumentOutOfRange(
+                arg,
+                Res.GetString(Res.Expr_ArgumentOutofRange, func)
+            );
         }
 
-        static public Exception ExpressionTooComplex() {
+        public static Exception ExpressionTooComplex()
+        {
             return _Eval(Res.GetString(Res.Expr_ExpressionTooComplex));
         }
 
-        static public Exception UnboundName(string name) {
+        public static Exception UnboundName(string name)
+        {
             return _Eval(Res.GetString(Res.Expr_UnboundName, name));
         }
 
-        static public Exception InvalidString(string str) {
+        public static Exception InvalidString(string str)
+        {
             return _Syntax(Res.GetString(Res.Expr_InvalidString, str));
         }
 
-        static public Exception UndefinedFunction(string name) {
+        public static Exception UndefinedFunction(string name)
+        {
             return _Eval(Res.GetString(Res.Expr_UndefinedFunction, name));
         }
 
-        static public Exception SyntaxError() {
+        public static Exception SyntaxError()
+        {
             return _Syntax(Res.GetString(Res.Expr_Syntax));
         }
 
-        static public Exception FunctionArgumentCount(string name) {
+        public static Exception FunctionArgumentCount(string name)
+        {
             return _Eval(Res.GetString(Res.Expr_FunctionArgumentCount, name));
         }
 
-        static public Exception MissingRightParen() {
+        public static Exception MissingRightParen()
+        {
             return _Syntax(Res.GetString(Res.Expr_MissingRightParen));
         }
 
-        static public Exception UnknownToken(string token, int position) {
-            return _Syntax(Res.GetString(Res.Expr_UnknownToken, token, position.ToString(CultureInfo.InvariantCulture)));
+        public static Exception UnknownToken(string token, int position)
+        {
+            return _Syntax(
+                Res.GetString(
+                    Res.Expr_UnknownToken,
+                    token,
+                    position.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
-        static public Exception UnknownToken(Tokens tokExpected, Tokens tokCurr, int position) {
-            return _Syntax(Res.GetString(Res.Expr_UnknownToken1, tokExpected.ToString(), tokCurr.ToString(), position.ToString(CultureInfo.InvariantCulture)));
+        public static Exception UnknownToken(Tokens tokExpected, Tokens tokCurr, int position)
+        {
+            return _Syntax(
+                Res.GetString(
+                    Res.Expr_UnknownToken1,
+                    tokExpected.ToString(),
+                    tokCurr.ToString(),
+                    position.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
-        static public Exception DatatypeConvertion(Type type1, Type type2) {
-            return _Eval(Res.GetString(Res.Expr_DatatypeConvertion, type1.ToString(), type2.ToString()));
+        public static Exception DatatypeConvertion(Type type1, Type type2)
+        {
+            return _Eval(
+                Res.GetString(Res.Expr_DatatypeConvertion, type1.ToString(), type2.ToString())
+            );
         }
 
-        static public Exception DatavalueConvertion(object value, Type type, Exception innerException) {
-            return _Eval(Res.GetString(Res.Expr_DatavalueConvertion, value.ToString(), type.ToString()), innerException);
+        public static Exception DatavalueConvertion(
+            object value,
+            Type type,
+            Exception innerException
+        )
+        {
+            return _Eval(
+                Res.GetString(Res.Expr_DatavalueConvertion, value.ToString(), type.ToString()),
+                innerException
+            );
         }
 
-        static public Exception InvalidName(string name) {
+        public static Exception InvalidName(string name)
+        {
             return _Syntax(Res.GetString(Res.Expr_InvalidName, name));
         }
 
-        static public Exception InvalidDate(string date) {
+        public static Exception InvalidDate(string date)
+        {
             return _Syntax(Res.GetString(Res.Expr_InvalidDate, date));
         }
 
-        static public Exception NonConstantArgument() {
+        public static Exception NonConstantArgument()
+        {
             return _Eval(Res.GetString(Res.Expr_NonConstantArgument));
         }
 
-        static public Exception InvalidPattern(string pat) {
+        public static Exception InvalidPattern(string pat)
+        {
             return _Eval(Res.GetString(Res.Expr_InvalidPattern, pat));
         }
 
-        static public Exception InWithoutParentheses() {
+        public static Exception InWithoutParentheses()
+        {
             return _Syntax(Res.GetString(Res.Expr_InWithoutParentheses));
         }
 
-        static public Exception InWithoutList() {
+        public static Exception InWithoutList()
+        {
             return _Syntax(Res.GetString(Res.Expr_InWithoutList));
         }
 
-        static public Exception InvalidIsSyntax() {
+        public static Exception InvalidIsSyntax()
+        {
             return _Syntax(Res.GetString(Res.Expr_IsSyntax));
         }
 
-        static public Exception Overflow(Type type) {
+        public static Exception Overflow(Type type)
+        {
             return _Overflow(Res.GetString(Res.Expr_Overflow, type.Name));
         }
 
-        static public Exception ArgumentType(string function, int arg, Type type) {
-            return _Eval(Res.GetString(Res.Expr_ArgumentType, function, arg.ToString(CultureInfo.InvariantCulture), type.ToString()));
+        public static Exception ArgumentType(string function, int arg, Type type)
+        {
+            return _Eval(
+                Res.GetString(
+                    Res.Expr_ArgumentType,
+                    function,
+                    arg.ToString(CultureInfo.InvariantCulture),
+                    type.ToString()
+                )
+            );
         }
 
-        static public Exception ArgumentTypeInteger(string function, int arg) {
-            return _Eval(Res.GetString(Res.Expr_ArgumentTypeInteger, function, arg.ToString(CultureInfo.InvariantCulture)));
+        public static Exception ArgumentTypeInteger(string function, int arg)
+        {
+            return _Eval(
+                Res.GetString(
+                    Res.Expr_ArgumentTypeInteger,
+                    function,
+                    arg.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
-        static public Exception TypeMismatchInBinop(int op, Type type1, Type type2) {
-            return _Eval(Res.GetString(Res.Expr_TypeMismatchInBinop, Operators.ToString(op), type1.ToString(), type2.ToString()));
+        public static Exception TypeMismatchInBinop(int op, Type type1, Type type2)
+        {
+            return _Eval(
+                Res.GetString(
+                    Res.Expr_TypeMismatchInBinop,
+                    Operators.ToString(op),
+                    type1.ToString(),
+                    type2.ToString()
+                )
+            );
         }
 
-        static public Exception AmbiguousBinop(int op, Type type1, Type type2) {
-            return _Eval(Res.GetString(Res.Expr_AmbiguousBinop, Operators.ToString(op), type1.ToString(), type2.ToString()));
+        public static Exception AmbiguousBinop(int op, Type type1, Type type2)
+        {
+            return _Eval(
+                Res.GetString(
+                    Res.Expr_AmbiguousBinop,
+                    Operators.ToString(op),
+                    type1.ToString(),
+                    type2.ToString()
+                )
+            );
         }
 
-        static public Exception UnsupportedOperator(int op) {
+        public static Exception UnsupportedOperator(int op)
+        {
             return _Eval(Res.GetString(Res.Expr_UnsupportedOperator, Operators.ToString(op)));
         }
 
-        static public Exception InvalidNameBracketing(string name) {
+        public static Exception InvalidNameBracketing(string name)
+        {
             return _Syntax(Res.GetString(Res.Expr_InvalidNameBracketing, name));
         }
 
-        static public Exception MissingOperandBefore(string op) {
+        public static Exception MissingOperandBefore(string op)
+        {
             return _Syntax(Res.GetString(Res.Expr_MissingOperandBefore, op));
         }
 
-        static public Exception TooManyRightParentheses() {
+        public static Exception TooManyRightParentheses()
+        {
             return _Syntax(Res.GetString(Res.Expr_TooManyRightParentheses));
         }
 
-        static public Exception UnresolvedRelation(string name, string expr) {
+        public static Exception UnresolvedRelation(string name, string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_UnresolvedRelation, name, expr));
         }
-        
-        static internal EvaluateException BindFailure(string relationName) {
+
+        internal static EvaluateException BindFailure(string relationName)
+        {
             return _Eval(Res.GetString(Res.Expr_BindFailure, relationName));
         }
 
-        static public Exception AggregateArgument() {
+        public static Exception AggregateArgument()
+        {
             return _Syntax(Res.GetString(Res.Expr_AggregateArgument));
         }
 
-        static public Exception AggregateUnbound(string expr) {
+        public static Exception AggregateUnbound(string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_AggregateUnbound, expr));
         }
 
-        static public Exception EvalNoContext() {
+        public static Exception EvalNoContext()
+        {
             return _Eval(Res.GetString(Res.Expr_EvalNoContext));
         }
 
-        static public Exception ExpressionUnbound(string expr) {
+        public static Exception ExpressionUnbound(string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_ExpressionUnbound, expr));
         }
 
-        static public Exception ComputeNotAggregate(string expr) {
+        public static Exception ComputeNotAggregate(string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_ComputeNotAggregate, expr));
         }
 
-        static public Exception FilterConvertion(string expr) {
+        public static Exception FilterConvertion(string expr)
+        {
             return _Eval(Res.GetString(Res.Expr_FilterConvertion, expr));
         }
 
-        static public Exception LookupArgument() {
+        public static Exception LookupArgument()
+        {
             return _Syntax(Res.GetString(Res.Expr_LookupArgument));
         }
 
-        static public Exception InvalidType(string typeName) {
+        public static Exception InvalidType(string typeName)
+        {
             return _Eval(Res.GetString(Res.Expr_InvalidType, typeName));
         }
 
-        static public Exception InvalidHoursArgument() {
+        public static Exception InvalidHoursArgument()
+        {
             return _Eval(Res.GetString(Res.Expr_InvalidHoursArgument));
         }
-        
-        static public Exception InvalidMinutesArgument() {
+
+        public static Exception InvalidMinutesArgument()
+        {
             return _Eval(Res.GetString(Res.Expr_InvalidMinutesArgument));
         }
-        
-        static public Exception InvalidTimeZoneRange() {
+
+        public static Exception InvalidTimeZoneRange()
+        {
             return _Eval(Res.GetString(Res.Expr_InvalidTimeZoneRange));
         }
-        
-        static public Exception MismatchKindandTimeSpan() {
+
+        public static Exception MismatchKindandTimeSpan()
+        {
             return _Eval(Res.GetString(Res.Expr_MismatchKindandTimeSpan));
         }
 
-        static public Exception UnsupportedDataType(Type type)
+        public static Exception UnsupportedDataType(Type type)
         {
-            return ExceptionBuilder._Argument(Res.GetString(Res.Expr_UnsupportedType, type.FullName));
+            return ExceptionBuilder._Argument(
+                Res.GetString(Res.Expr_UnsupportedType, type.FullName)
+            );
         }
     }
 }

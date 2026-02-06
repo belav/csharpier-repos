@@ -17,7 +17,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => MvcHelper.GetHtmlHelper().Display(expression: null),
-                "expression");
+                "expression"
+            );
         }
 
         [Theory]
@@ -25,14 +26,15 @@ namespace System.Web.Mvc.Html.Test
         public void CollectionTemplateWrappingObjectTemplate_EncodesSimpleDisplayTextOfItems_IfHtmlEncode(
             string text,
             bool htmlEncode,
-            string expectedResult)
+            string expectedResult
+        )
         {
             // Arrange
             var innerModel = new ObjectTemplateModel
             {
-                Property1 = text,           // SimpleDisplayText uses first property by default.
+                Property1 = text, // SimpleDisplayText uses first property by default.
             };
-            var model = new[] { innerModel, innerModel, };
+            var model = new[] { innerModel, innerModel };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -44,7 +46,10 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.HtmlEncode = htmlEncode;
 
             string displayResult;
@@ -73,10 +78,12 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string attributeEncodedText,
-            string htmlEncodedText)
+            string htmlEncodedText
+        )
         {
             // Arrange
-            var expectedResult = "<a href=\"mailto:" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";
+            var expectedResult =
+                "<a href=\"mailto:" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";
             var viewData = new ViewDataDictionary<string>(text);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -85,7 +92,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = "EmailAddress";
             metadata.HtmlEncode = htmlEncode;
 
@@ -114,7 +124,8 @@ namespace System.Web.Mvc.Html.Test
         public void HtmlOrStringTemplate_HtmlEncodesValue_IfHtmlEncode(
             string text,
             bool htmlEncode,
-            string expectedResult)
+            string expectedResult
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(text);
@@ -125,7 +136,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = htmlEncode ? "String" : "Html";
 
             string displayResult;
@@ -162,7 +176,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(ObjectTemplateModel));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(ObjectTemplateModel)
+            );
             metadata.NullDisplayText = text;
 
             string displayResult;
@@ -191,10 +208,12 @@ namespace System.Web.Mvc.Html.Test
             string text,
             bool htmlEncode,
             string attributeEncodedText,
-            string htmlEncodedText)
+            string htmlEncodedText
+        )
         {
             // Arrange
-            var expectedResult = "<a href=\"" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";
+            var expectedResult =
+                "<a href=\"" + attributeEncodedText + "\">" + htmlEncodedText + "</a>";
             var viewData = new ViewDataDictionary<string>(text);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -203,7 +222,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
             metadata.TemplateHint = "Url";
             metadata.HtmlEncode = htmlEncode;
 

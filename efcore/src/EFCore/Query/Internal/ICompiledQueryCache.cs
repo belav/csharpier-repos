@@ -24,5 +24,6 @@ public interface ICompiledQueryCache
     /// </summary>
     Func<QueryContext, TResult> GetOrAddQuery<TResult>(
         object cacheKey,
-        Func<Func<QueryContext, TResult>> compiler);
+        Func<Func<QueryContext, TResult>> compiler
+    );
 }

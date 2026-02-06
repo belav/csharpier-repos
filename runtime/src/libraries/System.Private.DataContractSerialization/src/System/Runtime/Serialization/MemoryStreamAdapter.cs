@@ -6,20 +6,30 @@ using System.IO;
 namespace System.Runtime.Serialization
 {
     // needs to be a separate class so it can get its own namespace
-    [DataContract(Name = nameof(MarshalByRefObject), Namespace = Globals.DataContractXsdBaseNamespace + "System")]
+    [DataContract(
+        Name = nameof(MarshalByRefObject),
+        Namespace = Globals.DataContractXsdBaseNamespace + "System"
+    )]
     internal abstract class MarshalByRefObjectAdapter
     {
 #pragma warning disable CA1822
         // never used, but must be first in the hierarchy in order to maintain NetFX compat
         [DataMember(Name = "__identity", Order = 0)]
-        public object? Identity { get { return null; } set { } }
+        public object? Identity
+        {
+            get { return null; }
+            set { }
+        }
 #pragma warning restore CA1822
     }
 
     /// <summary>
     /// Members on this type correspond to the fields in MemoryStream's hierarchy on NetFX.
     /// </summary>
-    [DataContract(Name = "MemoryStream", Namespace = Globals.DataContractXsdBaseNamespace + "System.IO")]
+    [DataContract(
+        Name = "MemoryStream",
+        Namespace = Globals.DataContractXsdBaseNamespace + "System.IO"
+    )]
     internal sealed class MemoryStreamAdapter : MarshalByRefObjectAdapter
     {
         [DataMember(Name = "_buffer", Order = 1)]
@@ -60,7 +70,10 @@ namespace System.Runtime.Serialization
             // IsOpen, etc.) are ignored since we allow the MemoryStream ctor to set them itself.
 
             byte[] buffer = value.Buffer!; // we don't expect this to be null, but if it is we'll throw NRE below
-            Span<byte> slicedBuffer = value.Buffer.AsSpan(value.Origin, value.Length - value.Origin);
+            Span<byte> slicedBuffer = value.Buffer.AsSpan(
+                value.Origin,
+                value.Length - value.Origin
+            );
             if (slicedBuffer.Length < buffer.Length)
             {
                 buffer = slicedBuffer.ToArray(); // trim leading and trailing data
@@ -71,7 +84,8 @@ namespace System.Runtime.Serialization
                 index: 0,
                 count: buffer.Length,
                 writable: value.Writable,
-                publiclyVisible: value.Exposable);
+                publiclyVisible: value.Exposable
+            );
 
             int desiredPosition = value.Position - value.Origin;
             if (desiredPosition < 0 || desiredPosition > memoryStream.Length)

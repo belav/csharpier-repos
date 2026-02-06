@@ -14,29 +14,29 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using NUnit.Framework;
+    using NUnit.Framework;
 
-	[TestFixture]
-	public class ClassProxyWithTargetTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void Forwards_to_protected_method()
-		{
-			var proxy = generator.CreateClassProxyWithTarget(new ClassWithProtectedMethod());
-			Assert.AreEqual(42, proxy.InvokeFortyTwo());
-		}
+    [TestFixture]
+    public class ClassProxyWithTargetTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void Forwards_to_protected_method()
+        {
+            var proxy = generator.CreateClassProxyWithTarget(new ClassWithProtectedMethod());
+            Assert.AreEqual(42, proxy.InvokeFortyTwo());
+        }
 
-		public class ClassWithProtectedMethod
-		{
-			public int InvokeFortyTwo()
-			{
-				return FortyTwo();
-			}
+        public class ClassWithProtectedMethod
+        {
+            public int InvokeFortyTwo()
+            {
+                return FortyTwo();
+            }
 
-			protected virtual int FortyTwo()
-			{
-				return 42;
-			}
-		}
-	}
+            protected virtual int FortyTwo()
+            {
+                return 42;
+            }
+        }
+    }
 }

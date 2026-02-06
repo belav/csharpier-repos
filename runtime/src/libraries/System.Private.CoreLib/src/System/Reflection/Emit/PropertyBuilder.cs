@@ -5,17 +5,13 @@ namespace System.Reflection.Emit
 {
     public abstract class PropertyBuilder : PropertyInfo
     {
-        protected PropertyBuilder()
-        {
-        }
+        protected PropertyBuilder() { }
 
-        public void AddOtherMethod(MethodBuilder mdBuilder)
-            => AddOtherMethodCore(mdBuilder);
+        public void AddOtherMethod(MethodBuilder mdBuilder) => AddOtherMethodCore(mdBuilder);
 
         protected abstract void AddOtherMethodCore(MethodBuilder mdBuilder);
 
-        public void SetConstant(object? defaultValue)
-            => SetConstantCore(defaultValue);
+        public void SetConstant(object? defaultValue) => SetConstantCore(defaultValue);
 
         protected abstract void SetConstantCore(object? defaultValue);
 
@@ -27,7 +23,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -36,13 +35,11 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        public void SetGetMethod(MethodBuilder mdBuilder)
-            => SetGetMethodCore(mdBuilder);
+        public void SetGetMethod(MethodBuilder mdBuilder) => SetGetMethodCore(mdBuilder);
 
         protected abstract void SetGetMethodCore(MethodBuilder mdBuilder);
 
-        public void SetSetMethod(MethodBuilder mdBuilder)
-            => SetSetMethodCore(mdBuilder);
+        public void SetSetMethod(MethodBuilder mdBuilder) => SetSetMethodCore(mdBuilder);
 
         protected abstract void SetSetMethodCore(MethodBuilder mdBuilder);
     }

@@ -6,13 +6,13 @@ namespace System.ServiceModel.Dispatcher
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Persistence;
-    using System.Threading;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Diagnostics;
     using System.Diagnostics;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Persistence;
+    using System.Threading;
 
     class ServiceDurableInstanceContextProvider : DurableInstanceContextProvider
     {
@@ -31,7 +31,8 @@ namespace System.ServiceModel.Dispatcher
             bool saveStateInOperationTransaction,
             UnknownExceptionAction unknownExceptionAction,
             DurableRuntimeValidator runtimeValidator,
-            TimeSpan operationTimeout)
+            TimeSpan operationTimeout
+        )
             : base(serviceHostBase, isPercall)
         {
             if (serviceType == null)
@@ -46,7 +47,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (runtimeValidator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("runtimeValidator");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "runtimeValidator"
+                );
             }
 
             this.serviceType = serviceType;
@@ -61,11 +64,19 @@ namespace System.ServiceModel.Dispatcher
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR2.GetString(SR2.InstanceContextProviderCreatedNewInstance, "Service", instanceId);
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.ActivatingMessageReceived, SR.GetString(SR.TraceCodeActivatingMessageReceived),
+                string traceText = SR2.GetString(
+                    SR2.InstanceContextProviderCreatedNewInstance,
+                    "Service",
+                    instanceId
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ActivatingMessageReceived,
+                    SR.GetString(SR.TraceCodeActivatingMessageReceived),
                     new StringTraceRecord("NewInstanceDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
 
             return new ServiceDurableInstance(
@@ -75,7 +86,8 @@ namespace System.ServiceModel.Dispatcher
                 this.unknownExceptionAction,
                 this.runtimeValidator,
                 this.operationTimeout,
-                this.serviceType);
+                this.serviceType
+            );
         }
 
         protected override DurableInstance OnGetExistingInstance(Guid instanceId)
@@ -86,7 +98,8 @@ namespace System.ServiceModel.Dispatcher
                 this.saveStateInOperationTransaction,
                 this.unknownExceptionAction,
                 this.runtimeValidator,
-                this.operationTimeout);
+                this.operationTimeout
+            );
         }
     }
 }

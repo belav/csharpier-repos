@@ -7,7 +7,11 @@ using System.Reflection;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class ObjectManager
     {
         private const int DefaultInitialSize = 16;
@@ -15,9 +19,13 @@ namespace System.Runtime.Serialization
         private const int ArrayMask = MaxArraySize - 1;
         private const int MaxReferenceDepth = 100;
 
-        private const string ObjectManagerUnreferencedCodeMessage = "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered.";
+        private const string ObjectManagerUnreferencedCodeMessage =
+            "ObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered.";
 
-        private static readonly FieldInfo s_nullableValueField = typeof(Nullable<>).GetField("value", BindingFlags.NonPublic | BindingFlags.Instance)!;
+        private static readonly FieldInfo s_nullableValueField = typeof(Nullable<>).GetField(
+            "value",
+            BindingFlags.NonPublic | BindingFlags.Instance
+        )!;
 
         private DeserializationEventHandler? _onDeserializationHandler;
         private SerializationEventHandler? _onDeserializedHandler;
@@ -128,7 +136,12 @@ namespace System.Runtime.Serialization
             _objects[index] = holder;
         }
 
-        private bool GetCompletionInfo(FixupHolder fixup, [NotNullWhen(true)] out ObjectHolder? holder, out object member, bool bThrowIfMissing)
+        private bool GetCompletionInfo(
+            FixupHolder fixup,
+            [NotNullWhen(true)] out ObjectHolder? holder,
+            out object member,
+            bool bThrowIfMissing
+        )
         {
             //Set the member id (String or MemberInfo) for the member being fixed up.
             member = fixup._fixupInfo;
@@ -142,13 +155,19 @@ namespace System.Runtime.Serialization
                 {
                     if (holder == null)
                     {
-                        throw new SerializationException(SR.Format(SR.Serialization_NeverSeen, fixup._id));
+                        throw new SerializationException(
+                            SR.Format(SR.Serialization_NeverSeen, fixup._id)
+                        );
                     }
                     if (holder.IsIncompleteObjectReference)
                     {
-                        throw new SerializationException(SR.Format(SR.Serialization_IORIncomplete, fixup._id));
+                        throw new SerializationException(
+                            SR.Format(SR.Serialization_IORIncomplete, fixup._id)
+                        );
                     }
-                    throw new SerializationException(SR.Format(SR.Serialization_ObjectNotSupplied, fixup._id));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_ObjectNotSupplied, fixup._id)
+                    );
                 }
                 return false;
             }
@@ -173,18 +192,31 @@ namespace System.Runtime.Serialization
         {
             ISurrogateSelector? uselessSelector = null;
 
-            Debug.Assert(holder.RequiresSerInfoFixup, "[ObjectManager.FixupSpecialObject]holder.HasSurrogate||holder.HasISerializable");
+            Debug.Assert(
+                holder.RequiresSerInfoFixup,
+                "[ObjectManager.FixupSpecialObject]holder.HasSurrogate||holder.HasISerializable"
+            );
             if (holder.HasSurrogate)
             {
                 ISerializationSurrogate? surrogate = holder.Surrogate;
                 Debug.Assert(surrogate != null, "surrogate!=null");
                 Debug.Assert(holder.SerializationInfo != null);
-                object? returnValue = surrogate.SetObjectData(holder.ObjectValue!, holder.SerializationInfo, _context, uselessSelector);
+                object? returnValue = surrogate.SetObjectData(
+                    holder.ObjectValue!,
+                    holder.SerializationInfo,
+                    _context,
+                    uselessSelector
+                );
                 if (returnValue != null)
                 {
                     if (!holder.CanSurrogatedObjectValueChange && returnValue != holder.ObjectValue)
                     {
-                        throw new SerializationException(SR.Format(SR.Serialization_NotCyclicallyReferenceableSurrogate, surrogate.GetType().FullName));
+                        throw new SerializationException(
+                            SR.Format(
+                                SR.Serialization_NotCyclicallyReferenceableSurrogate,
+                                surrogate.GetType().FullName
+                            )
+                        );
                     }
                     holder.SetObjectValue(returnValue, this);
                 }
@@ -194,7 +226,10 @@ namespace System.Runtime.Serialization
             else
             {
                 //Set the object data
-                Debug.Assert(holder.ObjectValue is ISerializable, "holder.m_object is ISerializable");
+                Debug.Assert(
+                    holder.ObjectValue is ISerializable,
+                    "holder.m_object is ISerializable"
+                );
                 CompleteISerializableObject(holder.ObjectValue, holder.SerializationInfo, _context);
             }
             //Clear anything that we know that we're not going to need.
@@ -241,7 +276,10 @@ namespace System.Runtime.Serialization
                 {
                     tempObject = holder.ObjectValue;
                     Debug.Assert(holder.ObjectValue != null);
-                    holder.SetObjectValue(((IObjectReference)(holder.ObjectValue)).GetRealObject(_context), this);
+                    holder.SetObjectValue(
+                        ((IObjectReference)(holder.ObjectValue)).GetRealObject(_context),
+                        this
+                    );
                     //The object didn't yet have enough information to resolve the reference, so we'll
                     //return false and the graph walker should call us back again after more objects have
                     //been resolved.
@@ -254,7 +292,9 @@ namespace System.Runtime.Serialization
                     {
                         throw new SerializationException(SR.Serialization_TooManyReferences);
                     }
-                } while ((holder.ObjectValue is IObjectReference) && (tempObject != holder.ObjectValue));
+                } while (
+                    (holder.ObjectValue is IObjectReference) && (tempObject != holder.ObjectValue)
+                );
             }
             catch (NullReferenceException)
             {
@@ -282,7 +322,10 @@ namespace System.Runtime.Serialization
             object? fixupObj = holder.ObjectValue;
 
             Debug.Assert(holder != null, "[TypedReferenceBuilder.ctor]holder!=null");
-            Debug.Assert(holder.RequiresValueTypeFixup, "[TypedReferenceBuilder.ctor]holder.RequiresValueTypeFixup");
+            Debug.Assert(
+                holder.RequiresValueTypeFixup,
+                "[TypedReferenceBuilder.ctor]holder.RequiresValueTypeFixup"
+            );
 
             //In order to get a TypedReference, we need to get a list of all of the FieldInfos to
             //create the path from our outermost containing object down to the actual field which
@@ -304,7 +347,7 @@ namespace System.Runtime.Serialization
                 //However, if the outermost containing object is an array, we need the object one further
                 //down the chain, so we have to do a lot of caching.
                 currFixup = holder.ValueFixup!;
-                fixupObj = holder.ObjectValue;  //Save the most derived
+                fixupObj = holder.ObjectValue; //Save the most derived
                 if (currFixup.ParentField != null)
                 {
                     FieldInfo parentField = currFixup.ParentField;
@@ -330,7 +373,10 @@ namespace System.Runtime.Serialization
                 else
                 {
                     //If we find an index into an array, save that information.
-                    Debug.Assert(currFixup.ParentIndex != null, "[ObjectManager.DoValueTypeFixup]currFixup.ParentIndex!=null");
+                    Debug.Assert(
+                        currFixup.ParentIndex != null,
+                        "[ObjectManager.DoValueTypeFixup]currFixup.ParentIndex!=null"
+                    );
                     holder = FindObjectHolder(currFixup.ContainerID)!; //find the array to fix.
                     arrayIndex = currFixup.ParentIndex;
                     break;
@@ -408,7 +454,9 @@ namespace System.Runtime.Serialization
             Debug.Assert(holder != null, "[ObjectManager.CompleteObject]holder.m_object!=null");
             if (holder.ObjectValue == null)
             {
-                throw new SerializationException(SR.Format(SR.Serialization_MissingObject, holder._id));
+                throw new SerializationException(
+                    SR.Format(SR.Serialization_MissingObject, holder._id)
+                );
             }
 
             if (fixups == null)
@@ -434,8 +482,18 @@ namespace System.Runtime.Serialization
                         {
                             continue;
                         }
-                        Debug.Assert(fixups._values[i]!._fixupType == FixupHolder.DelayedFixup, "fixups.m_values[i].m_fixupType==FixupHolder.DelayedFixup");
-                        if (GetCompletionInfo(fixups._values[i]!, out tempObjectHolder, out fixupInfo, bObjectFullyComplete))
+                        Debug.Assert(
+                            fixups._values[i]!._fixupType == FixupHolder.DelayedFixup,
+                            "fixups.m_values[i].m_fixupType==FixupHolder.DelayedFixup"
+                        );
+                        if (
+                            GetCompletionInfo(
+                                fixups._values[i]!,
+                                out tempObjectHolder,
+                                out fixupInfo,
+                                bObjectFullyComplete
+                            )
+                        )
                         {
                             //Walk the SerializationInfo and find the member needing completion.  All we have to do
                             //at this point is set the member into the Object
@@ -443,11 +501,19 @@ namespace System.Runtime.Serialization
                             Debug.Assert(holderValue != null);
                             if (CanCallGetType(holderValue))
                             {
-                                si.UpdateValue((string)fixupInfo, holderValue, holderValue.GetType());
+                                si.UpdateValue(
+                                    (string)fixupInfo,
+                                    holderValue,
+                                    holderValue.GetType()
+                                );
                             }
                             else
                             {
-                                si.UpdateValue((string)fixupInfo, holderValue, typeof(MarshalByRefObject));
+                                si.UpdateValue(
+                                    (string)fixupInfo,
+                                    holderValue,
+                                    typeof(MarshalByRefObject)
+                                );
                             }
                             //Decrement our total number of fixups left to do.
                             fixupsPerformed++;
@@ -470,7 +536,14 @@ namespace System.Runtime.Serialization
                     {
                         continue;
                     }
-                    if (GetCompletionInfo(currentFixup, out tempObjectHolder, out fixupInfo, bObjectFullyComplete))
+                    if (
+                        GetCompletionInfo(
+                            currentFixup,
+                            out tempObjectHolder,
+                            out fixupInfo,
+                            bObjectFullyComplete
+                        )
+                    )
                     {
                         // Check to make sure we are not both reachable from the topObject
                         // and there was a typeloadexception
@@ -481,7 +554,12 @@ namespace System.Runtime.Serialization
                             // throw an exception with the type name
                             if (holder.Reachable)
                             {
-                                throw new SerializationException(SR.Format(SR.Serialization_TypeLoadFailure, holder.TypeLoadException!.TypeName));
+                                throw new SerializationException(
+                                    SR.Format(
+                                        SR.Serialization_TypeLoadFailure,
+                                        holder.TypeLoadException!.TypeName
+                                    )
+                                );
                             }
                         }
 
@@ -496,14 +574,22 @@ namespace System.Runtime.Serialization
                         switch (currentFixup._fixupType)
                         {
                             case FixupHolder.ArrayFixup:
-                                Debug.Assert(holder.ObjectValue is Array, "holder.ObjectValue is Array");
+                                Debug.Assert(
+                                    holder.ObjectValue is Array,
+                                    "holder.ObjectValue is Array"
+                                );
                                 if (holder.RequiresValueTypeFixup)
                                 {
-                                    throw new SerializationException(SR.Serialization_ValueTypeFixup);
+                                    throw new SerializationException(
+                                        SR.Serialization_ValueTypeFixup
+                                    );
                                 }
                                 else
                                 {
-                                    ((Array)(holder.ObjectValue)).SetValue(tempObjectHolder.ObjectValue, ((int[])fixupInfo));
+                                    ((Array)(holder.ObjectValue)).SetValue(
+                                        tempObjectHolder.ObjectValue,
+                                        ((int[])fixupInfo)
+                                    );
                                 }
                                 break;
                             case FixupHolder.MemberFixup:
@@ -521,16 +607,31 @@ namespace System.Runtime.Serialization
                                     // to go through the more complicated path laid out in DoValueTypeFixup. We can tell that the
                                     // valuetype has already been inserted into it's container because we set ValueTypeFixupPerformed
                                     // to true when we do this.
-                                    if (holder.RequiresValueTypeFixup && holder.ValueTypeFixupPerformed)
+                                    if (
+                                        holder.RequiresValueTypeFixup
+                                        && holder.ValueTypeFixupPerformed
+                                    )
                                     {
-                                        if (!DoValueTypeFixup((FieldInfo)tempMember, holder, tempObjectHolder.ObjectValue))
+                                        if (
+                                            !DoValueTypeFixup(
+                                                (FieldInfo)tempMember,
+                                                holder,
+                                                tempObjectHolder.ObjectValue
+                                            )
+                                        )
                                         {
-                                            throw new SerializationException(SR.Serialization_PartialValueTypeFixup);
+                                            throw new SerializationException(
+                                                SR.Serialization_PartialValueTypeFixup
+                                            );
                                         }
                                     }
                                     else
                                     {
-                                        FormatterServices.SerializationSetValue(tempMember, holder.ObjectValue, tempObjectHolder.ObjectValue);
+                                        FormatterServices.SerializationSetValue(
+                                            tempMember,
+                                            holder.ObjectValue,
+                                            tempObjectHolder.ObjectValue
+                                        );
                                     }
                                     if (tempObjectHolder.RequiresValueTypeFixup)
                                     {
@@ -539,7 +640,9 @@ namespace System.Runtime.Serialization
                                 }
                                 else
                                 {
-                                    throw new SerializationException(SR.Serialization_UnableToFixup);
+                                    throw new SerializationException(
+                                        SR.Serialization_UnableToFixup
+                                    );
                                 }
                                 break;
                             default:
@@ -594,7 +697,10 @@ namespace System.Runtime.Serialization
             {
                 ObjectHolder? temp = FindObjectHolder(dependencies.Current);
                 Debug.Assert(temp != null);
-                Debug.Assert(temp.DirectlyDependentObjects > 0, "temp.m_missingElementsRemaining>0");
+                Debug.Assert(
+                    temp.DirectlyDependentObjects > 0,
+                    "temp.m_missingElementsRemaining>0"
+                );
                 temp.DecrementFixupsRemaining(this);
                 if (((temp.DirectlyDependentObjects)) == 0)
                 {
@@ -616,7 +722,10 @@ namespace System.Runtime.Serialization
         {
             if (objectID <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(objectID), SR.ArgumentOutOfRange_ObjectID);
+                throw new ArgumentOutOfRangeException(
+                    nameof(objectID),
+                    SR.ArgumentOutOfRange_ObjectID
+                );
             }
 
             //Find the bin in which we're interested.  IObjectReference's shouldn't be returned -- the graph
@@ -643,29 +752,62 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
-        public void RegisterObject(object obj, long objectID, SerializationInfo? info, long idOfContainingObj, MemberInfo? member)
+        public void RegisterObject(
+            object obj,
+            long objectID,
+            SerializationInfo? info,
+            long idOfContainingObj,
+            MemberInfo? member
+        )
         {
             RegisterObject(obj, objectID, info, idOfContainingObj, member, null);
         }
 
-        internal void RegisterString(string? obj, long objectID, SerializationInfo? info, long idOfContainingObj, MemberInfo? member)
+        internal void RegisterString(
+            string? obj,
+            long objectID,
+            SerializationInfo? info,
+            long idOfContainingObj,
+            MemberInfo? member
+        )
         {
             ObjectHolder temp;
-            Debug.Assert(member == null || member is FieldInfo, "RegisterString - member is FieldInfo");
+            Debug.Assert(
+                member == null || member is FieldInfo,
+                "RegisterString - member is FieldInfo"
+            );
 
-            temp = new ObjectHolder(obj, objectID, info, null, idOfContainingObj, (FieldInfo?)member, null);
+            temp = new ObjectHolder(
+                obj,
+                objectID,
+                info,
+                null,
+                idOfContainingObj,
+                (FieldInfo?)member,
+                null
+            );
             AddObjectHolder(temp);
             return;
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
-        public void RegisterObject(object obj, long objectID, SerializationInfo? info, long idOfContainingObj, MemberInfo? member, int[]? arrayIndex)
+        public void RegisterObject(
+            object obj,
+            long objectID,
+            SerializationInfo? info,
+            long idOfContainingObj,
+            MemberInfo? member,
+            int[]? arrayIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
 
             if (objectID <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(objectID), SR.ArgumentOutOfRange_ObjectID);
+                throw new ArgumentOutOfRangeException(
+                    nameof(objectID),
+                    SR.ArgumentOutOfRange_ObjectID
+                );
             }
             if (member != null && !(member is FieldInfo)) // .NET Framework checks specifically for RuntimeFieldInfo and SerializationFieldInfo, but the former is an implementation detail in corelib
             {
@@ -678,9 +820,9 @@ namespace System.Runtime.Serialization
 
             if (_selector != null)
             {
-                Type selectorType = CanCallGetType(obj) ?
-                    obj.GetType() :
-                    typeof(MarshalByRefObject);
+                Type selectorType = CanCallGetType(obj)
+                    ? obj.GetType()
+                    : typeof(MarshalByRefObject);
 
                 //If we need a surrogate for this object, lets find it now.
                 surrogate = _selector.GetSurrogate(selectorType, _context, out useless);
@@ -689,7 +831,9 @@ namespace System.Runtime.Serialization
             //The object is interested in DeserializationEvents so lets register it.
             if (obj is IDeserializationCallback)
             {
-                DeserializationEventHandler d = new DeserializationEventHandler(((IDeserializationCallback)obj).OnDeserialization);
+                DeserializationEventHandler d = new DeserializationEventHandler(
+                    ((IDeserializationCallback)obj).OnDeserialization
+                );
                 AddOnDeserialization(d);
             }
 
@@ -704,7 +848,15 @@ namespace System.Runtime.Serialization
             temp = FindObjectHolder(objectID);
             if (temp == null)
             {
-                temp = new ObjectHolder(obj, objectID, info, surrogate, idOfContainingObj, (FieldInfo?)member, arrayIndex);
+                temp = new ObjectHolder(
+                    obj,
+                    objectID,
+                    info,
+                    surrogate,
+                    idOfContainingObj,
+                    (FieldInfo?)member,
+                    arrayIndex
+                );
                 AddObjectHolder(temp);
                 if (temp.RequiresDelayedFixup)
                 {
@@ -723,7 +875,15 @@ namespace System.Runtime.Serialization
             }
 
             //Complete the data in the ObjectHolder
-            temp.UpdateData(obj, info, surrogate, idOfContainingObj, (FieldInfo?)member, arrayIndex, this);
+            temp.UpdateData(
+                obj,
+                info,
+                surrogate,
+                idOfContainingObj,
+                (FieldInfo?)member,
+                arrayIndex,
+                this
+            );
 
             // The following case will only be true when somebody has registered a fixup on an object before
             // registering the object itself.  I don't believe that most well-behaved formatters will do this,
@@ -770,7 +930,11 @@ namespace System.Runtime.Serialization
         /// <param name="info">The SerializationInfo containing all info for obj.</param>
         /// <param name="context">The streaming context in which the serialization is taking place.</param>
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
-        internal void CompleteISerializableObject(object obj, SerializationInfo? info, StreamingContext context)
+        internal void CompleteISerializableObject(
+            object obj,
+            SerializationInfo? info,
+            StreamingContext context
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
 
@@ -787,27 +951,46 @@ namespace System.Runtime.Serialization
             }
             catch (Exception e)
             {
-                throw new SerializationException(SR.Format(SR.Serialization_ConstructorNotFound, t), e);
+                throw new SerializationException(
+                    SR.Format(SR.Serialization_ConstructorNotFound, t),
+                    e
+                );
             }
 
             constInfo.Invoke(obj, new object?[] { info, context });
         }
 
         internal static ConstructorInfo GetDeserializationConstructor(
-           [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] Type t)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type t
+        )
         {
-            foreach (ConstructorInfo ci in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                ConstructorInfo ci in t.GetConstructors(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 ParameterInfo[] parameters = ci.GetParameters();
-                if (parameters.Length == 2 &&
-                    parameters[0].ParameterType == typeof(SerializationInfo) &&
-                    parameters[1].ParameterType == typeof(StreamingContext))
+                if (
+                    parameters.Length == 2
+                    && parameters[0].ParameterType == typeof(SerializationInfo)
+                    && parameters[1].ParameterType == typeof(StreamingContext)
+                )
                 {
                     return ci;
                 }
             }
 
-            throw new SerializationException(SR.Format(SR.Serialization_ConstructorNotFound, t.FullName));
+            throw new SerializationException(
+                SR.Format(SR.Serialization_ConstructorNotFound, t.FullName)
+            );
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
@@ -828,13 +1011,16 @@ namespace System.Runtime.Serialization
             {
                 fixupCount = 0;
                 //Walk all of the IObjectReferences and ensure that they've been properly completed.
-                ObjectHolderListEnumerator fixupObjectsEnum = SpecialFixupObjects.GetFixupEnumerator();
+                ObjectHolderListEnumerator fixupObjectsEnum =
+                    SpecialFixupObjects.GetFixupEnumerator();
                 while (fixupObjectsEnum.MoveNext())
                 {
                     temp = fixupObjectsEnum.Current;
                     if (temp.ObjectValue == null)
                     {
-                        throw new SerializationException(SR.Format(SR.Serialization_ObjectNotSupplied, temp._id));
+                        throw new SerializationException(
+                            SR.Format(SR.Serialization_ObjectNotSupplied, temp._id)
+                        );
                     }
                     if (temp.TotalDependentObjects == 0)
                     {
@@ -863,7 +1049,12 @@ namespace System.Runtime.Serialization
             {
                 if (TopObject is TypeLoadExceptionHolder)
                 {
-                    throw new SerializationException(SR.Format(SR.Serialization_TypeLoadFailure, ((TypeLoadExceptionHolder)TopObject).TypeName));
+                    throw new SerializationException(
+                        SR.Format(
+                            SR.Serialization_TypeLoadFailure,
+                            ((TypeLoadExceptionHolder)TopObject).TypeName
+                        )
+                    );
                 }
                 return;
             }
@@ -875,7 +1066,9 @@ namespace System.Runtime.Serialization
                 temp = _objects[i];
                 while (temp != null)
                 {
-                    if (temp.TotalDependentObjects > 0 /*|| temp.m_missingElements!=null*/)
+                    if (
+                        temp.TotalDependentObjects > 0 /*|| temp.m_missingElements!=null*/
+                    )
                     {
                         CompleteObject(temp, true);
                     }
@@ -921,17 +1114,26 @@ namespace System.Runtime.Serialization
             _fixupCount++;
         }
 
-        public virtual void RecordFixup(long objectToBeFixed, MemberInfo member, long objectRequired)
+        public virtual void RecordFixup(
+            long objectToBeFixed,
+            MemberInfo member,
+            long objectRequired
+        )
         {
             //Verify our arguments
             if (objectToBeFixed <= 0 || objectRequired <= 0)
             {
-                throw new ArgumentOutOfRangeException(objectToBeFixed <= 0 ? nameof(objectToBeFixed) : nameof(objectRequired), SR.Serialization_IdTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    objectToBeFixed <= 0 ? nameof(objectToBeFixed) : nameof(objectRequired),
+                    SR.Serialization_IdTooSmall
+                );
             }
             ArgumentNullException.ThrowIfNull(member);
             if (!(member is FieldInfo)) // .NET Framework checks specifically for RuntimeFieldInfo and SerializationFieldInfo, but the former is an implementation detail in corelib
             {
-                throw new SerializationException(SR.Format(SR.Serialization_InvalidType, member.GetType()));
+                throw new SerializationException(
+                    SR.Format(SR.Serialization_InvalidType, member.GetType())
+                );
             }
 
             //Create a new fixup holder
@@ -939,33 +1141,55 @@ namespace System.Runtime.Serialization
             RegisterFixup(fixup, objectToBeFixed, objectRequired);
         }
 
-        public virtual void RecordDelayedFixup(long objectToBeFixed, string memberName, long objectRequired)
+        public virtual void RecordDelayedFixup(
+            long objectToBeFixed,
+            string memberName,
+            long objectRequired
+        )
         {
             //Verify our arguments
             if (objectToBeFixed <= 0 || objectRequired <= 0)
             {
-                throw new ArgumentOutOfRangeException(objectToBeFixed <= 0 ? nameof(objectToBeFixed) : nameof(objectRequired), SR.Serialization_IdTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    objectToBeFixed <= 0 ? nameof(objectToBeFixed) : nameof(objectRequired),
+                    SR.Serialization_IdTooSmall
+                );
             }
             ArgumentNullException.ThrowIfNull(memberName);
 
             //Create a new fixup holder
-            FixupHolder fixup = new FixupHolder(objectRequired, memberName, FixupHolder.DelayedFixup);
+            FixupHolder fixup = new FixupHolder(
+                objectRequired,
+                memberName,
+                FixupHolder.DelayedFixup
+            );
             RegisterFixup(fixup, objectToBeFixed, objectRequired);
         }
 
-        public virtual void RecordArrayElementFixup(long arrayToBeFixed, int index, long objectRequired)
+        public virtual void RecordArrayElementFixup(
+            long arrayToBeFixed,
+            int index,
+            long objectRequired
+        )
         {
             int[] indexArray = new int[1];
             indexArray[0] = index;
             RecordArrayElementFixup(arrayToBeFixed, indexArray, objectRequired);
         }
 
-        public virtual void RecordArrayElementFixup(long arrayToBeFixed, int[] indices, long objectRequired)
+        public virtual void RecordArrayElementFixup(
+            long arrayToBeFixed,
+            int[] indices,
+            long objectRequired
+        )
         {
             //Verify our arguments
             if (arrayToBeFixed <= 0 || objectRequired <= 0)
             {
-                throw new ArgumentOutOfRangeException(arrayToBeFixed <= 0 ? nameof(arrayToBeFixed) : nameof(objectRequired), SR.Serialization_IdTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    arrayToBeFixed <= 0 ? nameof(arrayToBeFixed) : nameof(objectRequired),
+                    SR.Serialization_IdTooSmall
+                );
             }
             ArgumentNullException.ThrowIfNull(indices);
 
@@ -982,20 +1206,25 @@ namespace System.Runtime.Serialization
 
         internal virtual void AddOnDeserialization(DeserializationEventHandler handler)
         {
-            _onDeserializationHandler = (DeserializationEventHandler)Delegate.Combine(_onDeserializationHandler, handler);
+            _onDeserializationHandler = (DeserializationEventHandler)
+                Delegate.Combine(_onDeserializationHandler, handler);
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
         internal virtual void AddOnDeserialized(object obj)
         {
-            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(obj.GetType());
+            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(
+                obj.GetType()
+            );
             _onDeserializedHandler = cache.AddOnDeserialized(obj, _onDeserializedHandler);
         }
 
         [RequiresUnreferencedCode(ObjectManagerUnreferencedCodeMessage)]
         internal virtual void RaiseOnDeserializedEvent(object obj)
         {
-            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(obj.GetType());
+            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(
+                obj.GetType()
+            );
             cache.InvokeOnDeserialized(obj, _context);
         }
 
@@ -1003,7 +1232,9 @@ namespace System.Runtime.Serialization
         public void RaiseOnDeserializingEvent(object obj)
         {
             // Run the OnDeserializing methods
-            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(obj.GetType());
+            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(
+                obj.GetType()
+            );
             cache.InvokeOnDeserializing(obj, _context);
         }
     }
@@ -1014,7 +1245,8 @@ namespace System.Runtime.Serialization
         internal const int HAS_ISERIALIZABLE = 0x0002;
         internal const int HAS_SURROGATE = 0x0004;
         internal const int REQUIRES_VALUETYPE_FIXUP = 0x0008;
-        internal const int REQUIRES_DELAYED_FIXUP = HAS_ISERIALIZABLE | HAS_SURROGATE | IncompleteObjectReference;
+        internal const int REQUIRES_DELAYED_FIXUP =
+            HAS_ISERIALIZABLE | HAS_SURROGATE | IncompleteObjectReference;
         internal const int SER_INFO_FIXED = 0x4000;
         internal const int VALUETYPE_FIXUP_PERFORMED = 0x8000;
 
@@ -1033,13 +1265,18 @@ namespace System.Runtime.Serialization
         private TypeLoadExceptionHolder? _typeLoad;
         private bool _reachable;
 
-        internal ObjectHolder(long objID) : this(null, objID, null, null, 0, null, null)
-        {
-        }
+        internal ObjectHolder(long objID)
+            : this(null, objID, null, null, 0, null, null) { }
 
         internal ObjectHolder(
-            object? obj, long objID, SerializationInfo? info, ISerializationSurrogate? surrogate,
-            long idOfContainingObj, FieldInfo? field, int[]? arrayIndex)
+            object? obj,
+            long objID,
+            SerializationInfo? info,
+            ISerializationSurrogate? surrogate,
+            long idOfContainingObj,
+            FieldInfo? field,
+            int[]? arrayIndex
+        )
         {
             Debug.Assert(objID >= 0, "objID>=0");
 
@@ -1061,7 +1298,10 @@ namespace System.Runtime.Serialization
                 _typeLoad = (TypeLoadExceptionHolder)obj;
             }
 
-            if (idOfContainingObj != 0 && ((field != null && field.FieldType.IsValueType) || arrayIndex != null))
+            if (
+                idOfContainingObj != 0
+                && ((field != null && field.FieldType.IsValueType) || arrayIndex != null)
+            )
             {
                 if (idOfContainingObj == objID)
                 {
@@ -1075,8 +1315,14 @@ namespace System.Runtime.Serialization
         }
 
         internal ObjectHolder(
-            string? obj, long objID, SerializationInfo? info, ISerializationSurrogate? surrogate,
-            long idOfContainingObj, FieldInfo? field, int[]? arrayIndex)
+            string? obj,
+            long objID,
+            SerializationInfo? info,
+            ISerializationSurrogate? surrogate,
+            long idOfContainingObj,
+            FieldInfo? field,
+            int[]? arrayIndex
+        )
         {
             Debug.Assert(objID >= 0, "objID>=0");
 
@@ -1124,7 +1370,10 @@ namespace System.Runtime.Serialization
         /// <param name="id">The id of the object for which to remove the dependency.</param>
         internal void RemoveDependency(long id)
         {
-            Debug.Assert(_dependentObjects != null, "[ObjectHolder.RemoveDependency]m_dependentObjects!=null");
+            Debug.Assert(
+                _dependentObjects != null,
+                "[ObjectHolder.RemoveDependency]m_dependentObjects!=null"
+            );
             Debug.Assert(id >= 0, "[ObjectHolder.RemoveDependency]id>=0");
             _dependentObjects.RemoveElement(id);
         }
@@ -1165,7 +1414,10 @@ namespace System.Runtime.Serialization
             do
             {
                 holder = manager.FindOrCreateObjectHolder(holder.ContainerID);
-                Debug.Assert(holder != null, "[ObjectHolder.UpdateTotalDependencyChain]holder!=null");
+                Debug.Assert(
+                    holder != null,
+                    "[ObjectHolder.UpdateTotalDependencyChain]holder!=null"
+                );
                 holder.IncrementDescendentFixups(amount);
             } while (holder.RequiresValueTypeFixup);
         }
@@ -1197,8 +1449,14 @@ namespace System.Runtime.Serialization
         /// <param name="arrayIndex">The array index.</param>
         /// <param name="manager">the ObjectManager being used to track these ObjectHolders.</param>
         internal void UpdateData(
-            object obj, SerializationInfo? info, ISerializationSurrogate? surrogate, long idOfContainer,
-            FieldInfo? field, int[]? arrayIndex, ObjectManager manager)
+            object obj,
+            SerializationInfo? info,
+            ISerializationSurrogate? surrogate,
+            long idOfContainer,
+            FieldInfo? field,
+            int[]? arrayIndex,
+            ObjectManager manager
+        )
         {
             Debug.Assert(obj != null, "obj!=null");
             Debug.Assert(_id > 0, "m_id>0");
@@ -1208,7 +1466,10 @@ namespace System.Runtime.Serialization
             _serInfo = info;
             _surrogate = surrogate;
 
-            if (idOfContainer != 0 && ((field != null && field.FieldType.IsValueType) || arrayIndex != null))
+            if (
+                idOfContainer != 0
+                && ((field != null && field.FieldType.IsValueType) || arrayIndex != null)
+            )
             {
                 if (idOfContainer == _id)
                 {
@@ -1284,8 +1545,13 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                return (((_flags & VALUETYPE_FIXUP_PERFORMED) != 0) ||
-                        (_object != null && ((_dependentObjects == null) || _dependentObjects.Count == 0)));
+                return (
+                    ((_flags & VALUETYPE_FIXUP_PERFORMED) != 0)
+                    || (
+                        _object != null
+                        && ((_dependentObjects == null) || _dependentObjects.Count == 0)
+                    )
+                );
             }
             set
             {
@@ -1304,19 +1570,27 @@ namespace System.Runtime.Serialization
             (_surrogate == null || _surrogate.GetType() != typeof(SurrogateForCyclicalReference));
 
         internal bool CanObjectValueChange =>
-            IsIncompleteObjectReference ? true :
-            HasSurrogate ? CanSurrogatedObjectValueChange :
-            false;
+            IsIncompleteObjectReference ? true
+            : HasSurrogate ? CanSurrogatedObjectValueChange
+            : false;
 
         internal int DirectlyDependentObjects => _missingElementsRemaining;
 
         internal int TotalDependentObjects => _missingElementsRemaining + _missingDecendents;
 
-        internal bool Reachable { get { return _reachable; } set { _reachable = value; } }
+        internal bool Reachable
+        {
+            get { return _reachable; }
+            set { _reachable = value; }
+        }
 
         internal bool TypeLoadExceptionReachable => _typeLoad != null;
 
-        internal TypeLoadExceptionHolder? TypeLoadException { get { return _typeLoad; } set { _typeLoad = value; } }
+        internal TypeLoadExceptionHolder? TypeLoadException
+        {
+            get { return _typeLoad; }
+            set { _typeLoad = value; }
+        }
 
         internal object? ObjectValue => _object;
 
@@ -1338,11 +1612,19 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal SerializationInfo? SerializationInfo { get { return _serInfo; } set { _serInfo = value; } }
+        internal SerializationInfo? SerializationInfo
+        {
+            get { return _serInfo; }
+            set { _serInfo = value; }
+        }
 
         internal ISerializationSurrogate? Surrogate => _surrogate;
 
-        internal LongList? DependentObjects { get { return _dependentObjects; } set { _dependentObjects = value; } }
+        internal LongList? DependentObjects
+        {
+            get { return _dependentObjects; }
+            set { _dependentObjects = value; }
+        }
 
         internal bool RequiresSerInfoFixup
         {
@@ -1389,7 +1671,10 @@ namespace System.Runtime.Serialization
         {
             Debug.Assert(id > 0, "id>0");
             Debug.Assert(fixupInfo != null, "fixupInfo!=null");
-            Debug.Assert(fixupType == ArrayFixup || fixupType == MemberFixup || fixupType == DelayedFixup, "fixupType==ArrayFixup || fixupType == MemberFixup || fixupType==DelayedFixup");
+            Debug.Assert(
+                fixupType == ArrayFixup || fixupType == MemberFixup || fixupType == DelayedFixup,
+                "fixupType==ArrayFixup || fixupType == MemberFixup || fixupType==DelayedFixup"
+            );
 
             _id = id;
             _fixupInfo = fixupInfo;
@@ -1404,9 +1689,8 @@ namespace System.Runtime.Serialization
         internal FixupHolder?[] _values;
         internal int _count;
 
-        internal FixupHolderList() : this(InitialSize)
-        {
-        }
+        internal FixupHolderList()
+            : this(InitialSize) { }
 
         internal FixupHolderList(int startingSize)
         {
@@ -1448,9 +1732,8 @@ namespace System.Runtime.Serialization
 
         // An m_currentItem of -1 indicates that the enumeration hasn't been started.
         // An m_values[xx] of -1 indicates that the item has been deleted.
-        internal LongList() : this(InitialSize)
-        {
-        }
+        internal LongList()
+            : this(InitialSize) { }
 
         internal LongList(int startingSize)
         {
@@ -1475,7 +1758,8 @@ namespace System.Runtime.Serialization
 
         internal bool MoveNext()
         {
-            while (++_currentItem < _totalItems && _values[_currentItem] == -1) ;
+            while (++_currentItem < _totalItems && _values[_currentItem] == -1)
+                ;
             return _currentItem != _totalItems;
         }
 
@@ -1484,7 +1768,10 @@ namespace System.Runtime.Serialization
             get
             {
                 Debug.Assert(_currentItem != -1, "[LongList.Current]m_currentItem!=-1");
-                Debug.Assert(_values[_currentItem] != -1, "[LongList.Current]m_values[m_currentItem]!=-1");
+                Debug.Assert(
+                    _values[_currentItem] != -1,
+                    "[LongList.Current]m_values[m_currentItem]!=-1"
+                );
                 return _values[_currentItem];
             }
         }
@@ -1528,13 +1815,15 @@ namespace System.Runtime.Serialization
         internal ObjectHolder[] _values;
         internal int _count;
 
-        internal ObjectHolderList() : this(DefaultInitialSize)
-        {
-        }
+        internal ObjectHolderList()
+            : this(DefaultInitialSize) { }
 
         internal ObjectHolderList(int startingSize)
         {
-            Debug.Assert(startingSize > 0 && startingSize < 0x1000, "startingSize>0 && startingSize<0x1000");
+            Debug.Assert(
+                startingSize > 0 && startingSize < 0x1000,
+                "startingSize>0 && startingSize<0x1000"
+            );
             _count = 0;
             _values = new ObjectHolder[startingSize];
         }
@@ -1548,7 +1837,8 @@ namespace System.Runtime.Serialization
             _values[_count++] = value;
         }
 
-        internal ObjectHolderListEnumerator GetFixupEnumerator() => new ObjectHolderListEnumerator(this, true);
+        internal ObjectHolderListEnumerator GetFixupEnumerator() =>
+            new ObjectHolderListEnumerator(this, true);
 
         private void EnlargeArray()
         {
@@ -1586,10 +1876,14 @@ namespace System.Runtime.Serialization
 
         internal bool MoveNext()
         {
-            Debug.Assert(_startingVersion == _list.Version, "[ObjectHolderListEnumerator.MoveNext]m_startingVersion==m_list.Version");
+            Debug.Assert(
+                _startingVersion == _list.Version,
+                "[ObjectHolderListEnumerator.MoveNext]m_startingVersion==m_list.Version"
+            );
             if (_isFixupEnumerator)
             {
-                while (++_currPos < _list.Count && _list._values[_currPos].CompletelyFixed);
+                while (++_currPos < _list.Count && _list._values[_currPos].CompletelyFixed)
+                    ;
                 return _currPos != _list.Count;
             }
             else
@@ -1604,8 +1898,14 @@ namespace System.Runtime.Serialization
             get
             {
                 Debug.Assert(_currPos != -1, "[ObjectHolderListEnumerator.Current]m_currPos!=-1");
-                Debug.Assert(_currPos < _list.Count, "[ObjectHolderListEnumerator.Current]m_currPos<m_list.Count");
-                Debug.Assert(_startingVersion == _list.Version, "[ObjectHolderListEnumerator.Current]m_startingVersion==m_list.Version");
+                Debug.Assert(
+                    _currPos < _list.Count,
+                    "[ObjectHolderListEnumerator.Current]m_currPos<m_list.Count"
+                );
+                Debug.Assert(
+                    _startingVersion == _list.Version,
+                    "[ObjectHolderListEnumerator.Current]m_startingVersion==m_list.Version"
+                );
                 return _list._values[_currPos];
             }
         }
@@ -1625,10 +1925,17 @@ namespace System.Runtime.Serialization
     {
         private static readonly Action<SerializationInfo, string, object, Type> s_updateValue =
             typeof(SerializationInfo)
-            .GetMethod("UpdateValue", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!
-            .CreateDelegate<Action<SerializationInfo, string, object, Type>>();
+                .GetMethod(
+                    "UpdateValue",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )!
+                .CreateDelegate<Action<SerializationInfo, string, object, Type>>();
 
-        public static void UpdateValue(this SerializationInfo si, string name, object value, Type type) =>
-            s_updateValue(si, name, value, type);
+        public static void UpdateValue(
+            this SerializationInfo si,
+            string name,
+            object value,
+            Type type
+        ) => s_updateValue(si, name, value, type);
     }
 }

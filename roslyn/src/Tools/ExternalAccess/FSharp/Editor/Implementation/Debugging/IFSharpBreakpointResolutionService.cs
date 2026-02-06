@@ -11,8 +11,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Implementation.Deb
 {
     internal interface IFSharpBreakpointResolutionService
     {
-        Task<FSharpBreakpointResolutionResult?> ResolveBreakpointAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken = default);
+        Task<FSharpBreakpointResolutionResult?> ResolveBreakpointAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken = default
+        );
 
-        Task<IEnumerable<FSharpBreakpointResolutionResult>> ResolveBreakpointsAsync(Solution solution, string name, CancellationToken cancellationToken = default);
+        Task<IEnumerable<FSharpBreakpointResolutionResult>> ResolveBreakpointsAsync(
+            Solution solution,
+            string name,
+            CancellationToken cancellationToken = default
+        );
     }
 }

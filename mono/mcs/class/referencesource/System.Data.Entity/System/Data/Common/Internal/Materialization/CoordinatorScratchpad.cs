@@ -20,9 +20,9 @@ using System.Security.Permissions;
 namespace System.Data.Common.Internal.Materialization
 {
     /// <summary>
-    /// Used in the Translator to aggregate information about a (nested) reader 
+    /// Used in the Translator to aggregate information about a (nested) reader
     /// coordinator. After the translator visits the columnMaps, it will compile
-    /// the coordinator(s) which produces an immutable CoordinatorFactory that 
+    /// the coordinator(s) which produces an immutable CoordinatorFactory that
     /// can be shared amongst many query instances.
     /// </summary>
     internal class CoordinatorScratchpad
@@ -32,12 +32,14 @@ namespace System.Data.Common.Internal.Materialization
         private readonly Type _elementType;
         private CoordinatorScratchpad _parent;
         private readonly List<CoordinatorScratchpad> _nestedCoordinatorScratchpads;
+
         /// <summary>
         /// Map from original expressions to expressions with detailed error handling.
         /// </summary>
         private readonly Dictionary<Expression, Expression> _expressionWithErrorHandlingMap;
+
         /// <summary>
-        /// Expressions that should be precompiled (i.e. reduced to constants in 
+        /// Expressions that should be precompiled (i.e. reduced to constants in
         /// compiled delegates.
         /// </summary>
         private readonly HashSet<LambdaExpression> _inlineDelegates;
@@ -74,14 +76,14 @@ namespace System.Data.Common.Internal.Materialization
         internal Expression SetKeys { get; set; }
 
         /// <summary>
-        /// Gets or sets an Expression returning 'true' when the key values for 
-        /// the current nested result (see SetKeys) are equal to the current key  
+        /// Gets or sets an Expression returning 'true' when the key values for
+        /// the current nested result (see SetKeys) are equal to the current key
         /// values on the underlying data reader.
         /// </summary>
         internal Expression CheckKeys { get; set; }
 
         /// <summary>
-        /// Gets or sets an expression returning 'true' if the current row in 
+        /// Gets or sets an expression returning 'true' if the current row in
         /// the underlying data reader contains an element of the collection.
         /// </summary>
         internal Expression HasData { get; set; }
@@ -122,7 +124,10 @@ namespace System.Data.Common.Internal.Materialization
         /// <param name="expression">The lean and mean raw version of the expression</param>
         /// <param name="expressionWithErrorHandling">The slower version of the same expression with better
         /// error handling</param>
-        internal void AddExpressionWithErrorHandling(Expression expression, Expression expressionWithErrorHandling)
+        internal void AddExpressionWithErrorHandling(
+            Expression expression,
+            Expression expressionWithErrorHandling
+        )
         {
             _expressionWithErrorHandlingMap[expression] = expressionWithErrorHandling;
         }
@@ -169,33 +174,50 @@ namespace System.Data.Common.Internal.Materialization
                 recordStateFactories = new RecordStateFactory[0];
             }
 
-            CoordinatorFactory[] nestedCoordinators = new CoordinatorFactory[_nestedCoordinatorScratchpads.Count];
+            CoordinatorFactory[] nestedCoordinators = new CoordinatorFactory[
+                _nestedCoordinatorScratchpads.Count
+            ];
             for (int i = 0; i < nestedCoordinators.Length; i++)
             {
                 nestedCoordinators[i] = _nestedCoordinatorScratchpads[i].Compile();
             }
 
             // compile inline delegates
-            ReplacementExpressionVisitor replacementVisitor = new ReplacementExpressionVisitor(null, this._inlineDelegates);
-            Expression element = new SecurityBoundaryExpressionVisitor().Visit(replacementVisitor.Visit(this.Element));
+            ReplacementExpressionVisitor replacementVisitor = new ReplacementExpressionVisitor(
+                null,
+                this._inlineDelegates
+            );
+            Expression element = new SecurityBoundaryExpressionVisitor().Visit(
+                replacementVisitor.Visit(this.Element)
+            );
 
             // substitute expressions that have error handlers into a new expression (used
             // when a more detailed exception message is needed)
-            replacementVisitor = new ReplacementExpressionVisitor(this._expressionWithErrorHandlingMap, this._inlineDelegates);
-            Expression elementWithErrorHandling = new SecurityBoundaryExpressionVisitor().Visit(replacementVisitor.Visit(this.Element));
+            replacementVisitor = new ReplacementExpressionVisitor(
+                this._expressionWithErrorHandlingMap,
+                this._inlineDelegates
+            );
+            Expression elementWithErrorHandling = new SecurityBoundaryExpressionVisitor().Visit(
+                replacementVisitor.Visit(this.Element)
+            );
 
-            CoordinatorFactory result = (CoordinatorFactory)Activator.CreateInstance(typeof(CoordinatorFactory<>).MakeGenericType(_elementType), new object[] {
-                                                            this.Depth, 
-                                                            this.StateSlotNumber, 
-                                                            this.HasData, 
-                                                            this.SetKeys, 
-                                                            this.CheckKeys, 
-                                                            nestedCoordinators, 
-                                                            element,
-                                                            elementWithErrorHandling,
-                                                            this.InitializeCollection,
-                                                            recordStateFactories
-                                                            });
+            CoordinatorFactory result = (CoordinatorFactory)
+                Activator.CreateInstance(
+                    typeof(CoordinatorFactory<>).MakeGenericType(_elementType),
+                    new object[]
+                    {
+                        this.Depth,
+                        this.StateSlotNumber,
+                        this.HasData,
+                        this.SetKeys,
+                        this.CheckKeys,
+                        nestedCoordinators,
+                        element,
+                        elementWithErrorHandling,
+                        this.InitializeCollection,
+                        recordStateFactories,
+                    }
+                );
             return result;
         }
 
@@ -228,8 +250,10 @@ namespace System.Data.Common.Internal.Materialization
             private readonly Dictionary<Expression, Expression> _replacementDictionary;
             private readonly HashSet<LambdaExpression> _inlineDelegates;
 
-            internal ReplacementExpressionVisitor(Dictionary<Expression, Expression> replacementDictionary,
-                HashSet<LambdaExpression> inlineDelegates)
+            internal ReplacementExpressionVisitor(
+                Dictionary<Expression, Expression> replacementDictionary,
+                HashSet<LambdaExpression> inlineDelegates
+            )
             {
                 this._replacementDictionary = replacementDictionary;
                 this._inlineDelegates = inlineDelegates;
@@ -246,7 +270,10 @@ namespace System.Data.Common.Internal.Materialization
 
                 // check to see if a substitution has been provided for this expression
                 Expression replacement;
-                if (null != this._replacementDictionary && this._replacementDictionary.TryGetValue(expression, out replacement))
+                if (
+                    null != this._replacementDictionary
+                    && this._replacementDictionary.TryGetValue(expression, out replacement)
+                )
                 {
                     // once a substitution is found, we stop walking the sub-expression and
                     // return immediately (since recursive replacement is not needed or wanted)
@@ -258,8 +285,7 @@ namespace System.Data.Common.Internal.Materialization
                     bool preCompile = false;
                     LambdaExpression lambda = null;
 
-                    if (expression.NodeType == ExpressionType.Lambda &&
-                        null != _inlineDelegates)
+                    if (expression.NodeType == ExpressionType.Lambda && null != _inlineDelegates)
                     {
                         lambda = (LambdaExpression)expression;
                         preCompile = _inlineDelegates.Contains(lambda);
@@ -293,13 +319,13 @@ namespace System.Data.Common.Internal.Materialization
         /// (Dev11 311339), we need to separate this delegate into two pieces: trusted code,
         /// run under a security assert, and untrusted code, run under the current AppDomain's
         /// permission set.
-        /// 
+        ///
         /// This visitor does that separation by compiling the untrusted code into delegates
         /// and re-inserting them back into the expression tree. When the untrusted code is
         /// run, it will run in another stack frame that does not have a security assert
         /// associated with it; therefore, any attempt to take advantage of MemberAccess
         /// reflection permissions will be blocked by the CLR.
-        /// 
+        ///
         /// The compiled user delegates accept two parameters, one of type DbDataReader
         /// to speed up access to the current reader, and the other of type object[],
         /// which contains all other values that they might require to correctly materialize an object. Most of these
@@ -307,9 +333,16 @@ namespace System.Data.Common.Internal.Materialization
         /// </remarks>
         private sealed class SecurityBoundaryExpressionVisitor : EntityExpressionVisitor
         {
-            private static readonly MethodInfo s_userMaterializationFuncInvokeMethod = typeof(Func<DbDataReader, object[], object>).GetMethod("Invoke");
+            private static readonly MethodInfo s_userMaterializationFuncInvokeMethod = typeof(Func<
+                DbDataReader,
+                object[],
+                object
+            >).GetMethod("Invoke");
             private ParameterExpression _values = Expression.Parameter(typeof(object[]), "values");
-            private ParameterExpression _reader = Expression.Parameter(typeof(DbDataReader), "reader");
+            private ParameterExpression _reader = Expression.Parameter(
+                typeof(DbDataReader),
+                "reader"
+            );
             private List<Expression> _initializationArguments = new List<Expression>();
             private int _userExpressionDepth;
 
@@ -333,7 +366,11 @@ namespace System.Data.Common.Internal.Materialization
                     // We are creating an internal type like CompensatingCollection<T> or Grouping<K, V>
                     // and at this particular point we are sure that the user isn't creating these
                     // since this.userArgumentType is not null.
-                    if (_userArgumentType != null && !nex.Type.IsPublic && nex.Type.Assembly == typeof(SecurityBoundaryExpressionVisitor).Assembly)
+                    if (
+                        _userArgumentType != null
+                        && !nex.Type.IsPublic
+                        && nex.Type.Assembly == typeof(SecurityBoundaryExpressionVisitor).Assembly
+                    )
                     {
                         return this.CreateInitializationArgumentReplacement(nex, _userArgumentType);
                     }
@@ -369,7 +406,9 @@ namespace System.Data.Common.Internal.Materialization
 
                     if (_userExpressionDepth == 1)
                     {
-                        var userMaterializationFunc = Expression.Lambda<Func<DbDataReader, object[], object>>(nex, _reader, _values).Compile();
+                        var userMaterializationFunc = Expression
+                            .Lambda<Func<DbDataReader, object[], object>>(nex, _reader, _values)
+                            .Compile();
 
                         // Convert the constructor invocation into a func that runs without elevated permissions.
                         return Expression.Convert(
@@ -377,8 +416,10 @@ namespace System.Data.Common.Internal.Materialization
                                 Expression.Constant(userMaterializationFunc),
                                 s_userMaterializationFuncInvokeMethod,
                                 Translator.Shaper_Reader,
-                                Expression.NewArrayInit(typeof(object), _initializationArguments)),
-                            nex.Type);
+                                Expression.NewArrayInit(typeof(object), _initializationArguments)
+                            ),
+                            nex.Type
+                        );
                     }
 
                     return nex;
@@ -396,11 +437,21 @@ namespace System.Data.Common.Internal.Materialization
 
                     // We can optimize the path that checks for DbNull and then
                     // reads a value directly off the reader or invokes another user expression.
-                    if (test != null && test.Object != null
+                    if (
+                        test != null
+                        && test.Object != null
                         && typeof(DbDataReader).IsAssignableFrom(test.Object.Type)
-                        && test.Method.Name == "IsDBNull")
+                        && test.Method.Name == "IsDBNull"
+                    )
                     {
-                        if (ifFalse != null && (ifFalse.Object != null && typeof(DbDataReader).IsAssignableFrom(ifFalse.Object.Type) || IsUserExpressionMethod(ifFalse.Method)))
+                        if (
+                            ifFalse != null
+                            && (
+                                ifFalse.Object != null
+                                    && typeof(DbDataReader).IsAssignableFrom(ifFalse.Object.Type)
+                                || IsUserExpressionMethod(ifFalse.Method)
+                            )
+                        )
                         {
                             return base.VisitConditional(c);
                         }
@@ -445,7 +496,13 @@ namespace System.Data.Common.Internal.Materialization
                     // Only compile into a delegate if this is the top-level user expression.
                     if (newMemberInit != init && _userExpressionDepth == 1)
                     {
-                        var userMaterializationFunc = Expression.Lambda<Func<DbDataReader, object[], object>>(newMemberInit, _reader, _values).Compile();
+                        var userMaterializationFunc = Expression
+                            .Lambda<Func<DbDataReader, object[], object>>(
+                                newMemberInit,
+                                _reader,
+                                _values
+                            )
+                            .Compile();
 
                         // Convert the object initializer into a func that runs without elevated permissions.
                         return Expression.Convert(
@@ -453,8 +510,10 @@ namespace System.Data.Common.Internal.Materialization
                                 Expression.Constant(userMaterializationFunc),
                                 s_userMaterializationFuncInvokeMethod,
                                 Translator.Shaper_Reader,
-                                Expression.NewArrayInit(typeof(object), _initializationArguments)),
-                            init.Type);
+                                Expression.NewArrayInit(typeof(object), _initializationArguments)
+                            ),
+                            init.Type
+                        );
                     }
                     else
                     {
@@ -492,7 +551,8 @@ namespace System.Data.Common.Internal.Materialization
                     Debug.Assert(
                         m.Arguments.Count == 1,
                         "m.Arguments.Count == 1",
-                        "There should be one expression argument provided to the user expression marker.");
+                        "There should be one expression argument provided to the user expression marker."
+                    );
 
                     try
                     {
@@ -527,18 +587,28 @@ namespace System.Data.Common.Internal.Materialization
                 return this.CreateInitializationArgumentReplacement(original, original.Type);
             }
 
-            private Expression CreateInitializationArgumentReplacement(Expression original, Type expressionType)
+            private Expression CreateInitializationArgumentReplacement(
+                Expression original,
+                Type expressionType
+            )
             {
                 _initializationArguments.Add(Expression.Convert(original, typeof(object)));
-                
+
                 return Expression.Convert(
-                    Expression.MakeBinary(ExpressionType.ArrayIndex, _values, Expression.Constant(_initializationArguments.Count - 1)),
-                    expressionType);
+                    Expression.MakeBinary(
+                        ExpressionType.ArrayIndex,
+                        _values,
+                        Expression.Constant(_initializationArguments.Count - 1)
+                    ),
+                    expressionType
+                );
             }
 
             private static bool IsUserExpressionMethod(MethodInfo method)
             {
-                return method.IsGenericMethod && method.GetGenericMethodDefinition() == InitializerMetadata.UserExpressionMarker;
+                return method.IsGenericMethod
+                    && method.GetGenericMethodDefinition()
+                        == InitializerMetadata.UserExpressionMarker;
             }
         }
         #endregion

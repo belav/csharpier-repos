@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.ModuleInitializers
         [Fact]
         public void TargetMustNotBeLocalFunction()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -37,14 +38,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (9,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(9, 10)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(9, 10)
+            );
         }
 
         [Fact]
         public void IgnoredOnLocalFunctionWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -68,14 +71,17 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (10,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(10, 10)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(10, 10)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeDestructor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -90,14 +96,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8795: A module initializer must be an ordinary member method
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(6, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void IgnoredOnDestructorWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -117,14 +125,17 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(7, 6)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(7, 6)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeOperator()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -139,14 +150,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8795: A module initializer must be an ordinary member method
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(6, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void IgnoredOnOperatorWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -166,14 +179,17 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(7, 6)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(7, 6)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeConversionOperator()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -188,14 +204,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8795: A module initializer must be an ordinary member method
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(6, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void IgnoredOnConversionOperatorWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -215,14 +233,17 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(7, 6)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(7, 6)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeEventAccessor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -242,17 +263,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (8,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(8, 10),
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(8, 10),
                 // (10,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(10, 10)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(10, 10)
+            );
         }
 
         [Fact]
         public void IgnoredOnEventAccessorsWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -277,17 +301,22 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (9,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(9, 10),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(9, 10),
                 // (11,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(11, 10)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(11, 10)
+            );
         }
 
         [Fact]
         public void TargetMustNotBePropertyAccessor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -307,17 +336,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (8,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(8, 10),
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(8, 10),
                 // (10,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(10, 10)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(10, 10)
+            );
         }
 
         [Fact]
         public void IgnoredOnPropertyAccessorsWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -342,17 +374,22 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (9,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(9, 10),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(9, 10),
                 // (11,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(11, 10)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(11, 10)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeIndexerAccessor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -372,17 +409,20 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (8,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(8, 10),
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(8, 10),
                 // (10,10): error CS8795: A module initializer must be an ordinary member method
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(10, 10)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(10, 10)
+            );
         }
 
         [Fact]
         public void IgnoredOnIndexerAccessorsWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -407,17 +447,22 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (9,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(9, 10),
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(9, 10),
                 // (11,10): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'class' declarations.
                 //         [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "class").WithLocation(11, 10)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "class")
+                    .WithLocation(11, 10)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeStaticConstructor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -432,14 +477,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8795: A module initializer must be an ordinary member method
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(6, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void IgnoredOnStaticConstructorWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -459,14 +506,17 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'method' declarations.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "method").WithLocation(7, 6)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "method")
+                    .WithLocation(7, 6)
+            );
         }
 
         [Fact]
         public void TargetMustNotBeInstanceConstructor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -481,14 +531,16 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyEmitDiagnostics(
                 // (6,6): error CS8795: A module initializer must be an ordinary member method
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer").WithLocation(6, 6)
-                );
+                Diagnostic(ErrorCode.ERR_ModuleInitializerMethodMustBeOrdinary, "ModuleInitializer")
+                    .WithLocation(6, 6)
+            );
         }
 
         [Fact]
         public void IgnoredOnInstanceConstructorWithBadAttributeTargets()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -508,8 +560,10 @@ namespace System.Runtime.CompilerServices
             compilation.VerifyEmitDiagnostics(
                 // (7,6): error CS0592: Attribute 'ModuleInitializer' is not valid on this declaration type. It is only valid on 'method' declarations.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer").WithArguments("ModuleInitializer", "method").WithLocation(7, 6)
-                );
+                Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ModuleInitializer")
+                    .WithArguments("ModuleInitializer", "method")
+                    .WithLocation(7, 6)
+            );
         }
     }
 }

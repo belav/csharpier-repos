@@ -13,7 +13,5 @@ internal sealed class ActiveStatementTag : TextMarkerTag
     public static readonly ActiveStatementTag Instance = new();
 
     private ActiveStatementTag()
-        : base(TagId)
-    {
-    }
+        : base(TagId) { }
 }

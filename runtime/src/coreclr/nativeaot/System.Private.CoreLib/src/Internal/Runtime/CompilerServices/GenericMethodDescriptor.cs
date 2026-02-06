@@ -10,7 +10,13 @@ namespace Internal.Runtime.CompilerServices
         public readonly IntPtr MethodFunctionPointer;
         public readonly IntPtr InstantiationArgument;
 
-        public GenericMethodDescriptor(IntPtr methodFunctionPointer, IntPtr instantiationArgument)
-            => (MethodFunctionPointer, InstantiationArgument) = (methodFunctionPointer, instantiationArgument);
+        public GenericMethodDescriptor(
+            IntPtr methodFunctionPointer,
+            IntPtr instantiationArgument
+        ) =>
+            (MethodFunctionPointer, InstantiationArgument) = (
+                methodFunctionPointer,
+                instantiationArgument
+            );
     }
 }

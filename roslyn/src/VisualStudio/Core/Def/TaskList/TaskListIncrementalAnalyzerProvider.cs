@@ -19,13 +19,16 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
         private readonly IGlobalOptionService _globalOptions;
         private readonly VisualStudioTaskListService _listener;
 
-        public TaskListIncrementalAnalyzerProvider(IGlobalOptionService globalOptions, VisualStudioTaskListService listener)
+        public TaskListIncrementalAnalyzerProvider(
+            IGlobalOptionService globalOptions,
+            VisualStudioTaskListService listener
+        )
         {
             _globalOptions = globalOptions;
             _listener = listener;
         }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new TaskListIncrementalAnalyzer(_globalOptions, _listener);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new TaskListIncrementalAnalyzer(_globalOptions, _listener);
     }
 }

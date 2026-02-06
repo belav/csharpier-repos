@@ -5,20 +5,17 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SeedingSqliteTest : SeedingTestBase
 {
-    protected override TestStore TestStore
-        => SqliteTestStore.Create("SeedingTest");
+    protected override TestStore TestStore => SqliteTestStore.Create("SeedingTest");
 
-    protected override SeedingContext CreateContextWithEmptyDatabase(string testId)
-        => new SeedingSqliteContext(testId);
+    protected override SeedingContext CreateContextWithEmptyDatabase(string testId) =>
+        new SeedingSqliteContext(testId);
 
     protected class SeedingSqliteContext : SeedingContext
     {
         public SeedingSqliteContext(string testId)
-            : base(testId)
-        {
-        }
+            : base(testId) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlite(($"Data Source = Seeds{TestId}.db"));
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(($"Data Source = Seeds{TestId}.db"));
     }
 }

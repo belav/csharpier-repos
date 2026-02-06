@@ -12,19 +12,22 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLanguages
 {
-    [ExportEmbeddedLanguageDocumentHighlighter(
-        nameof(AspNetCoreEmbeddedLanguageDocumentHighlighter),
-        new[] { LanguageNames.CSharp },
-        supportsUnannotatedAPIs: false,
-        // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
-        identifiers: new[] { "Route" }), Shared]
-    internal class AspNetCoreEmbeddedLanguageDocumentHighlighter : IEmbeddedLanguageDocumentHighlighter
+    [
+        ExportEmbeddedLanguageDocumentHighlighter(
+            nameof(AspNetCoreEmbeddedLanguageDocumentHighlighter),
+            new[] { LanguageNames.CSharp },
+            supportsUnannotatedAPIs: false,
+            // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
+            identifiers: new[] { "Route" }
+        ),
+        Shared
+    ]
+    internal class AspNetCoreEmbeddedLanguageDocumentHighlighter
+        : IEmbeddedLanguageDocumentHighlighter
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageDocumentHighlighter()
-        {
-        }
+        public AspNetCoreEmbeddedLanguageDocumentHighlighter() { }
 
         public ImmutableArray<DocumentHighlights> GetDocumentHighlights(
             Document document,
@@ -32,16 +35,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
             SyntaxToken token,
             int position,
             HighlightingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var highlighters = AspNetCoreDocumentHighlighterExtensionProvider.GetExtensions(document.Project);
+            var highlighters = AspNetCoreDocumentHighlighterExtensionProvider.GetExtensions(
+                document.Project
+            );
             foreach (var highlighter in highlighters)
             {
-                var highlights = highlighter.GetDocumentHighlights(semanticModel, token, position, cancellationToken);
+                var highlights = highlighter.GetDocumentHighlights(
+                    semanticModel,
+                    token,
+                    position,
+                    cancellationToken
+                );
                 if (!highlights.IsDefaultOrEmpty)
                 {
-                    return highlights.SelectAsArray(h => new DocumentHighlights(document,
-                        h.HighlightSpans.SelectAsArray(hs => new HighlightSpan(hs.TextSpan, ConvertKind(hs.Kind)))));
+                    return highlights.SelectAsArray(h => new DocumentHighlights(
+                        document,
+                        h.HighlightSpans.SelectAsArray(hs => new HighlightSpan(
+                            hs.TextSpan,
+                            ConvertKind(hs.Kind)
+                        ))
+                    ));
                 }
             }
 
@@ -54,7 +70,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
                     AspNetCoreHighlightSpanKind.None => HighlightSpanKind.None,
                     AspNetCoreHighlightSpanKind.Definition => HighlightSpanKind.Definition,
                     AspNetCoreHighlightSpanKind.Reference => HighlightSpanKind.Reference,
-                    AspNetCoreHighlightSpanKind.WrittenReference => HighlightSpanKind.WrittenReference,
+                    AspNetCoreHighlightSpanKind.WrittenReference =>
+                        HighlightSpanKind.WrittenReference,
                     _ => throw new NotImplementedException(),
                 };
             }

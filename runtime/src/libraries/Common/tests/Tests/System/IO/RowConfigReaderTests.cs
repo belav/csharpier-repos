@@ -47,8 +47,14 @@ namespace System.IO
         public static void StaticHelper(string data)
         {
             Assert.Equal("stringVal", RowConfigReader.ReadFirstValueFromString(data, "stringKey"));
-            Assert.Equal(int.MaxValue.ToString(), RowConfigReader.ReadFirstValueFromString(data, "intKey"));
-            Assert.Equal(long.MaxValue.ToString(), RowConfigReader.ReadFirstValueFromString(data, "longKey"));
+            Assert.Equal(
+                int.MaxValue.ToString(),
+                RowConfigReader.ReadFirstValueFromString(data, "intKey")
+            );
+            Assert.Equal(
+                long.MaxValue.ToString(),
+                RowConfigReader.ReadFirstValueFromString(data, "longKey")
+            );
         }
 
         [InlineData("key")]
@@ -111,14 +117,14 @@ namespace System.IO
         }
 
         private static string BasicData =>
-            $"stringKey stringVal{Environment.NewLine}" +
-            $"intKey {int.MaxValue}{Environment.NewLine}" +
-            $"longKey {long.MaxValue}{Environment.NewLine}";
+            $"stringKey stringVal{Environment.NewLine}"
+            + $"intKey {int.MaxValue}{Environment.NewLine}"
+            + $"longKey {long.MaxValue}{Environment.NewLine}";
 
         private static string BasicDataWithTabs =>
-            $"stringKey\t\t\tstringVal{Environment.NewLine}" +
-            $"intKey\t\t{int.MaxValue}{Environment.NewLine}" +
-            $"longKey\t\t{long.MaxValue}{Environment.NewLine}";
+            $"stringKey\t\t\tstringVal{Environment.NewLine}"
+            + $"intKey\t\t{int.MaxValue}{Environment.NewLine}"
+            + $"longKey\t\t{long.MaxValue}{Environment.NewLine}";
 
         public static IEnumerable<object[]> NewlineTestData()
         {
@@ -127,16 +133,20 @@ namespace System.IO
             yield return new[] { ConfigDataNoTrailingNewline };
         }
 
-        private static string ConfigData => string.Format(
-            "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3{0}",
-            Environment.NewLine);
+        private static string ConfigData =>
+            string.Format(
+                "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3{0}",
+                Environment.NewLine
+            );
 
         private static string ConfigDataExtraNewlines =>
             $"value0 00{Newlines(5)}value0 0{Newlines(3)}value1 1{Newlines(1)}value2 2{Newlines(4)}value3 3{Newlines(6)}";
 
-        private static string ConfigDataNoTrailingNewline => string.Format(
-            "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3",
-            Environment.NewLine);
+        private static string ConfigDataNoTrailingNewline =>
+            string.Format(
+                "value0 00{0}value0 0{0}value1 1{0}value2 2{0}value3 3",
+                Environment.NewLine
+            );
 
         private static string Newlines(int count)
         {

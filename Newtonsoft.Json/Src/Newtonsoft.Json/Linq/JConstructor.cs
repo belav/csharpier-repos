@@ -26,8 +26,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -88,9 +88,7 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class.
         /// </summary>
-        public JConstructor()
-        {
-        }
+        public JConstructor() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class from another <see cref="JConstructor"/> object.
@@ -114,9 +112,7 @@ namespace Newtonsoft.Json.Linq
         /// <param name="name">The constructor name.</param>
         /// <param name="content">The contents of the constructor.</param>
         public JConstructor(string name, params object[] content)
-            : this(name, (object)content)
-        {
-        }
+            : this(name, (object)content) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and content.
@@ -188,7 +184,12 @@ namespace Newtonsoft.Json.Linq
 
                 if (!(key is int i))
                 {
-                    throw new ArgumentException("Accessed JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(CultureInfo.InvariantCulture, MiscellaneousUtils.ToString(key)));
+                    throw new ArgumentException(
+                        "Accessed JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            MiscellaneousUtils.ToString(key)
+                        )
+                    );
                 }
 
                 return GetItem(i);
@@ -199,7 +200,12 @@ namespace Newtonsoft.Json.Linq
 
                 if (!(key is int i))
                 {
-                    throw new ArgumentException("Set JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(CultureInfo.InvariantCulture, MiscellaneousUtils.ToString(key)));
+                    throw new ArgumentException(
+                        "Set JConstructor values with invalid key value: {0}. Argument position index expected.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            MiscellaneousUtils.ToString(key)
+                        )
+                    );
                 }
 
                 SetItem(i, value);
@@ -222,7 +228,7 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JConstructor"/>.</param>
         /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JConstructor Load(JsonReader reader)
+        public static new JConstructor Load(JsonReader reader)
         {
             return Load(reader, null);
         }
@@ -234,13 +240,16 @@ namespace Newtonsoft.Json.Linq
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
         /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
-        public new static JConstructor Load(JsonReader reader, JsonLoadSettings? settings)
+        public static new JConstructor Load(JsonReader reader, JsonLoadSettings? settings)
         {
             if (reader.TokenType == JsonToken.None)
             {
                 if (!reader.Read())
                 {
-                    throw JsonReaderException.Create(reader, "Error reading JConstructor from JsonReader.");
+                    throw JsonReaderException.Create(
+                        reader,
+                        "Error reading JConstructor from JsonReader."
+                    );
                 }
             }
 
@@ -248,7 +257,13 @@ namespace Newtonsoft.Json.Linq
 
             if (reader.TokenType != JsonToken.StartConstructor)
             {
-                throw JsonReaderException.Create(reader, "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading JConstructor from JsonReader. Current JsonReader item is not a constructor: {0}".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             JConstructor c = new JConstructor((string)reader.Value!);

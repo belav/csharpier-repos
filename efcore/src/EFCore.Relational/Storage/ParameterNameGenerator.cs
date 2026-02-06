@@ -24,12 +24,10 @@ public class ParameterNameGenerator
     ///     Generates the next unique parameter name.
     /// </summary>
     /// <returns>The generated name.</returns>
-    public virtual string GenerateNext()
-        => "p" + _count++;
+    public virtual string GenerateNext() => "p" + _count++;
 
     /// <summary>
     ///     Resets the generator, meaning it can reuse previously generated names.
     /// </summary>
-    public virtual void Reset()
-        => _count = 0;
+    public virtual void Reset() => _count = 0;
 }

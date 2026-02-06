@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,17 +31,17 @@ using System;
 
 namespace System.Windows.Forms.Design
 {
-	[Flags]
-	public enum SelectionRules
-	{
-		AllSizeable = 15,
-		BottomSizeable = 2,
-		LeftSizeable = 4,
-		Locked = -2147483648,
-		Moveable = 268435456,
-		None = 0,
-		RightSizeable = 8,
-		TopSizeable = 1,
-		Visible = 1073741824
-	}
+    [Flags]
+    public enum SelectionRules
+    {
+        AllSizeable = 15,
+        BottomSizeable = 2,
+        LeftSizeable = 4,
+        Locked = -2147483648,
+        Moveable = 268435456,
+        None = 0,
+        RightSizeable = 8,
+        TopSizeable = 1,
+        Visible = 1073741824,
+    }
 }

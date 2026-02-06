@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.ServiceCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,87 +30,90 @@
 
 using System.Web.Services;
 
-namespace System.Web.Services.Description {
-	public sealed class ServiceCollection : ServiceDescriptionBaseCollection {
-		
-		#region Constructors
-	
-		internal ServiceCollection (ServiceDescription serviceDescription)
-			: base (serviceDescription)
-		{
-		}
+namespace System.Web.Services.Description
+{
+    public sealed class ServiceCollection : ServiceDescriptionBaseCollection
+    {
+        #region Constructors
 
-		#endregion // Constructors
+        internal ServiceCollection(ServiceDescription serviceDescription)
+            : base(serviceDescription) { }
 
-		#region Properties
+        #endregion // Constructors
 
-		public Service this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+        #region Properties
 
-				return (Service) List[index]; 
-			}
-			set { List [index] = value; }
-		}
+        public Service this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException();
 
-		public Service this [string name] {
-			get { 
-				int index = IndexOf ((Service) Table[name]);
-				if (index >= 0)
-					return this[index]; 
-				return null;
-			}
-		}
+                return (Service)List[index];
+            }
+            set { List[index] = value; }
+        }
 
-		#endregion // Properties
+        public Service this[string name]
+        {
+            get
+            {
+                int index = IndexOf((Service)Table[name]);
+                if (index >= 0)
+                    return this[index];
+                return null;
+            }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public int Add (Service service) 
-		{
-			Insert (Count, service);
-			return (Count - 1);
-		}
+        #region Methods
 
-		public bool Contains (Service service)
-		{
-			return List.Contains (service);
-		}
+        public int Add(Service service)
+        {
+            Insert(Count, service);
+            return (Count - 1);
+        }
 
-		public void CopyTo (Service[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public bool Contains(Service service)
+        {
+            return List.Contains(service);
+        }
 
-		protected override string GetKey (object value) 
-		{
-			if (!(value is Service))
-				throw new InvalidCastException ();
+        public void CopyTo(Service[] array, int index)
+        {
+            List.CopyTo(array, index);
+        }
 
-			return ((Service) value).Name;
-		}
+        protected override string GetKey(object value)
+        {
+            if (!(value is Service))
+                throw new InvalidCastException();
 
-		public int IndexOf (Service service)
-		{
-			return List.IndexOf (service);
-		}
+            return ((Service)value).Name;
+        }
 
-		public void Insert (int index, Service service)
-		{
-			List.Insert (index, service);
-		}
-	
-		public void Remove (Service service)
-		{
-			List.Remove (service);
-		}
-			
-		protected override void SetParent (object value, object parent)
-		{
-			((Service) value).SetParent ((ServiceDescription) parent);
-		}
-			
-		#endregion // Methods
-	}
+        public int IndexOf(Service service)
+        {
+            return List.IndexOf(service);
+        }
+
+        public void Insert(int index, Service service)
+        {
+            List.Insert(index, service);
+        }
+
+        public void Remove(Service service)
+        {
+            List.Remove(service);
+        }
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((Service)value).SetParent((ServiceDescription)parent);
+        }
+
+        #endregion // Methods
+    }
 }

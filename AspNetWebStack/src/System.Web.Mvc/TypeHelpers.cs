@@ -12,10 +12,16 @@ namespace System.Web.Mvc
 {
     internal static class TypeHelpers
     {
-        private static readonly Dictionary<Type, TryGetValueDelegate> _tryGetValueDelegateCache = new Dictionary<Type, TryGetValueDelegate>();
-        private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock = new ReaderWriterLockSlim();
+        private static readonly Dictionary<Type, TryGetValueDelegate> _tryGetValueDelegateCache =
+            new Dictionary<Type, TryGetValueDelegate>();
+        private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock =
+            new ReaderWriterLockSlim();
 
-        private static readonly MethodInfo _strongTryGetValueImplInfo = typeof(TypeHelpers).GetMethod("StrongTryGetValueImpl", BindingFlags.NonPublic | BindingFlags.Static);
+        private static readonly MethodInfo _strongTryGetValueImplInfo =
+            typeof(TypeHelpers).GetMethod(
+                "StrongTryGetValueImpl",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
         public static readonly Assembly MsCorLibAssembly = typeof(string).Assembly;
         public static readonly Assembly MvcAssembly = typeof(Controller).Assembly;
@@ -23,10 +29,19 @@ namespace System.Web.Mvc
 
         // method is used primarily for lighting up new .NET Framework features even if MVC targets the previous version
         // thisParameter is the 'this' parameter if target method is instance method, should be null for static method
-        public static TDelegate CreateDelegate<TDelegate>(Assembly assembly, string typeName, string methodName, object thisParameter) where TDelegate : class
+        public static TDelegate CreateDelegate<TDelegate>(
+            Assembly assembly,
+            string typeName,
+            string methodName,
+            object thisParameter
+        )
+            where TDelegate : class
         {
             // ensure target type exists
-            Type targetType = assembly.GetType(typeName, false /* throwOnError */);
+            Type targetType = assembly.GetType(
+                typeName,
+                false /* throwOnError */
+            );
             if (targetType == null)
             {
                 return null;
@@ -35,18 +50,34 @@ namespace System.Web.Mvc
             return CreateDelegate<TDelegate>(targetType, methodName, thisParameter);
         }
 
-        public static TDelegate CreateDelegate<TDelegate>(Type targetType, string methodName, object thisParameter) where TDelegate : class
+        public static TDelegate CreateDelegate<TDelegate>(
+            Type targetType,
+            string methodName,
+            object thisParameter
+        )
+            where TDelegate : class
         {
             // ensure target method exists
-            ParameterInfo[] delegateParameters = typeof(TDelegate).GetMethod("Invoke").GetParameters();
-            Type[] argumentTypes = Array.ConvertAll(delegateParameters, pInfo => pInfo.ParameterType);
+            ParameterInfo[] delegateParameters = typeof(TDelegate)
+                .GetMethod("Invoke")
+                .GetParameters();
+            Type[] argumentTypes = Array.ConvertAll(
+                delegateParameters,
+                pInfo => pInfo.ParameterType
+            );
             MethodInfo targetMethod = targetType.GetMethod(methodName, argumentTypes);
             if (targetMethod == null)
             {
                 return null;
             }
 
-            TDelegate d = Delegate.CreateDelegate(typeof(TDelegate), thisParameter, targetMethod, false /* throwOnBindFailure */) as TDelegate;
+            TDelegate d =
+                Delegate.CreateDelegate(
+                    typeof(TDelegate),
+                    thisParameter,
+                    targetMethod,
+                    false /* throwOnBindFailure */
+                ) as TDelegate;
             return d;
         }
 
@@ -78,8 +109,12 @@ namespace System.Web.Mvc
 
                 if (keyType.IsAssignableFrom(typeof(string)))
                 {
-                    MethodInfo strongImplInfo = _strongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
-                    result = (TryGetValueDelegate)Delegate.CreateDelegate(typeof(TryGetValueDelegate), strongImplInfo);
+                    MethodInfo strongImplInfo = _strongTryGetValueImplInfo.MakeGenericMethod(
+                        keyType,
+                        returnType
+                    );
+                    result = (TryGetValueDelegate)
+                        Delegate.CreateDelegate(typeof(TryGetValueDelegate), strongImplInfo);
                 }
             }
 
@@ -135,7 +170,8 @@ namespace System.Web.Mvc
         /// <returns>New <see cref="MissingMethodException"/> if an update is required; null otherwise.</returns>
         public static MissingMethodException EnsureDebuggableException(
             MissingMethodException originalException,
-            string fullTypeName)
+            string fullTypeName
+        )
         {
             MissingMethodException replacementException = null;
             if (!originalException.Message.Contains(fullTypeName))
@@ -144,7 +180,8 @@ namespace System.Web.Mvc
                     CultureInfo.CurrentCulture,
                     MvcResources.TypeHelpers_CannotCreateInstance,
                     originalException.Message,
-                    fullTypeName);
+                    fullTypeName
+                );
                 replacementException = new MissingMethodException(message, originalException);
             }
 
@@ -169,7 +206,11 @@ namespace System.Web.Mvc
             return null;
         }
 
-        private static bool StrongTryGetValueImpl<TKey, TValue>(object dictionary, string key, out object value)
+        private static bool StrongTryGetValueImpl<TKey, TValue>(
+            object dictionary,
+            string key,
+            out object value
+        )
         {
             IDictionary<TKey, TValue> strongDict = (IDictionary<TKey, TValue>)dictionary;
 
@@ -179,7 +220,11 @@ namespace System.Web.Mvc
             return retVal;
         }
 
-        private static bool TryGetValueFromNonGenericDictionary(object dictionary, string key, out object value)
+        private static bool TryGetValueFromNonGenericDictionary(
+            object dictionary,
+            string key,
+            out object value
+        )
         {
             IDictionary weakDict = (IDictionary)dictionary;
 

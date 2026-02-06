@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,57 +33,59 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class WebRequestModulesSection : ConfigurationSection
-	{
-		#region Fields
+    public sealed class WebRequestModulesSection : ConfigurationSection
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty webRequestModulesProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty webRequestModulesProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static WebRequestModulesSection ()
-		{
-			webRequestModulesProp = new ConfigurationProperty ("", typeof (WebRequestModuleElementCollection),
-									   null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static WebRequestModulesSection()
+        {
+            webRequestModulesProp = new ConfigurationProperty(
+                "",
+                typeof(WebRequestModuleElementCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (webRequestModulesProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(webRequestModulesProp);
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public WebRequestModuleElementCollection WebRequestModules {
-			get { return (WebRequestModuleElementCollection) base [webRequestModulesProp]; }
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public WebRequestModuleElementCollection WebRequestModules
+        {
+            get { return (WebRequestModuleElementCollection)base[webRequestModulesProp]; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		[MonoTODO]
-		protected override void PostDeserialize ()
-		{
-		}
+        [MonoTODO]
+        protected override void PostDeserialize() { }
 
-		[MonoTODO]
-		protected override void InitializeDefault ()
-		{
-		}
+        [MonoTODO]
+        protected override void InitializeDefault() { }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

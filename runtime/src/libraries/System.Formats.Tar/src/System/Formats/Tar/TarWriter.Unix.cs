@@ -13,10 +13,15 @@ namespace System.Formats.Tar
     public sealed partial class TarWriter : IDisposable
     {
         private readonly Dictionary<uint, string> _userIdentifiers = new Dictionary<uint, string>();
-        private readonly Dictionary<uint, string> _groupIdentifiers = new Dictionary<uint, string>();
+        private readonly Dictionary<uint, string> _groupIdentifiers =
+            new Dictionary<uint, string>();
 
         // Creates an entry for writing using the specified path and entryName. If this is being called from an async method, FileOptions should contain Asynchronous.
-        private TarEntry ConstructEntryForWriting(string fullPath, string entryName, FileOptions fileOptions)
+        private TarEntry ConstructEntryForWriting(
+            string fullPath,
+            string entryName,
+            FileOptions fileOptions
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(fullPath));
 
@@ -33,12 +38,17 @@ namespace System.Formats.Tar
                 Interop.Sys.FileTypes.S_IFCHR => TarEntryType.CharacterDevice,
                 Interop.Sys.FileTypes.S_IFIFO => TarEntryType.Fifo,
                 Interop.Sys.FileTypes.S_IFLNK => TarEntryType.SymbolicLink,
-                Interop.Sys.FileTypes.S_IFREG => Format is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile,
+                Interop.Sys.FileTypes.S_IFREG => Format is TarEntryFormat.V7
+                    ? TarEntryType.V7RegularFile
+                    : TarEntryType.RegularFile,
                 Interop.Sys.FileTypes.S_IFDIR => TarEntryType.Directory,
                 _ => throw new IOException(SR.Format(SR.TarUnsupportedFile, fullPath)),
             };
 
-            FileSystemInfo info = entryType is TarEntryType.Directory ? new DirectoryInfo(fullPath) : new FileInfo(fullPath);
+            FileSystemInfo info =
+                entryType is TarEntryType.Directory
+                    ? new DirectoryInfo(fullPath)
+                    : new FileInfo(fullPath);
 
             TarEntry entry = Format switch
             {
@@ -97,7 +107,14 @@ namespace System.Formats.Tar
             if (entry.EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)
             {
                 Debug.Assert(entry._header._dataStream == null);
-                entry._header._dataStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, fileOptions);
+                entry._header._dataStream = new FileStream(
+                    fullPath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    4096,
+                    fileOptions
+                );
             }
 
             return entry;

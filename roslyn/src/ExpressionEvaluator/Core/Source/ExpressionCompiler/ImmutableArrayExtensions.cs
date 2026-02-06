@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal static class ImmutableArrayExtensions
     {
-        internal static int IndexOf<TItem, TArg>(this ImmutableArray<TItem> array, Func<TItem, TArg, bool> predicate, TArg arg)
+        internal static int IndexOf<TItem, TArg>(
+            this ImmutableArray<TItem> array,
+            Func<TItem, TArg, bool> predicate,
+            TArg arg
+        )
         {
             for (int i = 0; i < array.Length; i++)
             {

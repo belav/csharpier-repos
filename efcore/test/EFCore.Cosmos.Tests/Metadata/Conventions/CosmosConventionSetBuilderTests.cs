@@ -16,6 +16,6 @@ public class CosmosConventionSetBuilderTests : ConventionSetBuilderTests
         return model;
     }
 
-    protected override ModelBuilder GetModelBuilder()
-        => CosmosConventionSetBuilder.CreateModelBuilder();
+    protected override ModelBuilder GetModelBuilder() =>
+        CosmosConventionSetBuilder.CreateModelBuilder();
 }

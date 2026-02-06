@@ -49,7 +49,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             XmlElement inclusionRoot = FindElement(root, elementToStartAt);
             if (inclusionRoot == null)
             {
-                throw new ArgumentException("elementToStartAt", elementToStartAt + " not found in document");
+                throw new ArgumentException(
+                    "elementToStartAt",
+                    elementToStartAt + " not found in document"
+                );
             }
 
             SimpleXmlNodeList list = GetAllDescendents(inclusionRoot);

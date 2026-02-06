@@ -43,7 +43,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Assert.ThrowsAny<CryptographicException>(() => ignored = c.SubjectName);
             Assert.ThrowsAny<CryptographicException>(() => ignored = c.IssuerName);
             Assert.ThrowsAny<CryptographicException>(() => c.GetCertHashString());
-            Assert.ThrowsAny<CryptographicException>(() => c.GetCertHashString(HashAlgorithmName.SHA256));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                c.GetCertHashString(HashAlgorithmName.SHA256)
+            );
             Assert.ThrowsAny<CryptographicException>(() => c.GetEffectiveDateString());
             Assert.ThrowsAny<CryptographicException>(() => c.GetExpirationDateString());
             Assert.ThrowsAny<CryptographicException>(() => c.GetPublicKeyString());
@@ -55,8 +57,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Assert.ThrowsAny<CryptographicException>(() => c.GetName());
 #pragma warning restore 0618
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _)
+            );
         }
 
         [Fact]
@@ -64,9 +67,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] expectedThumbPrintSha1 =
             {
-                0x10, 0x8e, 0x2b, 0xa2, 0x36, 0x32, 0x62, 0x0c,
-                0x42, 0x7c, 0x57, 0x0b, 0x6d, 0x9d, 0xb5, 0x1a,
-                0xc3, 0x13, 0x87, 0xfe,
+                0x10,
+                0x8e,
+                0x2b,
+                0xa2,
+                0x36,
+                0x32,
+                0x62,
+                0x0c,
+                0x42,
+                0x7c,
+                0x57,
+                0x0b,
+                0x6d,
+                0x9d,
+                0xb5,
+                0x1a,
+                0xc3,
+                0x13,
+                0x87,
+                0xfe,
             };
 
             Action<X509Certificate2> assert = (c) =>
@@ -95,9 +115,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] expectedThumbPrintSha1 =
             {
-                0x10, 0x8e, 0x2b, 0xa2, 0x36, 0x32, 0x62, 0x0c,
-                0x42, 0x7c, 0x57, 0x0b, 0x6d, 0x9d, 0xb5, 0x1a,
-                0xc3, 0x13, 0x87, 0xfe,
+                0x10,
+                0x8e,
+                0x2b,
+                0xa2,
+                0x36,
+                0x32,
+                0x62,
+                0x0c,
+                0x42,
+                0x7c,
+                0x57,
+                0x0b,
+                0x6d,
+                0x9d,
+                0xb5,
+                0x1a,
+                0xc3,
+                0x13,
+                0x87,
+                0xfe,
             };
 
             Action<X509Certificate2> assert = (cert) =>
@@ -139,13 +176,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var c2 = new X509Certificate2(c1))
             {
                 Assert.Equal(c1.GetCertHash(), c2.GetCertHash());
-                Assert.Equal(c1.GetCertHash(HashAlgorithmName.SHA256), c2.GetCertHash(HashAlgorithmName.SHA256));
+                Assert.Equal(
+                    c1.GetCertHash(HashAlgorithmName.SHA256),
+                    c2.GetCertHash(HashAlgorithmName.SHA256)
+                );
                 Assert.Equal(c1.GetKeyAlgorithm(), c2.GetKeyAlgorithm());
                 Assert.Equal(c1.GetKeyAlgorithmParameters(), c2.GetKeyAlgorithmParameters());
-                Assert.Equal(c1.GetKeyAlgorithmParametersString(), c2.GetKeyAlgorithmParametersString());
+                Assert.Equal(
+                    c1.GetKeyAlgorithmParametersString(),
+                    c2.GetKeyAlgorithmParametersString()
+                );
                 Assert.Equal(c1.GetPublicKey(), c2.GetPublicKey());
                 Assert.Equal(c1.GetSerialNumber(), c2.GetSerialNumber());
-                AssertExtensions.SequenceEqual(c1.SerialNumberBytes.Span, c1.SerialNumberBytes.Span);
+                AssertExtensions.SequenceEqual(
+                    c1.SerialNumberBytes.Span,
+                    c1.SerialNumberBytes.Span
+                );
                 Assert.Equal(c1.Issuer, c2.Issuer);
                 Assert.Equal(c1.Subject, c2.Subject);
                 Assert.Equal(c1.RawData, c2.RawData);
@@ -157,7 +203,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(c1.SubjectName.Name, c2.SubjectName.Name);
                 Assert.Equal(c1.IssuerName.Name, c2.IssuerName.Name);
                 Assert.Equal(c1.GetCertHashString(), c2.GetCertHashString());
-                Assert.Equal(c1.GetCertHashString(HashAlgorithmName.SHA256), c2.GetCertHashString(HashAlgorithmName.SHA256));
+                Assert.Equal(
+                    c1.GetCertHashString(HashAlgorithmName.SHA256),
+                    c2.GetCertHashString(HashAlgorithmName.SHA256)
+                );
                 Assert.Equal(c1.GetEffectiveDateString(), c2.GetEffectiveDateString());
                 Assert.Equal(c1.GetExpirationDateString(), c2.GetExpirationDateString());
                 Assert.Equal(c1.GetPublicKeyString(), c2.GetPublicKeyString());
@@ -179,7 +228,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 RSA rsa = c2.GetRSAPrivateKey();
                 byte[] hash = new byte[SHA256.HashSizeInBytes];
-                byte[] sig = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                byte[] sig = rsa.SignHash(
+                    hash,
+                    HashAlgorithmName.SHA256,
+                    RSASignaturePadding.Pkcs1
+                );
                 Assert.Equal(TestData.PfxSha256Empty_ExpectedSig, sig);
 
                 c1.Dispose();
@@ -249,7 +302,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 using (RSA rsa = c.GetRSAPrivateKey())
                 {
                     byte[] hash = new byte[SHA256.HashSizeInBytes];
-                    byte[] sig = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                    byte[] sig = rsa.SignHash(
+                        hash,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
                     Assert.Equal(TestData.PfxSha256Empty_ExpectedSig, sig);
                 }
             }
@@ -260,7 +317,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // StoreSavedAsSerializedCerData not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // StoreSavedAsSerializedCerData not supported on Unix
         public static void TestConstructor_SerializedCert_Windows()
         {
             const string ExpectedThumbPrint = "71CB4E2B02738AD44F8B382C93BD17BA665F9914";
@@ -272,7 +329,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(ExpectedThumbPrint, cert.Thumbprint);
             };
 
-            using (X509Certificate2 c = new X509Certificate2(TestData.StoreSavedAsSerializedCerData))
+            using (
+                X509Certificate2 c = new X509Certificate2(TestData.StoreSavedAsSerializedCerData)
+            )
             {
                 assert(c);
                 using (X509Certificate2 c2 = new X509Certificate2(c))
@@ -283,34 +342,79 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // StoreSavedAsSerializedCerData not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // StoreSavedAsSerializedCerData not supported on Unix
         public static void TestByteArrayConstructor_SerializedCert_Unix()
         {
-            Assert.ThrowsAny<CryptographicException>(() => new X509Certificate2(TestData.StoreSavedAsSerializedCerData));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestData.StoreSavedAsSerializedCerData)
+            );
         }
 
         [Fact]
         public static void TestNullConstructorArguments()
         {
             Assert.Throws<ArgumentNullException>(() => new X509Certificate2((string)null));
-            AssertExtensions.Throws<ArgumentException>("handle", () => new X509Certificate2(IntPtr.Zero));
-            AssertExtensions.Throws<ArgumentException>("rawData", () => new X509Certificate2((byte[])null, (string)null));
-            AssertExtensions.Throws<ArgumentException>("rawData", () => new X509Certificate2(Array.Empty<byte>(), (string)null));
-            AssertExtensions.Throws<ArgumentException>("rawData", () => new X509Certificate2((byte[])null, (string)null, X509KeyStorageFlags.DefaultKeySet));
-            AssertExtensions.Throws<ArgumentException>("rawData", () => new X509Certificate2(Array.Empty<byte>(), (string)null, X509KeyStorageFlags.DefaultKeySet));
+            AssertExtensions.Throws<ArgumentException>(
+                "handle",
+                () => new X509Certificate2(IntPtr.Zero)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "rawData",
+                () => new X509Certificate2((byte[])null, (string)null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "rawData",
+                () => new X509Certificate2(Array.Empty<byte>(), (string)null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "rawData",
+                () =>
+                    new X509Certificate2(
+                        (byte[])null,
+                        (string)null,
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "rawData",
+                () =>
+                    new X509Certificate2(
+                        Array.Empty<byte>(),
+                        (string)null,
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+            );
 
             // A null string password does not throw
             using (new X509Certificate2(TestData.MsCertificate, (string)null)) { }
-            using (new X509Certificate2(TestData.MsCertificate, (string)null, X509KeyStorageFlags.DefaultKeySet)) { }
+            using (
+                new X509Certificate2(
+                    TestData.MsCertificate,
+                    (string)null,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            ) { }
 
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromCertFile(null));
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromSignedFile(null));
-            AssertExtensions.Throws<ArgumentNullException>("cert", () => new X509Certificate2((X509Certificate2)null));
-            AssertExtensions.Throws<ArgumentException>("handle", () => new X509Certificate2(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "cert",
+                () => new X509Certificate2((X509Certificate2)null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "handle",
+                () => new X509Certificate2(IntPtr.Zero)
+            );
 
             // A null SecureString password does not throw
             using (new X509Certificate2(TestData.MsCertificate, (SecureString)null)) { }
-            using (new X509Certificate2(TestData.MsCertificate, (SecureString)null, X509KeyStorageFlags.DefaultKeySet)) { }
+            using (
+                new X509Certificate2(
+                    TestData.MsCertificate,
+                    (SecureString)null,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            ) { }
 
             // For compat reasons, the (byte[]) constructor (and only that constructor) treats a null or 0-length array as the same
             // as calling the default constructor.
@@ -336,8 +440,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void InvalidCertificateBlob()
         {
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(new byte[] { 0x01, 0x02, 0x03 }));
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(new byte[] { 0x01, 0x02, 0x03 })
+            );
 
             CryptographicException defaultException = new CryptographicException();
             Assert.NotEqual(defaultException.Message, ex.Message);
@@ -366,19 +471,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => new X509Certificate(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => new X509Certificate(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate2(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => new X509Certificate2(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate2(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => new X509Certificate2(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             // No test is performed here for the ephemeral flag failing downlevel, because the live
             // binary is always used by default, meaning it doesn't know EphemeralKeySet doesn't exist.
@@ -394,19 +503,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate(nonEmptyBytes, string.Empty, PersistedEphemeral));
+                () => new X509Certificate(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate(string.Empty, string.Empty, PersistedEphemeral));
+                () => new X509Certificate(string.Empty, string.Empty, PersistedEphemeral)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate2(nonEmptyBytes, string.Empty, PersistedEphemeral));
+                () => new X509Certificate2(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => new X509Certificate2(string.Empty, string.Empty, PersistedEphemeral));
+                () => new X509Certificate2(string.Empty, string.Empty, PersistedEphemeral)
+            );
         }
 #endif
     }

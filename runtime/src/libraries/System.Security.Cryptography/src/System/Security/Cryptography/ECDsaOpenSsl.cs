@@ -102,7 +102,12 @@ namespace System.Security.Cryptography
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.PlatformNotSupported_CryptographyOpenSSLNotFound, nameof(ECDsaOpenSsl)));
+                throw new PlatformNotSupportedException(
+                    SR.Format(
+                        SR.PlatformNotSupported_CryptographyOpenSSLNotFound,
+                        nameof(ECDsaOpenSsl)
+                    )
+                );
             }
         }
     }

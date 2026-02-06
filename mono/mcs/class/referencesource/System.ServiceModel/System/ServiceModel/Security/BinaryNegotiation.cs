@@ -4,18 +4,16 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
-    internal sealed class BinaryNegotiation 
+    internal sealed class BinaryNegotiation
     {
         private byte[] negotiationData;
         XmlDictionaryString valueTypeUriDictionaryString;
         string valueTypeUri;
 
-        public BinaryNegotiation(
-            string valueTypeUri,
-            byte[] negotiationData)
+        public BinaryNegotiation(string valueTypeUri, byte[] negotiationData)
         {
             if (valueTypeUri == null)
             {
@@ -32,11 +30,14 @@ namespace System.ServiceModel.Security
 
         public BinaryNegotiation(
             XmlDictionaryString valueTypeDictionaryString,
-            byte[] negotiationData)
+            byte[] negotiationData
+        )
         {
             if (valueTypeDictionaryString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("valueTypeDictionaryString");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "valueTypeDictionaryString"
+                );
             }
             if (negotiationData == null)
             {
@@ -51,12 +52,23 @@ namespace System.ServiceModel.Security
         {
             if (this.valueTypeUri != valueTypeUriDictionaryString.Value)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.IncorrectBinaryNegotiationValueType, this.valueTypeUri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.IncorrectBinaryNegotiationValueType, this.valueTypeUri)
+                    )
+                );
             }
             this.valueTypeUriDictionaryString = valueTypeUriDictionaryString;
         }
 
-        public void WriteTo(XmlDictionaryWriter writer, string prefix, XmlDictionaryString localName, XmlDictionaryString ns, XmlDictionaryString valueTypeLocalName, XmlDictionaryString valueTypeNs)
+        public void WriteTo(
+            XmlDictionaryWriter writer,
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns,
+            XmlDictionaryString valueTypeLocalName,
+            XmlDictionaryString valueTypeNs
+        )
         {
             writer.WriteStartElement(prefix, localName, ns);
             writer.WriteStartAttribute(valueTypeLocalName, valueTypeNs);
@@ -74,10 +86,7 @@ namespace System.ServiceModel.Security
 
         public string ValueTypeUri
         {
-            get 
-            { 
-                return this.valueTypeUri;
-            }
+            get { return this.valueTypeUri; }
         }
 
         public byte[] GetNegotiationData()

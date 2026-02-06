@@ -10,7 +10,9 @@ namespace System.ServiceModel.Dispatcher
 
     class ReceiveContextRPCFacet
     {
-        static AsyncCallback handleEndComplete = Fx.ThunkCallback(new AsyncCallback(HandleEndComplete));
+        static AsyncCallback handleEndComplete = Fx.ThunkCallback(
+            new AsyncCallback(HandleEndComplete)
+        );
         ReceiveContext receiveContext;
 
         ReceiveContextRPCFacet(ReceiveContext receiveContext)
@@ -22,9 +24,15 @@ namespace System.ServiceModel.Dispatcher
         //ManualAcknowledgementMode : No-Op.
         //Non-transacted V1 Operation : Remove RC; RC.Complete;(Will pause RPC if truly async)
         //Else : Create and Attach RCFacet to MessageRPC.
-        public static void CreateIfRequired(ImmutableDispatchRuntime dispatchRuntime, ref MessageRpc messageRpc)
+        public static void CreateIfRequired(
+            ImmutableDispatchRuntime dispatchRuntime,
+            ref MessageRpc messageRpc
+        )
         {
-            if (messageRpc.Operation.ReceiveContextAcknowledgementMode == ReceiveContextAcknowledgementMode.ManualAcknowledgement)
+            if (
+                messageRpc.Operation.ReceiveContextAcknowledgementMode
+                == ReceiveContextAcknowledgementMode.ManualAcknowledgement
+            )
             {
                 //Manual mode, user owns the acknowledgement.
                 return;
@@ -36,12 +44,19 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR.GetString(SR.SFxReceiveContextPropertyMissing,
-                    typeof(ReceiveContext).Name)));
+                        SR.GetString(
+                            SR.SFxReceiveContextPropertyMissing,
+                            typeof(ReceiveContext).Name
+                        )
+                    )
+                );
             }
             messageRpc.Request.Properties.Remove(ReceiveContext.Name);
 
-            if (messageRpc.Operation.ReceiveContextAcknowledgementMode == ReceiveContextAcknowledgementMode.AutoAcknowledgeOnReceive)
+            if (
+                messageRpc.Operation.ReceiveContextAcknowledgementMode
+                == ReceiveContextAcknowledgementMode.AutoAcknowledgeOnReceive
+            )
             {
                 if (!messageRpc.Operation.TransactionRequired)
                 {
@@ -56,8 +71,9 @@ namespace System.ServiceModel.Dispatcher
                         new AcknowledgementCompleteCallbackState
                         {
                             DispatchRuntime = dispatchRuntime,
-                            Rpc = messageRpc
-                        });
+                            Rpc = messageRpc,
+                        }
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -73,7 +89,12 @@ namespace System.ServiceModel.Dispatcher
         //Called from ProcessMessage31.
         //Mode is TransactedOperation && !ManualAcknowledgement
         //Will pause RPC if Complete is truly Async.
-        public void Complete(ImmutableDispatchRuntime dispatchRuntime, ref MessageRpc rpc, TimeSpan timeout, Transaction transaction)
+        public void Complete(
+            ImmutableDispatchRuntime dispatchRuntime,
+            ref MessageRpc rpc,
+            TimeSpan timeout,
+            Transaction transaction
+        )
         {
             Fx.Assert(transaction != null, "Cannot reach here with null transaction");
             //Async Result Ensures the RPC is paused if the request goes Async.
@@ -86,8 +107,9 @@ namespace System.ServiceModel.Dispatcher
                 new AcknowledgementCompleteCallbackState
                 {
                     DispatchRuntime = dispatchRuntime,
-                    Rpc = rpc
-                });
+                    Rpc = rpc,
+                }
+            );
 
             if (result.CompletedSynchronously)
             {
@@ -97,30 +119,35 @@ namespace System.ServiceModel.Dispatcher
 
         //Called from RPC.DisposeRequestContext for sucessful invoke.
         //Mode is RCBA.ManualAcknowledgement = false.
-        public IAsyncResult BeginComplete(TimeSpan timeout, Transaction transaction, ChannelHandler channelHandler, AsyncCallback callback, object state)
+        public IAsyncResult BeginComplete(
+            TimeSpan timeout,
+            Transaction transaction,
+            ChannelHandler channelHandler,
+            AsyncCallback callback,
+            object state
+        )
         {
             IAsyncResult result = null;
             if (transaction != null)
             {
                 using (TransactionScope scope = new TransactionScope(transaction))
                 {
-                    TransactionOutcomeListener.EnsureReceiveContextAbandonOnTransactionRollback(this.receiveContext, transaction, channelHandler);
-                    result = this.receiveContext.BeginComplete(
-                        timeout,
-                        callback,
-                        state);
+                    TransactionOutcomeListener.EnsureReceiveContextAbandonOnTransactionRollback(
+                        this.receiveContext,
+                        transaction,
+                        channelHandler
+                    );
+                    result = this.receiveContext.BeginComplete(timeout, callback, state);
                     scope.Complete();
                 }
             }
             else
             {
-                result = this.receiveContext.BeginComplete(
-                    timeout,
-                    callback,
-                    state);
+                result = this.receiveContext.BeginComplete(timeout, callback, state);
             }
             return result;
         }
+
         public void EndComplete(IAsyncResult result)
         {
             this.receiveContext.EndComplete(result);
@@ -130,11 +157,9 @@ namespace System.ServiceModel.Dispatcher
         //Mode is RCBA.ManualAcknowledgement = false.
         public IAsyncResult BeginAbandon(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return this.receiveContext.BeginAbandon(
-                timeout,
-                callback,
-                state);
+            return this.receiveContext.BeginAbandon(timeout, callback, state);
         }
+
         public void EndAbandon(IAsyncResult result)
         {
             this.receiveContext.EndAbandon(result);
@@ -158,7 +183,8 @@ namespace System.ServiceModel.Dispatcher
                 {
                     throw;
                 }
-                AcknowledgementCompleteCallbackState callbackState = (AcknowledgementCompleteCallbackState)result.AsyncState;
+                AcknowledgementCompleteCallbackState callbackState =
+                    (AcknowledgementCompleteCallbackState)result.AsyncState;
                 MessageRpc rpc = callbackState.Rpc;
                 rpc.Error = e;
                 callbackState.DispatchRuntime.ErrorBehavior.HandleError(ref rpc);
@@ -168,21 +194,16 @@ namespace System.ServiceModel.Dispatcher
 
         class AcknowledgementCompleteCallbackState
         {
-            public ImmutableDispatchRuntime DispatchRuntime
-            {
-                get;
-                set;
-            }
+            public ImmutableDispatchRuntime DispatchRuntime { get; set; }
 
-            public MessageRpc Rpc
-            {
-                get;
-                set;
-            }
+            public MessageRpc Rpc { get; set; }
         }
+
         class AcknowledgementCompleteAsyncResult : AsyncResult
         {
-            static AsyncCallback completeCallback = Fx.ThunkCallback(new AsyncCallback(CompleteCallback));
+            static AsyncCallback completeCallback = Fx.ThunkCallback(
+                new AsyncCallback(CompleteCallback)
+            );
             IResumeMessageRpc resumableRPC;
             ReceiveContext receiveContext;
             Transaction currentTransaction;
@@ -194,7 +215,9 @@ namespace System.ServiceModel.Dispatcher
                 ref MessageRpc rpc,
                 Transaction transaction,
                 AsyncCallback callback,
-                object state) : base(callback, state)
+                object state
+            )
+                : base(callback, state)
             {
                 this.receiveContext = receiveContext;
                 this.currentTransaction = transaction;
@@ -236,20 +259,18 @@ namespace System.ServiceModel.Dispatcher
                 {
                     using (TransactionScope scope = new TransactionScope(this.currentTransaction))
                     {
-                        TransactionOutcomeListener.EnsureReceiveContextAbandonOnTransactionRollback(this.receiveContext, this.currentTransaction, this.channelHandler);
-                        result = this.receiveContext.BeginComplete(
-                            timeout,
-                            completeCallback,
-                            this);
+                        TransactionOutcomeListener.EnsureReceiveContextAbandonOnTransactionRollback(
+                            this.receiveContext,
+                            this.currentTransaction,
+                            this.channelHandler
+                        );
+                        result = this.receiveContext.BeginComplete(timeout, completeCallback, this);
                         scope.Complete();
                     }
                 }
                 else
                 {
-                    result = this.receiveContext.BeginComplete(
-                        timeout,
-                        completeCallback,
-                        this);
+                    result = this.receiveContext.BeginComplete(timeout, completeCallback, this);
                 }
 
                 if (result.CompletedSynchronously)
@@ -261,7 +282,8 @@ namespace System.ServiceModel.Dispatcher
 
             static bool HandleComplete(IAsyncResult result)
             {
-                AcknowledgementCompleteAsyncResult thisPtr = (AcknowledgementCompleteAsyncResult)result.AsyncState;
+                AcknowledgementCompleteAsyncResult thisPtr = (AcknowledgementCompleteAsyncResult)
+                    result.AsyncState;
                 thisPtr.receiveContext.EndComplete(result);
                 return true;
             }
@@ -292,26 +314,40 @@ namespace System.ServiceModel.Dispatcher
 
                 if (completeSelf)
                 {
-                    AcknowledgementCompleteAsyncResult thisPtr = (AcknowledgementCompleteAsyncResult)result.AsyncState;
+                    AcknowledgementCompleteAsyncResult thisPtr =
+                        (AcknowledgementCompleteAsyncResult)result.AsyncState;
                     thisPtr.resumableRPC.Resume();
                     thisPtr.Complete(false, completionException);
                 }
             }
         }
+
         class TransactionOutcomeListener
         {
-            static AsyncCallback abandonCallback = Fx.ThunkCallback(new AsyncCallback(AbandonCallback));
+            static AsyncCallback abandonCallback = Fx.ThunkCallback(
+                new AsyncCallback(AbandonCallback)
+            );
             ReceiveContext receiveContext;
             ChannelHandler channelHandler;
 
-            public TransactionOutcomeListener(ReceiveContext receiveContext, Transaction transaction, ChannelHandler handler)
+            public TransactionOutcomeListener(
+                ReceiveContext receiveContext,
+                Transaction transaction,
+                ChannelHandler handler
+            )
             {
                 this.receiveContext = receiveContext;
-                transaction.TransactionCompleted += new TransactionCompletedEventHandler(this.OnTransactionComplete);
+                transaction.TransactionCompleted += new TransactionCompletedEventHandler(
+                    this.OnTransactionComplete
+                );
                 this.channelHandler = handler;
             }
 
-            public static void EnsureReceiveContextAbandonOnTransactionRollback(ReceiveContext receiveContext, Transaction transaction, ChannelHandler channelHandler)
+            public static void EnsureReceiveContextAbandonOnTransactionRollback(
+                ReceiveContext receiveContext,
+                Transaction transaction,
+                ChannelHandler channelHandler
+            )
             {
                 new TransactionOutcomeListener(receiveContext, transaction, channelHandler);
             }
@@ -328,8 +364,9 @@ namespace System.ServiceModel.Dispatcher
                             new CallbackState
                             {
                                 ChannelHandler = this.channelHandler,
-                                ReceiveContext = this.receiveContext
-                            });
+                                ReceiveContext = this.receiveContext,
+                            }
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -372,17 +409,9 @@ namespace System.ServiceModel.Dispatcher
 
             class CallbackState
             {
-                public ChannelHandler ChannelHandler
-                {
-                    get;
-                    set;
-                }
+                public ChannelHandler ChannelHandler { get; set; }
 
-                public ReceiveContext ReceiveContext
-                {
-                    get;
-                    set;
-                }
+                public ReceiveContext ReceiveContext { get; set; }
             }
         }
     }

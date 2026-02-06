@@ -56,16 +56,16 @@ namespace System.ServiceModel.Dispatcher
         }
 
         public ChannelDispatcher(IChannelListener listener)
-            : this(listener, null, null)
-        {
-        }
+            : this(listener, null, null) { }
 
         public ChannelDispatcher(IChannelListener listener, string bindingName)
-            : this(listener, bindingName, null)
-        {
-        }
+            : this(listener, bindingName, null) { }
 
-        public ChannelDispatcher(IChannelListener listener, string bindingName, IDefaultCommunicationTimeouts timeouts)
+        public ChannelDispatcher(
+            IChannelListener listener,
+            string bindingName,
+            IDefaultCommunicationTimeouts timeouts
+        )
         {
             if (listener == null)
             {
@@ -76,9 +76,11 @@ namespace System.ServiceModel.Dispatcher
             this.bindingName = bindingName;
             this.timeouts = new ImmutableCommunicationTimeouts(timeouts);
 
-            this.session = ((listener is IChannelListener<IInputSessionChannel>) ||
-                            (listener is IChannelListener<IReplySessionChannel>) ||
-                            (listener is IChannelListener<IDuplexSessionChannel>));
+            this.session = (
+                (listener is IChannelListener<IInputSessionChannel>)
+                || (listener is IChannelListener<IReplySessionChannel>)
+                || (listener is IChannelListener<IDuplexSessionChannel>)
+            );
 
             this.Initialize(new SharedRuntimeState(true));
         }
@@ -96,7 +98,9 @@ namespace System.ServiceModel.Dispatcher
             this.receiveSynchronously = false;
             this.serviceThrottle = null;
             this.transactionTimeout = TimeSpan.Zero;
-            this.maxPendingReceives = MultipleReceiveBinder.MultipleReceiveDefaults.MaxPendingReceives;
+            this.maxPendingReceives = MultipleReceiveBinder
+                .MultipleReceiveDefaults
+                .MaxPendingReceives;
             if (this.listener != null)
             {
                 this.listener.Faulted += new EventHandler(OnListenerFaulted);
@@ -205,10 +209,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool IsTransactedReceive
         {
-            get
-            {
-                return this.isTransactedReceive;
-            }
+            get { return this.isTransactedReceive; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -218,10 +219,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool AsynchronousTransactedAcceptEnabled
         {
-            get
-            {
-                return this.asynchronousTransactedAcceptEnabled;
-            }
+            get { return this.asynchronousTransactedAcceptEnabled; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -231,10 +229,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool ReceiveContextEnabled
         {
-            get
-            {
-                return this.receiveContextEnabled;
-            }
+            get { return this.receiveContextEnabled; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -242,11 +237,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal bool BufferedReceiveEnabled
-        {
-            get;
-            set;
-        }
+        internal bool BufferedReceiveEnabled { get; set; }
 
         public override IChannelListener Listener
         {
@@ -255,16 +246,18 @@ namespace System.ServiceModel.Dispatcher
 
         public int MaxTransactedBatchSize
         {
-            get
-            {
-                return this.maxTransactedBatchSize;
-            }
+            get { return this.maxTransactedBatchSize; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -274,10 +267,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ServiceThrottle ServiceThrottle
         {
-            get
-            {
-                return this.serviceThrottle;
-            }
+            get { return this.serviceThrottle; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -302,10 +292,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool ReceiveSynchronously
         {
-            get
-            {
-                return this.receiveSynchronously;
-            }
+            get { return this.receiveSynchronously; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -315,24 +302,17 @@ namespace System.ServiceModel.Dispatcher
 
         public bool SendAsynchronously
         {
-            get
-            {
-                return this.sendAsynchronously;
-            }
+            get { return this.sendAsynchronously; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
                 this.sendAsynchronously = value;
             }
-
         }
 
         public int MaxPendingReceives
         {
-            get
-            {
-                return this.maxPendingReceives;
-            }
+            get { return this.maxPendingReceives; }
             set
             {
                 this.ThrowIfDisposedOrImmutable();
@@ -375,7 +355,9 @@ namespace System.ServiceModel.Dispatcher
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value")
+                        );
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -391,22 +373,29 @@ namespace System.ServiceModel.Dispatcher
 
         public TimeSpan TransactionTimeout
         {
-            get
-            {
-                return this.transactionTimeout;
-            }
+            get { return this.transactionTimeout; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -427,8 +416,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal override void CloseInput(TimeSpan timeout)
         {
-            // we have to perform some slightly convoluted logic here due to 
-            // backwards compat. We probably need an IAsyncChannelDispatcher 
+            // we have to perform some slightly convoluted logic here due to
+            // backwards compat. We probably need an IAsyncChannelDispatcher
             // interface that has timeouts and async
             this.CloseInput();
 
@@ -442,7 +431,11 @@ namespace System.ServiceModel.Dispatcher
                         for (int i = 0; i < this.endpointDispatchers.Count; i++)
                         {
                             EndpointDispatcher endpointDispatcher = this.endpointDispatchers[i];
-                            this.TraceEndpointLifetime(endpointDispatcher, TraceCode.EndpointListenerClose, SR.GetString(SR.TraceCodeEndpointListenerClose));
+                            this.TraceEndpointLifetime(
+                                endpointDispatcher,
+                                TraceCode.EndpointListenerClose,
+                                SR.GetString(SR.TraceCodeEndpointListenerClose)
+                            );
                         }
                     }
 
@@ -575,7 +568,11 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (this.addressTable != null)
                     {
-                        this.addressTable.Add(endpoint.AddressFilter, endpoint.EndpointAddress, endpoint.FilterPriority);
+                        this.addressTable.Add(
+                            endpoint.AddressFilter,
+                            endpoint.EndpointAddress,
+                            endpoint.FilterPriority
+                        );
                     }
 
                     this.filterTable.AddEndpoint(endpoint);
@@ -635,7 +632,11 @@ namespace System.ServiceModel.Dispatcher
             this.AbortPendingChannels();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             List<ICommunicationObject> list = new List<ICommunicationObject>();
 
@@ -674,7 +675,11 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < this.endpointDispatchers.Count; i++)
                 {
                     EndpointDispatcher endpointDispatcher = this.endpointDispatchers[i];
-                    this.TraceEndpointLifetime(endpointDispatcher, TraceCode.EndpointListenerClose, SR.GetString(SR.TraceCodeEndpointListenerClose));
+                    this.TraceEndpointLifetime(
+                        endpointDispatcher,
+                        TraceCode.EndpointListenerClose,
+                        SR.GetString(SR.TraceCodeEndpointListenerClose)
+                    );
                 }
             }
         }
@@ -692,24 +697,37 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateOuterExceptionWithEndpointsInformation(e)
+                    );
                 }
             }
         }
 
-        InvalidOperationException CreateOuterExceptionWithEndpointsInformation(InvalidOperationException e)
+        InvalidOperationException CreateOuterExceptionWithEndpointsInformation(
+            InvalidOperationException e
+        )
         {
             string endpointContractNames = CreateContractListString();
 
             if (String.IsNullOrEmpty(endpointContractNames))
             {
-                return new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherUnableToOpen1, this.listener.Uri), e);
+                return new InvalidOperationException(
+                    SR.GetString(SR.SFxChannelDispatcherUnableToOpen1, this.listener.Uri),
+                    e
+                );
             }
             else
             {
-                return new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherUnableToOpen2, this.listener.Uri, endpointContractNames), e);
+                return new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFxChannelDispatcherUnableToOpen2,
+                        this.listener.Uri,
+                        endpointContractNames
+                    ),
+                    e
+                );
             }
-
         }
 
         internal string CreateContractListString()
@@ -729,7 +747,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (endpointContractNames.Length > 0)
                         {
-                            endpointContractNames.Append(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
+                            endpointContractNames.Append(
+                                CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                            );
                             endpointContractNames.Append(Space);
                         }
 
@@ -745,7 +765,11 @@ namespace System.ServiceModel.Dispatcher
             return endpointContractNames.ToString();
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfNotAttachedToHost();
             ThrowIfNoMessageVersion();
@@ -758,7 +782,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateOuterExceptionWithEndpointsInformation(e)
+                    );
                 }
             }
             else
@@ -777,7 +803,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateOuterExceptionWithEndpointsInformation(e)
+                    );
                 }
             }
             else
@@ -793,9 +821,13 @@ namespace System.ServiceModel.Dispatcher
             if (TD.ListenerOpenStartIsEnabled())
             {
                 this.eventTraceActivity = EventTraceActivity.GetFromThreadOrCreate();
-                TD.ListenerOpenStart(this.eventTraceActivity,
+                TD.ListenerOpenStart(
+                    this.eventTraceActivity,
                     (this.Listener != null) ? this.Listener.Uri.ToString() : string.Empty,
-                    (this.host != null && host.EventTraceActivity != null) ? this.host.EventTraceActivity.ActivityId : Guid.Empty);
+                    (this.host != null && host.EventTraceActivity != null)
+                        ? this.host.EventTraceActivity.ActivityId
+                        : Guid.Empty
+                );
             }
 
             base.OnOpening();
@@ -828,12 +860,20 @@ namespace System.ServiceModel.Dispatcher
 
                 if ((this.addressTable != null) && (endpoint.OriginalAddress != null))
                 {
-                    this.addressTable.Add(endpoint.AddressFilter, endpoint.OriginalAddress, endpoint.FilterPriority);
+                    this.addressTable.Add(
+                        endpoint.AddressFilter,
+                        endpoint.OriginalAddress,
+                        endpoint.FilterPriority
+                    );
                 }
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    this.TraceEndpointLifetime(endpoint, TraceCode.EndpointListenerOpen, SR.GetString(SR.TraceCodeEndpointListenerOpen));
+                    this.TraceEndpointLifetime(
+                        endpoint,
+                        TraceCode.EndpointListenerOpen,
+                        SR.GetString(SR.TraceCodeEndpointListenerOpen)
+                    );
                 }
             }
 
@@ -844,11 +884,21 @@ namespace System.ServiceModel.Dispatcher
             }
 
             IListenerBinder binder = ListenerBinder.GetBinder(this.listener, this.messageVersion);
-            this.listenerHandler = new ListenerHandler(binder, this, this.host, throttle, this.timeouts);
-            this.listenerHandler.Open();  // This never throws, which is why it's ok for it to happen in OnOpened
+            this.listenerHandler = new ListenerHandler(
+                binder,
+                this,
+                this.host,
+                throttle,
+                this.timeouts
+            );
+            this.listenerHandler.Open(); // This never throws, which is why it's ok for it to happen in OnOpened
         }
 
-        internal void ProvideFault(Exception e, FaultConverter faultConverter, ref ErrorHandlerFaultInfo faultInfo)
+        internal void ProvideFault(
+            Exception e,
+            FaultConverter faultConverter,
+            ref ErrorHandlerFaultInfo faultInfo
+        )
         {
             ErrorBehavior behavior;
 
@@ -891,7 +941,9 @@ namespace System.ServiceModel.Dispatcher
             // if we are on the client, we never call Open(), so this method is not invoked
             if (this.host == null)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherNoHost0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxChannelDispatcherNoHost0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
         }
@@ -900,23 +952,35 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.messageVersion == null)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherNoMessageVersion));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxChannelDispatcherNoMessageVersion)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
         }
 
-        void TraceEndpointLifetime(EndpointDispatcher endpoint, int traceCode, string traceDescription)
+        void TraceEndpointLifetime(
+            EndpointDispatcher endpoint,
+            int traceCode,
+            string traceDescription
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
                 Dictionary<string, object> values = new Dictionary<string, object>(3)
                 {
-                    { "ContractNamespace",  endpoint.ContractNamespace },
-                    { "ContractName",  endpoint.ContractName },
-                    { "Endpoint",  endpoint.ListenUri }
+                    { "ContractNamespace", endpoint.ContractNamespace },
+                    { "ContractName", endpoint.ContractName },
+                    { "Endpoint", endpoint.ListenUri },
                 };
-                TraceUtility.TraceEvent(TraceEventType.Information, traceCode,
-                    traceDescription, new DictionaryTraceRecord(values), endpoint, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(values),
+                    endpoint,
+                    null
+                );
             }
         }
 
@@ -933,7 +997,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.host != null)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherMultipleHost0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxChannelDispatcherMultipleHost0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
 
@@ -949,7 +1015,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.host != host)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxChannelDispatcherDifferentHost0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxChannelDispatcherDifferentHost0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
 
@@ -995,7 +1063,9 @@ namespace System.ServiceModel.Dispatcher
 
             protected override void SetItem(int index, EndpointDispatcher item)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxCollectionDoesNotSupportSet0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxCollectionDoesNotSupportSet0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
         }

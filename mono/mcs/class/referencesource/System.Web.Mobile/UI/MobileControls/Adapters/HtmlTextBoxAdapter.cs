@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTextBoxAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-using System.Security.Permissions;
 using System.Globalization;
+using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -20,9 +20,17 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlTextBoxAdapter : HtmlControlAdapter
     {
         private String _staticValue;
@@ -30,10 +38,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Control"]/*' />
         protected new TextBox Control
         {
-            get
-            {
-                return (TextBox)base.Control;
-            }
+            get { return (TextBox)base.Control; }
         }
 
         /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.OnInit"]/*' />
@@ -46,7 +51,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlTextBoxAdapter.uex' path='docs/doc[@for="HtmlTextBoxAdapter.Render"]/*' />
         public override void Render(HtmlMobileTextWriter writer)
         {
-            writer.EnterLayout(Style); 
+            writer.EnterLayout(Style);
 
             writer.WriteBeginTag("input");
 
@@ -64,7 +69,10 @@ namespace System.Web.UI.MobileControls.Adapters
             }
             if (Control.MaxLength > 0)
             {
-                writer.WriteAttribute("maxlength", Control.MaxLength.ToString(CultureInfo.InvariantCulture));
+                writer.WriteAttribute(
+                    "maxlength",
+                    Control.MaxLength.ToString(CultureInfo.InvariantCulture)
+                );
             }
             if (Control.Password)
             {
@@ -80,7 +88,7 @@ namespace System.Web.UI.MobileControls.Adapters
         internal virtual String GetRenderName()
         {
             String renderName;
-            if(Device.RequiresAttributeColonSubstitution)
+            if (Device.RequiresAttributeColonSubstitution)
             {
                 renderName = Control.UniqueID.Replace(':', ',');
             }
@@ -98,7 +106,10 @@ namespace System.Web.UI.MobileControls.Adapters
             // Optimization - if viewstate is enabled for this control, and the
             // postback returns to this page, we just let it do the trick.
 
-            if (Control.Form.Action.Length > 0 || (!IsViewStateEnabled() && Control.Text != _staticValue))
+            if (
+                Control.Form.Action.Length > 0
+                || (!IsViewStateEnabled() && Control.Text != _staticValue)
+            )
             {
                 writer.WriteHiddenField(Control.UniqueID, Control.Text);
             }

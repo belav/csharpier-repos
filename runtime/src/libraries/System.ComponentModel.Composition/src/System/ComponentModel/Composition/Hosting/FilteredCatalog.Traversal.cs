@@ -77,7 +77,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static HashSet<ComposablePartDefinition> GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, IComposablePartCatalogTraversal traversal)
+        private static HashSet<ComposablePartDefinition> GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            IComposablePartCatalogTraversal traversal
+        )
         {
             ArgumentNullException.ThrowIfNull(traversal);
 
@@ -86,13 +89,22 @@ namespace System.ComponentModel.Composition.Hosting
             return traversedParts;
         }
 
-        private static void GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, HashSet<ComposablePartDefinition> traversedParts, IComposablePartCatalogTraversal traversal)
+        private static void GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            HashSet<ComposablePartDefinition> traversedParts,
+            IComposablePartCatalogTraversal traversal
+        )
         {
             foreach (var part in parts)
             {
                 if (traversedParts.Add(part))
                 {
-                    if (traversal.TryTraverse(part, out IEnumerable<ComposablePartDefinition>? partsToTraverse))
+                    if (
+                        traversal.TryTraverse(
+                            part,
+                            out IEnumerable<ComposablePartDefinition>? partsToTraverse
+                        )
+                    )
                     {
                         GetTraversalClosure(partsToTraverse, traversedParts, traversal);
                     }
@@ -116,7 +128,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static void ThrowOnRecomposition(object? sender, ComposablePartCatalogChangeEventArgs e)
+        private static void ThrowOnRecomposition(
+            object? sender,
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             throw new ChangeRejectedException();
         }

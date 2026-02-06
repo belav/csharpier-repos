@@ -1,13 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="FormViewInsertEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-
 
     /// <devdoc>
     /// <para>Represents the method that will handle the <see langword='FormViewCommand'/>

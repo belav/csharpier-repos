@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,8 +12,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace System.Linq.Parallel
 {
@@ -32,10 +32,8 @@ namespace System.Linq.Parallel
         //     taskIndex   - the unique index of this task
         //
 
-        protected SpoolingTaskBase(int taskIndex, QueryTaskGroupState groupState) :
-            base(taskIndex, groupState)
-        {
-        }
+        protected SpoolingTaskBase(int taskIndex, QueryTaskGroupState groupState)
+            : base(taskIndex, groupState) { }
 
         //-----------------------------------------------------------------------------------
         // The implementation of the Work API just enumerates the producer's data, and
@@ -53,9 +51,15 @@ namespace System.Linq.Parallel
             catch (Exception ex)
             {
                 OperationCanceledException oce = ex as OperationCanceledException;
-                if (oce != null && 
-                    oce.CancellationToken == m_groupState.CancellationState.MergedCancellationToken
-                    && m_groupState.CancellationState.MergedCancellationToken.IsCancellationRequested)
+                if (
+                    oce != null
+                    && oce.CancellationToken
+                        == m_groupState.CancellationState.MergedCancellationToken
+                    && m_groupState
+                        .CancellationState
+                        .MergedCancellationToken
+                        .IsCancellationRequested
+                )
                 {
                     //an expected internal cancellation has occurred.  suppress this exception.
                 }
@@ -92,6 +96,5 @@ namespace System.Linq.Parallel
         {
             // (Intentionally left blank.)
         }
-
     }
 }

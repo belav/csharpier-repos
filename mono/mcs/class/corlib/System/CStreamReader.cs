@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,77 +33,83 @@
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace System.IO {
-	class CStreamReader : StreamReader {
-		TermInfoDriver driver;
+namespace System.IO
+{
+    class CStreamReader : StreamReader
+    {
+        TermInfoDriver driver;
 
-		public CStreamReader(Stream stream, Encoding encoding)
-			: base (stream, encoding)
-		{
-			driver = (TermInfoDriver) ConsoleDriver.driver;
-		}
+        public CStreamReader(Stream stream, Encoding encoding)
+            : base(stream, encoding)
+        {
+            driver = (TermInfoDriver)ConsoleDriver.driver;
+        }
 
-		public override int Peek ()
-		{
-			try {
-				return base.Peek ();
-			} catch (IOException) {
-			}
+        public override int Peek()
+        {
+            try
+            {
+                return base.Peek();
+            }
+            catch (IOException) { }
 
-			return -1;
-		}
+            return -1;
+        }
 
-		public override int Read ()
-		{
-			try {
-				ConsoleKeyInfo key = Console.ReadKey ();
-				return key.KeyChar;
-			} catch (IOException) {
-			}
+        public override int Read()
+        {
+            try
+            {
+                ConsoleKeyInfo key = Console.ReadKey();
+                return key.KeyChar;
+            }
+            catch (IOException) { }
 
-			return(-1);
-		}
+            return (-1);
+        }
 
-		public override int Read ([In, Out] char [] dest, int index, int count)
-		{
-			if (dest == null)
-				throw new ArgumentNullException ("dest");
-			if (index < 0)
-				throw new ArgumentOutOfRangeException ("index", "< 0");
-			if (count < 0)
-				throw new ArgumentOutOfRangeException ("count", "< 0");
-			// ordered to avoid possible integer overflow
-			if (index > dest.Length - count)
-				throw new ArgumentException ("index + count > dest.Length");
+        public override int Read([In, Out] char[] dest, int index, int count)
+        {
+            if (dest == null)
+                throw new ArgumentNullException("dest");
+            if (index < 0)
+                throw new ArgumentOutOfRangeException("index", "< 0");
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count", "< 0");
+            // ordered to avoid possible integer overflow
+            if (index > dest.Length - count)
+                throw new ArgumentException("index + count > dest.Length");
 
-			try {
-				return driver.Read (dest, index, count);
-			} catch (IOException) {
-			}
+            try
+            {
+                return driver.Read(dest, index, count);
+            }
+            catch (IOException) { }
 
-			return 0;
-		}
+            return 0;
+        }
 
-		public override string ReadLine ()
-		{
-			try {
-				return driver.ReadLine ();
-			} catch (IOException) {
-			}
+        public override string ReadLine()
+        {
+            try
+            {
+                return driver.ReadLine();
+            }
+            catch (IOException) { }
 
-			return null;
-		}
+            return null;
+        }
 
-		public override string ReadToEnd ()
-		{
-			try {
-				return driver.ReadToEnd ();
-			} catch (IOException) {
-			}
+        public override string ReadToEnd()
+        {
+            try
+            {
+                return driver.ReadToEnd();
+            }
+            catch (IOException) { }
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }
 #endif
-

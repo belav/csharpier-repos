@@ -41,7 +41,10 @@ namespace System.ComponentModel.Design.Tests
         public void SetSavedLicenseKey_NullType_ThrowsNullReferenceException()
         {
             var context = new DesigntimeLicenseContext();
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("type", () => context.SetSavedLicenseKey(null, "Key"));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "type",
+                () => context.SetSavedLicenseKey(null, "Key")
+            );
         }
     }
 }

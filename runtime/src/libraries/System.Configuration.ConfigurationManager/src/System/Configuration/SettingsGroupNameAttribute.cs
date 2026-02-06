@@ -24,10 +24,7 @@ namespace System.Configuration
         /// </summary>
         public string GroupName
         {
-            get
-            {
-                return _groupName;
-            }
+            get { return _groupName; }
         }
     }
 }

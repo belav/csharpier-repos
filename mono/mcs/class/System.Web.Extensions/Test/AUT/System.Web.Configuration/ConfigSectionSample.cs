@@ -10,9 +10,8 @@ public class ConfigSectionSample
             WebConfigurationManager.OpenWebConfiguration("/aspnetTest");
 
         // Get the external Web services section.
-        ScriptingWebServicesSectionGroup webServicesSection =
-            (ScriptingWebServicesSectionGroup)configuration.GetSectionGroup(
-            "system.web.extensions/scripting/webServices");
+        ScriptingWebServicesSectionGroup webServicesSection = (ScriptingWebServicesSectionGroup)
+            configuration.GetSectionGroup("system.web.extensions/scripting/webServices");
 
         // Get the authentication service section.
         ScriptingAuthenticationServiceSection authenticationSection =
@@ -26,13 +25,11 @@ public class ConfigSectionSample
             WebConfigurationManager.OpenWebConfiguration("/aspnetTest");
 
         // Get the external Web services section.
-        ScriptingWebServicesSectionGroup webServicesSection =
-            (ScriptingWebServicesSectionGroup)configuration.GetSectionGroup(
-            "system.web.extensions/scripting/webServices");
+        ScriptingWebServicesSectionGroup webServicesSection = (ScriptingWebServicesSectionGroup)
+            configuration.GetSectionGroup("system.web.extensions/scripting/webServices");
 
         // Get the profile service section.
-        ScriptingProfileServiceSection profileSection =
-            webServicesSection.ProfileService;
+        ScriptingProfileServiceSection profileSection = webServicesSection.ProfileService;
     }
 
     public static void GetConverterElement()
@@ -42,13 +39,13 @@ public class ConfigSectionSample
             WebConfigurationManager.OpenWebConfiguration("/aspnetTest");
 
         // Get the external JSON section.
-        ScriptingJsonSerializationSection jsonSection =
-            (ScriptingJsonSerializationSection)configuration.GetSection(
-            "system.web.extensions/scripting/webServices/jsonSerialization");
+        ScriptingJsonSerializationSection jsonSection = (ScriptingJsonSerializationSection)
+            configuration.GetSection(
+                "system.web.extensions/scripting/webServices/jsonSerialization"
+            );
 
         //Get the converters collection.
-        ConvertersCollection converters =
-            jsonSection.Converters;
+        ConvertersCollection converters = jsonSection.Converters;
 
         if ((converters != null) && converters.Count > 0)
         {

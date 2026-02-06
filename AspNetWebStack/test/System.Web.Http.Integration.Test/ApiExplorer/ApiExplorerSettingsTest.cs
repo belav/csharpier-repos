@@ -23,12 +23,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("HiddenController_DoesNotShowUpOnDescription_PropertyData")]
-        public void HiddenController_DoesNotShowUpOnDescription(Type controllerType, List<object> expectedResults)
+        public void HiddenController_DoesNotShowUpOnDescription(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -42,7 +50,14 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(HiddenActionController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "HiddenAction/{id}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "HiddenAction/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -50,12 +65,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("HiddenAction_DoesNotShowUpOnDescription_PropertyData")]
-        public void HiddenAction_DoesNotShowUpOnDescription(Type controllerType, List<object> expectedResults)
+        public void HiddenAction_DoesNotShowUpOnDescription(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();

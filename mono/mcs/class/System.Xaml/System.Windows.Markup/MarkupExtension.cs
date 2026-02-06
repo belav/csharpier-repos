@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,9 +29,9 @@ using System.Xaml.Schema;
 
 namespace System.Windows.Markup
 {
-	[System.Runtime.CompilerServices.TypeForwardedFrom (Consts.AssemblyWindowsBase)]
-	public abstract class MarkupExtension
-	{
-		public abstract object ProvideValue (IServiceProvider serviceProvider);
-	}
+    [System.Runtime.CompilerServices.TypeForwardedFrom(Consts.AssemblyWindowsBase)]
+    public abstract class MarkupExtension
+    {
+        public abstract object ProvideValue(IServiceProvider serviceProvider);
+    }
 }

@@ -32,10 +32,7 @@ namespace System.Net.Sockets
         /// </summary>
         public byte[] Buffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
 
         /// <summary>
@@ -43,10 +40,7 @@ namespace System.Net.Sockets
         /// </summary>
         public IPEndPoint RemoteEndPoint
         {
-            get
-            {
-                return _remoteEndPoint;
-            }
+            get { return _remoteEndPoint; }
         }
 
         /// <summary>
@@ -73,7 +67,8 @@ namespace System.Net.Sockets
         /// <returns>true if other is an instance of <see cref="UdpReceiveResult"/> and equals the value of the instance; otherwise, false</returns>
         public bool Equals(UdpReceiveResult other)
         {
-            return object.Equals(_buffer, other._buffer) && object.Equals(_remoteEndPoint, other._remoteEndPoint);
+            return object.Equals(_buffer, other._buffer)
+                && object.Equals(_remoteEndPoint, other._remoteEndPoint);
         }
 
         /// <summary>

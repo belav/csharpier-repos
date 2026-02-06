@@ -42,15 +42,19 @@ namespace System.Web.WebPages.Test
             page.VirtualPath = "~/MyApp/index.cshtml";
 
             var mockBuildManager = new Mock<IVirtualPathFactory>();
-            mockBuildManager.Setup(c => c.Exists(It.IsAny<string>())).Returns<string>(p => p.Equals(layoutPath1, StringComparison.OrdinalIgnoreCase));
+            mockBuildManager
+                .Setup(c => c.Exists(It.IsAny<string>()))
+                .Returns<string>(p => p.Equals(layoutPath1, StringComparison.OrdinalIgnoreCase));
             page.VirtualPathFactory = mockBuildManager.Object;
 
             Assert.Equal(layoutPath1, page.NormalizeLayoutPagePath(layoutPage));
 
             mockBuildManager.Setup(c => c.Exists(It.IsAny<string>())).Returns<string>(_ => false);
 
-            Assert.Throws<HttpException>(() => page.NormalizeLayoutPagePath(layoutPage),
-                                                  @"The layout page ""Layout.cshtml"" could not be found at the following path: ""~/MyApp/Layout.cshtml"".");
+            Assert.Throws<HttpException>(
+                () => page.NormalizeLayoutPagePath(layoutPage),
+                @"The layout page ""Layout.cshtml"" could not be found at the following path: ""~/MyApp/Layout.cshtml""."
+            );
         }
 
         [Fact]
@@ -59,7 +63,10 @@ namespace System.Web.WebPages.Test
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(context => context.Items).Returns(new Hashtable());
             string pathInfo = String.Format("{0}/{1}/{2}/{3}", "one", 2, 3.0, 4.0005);
-            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch("~/a.cshtml", pathInfo);
+            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch(
+                "~/a.cshtml",
+                pathInfo
+            );
             WebPage page = new Mock<WebPage>() { CallBase = true }.Object;
             page.Context = mockContext.Object;
 
@@ -74,7 +81,10 @@ namespace System.Web.WebPages.Test
         {
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(context => context.Items).Returns(new Hashtable());
-            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch("~/a.cshtml", "one///two/");
+            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch(
+                "~/a.cshtml",
+                "one///two/"
+            );
             WebPage page = new Mock<WebPage>() { CallBase = true }.Object;
             page.Context = mockContext.Object;
 
@@ -90,13 +100,34 @@ namespace System.Web.WebPages.Test
         {
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             mockContext.Setup(context => context.Items).Returns(new Hashtable());
-            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch("~/a.cshtml", "one/2/3.0/4.0005");
+            mockContext.Object.Items[typeof(WebPageMatch)] = new WebPageMatch(
+                "~/a.cshtml",
+                "one/2/3.0/4.0005"
+            );
             WebPage page = new Mock<WebPage>() { CallBase = true }.Object;
             page.Context = mockContext.Object;
 
-            Assert.Throws<NotSupportedException>(() => { page.UrlData.Add("bogus"); }, "The UrlData collection is read-only.");
-            Assert.Throws<NotSupportedException>(() => { page.UrlData.Insert(0, "bogus"); }, "The UrlData collection is read-only.");
-            Assert.Throws<NotSupportedException>(() => { page.UrlData.Remove("one"); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    page.UrlData.Add("bogus");
+                },
+                "The UrlData collection is read-only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    page.UrlData.Insert(0, "bogus");
+                },
+                "The UrlData collection is read-only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    page.UrlData.Remove("one");
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]
@@ -294,7 +325,11 @@ namespace System.Web.WebPages.Test
             return page;
         }
 
-        private static Mock<HttpContextBase> CreateContext(string httpMethod, NameValueCollection queryString, NameValueCollection httpHeaders = null)
+        private static Mock<HttpContextBase> CreateContext(
+            string httpMethod,
+            NameValueCollection queryString,
+            NameValueCollection httpHeaders = null
+        )
         {
             var request = new Mock<HttpRequestBase>();
             request.Setup(r => r.HttpMethod).Returns(httpMethod);

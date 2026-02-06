@@ -32,7 +32,8 @@ public class DatabaseOperations
         string? rootNamespace,
         string? language,
         bool nullable,
-        string[]? args)
+        string[]? args
+    )
     {
         _projectDir = projectDir;
         _rootNamespace = rootNamespace;
@@ -40,7 +41,12 @@ public class DatabaseOperations
         _nullable = nullable;
         _args = args ?? Array.Empty<string>();
 
-        _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
+        _servicesBuilder = new DesignTimeServicesBuilder(
+            assembly,
+            startupAssembly,
+            reporter,
+            _args
+        );
     }
 
     /// <summary>
@@ -63,15 +69,18 @@ public class DatabaseOperations
         bool overwriteFiles,
         bool useDatabaseNames,
         bool suppressOnConfiguring,
-        bool noPluralize)
+        bool noPluralize
+    )
     {
-        outputDir = outputDir != null
-            ? Path.GetFullPath(Path.Combine(_projectDir, outputDir))
-            : _projectDir;
+        outputDir =
+            outputDir != null
+                ? Path.GetFullPath(Path.Combine(_projectDir, outputDir))
+                : _projectDir;
 
-        outputContextDir = outputContextDir != null
-            ? Path.GetFullPath(Path.Combine(_projectDir, outputContextDir))
-            : outputDir;
+        outputContextDir =
+            outputContextDir != null
+                ? Path.GetFullPath(Path.Combine(_projectDir, outputContextDir))
+                : outputDir;
 
         var services = _servicesBuilder.Build(provider);
         using var scope = services.CreateScope();
@@ -85,7 +94,11 @@ public class DatabaseOperations
         var scaffoldedModel = scaffolder.ScaffoldModel(
             connectionString,
             new DatabaseModelFactoryOptions(tables, schemas),
-            new ModelReverseEngineerOptions { UseDatabaseNames = useDatabaseNames, NoPluralize = noPluralize },
+            new ModelReverseEngineerOptions
+            {
+                UseDatabaseNames = useDatabaseNames,
+                NoPluralize = noPluralize,
+            },
             new ModelCodeGenerationOptions
             {
                 UseDataAnnotations = useDataAnnotations,
@@ -97,23 +110,19 @@ public class DatabaseOperations
                 ContextDir = MakeDirRelative(outputDir, outputContextDir),
                 ContextName = dbContextClassName,
                 SuppressOnConfiguring = suppressOnConfiguring,
-                ProjectDir = _projectDir
-            });
+                ProjectDir = _projectDir,
+            }
+        );
 
-        return scaffolder.Save(
-            scaffoldedModel,
-            outputDir,
-            overwriteFiles);
+        return scaffolder.Save(scaffoldedModel, outputDir, overwriteFiles);
     }
 
     private string? GetNamespaceFromOutputPath(string directoryPath)
     {
         var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
-        return string.IsNullOrEmpty(subNamespace)
-            ? _rootNamespace
-            : string.IsNullOrEmpty(_rootNamespace)
-                ? subNamespace
-                : _rootNamespace + "." + subNamespace;
+        return string.IsNullOrEmpty(subNamespace) ? _rootNamespace
+            : string.IsNullOrEmpty(_rootNamespace) ? subNamespace
+            : _rootNamespace + "." + subNamespace;
     }
 
     // if outputDir is a subfolder of projectDir, then use each subfolder as a sub-namespace
@@ -132,7 +141,10 @@ public class DatabaseOperations
             ? string.Join(
                 ".",
                 subPath.Split(
-                    new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries))
+                    new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
+                    StringSplitOptions.RemoveEmptyEntries
+                )
+            )
             : null;
     }
 
@@ -140,7 +152,8 @@ public class DatabaseOperations
     {
         var relativeUri = new Uri(NormalizeDir(root)).MakeRelativeUri(new Uri(NormalizeDir(path)));
 
-        return Uri.UnescapeDataString(relativeUri.ToString()).Replace('/', Path.DirectorySeparatorChar);
+        return Uri.UnescapeDataString(relativeUri.ToString())
+            .Replace('/', Path.DirectorySeparatorChar);
     }
 
     private static string NormalizeDir(string path)
@@ -151,9 +164,8 @@ public class DatabaseOperations
         }
 
         var last = path[^1];
-        return last == Path.DirectorySeparatorChar
-            || last == Path.AltDirectorySeparatorChar
-                ? path
-                : path + Path.DirectorySeparatorChar;
+        return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar
+            ? path
+            : path + Path.DirectorySeparatorChar;
     }
 }

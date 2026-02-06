@@ -9,7 +9,7 @@ namespace System.Activities.DurableInstancing
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
-    using System.Threading;    
+    using System.Threading;
 
     class SqlWorkflowInstanceStoreLock
     {
@@ -27,59 +27,34 @@ namespace System.Activities.DurableInstancing
             this.SurrogateLockOwnerId = -1;
         }
 
-        public PersistenceTask InstanceDetectionTask
-        {
-            get;
-            set;
-        }
+        public PersistenceTask InstanceDetectionTask { get; set; }
 
         public bool IsValid
         {
-            get
-            {
-                return IsLockOwnerValid(this.SurrogateLockOwnerId);
-            }
+            get { return IsLockOwnerValid(this.SurrogateLockOwnerId); }
         }
 
         public bool IsLockOwnerValid(long surrogateLockOwnerId)
         {
-            return (this.SurrogateLockOwnerId != -1) 
+            return (this.SurrogateLockOwnerId != -1)
                 && (surrogateLockOwnerId == this.SurrogateLockOwnerId)
-                    && (this.sqlWorkflowInstanceStore.InstanceOwnersExist);
+                && (this.sqlWorkflowInstanceStore.InstanceOwnersExist);
         }
 
         public Guid LockOwnerId
         {
-            get
-            {
-                return this.lockOwnerId;
-            }
+            get { return this.lockOwnerId; }
         }
 
-        public PersistenceTask LockRecoveryTask
-        {
-            get;
-            set;
-        }
+        public PersistenceTask LockRecoveryTask { get; set; }
 
-        public PersistenceTask LockRenewalTask
-        {
-            get;
-            set;
-        }
+        public PersistenceTask LockRenewalTask { get; set; }
 
-        public long SurrogateLockOwnerId
-        {
-            get;            
-            private set;
-        }
+        public long SurrogateLockOwnerId { get; private set; }
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         TimeSpan HostLockRenewalPulseInterval
@@ -90,15 +65,20 @@ namespace System.Activities.DurableInstancing
                 {
                     // if user configured HostLockRenewalPeriod is less than constant MaxHostLockRenewalPulseInterval,
                     // then HostLockRenewalPeriod is how frequently SWIS will connect to SQL store to renew lock expiration.
-                    // Otherwise, SWIS will connect to SQL store to renew lock expiration every MaxHostLockRenewalPulseInterval timespan. 
+                    // Otherwise, SWIS will connect to SQL store to renew lock expiration every MaxHostLockRenewalPulseInterval timespan.
 
-                    if (SqlWorkflowInstanceStoreConstants.MaxHostLockRenewalPulseInterval < this.sqlWorkflowInstanceStore.HostLockRenewalPeriod)
+                    if (
+                        SqlWorkflowInstanceStoreConstants.MaxHostLockRenewalPulseInterval
+                        < this.sqlWorkflowInstanceStore.HostLockRenewalPeriod
+                    )
                     {
-                        this.hostLockRenewalPulseInterval = SqlWorkflowInstanceStoreConstants.MaxHostLockRenewalPulseInterval;
+                        this.hostLockRenewalPulseInterval =
+                            SqlWorkflowInstanceStoreConstants.MaxHostLockRenewalPulseInterval;
                     }
                     else
                     {
-                        this.hostLockRenewalPulseInterval = this.sqlWorkflowInstanceStore.HostLockRenewalPeriod;
+                        this.hostLockRenewalPulseInterval =
+                            this.sqlWorkflowInstanceStore.HostLockRenewalPeriod;
                     }
                 }
 
@@ -106,28 +86,53 @@ namespace System.Activities.DurableInstancing
             }
         }
 
-        public void MarkInstanceOwnerCreated(Guid lockOwnerId, long surrogateLockOwnerId, InstanceHandle lockOwnerInstanceHandle, bool detectRunnableInstances, bool detectActivatableInstances)
+        public void MarkInstanceOwnerCreated(
+            Guid lockOwnerId,
+            long surrogateLockOwnerId,
+            InstanceHandle lockOwnerInstanceHandle,
+            bool detectRunnableInstances,
+            bool detectActivatableInstances
+        )
         {
             Fx.Assert(this.isBeingModified, "Must have modification lock to mark owner as created");
             this.lockOwnerId = lockOwnerId;
             this.SurrogateLockOwnerId = surrogateLockOwnerId;
             this.lockOwnerInstanceHandle = new WeakReference(lockOwnerInstanceHandle);
 
-            TimeSpan runnableInstancesDetectionPeriod = this.sqlWorkflowInstanceStore.RunnableInstancesDetectionPeriod;
+            TimeSpan runnableInstancesDetectionPeriod =
+                this.sqlWorkflowInstanceStore.RunnableInstancesDetectionPeriod;
 
             if (detectActivatableInstances)
             {
-                this.InstanceDetectionTask = new DetectActivatableWorkflowsTask(this.sqlWorkflowInstanceStore, this, runnableInstancesDetectionPeriod);
+                this.InstanceDetectionTask = new DetectActivatableWorkflowsTask(
+                    this.sqlWorkflowInstanceStore,
+                    this,
+                    runnableInstancesDetectionPeriod
+                );
             }
             else if (detectRunnableInstances)
             {
-                this.InstanceDetectionTask = new DetectRunnableInstancesTask(this.sqlWorkflowInstanceStore, this, runnableInstancesDetectionPeriod);
+                this.InstanceDetectionTask = new DetectRunnableInstancesTask(
+                    this.sqlWorkflowInstanceStore,
+                    this,
+                    runnableInstancesDetectionPeriod
+                );
             }
 
-            // By setting taskTimeout value with BufferedHostLockRenewalPeriod, 
-            //  BufferedHostLockRenewalPeriod becomes max sql retry duration for ExtendLock command and RecoveryIntanceLock command.            
-            this.LockRenewalTask = new LockRenewalTask(this.sqlWorkflowInstanceStore, this, this.HostLockRenewalPulseInterval, this.sqlWorkflowInstanceStore.BufferedHostLockRenewalPeriod);
-            this.LockRecoveryTask = new LockRecoveryTask(this.sqlWorkflowInstanceStore, this, this.HostLockRenewalPulseInterval, this.sqlWorkflowInstanceStore.BufferedHostLockRenewalPeriod);
+            // By setting taskTimeout value with BufferedHostLockRenewalPeriod,
+            //  BufferedHostLockRenewalPeriod becomes max sql retry duration for ExtendLock command and RecoveryIntanceLock command.
+            this.LockRenewalTask = new LockRenewalTask(
+                this.sqlWorkflowInstanceStore,
+                this,
+                this.HostLockRenewalPulseInterval,
+                this.sqlWorkflowInstanceStore.BufferedHostLockRenewalPeriod
+            );
+            this.LockRecoveryTask = new LockRecoveryTask(
+                this.sqlWorkflowInstanceStore,
+                this,
+                this.HostLockRenewalPulseInterval,
+                this.sqlWorkflowInstanceStore.BufferedHostLockRenewalPeriod
+            );
 
             if (this.InstanceDetectionTask != null)
             {
@@ -199,7 +204,8 @@ namespace System.Activities.DurableInstancing
             if (this.SurrogateLockOwnerId == surrogateLockOwnerId)
             {
                 this.SurrogateLockOwnerId = -1;
-                InstanceHandle instanceHandle = this.lockOwnerInstanceHandle.Target as InstanceHandle;
+                InstanceHandle instanceHandle =
+                    this.lockOwnerInstanceHandle.Target as InstanceHandle;
                 if (instanceHandle != null)
                 {
                     instanceHandle.Free();

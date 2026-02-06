@@ -31,9 +31,16 @@ namespace System.Data.Mapping.Update.Internal
             #region Constructor
             internal RelationshipConstraintValidator(UpdateTranslator updateTranslator)
             {
-                m_existingRelationships = new Dictionary<DirectionalRelationship, DirectionalRelationship>(EqualityComparer<DirectionalRelationship>.Default);
-                m_impliedRelationships = new Dictionary<DirectionalRelationship, IEntityStateEntry>(EqualityComparer<DirectionalRelationship>.Default);
-                m_referencingRelationshipSets = new Dictionary<EntitySet, List<AssociationSet>>(EqualityComparer<EntitySet>.Default);
+                m_existingRelationships = new Dictionary<
+                    DirectionalRelationship,
+                    DirectionalRelationship
+                >(EqualityComparer<DirectionalRelationship>.Default);
+                m_impliedRelationships = new Dictionary<DirectionalRelationship, IEntityStateEntry>(
+                    EqualityComparer<DirectionalRelationship>.Default
+                );
+                m_referencingRelationshipSets = new Dictionary<EntitySet, List<AssociationSet>>(
+                    EqualityComparer<EntitySet>.Default
+                );
                 m_updateTranslator = updateTranslator;
             }
             #endregion
@@ -42,17 +49,26 @@ namespace System.Data.Mapping.Update.Internal
             /// <summary>
             /// Relationships registered in the validator.
             /// </summary>
-            private readonly Dictionary<DirectionalRelationship, DirectionalRelationship> m_existingRelationships;
+            private readonly Dictionary<
+                DirectionalRelationship,
+                DirectionalRelationship
+            > m_existingRelationships;
 
             /// <summary>
             /// Relationships the validator determines are required based on registered entities.
             /// </summary>
-            private readonly Dictionary<DirectionalRelationship, IEntityStateEntry> m_impliedRelationships;
+            private readonly Dictionary<
+                DirectionalRelationship,
+                IEntityStateEntry
+            > m_impliedRelationships;
 
             /// <summary>
             /// Cache used to store relationship sets with ends bound to entity sets.
             /// </summary>
-            private readonly Dictionary<EntitySet, List<AssociationSet>> m_referencingRelationshipSets;
+            private readonly Dictionary<
+                EntitySet,
+                List<AssociationSet>
+            > m_referencingRelationshipSets;
 
             /// <summary>
             /// Update translator containing session context.
@@ -69,20 +85,32 @@ namespace System.Data.Mapping.Update.Internal
             {
                 EntityUtil.CheckArgumentNull(stateEntry, "stateEntry");
 
-                if (EntityState.Added == stateEntry.State || EntityState.Deleted == stateEntry.State)
+                if (
+                    EntityState.Added == stateEntry.State
+                    || EntityState.Deleted == stateEntry.State
+                )
                 {
                     // We only track added and deleted entities because modifications to entities do not affect
                     // cardinality constraints. Relationships are based on end keys, and it is not
                     // possible to modify key values.
-                    Debug.Assert(null != (object)stateEntry.EntityKey, "entity state entry must have an entity key");
-                    EntityKey entityKey = EntityUtil.CheckArgumentNull(stateEntry.EntityKey, "stateEntry.EntityKey");
+                    Debug.Assert(
+                        null != (object)stateEntry.EntityKey,
+                        "entity state entry must have an entity key"
+                    );
+                    EntityKey entityKey = EntityUtil.CheckArgumentNull(
+                        stateEntry.EntityKey,
+                        "stateEntry.EntityKey"
+                    );
                     EntitySet entitySet = (EntitySet)stateEntry.EntitySet;
-                    EntityType entityType = EntityState.Added == stateEntry.State ?
-                        GetEntityType(stateEntry.CurrentValues) :
-                        GetEntityType(stateEntry.OriginalValues);
+                    EntityType entityType =
+                        EntityState.Added == stateEntry.State
+                            ? GetEntityType(stateEntry.CurrentValues)
+                            : GetEntityType(stateEntry.OriginalValues);
 
                     // figure out relationship set ends that are associated with this entity set
-                    foreach (AssociationSet associationSet in GetReferencingAssocationSets(entitySet))
+                    foreach (
+                        AssociationSet associationSet in GetReferencingAssocationSets(entitySet)
+                    )
                     {
                         // describe unidirectional relationships in which the added entity is the "destination"
                         var ends = associationSet.AssociationSetEnds;
@@ -91,23 +119,55 @@ namespace System.Data.Mapping.Update.Internal
                             foreach (var toEnd in ends)
                             {
                                 // end to itself does not describe an interesting relationship subpart
-                                if (object.ReferenceEquals(toEnd.CorrespondingAssociationEndMember, 
-                                    fromEnd.CorrespondingAssociationEndMember)) { continue; }
+                                if (
+                                    object.ReferenceEquals(
+                                        toEnd.CorrespondingAssociationEndMember,
+                                        fromEnd.CorrespondingAssociationEndMember
+                                    )
+                                )
+                                {
+                                    continue;
+                                }
 
                                 // skip ends that don't target the current entity set
-                                if (!toEnd.EntitySet.EdmEquals(entitySet)) { continue; }
+                                if (!toEnd.EntitySet.EdmEquals(entitySet))
+                                {
+                                    continue;
+                                }
 
                                 // skip ends that aren't required
-                                if (0 == MetadataHelper.GetLowerBoundOfMultiplicity(
-                                    fromEnd.CorrespondingAssociationEndMember.RelationshipMultiplicity)) { continue; }
+                                if (
+                                    0
+                                    == MetadataHelper.GetLowerBoundOfMultiplicity(
+                                        fromEnd
+                                            .CorrespondingAssociationEndMember
+                                            .RelationshipMultiplicity
+                                    )
+                                )
+                                {
+                                    continue;
+                                }
 
                                 // skip ends that don't target the current entity type
-                                if (!MetadataHelper.GetEntityTypeForEnd(toEnd.CorrespondingAssociationEndMember)
-                                    .IsAssignableFrom(entityType)) { continue; }
+                                if (
+                                    !MetadataHelper
+                                        .GetEntityTypeForEnd(
+                                            toEnd.CorrespondingAssociationEndMember
+                                        )
+                                        .IsAssignableFrom(entityType)
+                                )
+                                {
+                                    continue;
+                                }
 
                                 // register the relationship so that we know it's required
-                                DirectionalRelationship relationship = new DirectionalRelationship(entityKey, fromEnd.CorrespondingAssociationEndMember, 
-                                    toEnd.CorrespondingAssociationEndMember, associationSet, stateEntry);
+                                DirectionalRelationship relationship = new DirectionalRelationship(
+                                    entityKey,
+                                    fromEnd.CorrespondingAssociationEndMember,
+                                    toEnd.CorrespondingAssociationEndMember,
+                                    associationSet,
+                                    stateEntry
+                                );
                                 m_impliedRelationships.Add(relationship, stateEntry);
                             }
                         }
@@ -122,7 +182,10 @@ namespace System.Data.Mapping.Update.Internal
                 IExtendedDataRecord extendedRecord = dbDataRecord as IExtendedDataRecord;
                 Debug.Assert(extendedRecord != null);
 
-                Debug.Assert(BuiltInTypeKind.EntityType == extendedRecord.DataRecordInfo.RecordType.EdmType.BuiltInTypeKind);
+                Debug.Assert(
+                    BuiltInTypeKind.EntityType
+                        == extendedRecord.DataRecordInfo.RecordType.EdmType.BuiltInTypeKind
+                );
                 return (EntityType)extendedRecord.DataRecordInfo.RecordType.EdmType;
             }
 
@@ -132,17 +195,24 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="associationSet">Relationship set to which the given record belongs.</param>
             /// <param name="record">Relationship record. Must conform to the type of the relationship set.</param>
             /// <param name="stateEntry">State entry for the relationship being tracked</param>
-            internal void RegisterAssociation(AssociationSet associationSet, IExtendedDataRecord record, IEntityStateEntry stateEntry)
+            internal void RegisterAssociation(
+                AssociationSet associationSet,
+                IExtendedDataRecord record,
+                IEntityStateEntry stateEntry
+            )
             {
                 EntityUtil.CheckArgumentNull(associationSet, "relationshipSet");
                 EntityUtil.CheckArgumentNull(record, "record");
                 EntityUtil.CheckArgumentNull(stateEntry, "stateEntry");
 
-                Debug.Assert(associationSet.ElementType.Equals(record.DataRecordInfo.RecordType.EdmType));
+                Debug.Assert(
+                    associationSet.ElementType.Equals(record.DataRecordInfo.RecordType.EdmType)
+                );
 
                 // retrieve the ends of the relationship
                 Dictionary<string, EntityKey> endNameToKeyMap = new Dictionary<string, EntityKey>(
-                    StringComparer.Ordinal);
+                    StringComparer.Ordinal
+                );
                 foreach (FieldMetadata field in record.DataRecordInfo.FieldMetadata)
                 {
                     string endName = field.FieldType.Name;
@@ -157,14 +227,26 @@ namespace System.Data.Mapping.Update.Internal
                     foreach (var toEnd in ends)
                     {
                         // end to itself does not describe an interesting relationship subpart
-                        if (object.ReferenceEquals(toEnd.CorrespondingAssociationEndMember, fromEnd.CorrespondingAssociationEndMember)) 
-                        { 
-                            continue; 
+                        if (
+                            object.ReferenceEquals(
+                                toEnd.CorrespondingAssociationEndMember,
+                                fromEnd.CorrespondingAssociationEndMember
+                            )
+                        )
+                        {
+                            continue;
                         }
 
-                        EntityKey toEntityKey = endNameToKeyMap[toEnd.CorrespondingAssociationEndMember.Name];
-                        DirectionalRelationship relationship = new DirectionalRelationship(toEntityKey, fromEnd.CorrespondingAssociationEndMember, 
-                            toEnd.CorrespondingAssociationEndMember, associationSet, stateEntry);
+                        EntityKey toEntityKey = endNameToKeyMap[
+                            toEnd.CorrespondingAssociationEndMember.Name
+                        ];
+                        DirectionalRelationship relationship = new DirectionalRelationship(
+                            toEntityKey,
+                            fromEnd.CorrespondingAssociationEndMember,
+                            toEnd.CorrespondingAssociationEndMember,
+                            associationSet,
+                            stateEntry
+                        );
                         AddExistingRelationship(relationship);
                     }
                 }
@@ -176,7 +258,12 @@ namespace System.Data.Mapping.Update.Internal
             internal void ValidateConstraints()
             {
                 // ensure all expected relationships exist
-                foreach (KeyValuePair<DirectionalRelationship, IEntityStateEntry> expected in m_impliedRelationships)
+                foreach (
+                    KeyValuePair<
+                        DirectionalRelationship,
+                        IEntityStateEntry
+                    > expected in m_impliedRelationships
+                )
                 {
                     DirectionalRelationship expectedRelationship = expected.Key;
                     IEntityStateEntry stateEntry = expected.Value;
@@ -192,9 +279,15 @@ namespace System.Data.Mapping.Update.Internal
                     }
 
                     // determine expected cardinality
-                    int minimumCount = MetadataHelper.GetLowerBoundOfMultiplicity(expectedRelationship.FromEnd.RelationshipMultiplicity);
-                    int? maximumCountDeclared = MetadataHelper.GetUpperBoundOfMultiplicity(expectedRelationship.FromEnd.RelationshipMultiplicity);
-                    int maximumCount = maximumCountDeclared.HasValue ? maximumCountDeclared.Value : count; // negative value
+                    int minimumCount = MetadataHelper.GetLowerBoundOfMultiplicity(
+                        expectedRelationship.FromEnd.RelationshipMultiplicity
+                    );
+                    int? maximumCountDeclared = MetadataHelper.GetUpperBoundOfMultiplicity(
+                        expectedRelationship.FromEnd.RelationshipMultiplicity
+                    );
+                    int maximumCount = maximumCountDeclared.HasValue
+                        ? maximumCountDeclared.Value
+                        : count; // negative value
                     // indicates unlimited cardinality
 
                     if (count < minimumCount || count > maximumCount)
@@ -203,10 +296,17 @@ namespace System.Data.Mapping.Update.Internal
                         // but we risk doing work on behalf of the user they don't want performed (e.g., deleting an
                         // entity or relationship the user has intentionally left untouched).
                         throw EntityUtil.UpdateRelationshipCardinalityConstraintViolation(
-                            expectedRelationship.AssociationSet.Name, minimumCount, maximumCountDeclared,
-                            TypeHelpers.GetFullName(expectedRelationship.ToEntityKey.EntityContainerName, expectedRelationship.ToEntityKey.EntitySetName), 
-                            count, expectedRelationship.FromEnd.Name,
-                            stateEntry);
+                            expectedRelationship.AssociationSet.Name,
+                            minimumCount,
+                            maximumCountDeclared,
+                            TypeHelpers.GetFullName(
+                                expectedRelationship.ToEntityKey.EntityContainerName,
+                                expectedRelationship.ToEntityKey.EntitySetName
+                            ),
+                            count,
+                            expectedRelationship.FromEnd.Name,
+                            stateEntry
+                        );
                     }
                 }
 
@@ -217,8 +317,12 @@ namespace System.Data.Mapping.Update.Internal
                     int deletedCount;
                     actualRelationship.GetCountsInEquivalenceSet(out addedCount, out deletedCount);
                     int absoluteCount = Math.Abs(addedCount - deletedCount);
-                    int minimumCount = MetadataHelper.GetLowerBoundOfMultiplicity(actualRelationship.FromEnd.RelationshipMultiplicity);
-                    int? maximumCount = MetadataHelper.GetUpperBoundOfMultiplicity(actualRelationship.FromEnd.RelationshipMultiplicity);
+                    int minimumCount = MetadataHelper.GetLowerBoundOfMultiplicity(
+                        actualRelationship.FromEnd.RelationshipMultiplicity
+                    );
+                    int? maximumCount = MetadataHelper.GetUpperBoundOfMultiplicity(
+                        actualRelationship.FromEnd.RelationshipMultiplicity
+                    );
 
                     // Check that we haven't inserted or deleted too many relationships
                     if (maximumCount.HasValue)
@@ -237,11 +341,20 @@ namespace System.Data.Mapping.Update.Internal
                         }
                         if (violationType.HasValue)
                         {
-                            throw EntityUtil.Update(Strings.Update_RelationshipCardinalityViolation(maximumCount.Value,
-                                violationType.Value, actualRelationship.AssociationSet.ElementType.FullName,
-                                actualRelationship.FromEnd.Name, actualRelationship.ToEnd.Name, violationCount.Value),
-                                null, actualRelationship.GetEquivalenceSet().Select(reln => reln.StateEntry));
-
+                            throw EntityUtil.Update(
+                                Strings.Update_RelationshipCardinalityViolation(
+                                    maximumCount.Value,
+                                    violationType.Value,
+                                    actualRelationship.AssociationSet.ElementType.FullName,
+                                    actualRelationship.FromEnd.Name,
+                                    actualRelationship.ToEnd.Name,
+                                    violationCount.Value
+                                ),
+                                null,
+                                actualRelationship
+                                    .GetEquivalenceSet()
+                                    .Select(reln => reln.StateEntry)
+                            );
                         }
                     }
 
@@ -259,12 +372,17 @@ namespace System.Data.Mapping.Update.Internal
                         // Identify the following error conditions:
                         // - the entity is not being modified at all
                         // - the entity is being modified, but not in the way we expect (it's not being added or deleted)
-                        if (!m_impliedRelationships.TryGetValue(actualRelationship, out entityEntry) ||
-                            (isAdd && EntityState.Added != entityEntry.State) ||
-                            (!isAdd && EntityState.Deleted != entityEntry.State))
+                        if (
+                            !m_impliedRelationships.TryGetValue(actualRelationship, out entityEntry)
+                            || (isAdd && EntityState.Added != entityEntry.State)
+                            || (!isAdd && EntityState.Deleted != entityEntry.State)
+                        )
                         {
-                            throw EntityUtil.UpdateEntityMissingConstraintViolation(actualRelationship.AssociationSet.Name,
-                                actualRelationship.ToEnd.Name, actualRelationship.StateEntry);
+                            throw EntityUtil.UpdateEntityMissingConstraintViolation(
+                                actualRelationship.AssociationSet.Name,
+                                actualRelationship.ToEnd.Name,
+                                actualRelationship.StateEntry
+                            );
                         }
                     }
                 }
@@ -274,15 +392,25 @@ namespace System.Data.Mapping.Update.Internal
             /// Determines the net change in relationship count.
             /// For instance, if the directional relationship is added 2 times and deleted 3, the return value is -1.
             /// </summary>
-            private int GetDirectionalRelationshipCountDelta(DirectionalRelationship expectedRelationship)
+            private int GetDirectionalRelationshipCountDelta(
+                DirectionalRelationship expectedRelationship
+            )
             {
                 // lookup up existing relationship from expected relationship
                 DirectionalRelationship existingRelationship;
-                if (m_existingRelationships.TryGetValue(expectedRelationship, out existingRelationship))
+                if (
+                    m_existingRelationships.TryGetValue(
+                        expectedRelationship,
+                        out existingRelationship
+                    )
+                )
                 {
                     int addedCount;
                     int deletedCount;
-                    existingRelationship.GetCountsInEquivalenceSet(out addedCount, out deletedCount);
+                    existingRelationship.GetCountsInEquivalenceSet(
+                        out addedCount,
+                        out deletedCount
+                    );
                     return addedCount - deletedCount;
                 }
                 else
@@ -349,7 +477,7 @@ namespace System.Data.Mapping.Update.Internal
             #region Nested types
             /// <summary>
             /// An instance of an actual or expected relationship. This class describes one direction
-            /// of the relationship. 
+            /// of the relationship.
             /// </summary>
             private class DirectionalRelationship : IEquatable<DirectionalRelationship>
             {
@@ -385,7 +513,13 @@ namespace System.Data.Mapping.Update.Internal
 
                 private readonly int _hashCode;
 
-                internal DirectionalRelationship(EntityKey toEntityKey, AssociationEndMember fromEnd, AssociationEndMember toEnd, AssociationSet associationSet, IEntityStateEntry stateEntry)
+                internal DirectionalRelationship(
+                    EntityKey toEntityKey,
+                    AssociationEndMember fromEnd,
+                    AssociationEndMember toEnd,
+                    AssociationSet associationSet,
+                    IEntityStateEntry stateEntry
+                )
                 {
                     ToEntityKey = EntityUtil.CheckArgumentNull(toEntityKey, "toEntityKey");
                     FromEnd = EntityUtil.CheckArgumentNull(fromEnd, "fromEnd");
@@ -394,10 +528,11 @@ namespace System.Data.Mapping.Update.Internal
                     StateEntry = EntityUtil.CheckArgumentNull(stateEntry, "stateEntry");
                     _equivalenceSetLinkedListNext = this;
 
-                    _hashCode = toEntityKey.GetHashCode() ^
-                        fromEnd.GetHashCode() ^
-                        toEnd.GetHashCode() ^
-                        associationSet.GetHashCode();
+                    _hashCode =
+                        toEntityKey.GetHashCode()
+                        ^ fromEnd.GetHashCode()
+                        ^ toEnd.GetHashCode()
+                        ^ associationSet.GetHashCode();
                 }
 
                 /// <summary>
@@ -409,8 +544,14 @@ namespace System.Data.Mapping.Update.Internal
                 internal void AddToEquivalenceSet(DirectionalRelationship other)
                 {
                     Debug.Assert(null != other, "other must not be null");
-                    Debug.Assert(this.Equals(other), "other must be another instance of the same relationship target");
-                    Debug.Assert(Object.ReferenceEquals(other._equivalenceSetLinkedListNext, other), "other must not be part of an equivalence set yet");
+                    Debug.Assert(
+                        this.Equals(other),
+                        "other must be another instance of the same relationship target"
+                    );
+                    Debug.Assert(
+                        Object.ReferenceEquals(other._equivalenceSetLinkedListNext, other),
+                        "other must not be part of an equivalence set yet"
+                    );
                     DirectionalRelationship currentSuccessor = this._equivalenceSetLinkedListNext;
                     this._equivalenceSetLinkedListNext = other;
                     other._equivalenceSetLinkedListNext = currentSuccessor;
@@ -427,8 +568,7 @@ namespace System.Data.Mapping.Update.Internal
                     {
                         yield return current;
                         current = current._equivalenceSetLinkedListNext;
-                    }
-                    while (!object.ReferenceEquals(current, this));
+                    } while (!object.ReferenceEquals(current, this));
                 }
 
                 /// <summary>
@@ -451,8 +591,7 @@ namespace System.Data.Mapping.Update.Internal
                             deletedCount++;
                         }
                         current = current._equivalenceSetLinkedListNext;
-                    }
-                    while (!object.ReferenceEquals(current, this));
+                    } while (!object.ReferenceEquals(current, this));
                 }
 
                 public override int GetHashCode()
@@ -462,12 +601,30 @@ namespace System.Data.Mapping.Update.Internal
 
                 public bool Equals(DirectionalRelationship other)
                 {
-                    if (object.ReferenceEquals(this, other)) { return true; }
-                    if (null == other) { return false; }
-                    if (ToEntityKey != other.ToEntityKey) { return false; }
-                    if (AssociationSet != other.AssociationSet) { return false; }
-                    if (ToEnd != other.ToEnd) { return false; }
-                    if (FromEnd != other.FromEnd) { return false; }
+                    if (object.ReferenceEquals(this, other))
+                    {
+                        return true;
+                    }
+                    if (null == other)
+                    {
+                        return false;
+                    }
+                    if (ToEntityKey != other.ToEntityKey)
+                    {
+                        return false;
+                    }
+                    if (AssociationSet != other.AssociationSet)
+                    {
+                        return false;
+                    }
+                    if (ToEnd != other.ToEnd)
+                    {
+                        return false;
+                    }
+                    if (FromEnd != other.FromEnd)
+                    {
+                        return false;
+                    }
                     return true;
                 }
 
@@ -479,8 +636,14 @@ namespace System.Data.Mapping.Update.Internal
 
                 public override string ToString()
                 {
-                    return String.Format(CultureInfo.InvariantCulture, "{0}.{1}-->{2}: {3}",
-                        AssociationSet.Name, FromEnd.Name, ToEnd.Name, StringUtil.BuildDelimitedList(ToEntityKey.EntityKeyValues, null, null));
+                    return String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}.{1}-->{2}: {3}",
+                        AssociationSet.Name,
+                        FromEnd.Name,
+                        ToEnd.Name,
+                        StringUtil.BuildDelimitedList(ToEntityKey.EntityKeyValues, null, null)
+                    );
                 }
             }
             #endregion

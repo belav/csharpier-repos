@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 /// <summary>
 /// Request handler type exposed to typescript.
 /// </summary>
-internal abstract class AbstractVSTypeScriptRequestHandler<TRequestType, TResponseType> : ILspServiceRequestHandler<TRequestType, TResponseType>, IVSTypeScriptRequestHandler, ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier?>
+internal abstract class AbstractVSTypeScriptRequestHandler<TRequestType, TResponseType>
+    : ILspServiceRequestHandler<TRequestType, TResponseType>,
+        IVSTypeScriptRequestHandler,
+        ITextDocumentIdentifierHandler<TRequestType, TextDocumentIdentifier?>
 {
     bool IMethodHandler.MutatesSolutionState => MutatesSolutionState;
 
@@ -38,25 +41,39 @@ internal abstract class AbstractVSTypeScriptRequestHandler<TRequestType, TRespon
         {
             textDocumentIdentifier.ProjectContext = new VSProjectContext
             {
-                Id = typeScriptIdentifier.Value.ProjectId
+                Id = typeScriptIdentifier.Value.ProjectId,
             };
         }
 
         return textDocumentIdentifier;
     }
 
-    public Task<TResponseType> HandleRequestAsync(TRequestType request, RequestContext context, CancellationToken cancellationToken)
+    public Task<TResponseType> HandleRequestAsync(
+        TRequestType request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return HandleRequestAsync(request, new TypeScriptRequestContext(context.Solution, context.Document), cancellationToken);
+        return HandleRequestAsync(
+            request,
+            new TypeScriptRequestContext(context.Solution, context.Document),
+            cancellationToken
+        );
     }
 
     protected abstract bool MutatesSolutionState { get; }
 
     protected abstract bool RequiresLSPSolution { get; }
 
-    protected abstract Task<TResponseType> HandleRequestAsync(TRequestType request, TypeScriptRequestContext context, CancellationToken cancellationToken);
+    protected abstract Task<TResponseType> HandleRequestAsync(
+        TRequestType request,
+        TypeScriptRequestContext context,
+        CancellationToken cancellationToken
+    );
 
-    protected abstract TypeScriptTextDocumentIdentifier? GetTypeSciptTextDocumentIdentifier(TRequestType request);
+    protected abstract TypeScriptTextDocumentIdentifier? GetTypeSciptTextDocumentIdentifier(
+        TRequestType request
+    );
 }
 
 internal record struct TypeScriptRequestContext(Solution? Solution, Document? Document);
@@ -66,6 +83,4 @@ internal record struct TypeScriptRequestContext(Solution? Solution, Document? Do
 /// </summary>
 internal record struct TypeScriptTextDocumentIdentifier(Uri Uri, string? ProjectId);
 
-internal interface IVSTypeScriptRequestHandler : ILspService
-{
-}
+internal interface IVSTypeScriptRequestHandler : ILspService { }

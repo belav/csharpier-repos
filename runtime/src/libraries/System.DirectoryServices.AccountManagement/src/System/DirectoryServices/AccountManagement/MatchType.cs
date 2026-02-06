@@ -12,6 +12,6 @@ namespace System.DirectoryServices.AccountManagement
         GreaterThan = 2,
         GreaterThanOrEquals = 3,
         LessThan = 4,
-        LessThanOrEquals = 5
+        LessThanOrEquals = 5,
     }
 }

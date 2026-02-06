@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveUnnecessaryNullableDirectiveDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider>;
+        CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryNullableDirective)]
     public class CSharpRemoveUnnecessaryNullableDirectiveTests
@@ -28,7 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Annotations)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Warnings)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Enable)]
-        public async Task TestUnnecessaryDisableDiffersFromCompilation(NullableContextOptions compilationContext, NullableContextOptions codeContext)
+        public async Task TestUnnecessaryDisableDiffersFromCompilation(
+            NullableContextOptions compilationContext,
+            NullableContextOptions codeContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -42,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -64,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                     First,
                     Second,
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -92,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                     First,
                     Second,
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -122,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -148,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -170,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 using System.Runtime.InteropServices;
                 using CustomException = System.Exception;
                 using static System.String;
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -195,15 +205,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 {
                     string Field;
                 }
-                
-                """);
+
+                """
+            );
         }
 
         [Fact]
         public async Task TestUnnecessaryDisableIgnoredWhenFollowedByConditionalDirective()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
                 struct StructName
                 {
@@ -228,7 +238,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             };
         }
 
-        private static async Task VerifyCodeFixAsync(NullableContextOptions compilationNullableContextOptions, string source, string fixedSource)
+        private static async Task VerifyCodeFixAsync(
+            NullableContextOptions compilationNullableContextOptions,
+            string source,
+            string fixedSource
+        )
         {
             await new VerifyCS.Test
             {
@@ -238,10 +252,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions?)solution.GetRequiredProject(projectId).CompilationOptions;
+                        var compilationOptions = (CSharpCompilationOptions?)
+                            solution.GetRequiredProject(projectId).CompilationOptions;
                         Contract.ThrowIfNull(compilationOptions);
 
-                        return solution.WithProjectCompilationOptions(projectId, compilationOptions.WithNullableContextOptions(compilationNullableContextOptions));
+                        return solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions.WithNullableContextOptions(
+                                compilationNullableContextOptions
+                            )
+                        );
                     },
                 },
             }.RunAsync();

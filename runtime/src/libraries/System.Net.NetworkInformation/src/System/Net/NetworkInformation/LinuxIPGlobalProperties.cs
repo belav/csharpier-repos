@@ -8,20 +8,26 @@ namespace System.Net.NetworkInformation
     {
         public override TcpConnectionInformation[] GetActiveTcpConnections()
         {
-            return StringParsingHelpers.ParseActiveTcpConnectionsFromFiles(Socket.OSSupportsIPv4 ? NetworkFiles.Tcp4ConnectionsFile : null,
-                                                                           Socket.OSSupportsIPv6 ? NetworkFiles.Tcp6ConnectionsFile : null);
+            return StringParsingHelpers.ParseActiveTcpConnectionsFromFiles(
+                Socket.OSSupportsIPv4 ? NetworkFiles.Tcp4ConnectionsFile : null,
+                Socket.OSSupportsIPv6 ? NetworkFiles.Tcp6ConnectionsFile : null
+            );
         }
 
         public override IPEndPoint[] GetActiveTcpListeners()
         {
-            return StringParsingHelpers.ParseActiveTcpListenersFromFiles(Socket.OSSupportsIPv4 ? NetworkFiles.Tcp4ConnectionsFile : null,
-                                                                         Socket.OSSupportsIPv6 ? NetworkFiles.Tcp6ConnectionsFile : null);
+            return StringParsingHelpers.ParseActiveTcpListenersFromFiles(
+                Socket.OSSupportsIPv4 ? NetworkFiles.Tcp4ConnectionsFile : null,
+                Socket.OSSupportsIPv6 ? NetworkFiles.Tcp6ConnectionsFile : null
+            );
         }
 
         public override IPEndPoint[] GetActiveUdpListeners()
         {
-            return StringParsingHelpers.ParseActiveUdpListenersFromFiles(Socket.OSSupportsIPv4 ? NetworkFiles.Udp4ConnectionsFile : null,
-                                                                         Socket.OSSupportsIPv6 ? NetworkFiles.Udp6ConnectionsFile : null);
+            return StringParsingHelpers.ParseActiveUdpListenersFromFiles(
+                Socket.OSSupportsIPv4 ? NetworkFiles.Udp4ConnectionsFile : null,
+                Socket.OSSupportsIPv6 ? NetworkFiles.Udp6ConnectionsFile : null
+            );
         }
 
         public override IcmpV4Statistics GetIcmpV4Statistics()

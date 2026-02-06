@@ -17,28 +17,51 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     {
         public async Task ShowAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Debug.Immediate, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Debug.Immediate,
+                cancellationToken
+            );
         }
 
         public async Task ClearAllAsync(CancellationToken cancellationToken)
         {
             await ShowAsync(cancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.ClearAll, cancellationToken);
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.ClearAll,
+                cancellationToken
+            );
         }
 
         public async Task<string> GetTextAsync(CancellationToken cancellationToken)
         {
-            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
+            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(
+                cancellationToken
+            );
             var immediateWindowGuid = VSConstants.StandardToolWindows.Immediate;
             IVsWindowFrame immediateWindowFrame;
-            ErrorHandler.ThrowOnFailure(shell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fForceCreate, ref immediateWindowGuid, out immediateWindowFrame));
+            ErrorHandler.ThrowOnFailure(
+                shell.FindToolWindow(
+                    (uint)__VSFINDTOOLWIN.FTW_fForceCreate,
+                    ref immediateWindowGuid,
+                    out immediateWindowFrame
+                )
+            );
             ErrorHandler.ThrowOnFailure(immediateWindowFrame.Show());
-            ErrorHandler.ThrowOnFailure(immediateWindowFrame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var docView));
+            ErrorHandler.ThrowOnFailure(
+                immediateWindowFrame.GetProperty(
+                    (int)__VSFPROPID.VSFPROPID_DocView,
+                    out var docView
+                )
+            );
             var vsTextView = (IVsTextView)docView;
             ErrorHandler.ThrowOnFailure(vsTextView.GetBuffer(out var vsTextLines));
             ErrorHandler.ThrowOnFailure(vsTextLines.GetLineCount(out var lineCount));
-            ErrorHandler.ThrowOnFailure(vsTextLines.GetLengthOfLine(lineCount - 1, out var lastLineLength));
-            ErrorHandler.ThrowOnFailure(vsTextLines.GetLineText(0, 0, lineCount - 1, lastLineLength, out var text));
+            ErrorHandler.ThrowOnFailure(
+                vsTextLines.GetLengthOfLine(lineCount - 1, out var lastLineLength)
+            );
+            ErrorHandler.ThrowOnFailure(
+                vsTextLines.GetLineText(0, 0, lineCount - 1, lastLineLength, out var text)
+            );
             return text;
         }
     }

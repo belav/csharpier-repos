@@ -13,15 +13,15 @@ namespace OLEDB.Test.ModuleCore
     //
     ////////////////////////////////////////////////////////////////
     public delegate int TestFunc();
+
     public class CVariation : CTestBase
     {
         //Data
         private TestFunc _pfunc = null;
+
         //Constructor
         public CVariation(CTestCase testcase)
-            : this(testcase, null)
-        {
-        }
+            : this(testcase, null) { }
 
         public CVariation(CTestCase testcase, string desc)
             : this(testcase, desc, "Variation_" + (testcase.GetVariationCount() + 1))
@@ -47,6 +47,7 @@ namespace OLEDB.Test.ModuleCore
             //of inherited drivers.
             _pfunc = function;
         }
+
         public CVariation(TestFunc func)
             : base(null, null)
         {

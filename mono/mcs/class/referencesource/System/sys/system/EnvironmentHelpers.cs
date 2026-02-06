@@ -12,17 +12,31 @@ namespace System
         private static volatile bool s_IsAppContainerProcess;
         private static volatile bool s_IsAppContainerProcessInitalized;
 
-        public static bool IsAppContainerProcess {
-            get {
-                if(!s_IsAppContainerProcessInitalized) {
-                   if(Environment.OSVersion.Platform != PlatformID.Win32NT) {
-                       s_IsAppContainerProcess = false;
-                   } else if(Environment.OSVersion.Version.Major < 6 || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor <= 1)) {
-                       // Windows 7 or older.
-                       s_IsAppContainerProcess = false;
-                   } else {
-                       s_IsAppContainerProcess = HasAppContainerToken();
-                   }
+        public static bool IsAppContainerProcess
+        {
+            get
+            {
+                if (!s_IsAppContainerProcessInitalized)
+                {
+                    if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+                    {
+                        s_IsAppContainerProcess = false;
+                    }
+                    else if (
+                        Environment.OSVersion.Version.Major < 6
+                        || (
+                            Environment.OSVersion.Version.Major == 6
+                            && Environment.OSVersion.Version.Minor <= 1
+                        )
+                    )
+                    {
+                        // Windows 7 or older.
+                        s_IsAppContainerProcess = false;
+                    }
+                    else
+                    {
+                        s_IsAppContainerProcess = HasAppContainerToken();
+                    }
 
                     s_IsAppContainerProcessInitalized = true;
                 }
@@ -32,13 +46,27 @@ namespace System
         }
 
         [SecuritySafeCritical]
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.ControlPrincipal)]
-        private static unsafe bool HasAppContainerToken() {
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.UnmanagedCode | SecurityPermissionFlag.ControlPrincipal
+        )]
+        private static unsafe bool HasAppContainerToken()
+        {
             int* dwIsAppContainerPtr = stackalloc int[1];
             uint dwLength = 0;
 
-            using (WindowsIdentity wi = WindowsIdentity.GetCurrent(TokenAccessLevels.Query)) {
-                if (!UnsafeNativeMethods.GetTokenInformation(wi.Token, UnsafeNativeMethods.TokenIsAppContainer, new IntPtr(dwIsAppContainerPtr), sizeof(int), out dwLength)) {
+            using (WindowsIdentity wi = WindowsIdentity.GetCurrent(TokenAccessLevels.Query))
+            {
+                if (
+                    !UnsafeNativeMethods.GetTokenInformation(
+                        wi.Token,
+                        UnsafeNativeMethods.TokenIsAppContainer,
+                        new IntPtr(dwIsAppContainerPtr),
+                        sizeof(int),
+                        out dwLength
+                    )
+                )
+                {
                     throw new Win32Exception();
                 }
             }

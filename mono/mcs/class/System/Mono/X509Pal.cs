@@ -25,14 +25,14 @@
 // THE SOFTWARE.
 using System;
 using System.IO;
-using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Mono
 {
-	static class X509Pal
-	{
-		public static X509PalImpl Instance => SystemDependencyProvider.Instance.X509Pal;
-	}
+    static class X509Pal
+    {
+        public static X509PalImpl Instance => SystemDependencyProvider.Instance.X509Pal;
+    }
 }

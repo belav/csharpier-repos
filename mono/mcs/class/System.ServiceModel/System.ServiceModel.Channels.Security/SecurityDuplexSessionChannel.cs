@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,144 +42,170 @@ using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using System.Xml;
 using System.Xml.XPath;
-
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
 
 namespace System.ServiceModel.Channels.Security
 {
-	class SecurityDuplexSession : DuplexSessionBase
-	{
-		SecurityDuplexSessionChannel channel;
-		
-		public SecurityDuplexSession (SecurityDuplexSessionChannel channel)
-		{
-			this.channel = channel;
-		}
-		
-		public override TimeSpan DefaultCloseTimeout {
-			get { return channel.DefaultCloseTimeout; }
-		}
-		
-		public override void Close (TimeSpan timeout)
-		{
-			// valid only if the inner channel is ISessionChannel
-			var d = channel.Channel as IDuplexSessionChannel;
-			if (d != null)
-				d.Session.CloseOutputSession (timeout);
-		}
-	}
-	
-	class SecurityDuplexSessionChannel : DuplexChannelBase, IDuplexSessionChannel
-	{
-		IChannel channel;
-		InitiatorMessageSecurityBindingSupport security_initiator;
-		RecipientMessageSecurityBindingSupport security_recipient;
-		SecurityDuplexSession session;
-		
-		public SecurityDuplexSessionChannel (ChannelFactoryBase factory, IChannel innerChannel, EndpointAddress remoteAddress, Uri via, InitiatorMessageSecurityBindingSupport security)
-			: base (factory, remoteAddress, via)
-		{
-			this.channel = innerChannel;
-			session = new SecurityDuplexSession (this);
-			InitializeSecurityFunctionality (security);
-		}
-		
-		public SecurityDuplexSessionChannel (ChannelListenerBase listener, IChannel innerChannel, RecipientMessageSecurityBindingSupport security)
-			: base (listener)
-		{
-			this.channel = innerChannel;
-			session = new SecurityDuplexSession (this);
-			InitializeSecurityFunctionality (security);
-		}
-		
-		public IChannel Channel {
-			get { return channel; }
-		}
+    class SecurityDuplexSession : DuplexSessionBase
+    {
+        SecurityDuplexSessionChannel channel;
 
-		public IDuplexSession Session {
-			get { return session; }
-		}
+        public SecurityDuplexSession(SecurityDuplexSessionChannel channel)
+        {
+            this.channel = channel;
+        }
 
-		void InitializeSecurityFunctionality (InitiatorMessageSecurityBindingSupport security)
-		{
-			security_initiator = security;
-		}
+        public override TimeSpan DefaultCloseTimeout
+        {
+            get { return channel.DefaultCloseTimeout; }
+        }
 
-		void InitializeSecurityFunctionality (RecipientMessageSecurityBindingSupport security)
-		{
-			security_recipient = security;
-		}
+        public override void Close(TimeSpan timeout)
+        {
+            // valid only if the inner channel is ISessionChannel
+            var d = channel.Channel as IDuplexSessionChannel;
+            if (d != null)
+                d.Session.CloseOutputSession(timeout);
+        }
+    }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			channel.Open (timeout);
-			if (security_initiator != null)
-				security_initiator.Prepare ((ChannelFactoryBase) Manager, RemoteAddress);
-			else
-				security_recipient.Prepare ((ChannelListenerBase) Manager, LocalAddress.Uri);
-		}
+    class SecurityDuplexSessionChannel : DuplexChannelBase, IDuplexSessionChannel
+    {
+        IChannel channel;
+        InitiatorMessageSecurityBindingSupport security_initiator;
+        RecipientMessageSecurityBindingSupport security_recipient;
+        SecurityDuplexSession session;
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			if (security_initiator != null)
-				security_initiator.Release ();
-			else
-				security_recipient.Release ();
-			channel.Close (timeout);
-		}
+        public SecurityDuplexSessionChannel(
+            ChannelFactoryBase factory,
+            IChannel innerChannel,
+            EndpointAddress remoteAddress,
+            Uri via,
+            InitiatorMessageSecurityBindingSupport security
+        )
+            : base(factory, remoteAddress, via)
+        {
+            this.channel = innerChannel;
+            session = new SecurityDuplexSession(this);
+            InitializeSecurityFunctionality(security);
+        }
 
-		protected override void OnAbort ()
-		{
-			if (security_initiator != null)
-				security_initiator.Release ();
-			else
-				security_recipient.Release ();
-			channel.Abort ();
-		}
+        public SecurityDuplexSessionChannel(
+            ChannelListenerBase listener,
+            IChannel innerChannel,
+            RecipientMessageSecurityBindingSupport security
+        )
+            : base(listener)
+        {
+            this.channel = innerChannel;
+            session = new SecurityDuplexSession(this);
+            InitializeSecurityFunctionality(security);
+        }
 
-		public override bool TryReceive (TimeSpan timeout, out Message message)
-		{
-			ThrowIfDisposedOrNotOpen ();
-			var input = (IInputChannel) channel;
-			if (!input.TryReceive (timeout, out message))
-				return false;
-			message = DecryptMessage (message);
-			return true;
-		}
+        public IChannel Channel
+        {
+            get { return channel; }
+        }
 
-		public override bool WaitForMessage (TimeSpan timeout)
-		{
-			var input = (IInputChannel) channel;
-			return input.WaitForMessage (timeout);
-		}
+        public IDuplexSession Session
+        {
+            get { return session; }
+        }
 
-		public override void Send (Message message)
-		{
-			Send (message, DefaultSendTimeout);
-		}
+        void InitializeSecurityFunctionality(InitiatorMessageSecurityBindingSupport security)
+        {
+            security_initiator = security;
+        }
 
-		public override void Send (Message message, TimeSpan timeout)
-		{
-			Message secure = SecureMessage (message);
-			var output = (IOutputChannel) channel;
-			output.Send (secure, timeout);
-		}
+        void InitializeSecurityFunctionality(RecipientMessageSecurityBindingSupport security)
+        {
+            security_recipient = security;
+        }
 
-		Message SecureMessage (Message msg)
-		{
-			if (security_initiator != null)
-				return new InitiatorMessageSecurityGenerator (msg, security_initiator, RemoteAddress).SecureMessage ();
-			else
-				return new RecipientMessageSecurityGenerator (msg, null, security_recipient).SecureMessage (); // FIXME: supply SecurityMessageProperty (if any)
-		}
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            channel.Open(timeout);
+            if (security_initiator != null)
+                security_initiator.Prepare((ChannelFactoryBase)Manager, RemoteAddress);
+            else
+                security_recipient.Prepare((ChannelListenerBase)Manager, LocalAddress.Uri);
+        }
 
-		Message DecryptMessage (Message msg)
-		{
-			if (security_initiator != null)
-				return new InitiatorSecureMessageDecryptor (msg, null, security_initiator).DecryptMessage (); // FIXME: supply SecurityMessageProperty (if any)
-			else
-				return new RecipientSecureMessageDecryptor (msg, security_recipient).DecryptMessage ();
-		}
-	}
+        protected override void OnClose(TimeSpan timeout)
+        {
+            if (security_initiator != null)
+                security_initiator.Release();
+            else
+                security_recipient.Release();
+            channel.Close(timeout);
+        }
+
+        protected override void OnAbort()
+        {
+            if (security_initiator != null)
+                security_initiator.Release();
+            else
+                security_recipient.Release();
+            channel.Abort();
+        }
+
+        public override bool TryReceive(TimeSpan timeout, out Message message)
+        {
+            ThrowIfDisposedOrNotOpen();
+            var input = (IInputChannel)channel;
+            if (!input.TryReceive(timeout, out message))
+                return false;
+            message = DecryptMessage(message);
+            return true;
+        }
+
+        public override bool WaitForMessage(TimeSpan timeout)
+        {
+            var input = (IInputChannel)channel;
+            return input.WaitForMessage(timeout);
+        }
+
+        public override void Send(Message message)
+        {
+            Send(message, DefaultSendTimeout);
+        }
+
+        public override void Send(Message message, TimeSpan timeout)
+        {
+            Message secure = SecureMessage(message);
+            var output = (IOutputChannel)channel;
+            output.Send(secure, timeout);
+        }
+
+        Message SecureMessage(Message msg)
+        {
+            if (security_initiator != null)
+                return new InitiatorMessageSecurityGenerator(
+                    msg,
+                    security_initiator,
+                    RemoteAddress
+                ).SecureMessage();
+            else
+                return new RecipientMessageSecurityGenerator(
+                    msg,
+                    null,
+                    security_recipient
+                ).SecureMessage(); // FIXME: supply SecurityMessageProperty (if any)
+        }
+
+        Message DecryptMessage(Message msg)
+        {
+            if (security_initiator != null)
+                return new InitiatorSecureMessageDecryptor(
+                    msg,
+                    null,
+                    security_initiator
+                ).DecryptMessage(); // FIXME: supply SecurityMessageProperty (if any)
+            else
+                return new RecipientSecureMessageDecryptor(
+                    msg,
+                    security_recipient
+                ).DecryptMessage();
+        }
+    }
 }
-

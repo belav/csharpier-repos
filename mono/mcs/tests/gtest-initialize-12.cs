@@ -1,19 +1,25 @@
 class C : B
 {
-	public override int Foo { set {} }
+    public override int Foo
+    {
+        set { }
+    }
 }
 
 abstract class B
 {
-	public abstract int Foo { set; }
+    public abstract int Foo { set; }
 }
 
 public class Test
 {
-	static int Foo { set {} }
+    static int Foo
+    {
+        set { }
+    }
 
-	public static void Main ()
-	{
-		var c = new C () { Foo = 1 };
-	}
+    public static void Main()
+    {
+        var c = new C() { Foo = 1 };
+    }
 }

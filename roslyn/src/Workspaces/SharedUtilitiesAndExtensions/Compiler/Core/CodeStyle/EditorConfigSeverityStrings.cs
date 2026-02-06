@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis
         public const string Warning = "warning";
         public const string Error = "error";
 
-        public static bool TryParse(string editorconfigSeverityString, out ReportDiagnostic reportDiagnostic)
+        public static bool TryParse(
+            string editorconfigSeverityString,
+            out ReportDiagnostic reportDiagnostic
+        )
         {
             switch (editorconfigSeverityString)
             {

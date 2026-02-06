@@ -18,24 +18,40 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices.SolutionExplorer.CreateSolutionAsync(nameof(BasicProjectExistsUIContext), HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.CreateSolutionAsync(
+                nameof(BasicProjectExistsUIContext),
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task ProjectContextChanges()
         {
-            var workspace = await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(HangMitigatingCancellationToken);
-            var contextProvider = workspace.Services.GetLanguageServices(LanguageNames.VisualBasic).GetRequiredService<IProjectExistsUIContextProviderLanguageService>();
+            var workspace =
+                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                    HangMitigatingCancellationToken
+                );
+            var contextProvider = workspace
+                .Services.GetLanguageServices(LanguageNames.VisualBasic)
+                .GetRequiredService<IProjectExistsUIContextProviderLanguageService>();
             var context = contextProvider.GetUIContext();
 
             Assert.False(context.IsActive);
 
-            await TestServices.SolutionExplorer.AddProjectAsync("TestVisualBasicProject", WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestVisualBasicProject",
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.VisualBasic,
+                HangMitigatingCancellationToken
+            );
 
             Assert.True(context.IsActive);
 
             await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace], HangMitigatingCancellationToken);
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [FeatureAttribute.Workspace],
+                HangMitigatingCancellationToken
+            );
 
             Assert.False(context.IsActive);
         }

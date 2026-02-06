@@ -3,31 +3,32 @@
 
 using System;
 using Xunit;
+
 namespace Test_ptuple_lost
 {
-public class A
-{
-    [Fact]
-    public static int TestEntryPoint()
+    public class A
     {
-        int[] arr = new int[10];
-
-        arr[5] = 100;
-
-        short idx = 5;
-        byte bdx = 5;
-        char cdx = Convert.ToChar(5);
-        System.Console.WriteLine(arr[idx] + " " + arr[bdx] + " " + arr[cdx]);
-        if (arr[idx] == 100 && arr[bdx] == 100 && arr[cdx] == 100)
+        [Fact]
+        public static int TestEntryPoint()
         {
-            Console.WriteLine("Passed");
-            return 100;
-        }
-        else
-        {
-            Console.WriteLine("Failed");
-            return 101;
+            int[] arr = new int[10];
+
+            arr[5] = 100;
+
+            short idx = 5;
+            byte bdx = 5;
+            char cdx = Convert.ToChar(5);
+            System.Console.WriteLine(arr[idx] + " " + arr[bdx] + " " + arr[cdx]);
+            if (arr[idx] == 100 && arr[bdx] == 100 && arr[cdx] == 100)
+            {
+                Console.WriteLine("Passed");
+                return 100;
+            }
+            else
+            {
+                Console.WriteLine("Failed");
+                return 101;
+            }
         }
     }
-}
 }

@@ -29,7 +29,14 @@ namespace System.Reflection.Metadata
             EndColumn = 0;
         }
 
-        internal SequencePoint(DocumentHandle document, int offset, int startLine, ushort startColumn, int endLine, ushort endColumn)
+        internal SequencePoint(
+            DocumentHandle document,
+            int offset,
+            int startLine,
+            ushort startColumn,
+            int endLine,
+            ushort endColumn
+        )
         {
             Document = document;
             Offset = offset;
@@ -41,11 +48,16 @@ namespace System.Reflection.Metadata
 
         public override int GetHashCode()
         {
-            return Hash.Combine(Document.RowId,
-                   Hash.Combine(Offset,
-                   Hash.Combine(StartLine,
-                   Hash.Combine(StartColumn,
-                   Hash.Combine(EndLine, EndColumn)))));
+            return Hash.Combine(
+                Document.RowId,
+                Hash.Combine(
+                    Offset,
+                    Hash.Combine(
+                        StartLine,
+                        Hash.Combine(StartColumn, Hash.Combine(EndLine, EndColumn))
+                    )
+                )
+            );
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
@@ -67,7 +79,9 @@ namespace System.Reflection.Metadata
 
         private string GetDebuggerDisplay()
         {
-            return IsHidden ? "<hidden>" : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
+            return IsHidden
+                ? "<hidden>"
+                : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
         }
     }
 }

@@ -67,12 +67,15 @@ namespace System.Reflection.Emit.Tests
 
             Assert.Equal("FieldOne", literal.Name);
             Assert.Equal(enumBuilder.Name, literal.DeclaringType.Name);
-            Assert.Equal(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal, literal.Attributes);
+            Assert.Equal(
+                FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal,
+                literal.Attributes
+            );
             Assert.Equal(enumBuilder.AsType(), literal.FieldType);
 
-            Type createdEnum = useCreateTypeInfo ?
-                enumBuilder.CreateType() :
-                enumBuilder.CreateType();
+            Type createdEnum = useCreateTypeInfo
+                ? enumBuilder.CreateType()
+                : enumBuilder.CreateType();
 
             FieldInfo createdLiteral = createdEnum.GetField("FieldOne");
             Assert.Equal(createdEnum, createdLiteral.FieldType);
@@ -84,7 +87,10 @@ namespace System.Reflection.Emit.Tests
             }
             else
             {
-                Assert.Equal(Enum.ToObject(createdEnum, literalValue), createdLiteral.GetValue(null));
+                Assert.Equal(
+                    Enum.ToObject(createdEnum, literalValue),
+                    createdLiteral.GetValue(null)
+                );
             }
         }
 
@@ -92,7 +98,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineLiteral_NullLiteralName_ThrowsArgumentNullException()
         {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("fieldName", () => enumBuilder.DefineLiteral(null, 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "fieldName",
+                () => enumBuilder.DefineLiteral(null, 1)
+            );
         }
 
         [Theory]
@@ -102,7 +111,10 @@ namespace System.Reflection.Emit.Tests
         public void DefineLiteral_EmptyLiteralName_ThrowsArgumentException(string literalName)
         {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int));
-            AssertExtensions.Throws<ArgumentException>("fieldName", () => enumBuilder.DefineLiteral(literalName, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "fieldName",
+                () => enumBuilder.DefineLiteral(literalName, 1)
+            );
         }
 
         public static IEnumerable<object[]> DefineLiteral_InvalidLiteralValue_ThrowsArgumentException_TestData()
@@ -127,10 +139,16 @@ namespace System.Reflection.Emit.Tests
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(DefineLiteral_InvalidLiteralValue_ThrowsArgumentException_TestData))]
-        public void DefineLiteral_InvalidLiteralValue_ThrowsArgumentException(Type underlyingType, object literalValue)
+        public void DefineLiteral_InvalidLiteralValue_ThrowsArgumentException(
+            Type underlyingType,
+            object literalValue
+        )
         {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, underlyingType);
-            AssertExtensions.Throws<ArgumentException>(null, () => enumBuilder.DefineLiteral("LiteralName", literalValue));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => enumBuilder.DefineLiteral("LiteralName", literalValue)
+            );
         }
 
         public static IEnumerable<object[]> DefineLiteral_InvalidLiteralValue_ThrowsTypeLoadExceptionOnCreation_TestData()
@@ -143,8 +161,14 @@ namespace System.Reflection.Emit.Tests
         }
 
         [Theory]
-        [MemberData(nameof(DefineLiteral_InvalidLiteralValue_ThrowsTypeLoadExceptionOnCreation_TestData))]
-        public void DefineLiteral_InvalidLiteralValue_ThrowsTypeLoadExceptionOnCreation(Type underlyingType, object literalValue, bool useCreateTypeInfo)
+        [MemberData(
+            nameof(DefineLiteral_InvalidLiteralValue_ThrowsTypeLoadExceptionOnCreation_TestData)
+        )]
+        public void DefineLiteral_InvalidLiteralValue_ThrowsTypeLoadExceptionOnCreation(
+            Type underlyingType,
+            object literalValue,
+            bool useCreateTypeInfo
+        )
         {
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, underlyingType);
             FieldBuilder literal = enumBuilder.DefineLiteral("LiteralName", literalValue);
@@ -177,7 +201,11 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void MakeArrayType()
         {
-            EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int), enumName: "TestEnum");
+            EnumBuilder enumBuilder = Helpers.DynamicEnum(
+                TypeAttributes.Public,
+                typeof(int),
+                enumName: "TestEnum"
+            );
             Type arrayType = enumBuilder.MakeArrayType();
             Assert.Equal(typeof(Array), arrayType.GetTypeInfo().BaseType);
             Assert.Equal("TestEnum[]", arrayType.Name);
@@ -189,7 +217,11 @@ namespace System.Reflection.Emit.Tests
         [InlineData(260)]
         public void MakeArrayType_Int(int rank)
         {
-            EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int), enumName: "TestEnum");
+            EnumBuilder enumBuilder = Helpers.DynamicEnum(
+                TypeAttributes.Public,
+                typeof(int),
+                enumName: "TestEnum"
+            );
             Type arrayType = enumBuilder.MakeArrayType(rank);
 
             string ranks = rank == 1 ? "*" : string.Empty;
@@ -207,14 +239,22 @@ namespace System.Reflection.Emit.Tests
         [InlineData(-1)]
         public void MakeArrayType_Int_RankLessThanOne_ThrowsIndexOutOfRange(int rank)
         {
-            EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int), enumName: "TestEnum");
+            EnumBuilder enumBuilder = Helpers.DynamicEnum(
+                TypeAttributes.Public,
+                typeof(int),
+                enumName: "TestEnum"
+            );
             Assert.Throws<IndexOutOfRangeException>(() => enumBuilder.MakeArrayType(rank));
         }
 
         [Fact]
         public void MakeByRefType()
         {
-            EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int), enumName: "TestEnum");
+            EnumBuilder enumBuilder = Helpers.DynamicEnum(
+                TypeAttributes.Public,
+                typeof(int),
+                enumName: "TestEnum"
+            );
             Type arrayType = enumBuilder.MakeByRefType();
             Assert.Equal(typeof(Array), arrayType.GetTypeInfo().BaseType);
             Assert.Equal("TestEnum&", arrayType.Name);
@@ -223,7 +263,11 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void MakePointerType()
         {
-            EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int), enumName: "TestEnum");
+            EnumBuilder enumBuilder = Helpers.DynamicEnum(
+                TypeAttributes.Public,
+                typeof(int),
+                enumName: "TestEnum"
+            );
             Type arrayType = enumBuilder.MakePointerType();
             Assert.Equal(typeof(Array), arrayType.GetTypeInfo().BaseType);
             Assert.Equal("TestEnum*", arrayType.Name);
@@ -236,10 +280,13 @@ namespace System.Reflection.Emit.Tests
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int));
             enumBuilder.CreateType();
 
-            ConstructorInfo attributeConstructor = typeof(BoolAttribute).GetConstructor(new Type[] { typeof(bool) });
+            ConstructorInfo attributeConstructor = typeof(BoolAttribute).GetConstructor(
+                new Type[] { typeof(bool) }
+            );
             enumBuilder.SetCustomAttribute(attributeConstructor, new byte[] { 01, 00, 01 });
 
-            Attribute[] objVals = (Attribute[])CustomAttributeExtensions.GetCustomAttributes(enumBuilder, true).ToArray();
+            Attribute[] objVals = (Attribute[])
+                CustomAttributeExtensions.GetCustomAttributes(enumBuilder, true).ToArray();
             Assert.Equal(new BoolAttribute(true), objVals[0]);
         }
 
@@ -250,8 +297,13 @@ namespace System.Reflection.Emit.Tests
             EnumBuilder enumBuilder = Helpers.DynamicEnum(TypeAttributes.Public, typeof(int));
             enumBuilder.CreateType();
 
-            ConstructorInfo attributeConstructor = typeof(BoolAttribute).GetConstructor(new Type[] { typeof(bool) });
-            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(attributeConstructor, new object[] { true });
+            ConstructorInfo attributeConstructor = typeof(BoolAttribute).GetConstructor(
+                new Type[] { typeof(bool) }
+            );
+            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
+                attributeConstructor,
+                new object[] { true }
+            );
             enumBuilder.SetCustomAttribute(attributeBuilder);
 
             object[] objVals = enumBuilder.GetCustomAttributes(true).ToArray();
@@ -261,7 +313,11 @@ namespace System.Reflection.Emit.Tests
         public class BoolAttribute : Attribute
         {
             private bool _b;
-            public BoolAttribute(bool myBool) { _b = myBool; }
+
+            public BoolAttribute(bool myBool)
+            {
+                _b = myBool;
+            }
         }
     }
 }

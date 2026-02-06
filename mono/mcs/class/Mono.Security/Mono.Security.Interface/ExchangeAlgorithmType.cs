@@ -28,11 +28,11 @@ using System;
 
 namespace Mono.Security.Interface
 {
-	public enum ExchangeAlgorithmType
-	{
-		None,
-		Dhe,
-		Rsa,
-		EcDhe
-	}
+    public enum ExchangeAlgorithmType
+    {
+        None,
+        Dhe,
+        Rsa,
+        EcDhe,
+    }
 }

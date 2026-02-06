@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,70 +27,101 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.X509Certificates {
+namespace MonoTests.System.Security.Cryptography.X509Certificates
+{
+    /*
+     * Notes:
+     *
+     * [MS/XP][!RFC3280] Unknown critical extensions are ignored.
+     *
+     * See PkitsTest.cs for more details
+     */
 
-	/*
-	 * Notes:
-	 *
-	 * [MS/XP][!RFC3280] Unknown critical extensions are ignored.
-	 *
-	 * See PkitsTest.cs for more details
-	 */
+    [TestFixture]
+    [Category("PKITS")]
+    public class Pkits_4_16_PrivateCertificateExtensions : PkitsTest
+    {
+        [Test]
+        public void T1_ValidUnknownNotCriticalCertificateExtension()
+        {
+            X509Certificate2 ee = GetCertificate(
+                "ValidUnknownNotCriticalCertificateExtensionTest1EE.crt"
+            );
+            X509Chain chain = new X509Chain();
+            Assert.IsTrue(chain.Build(ee), "Build");
+            CheckChainStatus(X509ChainStatusFlags.NoError, chain.ChainStatus, "ChainStatus");
+            Assert.AreEqual(ee, chain.ChainElements[0].Certificate, "EndEntity");
+            CheckChainStatus(
+                X509ChainStatusFlags.NoError,
+                chain.ChainElements[0].ChainElementStatus,
+                "EndEntity.Status"
+            );
+            Assert.AreEqual(TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
+            CheckChainStatus(
+                X509ChainStatusFlags.NoError,
+                chain.ChainElements[1].ChainElementStatus,
+                "TrustAnchorRoot.Status"
+            );
+        }
 
-	[TestFixture]
-	[Category ("PKITS")]
-	public class Pkits_4_16_PrivateCertificateExtensions: PkitsTest {
+        [Test]
+        [Category("NotDotNet")]
+        public void T2_InvalidUnknownCriticalCertificateExtension()
+        {
+            X509Certificate2 ee = GetCertificate(
+                "InvalidUnknownCriticalCertificateExtensionTest2EE.crt"
+            );
+            X509Chain chain = new X509Chain();
+            Assert.IsFalse(chain.Build(ee), "Build");
+            CheckChainStatus(
+                X509ChainStatusFlags.InvalidExtension,
+                chain.ChainStatus,
+                "ChainStatus"
+            );
+            Assert.AreEqual(ee, chain.ChainElements[0].Certificate, "EndEntity");
+            CheckChainStatus(
+                X509ChainStatusFlags.InvalidExtension,
+                chain.ChainElements[0].ChainElementStatus,
+                "EndEntity.Status"
+            );
+            Assert.AreEqual(TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
+            CheckChainStatus(
+                X509ChainStatusFlags.NoError,
+                chain.ChainElements[1].ChainElementStatus,
+                "TrustAnchorRoot.Status"
+            );
+        }
 
-		[Test]
-		public void T1_ValidUnknownNotCriticalCertificateExtension ()
-		{
-			X509Certificate2 ee = GetCertificate ("ValidUnknownNotCriticalCertificateExtensionTest1EE.crt");
-			X509Chain chain = new X509Chain ();
-			Assert.IsTrue (chain.Build (ee), "Build");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainStatus, "ChainStatus");
-			Assert.AreEqual (ee, chain.ChainElements[0].Certificate, "EndEntity");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainElements[0].ChainElementStatus, "EndEntity.Status");
-			Assert.AreEqual (TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainElements[1].ChainElementStatus, "TrustAnchorRoot.Status");
-		}
+        [Test]
+        [Category("NotWorking")] // WONTFIX - this isn't RFC3280 compliant
+        public void T2_InvalidUnknownCriticalCertificateExtension_MS()
+        {
+            X509Certificate2 ee = GetCertificate(
+                "InvalidUnknownCriticalCertificateExtensionTest2EE.crt"
+            );
+            X509Chain chain = new X509Chain();
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void T2_InvalidUnknownCriticalCertificateExtension ()
-		{
-			X509Certificate2 ee = GetCertificate ("InvalidUnknownCriticalCertificateExtensionTest2EE.crt");
-			X509Chain chain = new X509Chain ();
-			Assert.IsFalse (chain.Build (ee), "Build");
-			CheckChainStatus (X509ChainStatusFlags.InvalidExtension, chain.ChainStatus, "ChainStatus");
-			Assert.AreEqual (ee, chain.ChainElements[0].Certificate, "EndEntity");
-			CheckChainStatus (X509ChainStatusFlags.InvalidExtension, chain.ChainElements[0].ChainElementStatus, "EndEntity.Status");
-			Assert.AreEqual (TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainElements[1].ChainElementStatus, "TrustAnchorRoot.Status");
-		}
+            // MS-BAD [XP] / this is NOT valid wrt RFC3280
+            // Unknown CRITICAL extensions should not success!
 
-		[Test]
-		[Category ("NotWorking")] // WONTFIX - this isn't RFC3280 compliant
-		public void T2_InvalidUnknownCriticalCertificateExtension_MS ()
-		{
-			X509Certificate2 ee = GetCertificate ("InvalidUnknownCriticalCertificateExtensionTest2EE.crt");
-			X509Chain chain = new X509Chain ();
-
-			// MS-BAD [XP] / this is NOT valid wrt RFC3280
-			// Unknown CRITICAL extensions should not success!
-
-			Assert.IsTrue (chain.Build (ee), "Build");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainStatus, "ChainStatus");
-			Assert.AreEqual (ee, chain.ChainElements[0].Certificate, "EndEntity");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainElements[0].ChainElementStatus, "EndEntity.Status");
-			Assert.AreEqual (TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
-			CheckChainStatus (X509ChainStatusFlags.NoError, chain.ChainElements[1].ChainElementStatus, "TrustAnchorRoot.Status");
-		}
-	}
+            Assert.IsTrue(chain.Build(ee), "Build");
+            CheckChainStatus(X509ChainStatusFlags.NoError, chain.ChainStatus, "ChainStatus");
+            Assert.AreEqual(ee, chain.ChainElements[0].Certificate, "EndEntity");
+            CheckChainStatus(
+                X509ChainStatusFlags.NoError,
+                chain.ChainElements[0].ChainElementStatus,
+                "EndEntity.Status"
+            );
+            Assert.AreEqual(TrustAnchorRoot, chain.ChainElements[1].Certificate, "TrustAnchorRoot");
+            CheckChainStatus(
+                X509ChainStatusFlags.NoError,
+                chain.ChainElements[1].ChainElementStatus,
+                "TrustAnchorRoot.Status"
+            );
+        }
+    }
 }
-

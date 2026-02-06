@@ -5,7 +5,8 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTest.SqlServerTriggersFixture>
+public class SqlServerQueryTriggersTest
+    : IClassFixture<SqlServerQueryTriggersTest.SqlServerTriggersFixture>
 {
     public SqlServerQueryTriggersTest(SqlServerTriggersFixture fixture)
     {
@@ -77,27 +78,21 @@ public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTe
         context.SaveChanges();
     }
 
-    protected QueryTriggersContext CreateContext()
-        => (QueryTriggersContext)Fixture.CreateContext();
+    protected QueryTriggersContext CreateContext() => (QueryTriggersContext)Fixture.CreateContext();
 
     protected class QueryTriggersContext : PoolableDbContext
     {
         public QueryTriggersContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public virtual DbSet<Product> Products { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Product>(
-                eb =>
-                {
-                    eb.Property(e => e.StoreUpdated)
-                        .HasDefaultValue(0)
-                        .ValueGeneratedOnAddOrUpdate();
-                    eb.ToTable("UpdatedProducts", tb => tb.HasTrigger("TRG_InsertUpdateProduct"));
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Product>(eb =>
+            {
+                eb.Property(e => e.StoreUpdated).HasDefaultValue(0).ValueGeneratedOnAddOrUpdate();
+                eb.ToTable("UpdatedProducts", tb => tb.HasTrigger("TRG_InsertUpdateProduct"));
+            });
     }
 
     protected class Product
@@ -110,13 +105,11 @@ public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTe
 
     public class SqlServerTriggersFixture : SharedStoreFixtureBase<DbContext>
     {
-        protected override string StoreName
-            => "SqlServerQueryTriggers";
+        protected override string StoreName => "SqlServerQueryTriggers";
 
         protected override Type ContextType { get; } = typeof(QueryTriggersContext);
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void Seed(DbContext context)
         {
@@ -134,7 +127,8 @@ BEGIN
 
     UPDATE UpdatedProducts set StoreUpdated = StoreUpdated + 1
     WHERE Id IN(SELECT INSERTED.Id FROM INSERTED);
-END");
+END"
+            );
         }
     }
 }

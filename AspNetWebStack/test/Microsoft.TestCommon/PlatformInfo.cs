@@ -10,9 +10,14 @@ namespace Microsoft.TestCommon
     /// </summary>
     public static class PlatformInfo
     {
-        private const string _net45TypeName = "System.IWellKnownStringEqualityComparer, mscorlib, Version=4.0.0.0, PublicKeyToken=b77a5c561934e089";
-        private const string _netCore20TypeName = "System.OrdinalCaseSensitiveComparer, system.private.corelib, Version=4.0.0.0, PublicKeyToken=7cec85d7bea7798e";
-        private static Lazy<Platform> _platform = new Lazy<Platform>(GetPlatform, isThreadSafe: true);
+        private const string _net45TypeName =
+            "System.IWellKnownStringEqualityComparer, mscorlib, Version=4.0.0.0, PublicKeyToken=b77a5c561934e089";
+        private const string _netCore20TypeName =
+            "System.OrdinalCaseSensitiveComparer, system.private.corelib, Version=4.0.0.0, PublicKeyToken=7cec85d7bea7798e";
+        private static Lazy<Platform> _platform = new Lazy<Platform>(
+            GetPlatform,
+            isThreadSafe: true
+        );
 
         /// <summary>
         /// Gets the platform that the unit test is currently running on.

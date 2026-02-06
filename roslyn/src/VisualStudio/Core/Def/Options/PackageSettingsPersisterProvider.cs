@@ -27,16 +27,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
         public PackageSettingsPersisterProvider(
             IThreadingContext threadingContext,
             [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider,
-            IGlobalOptionService optionService)
+            IGlobalOptionService optionService
+        )
         {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
             _optionService = optionService;
         }
 
-        public ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
+        public ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        )
         {
-            _lazyPersister ??= new PackageSettingsPersister(_threadingContext, _serviceProvider, _optionService);
+            _lazyPersister ??= new PackageSettingsPersister(
+                _threadingContext,
+                _serviceProvider,
+                _optionService
+            );
             return new ValueTask<IOptionPersister>(_lazyPersister);
         }
     }

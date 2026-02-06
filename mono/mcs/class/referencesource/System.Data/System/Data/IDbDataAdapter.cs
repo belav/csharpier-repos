@@ -6,28 +6,16 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
+    public interface IDbDataAdapter : IDataAdapter
+    {
+        IDbCommand SelectCommand { get; set; }
 
-    public interface IDbDataAdapter : IDataAdapter {
+        IDbCommand InsertCommand { get; set; }
 
-        IDbCommand SelectCommand {
-            get;
-            set;
-        }
+        IDbCommand UpdateCommand { get; set; }
 
-        IDbCommand InsertCommand {
-            get;
-            set;
-        }
-
-        IDbCommand UpdateCommand {
-            get;
-            set;
-        }
-
-        IDbCommand DeleteCommand {
-            get;
-            set;
-        }
+        IDbCommand DeleteCommand { get; set; }
     }
 }

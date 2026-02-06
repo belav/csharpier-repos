@@ -28,17 +28,41 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new ParenthesizePropertyNameAttribute(true), new ParenthesizePropertyNameAttribute(true), true };
-            yield return new object[] { new ParenthesizePropertyNameAttribute(true), new ParenthesizePropertyNameAttribute(false), false };
-            yield return new object[] { ParenthesizePropertyNameAttribute.Default, ParenthesizePropertyNameAttribute.Default, true };
+            yield return new object[]
+            {
+                new ParenthesizePropertyNameAttribute(true),
+                new ParenthesizePropertyNameAttribute(true),
+                true,
+            };
+            yield return new object[]
+            {
+                new ParenthesizePropertyNameAttribute(true),
+                new ParenthesizePropertyNameAttribute(false),
+                false,
+            };
+            yield return new object[]
+            {
+                ParenthesizePropertyNameAttribute.Default,
+                ParenthesizePropertyNameAttribute.Default,
+                true,
+            };
 
-            yield return new object[] { ParenthesizePropertyNameAttribute.Default, new object(), false };
+            yield return new object[]
+            {
+                ParenthesizePropertyNameAttribute.Default,
+                new object(),
+                false,
+            };
             yield return new object[] { ParenthesizePropertyNameAttribute.Default, null, false };
         }
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ParenthesizePropertyNameAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ParenthesizePropertyNameAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ParenthesizePropertyNameAttribute)

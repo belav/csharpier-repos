@@ -4,18 +4,21 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
 
     public sealed partial class NamedPipeTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ProtectionLevel, DefaultValue = NamedPipeTransportSecurity.DefaultProtectionLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProtectionLevel,
+            DefaultValue = NamedPipeTransportSecurity.DefaultProtectionLevel
+        )]
         [ServiceModelEnumValidator(typeof(ProtectionLevelHelper))]
         public ProtectionLevel ProtectionLevel
         {
@@ -38,7 +41,10 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectionLevel, security.ProtectionLevel);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ProtectionLevel,
+                security.ProtectionLevel
+            );
         }
     }
 }

@@ -4,41 +4,37 @@
 namespace Microsoft.InfoCards
 {
     using System;
-    using System.Runtime.InteropServices;
-    using Microsoft.InfoCards.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security;
+    using Microsoft.InfoCards.Diagnostics;
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
-
 
     //
     // Summary:
-    // Provides a wrapper over HGlobal alloc'd memory guaranteeing that the 
+    // Provides a wrapper over HGlobal alloc'd memory guaranteeing that the
     // contents will be released in the presence of rude app domain and thread aborts.
     //
     internal class HGlobalSafeHandle : SafeHandle
     {
-
         public static HGlobalSafeHandle Construct()
         {
             return new HGlobalSafeHandle();
         }
+
         public static HGlobalSafeHandle Construct(string managedString)
         {
             IDT.DebugAssert(!String.IsNullOrEmpty(managedString), "null string");
 
             int bytes = (managedString.Length + 1) * 2;
             return new HGlobalSafeHandle(Marshal.StringToHGlobalUni(managedString), bytes);
-
         }
 
         public static HGlobalSafeHandle Construct(int bytes)
         {
             IDT.DebugAssert(bytes > 0, "attempt to allocate a handle with <= 0 bytes");
             return new HGlobalSafeHandle(Marshal.AllocHGlobal(bytes), bytes);
-
         }
 
         [SuppressUnmanagedCodeSecurity]
@@ -50,6 +46,7 @@ namespace Microsoft.InfoCards
         // The number of bytes allocated.
         //
         private int m_bytes;
+
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         private HGlobalSafeHandle(IntPtr toManage, int length)
             : base(IntPtr.Zero, true)
@@ -58,16 +55,13 @@ namespace Microsoft.InfoCards
             SetHandle(toManage);
         }
 
-        private HGlobalSafeHandle() : base(IntPtr.Zero, true) { }
+        private HGlobalSafeHandle()
+            : base(IntPtr.Zero, true) { }
 
         public override bool IsInvalid
         {
-            get
-            {
-                return (IntPtr.Zero == base.handle);
-            }
+            get { return (IntPtr.Zero == base.handle); }
         }
-
 
         //
         // Summary:
@@ -75,7 +69,6 @@ namespace Microsoft.InfoCards
         //
         protected override bool ReleaseHandle()
         {
-
             IDT.DebugAssert(!IsInvalid, "handle is invalid in release handle");
             IDT.DebugAssert(0 != m_bytes, "invalid size");
             ZeroMemory(base.handle, m_bytes);
@@ -83,7 +76,5 @@ namespace Microsoft.InfoCards
             Marshal.FreeHGlobal(base.handle);
             return true;
         }
-
-
     }
 }

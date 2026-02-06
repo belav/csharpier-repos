@@ -5,7 +5,10 @@ namespace System.IO
 {
     public partial class FileLoadException
     {
-        internal static string FormatFileLoadExceptionMessage(string? fileName, int _ /*hResult*/)
+        internal static string FormatFileLoadExceptionMessage(
+            string? fileName,
+            int _ /*hResult*/
+        )
         {
             return fileName == null ? SR.IO_FileLoad : SR.Format(SR.IO_FileLoad_FileName, fileName);
         }

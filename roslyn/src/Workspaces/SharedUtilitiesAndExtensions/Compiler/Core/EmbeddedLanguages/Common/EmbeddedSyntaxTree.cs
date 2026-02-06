@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         protected EmbeddedSyntaxTree(
             VirtualCharSequence text,
             TCompilationUnitSyntax root,
-            ImmutableArray<EmbeddedDiagnostic> diagnostics)
+            ImmutableArray<EmbeddedDiagnostic> diagnostics
+        )
         {
             Text = text;
             Root = root;

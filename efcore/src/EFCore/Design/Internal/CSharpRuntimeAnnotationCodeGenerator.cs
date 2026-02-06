@@ -16,7 +16,9 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     ///     Initializes a new instance of this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    public CSharpRuntimeAnnotationCodeGenerator(CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies)
+    public CSharpRuntimeAnnotationCodeGenerator(
+        CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -27,16 +29,21 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     protected virtual CSharpRuntimeAnnotationCodeGeneratorDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    public virtual void Generate(IModel model, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IModel model,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
                     && key != CoreAnnotationNames.ProductVersion
-                    && key != CoreAnnotationNames.FullChangeTrackingNotificationsRequired)
+                    && key != CoreAnnotationNames.FullChangeTrackingNotificationsRequired
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -52,15 +59,20 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IEntityType entityType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IEntityType entityType,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
-                    && key != CoreAnnotationNames.DiscriminatorMappingComplete)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
+                    && key != CoreAnnotationNames.DiscriminatorMappingComplete
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -71,15 +83,20 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IComplexProperty complexProperty, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IComplexProperty complexProperty,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
-                    && key != CoreAnnotationNames.DiscriminatorMappingComplete)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
+                    && key != CoreAnnotationNames.DiscriminatorMappingComplete
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -90,15 +107,20 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IComplexType complexType, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IComplexType complexType,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var annotations = parameters.Annotations;
         if (!parameters.IsRuntime)
         {
             foreach (var (key, _) in annotations)
             {
-                if (CoreAnnotationNames.AllNames.Contains(key)
-                    && key != CoreAnnotationNames.DiscriminatorMappingComplete)
+                if (
+                    CoreAnnotationNames.AllNames.Contains(key)
+                    && key != CoreAnnotationNames.DiscriminatorMappingComplete
+                )
                 {
                     annotations.Remove(key);
                 }
@@ -109,7 +131,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -127,7 +152,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IServiceProperty property, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IServiceProperty property,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -145,7 +173,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IKey key, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IKey key,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -163,7 +194,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IForeignKey foreignKey, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IForeignKey foreignKey,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -181,7 +215,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(INavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        INavigation navigation,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -199,7 +236,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ISkipNavigation navigation, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ISkipNavigation navigation,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -217,7 +257,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(IIndex index, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        IIndex index,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -235,7 +278,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ITrigger trigger, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ITrigger trigger,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -253,7 +299,10 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     }
 
     /// <inheritdoc />
-    public virtual void Generate(ITypeMappingConfiguration typeConfiguration, CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    public virtual void Generate(
+        ITypeMappingConfiguration typeConfiguration,
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (!parameters.IsRuntime)
         {
@@ -274,7 +323,9 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     ///     Generates code to create the given annotations using literals.
     /// </summary>
     /// <param name="parameters">Parameters used during code generation.</param>
-    protected virtual void GenerateSimpleAnnotations(CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+    protected virtual void GenerateSimpleAnnotations(
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         foreach (var (name, value) in parameters.Annotations.OrderBy(a => a.Key))
         {
@@ -283,7 +334,11 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 AddNamespace(value as Type ?? value.GetType(), parameters.Namespaces);
             }
 
-            GenerateSimpleAnnotation(name, Dependencies.CSharpHelper.UnknownLiteral(value), parameters);
+            GenerateSimpleAnnotation(
+                name,
+                Dependencies.CSharpHelper.UnknownLiteral(value),
+                parameters
+            );
         }
     }
 
@@ -296,17 +351,16 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     protected virtual void GenerateSimpleAnnotation(
         string annotationName,
         string valueString,
-        CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         if (parameters.TargetName != "this")
         {
-            parameters.MainBuilder
-                .Append(parameters.TargetName)
-                .Append('.');
+            parameters.MainBuilder.Append(parameters.TargetName).Append('.');
         }
 
-        parameters.MainBuilder
-            .Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
+        parameters
+            .MainBuilder.Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
             .Append(Dependencies.CSharpHelper.Literal(annotationName))
             .Append(", ")
             .Append(valueString)
@@ -352,13 +406,17 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     public static void Create(
         ValueConverter converter,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,
-        ICSharpHelper codeHelper)
+        ICSharpHelper codeHelper
+    )
     {
         var mainBuilder = parameters.MainBuilder;
-        var constructor = converter.GetType().GetDeclaredConstructor(new[] { typeof(JsonValueReaderWriter) });
-        var jsonReaderWriterProperty = converter.GetType().GetProperty(nameof(CollectionToJsonStringConverter<object>.JsonReaderWriter));
-        if (constructor == null
-            || jsonReaderWriterProperty == null)
+        var constructor = converter
+            .GetType()
+            .GetDeclaredConstructor(new[] { typeof(JsonValueReaderWriter) });
+        var jsonReaderWriterProperty = converter
+            .GetType()
+            .GetProperty(nameof(CollectionToJsonStringConverter<object>.JsonReaderWriter));
+        if (constructor == null || jsonReaderWriterProperty == null)
         {
             AddNamespace(typeof(ValueConverter<,>), parameters.Namespaces);
             AddNamespace(converter.ModelClrType, parameters.Namespaces);
@@ -371,20 +429,26 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 .Append(codeHelper.Reference(converter.ProviderClrType))
                 .AppendLine(">(")
                 .IncrementIndent()
-                .Append(codeHelper.Expression(converter.ConvertToProviderExpression, parameters.Namespaces))
+                .Append(
+                    codeHelper.Expression(
+                        converter.ConvertToProviderExpression,
+                        parameters.Namespaces
+                    )
+                )
                 .AppendLine(",")
-                .Append(codeHelper.Expression(converter.ConvertFromProviderExpression, parameters.Namespaces));
+                .Append(
+                    codeHelper.Expression(
+                        converter.ConvertFromProviderExpression,
+                        parameters.Namespaces
+                    )
+                );
 
             if (converter.ConvertsNulls)
             {
-                mainBuilder
-                    .AppendLine(",")
-                    .Append("convertsNulls: true");
+                mainBuilder.AppendLine(",").Append("convertsNulls: true");
             }
 
-            mainBuilder
-                .Append(")")
-                .DecrementIndent();
+            mainBuilder.Append(")").DecrementIndent();
         }
         else
         {
@@ -395,10 +459,13 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 .Append(codeHelper.Reference(converter.GetType()))
                 .Append("(");
 
-            CreateJsonValueReaderWriter((JsonValueReaderWriter)jsonReaderWriterProperty.GetValue(converter)!, parameters, codeHelper);
+            CreateJsonValueReaderWriter(
+                (JsonValueReaderWriter)jsonReaderWriterProperty.GetValue(converter)!,
+                parameters,
+                codeHelper
+            );
 
-            mainBuilder
-                .Append(")");
+            mainBuilder.Append(")");
         }
     }
 
@@ -411,14 +478,18 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     public static void Create(
         ValueComparer comparer,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,
-        ICSharpHelper codeHelper)
+        ICSharpHelper codeHelper
+    )
     {
         var mainBuilder = parameters.MainBuilder;
 
-        var constructor = comparer.GetType().GetDeclaredConstructor(new[] { typeof(ValueComparer) });
-        var elementComparerProperty = comparer.GetType().GetProperty(nameof(ListComparer<object>.ElementComparer));
-        if (constructor == null
-            || elementComparerProperty == null)
+        var constructor = comparer
+            .GetType()
+            .GetDeclaredConstructor(new[] { typeof(ValueComparer) });
+        var elementComparerProperty = comparer
+            .GetType()
+            .GetProperty(nameof(ListComparer<object>.ElementComparer));
+        if (constructor == null || elementComparerProperty == null)
         {
             AddNamespace(typeof(ValueComparer<>), parameters.Namespaces);
             AddNamespace(comparer.Type, parameters.Namespaces);
@@ -428,11 +499,20 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 .Append(codeHelper.Reference(comparer.Type))
                 .AppendLine(">(")
                 .IncrementIndent()
-                .AppendLines(codeHelper.Expression(comparer.EqualsExpression, parameters.Namespaces), skipFinalNewline: true)
+                .AppendLines(
+                    codeHelper.Expression(comparer.EqualsExpression, parameters.Namespaces),
+                    skipFinalNewline: true
+                )
                 .AppendLine(",")
-                .AppendLines(codeHelper.Expression(comparer.HashCodeExpression, parameters.Namespaces), skipFinalNewline: true)
+                .AppendLines(
+                    codeHelper.Expression(comparer.HashCodeExpression, parameters.Namespaces),
+                    skipFinalNewline: true
+                )
                 .AppendLine(",")
-                .AppendLines(codeHelper.Expression(comparer.SnapshotExpression, parameters.Namespaces), skipFinalNewline: true)
+                .AppendLines(
+                    codeHelper.Expression(comparer.SnapshotExpression, parameters.Namespaces),
+                    skipFinalNewline: true
+                )
                 .Append(")")
                 .DecrementIndent();
         }
@@ -440,15 +520,15 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
         {
             AddNamespace(comparer.GetType(), parameters.Namespaces);
 
-            mainBuilder
-                .Append("new ")
-                .Append(codeHelper.Reference(comparer.GetType()))
-                .Append("(");
+            mainBuilder.Append("new ").Append(codeHelper.Reference(comparer.GetType())).Append("(");
 
-            Create((ValueComparer)elementComparerProperty.GetValue(comparer)!, parameters, codeHelper);
+            Create(
+                (ValueComparer)elementComparerProperty.GetValue(comparer)!,
+                parameters,
+                codeHelper
+            );
 
-            mainBuilder
-                .Append(")");
+            mainBuilder.Append(")");
         }
     }
 
@@ -461,7 +541,8 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     public static void CreateJsonValueReaderWriter(
         JsonValueReaderWriter jsonValueReaderWriter,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,
-        ICSharpHelper codeHelper)
+        ICSharpHelper codeHelper
+    )
     {
         var mainBuilder = parameters.MainBuilder;
         var jsonValueReaderWriterType = jsonValueReaderWriter.GetType();
@@ -475,12 +556,14 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 .Append(codeHelper.Reference(jsonValueReaderWriterType))
                 .AppendLine("(")
                 .IncrementIndent();
-            CreateJsonValueReaderWriter(jsonConvertedValueReaderWriter.InnerReaderWriter, parameters, codeHelper);
+            CreateJsonValueReaderWriter(
+                jsonConvertedValueReaderWriter.InnerReaderWriter,
+                parameters,
+                codeHelper
+            );
             mainBuilder.AppendLine(",");
             Create(jsonConvertedValueReaderWriter.Converter, parameters, codeHelper);
-            mainBuilder
-                .Append(")")
-                .DecrementIndent();
+            mainBuilder.Append(")").DecrementIndent();
             return;
         }
 
@@ -493,10 +576,12 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
                 .Append(codeHelper.Reference(jsonValueReaderWriterType))
                 .AppendLine("(")
                 .IncrementIndent();
-            CreateJsonValueReaderWriter(compositeJsonValueReaderWriter.InnerReaderWriter, parameters, codeHelper);
-            mainBuilder
-                .Append(")")
-                .DecrementIndent();
+            CreateJsonValueReaderWriter(
+                compositeJsonValueReaderWriter.InnerReaderWriter,
+                parameters,
+                codeHelper
+            );
+            mainBuilder.Append(")").DecrementIndent();
             return;
         }
 
@@ -512,21 +597,22 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     public static void CreateJsonValueReaderWriter(
         Type jsonValueReaderWriterType,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,
-        ICSharpHelper codeHelper)
+        ICSharpHelper codeHelper
+    )
     {
         var mainBuilder = parameters.MainBuilder;
         AddNamespace(jsonValueReaderWriterType, parameters.Namespaces);
 
         var instanceProperty = jsonValueReaderWriterType.GetProperty("Instance");
-        if (instanceProperty != null
+        if (
+            instanceProperty != null
             && instanceProperty.IsStatic()
             && instanceProperty.GetMethod?.IsPublic == true
             && jsonValueReaderWriterType.IsAssignableFrom(instanceProperty.PropertyType)
-            && jsonValueReaderWriterType.IsPublic)
+            && jsonValueReaderWriterType.IsPublic
+        )
         {
-            mainBuilder
-                .Append(codeHelper.Reference(jsonValueReaderWriterType))
-                .Append(".Instance");
+            mainBuilder.Append(codeHelper.Reference(jsonValueReaderWriterType)).Append(".Instance");
         }
         else
         {
@@ -543,7 +629,8 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters,
         ValueComparer? valueComparer = null,
         ValueComparer? keyValueComparer = null,
-        ValueComparer? providerValueComparer = null)
+        ValueComparer? providerValueComparer = null
+    )
     {
         var mainBuilder = parameters.MainBuilder;
         var code = Dependencies.CSharpHelper;
@@ -553,60 +640,52 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
             return true;
         }
 
-        mainBuilder
-            .AppendLine(".Clone(")
-            .IncrementIndent();
+        mainBuilder.AppendLine(".Clone(").IncrementIndent();
 
-        mainBuilder
-            .Append("comparer: ");
+        mainBuilder.Append("comparer: ");
         Create(valueComparer ?? typeMapping.Comparer, parameters, code);
 
-        mainBuilder.AppendLine(",")
-            .Append("keyComparer: ");
+        mainBuilder.AppendLine(",").Append("keyComparer: ");
         Create(keyValueComparer ?? typeMapping.KeyComparer, parameters, code);
 
-        mainBuilder.AppendLine(",")
-            .Append("providerValueComparer: ");
+        mainBuilder.AppendLine(",").Append("providerValueComparer: ");
         Create(providerValueComparer ?? typeMapping.ProviderValueComparer, parameters, code);
 
-        if (typeMapping.Converter != null
-            && typeMapping.Converter != defaultInstance.Converter)
+        if (typeMapping.Converter != null && typeMapping.Converter != defaultInstance.Converter)
         {
-            mainBuilder.AppendLine(",")
-                .Append("converter: ");
+            mainBuilder.AppendLine(",").Append("converter: ");
 
             Create(typeMapping.Converter, parameters, code);
         }
 
-        var typeDifferent = typeMapping.Converter == null
-            && typeMapping.ClrType != defaultInstance.ClrType;
+        var typeDifferent =
+            typeMapping.Converter == null && typeMapping.ClrType != defaultInstance.ClrType;
         if (typeDifferent)
         {
-            mainBuilder.AppendLine(",")
-                .Append($"clrType: {code.Literal(typeMapping.ClrType)}");
+            mainBuilder.AppendLine(",").Append($"clrType: {code.Literal(typeMapping.ClrType)}");
         }
 
-        if (typeMapping.JsonValueReaderWriter != null
-            && typeMapping.JsonValueReaderWriter != defaultInstance.JsonValueReaderWriter)
+        if (
+            typeMapping.JsonValueReaderWriter != null
+            && typeMapping.JsonValueReaderWriter != defaultInstance.JsonValueReaderWriter
+        )
         {
-            mainBuilder.AppendLine(",")
-                .Append("jsonValueReaderWriter: ");
+            mainBuilder.AppendLine(",").Append("jsonValueReaderWriter: ");
 
             CreateJsonValueReaderWriter(typeMapping.JsonValueReaderWriter, parameters, code);
         }
 
-        if (typeMapping.ElementTypeMapping != null
-            && typeMapping.ElementTypeMapping != defaultInstance.ElementTypeMapping)
+        if (
+            typeMapping.ElementTypeMapping != null
+            && typeMapping.ElementTypeMapping != defaultInstance.ElementTypeMapping
+        )
         {
-            mainBuilder.AppendLine(",")
-                .Append("elementMapping: ");
+            mainBuilder.AppendLine(",").Append("elementMapping: ");
 
             Create(typeMapping.ElementTypeMapping, parameters);
         }
 
-        mainBuilder
-            .Append(")")
-            .DecrementIndent();
+        mainBuilder.Append(")").DecrementIndent();
 
         return true;
     }
@@ -619,26 +698,28 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
     /// </summary>
     protected virtual CoreTypeMapping? CreateDefaultTypeMapping(
         CoreTypeMapping typeMapping,
-        CSharpRuntimeAnnotationCodeGeneratorParameters parameters)
+        CSharpRuntimeAnnotationCodeGeneratorParameters parameters
+    )
     {
         var typeMappingType = typeMapping.GetType();
         var mainBuilder = parameters.MainBuilder;
         var code = Dependencies.CSharpHelper;
         var defaultProperty = typeMappingType.GetProperty("Default");
-        if (defaultProperty == null
+        if (
+            defaultProperty == null
             || !defaultProperty.IsStatic()
             || (defaultProperty.GetMethod?.IsPublic) != true
             || !typeMappingType.IsAssignableFrom(defaultProperty.PropertyType)
-            || !typeMappingType.IsPublic)
+            || !typeMappingType.IsPublic
+        )
         {
             throw new InvalidOperationException(
-                CoreStrings.CompiledModelIncompatibleTypeMapping(typeMappingType.ShortDisplayName()));
+                CoreStrings.CompiledModelIncompatibleTypeMapping(typeMappingType.ShortDisplayName())
+            );
         }
 
         AddNamespace(typeMappingType, parameters.Namespaces);
-        mainBuilder
-            .Append(code.Reference(typeMappingType))
-            .Append(".Default");
+        mainBuilder.Append(code.Reference(typeMappingType)).Append(".Default");
 
         var defaultInstance = (CoreTypeMapping)defaultProperty.GetValue(null)!;
         return typeMapping == defaultInstance ? null : defaultInstance;

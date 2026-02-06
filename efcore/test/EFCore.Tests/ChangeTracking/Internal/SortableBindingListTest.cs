@@ -9,34 +9,11 @@ public class SortableBindingListTest
 {
     private void SortTest(string property, ListSortDirection direction)
     {
-        var list = new List<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
-        var sortedList = direction == ListSortDirection.Ascending
-            ? new List<ListElement>
-            {
-                1,
-                1,
-                3,
-                4,
-                5,
-                9
-            }
-            : new List<ListElement>
-            {
-                9,
-                5,
-                4,
-                3,
-                1,
-                1
-            };
+        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var sortedList =
+            direction == ListSortDirection.Ascending
+                ? new List<ListElement> { 1, 1, 3, 4, 5, 9 }
+                : new List<ListElement> { 9, 5, 4, 3, 1, 1 };
 
         var bindingList = new SortableBindingList<ListElement>(list);
 
@@ -46,53 +23,40 @@ public class SortableBindingListTest
     }
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_ascending_using_IComparable_on_value_type()
-        => SortTest("Int", ListSortDirection.Ascending);
+    public void SortableBindingList_can_sort_ascending_using_IComparable_on_value_type() =>
+        SortTest("Int", ListSortDirection.Ascending);
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_ascending_using_IComparable_on_nullable_value_type()
-        => SortTest("NullableInt", ListSortDirection.Ascending);
+    public void SortableBindingList_can_sort_ascending_using_IComparable_on_nullable_value_type() =>
+        SortTest("NullableInt", ListSortDirection.Ascending);
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_ascending_using_IComparable_on_reference_type()
-        => SortTest("String", ListSortDirection.Ascending);
+    public void SortableBindingList_can_sort_ascending_using_IComparable_on_reference_type() =>
+        SortTest("String", ListSortDirection.Ascending);
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_descending_using_IComparable_on_value_type()
-        => SortTest("Int", ListSortDirection.Descending);
+    public void SortableBindingList_can_sort_descending_using_IComparable_on_value_type() =>
+        SortTest("Int", ListSortDirection.Descending);
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_descending_using_IComparable_on_nullable_value_type()
-        => SortTest("NullableInt", ListSortDirection.Descending);
+    public void SortableBindingList_can_sort_descending_using_IComparable_on_nullable_value_type() =>
+        SortTest("NullableInt", ListSortDirection.Descending);
 
     [ConditionalFact]
-    public void SortableBindingList_can_sort_descending_using_IComparable_on_reference_type()
-        => SortTest("String", ListSortDirection.Descending);
+    public void SortableBindingList_can_sort_descending_using_IComparable_on_reference_type() =>
+        SortTest("String", ListSortDirection.Descending);
 
     [ConditionalFact]
     public void SortableBindingList_does_not_sort_for_non_XNode_that_does_not_implement_IComparable()
     {
-        var list = new List<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
-        var unsortedList = new List<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
         var bindingList = new SortableBindingList<ListElement>(list);
 
-        ((IBindingList)bindingList).ApplySort(ListElement.Property("Random"), ListSortDirection.Ascending);
+        ((IBindingList)bindingList).ApplySort(
+            ListElement.Property("Random"),
+            ListSortDirection.Ascending
+        );
 
         Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
     }
@@ -100,27 +64,14 @@ public class SortableBindingListTest
     [ConditionalFact]
     public void SortableBindingList_does_not_sort_for_byte_arrays()
     {
-        var list = new List<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
-        var unsortedList = new List<ListElement>
-        {
-            3,
-            1,
-            4,
-            1,
-            5,
-            9
-        };
+        var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+        var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
         var bindingList = new SortableBindingList<ListElement>(list);
 
-        ((IBindingList)bindingList).ApplySort(ListElement.Property("ByteArray"), ListSortDirection.Descending);
+        ((IBindingList)bindingList).ApplySort(
+            ListElement.Property("ByteArray"),
+            ListSortDirection.Descending
+        );
 
         Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
     }
@@ -132,18 +83,21 @@ public class SortableBindingListTest
         {
             new DerivedListElement(3),
             new DerivedListElement(1),
-            new DerivedListElement(4)
+            new DerivedListElement(4),
         };
         var sortedList = new List<ListElement>
         {
             new DerivedListElement(1),
             new DerivedListElement(3),
-            new DerivedListElement(4)
+            new DerivedListElement(4),
         };
 
         var bindingList = new SortableBindingList<ListElement>(list);
 
-        ((IBindingList)bindingList).ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
+        ((IBindingList)bindingList).ApplySort(
+            ListElement.Property("Int"),
+            ListSortDirection.Ascending
+        );
 
         Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
     }
@@ -151,31 +105,22 @@ public class SortableBindingListTest
     [ConditionalFact]
     public void SortableBindingList_can_sort_when_list_is_of_derived_type()
     {
-        var list = new List<DerivedListElement>
-        {
-            new(3),
-            new(1),
-            new(4)
-        };
-        var sortedList = new List<DerivedListElement>
-        {
-            new(1),
-            new(3),
-            new(4)
-        };
+        var list = new List<DerivedListElement> { new(3), new(1), new(4) };
+        var sortedList = new List<DerivedListElement> { new(1), new(3), new(4) };
 
         var bindingList = new SortableBindingList<DerivedListElement>(list);
 
-        ((IBindingList)bindingList).ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
+        ((IBindingList)bindingList).ApplySort(
+            ListElement.Property("Int"),
+            ListSortDirection.Ascending
+        );
 
         Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
     }
 
     private class ListElement
     {
-        public ListElement()
-        {
-        }
+        public ListElement() { }
 
         public ListElement(int i)
         {
@@ -186,8 +131,7 @@ public class SortableBindingListTest
             ByteArray = new[] { (byte)i, (byte)i, (byte)i, (byte)i };
         }
 
-        public static implicit operator ListElement(int i)
-            => new(i);
+        public static implicit operator ListElement(int i) => new(i);
 
         public int Int { get; }
         public int? NullableInt { get; }
@@ -195,28 +139,22 @@ public class SortableBindingListTest
         public Random Random { get; }
         public byte[] ByteArray { get; }
 
-        public static PropertyDescriptor Property(string name)
-            => TypeDescriptor.GetProperties(typeof(ListElement))[name];
+        public static PropertyDescriptor Property(string name) =>
+            TypeDescriptor.GetProperties(typeof(ListElement))[name];
     }
 
     private class DerivedListElement : ListElement
     {
-        public DerivedListElement()
-        {
-        }
+        public DerivedListElement() { }
 
         public DerivedListElement(int i)
-            : base(i)
-        {
-        }
+            : base(i) { }
     }
 
     private class ListElementComparer : IEqualityComparer<ListElement>
     {
-        public bool Equals(ListElement x, ListElement y)
-            => x.Int == y.Int;
+        public bool Equals(ListElement x, ListElement y) => x.Int == y.Int;
 
-        public int GetHashCode(ListElement obj)
-            => obj.Int;
+        public int GetHashCode(ListElement obj) => obj.Int;
     }
 }

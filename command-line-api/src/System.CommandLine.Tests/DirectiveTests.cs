@@ -16,7 +16,11 @@ namespace System.CommandLine.Tests
         {
             CliDirective directive = new("parse");
 
-            ParseResult result = Parse(new CliOption<bool>("-y"), directive, $"{CliRootCommand.ExecutableName} [nonExisting] -y");
+            ParseResult result = Parse(
+                new CliOption<bool>("-y"),
+                directive,
+                $"{CliRootCommand.ExecutableName} [nonExisting] -y"
+            );
 
             result.UnmatchedTokens.Should().ContainSingle("[nonExisting]");
         }
@@ -24,7 +28,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Raw_tokens_still_hold_directives()
         {
-            CliDirective directive = new ("parse");
+            CliDirective directive = new("parse");
 
             ParseResult result = Parse(new CliOption<bool>("-y"), directive, "[parse] -y");
 
@@ -46,8 +50,8 @@ namespace System.CommandLine.Tests
         public void Multiple_directives_are_allowed()
         {
             CliRootCommand root = new() { new CliOption<bool>("-y") };
-            CliDirective parseDirective = new ("parse");
-            CliDirective suggestDirective = new ("suggest");
+            CliDirective parseDirective = new("parse");
+            CliDirective suggestDirective = new("suggest");
             CliConfiguration config = new(root);
             root.Add(parseDirective);
             root.Add(suggestDirective);
@@ -72,17 +76,19 @@ namespace System.CommandLine.Tests
             var testDirective = new TestDirective("test")
             {
                 Action = invokeAsync
-                             ? new AsynchronousTestAction(incrementCallCount, terminating: false)
-                             : new SynchronousTestAction(incrementCallCount, terminating: false)
+                    ? new AsynchronousTestAction(incrementCallCount, terminating: false)
+                    : new SynchronousTestAction(incrementCallCount, terminating: false),
             };
 
-            var config = new CliConfiguration(new CliRootCommand
-            {
-                Action = invokeAsync
-                             ? new AsynchronousTestAction(verifyActionWasCalled, terminating: false)
-                             : new SynchronousTestAction(verifyActionWasCalled, terminating: false),
-                Directives = { testDirective }
-            });
+            var config = new CliConfiguration(
+                new CliRootCommand
+                {
+                    Action = invokeAsync
+                        ? new AsynchronousTestAction(verifyActionWasCalled, terminating: false)
+                        : new SynchronousTestAction(verifyActionWasCalled, terminating: false),
+                    Directives = { testDirective },
+                }
+            );
 
             if (invokeAsync)
             {
@@ -110,16 +116,28 @@ namespace System.CommandLine.Tests
 
             var directiveOne = new TestDirective("one")
             {
-                Action = new SynchronousTestAction(_ => directiveOneActionWasCalled = true, terminating: false)
+                Action = new SynchronousTestAction(
+                    _ => directiveOneActionWasCalled = true,
+                    terminating: false
+                ),
             };
             var directiveTwo = new TestDirective("two")
             {
-                Action = new SynchronousTestAction(_ => directiveTwoActionWasCalled = true, terminating: false)
+                Action = new SynchronousTestAction(
+                    _ => directiveTwoActionWasCalled = true,
+                    terminating: false
+                ),
             };
-            var config = new CliConfiguration(new CliRootCommand
-            {
-                Action = new SynchronousTestAction(_ => commandActionWasCalled = true, terminating: false), Directives = { directiveOne, directiveTwo }
-            });
+            var config = new CliConfiguration(
+                new CliRootCommand
+                {
+                    Action = new SynchronousTestAction(
+                        _ => commandActionWasCalled = true,
+                        terminating: false
+                    ),
+                    Directives = { directiveOne, directiveTwo },
+                }
+            );
 
             if (invokeAsync)
             {
@@ -139,9 +157,8 @@ namespace System.CommandLine.Tests
 
         public class TestDirective : CliDirective
         {
-            public TestDirective(string name) : base(name)
-            {
-            }
+            public TestDirective(string name)
+                : base(name) { }
         }
 
         [Theory]
@@ -151,7 +168,8 @@ namespace System.CommandLine.Tests
         public void Directives_can_have_a_value_which_is_everything_after_the_first_colon(
             string wholeText,
             string key,
-            string expectedValue)
+            string expectedValue
+        )
         {
             CliDirective directive = new(key);
 
@@ -175,8 +193,8 @@ namespace System.CommandLine.Tests
         [InlineData("[:value]")]
         public void Directives_must_have_a_non_empty_key(string directive)
         {
-            CliOption<bool> option = new ("-a");
-            CliRootCommand root = new () { option };
+            CliOption<bool> option = new("-a");
+            CliRootCommand root = new() { option };
 
             var result = root.Parse($"{directive} -a");
 
@@ -187,7 +205,11 @@ namespace System.CommandLine.Tests
         [InlineData("[par se]", "[par", "se]")]
         [InlineData("[ parse]", "[", "parse]")]
         [InlineData("[parse ]", "[parse", "]")]
-        public void Directives_cannot_contain_spaces(string value, string firstUnmatchedToken, string secondUnmatchedToken)
+        public void Directives_cannot_contain_spaces(
+            string value,
+            string firstUnmatchedToken,
+            string secondUnmatchedToken
+        )
         {
             Action create = () => new CliDirective(value);
             create.Should().Throw<ArgumentException>();
@@ -196,7 +218,9 @@ namespace System.CommandLine.Tests
             ParseResult result = Parse(new CliOption<bool>("-y"), directive, $"{value} -y");
             result.GetResult(directive).Should().BeNull();
 
-            result.UnmatchedTokens.Should().BeEquivalentTo(firstUnmatchedToken, secondUnmatchedToken);
+            result
+                .UnmatchedTokens.Should()
+                .BeEquivalentTo(firstUnmatchedToken, secondUnmatchedToken);
         }
 
         [Fact]
@@ -204,12 +228,20 @@ namespace System.CommandLine.Tests
         {
             CliDirective directive = new("directive");
 
-            ParseResult result = Parse(new CliOption<bool>("-a"), directive, "[directive:one] [directive:two] -a");
+            ParseResult result = Parse(
+                new CliOption<bool>("-a"),
+                directive,
+                "[directive:one] [directive:two] -a"
+            );
 
             result.GetResult(directive).Values.Should().BeEquivalentTo("one", "two");
         }
 
-        private static ParseResult Parse(CliOption option, CliDirective directive, string commandLine)
+        private static ParseResult Parse(
+            CliOption option,
+            CliDirective directive,
+            string commandLine
+        )
         {
             CliRootCommand root = new() { option };
             CliConfiguration config = new(root);

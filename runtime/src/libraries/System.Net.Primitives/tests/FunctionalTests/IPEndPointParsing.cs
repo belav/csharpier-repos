@@ -10,24 +10,31 @@ namespace System.Net.Primitives.Functional.Tests
     public class IPEndPointParsing
     {
         [Theory]
-        [MemberData(nameof(IPAddressParsingFormatting.ValidIpv4Addresses), MemberType = typeof(IPAddressParsingFormatting))]    // Just borrow the list from IPAddressParsing
+        [MemberData(
+            nameof(IPAddressParsingFormatting.ValidIpv4Addresses),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )] // Just borrow the list from IPAddressParsing
         public void Parse_ValidEndPoint_IPv4_Success(string address, string expectedAddress)
         {
             Parse_ValidEndPoint_Success(address, expectedAddress, true);
         }
 
         [Theory]
-        [MemberData(nameof(ValidIpv6AddressesNoPort))]  // We need our own list here to explicitly exclude port numbers and brackets without making the test overly complicated (and less valid)
+        [MemberData(nameof(ValidIpv6AddressesNoPort))] // We need our own list here to explicitly exclude port numbers and brackets without making the test overly complicated (and less valid)
         public void Parse_ValidEndPoint_IPv6_Success(string address, string expectedAddress)
         {
             Parse_ValidEndPoint_Success(address, expectedAddress, false);
         }
 
-        private void Parse_ValidEndPoint_Success(string address, string expectedAddress, bool isIPv4)
+        private void Parse_ValidEndPoint_Success(
+            string address,
+            string expectedAddress,
+            bool isIPv4
+        )
         {
             // We'll parse just the address alone followed by the address with various port numbers
 
-            expectedAddress = expectedAddress.ToLowerInvariant();   // This is done in the IP parse routines
+            expectedAddress = expectedAddress.ToLowerInvariant(); // This is done in the IP parse routines
 
             // TryParse should return true
             Assert.True(IPEndPoint.TryParse(address, out IPEndPoint result));
@@ -43,7 +50,9 @@ namespace System.Net.Primitives.Functional.Tests
             int portNumber = 1;
             for (int i = 0; i < 5; i++)
             {
-                var addressAndPort = isIPv4 ? $"{address}:{portNumber}" : $"[{address}]:{portNumber}";
+                var addressAndPort = isIPv4
+                    ? $"{address}:{portNumber}"
+                    : $"[{address}]:{portNumber}";
 
                 // TryParse should return true
                 Assert.True(IPEndPoint.TryParse(addressAndPort, out result));
@@ -62,16 +71,28 @@ namespace System.Net.Primitives.Functional.Tests
         }
 
         [Theory]
-        [MemberData(nameof(IPAddressParsingFormatting.InvalidIpv4Addresses), MemberType = typeof(IPAddressParsingFormatting))]
-        [MemberData(nameof(IPAddressParsingFormatting.InvalidIpv4AddressesStandalone), MemberType = typeof(IPAddressParsingFormatting))]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.InvalidIpv4Addresses),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.InvalidIpv4AddressesStandalone),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
         public void Parse_InvalidAddress_IPv4_Throws(string address)
         {
             Parse_InvalidAddress_Throws(address, true);
         }
 
         [Theory]
-        [MemberData(nameof(IPAddressParsingFormatting.InvalidIpv6Addresses), MemberType = typeof(IPAddressParsingFormatting))]
-        [MemberData(nameof(IPAddressParsingFormatting.InvalidIpv6AddressesNoInner), MemberType = typeof(IPAddressParsingFormatting))]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.InvalidIpv6Addresses),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.InvalidIpv6AddressesNoInner),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
         public void Parse_InvalidAddress_IPv6_Throws(string address)
         {
             Parse_InvalidAddress_Throws(address, false);
@@ -89,7 +110,9 @@ namespace System.Net.Primitives.Functional.Tests
             int portNumber = 1;
             for (int i = 0; i < 5; i++)
             {
-                string addressAndPort = isIPv4 ? $"{address}:{portNumber}" : $"[{address}]:{portNumber}";
+                string addressAndPort = isIPv4
+                    ? $"{address}:{portNumber}"
+                    : $"[{address}]:{portNumber}";
 
                 // TryParse should return false and set result to null
                 result = new IPEndPoint(IPAddress.Parse("0"), 25);
@@ -106,7 +129,10 @@ namespace System.Net.Primitives.Functional.Tests
         }
 
         [Theory]
-        [MemberData(nameof(IPAddressParsingFormatting.ValidIpv4Addresses), MemberType = typeof(IPAddressParsingFormatting))]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.ValidIpv4Addresses),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
         public void Parse_InvalidPort_IPv4_Throws(string address, string expectedAddress)
         {
             _ = expectedAddress;
@@ -114,7 +140,10 @@ namespace System.Net.Primitives.Functional.Tests
         }
 
         [Theory]
-        [MemberData(nameof(IPAddressParsingFormatting.ValidIpv6Addresses), MemberType = typeof(IPAddressParsingFormatting))]
+        [MemberData(
+            nameof(IPAddressParsingFormatting.ValidIpv6Addresses),
+            MemberType = typeof(IPAddressParsingFormatting)
+        )]
         public void Parse_InvalidPort_IPv6_Throws(string address, string expectedAddress)
         {
             _ = expectedAddress;
@@ -123,23 +152,45 @@ namespace System.Net.Primitives.Functional.Tests
 
         private void Parse_InvalidPort_Throws(string address, bool isIPv4)
         {
-            InvalidPortHelper(isIPv4 ? $"{address}:65536" : $"[{address}]:65536");  // port exceeds max
-            InvalidPortHelper(isIPv4 ? $"{address}:-300" : $"[{address}]:-300");    // port is negative
-            InvalidPortHelper(isIPv4 ? $"{address}:+300" : $"[{address}]:+300");    // plug sign
+            InvalidPortHelper(isIPv4 ? $"{address}:65536" : $"[{address}]:65536"); // port exceeds max
+            InvalidPortHelper(isIPv4 ? $"{address}:-300" : $"[{address}]:-300"); // port is negative
+            InvalidPortHelper(isIPv4 ? $"{address}:+300" : $"[{address}]:+300"); // plug sign
 
             int portNumber = 1;
             for (int i = 0; i < 5; i++)
             {
-                InvalidPortHelper(isIPv4 ? $"{address}:a{portNumber}" : $"[{address}]:a{portNumber}");        // character at start of port
-                InvalidPortHelper(isIPv4 ? $"{address}:{portNumber}a" : $"[{address}]:{portNumber}a");        // character at end of port
-                InvalidPortHelper(isIPv4 ? $"{address}]:{portNumber}" : $"[{address}]]:{portNumber}");        // bracket where it should not be
-                InvalidPortHelper(isIPv4 ? $"{address}:]{portNumber}" : $"[{address}]:]{portNumber}");        // bracket after colon
-                InvalidPortHelper(isIPv4 ? $"{address}:{portNumber}]" : $"[{address}]:{portNumber}]");        // trailing bracket
-                InvalidPortHelper(isIPv4 ? $"{address}:{portNumber}:" : $"[{address}]:{portNumber}:");        // trailing colon
-                InvalidPortHelper(isIPv4 ? $"{address}:{portNumber}:{portNumber}" : $"[{address}]:{portNumber}]:{portNumber}"); // double port
-                InvalidPortHelper(isIPv4 ? $"{address}:{portNumber}a{portNumber}" : $"[{address}]:{portNumber}a{portNumber}");  // character in the middle of numbers
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}:a{portNumber}" : $"[{address}]:a{portNumber}"
+                ); // character at start of port
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}:{portNumber}a" : $"[{address}]:{portNumber}a"
+                ); // character at end of port
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}]:{portNumber}" : $"[{address}]]:{portNumber}"
+                ); // bracket where it should not be
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}:]{portNumber}" : $"[{address}]:]{portNumber}"
+                ); // bracket after colon
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}:{portNumber}]" : $"[{address}]:{portNumber}]"
+                ); // trailing bracket
+                InvalidPortHelper(
+                    isIPv4 ? $"{address}:{portNumber}:" : $"[{address}]:{portNumber}:"
+                ); // trailing colon
+                InvalidPortHelper(
+                    isIPv4
+                        ? $"{address}:{portNumber}:{portNumber}"
+                        : $"[{address}]:{portNumber}]:{portNumber}"
+                ); // double port
+                InvalidPortHelper(
+                    isIPv4
+                        ? $"{address}:{portNumber}a{portNumber}"
+                        : $"[{address}]:{portNumber}a{portNumber}"
+                ); // character in the middle of numbers
 
-                string addressAndPort = isIPv4 ? $"{address}::{portNumber}" : $"[{address}]::{portNumber}";   // double delimiter
+                string addressAndPort = isIPv4
+                    ? $"{address}::{portNumber}"
+                    : $"[{address}]::{portNumber}"; // double delimiter
                 // Appending two colons to an address may create a valid one (e.g. "0" becomes "0::x").
                 // If and only if the address parsers says it's not valid then we should as well
                 if (!IPAddress.TryParse(addressAndPort, out IPAddress ipAddress))
@@ -167,7 +218,11 @@ namespace System.Net.Primitives.Functional.Tests
         {
             new object[] { "Fe08::1", "fe08::1" },
             new object[] { "0000:0000:0000:0000:0000:0000:0000:0000", "::" },
-            new object[] { "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff" },
+            new object[]
+            {
+                "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF",
+                "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+            },
             new object[] { "0:0:0:0:0:0:0:0", "::" },
             new object[] { "1:0:0:0:0:0:0:0", "1::" },
             new object[] { "0:1:0:0:0:0:0:0", "0:1::" },

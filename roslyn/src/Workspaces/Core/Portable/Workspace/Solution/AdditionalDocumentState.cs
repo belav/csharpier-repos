@@ -18,8 +18,15 @@ namespace Microsoft.CodeAnalysis
             IDocumentServiceProvider documentServiceProvider,
             DocumentInfo.DocumentAttributes attributes,
             ITextAndVersionSource textAndVersionSource,
-            LoadTextOptions loadTextOptions)
-            : base(solutionServices, documentServiceProvider, attributes, textAndVersionSource, loadTextOptions)
+            LoadTextOptions loadTextOptions
+        )
+            : base(
+                solutionServices,
+                documentServiceProvider,
+                attributes,
+                textAndVersionSource,
+                loadTextOptions
+            )
         {
             _additionalText = new AdditionalTextWithState(this);
         }
@@ -27,7 +34,8 @@ namespace Microsoft.CodeAnalysis
         public AdditionalDocumentState(
             SolutionServices solutionServices,
             DocumentInfo documentInfo,
-            LoadTextOptions loadTextOptions)
+            LoadTextOptions loadTextOptions
+        )
             : base(solutionServices, documentInfo, loadTextOptions)
         {
             _additionalText = new AdditionalTextWithState(this);
@@ -35,23 +43,30 @@ namespace Microsoft.CodeAnalysis
 
         public AdditionalText AdditionalText => _additionalText;
 
-        public new AdditionalDocumentState UpdateText(TextLoader loader, PreservationMode mode)
-            => (AdditionalDocumentState)base.UpdateText(loader, mode);
+        public new AdditionalDocumentState UpdateText(TextLoader loader, PreservationMode mode) =>
+            (AdditionalDocumentState)base.UpdateText(loader, mode);
 
-        public new AdditionalDocumentState UpdateText(SourceText text, PreservationMode mode)
-            => (AdditionalDocumentState)base.UpdateText(text, mode);
+        public new AdditionalDocumentState UpdateText(SourceText text, PreservationMode mode) =>
+            (AdditionalDocumentState)base.UpdateText(text, mode);
 
-        public new AdditionalDocumentState UpdateText(TextAndVersion newTextAndVersion, PreservationMode mode)
-            => (AdditionalDocumentState)base.UpdateText(newTextAndVersion, mode);
+        public new AdditionalDocumentState UpdateText(
+            TextAndVersion newTextAndVersion,
+            PreservationMode mode
+        ) => (AdditionalDocumentState)base.UpdateText(newTextAndVersion, mode);
 
-        protected override TextDocumentState UpdateText(ITextAndVersionSource newTextSource, PreservationMode mode, bool incremental)
+        protected override TextDocumentState UpdateText(
+            ITextAndVersionSource newTextSource,
+            PreservationMode mode,
+            bool incremental
+        )
         {
             return new AdditionalDocumentState(
                 this.solutionServices,
                 this.Services,
                 this.Attributes,
                 newTextSource,
-                this.LoadTextOptions);
+                this.LoadTextOptions
+            );
         }
     }
 }

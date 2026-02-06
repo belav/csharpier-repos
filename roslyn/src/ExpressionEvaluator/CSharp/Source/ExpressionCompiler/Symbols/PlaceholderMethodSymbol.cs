@@ -18,8 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     /// </summary>
     internal sealed partial class PlaceholderMethodSymbol : MethodSymbol
     {
-        internal delegate ImmutableArray<TypeParameterSymbol> GetTypeParameters(PlaceholderMethodSymbol method);
-        internal delegate ImmutableArray<ParameterSymbol> GetParameters(PlaceholderMethodSymbol method);
+        internal delegate ImmutableArray<TypeParameterSymbol> GetTypeParameters(
+            PlaceholderMethodSymbol method
+        );
+        internal delegate ImmutableArray<ParameterSymbol> GetParameters(
+            PlaceholderMethodSymbol method
+        );
         internal delegate TypeSymbol GetReturnType(PlaceholderMethodSymbol method);
 
         private readonly NamedTypeSymbol _container;
@@ -33,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string name,
             GetTypeParameters getTypeParameters,
             GetReturnType getReturnType,
-            GetParameters getParameters)
+            GetParameters getParameters
+        )
         {
             _container = container;
             _name = name;
@@ -161,11 +166,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { return _returnType; }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
@@ -187,7 +195,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get
             {
                 Debug.Assert(this.IsStatic);
-                return this.IsGenericMethod ? Cci.CallingConvention.Generic : Cci.CallingConvention.Default;
+                return this.IsGenericMethod
+                    ? Cci.CallingConvention.Generic
+                    : Cci.CallingConvention.Default;
             }
         }
 
@@ -216,7 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get { throw ExceptionUtilities.Unreachable(); }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => throw ExceptionUtilities.Unreachable();
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => throw ExceptionUtilities.Unreachable();
 
         internal override bool HasUnscopedRefAttribute => false;
 
@@ -254,10 +266,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
@@ -277,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override bool IsNullableAnalysisEnabled() => false;
 
-        protected override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol builderArgument)
         {
@@ -296,8 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 #if DEBUG
     internal sealed partial class PlaceholderMethodSymbolAdapter : MethodSymbolAdapter
     {
-        internal PlaceholderMethodSymbolAdapter(MethodSymbol underlyingMethodSymbol) : base(underlyingMethodSymbol)
-        { }
+        internal PlaceholderMethodSymbolAdapter(MethodSymbol underlyingMethodSymbol)
+            : base(underlyingMethodSymbol) { }
     }
 #endif
 
@@ -320,7 +330,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(AdaptedMethodSymbol.RefCustomModifiers);
+                return ImmutableArray<Cci.ICustomModifier>.CastUp(
+                    AdaptedMethodSymbol.RefCustomModifiers
+                );
             }
         }
     }

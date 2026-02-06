@@ -145,7 +145,9 @@ namespace System.ComponentModel.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void Dispose_DisposingSiteEventHandler_InvokesEventHandlerAndRemovesSiteFromComponent(bool disposing)
+        public void Dispose_DisposingSiteEventHandler_InvokesEventHandlerAndRemovesSiteFromComponent(
+            bool disposing
+        )
         {
             bool calledDisposed = false;
             var site = new Site();
@@ -175,7 +177,10 @@ namespace System.ComponentModel.Tests
         public void ToString_WithSite_ReturnsExpected()
         {
             var component = new MarshalByValueComponent() { Site = new Site() };
-            Assert.Equal("name [System.ComponentModel.MarshalByValueComponent]", component.ToString());
+            Assert.Equal(
+                "name [System.ComponentModel.MarshalByValueComponent]",
+                component.ToString()
+            );
         }
 
         [Fact]
@@ -187,7 +192,8 @@ namespace System.ComponentModel.Tests
 
         public class SubMarshalByValueComponent : MarshalByValueComponent
         {
-            public SubMarshalByValueComponent() : base() { }
+            public SubMarshalByValueComponent()
+                : base() { }
 
             public EventHandlerList EventsEntryPoint => Events;
 

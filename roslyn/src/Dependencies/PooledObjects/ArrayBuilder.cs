@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-
 #if COMPILERCORE
 using Roslyn.Utilities;
 #endif
@@ -61,8 +60,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 
         public ArrayBuilder()
-            : this(8)
-        { }
+            : this(8) { }
 
         private ArrayBuilder(ObjectPool<ArrayBuilder<T>> pool)
             : this()
@@ -103,44 +101,24 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
         public int Count
         {
-            get
-            {
-                return _builder.Count;
-            }
-            set
-            {
-                _builder.Count = value;
-            }
+            get { return _builder.Count; }
+            set { _builder.Count = value; }
         }
 
         public int Capacity
         {
-            get
-            {
-                return _builder.Capacity;
-            }
-
-            set
-            {
-                _builder.Capacity = value;
-            }
+            get { return _builder.Capacity; }
+            set { _builder.Capacity = value; }
         }
 
         public T this[int index]
         {
-            get
-            {
-                return _builder[index];
-            }
-
-            set
-            {
-                _builder[index] = value;
-            }
+            get { return _builder[index]; }
+            set { _builder[index] = value; }
         }
 
         /// <summary>
-        /// Write <paramref name="value"/> to slot <paramref name="index"/>. 
+        /// Write <paramref name="value"/> to slot <paramref name="index"/>.
         /// Fills in unallocated slots preceding the <paramref name="index"/>, if any.
         /// </summary>
         public void SetItem(int index, T value)
@@ -203,11 +181,10 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return _builder.IndexOf(item, startIndex, count);
         }
 
-        public int FindIndex(Predicate<T> match)
-            => FindIndex(0, this.Count, match);
+        public int FindIndex(Predicate<T> match) => FindIndex(0, this.Count, match);
 
-        public int FindIndex(int startIndex, Predicate<T> match)
-            => FindIndex(startIndex, this.Count - startIndex, match);
+        public int FindIndex(int startIndex, Predicate<T> match) =>
+            FindIndex(startIndex, this.Count - startIndex, match);
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
@@ -223,11 +200,11 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return -1;
         }
 
-        public int FindIndex<TArg>(Func<T, TArg, bool> match, TArg arg)
-            => FindIndex(0, Count, match, arg);
+        public int FindIndex<TArg>(Func<T, TArg, bool> match, TArg arg) =>
+            FindIndex(0, Count, match, arg);
 
-        public int FindIndex<TArg>(int startIndex, Func<T, TArg, bool> match, TArg arg)
-            => FindIndex(startIndex, Count - startIndex, match, arg);
+        public int FindIndex<TArg>(int startIndex, Func<T, TArg, bool> match, TArg arg) =>
+            FindIndex(startIndex, Count - startIndex, match, arg);
 
         public int FindIndex<TArg>(int startIndex, int count, Func<T, TArg, bool> match, TArg arg)
         {
@@ -273,8 +250,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             _builder.Sort(comparer);
         }
 
-        public void Sort(Comparison<T> compare)
-            => Sort(Comparer<T>.Create(compare));
+        public void Sort(Comparison<T> compare) => Sort(Comparer<T>.Create(compare));
 
         public void Sort(int startIndex, IComparer<T> comparer)
         {
@@ -291,11 +267,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             _builder.CopyTo(array, start);
         }
 
-        public T Last()
-            => _builder[_builder.Count - 1];
+        public T Last() => _builder[_builder.Count - 1];
 
-        internal T? LastOrDefault()
-            => Count == 0 ? default : Last();
+        internal T? LastOrDefault() => Count == 0 ? default : Last();
 
         public T First()
         {
@@ -340,7 +314,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return tmp.ToImmutableAndFree();
         }
 
-        public ImmutableArray<U> ToDowncastedImmutableAndFree<U>() where U : T
+        public ImmutableArray<U> ToDowncastedImmutableAndFree<U>()
+            where U : T
         {
             var result = ToDowncastedImmutable<U>();
             this.Free();
@@ -382,7 +357,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         #region Poolable
 
         // To implement Poolable, you need two things:
-        // 1) Expose Freeing primitive. 
+        // 1) Expose Freeing primitive.
         public void Free()
         {
             var pool = _pool;
@@ -393,9 +368,9 @@ namespace Microsoft.CodeAnalysis.PooledObjects
                 // After about 50 (just 67) we have a long tail of infrequently used builder sizes.
                 // However we have builders with size up to 50K   (just one such thing)
                 //
-                // We do not want to retain (potentially indefinitely) very large builders 
+                // We do not want to retain (potentially indefinitely) very large builders
                 // while the chance that we will need their size is diminishingly small.
-                // It makes sense to constrain the size to some "not too small" number. 
+                // It makes sense to constrain the size to some "not too small" number.
                 // Overall perf does not seem to be very sensitive to this number, so I picked 128 as a limit.
                 if (_builder.Capacity < PooledArrayLengthLimitExclusive)
                 {
@@ -417,6 +392,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         // 2) Expose the pool or the way to create a pool or the way to get an instance.
         //    for now we will expose both and figure which way works better
         private static readonly ObjectPool<ArrayBuilder<T>> s_poolInstance = CreatePool();
+
         public static ArrayBuilder<T> GetInstance()
         {
             var builder = s_poolInstance.Allocate();
@@ -473,7 +449,10 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return _builder.GetEnumerator();
         }
 
-        internal Dictionary<K, ImmutableArray<T>> ToDictionary<K>(Func<T, K> keySelector, IEqualityComparer<K>? comparer = null)
+        internal Dictionary<K, ImmutableArray<T>> ToDictionary<K>(
+            Func<T, K> keySelector,
+            IEqualityComparer<K>? comparer = null
+        )
             where K : notnull
         {
             if (this.Count == 1)
@@ -490,7 +469,7 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
 
             // bucketize
-            // prevent reallocation. it may not have 'count' entries, but it won't have more. 
+            // prevent reallocation. it may not have 'count' entries, but it won't have more.
             var accumulator = new Dictionary<K, ArrayBuilder<T>>(Count, comparer);
             for (var i = 0; i < Count; i++)
             {
@@ -529,12 +508,14 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
         }
 
-        public void AddRange<U>(ArrayBuilder<U> items) where U : T
+        public void AddRange<U>(ArrayBuilder<U> items)
+            where U : T
         {
             _builder.AddRange(items._builder);
         }
 
-        public void AddRange<U>(ArrayBuilder<U> items, int start, int length) where U : T
+        public void AddRange<U>(ArrayBuilder<U> items, int start, int length)
+            where U : T
         {
             Debug.Assert(start >= 0 && length >= 0);
             Debug.Assert(start + length <= items.Count);
@@ -564,7 +545,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
         }
 
-        public void AddRange<S>(ImmutableArray<S> items) where S : class, T
+        public void AddRange<S>(ImmutableArray<S> items)
+            where S : class, T
         {
             AddRange(ImmutableArray<T>.CastUp(items));
         }

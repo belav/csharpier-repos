@@ -8,226 +8,267 @@
 //
 
 using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.VisualBasic
 {
-	[TestFixture]
-	public class CodeGeneratorFromCompileUnitTest : CodeGeneratorTestBase
-	{
-		string codeUnitHeader = "";
-		CodeCompileUnit codeUnit = null;
+    [TestFixture]
+    public class CodeGeneratorFromCompileUnitTest : CodeGeneratorTestBase
+    {
+        string codeUnitHeader = "";
+        CodeCompileUnit codeUnit = null;
 
-		public CodeGeneratorFromCompileUnitTest ()
-		{
-			Init();
-			codeUnitHeader = Generate ();
-		}
-		
-		[SetUp]
-		public void Init ()
-		{
-			InitBase ();
-			codeUnit = new CodeCompileUnit ();
-		}
+        public CodeGeneratorFromCompileUnitTest()
+        {
+            Init();
+            codeUnitHeader = Generate();
+        }
 
-		protected override string Generate (CodeGeneratorOptions options)
-		{
-			StringWriter writer = new StringWriter ();
-			writer.NewLine = NewLine;
+        [SetUp]
+        public void Init()
+        {
+            InitBase();
+            codeUnit = new CodeCompileUnit();
+        }
 
-			generator.GenerateCodeFromCompileUnit (codeUnit, writer, options);
-			writer.Close ();
-			return writer.ToString ().Substring (codeUnitHeader.Length);
-		}
+        protected override string Generate(CodeGeneratorOptions options)
+        {
+            StringWriter writer = new StringWriter();
+            writer.NewLine = NewLine;
 
-		[Test]
-		public void DefaultCodeUnitTest ()
-		{
-			Assert.AreEqual ("", Generate ());
-		}
+            generator.GenerateCodeFromCompileUnit(codeUnit, writer, options);
+            writer.Close();
+            return writer.ToString().Substring(codeUnitHeader.Length);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void NullCodeUnitTest ()
-		{
-			codeUnit = null;
-			Generate();
-		}
+        [Test]
+        public void DefaultCodeUnitTest()
+        {
+            Assert.AreEqual("", Generate());
+        }
 
-		[Test]
-		public void ReferencedTest ()
-		{
-			codeUnit.ReferencedAssemblies.Add ("System.dll");
-			Assert.AreEqual ("", Generate ());
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void NullCodeUnitTest()
+        {
+            codeUnit = null;
+            Generate();
+        }
 
-		[Test]
-		public void SimpleNamespaceTest ()
-		{
-			CodeNamespace ns = new CodeNamespace ("A");
-			codeUnit.Namespaces.Add (ns);
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"{0}Namespace A{0}End Namespace{0}", NewLine), Generate ());
-		}
+        [Test]
+        public void ReferencedTest()
+        {
+            codeUnit.ReferencedAssemblies.Add("System.dll");
+            Assert.AreEqual("", Generate());
+        }
 
-		[Test]
-		public void ReferenceAndSimpleNamespaceTest()
-		{
-			CodeNamespace ns = new CodeNamespace ("A");
-			codeUnit.Namespaces.Add (ns);
-			codeUnit.ReferencedAssemblies.Add ("using System;");
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"{0}Namespace A{0}End Namespace{0}", NewLine), Generate ());
-		}
+        [Test]
+        public void SimpleNamespaceTest()
+        {
+            CodeNamespace ns = new CodeNamespace("A");
+            codeUnit.Namespaces.Add(ns);
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}Namespace A{0}End Namespace{0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-		[Test]
-		public void SimpleAttributeTest ()
-		{
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
+        [Test]
+        public void ReferenceAndSimpleNamespaceTest()
+        {
+            CodeNamespace ns = new CodeNamespace("A");
+            codeUnit.Namespaces.Add(ns);
+            codeUnit.ReferencedAssemblies.Add("using System;");
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}Namespace A{0}End Namespace{0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"<Assembly: A()> {0}", NewLine), Generate ());
-		}
+        [Test]
+        public void SimpleAttributeTest()
+        {
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
 
-		[Test]
-		public void AttributeWithValueTest ()
-		{
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
+            Assert.AreEqual(
+                string.Format(CultureInfo.InvariantCulture, "<Assembly: A()> {0}", NewLine),
+                Generate()
+            );
+        }
 
-			attrDec.Arguments.Add (new CodeAttributeArgument("A1", 
-				new CodePrimitiveExpression(false)));
-			attrDec.Arguments.Add (new CodeAttributeArgument("A2", 
-				new CodePrimitiveExpression(true)));
-			// null name should not be output
-			attrDec.Arguments.Add (new CodeAttributeArgument (null,
-				new CodePrimitiveExpression (true)));
-			// zero length name should not be output
-			attrDec.Arguments.Add (new CodeAttributeArgument (string.Empty,
-				new CodePrimitiveExpression (false)));
+        [Test]
+        public void AttributeWithValueTest()
+        {
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
 
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
-			Assert.AreEqual ("<Assembly: A(A1:=false, A2:=true, true, false)> " +
-				NewLine, Generate ());
-		}
+            attrDec.Arguments.Add(
+                new CodeAttributeArgument("A1", new CodePrimitiveExpression(false))
+            );
+            attrDec.Arguments.Add(
+                new CodeAttributeArgument("A2", new CodePrimitiveExpression(true))
+            );
+            // null name should not be output
+            attrDec.Arguments.Add(
+                new CodeAttributeArgument(null, new CodePrimitiveExpression(true))
+            );
+            // zero length name should not be output
+            attrDec.Arguments.Add(
+                new CodeAttributeArgument(string.Empty, new CodePrimitiveExpression(false))
+            );
 
-		[Test]
-		public void MultipleAttributeTest ()
-		{
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
+            Assert.AreEqual(
+                "<Assembly: A(A1:=false, A2:=true, true, false)> " + NewLine,
+                Generate()
+            );
+        }
 
-			attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "B";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture, 
-				"<Assembly: A(),  _{0} Assembly: B()> {0}", NewLine),
-				Generate ());
-		}
+        [Test]
+        public void MultipleAttributeTest()
+        {
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
 
-		[Test]
-		public void AttributeAndSimpleNamespaceTest ()
-		{
-			CodeNamespace ns = new CodeNamespace ("A");
-			codeUnit.Namespaces.Add (ns);
+            attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "B";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "<Assembly: A(),  _{0} Assembly: B()> {0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
+        [Test]
+        public void AttributeAndSimpleNamespaceTest()
+        {
+            CodeNamespace ns = new CodeNamespace("A");
+            codeUnit.Namespaces.Add(ns);
 
-			attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "B";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
 
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"<Assembly: A(),  _{0} Assembly: B()> {0}{0}Namespace A{0}End "
-				+ "Namespace{0}", NewLine), Generate ());
-		}
+            attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "B";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
 
-		[Test]
-		public void AttributeAndImportsTest ()
-		{
-			CodeNamespace ns = new CodeNamespace ();
-			codeUnit.Namespaces.Add (ns);
-			ns.Imports.Add(new CodeNamespaceImport("System"));
-			ns.Imports.Add(new CodeNamespaceImport("System.Reflection"));
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "<Assembly: A(),  _{0} Assembly: B()> {0}{0}Namespace A{0}End "
+                        + "Namespace{0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
+        [Test]
+        public void AttributeAndImportsTest()
+        {
+            CodeNamespace ns = new CodeNamespace();
+            codeUnit.Namespaces.Add(ns);
+            ns.Imports.Add(new CodeNamespaceImport("System"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Reflection"));
 
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"Imports System{0}Imports System.Reflection{0}<Assembly: A()> {0}{0}",
-				NewLine), Generate ());
-		}
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
 
-		[Test]
-		public void AttributeAndImportsAndNamespaceTest ()
-		{
-			CodeNamespace ns = new CodeNamespace ("A");
-			codeUnit.Namespaces.Add (ns);
-			ns.Imports.Add(new CodeNamespaceImport("System"));
-			ns.Imports.Add(new CodeNamespaceImport("System.Reflection"));
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Imports System{0}Imports System.Reflection{0}<Assembly: A()> {0}{0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-			CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration ();
-			attrDec.Name = "A";
-			codeUnit.AssemblyCustomAttributes.Add (attrDec);
+        [Test]
+        public void AttributeAndImportsAndNamespaceTest()
+        {
+            CodeNamespace ns = new CodeNamespace("A");
+            codeUnit.Namespaces.Add(ns);
+            ns.Imports.Add(new CodeNamespaceImport("System"));
+            ns.Imports.Add(new CodeNamespaceImport("System.Reflection"));
 
-			Assert.AreEqual (string.Format (CultureInfo.InvariantCulture,
-				"Imports System{0}Imports System.Reflection{0}<Assembly: A()> {0}{0}"
-				+ "Namespace A{0}End Namespace{0}", NewLine), Generate ());
-		}
+            CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
+            attrDec.Name = "A";
+            codeUnit.AssemblyCustomAttributes.Add(attrDec);
 
-		[Test]
-		public void CodeSnippetTest ()
-		{
-			StringBuilder sb = new StringBuilder();
-			sb.Append ("Public Class Test1");
-			sb.Append (Environment.NewLine);
-			sb.Append ("End Class");
+            Assert.AreEqual(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Imports System{0}Imports System.Reflection{0}<Assembly: A()> {0}{0}"
+                        + "Namespace A{0}End Namespace{0}",
+                    NewLine
+                ),
+                Generate()
+            );
+        }
 
-			StringWriter writer = new StringWriter ();
-			writer.NewLine = NewLine;
+        [Test]
+        public void CodeSnippetTest()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Public Class Test1");
+            sb.Append(Environment.NewLine);
+            sb.Append("End Class");
 
-			codeUnit = new CodeSnippetCompileUnit (sb.ToString ());
-			generator.GenerateCodeFromCompileUnit (codeUnit, writer, options);
-			writer.Close ();
-			Assert.AreEqual (sb.ToString () + NewLine, writer.ToString());
-		}
-		
-		[Test]
-		public void ExternalSourceTest ()
-		{
-			CodeSnippetCompileUnit snippet;
-			
-			StringBuilder sb = new StringBuilder();
-			sb.Append ("\n");
-			sb.Append ("#ExternalSource(\"file.vb\",123)");
-			sb.Append ("\n");
-			sb.Append ("\n");
-			sb.Append ("\n");
-			sb.Append ("#End ExternalSource");
-			sb.Append ("\n");
+            StringWriter writer = new StringWriter();
+            writer.NewLine = NewLine;
 
-			StringWriter writer = new StringWriter ();
-			writer.NewLine = NewLine;
+            codeUnit = new CodeSnippetCompileUnit(sb.ToString());
+            generator.GenerateCodeFromCompileUnit(codeUnit, writer, options);
+            writer.Close();
+            Assert.AreEqual(sb.ToString() + NewLine, writer.ToString());
+        }
 
-			codeUnit = new CodeSnippetCompileUnit ("");
-			snippet = (CodeSnippetCompileUnit) codeUnit;
-			snippet.LinePragma = new CodeLinePragma ("file.vb", 123);
-			generator.GenerateCodeFromCompileUnit (codeUnit, writer, options);
-			writer.Close ();
-			Assert.AreEqual (sb.ToString (), writer.ToString());
-		}
-	}
+        [Test]
+        public void ExternalSourceTest()
+        {
+            CodeSnippetCompileUnit snippet;
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
+            sb.Append("#ExternalSource(\"file.vb\",123)");
+            sb.Append("\n");
+            sb.Append("\n");
+            sb.Append("\n");
+            sb.Append("#End ExternalSource");
+            sb.Append("\n");
+
+            StringWriter writer = new StringWriter();
+            writer.NewLine = NewLine;
+
+            codeUnit = new CodeSnippetCompileUnit("");
+            snippet = (CodeSnippetCompileUnit)codeUnit;
+            snippet.LinePragma = new CodeLinePragma("file.vb", 123);
+            generator.GenerateCodeFromCompileUnit(codeUnit, writer, options);
+            writer.Close();
+            Assert.AreEqual(sb.ToString(), writer.ToString());
+        }
+    }
 }

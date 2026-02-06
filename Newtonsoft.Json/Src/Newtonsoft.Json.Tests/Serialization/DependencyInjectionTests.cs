@@ -177,7 +177,12 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             // attempt to create the contact from the resolved type
             IComponentRegistration registration;
-            if (_container.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out registration))
+            if (
+                _container.ComponentRegistry.TryGetRegistration(
+                    new TypedService(objectType),
+                    out registration
+                )
+            )
             {
                 Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                 if (viewType != null)
@@ -203,10 +208,10 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             AutofacContractResolver resolver = new AutofacContractResolver(container);
 
-            User user = JsonConvert.DeserializeObject<User>("{'company':{'company_name':'Company name!'}}", new JsonSerializerSettings
-            {
-                ContractResolver = resolver
-            });
+            User user = JsonConvert.DeserializeObject<User>(
+                "{'company':{'company_name':'Company name!'}}",
+                new JsonSerializerSettings { ContractResolver = resolver }
+            );
 
             Assert.AreEqual("Company name!", user.Company.CompanyName);
         }
@@ -219,24 +224,26 @@ namespace Newtonsoft.Json.Tests.Serialization
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
-            builder.Register(c =>
-            {
-                count++;
-                return new LogManager(new DateTime(2000, 12, 12));
-            }).As<ILogger>();
+            builder
+                .Register(c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                })
+                .As<ILogger>();
 
             IContainer container = builder.Build();
 
             AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
-            TaskController controller = JsonConvert.DeserializeObject<TaskController>(@"{
+            TaskController controller = JsonConvert.DeserializeObject<TaskController>(
+                @"{
                 'Logger': {
                     'Level':'Debug'
                 }
-            }", new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            }",
+                new JsonSerializerSettings { ContractResolver = contractResolver }
+            );
 
             Assert.IsNotNull(controller);
             Assert.IsNotNull(controller.Logger);
@@ -253,23 +260,28 @@ namespace Newtonsoft.Json.Tests.Serialization
             int count = 0;
 
             ContainerBuilder builder = new ContainerBuilder();
-            builder.Register(c =>
-            {
-                count++;
-                return new TaskRepository();
-            }).As<ITaskRepository>();
+            builder
+                .Register(c =>
+                {
+                    count++;
+                    return new TaskRepository();
+                })
+                .As<ITaskRepository>();
             builder.RegisterType<HasSettableProperty>();
-            builder.Register(c =>
-            {
-                count++;
-                return new LogManager(new DateTime(2000, 12, 12));
-            }).As<ILogger>();
+            builder
+                .Register(c =>
+                {
+                    count++;
+                    return new LogManager(new DateTime(2000, 12, 12));
+                })
+                .As<ILogger>();
 
             IContainer container = builder.Build();
 
             AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
-            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(@"{
+            HasSettableProperty o = JsonConvert.DeserializeObject<HasSettableProperty>(
+                @"{
                 'Logger': {
                     'Level': 'Debug'
                 },
@@ -288,10 +300,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 'Person': {
                     'Name': 'Name3!'
                 }
-            }", new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            }",
+                new JsonSerializerSettings { ContractResolver = contractResolver }
+            );
 
             Assert.IsNotNull(o);
             Assert.IsNotNull(o.Logger);

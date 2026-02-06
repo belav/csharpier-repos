@@ -21,7 +21,10 @@ CREATE TABLE [__EFMigrationsHistory] (
     CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
 );
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -38,7 +41,10 @@ CREATE TABLE [my].[__EFMigrationsHistory] (
     CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
 );
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -57,7 +63,10 @@ BEGIN
     );
 END;
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -77,7 +86,10 @@ BEGIN
     );
 END;
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -90,21 +102,26 @@ END;
 DELETE FROM [__EFMigrationsHistory]
 WHERE [MigrationId] = N'Migration1';
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
     public void GetInsertScript_works()
     {
-        var sql = CreateHistoryRepository().GetInsertScript(
-            new HistoryRow("Migration1", "7.0.0"));
+        var sql = CreateHistoryRepository().GetInsertScript(new HistoryRow("Migration1", "7.0.0"));
 
         Assert.Equal(
             """
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'Migration1', N'7.0.0');
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -119,7 +136,10 @@ IF NOT EXISTS (
     WHERE [MigrationId] = N'Migration1'
 )
 BEGIN
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -134,7 +154,10 @@ IF EXISTS (
     WHERE [MigrationId] = N'Migration1'
 )
 BEGIN
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -146,35 +169,34 @@ BEGIN
             """
 END;
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
-    private static IHistoryRepository CreateHistoryRepository(string schema = null)
-        => new TestDbContext(
-                new DbContextOptionsBuilder()
-                    .UseInternalServiceProvider(SqlServerTestHelpers.Instance.CreateServiceProvider())
-                    .UseSqlServer(
-                        new SqlConnection("Database=DummyDatabase"),
-                        b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema))
-                    .Options)
-            .GetService<IHistoryRepository>();
+    private static IHistoryRepository CreateHistoryRepository(string schema = null) =>
+        new TestDbContext(
+            new DbContextOptionsBuilder()
+                .UseInternalServiceProvider(SqlServerTestHelpers.Instance.CreateServiceProvider())
+                .UseSqlServer(
+                    new SqlConnection("Database=DummyDatabase"),
+                    b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
+                )
+                .Options
+        ).GetService<IHistoryRepository>();
 
     private class TestDbContext : DbContext
     {
         public TestDbContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Blog> Blogs { get; set; }
 
         [DbFunction("TableFunction")]
-        public IQueryable<TableFunction> TableFunction()
-            => FromExpression(() => TableFunction());
+        public IQueryable<TableFunction> TableFunction() => FromExpression(() => TableFunction());
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
     }
 
     private class Blog

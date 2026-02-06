@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class UnsafeKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validTypeModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validTypeModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.InternalKeyword,
@@ -24,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.FileKeyword,
         };
 
-        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.ExternKeyword,
@@ -41,45 +45,67 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.VolatileKeyword,
         };
 
-        private static readonly ISet<SyntaxKind> s_validGlobalMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ExternKeyword,
-            SyntaxKind.InternalKeyword,
-            SyntaxKind.NewKeyword,
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.PrivateKeyword,
-            SyntaxKind.ReadOnlyKeyword,
-            SyntaxKind.StaticKeyword,
-            SyntaxKind.VolatileKeyword,
-        };
+        private static readonly ISet<SyntaxKind> s_validGlobalMemberModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.ExternKeyword,
+                SyntaxKind.InternalKeyword,
+                SyntaxKind.NewKeyword,
+                SyntaxKind.PublicKeyword,
+                SyntaxKind.PrivateKeyword,
+                SyntaxKind.ReadOnlyKeyword,
+                SyntaxKind.StaticKeyword,
+                SyntaxKind.VolatileKeyword,
+            };
 
-        private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ExternKeyword,
-            SyntaxKind.StaticKeyword,
-            SyntaxKind.AsyncKeyword
-        };
+        private static readonly ISet<SyntaxKind> s_validLocalFunctionModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.ExternKeyword,
+                SyntaxKind.StaticKeyword,
+                SyntaxKind.AsyncKeyword,
+            };
 
         public UnsafeKeywordRecommender()
-            : base(SyntaxKind.UnsafeKeyword)
-        {
-        }
+            : base(SyntaxKind.UnsafeKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsTypeDeclarationContext(validModifiers: s_validTypeModifiers, validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations, canBePartial: false, cancellationToken: cancellationToken) ||
-                syntaxTree.IsGlobalMemberDeclarationContext(position, s_validGlobalMemberModifiers, cancellationToken) ||
-                context.IsMemberDeclarationContext(
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsTypeDeclarationContext(
+                    validModifiers: s_validTypeModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+                || syntaxTree.IsGlobalMemberDeclarationContext(
+                    position,
+                    s_validGlobalMemberModifiers,
+                    cancellationToken
+                )
+                || context.IsMemberDeclarationContext(
                     validModifiers: s_validMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken) ||
-                syntaxTree.IsLocalFunctionDeclarationContext(position, s_validLocalFunctionModifiers, cancellationToken) ||
-                (context.IsInImportsDirective && context.TargetToken.Kind() is SyntaxKind.UsingKeyword or SyntaxKind.StaticKeyword);
+                    cancellationToken: cancellationToken
+                )
+                || syntaxTree.IsLocalFunctionDeclarationContext(
+                    position,
+                    s_validLocalFunctionModifiers,
+                    cancellationToken
+                )
+                || (
+                    context.IsInImportsDirective
+                    && context.TargetToken.Kind()
+                        is SyntaxKind.UsingKeyword
+                            or SyntaxKind.StaticKeyword
+                );
         }
     }
 }

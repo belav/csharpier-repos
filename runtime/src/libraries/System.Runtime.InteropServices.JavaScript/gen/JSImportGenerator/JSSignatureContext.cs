@@ -4,25 +4,31 @@
 using System;
 using System.Collections.Immutable;
 using System.Threading;
-
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop.JavaScript
 {
     internal sealed record JSSignatureContext
     {
-        private static SymbolDisplayFormat TypeAndContainingTypesStyle { get; } = new SymbolDisplayFormat(
-            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes
-        );
+        private static SymbolDisplayFormat TypeAndContainingTypesStyle { get; } =
+            new SymbolDisplayFormat(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes
+            );
 
-        private static SymbolDisplayFormat TypeContainingTypesAndNamespacesStyle { get; } = new SymbolDisplayFormat(
-            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+        private static SymbolDisplayFormat TypeContainingTypesAndNamespacesStyle { get; } =
+            new SymbolDisplayFormat(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            );
 
-        internal static readonly string GeneratorName = typeof(JSImportGenerator).Assembly.GetName().Name;
+        internal static readonly string GeneratorName = typeof(JSImportGenerator)
+            .Assembly.GetName()
+            .Name;
 
-        internal static readonly string GeneratorVersion = typeof(JSImportGenerator).Assembly.GetName().Version.ToString();
+        internal static readonly string GeneratorVersion = typeof(JSImportGenerator)
+            .Assembly.GetName()
+            .Version.ToString();
 
         public SignatureContext SignatureContext { get; private init; }
 
@@ -30,21 +36,43 @@ namespace Microsoft.Interop.JavaScript
             IMethodSymbol method,
             StubEnvironment env,
             GeneratorDiagnosticsBag diagnostics,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
             // Cancel early if requested
             token.ThrowIfCancellationRequested();
 
-            ImmutableArray<IUseSiteAttributeParser> useSiteAttributeParsers = ImmutableArray.Create<IUseSiteAttributeParser>(new JSMarshalAsAttributeParser(env.Compilation));
+            ImmutableArray<IUseSiteAttributeParser> useSiteAttributeParsers =
+                ImmutableArray.Create<IUseSiteAttributeParser>(
+                    new JSMarshalAsAttributeParser(env.Compilation)
+                );
             var jsMarshallingAttributeParser = new MarshallingInfoParser(
                 diagnostics,
-                new MethodSignatureElementInfoProvider(env.Compilation, diagnostics, method, useSiteAttributeParsers),
+                new MethodSignatureElementInfoProvider(
+                    env.Compilation,
+                    diagnostics,
+                    method,
+                    useSiteAttributeParsers
+                ),
                 useSiteAttributeParsers,
-                ImmutableArray.Create<IMarshallingInfoAttributeParser>(new JSMarshalAsAttributeParser(env.Compilation)),
-                ImmutableArray.Create<ITypeBasedMarshallingInfoProvider>(new FallbackJSMarshallingInfoProvider()));
-            SignatureContext sigContext = SignatureContext.Create(method, jsMarshallingAttributeParser, env, new CodeEmitOptions(SkipInit: true), typeof(JSImportGenerator).Assembly);
+                ImmutableArray.Create<IMarshallingInfoAttributeParser>(
+                    new JSMarshalAsAttributeParser(env.Compilation)
+                ),
+                ImmutableArray.Create<ITypeBasedMarshallingInfoProvider>(
+                    new FallbackJSMarshallingInfoProvider()
+                )
+            );
+            SignatureContext sigContext = SignatureContext.Create(
+                method,
+                jsMarshallingAttributeParser,
+                env,
+                new CodeEmitOptions(SkipInit: true),
+                typeof(JSImportGenerator).Assembly
+            );
 
-            string stubTypeFullName = method.ContainingType.ToDisplayString(TypeContainingTypesAndNamespacesStyle);
+            string stubTypeFullName = method.ContainingType.ToDisplayString(
+                TypeContainingTypesAndNamespacesStyle
+            );
 
             // there could be multiple method signatures with the same name, get unique signature name
             uint hash = 17;
@@ -54,7 +82,8 @@ namespace Microsoft.Interop.JavaScript
                 {
                     hash = hash * 31 + (uint)param.ManagedType.FullTypeName.GetHashCode();
                 }
-            };
+            }
+            ;
             int typesHash = Math.Abs((int)hash);
 
             var fullName = $"{method.ContainingType.ToDisplayString()}.{method.Name}";
@@ -75,13 +104,17 @@ namespace Microsoft.Interop.JavaScript
         private static string GetFullyQualifiedMethodName(StubEnvironment env, IMethodSymbol method)
         {
             // Mono style nested class name format.
-            string typeName = method.ContainingType.ToDisplayString(TypeAndContainingTypesStyle).Replace(".", "/");
+            string typeName = method
+                .ContainingType.ToDisplayString(TypeAndContainingTypesStyle)
+                .Replace(".", "/");
 
             if (!method.ContainingType.ContainingNamespace.IsGlobalNamespace)
-                typeName = $"{method.ContainingType.ContainingNamespace.ToDisplayString()}.{typeName}";
+                typeName =
+                    $"{method.ContainingType.ContainingNamespace.ToDisplayString()}.{typeName}";
 
             return $"[{env.Compilation.AssemblyName}]{typeName}:{method.Name}";
         }
+
         public string? StubTypeFullName { get; init; }
         public int TypesHash { get; init; }
 

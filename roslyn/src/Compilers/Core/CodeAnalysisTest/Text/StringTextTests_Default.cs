@@ -26,7 +26,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         protected virtual SourceText Create(string source)
         {
             byte[] buffer = GetBytes(Encoding.Default, source);
-            using (var stream = new MemoryStream(buffer, 0, buffer.Length, writable: false, publiclyVisible: true))
+            using (
+                var stream = new MemoryStream(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    writable: false,
+                    publiclyVisible: true
+                )
+            )
             {
                 return EncodedStringText.Create(stream);
             }
@@ -47,8 +55,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Indexer1()
         {
             var data = Create(String.Empty);
-            Assert.Throws<IndexOutOfRangeException>(
-                () => { var value = data[-1]; });
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var value = data[-1];
+            });
         }
 
         [Fact]
@@ -65,7 +75,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void NewLines2()
         {
             var text =
-@"goo
+                @"goo
 bar
 baz";
             var data = Create(text);
@@ -95,8 +105,9 @@ baz";
         public void LinesGetText1()
         {
             var data = Create(
-@"goo
-bar baz");
+                @"goo
+bar baz"
+            );
             Assert.Equal(2, data.Lines.Count);
             Assert.Equal("goo", data.Lines[0].ToString());
             Assert.Equal("bar baz", data.Lines[1].ToString());

@@ -21,7 +21,11 @@ namespace Microsoft.CSharp.RuntimeBinder
         void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals);
+        Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        );
 
         BindingFlag BindingFlags { get; }
 

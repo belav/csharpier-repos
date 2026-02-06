@@ -21,7 +21,8 @@ namespace System.Reflection.Metadata
             _rowId = handle.RowId;
         }
 
-        private CustomDebugInformationHandle Handle => CustomDebugInformationHandle.FromRowId(_rowId);
+        private CustomDebugInformationHandle Handle =>
+            CustomDebugInformationHandle.FromRowId(_rowId);
 
         public EntityHandle Parent => _reader.CustomDebugInformationTable.GetParent(Handle);
         public GuidHandle Kind => _reader.CustomDebugInformationTable.GetKind(Handle);

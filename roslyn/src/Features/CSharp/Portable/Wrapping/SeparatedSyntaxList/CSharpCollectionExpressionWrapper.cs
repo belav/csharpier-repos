@@ -27,25 +27,31 @@ internal sealed partial class CSharpCollectionExpressionWrapper
     protected override string Indent_wrapped_items => throw ExceptionUtilities.Unreachable();
     protected override string Unwrap_and_indent_all_items => throw ExceptionUtilities.Unreachable();
 
-    protected override bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options)
-        => ((CSharpSyntaxWrappingOptions)options).NewLinesForBracesInObjectCollectionArrayInitializers;
+    protected override bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options) =>
+        ((CSharpSyntaxWrappingOptions)options).NewLinesForBracesInObjectCollectionArrayInitializers;
 
-    protected override bool ShouldMoveCloseBraceToNewLine
-        => true;
+    protected override bool ShouldMoveCloseBraceToNewLine => true;
 
-    protected override SyntaxToken FirstToken(CollectionExpressionSyntax listSyntax)
-        => listSyntax.OpenBracketToken;
+    protected override SyntaxToken FirstToken(CollectionExpressionSyntax listSyntax) =>
+        listSyntax.OpenBracketToken;
 
-    protected override SyntaxToken LastToken(CollectionExpressionSyntax listSyntax)
-        => listSyntax.CloseBracketToken;
+    protected override SyntaxToken LastToken(CollectionExpressionSyntax listSyntax) =>
+        listSyntax.CloseBracketToken;
 
-    protected override SeparatedSyntaxList<CollectionElementSyntax> GetListItems(CollectionExpressionSyntax listSyntax)
-        => listSyntax.Elements;
+    protected override SeparatedSyntaxList<CollectionElementSyntax> GetListItems(
+        CollectionExpressionSyntax listSyntax
+    ) => listSyntax.Elements;
 
-    protected override CollectionExpressionSyntax? TryGetApplicableList(SyntaxNode node)
-        => node as CollectionExpressionSyntax;
+    protected override CollectionExpressionSyntax? TryGetApplicableList(SyntaxNode node) =>
+        node as CollectionExpressionSyntax;
 
-    protected override bool PositionIsApplicable(SyntaxNode root, int position, SyntaxNode declaration, bool containsSyntaxError, CollectionExpressionSyntax listSyntax)
+    protected override bool PositionIsApplicable(
+        SyntaxNode root,
+        int position,
+        SyntaxNode declaration,
+        bool containsSyntaxError,
+        CollectionExpressionSyntax listSyntax
+    )
     {
         if (containsSyntaxError)
             return false;

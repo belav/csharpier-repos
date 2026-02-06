@@ -18,7 +18,18 @@ namespace DependencyLogViewer
             InitializeComponent();
             SetNode(n);
             btnBack.Visible = btnForward.Visible = chkSameWindowNav.Checked;
-            var fixControls = new Control[] {btnBack, btnForward, chkSameWindowNav, exploreDependent, dependentsListBox, exploreDependee, dependeesListBox, this, this.splitContainer1 };
+            var fixControls = new Control[]
+            {
+                btnBack,
+                btnForward,
+                chkSameWindowNav,
+                exploreDependent,
+                dependentsListBox,
+                exploreDependee,
+                dependeesListBox,
+                this,
+                this.splitContainer1,
+            };
             foreach (var cntrl in fixControls)
             {
                 cntrl.PreviewKeyDown += Cntrl_PreviewKeyDown;
@@ -26,8 +37,8 @@ namespace DependencyLogViewer
             }
         }
 
-
-        private void Cntrl_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+        private void Cntrl_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
             if (!chkSameWindowNav.Checked)
                 return;
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
@@ -56,7 +67,6 @@ namespace DependencyLogViewer
 
         public void SetNode(Node n)
         {
-
             _node = n;
 
             this.Text = $"Graph Pid: {_graph.PID}, ID: {_graph.ID}, Node: {_node.ToString}";
@@ -80,7 +90,7 @@ namespace DependencyLogViewer
                 this.dependentsListBox.DataSource = sourceNodes;
                 this.dependeesListBox.DataSource = targetNodes;
             }
-            if (CurSpotInHistory == -1 && chkSameWindowNav.Checked)//if we are in history we dont modify history
+            if (CurSpotInHistory == -1 && chkSameWindowNav.Checked) //if we are in history we dont modify history
                 AddSelfToHistory();
             SetNavButtonStates();
         }
@@ -119,13 +129,14 @@ namespace DependencyLogViewer
             var selected = (BoxDisplay)dependentsListBox.SelectedItem;
             SetNode(selected.node);
         }
+
         private void AddSelfToHistory()
         {
             History.Add(_node);
         }
+
         private void ClearHistoryIfIn()
         {
-
             if (CurSpotInHistory != -1)
             {
                 var removeAfter = CurSpotInHistory + 1;
@@ -134,6 +145,7 @@ namespace DependencyLogViewer
                 CurSpotInHistory = -1;
             }
         }
+
         public int CurSpotInHistory = -1;
         private List<Node> History = new();
 
@@ -147,9 +159,10 @@ namespace DependencyLogViewer
                 CurSpotInHistory--;
             SetNode(History[CurSpotInHistory]);
         }
+
         private void btnForward_Click(object sender, EventArgs e)
         {
-            if (CurSpotInHistory == -1)// should not get here
+            if (CurSpotInHistory == -1) // should not get here
                 return;
             else if (CurSpotInHistory == History.Count - 1) // should not get here
                 return;
@@ -157,15 +170,20 @@ namespace DependencyLogViewer
                 CurSpotInHistory++;
             SetNode(History[CurSpotInHistory]);
         }
+
         private void SetNavButtonStates()
         {
             btnBack.Enabled = CurSpotInHistory != 0 && History.Count > 1;
             btnForward.Enabled = CurSpotInHistory != -1 && CurSpotInHistory != History.Count - 1;
         }
-        private void ChkSameWindowNav_CheckedChanged(object sender, System.EventArgs e) => btnBack.Visible = btnForward.Visible = chkSameWindowNav.Checked;
+
+        private void ChkSameWindowNav_CheckedChanged(object sender, System.EventArgs e) =>
+            btnBack.Visible = btnForward.Visible = chkSameWindowNav.Checked;
+
         private void infoButton_LinkClicked(object sender, EventArgs e)
         {
-            string dMessage = "Dependent nodes depend on the current node. The current node depends on the dependees.";
+            string dMessage =
+                "Dependent nodes depend on the current node. The current node depends on the dependees.";
             MessageBox.Show(dMessage);
         }
     }

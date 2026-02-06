@@ -12,7 +12,9 @@ namespace System.Diagnostics.CodeAnalysis
     /// </remarks>
     [AttributeUsage(
         AttributeTargets.Constructor | AttributeTargets.Field | AttributeTargets.Method,
-        AllowMultiple = true, Inherited = false)]
+        AllowMultiple = true,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
@@ -49,7 +51,11 @@ namespace System.Diagnostics.CodeAnalysis
         /// <param name="memberSignature">The signature of the member depended on.</param>
         /// <param name="typeName">The full name of the type containing the specified member.</param>
         /// <param name="assemblyName">The assembly name of the type containing the specified member.</param>
-        public DynamicDependencyAttribute(string memberSignature, string typeName, string assemblyName)
+        public DynamicDependencyAttribute(
+            string memberSignature,
+            string typeName,
+            string assemblyName
+        )
         {
             MemberSignature = memberSignature;
             TypeName = typeName;
@@ -75,7 +81,11 @@ namespace System.Diagnostics.CodeAnalysis
         /// <param name="memberTypes">The types of members depended on.</param>
         /// <param name="typeName">The full name of the type containing the specified members.</param>
         /// <param name="assemblyName">The assembly name of the type containing the specified members.</param>
-        public DynamicDependencyAttribute(DynamicallyAccessedMemberTypes memberTypes, string typeName, string assemblyName)
+        public DynamicDependencyAttribute(
+            DynamicallyAccessedMemberTypes memberTypes,
+            string typeName,
+            string assemblyName
+        )
         {
             MemberTypes = memberTypes;
             TypeName = typeName;

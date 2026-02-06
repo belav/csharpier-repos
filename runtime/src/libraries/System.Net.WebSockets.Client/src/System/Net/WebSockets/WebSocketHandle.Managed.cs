@@ -32,7 +32,8 @@ namespace System.Net.WebSockets
 
         public IReadOnlyDictionary<string, IEnumerable<string>>? HttpResponseHeaders { get; set; }
 
-        public static ClientWebSocketOptions CreateDefaultOptions() => new ClientWebSocketOptions() { Proxy = DefaultWebProxy.Instance };
+        public static ClientWebSocketOptions CreateDefaultOptions() =>
+            new ClientWebSocketOptions() { Proxy = DefaultWebProxy.Instance };
 
         public void Dispose()
         {
@@ -46,14 +47,25 @@ namespace System.Net.WebSockets
             WebSocket?.Abort();
         }
 
-        public async Task ConnectAsync(Uri uri, HttpMessageInvoker? invoker, CancellationToken cancellationToken, ClientWebSocketOptions options)
+        public async Task ConnectAsync(
+            Uri uri,
+            HttpMessageInvoker? invoker,
+            CancellationToken cancellationToken,
+            ClientWebSocketOptions options
+        )
         {
             bool disposeInvoker = false;
             if (invoker is null)
             {
-                if (options.HttpVersion.Major >= 2 || options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrHigher)
+                if (
+                    options.HttpVersion.Major >= 2
+                    || options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrHigher
+                )
                 {
-                    throw new ArgumentException(SR.net_WebSockets_CustomInvokerRequiredForHttp2, nameof(options));
+                    throw new ArgumentException(
+                        SR.net_WebSockets_CustomInvokerRequiredForHttp2,
+                        nameof(options)
+                    );
                 }
 
                 invoker = SetupInvoker(options, out disposeInvoker);
@@ -61,35 +73,59 @@ namespace System.Net.WebSockets
             else if (!options.AreCompatibleWithCustomInvoker())
             {
                 // This will not throw if the Proxy is a DefaultWebProxy.
-                throw new ArgumentException(SR.net_WebSockets_OptionsIncompatibleWithCustomInvoker, nameof(options));
+                throw new ArgumentException(
+                    SR.net_WebSockets_OptionsIncompatibleWithCustomInvoker,
+                    nameof(options)
+                );
             }
 
             HttpResponseMessage? response = null;
             bool disposeResponse = false;
 
             // force non-secure request to 1.1 whenever it is possible as HttpClient does
-            bool tryDowngrade = uri.Scheme == UriScheme.Ws && (options.HttpVersion == HttpVersion.Version11 || options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrLower);
+            bool tryDowngrade =
+                uri.Scheme == UriScheme.Ws
+                && (
+                    options.HttpVersion == HttpVersion.Version11
+                    || options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrLower
+                );
             try
             {
-
                 while (true)
                 {
                     try
                     {
                         HttpRequestMessage request;
-                        if (!tryDowngrade && options.HttpVersion >= HttpVersion.Version20
-                            || (options.HttpVersion == HttpVersion.Version11 && options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrHigher && uri.Scheme == UriScheme.Wss))
+                        if (
+                            !tryDowngrade && options.HttpVersion >= HttpVersion.Version20
+                            || (
+                                options.HttpVersion == HttpVersion.Version11
+                                && options.HttpVersionPolicy
+                                    == HttpVersionPolicy.RequestVersionOrHigher
+                                && uri.Scheme == UriScheme.Wss
+                            )
+                        )
                         {
-                            if (options.HttpVersion > HttpVersion.Version20 && options.HttpVersionPolicy != HttpVersionPolicy.RequestVersionOrLower)
+                            if (
+                                options.HttpVersion > HttpVersion.Version20
+                                && options.HttpVersionPolicy
+                                    != HttpVersionPolicy.RequestVersionOrLower
+                            )
                             {
                                 throw new WebSocketException(WebSocketError.UnsupportedProtocol);
                             }
-                            request = new HttpRequestMessage(HttpMethod.Connect, uri) { Version = HttpVersion.Version20 };
+                            request = new HttpRequestMessage(HttpMethod.Connect, uri)
+                            {
+                                Version = HttpVersion.Version20,
+                            };
                             tryDowngrade = true;
                         }
                         else if (tryDowngrade || options.HttpVersion == HttpVersion.Version11)
                         {
-                            request = new HttpRequestMessage(HttpMethod.Get, uri) { Version = HttpVersion.Version11 };
+                            request = new HttpRequestMessage(HttpMethod.Get, uri)
+                            {
+                                Version = HttpVersion.Version11,
+                            };
                             tryDowngrade = false;
                         }
                         else
@@ -101,7 +137,10 @@ namespace System.Net.WebSockets
                         {
                             foreach (string key in options.RequestHeaders)
                             {
-                                request.Headers.TryAddWithoutValidation(key, options.RequestHeaders[key]);
+                                request.Headers.TryAddWithoutValidation(
+                                    key,
+                                    options.RequestHeaders[key]
+                                );
                             }
                         }
 
@@ -112,9 +151,11 @@ namespace System.Net.WebSockets
                         CancellationTokenSource externalAndAbortCancellation;
                         if (cancellationToken.CanBeCanceled) // avoid allocating linked source if external token is not cancelable
                         {
-                            linkedCancellation =
-                                externalAndAbortCancellation =
-                                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _abortSource.Token);
+                            linkedCancellation = externalAndAbortCancellation =
+                                CancellationTokenSource.CreateLinkedTokenSource(
+                                    cancellationToken,
+                                    _abortSource.Token
+                                );
                         }
                         else
                         {
@@ -125,7 +166,11 @@ namespace System.Net.WebSockets
                         using (linkedCancellation)
                         {
                             Task<HttpResponseMessage> sendTask = invoker is HttpClient client
-                                ? client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, externalAndAbortCancellation.Token)
+                                ? client.SendAsync(
+                                    request,
+                                    HttpCompletionOption.ResponseHeadersRead,
+                                    externalAndAbortCancellation.Token
+                                )
                                 : invoker.SendAsync(request, externalAndAbortCancellation.Token);
                             response = await sendTask.ConfigureAwait(false);
                             externalAndAbortCancellation.Token.ThrowIfCancellationRequested(); // poll in case sends/receives in request/response didn't observe cancellation
@@ -134,20 +179,30 @@ namespace System.Net.WebSockets
                         ValidateResponse(response, secValue);
                         break;
                     }
-                    catch (HttpRequestException ex) when
-                        ((ex.HttpRequestError == HttpRequestError.ExtendedConnectNotSupported || ex.Data.Contains("HTTP2_ENABLED"))
-                        && tryDowngrade
-                        && (options.HttpVersion == HttpVersion.Version11 || options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrLower))
-                    {
-                    }
-
+                    catch (HttpRequestException ex)
+                        when ((
+                                ex.HttpRequestError == HttpRequestError.ExtendedConnectNotSupported
+                                || ex.Data.Contains("HTTP2_ENABLED")
+                            )
+                            && tryDowngrade
+                            && (
+                                options.HttpVersion == HttpVersion.Version11
+                                || options.HttpVersionPolicy
+                                    == HttpVersionPolicy.RequestVersionOrLower
+                            )
+                        ) { }
                 }
 
                 // The SecWebSocketProtocol header is optional.  We should only get it with a non-empty value if we requested subprotocols,
                 // and then it must only be one of the ones we requested.  If we got a subprotocol other than one we requested (or if we
                 // already got one in a previous header), fail. Otherwise, track which one we got.
                 string? subprotocol = null;
-                if (response.Headers.TryGetValues(HttpKnownHeaderNames.SecWebSocketProtocol, out IEnumerable<string>? subprotocolEnumerableValues))
+                if (
+                    response.Headers.TryGetValues(
+                        HttpKnownHeaderNames.SecWebSocketProtocol,
+                        out IEnumerable<string>? subprotocolEnumerableValues
+                    )
+                )
                 {
                     Debug.Assert(subprotocolEnumerableValues is string[]);
                     string[] subprotocolArray = (string[])subprotocolEnumerableValues;
@@ -157,7 +212,12 @@ namespace System.Net.WebSockets
                         {
                             foreach (string requestedProtocol in options._requestedSubProtocols)
                             {
-                                if (requestedProtocol.Equals(subprotocolArray[0], StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    requestedProtocol.Equals(
+                                        subprotocolArray[0],
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     subprotocol = requestedProtocol;
                                     break;
@@ -169,7 +229,12 @@ namespace System.Net.WebSockets
                         {
                             throw new WebSocketException(
                                 WebSocketError.UnsupportedProtocol,
-                                SR.Format(SR.net_WebSockets_AcceptUnsupportedProtocol, string.Join(", ", options.RequestedSubProtocols), string.Join(", ", subprotocolArray)));
+                                SR.Format(
+                                    SR.net_WebSockets_AcceptUnsupportedProtocol,
+                                    string.Join(", ", options.RequestedSubProtocols),
+                                    string.Join(", ", subprotocolArray)
+                                )
+                            );
                         }
                     }
                 }
@@ -177,13 +242,27 @@ namespace System.Net.WebSockets
                 // Because deflate options are negotiated we need a new object
                 WebSocketDeflateOptions? negotiatedDeflateOptions = null;
 
-                if (options.DangerousDeflateOptions is not null && response.Headers.TryGetValues(HttpKnownHeaderNames.SecWebSocketExtensions, out IEnumerable<string>? extensions))
+                if (
+                    options.DangerousDeflateOptions is not null
+                    && response.Headers.TryGetValues(
+                        HttpKnownHeaderNames.SecWebSocketExtensions,
+                        out IEnumerable<string>? extensions
+                    )
+                )
                 {
                     foreach (string extension in extensions)
                     {
-                        if (extension.AsSpan().TrimStart().StartsWith(ClientWebSocketDeflateConstants.Extension))
+                        if (
+                            extension
+                                .AsSpan()
+                                .TrimStart()
+                                .StartsWith(ClientWebSocketDeflateConstants.Extension)
+                        )
                         {
-                            negotiatedDeflateOptions = ParseDeflateOptions(extension, options.DangerousDeflateOptions);
+                            negotiatedDeflateOptions = ParseDeflateOptions(
+                                extension,
+                                options.DangerousDeflateOptions
+                            );
                             break;
                         }
                     }
@@ -193,13 +272,16 @@ namespace System.Net.WebSockets
                 Stream connectedStream = response.Content.ReadAsStream();
                 Debug.Assert(connectedStream.CanWrite);
                 Debug.Assert(connectedStream.CanRead);
-                WebSocket = WebSocket.CreateFromStream(connectedStream, new WebSocketCreationOptions
-                {
-                    IsServer = false,
-                    SubProtocol = subprotocol,
-                    KeepAliveInterval = options.KeepAliveInterval,
-                    DangerousDeflateOptions = negotiatedDeflateOptions
-                });
+                WebSocket = WebSocket.CreateFromStream(
+                    connectedStream,
+                    new WebSocketCreationOptions
+                    {
+                        IsServer = false,
+                        SubProtocol = subprotocol,
+                        KeepAliveInterval = options.KeepAliveInterval,
+                        DangerousDeflateOptions = negotiatedDeflateOptions,
+                    }
+                );
                 _negotiatedDeflateOptions = negotiatedDeflateOptions;
             }
             catch (Exception exc)
@@ -212,13 +294,22 @@ namespace System.Net.WebSockets
                 Abort();
                 disposeResponse = true;
 
-                if (exc is WebSocketException ||
-                    (exc is OperationCanceledException && cancellationToken.IsCancellationRequested))
+                if (
+                    exc is WebSocketException
+                    || (
+                        exc is OperationCanceledException
+                        && cancellationToken.IsCancellationRequested
+                    )
+                )
                 {
                     throw;
                 }
 
-                throw new WebSocketException(WebSocketError.Faulted, SR.net_webstatus_ConnectFailure, exc);
+                throw new WebSocketException(
+                    WebSocketError.Faulted,
+                    SR.net_webstatus_ConnectFailure,
+                    exc
+                );
             }
             finally
             {
@@ -227,7 +318,9 @@ namespace System.Net.WebSockets
                     if (options.CollectHttpResponseDetails)
                     {
                         HttpStatusCode = response.StatusCode;
-                        HttpResponseHeaders = new HttpResponseHeadersReadOnlyCollection(response.Headers);
+                        HttpResponseHeaders = new HttpResponseHeadersReadOnlyCollection(
+                            response.Headers
+                        );
                     }
 
                     if (disposeResponse)
@@ -244,7 +337,10 @@ namespace System.Net.WebSockets
             }
         }
 
-        private static HttpMessageInvoker SetupInvoker(ClientWebSocketOptions options, out bool disposeInvoker)
+        private static HttpMessageInvoker SetupInvoker(
+            ClientWebSocketOptions options,
+            out bool disposeInvoker
+        )
         {
             // Create the invoker for this request and populate it with all of the options.
             // If the options are compatible, reuse a shared invoker.
@@ -254,16 +350,20 @@ namespace System.Net.WebSockets
 
                 bool useDefaultProxy = options.Proxy is not null;
 
-                ref HttpMessageInvoker? invokerRef = ref useDefaultProxy ? ref s_defaultInvokerDefaultProxy : ref s_defaultInvokerNoProxy;
+                ref HttpMessageInvoker? invokerRef = ref useDefaultProxy
+                    ? ref s_defaultInvokerDefaultProxy
+                    : ref s_defaultInvokerNoProxy;
 
                 if (invokerRef is null)
                 {
-                    var invoker = new HttpMessageInvoker(new SocketsHttpHandler()
-                    {
-                        PooledConnectionLifetime = TimeSpan.Zero,
-                        UseProxy = useDefaultProxy,
-                        UseCookies = false,
-                    });
+                    var invoker = new HttpMessageInvoker(
+                        new SocketsHttpHandler()
+                        {
+                            PooledConnectionLifetime = TimeSpan.Zero,
+                            UseProxy = useDefaultProxy,
+                            UseCookies = false,
+                        }
+                    );
 
                     if (Interlocked.CompareExchange(ref invokerRef, invoker, null) is not null)
                     {
@@ -280,11 +380,12 @@ namespace System.Net.WebSockets
                 handler.PooledConnectionLifetime = TimeSpan.Zero;
                 handler.CookieContainer = options.Cookies;
                 handler.UseCookies = options.Cookies != null;
-                handler.SslOptions.RemoteCertificateValidationCallback = options.RemoteCertificateValidationCallback;
+                handler.SslOptions.RemoteCertificateValidationCallback =
+                    options.RemoteCertificateValidationCallback;
 
-                handler.Credentials = options.UseDefaultCredentials ?
-                    CredentialCache.DefaultCredentials :
-                    options.Credentials;
+                handler.Credentials = options.UseDefaultCredentials
+                    ? CredentialCache.DefaultCredentials
+                    : options.Credentials;
 
                 if (options.Proxy == null)
                 {
@@ -306,7 +407,10 @@ namespace System.Net.WebSockets
             }
         }
 
-        private static WebSocketDeflateOptions ParseDeflateOptions(ReadOnlySpan<char> extension, WebSocketDeflateOptions original)
+        private static WebSocketDeflateOptions ParseDeflateOptions(
+            ReadOnlySpan<char> extension,
+            WebSocketDeflateOptions original
+        )
         {
             var options = new WebSocketDeflateOptions();
 
@@ -317,11 +421,15 @@ namespace System.Net.WebSockets
 
                 if (value.Length > 0)
                 {
-                    if (value.SequenceEqual(ClientWebSocketDeflateConstants.ClientNoContextTakeover))
+                    if (
+                        value.SequenceEqual(ClientWebSocketDeflateConstants.ClientNoContextTakeover)
+                    )
                     {
                         options.ClientContextTakeover = false;
                     }
-                    else if (value.SequenceEqual(ClientWebSocketDeflateConstants.ServerNoContextTakeover))
+                    else if (
+                        value.SequenceEqual(ClientWebSocketDeflateConstants.ServerNoContextTakeover)
+                    )
                     {
                         options.ServerContextTakeover = false;
                     }
@@ -338,13 +446,26 @@ namespace System.Net.WebSockets
                     {
                         var startIndex = value.IndexOf('=');
 
-                        if (startIndex < 0 ||
-                            !int.TryParse(value.Slice(startIndex + 1), NumberStyles.Integer, CultureInfo.InvariantCulture, out int windowBits) ||
-                            windowBits < WebSocketValidate.MinDeflateWindowBits ||
-                            windowBits > WebSocketValidate.MaxDeflateWindowBits)
+                        if (
+                            startIndex < 0
+                            || !int.TryParse(
+                                value.Slice(startIndex + 1),
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out int windowBits
+                            )
+                            || windowBits < WebSocketValidate.MinDeflateWindowBits
+                            || windowBits > WebSocketValidate.MaxDeflateWindowBits
+                        )
                         {
-                            throw new WebSocketException(WebSocketError.HeaderError,
-                                SR.Format(SR.net_WebSockets_InvalidResponseHeader, ClientWebSocketDeflateConstants.Extension, value.ToString()));
+                            throw new WebSocketException(
+                                WebSocketError.HeaderError,
+                                SR.Format(
+                                    SR.net_WebSockets_InvalidResponseHeader,
+                                    ClientWebSocketDeflateConstants.Extension,
+                                    value.ToString()
+                                )
+                            );
                         }
 
                         return windowBits;
@@ -360,14 +481,24 @@ namespace System.Net.WebSockets
 
             if (options.ClientMaxWindowBits > original.ClientMaxWindowBits)
             {
-                throw new WebSocketException(SR.Format(SR.net_WebSockets_ClientWindowBitsNegotiationFailure,
-                    original.ClientMaxWindowBits, options.ClientMaxWindowBits));
+                throw new WebSocketException(
+                    SR.Format(
+                        SR.net_WebSockets_ClientWindowBitsNegotiationFailure,
+                        original.ClientMaxWindowBits,
+                        options.ClientMaxWindowBits
+                    )
+                );
             }
 
             if (options.ServerMaxWindowBits > original.ServerMaxWindowBits)
             {
-                throw new WebSocketException(SR.Format(SR.net_WebSockets_ServerWindowBitsNegotiationFailure,
-                    original.ServerMaxWindowBits, options.ServerMaxWindowBits));
+                throw new WebSocketException(
+                    SR.Format(
+                        SR.net_WebSockets_ServerWindowBitsNegotiationFailure,
+                        original.ServerMaxWindowBits,
+                        options.ServerMaxWindowBits
+                    )
+                );
             }
 
             return options;
@@ -376,7 +507,10 @@ namespace System.Net.WebSockets
         /// <summary>Adds the necessary headers for the web socket request.</summary>
         /// <param name="request">The request to which the headers should be added.</param>
         /// <param name="options">The options controlling the request.</param>
-        private static string? AddWebSocketHeaders(HttpRequestMessage request, ClientWebSocketOptions options)
+        private static string? AddWebSocketHeaders(
+            HttpRequestMessage request,
+            ClientWebSocketOptions options
+        )
         {
             // always exact because we handle downgrade here
             request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
@@ -385,11 +519,18 @@ namespace System.Net.WebSockets
             if (request.Version == HttpVersion.Version11)
             {
                 // Create the security key and expected response, then build all of the request headers
-                KeyValuePair<string, string> secKeyAndSecWebSocketAccept = CreateSecKeyAndSecWebSocketAccept();
+                KeyValuePair<string, string> secKeyAndSecWebSocketAccept =
+                    CreateSecKeyAndSecWebSocketAccept();
                 secValue = secKeyAndSecWebSocketAccept.Value;
-                request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
+                request.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.Connection,
+                    HttpKnownHeaderNames.Upgrade
+                );
                 request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Upgrade, "websocket");
-                request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketKey, secKeyAndSecWebSocketAccept.Key);
+                request.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.SecWebSocketKey,
+                    secKeyAndSecWebSocketAccept.Key
+                );
             }
             else if (request.Version == HttpVersion.Version20)
             {
@@ -400,20 +541,31 @@ namespace System.Net.WebSockets
 
             if (options._requestedSubProtocols?.Count > 0)
             {
-                request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketProtocol, string.Join(", ", options.RequestedSubProtocols));
+                request.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.SecWebSocketProtocol,
+                    string.Join(", ", options.RequestedSubProtocols)
+                );
             }
             if (options.DangerousDeflateOptions is not null)
             {
-                request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketExtensions, GetDeflateOptions(options.DangerousDeflateOptions));
+                request.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.SecWebSocketExtensions,
+                    GetDeflateOptions(options.DangerousDeflateOptions)
+                );
 
                 static string GetDeflateOptions(WebSocketDeflateOptions options)
                 {
-                    var builder = new StringBuilder(ClientWebSocketDeflateConstants.MaxExtensionLength);
+                    var builder = new StringBuilder(
+                        ClientWebSocketDeflateConstants.MaxExtensionLength
+                    );
                     builder.Append(ClientWebSocketDeflateConstants.Extension).Append("; ");
 
                     if (options.ClientMaxWindowBits != WebSocketValidate.MaxDeflateWindowBits)
                     {
-                        builder.Append(CultureInfo.InvariantCulture, $"{ClientWebSocketDeflateConstants.ClientMaxWindowBits}={options.ClientMaxWindowBits}");
+                        builder.Append(
+                            CultureInfo.InvariantCulture,
+                            $"{ClientWebSocketDeflateConstants.ClientMaxWindowBits}={options.ClientMaxWindowBits}"
+                        );
                     }
                     else
                     {
@@ -423,20 +575,29 @@ namespace System.Net.WebSockets
 
                     if (!options.ClientContextTakeover)
                     {
-                        builder.Append("; ").Append(ClientWebSocketDeflateConstants.ClientNoContextTakeover);
+                        builder
+                            .Append("; ")
+                            .Append(ClientWebSocketDeflateConstants.ClientNoContextTakeover);
                     }
 
                     if (options.ServerMaxWindowBits != WebSocketValidate.MaxDeflateWindowBits)
                     {
-                        builder.Append(CultureInfo.InvariantCulture, $"; {ClientWebSocketDeflateConstants.ServerMaxWindowBits}={options.ServerMaxWindowBits}");
+                        builder.Append(
+                            CultureInfo.InvariantCulture,
+                            $"; {ClientWebSocketDeflateConstants.ServerMaxWindowBits}={options.ServerMaxWindowBits}"
+                        );
                     }
 
                     if (!options.ServerContextTakeover)
                     {
-                        builder.Append("; ").Append(ClientWebSocketDeflateConstants.ServerNoContextTakeover);
+                        builder
+                            .Append("; ")
+                            .Append(ClientWebSocketDeflateConstants.ServerNoContextTakeover);
                     }
 
-                    Debug.Assert(builder.Length <= ClientWebSocketDeflateConstants.MaxExtensionLength);
+                    Debug.Assert(
+                        builder.Length <= ClientWebSocketDeflateConstants.MaxExtensionLength
+                    );
                     return builder.ToString();
                 }
             }
@@ -445,13 +606,23 @@ namespace System.Net.WebSockets
 
         private static void ValidateResponse(HttpResponseMessage response, string? secValue)
         {
-            Debug.Assert(response.Version == HttpVersion.Version11 || response.Version == HttpVersion.Version20);
+            Debug.Assert(
+                response.Version == HttpVersion.Version11
+                    || response.Version == HttpVersion.Version20
+            );
 
             if (response.Version == HttpVersion.Version11)
             {
                 if (response.StatusCode != HttpStatusCode.SwitchingProtocols)
                 {
-                    throw new WebSocketException(WebSocketError.NotAWebSocket, SR.Format(SR.net_WebSockets_ConnectStatusExpected, (int)response.StatusCode, (int)HttpStatusCode.SwitchingProtocols));
+                    throw new WebSocketException(
+                        WebSocketError.NotAWebSocket,
+                        SR.Format(
+                            SR.net_WebSockets_ConnectStatusExpected,
+                            (int)response.StatusCode,
+                            (int)HttpStatusCode.SwitchingProtocols
+                        )
+                    );
                 }
 
                 Debug.Assert(secValue != null);
@@ -465,7 +636,14 @@ namespace System.Net.WebSockets
             {
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    throw new WebSocketException(WebSocketError.NotAWebSocket, SR.Format(SR.net_WebSockets_ConnectStatusExpected, (int)response.StatusCode, (int)HttpStatusCode.OK));
+                    throw new WebSocketException(
+                        WebSocketError.NotAWebSocket,
+                        SR.Format(
+                            SR.net_WebSockets_ConnectStatusExpected,
+                            (int)response.StatusCode,
+                            (int)HttpStatusCode.OK
+                        )
+                    );
                 }
             }
 
@@ -486,12 +664,21 @@ namespace System.Net.WebSockets
             // GUID appended by the server as part of the security key response.  Defined in the RFC.
             ReadOnlySpan<byte> wsServerGuidBytes = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"u8;
 
-            Span<byte> bytes = stackalloc byte[24 /* Base64 guid length */ + wsServerGuidBytes.Length];
+            Span<byte> bytes =
+                stackalloc byte[
+                    24 /* Base64 guid length */
+                        + wsServerGuidBytes.Length
+                ];
 
             // Base64-encode a new Guid's bytes to get the security key
             bool success = Guid.NewGuid().TryWriteBytes(bytes);
             Debug.Assert(success);
-            string secKey = Convert.ToBase64String(bytes.Slice(0, 16 /*sizeof(Guid)*/));
+            string secKey = Convert.ToBase64String(
+                bytes.Slice(
+                    0,
+                    16 /*sizeof(Guid)*/
+                )
+            );
 
             // Get the corresponding ASCII bytes for seckey+wsServerGuidBytes
             int encodedSecKeyLength = Encoding.ASCII.GetBytes(secKey, bytes);
@@ -499,12 +686,15 @@ namespace System.Net.WebSockets
 
             // Hash the seckey+wsServerGuidBytes bytes
             SHA1.TryHashData(bytes, bytes, out int bytesWritten);
-            Debug.Assert(bytesWritten == 20 /* SHA1 hash length */);
+            Debug.Assert(
+                bytesWritten == 20 /* SHA1 hash length */
+            );
 
             // Return the security key + the base64 encoded hashed bytes
             return new KeyValuePair<string, string>(
                 secKey,
-                Convert.ToBase64String(bytes.Slice(0, bytesWritten)));
+                Convert.ToBase64String(bytes.Slice(0, bytesWritten))
+            );
         }
 
         private static void ValidateHeader(HttpHeaders headers, string name, string expectedValue)
@@ -523,18 +713,30 @@ namespace System.Net.WebSockets
                     }
                 }
 
-                throw new WebSocketException(WebSocketError.HeaderError, SR.Format(SR.net_WebSockets_InvalidResponseHeader, name, hsv));
+                throw new WebSocketException(
+                    WebSocketError.HeaderError,
+                    SR.Format(SR.net_WebSockets_InvalidResponseHeader, name, hsv)
+                );
             }
 
-            throw new WebSocketException(WebSocketError.Faulted, SR.Format(SR.net_WebSockets_MissingResponseHeader, name));
+            throw new WebSocketException(
+                WebSocketError.Faulted,
+                SR.Format(SR.net_WebSockets_MissingResponseHeader, name)
+            );
         }
 
         /// <summary>Used as a sentinel to indicate that ClientWebSocket should use the system's default proxy.</summary>
         internal sealed class DefaultWebProxy : IWebProxy
         {
             public static DefaultWebProxy Instance { get; } = new DefaultWebProxy();
-            public ICredentials? Credentials { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+            public ICredentials? Credentials
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
+
             public Uri? GetProxy(Uri destination) => throw new NotSupportedException();
+
             public bool IsBypassed(Uri host) => throw new NotSupportedException();
         }
     }

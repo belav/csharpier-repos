@@ -28,6 +28,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public enum Antworten
     {
         First,
-        Second
+        Second,
     }
 }

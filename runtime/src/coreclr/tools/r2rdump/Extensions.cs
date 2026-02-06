@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
-
 using ILCompiler.Reflection.ReadyToRun;
 using ILCompiler.Reflection.ReadyToRun.Amd64;
 using Internal.Runtime;
@@ -30,7 +29,9 @@ namespace R2RDump
                 }
                 if (theThis.BoundsList[i].ILOffset == (uint)DebugInfoBoundsType.NoMapping)
                 {
-                    writer.WriteLine($"NoMapping, Source Types: {theThis.BoundsList[i].SourceTypes}");
+                    writer.WriteLine(
+                        $"NoMapping, Source Types: {theThis.BoundsList[i].SourceTypes}"
+                    );
                 }
                 else if (theThis.BoundsList[i].ILOffset == (uint)DebugInfoBoundsType.Prolog)
                 {
@@ -42,7 +43,9 @@ namespace R2RDump
                 }
                 else
                 {
-                    writer.WriteLine($"IL Offset: 0x{theThis.BoundsList[i].ILOffset:x4}, Source Types: {theThis.BoundsList[i].SourceTypes}");
+                    writer.WriteLine(
+                        $"IL Offset: 0x{theThis.BoundsList[i].ILOffset:x4}, Source Types: {theThis.BoundsList[i].SourceTypes}"
+                    );
                 }
             }
             writer.WriteLine("");
@@ -68,36 +71,58 @@ namespace R2RDump
                     case VarLocType.VLT_REG:
                     case VarLocType.VLT_REG_FP:
                     case VarLocType.VLT_REG_BYREF:
-                        writer.WriteLine($"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
+                        writer.WriteLine(
+                            $"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
                         break;
                     case VarLocType.VLT_STK:
                     case VarLocType.VLT_STK_BYREF:
-                        writer.WriteLine($"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
+                        writer.WriteLine(
+                            $"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
                         writer.WriteLine($"    Stack Offset: {varLoc.VariableLocation.Data2}");
                         break;
                     case VarLocType.VLT_REG_REG:
-                        writer.WriteLine($"    Register 1: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
-                        writer.WriteLine($"    Register 2: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}");
+                        writer.WriteLine(
+                            $"    Register 1: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
+                        writer.WriteLine(
+                            $"    Register 2: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}"
+                        );
                         break;
                     case VarLocType.VLT_REG_STK:
-                        writer.WriteLine($"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
-                        writer.WriteLine($"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}");
+                        writer.WriteLine(
+                            $"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
+                        writer.WriteLine(
+                            $"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}"
+                        );
                         writer.WriteLine($"    Stack Offset: {varLoc.VariableLocation.Data3}");
                         break;
                     case VarLocType.VLT_STK_REG:
                         writer.WriteLine($"    Stack Offset: {varLoc.VariableLocation.Data1}");
-                        writer.WriteLine($"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}");
-                        writer.WriteLine($"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data3)}");
+                        writer.WriteLine(
+                            $"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data2)}"
+                        );
+                        writer.WriteLine(
+                            $"    Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data3)}"
+                        );
                         break;
                     case VarLocType.VLT_STK2:
-                        writer.WriteLine($"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
+                        writer.WriteLine(
+                            $"    Base Register: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
                         writer.WriteLine($"    Stack Offset: {varLoc.VariableLocation.Data2}");
                         break;
                     case VarLocType.VLT_FPSTK:
-                        writer.WriteLine($"    Offset: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
+                        writer.WriteLine(
+                            $"    Offset: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
                         break;
                     case VarLocType.VLT_FIXED_VA:
-                        writer.WriteLine($"    Offset: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}");
+                        writer.WriteLine(
+                            $"    Offset: {DebugInfo.GetPlatformSpecificRegister(theThis.Machine, varLoc.VariableLocation.Data1)}"
+                        );
                         break;
                     default:
                         throw new BadImageFormatException("Unexpected var loc type");
@@ -107,7 +132,11 @@ namespace R2RDump
             }
         }
 
-        public static void WriteTo(this ReadyToRunImportSection.ImportSectionEntry theThis, TextWriter writer, DumpModel model)
+        public static void WriteTo(
+            this ReadyToRunImportSection.ImportSectionEntry theThis,
+            TextWriter writer,
+            DumpModel model
+        )
         {
             if (!model.Naked)
             {
@@ -125,9 +154,15 @@ namespace R2RDump
             }
         }
 
-        public static void WriteTo(this ReadyToRunSection theThis, TextWriter writer, DumpModel model)
+        public static void WriteTo(
+            this ReadyToRunSection theThis,
+            TextWriter writer,
+            DumpModel model
+        )
         {
-            writer.WriteLine($"Type:  {Enum.GetName(typeof(ReadyToRunSectionType), theThis.Type)} ({theThis.Type:D})");
+            writer.WriteLine(
+                $"Type:  {Enum.GetName(typeof(ReadyToRunSectionType), theThis.Type)} ({theThis.Type:D})"
+            );
             if (!model.Naked)
             {
                 writer.WriteLine($"RelativeVirtualAddress: 0x{theThis.RelativeVirtualAddress:X8}");
@@ -135,15 +170,25 @@ namespace R2RDump
             writer.WriteLine($"Size: {theThis.Size} bytes");
         }
 
-        public static void WriteTo(this ReadyToRunMethod theThis, TextWriter writer, DumpModel model)
+        public static void WriteTo(
+            this ReadyToRunMethod theThis,
+            TextWriter writer,
+            DumpModel model
+        )
         {
             writer.WriteLine(theThis.SignatureString);
 
-            writer.WriteLine($"Handle: 0x{MetadataTokens.GetToken(theThis.ComponentReader.MetadataReader, theThis.MethodHandle):X8}");
-            writer.WriteLine($"Rid: {MetadataTokens.GetRowNumber(theThis.ComponentReader.MetadataReader, theThis.MethodHandle)}");
+            writer.WriteLine(
+                $"Handle: 0x{MetadataTokens.GetToken(theThis.ComponentReader.MetadataReader, theThis.MethodHandle):X8}"
+            );
+            writer.WriteLine(
+                $"Rid: {MetadataTokens.GetRowNumber(theThis.ComponentReader.MetadataReader, theThis.MethodHandle)}"
+            );
             if (!model.Naked)
             {
-                writer.WriteLine($"EntryPointRuntimeFunctionId: {theThis.EntryPointRuntimeFunctionId}");
+                writer.WriteLine(
+                    $"EntryPointRuntimeFunctionId: {theThis.EntryPointRuntimeFunctionId}"
+                );
             }
             writer.WriteLine($"Number of RuntimeFunctions: {theThis.RuntimeFunctions.Count}");
             if (theThis.Fixups != null)
@@ -152,7 +197,9 @@ namespace R2RDump
                 IEnumerable<FixupCell> fixups = theThis.Fixups;
                 if (model.Normalize)
                 {
-                    fixups = fixups.OrderBy(fc => fc.Signature.ToString(model.SignatureFormattingOptions));
+                    fixups = fixups.OrderBy(fc =>
+                        fc.Signature.ToString(model.SignatureFormattingOptions)
+                    );
                 }
 
                 foreach (FixupCell cell in fixups)
@@ -160,7 +207,9 @@ namespace R2RDump
                     writer.Write("    ");
                     if (!model.Naked)
                     {
-                        writer.Write($"TableIndex {cell.TableIndex}, Offset {cell.CellOffset:X4}: ");
+                        writer.Write(
+                            $"TableIndex {cell.TableIndex}, Offset {cell.CellOffset:X4}: "
+                        );
                     }
                     writer.WriteLine(cell.Signature.ToString(model.SignatureFormattingOptions));
                 }
@@ -186,18 +235,36 @@ namespace R2RDump
             {
                 writer.WriteLine($"UnwindRVA: 0x{theThis.UnwindRVA:X8}");
             }
-            if (theThis.UnwindInfo is ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo amd64UnwindInfo)
+            if (
+                theThis.UnwindInfo
+                is ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo amd64UnwindInfo
+            )
             {
                 string parsedFlags = "";
-                if ((amd64UnwindInfo.Flags & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_EHANDLER) != 0)
+                if (
+                    (
+                        amd64UnwindInfo.Flags
+                        & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_EHANDLER
+                    ) != 0
+                )
                 {
                     parsedFlags += " EHANDLER";
                 }
-                if ((amd64UnwindInfo.Flags & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_UHANDLER) != 0)
+                if (
+                    (
+                        amd64UnwindInfo.Flags
+                        & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_UHANDLER
+                    ) != 0
+                )
                 {
                     parsedFlags += " UHANDLER";
                 }
-                if ((amd64UnwindInfo.Flags & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_CHAININFO) != 0)
+                if (
+                    (
+                        amd64UnwindInfo.Flags
+                        & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_CHAININFO
+                    ) != 0
+                )
                 {
                     parsedFlags += " CHAININFO";
                 }
@@ -209,11 +276,29 @@ namespace R2RDump
                 writer.WriteLine($"Flags:              0x{amd64UnwindInfo.Flags:X2}{parsedFlags}");
                 writer.WriteLine($"SizeOfProlog:       0x{amd64UnwindInfo.SizeOfProlog:X4}");
                 writer.WriteLine($"CountOfUnwindCodes: {amd64UnwindInfo.CountOfUnwindCodes}");
-                writer.WriteLine($"FrameRegister:      {((amd64UnwindInfo.FrameRegister == 0) ? "None" : amd64UnwindInfo.FrameRegister.ToString())}");
+                writer.WriteLine(
+                    $"FrameRegister:      {((amd64UnwindInfo.FrameRegister == 0) ? "None" : amd64UnwindInfo.FrameRegister.ToString())}"
+                );
                 writer.WriteLine($"FrameOffset:        0x{amd64UnwindInfo.FrameOffset}");
-                if (!model.Naked && ((amd64UnwindInfo.Flags & (int)ILCompiler.Reflection.ReadyToRun.Amd64.UnwindFlags.UNW_FLAG_CHAININFO) == 0))
+                if (
+                    !model.Naked
+                    && (
+                        (
+                            amd64UnwindInfo.Flags
+                            & (int)
+                                ILCompiler
+                                    .Reflection
+                                    .ReadyToRun
+                                    .Amd64
+                                    .UnwindFlags
+                                    .UNW_FLAG_CHAININFO
+                        ) == 0
+                    )
+                )
                 {
-                    writer.WriteLine($"PersonalityRVA:     0x{amd64UnwindInfo.PersonalityRoutineRVA:X4}");
+                    writer.WriteLine(
+                        $"PersonalityRVA:     0x{amd64UnwindInfo.PersonalityRoutineRVA:X4}"
+                    );
                 }
 
                 for (int uwcIndex = 0; uwcIndex < amd64UnwindInfo.UnwindCodes.Count; uwcIndex++)
@@ -235,7 +320,9 @@ namespace R2RDump
                 if (model.Naked)
                     writer.WriteLine($@"EH info, #clauses = {theThis.EHInfo.EHClauses.Count}");
                 else
-                    writer.WriteLine($@"EH info @ {theThis.EHInfo.RelativeVirtualAddress:X4}, #clauses = {theThis.EHInfo.EHClauses.Count}");
+                    writer.WriteLine(
+                        $@"EH info @ {theThis.EHInfo.RelativeVirtualAddress:X4}, #clauses = {theThis.EHInfo.EHClauses.Count}"
+                    );
                 theThis.EHInfo.WriteTo(writer, !model.Naked);
                 writer.WriteLine();
             }

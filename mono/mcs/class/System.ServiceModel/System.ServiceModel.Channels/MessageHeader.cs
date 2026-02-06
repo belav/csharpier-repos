@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,297 +36,474 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class MessageHeader : MessageHeaderInfo
-	{
-		static readonly XmlWriterSettings writer_settings;
+    public abstract class MessageHeader : MessageHeaderInfo
+    {
+        static readonly XmlWriterSettings writer_settings;
 
-		static MessageHeader ()
-		{
-			writer_settings = new XmlWriterSettings ();
-			writer_settings.OmitXmlDeclaration = true;
-			writer_settings.Indent = true;
-		}
+        static MessageHeader()
+        {
+            writer_settings = new XmlWriterSettings();
+            writer_settings.OmitXmlDeclaration = true;
+            writer_settings.Indent = true;
+        }
 
-		protected MessageHeader () {}
+        protected MessageHeader() { }
 
-		static string default_actor = String.Empty;
-		static bool default_is_ref = false;
-		static bool default_must_understand = false;
-		static bool default_relay = false;
+        static string default_actor = String.Empty;
+        static bool default_is_ref = false;
+        static bool default_must_understand = false;
+        static bool default_relay = false;
 
-		public static MessageHeader CreateHeader (string name, string ns, object value)
-		{
-			return CreateHeader (name, ns, value, default_must_understand);
-		}
+        public static MessageHeader CreateHeader(string name, string ns, object value)
+        {
+            return CreateHeader(name, ns, value, default_must_understand);
+        }
 
-		public static MessageHeader CreateHeader (string name, string ns, object value, bool mustUnderstand)
-		{
-			return CreateHeader (name, ns, value, mustUnderstand, default_actor);
-		}
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            bool mustUnderstand
+        )
+        {
+            return CreateHeader(name, ns, value, mustUnderstand, default_actor);
+        }
 
-		public static MessageHeader CreateHeader (string name, string ns, object value, XmlObjectSerializer serializer)
-		{
-			return CreateHeader (name, ns, value, serializer, default_must_understand, 
-					     default_actor, default_relay);
-		}
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            XmlObjectSerializer serializer
+        )
+        {
+            return CreateHeader(
+                name,
+                ns,
+                value,
+                serializer,
+                default_must_understand,
+                default_actor,
+                default_relay
+            );
+        }
 
-		public static MessageHeader CreateHeader (string name, string ns, object value, 
-						   bool mustUnderstand, string actor)
-		{
-			return CreateHeader (name, ns, value, mustUnderstand, actor, default_relay);
-		}
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            bool mustUnderstand,
+            string actor
+        )
+        {
+            return CreateHeader(name, ns, value, mustUnderstand, actor, default_relay);
+        }
 
-		public static MessageHeader CreateHeader (string name, string ns, object value, XmlObjectSerializer serializer, 
-						   bool mustUnderstand)
-		{
-			return CreateHeader (name, ns, value, serializer, mustUnderstand, default_actor, default_relay);
-		}
-		
-		public static MessageHeader CreateHeader (string name, string ns, object value, 
-						   bool mustUnderstand, string actor, bool relay)
-		{
-			return CreateHeader (name, ns, value, new DataContractSerializer (value.GetType ()),
-					mustUnderstand, actor, relay);
-		}
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            XmlObjectSerializer serializer,
+            bool mustUnderstand
+        )
+        {
+            return CreateHeader(
+                name,
+                ns,
+                value,
+                serializer,
+                mustUnderstand,
+                default_actor,
+                default_relay
+            );
+        }
 
-		public static MessageHeader CreateHeader (string name, string ns, object value, XmlObjectSerializer serializer,
-						   bool mustUnderstand, string actor)
-		{
-			return CreateHeader (name, ns, value, serializer, mustUnderstand, actor, default_relay);
-		}
-		
-		public static MessageHeader CreateHeader (string name, string ns, object value, XmlObjectSerializer serializer,
-						   bool mustUnderstand, string actor, bool relay)
-		{
-			// FIXME: how to get IsReferenceParameter ?
-			return new DefaultMessageHeader (name, ns, value, serializer, default_is_ref, mustUnderstand, actor, relay);
-		}
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            bool mustUnderstand,
+            string actor,
+            bool relay
+        )
+        {
+            return CreateHeader(
+                name,
+                ns,
+                value,
+                new DataContractSerializer(value.GetType()),
+                mustUnderstand,
+                actor,
+                relay
+            );
+        }
 
-		public virtual bool IsMessageVersionSupported (MessageVersion messageVersion)
-		{
-			if (messageVersion.Envelope == EnvelopeVersion.Soap12)
-				if (Actor == EnvelopeVersion.Soap11.NextDestinationActorValue)
-					return false;
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            XmlObjectSerializer serializer,
+            bool mustUnderstand,
+            string actor
+        )
+        {
+            return CreateHeader(name, ns, value, serializer, mustUnderstand, actor, default_relay);
+        }
 
-			if (messageVersion.Envelope == EnvelopeVersion.Soap11)
-				if (Actor == EnvelopeVersion.Soap12.NextDestinationActorValue ||
-				    Actor == EnvelopeVersion.Soap12UltimateReceiver)
-					return false;
+        public static MessageHeader CreateHeader(
+            string name,
+            string ns,
+            object value,
+            XmlObjectSerializer serializer,
+            bool mustUnderstand,
+            string actor,
+            bool relay
+        )
+        {
+            // FIXME: how to get IsReferenceParameter ?
+            return new DefaultMessageHeader(
+                name,
+                ns,
+                value,
+                serializer,
+                default_is_ref,
+                mustUnderstand,
+                actor,
+                relay
+            );
+        }
 
-			// by default, it's always supported
-			return true;
-		}
+        public virtual bool IsMessageVersionSupported(MessageVersion messageVersion)
+        {
+            if (messageVersion.Envelope == EnvelopeVersion.Soap12)
+                if (Actor == EnvelopeVersion.Soap11.NextDestinationActorValue)
+                    return false;
 
-		protected abstract void OnWriteHeaderContents (XmlDictionaryWriter writer, MessageVersion messageVersion);
+            if (messageVersion.Envelope == EnvelopeVersion.Soap11)
+                if (
+                    Actor == EnvelopeVersion.Soap12.NextDestinationActorValue
+                    || Actor == EnvelopeVersion.Soap12UltimateReceiver
+                )
+                    return false;
 
-		protected virtual void OnWriteStartHeader (XmlDictionaryWriter writer, MessageVersion messageVersion)
-		{
-			var dic = Constants.SoapDictionary;
-			XmlDictionaryString name, ns;
-			var prefix = Prefix ?? (Namespace.Length > 0 ? writer.LookupPrefix (Namespace) : String.Empty);
-			if (dic.TryLookup (Name, out name) && dic.TryLookup (Namespace, out ns))
-				writer.WriteStartElement (prefix, name, ns);
-			else
-				writer.WriteStartElement (prefix, this.Name, this.Namespace);
-			WriteHeaderAttributes (writer, messageVersion);
-		}
+            // by default, it's always supported
+            return true;
+        }
 
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
+        protected abstract void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        );
 
-			XmlWriter w = XmlWriter.Create (sb, writer_settings);
+        protected virtual void OnWriteStartHeader(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
+        {
+            var dic = Constants.SoapDictionary;
+            XmlDictionaryString name,
+                ns;
+            var prefix =
+                Prefix ?? (Namespace.Length > 0 ? writer.LookupPrefix(Namespace) : String.Empty);
+            if (dic.TryLookup(Name, out name) && dic.TryLookup(Namespace, out ns))
+                writer.WriteStartElement(prefix, name, ns);
+            else
+                writer.WriteStartElement(prefix, this.Name, this.Namespace);
+            WriteHeaderAttributes(writer, messageVersion);
+        }
 
-			WriteHeader (w, MessageVersion.Default);
-			w.Close ();
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
 
-			return sb.ToString ();
-		}
+            XmlWriter w = XmlWriter.Create(sb, writer_settings);
 
-		public void WriteHeader (XmlDictionaryWriter writer, MessageVersion messageVersion)
-		{
-			if (writer == null)
-				throw new ArgumentNullException ("writer is null.");
+            WriteHeader(w, MessageVersion.Default);
+            w.Close();
 
-			if (messageVersion == null)
-				throw new ArgumentNullException ("messageVersion is null.");
+            return sb.ToString();
+        }
 
-			if (messageVersion.Envelope == EnvelopeVersion.None)
-				return;
+        public void WriteHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        {
+            if (writer == null)
+                throw new ArgumentNullException("writer is null.");
 
-			WriteStartHeader (writer, messageVersion);
-			WriteHeaderContents (writer, messageVersion);
+            if (messageVersion == null)
+                throw new ArgumentNullException("messageVersion is null.");
 
-			writer.WriteEndElement ();
-		}
+            if (messageVersion.Envelope == EnvelopeVersion.None)
+                return;
 
-		public void WriteHeader (XmlWriter writer, MessageVersion messageVersion)
-		{
-			WriteHeader (XmlDictionaryWriter.CreateDictionaryWriter (writer), messageVersion);
-		}
+            WriteStartHeader(writer, messageVersion);
+            WriteHeaderContents(writer, messageVersion);
 
-		protected void WriteHeaderAttributes (XmlDictionaryWriter writer, MessageVersion messageVersion)
-		{
-			var dic = Constants.SoapDictionary;
-			if (Id != null)
-				writer.WriteAttributeString ("u", dic.Add ("Id"), dic.Add (Constants.WsuNamespace), Id);
-			if (!String.IsNullOrEmpty (Actor)) {
-				if (messageVersion.Envelope == EnvelopeVersion.Soap11) 
-					writer.WriteAttributeString ("s", dic.Add ("actor"), dic.Add (messageVersion.Envelope.Namespace), Actor);
+            writer.WriteEndElement();
+        }
 
-				if (messageVersion.Envelope == EnvelopeVersion.Soap12) 
-					writer.WriteAttributeString ("s", dic.Add ("role"), dic.Add (messageVersion.Envelope.Namespace), Actor);
-			}
+        public void WriteHeader(XmlWriter writer, MessageVersion messageVersion)
+        {
+            WriteHeader(XmlDictionaryWriter.CreateDictionaryWriter(writer), messageVersion);
+        }
 
-			// mustUnderstand is the same across SOAP 1.1 and 1.2
-			if (MustUnderstand == true)
-				writer.WriteAttributeString ("s", dic.Add ("mustUnderstand"), dic.Add (messageVersion.Envelope.Namespace), "1");
+        protected void WriteHeaderAttributes(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
+        {
+            var dic = Constants.SoapDictionary;
+            if (Id != null)
+                writer.WriteAttributeString(
+                    "u",
+                    dic.Add("Id"),
+                    dic.Add(Constants.WsuNamespace),
+                    Id
+                );
+            if (!String.IsNullOrEmpty(Actor))
+            {
+                if (messageVersion.Envelope == EnvelopeVersion.Soap11)
+                    writer.WriteAttributeString(
+                        "s",
+                        dic.Add("actor"),
+                        dic.Add(messageVersion.Envelope.Namespace),
+                        Actor
+                    );
 
-			// relay is only available on SOAP 1.2
-			if (Relay == true && messageVersion.Envelope == EnvelopeVersion.Soap12)
-				writer.WriteAttributeString ("s", dic.Add ("relay"), dic.Add (messageVersion.Envelope.Namespace), "true");
-		}
+                if (messageVersion.Envelope == EnvelopeVersion.Soap12)
+                    writer.WriteAttributeString(
+                        "s",
+                        dic.Add("role"),
+                        dic.Add(messageVersion.Envelope.Namespace),
+                        Actor
+                    );
+            }
 
-		public void WriteHeaderContents (XmlDictionaryWriter writer, MessageVersion messageVersion)
-		{
-			this.OnWriteHeaderContents (writer, messageVersion);
-		}
+            // mustUnderstand is the same across SOAP 1.1 and 1.2
+            if (MustUnderstand == true)
+                writer.WriteAttributeString(
+                    "s",
+                    dic.Add("mustUnderstand"),
+                    dic.Add(messageVersion.Envelope.Namespace),
+                    "1"
+                );
 
-		public void WriteStartHeader (XmlDictionaryWriter writer, MessageVersion messageVersion)
-		{
-			this.OnWriteStartHeader (writer, messageVersion);
-		}
+            // relay is only available on SOAP 1.2
+            if (Relay == true && messageVersion.Envelope == EnvelopeVersion.Soap12)
+                writer.WriteAttributeString(
+                    "s",
+                    dic.Add("relay"),
+                    dic.Add(messageVersion.Envelope.Namespace),
+                    "true"
+                );
+        }
 
-		public override string Actor { get { return default_actor; }}
+        public void WriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        {
+            this.OnWriteHeaderContents(writer, messageVersion);
+        }
 
-		public override bool IsReferenceParameter { get { return default_is_ref; }}
+        public void WriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        {
+            this.OnWriteStartHeader(writer, messageVersion);
+        }
 
-		public override bool MustUnderstand { get { return default_must_understand; }}
+        public override string Actor
+        {
+            get { return default_actor; }
+        }
 
-		public override bool Relay { get { return default_relay; }}
+        public override bool IsReferenceParameter
+        {
+            get { return default_is_ref; }
+        }
 
-		internal class XmlMessageHeader : MessageHeader
-		{
-			bool is_ref, must_understand, relay;
-			string actor;
+        public override bool MustUnderstand
+        {
+            get { return default_must_understand; }
+        }
+
+        public override bool Relay
+        {
+            get { return default_relay; }
+        }
+
+        internal class XmlMessageHeader : MessageHeader
+        {
+            bool is_ref,
+                must_understand,
+                relay;
+            string actor;
 #if MOBILE
-			string body;
+            string body;
 #else
-			// This is required to completely clone body xml that 
-			// does not introduce additional xmlns declarations that
-			// blocks canonicalized copy of the input XML.
-			XmlDocument body;
+            // This is required to completely clone body xml that
+            // does not introduce additional xmlns declarations that
+            // blocks canonicalized copy of the input XML.
+            XmlDocument body;
 #endif
-			string local_name;
-			string namespace_uri;
+            string local_name;
+            string namespace_uri;
 
-			public XmlMessageHeader (XmlReader reader, MessageVersion version)
-			{
-				var soapNS = version.Envelope.Namespace;
-				var addrNS = version.Addressing.Namespace;
-				Prefix = reader.Prefix;
-				Id = reader.GetAttribute ("Id", Constants.WsuNamespace);
+            public XmlMessageHeader(XmlReader reader, MessageVersion version)
+            {
+                var soapNS = version.Envelope.Namespace;
+                var addrNS = version.Addressing.Namespace;
+                Prefix = reader.Prefix;
+                Id = reader.GetAttribute("Id", Constants.WsuNamespace);
 
-				string s = reader.GetAttribute ("relay", soapNS);
-				relay = s != null ? XmlConvert.ToBoolean (s) : false;
-				s = reader.GetAttribute ("mustUnderstand", soapNS);
-				must_understand = s != null ? XmlConvert.ToBoolean (s) : false;
-				actor = reader.GetAttribute ("actor", soapNS) ?? String.Empty;
+                string s = reader.GetAttribute("relay", soapNS);
+                relay = s != null ? XmlConvert.ToBoolean(s) : false;
+                s = reader.GetAttribute("mustUnderstand", soapNS);
+                must_understand = s != null ? XmlConvert.ToBoolean(s) : false;
+                actor = reader.GetAttribute("actor", soapNS) ?? String.Empty;
 
-				s = reader.GetAttribute ("IsReferenceParameter", addrNS);
-				is_ref = s != null ? XmlConvert.ToBoolean (s) : false;
+                s = reader.GetAttribute("IsReferenceParameter", addrNS);
+                is_ref = s != null ? XmlConvert.ToBoolean(s) : false;
 
-				local_name = reader.LocalName;
-				namespace_uri = reader.NamespaceURI;
+                local_name = reader.LocalName;
+                namespace_uri = reader.NamespaceURI;
 #if MOBILE
-				body = reader.ReadOuterXml ();
+                body = reader.ReadOuterXml();
 #else
-				body = new XmlDocument ();
-				var w = body.CreateNavigator ().AppendChild ();
-				w.WriteNode (reader, false);
-				w.Close ();
+                body = new XmlDocument();
+                var w = body.CreateNavigator().AppendChild();
+                w.WriteNode(reader, false);
+                w.Close();
 #endif
-			}
+            }
 
-			public XmlReader CreateReader ()
-			{
+            public XmlReader CreateReader()
+            {
 #if MOBILE
-				var reader = XmlReader.Create (new StringReader (body));
+                var reader = XmlReader.Create(new StringReader(body));
 #else
-				var reader = new XmlNodeReader (body);
+                var reader = new XmlNodeReader(body);
 #endif
-				reader.MoveToContent ();
-				return reader;
-			}
+                reader.MoveToContent();
+                return reader;
+            }
 
-			protected override void OnWriteHeaderContents (
-				XmlDictionaryWriter writer, MessageVersion version)
-			{
-				var r = CreateReader ();
-				r.MoveToContent ();
-				if (r.IsEmptyElement)
-					return; // write nothing
-				for (r.Read (); r.NodeType != XmlNodeType.EndElement;)
-					writer.WriteNode (r, false);
-			}
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion version
+            )
+            {
+                var r = CreateReader();
+                r.MoveToContent();
+                if (r.IsEmptyElement)
+                    return; // write nothing
+                for (r.Read(); r.NodeType != XmlNodeType.EndElement; )
+                    writer.WriteNode(r, false);
+            }
 
-			public override string Actor { get { return actor; }}
+            public override string Actor
+            {
+                get { return actor; }
+            }
 
-			public override bool IsReferenceParameter { get { return is_ref; }}
+            public override bool IsReferenceParameter
+            {
+                get { return is_ref; }
+            }
 
-			public override bool MustUnderstand { get { return must_understand; }}
+            public override bool MustUnderstand
+            {
+                get { return must_understand; }
+            }
 
-			public override string Name { get { return local_name; }}
+            public override string Name
+            {
+                get { return local_name; }
+            }
 
-			public override string Namespace { get { return namespace_uri; }}
+            public override string Namespace
+            {
+                get { return namespace_uri; }
+            }
 
-			public override bool Relay { get { return relay; }}
-		}
+            public override bool Relay
+            {
+                get { return relay; }
+            }
+        }
 
-		internal class DefaultMessageHeader : MessageHeader
-		{
-			string actor, name, ns;
-			object value;
-			XmlObjectSerializer formatter;
-			bool is_ref, must_understand, relay;
-			
-			internal DefaultMessageHeader (string name, string ns, object value, XmlObjectSerializer formatter, 
-						       bool isReferenceParameter,
-						       bool mustUnderstand, string actor, bool relay)
-			{
-				this.name = name;
-				this.ns = ns;
-				this.value = value;
-				this.formatter = formatter;
-				this.is_ref = isReferenceParameter;
-				this.must_understand = mustUnderstand;
-				this.actor = actor ?? String.Empty;
-				this.relay = relay;
-			}
+        internal class DefaultMessageHeader : MessageHeader
+        {
+            string actor,
+                name,
+                ns;
+            object value;
+            XmlObjectSerializer formatter;
+            bool is_ref,
+                must_understand,
+                relay;
 
-			protected override void OnWriteHeaderContents (XmlDictionaryWriter writer,
-								       MessageVersion version)
-			{
-				// FIXME: it's a nasty workaround just to avoid UniqueId output as a string, for bug #577139.
-				if (Value is UniqueId)
-					writer.WriteValue ((UniqueId) Value);
-				else
-					this.formatter.WriteObjectContent (writer, value);
-			}
+            internal DefaultMessageHeader(
+                string name,
+                string ns,
+                object value,
+                XmlObjectSerializer formatter,
+                bool isReferenceParameter,
+                bool mustUnderstand,
+                string actor,
+                bool relay
+            )
+            {
+                this.name = name;
+                this.ns = ns;
+                this.value = value;
+                this.formatter = formatter;
+                this.is_ref = isReferenceParameter;
+                this.must_understand = mustUnderstand;
+                this.actor = actor ?? String.Empty;
+                this.relay = relay;
+            }
 
-			public object Value { get { return value; } }
+            protected override void OnWriteHeaderContents(
+                XmlDictionaryWriter writer,
+                MessageVersion version
+            )
+            {
+                // FIXME: it's a nasty workaround just to avoid UniqueId output as a string, for bug #577139.
+                if (Value is UniqueId)
+                    writer.WriteValue((UniqueId)Value);
+                else
+                    this.formatter.WriteObjectContent(writer, value);
+            }
 
-			public override string Actor { get { return actor; }}
+            public object Value
+            {
+                get { return value; }
+            }
 
-			public override bool IsReferenceParameter { get { return is_ref; }}
+            public override string Actor
+            {
+                get { return actor; }
+            }
 
-			public override bool MustUnderstand { get { return must_understand; }}
+            public override bool IsReferenceParameter
+            {
+                get { return is_ref; }
+            }
 
-			public override string Name { get { return name; }}
+            public override bool MustUnderstand
+            {
+                get { return must_understand; }
+            }
 
-			public override string Namespace { get { return ns; }}
+            public override string Name
+            {
+                get { return name; }
+            }
 
-			public override bool Relay { get { return relay; }}
-		}
-	}
+            public override string Namespace
+            {
+                get { return ns; }
+            }
+
+            public override bool Relay
+            {
+                get { return relay; }
+            }
+        }
+    }
 }

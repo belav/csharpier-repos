@@ -14,10 +14,12 @@ namespace System.IO
         None = 0,
         WriteThrough = unchecked((int)0x80000000),
         Asynchronous = unchecked((int)0x40000000), // FILE_FLAG_OVERLAPPED
+
         // NoBuffering = 0x20000000,
         RandomAccess = 0x10000000,
         DeleteOnClose = 0x04000000,
         SequentialScan = 0x08000000,
+
         // AllowPosix = 0x01000000,  // FILE_FLAG_POSIX_SEMANTICS
         // BackupOrRestore,
         // DisallowReparsePoint = 0x00200000, // FILE_FLAG_OPEN_REPARSE_POINT

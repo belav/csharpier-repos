@@ -20,20 +20,27 @@ namespace System.ServiceModel.Security
         WSSecurityTokenSerializer tokenSerializer;
         DerivedKeyTokenEntry derivedKeyEntry;
 
-        protected WSSecureConversation(WSSecurityTokenSerializer tokenSerializer, int maxKeyDerivationOffset, int maxKeyDerivationLabelLength, int maxKeyDerivationNonceLength)
+        protected WSSecureConversation(
+            WSSecurityTokenSerializer tokenSerializer,
+            int maxKeyDerivationOffset,
+            int maxKeyDerivationLabelLength,
+            int maxKeyDerivationNonceLength
+        )
         {
             if (tokenSerializer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenSerializer");
             }
             this.tokenSerializer = tokenSerializer;
-            this.derivedKeyEntry = new DerivedKeyTokenEntry(this, maxKeyDerivationOffset, maxKeyDerivationLabelLength, maxKeyDerivationNonceLength);
+            this.derivedKeyEntry = new DerivedKeyTokenEntry(
+                this,
+                maxKeyDerivationOffset,
+                maxKeyDerivationLabelLength,
+                maxKeyDerivationNonceLength
+            );
         }
 
-        public abstract SecureConversationDictionary SerializerDictionary
-        {
-            get;
-        }
+        public abstract SecureConversationDictionary SerializerDictionary { get; }
 
         public WSSecurityTokenSerializer WSSecurityTokenSerializer
         {
@@ -54,16 +61,58 @@ namespace System.ServiceModel.Security
             return this.derivedKeyEntry.CanReadTokenCore(reader);
         }
 
-        public virtual void ReadDerivedKeyTokenParameters(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver, out string id, out string derivationAlgorithm, out string label, out int length, out byte[] nonce, out int offset, out int generation, out SecurityKeyIdentifierClause tokenToDeriveIdentifier, out SecurityToken tokenToDerive)
+        public virtual void ReadDerivedKeyTokenParameters(
+            XmlDictionaryReader reader,
+            SecurityTokenResolver tokenResolver,
+            out string id,
+            out string derivationAlgorithm,
+            out string label,
+            out int length,
+            out byte[] nonce,
+            out int offset,
+            out int generation,
+            out SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            out SecurityToken tokenToDerive
+        )
         {
-            this.derivedKeyEntry.ReadDerivedKeyTokenParameters(reader, tokenResolver, out id, out derivationAlgorithm, out label,
-                out length, out nonce, out offset, out generation, out tokenToDeriveIdentifier, out tokenToDerive);
+            this.derivedKeyEntry.ReadDerivedKeyTokenParameters(
+                reader,
+                tokenResolver,
+                out id,
+                out derivationAlgorithm,
+                out label,
+                out length,
+                out nonce,
+                out offset,
+                out generation,
+                out tokenToDeriveIdentifier,
+                out tokenToDerive
+            );
         }
 
-        public virtual SecurityToken CreateDerivedKeyToken(string id, string derivationAlgorithm, string label, int length, byte[] nonce, int offset, int generation, SecurityKeyIdentifierClause tokenToDeriveIdentifier, SecurityToken tokenToDerive)
+        public virtual SecurityToken CreateDerivedKeyToken(
+            string id,
+            string derivationAlgorithm,
+            string label,
+            int length,
+            byte[] nonce,
+            int offset,
+            int generation,
+            SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+            SecurityToken tokenToDerive
+        )
         {
-            return this.derivedKeyEntry.CreateDerivedKeyToken(id, derivationAlgorithm, label, length, nonce, offset, generation,
-                tokenToDeriveIdentifier, tokenToDerive);
+            return this.derivedKeyEntry.CreateDerivedKeyToken(
+                id,
+                derivationAlgorithm,
+                label,
+                length,
+                nonce,
+                offset,
+                generation,
+                tokenToDeriveIdentifier,
+                tokenToDerive
+            );
         }
 
         public virtual string DerivationAlgorithm
@@ -80,7 +129,12 @@ namespace System.ServiceModel.Security
             int maxKeyDerivationLabelLength;
             int maxKeyDerivationNonceLength;
 
-            public DerivedKeyTokenEntry(WSSecureConversation parent, int maxKeyDerivationOffset, int maxKeyDerivationLabelLength, int maxKeyDerivationNonceLength)
+            public DerivedKeyTokenEntry(
+                WSSecureConversation parent,
+                int maxKeyDerivationOffset,
+                int maxKeyDerivationLabelLength,
+                int maxKeyDerivationNonceLength
+            )
             {
                 if (parent == null)
                 {
@@ -92,28 +146,53 @@ namespace System.ServiceModel.Security
                 this.maxKeyDerivationNonceLength = maxKeyDerivationNonceLength;
             }
 
-            protected override XmlDictionaryString LocalName { get { return parent.SerializerDictionary.DerivedKeyToken; } }
-            protected override XmlDictionaryString NamespaceUri { get { return parent.SerializerDictionary.Namespace; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(DerivedKeySecurityToken) }; }
-            public override string TokenTypeUri { get { return parent.SerializerDictionary.DerivedKeyTokenType.Value; } }
-            protected override string ValueTypeUri { get { return null; } }
+            protected override XmlDictionaryString LocalName
+            {
+                get { return parent.SerializerDictionary.DerivedKeyToken; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return parent.SerializerDictionary.Namespace; }
+            }
 
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(DerivedKeySecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return parent.SerializerDictionary.DerivedKeyTokenType.Value; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
             {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
                 switch (tokenReferenceStyle)
                 {
                     case SecurityTokenReferenceStyle.Internal:
-                        return CreateDirectReference(issuedTokenXml, UtilityStrings.IdAttribute, UtilityStrings.Namespace, typeof(DerivedKeySecurityToken));
+                        return CreateDirectReference(
+                            issuedTokenXml,
+                            UtilityStrings.IdAttribute,
+                            UtilityStrings.Namespace,
+                            typeof(DerivedKeySecurityToken)
+                        );
                     case SecurityTokenReferenceStyle.External:
                         // DerivedKeys aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
-
             }
 
             // xml format
@@ -128,16 +207,36 @@ namespace System.ServiceModel.Security
             //  <Label>...</Label> - optional
             //  <Nonce>...</Nonce> - required (optional in spec, but we require it)
             //</DerivedKeyToken>
-            public virtual void ReadDerivedKeyTokenParameters(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver, out string id, out string derivationAlgorithm, out string label, out int length, out byte[] nonce, out int offset, out int generation, out SecurityKeyIdentifierClause tokenToDeriveIdentifier, out SecurityToken tokenToDerive)
+            public virtual void ReadDerivedKeyTokenParameters(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver,
+                out string id,
+                out string derivationAlgorithm,
+                out string label,
+                out int length,
+                out byte[] nonce,
+                out int offset,
+                out int generation,
+                out SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+                out SecurityToken tokenToDerive
+            )
             {
                 if (tokenResolver == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenResolver");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "tokenResolver"
+                    );
                 }
 
-                id = reader.GetAttribute(XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
+                id = reader.GetAttribute(
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace
+                );
 
-                derivationAlgorithm = reader.GetAttribute(XD.XmlSignatureDictionary.Algorithm, null);
+                derivationAlgorithm = reader.GetAttribute(
+                    XD.XmlSignatureDictionary.Algorithm,
+                    null
+                );
                 if (derivationAlgorithm == null)
                 {
                     derivationAlgorithm = parent.DerivationAlgorithm;
@@ -148,40 +247,71 @@ namespace System.ServiceModel.Security
                 tokenToDeriveIdentifier = null;
                 tokenToDerive = null;
 
-                if (reader.IsStartElement(XD.SecurityJan2004Dictionary.SecurityTokenReference, XD.SecurityJan2004Dictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        XD.SecurityJan2004Dictionary.SecurityTokenReference,
+                        XD.SecurityJan2004Dictionary.Namespace
+                    )
+                )
                 {
-                    tokenToDeriveIdentifier = parent.WSSecurityTokenSerializer.ReadKeyIdentifierClause(reader);
+                    tokenToDeriveIdentifier =
+                        parent.WSSecurityTokenSerializer.ReadKeyIdentifierClause(reader);
                     tokenResolver.TryResolveToken(tokenToDeriveIdentifier, out tokenToDerive);
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.DerivedKeyTokenRequiresTokenReference)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(SR.GetString(SR.DerivedKeyTokenRequiresTokenReference))
+                    );
                 }
 
                 // no support for properties
 
                 generation = -1;
-                if (reader.IsStartElement(parent.SerializerDictionary.Generation, parent.SerializerDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        parent.SerializerDictionary.Generation,
+                        parent.SerializerDictionary.Namespace
+                    )
+                )
                 {
                     reader.ReadStartElement();
                     generation = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (generation < 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.DerivedKeyInvalidGenerationSpecified, generation)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.DerivedKeyInvalidGenerationSpecified, generation)
+                            )
+                        );
                 }
 
                 offset = -1;
-                if (reader.IsStartElement(parent.SerializerDictionary.Offset, parent.SerializerDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        parent.SerializerDictionary.Offset,
+                        parent.SerializerDictionary.Namespace
+                    )
+                )
                 {
                     reader.ReadStartElement();
                     offset = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (offset < 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.DerivedKeyInvalidOffsetSpecified, offset)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.DerivedKeyInvalidOffsetSpecified, offset)
+                            )
+                        );
                 }
 
                 length = DerivedKeySecurityToken.DefaultDerivedKeyLength;
-                if (reader.IsStartElement(parent.SerializerDictionary.Length, parent.SerializerDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        parent.SerializerDictionary.Length,
+                        parent.SerializerDictionary.Namespace
+                    )
+                )
                 {
                     reader.ReadStartElement();
                     length = reader.ReadContentAsInt();
@@ -192,10 +322,20 @@ namespace System.ServiceModel.Security
                     offset = 0;
 
                 // verify that the offset is not larger than the max allowed
-                DerivedKeySecurityToken.EnsureAcceptableOffset(offset, generation, length, this.maxKeyDerivationOffset);
+                DerivedKeySecurityToken.EnsureAcceptableOffset(
+                    offset,
+                    generation,
+                    length,
+                    this.maxKeyDerivationOffset
+                );
 
                 label = null;
-                if (reader.IsStartElement(parent.SerializerDictionary.Label, parent.SerializerDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        parent.SerializerDictionary.Label,
+                        parent.SerializerDictionary.Namespace
+                    )
+                )
                 {
                     reader.ReadStartElement();
                     label = reader.ReadString();
@@ -203,37 +343,86 @@ namespace System.ServiceModel.Security
                 }
                 if (label != null && label.Length > this.maxKeyDerivationLabelLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.DerivedKeyTokenLabelTooLong, label.Length, this.maxKeyDerivationLabelLength)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.DerivedKeyTokenLabelTooLong,
+                                label.Length,
+                                this.maxKeyDerivationLabelLength
+                            )
+                        )
+                    );
                 }
 
                 nonce = null;
-                reader.ReadStartElement(parent.SerializerDictionary.Nonce, parent.SerializerDictionary.Namespace);
+                reader.ReadStartElement(
+                    parent.SerializerDictionary.Nonce,
+                    parent.SerializerDictionary.Namespace
+                );
                 nonce = reader.ReadContentAsBase64();
                 reader.ReadEndElement();
 
                 if (nonce != null && nonce.Length > this.maxKeyDerivationNonceLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.DerivedKeyTokenNonceTooLong, nonce.Length, this.maxKeyDerivationNonceLength)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.DerivedKeyTokenNonceTooLong,
+                                nonce.Length,
+                                this.maxKeyDerivationNonceLength
+                            )
+                        )
+                    );
                 }
 
                 reader.ReadEndElement();
             }
 
-            public virtual SecurityToken CreateDerivedKeyToken(string id, string derivationAlgorithm, string label, int length, byte[] nonce, int offset, int generation, SecurityKeyIdentifierClause tokenToDeriveIdentifier, SecurityToken tokenToDerive)
+            public virtual SecurityToken CreateDerivedKeyToken(
+                string id,
+                string derivationAlgorithm,
+                string label,
+                int length,
+                byte[] nonce,
+                int offset,
+                int generation,
+                SecurityKeyIdentifierClause tokenToDeriveIdentifier,
+                SecurityToken tokenToDerive
+            )
             {
                 if (tokenToDerive == null)
                 {
-                    return new DerivedKeySecurityTokenStub(generation, offset, length,
-                        label, nonce, tokenToDeriveIdentifier, derivationAlgorithm, id);
+                    return new DerivedKeySecurityTokenStub(
+                        generation,
+                        offset,
+                        length,
+                        label,
+                        nonce,
+                        tokenToDeriveIdentifier,
+                        derivationAlgorithm,
+                        id
+                    );
                 }
                 else
                 {
-                    return new DerivedKeySecurityToken(generation, offset, length,
-                        label, nonce, tokenToDerive, tokenToDeriveIdentifier, derivationAlgorithm, id);
+                    return new DerivedKeySecurityToken(
+                        generation,
+                        offset,
+                        length,
+                        label,
+                        nonce,
+                        tokenToDerive,
+                        tokenToDeriveIdentifier,
+                        derivationAlgorithm,
+                        id
+                    );
                 }
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
                 string id;
                 string derivationAlgorithm;
@@ -244,11 +433,31 @@ namespace System.ServiceModel.Security
                 int generation;
                 SecurityKeyIdentifierClause tokenToDeriveIdentifier;
                 SecurityToken tokenToDerive;
-                this.ReadDerivedKeyTokenParameters(reader, tokenResolver, out id, out derivationAlgorithm, out label, out length,
-                    out nonce, out offset, out generation, out tokenToDeriveIdentifier, out tokenToDerive);
+                this.ReadDerivedKeyTokenParameters(
+                    reader,
+                    tokenResolver,
+                    out id,
+                    out derivationAlgorithm,
+                    out label,
+                    out length,
+                    out nonce,
+                    out offset,
+                    out generation,
+                    out tokenToDeriveIdentifier,
+                    out tokenToDerive
+                );
 
-                return CreateDerivedKeyToken(id, derivationAlgorithm, label, length, nonce, offset, generation,
-                    tokenToDeriveIdentifier, tokenToDerive);
+                return CreateDerivedKeyToken(
+                    id,
+                    derivationAlgorithm,
+                    label,
+                    length,
+                    nonce,
+                    offset,
+                    generation,
+                    tokenToDeriveIdentifier,
+                    tokenToDerive
+                );
             }
 
             public override void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token)
@@ -256,43 +465,82 @@ namespace System.ServiceModel.Security
                 DerivedKeySecurityToken derivedKeyToken = token as DerivedKeySecurityToken;
                 string serializerPrefix = parent.SerializerDictionary.Prefix.Value;
 
-                writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.DerivedKeyToken, parent.SerializerDictionary.Namespace);
+                writer.WriteStartElement(
+                    serializerPrefix,
+                    parent.SerializerDictionary.DerivedKeyToken,
+                    parent.SerializerDictionary.Namespace
+                );
                 if (derivedKeyToken.Id != null)
                 {
-                    writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace, derivedKeyToken.Id);
+                    writer.WriteAttributeString(
+                        XD.UtilityDictionary.Prefix.Value,
+                        XD.UtilityDictionary.IdAttribute,
+                        XD.UtilityDictionary.Namespace,
+                        derivedKeyToken.Id
+                    );
                 }
                 if (derivedKeyToken.KeyDerivationAlgorithm != parent.DerivationAlgorithm)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.UnsupportedKeyDerivationAlgorithm, derivedKeyToken.KeyDerivationAlgorithm)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.UnsupportedKeyDerivationAlgorithm,
+                                derivedKeyToken.KeyDerivationAlgorithm
+                            )
+                        )
+                    );
                 }
-                parent.WSSecurityTokenSerializer.WriteKeyIdentifierClause(writer, derivedKeyToken.TokenToDeriveIdentifier);
+                parent.WSSecurityTokenSerializer.WriteKeyIdentifierClause(
+                    writer,
+                    derivedKeyToken.TokenToDeriveIdentifier
+                );
 
                 // Don't support Properties element
-                if (derivedKeyToken.Generation > 0 || derivedKeyToken.Offset > 0 || derivedKeyToken.Length != 32)
+                if (
+                    derivedKeyToken.Generation > 0
+                    || derivedKeyToken.Offset > 0
+                    || derivedKeyToken.Length != 32
+                )
                 {
                     // this means they're both specified (offset must be gen * length) - we'll write generation
                     if (derivedKeyToken.Generation >= 0 && derivedKeyToken.Offset >= 0)
                     {
-                        writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Generation, parent.SerializerDictionary.Namespace);
+                        writer.WriteStartElement(
+                            serializerPrefix,
+                            parent.SerializerDictionary.Generation,
+                            parent.SerializerDictionary.Namespace
+                        );
                         writer.WriteValue(derivedKeyToken.Generation);
                         writer.WriteEndElement();
                     }
                     else if (derivedKeyToken.Generation != -1)
                     {
-                        writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Generation, parent.SerializerDictionary.Namespace);
+                        writer.WriteStartElement(
+                            serializerPrefix,
+                            parent.SerializerDictionary.Generation,
+                            parent.SerializerDictionary.Namespace
+                        );
                         writer.WriteValue(derivedKeyToken.Generation);
                         writer.WriteEndElement();
                     }
                     else if (derivedKeyToken.Offset != -1)
                     {
-                        writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Offset, parent.SerializerDictionary.Namespace);
+                        writer.WriteStartElement(
+                            serializerPrefix,
+                            parent.SerializerDictionary.Offset,
+                            parent.SerializerDictionary.Namespace
+                        );
                         writer.WriteValue(derivedKeyToken.Offset);
                         writer.WriteEndElement();
                     }
 
                     if (derivedKeyToken.Length != 32)
                     {
-                        writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Length, parent.SerializerDictionary.Namespace);
+                        writer.WriteStartElement(
+                            serializerPrefix,
+                            parent.SerializerDictionary.Length,
+                            parent.SerializerDictionary.Namespace
+                        );
                         writer.WriteValue(derivedKeyToken.Length);
                         writer.WriteEndElement();
                     }
@@ -300,11 +548,19 @@ namespace System.ServiceModel.Security
 
                 if (derivedKeyToken.Label != null)
                 {
-                    writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Generation, parent.SerializerDictionary.Namespace);
+                    writer.WriteStartElement(
+                        serializerPrefix,
+                        parent.SerializerDictionary.Generation,
+                        parent.SerializerDictionary.Namespace
+                    );
                     writer.WriteString(derivedKeyToken.Label);
                     writer.WriteEndElement();
                 }
-                writer.WriteStartElement(serializerPrefix, parent.SerializerDictionary.Nonce, parent.SerializerDictionary.Namespace);
+                writer.WriteStartElement(
+                    serializerPrefix,
+                    parent.SerializerDictionary.Nonce,
+                    parent.SerializerDictionary.Namespace
+                );
                 writer.WriteBase64(derivedKeyToken.Nonce, 0, derivedKeyToken.Nonce.Length);
                 writer.WriteEndElement();
                 writer.WriteEndElement();
@@ -316,10 +572,17 @@ namespace System.ServiceModel.Security
             WSSecureConversation parent;
             SecurityContextCookieSerializer cookieSerializer;
 
-            public SecurityContextTokenEntry(WSSecureConversation parent, SecurityStateEncoder securityStateEncoder, IList<Type> knownClaimTypes)
+            public SecurityContextTokenEntry(
+                WSSecureConversation parent,
+                SecurityStateEncoder securityStateEncoder,
+                IList<Type> knownClaimTypes
+            )
             {
                 this.parent = parent;
-                this.cookieSerializer = new SecurityContextCookieSerializer(securityStateEncoder, knownClaimTypes);
+                this.cookieSerializer = new SecurityContextCookieSerializer(
+                    securityStateEncoder,
+                    knownClaimTypes
+                );
             }
 
             protected WSSecureConversation Parent
@@ -327,22 +590,45 @@ namespace System.ServiceModel.Security
                 get { return this.parent; }
             }
 
-            protected override XmlDictionaryString LocalName { get { return parent.SerializerDictionary.SecurityContextToken; } }
-            protected override XmlDictionaryString NamespaceUri { get { return parent.SerializerDictionary.Namespace; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(SecurityContextSecurityToken) }; }
-            public override string TokenTypeUri { get { return parent.SerializerDictionary.SecurityContextTokenType.Value; } }
-            protected override string ValueTypeUri { get { return null; } }
-
-            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(XmlElement issuedTokenXml,
-                SecurityTokenReferenceStyle tokenReferenceStyle)
+            protected override XmlDictionaryString LocalName
             {
+                get { return parent.SerializerDictionary.SecurityContextToken; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return parent.SerializerDictionary.Namespace; }
+            }
 
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(SecurityContextSecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return parent.SerializerDictionary.SecurityContextTokenType.Value; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
+
+            public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXmlCore(
+                XmlElement issuedTokenXml,
+                SecurityTokenReferenceStyle tokenReferenceStyle
+            )
+            {
                 TokenReferenceStyleHelper.Validate(tokenReferenceStyle);
 
                 switch (tokenReferenceStyle)
                 {
                     case SecurityTokenReferenceStyle.Internal:
-                        return CreateDirectReference(issuedTokenXml, UtilityStrings.IdAttribute, UtilityStrings.Namespace, typeof(SecurityContextSecurityToken));
+                        return CreateDirectReference(
+                            issuedTokenXml,
+                            UtilityStrings.IdAttribute,
+                            UtilityStrings.Namespace,
+                            typeof(SecurityContextSecurityToken)
+                        );
                     case SecurityTokenReferenceStyle.External:
                         UniqueId contextId = null;
                         UniqueId generation = null;
@@ -351,7 +637,12 @@ namespace System.ServiceModel.Security
                             XmlElement element = node as XmlElement;
                             if (element != null)
                             {
-                                if (element.LocalName == parent.SerializerDictionary.Identifier.Value && element.NamespaceURI == parent.SerializerDictionary.Namespace.Value)
+                                if (
+                                    element.LocalName
+                                        == parent.SerializerDictionary.Identifier.Value
+                                    && element.NamespaceURI
+                                        == parent.SerializerDictionary.Namespace.Value
+                                )
                                 {
                                     contextId = XmlHelper.ReadTextElementAsUniqueId(element);
                                 }
@@ -363,7 +654,9 @@ namespace System.ServiceModel.Security
                         }
                         return new SecurityContextKeyIdentifierClause(contextId, generation);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenReferenceStyle"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("tokenReferenceStyle")
+                        );
                 }
             }
 
@@ -372,7 +665,13 @@ namespace System.ServiceModel.Security
             protected abstract UniqueId ReadGeneration(XmlDictionaryReader reader);
             protected abstract UniqueId ReadGeneration(XmlElement element);
 
-            SecurityContextSecurityToken TryResolveSecurityContextToken(UniqueId contextId, UniqueId generation, string id, SecurityTokenResolver tokenResolver, out ISecurityContextSecurityTokenCache sctCache)
+            SecurityContextSecurityToken TryResolveSecurityContextToken(
+                UniqueId contextId,
+                UniqueId generation,
+                string id,
+                SecurityTokenResolver tokenResolver,
+                out ISecurityContextSecurityTokenCache sctCache
+            )
             {
                 SecurityContextSecurityToken cachedSct = null;
                 sctCache = null;
@@ -383,13 +682,16 @@ namespace System.ServiceModel.Security
                 }
                 else if (tokenResolver is AggregateSecurityHeaderTokenResolver)
                 {
-                    // We will see if we have a ISecurityContextSecurityTokenCache in the 
+                    // We will see if we have a ISecurityContextSecurityTokenCache in the
                     // AggregateTokenResolver. We will hold the reference to the first sctCache
                     // we find.
-                    AggregateSecurityHeaderTokenResolver aggregateTokenResolve = tokenResolver as AggregateSecurityHeaderTokenResolver;
+                    AggregateSecurityHeaderTokenResolver aggregateTokenResolve =
+                        tokenResolver as AggregateSecurityHeaderTokenResolver;
                     for (int i = 0; i < aggregateTokenResolve.TokenResolvers.Count; ++i)
                     {
-                        ISecurityContextSecurityTokenCache oobTokenResolver = aggregateTokenResolve.TokenResolvers[i] as ISecurityContextSecurityTokenCache;
+                        ISecurityContextSecurityTokenCache oobTokenResolver =
+                            aggregateTokenResolve.TokenResolvers[i]
+                            as ISecurityContextSecurityTokenCache;
                         if (oobTokenResolver == null)
                         {
                             continue;
@@ -419,7 +721,10 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public override SecurityToken ReadTokenCore(XmlDictionaryReader reader, SecurityTokenResolver tokenResolver)
+            public override SecurityToken ReadTokenCore(
+                XmlDictionaryReader reader,
+                SecurityTokenResolver tokenResolver
+            )
             {
                 UniqueId contextId = null;
                 byte[] encodedCookie = null;
@@ -429,29 +734,52 @@ namespace System.ServiceModel.Security
                 Fx.Assert(reader.NodeType == XmlNodeType.Element, "");
 
                 // check if there is an id
-                string id = reader.GetAttribute(XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
+                string id = reader.GetAttribute(
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace
+                );
 
                 SecurityContextSecurityToken sct = null;
 
                 // There needs to be at least a contextId in here.
                 reader.ReadFullStartElement();
-                reader.MoveToStartElement(parent.SerializerDictionary.Identifier, parent.SerializerDictionary.Namespace);
+                reader.MoveToStartElement(
+                    parent.SerializerDictionary.Identifier,
+                    parent.SerializerDictionary.Namespace
+                );
                 contextId = reader.ReadElementContentAsUniqueId();
                 if (CanReadGeneration(reader))
                 {
                     generation = ReadGeneration(reader);
                 }
-                if (reader.IsStartElement(parent.SerializerDictionary.Cookie, XD.DotNetSecurityDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        parent.SerializerDictionary.Cookie,
+                        XD.DotNetSecurityDictionary.Namespace
+                    )
+                )
                 {
                     isCookieMode = true;
                     ISecurityContextSecurityTokenCache sctCache;
-                    sct = TryResolveSecurityContextToken(contextId, generation, id, tokenResolver, out sctCache);
+                    sct = TryResolveSecurityContextToken(
+                        contextId,
+                        generation,
+                        id,
+                        tokenResolver,
+                        out sctCache
+                    );
                     if (sct == null)
                     {
                         encodedCookie = reader.ReadElementContentAsBase64();
                         if (encodedCookie != null)
                         {
-                            sct = cookieSerializer.CreateSecurityContextFromCookie(encodedCookie, contextId, generation, id, reader.Quotas);
+                            sct = cookieSerializer.CreateSecurityContextFromCookie(
+                                encodedCookie,
+                                contextId,
+                                generation,
+                                id,
+                                reader.Quotas
+                            );
                             if (sctCache != null)
                             {
                                 sctCache.AddContext(sct);
@@ -467,38 +795,64 @@ namespace System.ServiceModel.Security
 
                 if (contextId == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoSecurityContextIdentifier)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.NoSecurityContextIdentifier))
+                    );
                 }
 
                 if (sct == null && !isCookieMode)
                 {
                     ISecurityContextSecurityTokenCache sctCache;
-                    sct = TryResolveSecurityContextToken(contextId, generation, id, tokenResolver, out sctCache);
+                    sct = TryResolveSecurityContextToken(
+                        contextId,
+                        generation,
+                        id,
+                        tokenResolver,
+                        out sctCache
+                    );
                 }
                 if (sct == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityContextTokenValidationException(SR.GetString(SR.SecurityContextNotRegistered, contextId, generation)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new SecurityContextTokenValidationException(
+                            SR.GetString(SR.SecurityContextNotRegistered, contextId, generation)
+                        )
+                    );
                 }
                 return sct;
             }
 
-            protected virtual void WriteGeneration(XmlDictionaryWriter writer, SecurityContextSecurityToken sct)
-            {
-            }
+            protected virtual void WriteGeneration(
+                XmlDictionaryWriter writer,
+                SecurityContextSecurityToken sct
+            ) { }
 
             public override void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token)
             {
                 SecurityContextSecurityToken sct = (token as SecurityContextSecurityToken);
 
                 // serialize the name and any wsu:Id attribute
-                writer.WriteStartElement(parent.SerializerDictionary.Prefix.Value, parent.SerializerDictionary.SecurityContextToken, parent.SerializerDictionary.Namespace);
+                writer.WriteStartElement(
+                    parent.SerializerDictionary.Prefix.Value,
+                    parent.SerializerDictionary.SecurityContextToken,
+                    parent.SerializerDictionary.Namespace
+                );
                 if (sct.Id != null)
                 {
-                    writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace, sct.Id);
+                    writer.WriteAttributeString(
+                        XD.UtilityDictionary.Prefix.Value,
+                        XD.UtilityDictionary.IdAttribute,
+                        XD.UtilityDictionary.Namespace,
+                        sct.Id
+                    );
                 }
 
                 // serialize the context id
-                writer.WriteStartElement(parent.SerializerDictionary.Prefix.Value, parent.SerializerDictionary.Identifier, parent.SerializerDictionary.Namespace);
+                writer.WriteStartElement(
+                    parent.SerializerDictionary.Prefix.Value,
+                    parent.SerializerDictionary.Identifier,
+                    parent.SerializerDictionary.Namespace
+                );
                 XmlHelper.WriteStringAsUniqueId(writer, sct.ContextId);
                 writer.WriteEndElement();
 
@@ -509,11 +863,17 @@ namespace System.ServiceModel.Security
                 {
                     if (sct.CookieBlob == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoCookieInSct)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MessageSecurityException(SR.GetString(SR.NoCookieInSct))
+                        );
                     }
 
                     // if the token has a cookie, write it out
-                    writer.WriteStartElement(XD.DotNetSecurityDictionary.Prefix.Value, parent.SerializerDictionary.Cookie, XD.DotNetSecurityDictionary.Namespace);
+                    writer.WriteStartElement(
+                        XD.DotNetSecurityDictionary.Prefix.Value,
+                        parent.SerializerDictionary.Cookie,
+                        XD.DotNetSecurityDictionary.Namespace
+                    );
                     writer.WriteBase64(sct.CookieBlob, 0, sct.CookieBlob.Length);
                     writer.WriteEndElement();
                 }
@@ -524,29 +884,18 @@ namespace System.ServiceModel.Security
 
         public abstract class Driver : SecureConversationDriver
         {
-            public Driver()
-            {
-            }
+            public Driver() { }
 
-            protected abstract SecureConversationDictionary DriverDictionary
-            {
-                get;
-            }
+            protected abstract SecureConversationDictionary DriverDictionary { get; }
 
             public override XmlDictionaryString IssueAction
             {
-                get
-                {
-                    return DriverDictionary.RequestSecurityContextIssuance;
-                }
+                get { return DriverDictionary.RequestSecurityContextIssuance; }
             }
 
             public override XmlDictionaryString IssueResponseAction
             {
-                get
-                {
-                    return DriverDictionary.RequestSecurityContextIssuanceResponse;
-                }
+                get { return DriverDictionary.RequestSecurityContextIssuanceResponse; }
             }
 
             public override XmlDictionaryString RenewNeededFaultCode
@@ -564,8 +913,15 @@ namespace System.ServiceModel.Security
                 if (reader == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-                reader.ReadStartElement(DriverDictionary.SecurityContextToken, DriverDictionary.Namespace);
-                UniqueId contextId = XmlHelper.ReadElementStringAsUniqueId(reader, DriverDictionary.Identifier, DriverDictionary.Namespace);
+                reader.ReadStartElement(
+                    DriverDictionary.SecurityContextToken,
+                    DriverDictionary.Namespace
+                );
+                UniqueId contextId = XmlHelper.ReadElementStringAsUniqueId(
+                    reader,
+                    DriverDictionary.Identifier,
+                    DriverDictionary.Namespace
+                );
                 while (reader.IsStartElement())
                 {
                     reader.Skip();
@@ -579,7 +935,10 @@ namespace System.ServiceModel.Security
                 if (reader == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-                return reader.IsStartElement(DriverDictionary.SecurityContextToken, DriverDictionary.Namespace);
+                return reader.IsStartElement(
+                    DriverDictionary.SecurityContextToken,
+                    DriverDictionary.Namespace
+                );
             }
         }
     }

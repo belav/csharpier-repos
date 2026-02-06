@@ -14,7 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal interface IProgressionLanguageService : ILanguageService
     {
-        IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(SyntaxNode root, CancellationToken cancellationToken);
+        IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        );
         string GetDescriptionForSymbol(ISymbol symbol, bool includeContainingSymbol);
         string GetLabelForSymbol(ISymbol symbol, bool includeContainingSymbol);
     }

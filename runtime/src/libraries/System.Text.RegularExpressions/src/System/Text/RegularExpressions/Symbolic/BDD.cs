@@ -66,7 +66,10 @@ namespace System.Text.RegularExpressions.Symbolic
 
         internal BDD(int ordinal, BDD? one, BDD? zero)
         {
-            Debug.Assert((one is null) == (zero is null), "Neither or both children should be null.");
+            Debug.Assert(
+                (one is null) == (zero is null),
+                "Neither or both children should be null."
+            );
 
             One = one;
             Zero = zero;
@@ -146,8 +149,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
         /// <summary>A shallow equality check that holds if ordinals are identical and one's are identical and zero's are identical.</summary>
         public bool Equals(BDD? bdd) =>
-            bdd is not null &&
-            (this == bdd || (Ordinal == bdd.Ordinal && One == bdd.One && Zero == bdd.Zero));
+            bdd is not null
+            && (this == bdd || (Ordinal == bdd.Ordinal && One == bdd.One && Zero == bdd.Zero));
 
         #region Serialization
 #if DEBUG // currently used only from the debug-only code that regenerates the embedded serialized BDD data
@@ -196,15 +199,17 @@ namespace System.Text.RegularExpressions.Symbolic
             result[1] = node_bits;
 
             //use the following bit layout
-            BitLayout(ordinal_bits, node_bits, out int zero_node_shift, out int one_node_shift, out int ordinal_shift);
+            BitLayout(
+                ordinal_bits,
+                node_bits,
+                out int zero_node_shift,
+                out int one_node_shift,
+                out int ordinal_shift
+            );
 
             //here we know that bdd is neither False nor True
             //but it could still be a MTBDD leaf if both children are null
-            var idmap = new Dictionary<BDD, long>
-            {
-                [True] = 1,
-                [False] = 0
-            };
+            var idmap = new Dictionary<BDD, long> { [True] = 1, [False] = 0 };
 
             // Give all nodes ascending identifiers and produce their serializations into the result
             for (int i = 0; i < nodes.Length; i++)
@@ -221,7 +226,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 else
                 {
                     // Combine ordinal and child identifiers according to the bit layout
-                    long v = (((long)node.Ordinal) << ordinal_shift) | (idmap[node.One] << one_node_shift) | (idmap[node.Zero] << zero_node_shift);
+                    long v =
+                        (((long)node.Ordinal) << ordinal_shift)
+                        | (idmap[node.One] << one_node_shift)
+                        | (idmap[node.Zero] << zero_node_shift);
                     Debug.Assert(v >= 0);
                     result[i + 2] = v; // children ids are well-defined due to the topological order of nodes
                 }
@@ -318,7 +326,26 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // k is the number of bytes needed to represent the maximal element
-            int k = m <= 0xFFFF ? 2 : (m <= 0xFF_FFFF ? 3 : (m <= 0xFFFF_FFFF ? 4 : (m <= 0xFF_FFFF_FFFF ? 5 : (m <= 0xFFFF_FFFF_FFFF ? 6 : (m <= 0xFF_FFFF_FFFF_FFFF ? 7 : 8)))));
+            int k =
+                m <= 0xFFFF
+                    ? 2
+                    : (
+                        m <= 0xFF_FFFF
+                            ? 3
+                            : (
+                                m <= 0xFFFF_FFFF
+                                    ? 4
+                                    : (
+                                        m <= 0xFF_FFFF_FFFF
+                                            ? 5
+                                            : (
+                                                m <= 0xFFFF_FFFF_FFFF
+                                                    ? 6
+                                                    : (m <= 0xFF_FFFF_FFFF_FFFF ? 7 : 8)
+                                            )
+                                    )
+                            )
+                    );
 
             // the result will contain k as the first element and the number of serialized elements times k
             byte[] result = new byte[(k * serialized.Length) + 1];
@@ -342,7 +369,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </summary>
         public static BDD Deserialize(ReadOnlySpan<byte> bytes)
         {
-            Debug.Assert(bytes.Length > 1, "All inputs are expected to be larger than a single byte, which would map to False or True.");
+            Debug.Assert(
+                bytes.Length > 1,
+                "All inputs are expected to be larger than a single byte, which would map to False or True."
+            );
 
             // here bytes represents an array of longs with k = the number of bytes used per long
             int bytesPerLong = bytes[0];
@@ -360,7 +390,13 @@ namespace System.Text.RegularExpressions.Symbolic
             // create bit masks for the sizes of ordinals and node identifiers
             long ordinal_mask = (1 << ordinal_bits) - 1;
             long node_mask = (1 << node_bits) - 1;
-            BitLayout(ordinal_bits, node_bits, out int zero_node_shift, out int one_node_shift, out int ordinal_shift);
+            BitLayout(
+                ordinal_bits,
+                node_bits,
+                out int zero_node_shift,
+                out int one_node_shift,
+                out int ordinal_shift
+            );
 
             // store BDD nodes by their id when they are created
             BDD[] nodes = new BDD[n];
@@ -405,7 +441,13 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>
         /// Use this bit layout in the serialization
         /// </summary>
-        private static void BitLayout(int ordinal_bits, int node_bits, out int zero_node_shift, out int one_node_shift, out int ordinal_shift)
+        private static void BitLayout(
+            int ordinal_bits,
+            int node_bits,
+            out int zero_node_shift,
+            out int one_node_shift,
+            out int ordinal_shift
+        )
         {
             //this bit layout seems to work best: zero,one,ord
             zero_node_shift = ordinal_bits + node_bits;
@@ -500,7 +542,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            Debug.Assert(leaf is not null, "this should never happen because there must exist another leaf besides False");
+            Debug.Assert(
+                leaf is not null,
+                "this should never happen because there must exist another leaf besides False"
+            );
             // found an MTBDD leaf and didn't find any other (non-False) leaves
             terminalActingAsTrue = leaf;
             return true;
@@ -521,10 +566,9 @@ namespace System.Text.RegularExpressions.Symbolic
 
             if (IsLeaf)
             {
-                return
-                    !other.IsLeaf || Ordinal < other.Ordinal ? -1 :
-                    Ordinal == other.Ordinal ? 0 :
-                    1;
+                return !other.IsLeaf || Ordinal < other.Ordinal ? -1
+                    : Ordinal == other.Ordinal ? 0
+                    : 1;
             }
 
             if (other.IsLeaf)
@@ -534,10 +578,9 @@ namespace System.Text.RegularExpressions.Symbolic
 
             ulong min = GetMin();
             ulong bdd_min = other.GetMin();
-            return
-                min < bdd_min ? -1 :
-                bdd_min < min ? 1 :
-                Ordinal.CompareTo(other.Ordinal);
+            return min < bdd_min ? -1
+                : bdd_min < min ? 1
+                : Ordinal.CompareTo(other.Ordinal);
         }
     }
 }

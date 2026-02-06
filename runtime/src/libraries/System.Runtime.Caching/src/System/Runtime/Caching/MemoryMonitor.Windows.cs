@@ -6,7 +6,6 @@ using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 using System.Security;
 
-
 namespace System.Runtime.Caching
 {
     internal abstract partial class MemoryMonitor

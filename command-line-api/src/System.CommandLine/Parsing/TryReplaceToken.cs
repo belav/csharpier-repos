@@ -10,5 +10,6 @@ namespace System.CommandLine.Parsing;
 /// </summary>
 public delegate bool TryReplaceToken(
     string tokenToReplace,
-    out IReadOnlyList<string>? replacementTokens, 
-    out string? errorMessage);
+    out IReadOnlyList<string>? replacementTokens,
+    out string? errorMessage
+);

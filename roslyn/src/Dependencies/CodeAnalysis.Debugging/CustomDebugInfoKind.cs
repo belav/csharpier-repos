@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Debugging
         UsingGroups = 0,
 
         /// <summary>
-        /// C# only. Indicates that per-method debug information (import strings) is stored on another method, 
+        /// C# only. Indicates that per-method debug information (import strings) is stored on another method,
         /// whose token is specified.
         /// </summary>
         /// <remarks>
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Debugging
         ForwardMethodInfo = 1,
 
         /// <summary>
-        /// C# only. Indicates that per-module debug information (assembly reference aliases) is stored on another method, 
+        /// C# only. Indicates that per-module debug information (assembly reference aliases) is stored on another method,
         /// whose token is specified.
         /// </summary>
         /// <remarks>

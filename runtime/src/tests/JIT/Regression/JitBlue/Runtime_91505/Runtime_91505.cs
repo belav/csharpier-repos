@@ -15,10 +15,10 @@ public class Runtime_91505
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static unsafe long Test()
     {
-        delegate*<void> ptr = &Foo;
+        delegate* <void> ptr = &Foo;
         return *(long*)ptr;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Foo() {}
+    private static void Foo() { }
 }

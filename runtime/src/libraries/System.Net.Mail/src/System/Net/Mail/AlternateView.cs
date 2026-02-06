@@ -11,32 +11,25 @@ namespace System.Net.Mail
     {
         private LinkedResourceCollection? _linkedResources;
 
-        internal AlternateView()
-        { }
+        internal AlternateView() { }
 
-        public AlternateView(string fileName) :
-            base(fileName)
-        { }
+        public AlternateView(string fileName)
+            : base(fileName) { }
 
-        public AlternateView(string fileName, string? mediaType) :
-            base(fileName, mediaType)
-        { }
+        public AlternateView(string fileName, string? mediaType)
+            : base(fileName, mediaType) { }
 
-        public AlternateView(string fileName, ContentType? contentType) :
-            base(fileName, contentType)
-        { }
+        public AlternateView(string fileName, ContentType? contentType)
+            : base(fileName, contentType) { }
 
-        public AlternateView(Stream contentStream) :
-            base(contentStream)
-        { }
+        public AlternateView(Stream contentStream)
+            : base(contentStream) { }
 
-        public AlternateView(Stream contentStream, string? mediaType) :
-            base(contentStream, mediaType)
-        { }
+        public AlternateView(Stream contentStream, string? mediaType)
+            : base(contentStream, mediaType) { }
 
-        public AlternateView(Stream contentStream, ContentType? contentType) :
-            base(contentStream, contentType)
-        { }
+        public AlternateView(Stream contentStream, ContentType? contentType)
+            : base(contentStream, contentType) { }
 
         public LinkedResourceCollection LinkedResources
         {
@@ -50,14 +43,8 @@ namespace System.Net.Mail
 
         public Uri? BaseUri
         {
-            get
-            {
-                return ContentLocation;
-            }
-            set
-            {
-                ContentLocation = value;
-            }
+            get { return ContentLocation; }
+            set { ContentLocation = value; }
         }
 
         public static AlternateView CreateAlternateViewFromString(string content)
@@ -67,14 +54,21 @@ namespace System.Net.Mail
             return a;
         }
 
-        public static AlternateView CreateAlternateViewFromString(string content, Encoding? contentEncoding, string? mediaType)
+        public static AlternateView CreateAlternateViewFromString(
+            string content,
+            Encoding? contentEncoding,
+            string? mediaType
+        )
         {
             AlternateView a = new AlternateView();
             a.SetContentFromString(content, contentEncoding, mediaType);
             return a;
         }
 
-        public static AlternateView CreateAlternateViewFromString(string content, ContentType? contentType)
+        public static AlternateView CreateAlternateViewFromString(
+            string content,
+            ContentType? contentType
+        )
         {
             AlternateView a = new AlternateView();
             a.SetContentFromString(content, contentType);

@@ -21,24 +21,29 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// A declaration with this name has not been encountered.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// This member is defined on the declared type or one of its base classes.
         /// </summary>
         FromDeclaredTypeOrBase = 0,
+
         /// <summary>
         /// This member is defined on a type that inherits from the declared type (is more derived).
         /// </summary>
         FromSubTypeOfDeclaredType = 1,
+
         /// <summary>
         /// This member should be hidden (under "Non-Public members" node), because Just My Code is on and
         /// no symbols have been loaded for the declaring type's module.
         /// </summary>
         HideNonPublic = 1 << 2,
+
         /// <summary>
         /// More than one non-virtual member with this name exists in the type hierarchy.
         /// The ResultProvider should include the declaring type of this member in the member name to disambiguate.
         /// </summary>
         IncludeTypeInMemberName = 1 << 3,
+
         /// <summary>
         /// The full name for this member access expression will require a cast to the declaring type.
         /// </summary>
@@ -55,7 +60,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
     internal readonly struct MemberAndDeclarationInfo
     {
-        public static readonly IComparer<MemberAndDeclarationInfo> Comparer = new MemberNameComparer();
+        public static readonly IComparer<MemberAndDeclarationInfo> Comparer =
+            new MemberNameComparer();
 
         private readonly MemberInfo _member;
 
@@ -71,7 +77,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         private readonly int _inheritanceLevel;
 
-        public MemberAndDeclarationInfo(MemberInfo member, DkmClrDebuggerBrowsableAttributeState? browsableState, DeclarationInfo info, int inheritanceLevel, bool canFavorite, bool isFavorite)
+        public MemberAndDeclarationInfo(
+            MemberInfo member,
+            DkmClrDebuggerBrowsableAttributeState? browsableState,
+            DeclarationInfo info,
+            int inheritanceLevel,
+            bool canFavorite,
+            bool isFavorite
+        )
         {
             Debug.Assert(member != null);
 
@@ -88,58 +101,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public Type DeclaringType
         {
-            get
-            {
-                return _member.DeclaringType;
-            }
+            get { return _member.DeclaringType; }
         }
 
         public bool IsPublic
         {
-            get
-            {
-                return _member.IsPublic();
-            }
+            get { return _member.IsPublic(); }
         }
 
         public bool IsStatic
         {
-            get
-            {
-                return IsMemberStatic(_member);
-            }
+            get { return IsMemberStatic(_member); }
         }
 
         public MemberTypes MemberType
         {
-            get
-            {
-                return _member.MemberType;
-            }
+            get { return _member.MemberType; }
         }
 
         public string Name
         {
-            get
-            {
-                return _member.Name;
-            }
+            get { return _member.Name; }
         }
 
         public Type Type
         {
-            get
-            {
-                return GetMemberType(_member);
-            }
+            get { return GetMemberType(_member); }
         }
 
         public Type OriginalDefinitionType
         {
-            get
-            {
-                return GetMemberType(_member.GetOriginalDefinition());
-            }
+            get { return GetMemberType(_member.GetOriginalDefinition()); }
         }
 
         private static Type GetMemberType(MemberInfo member)
@@ -233,7 +225,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     // to display more than one.
                     foreach (var accessor in accessors)
                     {
-                        foreach (var interfaceAccessor in accessor.GetExplicitInterfacesImplemented())
+                        foreach (
+                            var interfaceAccessor in accessor.GetExplicitInterfacesImplemented()
+                        )
                         {
                             memberName = memberName.Substring(dotPos + 1);
                             return interfaceAccessor.DeclaringType;

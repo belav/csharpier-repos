@@ -18,5 +18,6 @@ public interface IComplexPropertyAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context);
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    );
 }

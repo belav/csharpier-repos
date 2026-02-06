@@ -8,12 +8,16 @@ namespace System.Numerics.Tests
     public sealed class IExponentialFunctionsTests
     {
         const float baseValue = 2.1f;
-        static readonly ExponentialFunctionsDimHelper helperValue = new ExponentialFunctionsDimHelper(baseValue);
+        static readonly ExponentialFunctionsDimHelper helperValue =
+            new ExponentialFunctionsDimHelper(baseValue);
 
         [Fact]
         public static void Exp10M1Test()
         {
-            Assert.Equal(float.Exp10M1(baseValue), ExponentialFunctionsHelper<ExponentialFunctionsDimHelper>.Exp10M1(helperValue).Value);
+            Assert.Equal(
+                float.Exp10M1(baseValue),
+                ExponentialFunctionsHelper<ExponentialFunctionsDimHelper>.Exp10M1(helperValue).Value
+            );
         }
     }
 }

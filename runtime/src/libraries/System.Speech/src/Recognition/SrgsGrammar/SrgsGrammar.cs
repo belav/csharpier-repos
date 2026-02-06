@@ -98,9 +98,15 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
 
             // Write the Alphabet type if not SAPI
-            if (_hasPhoneticAlphabetBeenSet || (_phoneticAlphabet != SrgsPhoneticAlphabet.Sapi && HasPronunciation))
+            if (
+                _hasPhoneticAlphabetBeenSet
+                || (_phoneticAlphabet != SrgsPhoneticAlphabet.Sapi && HasPronunciation)
+            )
             {
-                string alphabet = _phoneticAlphabet == SrgsPhoneticAlphabet.Ipa ? "ipa" : _phoneticAlphabet == SrgsPhoneticAlphabet.Ups ? "x-microsoft-ups" : "x-microsoft-sapi";
+                string alphabet =
+                    _phoneticAlphabet == SrgsPhoneticAlphabet.Ipa ? "ipa"
+                    : _phoneticAlphabet == SrgsPhoneticAlphabet.Ups ? "x-microsoft-ups"
+                    : "x-microsoft-sapi";
 
                 writer.WriteAttributeString("sapi", "alphabet", XmlParser.sapiNamespace, alphabet);
             }
@@ -154,7 +160,14 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             // Initial values for ContainsCOde and SapiExtensionUsed.
             _isSapiExtensionUsed |= HasPronunciation;
-            _fContainsCode |= _language != null || _script.Length > 0 || _usings.Count > 0 || _assemblyReferences.Count > 0 || _codebehind.Count > 0 || _namespace != null || _fDebug;
+            _fContainsCode |=
+                _language != null
+                || _script.Length > 0
+                || _usings.Count > 0
+                || _assemblyReferences.Count > 0
+                || _codebehind.Count > 0
+                || _namespace != null
+                || _fDebug;
             _isSapiExtensionUsed |= _fContainsCode;
             // If the grammar contains no pronunciations, set the phonetic alphabet to SAPI.
             // This way, the CFG data can be loaded by SAPI 5.1.
@@ -193,12 +206,18 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
         }
 
-        IRule IGrammar.CreateRule(string id, RulePublic publicRule, RuleDynamic dynamic, bool hasScript)
+        IRule IGrammar.CreateRule(
+            string id,
+            RulePublic publicRule,
+            RuleDynamic dynamic,
+            bool hasScript
+        )
         {
             SrgsRule rule = new(id);
             if (publicRule != RulePublic.NotSet)
             {
-                rule.Scope = publicRule == RulePublic.True ? SrgsRuleScope.Public : SrgsRuleScope.Private;
+                rule.Scope =
+                    publicRule == RulePublic.True ? SrgsRuleScope.Public : SrgsRuleScope.Private;
             }
             rule.Dynamic = dynamic;
             return rule;
@@ -267,14 +286,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         string IGrammar.Root
         {
-            get
-            {
-                return _sRoot;
-            }
-            set
-            {
-                _sRoot = value;
-            }
+            get { return _sRoot; }
+            set { _sRoot = value; }
         }
 
         /// <summary>
@@ -282,14 +295,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Uri XmlBase
         {
-            get
-            {
-                return _xmlBase;
-            }
-            set
-            {
-                _xmlBase = value;
-            }
+            get { return _xmlBase; }
+            set { _xmlBase = value; }
         }
 
         /// <summary>
@@ -297,10 +304,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public CultureInfo Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
             set
             {
                 Helpers.ThrowIfNull(value, nameof(value));
@@ -316,11 +320,16 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             get
             {
-                return _mode == SrgsGrammarMode.Voice ? GrammarType.VoiceGrammar : GrammarType.DtmfGrammar;
+                return _mode == SrgsGrammarMode.Voice
+                    ? GrammarType.VoiceGrammar
+                    : GrammarType.DtmfGrammar;
             }
             set
             {
-                _mode = value == GrammarType.VoiceGrammar ? SrgsGrammarMode.Voice : SrgsGrammarMode.Dtmf;
+                _mode =
+                    value == GrammarType.VoiceGrammar
+                        ? SrgsGrammarMode.Voice
+                        : SrgsGrammarMode.Dtmf;
                 _isModeSet = true;
             }
         }
@@ -330,14 +339,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public AlphabetType PhoneticAlphabet
         {
-            get
-            {
-                return (AlphabetType)_phoneticAlphabet;
-            }
-            set
-            {
-                _phoneticAlphabet = (SrgsPhoneticAlphabet)value;
-            }
+            get { return (AlphabetType)_phoneticAlphabet; }
+            set { _phoneticAlphabet = (SrgsPhoneticAlphabet)value; }
         }
 
         /// <summary>root
@@ -345,14 +348,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public SrgsRule Root
         {
-            get
-            {
-                return _root;
-            }
-            set
-            {
-                _root = value;
-            }
+            get { return _root; }
+            set { _root = value; }
         }
 
         /// <summary>
@@ -360,14 +357,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public SrgsTagFormat TagFormat
         {
-            get
-            {
-                return _tagFormat;
-            }
-            set
-            {
-                _tagFormat = value;
-            }
+            get { return _tagFormat; }
+            set { _tagFormat = value; }
         }
 
         /// <summary>
@@ -375,14 +366,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> GlobalTags
         {
-            get
-            {
-                return _globalTags;
-            }
-            set
-            {
-                _globalTags = value;
-            }
+            get { return _globalTags; }
+            set { _globalTags = value; }
         }
 
         /// <summary>
@@ -390,14 +375,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Language
         {
-            get
-            {
-                return _language;
-            }
-            set
-            {
-                _language = value;
-            }
+            get { return _language; }
+            set { _language = value; }
         }
 
         /// <summary>
@@ -405,14 +384,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Namespace
         {
-            get
-            {
-                return _namespace;
-            }
-            set
-            {
-                _namespace = value;
-            }
+            get { return _namespace; }
+            set { _namespace = value; }
         }
 
         /// <summary>
@@ -420,14 +393,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> CodeBehind
         {
-            get
-            {
-                return _codebehind;
-            }
-            set
-            {
-                throw new InvalidOperationException();
-            }
+            get { return _codebehind; }
+            set { throw new InvalidOperationException(); }
         }
 
         /// <summary>
@@ -435,14 +402,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public bool Debug
         {
-            get
-            {
-                return _fDebug;
-            }
-            set
-            {
-                _fDebug = value;
-            }
+            get { return _fDebug; }
+            set { _fDebug = value; }
         }
 
         /// <summary>
@@ -450,10 +411,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public string Script
         {
-            get
-            {
-                return _script;
-            }
+            get { return _script; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -466,14 +424,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> ImportNamespaces
         {
-            get
-            {
-                return _usings;
-            }
-            set
-            {
-                throw new InvalidOperationException();
-            }
+            get { return _usings; }
+            set { throw new InvalidOperationException(); }
         }
 
         /// <summary>
@@ -481,14 +433,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         public Collection<string> AssemblyReferences
         {
-            get
-            {
-                return _assemblyReferences;
-            }
-            set
-            {
-                throw new InvalidOperationException();
-            }
+            get { return _assemblyReferences; }
+            set { throw new InvalidOperationException(); }
         }
         #endregion
 
@@ -499,10 +445,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         internal SrgsRulesCollection Rules
         {
-            get
-            {
-                return _rules;
-            }
+            get { return _rules; }
         }
 
         /// <summary>
@@ -510,14 +453,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         internal bool HasPronunciation
         {
-            get
-            {
-                return _hasPronunciation;
-            }
-            set
-            {
-                _hasPronunciation = value;
-            }
+            get { return _hasPronunciation; }
+            set { _hasPronunciation = value; }
         }
 
         /// <summary>
@@ -525,10 +462,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         internal bool HasPhoneticAlphabetBeenSet
         {
-            set
-            {
-                _hasPhoneticAlphabetBeenSet = value;
-            }
+            set { _hasPhoneticAlphabetBeenSet = value; }
         }
 
         /// <summary>
@@ -536,14 +470,8 @@ namespace System.Speech.Recognition.SrgsGrammar
         /// </summary>
         internal bool HasSapiExtension
         {
-            get
-            {
-                return _isSapiExtensionUsed;
-            }
-            set
-            {
-                _isSapiExtensionUsed = value;
-            }
+            get { return _isSapiExtensionUsed; }
+            set { _isSapiExtensionUsed = value; }
         }
 
         #endregion
@@ -564,7 +492,12 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Write the 'namespace' attribute
             if (_namespace != null)
             {
-                writer.WriteAttributeString("sapi", "namespace", XmlParser.sapiNamespace, _namespace);
+                writer.WriteAttributeString(
+                    "sapi",
+                    "namespace",
+                    XmlParser.sapiNamespace,
+                    _namespace
+                );
             }
 
             // Write the 'codebehind' attribute
@@ -572,7 +505,12 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 if (!string.IsNullOrEmpty(sFile))
                 {
-                    writer.WriteAttributeString("sapi", "codebehind", XmlParser.sapiNamespace, sFile);
+                    writer.WriteAttributeString(
+                        "sapi",
+                        "codebehind",
+                        XmlParser.sapiNamespace,
+                        sFile
+                    );
                 }
             }
 
@@ -602,7 +540,12 @@ namespace System.Speech.Recognition.SrgsGrammar
                 if (!string.IsNullOrEmpty(sNamespace))
                 {
                     writer.WriteStartElement("sapi", "importNamespace", XmlParser.sapiNamespace);
-                    writer.WriteAttributeString("sapi", "namespace", XmlParser.sapiNamespace, sNamespace);
+                    writer.WriteAttributeString(
+                        "sapi",
+                        "namespace",
+                        XmlParser.sapiNamespace,
+                        sNamespace
+                    );
                     writer.WriteEndElement();
                 }
             }
@@ -641,7 +584,7 @@ namespace System.Speech.Recognition.SrgsGrammar
 
         #region Private Fields
 
-        private bool _isSapiExtensionUsed;  // Set in *.Validate()
+        private bool _isSapiExtensionUsed; // Set in *.Validate()
 
         private Uri _xmlBase;
 
@@ -667,7 +610,7 @@ namespace System.Speech.Recognition.SrgsGrammar
 
         private string _sRoot;
 
-        internal bool _fContainsCode;  // Set in *.Validate()
+        internal bool _fContainsCode; // Set in *.Validate()
 
         // .NET Language for this grammar
         private string _language;
@@ -693,6 +636,5 @@ namespace System.Speech.Recognition.SrgsGrammar
         // .NET Namespaces to import
         private Collection<string> _assemblyReferences = new();
         #endregion
-
     }
 }

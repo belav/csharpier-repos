@@ -18,38 +18,74 @@ namespace System.Activities.Core.Presentation
         public static readonly DependencyProperty DisplayHintTextProperty =
             DependencyProperty.Register("DisplayHintText", typeof(bool), typeof(CaseKeyBox));
 
-        public static readonly DependencyProperty LabelTextProperty =
-          DependencyProperty.Register("LabelText", typeof(string), typeof(CaseKeyBox), new UIPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty LabelTextProperty = DependencyProperty.Register(
+            "LabelText",
+            typeof(string),
+            typeof(CaseKeyBox),
+            new UIPropertyMetadata(string.Empty)
+        );
 
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(object), typeof(CaseKeyBox), new PropertyMetadata(OnValueChanged));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+            "Value",
+            typeof(object),
+            typeof(CaseKeyBox),
+            new PropertyMetadata(OnValueChanged)
+        );
 
-        public static readonly DependencyProperty ValueTypeProperty =
-            DependencyProperty.Register("ValueType", typeof(Type), typeof(CaseKeyBox), new PropertyMetadata(OnValueTypeChanged));
+        public static readonly DependencyProperty ValueTypeProperty = DependencyProperty.Register(
+            "ValueType",
+            typeof(Type),
+            typeof(CaseKeyBox),
+            new PropertyMetadata(OnValueTypeChanged)
+        );
 
         public static readonly DependencyProperty EditorAutomationNameProperty =
             DependencyProperty.Register("EditorAutomationName", typeof(string), typeof(CaseKeyBox));
 
         public static readonly DependencyProperty ComboBoxAutomationNameProperty =
-            DependencyProperty.Register("ComboBoxAutomationName", typeof(string), typeof(CaseKeyBox));
+            DependencyProperty.Register(
+                "ComboBoxAutomationName",
+                typeof(string),
+                typeof(CaseKeyBox)
+            );
 
-        public static RoutedEvent ValueCommittedEvent =
-            EventManager.RegisterRoutedEvent("ValueCommitted", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CaseKeyBox));
+        public static RoutedEvent ValueCommittedEvent = EventManager.RegisterRoutedEvent(
+            "ValueCommitted",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(CaseKeyBox)
+        );
 
-        public static RoutedEvent EditCancelledEvent =
-            EventManager.RegisterRoutedEvent("EditCancelled", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CaseKeyBox));
+        public static RoutedEvent EditCancelledEvent = EventManager.RegisterRoutedEvent(
+            "EditCancelled",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(CaseKeyBox)
+        );
 
         public static readonly DependencyProperty CaseKeyValidationCallbackProperty =
-            DependencyProperty.Register("CaseKeyValidationCallback", typeof(CaseKeyValidationCallbackDelegate), typeof(CaseKeyBox));
+            DependencyProperty.Register(
+                "CaseKeyValidationCallback",
+                typeof(CaseKeyValidationCallbackDelegate),
+                typeof(CaseKeyBox)
+            );
 
         public static readonly DependencyProperty ErrorCallbackProperty =
-            DependencyProperty.Register("ErrorCallback", typeof(Action<CaseKeyBox>), typeof(CaseKeyBox));
+            DependencyProperty.Register(
+                "ErrorCallback",
+                typeof(Action<CaseKeyBox>),
+                typeof(CaseKeyBox)
+            );
 
         public static readonly DependencyProperty CommitExplicitlyProperty =
-            DependencyProperty.Register("CommitExplicitly", typeof(bool), typeof(CaseKeyBox), new PropertyMetadata(false));
+            DependencyProperty.Register(
+                "CommitExplicitly",
+                typeof(bool),
+                typeof(CaseKeyBox),
+                new PropertyMetadata(false)
+            );
 
         Control visibleBox;
-
 
         public CaseKeyBox()
         {
@@ -85,7 +121,12 @@ namespace System.Activities.Core.Presentation
 
         public CaseKeyValidationCallbackDelegate CaseKeyValidationCallback
         {
-            get { return (CaseKeyValidationCallbackDelegate)GetValue(CaseKeyValidationCallbackProperty); }
+            get
+            {
+                return (CaseKeyValidationCallbackDelegate)GetValue(
+                    CaseKeyValidationCallbackProperty
+                );
+            }
             set { SetValue(CaseKeyValidationCallbackProperty, value); }
         }
 
@@ -133,23 +174,33 @@ namespace System.Activities.Core.Presentation
             DisableKeyboardLostFocus();
             ErrorReporting.ShowErrorMessage(errorMessage);
 
-            this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (Action)(() =>
-            {
-                if (this.ErrorCallback != null)
-                {
-                    this.ErrorCallback(this);
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (Action)(() =>
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.ApplicationIdle,
+                (Action)(
+                    () =>
                     {
-                        RegainFocus();
-                        EnableKeyboardLostFocus();
-                    }));
-                }
-                else
-                {
-                    RegainFocus();
-                    EnableKeyboardLostFocus();
-                }
-            }));
+                        if (this.ErrorCallback != null)
+                        {
+                            this.ErrorCallback(this);
+                            this.Dispatcher.BeginInvoke(
+                                DispatcherPriority.ApplicationIdle,
+                                (Action)(
+                                    () =>
+                                    {
+                                        RegainFocus();
+                                        EnableKeyboardLostFocus();
+                                    }
+                                )
+                            );
+                        }
+                        else
+                        {
+                            RegainFocus();
+                            EnableKeyboardLostFocus();
+                        }
+                    }
+                )
+            );
         }
 
         void OnBoxMouseUp(object sender, MouseButtonEventArgs e)
@@ -207,12 +258,18 @@ namespace System.Activities.Core.Presentation
 
         public CaseKeyBoxViewModel ViewModel { get; set; }
 
-        static void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
+        static void OnValueChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs eventArgs
+        )
         {
             ((CaseKeyBox)sender).ViewModel.OnValueChanged();
         }
 
-        static void OnValueTypeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
+        static void OnValueTypeChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs eventArgs
+        )
         {
             ((CaseKeyBox)sender).ViewModel.OnValueTypeChanged();
         }
@@ -274,14 +331,21 @@ namespace System.Activities.Core.Presentation
                 {
                     if (!string.IsNullOrEmpty(ComboBoxAutomationName))
                     {
-                        comboBox.SetValue(AutomationProperties.NameProperty, ComboBoxAutomationName);
+                        comboBox.SetValue(
+                            AutomationProperties.NameProperty,
+                            ComboBoxAutomationName
+                        );
                     }
                     if (comboBox.IsEditable && comboBox.Template != null)
                     {
-                        var comboBoxTextBox = comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
+                        var comboBoxTextBox =
+                            comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
                         if (comboBoxTextBox != null && !string.IsNullOrEmpty(EditorAutomationName))
                         {
-                            comboBoxTextBox.SetValue(AutomationProperties.NameProperty, EditorAutomationName);
+                            comboBoxTextBox.SetValue(
+                                AutomationProperties.NameProperty,
+                                EditorAutomationName
+                            );
                         }
                     }
                 }
@@ -345,7 +409,9 @@ namespace System.Activities.Core.Presentation
         {
             if (sender is TextBox)
             {
-                BindingExpression binding = ((TextBox)sender).GetBindingExpression(TextBox.TextProperty);
+                BindingExpression binding = ((TextBox)sender).GetBindingExpression(
+                    TextBox.TextProperty
+                );
                 if (binding != null)
                 {
                     binding.UpdateSource();
@@ -353,7 +419,9 @@ namespace System.Activities.Core.Presentation
             }
             else if (sender is ComboBox)
             {
-                BindingExpression binding = ((ComboBox)sender).GetBindingExpression(ComboBox.TextProperty);
+                BindingExpression binding = ((ComboBox)sender).GetBindingExpression(
+                    ComboBox.TextProperty
+                );
                 if (binding != null)
                 {
                     binding.UpdateSource();
@@ -368,5 +436,4 @@ namespace System.Activities.Core.Presentation
             this.ViewModel.ResetText();
         }
     }
-
 }

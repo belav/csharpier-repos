@@ -16,12 +16,16 @@ namespace System.Diagnostics.Tracing
             this.elementInfo = elementInfo;
         }
 
-        internal TraceLoggingTypeInfo ElementInfo { get { return elementInfo; } }
+        internal TraceLoggingTypeInfo ElementInfo
+        {
+            get { return elementInfo; }
+        }
 
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);

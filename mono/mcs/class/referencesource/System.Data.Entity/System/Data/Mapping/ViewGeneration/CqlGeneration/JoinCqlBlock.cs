@@ -7,13 +7,13 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
-using System.Text;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {
@@ -27,12 +27,14 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         /// Creates a join block (type given by <paramref name="opType"/>) with SELECT (<paramref name="slotInfos"/>), FROM (<paramref name="children"/>),
         /// ON (<paramref name="onClauses"/> - one for each child except 0th), WHERE (true), AS (<paramref name="blockAliasNum"/>).
         /// </summary>
-        internal JoinCqlBlock(CellTreeOpType opType,
-                              SlotInfo[] slotInfos,
-                              List<CqlBlock> children,
-                              List<OnClause> onClauses,
-                              CqlIdentifiers identifiers,
-                              int blockAliasNum)
+        internal JoinCqlBlock(
+            CellTreeOpType opType,
+            SlotInfo[] slotInfos,
+            List<CqlBlock> children,
+            List<OnClause> onClauses,
+            CqlIdentifiers identifiers,
+            int blockAliasNum
+        )
             : base(slotInfos, children, BoolExpression.True, identifiers, blockAliasNum)
         {
             m_opType = opType;
@@ -46,7 +48,11 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         #endregion
 
         #region Methods
-        internal override StringBuilder AsEsql(StringBuilder builder, bool isTopLevel, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            bool isTopLevel,
+            int indentLevel
+        )
         {
             // The SELECT part.
             StringUtil.IndentNewLine(builder, indentLevel);
@@ -57,7 +63,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                        * see QualifiedSlot and QualifiedCellIdBoolean for more info. */
                 false,
                 indentLevel,
-                isTopLevel);
+                isTopLevel
+            );
             StringUtil.IndentNewLine(builder, indentLevel);
 
             // The FROM part by joining all the children using ON Clauses.
@@ -72,8 +79,7 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 }
                 builder.Append(" (");
                 child.AsEsql(builder, false, indentLevel + 1);
-                builder.Append(") AS ")
-                       .Append(child.CqlAlias);
+                builder.Append(") AS ").Append(child.CqlAlias);
 
                 // The ON part.
                 if (i > 0)
@@ -91,8 +97,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         {
             // The FROM part:
             //  - build a tree of binary joins out of the inputs (this.Children).
-            //  - update each child block with its relative position in the join tree, 
-            //    so that QualifiedSlot and QualifiedCellIdBoolean objects could find their 
+            //  - update each child block with its relative position in the join tree,
+            //    so that QualifiedSlot and QualifiedCellIdBoolean objects could find their
             //    designated block areas inside the cumulative join row passed into their AsCqt(row) method.
             CqlBlock leftmostBlock = this.Children[0];
             DbExpression left = leftmostBlock.AsCqt(false);
@@ -102,7 +108,9 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 // Join the current left expression (a tree) to the current right block.
                 CqlBlock rightBlock = this.Children[i];
                 DbExpression right = rightBlock.AsCqt(false);
-                Func<DbExpression, DbExpression, DbExpression> joinConditionFunc = m_onClauses[i - 1].AsCqt;
+                Func<DbExpression, DbExpression, DbExpression> joinConditionFunc = m_onClauses[
+                    i - 1
+                ].AsCqt;
                 DbJoinExpression join;
                 switch (m_opType)
                 {
@@ -123,7 +131,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 if (i == 1)
                 {
                     // Assign the joinTreeContext to the leftmost block.
-                    leftmostBlock.SetJoinTreeContext(joinTreeCtxParentQualifiers, join.Left.VariableName);
+                    leftmostBlock.SetJoinTreeContext(
+                        joinTreeCtxParentQualifiers,
+                        join.Left.VariableName
+                    );
                 }
                 else
                 {
@@ -163,9 +174,19 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             /// <summary>
             /// Adds an <see cref="SingleClause"/> element for a join of the form <paramref name="leftSlot"/> = <paramref name="rightSlot"/>.
             /// </summary>
-            internal void Add(QualifiedSlot leftSlot, MemberPath leftSlotOutputMember, QualifiedSlot rightSlot, MemberPath rightSlotOutputMember)
+            internal void Add(
+                QualifiedSlot leftSlot,
+                MemberPath leftSlotOutputMember,
+                QualifiedSlot rightSlot,
+                MemberPath rightSlotOutputMember
+            )
             {
-                SingleClause singleClause = new SingleClause(leftSlot, leftSlotOutputMember, rightSlot, rightSlotOutputMember);
+                SingleClause singleClause = new SingleClause(
+                    leftSlot,
+                    leftSlotOutputMember,
+                    rightSlot,
+                    rightSlotOutputMember
+                );
                 m_singleClauses.Add(singleClause);
             }
 
@@ -213,7 +234,12 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             /// </summary>
             private sealed class SingleClause : InternalBase
             {
-                internal SingleClause(QualifiedSlot leftSlot, MemberPath leftSlotOutputMember, QualifiedSlot rightSlot, MemberPath rightSlotOutputMember)
+                internal SingleClause(
+                    QualifiedSlot leftSlot,
+                    MemberPath leftSlotOutputMember,
+                    QualifiedSlot rightSlot,
+                    MemberPath rightSlotOutputMember
+                )
                 {
                     m_leftSlot = leftSlot;
                     m_leftSlotOutputMember = leftSlotOutputMember;
@@ -234,9 +260,10 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 /// </summary>
                 internal StringBuilder AsEsql(StringBuilder builder)
                 {
-                    builder.Append(m_leftSlot.GetQualifiedCqlName(m_leftSlotOutputMember))
-                           .Append(" = ")
-                           .Append(m_rightSlot.GetQualifiedCqlName(m_rightSlotOutputMember));
+                    builder
+                        .Append(m_leftSlot.GetQualifiedCqlName(m_leftSlotOutputMember))
+                        .Append(" = ")
+                        .Append(m_rightSlot.GetQualifiedCqlName(m_rightSlotOutputMember));
                     return builder;
                 }
 
@@ -245,7 +272,9 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
                 /// </summary>
                 internal DbExpression AsCqt(DbExpression leftRow, DbExpression rightRow)
                 {
-                    return m_leftSlot.AsCqt(leftRow, m_leftSlotOutputMember).Equal(m_rightSlot.AsCqt(rightRow, m_rightSlotOutputMember));
+                    return m_leftSlot
+                        .AsCqt(leftRow, m_leftSlotOutputMember)
+                        .Equal(m_rightSlot.AsCqt(rightRow, m_rightSlotOutputMember));
                 }
 
                 internal override void ToCompactString(StringBuilder builder)

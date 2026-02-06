@@ -14,8 +14,7 @@ namespace System.ServiceModel
         InstanceContext callbackInstance;
         ServiceEndpoint endpoint;
 
-        public ServiceEndpointTrait(ServiceEndpoint endpoint,
-            InstanceContext callbackInstance)
+        public ServiceEndpointTrait(ServiceEndpoint endpoint, InstanceContext callbackInstance)
         {
             this.endpoint = endpoint;
             this.callbackInstance = callbackInstance;
@@ -24,7 +23,8 @@ namespace System.ServiceModel
         public override bool Equals(object obj)
         {
             ServiceEndpointTrait<TChannel> trait1 = obj as ServiceEndpointTrait<TChannel>;
-            if (trait1 == null) return false;
+            if (trait1 == null)
+                return false;
 
             if (!object.ReferenceEquals(this.callbackInstance, trait1.callbackInstance))
                 return false;

@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo, IEquatable<NativeFormatRuntimeNamedTypeInfo>
+    internal sealed partial class NativeFormatRuntimeNamedTypeInfo
+        : RuntimeNamedTypeInfo,
+            IEquatable<NativeFormatRuntimeNamedTypeInfo>
     {
         //
         // Key for unification.
@@ -27,7 +28,11 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             //    We allow it to ride along in the key object because the ConcurrentUnifier classes we use don't support passing "extra" parameters to
             //    their Factory methods.
             //
-            public UnificationKey(MetadataReader reader, TypeDefinitionHandle typeDefinitionHandle, RuntimeTypeHandle typeHandle)
+            public UnificationKey(
+                MetadataReader reader,
+                TypeDefinitionHandle typeDefinitionHandle,
+                RuntimeTypeHandle typeHandle
+            )
             {
                 Reader = reader;
                 TypeDefinitionHandle = typeDefinitionHandle;

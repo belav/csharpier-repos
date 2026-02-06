@@ -17,7 +17,8 @@ namespace System.Configuration
             EnsureStaticPropertyBag();
         }
 
-        protected internal override ConfigurationPropertyCollection Properties => EnsureStaticPropertyBag();
+        protected internal override ConfigurationPropertyCollection Properties =>
+            EnsureStaticPropertyBag();
 
         private static ConfigurationPropertyCollection EnsureStaticPropertyBag()
         {
@@ -49,13 +50,19 @@ namespace System.Configuration
         protected internal override void DeserializeSection(XmlReader xmlReader)
         {
             if (!xmlReader.Read() || (xmlReader.NodeType != XmlNodeType.Element))
-                throw new ConfigurationErrorsException(SR.Config_base_expected_to_find_element, xmlReader);
+                throw new ConfigurationErrorsException(
+                    SR.Config_base_expected_to_find_element,
+                    xmlReader
+                );
             _rawXml = xmlReader.ReadOuterXml();
             _isModified = true;
         }
 
-        protected internal override string SerializeSection(ConfigurationElement parentSection, string name,
-            ConfigurationSaveMode saveMode)
+        protected internal override string SerializeSection(
+            ConfigurationElement parentSection,
+            string name,
+            ConfigurationSaveMode saveMode
+        )
         {
             return _rawXml;
         }

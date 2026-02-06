@@ -45,8 +45,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
             if (processId == 1)
             {
-                return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NOTIFY_SOCKET")) ||
-                       !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("LISTEN_PID"));
+                return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NOTIFY_SOCKET"))
+                    || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("LISTEN_PID"));
             }
 
             try
@@ -57,9 +57,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
                 byte[] comm = File.ReadAllBytes("/proc/" + ppidString + "/comm");
                 return comm.AsSpan().SequenceEqual("systemd\n"u8);
             }
-            catch
-            {
-            }
+            catch { }
 
             return false;
         }

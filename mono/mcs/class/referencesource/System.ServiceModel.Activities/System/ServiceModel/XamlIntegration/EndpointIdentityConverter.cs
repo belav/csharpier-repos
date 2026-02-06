@@ -11,8 +11,11 @@ namespace System.ServiceModel.XamlIntegration
     using System.Runtime;
     using System.Windows.Markup;
 
-    [SuppressMessage(FxCop.Category.Xaml, "XAML1012",
-        Justification = "ConvertFrom methods are not required for MarkupExtension converters")]
+    [SuppressMessage(
+        FxCop.Category.Xaml,
+        "XAML1012",
+        Justification = "ConvertFrom methods are not required for MarkupExtension converters"
+    )]
     public class EndpointIdentityConverter : TypeConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -24,7 +27,12 @@ namespace System.ServiceModel.XamlIntegration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null)
             {

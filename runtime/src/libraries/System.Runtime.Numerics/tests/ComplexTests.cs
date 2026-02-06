@@ -22,24 +22,33 @@ namespace System.Numerics.Tests
             0,
             double.Epsilon,
             1,
-            double.MaxValue
+            double.MaxValue,
         };
 
         public static readonly double[] s_invalidDoubleValues = new double[]
         {
             double.NegativeInfinity,
             double.PositiveInfinity,
-            double.NaN
+            double.NaN,
         };
 
         public static readonly double[] s_typicalPhaseValues = new double[]
         {
-            -Math.PI/2,
+            -Math.PI / 2,
             0,
-            Math.PI/2
+            Math.PI / 2,
         };
 
-        public static string[] s_supportedStandardNumericFormats = new string[] { "C", "E", "F", "G", "N", "P", "R" };
+        public static string[] s_supportedStandardNumericFormats = new string[]
+        {
+            "C",
+            "E",
+            "F",
+            "G",
+            "N",
+            "P",
+            "R",
+        };
 
         [Fact]
         public static void Zero()
@@ -101,25 +110,85 @@ namespace System.Numerics.Tests
         public static IEnumerable<object[]> Random_4_TestData()
         {
             // First quadrant, first quadrant
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), RandomPositiveDouble(), RandomPositiveDouble() };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+            };
             // First quadrant, second quadrant
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), RandomNegativeDouble(), RandomPositiveDouble() };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+            };
             // First quadrant, third quadrant
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
             // First quadrant, fourth quadrant
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), RandomPositiveDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+            };
             // Second quadrant, second quadrant
-            yield return new object[] { RandomNegativeDouble(), RandomPositiveDouble(), RandomNegativeDouble(), RandomPositiveDouble() };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+            };
             // Second quadrant, third quadrant
-            yield return new object[] { RandomNegativeDouble(), RandomPositiveDouble(), RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
             // Second quadrant, fourth quadrant
-            yield return new object[] { RandomNegativeDouble(), RandomPositiveDouble(), RandomPositiveDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+            };
             // Third quadrant, third quadrant
-            yield return new object[] { RandomNegativeDouble(), RandomNegativeDouble(), RandomPositiveDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+            };
             // Third quadrant, fourth quadrant
-            yield return new object[] { RandomNegativeDouble(), RandomNegativeDouble(), RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
             // Fourth quadrant, fourth quadrant
-            yield return new object[] { RandomPositiveDouble(), RandomNegativeDouble(), RandomPositiveDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+                RandomPositiveDouble(),
+                RandomNegativeDouble(),
+            };
         }
 
         public static IEnumerable<object[]> SmallRandom_2_TestData()
@@ -133,25 +202,85 @@ namespace System.Numerics.Tests
         public static IEnumerable<object[]> SmallRandom_4_TestData()
         {
             // First quadrant, first quadrant
-            yield return new object[] { SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomPositiveDouble() };
+            yield return new object[]
+            {
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+            };
             // First quadrant, second quadrant
-            yield return new object[] { SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomPositiveDouble() };
+            yield return new object[]
+            {
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+            };
             // First quadrant, third quadrant
-            yield return new object[] { SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // First quadrant, fourth quadrant
-            yield return new object[] { SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // Second quadrant, second quadrant
-            yield return new object[] { SmallRandomNegativeDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomPositiveDouble() };
+            yield return new object[]
+            {
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+            };
             // Second quadrant, third quadrant
-            yield return new object[] { SmallRandomNegativeDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // Second quadrant, fourth quadrant
-            yield return new object[] { SmallRandomNegativeDouble(), SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // Third quadrant, third quadrant
-            yield return new object[] { SmallRandomNegativeDouble(), SmallRandomNegativeDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // Third quadrant, fourth quadrant
-            yield return new object[] { SmallRandomNegativeDouble(), SmallRandomNegativeDouble(), SmallRandomNegativeDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble(),
+            };
             // Fourth quadrant, fourth quadrant
-            yield return new object[] { SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomPositiveDouble(), SmallRandomNegativeDouble() };
+            yield return new object[]
+            {
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble(),
+            };
         }
 
         public static IEnumerable<object[]> Boundaries_2_TestData()
@@ -185,13 +314,43 @@ namespace System.Numerics.Tests
         {
             foreach (double invalidReal in s_invalidDoubleValues)
             {
-                yield return new object[] { invalidReal, SmallRandomPositiveDouble(), SmallRandomPositiveDouble(), SmallRandomPositiveDouble() }; // Invalid real
-                yield return new object[] { invalidReal, SmallRandomPositiveDouble(), SmallRandomNegativeDouble(), SmallRandomPositiveDouble() }; // Invalid real
+                yield return new object[]
+                {
+                    invalidReal,
+                    SmallRandomPositiveDouble(),
+                    SmallRandomPositiveDouble(),
+                    SmallRandomPositiveDouble(),
+                }; // Invalid real
+                yield return new object[]
+                {
+                    invalidReal,
+                    SmallRandomPositiveDouble(),
+                    SmallRandomNegativeDouble(),
+                    SmallRandomPositiveDouble(),
+                }; // Invalid real
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
-                    yield return new object[] { SmallRandomPositiveDouble(), invalidImaginary, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() }; // Invalid imaginary
-                    yield return new object[] { SmallRandomPositiveDouble(), invalidImaginary, SmallRandomPositiveDouble(), SmallRandomNegativeDouble() }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        SmallRandomPositiveDouble(),
+                        invalidImaginary,
+                        SmallRandomPositiveDouble(),
+                        SmallRandomPositiveDouble(),
+                    }; // Invalid imaginary
+                    yield return new object[]
+                    {
+                        SmallRandomPositiveDouble(),
+                        invalidImaginary,
+                        SmallRandomPositiveDouble(),
+                        SmallRandomNegativeDouble(),
+                    }; // Invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        SmallRandomPositiveDouble(),
+                        SmallRandomPositiveDouble(),
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
@@ -221,11 +380,28 @@ namespace System.Numerics.Tests
             // Invalid values
             foreach (double invalidReal in s_invalidDoubleValues)
             {
-                yield return new object[] { invalidReal, RandomPositiveDouble(), Math.Abs(invalidReal) }; // Invalid real
+                yield return new object[]
+                {
+                    invalidReal,
+                    RandomPositiveDouble(),
+                    Math.Abs(invalidReal),
+                }; // Invalid real
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
-                    yield return new object[] { RandomPositiveDouble(), invalidImaginary, Math.Abs(invalidImaginary) }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, (double.IsNaN(invalidReal) || double.IsNaN(invalidImaginary)) ? double.NaN : double.PositiveInfinity }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        RandomPositiveDouble(),
+                        invalidImaginary,
+                        Math.Abs(invalidImaginary),
+                    }; // Invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        (double.IsNaN(invalidReal) || double.IsNaN(invalidImaginary))
+                            ? double.NaN
+                            : double.PositiveInfinity,
+                    }; // Invalid real, invalid imaginary
                 }
             }
 
@@ -242,11 +418,21 @@ namespace System.Numerics.Tests
 
             // Infinities in any slot return +inf paired with any other argument except NaN.
             yield return new object[] { double.NegativeInfinity, 0.0, double.PositiveInfinity };
-            yield return new object[] { double.MaxValue, double.NegativeInfinity, double.PositiveInfinity };
-            yield return new object[] { double.PositiveInfinity, double.NegativeInfinity, double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+            };
 
             // NaN in any slot returns NaN.
-            yield return new object[] { double.NaN, 0, double.NaN };  // Regression test: Complex.Abs() is inconsistent on NaN / Complex
+            yield return new object[] { double.NaN, 0, double.NaN }; // Regression test: Complex.Abs() is inconsistent on NaN / Complex
             yield return new object[] { 0.0, double.NaN, double.NaN };
             yield return new object[] { double.MaxValue, double.NaN, double.NaN };
             yield return new object[] { double.NaN, double.NegativeInfinity, double.NaN };
@@ -260,12 +446,28 @@ namespace System.Numerics.Tests
             var complex = new Complex(real, imaginary);
             double abs = Complex.Abs(complex);
 
-            Assert.True((abs.Equals(expected) || IsDiffTolerable(abs, expected)),
-                string.Format("Abs({0}, {1}) Actual: {2}, Expected: {3}", real, imaginary, abs, expected));
+            Assert.True(
+                (abs.Equals(expected) || IsDiffTolerable(abs, expected)),
+                string.Format(
+                    "Abs({0}, {1}) Actual: {2}, Expected: {3}",
+                    real,
+                    imaginary,
+                    abs,
+                    expected
+                )
+            );
 
             double absNegative = Complex.Abs(-complex);
-            Assert.True(absNegative.Equals(abs),
-                string.Format("Abs({0}, {1}) = {2} != Abs(-neg)={3}", real, imaginary, abs, absNegative));
+            Assert.True(
+                absNegative.Equals(abs),
+                string.Format(
+                    "Abs({0}, {1}) = {2} != Abs(-neg)={3}",
+                    real,
+                    imaginary,
+                    abs,
+                    absNegative
+                )
+            );
         }
 
         public static IEnumerable<object[]> ACos_Basic_TestData()
@@ -292,8 +494,13 @@ namespace System.Numerics.Tests
             if (!real.Equals(acosComplex.Real) || !imaginary.Equals(acosComplex.Imaginary))
             {
                 double realDiff = Math.Abs(Math.Abs(real) - Math.Abs(acosComplex.Real));
-                double imaginaryDiff = Math.Abs(Math.Abs(imaginary) - Math.Abs(acosComplex.Imaginary));
-                Assert.False((realDiff > 0.1) || (imaginaryDiff > 0.1), string.Format("({0}) != ACos(Cos():{1}):{2}", complex, cosComplex, acosComplex));
+                double imaginaryDiff = Math.Abs(
+                    Math.Abs(imaginary) - Math.Abs(acosComplex.Imaginary)
+                );
+                Assert.False(
+                    (realDiff > 0.1) || (imaginaryDiff > 0.1),
+                    string.Format("({0}) != ACos(Cos():{1}):{2}", complex, cosComplex, acosComplex)
+                );
             }
         }
 
@@ -310,20 +517,55 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, -1234000000, 1.5707963267948966, 21.62667394298955 }; // Imaginary part is negative
 
             // Extreme values
-            yield return new object[] { double.MaxValue, 0.0, 0.0, Math.Log(2.0) + Math.Log(double.MaxValue) };
-            yield return new object[] { 0.0, double.MaxValue, Math.PI / 2.0, -(Math.Log(2.0) + Math.Log(double.MaxValue)) };
-            yield return new object[] { -double.MaxValue, -double.MaxValue, 3.0 / 4.0 * Math.PI, Math.Log(2.0 * Math.Sqrt(2.0)) + Math.Log(double.MaxValue) };
+            yield return new object[]
+            {
+                double.MaxValue,
+                0.0,
+                0.0,
+                Math.Log(2.0) + Math.Log(double.MaxValue),
+            };
+            yield return new object[]
+            {
+                0.0,
+                double.MaxValue,
+                Math.PI / 2.0,
+                -(Math.Log(2.0) + Math.Log(double.MaxValue)),
+            };
+            yield return new object[]
+            {
+                -double.MaxValue,
+                -double.MaxValue,
+                3.0 / 4.0 * Math.PI,
+                Math.Log(2.0 * Math.Sqrt(2.0)) + Math.Log(double.MaxValue),
+            };
 
             // NaN values
             yield return new object[] { double.NaN, double.NaN, double.NaN, double.NaN };
             yield return new object[] { -1.0, double.NaN, double.NaN, double.NaN };
-            yield return new object[] { double.NegativeInfinity, double.NaN, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.NaN,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { double.NaN, 0.0, double.NaN, double.NaN };
-            yield return new object[] { double.NaN, double.PositiveInfinity, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NaN,
+                double.PositiveInfinity,
+                double.NaN,
+                double.NaN,
+            };
         }
 
         [Theory, MemberData(nameof(ACos_Advanced_TestData))]
-        public static void ACos_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void ACos_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Acos(complex);
@@ -345,7 +587,13 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
@@ -356,18 +604,47 @@ namespace System.Numerics.Tests
             yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), 0, 0 }; // x + 0 = x
 
             // Boundary values
-            yield return new object[] { double.MaxValue, double.MaxValue, RandomPositiveDouble(), RandomPositiveDouble() };
-            yield return new object[] { double.MaxValue, double.MaxValue, RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
 
-            yield return new object[] { double.MinValue, double.MinValue, RandomPositiveDouble(), RandomPositiveDouble() };
-            yield return new object[] { double.MinValue, double.MinValue, RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Add_TestData))]
         [MemberData(nameof(Random_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void Add(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void Add(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
@@ -389,7 +666,12 @@ namespace System.Numerics.Tests
         [MemberData(nameof(Add_TestData))]
         [MemberData(nameof(Random_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void AddDouble(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void AddDouble(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
@@ -443,23 +725,64 @@ namespace System.Numerics.Tests
             // Extremely tiny values
             yield return new object[] { 1.0 / double.MaxValue, 0.0, 1.0 / double.MaxValue, 0.0 };
             yield return new object[] { 0.0, -1.0 / double.MaxValue, 0.0, -1.0 / double.MaxValue };
-            yield return new object[] { -1.0 / double.MaxValue, 1.0 / double.MaxValue, -1.0 / double.MaxValue, 1.0 / double.MaxValue };
+            yield return new object[]
+            {
+                -1.0 / double.MaxValue,
+                1.0 / double.MaxValue,
+                -1.0 / double.MaxValue,
+                1.0 / double.MaxValue,
+            };
 
             // Extremely large values
-            yield return new object[] { double.MaxValue, 0.0, Math.PI / 2.0, Math.Log(2.0) + Math.Log(double.MaxValue) };
-            yield return new object[] { 0.0, double.MaxValue, 0.0, Math.Log(2.0) + Math.Log(double.MaxValue) };
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.PI / 4.0, Math.Log(2.0 * Math.Sqrt(2.0)) + Math.Log(double.MaxValue) };
+            yield return new object[]
+            {
+                double.MaxValue,
+                0.0,
+                Math.PI / 2.0,
+                Math.Log(2.0) + Math.Log(double.MaxValue),
+            };
+            yield return new object[]
+            {
+                0.0,
+                double.MaxValue,
+                0.0,
+                Math.Log(2.0) + Math.Log(double.MaxValue),
+            };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.PI / 4.0,
+                Math.Log(2.0 * Math.Sqrt(2.0)) + Math.Log(double.MaxValue),
+            };
 
             // NaN values
             yield return new object[] { double.NaN, double.NaN, double.NaN, double.NaN };
             yield return new object[] { 0.0, double.NaN, double.NaN, double.NaN };
-            yield return new object[] { double.PositiveInfinity, double.NaN, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.NaN,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { double.NaN, 1.0, double.NaN, double.NaN };
-            yield return new object[] { double.NaN, double.NegativeInfinity, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NaN,
+                double.NegativeInfinity,
+                double.NaN,
+                double.NaN,
+            };
         }
 
         [Theory, MemberData(nameof(ASin_Advanced_TestData))]
-        public static void ASin_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void ASin_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Asin(complex);
@@ -481,7 +804,13 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
@@ -516,13 +845,24 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         [Theory, MemberData(nameof(ATan_Advanced_TestData))]
-        public static void ATan_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void ATan_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Atan(complex);
@@ -575,31 +915,66 @@ namespace System.Numerics.Tests
                 {
                     if (double.IsPositiveInfinity(invalidImaginary))
                     {
-                        yield return new object[] { 1, invalidImaginary, double.PositiveInfinity, double.NegativeInfinity }; // Invalid imaginary
+                        yield return new object[]
+                        {
+                            1,
+                            invalidImaginary,
+                            double.PositiveInfinity,
+                            double.NegativeInfinity,
+                        }; // Invalid imaginary
                     }
                     else if (double.IsNegativeInfinity(invalidImaginary))
                     {
-                        yield return new object[] { 1, invalidImaginary, double.PositiveInfinity, double.PositiveInfinity }; // Invalid imaginary
+                        yield return new object[]
+                        {
+                            1,
+                            invalidImaginary,
+                            double.PositiveInfinity,
+                            double.PositiveInfinity,
+                        }; // Invalid imaginary
                     }
                     else
                     {
                         yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
                     }
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         public static IEnumerable<object[]> Cos_Advanced_TestData()
         {
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.PositiveInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Cos_Advanced_TestData_Shared))]
         [MemberData(nameof(Cos_Advanced_TestData))]
-        public static void Cos_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Cos_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Cos(complex);
@@ -610,8 +985,20 @@ namespace System.Numerics.Tests
         {
             // These tests validate legacy .NET Framework behavior.
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.NegativeInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                double.NegativeInfinity,
+                double.NegativeInfinity,
+            };
         }
 
         [Theory]
@@ -641,7 +1028,13 @@ namespace System.Numerics.Tests
             {
                 if (double.IsInfinity(invalidReal))
                 {
-                    yield return new object[] { invalidReal, 1, double.PositiveInfinity, invalidReal }; // Invalid real
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        1,
+                        double.PositiveInfinity,
+                        invalidReal,
+                    }; // Invalid real
                 }
                 else
                 {
@@ -650,21 +1043,44 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         public static IEnumerable<object[]> Cosh_Advanced_TestData()
         {
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.NegativeInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Cosh_Advanced_TestData_Shared))]
         [MemberData(nameof(Cosh_Advanced_TestData))]
-        public static void Cosh_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Cosh_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Cosh(complex);
@@ -675,8 +1091,20 @@ namespace System.Numerics.Tests
         {
             // These tests validate legacy .NET Framework behavior.
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+            };
         }
 
         public static IEnumerable<object[]> Divide_TestData()
@@ -693,15 +1121,32 @@ namespace System.Numerics.Tests
             yield return new object[] { 10, 50, 0, 1 }; // x / i
 
             // Boundary values
-            yield return new object[] { double.MaxValue, double.MaxValue, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() };
-            yield return new object[] { double.MinValue, double.MinValue, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Divide_TestData))]
         [MemberData(nameof(SmallRandom_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void Divide(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void Divide(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var dividend = new Complex(realLeft, imaginaryLeft);
             var divisor = new Complex(realRight, imaginaryRight);
@@ -732,7 +1177,12 @@ namespace System.Numerics.Tests
         [MemberData(nameof(Divide_TestData))]
         [MemberData(nameof(SmallRandom_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void DivideByDouble(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void DivideByDouble(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var dividend = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
@@ -755,7 +1205,12 @@ namespace System.Numerics.Tests
         [MemberData(nameof(Divide_TestData))]
         [MemberData(nameof(SmallRandom_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void DivideByComplex(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void DivideByComplex(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             _ = imaginaryLeft; // not used when testing operations with doubles
             double dividend = realLeft;
@@ -789,11 +1244,21 @@ namespace System.Numerics.Tests
                 {
                     invalidComplex = new Complex(1, invalidImaginary);
                     Equals_Helper(invalidComplex, complex, false, false);
-                    Equals_Helper(invalidComplex, invalidComplex, !double.IsNaN(invalidImaginary), true); // Handle double.NaN != double.NaN
+                    Equals_Helper(
+                        invalidComplex,
+                        invalidComplex,
+                        !double.IsNaN(invalidImaginary),
+                        true
+                    ); // Handle double.NaN != double.NaN
 
                     invalidComplex = new Complex(invalidReal, invalidImaginary);
                     Equals_Helper(invalidComplex, complex, false, false);
-                    Equals_Helper(invalidComplex, invalidComplex, !double.IsNaN(invalidReal) && !double.IsNaN(invalidImaginary), true); // Handle double.NaN != double.NaN
+                    Equals_Helper(
+                        invalidComplex,
+                        invalidComplex,
+                        !double.IsNaN(invalidReal) && !double.IsNaN(invalidImaginary),
+                        true
+                    ); // Handle double.NaN != double.NaN
                 }
             }
         }
@@ -880,24 +1345,92 @@ namespace System.Numerics.Tests
             Equals_Helper(new Complex(0, 100.5), null, false, false);
         }
 
-        private static void Equals_Helper(Complex complex1, object obj, bool expected, bool expectedEquals)
+        private static void Equals_Helper(
+            Complex complex1,
+            object obj,
+            bool expected,
+            bool expectedEquals
+        )
         {
             if (obj is Complex)
             {
                 Complex complex2 = (Complex)obj;
-                Assert.True(expected == (complex1 == complex2), string.Format("c1:{0} == c2{1} is not '{2}' as expected", complex1, complex2, expected));
-                Assert.True(expected == (complex2 == complex1), string.Format("c2:{0} == c1{1} is not '{2}' as expected", complex2, complex1, expected));
+                Assert.True(
+                    expected == (complex1 == complex2),
+                    string.Format(
+                        "c1:{0} == c2{1} is not '{2}' as expected",
+                        complex1,
+                        complex2,
+                        expected
+                    )
+                );
+                Assert.True(
+                    expected == (complex2 == complex1),
+                    string.Format(
+                        "c2:{0} == c1{1} is not '{2}' as expected",
+                        complex2,
+                        complex1,
+                        expected
+                    )
+                );
 
-                Assert.False(expected == (complex1 != complex2), string.Format("c1:{0} != c2{1} is not '{2}' as expected", complex1, complex2, !expected));
-                Assert.False(expected == (complex2 != complex1), string.Format("c2:{0} != c1{1} is not '{2}' as expected", complex2, complex1, !expected));
+                Assert.False(
+                    expected == (complex1 != complex2),
+                    string.Format(
+                        "c1:{0} != c2{1} is not '{2}' as expected",
+                        complex1,
+                        complex2,
+                        !expected
+                    )
+                );
+                Assert.False(
+                    expected == (complex2 != complex1),
+                    string.Format(
+                        "c2:{0} != c1{1} is not '{2}' as expected",
+                        complex2,
+                        complex1,
+                        !expected
+                    )
+                );
 
-                Assert.True(expectedEquals == complex1.Equals(complex2), string.Format("{0}.Equals({1}) is not '{2}' as expected", complex1, complex2, expectedEquals));
-                Assert.True(expectedEquals == complex2.Equals(complex1), string.Format("{0}.Equals({1}) is not '{2}' as expected", complex2, complex1, expectedEquals));
+                Assert.True(
+                    expectedEquals == complex1.Equals(complex2),
+                    string.Format(
+                        "{0}.Equals({1}) is not '{2}' as expected",
+                        complex1,
+                        complex2,
+                        expectedEquals
+                    )
+                );
+                Assert.True(
+                    expectedEquals == complex2.Equals(complex1),
+                    string.Format(
+                        "{0}.Equals({1}) is not '{2}' as expected",
+                        complex2,
+                        complex1,
+                        expectedEquals
+                    )
+                );
 
-                Assert.True(expectedEquals == complex1.GetHashCode().Equals(complex2.GetHashCode()),
-                    string.Format("{0}.GetHashCode().Equals({1}.GetHashCode()) is not '{2}' as expected", complex1, complex2, expectedEquals));
+                Assert.True(
+                    expectedEquals == complex1.GetHashCode().Equals(complex2.GetHashCode()),
+                    string.Format(
+                        "{0}.GetHashCode().Equals({1}.GetHashCode()) is not '{2}' as expected",
+                        complex1,
+                        complex2,
+                        expectedEquals
+                    )
+                );
             }
-            Assert.True(expectedEquals == complex1.Equals(obj), string.Format("{0}.Equals({1}) is not '{2}' as expected", complex1, obj, expectedEquals));
+            Assert.True(
+                expectedEquals == complex1.Equals(obj),
+                string.Format(
+                    "{0}.Equals({1}) is not '{2}' as expected",
+                    complex1,
+                    obj,
+                    expectedEquals
+                )
+            );
         }
 
         public static IEnumerable<object[]> Exp_TestData()
@@ -922,7 +1455,10 @@ namespace System.Numerics.Tests
             // Special case the complex {double.MaxValue, double.MaxValue)
             if (real == double.MaxValue && imaginary == double.MaxValue)
             {
-                expected = new Complex(Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.NegativeInfinity);
+                expected = new Complex(
+                    Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                    Math.Cos(double.MaxValue) * double.NegativeInfinity
+                );
             }
             else
             {
@@ -1049,7 +1585,12 @@ namespace System.Numerics.Tests
 
             VerifyLog10(complex1);
             VerifyLogWithBase(complex1);
-            if (real1 != double.MaxValue && real1 != double.MinValue && imaginary1 != double.MaxValue && imaginary1 != double.MinValue)
+            if (
+                real1 != double.MaxValue
+                && real1 != double.MinValue
+                && imaginary1 != double.MaxValue
+                && imaginary1 != double.MinValue
+            )
             {
                 VerifyLogWithMultiply(complex1, complex2);
                 VerifyLogWithPowerMinusOne(complex1);
@@ -1108,7 +1649,9 @@ namespace System.Numerics.Tests
         private static void VerifyLogWithMultiply(Complex complex1, Complex complex2)
         {
             // Log(complex1 * complex2) == Log(complex1) + Log(complex2), if -PI < Arctan(complex1) + Arctan(complex2) <= PI
-            double equalityCondition = Math.Atan2(complex1.Imaginary, complex1.Real) + Math.Atan2(complex2.Imaginary, complex2.Real);
+            double equalityCondition =
+                Math.Atan2(complex1.Imaginary, complex1.Real)
+                + Math.Atan2(complex2.Imaginary, complex2.Real);
             if (equalityCondition <= -Math.PI || equalityCondition > Math.PI)
             {
                 return;
@@ -1125,7 +1668,11 @@ namespace System.Numerics.Tests
             Complex logComplex = Complex.Log(complex);
             Complex logPowerMinusOne = Complex.Log(1 / complex);
 
-            VerifyRealImaginaryProperties(logComplex, -logPowerMinusOne.Real, -logPowerMinusOne.Imaginary);
+            VerifyRealImaginaryProperties(
+                logComplex,
+                -logPowerMinusOne.Real,
+                -logPowerMinusOne.Imaginary
+            );
         }
 
         private static void VerifyLogWithExp(Complex complex)
@@ -1141,7 +1688,7 @@ namespace System.Numerics.Tests
         {
             yield return new object[] { 0, 0, 0, 0 }; // 0 * 0 = 0
             yield return new object[] { 0, 0, RandomPositiveDouble(), RandomPositivePhase() }; // 0 * x = 0
-            yield return new object[] { RandomPositiveDouble(), RandomPositivePhase(), 0, 0, }; // x * 0 = 0
+            yield return new object[] { RandomPositiveDouble(), RandomPositivePhase(), 0, 0 }; // x * 0 = 0
 
             yield return new object[] { 1, 0, 1, 0 }; // 1 * 1 = 0
             yield return new object[] { 1, 0, RandomPositiveDouble(), RandomPositivePhase() }; // 1 * x = x
@@ -1152,15 +1699,32 @@ namespace System.Numerics.Tests
             yield return new object[] { RandomPositiveDouble(), RandomPositivePhase(), 0, 1 }; // x * i
 
             // Boundary values
-            yield return new object[] { double.MaxValue, double.MaxValue, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() };
-            yield return new object[] { double.MinValue, double.MinValue, SmallRandomPositiveDouble(), SmallRandomPositiveDouble() };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Multiply_TestData))]
         [MemberData(nameof(SmallRandom_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void Multiply(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void Multiply(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
@@ -1181,7 +1745,12 @@ namespace System.Numerics.Tests
         [MemberData(nameof(Multiply_TestData))]
         [MemberData(nameof(SmallRandom_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void MultiplyDouble(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void MultiplyDouble(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
@@ -1245,7 +1814,11 @@ namespace System.Numerics.Tests
             }
         }
 
-        private static void VerifyPow_Complex_Double(double realValue, double imaginaryValue, double power)
+        private static void VerifyPow_Complex_Double(
+            double realValue,
+            double imaginaryValue,
+            double power
+        )
         {
             var value = new Complex(realValue, imaginaryValue);
             Complex result = Complex.Pow(value, power);
@@ -1274,13 +1847,38 @@ namespace System.Numerics.Tests
             VerifyPow_Complex_Complex(real, imaginary, 0, 1);
             VerifyPow_Complex_Complex(real, imaginary, 0, -1);
 
-            VerifyPow_Complex_Complex(real, imaginary, SmallRandomPositiveDouble(), SmallRandomPositiveDouble()); // First quadrant
-            VerifyPow_Complex_Complex(real, imaginary, SmallRandomNegativeDouble(), SmallRandomPositiveDouble()); // Second quadrant
-            VerifyPow_Complex_Complex(real, imaginary, SmallRandomNegativeDouble(), SmallRandomNegativeDouble()); // Third quadrant
-            VerifyPow_Complex_Complex(real, imaginary, SmallRandomPositiveDouble(), SmallRandomNegativeDouble()); // Fourth quadrant
+            VerifyPow_Complex_Complex(
+                real,
+                imaginary,
+                SmallRandomPositiveDouble(),
+                SmallRandomPositiveDouble()
+            ); // First quadrant
+            VerifyPow_Complex_Complex(
+                real,
+                imaginary,
+                SmallRandomNegativeDouble(),
+                SmallRandomPositiveDouble()
+            ); // Second quadrant
+            VerifyPow_Complex_Complex(
+                real,
+                imaginary,
+                SmallRandomNegativeDouble(),
+                SmallRandomNegativeDouble()
+            ); // Third quadrant
+            VerifyPow_Complex_Complex(
+                real,
+                imaginary,
+                SmallRandomPositiveDouble(),
+                SmallRandomNegativeDouble()
+            ); // Fourth quadrant
         }
 
-        private static void VerifyPow_Complex_Complex(double realValue, double imaginaryValue, double realPower, double imaginaryPower)
+        private static void VerifyPow_Complex_Complex(
+            double realValue,
+            double imaginaryValue,
+            double realPower,
+            double imaginaryPower
+        )
         {
             var value = new Complex(realValue, imaginaryValue);
             var power = new Complex(realPower, imaginaryPower);
@@ -1313,9 +1911,16 @@ namespace System.Numerics.Tests
             var result = Complex.Reciprocal(complex);
 
             Complex expected = Complex.Zero;
-            if (Complex.Zero != complex &&
-                !(double.IsInfinity(real) && !(double.IsInfinity(imaginary) || double.IsNaN(imaginary))) &&
-                !(double.IsInfinity(imaginary) && !(double.IsInfinity(real) || double.IsNaN(real))))
+            if (
+                Complex.Zero != complex
+                && !(
+                    double.IsInfinity(real)
+                    && !(double.IsInfinity(imaginary) || double.IsNaN(imaginary))
+                )
+                && !(
+                    double.IsInfinity(imaginary) && !(double.IsInfinity(real) || double.IsNaN(real))
+                )
+            )
             {
                 double magnitude = complex.Magnitude;
                 expected = Complex.Conjugate(complex) / magnitude; // In order to avoid Infinity = magnitude* magnitude
@@ -1335,14 +1940,27 @@ namespace System.Numerics.Tests
             // The verification formula is used not for the boundary values
             Complex z = new Complex(real, imaginary);
             Complex temp = Complex.ImaginaryOne * z;
-            Complex expectedComplex = (Complex.Exp(temp) - Complex.Exp(-temp)) / (2 * Complex.ImaginaryOne);
+            Complex expectedComplex =
+                (Complex.Exp(temp) - Complex.Exp(-temp)) / (2 * Complex.ImaginaryOne);
             Sin_Advanced(real, imaginary, expectedComplex.Real, expectedComplex.Imaginary);
         }
 
         public static IEnumerable<object[]> Sin_Advanced_TestData()
         {
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.NegativeInfinity, Math.Cos(double.MaxValue) * double.PositiveInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+            };
         }
 
         // Sin() test data for values which are shared across runtimes
@@ -1361,22 +1979,38 @@ namespace System.Numerics.Tests
                 {
                     if (double.IsInfinity(invalidImaginary))
                     {
-                        yield return new object[] { 1, invalidImaginary, double.PositiveInfinity, invalidImaginary }; // Invalid imaginary
+                        yield return new object[]
+                        {
+                            1,
+                            invalidImaginary,
+                            double.PositiveInfinity,
+                            invalidImaginary,
+                        }; // Invalid imaginary
                     }
                     else
                     {
                         yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
                     }
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
-
         }
 
         [Theory]
         [MemberData(nameof(Sin_Advanced_TestData_Shared))]
         [MemberData(nameof(Sin_Advanced_TestData))]
-        public static void Sin_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Sin_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sin(complex);
@@ -1387,8 +2021,20 @@ namespace System.Numerics.Tests
         {
             // These tests validate legacy .NET Framework behavior.
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity};
-            yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+            };
         }
 
         [Theory]
@@ -1418,7 +2064,13 @@ namespace System.Numerics.Tests
             {
                 if (double.IsInfinity(invalidReal))
                 {
-                    yield return new object[] { invalidReal, 1, invalidReal, double.PositiveInfinity }; // Invalid real
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        1,
+                        invalidReal,
+                        double.PositiveInfinity,
+                    }; // Invalid real
                 }
                 else
                 {
@@ -1427,21 +2079,44 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         public static IEnumerable<object[]> Sinh_Advanced_TestData()
         {
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, Math.Cos(double.MaxValue) * double.NegativeInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, Math.Cos(double.MaxValue) * double.NegativeInfinity, Math.Cos(double.MaxValue) * double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                Math.Cos(double.MaxValue) * double.NegativeInfinity,
+                Math.Cos(double.MaxValue) * double.PositiveInfinity,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Sinh_Advanced_TestData_Shared))]
         [MemberData(nameof(Sinh_Advanced_TestData))]
-        public static void Sinh_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Sinh_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sinh(complex);
@@ -1452,8 +2127,20 @@ namespace System.Numerics.Tests
         {
             // These tests validate legacy .NET Framework behavior.
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { double.MinValue, double.MinValue, double.PositiveInfinity, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
         }
 
         public static IEnumerable<object[]> Subtract_TestData()
@@ -1462,22 +2149,75 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, 0, RandomPositiveDouble(), RandomPositiveDouble() }; // 0 - x = -x
 
             // Boundary values
-            yield return new object[] { double.MaxValue, double.MaxValue, RandomPositiveDouble(), RandomPositiveDouble() };
-            yield return new object[] { double.MinValue, double.MinValue, RandomPositiveDouble(), RandomPositiveDouble() };
-            yield return new object[] { double.MaxValue, double.MaxValue, RandomNegativeDouble(), RandomNegativeDouble() };
-            yield return new object[] { double.MinValue, double.MinValue, RandomNegativeDouble(), RandomNegativeDouble() };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+            };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                double.MinValue,
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+            };
 
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), double.MaxValue, double.MaxValue };
-            yield return new object[] { RandomPositiveDouble(), RandomPositiveDouble(), double.MinValue, double.MinValue };
-            yield return new object[] { RandomNegativeDouble(), RandomNegativeDouble(), double.MaxValue, double.MaxValue };
-            yield return new object[] { RandomNegativeDouble(), RandomNegativeDouble(), double.MinValue, double.MinValue };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                double.MaxValue,
+                double.MaxValue,
+            };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                RandomPositiveDouble(),
+                double.MinValue,
+                double.MinValue,
+            };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+                double.MaxValue,
+                double.MaxValue,
+            };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                RandomNegativeDouble(),
+                double.MinValue,
+                double.MinValue,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Subtract_TestData))]
         [MemberData(nameof(Random_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void Subtract(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void Subtract(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             var right = new Complex(realRight, imaginaryRight);
@@ -1499,7 +2239,12 @@ namespace System.Numerics.Tests
         [MemberData(nameof(Subtract_TestData))]
         [MemberData(nameof(Random_4_TestData))]
         [MemberData(nameof(Invalid_4_TestData))]
-        public static void SubtractDouble(double realLeft, double imaginaryLeft, double realRight, double imaginaryRight)
+        public static void SubtractDouble(
+            double realLeft,
+            double imaginaryLeft,
+            double realRight,
+            double imaginaryRight
+        )
         {
             var left = new Complex(realLeft, imaginaryLeft);
             _ = imaginaryRight; // not used when testing operations with doubles
@@ -1535,44 +2280,138 @@ namespace System.Numerics.Tests
 
             // Extreme values don't overflow, even when intermediate quantities would if handled naively.
             yield return new object[] { double.MaxValue, 0.0, Math.Sqrt(double.MaxValue), 0.0 };
-            yield return new object[] { 0, double.MaxValue, 9.48075190810917E+153, 9.48075190810917E+153 };
-            yield return new object[] { 0, double.MinValue, 9.48075190810917E+153, -9.48075190810917E+153 };
+            yield return new object[]
+            {
+                0,
+                double.MaxValue,
+                9.48075190810917E+153,
+                9.48075190810917E+153,
+            };
+            yield return new object[]
+            {
+                0,
+                double.MinValue,
+                9.48075190810917E+153,
+                -9.48075190810917E+153,
+            };
         }
 
-        public static IEnumerable<object[]> Sqrt_AdvancedTestData ()
+        public static IEnumerable<object[]> Sqrt_AdvancedTestData()
         {
             yield return new object[] { -1, 0, 0, 1 }; // .NET Framework does not properly handle this simple case.
             yield return new object[] { -double.MaxValue, 0.0, 0.0, Math.Sqrt(double.MaxValue) };
 
             // Extreme values don't overflow, even when intermediate quantities would if handled naively.
-            yield return new object[] { double.MaxValue, double.MaxValue, Math.Sqrt(Math.Sqrt(2.0)) * Math.Sqrt(double.MaxValue) * Math.Cos(Math.PI / 8.0), Math.Sqrt(Math.Sqrt(2.0)) * Math.Sqrt(double.MaxValue) * Math.Sin(Math.PI / 8.0) };
+            yield return new object[]
+            {
+                double.MaxValue,
+                double.MaxValue,
+                Math.Sqrt(Math.Sqrt(2.0)) * Math.Sqrt(double.MaxValue) * Math.Cos(Math.PI / 8.0),
+                Math.Sqrt(Math.Sqrt(2.0)) * Math.Sqrt(double.MaxValue) * Math.Sin(Math.PI / 8.0),
+            };
 
             // Infinities produce the expected infinities.
-            yield return new object[] { double.PositiveInfinity, 0.0, double.PositiveInfinity, 0.0 };
-            yield return new object[] { double.NegativeInfinity, 0.0, 0.0, double.PositiveInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                0.0,
+                double.PositiveInfinity,
+                0.0,
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                0.0,
+                0.0,
+                double.PositiveInfinity,
+            };
             // We can determine signs for double infinities because we know which quadrants are mapped into which by sqrt.
-            yield return new object[] { double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { double.PositiveInfinity, double.NegativeInfinity, double.PositiveInfinity, double.NegativeInfinity };
-            yield return new object[] { double.NegativeInfinity, double.NegativeInfinity, double.PositiveInfinity, double.NegativeInfinity };
-            yield return new object[] { double.NegativeInfinity, double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { RandomPositiveDouble(), double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { RandomNegativeDouble(), double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity };
-            yield return new object[] { RandomPositiveDouble(), double.NegativeInfinity, double.PositiveInfinity, double.NegativeInfinity };
-            yield return new object[] { RandomNegativeDouble(), double.NegativeInfinity, double.PositiveInfinity, double.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity,
+            };
+            yield return new object[]
+            {
+                RandomPositiveDouble(),
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
+            yield return new object[]
+            {
+                RandomNegativeDouble(),
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
 
             // NaN in any component produces NaNs in both components (except arguably on real line).
             yield return new object[] { 0.0, double.NaN, double.NaN, double.NaN };
             yield return new object[] { double.MaxValue, double.NaN, double.NaN, double.NaN };
-            yield return new object[] { double.NegativeInfinity, double.NaN, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NegativeInfinity,
+                double.NaN,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { double.NaN, -double.MaxValue, double.NaN, double.NaN };
-            yield return new object[] { double.NaN, double.PositiveInfinity, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NaN,
+                double.PositiveInfinity,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { double.NaN, double.NaN, double.NaN, double.NaN };
-
         }
 
         [Theory]
         [MemberData(nameof(Sqrt_TestData))]
-        public static void Sqrt(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Sqrt(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sqrt(complex);
@@ -1581,7 +2420,12 @@ namespace System.Numerics.Tests
 
         [Theory]
         [MemberData(nameof(Sqrt_AdvancedTestData))]
-        public static void Sqrt_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Sqrt_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Sqrt(complex);
@@ -1610,7 +2454,6 @@ namespace System.Numerics.Tests
 
         public static IEnumerable<object[]> Tan_Advanced_TestData()
         {
-
             // .NET does not compute simple trig functions of large values correctly, so we can't make any
             // assertions about complex trig functions with large real parts.
 
@@ -1622,19 +2465,36 @@ namespace System.Numerics.Tests
 
             yield return new object[] { 0.0, double.NaN, double.NaN, double.NaN };
             yield return new object[] { double.NaN, 0.0, double.NaN, double.NaN };
-            yield return new object[] { double.NaN, double.PositiveInfinity, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.NaN,
+                double.PositiveInfinity,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { double.NaN, double.NaN, double.NaN, double.NaN };
 
             yield return new object[] { 0.0, 750.0, 0.0, 1.0 };
-
         }
 
         public static IEnumerable<object[]> Tan_Legacy_TestData()
         {
             // These tests validate legacy .NET Framework behavior.
 
-            yield return new object[] { double.MaxValue, 0, Math.Sin(double.MaxValue) / Math.Cos(double.MaxValue), 0 };
-            yield return new object[] { double.MinValue, 0, Math.Sin(double.MinValue) / Math.Cos(double.MinValue), 0 };
+            yield return new object[]
+            {
+                double.MaxValue,
+                0,
+                Math.Sin(double.MaxValue) / Math.Cos(double.MaxValue),
+                0,
+            };
+            yield return new object[]
+            {
+                double.MinValue,
+                0,
+                Math.Sin(double.MinValue) / Math.Cos(double.MinValue),
+                0,
+            };
 
             yield return new object[] { 0, double.MaxValue, double.NaN, double.NaN };
             yield return new object[] { 0, double.MinValue, double.NaN, double.NaN };
@@ -1645,13 +2505,24 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         [Theory, MemberData(nameof(Tan_Advanced_TestData))]
-        public static void Tan_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Tan_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Tan(complex);
@@ -1684,7 +2555,13 @@ namespace System.Numerics.Tests
             yield return new object[] { double.NegativeInfinity, 0.0, -1.0, 0.0 };
 
             yield return new object[] { double.NaN, 0.0, double.NaN, double.NaN };
-            yield return new object[] { double.PositiveInfinity, double.NaN, double.NaN, double.NaN };
+            yield return new object[]
+            {
+                double.PositiveInfinity,
+                double.NaN,
+                double.NaN,
+                double.NaN,
+            };
             yield return new object[] { 0.0, double.NaN, double.NaN, double.NaN };
             yield return new object[] { double.NaN, double.NaN, double.NaN, double.NaN };
 
@@ -1697,9 +2574,20 @@ namespace System.Numerics.Tests
 
             // Boundary values
             yield return new object[] { double.MinValue, 0, double.NaN, double.NaN };
-            yield return new object[] { 0, double.MaxValue, 0, Math.Sin(double.MaxValue) / Math.Cos(double.MaxValue) };
-            yield return new object[] { 0, double.MinValue, 0, Math.Sin(double.MinValue) / Math.Cos(double.MinValue) };
-
+            yield return new object[]
+            {
+                0,
+                double.MaxValue,
+                0,
+                Math.Sin(double.MaxValue) / Math.Cos(double.MaxValue),
+            };
+            yield return new object[]
+            {
+                0,
+                double.MinValue,
+                0,
+                Math.Sin(double.MinValue) / Math.Cos(double.MinValue),
+            };
 
             // Invalid values
             foreach (double invalidReal in s_invalidDoubleValues)
@@ -1708,13 +2596,24 @@ namespace System.Numerics.Tests
                 foreach (double invalidImaginary in s_invalidDoubleValues)
                 {
                     yield return new object[] { 1, invalidImaginary, double.NaN, double.NaN }; // Invalid imaginary
-                    yield return new object[] { invalidReal, invalidImaginary, double.NaN, double.NaN }; // Invalid real, invalid imaginary
+                    yield return new object[]
+                    {
+                        invalidReal,
+                        invalidImaginary,
+                        double.NaN,
+                        double.NaN,
+                    }; // Invalid real, invalid imaginary
                 }
             }
         }
 
         [Theory, MemberData(nameof(Tanh_Advanced_TestData))]
-        public static void Tanh_Advanced(double real, double imaginary, double expectedReal, double expectedImaginary)
+        public static void Tanh_Advanced(
+            double real,
+            double imaginary,
+            double expectedReal,
+            double expectedImaginary
+        )
         {
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Tanh(complex);
@@ -1734,14 +2633,29 @@ namespace System.Numerics.Tests
 
             Assert.Equal($"<{real}; {imaginary}>", complex.ToString());
 
-            Assert.Equal($"<{real.ToString(numberFormatInfo)}; {imaginary.ToString(numberFormatInfo)}>", complex.ToString(numberFormatInfo));
-            Assert.Equal($"<{real.ToString((string)null)}; {imaginary.ToString((string)null)}>", complex.ToString((string)null));
-            Assert.Equal($"<{real.ToString((string)null, numberFormatInfo)}; {imaginary.ToString((string)null, numberFormatInfo)}>", complex.ToString((string)null, numberFormatInfo));
+            Assert.Equal(
+                $"<{real.ToString(numberFormatInfo)}; {imaginary.ToString(numberFormatInfo)}>",
+                complex.ToString(numberFormatInfo)
+            );
+            Assert.Equal(
+                $"<{real.ToString((string)null)}; {imaginary.ToString((string)null)}>",
+                complex.ToString((string)null)
+            );
+            Assert.Equal(
+                $"<{real.ToString((string)null, numberFormatInfo)}; {imaginary.ToString((string)null, numberFormatInfo)}>",
+                complex.ToString((string)null, numberFormatInfo)
+            );
 
             foreach (string format in s_supportedStandardNumericFormats)
             {
-                Assert.Equal($"<{real.ToString(format)}; {imaginary.ToString(format)}>", complex.ToString(format));
-                Assert.Equal($"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>", complex.ToString(format, numberFormatInfo));
+                Assert.Equal(
+                    $"<{real.ToString(format)}; {imaginary.ToString(format)}>",
+                    complex.ToString(format)
+                );
+                Assert.Equal(
+                    $"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>",
+                    complex.ToString(format, numberFormatInfo)
+                );
             }
         }
 
@@ -1757,24 +2671,40 @@ namespace System.Numerics.Tests
 
             // UTF16
             {
-                foreach (NumberFormatInfo numberFormatInfo in new[] { CultureInfo.CurrentCulture.NumberFormat, null })
+                foreach (
+                    NumberFormatInfo numberFormatInfo in new[]
+                    {
+                        CultureInfo.CurrentCulture.NumberFormat,
+                        null,
+                    }
+                )
                 {
                     foreach (string format in s_supportedStandardNumericFormats.Append(null))
                     {
-                        string expected = $"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>";
+                        string expected =
+                            $"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>";
                         int charsWritten;
 
                         // Just right or larger than required storage
                         for (int additional = 0; additional < 2; additional++)
                         {
                             char[] chars = new char[expected.Length + additional];
-                            Assert.True(complex.TryFormat(chars, out charsWritten, format, numberFormatInfo));
+                            Assert.True(
+                                complex.TryFormat(chars, out charsWritten, format, numberFormatInfo)
+                            );
                             Assert.Equal(expected.Length, charsWritten);
                             Assert.Equal(expected, new string(expected.AsSpan(0, expected.Length)));
                         }
 
                         // Too small storage
-                        Assert.False(complex.TryFormat(new char[expected.Length - 1], out charsWritten, format, numberFormatInfo));
+                        Assert.False(
+                            complex.TryFormat(
+                                new char[expected.Length - 1],
+                                out charsWritten,
+                                format,
+                                numberFormatInfo
+                            )
+                        );
                         Assert.Equal(0, charsWritten);
                     }
                 }
@@ -1782,24 +2712,41 @@ namespace System.Numerics.Tests
 
             // UTF8
             {
-                foreach (NumberFormatInfo numberFormatInfo in new[] { CultureInfo.CurrentCulture.NumberFormat, null })
+                foreach (
+                    NumberFormatInfo numberFormatInfo in new[]
+                    {
+                        CultureInfo.CurrentCulture.NumberFormat,
+                        null,
+                    }
+                )
                 {
                     foreach (string format in s_supportedStandardNumericFormats.Append(null))
                     {
-                        byte[] expected = Encoding.UTF8.GetBytes($"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>");
+                        byte[] expected = Encoding.UTF8.GetBytes(
+                            $"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>"
+                        );
                         int bytesWritten;
 
                         // Just right or larger than required storage
                         for (int additional = 0; additional < 2; additional++)
                         {
                             byte[] bytes = new byte[expected.Length + additional];
-                            Assert.True(complex.TryFormat(bytes, out bytesWritten, format, numberFormatInfo));
+                            Assert.True(
+                                complex.TryFormat(bytes, out bytesWritten, format, numberFormatInfo)
+                            );
                             Assert.Equal(expected.Length, bytesWritten);
                             Assert.Equal(expected, bytes.AsSpan(0, expected.Length).ToArray());
                         }
 
                         // Too small storage
-                        Assert.False(complex.TryFormat(new byte[expected.Length - 1], out bytesWritten, format, numberFormatInfo));
+                        Assert.False(
+                            complex.TryFormat(
+                                new byte[expected.Length - 1],
+                                out bytesWritten,
+                                format,
+                                numberFormatInfo
+                            )
+                        );
                         Assert.Equal(0, bytesWritten);
                     }
                 }
@@ -1950,7 +2897,8 @@ namespace System.Numerics.Tests
                 s_random.Next(int.MinValue, int.MaxValue),
                 s_random.Next(int.MinValue, int.MaxValue),
                 false,
-                (byte)s_random.Next(0, 29));
+                (byte)s_random.Next(0, 29)
+            );
             yield return new object[] { positiveDecimal };
             yield return new object[] { -positiveDecimal };
         }
@@ -1981,19 +2929,26 @@ namespace System.Numerics.Tests
         [Fact]
         public static void Infinity()
         {
-            Assert.True(Complex.IsInfinity(new Complex(double.PositiveInfinity, double.PositiveInfinity)));
+            Assert.True(
+                Complex.IsInfinity(new Complex(double.PositiveInfinity, double.PositiveInfinity))
+            );
             Assert.True(Complex.IsInfinity(new Complex(1, double.PositiveInfinity)));
             Assert.True(Complex.IsInfinity(new Complex(double.PositiveInfinity, 1)));
 
-            Assert.True(Complex.IsInfinity(new Complex(double.NegativeInfinity, double.NegativeInfinity)));
+            Assert.True(
+                Complex.IsInfinity(new Complex(double.NegativeInfinity, double.NegativeInfinity))
+            );
             Assert.True(Complex.IsInfinity(new Complex(1, double.NegativeInfinity)));
             Assert.True(Complex.IsInfinity(new Complex(double.NegativeInfinity, 1)));
 
             Assert.True(Complex.IsInfinity(Complex.Infinity));
             Assert.False(Complex.IsInfinity(Complex.NaN));
 
-
-            VerifyRealImaginaryProperties(Complex.Infinity, double.PositiveInfinity, double.PositiveInfinity);
+            VerifyRealImaginaryProperties(
+                Complex.Infinity,
+                double.PositiveInfinity,
+                double.PositiveInfinity
+            );
             VerifyMagnitudePhaseProperties(Complex.Infinity, double.PositiveInfinity, Math.PI / 4);
         }
 
@@ -2004,11 +2959,15 @@ namespace System.Numerics.Tests
             Assert.False(Complex.IsFinite(new Complex(1, double.NaN)));
             Assert.False(Complex.IsFinite(new Complex(double.NaN, 1)));
 
-            Assert.False(Complex.IsFinite(new Complex(double.PositiveInfinity, double.PositiveInfinity)));
+            Assert.False(
+                Complex.IsFinite(new Complex(double.PositiveInfinity, double.PositiveInfinity))
+            );
             Assert.False(Complex.IsFinite(new Complex(1, double.PositiveInfinity)));
             Assert.False(Complex.IsFinite(new Complex(double.PositiveInfinity, 1)));
 
-            Assert.False(Complex.IsFinite(new Complex(double.NegativeInfinity, double.NegativeInfinity)));
+            Assert.False(
+                Complex.IsFinite(new Complex(double.NegativeInfinity, double.NegativeInfinity))
+            );
             Assert.False(Complex.IsFinite(new Complex(1, double.NegativeInfinity)));
             Assert.False(Complex.IsFinite(new Complex(double.NegativeInfinity, 1)));
 
@@ -2054,23 +3013,56 @@ namespace System.Numerics.Tests
             return randomDouble;
         }
 
-        private static void VerifyRealImaginaryProperties(Complex complex, double real, double imaginary, [CallerLineNumber] int lineNumber = 0)
+        private static void VerifyRealImaginaryProperties(
+            Complex complex,
+            double real,
+            double imaginary,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
-            Assert.True(real.Equals(complex.Real) || IsDiffTolerable(complex.Real, real),
-                string.Format("Failure at line {0}. Expected real: {1}. Actual real: {2}", lineNumber, real, complex.Real));
-            Assert.True(imaginary.Equals(complex.Imaginary) || IsDiffTolerable(complex.Imaginary, imaginary),
-                string.Format("Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}", lineNumber, imaginary, complex.Imaginary));
+            Assert.True(
+                real.Equals(complex.Real) || IsDiffTolerable(complex.Real, real),
+                string.Format(
+                    "Failure at line {0}. Expected real: {1}. Actual real: {2}",
+                    lineNumber,
+                    real,
+                    complex.Real
+                )
+            );
+            Assert.True(
+                imaginary.Equals(complex.Imaginary)
+                    || IsDiffTolerable(complex.Imaginary, imaginary),
+                string.Format(
+                    "Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}",
+                    lineNumber,
+                    imaginary,
+                    complex.Imaginary
+                )
+            );
         }
 
-        private static void VerifyMagnitudePhaseProperties(Complex complex, double magnitude, double phase, [CallerLineNumber] int lineNumber = 0)
+        private static void VerifyMagnitudePhaseProperties(
+            Complex complex,
+            double magnitude,
+            double phase,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             // The magnitude (m) of a complex number (z = x + yi) is the absolute value - |z| = sqrt(x^2 + y^2)
             // Verification is done using the square of the magnitude since m^2 = x^2 + y^2
             double expectedMagnitudeSquared = magnitude * magnitude;
             double actualMagnitudeSquared = complex.Magnitude * complex.Magnitude;
 
-            Assert.True(expectedMagnitudeSquared.Equals(actualMagnitudeSquared) || IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared),
-                string.Format("Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}", lineNumber, expectedMagnitudeSquared, actualMagnitudeSquared));
+            Assert.True(
+                expectedMagnitudeSquared.Equals(actualMagnitudeSquared)
+                    || IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared),
+                string.Format(
+                    "Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}",
+                    lineNumber,
+                    expectedMagnitudeSquared,
+                    actualMagnitudeSquared
+                )
+            );
 
             if (double.IsNaN(magnitude))
             {
@@ -2085,8 +3077,15 @@ namespace System.Numerics.Tests
                 phase += (phase < 0) ? Math.PI : -Math.PI;
             }
 
-            Assert.True(phase.Equals(complex.Phase) || IsDiffTolerable(complex.Phase, phase),
-                string.Format("Failure at line {0}. Expected phase: {1}. Actual phase: {2}", lineNumber, phase, complex.Phase));
+            Assert.True(
+                phase.Equals(complex.Phase) || IsDiffTolerable(complex.Phase, phase),
+                string.Format(
+                    "Failure at line {0}. Expected phase: {1}. Actual phase: {2}",
+                    lineNumber,
+                    phase,
+                    complex.Phase
+                )
+            );
         }
 
         private static bool IsDiffTolerable(double d1, double d2)
@@ -2106,9 +3105,8 @@ namespace System.Numerics.Tests
 
         private static bool AreSameInfinity(double d1, double d2)
         {
-            return
-                double.IsNegativeInfinity(d1) == double.IsNegativeInfinity(d2) &&
-                double.IsPositiveInfinity(d1) == double.IsPositiveInfinity(d2);
+            return double.IsNegativeInfinity(d1) == double.IsNegativeInfinity(d2)
+                && double.IsPositiveInfinity(d1) == double.IsPositiveInfinity(d2);
         }
     }
 }

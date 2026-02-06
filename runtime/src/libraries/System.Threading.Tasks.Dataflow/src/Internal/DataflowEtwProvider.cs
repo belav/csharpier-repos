@@ -21,7 +21,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// <summary>Provides an event source for tracing Dataflow information.</summary>
     [EventSource(
         Name = "System.Threading.Tasks.Dataflow.DataflowEventSource",
-        Guid = "16F53577-E41D-43D4-B47E-C17025BF4025")]
+        Guid = "16F53577-E41D-43D4-B47E-C17025BF4025"
+    )]
     internal sealed class DataflowEtwProvider : EventSource
     {
         /// <summary>
@@ -29,6 +30,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// The dataflow provider GUID is {16F53577-E41D-43D4-B47E-C17025BF4025}.
         /// </summary>
         internal static readonly DataflowEtwProvider Log = new DataflowEtwProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private DataflowEtwProvider() { }
 
@@ -42,12 +44,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The event ID for when we encounter a new dataflow block object that hasn't had its name traced to the trace file.</summary>
         private const int DATAFLOWBLOCKCREATED_EVENTID = 1;
+
         /// <summary>The event ID for the task launched event.</summary>
         private const int TASKLAUNCHED_EVENTID = 2;
+
         /// <summary>The event ID for the block completed event.</summary>
         private const int BLOCKCOMPLETED_EVENTID = 3;
+
         /// <summary>The event ID for the block linked event.</summary>
         private const int BLOCKLINKED_EVENTID = 4;
+
         /// <summary>The event ID for the block unlinked event.</summary>
         private const int BLOCKUNLINKED_EVENTID = 5;
 
@@ -56,12 +62,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
         // Dataflow Events
         //
 
-#region Block Creation
+        #region Block Creation
         /// <summary>Trace an event for when a new block is instantiated.</summary>
         /// <param name="block">The dataflow block that was created.</param>
         /// <param name="dataflowBlockOptions">The options with which the block was created.</param>
         [NonEvent]
-        internal void DataflowBlockCreated(IDataflowBlock block, DataflowBlockOptions dataflowBlockOptions)
+        internal void DataflowBlockCreated(
+            IDataflowBlock block,
+            DataflowBlockOptions dataflowBlockOptions
+        )
         {
             Debug.Assert(block != null, "Block needed for the ETW event.");
             Debug.Assert(dataflowBlockOptions != null, "Options needed for the ETW event.");
@@ -70,7 +79,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 DataflowBlockCreated(
                     Common.GetNameForDebugger(block, dataflowBlockOptions),
-                    Common.GetBlockId(block));
+                    Common.GetBlockId(block)
+                );
             }
         }
 
@@ -79,9 +89,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(DATAFLOWBLOCKCREATED_EVENTID, blockName, blockId);
         }
-#endregion
+        #endregion
 
-#region Task Launching
+        #region Task Launching
         /// <summary>Trace an event for a block launching a task to handle messages.</summary>
         /// <param name="block">The owner block launching a task.</param>
         /// <param name="task">The task being launched for processing.</param>
@@ -89,24 +99,44 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="availableMessages">The number of messages available to be handled by the task.</param>
         [NonEvent]
         internal void TaskLaunchedForMessageHandling(
-            IDataflowBlock block, Task task, TaskLaunchedReason reason, int availableMessages)
+            IDataflowBlock block,
+            Task task,
+            TaskLaunchedReason reason,
+            int availableMessages
+        )
         {
             Debug.Assert(block != null, "Block needed for the ETW event.");
             Debug.Assert(task != null, "Task needed for the ETW event.");
-            Debug.Assert(reason == TaskLaunchedReason.ProcessingInputMessages || reason == TaskLaunchedReason.OfferingOutputMessages,
-                "The reason should be a supported value from the TaskLaunchedReason enumeration.");
+            Debug.Assert(
+                reason == TaskLaunchedReason.ProcessingInputMessages
+                    || reason == TaskLaunchedReason.OfferingOutputMessages,
+                "The reason should be a supported value from the TaskLaunchedReason enumeration."
+            );
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
-                TaskLaunchedForMessageHandling(Common.GetBlockId(block), reason, availableMessages, task.Id);
+                TaskLaunchedForMessageHandling(
+                    Common.GetBlockId(block),
+                    reason,
+                    availableMessages,
+                    task.Id
+                );
             }
         }
 
         [Event(TASKLAUNCHED_EVENTID, Level = EventLevel.Informational)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        private void TaskLaunchedForMessageHandling(int blockId, TaskLaunchedReason reason, int availableMessages, int taskId)
+        private void TaskLaunchedForMessageHandling(
+            int blockId,
+            TaskLaunchedReason reason,
+            int availableMessages,
+            int taskId
+        )
         {
             WriteEvent(TASKLAUNCHED_EVENTID, blockId, reason, availableMessages, taskId);
         }
@@ -116,12 +146,13 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>A task is being launched to process incoming messages.</summary>
             ProcessingInputMessages = 1,
+
             /// <summary>A task is being launched to offer outgoing messages to linked targets.</summary>
             OfferingOutputMessages = 2,
         }
-#endregion
+        #endregion
 
-#region Block Completion
+        #region Block Completion
         /// <summary>Trace an event for a block completing.</summary>
         /// <param name="block">The block that's completing.</param>
         [NonEvent]
@@ -132,7 +163,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 Task? completionTask = Common.GetPotentiallyNotSupportedCompletionTask(block);
                 bool blockIsCompleted = completionTask != null && completionTask.IsCompleted;
-                Debug.Assert(blockIsCompleted, "Block must be completed for this event to be valid.");
+                Debug.Assert(
+                    blockIsCompleted,
+                    "Block must be completed for this event to be valid."
+                );
                 if (blockIsCompleted)
                 {
                     var reason = (BlockCompletionReason)completionTask!.Status;
@@ -140,7 +174,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
                     if (completionTask.IsFaulted)
                     {
-                        try { exceptionData = string.Join(Environment.NewLine, completionTask.Exception!.InnerExceptions.Select(static e => e.ToString())); }
+                        try
+                        {
+                            exceptionData = string.Join(
+                                Environment.NewLine,
+                                completionTask.Exception!.InnerExceptions.Select(static e =>
+                                    e.ToString()
+                                )
+                            );
+                        }
                         catch { }
                     }
 
@@ -154,24 +196,33 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>The block completed successfully.</summary>
             RanToCompletion = (int)TaskStatus.RanToCompletion,
+
             /// <summary>The block completed due to an error.</summary>
             Faulted = (int)TaskStatus.Faulted,
+
             /// <summary>The block completed due to cancellation.</summary>
-            Canceled = (int)TaskStatus.Canceled
+            Canceled = (int)TaskStatus.Canceled,
         }
 
         [Event(BLOCKCOMPLETED_EVENTID, Level = EventLevel.Informational)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        private void DataflowBlockCompleted(int blockId, BlockCompletionReason reason, string exceptionData)
+        private void DataflowBlockCompleted(
+            int blockId,
+            BlockCompletionReason reason,
+            string exceptionData
+        )
         {
             WriteEvent(BLOCKCOMPLETED_EVENTID, blockId, reason, exceptionData);
         }
-#endregion
+        #endregion
 
-#region Linking
+        #region Linking
         /// <summary>Trace an event for a block linking.</summary>
         /// <param name="source">The source block linking to a target.</param>
         /// <param name="target">The target block being linked from a source.</param>
@@ -191,9 +242,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKLINKED_EVENTID, sourceId, targetId);
         }
-#endregion
+        #endregion
 
-#region Unlinking
+        #region Unlinking
         /// <summary>Trace an event for a block unlinking.</summary>
         /// <param name="source">The source block unlinking from a target.</param>
         /// <param name="target">The target block being unlinked from a source.</param>
@@ -214,6 +265,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             WriteEvent(BLOCKUNLINKED_EVENTID, sourceId, targetId);
         }
-#endregion
+        #endregion
     }
 }

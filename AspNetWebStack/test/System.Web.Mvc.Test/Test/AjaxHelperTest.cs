@@ -14,8 +14,15 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.ThrowsArgumentNull(
-                delegate { AjaxHelper ajaxHelper = new AjaxHelper(null, new Mock<IViewDataContainer>().Object); },
-                "viewContext");
+                delegate
+                {
+                    AjaxHelper ajaxHelper = new AjaxHelper(
+                        null,
+                        new Mock<IViewDataContainer>().Object
+                    );
+                },
+                "viewContext"
+            );
         }
 
         [Fact]
@@ -23,8 +30,12 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.ThrowsArgumentNull(
-                delegate { AjaxHelper ajaxHelper = new AjaxHelper(new Mock<ViewContext>().Object, null); },
-                "viewDataContainer");
+                delegate
+                {
+                    AjaxHelper ajaxHelper = new AjaxHelper(new Mock<ViewContext>().Object, null);
+                },
+                "viewDataContainer"
+            );
         }
 
         [Fact]
@@ -65,7 +76,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ViewContext viewContext = new Mock<ViewContext>().Object;
-            ViewDataDictionary<Controller> vdd = new ViewDataDictionary<Controller>(new Mock<Controller>().Object);
+            ViewDataDictionary<Controller> vdd = new ViewDataDictionary<Controller>(
+                new Mock<Controller>().Object
+            );
             Mock<IViewDataContainer> vdc = new Mock<IViewDataContainer>();
             vdc.Setup(v => v.ViewData).Returns(vdd);
 
@@ -84,13 +97,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ViewContext viewContext = new Mock<ViewContext>().Object;
-            ViewDataDictionary<Controller> vdd = new ViewDataDictionary<Controller>(new Mock<Controller>().Object);
+            ViewDataDictionary<Controller> vdd = new ViewDataDictionary<Controller>(
+                new Mock<Controller>().Object
+            );
             Mock<IViewDataContainer> vdc = new Mock<IViewDataContainer>();
             vdc.Setup(v => v.ViewData).Returns(vdd);
             RouteCollection rc = new RouteCollection();
 
             // Act
-            AjaxHelper<Controller> ajaxHelper = new AjaxHelper<Controller>(viewContext, vdc.Object, rc);
+            AjaxHelper<Controller> ajaxHelper = new AjaxHelper<Controller>(
+                viewContext,
+                vdc.Object,
+                rc
+            );
 
             // Assert
             Assert.Equal(viewContext, ajaxHelper.ViewContext);
@@ -167,7 +186,9 @@ namespace System.Web.Mvc.Test
             AjaxHelper ajaxHelper = GetAjaxHelper();
 
             // Act
-            string encoded = ajaxHelper.JavaScriptStringEncode(null /* message */);
+            string encoded = ajaxHelper.JavaScriptStringEncode(
+                null /* message */
+            );
 
             // Assert
             Assert.Null(encoded);
@@ -182,7 +203,10 @@ namespace System.Web.Mvc.Test
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
             // Act
-            AjaxHelper ajaxHelper = new AjaxHelper(new Mock<ViewContext>().Object, viewDataContainer.Object);
+            AjaxHelper ajaxHelper = new AjaxHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object
+            );
 
             // Assert
             Assert.Equal(1, ajaxHelper.ViewBag.A);
@@ -198,9 +222,15 @@ namespace System.Web.Mvc.Test
 
             ViewDataDictionary otherViewDataDictionary = new ViewDataDictionary() { { "A", 2 } };
             Mock<IViewDataContainer> otherViewDataContainer = new Mock<IViewDataContainer>();
-            otherViewDataContainer.Setup(container => container.ViewData).Returns(otherViewDataDictionary);
+            otherViewDataContainer
+                .Setup(container => container.ViewData)
+                .Returns(otherViewDataDictionary);
 
-            AjaxHelper ajaxHelper = new AjaxHelper(new Mock<ViewContext>().Object, viewDataContainer.Object, new RouteCollection());
+            AjaxHelper ajaxHelper = new AjaxHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object,
+                new RouteCollection()
+            );
 
             // Act
             ajaxHelper.ViewDataContainer = otherViewDataContainer.Object;
@@ -217,7 +247,11 @@ namespace System.Web.Mvc.Test
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
-            AjaxHelper ajaxHelper = new AjaxHelper(new Mock<ViewContext>().Object, viewDataContainer.Object, new RouteCollection());
+            AjaxHelper ajaxHelper = new AjaxHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object,
+                new RouteCollection()
+            );
 
             // Act
             ajaxHelper.ViewBag.A = "foo";

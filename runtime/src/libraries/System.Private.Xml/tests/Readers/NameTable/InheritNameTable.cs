@@ -29,7 +29,8 @@ namespace System.Xml.NameTableTests
             xrs.NameTable = nt;
             xrs.DtdProcessing = DtdProcessing.Ignore;
             XmlReader r = XmlReader.Create(FilePathUtil.getStream(strFile), xrs);
-            while (r.Read()) ;
+            while (r.Read())
+                ;
 
             // verify name table
             object play2 = nt.Get("PLAY");
@@ -51,10 +52,7 @@ namespace System.Xml.NameTableTests
 
         public int Count
         {
-            get
-            {
-                return _Atoms.Count;
-            }
+            get { return _Atoms.Count; }
         }
 
         private string LookupKey(string key)

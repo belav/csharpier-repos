@@ -37,7 +37,11 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("browser")]
         public static new MD5 Create() => new Implementation();
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new MD5? Create(string algName) => (MD5?)CryptoConfig.CreateFromName(algName);
 
@@ -105,7 +109,11 @@ namespace System.Security.Cryptography
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
         [UnsupportedOSPlatform("browser")]
-        public static bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length < HashSizeInBytes)
             {
@@ -113,7 +121,11 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(HashAlgorithmNames.MD5, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
+                HashAlgorithmNames.MD5,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;
@@ -190,14 +202,21 @@ namespace System.Security.Cryptography
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
         [UnsupportedOSPlatform("browser")]
-        public static ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
             if (!source.CanRead)
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
-            return LiteHashProvider.HashStreamAsync(HashAlgorithmNames.MD5, source, cancellationToken);
+            return LiteHashProvider.HashStreamAsync(
+                HashAlgorithmNames.MD5,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -227,7 +246,8 @@ namespace System.Security.Cryptography
         public static ValueTask<int> HashDataAsync(
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -241,7 +261,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmNames.MD5,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private sealed class Implementation : MD5
@@ -260,11 +281,12 @@ namespace System.Security.Cryptography
             protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
                 _hashProvider.AppendHashData(source);
 
-            protected sealed override byte[] HashFinal() =>
-                _hashProvider.FinalizeHashAndReset();
+            protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
-            protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
-                _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
+            protected sealed override bool TryHashFinal(
+                Span<byte> destination,
+                out int bytesWritten
+            ) => _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
 
             public sealed override void Initialize() => _hashProvider.Reset();
 

@@ -14,10 +14,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public OperationStatus Status { get; } = status;
         public T Data { get; } = data;
 
-        public OperationStatus<T> With(OperationStatus status)
-            => new(status, Data);
+        public OperationStatus<T> With(OperationStatus status) => new(status, Data);
 
-        public OperationStatus<TNew> With<TNew>(TNew data)
-            => new(Status, data);
+        public OperationStatus<TNew> With<TNew>(TNew data) => new(Status, data);
     }
 }

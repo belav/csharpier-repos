@@ -13,9 +13,7 @@ namespace System.Xml.Xsl.Qil
     /// </remarks>
     internal sealed class QilFactory
     {
-        public QilFactory()
-        {
-        }
+        public QilFactory() { }
 
         //-----------------------------------------------
         // Convenience methods
@@ -653,9 +651,20 @@ namespace System.Xml.Xsl.Qil
         //-----------------------------------------------
         // function definition and invocation
         //-----------------------------------------------
-        public QilFunction Function(QilNode arguments, QilNode definition, QilNode sideEffects, XmlQueryType xmlType)
+        public QilFunction Function(
+            QilNode arguments,
+            QilNode definition,
+            QilNode sideEffects,
+            XmlQueryType xmlType
+        )
         {
-            QilFunction n = new QilFunction(QilNodeType.Function, arguments, definition, sideEffects, xmlType);
+            QilFunction n = new QilFunction(
+                QilNodeType.Function,
+                arguments,
+                definition,
+                sideEffects,
+                xmlType
+            );
             n.XmlType = QilTypeChecker.CheckFunction(n);
             TraceNode(n);
             return n;
@@ -987,15 +996,30 @@ namespace System.Xml.Xsl.Qil
 
         public QilInvokeLateBound XsltInvokeLateBound(QilNode name, QilNode arguments)
         {
-            QilInvokeLateBound n = new QilInvokeLateBound(QilNodeType.XsltInvokeLateBound, name, arguments);
+            QilInvokeLateBound n = new QilInvokeLateBound(
+                QilNodeType.XsltInvokeLateBound,
+                name,
+                arguments
+            );
             n.XmlType = QilTypeChecker.CheckXsltInvokeLateBound(n);
             TraceNode(n);
             return n;
         }
 
-        public QilInvokeEarlyBound XsltInvokeEarlyBound(QilNode name, QilNode clrMethod, QilNode arguments, XmlQueryType xmlType)
+        public QilInvokeEarlyBound XsltInvokeEarlyBound(
+            QilNode name,
+            QilNode clrMethod,
+            QilNode arguments,
+            XmlQueryType xmlType
+        )
         {
-            QilInvokeEarlyBound n = new QilInvokeEarlyBound(QilNodeType.XsltInvokeEarlyBound, name, clrMethod, arguments, xmlType);
+            QilInvokeEarlyBound n = new QilInvokeEarlyBound(
+                QilNodeType.XsltInvokeEarlyBound,
+                name,
+                clrMethod,
+                arguments,
+                xmlType
+            );
             n.XmlType = QilTypeChecker.CheckXsltInvokeEarlyBound(n);
             TraceNode(n);
             return n;
@@ -1029,7 +1053,6 @@ namespace System.Xml.Xsl.Qil
         #endregion
         #region Diagnostic Support
         [System.Diagnostics.Conditional("QIL_TRACE_NODE_CREATION")]
-
 #pragma warning disable CA1822
         public void TraceNode(QilNode n)
         {

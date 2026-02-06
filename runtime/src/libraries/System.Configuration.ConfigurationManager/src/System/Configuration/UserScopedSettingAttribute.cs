@@ -7,7 +7,5 @@ namespace System.Configuration
     ///     Indicates that a setting is to be stored on a per-user basis.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class UserScopedSettingAttribute : SettingAttribute
-    {
-    }
+    public sealed class UserScopedSettingAttribute : SettingAttribute { }
 }

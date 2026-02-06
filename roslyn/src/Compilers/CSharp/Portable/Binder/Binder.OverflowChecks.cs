@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// Within <c>checked</c> expression/block.
             /// </summary>
-            Enabled
+            Enabled,
         }
     }
 }

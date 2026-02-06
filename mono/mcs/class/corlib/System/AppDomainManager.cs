@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,133 +34,207 @@ using System.Security.Permissions;
 using System.Security.Policy;
 using System.Threading;
 
-namespace System {
-
+namespace System
+{
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-	[ComVisible (true)]
-	[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-	[SecurityPermission (SecurityAction.InheritanceDemand, Infrastructure = true)]
-	public class AppDomainManager : MarshalByRefObject {
-		private ApplicationActivator _activator;
-		private AppDomainManagerInitializationOptions _flags;
+    [ComVisible(true)]
+    [SecurityPermission(SecurityAction.LinkDemand, Infrastructure = true)]
+    [SecurityPermission(SecurityAction.InheritanceDemand, Infrastructure = true)]
+    public class AppDomainManager : MarshalByRefObject
+    {
+        private ApplicationActivator _activator;
+        private AppDomainManagerInitializationOptions _flags;
 
-		public AppDomainManager ()
-		{
-			_flags = AppDomainManagerInitializationOptions.None;
-		}
+        public AppDomainManager()
+        {
+            _flags = AppDomainManagerInitializationOptions.None;
+        }
 
-		public virtual ApplicationActivator ApplicationActivator {
-			get {
-				if (_activator == null)
-					_activator = new ApplicationActivator ();
-				 return _activator;
-			}
-		}
+        public virtual ApplicationActivator ApplicationActivator
+        {
+            get
+            {
+                if (_activator == null)
+                    _activator = new ApplicationActivator();
+                return _activator;
+            }
+        }
 
-		public virtual Assembly EntryAssembly {
-			get { return Assembly.GetEntryAssembly (); }
-		}
+        public virtual Assembly EntryAssembly
+        {
+            get { return Assembly.GetEntryAssembly(); }
+        }
 
-		[MonoTODO]
-		public virtual HostExecutionContextManager HostExecutionContextManager {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public virtual HostExecutionContextManager HostExecutionContextManager
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public virtual HostSecurityManager HostSecurityManager {
-			get { return null; }
-		}
+        public virtual HostSecurityManager HostSecurityManager
+        {
+            get { return null; }
+        }
 
-		public AppDomainManagerInitializationOptions InitializationFlags {
-			get { return _flags; }
-			set { _flags = value; }	
-		}
+        public AppDomainManagerInitializationOptions InitializationFlags
+        {
+            get { return _flags; }
+            set { _flags = value; }
+        }
 
-		// methods
+        // methods
 
-		public virtual AppDomain CreateDomain (string friendlyName, Evidence securityInfo, AppDomainSetup appDomainInfo)
-		{
-			InitializeNewDomain (appDomainInfo);
-			AppDomain ad = CreateDomainHelper (friendlyName, securityInfo, appDomainInfo);
+        public virtual AppDomain CreateDomain(
+            string friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup appDomainInfo
+        )
+        {
+            InitializeNewDomain(appDomainInfo);
+            AppDomain ad = CreateDomainHelper(friendlyName, securityInfo, appDomainInfo);
 
-			// supply app domain policy ?
-			if ((HostSecurityManager.Flags & HostSecurityManagerOptions.HostPolicyLevel) == HostSecurityManagerOptions.HostPolicyLevel) {
-				PolicyLevel pl = HostSecurityManager.DomainPolicy;
-				if (pl != null) {
-					ad.SetAppDomainPolicy (pl);
-				}
-			}
+            // supply app domain policy ?
+            if (
+                (HostSecurityManager.Flags & HostSecurityManagerOptions.HostPolicyLevel)
+                == HostSecurityManagerOptions.HostPolicyLevel
+            )
+            {
+                PolicyLevel pl = HostSecurityManager.DomainPolicy;
+                if (pl != null)
+                {
+                    ad.SetAppDomainPolicy(pl);
+                }
+            }
 
-			return ad;
-		}
+            return ad;
+        }
 
-		public virtual void InitializeNewDomain (AppDomainSetup appDomainInfo)
-		{
-			// default does nothing (as documented)
-		}
+        public virtual void InitializeNewDomain(AppDomainSetup appDomainInfo)
+        {
+            // default does nothing (as documented)
+        }
 
-		// available in FX2.0 with service pack 1, including the 2.0 shipped as part of FX3.5
-		public virtual bool CheckSecuritySettings (SecurityState state)
-		{
-			return false;
-		}
+        // available in FX2.0 with service pack 1, including the 2.0 shipped as part of FX3.5
+        public virtual bool CheckSecuritySettings(SecurityState state)
+        {
+            return false;
+        }
 
-		// static
+        // static
 
-		// FIXME: maybe AppDomain.CreateDomain should be calling this?
-		protected static AppDomain CreateDomainHelper (string friendlyName, Evidence securityInfo, AppDomainSetup appDomainInfo)
-		{
-			return AppDomain.CreateDomain (friendlyName, securityInfo, appDomainInfo);
-		}
-	}
+        // FIXME: maybe AppDomain.CreateDomain should be calling this?
+        protected static AppDomain CreateDomainHelper(
+            string friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup appDomainInfo
+        )
+        {
+            return AppDomain.CreateDomain(friendlyName, securityInfo, appDomainInfo);
+        }
+    }
 #else
-	[Obsolete ("AppDomainManager is not supported on the current platform.", true)]
-	public class AppDomainManager : MarshalByRefObject {
-		public AppDomainManager ()
-		{
-			throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform.");
-		}
+    [Obsolete("AppDomainManager is not supported on the current platform.", true)]
+    public class AppDomainManager : MarshalByRefObject
+    {
+        public AppDomainManager()
+        {
+            throw new PlatformNotSupportedException(
+                "AppDomainManager is not supported on the current platform."
+            );
+        }
 
-		public virtual ApplicationActivator ApplicationActivator {
-			get { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-		}
+        public virtual ApplicationActivator ApplicationActivator
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+        }
 
-		public virtual Assembly EntryAssembly {
-			get { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-		}
+        public virtual Assembly EntryAssembly
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+        }
 
-		public virtual HostExecutionContextManager HostExecutionContextManager {
-			get { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-		}
+        public virtual HostExecutionContextManager HostExecutionContextManager
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+        }
 
-		public virtual HostSecurityManager HostSecurityManager {
-			get { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-		}
+        public virtual HostSecurityManager HostSecurityManager
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+        }
 
-		public AppDomainManagerInitializationOptions InitializationFlags {
-			get { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-			set { throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform."); }
-		}
+        public AppDomainManagerInitializationOptions InitializationFlags
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    "AppDomainManager is not supported on the current platform."
+                );
+            }
+        }
 
-		public virtual AppDomain CreateDomain (string friendlyName, Evidence securityInfo, AppDomainSetup appDomainInfo)
-		{
-			throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform.");
-		}
+        public virtual AppDomain CreateDomain(
+            string friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup appDomainInfo
+        )
+        {
+            throw new PlatformNotSupportedException(
+                "AppDomainManager is not supported on the current platform."
+            );
+        }
 
-		public virtual void InitializeNewDomain (AppDomainSetup appDomainInfo)
-		{
-			throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform.");
-		}
+        public virtual void InitializeNewDomain(AppDomainSetup appDomainInfo)
+        {
+            throw new PlatformNotSupportedException(
+                "AppDomainManager is not supported on the current platform."
+            );
+        }
 
-		public virtual bool CheckSecuritySettings (SecurityState state)
-		{
-			throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform.");
-		}
+        public virtual bool CheckSecuritySettings(SecurityState state)
+        {
+            throw new PlatformNotSupportedException(
+                "AppDomainManager is not supported on the current platform."
+            );
+        }
 
-		protected static AppDomain CreateDomainHelper (string friendlyName, Evidence securityInfo, AppDomainSetup appDomainInfo)
-		{
-			throw new PlatformNotSupportedException ("AppDomainManager is not supported on the current platform.");
-		}
-	}
+        protected static AppDomain CreateDomainHelper(
+            string friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup appDomainInfo
+        )
+        {
+            throw new PlatformNotSupportedException(
+                "AppDomainManager is not supported on the current platform."
+            );
+        }
+    }
 
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS
 }

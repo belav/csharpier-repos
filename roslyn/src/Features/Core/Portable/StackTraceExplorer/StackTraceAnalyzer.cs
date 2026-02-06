@@ -16,31 +16,40 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal static class StackTraceAnalyzer
-
     {
         /// <summary>
         /// List of parsers to use. Order is important because
-        /// take the result from the first parser that returns 
+        /// take the result from the first parser that returns
         /// success.
         /// </summary>
-        private static readonly ImmutableArray<IStackFrameParser> s_parsers = ImmutableArray.Create<IStackFrameParser>(
-            new DotnetStackFrameParser(),
-            new VSDebugCallstackParser(),
-            new DefaultStackParser()
-        );
+        private static readonly ImmutableArray<IStackFrameParser> s_parsers =
+            ImmutableArray.Create<IStackFrameParser>(
+                new DotnetStackFrameParser(),
+                new VSDebugCallstackParser(),
+                new DefaultStackParser()
+            );
 
-        public static Task<StackTraceAnalysisResult> AnalyzeAsync(string callstack, CancellationToken cancellationToken)
+        public static Task<StackTraceAnalysisResult> AnalyzeAsync(
+            string callstack,
+            CancellationToken cancellationToken
+        )
         {
-            var result = new StackTraceAnalysisResult(callstack, Parse(callstack, cancellationToken));
+            var result = new StackTraceAnalysisResult(
+                callstack,
+                Parse(callstack, cancellationToken)
+            );
             return Task.FromResult(result);
         }
 
-        private static ImmutableArray<ParsedFrame> Parse(string callstack, CancellationToken cancellationToken)
+        private static ImmutableArray<ParsedFrame> Parse(
+            string callstack,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<ParsedFrame>.GetInstance(out var builder);
 
             // if the callstack comes from ActivityLog.xml it has been
-            // encoding to be passed over HTTP. This should only decode 
+            // encoding to be passed over HTTP. This should only decode
             // specific characters like "&gt;" and "&lt;" to their "normal"
             // equivalents ">" and "<" so we can parse correctly
             callstack = WebUtility.HtmlDecode(callstack);
@@ -51,7 +60,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                // For now do the work to removing leading and trailing whitespace. 
+                // For now do the work to removing leading and trailing whitespace.
                 // This keeps behavior we've had, but may not actually be the desired behavior in the long run.
                 // Specifically if we ever want to add a copy feature to copy back contents from a frame
                 var trimmedLine = Trim(line);
@@ -91,7 +100,9 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 
             if (position < callstack.Length)
             {
-                yield return callstack.GetSubSequence(TextSpan.FromBounds(position, callstack.Length));
+                yield return callstack.GetSubSequence(
+                    TextSpan.FromBounds(position, callstack.Length)
+                );
             }
         }
 

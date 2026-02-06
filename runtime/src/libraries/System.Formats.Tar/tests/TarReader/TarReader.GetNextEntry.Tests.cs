@@ -42,7 +42,6 @@ namespace System.Formats.Tar.Tests
             Assert.Null(reader.GetNextEntry());
         }
 
-
         [Fact]
         public void LongEndMarkers_DoNotAdvanceStream()
         {
@@ -76,7 +75,9 @@ namespace System.Formats.Tar.Tests
             {
                 UstarTarEntry entry1 = new UstarTarEntry(TarEntryType.RegularFile, "file.txt");
                 entry1.DataStream = new MemoryStream();
-                using (StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true))
+                using (
+                    StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true)
+                )
                 {
                     streamWriter.WriteLine(expectedText);
                 }
@@ -106,7 +107,6 @@ namespace System.Formats.Tar.Tests
                     string actualText = streamReader.ReadLine();
                     Assert.Equal(expectedText, actualText);
                 }
-
             }
 
             // The reader must stay alive because it's in charge of disposing all the entries it collected
@@ -122,7 +122,9 @@ namespace System.Formats.Tar.Tests
             {
                 UstarTarEntry entry1 = new UstarTarEntry(TarEntryType.RegularFile, "file.txt");
                 entry1.DataStream = new MemoryStream();
-                using (StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true))
+                using (
+                    StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true)
+                )
                 {
                     streamWriter.WriteLine(expectedText);
                 }
@@ -134,7 +136,12 @@ namespace System.Formats.Tar.Tests
             }
 
             archive.Seek(0, SeekOrigin.Begin);
-            using WrappedStream wrapped = new WrappedStream(archive, canRead: true, canWrite: false, canSeek: false);
+            using WrappedStream wrapped = new WrappedStream(
+                archive,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
 
             UstarTarEntry entry;
             using (TarReader reader = new TarReader(wrapped, leaveOpen: true)) // Unseekable
@@ -154,7 +161,6 @@ namespace System.Formats.Tar.Tests
                     string actualText = streamReader.ReadLine();
                     Assert.Equal(expectedText, actualText);
                 }
-
             }
 
             // The reader must stay alive because it's in charge of disposing all the entries it collected
@@ -168,25 +174,43 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Gnu)]
         public void GetNextEntry_CopyDataFalse_UnseekableArchive_Exceptions(TarEntryFormat format)
         {
-            TarEntryType fileEntryType = GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format);
+            TarEntryType fileEntryType = GetTarEntryTypeForTarEntryFormat(
+                TarEntryType.RegularFile,
+                format
+            );
             using MemoryStream archive = new MemoryStream();
             using (TarWriter writer = new TarWriter(archive, format, leaveOpen: true))
             {
-                TarEntry entry1 = InvokeTarEntryCreationConstructor(format, fileEntryType, "file.txt");
+                TarEntry entry1 = InvokeTarEntryCreationConstructor(
+                    format,
+                    fileEntryType,
+                    "file.txt"
+                );
                 entry1.DataStream = new MemoryStream();
-                using (StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true))
+                using (
+                    StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true)
+                )
                 {
                     streamWriter.WriteLine("Hello world!");
                 }
                 entry1.DataStream.Seek(0, SeekOrigin.Begin); // Rewind to ensure it gets written from the beginning
                 writer.WriteEntry(entry1);
 
-                TarEntry entry2 = InvokeTarEntryCreationConstructor(format, TarEntryType.Directory, "dir");
+                TarEntry entry2 = InvokeTarEntryCreationConstructor(
+                    format,
+                    TarEntryType.Directory,
+                    "dir"
+                );
                 writer.WriteEntry(entry2);
             }
 
             archive.Seek(0, SeekOrigin.Begin);
-            using WrappedStream wrapped = new WrappedStream(archive, canRead: true, canWrite: false, canSeek: false);
+            using WrappedStream wrapped = new WrappedStream(
+                archive,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
             TarEntry entry;
             byte[] b = new byte[1];
             using (TarReader reader = new TarReader(wrapped)) // Unseekable
@@ -214,14 +238,18 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void GetNextEntry_UnseekableArchive_ReplaceDataStream_ExcludeFromDisposing(bool copyData)
+        public void GetNextEntry_UnseekableArchive_ReplaceDataStream_ExcludeFromDisposing(
+            bool copyData
+        )
         {
             MemoryStream archive = new MemoryStream();
             using (TarWriter writer = new TarWriter(archive, TarEntryFormat.Ustar, leaveOpen: true))
             {
                 UstarTarEntry entry1 = new UstarTarEntry(TarEntryType.RegularFile, "file.txt");
                 entry1.DataStream = new MemoryStream();
-                using (StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true))
+                using (
+                    StreamWriter streamWriter = new StreamWriter(entry1.DataStream, leaveOpen: true)
+                )
                 {
                     streamWriter.WriteLine("Hello world!");
                 }
@@ -233,7 +261,12 @@ namespace System.Formats.Tar.Tests
             }
 
             archive.Seek(0, SeekOrigin.Begin);
-            using WrappedStream wrapped = new WrappedStream(archive, canRead: true, canWrite: false, canSeek: false);
+            using WrappedStream wrapped = new WrappedStream(
+                archive,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
             UstarTarEntry entry;
             Stream oldStream;
             using (TarReader reader = new TarReader(wrapped)) // Unseekable
@@ -245,7 +278,9 @@ namespace System.Formats.Tar.Tests
                 oldStream = entry.DataStream;
 
                 entry.DataStream = new MemoryStream(); // Substitution, setter should dispose the previous stream
-                using(StreamWriter streamWriter = new StreamWriter(entry.DataStream, leaveOpen: true))
+                using (
+                    StreamWriter streamWriter = new StreamWriter(entry.DataStream, leaveOpen: true)
+                )
                 {
                     streamWriter.WriteLine("Substituted");
                 }
@@ -284,14 +319,20 @@ namespace System.Formats.Tar.Tests
             }
 
             archive.Position = 0;
-            using var unseekable = new WrappedStream(archive, archive.CanRead, archive.CanWrite, canSeek: false);
+            using var unseekable = new WrappedStream(
+                archive,
+                archive.CanRead,
+                archive.CanWrite,
+                canSeek: false
+            );
             using var reader = new TarReader(unseekable);
 
             TarEntry e = reader.GetNextEntry(copyData);
             Assert.Equal(contentSize, e.Length);
 
             byte[] buffer = new byte[contentSize];
-            while (e.DataStream.Read(buffer) > 0) ;
+            while (e.DataStream.Read(buffer) > 0)
+                ;
             AssertExtensions.SequenceEqual(fileContents, buffer);
 
             e = reader.GetNextEntry(copyData);

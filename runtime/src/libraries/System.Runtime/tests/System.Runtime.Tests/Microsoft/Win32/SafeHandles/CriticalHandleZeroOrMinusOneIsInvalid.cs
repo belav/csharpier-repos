@@ -37,21 +37,19 @@ public static class CriticalHandleZeroOrMinusOneIsInvalidTests
 
     private class TestCriticalHandleMinusOneIsInvalid : CriticalHandleMinusOneIsInvalid
     {
-        public TestCriticalHandleMinusOneIsInvalid()
-        {
-        }
+        public TestCriticalHandleMinusOneIsInvalid() { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 
     private class TestCriticalHandleZeroOrMinusOneIsInvalid : CriticalHandleZeroOrMinusOneIsInvalid
     {
-        public TestCriticalHandleZeroOrMinusOneIsInvalid()
-        {
-        }
+        public TestCriticalHandleZeroOrMinusOneIsInvalid() { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 }

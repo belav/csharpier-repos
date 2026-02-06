@@ -9,10 +9,19 @@ namespace System.Activities.DurableInstancing
 
     class DetectRunnableInstancesTask : PersistenceTask
     {
-        public DetectRunnableInstancesTask(SqlWorkflowInstanceStore store, SqlWorkflowInstanceStoreLock storeLock, TimeSpan taskInterval)
-            : base(store, storeLock, new DetectRunnableInstancesCommand(), taskInterval, SqlWorkflowInstanceStoreConstants.DefaultTaskTimeout, false)
-        {
-        }
+        public DetectRunnableInstancesTask(
+            SqlWorkflowInstanceStore store,
+            SqlWorkflowInstanceStoreLock storeLock,
+            TimeSpan taskInterval
+        )
+            : base(
+                store,
+                storeLock,
+                new DetectRunnableInstancesCommand(),
+                taskInterval,
+                SqlWorkflowInstanceStoreConstants.DefaultTaskTimeout,
+                false
+            ) { }
 
         public override void ResetTimer(bool fireImmediately, TimeSpan? taskIntervalOverride)
         {

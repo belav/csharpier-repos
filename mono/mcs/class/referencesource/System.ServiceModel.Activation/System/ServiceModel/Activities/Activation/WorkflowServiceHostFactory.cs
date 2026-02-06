@@ -28,15 +28,22 @@ namespace System.ServiceModel.Activities.Activation
     {
         const string SupportedVersionsGeneratedTypeNamePrefix = "SupportedVersionsGeneratedType_";
         const string SupportedVersionsFolder = "App_Code";
-        string xamlVirtualFile;       
+        string xamlVirtualFile;
 
-        public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
+        public override ServiceHostBase CreateServiceHost(
+            string constructorString,
+            Uri[] baseAddresses
+        )
         {
             WorkflowServiceHost serviceHost = null;
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WorkflowServiceHostFactoryConstructorStringNotProvided));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.WorkflowServiceHostFactoryConstructorStringNotProvided
+                    )
+                );
             }
 
             if (baseAddresses == null)
@@ -46,46 +53,73 @@ namespace System.ServiceModel.Activities.Activation
 
             if (baseAddresses.Length == 0)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BaseAddressesNotProvided));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BaseAddressesNotProvided)
+                );
             }
 
             if (!HostingEnvironment.IsHosted)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ProcessNotExecutingUnderHostedContext("WorkflowServiceHostFactory.CreateServiceHost")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_ProcessNotExecutingUnderHostedContext(
+                            "WorkflowServiceHostFactory.CreateServiceHost"
+                        )
+                    )
+                );
             }
 
-            // We expect most users will use .xamlx file instead of precompiled assembly 
+            // We expect most users will use .xamlx file instead of precompiled assembly
             // Samples of xamlVirtualPath under all scenarios
             //                          constructorString  XamlFileBaseLocation    xamlVirtualPath
-            // 1. Xamlx direct          ~/sub/a.xamlx      ~/sub/                  ~/sub/a.xamlx 
+            // 1. Xamlx direct          ~/sub/a.xamlx      ~/sub/                  ~/sub/a.xamlx
             // 2. CBA with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no file will be found
             // 3. CBA with xamlx        sub/a.xamlx        ~/                      ~/sub/a.xamlx
             // 4. Svc with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no file will be found
             // 5. Svc with Xamlx        ../a.xamlx         ~/sub/                  ~/a.xamlx
-                          
-            string xamlVirtualPath = VirtualPathUtility.Combine(AspNetEnvironment.Current.XamlFileBaseLocation, constructorString);
+
+            string xamlVirtualPath = VirtualPathUtility.Combine(
+                AspNetEnvironment.Current.XamlFileBaseLocation,
+                constructorString
+            );
             Stream activityStream;
             string compiledCustomString;
-            if (GetServiceFileStreamOrCompiledCustomString(xamlVirtualPath, baseAddresses, out activityStream, out compiledCustomString))
+            if (
+                GetServiceFileStreamOrCompiledCustomString(
+                    xamlVirtualPath,
+                    baseAddresses,
+                    out activityStream,
+                    out compiledCustomString
+                )
+            )
             {
-                // 
+                //
 
                 BuildManager.GetReferencedAssemblies();
                 //XmlnsMappingHelper.EnsureMappingPassed();
 
                 this.xamlVirtualFile = xamlVirtualPath;
-               
+
                 WorkflowService service;
                 using (activityStream)
                 {
                     string serviceName = VirtualPathUtility.GetFileName(xamlVirtualPath);
-                    string serviceNamespace = String.Format(CultureInfo.InvariantCulture, "/{0}{1}", ServiceHostingEnvironment.SiteName, VirtualPathUtility.GetDirectory(ServiceHostingEnvironment.FullVirtualPath));
+                    string serviceNamespace = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "/{0}{1}",
+                        ServiceHostingEnvironment.SiteName,
+                        VirtualPathUtility.GetDirectory(ServiceHostingEnvironment.FullVirtualPath)
+                    );
 
-                    service = CreatetWorkflowServiceAndSetCompiledExpressionRoot(null, activityStream, XName.Get(XmlConvert.EncodeLocalName(serviceName), serviceNamespace));
+                    service = CreatetWorkflowServiceAndSetCompiledExpressionRoot(
+                        null,
+                        activityStream,
+                        XName.Get(XmlConvert.EncodeLocalName(serviceName), serviceNamespace)
+                    );
                 }
-                
+
                 if (service != null)
-                {                   
+                {
                     serviceHost = CreateWorkflowServiceHost(service, baseAddresses);
                 }
             }
@@ -94,7 +128,10 @@ namespace System.ServiceModel.Activities.Activation
                 Type activityType = this.GetTypeFromAssembliesInCurrentDomain(constructorString);
                 if (null == activityType)
                 {
-                    activityType = GetTypeFromCompileCustomString(compiledCustomString, constructorString);
+                    activityType = GetTypeFromCompileCustomString(
+                        compiledCustomString,
+                        constructorString
+                    );
                 }
                 if (null == activityType)
                 {
@@ -106,7 +143,9 @@ namespace System.ServiceModel.Activities.Activation
                 {
                     if (!TypeHelper.AreTypesCompatible(activityType, typeof(Activity)))
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TypeNotActivity(activityType.FullName)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.TypeNotActivity(activityType.FullName))
+                        );
                     }
 
                     Activity activity = (Activity)Activator.CreateInstance(activityType);
@@ -116,14 +155,27 @@ namespace System.ServiceModel.Activities.Activation
             if (serviceHost == null)
             {
                 throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotResolveConstructorStringToWorkflowType(constructorString)));
+                    new InvalidOperationException(
+                        SR.CannotResolveConstructorStringToWorkflowType(constructorString)
+                    )
+                );
             }
 
-            //The Description.Name and Description.NameSpace aren't included intentionally - because 
+            //The Description.Name and Description.NameSpace aren't included intentionally - because
             //in farm scenarios the sole and unique identifier is the service deployment URL
             ((IDurableInstancingOptions)serviceHost.DurableInstancingOptions).SetScopeName(
-                XName.Get(XmlConvert.EncodeLocalName(VirtualPathUtility.GetFileName(ServiceHostingEnvironment.FullVirtualPath)),
-                String.Format(CultureInfo.InvariantCulture, "/{0}{1}", ServiceHostingEnvironment.SiteName, VirtualPathUtility.GetDirectory(ServiceHostingEnvironment.FullVirtualPath))));
+                XName.Get(
+                    XmlConvert.EncodeLocalName(
+                        VirtualPathUtility.GetFileName(ServiceHostingEnvironment.FullVirtualPath)
+                    ),
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "/{0}{1}",
+                        ServiceHostingEnvironment.SiteName,
+                        VirtualPathUtility.GetDirectory(ServiceHostingEnvironment.FullVirtualPath)
+                    )
+                )
+            );
 
             return serviceHost;
         }
@@ -133,7 +185,9 @@ namespace System.ServiceModel.Activities.Activation
             object serviceObject;
             XamlXmlReaderSettings xamlXmlReaderSettings = new XamlXmlReaderSettings();
             xamlXmlReaderSettings.ProvideLineInfo = true;
-            XamlReader wrappedReader = ActivityXamlServices.CreateReader(new XamlXmlReader(XmlReader.Create(activityStream), xamlXmlReaderSettings));
+            XamlReader wrappedReader = ActivityXamlServices.CreateReader(
+                new XamlXmlReader(XmlReader.Create(activityStream), xamlXmlReaderSettings)
+            );
             if (TD.XamlServicesLoadStartIsEnabled())
             {
                 TD.XamlServicesLoadStart();
@@ -145,15 +199,20 @@ namespace System.ServiceModel.Activities.Activation
             }
             return serviceObject;
         }
-        
-        void AddSupportedVersions(WorkflowServiceHost workflowServiceHost, WorkflowService baseService)
+
+        void AddSupportedVersions(
+            WorkflowServiceHost workflowServiceHost,
+            WorkflowService baseService
+        )
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
             IList<Tuple<string, Stream>> streams = null;
-            string xamlFileName = Path.GetFileNameWithoutExtension(VirtualPathUtility.GetFileName(this.xamlVirtualFile));
+            string xamlFileName = Path.GetFileNameWithoutExtension(
+                VirtualPathUtility.GetFileName(this.xamlVirtualFile)
+            );
             GetSupportedVersionStreams(xamlFileName, out streams);
-           
+
             if (streams != null)
             {
                 try
@@ -162,7 +221,12 @@ namespace System.ServiceModel.Activities.Activation
                     {
                         try
                         {
-                            WorkflowService service = CreatetWorkflowServiceAndSetCompiledExpressionRoot(stream.Item1, stream.Item2, baseService.Name);
+                            WorkflowService service =
+                                CreatetWorkflowServiceAndSetCompiledExpressionRoot(
+                                    stream.Item1,
+                                    stream.Item2,
+                                    baseService.Name
+                                );
                             if (service != null)
                             {
                                 workflowServiceHost.SupportedVersions.Add(service);
@@ -171,7 +235,14 @@ namespace System.ServiceModel.Activities.Activation
                         catch (Exception e)
                         {
                             Exception newException;
-                            if (Fx.IsFatal(e) || !TryWrapSupportedVersionException(stream.Item1, e, out newException))
+                            if (
+                                Fx.IsFatal(e)
+                                || !TryWrapSupportedVersionException(
+                                    stream.Item1,
+                                    e,
+                                    out newException
+                                )
+                            )
                             {
                                 throw;
                             }
@@ -190,33 +261,49 @@ namespace System.ServiceModel.Activities.Activation
             }
         }
 
-        internal static bool TryWrapSupportedVersionException(string filePath, Exception e, out Exception newException)
+        internal static bool TryWrapSupportedVersionException(
+            string filePath,
+            Exception e,
+            out Exception newException
+        )
         {
-            // We replace the exception, rather than simply wrapping it, because the activation error page highlights 
+            // We replace the exception, rather than simply wrapping it, because the activation error page highlights
             // the innermost exception, and we want that  exception to clearly show which file is the culprit.
             // Of course, if the exception has an inner exception, that will still get highlighted instead.
             // Also, for Xaml and XmlException, we don't propagate the line info, because the exception message already contains it.
             if (e is XmlException)
             {
-                newException = new XmlException(SR.ExceptionLoadingSupportedVersion(filePath, e.Message), e.InnerException);
+                newException = new XmlException(
+                    SR.ExceptionLoadingSupportedVersion(filePath, e.Message),
+                    e.InnerException
+                );
                 return true;
             }
 
             if (e is XamlException)
             {
-                newException = new XamlException(SR.ExceptionLoadingSupportedVersion(filePath, e.Message), e.InnerException);
+                newException = new XamlException(
+                    SR.ExceptionLoadingSupportedVersion(filePath, e.Message),
+                    e.InnerException
+                );
                 return true;
             }
 
             if (e is InvalidWorkflowException)
             {
-                newException = new InvalidWorkflowException(SR.ExceptionLoadingSupportedVersion(filePath, e.Message), e.InnerException);
+                newException = new InvalidWorkflowException(
+                    SR.ExceptionLoadingSupportedVersion(filePath, e.Message),
+                    e.InnerException
+                );
                 return true;
             }
 
             if (e is ValidationException)
             {
-                newException = new ValidationException(SR.ExceptionLoadingSupportedVersion(filePath, e.Message), e.InnerException);
+                newException = new ValidationException(
+                    SR.ExceptionLoadingSupportedVersion(filePath, e.Message),
+                    e.InnerException
+                );
                 return true;
             }
 
@@ -226,9 +313,12 @@ namespace System.ServiceModel.Activities.Activation
 
         internal static string GetSupportedVersionGeneratedTypeName(string filePath)
         {
-            string activityName = Path.GetFileNameWithoutExtension(filePath).ToUpper(CultureInfo.InvariantCulture);
-            
-            StringBuilder sb = new StringBuilder(WorkflowServiceHostFactory.SupportedVersionsGeneratedTypeNamePrefix);
+            string activityName = Path.GetFileNameWithoutExtension(filePath)
+                .ToUpper(CultureInfo.InvariantCulture);
+
+            StringBuilder sb = new StringBuilder(
+                WorkflowServiceHostFactory.SupportedVersionsGeneratedTypeNamePrefix
+            );
             for (int i = 0; i < activityName.Length; i++)
             {
                 sb.Append(char.ConvertToUtf32(activityName, i));
@@ -237,15 +327,24 @@ namespace System.ServiceModel.Activities.Activation
             return sb.ToString();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method HostingEnvironmentWrapper.UnsafeImpersonate().",
-           Safe = "Demands unmanaged code permission, disposes impersonation context in a finally, and tightly scopes the usage of the impersonation token.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method HostingEnvironmentWrapper.UnsafeImpersonate().",
+            Safe = "Demands unmanaged code permission, disposes impersonation context in a finally, and tightly scopes the usage of the impersonation token."
+        )]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
         [SecuritySafeCritical]
-        internal static void GetSupportedVersionStreams(string xamlFileName, out IList<Tuple<string, Stream>> streams)
+        internal static void GetSupportedVersionStreams(
+            string xamlFileName,
+            out IList<Tuple<string, Stream>> streams
+        )
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
-            string virtualFileFolder = string.Format(CultureInfo.InvariantCulture, "~\\{0}", Path.Combine(SupportedVersionsFolder, xamlFileName));
+            string virtualFileFolder = string.Format(
+                CultureInfo.InvariantCulture,
+                "~\\{0}",
+                Path.Combine(SupportedVersionsFolder, xamlFileName)
+            );
             IDisposable unsafeImpersonate = null;
             List<Tuple<string, Stream>> streamList = new List<Tuple<string, Stream>>();
             bool cleanExit = false;
@@ -254,9 +353,7 @@ namespace System.ServiceModel.Activities.Activation
             {
                 try
                 {
-                    try
-                    {
-                    }
+                    try { }
                     finally
                     {
                         unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
@@ -264,17 +361,29 @@ namespace System.ServiceModel.Activities.Activation
 
                     if (HostingEnvironment.VirtualPathProvider.DirectoryExists(virtualFileFolder))
                     {
-                        string xamlFileFolder = HostingEnvironmentWrapper.MapPath(virtualFileFolder);
+                        string xamlFileFolder = HostingEnvironmentWrapper.MapPath(
+                            virtualFileFolder
+                        );
                         string[] files = Directory.GetFiles(xamlFileFolder, "*.xamlx");
                         foreach (string file in files)
                         {
                             Stream activityStream;
-                            string path = Path.Combine(SupportedVersionsFolder, xamlFileName, Path.GetFileName(file));
-                            string virtualFile = string.Format(CultureInfo.InvariantCulture, "~\\{0}", path);
+                            string path = Path.Combine(
+                                SupportedVersionsFolder,
+                                xamlFileName,
+                                Path.GetFileName(file)
+                            );
+                            string virtualFile = string.Format(
+                                CultureInfo.InvariantCulture,
+                                "~\\{0}",
+                                path
+                            );
 
                             if (HostingEnvironment.VirtualPathProvider.FileExists(virtualFile))
                             {
-                                activityStream = HostingEnvironment.VirtualPathProvider.GetFile(virtualFile).Open();
+                                activityStream = HostingEnvironment
+                                    .VirtualPathProvider.GetFile(virtualFile)
+                                    .Open();
                                 streamList.Add(Tuple.Create(path, activityStream));
                             }
                         }
@@ -287,7 +396,7 @@ namespace System.ServiceModel.Activities.Activation
                     {
                         unsafeImpersonate.Dispose();
                         unsafeImpersonate = null;
-                    }                    
+                    }
                 }
             }
             catch
@@ -311,20 +420,35 @@ namespace System.ServiceModel.Activities.Activation
             }
         }
 
-        static WorkflowService CreatetWorkflowServiceAndSetCompiledExpressionRoot(string supportedVersionXamlxfilePath, Stream activityStream, XName defaultServiceName)
+        static WorkflowService CreatetWorkflowServiceAndSetCompiledExpressionRoot(
+            string supportedVersionXamlxfilePath,
+            Stream activityStream,
+            XName defaultServiceName
+        )
         {
             WorkflowService service = CreatetWorkflowService(activityStream, defaultServiceName);
             if (service != null)
             {
                 // CompiledExpression is not supported on Configuration Based Activation (CBA) scenario.
-                if (ServiceHostingEnvironment.IsHosted && !ServiceHostingEnvironment.IsConfigurationBased)
+                if (
+                    ServiceHostingEnvironment.IsHosted
+                    && !ServiceHostingEnvironment.IsConfigurationBased
+                )
                 {
-                    // We use ServiceHostingEnvironment.FullVirtualPath (instead of the constructor string) because we’re passing this path to BuildManager, 
+                    // We use ServiceHostingEnvironment.FullVirtualPath (instead of the constructor string) because weï¿½re passing this path to BuildManager,
                     // which may not understand the file type referenced by the constructor string (e.g. .xaml).
-                    ICompiledExpressionRoot expressionRoot = XamlBuildProviderExtension.GetExpressionRoot(supportedVersionXamlxfilePath, service, ServiceHostingEnvironment.FullVirtualPath);
+                    ICompiledExpressionRoot expressionRoot =
+                        XamlBuildProviderExtension.GetExpressionRoot(
+                            supportedVersionXamlxfilePath,
+                            service,
+                            ServiceHostingEnvironment.FullVirtualPath
+                        );
                     if (expressionRoot != null)
                     {
-                        CompiledExpressionInvoker.SetCompiledExpressionRoot(service.Body, expressionRoot);
+                        CompiledExpressionInvoker.SetCompiledExpressionRoot(
+                            service.Body,
+                            expressionRoot
+                        );
                     }
                 }
             }
@@ -332,19 +456,19 @@ namespace System.ServiceModel.Activities.Activation
             return service;
         }
 
-        internal static WorkflowService CreatetWorkflowService(Stream activityStream, XName defaultServiceName)
-        {   
+        internal static WorkflowService CreatetWorkflowService(
+            Stream activityStream,
+            XName defaultServiceName
+        )
+        {
             WorkflowService service = null;
             object serviceObject;
 
             serviceObject = LoadXaml(activityStream);
-   
+
             if (serviceObject is Activity)
             {
-                service = new WorkflowService
-                {
-                    Body = (Activity)serviceObject
-                };
+                service = new WorkflowService { Body = (Activity)serviceObject };
             }
             else if (serviceObject is WorkflowService)
             {
@@ -363,12 +487,14 @@ namespace System.ServiceModel.Activities.Activation
 
                     if (service.ConfigurationName == null && service.Body != null)
                     {
-                        service.ConfigurationName = XmlConvert.EncodeLocalName(service.Body.DisplayName);
+                        service.ConfigurationName = XmlConvert.EncodeLocalName(
+                            service.Body.DisplayName
+                        );
                     }
                 }
             }
             return service;
-        }        
+        }
 
         Type GetTypeFromAssembliesInCurrentDomain(string typeString)
         {
@@ -396,7 +522,9 @@ namespace System.ServiceModel.Activities.Activation
             string[] components = compileCustomString.Split('|');
             if (components.Length < 3)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidCompiledString(compileCustomString)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.InvalidCompiledString(compileCustomString))
+                );
             }
             Type activityType = null;
             for (int i = 3; i < components.Length; i++)
@@ -411,14 +539,23 @@ namespace System.ServiceModel.Activities.Activation
             return activityType;
         }
 
-        protected virtual WorkflowServiceHost CreateWorkflowServiceHost(Activity activity, Uri[] baseAddresses)
+        protected virtual WorkflowServiceHost CreateWorkflowServiceHost(
+            Activity activity,
+            Uri[] baseAddresses
+        )
         {
             return new WorkflowServiceHost(activity, baseAddresses);
         }
 
-        protected virtual WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses)
+        protected virtual WorkflowServiceHost CreateWorkflowServiceHost(
+            WorkflowService service,
+            Uri[] baseAddresses
+        )
         {
-            WorkflowServiceHost workflowServiceHost = new WorkflowServiceHost(service, baseAddresses);
+            WorkflowServiceHost workflowServiceHost = new WorkflowServiceHost(
+                service,
+                baseAddresses
+            );
             if (service.DefinitionIdentity != null)
             {
                 AddSupportedVersions(workflowServiceHost, service);
@@ -426,13 +563,20 @@ namespace System.ServiceModel.Activities.Activation
             return workflowServiceHost;
         }
 
-        // The code is optimized for reducing impersonation 
+        // The code is optimized for reducing impersonation
         // true means serviceFileStream has been set; false means CompiledCustomString has been set
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method HostingEnvironmentWrapper.UnsafeImpersonate().",
-            Safe = "Demands unmanaged code permission, disposes impersonation context in a finally, and tightly scopes the usage of the impersonation token.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method HostingEnvironmentWrapper.UnsafeImpersonate().",
+            Safe = "Demands unmanaged code permission, disposes impersonation context in a finally, and tightly scopes the usage of the impersonation token."
+        )]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
         [SecuritySafeCritical]
-        bool GetServiceFileStreamOrCompiledCustomString(string virtualPath, Uri[] baseAddresses, out Stream serviceFileStream, out string compiledCustomString)
+        bool GetServiceFileStreamOrCompiledCustomString(
+            string virtualPath,
+            Uri[] baseAddresses,
+            out Stream serviceFileStream,
+            out string compiledCustomString
+        )
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
@@ -443,23 +587,25 @@ namespace System.ServiceModel.Activities.Activation
             {
                 try
                 {
-                    try
-                    {
-                    }
+                    try { }
                     finally
                     {
                         unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
                     }
                     if (HostingEnvironment.VirtualPathProvider.FileExists(virtualPath))
                     {
-                        serviceFileStream = HostingEnvironment.VirtualPathProvider.GetFile(virtualPath).Open();
+                        serviceFileStream = HostingEnvironment
+                            .VirtualPathProvider.GetFile(virtualPath)
+                            .Open();
                         return true;
                     }
                     else
                     {
                         if (!AspNetEnvironment.Current.IsConfigurationBased)
                         {
-                            compiledCustomString = BuildManager.GetCompiledCustomString(baseAddresses[0].AbsolutePath);
+                            compiledCustomString = BuildManager.GetCompiledCustomString(
+                                baseAddresses[0].AbsolutePath
+                            );
                         }
                         return false;
                     }

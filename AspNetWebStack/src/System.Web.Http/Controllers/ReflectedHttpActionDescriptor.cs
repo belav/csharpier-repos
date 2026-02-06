@@ -35,23 +35,23 @@ namespace System.Web.Http.Controllers
         private string _actionName;
         private Collection<HttpMethod> _supportedHttpMethods;
 
-        // Getting custom attributes via reflection is slow. 
-        // But iterating over a object[] to pick out specific types is fast. 
-        // Furthermore, many different services may call to ask for different attributes, so we have multiple callers. 
+        // Getting custom attributes via reflection is slow.
+        // But iterating over a object[] to pick out specific types is fast.
+        // Furthermore, many different services may call to ask for different attributes, so we have multiple callers.
         // That means there's not a single cache for the callers, which means there's some value caching here.
         // This cache can be a 2x speedup in some benchmarks.
         private object[] _attributeCache;
         private object[] _declaredOnlyAttributeCache;
 
-        private static readonly HttpMethod[] _supportedHttpMethodsByConvention = 
-        { 
-            HttpMethod.Get, 
-            HttpMethod.Post, 
-            HttpMethod.Put, 
-            HttpMethod.Delete, 
-            HttpMethod.Head, 
-            HttpMethod.Options, 
-            new HttpMethod("PATCH") 
+        private static readonly HttpMethod[] _supportedHttpMethodsByConvention =
+        {
+            HttpMethod.Get,
+            HttpMethod.Post,
+            HttpMethod.Put,
+            HttpMethod.Delete,
+            HttpMethod.Head,
+            HttpMethod.Options,
+            new HttpMethod("PATCH"),
         };
 
         /// <summary>
@@ -60,11 +60,16 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
         public ReflectedHttpActionDescriptor()
         {
-            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() => InitializeParameterDescriptors());
+            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
+                InitializeParameterDescriptors()
+            );
             _supportedHttpMethods = new Collection<HttpMethod>();
         }
 
-        public ReflectedHttpActionDescriptor(HttpControllerDescriptor controllerDescriptor, MethodInfo methodInfo)
+        public ReflectedHttpActionDescriptor(
+            HttpControllerDescriptor controllerDescriptor,
+            MethodInfo methodInfo
+        )
             : base(controllerDescriptor)
         {
             if (methodInfo == null)
@@ -73,7 +78,9 @@ namespace System.Web.Http.Controllers
             }
 
             InitializeProperties(methodInfo);
-            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() => InitializeParameterDescriptors());
+            _parameters = new Lazy<Collection<HttpParameterDescriptor>>(() =>
+                InitializeParameterDescriptors()
+            );
         }
 
         public override string ActionName
@@ -126,8 +133,16 @@ namespace System.Web.Http.Controllers
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task<object> ExecuteAsync(
+            HttpControllerContext controllerContext,
+            IDictionary<string, object> arguments,
+            CancellationToken cancellationToken
+        )
         {
             if (controllerContext == null)
             {
@@ -157,7 +172,9 @@ namespace System.Web.Http.Controllers
 
         public override Collection<IFilter> GetFilters()
         {
-            return new Collection<IFilter>(GetCustomAttributes<IFilter>().Concat(base.GetFilters()).ToList());
+            return new Collection<IFilter>(
+                GetCustomAttributes<IFilter>().Concat(base.GetFilters()).ToList()
+            );
         }
 
         public override Collection<HttpParameterDescriptor> GetParameters()
@@ -195,14 +212,18 @@ namespace System.Web.Http.Controllers
         {
             Contract.Assert(_methodInfo != null);
 
-            List<HttpParameterDescriptor> parameterInfos = ParameterInfos.Select(
-                (item) => new ReflectedHttpParameterDescriptor(this, item)).ToList<HttpParameterDescriptor>();
+            List<HttpParameterDescriptor> parameterInfos = ParameterInfos
+                .Select((item) => new ReflectedHttpParameterDescriptor(this, item))
+                .ToList<HttpParameterDescriptor>();
             return new Collection<HttpParameterDescriptor>(parameterInfos);
         }
 
-        private object[] PrepareParameters(IDictionary<string, object> parameters, HttpControllerContext controllerContext)
+        private object[] PrepareParameters(
+            IDictionary<string, object> parameters,
+            HttpControllerContext controllerContext
+        )
         {
-            // This is on a hotpath, so a quick check to avoid the allocation if we have no parameters. 
+            // This is on a hotpath, so a quick check to avoid the allocation if we have no parameters.
             if (_parameters.Value.Count == 0)
             {
                 return _empty;
@@ -213,44 +234,81 @@ namespace System.Web.Http.Controllers
             object[] parameterValues = new object[parameterCount];
             for (int parameterIndex = 0; parameterIndex < parameterCount; parameterIndex++)
             {
-                parameterValues[parameterIndex] = ExtractParameterFromDictionary(parameterInfos[parameterIndex], parameters, controllerContext);
+                parameterValues[parameterIndex] = ExtractParameterFromDictionary(
+                    parameterInfos[parameterIndex],
+                    parameters,
+                    controllerContext
+                );
             }
             return parameterValues;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller is responsible for disposing of response instance.")]
-        private object ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary<string, object> parameters, HttpControllerContext controllerContext)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller is responsible for disposing of response instance."
+        )]
+        private object ExtractParameterFromDictionary(
+            ParameterInfo parameterInfo,
+            IDictionary<string, object> parameters,
+            HttpControllerContext controllerContext
+        )
         {
             object value;
 
             if (!parameters.TryGetValue(parameterInfo.Name, out value))
             {
                 // the key should always be present, even if the parameter value is null
-                throw new HttpResponseException(controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    SRResources.BadRequest,
-                    Error.Format(SRResources.ReflectedActionDescriptor_ParameterNotInDictionary,
-                                 parameterInfo.Name, parameterInfo.ParameterType, MethodInfo, MethodInfo.DeclaringType)));
+                throw new HttpResponseException(
+                    controllerContext.Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        SRResources.BadRequest,
+                        Error.Format(
+                            SRResources.ReflectedActionDescriptor_ParameterNotInDictionary,
+                            parameterInfo.Name,
+                            parameterInfo.ParameterType,
+                            MethodInfo,
+                            MethodInfo.DeclaringType
+                        )
+                    )
+                );
             }
 
             if (value == null && !TypeHelper.TypeAllowsNullValue(parameterInfo.ParameterType))
             {
                 // tried to pass a null value for a non-nullable parameter type
-                throw new HttpResponseException(controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    SRResources.BadRequest,
-                    Error.Format(SRResources.ReflectedActionDescriptor_ParameterCannotBeNull,
-                                    parameterInfo.Name, parameterInfo.ParameterType, MethodInfo, MethodInfo.DeclaringType)));
+                throw new HttpResponseException(
+                    controllerContext.Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        SRResources.BadRequest,
+                        Error.Format(
+                            SRResources.ReflectedActionDescriptor_ParameterCannotBeNull,
+                            parameterInfo.Name,
+                            parameterInfo.ParameterType,
+                            MethodInfo,
+                            MethodInfo.DeclaringType
+                        )
+                    )
+                );
             }
 
             if (value != null && !parameterInfo.ParameterType.IsInstanceOfType(value))
             {
                 // value was supplied but is not of the proper type
-                throw new HttpResponseException(controllerContext.Request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    SRResources.BadRequest,
-                    Error.Format(SRResources.ReflectedActionDescriptor_ParameterValueHasWrongType,
-                                    parameterInfo.Name, MethodInfo, MethodInfo.DeclaringType, value.GetType(), parameterInfo.ParameterType)));
+                throw new HttpResponseException(
+                    controllerContext.Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        SRResources.BadRequest,
+                        Error.Format(
+                            SRResources.ReflectedActionDescriptor_ParameterValueHasWrongType,
+                            parameterInfo.Name,
+                            MethodInfo,
+                            MethodInfo.DeclaringType,
+                            value.GetType(),
+                            parameterInfo.ParameterType
+                        )
+                    )
+                );
             }
 
             return value;
@@ -258,16 +316,20 @@ namespace System.Web.Http.Controllers
 
         private static string GetActionName(MethodInfo methodInfo, object[] actionAttributes)
         {
-            ActionNameAttribute nameAttribute = TypeHelper.OfType<ActionNameAttribute>(actionAttributes).FirstOrDefault();
-            return nameAttribute != null
-                       ? nameAttribute.Name
-                       : methodInfo.Name;
+            ActionNameAttribute nameAttribute = TypeHelper
+                .OfType<ActionNameAttribute>(actionAttributes)
+                .FirstOrDefault();
+            return nameAttribute != null ? nameAttribute.Name : methodInfo.Name;
         }
 
-        private static Collection<HttpMethod> GetSupportedHttpMethods(MethodInfo methodInfo, object[] actionAttributes)
+        private static Collection<HttpMethod> GetSupportedHttpMethods(
+            MethodInfo methodInfo,
+            object[] actionAttributes
+        )
         {
             Collection<HttpMethod> supportedHttpMethods = new Collection<HttpMethod>();
-            ICollection<IActionHttpMethodProvider> httpMethodProviders = TypeHelper.OfType<IActionHttpMethodProvider>(actionAttributes);
+            ICollection<IActionHttpMethodProvider> httpMethodProviders =
+                TypeHelper.OfType<IActionHttpMethodProvider>(actionAttributes);
             if (httpMethodProviders.Count > 0)
             {
                 // Get HttpMethod from attributes
@@ -281,10 +343,15 @@ namespace System.Web.Http.Controllers
             }
             else
             {
-                // Get HttpMethod from method name convention 
+                // Get HttpMethod from method name convention
                 for (int i = 0; i < _supportedHttpMethodsByConvention.Length; i++)
                 {
-                    if (methodInfo.Name.StartsWith(_supportedHttpMethodsByConvention[i].Method, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        methodInfo.Name.StartsWith(
+                            _supportedHttpMethodsByConvention[i].Method,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         supportedHttpMethods.Add(_supportedHttpMethodsByConvention[i]);
                         break;
@@ -323,7 +390,8 @@ namespace System.Web.Http.Controllers
         {
             if (_methodInfo != null)
             {
-                ReflectedHttpActionDescriptor otherDescriptor = obj as ReflectedHttpActionDescriptor;
+                ReflectedHttpActionDescriptor otherDescriptor =
+                    obj as ReflectedHttpActionDescriptor;
                 if (otherDescriptor == null)
                 {
                     return false;
@@ -339,8 +407,11 @@ namespace System.Web.Http.Controllers
         {
             if (methodInfo.ContainsGenericParameters)
             {
-                throw Error.InvalidOperation(SRResources.ReflectedHttpActionDescriptor_CannotCallOpenGenericMethods,
-                                     methodInfo, methodInfo.ReflectedType.FullName);
+                throw Error.InvalidOperation(
+                    SRResources.ReflectedHttpActionDescriptor_CannotCallOpenGenericMethods,
+                    methodInfo,
+                    methodInfo.ReflectedType.FullName
+                );
             }
 
             return new ActionExecutor(methodInfo);
@@ -349,7 +420,10 @@ namespace System.Web.Http.Controllers
         private sealed class ActionExecutor
         {
             private readonly Func<object, object[], Task<object>> _executor;
-            private static MethodInfo _convertOfTMethod = typeof(ActionExecutor).GetMethod("Convert", BindingFlags.Static | BindingFlags.NonPublic);
+            private static MethodInfo _convertOfTMethod = typeof(ActionExecutor).GetMethod(
+                "Convert",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
             public ActionExecutor(MethodInfo methodInfo)
             {
@@ -372,18 +446,30 @@ namespace System.Web.Http.Controllers
             // Do not inline or optimize this method to avoid stack-related reflection demand issues when
             // running from the GAC in medium trust
             [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-            private static Func<object, Task<object>> CompileGenericTaskConversionDelegate(Type taskValueType)
+            private static Func<object, Task<object>> CompileGenericTaskConversionDelegate(
+                Type taskValueType
+            )
             {
                 Contract.Assert(taskValueType != null);
 
-                return (Func<object, Task<object>>)Delegate.CreateDelegate(typeof(Func<object, Task<object>>), _convertOfTMethod.MakeGenericMethod(taskValueType));
+                return (Func<object, Task<object>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<object, Task<object>>),
+                        _convertOfTMethod.MakeGenericMethod(taskValueType)
+                    );
             }
 
             private static Func<object, object[], Task<object>> GetExecutor(MethodInfo methodInfo)
             {
                 // Parameters to executor
-                ParameterExpression instanceParameter = Expression.Parameter(typeof(object), "instance");
-                ParameterExpression parametersParameter = Expression.Parameter(typeof(object[]), "parameters");
+                ParameterExpression instanceParameter = Expression.Parameter(
+                    typeof(object),
+                    "instance"
+                );
+                ParameterExpression parametersParameter = Expression.Parameter(
+                    typeof(object[]),
+                    "parameters"
+                );
 
                 // Build parameter list
                 List<Expression> parameters = new List<Expression>();
@@ -391,23 +477,38 @@ namespace System.Web.Http.Controllers
                 for (int i = 0; i < paramInfos.Length; i++)
                 {
                     ParameterInfo paramInfo = paramInfos[i];
-                    BinaryExpression valueObj = Expression.ArrayIndex(parametersParameter, Expression.Constant(i));
-                    UnaryExpression valueCast = Expression.Convert(valueObj, paramInfo.ParameterType);
+                    BinaryExpression valueObj = Expression.ArrayIndex(
+                        parametersParameter,
+                        Expression.Constant(i)
+                    );
+                    UnaryExpression valueCast = Expression.Convert(
+                        valueObj,
+                        paramInfo.ParameterType
+                    );
 
                     // valueCast is "(Ti) parameters[i]"
                     parameters.Add(valueCast);
                 }
 
                 // Call method
-                UnaryExpression instanceCast = (!methodInfo.IsStatic) ? Expression.Convert(instanceParameter, methodInfo.ReflectedType) : null;
-                MethodCallExpression methodCall = Expression.Call(instanceCast, methodInfo, parameters);
+                UnaryExpression instanceCast =
+                    (!methodInfo.IsStatic)
+                        ? Expression.Convert(instanceParameter, methodInfo.ReflectedType)
+                        : null;
+                MethodCallExpression methodCall = Expression.Call(
+                    instanceCast,
+                    methodInfo,
+                    parameters
+                );
 
                 // methodCall is "((MethodInstanceType) instance).method((T0) parameters[0], (T1) parameters[1], ...)"
                 // Create function
                 if (methodCall.Type == typeof(void))
                 {
                     // for: public void Action()
-                    Expression<Action<object, object[]>> lambda = Expression.Lambda<Action<object, object[]>>(methodCall, instanceParameter, parametersParameter);
+                    Expression<Action<object, object[]>> lambda = Expression.Lambda<
+                        Action<object, object[]>
+                    >(methodCall, instanceParameter, parametersParameter);
                     Action<object, object[]> voidExecutor = lambda.Compile();
                     return (instance, methodParameters) =>
                     {
@@ -419,7 +520,9 @@ namespace System.Web.Http.Controllers
                 {
                     // must coerce methodCall to match Func<object, object[], object> signature
                     UnaryExpression castMethodCall = Expression.Convert(methodCall, typeof(object));
-                    Expression<Func<object, object[], object>> lambda = Expression.Lambda<Func<object, object[], object>>(castMethodCall, instanceParameter, parametersParameter);
+                    Expression<Func<object, object[], object>> lambda = Expression.Lambda<
+                        Func<object, object[], object>
+                    >(castMethodCall, instanceParameter, parametersParameter);
                     Func<object, object[], object> compiled = lambda.Compile();
                     if (methodCall.Type == typeof(Task))
                     {
@@ -436,7 +539,9 @@ namespace System.Web.Http.Controllers
                         // for: public Task<T> Action()
                         // constructs: return (Task<object>)Convert<T>(((Task<T>)instance).method((T0) param[0], ...))
                         Type taskValueType = TypeHelper.GetTaskInnerTypeOrNull(methodCall.Type);
-                        var compiledConversion = CompileGenericTaskConversionDelegate(taskValueType);
+                        var compiledConversion = CompileGenericTaskConversionDelegate(
+                            taskValueType
+                        );
 
                         return (instance, methodParameters) =>
                         {
@@ -456,8 +561,11 @@ namespace System.Web.Http.Controllers
                             Task resultAsTask = result as Task;
                             if (resultAsTask != null)
                             {
-                                throw Error.InvalidOperation(SRResources.ActionExecutor_UnexpectedTaskInstance,
-                                    methodInfo.Name, methodInfo.DeclaringType.Name);
+                                throw Error.InvalidOperation(
+                                    SRResources.ActionExecutor_UnexpectedTaskInstance,
+                                    methodInfo.Name,
+                                    methodInfo.DeclaringType.Name
+                                );
                             }
                             return Task.FromResult(result);
                         };
@@ -476,8 +584,12 @@ namespace System.Web.Http.Controllers
                     Type innerTaskType = TypeHelper.GetTaskInnerTypeOrNull(type);
                     if (innerTaskType != null && typeof(Task).IsAssignableFrom(innerTaskType))
                     {
-                        throw Error.InvalidOperation(SRResources.ActionExecutor_WrappedTaskInstance,
-                            method.Name, method.DeclaringType.Name, type.FullName);
+                        throw Error.InvalidOperation(
+                            SRResources.ActionExecutor_WrappedTaskInstance,
+                            method.Name,
+                            method.DeclaringType.Name,
+                            type.FullName
+                        );
                     }
                 }
             }

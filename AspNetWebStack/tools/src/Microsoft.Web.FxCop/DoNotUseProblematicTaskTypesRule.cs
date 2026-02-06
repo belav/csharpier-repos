@@ -11,9 +11,7 @@ namespace Microsoft.Web.FxCop
         private readonly Dictionary<string, string> _problematicTypes = GetProblematicTypes();
 
         public DoNotUseProblematicTaskTypesRule()
-            : base("DoNotUseProblematicTaskTypes")
-        {
-        }
+            : base("DoNotUseProblematicTaskTypes") { }
 
         public override ProblemCollection Check(Member member)
         {
@@ -34,7 +32,12 @@ namespace Microsoft.Web.FxCop
                 string message;
                 if (_problematicTypes.TryGetValue(method.DeclaringType.FullName, out message))
                 {
-                    Problems.Add(new Problem(GetResolution(method.DeclaringType.FullName, message), memberBinding.UniqueKey.ToString()));
+                    Problems.Add(
+                        new Problem(
+                            GetResolution(method.DeclaringType.FullName, message),
+                            memberBinding.UniqueKey.ToString()
+                        )
+                    );
                 }
             }
 
@@ -45,10 +48,22 @@ namespace Microsoft.Web.FxCop
         {
             return new Dictionary<string, string>
             {
-                { "System.Threading.Tasks.Parallel", "The methods on this type are blocking operations." },
-                { "System.Threading.Tasks.TaskExtensions", "The .Unwrap() method does not have good performance characteristics. Use the .FastUnwrap() extension method instead." },
-                { "System.Threading.Tasks.TaskFactory", "If you need to create a Task, use the TaskHelpers class instead." },
-                { "System.Threading.Tasks.TaskScheduler", "If you need to create a Task, use the TaskHelpers class instead." }
+                {
+                    "System.Threading.Tasks.Parallel",
+                    "The methods on this type are blocking operations."
+                },
+                {
+                    "System.Threading.Tasks.TaskExtensions",
+                    "The .Unwrap() method does not have good performance characteristics. Use the .FastUnwrap() extension method instead."
+                },
+                {
+                    "System.Threading.Tasks.TaskFactory",
+                    "If you need to create a Task, use the TaskHelpers class instead."
+                },
+                {
+                    "System.Threading.Tasks.TaskScheduler",
+                    "If you need to create a Task, use the TaskHelpers class instead."
+                },
             };
         }
     }

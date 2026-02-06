@@ -31,14 +31,24 @@ namespace System.ServiceModel.Configuration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is string)
             {
                 string encoding = (string)value;
 
                 Encoding retval;
-                if (String.Compare(encoding, TextEncoderDefaults.EncodingString, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(
+                        encoding,
+                        TextEncoderDefaults.EncodingString,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     // special case for utf-8 to match with what we do in the default text encoding
                     retval = TextEncoderDefaults.Encoding;
@@ -49,14 +59,22 @@ namespace System.ServiceModel.Configuration
                 }
                 if (retval == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ConfigInvalidEncodingValue, encoding));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ConfigInvalidEncodingValue, encoding)
+                    );
                 }
                 return retval;
             }
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (typeof(string) == destinationType && value is Encoding)
             {

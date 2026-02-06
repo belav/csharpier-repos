@@ -5,13 +5,16 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     abstract class EntityBase
     {
         public EntityBase() => Id = Guid.NewGuid();
+
         public Guid Id { get; set; }
         public User CreatedBy { get; set; }
         public User ModifiedBy { get; set; }
     }
 
     class User { }
+
     class Computer : EntityBase { }
+
     class Script : EntityBase
     {
         public Computer Computer { get; set; }
@@ -26,7 +29,9 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     }
 
     class UserModel { }
+
     class ComputerModel : EntityBaseModel { }
+
     class ScriptModel : EntityBaseModel
     {
         public ComputerModel Computer { get; set; }
@@ -35,20 +40,21 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
 
     private Script _source;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<User, UserModel>();
-        cfg.CreateProjection<EntityBase, EntityBaseModel>()
-            .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-            .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-        cfg.CreateProjection<Computer, ComputerModel>()
-            .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-            .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-        cfg.CreateProjection<Script, ScriptModel>()
-            .ForMember(d => d.Computer, o => o.ExplicitExpansion())
-            .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
-            .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<User, UserModel>();
+            cfg.CreateProjection<EntityBase, EntityBaseModel>()
+                .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+            cfg.CreateProjection<Computer, ComputerModel>()
+                .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+            cfg.CreateProjection<Script, ScriptModel>()
+                .ForMember(d => d.Computer, o => o.ExplicitExpansion())
+                .ForMember(d => d.ModifiedBy, o => o.ExplicitExpansion())
+                .ForMember(d => d.CreatedBy, o => o.ExplicitExpansion());
+        });
 
     protected override void Because_of()
     {
@@ -56,16 +62,8 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
         {
             CreatedBy = new User(),
             ModifiedBy = new User(),
-            Computer = new Computer()
-            {
-                CreatedBy = new User(),
-                ModifiedBy = new User(),
-            },
-            OtherComputer = new Computer()
-            {
-                CreatedBy = new User(),
-                ModifiedBy = new User(),
-            }
+            Computer = new Computer() { CreatedBy = new User(), ModifiedBy = new User() },
+            OtherComputer = new Computer() { CreatedBy = new User(), ModifiedBy = new User() },
         };
     }
 
@@ -73,8 +71,10 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     public void ComputerCreatedBy_should_be_null_but_ScriptCreatedBy_should_not_be_null_using_lambda_expression_expansions()
     {
         // act
-        var scriptModel = new[] { _source }.AsQueryable()
-            .ProjectTo<ScriptModel>(Configuration, c => c.Computer, c => c.CreatedBy).Single();
+        var scriptModel = new[] { _source }
+            .AsQueryable()
+            .ProjectTo<ScriptModel>(Configuration, c => c.Computer, c => c.CreatedBy)
+            .Single();
 
         // assert
         Assert.Null(scriptModel.Computer.CreatedBy);
@@ -85,8 +85,10 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     public void ComputerCreatedBy_should_not_be_null_but_ScriptCreatedBy_should_be_null_using_lambda_expression_expansions()
     {
         // act
-        var scriptModel = new[] { _source }.AsQueryable()
-            .ProjectTo<ScriptModel>(Configuration, c => c.Computer.CreatedBy).Single();
+        var scriptModel = new[] { _source }
+            .AsQueryable()
+            .ProjectTo<ScriptModel>(Configuration, c => c.Computer.CreatedBy)
+            .Single();
 
         // assert
         Assert.NotNull(scriptModel.Computer.CreatedBy);
@@ -98,8 +100,10 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     public void ComputerCreatedBy_should_be_null_but_ScriptCreatedBy_should_not_be_null_using_string_expansions()
     {
         // act
-        var scriptModel = new[] { _source }.AsQueryable()
-            .ProjectTo<ScriptModel>(Configuration, null, "Computer", "CreatedBy").Single();
+        var scriptModel = new[] { _source }
+            .AsQueryable()
+            .ProjectTo<ScriptModel>(Configuration, null, "Computer", "CreatedBy")
+            .Single();
 
         // assert
         Assert.Null(scriptModel.Computer.CreatedBy);
@@ -110,8 +114,10 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
     public void ComputerCreatedBy_shouldnt_be_null_but_ScriptCreatedBy_should_be_null_using_string_expansions()
     {
         // act
-        var scriptModel = new[] { _source }.AsQueryable()
-            .ProjectTo<ScriptModel>(Configuration, null, "Computer.CreatedBy").Single();
+        var scriptModel = new[] { _source }
+            .AsQueryable()
+            .ProjectTo<ScriptModel>(Configuration, null, "Computer.CreatedBy")
+            .Single();
 
         // assert
         Assert.NotNull(scriptModel.Computer.CreatedBy);

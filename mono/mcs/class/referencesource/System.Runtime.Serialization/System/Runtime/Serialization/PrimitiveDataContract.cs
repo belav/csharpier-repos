@@ -8,8 +8,8 @@ namespace System.Runtime.Serialization
     using System.Collections.Generic;
     using System.Globalization;
     using System.Reflection;
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 #if MONO
     using System.Runtime.CompilerServices;
 #endif
@@ -20,13 +20,17 @@ namespace System.Runtime.Serialization
     internal abstract class PrimitiveDataContract : DataContract
 #endif
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         PrimitiveDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         protected PrimitiveDataContract(Type type, XmlDictionaryString name, XmlDictionaryString ns)
             : base(new PrimitiveDataContractCriticalHelper(type, name, ns))
@@ -34,12 +38,12 @@ namespace System.Runtime.Serialization
             helper = base.Helper as PrimitiveDataContractCriticalHelper;
         }
 
-        static internal PrimitiveDataContract GetPrimitiveDataContract(Type type)
+        internal static PrimitiveDataContract GetPrimitiveDataContract(Type type)
         {
             return DataContract.GetBuiltInDataContract(type) as PrimitiveDataContract;
         }
 
-        static internal PrimitiveDataContract GetPrimitiveDataContract(string name, string ns)
+        internal static PrimitiveDataContract GetPrimitiveDataContract(string name, string ns)
         {
             return DataContract.GetBuiltInDataContract(name, ns) as PrimitiveDataContract;
         }
@@ -65,54 +69,106 @@ namespace System.Runtime.Serialization
 
         internal override bool IsBuiltInDataContract
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal MethodInfo XmlFormatWriterMethod
         {
 #if MONO
-            [PreserveDependency ("WriteChar", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteBoolean", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteSignedByte", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedByte", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteShort", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedShort", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteInt", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedInt", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteLong", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedLong", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteFloat", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDouble", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDecimal", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDateTime", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteString", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteBase64", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteAnyType", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteTimeSpan", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteGuid", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUri", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteQName", "System.Runtime.Serialization.XmlWriterDelegator")]
-
-            [PreserveDependency ("WriteString", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteBase64", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteAnyType", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteUri", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteQName", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
+            [PreserveDependency("WriteChar", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteBoolean", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteSignedByte",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency(
+                "WriteUnsignedByte",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteShort", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedShort",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteInt", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedInt",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteLong", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedLong",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteFloat", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDouble", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDecimal", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDateTime", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteString", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteBase64", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteAnyType", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteTimeSpan", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteGuid", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteUri", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteQName", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteString",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteBase64",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteAnyType",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteUri",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteQName",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
 #endif
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical XmlFormatWriterMethod property.",
-                Safe = "XmlFormatWriterMethod only needs to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical XmlFormatWriterMethod property.",
+                Safe = "XmlFormatWriterMethod only needs to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
                 if (helper.XmlFormatWriterMethod == null)
                 {
                     if (UnderlyingType.IsValueType)
-                        helper.XmlFormatWriterMethod = typeof(XmlWriterDelegator).GetMethod(WriteMethodName, Globals.ScanAllMembers, null, new Type[] { UnderlyingType, typeof(XmlDictionaryString), typeof(XmlDictionaryString) }, null);
+                        helper.XmlFormatWriterMethod = typeof(XmlWriterDelegator).GetMethod(
+                            WriteMethodName,
+                            Globals.ScanAllMembers,
+                            null,
+                            new Type[]
+                            {
+                                UnderlyingType,
+                                typeof(XmlDictionaryString),
+                                typeof(XmlDictionaryString),
+                            },
+                            null
+                        );
                     else
-                        helper.XmlFormatWriterMethod = typeof(XmlObjectSerializerWriteContext).GetMethod(WriteMethodName, Globals.ScanAllMembers, null, new Type[] { typeof(XmlWriterDelegator), UnderlyingType, typeof(XmlDictionaryString), typeof(XmlDictionaryString) }, null);
+                        helper.XmlFormatWriterMethod =
+                            typeof(XmlObjectSerializerWriteContext).GetMethod(
+                                WriteMethodName,
+                                Globals.ScanAllMembers,
+                                null,
+                                new Type[]
+                                {
+                                    typeof(XmlWriterDelegator),
+                                    UnderlyingType,
+                                    typeof(XmlDictionaryString),
+                                    typeof(XmlDictionaryString),
+                                },
+                                null
+                            );
                 }
                 return helper.XmlFormatWriterMethod;
             }
@@ -121,45 +177,89 @@ namespace System.Runtime.Serialization
         internal MethodInfo XmlFormatContentWriterMethod
         {
 #if MONO
-            [PreserveDependency ("WriteChar", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteBoolean", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteSignedByte", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedByte", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteShort", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedShort", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteInt", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedInt", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteLong", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUnsignedLong", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteFloat", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDouble", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDecimal", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteDateTime", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteString", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteBase64", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteAnyType", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteTimeSpan", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteGuid", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteUri", "System.Runtime.Serialization.XmlWriterDelegator")]
-            [PreserveDependency ("WriteQName", "System.Runtime.Serialization.XmlWriterDelegator")]
-
-            [PreserveDependency ("WriteString", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteBase64", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteAnyType", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteUri", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
-            [PreserveDependency ("WriteQName", "System.Runtime.Serialization.XmlObjectSerializerWriteContext")]
+            [PreserveDependency("WriteChar", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteBoolean", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteSignedByte",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency(
+                "WriteUnsignedByte",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteShort", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedShort",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteInt", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedInt",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteLong", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteUnsignedLong",
+                "System.Runtime.Serialization.XmlWriterDelegator"
+            )]
+            [PreserveDependency("WriteFloat", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDouble", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDecimal", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteDateTime", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteString", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteBase64", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteAnyType", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteTimeSpan", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteGuid", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteUri", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency("WriteQName", "System.Runtime.Serialization.XmlWriterDelegator")]
+            [PreserveDependency(
+                "WriteString",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteBase64",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteAnyType",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteUri",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
+            [PreserveDependency(
+                "WriteQName",
+                "System.Runtime.Serialization.XmlObjectSerializerWriteContext"
+            )]
 #endif
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical XmlFormatContentWriterMethod property.",
-                Safe = "XmlFormatContentWriterMethod only needs to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical XmlFormatContentWriterMethod property.",
+                Safe = "XmlFormatContentWriterMethod only needs to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
                 if (helper.XmlFormatContentWriterMethod == null)
                 {
                     if (UnderlyingType.IsValueType)
-                        helper.XmlFormatContentWriterMethod = typeof(XmlWriterDelegator).GetMethod(WriteMethodName, Globals.ScanAllMembers, null, new Type[] { UnderlyingType }, null);
+                        helper.XmlFormatContentWriterMethod = typeof(XmlWriterDelegator).GetMethod(
+                            WriteMethodName,
+                            Globals.ScanAllMembers,
+                            null,
+                            new Type[] { UnderlyingType },
+                            null
+                        );
                     else
-                        helper.XmlFormatContentWriterMethod = typeof(XmlObjectSerializerWriteContext).GetMethod(WriteMethodName, Globals.ScanAllMembers, null, new Type[] { typeof(XmlWriterDelegator), UnderlyingType }, null);
+                        helper.XmlFormatContentWriterMethod =
+                            typeof(XmlObjectSerializerWriteContext).GetMethod(
+                                WriteMethodName,
+                                Globals.ScanAllMembers,
+                                null,
+                                new Type[] { typeof(XmlWriterDelegator), UnderlyingType },
+                                null
+                            );
                 }
                 return helper.XmlFormatContentWriterMethod;
             }
@@ -168,42 +268,114 @@ namespace System.Runtime.Serialization
         internal MethodInfo XmlFormatReaderMethod
         {
 #if MONO
-            [PreserveDependency ("ReadElementContentAsChar", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsBoolean", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsSignedByte", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsUnsignedByte", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsShort", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsUnsignedShort", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsInt", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsUnsignedInt", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsLong", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsUnsignedLong", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsFloat", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsDouble", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsDecimal", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsDateTime", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsString", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsBase64", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsAnyType", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsTimeSpan", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsGuid", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsUri", "System.Runtime.Serialization.XmlReaderDelegator")]
-            [PreserveDependency ("ReadElementContentAsQName", "System.Runtime.Serialization.XmlReaderDelegator")]
+            [PreserveDependency(
+                "ReadElementContentAsChar",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsBoolean",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsSignedByte",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsUnsignedByte",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsShort",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsUnsignedShort",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsInt",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsUnsignedInt",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsLong",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsUnsignedLong",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsFloat",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsDouble",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsDecimal",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsDateTime",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsString",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsBase64",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsAnyType",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsTimeSpan",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsGuid",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsUri",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
+            [PreserveDependency(
+                "ReadElementContentAsQName",
+                "System.Runtime.Serialization.XmlReaderDelegator"
+            )]
 #endif
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical XmlFormatReaderMethod property.",
-                Safe = "XmlFormatReaderMethod only needs to be protected for write; initialized in getter if null.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical XmlFormatReaderMethod property.",
+                Safe = "XmlFormatReaderMethod only needs to be protected for write; initialized in getter if null."
+            )]
             [SecuritySafeCritical]
             get
             {
                 if (helper.XmlFormatReaderMethod == null)
                 {
-                    helper.XmlFormatReaderMethod = typeof(XmlReaderDelegator).GetMethod(ReadMethodName, Globals.ScanAllMembers);
+                    helper.XmlFormatReaderMethod = typeof(XmlReaderDelegator).GetMethod(
+                        ReadMethodName,
+                        Globals.ScanAllMembers
+                    );
                 }
                 return helper.XmlFormatReaderMethod;
             }
         }
 
-        public override void WriteXmlValue(XmlWriterDelegator xmlWriter, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator xmlWriter,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             xmlWriter.WriteAnyType(obj);
         }
@@ -219,7 +391,11 @@ namespace System.Runtime.Serialization
             Attributes attributes = new Attributes();
             attributes.Read(reader);
             if (attributes.Ref != Globals.NewObjectId)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.CannotDeserializeRefAtTopLevel, attributes.Ref)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.CannotDeserializeRefAtTopLevel, attributes.Ref)
+                    )
+                );
             if (attributes.XsiNil)
             {
                 reader.Skip();
@@ -228,20 +404,29 @@ namespace System.Runtime.Serialization
             return false;
         }
 
-        internal override bool Equals(object other, Dictionary<DataContractPairKey, object> checkedContracts)
+        internal override bool Equals(
+            object other,
+            Dictionary<DataContractPairKey, object> checkedContracts
+        )
         {
             PrimitiveDataContract dataContract = other as PrimitiveDataContract;
             if (dataContract != null)
             {
                 Type thisType = this.GetType();
                 Type otherType = other.GetType();
-                return (thisType.Equals(otherType) || thisType.IsSubclassOf(otherType) || otherType.IsSubclassOf(thisType));
+                return (
+                    thisType.Equals(otherType)
+                    || thisType.IsSubclassOf(otherType)
+                    || otherType.IsSubclassOf(thisType)
+                );
             }
             return false;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for for (de)serializing primitives."
-            + " Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for for (de)serializing primitives."
+                + " Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #endif
@@ -251,7 +436,11 @@ namespace System.Runtime.Serialization
             MethodInfo xmlFormatContentWriterMethod;
             MethodInfo xmlFormatReaderMethod;
 
-            internal PrimitiveDataContractCriticalHelper(Type type, XmlDictionaryString name, XmlDictionaryString ns)
+            internal PrimitiveDataContractCriticalHelper(
+                Type type,
+                XmlDictionaryString name,
+                XmlDictionaryString ns
+            )
                 : base(type)
             {
                 SetDataContractName(name, ns);
@@ -275,59 +464,85 @@ namespace System.Runtime.Serialization
                 set { xmlFormatReaderMethod = value; }
             }
         }
-
     }
 
     internal class CharDataContract : PrimitiveDataContract
     {
         internal CharDataContract()
-            : this(DictionaryGlobals.CharLocalName, DictionaryGlobals.SerializationNamespace)
-        {
-        }
+            : this(DictionaryGlobals.CharLocalName, DictionaryGlobals.SerializationNamespace) { }
 
         internal CharDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(char), name, ns)
+            : base(typeof(char), name, ns) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteChar"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsChar"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteChar"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsChar"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteChar((char)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsChar()
+            return (context == null)
+                ? reader.ReadElementContentAsChar()
                 : HandleReadValue(reader.ReadElementContentAsChar(), context);
         }
     }
 
     internal class AsmxCharDataContract : CharDataContract
     {
-        internal AsmxCharDataContract() : base(DictionaryGlobals.CharLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
+        internal AsmxCharDataContract()
+            : base(DictionaryGlobals.CharLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
     }
 
     internal class BooleanDataContract : PrimitiveDataContract
     {
         internal BooleanDataContract()
-            : base(typeof(bool), DictionaryGlobals.BooleanLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(bool),
+                DictionaryGlobals.BooleanLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteBoolean"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsBoolean"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteBoolean"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsBoolean"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteBoolean((bool)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsBoolean()
+            return (context == null)
+                ? reader.ReadElementContentAsBoolean()
                 : HandleReadValue(reader.ReadElementContentAsBoolean(), context);
         }
     }
@@ -335,21 +550,37 @@ namespace System.Runtime.Serialization
     internal class SignedByteDataContract : PrimitiveDataContract
     {
         internal SignedByteDataContract()
-            : base(typeof(sbyte), DictionaryGlobals.SignedByteLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(sbyte),
+                DictionaryGlobals.SignedByteLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteSignedByte"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsSignedByte"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteSignedByte"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsSignedByte"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteSignedByte((sbyte)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsSignedByte()
+            return (context == null)
+                ? reader.ReadElementContentAsSignedByte()
                 : HandleReadValue(reader.ReadElementContentAsSignedByte(), context);
         }
     }
@@ -357,21 +588,37 @@ namespace System.Runtime.Serialization
     internal class UnsignedByteDataContract : PrimitiveDataContract
     {
         internal UnsignedByteDataContract()
-            : base(typeof(byte), DictionaryGlobals.UnsignedByteLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(byte),
+                DictionaryGlobals.UnsignedByteLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteUnsignedByte"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsUnsignedByte"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteUnsignedByte"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsUnsignedByte"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteUnsignedByte((byte)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsUnsignedByte()
+            return (context == null)
+                ? reader.ReadElementContentAsUnsignedByte()
                 : HandleReadValue(reader.ReadElementContentAsUnsignedByte(), context);
         }
     }
@@ -379,21 +626,37 @@ namespace System.Runtime.Serialization
     internal class ShortDataContract : PrimitiveDataContract
     {
         internal ShortDataContract()
-            : base(typeof(short), DictionaryGlobals.ShortLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(short),
+                DictionaryGlobals.ShortLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteShort"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsShort"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteShort"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsShort"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteShort((short)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsShort()
+            return (context == null)
+                ? reader.ReadElementContentAsShort()
                 : HandleReadValue(reader.ReadElementContentAsShort(), context);
         }
     }
@@ -401,21 +664,37 @@ namespace System.Runtime.Serialization
     internal class UnsignedShortDataContract : PrimitiveDataContract
     {
         internal UnsignedShortDataContract()
-            : base(typeof(ushort), DictionaryGlobals.UnsignedShortLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(ushort),
+                DictionaryGlobals.UnsignedShortLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteUnsignedShort"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsUnsignedShort"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteUnsignedShort"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsUnsignedShort"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteUnsignedShort((ushort)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsUnsignedShort()
+            return (context == null)
+                ? reader.ReadElementContentAsUnsignedShort()
                 : HandleReadValue(reader.ReadElementContentAsUnsignedShort(), context);
         }
     }
@@ -424,20 +703,33 @@ namespace System.Runtime.Serialization
     {
         internal IntDataContract()
             : base(typeof(int), DictionaryGlobals.IntLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteInt"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsInt"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteInt"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsInt"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteInt((int)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsInt()
+            return (context == null)
+                ? reader.ReadElementContentAsInt()
                 : HandleReadValue(reader.ReadElementContentAsInt(), context);
         }
     }
@@ -445,21 +737,37 @@ namespace System.Runtime.Serialization
     internal class UnsignedIntDataContract : PrimitiveDataContract
     {
         internal UnsignedIntDataContract()
-            : base(typeof(uint), DictionaryGlobals.UnsignedIntLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(uint),
+                DictionaryGlobals.UnsignedIntLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteUnsignedInt"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsUnsignedInt"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteUnsignedInt"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsUnsignedInt"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteUnsignedInt((uint)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsUnsignedInt()
+            return (context == null)
+                ? reader.ReadElementContentAsUnsignedInt()
                 : HandleReadValue(reader.ReadElementContentAsUnsignedInt(), context);
         }
     }
@@ -467,68 +775,108 @@ namespace System.Runtime.Serialization
     internal class LongDataContract : PrimitiveDataContract
     {
         internal LongDataContract()
-            : this(DictionaryGlobals.LongLocalName, DictionaryGlobals.SchemaNamespace)
-        {
-        }
+            : this(DictionaryGlobals.LongLocalName, DictionaryGlobals.SchemaNamespace) { }
 
         internal LongDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(long), name, ns)
+            : base(typeof(long), name, ns) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteLong"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsLong"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteLong"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsLong"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteLong((long)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsLong()
+            return (context == null)
+                ? reader.ReadElementContentAsLong()
                 : HandleReadValue(reader.ReadElementContentAsLong(), context);
         }
     }
+
     internal class IntegerDataContract : LongDataContract
     {
-        internal IntegerDataContract() : base(DictionaryGlobals.integerLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal IntegerDataContract()
+            : base(DictionaryGlobals.integerLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class PositiveIntegerDataContract : LongDataContract
     {
-        internal PositiveIntegerDataContract() : base(DictionaryGlobals.positiveIntegerLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal PositiveIntegerDataContract()
+            : base(DictionaryGlobals.positiveIntegerLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
     }
+
     internal class NegativeIntegerDataContract : LongDataContract
     {
-        internal NegativeIntegerDataContract() : base(DictionaryGlobals.negativeIntegerLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NegativeIntegerDataContract()
+            : base(DictionaryGlobals.negativeIntegerLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
     }
+
     internal class NonPositiveIntegerDataContract : LongDataContract
     {
-        internal NonPositiveIntegerDataContract() : base(DictionaryGlobals.nonPositiveIntegerLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NonPositiveIntegerDataContract()
+            : base(DictionaryGlobals.nonPositiveIntegerLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
     }
+
     internal class NonNegativeIntegerDataContract : LongDataContract
     {
-        internal NonNegativeIntegerDataContract() : base(DictionaryGlobals.nonNegativeIntegerLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NonNegativeIntegerDataContract()
+            : base(DictionaryGlobals.nonNegativeIntegerLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
     }
 
     internal class UnsignedLongDataContract : PrimitiveDataContract
     {
         internal UnsignedLongDataContract()
-            : base(typeof(ulong), DictionaryGlobals.UnsignedLongLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(ulong),
+                DictionaryGlobals.UnsignedLongLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteUnsignedLong"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsUnsignedLong"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteUnsignedLong"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsUnsignedLong"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteUnsignedLong((ulong)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsUnsignedLong()
+            return (context == null)
+                ? reader.ReadElementContentAsUnsignedLong()
                 : HandleReadValue(reader.ReadElementContentAsUnsignedLong(), context);
         }
     }
@@ -536,21 +884,37 @@ namespace System.Runtime.Serialization
     internal class FloatDataContract : PrimitiveDataContract
     {
         internal FloatDataContract()
-            : base(typeof(float), DictionaryGlobals.FloatLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(float),
+                DictionaryGlobals.FloatLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteFloat"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsFloat"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteFloat"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsFloat"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteFloat((float)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsFloat()
+            return (context == null)
+                ? reader.ReadElementContentAsFloat()
                 : HandleReadValue(reader.ReadElementContentAsFloat(), context);
         }
     }
@@ -558,21 +922,37 @@ namespace System.Runtime.Serialization
     internal class DoubleDataContract : PrimitiveDataContract
     {
         internal DoubleDataContract()
-            : base(typeof(double), DictionaryGlobals.DoubleLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(double),
+                DictionaryGlobals.DoubleLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteDouble"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsDouble"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteDouble"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsDouble"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteDouble((double)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsDouble()
+            return (context == null)
+                ? reader.ReadElementContentAsDouble()
                 : HandleReadValue(reader.ReadElementContentAsDouble(), context);
         }
     }
@@ -580,21 +960,37 @@ namespace System.Runtime.Serialization
     internal class DecimalDataContract : PrimitiveDataContract
     {
         internal DecimalDataContract()
-            : base(typeof(decimal), DictionaryGlobals.DecimalLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(decimal),
+                DictionaryGlobals.DecimalLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteDecimal"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsDecimal"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteDecimal"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsDecimal"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteDecimal((decimal)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsDecimal()
+            return (context == null)
+                ? reader.ReadElementContentAsDecimal()
                 : HandleReadValue(reader.ReadElementContentAsDecimal(), context);
         }
     }
@@ -602,21 +998,37 @@ namespace System.Runtime.Serialization
     internal class DateTimeDataContract : PrimitiveDataContract
     {
         internal DateTimeDataContract()
-            : base(typeof(DateTime), DictionaryGlobals.DateTimeLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(DateTime),
+                DictionaryGlobals.DateTimeLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteDateTime"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsDateTime"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteDateTime"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsDateTime"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteDateTime((DateTime)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsDateTime()
+            return (context == null)
+                ? reader.ReadElementContentAsDateTime()
                 : HandleReadValue(reader.ReadElementContentAsDateTime(), context);
         }
     }
@@ -624,24 +1036,33 @@ namespace System.Runtime.Serialization
     internal class StringDataContract : PrimitiveDataContract
     {
         internal StringDataContract()
-            : this(DictionaryGlobals.StringLocalName, DictionaryGlobals.SchemaNamespace)
-        {
-        }
+            : this(DictionaryGlobals.StringLocalName, DictionaryGlobals.SchemaNamespace) { }
 
         internal StringDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(string), name, ns)
+            : base(typeof(string), name, ns) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteString"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsString"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteString"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsString"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteString((string)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
             if (context == null)
             {
@@ -653,103 +1074,159 @@ namespace System.Runtime.Serialization
             }
         }
     }
+
     internal class TimeDataContract : StringDataContract
     {
-        internal TimeDataContract() : base(DictionaryGlobals.timeLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal TimeDataContract()
+            : base(DictionaryGlobals.timeLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class DateDataContract : StringDataContract
     {
-        internal DateDataContract() : base(DictionaryGlobals.dateLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal DateDataContract()
+            : base(DictionaryGlobals.dateLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class HexBinaryDataContract : StringDataContract
     {
-        internal HexBinaryDataContract() : base(DictionaryGlobals.hexBinaryLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal HexBinaryDataContract()
+            : base(DictionaryGlobals.hexBinaryLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class GYearMonthDataContract : StringDataContract
     {
-        internal GYearMonthDataContract() : base(DictionaryGlobals.gYearMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal GYearMonthDataContract()
+            : base(DictionaryGlobals.gYearMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class GYearDataContract : StringDataContract
     {
-        internal GYearDataContract() : base(DictionaryGlobals.gYearLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal GYearDataContract()
+            : base(DictionaryGlobals.gYearLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class GMonthDayDataContract : StringDataContract
     {
-        internal GMonthDayDataContract() : base(DictionaryGlobals.gMonthDayLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal GMonthDayDataContract()
+            : base(DictionaryGlobals.gMonthDayLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class GDayDataContract : StringDataContract
     {
-        internal GDayDataContract() : base(DictionaryGlobals.gDayLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal GDayDataContract()
+            : base(DictionaryGlobals.gDayLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class GMonthDataContract : StringDataContract
     {
-        internal GMonthDataContract() : base(DictionaryGlobals.gMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal GMonthDataContract()
+            : base(DictionaryGlobals.gMonthLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class NormalizedStringDataContract : StringDataContract
     {
-        internal NormalizedStringDataContract() : base(DictionaryGlobals.normalizedStringLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NormalizedStringDataContract()
+            : base(DictionaryGlobals.normalizedStringLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
     }
+
     internal class TokenDataContract : StringDataContract
     {
-        internal TokenDataContract() : base(DictionaryGlobals.tokenLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal TokenDataContract()
+            : base(DictionaryGlobals.tokenLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class LanguageDataContract : StringDataContract
     {
-        internal LanguageDataContract() : base(DictionaryGlobals.languageLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal LanguageDataContract()
+            : base(DictionaryGlobals.languageLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class NameDataContract : StringDataContract
     {
-        internal NameDataContract() : base(DictionaryGlobals.NameLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NameDataContract()
+            : base(DictionaryGlobals.NameLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class NCNameDataContract : StringDataContract
     {
-        internal NCNameDataContract() : base(DictionaryGlobals.NCNameLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NCNameDataContract()
+            : base(DictionaryGlobals.NCNameLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class IDDataContract : StringDataContract
     {
-        internal IDDataContract() : base(DictionaryGlobals.XSDIDLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal IDDataContract()
+            : base(DictionaryGlobals.XSDIDLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class IDREFDataContract : StringDataContract
     {
-        internal IDREFDataContract() : base(DictionaryGlobals.IDREFLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal IDREFDataContract()
+            : base(DictionaryGlobals.IDREFLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class IDREFSDataContract : StringDataContract
     {
-        internal IDREFSDataContract() : base(DictionaryGlobals.IDREFSLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal IDREFSDataContract()
+            : base(DictionaryGlobals.IDREFSLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class ENTITYDataContract : StringDataContract
     {
-        internal ENTITYDataContract() : base(DictionaryGlobals.ENTITYLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal ENTITYDataContract()
+            : base(DictionaryGlobals.ENTITYLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class ENTITIESDataContract : StringDataContract
     {
-        internal ENTITIESDataContract() : base(DictionaryGlobals.ENTITIESLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal ENTITIESDataContract()
+            : base(DictionaryGlobals.ENTITIESLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class NMTOKENDataContract : StringDataContract
     {
-        internal NMTOKENDataContract() : base(DictionaryGlobals.NMTOKENLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NMTOKENDataContract()
+            : base(DictionaryGlobals.NMTOKENLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
+
     internal class NMTOKENSDataContract : StringDataContract
     {
-        internal NMTOKENSDataContract() : base(DictionaryGlobals.NMTOKENSLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal NMTOKENSDataContract()
+            : base(DictionaryGlobals.NMTOKENSLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
 
     internal class ByteArrayDataContract : PrimitiveDataContract
     {
         internal ByteArrayDataContract()
-            : base(typeof(byte[]), DictionaryGlobals.ByteArrayLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(byte[]),
+                DictionaryGlobals.ByteArrayLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteBase64"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsBase64"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteBase64"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsBase64"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteBase64((byte[])obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
             if (context == null)
             {
@@ -765,19 +1242,34 @@ namespace System.Runtime.Serialization
     internal class ObjectDataContract : PrimitiveDataContract
     {
         internal ObjectDataContract()
-            : base(typeof(object), DictionaryGlobals.ObjectLocalName, DictionaryGlobals.SchemaNamespace)
+            : base(
+                typeof(object),
+                DictionaryGlobals.ObjectLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteAnyType"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsAnyType"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteAnyType"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsAnyType"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             // write nothing
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
             object obj;
             if (reader.IsEmptyElement)
@@ -797,7 +1289,12 @@ namespace System.Runtime.Serialization
                 }
                 catch (XmlException xes)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.XmlForObjectCannotHaveContent, localName, ns), xes));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(SR.XmlForObjectCannotHaveContent, localName, ns),
+                            xes
+                        )
+                    );
                 }
             }
             return (context == null) ? obj : HandleReadValue(obj, context);
@@ -812,89 +1309,123 @@ namespace System.Runtime.Serialization
         {
             get { return false; }
         }
-
     }
 
     internal class TimeSpanDataContract : PrimitiveDataContract
     {
         internal TimeSpanDataContract()
             : this(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SerializationNamespace)
-        {
-        }
+        { }
 
         internal TimeSpanDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(TimeSpan), name, ns)
+            : base(typeof(TimeSpan), name, ns) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteTimeSpan"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsTimeSpan"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteTimeSpan"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsTimeSpan"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteTimeSpan((TimeSpan)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsTimeSpan()
+            return (context == null)
+                ? reader.ReadElementContentAsTimeSpan()
                 : HandleReadValue(reader.ReadElementContentAsTimeSpan(), context);
         }
     }
 
     internal class XsDurationDataContract : TimeSpanDataContract
     {
-        internal XsDurationDataContract() : base(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SchemaNamespace) { }
+        internal XsDurationDataContract()
+            : base(DictionaryGlobals.TimeSpanLocalName, DictionaryGlobals.SchemaNamespace) { }
     }
 
     internal class GuidDataContract : PrimitiveDataContract
     {
         internal GuidDataContract()
-            : this(DictionaryGlobals.GuidLocalName, DictionaryGlobals.SerializationNamespace)
-        {
-        }
+            : this(DictionaryGlobals.GuidLocalName, DictionaryGlobals.SerializationNamespace) { }
 
         internal GuidDataContract(XmlDictionaryString name, XmlDictionaryString ns)
-            : base(typeof(Guid), name, ns)
+            : base(typeof(Guid), name, ns) { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteGuid"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsGuid"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteGuid"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsGuid"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteGuid((Guid)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
-            return (context == null) ? reader.ReadElementContentAsGuid()
+            return (context == null)
+                ? reader.ReadElementContentAsGuid()
                 : HandleReadValue(reader.ReadElementContentAsGuid(), context);
         }
     }
 
     internal class AsmxGuidDataContract : GuidDataContract
     {
-        internal AsmxGuidDataContract() : base(DictionaryGlobals.GuidLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
+        internal AsmxGuidDataContract()
+            : base(DictionaryGlobals.GuidLocalName, DictionaryGlobals.AsmxTypesNamespace) { }
     }
 
     internal class UriDataContract : PrimitiveDataContract
     {
         internal UriDataContract()
             : base(typeof(Uri), DictionaryGlobals.UriLocalName, DictionaryGlobals.SchemaNamespace)
+        { }
+
+        internal override string WriteMethodName
         {
+            get { return "WriteUri"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsUri"; }
         }
 
-        internal override string WriteMethodName { get { return "WriteUri"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsUri"; } }
-
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteUri((Uri)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
             if (context == null)
             {
@@ -910,24 +1441,39 @@ namespace System.Runtime.Serialization
     internal class QNameDataContract : PrimitiveDataContract
     {
         internal QNameDataContract()
-            : base(typeof(XmlQualifiedName), DictionaryGlobals.QNameLocalName, DictionaryGlobals.SchemaNamespace)
-        {
-        }
+            : base(
+                typeof(XmlQualifiedName),
+                DictionaryGlobals.QNameLocalName,
+                DictionaryGlobals.SchemaNamespace
+            ) { }
 
-        internal override string WriteMethodName { get { return "WriteQName"; } }
-        internal override string ReadMethodName { get { return "ReadElementContentAsQName"; } }
+        internal override string WriteMethodName
+        {
+            get { return "WriteQName"; }
+        }
+        internal override string ReadMethodName
+        {
+            get { return "ReadElementContentAsQName"; }
+        }
 
         internal override bool IsPrimitive
         {
             get { return false; }
         }
 
-        public override void WriteXmlValue(XmlWriterDelegator writer, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator writer,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             writer.WriteQName((XmlQualifiedName)obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator reader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContext context
+        )
         {
             if (context == null)
             {
@@ -939,7 +1485,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal override void WriteRootElement(XmlWriterDelegator writer, XmlDictionaryString name, XmlDictionaryString ns)
+        internal override void WriteRootElement(
+            XmlWriterDelegator writer,
+            XmlDictionaryString name,
+            XmlDictionaryString ns
+        )
         {
             if (object.ReferenceEquals(ns, DictionaryGlobals.SerializationNamespace))
                 writer.WriteStartElement(Globals.SerPrefix, name, ns);

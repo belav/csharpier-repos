@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,231 +32,296 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [Designer(
+        "System.Web.UI.Design.WebControls.PanelDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ParseChildren(false)]
+    [PersistChildren(true)]
+    public class Panel : WebControl
+    {
+        public Panel()
+            : base(HtmlTextWriterTag.Div) { }
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Designer ("System.Web.UI.Design.WebControls.PanelDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	[ParseChildren (false)]
-	[PersistChildren (true)]
-	public class Panel : WebControl {
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender(writer);
 
-		public Panel () : base (HtmlTextWriterTag.Div) 
-		{
-		}
-		
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			base.AddAttributesToRender (writer);
-			
-			string image = BackImageUrl;
-			if (image != "") {
-				image = ResolveClientUrl (image);
-				writer.AddStyleAttribute (HtmlTextWriterStyle.BackgroundImage, image);
-			}
+            string image = BackImageUrl;
+            if (image != "")
+            {
+                image = ResolveClientUrl(image);
+                writer.AddStyleAttribute(HtmlTextWriterStyle.BackgroundImage, image);
+            }
 
-			if (!String.IsNullOrEmpty (DefaultButton) && Page != null) {
-				Control button = FindControl (DefaultButton);
-				if (button == null || !(button is IButtonControl))
-					throw new InvalidOperationException (String.Format ("The DefaultButton of '{0}' must be the ID of a control of type IButtonControl.", ID));
+            if (!String.IsNullOrEmpty(DefaultButton) && Page != null)
+            {
+                Control button = FindControl(DefaultButton);
+                if (button == null || !(button is IButtonControl))
+                    throw new InvalidOperationException(
+                        String.Format(
+                            "The DefaultButton of '{0}' must be the ID of a control of type IButtonControl.",
+                            ID
+                        )
+                    );
 
-				Page.ClientScript.RegisterWebFormClientScript ();
+                Page.ClientScript.RegisterWebFormClientScript();
 
-				writer.AddAttribute ("onkeypress",
-						"javascript:return " + Page.WebFormScriptReference + ".WebForm_FireDefaultButton(event, '" + button.ClientID + "')");
-			}
+                writer.AddAttribute(
+                    "onkeypress",
+                    "javascript:return "
+                        + Page.WebFormScriptReference
+                        + ".WebForm_FireDefaultButton(event, '"
+                        + button.ClientID
+                        + "')"
+                );
+            }
 
-			if (Direction != ContentDirection.NotSet) {
-				writer.AddAttribute (HtmlTextWriterAttribute.Dir, Direction == ContentDirection.RightToLeft ? "rtl" : "ltr", false);
-			}
+            if (Direction != ContentDirection.NotSet)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Dir,
+                    Direction == ContentDirection.RightToLeft ? "rtl" : "ltr",
+                    false
+                );
+            }
 
-			switch (ScrollBars) {
-			case ScrollBars.Auto:
-				writer.AddStyleAttribute (HtmlTextWriterStyle.Overflow, "auto");
-				break;
-			case ScrollBars.Both:
-				writer.AddStyleAttribute (HtmlTextWriterStyle.Overflow, "scroll");
-				break;
-			case ScrollBars.Horizontal:
-				writer.AddStyleAttribute (HtmlTextWriterStyle.OverflowX, "scroll");
-				break;
-			case ScrollBars.Vertical:
-				writer.AddStyleAttribute (HtmlTextWriterStyle.OverflowY, "scroll");
-				break;
-			}
+            switch (ScrollBars)
+            {
+                case ScrollBars.Auto:
+                    writer.AddStyleAttribute(HtmlTextWriterStyle.Overflow, "auto");
+                    break;
+                case ScrollBars.Both:
+                    writer.AddStyleAttribute(HtmlTextWriterStyle.Overflow, "scroll");
+                    break;
+                case ScrollBars.Horizontal:
+                    writer.AddStyleAttribute(HtmlTextWriterStyle.OverflowX, "scroll");
+                    break;
+                case ScrollBars.Vertical:
+                    writer.AddStyleAttribute(HtmlTextWriterStyle.OverflowY, "scroll");
+                    break;
+            }
 
+            if (!Wrap)
+            {
+                writer.AddStyleAttribute(HtmlTextWriterStyle.WhiteSpace, "nowrap");
+            }
 
-			if (!Wrap) {
-				writer.AddStyleAttribute (HtmlTextWriterStyle.WhiteSpace, "nowrap");
-			}
+            string align = "";
 
-			string align = "";
+            switch (HorizontalAlign)
+            {
+                case HorizontalAlign.Center:
+                    align = "center";
+                    break;
+                case HorizontalAlign.Justify:
+                    align = "justify";
+                    break;
+                case HorizontalAlign.Left:
+                    align = "left";
+                    break;
+                case HorizontalAlign.Right:
+                    align = "right";
+                    break;
+            }
 
-			switch (HorizontalAlign) {
-			case HorizontalAlign.Center: align = "center"; break;
-			case HorizontalAlign.Justify: align = "justify"; break;
-			case HorizontalAlign.Left: align = "left"; break;
-			case HorizontalAlign.Right: align = "right"; break;
-			}
+            if (align != "")
+                writer.AddStyleAttribute(HtmlTextWriterStyle.TextAlign, align);
+        }
 
-			if (align != "")
-				writer.AddStyleAttribute (HtmlTextWriterStyle.TextAlign, align);
-		}
-		PanelStyle PanelStyle {
-			get { return (ControlStyle as PanelStyle); }
-		}
+        PanelStyle PanelStyle
+        {
+            get { return (ControlStyle as PanelStyle); }
+        }
 
-		[UrlProperty]
-		[DefaultValue ("")]
-		[Editor ("System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
-		[WebSysDescription ("")]
-		[WebCategory ("Appearance")]
-		public virtual string BackImageUrl {
-			get {
-				if (ControlStyleCreated) {
-					if (PanelStyle != null)
-						return PanelStyle.BackImageUrl;
-					else
-						return ViewState.GetString ("BackImageUrl", String.Empty);
-				}
-				return String.Empty;
-			}
-			set {
-				if(PanelStyle!=null)
-					PanelStyle.BackImageUrl = value;
-				else
-					ViewState ["BackImageUrl"] = value;
-			}
-		}
+        [UrlProperty]
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.ImageUrlEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual string BackImageUrl
+        {
+            get
+            {
+                if (ControlStyleCreated)
+                {
+                    if (PanelStyle != null)
+                        return PanelStyle.BackImageUrl;
+                    else
+                        return ViewState.GetString("BackImageUrl", String.Empty);
+                }
+                return String.Empty;
+            }
+            set
+            {
+                if (PanelStyle != null)
+                    PanelStyle.BackImageUrl = value;
+                else
+                    ViewState["BackImageUrl"] = value;
+            }
+        }
 
-		[DefaultValue (HorizontalAlign.NotSet)]
-		[WebSysDescription ("")]
-		[WebCategory ("Layout")]
-		public virtual HorizontalAlign HorizontalAlign {
-			get {
-				if (ControlStyleCreated) {
-					if (PanelStyle != null)
-						return PanelStyle.HorizontalAlign;
-					else
-						return ViewState ["HorizontalAlign"] != null ? (HorizontalAlign) ViewState ["HorizontalAlign"] : HorizontalAlign.NotSet;
-				}
-				return HorizontalAlign.NotSet;
-			}
-			set {
-				if (PanelStyle != null)
-					PanelStyle.HorizontalAlign = value;
-				else
-					ViewState ["HorizontalAlign"] = value;
-			}
-		}
+        [DefaultValue(HorizontalAlign.NotSet)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual HorizontalAlign HorizontalAlign
+        {
+            get
+            {
+                if (ControlStyleCreated)
+                {
+                    if (PanelStyle != null)
+                        return PanelStyle.HorizontalAlign;
+                    else
+                        return ViewState["HorizontalAlign"] != null
+                            ? (HorizontalAlign)ViewState["HorizontalAlign"]
+                            : HorizontalAlign.NotSet;
+                }
+                return HorizontalAlign.NotSet;
+            }
+            set
+            {
+                if (PanelStyle != null)
+                    PanelStyle.HorizontalAlign = value;
+                else
+                    ViewState["HorizontalAlign"] = value;
+            }
+        }
 
-		[DefaultValue (true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Layout")]
-		public virtual bool Wrap {
-			get {
-				if (ControlStyleCreated) {
-					if (PanelStyle != null)
-						return PanelStyle.Wrap;
-					else
-						return ViewState.GetBool ("Wrap", true);
-				}
-				return true;
-			}
-			set {
-				if (PanelStyle != null)
-					PanelStyle.Wrap = value;
-				else
-					ViewState ["Wrap"] = value;
-			}
-		}
-		
-		[ThemeableAttribute (false)]
-		[DefaultValue ("")]
-		public virtual string DefaultButton {
-			get {
-				return ViewState.GetString ("DefaultButton", String.Empty);
-			}
-			set {
-				ViewState ["DefaultButton"] = value;
-			}
-		}
+        [DefaultValue(true)]
+        [WebSysDescription("")]
+        [WebCategory("Layout")]
+        public virtual bool Wrap
+        {
+            get
+            {
+                if (ControlStyleCreated)
+                {
+                    if (PanelStyle != null)
+                        return PanelStyle.Wrap;
+                    else
+                        return ViewState.GetBool("Wrap", true);
+                }
+                return true;
+            }
+            set
+            {
+                if (PanelStyle != null)
+                    PanelStyle.Wrap = value;
+                else
+                    ViewState["Wrap"] = value;
+            }
+        }
 
-		[DefaultValue (ContentDirection.NotSet)]
-		public virtual ContentDirection Direction {
-			get {
-				if (ControlStyleCreated) {
-					if (PanelStyle != null)
-						return PanelStyle.Direction;
-					else
-						return ViewState ["Direction"] != null ? (ContentDirection) ViewState ["Direction"] : ContentDirection.NotSet;
-				}
-				return ContentDirection.NotSet;
-			}
-			set {
-				if (PanelStyle != null)
-					PanelStyle.Direction = value;
-				else
-					ViewState ["Direction"] = value;
-			}
-		}
+        [ThemeableAttribute(false)]
+        [DefaultValue("")]
+        public virtual string DefaultButton
+        {
+            get { return ViewState.GetString("DefaultButton", String.Empty); }
+            set { ViewState["DefaultButton"] = value; }
+        }
 
-		[LocalizableAttribute (true)]
-		[DefaultValue ("")]
-		public virtual string GroupingText {
-			get {
-				return ViewState.GetString ("GroupingText", String.Empty);
-			}
-			set {
-				ViewState ["GroupingText"] = value;
-			}
-		}
+        [DefaultValue(ContentDirection.NotSet)]
+        public virtual ContentDirection Direction
+        {
+            get
+            {
+                if (ControlStyleCreated)
+                {
+                    if (PanelStyle != null)
+                        return PanelStyle.Direction;
+                    else
+                        return ViewState["Direction"] != null
+                            ? (ContentDirection)ViewState["Direction"]
+                            : ContentDirection.NotSet;
+                }
+                return ContentDirection.NotSet;
+            }
+            set
+            {
+                if (PanelStyle != null)
+                    PanelStyle.Direction = value;
+                else
+                    ViewState["Direction"] = value;
+            }
+        }
 
-		[DefaultValue (ScrollBars.None)]
-		public virtual ScrollBars ScrollBars {
-			get {
-				if (ControlStyleCreated) {
-					if (PanelStyle != null)
-						return PanelStyle.ScrollBars;
-					else
-						return ViewState ["ScrollBars"] != null ? (ScrollBars) ViewState ["Direction"] : ScrollBars.None;
-				}
-				return ScrollBars.None;
-			}
-			set {
-				if (PanelStyle != null)
-					PanelStyle.ScrollBars = value;
-				else
-					ViewState ["ScrollBars"] = value;
-			}
-		}
-		public override bool SupportsDisabledAttribute {
-			get { return RenderingCompatibilityLessThan40; }
-		}
-		protected override Style CreateControlStyle ()
-		{
-			return new PanelStyle (ViewState);
-		}
+        [LocalizableAttribute(true)]
+        [DefaultValue("")]
+        public virtual string GroupingText
+        {
+            get { return ViewState.GetString("GroupingText", String.Empty); }
+            set { ViewState["GroupingText"] = value; }
+        }
 
-		public override void RenderBeginTag (HtmlTextWriter writer)
-		{
-			base.RenderBeginTag (writer);
-			if (!String.IsNullOrEmpty (GroupingText)) {
-				writer.RenderBeginTag (HtmlTextWriterTag.Fieldset);
-				writer.RenderBeginTag (HtmlTextWriterTag.Legend);
-				writer.Write (GroupingText);
-				writer.RenderEndTag ();
-			}
-		}
+        [DefaultValue(ScrollBars.None)]
+        public virtual ScrollBars ScrollBars
+        {
+            get
+            {
+                if (ControlStyleCreated)
+                {
+                    if (PanelStyle != null)
+                        return PanelStyle.ScrollBars;
+                    else
+                        return ViewState["ScrollBars"] != null
+                            ? (ScrollBars)ViewState["Direction"]
+                            : ScrollBars.None;
+                }
+                return ScrollBars.None;
+            }
+            set
+            {
+                if (PanelStyle != null)
+                    PanelStyle.ScrollBars = value;
+                else
+                    ViewState["ScrollBars"] = value;
+            }
+        }
+        public override bool SupportsDisabledAttribute
+        {
+            get { return RenderingCompatibilityLessThan40; }
+        }
 
-		public override void RenderEndTag (HtmlTextWriter writer)
-		{
-			if (!String.IsNullOrEmpty (GroupingText)) {
-				writer.RenderEndTag (); // Fieldset
-			}
-			base.RenderEndTag (writer);
-		}
-	}
+        protected override Style CreateControlStyle()
+        {
+            return new PanelStyle(ViewState);
+        }
+
+        public override void RenderBeginTag(HtmlTextWriter writer)
+        {
+            base.RenderBeginTag(writer);
+            if (!String.IsNullOrEmpty(GroupingText))
+            {
+                writer.RenderBeginTag(HtmlTextWriterTag.Fieldset);
+                writer.RenderBeginTag(HtmlTextWriterTag.Legend);
+                writer.Write(GroupingText);
+                writer.RenderEndTag();
+            }
+        }
+
+        public override void RenderEndTag(HtmlTextWriter writer)
+        {
+            if (!String.IsNullOrEmpty(GroupingText))
+            {
+                writer.RenderEndTag(); // Fieldset
+            }
+            base.RenderEndTag(writer);
+        }
+    }
 }

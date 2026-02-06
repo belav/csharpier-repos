@@ -1,18 +1,19 @@
 using System;
-using System.Diagnostics;
-using System.Text;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
-using System.Security.Permissions;
-using Microsoft.Win32;
 using System.IO;
 using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32;
 
 namespace System.Net
 {
     internal static class HttpSysSettings
     {
-        private const string httpSysParametersKey = @"System\CurrentControlSet\Services\HTTP\Parameters";
+        private const string httpSysParametersKey =
+            @"System\CurrentControlSet\Services\HTTP\Parameters";
         private const bool enableNonUtf8Default = true;
         private const bool favorUtf8Default = true;
         private const string enableNonUtf8Name = "EnableNonUtf8";
@@ -38,24 +39,40 @@ namespace System.Net
             get { return favorUtf8; }
         }
 
-        [RegistryPermission(SecurityAction.Assert, Read = @"HKEY_LOCAL_MACHINE\" + httpSysParametersKey)]
+        [RegistryPermission(
+            SecurityAction.Assert,
+            Read = @"HKEY_LOCAL_MACHINE\" + httpSysParametersKey
+        )]
         private static void ReadHttpSysRegistrySettings()
         {
             try
             {
-                RegistryKey httpSysParameters = Registry.LocalMachine.OpenSubKey(httpSysParametersKey);
+                RegistryKey httpSysParameters = Registry.LocalMachine.OpenSubKey(
+                    httpSysParametersKey
+                );
 
                 if (httpSysParameters == null)
                 {
-                    LogWarning("ReadHttpSysRegistrySettings", SR.net_log_listener_httpsys_registry_null,
-                        httpSysParametersKey);
+                    LogWarning(
+                        "ReadHttpSysRegistrySettings",
+                        SR.net_log_listener_httpsys_registry_null,
+                        httpSysParametersKey
+                    );
                 }
                 else
                 {
                     using (httpSysParameters)
                     {
-                        enableNonUtf8 = ReadRegistryValue(httpSysParameters, enableNonUtf8Name, enableNonUtf8Default);
-                        favorUtf8 = ReadRegistryValue(httpSysParameters, favorUtf8Name, favorUtf8Default);
+                        enableNonUtf8 = ReadRegistryValue(
+                            httpSysParameters,
+                            enableNonUtf8Name,
+                            enableNonUtf8Default
+                        );
+                        favorUtf8 = ReadRegistryValue(
+                            httpSysParameters,
+                            favorUtf8Name,
+                            favorUtf8Default
+                        );
                     }
                 }
             }
@@ -106,15 +123,24 @@ namespace System.Net
 
         private static void LogRegistryException(string methodName, Exception e)
         {
-            LogWarning(methodName, SR.net_log_listener_httpsys_registry_error, httpSysParametersKey, e);
+            LogWarning(
+                methodName,
+                SR.net_log_listener_httpsys_registry_error,
+                httpSysParametersKey,
+                e
+            );
         }
 
         private static void LogWarning(string methodName, string message, params object[] args)
         {
             if (Logging.On)
             {
-                Logging.PrintWarning(Logging.HttpListener, typeof(HttpSysSettings), methodName,
-                    SR.GetString(message, args));
+                Logging.PrintWarning(
+                    Logging.HttpListener,
+                    typeof(HttpSysSettings),
+                    methodName,
+                    SR.GetString(message, args)
+                );
             }
         }
     }

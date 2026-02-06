@@ -1,17 +1,13 @@
 struct G<T>
 {
-	public static G<T> s;
+    public static G<T> s;
 
-	private G (int i)
-	{
-	}
+    private G(int i) { }
 }
 
 struct S
 {
-	private G<string> value;
+    private G<string> value;
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

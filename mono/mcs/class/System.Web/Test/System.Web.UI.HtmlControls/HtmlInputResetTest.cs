@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,93 +31,90 @@ using System;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-
 using NUnit.Framework;
 
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class HtmlInputResetPoker : HtmlInputReset
+    {
+        public HtmlInputResetPoker()
+        {
+            TrackViewState();
+        }
 
-namespace MonoTests.System.Web.UI.HtmlControls {
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-	public class HtmlInputResetPoker : HtmlInputReset {
+        public void LoadState(object state)
+        {
+            LoadViewState(state);
+        }
 
-		public HtmlInputResetPoker ()
-		{
-			TrackViewState ();
-		}
+        public void DoRenderAttributes(HtmlTextWriter writer)
+        {
+            RenderAttributes(writer);
+        }
+    }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+    [TestFixture]
+    public class HtmlInputResetTest
+    {
+        [Test]
+        public void OverrideProperties()
+        {
+            HtmlInputResetPoker p = new HtmlInputResetPoker();
 
-		public void LoadState (object state)
-		{
-			LoadViewState (state);
-		}
+            Assert.IsTrue(p.CausesValidation, "A1");
+            Assert.IsTrue(((HtmlInputButton)p).CausesValidation, "A2");
 
-		public void DoRenderAttributes (HtmlTextWriter writer)
-		{
-			RenderAttributes (writer);
-		}
-	}
+            Assert.AreEqual("", p.ValidationGroup, "A3");
+            Assert.AreEqual("", ((HtmlInputButton)p).ValidationGroup, "A4");
+        }
 
-	[TestFixture]
-	public class HtmlInputResetTest {
+        [Test]
+        public void Defaults()
+        {
+            HtmlInputResetPoker p = new HtmlInputResetPoker();
 
-		[Test]
-		public void OverrideProperties ()
-		{
-			HtmlInputResetPoker p = new HtmlInputResetPoker ();
+            Assert.IsTrue(p.CausesValidation, "A1");
+            Assert.AreEqual("", p.ValidationGroup, "A2");
+        }
 
-			Assert.IsTrue (p.CausesValidation, "A1");
-			Assert.IsTrue (((HtmlInputButton)p).CausesValidation, "A2");
+        [Test]
+        public void CleanProperties()
+        {
+            HtmlInputResetPoker p = new HtmlInputResetPoker();
 
-			Assert.AreEqual ("", p.ValidationGroup, "A3");
-			Assert.AreEqual ("", ((HtmlInputButton)p).ValidationGroup, "A4");
-		}
+            p.CausesValidation = false;
+            Assert.IsFalse(p.CausesValidation, "A1");
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlInputResetPoker p = new HtmlInputResetPoker ();
+            p.CausesValidation = true;
+            Assert.IsTrue(p.CausesValidation, "A2");
 
-			Assert.IsTrue (p.CausesValidation, "A1");
-			Assert.AreEqual ("", p.ValidationGroup, "A2");
-		}
+            p.CausesValidation = false;
+            Assert.IsFalse(p.CausesValidation, "A3");
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlInputResetPoker p = new HtmlInputResetPoker ();
+            p.ValidationGroup = "hi";
+            Assert.AreEqual("hi", p.ValidationGroup, "A4");
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A1");
+            p.ValidationGroup = "";
+            Assert.AreEqual("", p.ValidationGroup, "A4");
+        }
 
-			p.CausesValidation = true;
-			Assert.IsTrue (p.CausesValidation, "A2");
+        [Test]
+        public void RenderAttributes()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A3");
+            HtmlInputResetPoker p = new HtmlInputResetPoker();
 
-			p.ValidationGroup = "hi";
-			Assert.AreEqual ("hi", p.ValidationGroup, "A4");
+            Assert.AreEqual(p.Attributes.Count, 1, "A1");
 
-			p.ValidationGroup = "";
-			Assert.AreEqual ("", p.ValidationGroup, "A4");
-		}
-
-		[Test]
-		public void RenderAttributes ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
-
-			HtmlInputResetPoker p = new HtmlInputResetPoker ();
-
-			Assert.AreEqual (p.Attributes.Count, 1, "A1");
-
-			p.DoRenderAttributes (tw);
-			Assert.AreEqual (sw.ToString (), " name type=\"reset\" /", "A2");
-		}
-	}	
+            p.DoRenderAttributes(tw);
+            Assert.AreEqual(sw.ToString(), " name type=\"reset\" /", "A2");
+        }
+    }
 }
-

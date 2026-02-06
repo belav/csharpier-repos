@@ -8,7 +8,9 @@ namespace System.IO
 {
     //Thrown when trying to access a drive that is not available.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class DriveNotFoundException : IOException
     {
         public DriveNotFoundException()
@@ -29,10 +31,13 @@ namespace System.IO
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected DriveNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected DriveNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

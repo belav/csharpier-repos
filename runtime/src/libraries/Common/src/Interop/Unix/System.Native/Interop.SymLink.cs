@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SymLink", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SymLink",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         internal static partial int SymLink(string target, string linkPath);
     }
 }

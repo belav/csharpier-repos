@@ -22,29 +22,57 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         public const SourceHashAlgorithm OpenDocumentChecksumAlgorithm = Default;
 
-        private static readonly Guid s_guidSha1 = unchecked(new Guid((int)0xff1816ec, (short)0xaa5e, 0x4d10, 0x87, 0xf7, 0x6f, 0x49, 0x63, 0x83, 0x34, 0x60));
-        private static readonly Guid s_guidSha256 = unchecked(new Guid((int)0x8829d00f, 0x11b8, 0x4213, 0x87, 0x8b, 0x77, 0x0e, 0x85, 0x97, 0xac, 0x16));
+        private static readonly Guid s_guidSha1 = unchecked(
+            new Guid(
+                (int)0xff1816ec,
+                (short)0xaa5e,
+                0x4d10,
+                0x87,
+                0xf7,
+                0x6f,
+                0x49,
+                0x63,
+                0x83,
+                0x34,
+                0x60
+            )
+        );
+        private static readonly Guid s_guidSha256 = unchecked(
+            new Guid(
+                (int)0x8829d00f,
+                0x11b8,
+                0x4213,
+                0x87,
+                0x8b,
+                0x77,
+                0x0e,
+                0x85,
+                0x97,
+                0xac,
+                0x16
+            )
+        );
 
-        public static bool IsSupportedAlgorithm(SourceHashAlgorithm algorithm)
-            => algorithm switch
+        public static bool IsSupportedAlgorithm(SourceHashAlgorithm algorithm) =>
+            algorithm switch
             {
                 SourceHashAlgorithm.Sha1 => true,
                 SourceHashAlgorithm.Sha256 => true,
-                _ => false
+                _ => false,
             };
 
-        public static Guid GetAlgorithmGuid(SourceHashAlgorithm algorithm)
-            => algorithm switch
+        public static Guid GetAlgorithmGuid(SourceHashAlgorithm algorithm) =>
+            algorithm switch
             {
                 SourceHashAlgorithm.Sha1 => s_guidSha1,
                 SourceHashAlgorithm.Sha256 => s_guidSha256,
                 _ => throw ExceptionUtilities.UnexpectedValue(algorithm),
             };
 
-        public static SourceHashAlgorithm GetSourceHashAlgorithm(Guid guid)
-            => (guid == s_guidSha256) ? SourceHashAlgorithm.Sha256 :
-               (guid == s_guidSha1) ? SourceHashAlgorithm.Sha1 :
-               SourceHashAlgorithm.None;
+        public static SourceHashAlgorithm GetSourceHashAlgorithm(Guid guid) =>
+            (guid == s_guidSha256) ? SourceHashAlgorithm.Sha256
+            : (guid == s_guidSha1) ? SourceHashAlgorithm.Sha1
+            : SourceHashAlgorithm.None;
 
         private static HashAlgorithm CreateInstance(SourceHashAlgorithm algorithm)
         {
@@ -52,7 +80,7 @@ namespace Microsoft.CodeAnalysis.Text
             {
                 SourceHashAlgorithm.Sha1 => SHA1.Create(),
                 SourceHashAlgorithm.Sha256 => SHA256.Create(),
-                _ => throw ExceptionUtilities.UnexpectedValue(algorithm)
+                _ => throw ExceptionUtilities.UnexpectedValue(algorithm),
             };
         }
 

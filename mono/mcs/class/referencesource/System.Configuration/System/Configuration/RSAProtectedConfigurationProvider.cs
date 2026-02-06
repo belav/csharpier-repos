@@ -7,28 +7,28 @@
 namespace System.Configuration
 {
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
-    using System.Xml;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
     using System.Security.Permissions;
+    using System.Xml;
+    using Microsoft.Win32;
 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public sealed class RsaProtectedConfigurationProvider : ProtectedConfigurationProvider
     {
-        // Note: this name has to match the name used in RegiisUtility 
+        // Note: this name has to match the name used in RegiisUtility
         const string DefaultRsaKeyContainerName = "NetFrameworkConfigurationKey";
-        
+
         public override XmlNode Decrypt(XmlNode encryptedNode)
         {
-            XmlDocument                 xmlDocument = new XmlDocument();
-            EncryptedXml                exml        = null;
-            RSACryptoServiceProvider    rsa         = GetCryptoServiceProvider(false, true);
+            XmlDocument xmlDocument = new XmlDocument();
+            EncryptedXml exml = null;
+            RSACryptoServiceProvider rsa = GetCryptoServiceProvider(false, true);
 
             xmlDocument.PreserveWhitespace = true;
             xmlDocument.LoadXml(encryptedNode.OuterXml);
@@ -41,24 +41,25 @@ namespace System.Configuration
 
         public override XmlNode Encrypt(XmlNode node)
         {
-            XmlDocument         xmlDocument;
-            EncryptedXml        exml;
-            byte[]              rgbOutput;
-            EncryptedData       ed;
-            KeyInfoName         kin;
-            EncryptedKey        ek;
+            XmlDocument xmlDocument;
+            EncryptedXml exml;
+            byte[] rgbOutput;
+            EncryptedData ed;
+            KeyInfoName kin;
+            EncryptedKey ek;
             KeyInfoEncryptedKey kek;
-            XmlElement          inputElement;
+            XmlElement inputElement;
             RSACryptoServiceProvider rsa = GetCryptoServiceProvider(false, false);
 
             // Encrypt the node with the new key
             xmlDocument = new XmlDocument();
             xmlDocument.PreserveWhitespace = true;
-            xmlDocument.LoadXml("<foo>"+ node.OuterXml+ "</foo>");
+            xmlDocument.LoadXml("<foo>" + node.OuterXml + "</foo>");
             exml = new EncryptedXml(xmlDocument);
             inputElement = xmlDocument.DocumentElement;
 
-            using (SymmetricAlgorithm symAlg = GetSymAlgorithmProvider()) {
+            using (SymmetricAlgorithm symAlg = GetSymAlgorithmProvider())
+            {
                 rgbOutput = exml.EncryptData(inputElement, symAlg, true);
                 ed = new EncryptedData();
                 ed.Type = EncryptedXml.XmlEncElementUrl;
@@ -83,14 +84,13 @@ namespace System.Configuration
 
             rsa.Clear();
 
-                // Get node from the document
+            // Get node from the document
             foreach (XmlNode node2 in xmlDocument.ChildNodes)
                 if (node2.NodeType == XmlNodeType.Element)
                     foreach (XmlNode node3 in node2.ChildNodes) // node2 is the "foo" node
                         if (node3.NodeType == XmlNodeType.Element)
                             return node3; // node3 is the "EncryptedData" node
-                return null;
-
+            return null;
         }
 
         public void AddKey(int keySize, bool exportable)
@@ -107,6 +107,7 @@ namespace System.Configuration
             rsa.PersistKeyInCsp = false;
             rsa.Clear();
         }
+
         public void ImportKey(string xmlFileName, bool exportable)
         {
             RSACryptoServiceProvider rsa = GetCryptoServiceProvider(exportable, false);
@@ -123,11 +124,26 @@ namespace System.Configuration
             rsa.Clear();
         }
 
-        public string   KeyContainerName    { get { return _KeyContainerName; } }
-        public string   CspProviderName     { get { return _CspProviderName; } }
-        public bool     UseMachineContainer { get { return _UseMachineContainer; } }
-        public bool UseOAEP { get { return _UseOAEP; } }
-        public bool UseFIPS { get { return _UseFIPS; } }
+        public string KeyContainerName
+        {
+            get { return _KeyContainerName; }
+        }
+        public string CspProviderName
+        {
+            get { return _CspProviderName; }
+        }
+        public bool UseMachineContainer
+        {
+            get { return _UseMachineContainer; }
+        }
+        public bool UseOAEP
+        {
+            get { return _UseOAEP; }
+        }
+        public bool UseFIPS
+        {
+            get { return _UseFIPS; }
+        }
 
         public override void Initialize(string name, NameValueCollection configurationValues)
         {
@@ -141,13 +157,21 @@ namespace System.Configuration
 
             _CspProviderName = configurationValues["cspProviderName"];
             configurationValues.Remove("cspProviderName");
-            _UseMachineContainer = GetBooleanValue(configurationValues, "useMachineContainer", true);
+            _UseMachineContainer = GetBooleanValue(
+                configurationValues,
+                "useMachineContainer",
+                true
+            );
             _UseOAEP = GetBooleanValue(configurationValues, "useOAEP", false);
             _UseFIPS = GetBooleanValue(configurationValues, "useFIPS", false);
             if (configurationValues.Count > 0)
-                throw new ConfigurationErrorsException(SR.GetString(SR.Unrecognized_initialization_value, configurationValues.GetKey(0)));
+                throw new ConfigurationErrorsException(
+                    SR.GetString(
+                        SR.Unrecognized_initialization_value,
+                        configurationValues.GetKey(0)
+                    )
+                );
         }
-
 
         private string _KeyName;
         private string _KeyContainerName;
@@ -156,11 +180,18 @@ namespace System.Configuration
         private bool _UseOAEP;
         private bool _UseFIPS;
 
-        public RSAParameters RsaPublicKey { get { return GetCryptoServiceProvider(false, false).ExportParameters(false); } }
-
-        private RSACryptoServiceProvider GetCryptoServiceProvider(bool exportable, bool keyMustExist)
+        public RSAParameters RsaPublicKey
         {
-            try {
+            get { return GetCryptoServiceProvider(false, false).ExportParameters(false); }
+        }
+
+        private RSACryptoServiceProvider GetCryptoServiceProvider(
+            bool exportable,
+            bool keyMustExist
+        )
+        {
+            try
+            {
                 CspParameters csp = new CspParameters();
                 csp.KeyContainerName = KeyContainerName;
                 csp.KeyNumber = 1;
@@ -177,8 +208,9 @@ namespace System.Configuration
                     csp.Flags |= CspProviderFlags.UseExistingKey;
 
                 return new RSACryptoServiceProvider(csp);
-
-            } catch {
+            }
+            catch
+            {
                 ThrowBetterException(keyMustExist);
 
                 // If a better exception can't be found, this will propagate
@@ -186,9 +218,10 @@ namespace System.Configuration
                 throw;
             }
         }
+
         private byte[] GetRandomKey()
         {
-            byte [] buf = new byte[24];
+            byte[] buf = new byte[24];
             (new RNGCryptoServiceProvider()).GetBytes(buf);
             return buf;
         }
@@ -197,35 +230,54 @@ namespace System.Configuration
         {
             SafeCryptContextHandle hProv = null;
             int success = 0;
-            try {
-                success = UnsafeNativeMethods.CryptAcquireContext(out hProv, KeyContainerName, CspProviderName, PROV_Rsa_FULL, UseMachineContainer ? CRYPT_MACHINE_KEYSET : 0);
+            try
+            {
+                success = UnsafeNativeMethods.CryptAcquireContext(
+                    out hProv,
+                    KeyContainerName,
+                    CspProviderName,
+                    PROV_Rsa_FULL,
+                    UseMachineContainer ? CRYPT_MACHINE_KEYSET : 0
+                );
                 if (success != 0)
                     return; // propagate original exception
 
                 int hr = Marshal.GetHRForLastWin32Error();
-                if (hr == HResults.NteBadKeySet && !keyMustExist) {
+                if (hr == HResults.NteBadKeySet && !keyMustExist)
+                {
                     return; // propagate original exception
                 }
 
-                switch (hr) {
+                switch (hr)
+                {
                     case HResults.NteBadKeySet:
                     case HResults.Win32AccessDenied:
                     case HResults.Win32InvalidHandle:
-                        throw new ConfigurationErrorsException(SR.GetString(SR.Key_container_doesnt_exist_or_access_denied));
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.Key_container_doesnt_exist_or_access_denied)
+                        );
 
                     default:
                         Marshal.ThrowExceptionForHR(hr);
                         break;
                 }
-            } finally {
+            }
+            finally
+            {
                 if (!(hProv == null || hProv.IsInvalid))
                     hProv.Dispose();
             }
         }
+
         const uint PROV_Rsa_FULL = 1;
         const uint CRYPT_MACHINE_KEYSET = 0x00000020;
 
-        private static bool GetBooleanValue(NameValueCollection configurationValues, string valueName, bool defaultValue) {
+        private static bool GetBooleanValue(
+            NameValueCollection configurationValues,
+            string valueName,
+            bool defaultValue
+        )
+        {
             string s = configurationValues[valueName];
             if (s == null)
                 return defaultValue;
@@ -234,17 +286,22 @@ namespace System.Configuration
                 return true;
             if (s == "false")
                 return false;
-            throw new ConfigurationErrorsException(SR.GetString(SR.Config_invalid_boolean_attribute, valueName));
+            throw new ConfigurationErrorsException(
+                SR.GetString(SR.Config_invalid_boolean_attribute, valueName)
+            );
         }
 
-        private SymmetricAlgorithm GetSymAlgorithmProvider() {
+        private SymmetricAlgorithm GetSymAlgorithmProvider()
+        {
             SymmetricAlgorithm symAlg;
 
-            if (UseFIPS) {
+            if (UseFIPS)
+            {
                 // AesCryptoServiceProvider implementation is FIPS certified
                 symAlg = new AesCryptoServiceProvider();
             }
-            else {
+            else
+            {
                 // Use the 3DES. FIPS obsolated 3DES
                 symAlg = new TripleDESCryptoServiceProvider();
 
@@ -257,9 +314,11 @@ namespace System.Configuration
             return symAlg;
         }
 
-        private EncryptionMethod GetSymEncryptionMethod() {
-            return UseFIPS ? new EncryptionMethod(EncryptedXml.XmlEncAES256Url) :
-                             new EncryptionMethod(EncryptedXml.XmlEncTripleDESUrl);
+        private EncryptionMethod GetSymEncryptionMethod()
+        {
+            return UseFIPS
+                ? new EncryptionMethod(EncryptedXml.XmlEncAES256Url)
+                : new EncryptionMethod(EncryptedXml.XmlEncTripleDESUrl);
         }
     }
 }

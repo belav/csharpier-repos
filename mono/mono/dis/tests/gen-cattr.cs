@@ -2,16 +2,14 @@
 using System;
 
 [AttributeUsage(AttributeTargets.GenericParameter)]
-class GenParAttribute : Attribute {
+class GenParAttribute : Attribute { }
+
+class cons<[GenPar] A>
+{
+    public void abc<[GenPar] M>() { }
 }
 
-class cons <[GenPar] A> {
-	public void abc <[GenPar] M> () {
-	}
-}
-
-class Test {
-	public static void Main ()
-	{
-	}
+class Test
+{
+    public static void Main() { }
 }

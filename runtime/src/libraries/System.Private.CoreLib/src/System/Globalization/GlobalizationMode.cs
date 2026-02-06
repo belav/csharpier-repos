@@ -12,11 +12,24 @@ namespace System.Globalization
         // validate this implementation detail.
         private static partial class Settings
         {
-            internal static bool Invariant { get; } = AppContextConfigHelper.GetBooleanConfig("System.Globalization.Invariant", "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT");
+            internal static bool Invariant { get; } =
+                AppContextConfigHelper.GetBooleanConfig(
+                    "System.Globalization.Invariant",
+                    "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"
+                );
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS || TARGET_BROWSER
-            internal static bool Hybrid { get; } = AppContextConfigHelper.GetBooleanConfig("System.Globalization.Hybrid", "DOTNET_SYSTEM_GLOBALIZATION_HYBRID");
+            internal static bool Hybrid { get; } =
+                AppContextConfigHelper.GetBooleanConfig(
+                    "System.Globalization.Hybrid",
+                    "DOTNET_SYSTEM_GLOBALIZATION_HYBRID"
+                );
 #endif
-            internal static bool PredefinedCulturesOnly { get; } = AppContextConfigHelper.GetBooleanConfig("System.Globalization.PredefinedCulturesOnly", "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY", GlobalizationMode.Invariant);
+            internal static bool PredefinedCulturesOnly { get; } =
+                AppContextConfigHelper.GetBooleanConfig(
+                    "System.Globalization.PredefinedCulturesOnly",
+                    "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                    GlobalizationMode.Invariant
+                );
         }
 
         // Note: Invariant=true and Invariant=false are substituted at different levels in the ILLink.Substitutions file.
@@ -29,8 +42,17 @@ namespace System.Globalization
         internal static bool PredefinedCulturesOnly => Settings.PredefinedCulturesOnly;
 
         private static bool TryGetAppLocalIcuSwitchValue([NotNullWhen(true)] out string? value) =>
-            TryGetStringValue("System.Globalization.AppLocalIcu", "DOTNET_SYSTEM_GLOBALIZATION_APPLOCALICU", out value);
-        private static bool TryGetStringValue(string switchName, string envVariable, [NotNullWhen(true)] out string? value)
+            TryGetStringValue(
+                "System.Globalization.AppLocalIcu",
+                "DOTNET_SYSTEM_GLOBALIZATION_APPLOCALICU",
+                out value
+            );
+
+        private static bool TryGetStringValue(
+            string switchName,
+            string envVariable,
+            [NotNullWhen(true)] out string? value
+        )
         {
             value = AppContext.GetData(switchName) as string;
             if (string.IsNullOrEmpty(value))
@@ -66,14 +88,27 @@ namespace System.Globalization
             LoadAppLocalIcuCore(version, icuSuffix);
         }
 
-        private static string CreateLibraryName(ReadOnlySpan<char> baseName, ReadOnlySpan<char> suffix, ReadOnlySpan<char> extension, ReadOnlySpan<char> version, bool versionAtEnd = false) =>
-            versionAtEnd ?
-                string.Concat(baseName, suffix, extension, version) :
-                string.Concat(baseName, suffix, version, extension);
+        private static string CreateLibraryName(
+            ReadOnlySpan<char> baseName,
+            ReadOnlySpan<char> suffix,
+            ReadOnlySpan<char> extension,
+            ReadOnlySpan<char> version,
+            bool versionAtEnd = false
+        ) =>
+            versionAtEnd
+                ? string.Concat(baseName, suffix, extension, version)
+                : string.Concat(baseName, suffix, version, extension);
 
         private static IntPtr LoadLibrary(string library, bool failOnLoadFailure)
         {
-            if (!NativeLibrary.TryLoad(library, typeof(object).Assembly, DllImportSearchPath.ApplicationDirectory | DllImportSearchPath.System32, out IntPtr lib) && failOnLoadFailure)
+            if (
+                !NativeLibrary.TryLoad(
+                    library,
+                    typeof(object).Assembly,
+                    DllImportSearchPath.ApplicationDirectory | DllImportSearchPath.System32,
+                    out IntPtr lib
+                ) && failOnLoadFailure
+            )
             {
                 Environment.FailFast($"Failed to load app-local ICU: {library}");
             }

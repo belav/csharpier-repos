@@ -25,19 +25,19 @@ namespace TypesWhichDoNotMatch
     [TypeIdentifier("TypesWhichDoNotMatch", "Type3")]
     public delegate
 #if TYPEEQUIVALENCEASSEMBLY_1
-        object
+    object
 #else
-        string
+    string
 #endif
-        Type3();
+    Type3();
 
     // A case where the type names are not the same
     [TypeIdentifier("TypesWhichDoNotMatch", "Type4")]
     public struct
 #if TYPEEQUIVALENCEASSEMBLY_1
-        Type4
+    Type4
 #else
-        Type4NotQuite
+    Type4NotQuite
 #endif
     { }
 
@@ -70,6 +70,7 @@ namespace TypesWhichDoNotMatch
     {
         [FieldOffset(0)]
         public int Lol;
+
 #if TYPEEQUIVALENCEASSEMBLY_1
         [FieldOffset(20)]
 #else
@@ -84,11 +85,11 @@ namespace TypesWhichDoNotMatch
     {
         public
 #if TYPEEQUIVALENCEASSEMBLY_1
-            TypesWhichMatch.Type4[,,]
+        TypesWhichMatch.Type4[,,]
 #else
-            TypesWhichMatch.Type4[,,,]
+        TypesWhichMatch.Type4[,,,]
 #endif
-            MDArray;
+        MDArray;
     }
 
     // A case where the underlying data of the enum does not match
@@ -99,14 +100,13 @@ namespace TypesWhichDoNotMatch
 #else
         sbyte
 #endif
-    {
-    }
+    { }
 
     // A case with a function pointer
     [TypeIdentifier("TypesWhichDoNotMatch", "Type10")]
     public struct Type10
     {
-        public unsafe delegate*<TypesWhichMatch.Type4, void> functionPointer;
+        public unsafe delegate* <TypesWhichMatch.Type4, void> functionPointer;
     }
 
     // A case where the overall size is different
@@ -120,6 +120,7 @@ namespace TypesWhichDoNotMatch
     {
         [FieldOffset(0)]
         public int Lol;
+
         [FieldOffset(20)]
         public byte Omg;
 

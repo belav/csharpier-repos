@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /*
      * Interface:       ICscHostObject5
-     * Owner:           
+     * Owner:
      *
      * Defines an interface for the Csc task to communicate with the IDE.  In particular,
      * the Csc task will delegate the actual compilation to the IDE, rather than shelling

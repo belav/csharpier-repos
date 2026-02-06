@@ -7,21 +7,26 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
-    internal sealed class ConstNode : ExpressionNode {
+    internal sealed class ConstNode : ExpressionNode
+    {
         internal readonly object val;
 
-        internal ConstNode(DataTable table, ValueType type, object constant) : this(table, type, constant, true) {
-        }
+        internal ConstNode(DataTable table, ValueType type, object constant)
+            : this(table, type, constant, true) { }
 
-        internal ConstNode(DataTable table, ValueType type, object constant, bool fParseQuotes) : base(table) {
-            switch (type) {
+        internal ConstNode(DataTable table, ValueType type, object constant, bool fParseQuotes)
+            : base(table)
+        {
+            switch (type)
+            {
                 case ValueType.Null:
                     this.val = DBNull.Value;
                     break;
@@ -41,11 +46,13 @@ namespace System.Data {
                     break;
 
                 case ValueType.Str:
-                    if (fParseQuotes) {
+                    if (fParseQuotes)
+                    {
                         // replace '' with one '
                         this.val = ((string)constant).Replace("''", "'");
                     }
-                    else {
+                    else
+                    {
                         this.val = (string)constant;
                     }
                     break;
@@ -64,89 +71,131 @@ namespace System.Data {
             }
         }
 
-        internal override void Bind(DataTable table, List<DataColumn> list) {
+        internal override void Bind(DataTable table, List<DataColumn> list)
+        {
             BindTable(table);
         }
 
-        internal override object Eval() {
+        internal override object Eval()
+        {
             return val;
         }
 
-        internal override object Eval(DataRow row, DataRowVersion version) {
+        internal override object Eval(DataRow row, DataRowVersion version)
+        {
             return Eval();
         }
 
-        internal override object Eval(int[] recordNos) {
+        internal override object Eval(int[] recordNos)
+        {
             return Eval();
         }
 
-        internal override bool IsConstant() {
+        internal override bool IsConstant()
+        {
             return true;
         }
 
-        internal override bool IsTableConstant() {
+        internal override bool IsTableConstant()
+        {
             return true;
         }
 
-        internal override bool HasLocalAggregate() {
-            return false;
-        }
-        internal override bool HasRemoteAggregate() {
+        internal override bool HasLocalAggregate()
+        {
             return false;
         }
 
-        internal override ExpressionNode Optimize() {
+        internal override bool HasRemoteAggregate()
+        {
+            return false;
+        }
+
+        internal override ExpressionNode Optimize()
+        {
             return this;
         }
 
-        private object SmallestDecimal(object constant) {
-            if (null == constant) {
+        private object SmallestDecimal(object constant)
+        {
+            if (null == constant)
+            {
                 return 0d;
             }
-            else {
+            else
+            {
                 string sval = (constant as string);
-                if (null != sval) {
+                if (null != sval)
+                {
                     decimal r12;
-                    if (Decimal.TryParse(sval, NumberStyles.Number, NumberFormatInfo.InvariantInfo, out r12)) {
+                    if (
+                        Decimal.TryParse(
+                            sval,
+                            NumberStyles.Number,
+                            NumberFormatInfo.InvariantInfo,
+                            out r12
+                        )
+                    )
+                    {
                         return r12;
                     }
-                    
+
                     double r8;
-                    if (Double.TryParse(sval, NumberStyles.Float| NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out r8)) {
+                    if (
+                        Double.TryParse(
+                            sval,
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            NumberFormatInfo.InvariantInfo,
+                            out r8
+                        )
+                    )
+                    {
                         return r8;
-                    }                    
+                    }
                 }
-                else {
+                else
+                {
                     IConvertible convertible = (constant as IConvertible);
-                    if (null != convertible) {
-                        try {
+                    if (null != convertible)
+                    {
+                        try
+                        {
                             return convertible.ToDecimal(NumberFormatInfo.InvariantInfo);
                         }
-                        catch (System.ArgumentException e) {
+                        catch (System.ArgumentException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.FormatException e) {
+                        catch (System.FormatException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.InvalidCastException e) {
+                        catch (System.InvalidCastException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.OverflowException e) {
+                        catch (System.OverflowException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        try {
+                        try
+                        {
                             return convertible.ToDouble(NumberFormatInfo.InvariantInfo);
                         }
-                        catch (System.ArgumentException e) {
+                        catch (System.ArgumentException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.FormatException e) {
+                        catch (System.FormatException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.InvalidCastException e) {
+                        catch (System.InvalidCastException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.OverflowException e) {
+                        catch (System.OverflowException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
                     }
@@ -155,74 +204,119 @@ namespace System.Data {
             return constant;
         }
 
-        private object SmallestNumeric(object constant) {
-            if (null == constant) {
+        private object SmallestNumeric(object constant)
+        {
+            if (null == constant)
+            {
                 return (int)0;
             }
-            else {
+            else
+            {
                 string sval = (constant as string);
-                if (null != sval) {
+                if (null != sval)
+                {
                     int i4;
-                    if (Int32.TryParse(sval, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out i4)) {
+                    if (
+                        Int32.TryParse(
+                            sval,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out i4
+                        )
+                    )
+                    {
                         return i4;
                     }
                     long i8;
-                    if (Int64.TryParse(sval, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out i8)) {
+                    if (
+                        Int64.TryParse(
+                            sval,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out i8
+                        )
+                    )
+                    {
                         return i8;
                     }
                     double r8;
-                    if (Double.TryParse(sval, NumberStyles.Float| NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out r8)) {
+                    if (
+                        Double.TryParse(
+                            sval,
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            NumberFormatInfo.InvariantInfo,
+                            out r8
+                        )
+                    )
+                    {
                         return r8;
                     }
                 }
-                else {
+                else
+                {
                     IConvertible convertible = (constant as IConvertible);
-                    if (null != convertible) {
-                        try {
+                    if (null != convertible)
+                    {
+                        try
+                        {
                             return convertible.ToInt32(NumberFormatInfo.InvariantInfo);
                         }
-                        catch (System.ArgumentException e) {
+                        catch (System.ArgumentException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.FormatException e) {
+                        catch (System.FormatException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.InvalidCastException e) {
+                        catch (System.InvalidCastException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.OverflowException e) {
+                        catch (System.OverflowException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
 
-                        try {
+                        try
+                        {
                             return convertible.ToInt64(NumberFormatInfo.InvariantInfo);
                         }
-                        catch (System.ArgumentException e) {
+                        catch (System.ArgumentException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.FormatException e) {
+                        catch (System.FormatException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.InvalidCastException e) {
+                        catch (System.InvalidCastException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.OverflowException e) {
+                        catch (System.OverflowException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
 
-                        try {
+                        try
+                        {
                             return convertible.ToDouble(NumberFormatInfo.InvariantInfo);
                         }
-                        catch (System.ArgumentException e) {
+                        catch (System.ArgumentException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.FormatException e) {
+                        catch (System.FormatException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.InvalidCastException e) {
+                        catch (System.InvalidCastException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
-                        catch (System.OverflowException e) {
+                        catch (System.OverflowException e)
+                        {
                             ExceptionBuilder.TraceExceptionWithoutRethrow(e);
                         }
                     }

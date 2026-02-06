@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Xunit;
 
@@ -11,11 +11,16 @@ namespace System.Reflection.Tests
 {
     public class TypeTests
     {
-        private const BindingFlags DefaultBindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+        private const BindingFlags DefaultBindingFlags =
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
         [Theory]
         [InlineData(typeof(TI_Class), nameof(TI_Class), MemberTypes.TypeInfo)]
-        [InlineData(typeof(TI_Class.PublicNestedType), nameof(TI_Class.PublicNestedType), MemberTypes.NestedType)]
+        [InlineData(
+            typeof(TI_Class.PublicNestedType),
+            nameof(TI_Class.PublicNestedType),
+            MemberTypes.NestedType
+        )]
         [InlineData(typeof(string), nameof(String), MemberTypes.TypeInfo)]
         public void Properties(Type type, string name, MemberTypes memberType)
         {
@@ -26,13 +31,19 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(GenericArrayWrapperClass<string>), new string[] { "System.String Item [Int32]" })]
+        [InlineData(
+            typeof(GenericArrayWrapperClass<string>),
+            new string[] { "System.String Item [Int32]" }
+        )]
         [InlineData(typeof(GenericArrayWrapperClass<>), new string[] { "T Item [Int32]" })]
         [InlineData(typeof(GenericClass<>), new string[] { "T ReturnAndSetField(T)" })]
         [InlineData(typeof(GenericClass<int>), new string[] { "Int32 ReturnAndSetField(Int32)" })]
         public void GetDefaultMembers(Type type, string[] expectedNames)
         {
-            string[] memberNames = TypeExtensions.GetDefaultMembers(type).Select(member => member.Name).ToArray();
+            string[] memberNames = TypeExtensions
+                .GetDefaultMembers(type)
+                .Select(member => member.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, memberNames.Length);
             Assert.All(expectedNames, toString => memberNames.Contains(toString));
         }
@@ -44,84 +55,382 @@ namespace System.Reflection.Tests
 
             yield return new object[] { BindingFlags.IgnoreCase, new string[0] };
             yield return new object[] { BindingFlags.DeclaredOnly, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly,
+                new string[0],
+            };
 
             yield return new object[] { BindingFlags.Instance, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance, new string[0] };
-            yield return new object[] { BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.DeclaredOnly,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.DeclaredOnly,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Static,
+                new string[0],
+            };
             yield return new object[] { BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static,
+                new string[0],
+            };
 
             yield return new object[] { BindingFlags.Public, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Public, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, expectedPublic };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public,
+                expectedPublic,
+            };
 
             yield return new object[] { BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, expectedPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, expectedPublic };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                expectedPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                expectedPublic,
+            };
 
             yield return new object[] { BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
 
             string[] expectedNonPublic = new string[] { "WeightStayedTheSame" };
-            yield return new object[] { BindingFlags.Instance | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, expectedNonPublic };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
 
-            yield return new object[] { BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, expectedNonPublic };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, expectedNonPublic };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                expectedNonPublic,
+            };
 
-            yield return new object[] { BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
             string[] expectedAll = new string[] { "WeightChanged", "WeightStayedTheSame" };
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
+            yield return new object[]
+            {
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
 
-            yield return new object[] { BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
-            yield return new object[] { BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, expectedAll };
+            yield return new object[]
+            {
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
+            yield return new object[]
+            {
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                expectedAll,
+            };
 
             yield return new object[] { BindingFlags.FlattenHierarchy, new string[0] };
         }
@@ -132,29 +441,58 @@ namespace System.Reflection.Tests
         {
             if (bindingAttributes == DefaultBindingFlags)
             {
-                string[] eventNames1 = TypeExtensions.GetEvents(typeof(Cat<int>)).Select(eventInfo => eventInfo.Name).ToArray();
+                string[] eventNames1 = TypeExtensions
+                    .GetEvents(typeof(Cat<int>))
+                    .Select(eventInfo => eventInfo.Name)
+                    .ToArray();
                 Assert.Equal(expectedNames.Length, eventNames1.Length);
                 Assert.All(expectedNames, name => eventNames1.Contains(name));
             }
-            string[] eventNames2 = TypeExtensions.GetEvents(typeof(Cat<int>), bindingAttributes).Select(eventInfo => eventInfo.Name).ToArray();
+            string[] eventNames2 = TypeExtensions
+                .GetEvents(typeof(Cat<int>), bindingAttributes)
+                .Select(eventInfo => eventInfo.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, eventNames2.Length);
             Assert.All(expectedNames, name => eventNames2.Contains(name));
         }
 
         public static IEnumerable<object[]> GetFields_TestData()
         {
-            yield return new object[] { typeof(GenericClassUsingNestedInterfaces<string, int>), new string[] { "FieldZero", "FieldOne", "FieldTwo", "FieldThree" } };
-            yield return new object[] { typeof(GenericStructWithInterface<string>), new string[] { "field", "field2" } };
-            yield return new object[] { typeof(NonGenericClassWithGenericInterface), new string[] { "field" } };
-            yield return new object[] { typeof(GenericStruct2TP<int, string>), new string[] { "field", "field2" } };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<>), new string[] { "field" } };
+            yield return new object[]
+            {
+                typeof(GenericClassUsingNestedInterfaces<string, int>),
+                new string[] { "FieldZero", "FieldOne", "FieldTwo", "FieldThree" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithInterface<string>),
+                new string[] { "field", "field2" },
+            };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithGenericInterface),
+                new string[] { "field" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericStruct2TP<int, string>),
+                new string[] { "field", "field2" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<>),
+                new string[] { "field" },
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetFields_TestData))]
         public void GetFields(Type type, string[] expectedNames)
         {
-            string[] fieldNames = TypeExtensions.GetFields(type).Select(field => field.Name).ToArray();
+            string[] fieldNames = TypeExtensions
+                .GetFields(type)
+                .Select(field => field.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, fieldNames.Length);
             Assert.All(expectedNames, name => fieldNames.Contains(name));
         }
@@ -165,10 +503,27 @@ namespace System.Reflection.Tests
         [InlineData(typeof(Cat<string>), new Type[] { typeof(IConsume) })]
         [InlineData(typeof(Cat<>), new Type[] { typeof(IConsume) })]
         [InlineData(typeof(PackOfCarnivores<Cat<string>>), new Type[0])]
-        [InlineData(typeof(IGenericInterfaceInherits<int, string>), new Type[] { typeof(IGenericInterface<int>), typeof(IGenericInterface2<string, int>) })]
-        [InlineData(typeof(GenericClassUsingNestedInterfaces<int, string>), new Type[] { typeof(IGenericInterfaceInherits<int, string>), typeof(IGenericInterface<int>), typeof(IGenericInterface2<string, int>) })]
-        [InlineData(typeof(NonGenericClassWithGenericInterface), new Type[] { typeof(IGenericInterface<int>) })]
-        [InlineData(typeof(TI_StructWithInterfaces), new Type[] { typeof(TI_Interface1), typeof(TI_Interface3) })]
+        [InlineData(
+            typeof(IGenericInterfaceInherits<int, string>),
+            new Type[] { typeof(IGenericInterface<int>), typeof(IGenericInterface2<string, int>) }
+        )]
+        [InlineData(
+            typeof(GenericClassUsingNestedInterfaces<int, string>),
+            new Type[]
+            {
+                typeof(IGenericInterfaceInherits<int, string>),
+                typeof(IGenericInterface<int>),
+                typeof(IGenericInterface2<string, int>),
+            }
+        )]
+        [InlineData(
+            typeof(NonGenericClassWithGenericInterface),
+            new Type[] { typeof(IGenericInterface<int>) }
+        )]
+        [InlineData(
+            typeof(TI_StructWithInterfaces),
+            new Type[] { typeof(TI_Interface1), typeof(TI_Interface3) }
+        )]
         [InlineData(typeof(TI_StructWithInterfaces?), new Type[0])]
         [InlineData(typeof(TI_Struct?), new Type[0])]
         public void GetInterfaces(Type type, Type[] expected)
@@ -183,37 +538,226 @@ namespace System.Reflection.Tests
         {
             Type[] interfaces = TypeExtensions.GetInterfaces(typeof(GenericClassWithInterface<>));
             Assert.Equal(1, interfaces.Length);
-            Assert.Equal("System.Reflection.Tests.IGenericInterface`1[T]", interfaces[0].ToString());
+            Assert.Equal(
+                "System.Reflection.Tests.IGenericInterface`1[T]",
+                interfaces[0].ToString()
+            );
         }
 
         public static IEnumerable<object[]> GetMember_TestData()
         {
-            yield return new object[] { typeof(GenericClassUsingNestedInterfaces<string, int>), "Field*", DefaultBindingFlags, new string[] { "FieldZero", "FieldOne", "FieldTwo", "FieldThree" } };
-            yield return new object[] { typeof(GenericClassUsingNestedInterfaces<string, int>), "Return*", DefaultBindingFlags, new string[] { "ReturnAndSetFieldZero", "ReturnAndSetFieldThree" } };
-            yield return new object[] { typeof(GenericClassWithInterface<int>), "*", DefaultBindingFlags, new string[] { "ReturnAndSetFieldZero", "GenericMethod", "ToString", "Equals", "GetHashCode", "GetType", ".ctor", "field" } };
-            yield return new object[] { typeof(IGenericInterface<>), "ReturnAndSetFieldZero", DefaultBindingFlags, new string[] { "ReturnAndSetFieldZero" } };
+            yield return new object[]
+            {
+                typeof(GenericClassUsingNestedInterfaces<string, int>),
+                "Field*",
+                DefaultBindingFlags,
+                new string[] { "FieldZero", "FieldOne", "FieldTwo", "FieldThree" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassUsingNestedInterfaces<string, int>),
+                "Return*",
+                DefaultBindingFlags,
+                new string[] { "ReturnAndSetFieldZero", "ReturnAndSetFieldThree" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithInterface<int>),
+                "*",
+                DefaultBindingFlags,
+                new string[]
+                {
+                    "ReturnAndSetFieldZero",
+                    "GenericMethod",
+                    "ToString",
+                    "Equals",
+                    "GetHashCode",
+                    "GetType",
+                    ".ctor",
+                    "field",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(IGenericInterface<>),
+                "ReturnAndSetFieldZero",
+                DefaultBindingFlags,
+                new string[] { "ReturnAndSetFieldZero" },
+            };
 
-            yield return new object[] { typeof(GenericArrayWrapperClass<>), "*", DefaultBindingFlags, new string[] { "get_myProperty", "set_myProperty", "get_Item", "set_Item", "ToString", "Equals", "GetHashCode", "GetType", ".ctor", "myProperty", "Item" } };
+            yield return new object[]
+            {
+                typeof(GenericArrayWrapperClass<>),
+                "*",
+                DefaultBindingFlags,
+                new string[]
+                {
+                    "get_myProperty",
+                    "set_myProperty",
+                    "get_Item",
+                    "set_Item",
+                    "ToString",
+                    "Equals",
+                    "GetHashCode",
+                    "GetType",
+                    ".ctor",
+                    "myProperty",
+                    "Item",
+                },
+            };
 
-            yield return new object[] { typeof(Cat<int>), "*", DefaultBindingFlags, new string[] { "add_WeightChanged", "remove_WeightChanged", "get_StuffConsumed", "Eat", "Puke", "ToString", "Equals", "GetHashCode", "GetType", ".ctor", "StuffConsumed", "PStuffConsumed", "get_PStuffConsumed", "set_PStuffConsumed", "WeightChanged" } };
+            yield return new object[]
+            {
+                typeof(Cat<int>),
+                "*",
+                DefaultBindingFlags,
+                new string[]
+                {
+                    "add_WeightChanged",
+                    "remove_WeightChanged",
+                    "get_StuffConsumed",
+                    "Eat",
+                    "Puke",
+                    "ToString",
+                    "Equals",
+                    "GetHashCode",
+                    "GetType",
+                    ".ctor",
+                    "StuffConsumed",
+                    "PStuffConsumed",
+                    "get_PStuffConsumed",
+                    "set_PStuffConsumed",
+                    "WeightChanged",
+                },
+            };
 
-            yield return new object[] { typeof(GenericArrayWrapperClass<int>), "*", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[] { "get_myProperty", "set_myProperty", "get_Item", "set_Item", ".ctor", "myProperty", "Item", "_field", "_field1" } };
+            yield return new object[]
+            {
+                typeof(GenericArrayWrapperClass<int>),
+                "*",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                new string[]
+                {
+                    "get_myProperty",
+                    "set_myProperty",
+                    "get_Item",
+                    "set_Item",
+                    ".ctor",
+                    "myProperty",
+                    "Item",
+                    "_field",
+                    "_field1",
+                },
+            };
 
-            yield return new object[] { typeof(GenericClassUsingNestedInterfaces<string, int>), "*", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[] { "ReturnAndSetFieldZero", "SetFieldOne", "SetFieldTwo", "ReturnAndSetFieldThree", ".ctor", "FieldZero", "FieldOne", "FieldTwo", "FieldThree" } };
-            yield return new object[] { typeof(GenericClassWithInterface<int>), "*", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[] { "GenericMethod", "ReturnAndSetFieldThree", ".ctor", "field" } };
-            yield return new object[] { typeof(IGenericInterface<>), "*", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[] { "ReturnAndSetFieldZero" } };
-            yield return new object[] { typeof(GenericArrayWrapperClass<>), "*", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, new string[] { "get_myProperty", "set_myProperty", "get_Item", "set_Item", ".ctor", "myProperty", "Item", "_field", "_field1" } };
+            yield return new object[]
+            {
+                typeof(GenericClassUsingNestedInterfaces<string, int>),
+                "*",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                new string[]
+                {
+                    "ReturnAndSetFieldZero",
+                    "SetFieldOne",
+                    "SetFieldTwo",
+                    "ReturnAndSetFieldThree",
+                    ".ctor",
+                    "FieldZero",
+                    "FieldOne",
+                    "FieldTwo",
+                    "FieldThree",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithInterface<int>),
+                "*",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                new string[] { "GenericMethod", "ReturnAndSetFieldThree", ".ctor", "field" },
+            };
+            yield return new object[]
+            {
+                typeof(IGenericInterface<>),
+                "*",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                new string[] { "ReturnAndSetFieldZero" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericArrayWrapperClass<>),
+                "*",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                new string[]
+                {
+                    "get_myProperty",
+                    "set_myProperty",
+                    "get_Item",
+                    "set_Item",
+                    ".ctor",
+                    "myProperty",
+                    "Item",
+                    "_field",
+                    "_field1",
+                },
+            };
 
-            yield return new object[] { typeof(GenericArrayWrapperClass<int>), "*", DefaultBindingFlags, new string[] { "get_myProperty", "set_myProperty", "get_Item", "set_Item", ".ctor", "myProperty", "Item", "ToString", "Equals", "GetHashCode", "GetType" } };
+            yield return new object[]
+            {
+                typeof(GenericArrayWrapperClass<int>),
+                "*",
+                DefaultBindingFlags,
+                new string[]
+                {
+                    "get_myProperty",
+                    "set_myProperty",
+                    "get_Item",
+                    "set_Item",
+                    ".ctor",
+                    "myProperty",
+                    "Item",
+                    "ToString",
+                    "Equals",
+                    "GetHashCode",
+                    "GetType",
+                },
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetMember_TestData))]
-        public void GetMember(Type type, string name, BindingFlags bindingAttributes, string[] expectedNames)
+        public void GetMember(
+            Type type,
+            string name,
+            BindingFlags bindingAttributes,
+            string[] expectedNames
+        )
         {
             if (bindingAttributes == DefaultBindingFlags)
             {
-                string[] memberNames1 = TypeExtensions.GetMember(type, name).Select(member => member.Name).ToArray();
+                string[] memberNames1 = TypeExtensions
+                    .GetMember(type, name)
+                    .Select(member => member.Name)
+                    .ToArray();
                 Assert.Equal(expectedNames.Length, memberNames1.Length);
                 Assert.All(expectedNames, expectedName => memberNames1.Contains(expectedName));
                 if (name == "*")
@@ -222,109 +766,1071 @@ namespace System.Reflection.Tests
                     MemberInfo[] memberNamesFromMethod1 = type.GetMembers();
 
                     Assert.Equal(memberNamesFromAsterix1.Length, memberNamesFromMethod1.Length);
-                    Assert.All(memberNamesFromAsterix1, memberInfo => memberNamesFromMethod1.Contains(memberInfo));
+                    Assert.All(
+                        memberNamesFromAsterix1,
+                        memberInfo => memberNamesFromMethod1.Contains(memberInfo)
+                    );
                 }
             }
-            string[] memberNames2 = TypeExtensions.GetMember(type, name, bindingAttributes).Select(member => member.Name).ToArray();
+            string[] memberNames2 = TypeExtensions
+                .GetMember(type, name, bindingAttributes)
+                .Select(member => member.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, memberNames2.Length);
             Assert.All(expectedNames, expectedName => memberNames2.Contains(expectedName));
             if (name == "*")
             {
-                MemberInfo[] memberNamesFromAsterix2 = TypeExtensions.GetMember(type, name, bindingAttributes);
-                MemberInfo[] memberNamesFromMethod2 = TypeExtensions.GetMembers(type, bindingAttributes);
+                MemberInfo[] memberNamesFromAsterix2 = TypeExtensions.GetMember(
+                    type,
+                    name,
+                    bindingAttributes
+                );
+                MemberInfo[] memberNamesFromMethod2 = TypeExtensions.GetMembers(
+                    type,
+                    bindingAttributes
+                );
 
                 Assert.Equal(memberNamesFromAsterix2.Length, memberNamesFromMethod2.Length);
-                Assert.All(memberNamesFromAsterix2, memberInfo => memberNamesFromMethod2.Contains(memberInfo));
+                Assert.All(
+                    memberNamesFromAsterix2,
+                    memberInfo => memberNamesFromMethod2.Contains(memberInfo)
+                );
             }
         }
+
         public static IEnumerable<object[]> GetMethods_TestData()
         {
-            yield return new object[] { typeof(GenericClass<string>), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance, new string[] { "ReturnAndSetField" } };
-            yield return new object[] { typeof(GenericClassUsingNestedInterfaces<string, int>), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance, new string[] { "ReturnAndSetFieldZero", "SetFieldOne", "SetFieldTwo", "ReturnAndSetFieldThree" } };
-            yield return new object[] { typeof(GenericClassWithInterface<>), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance, new string[] { "ReturnAndSetFieldZero", "GenericMethod" } };
-            yield return new object[] { typeof(GenericClassWithInterface<int>), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance, new string[] { "ReturnAndSetFieldZero", "GenericMethod" } };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<int>), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance, new string[] { "get_publicField", "set_publicField", "ReturnAndSetField" } };
+            yield return new object[]
+            {
+                typeof(GenericClass<string>),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance,
+                new string[] { "ReturnAndSetField" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassUsingNestedInterfaces<string, int>),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance,
+                new string[]
+                {
+                    "ReturnAndSetFieldZero",
+                    "SetFieldOne",
+                    "SetFieldTwo",
+                    "ReturnAndSetFieldThree",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithInterface<>),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance,
+                new string[] { "ReturnAndSetFieldZero", "GenericMethod" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithInterface<int>),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance,
+                new string[] { "ReturnAndSetFieldZero", "GenericMethod" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<int>),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance,
+                new string[] { "get_publicField", "set_publicField", "ReturnAndSetField" },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "GetType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "GetType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "GetType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "GetType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Static | BindingFlags.Public, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.Public, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Static | BindingFlags.Public,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.Public,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "GetType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "GetType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "GetType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "GetType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic, new string[] { "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Public
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "GetType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "GetType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "GetType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "GetType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse" },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "GetType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType", "GetType", "Finalize", "MemberwiseClone" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "CompareTo", "CompareTo", "Equals", "Equals", "GetHashCode", "ToString", "ToString", "ToString", "ToString", "Parse", "Parse", "Parse", "Parse", "TryParse", "TryParse", "GetTypeCode", "System.IConvertible.ToBoolean", "System.IConvertible.ToChar", "System.IConvertible.ToSByte", "System.IConvertible.ToByte", "System.IConvertible.ToInt16", "System.IConvertible.ToUInt16", "System.IConvertible.ToInt32", "System.IConvertible.ToUInt32", "System.IConvertible.ToInt64", "System.IConvertible.ToUInt64", "System.IConvertible.ToSingle", "System.IConvertible.ToDouble", "System.IConvertible.ToDecimal", "System.IConvertible.ToDateTime", "System.IConvertible.ToType" } };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "GetType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                    "GetType",
+                    "Finalize",
+                    "MemberwiseClone",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[]
+                {
+                    "CompareTo",
+                    "CompareTo",
+                    "Equals",
+                    "Equals",
+                    "GetHashCode",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "ToString",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "Parse",
+                    "TryParse",
+                    "TryParse",
+                    "GetTypeCode",
+                    "System.IConvertible.ToBoolean",
+                    "System.IConvertible.ToChar",
+                    "System.IConvertible.ToSByte",
+                    "System.IConvertible.ToByte",
+                    "System.IConvertible.ToInt16",
+                    "System.IConvertible.ToUInt16",
+                    "System.IConvertible.ToInt32",
+                    "System.IConvertible.ToUInt32",
+                    "System.IConvertible.ToInt64",
+                    "System.IConvertible.ToUInt64",
+                    "System.IConvertible.ToSingle",
+                    "System.IConvertible.ToDouble",
+                    "System.IConvertible.ToDecimal",
+                    "System.IConvertible.ToDateTime",
+                    "System.IConvertible.ToType",
+                },
+            };
 
-            yield return new object[] { typeof(Int32Impersonator), BindingFlags.FlattenHierarchy, new string[0] };
+            yield return new object[]
+            {
+                typeof(Int32Impersonator),
+                BindingFlags.FlattenHierarchy,
+                new string[0],
+            };
         }
 
         [Theory]
@@ -334,83 +1840,389 @@ namespace System.Reflection.Tests
         {
             if (bindingAttributes == DefaultBindingFlags)
             {
-                string[] methodNames1 = TypeExtensions.GetMethods(type).Select(method => method.Name).ToArray();
+                string[] methodNames1 = TypeExtensions
+                    .GetMethods(type)
+                    .Select(method => method.Name)
+                    .ToArray();
                 Assert.Equal(expectedNames.Length, methodNames1.Length);
                 Assert.All(expectedNames, name => methodNames1.Contains(name));
             }
-            string[] methodNames2 = TypeExtensions.GetMethods(type, bindingAttributes).Select(method => method.Name).ToArray();
+            string[] methodNames2 = TypeExtensions
+                .GetMethods(type, bindingAttributes)
+                .Select(method => method.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, methodNames2.Length);
             Assert.All(expectedNames, name => methodNames2.Contains(name));
         }
 
         public static IEnumerable<object[]> GetProperties_TestData()
         {
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<string>), DefaultBindingFlags, new string[] { "publicField" } };
-            yield return new object[] { typeof(Cat<int>), DefaultBindingFlags, new string[] { "StuffConsumed", "PStuffConsumed" } };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<int>), DefaultBindingFlags, new string[] { "publicField" } };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<>), DefaultBindingFlags, new string[] { "publicField" } };
-            yield return new object[] { typeof(ClassWithVarArgMethod), DefaultBindingFlags, new string[] { "publicField" } };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<string>),
+                DefaultBindingFlags,
+                new string[] { "publicField" },
+            };
+            yield return new object[]
+            {
+                typeof(Cat<int>),
+                DefaultBindingFlags,
+                new string[] { "StuffConsumed", "PStuffConsumed" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<int>),
+                DefaultBindingFlags,
+                new string[] { "publicField" },
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<>),
+                DefaultBindingFlags,
+                new string[] { "publicField" },
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithVarArgMethod),
+                DefaultBindingFlags,
+                new string[] { "publicField" },
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance | BindingFlags.Public, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public, new string[] { "Chars", "Length" } };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance | BindingFlags.Public,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public,
+                new string[] { "Chars", "Length" },
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Public | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Static,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.Static,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static, new string[] { "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static, new string[] { "Chars", "Length" } };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.Static,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.Static,
+                new string[] { "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.Static,
+                new string[] { "Chars", "Length" },
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "FirstChar" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "FirstChar" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "FirstChar" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic, new string[] { "FirstChar" } };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[] { "FirstChar" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[] { "FirstChar" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic,
+                new string[] { "FirstChar" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.NonPublic,
+                new string[] { "FirstChar" },
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[0],
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "FirstChar", "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "FirstChar", "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "FirstChar", "Chars", "Length" } };
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.IgnoreCase | BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, new string[] { "FirstChar", "Chars", "Length" } };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                new string[] { "FirstChar", "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "FirstChar", "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "FirstChar", "Chars", "Length" },
+            };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.IgnoreCase
+                    | BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic,
+                new string[] { "FirstChar", "Chars", "Length" },
+            };
 
-            yield return new object[] { typeof(StringImpersonator), BindingFlags.FlattenHierarchy, new string[0] };
+            yield return new object[]
+            {
+                typeof(StringImpersonator),
+                BindingFlags.FlattenHierarchy,
+                new string[0],
+            };
         }
 
         [Theory]
@@ -419,28 +2231,86 @@ namespace System.Reflection.Tests
         {
             if (bindingAttributes == DefaultBindingFlags)
             {
-                string[] propertyNames1 = TypeExtensions.GetProperties(type).Select(method => method.Name).ToArray();
+                string[] propertyNames1 = TypeExtensions
+                    .GetProperties(type)
+                    .Select(method => method.Name)
+                    .ToArray();
                 Assert.Equal(expectedNames.Length, propertyNames1.Length);
                 Assert.All(expectedNames, name => propertyNames1.Contains(name));
             }
-            string[] propertyNames2 = TypeExtensions.GetProperties(type, bindingAttributes).Select(method => method.Name).ToArray();
+            string[] propertyNames2 = TypeExtensions
+                .GetProperties(type, bindingAttributes)
+                .Select(method => method.Name)
+                .ToArray();
             Assert.Equal(expectedNames.Length, propertyNames2.Length);
             Assert.All(expectedNames, name => propertyNames2.Contains(name));
         }
 
         public static IEnumerable<object[]> GetProperty_TestData()
         {
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<string>), "publicField", DefaultBindingFlags, typeof(string), new Type[0] };
-            yield return new object[] { typeof(Cat<int>), "StuffConsumed", DefaultBindingFlags, null, new Type[0] };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<int>), "publicField", DefaultBindingFlags, typeof(int), new Type[0] };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<>), "publicField", BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly, null, new Type[0] };
-            yield return new object[] { typeof(GenericClassWithVarArgMethod<>), "publicField", DefaultBindingFlags, null, new Type[0] };
-            yield return new object[] { typeof(ClassWithVarArgMethod), "publicField", DefaultBindingFlags, null, new Type[0] };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<string>),
+                "publicField",
+                DefaultBindingFlags,
+                typeof(string),
+                new Type[0],
+            };
+            yield return new object[]
+            {
+                typeof(Cat<int>),
+                "StuffConsumed",
+                DefaultBindingFlags,
+                null,
+                new Type[0],
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<int>),
+                "publicField",
+                DefaultBindingFlags,
+                typeof(int),
+                new Type[0],
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<>),
+                "publicField",
+                BindingFlags.Public
+                    | BindingFlags.Static
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly,
+                null,
+                new Type[0],
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithVarArgMethod<>),
+                "publicField",
+                DefaultBindingFlags,
+                null,
+                new Type[0],
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithVarArgMethod),
+                "publicField",
+                DefaultBindingFlags,
+                null,
+                new Type[0],
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetProperty_TestData))]
-        public void GetProperty(Type type, string name, BindingFlags bindingAttributes, Type returnType, Type[] types)
+        public void GetProperty(
+            Type type,
+            string name,
+            BindingFlags bindingAttributes,
+            Type returnType,
+            Type[] types
+        )
         {
             if (returnType == null)
             {
@@ -466,48 +2336,218 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(IList<object>), typeof(object[]), true };
             yield return new object[] { typeof(object[]), typeof(IList<object>), false };
 
-            yield return new object[] { typeof(TI_BaseClassWithInterface), typeof(TI_SubClassWithInterface), true };
-            yield return new object[] { typeof(TI_BaseClassWithInterface[]), typeof(TI_SubClassWithInterface[]), true };
-            yield return new object[] { typeof(IList<object>), typeof(TI_BaseClassWithInterface[]), true };
-            yield return new object[] { typeof(IList<TI_BaseClassWithInterface>), typeof(TI_BaseClassWithInterface[]), true };
-            yield return new object[] { typeof(IList<TI_BaseClassWithInterface>), typeof(TI_SubClassWithInterface[]), true };
-            yield return new object[] { typeof(IList<TI_SubClassWithInterface>), typeof(TI_SubClassWithInterface[]), true };
+            yield return new object[]
+            {
+                typeof(TI_BaseClassWithInterface),
+                typeof(TI_SubClassWithInterface),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_BaseClassWithInterface[]),
+                typeof(TI_SubClassWithInterface[]),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(IList<object>),
+                typeof(TI_BaseClassWithInterface[]),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(IList<TI_BaseClassWithInterface>),
+                typeof(TI_BaseClassWithInterface[]),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(IList<TI_BaseClassWithInterface>),
+                typeof(TI_SubClassWithInterface[]),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(IList<TI_SubClassWithInterface>),
+                typeof(TI_SubClassWithInterface[]),
+                true,
+            };
 
-            yield return new object[] { typeof(TI_GenericBaseClass<object>), typeof(TI_GenericSubSubClass<object>), true };
-            yield return new object[] { typeof(TI_GenericSubClass<string>), typeof(TI_GenericSubSubClass<string>), true };
-            yield return new object[] { typeof(TI_GenericSubClass<string>), typeof(TI_GenericSubClass<string>), true };
-            yield return new object[] { typeof(TI_GenericSubClass<string>), typeof(TI_GenericSubClass<object>), false };
-            yield return new object[] { typeof(TI_GenericSubClass<object>), typeof(TI_GenericSubClass<string>), false };
-            yield return new object[] { typeof(TI_GenericSubSubClass<object>), typeof(TI_GenericSubClass<object>), false };
-            yield return new object[] { typeof(TI_GenericSubClass<string>), typeof(TI_GenericBaseClass<string>), false };
+            yield return new object[]
+            {
+                typeof(TI_GenericBaseClass<object>),
+                typeof(TI_GenericSubSubClass<object>),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClass<string>),
+                typeof(TI_GenericSubSubClass<string>),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClass<string>),
+                typeof(TI_GenericSubClass<string>),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClass<string>),
+                typeof(TI_GenericSubClass<object>),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClass<object>),
+                typeof(TI_GenericSubClass<string>),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubSubClass<object>),
+                typeof(TI_GenericSubClass<object>),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClass<string>),
+                typeof(TI_GenericBaseClass<string>),
+                false,
+            };
 
             yield return new object[] { typeof(TI_Interface2), typeof(TI_Interface2), true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_BaseClassWithInterface), true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_SubClassWithInterface), true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_GenericSubClassWithInterface<>), true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_GenericSubClassWithInterface<string>), true };
-            yield return new object[] { typeof(TI_SubClassWithInterface), typeof(TI_Interface1), false };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_BaseClassWithInterface),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_SubClassWithInterface),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_GenericSubClassWithInterface<>),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_GenericSubClassWithInterface<string>),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_SubClassWithInterface),
+                typeof(TI_Interface1),
+                false,
+            };
 
-            yield return new object[] { typeof(TI_Interface1), typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0], true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0], true };
-            yield return new object[] { typeof(TI_GenericSubClassWithInterface<>), typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0], false };
+            yield return new object[]
+            {
+                typeof(TI_Interface1),
+                typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0],
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0],
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericSubClassWithInterface<>),
+                typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0],
+                false,
+            };
 
-            yield return new object[] { typeof(CustomNamespace.TI_AbstractBaseClass), typeof(CustomNamespace.TI_AbstractSubClass), true };
-            yield return new object[] { typeof(CustomNamespace.TI_AbstractBaseClass), typeof(CustomNamespace.TI_SubClass), true };
-            yield return new object[] { typeof(CustomNamespace.TI_AbstractSubClass), typeof(CustomNamespace.TI_SubClass), true };
+            yield return new object[]
+            {
+                typeof(CustomNamespace.TI_AbstractBaseClass),
+                typeof(CustomNamespace.TI_AbstractSubClass),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(CustomNamespace.TI_AbstractBaseClass),
+                typeof(CustomNamespace.TI_SubClass),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(CustomNamespace.TI_AbstractSubClass),
+                typeof(CustomNamespace.TI_SubClass),
+                true,
+            };
 
-            yield return new object[] { typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0], typeof(TI_Interface1), false };
-            yield return new object[] { typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0], typeof(TI_BaseClassWithInterface), false };
-            yield return new object[] { typeof(TI_Interface1), typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0], true };
-            yield return new object[] { typeof(TI_BaseClassWithInterface), typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0], false };
-            yield return new object[] { typeof(TI_Interface1), typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0], true };
-            yield return new object[] { typeof(TI_Interface2), typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0], true };
+            yield return new object[]
+            {
+                typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0],
+                typeof(TI_Interface1),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0],
+                typeof(TI_BaseClassWithInterface),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface1),
+                typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0],
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_BaseClassWithInterface),
+                typeof(TI_GenericClassWithConstraints<>).GetGenericArguments()[0],
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface1),
+                typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0],
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface2),
+                typeof(TI_GenericSubClassWithConstraints<>).GetGenericArguments()[0],
+                true,
+            };
 
             // A T[] is assignable to IList<U> iff T[] is assignable to U[]
-            yield return new object[] { typeof(TI_Interface1[]), typeof(TI_StructWithInterface[]), false };
-            yield return new object[] { typeof(TI_Interface1[]), typeof(TI_SubClassWithInterface[]), true };
-            yield return new object[] { typeof(IList<TI_Interface1>), typeof(TI_StructWithInterface[]), false };
-            yield return new object[] { typeof(IList<TI_Interface1>), typeof(TI_SubClassWithInterface[]), true };
+            yield return new object[]
+            {
+                typeof(TI_Interface1[]),
+                typeof(TI_StructWithInterface[]),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(TI_Interface1[]),
+                typeof(TI_SubClassWithInterface[]),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(IList<TI_Interface1>),
+                typeof(TI_StructWithInterface[]),
+                false,
+            };
+            yield return new object[]
+            {
+                typeof(IList<TI_Interface1>),
+                typeof(TI_SubClassWithInterface[]),
+                true,
+            };
 
             yield return new object[] { typeof(int[]), typeof(uint[]), true };
             yield return new object[] { typeof(uint[]), typeof(int[]), true };
@@ -518,8 +2558,18 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(int), typeof(int?), false };
             yield return new object[] { typeof(int?[]), typeof(int[]), false };
 
-            yield return new object[] { typeof(TI_Interface1), typeof(TI_StructWithInterfaces), true };
-            yield return new object[] { typeof(TI_StructWithInterfaces), typeof(TI_Interface1), false };
+            yield return new object[]
+            {
+                typeof(TI_Interface1),
+                typeof(TI_StructWithInterfaces),
+                true,
+            };
+            yield return new object[]
+            {
+                typeof(TI_StructWithInterfaces),
+                typeof(TI_Interface1),
+                false,
+            };
         }
 
         [Theory]
@@ -565,36 +2615,93 @@ namespace System.Reflection.Tests
         public void Methods_SameAsUnderlyingType(Type type)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
-            BindingFlags declaredFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
+            BindingFlags declaredFlags =
+                BindingFlags.DeclaredOnly
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.Instance;
 
-            Assert.Equal(TypeExtensions.GetMethod(type, "ProtectedMethod", declaredFlags), typeInfo.GetDeclaredMethods("ProtectedMethod").First());
-            Assert.Equal(TypeExtensions.GetNestedType(type, "PublicNestedType", declaredFlags), typeInfo.GetDeclaredNestedType("PublicNestedType").AsType());
-            Assert.Equal(TypeExtensions.GetProperty(type, "PrivateProperty", declaredFlags), typeInfo.GetDeclaredProperty("PrivateProperty"));
+            Assert.Equal(
+                TypeExtensions.GetMethod(type, "ProtectedMethod", declaredFlags),
+                typeInfo.GetDeclaredMethods("ProtectedMethod").First()
+            );
+            Assert.Equal(
+                TypeExtensions.GetNestedType(type, "PublicNestedType", declaredFlags),
+                typeInfo.GetDeclaredNestedType("PublicNestedType").AsType()
+            );
+            Assert.Equal(
+                TypeExtensions.GetProperty(type, "PrivateProperty", declaredFlags),
+                typeInfo.GetDeclaredProperty("PrivateProperty")
+            );
 
-            Assert.All(TypeExtensions.GetFields(type, declaredFlags), field => typeInfo.DeclaredFields.Contains(field));
-            Assert.All(TypeExtensions.GetMethods(type, declaredFlags), method => typeInfo.DeclaredMethods.Contains(method));
-            Assert.All(TypeExtensions.GetNestedTypes(type, declaredFlags), nestedType => typeInfo.DeclaredNestedTypes.Contains(nestedType.GetTypeInfo()));
-            Assert.All(TypeExtensions.GetProperties(type, declaredFlags), property => typeInfo.DeclaredProperties.Contains(property));
-            Assert.All(TypeExtensions.GetEvents(type, declaredFlags), eventInfo => typeInfo.DeclaredEvents.Contains(eventInfo));
-            Assert.All(TypeExtensions.GetConstructors(type, declaredFlags), constructor => typeInfo.DeclaredConstructors.Contains(constructor));
+            Assert.All(
+                TypeExtensions.GetFields(type, declaredFlags),
+                field => typeInfo.DeclaredFields.Contains(field)
+            );
+            Assert.All(
+                TypeExtensions.GetMethods(type, declaredFlags),
+                method => typeInfo.DeclaredMethods.Contains(method)
+            );
+            Assert.All(
+                TypeExtensions.GetNestedTypes(type, declaredFlags),
+                nestedType => typeInfo.DeclaredNestedTypes.Contains(nestedType.GetTypeInfo())
+            );
+            Assert.All(
+                TypeExtensions.GetProperties(type, declaredFlags),
+                property => typeInfo.DeclaredProperties.Contains(property)
+            );
+            Assert.All(
+                TypeExtensions.GetEvents(type, declaredFlags),
+                eventInfo => typeInfo.DeclaredEvents.Contains(eventInfo)
+            );
+            Assert.All(
+                TypeExtensions.GetConstructors(type, declaredFlags),
+                constructor => typeInfo.DeclaredConstructors.Contains(constructor)
+            );
 
-            Assert.All(TypeExtensions.GetEvents(type), eventInfo => typeInfo.AsType().GetEvents().Contains(eventInfo));
-            Assert.All(TypeExtensions.GetFields(type), fieldInfo => typeInfo.AsType().GetFields().Contains(fieldInfo));
-            Assert.All(TypeExtensions.GetMethods(type), methodInfo => typeInfo.AsType().GetMethods().Contains(methodInfo));
-            Assert.All(TypeExtensions.GetProperties(type), propertyInfo => typeInfo.AsType().GetProperties().Contains(propertyInfo));
+            Assert.All(
+                TypeExtensions.GetEvents(type),
+                eventInfo => typeInfo.AsType().GetEvents().Contains(eventInfo)
+            );
+            Assert.All(
+                TypeExtensions.GetFields(type),
+                fieldInfo => typeInfo.AsType().GetFields().Contains(fieldInfo)
+            );
+            Assert.All(
+                TypeExtensions.GetMethods(type),
+                methodInfo => typeInfo.AsType().GetMethods().Contains(methodInfo)
+            );
+            Assert.All(
+                TypeExtensions.GetProperties(type),
+                propertyInfo => typeInfo.AsType().GetProperties().Contains(propertyInfo)
+            );
 
             Assert.Equal(type.GetType(), typeInfo.GetType());
             Assert.True(type.Equals(typeInfo));
 
-            BindingFlags allFlags = BindingFlags.DeclaredOnly | BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static;
-            Assert.All(type.GetNestedTypes(allFlags), nestedType => typeInfo.AsType().GetNestedTypes(allFlags).Contains(nestedType));
+            BindingFlags allFlags =
+                BindingFlags.DeclaredOnly
+                | BindingFlags.FlattenHierarchy
+                | BindingFlags.IgnoreCase
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Public
+                | BindingFlags.Static;
+            Assert.All(
+                type.GetNestedTypes(allFlags),
+                nestedType => typeInfo.AsType().GetNestedTypes(allFlags).Contains(nestedType)
+            );
 
             Assert.Equal(type.GetTypeInfo().IsClass, typeInfo.IsClass);
             Assert.Equal(type.GetTypeInfo().IsPublic, typeInfo.IsPublic);
             Assert.Equal(type.GetTypeInfo().IsGenericType, typeInfo.IsGenericType);
             Assert.Equal(type.GetTypeInfo().IsImport, typeInfo.IsImport);
             Assert.Equal(type.GetTypeInfo().IsEnum, typeInfo.IsEnum);
-            Assert.Equal(type.GetTypeInfo().IsGenericTypeDefinition, typeInfo.IsGenericTypeDefinition);
+            Assert.Equal(
+                type.GetTypeInfo().IsGenericTypeDefinition,
+                typeInfo.IsGenericTypeDefinition
+            );
         }
 
         [Fact]
@@ -628,29 +2735,57 @@ namespace System.Reflection.Tests
         internal static int InternalStaticField;
 
         public TI_Class() { }
+
         protected TI_Class(int i) { }
+
         private TI_Class(int i, int j) { }
+
         internal TI_Class(int i, int j, int k) { }
 
         public void PublicMethod() { }
+
         protected void ProtectedMethod() { }
+
         private void PrivateMethod() { }
+
         internal void InternalMethod() { }
 
         public static void PublicStaticMethod() { }
+
         protected static void ProtectedStaticMethod() { }
+
         private static void PrivateStaticMethod() { }
+
         internal static void InternalStaticMethod() { }
 
         public class PublicNestedType { }
+
         protected class ProtectedNestedType { }
+
         private class PrivateNestedType { }
+
         internal class InternalNestedType { }
 
-        public int PublicProperty { get { return default(int); } set { } }
-        protected int ProtectedProperty { get { return default(int); } set { } }
-        private int PrivateProperty { get { return default(int); } set { } }
-        internal int InternalProperty { get { return default(int); } set { } }
+        public int PublicProperty
+        {
+            get { return default(int); }
+            set { }
+        }
+        protected int ProtectedProperty
+        {
+            get { return default(int); }
+            set { }
+        }
+        private int PrivateProperty
+        {
+            get { return default(int); }
+            set { }
+        }
+        internal int InternalProperty
+        {
+            get { return default(int); }
+            set { }
+        }
     }
 
     [DefaultMember("ReturnAndSetField")]
@@ -658,7 +2793,10 @@ namespace System.Reflection.Tests
     {
         public T field;
 
-        public GenericClass(T a) { field = a; }
+        public GenericClass(T a)
+        {
+            field = a;
+        }
 
         public T ReturnAndSetField(T newFieldValue)
         {
@@ -749,7 +2887,9 @@ namespace System.Reflection.Tests
         void SetFieldTwo(W newFieldValue);
     }
 
-    public interface IGenericInterfaceInherits<U, V> : IGenericInterface<U>, IGenericInterface2<V, U>
+    public interface IGenericInterfaceInherits<U, V>
+        : IGenericInterface<U>,
+            IGenericInterface2<V, U>
     {
         V ReturnAndSetFieldThree(V newFieldValue);
     }
@@ -841,7 +2981,8 @@ namespace System.Reflection.Tests
         object[] Puke(int Amount);
     }
 
-    public class PackOfCarnivores<T> where T : IConsume
+    public class PackOfCarnivores<T>
+        where T : IConsume
     {
         public T[] pPack;
     }
@@ -856,7 +2997,10 @@ namespace System.Reflection.Tests
 
         private static EventHandler s_catDisappeared;
 
-        public object[] StuffConsumed { get { return PStuffConsumed.ToArray(); } }
+        public object[] StuffConsumed
+        {
+            get { return PStuffConsumed.ToArray(); }
+        }
 
         public List<object> PStuffConsumed
         {
@@ -942,81 +3086,245 @@ namespace System.Reflection.Tests
     }
 
     internal interface TI_Interface1 { }
+
     internal interface TI_Interface2 { }
-    internal interface TI_Interface3 { void DoSomething(); }
+
+    internal interface TI_Interface3
+    {
+        void DoSomething();
+    }
 
     internal struct TI_StructWithInterface : TI_Interface1 { }
 
     internal struct TI_Struct { }
+
     internal struct TI_StructWithInterfaces : TI_Interface1, TI_Interface3
     {
         public void DoSomething() { }
     }
 
-    internal struct TI_GenericStruct<T> { public T field; }
+    internal struct TI_GenericStruct<T>
+    {
+        public T field;
+    }
 
     internal class TI_BaseClassWithInterface : TI_Interface1, TI_Interface2 { }
+
     internal class TI_SubClassWithInterface : TI_BaseClassWithInterface { }
+
     internal class TI_GenericSubClassWithInterface<T> : TI_SubClassWithInterface { }
 
     internal class TI_GenericBaseClass<T> { }
+
     internal class TI_GenericSubClass<T> : TI_GenericBaseClass<T> { }
+
     internal class TI_GenericSubSubClass<T> : TI_GenericSubClass<T> { }
 
-    internal class TI_GenericSubClassWithConstraints<T> where T : TI_GenericSubClassWithInterface<T>, TI_Interface1, TI_Interface2 { }
+    internal class TI_GenericSubClassWithConstraints<T>
+        where T : TI_GenericSubClassWithInterface<T>, TI_Interface1, TI_Interface2 { }
 
     internal class StringImpersonator
     {
         [IndexerName("Chars")]
-        public char this[int index] { get { throw null; } }
-        public int Length { get { throw null; } }
-        public static bool IsNullOrEmpty(string value) { throw null; }
-        internal char FirstChar { get { throw null; } }
+        public char this[int index]
+        {
+            get { throw null; }
+        }
+        public int Length
+        {
+            get { throw null; }
+        }
+
+        public static bool IsNullOrEmpty(string value)
+        {
+            throw null;
+        }
+
+        internal char FirstChar
+        {
+            get { throw null; }
+        }
     }
 
-    internal struct Int32Impersonator : IComparable, IFormattable, IConvertible, IComparable<int>, IEquatable<int>
+    internal struct Int32Impersonator
+        : IComparable,
+            IFormattable,
+            IConvertible,
+            IComparable<int>,
+            IEquatable<int>
     {
-        public int CompareTo(object value) { throw null; }
-        public int CompareTo(int value) { throw null; }
-        public override bool Equals(object obj) { throw null; }
-        public bool Equals(int obj) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public override string ToString() { throw null; }
-        public string ToString(string format) { throw null; }
-        public string ToString(IFormatProvider provider) { throw null; }
-        public string ToString(string format, IFormatProvider provider) { throw null; }
-        public static int Parse(string s) { throw null; }
-        public static int Parse(string s, NumberStyles style) { throw null; }
-        public static int Parse(string s, IFormatProvider provider) { throw null; }
-        public static int Parse(string s, NumberStyles style, IFormatProvider provider) { throw null; }
-        public static bool TryParse(string s, out int result) { throw null; }
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out int result) { throw null; }
-        public TypeCode GetTypeCode() { throw null; }
-        bool IConvertible.ToBoolean(IFormatProvider provider) { throw null; }
-        char IConvertible.ToChar(IFormatProvider provider) { throw null; }
-        sbyte IConvertible.ToSByte(IFormatProvider provider) { throw null; }
-        byte IConvertible.ToByte(IFormatProvider provider) { throw null; }
-        short IConvertible.ToInt16(IFormatProvider provider) { throw null; }
-        ushort IConvertible.ToUInt16(IFormatProvider provider) { throw null; }
-        int IConvertible.ToInt32(IFormatProvider provider) { throw null; }
-        uint IConvertible.ToUInt32(IFormatProvider provider) { throw null; }
-        long IConvertible.ToInt64(IFormatProvider provider) { throw null; }
-        ulong IConvertible.ToUInt64(IFormatProvider provider) { throw null; }
-        float IConvertible.ToSingle(IFormatProvider provider) { throw null; }
-        double IConvertible.ToDouble(IFormatProvider provider) { throw null; }
-        decimal IConvertible.ToDecimal(IFormatProvider provider) { throw null; }
-        DateTime IConvertible.ToDateTime(IFormatProvider provider) { throw null; }
-        object IConvertible.ToType(Type type, IFormatProvider provider) { throw null; }
+        public int CompareTo(object value)
+        {
+            throw null;
+        }
+
+        public int CompareTo(int value)
+        {
+            throw null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            throw null;
+        }
+
+        public bool Equals(int obj)
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public override string ToString()
+        {
+            throw null;
+        }
+
+        public string ToString(string format)
+        {
+            throw null;
+        }
+
+        public string ToString(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        public string ToString(string format, IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        public static int Parse(string s)
+        {
+            throw null;
+        }
+
+        public static int Parse(string s, NumberStyles style)
+        {
+            throw null;
+        }
+
+        public static int Parse(string s, IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        public static int Parse(string s, NumberStyles style, IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        public static bool TryParse(string s, out int result)
+        {
+            throw null;
+        }
+
+        public static bool TryParse(
+            string s,
+            NumberStyles style,
+            IFormatProvider provider,
+            out int result
+        )
+        {
+            throw null;
+        }
+
+        public TypeCode GetTypeCode()
+        {
+            throw null;
+        }
+
+        bool IConvertible.ToBoolean(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        char IConvertible.ToChar(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        sbyte IConvertible.ToSByte(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        byte IConvertible.ToByte(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        short IConvertible.ToInt16(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        ushort IConvertible.ToUInt16(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        int IConvertible.ToInt32(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        uint IConvertible.ToUInt32(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        long IConvertible.ToInt64(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        ulong IConvertible.ToUInt64(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        float IConvertible.ToSingle(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        double IConvertible.ToDouble(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        decimal IConvertible.ToDecimal(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        DateTime IConvertible.ToDateTime(IFormatProvider provider)
+        {
+            throw null;
+        }
+
+        object IConvertible.ToType(Type type, IFormatProvider provider)
+        {
+            throw null;
+        }
     }
 
     namespace CustomNamespace
     {
         internal abstract class TI_AbstractBaseClass { }
+
         internal abstract class TI_AbstractSubClass : TI_AbstractBaseClass { }
+
         internal class TI_SubClass : TI_AbstractSubClass { }
     }
 
-    internal class TI_GenericClassWithConstraints<T> where T : TI_Interface1 { }
+    internal class TI_GenericClassWithConstraints<T>
+        where T : TI_Interface1 { }
 
 #pragma warning restore 0169, 0067, 0649
 }

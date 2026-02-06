@@ -5,19 +5,28 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-class B 
+class B
 {
-    public virtual string F() { return "B"; }
+    public virtual string F()
+    {
+        return "B";
+    }
 }
 
 sealed class D : B
 {
-    public override string F() { return "D"; }
+    public override string F()
+    {
+        return "D";
+    }
 }
 
 sealed class E : B
 {
-    public override string F() { return "E"; }
+    public override string F()
+    {
+        return "E";
+    }
 }
 
 public class X

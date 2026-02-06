@@ -23,7 +23,8 @@ public class ServiceProviderDebugInfoEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IDictionary<string, string> newDebugInfo,
-        IList<IDictionary<string, string>> cachedDebugInfos)
+        IList<IDictionary<string, string>> cachedDebugInfos
+    )
         : base(eventDefinition, messageGenerator)
     {
         NewDebugInfo = newDebugInfo;

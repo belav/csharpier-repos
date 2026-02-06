@@ -26,7 +26,13 @@ namespace System.ServiceModel.Channels
         Func<string, bool> checkContentTypeFunc;
         Func<string, bool> checkTransferModeFunc;
 
-        public DefaultWebSocketConnectionHandler(string subProtocol, string currentVersion, MessageVersion messageVersion, MessageEncoderFactory encoderFactory, TransferMode transferMode)
+        public DefaultWebSocketConnectionHandler(
+            string subProtocol,
+            string currentVersion,
+            MessageVersion messageVersion,
+            MessageEncoderFactory encoderFactory,
+            TransferMode transferMode
+        )
         {
             this.subProtocol = subProtocol;
             this.currentVersion = currentVersion;
@@ -47,21 +53,43 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected internal override HttpResponseMessage AcceptWebSocket(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal override HttpResponseMessage AcceptWebSocket(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
-            if (!CheckHttpHeader(request, WebSocketHelper.SecWebSocketVersion, this.checkVersionFunc))
+            if (
+                !CheckHttpHeader(
+                    request,
+                    WebSocketHelper.SecWebSocketVersion,
+                    this.checkVersionFunc
+                )
+            )
             {
                 return GetUpgradeRequiredResponseMessageWithVersion(request, this.currentVersion);
             }
 
             if (this.needToCheckContentType)
             {
-                if (!CheckHttpHeader(request, WebSocketTransportSettings.SoapContentTypeHeader, this.checkContentTypeFunc))
+                if (
+                    !CheckHttpHeader(
+                        request,
+                        WebSocketTransportSettings.SoapContentTypeHeader,
+                        this.checkContentTypeFunc
+                    )
+                )
                 {
-                    return this.GetBadRequestResponseMessageWithContentTypeAndTransfermode(request); 
+                    return this.GetBadRequestResponseMessageWithContentTypeAndTransfermode(request);
                 }
 
-                if (this.needToCheckTransferMode && !CheckHttpHeader(request, WebSocketTransportSettings.BinaryEncoderTransferModeHeader, this.checkTransferModeFunc))
+                if (
+                    this.needToCheckTransferMode
+                    && !CheckHttpHeader(
+                        request,
+                        WebSocketTransportSettings.BinaryEncoderTransferModeHeader,
+                        this.checkTransferModeFunc
+                    )
+                )
                 {
                     return this.GetBadRequestResponseMessageWithContentTypeAndTransfermode(request);
                 }
@@ -82,7 +110,13 @@ namespace System.ServiceModel.Channels
                 // match client protocols vs server protocol
                 foreach (string protocol in subprotocolParseResult.ParsedSubprotocols)
                 {
-                    if (string.Compare(protocol, this.subProtocol, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare(
+                            protocol,
+                            this.subProtocol,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         negotiatedProtocol = protocol;
                         break;
@@ -91,10 +125,20 @@ namespace System.ServiceModel.Channels
 
                 if (negotiatedProtocol == null)
                 {
-                    FxTrace.Exception.AsWarning(new WebException(
-                        SR.GetString(SR.WebSocketInvalidProtocolNotInClientList, this.subProtocol, string.Join(", ", subprotocolParseResult.ParsedSubprotocols))));
+                    FxTrace.Exception.AsWarning(
+                        new WebException(
+                            SR.GetString(
+                                SR.WebSocketInvalidProtocolNotInClientList,
+                                this.subProtocol,
+                                string.Join(", ", subprotocolParseResult.ParsedSubprotocols)
+                            )
+                        )
+                    );
 
-                    return GetUpgradeRequiredResponseMessageWithSubProtocol(request, this.subProtocol);
+                    return GetUpgradeRequiredResponseMessageWithSubProtocol(
+                        request,
+                        this.subProtocol
+                    );
                 }
 
                 // set response header
@@ -108,10 +152,20 @@ namespace System.ServiceModel.Channels
             {
                 if (!string.IsNullOrEmpty(this.subProtocol))
                 {
-                    FxTrace.Exception.AsWarning(new WebException(
-                        SR.GetString(SR.WebSocketInvalidProtocolNoHeader, this.subProtocol, WebSocketHelper.SecWebSocketProtocol)));
+                    FxTrace.Exception.AsWarning(
+                        new WebException(
+                            SR.GetString(
+                                SR.WebSocketInvalidProtocolNoHeader,
+                                this.subProtocol,
+                                WebSocketHelper.SecWebSocketProtocol
+                            )
+                        )
+                    );
 
-                    return GetUpgradeRequiredResponseMessageWithSubProtocol(request, this.subProtocol);
+                    return GetUpgradeRequiredResponseMessageWithSubProtocol(
+                        request,
+                        this.subProtocol
+                    );
                 }
             }
 
@@ -123,7 +177,12 @@ namespace System.ServiceModel.Channels
             Fx.Assert(request != null, "request should not be null");
             IEnumerable<string> clientProtocols = null;
 
-            if (request.Headers.TryGetValues(WebSocketHelper.SecWebSocketProtocol, out clientProtocols))
+            if (
+                request.Headers.TryGetValues(
+                    WebSocketHelper.SecWebSocketProtocol,
+                    out clientProtocols
+                )
+            )
             {
                 List<string> tokenList = new List<string>();
 
@@ -154,7 +213,10 @@ namespace System.ServiceModel.Channels
             return SubprotocolParseResult.HeaderNotFound;
         }
 
-        static HttpResponseMessage GetUpgradeRequiredResponseMessageWithSubProtocol(HttpRequestMessage request, string subprotocol)
+        static HttpResponseMessage GetUpgradeRequiredResponseMessageWithSubProtocol(
+            HttpRequestMessage request,
+            string subprotocol
+        )
         {
             HttpResponseMessage response = GetUpgradeRequiredResponseMessage(request);
             if (!string.IsNullOrEmpty(subprotocol))
@@ -165,7 +227,10 @@ namespace System.ServiceModel.Channels
             return response;
         }
 
-        static HttpResponseMessage GetUpgradeRequiredResponseMessageWithVersion(HttpRequestMessage request, string version)
+        static HttpResponseMessage GetUpgradeRequiredResponseMessageWithVersion(
+            HttpRequestMessage request,
+            string version
+        )
         {
             HttpResponseMessage response = GetUpgradeRequiredResponseMessage(request);
             response.Headers.Add(WebSocketHelper.SecWebSocketVersion, version);
@@ -173,7 +238,11 @@ namespace System.ServiceModel.Channels
             return response;
         }
 
-        static bool CheckHttpHeader(HttpRequestMessage request, string header, Func<string, bool> validator)
+        static bool CheckHttpHeader(
+            HttpRequestMessage request,
+            string header,
+            Func<string, bool> validator
+        )
         {
             Fx.Assert(request != null, "request should not be null.");
             Fx.Assert(header != null, "header should not be null.");
@@ -218,15 +287,23 @@ namespace System.ServiceModel.Channels
             Fx.Assert(headerValue != null, "headerValue should not be null.");
             return headerValue.Equals(this.transferMode, StringComparison.OrdinalIgnoreCase);
         }
-        
-        HttpResponseMessage GetBadRequestResponseMessageWithContentTypeAndTransfermode(HttpRequestMessage request)
+
+        HttpResponseMessage GetBadRequestResponseMessageWithContentTypeAndTransfermode(
+            HttpRequestMessage request
+        )
         {
             Fx.Assert(this.needToCheckContentType, "needToCheckContentType should be true.");
             HttpResponseMessage response = GetBadRequestResponseMessage(request);
-            response.Headers.Add(WebSocketTransportSettings.SoapContentTypeHeader, this.encoder.ContentType);
+            response.Headers.Add(
+                WebSocketTransportSettings.SoapContentTypeHeader,
+                this.encoder.ContentType
+            );
             if (this.needToCheckTransferMode)
             {
-                response.Headers.Add(WebSocketTransportSettings.BinaryEncoderTransferModeHeader, this.transferMode.ToString());
+                response.Headers.Add(
+                    WebSocketTransportSettings.BinaryEncoderTransferModeHeader,
+                    this.transferMode.ToString()
+                );
             }
 
             return response;
@@ -234,14 +311,20 @@ namespace System.ServiceModel.Channels
 
         struct SubprotocolParseResult
         {
-            public static readonly SubprotocolParseResult HeaderInvalid = new SubprotocolParseResult(true, false, null);
-            public static readonly SubprotocolParseResult HeaderNotFound = new SubprotocolParseResult(false, false, null);
+            public static readonly SubprotocolParseResult HeaderInvalid =
+                new SubprotocolParseResult(true, false, null);
+            public static readonly SubprotocolParseResult HeaderNotFound =
+                new SubprotocolParseResult(false, false, null);
 
             bool headerFound;
             bool headerValid;
             IEnumerable<string> parsedSubprotocols;
 
-            public SubprotocolParseResult(bool headerFound, bool headerValid, IEnumerable<string> parsedSubprotocols)
+            public SubprotocolParseResult(
+                bool headerFound,
+                bool headerValid,
+                IEnumerable<string> parsedSubprotocols
+            )
             {
                 this.headerFound = headerFound;
                 this.headerValid = headerValid;

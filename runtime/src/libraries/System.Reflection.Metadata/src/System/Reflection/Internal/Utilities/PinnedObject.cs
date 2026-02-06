@@ -21,7 +21,8 @@ namespace System.Reflection.Internal
             // Make sure the current thread isn't aborted in between allocating the handle and storing it.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
-            { /* intentionally left blank */ }
+            { /* intentionally left blank */
+            }
             finally
 #endif
             {
@@ -36,7 +37,8 @@ namespace System.Reflection.Internal
             // Make sure the current thread isn't aborted in between zeroing the handle and freeing it.
             RuntimeHelpers.PrepareConstrainedRegions();
             try
-            { /* intentionally left blank */ }
+            { /* intentionally left blank */
+            }
             finally
 #endif
             {

@@ -11,11 +11,13 @@ namespace System.Reflection.Tests
         /// <summary>
         /// Do a type comparison; RO Types compare via == or .Equals, not ReferenceEquals
         /// </summary>
-        public static bool IsFunctionPointerEqual(this Type type, Type other) => type == other && type.Equals(other);
+        public static bool IsFunctionPointerEqual(this Type type, Type other) =>
+            type == other && type.Equals(other);
 
         /// <summary>
         /// Do a type comparison; RO Types compare via == or .Equals, not ReferenceEquals
         /// </summary>
-        public static bool IsFunctionPointerNotEqual(this Type type, Type other) => type != other && !type.Equals(other);
+        public static bool IsFunctionPointerNotEqual(this Type type, Type other) =>
+            type != other && !type.Equals(other);
     }
 }

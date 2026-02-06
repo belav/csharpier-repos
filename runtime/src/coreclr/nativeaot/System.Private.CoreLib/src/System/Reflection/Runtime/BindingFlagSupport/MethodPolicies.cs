@@ -15,23 +15,37 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     {
         public static readonly MethodPolicies Instance = new MethodPolicies();
 
-        public MethodPolicies() : base(MemberTypeIndex.Method) { }
+        public MethodPolicies()
+            : base(MemberTypeIndex.Method) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Reflection implementation")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Reflection implementation"
+        )]
         public sealed override IEnumerable<MethodInfo> GetDeclaredMembers(Type type)
         {
             return type.GetMethods(DeclaredOnlyLookup);
         }
 
-        public sealed override IEnumerable<MethodInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? optionalNameFilter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<MethodInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.CoreGetDeclaredMethods(optionalNameFilter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(MethodInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            MethodInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             MethodAttributes methodAttributes = member.Attributes;
             visibility = methodAttributes & MethodAttributes.MemberAccessMask;
@@ -40,7 +54,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isNewSlot = (0 != (methodAttributes & MethodAttributes.NewSlot));
         }
 
-        public sealed override bool ImplicitlyOverrides(MethodInfo? baseMember, MethodInfo? derivedMember)
+        public sealed override bool ImplicitlyOverrides(
+            MethodInfo? baseMember,
+            MethodInfo? derivedMember
+        )
         {
             // TODO (https://github.com/dotnet/corert/issues/1896) Comparing signatures is fragile. The runtime and/or toolchain should have a way of sharing this info.
             return AreNamesAndSignaturesEqual(baseMember!, derivedMember!);
@@ -49,7 +66,12 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         //
         // Methods hide methods in base types if they share the same vtable slot.
         //
-        public sealed override bool IsSuppressedByMoreDerivedMember(MethodInfo member, MethodInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            MethodInfo member,
+            MethodInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             if (!member.IsVirtual)
                 return false;
@@ -57,7 +79,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             for (int i = startIndex; i < endIndex; i++)
             {
                 MethodInfo prior = priorMembers[i];
-                MethodAttributes attributes = prior.Attributes & (MethodAttributes.Virtual | MethodAttributes.VtableLayoutMask);
+                MethodAttributes attributes =
+                    prior.Attributes
+                    & (MethodAttributes.Virtual | MethodAttributes.VtableLayoutMask);
                 if (attributes != (MethodAttributes.Virtual | MethodAttributes.ReuseSlot))
                     continue;
                 if (!ImplicitlyOverrides(member, prior))
@@ -70,7 +94,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         public sealed override bool OkToIgnoreAmbiguity(MethodInfo m1, MethodInfo m2)
         {
-            return DefaultBinder.CompareMethodSig(m1, m2);  // If all candidates have the same signature, pick the most derived one without throwing an AmbiguousMatchException.
+            return DefaultBinder.CompareMethodSig(m1, m2); // If all candidates have the same signature, pick the most derived one without throwing an AmbiguousMatchException.
         }
     }
 }

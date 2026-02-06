@@ -8,24 +8,28 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
 
     public sealed partial class DataContractSerializerElement : BehaviorExtensionElement
     {
-        public DataContractSerializerElement()
-        {
-        }
+        public DataContractSerializerElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.IgnoreExtensionDataObject, DefaultValue = DataContractSerializerDefaults.IgnoreExtensionDataObject)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IgnoreExtensionDataObject,
+            DefaultValue = DataContractSerializerDefaults.IgnoreExtensionDataObject
+        )]
         public bool IgnoreExtensionDataObject
         {
             get { return (bool)base[ConfigurationStrings.IgnoreExtensionDataObject]; }
             set { base[ConfigurationStrings.IgnoreExtensionDataObject] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxItemsInObjectGraph, DefaultValue = DataContractSerializerDefaults.MaxItemsInObjectGraph)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxItemsInObjectGraph,
+            DefaultValue = DataContractSerializerDefaults.MaxItemsInObjectGraph
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxItemsInObjectGraph
         {
@@ -45,7 +49,10 @@ namespace System.ServiceModel.Configuration
 
         protected internal override object CreateBehavior()
         {
-            return new DataContractSerializerServiceBehavior(this.IgnoreExtensionDataObject, this.MaxItemsInObjectGraph);
+            return new DataContractSerializerServiceBehavior(
+                this.IgnoreExtensionDataObject,
+                this.MaxItemsInObjectGraph
+            );
         }
 
         public override Type BehaviorType
@@ -54,6 +61,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

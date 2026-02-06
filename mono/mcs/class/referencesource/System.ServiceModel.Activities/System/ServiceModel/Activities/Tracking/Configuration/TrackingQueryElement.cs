@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
     using System.Activities.Tracking;
     using System.Collections.Generic;
-    using System.Runtime;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     // Base class for all the workflow tracking query configuration elements
     [Fx.Tag.XamlVisible(false)]
@@ -23,8 +23,18 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.Annotations, typeof(System.ServiceModel.Activities.Tracking.Configuration.AnnotationElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.Annotations,
+                            typeof(System.ServiceModel.Activities.Tracking.Configuration.AnnotationElementCollection),
+                            null,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -40,8 +50,11 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             }
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property is defined by the base class to compute unique key.")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property is defined by the base class to compute unique key."
+        )]
         public override object ElementKey
         {
             get
@@ -53,7 +66,6 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
                 return this.elementKey;
             }
         }
-
 
         internal TrackingQuery CreateTrackingQuery()
         {
@@ -70,8 +82,10 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
         {
             foreach (AnnotationElement annotation in this.Annotations)
             {
-                trackingQuery.QueryAnnotations.Add(new KeyValuePair<string, string>(annotation.Name, annotation.Value));
-            } 
+                trackingQuery.QueryAnnotations.Add(
+                    new KeyValuePair<string, string>(annotation.Name, annotation.Value)
+                );
+            }
         }
     }
 }

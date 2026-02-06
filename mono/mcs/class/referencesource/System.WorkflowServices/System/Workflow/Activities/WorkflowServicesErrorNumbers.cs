@@ -26,17 +26,22 @@ namespace System.Workflow.ComponentModel
         public const int Error_OperationParameterNameDuplicate = 0x711;
         public const int Error_OperationParameterDirectionInOneWayOperation = 0x712;
         public const int Error_ReturnTypeInOneWayOperation = 0x713;
+
         // contract implementation validation errors
         public const int Error_OperationNotImplemented = 0x714;
+
         // context token validation errors
         public const int Error_ContextTokenNameNotSpecified = 0x715;
         public const int Error_RootContextScope = 0x716;
+
         // channel token validation errors
         public const int Error_ChannelTokenNotSpecified = 0x717;
         public const int Error_ChannelTokenNameNotSpecified = 0x718;
         public const int Error_ChannelTokenConfigurationNameNotSpecified = 0x719;
+
         // service attribute validation errors
         public const int Error_InvalidMaxItemsInObjectGraph = 0x71A;
+
         // Send and Receive activity validation errors
         public const int Warning_SendActivityParameterBindingMissing = 0x71B;
         public const int Warning_ReceiveActivityParameterBindingMissing = 0x71C;

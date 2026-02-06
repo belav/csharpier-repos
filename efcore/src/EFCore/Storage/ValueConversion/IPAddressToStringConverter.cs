@@ -21,9 +21,7 @@ public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     ///     Creates a new instance of this converter.
     /// </summary>
     public IPAddressToStringConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -36,23 +34,21 @@ public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     ///     facets for the converted data.
     /// </param>
     public IPAddressToStringConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToString(),
-            ToIPAddress(),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(ToString(), ToIPAddress(), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(IPAddress), typeof(string), i => new IPAddressToStringConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(IPAddress),
+            typeof(string),
+            i => new IPAddressToStringConverter(i.MappingHints),
+            DefaultHints
+        );
 
-    private static new Expression<Func<IPAddress?, string?>> ToString()
-        => v => v!.ToString();
+    private static new Expression<Func<IPAddress?, string?>> ToString() => v => v!.ToString();
 
     // ReSharper disable once InconsistentNaming
-    private static Expression<Func<string?, IPAddress?>> ToIPAddress()
-        => v => IPAddress.Parse(v!);
+    private static Expression<Func<string?, IPAddress?>> ToIPAddress() => v => IPAddress.Parse(v!);
 }

@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace Microsoft.Internal.Collections
 {
-    internal sealed class WeakReferenceCollection<T> where T : class
+    internal sealed class WeakReferenceCollection<T>
+        where T : class
     {
         private readonly List<WeakReference> _items = new List<WeakReference>();
 

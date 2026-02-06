@@ -11,13 +11,29 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> sourceCounts = new[] { 0, 1, 2, 3, 5, 8, 13, 55, 100, 250 };
 
-            IEnumerable<int> counts = new[] { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 100, 250, 500, int.MaxValue };
+            IEnumerable<int> counts = new[]
+            {
+                1,
+                2,
+                3,
+                5,
+                8,
+                13,
+                21,
+                34,
+                55,
+                89,
+                100,
+                250,
+                500,
+                int.MaxValue,
+            };
             counts = counts.Concat(counts.Select(c => -c)).Append(0).Append(int.MinValue);
 
             return from sourceCount in sourceCounts
-                   let source = Enumerable.Range(0, sourceCount)
-                   from count in counts
-                   select new object[] { source, count };
+                let source = Enumerable.Range(0, sourceCount)
+                from count in counts
+                select new object[] { source, count };
         }
 
         public static IEnumerable<object[]> EvaluationBehaviorData()
@@ -27,11 +43,12 @@ namespace System.Linq.Tests
 
         public static IEnumerable<object[]> QueryableData()
         {
-            return EnumerableData().Select(array =>
-            {
-                var enumerable = (IEnumerable<int>)array[0];
-                return new[] { enumerable.AsQueryable(), array[1] };
-            });
+            return EnumerableData()
+                .Select(array =>
+                {
+                    var enumerable = (IEnumerable<int>)array[0];
+                    return new[] { enumerable.AsQueryable(), array[1] };
+                });
         }
     }
 }

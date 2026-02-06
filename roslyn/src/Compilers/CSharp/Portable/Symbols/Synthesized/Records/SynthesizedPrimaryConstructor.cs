@@ -18,37 +18,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private IReadOnlySet<ParameterSymbol>? _parametersPassedToTheBase = null;
 
         public SynthesizedPrimaryConstructor(
-             SourceMemberContainerTypeSymbol containingType,
-             TypeDeclarationSyntax syntax) :
-             base(containingType, syntax.Identifier.GetLocation(), syntax, isIterator: false, MakeModifiersAndFlags(containingType, syntax))
+            SourceMemberContainerTypeSymbol containingType,
+            TypeDeclarationSyntax syntax
+        )
+            : base(
+                containingType,
+                syntax.Identifier.GetLocation(),
+                syntax,
+                isIterator: false,
+                MakeModifiersAndFlags(containingType, syntax)
+            )
         {
-            Debug.Assert(syntax.Kind() is SyntaxKind.RecordDeclaration or SyntaxKind.RecordStructDeclaration or SyntaxKind.ClassDeclaration or SyntaxKind.StructDeclaration);
+            Debug.Assert(
+                syntax.Kind()
+                    is SyntaxKind.RecordDeclaration
+                        or SyntaxKind.RecordStructDeclaration
+                        or SyntaxKind.ClassDeclaration
+                        or SyntaxKind.StructDeclaration
+            );
             Debug.Assert(containingType.HasPrimaryConstructor);
             Debug.Assert(containingType is SourceNamedTypeSymbol);
             Debug.Assert(containingType is IAttributeTargetSymbol);
 
-            if (syntax.PrimaryConstructorBaseTypeIfClass is not PrimaryConstructorBaseTypeSyntax { ArgumentList.Arguments.Count: not 0 })
+            if (
+                syntax.PrimaryConstructorBaseTypeIfClass
+                is not PrimaryConstructorBaseTypeSyntax { ArgumentList.Arguments.Count: not 0 }
+            )
             {
-                _parametersPassedToTheBase = SpecializedCollections.EmptyReadOnlySet<ParameterSymbol>();
+                _parametersPassedToTheBase =
+                    SpecializedCollections.EmptyReadOnlySet<ParameterSymbol>();
             }
         }
 
-        private static (DeclarationModifiers, Flags) MakeModifiersAndFlags(SourceMemberContainerTypeSymbol containingType, TypeDeclarationSyntax syntax)
+        private static (DeclarationModifiers, Flags) MakeModifiersAndFlags(
+            SourceMemberContainerTypeSymbol containingType,
+            TypeDeclarationSyntax syntax
+        )
         {
             Debug.Assert(syntax.ParameterList != null);
 
-            DeclarationModifiers declarationModifiers = containingType.IsAbstract ? DeclarationModifiers.Protected : DeclarationModifiers.Public;
+            DeclarationModifiers declarationModifiers = containingType.IsAbstract
+                ? DeclarationModifiers.Protected
+                : DeclarationModifiers.Public;
             Flags flags = MakeFlags(
-                                    MethodKind.Constructor,
-                                    RefKind.None,
-                                    declarationModifiers,
-                                    returnsVoid: true,
-                                    returnsVoidIsSet: true,
-                                    isExpressionBodied: false,
-                                    isExtensionMethod: false,
-                                    isVarArg: syntax.ParameterList.IsVarArg(),
-                                    isNullableAnalysisEnabled: false, // IsNullableAnalysisEnabled uses containing type instead.
-                                    isExplicitInterfaceImplementation: false);
+                MethodKind.Constructor,
+                RefKind.None,
+                declarationModifiers,
+                returnsVoid: true,
+                returnsVoidIsSet: true,
+                isExpressionBodied: false,
+                isExtensionMethod: false,
+                isVarArg: syntax.ParameterList.IsVarArg(),
+                isNullableAnalysisEnabled: false, // IsNullableAnalysisEnabled uses containing type instead.
+                isExplicitInterfaceImplementation: false
+            );
 
             return (declarationModifiers, flags);
         }
@@ -71,7 +94,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
         {
-            return new OneOrMany<SyntaxList<AttributeListSyntax>>(((SourceNamedTypeSymbol)ContainingType).GetAttributeDeclarations());
+            return new OneOrMany<SyntaxList<AttributeListSyntax>>(
+                ((SourceNamedTypeSymbol)ContainingType).GetAttributeDeclarations()
+            );
         }
 
         protected override ParameterListSyntax GetParameterList()
@@ -84,9 +109,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return GetSyntax().PrimaryConstructorBaseTypeIfClass;
         }
 
-        public new SourceMemberContainerTypeSymbol ContainingType => (SourceMemberContainerTypeSymbol)base.ContainingType;
+        public new SourceMemberContainerTypeSymbol ContainingType =>
+            (SourceMemberContainerTypeSymbol)base.ContainingType;
 
-        protected override bool AllowRefOrOut => !(ContainingType is { IsRecord: true } or { IsRecordStruct: true });
+        protected override bool AllowRefOrOut =>
+            !(ContainingType is { IsRecord: true } or { IsRecordStruct: true });
 
         internal override bool IsNullableAnalysisEnabled()
         {
@@ -99,24 +126,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override ExecutableCodeBinder TryGetBodyBinder(BinderFactory? binderFactoryOpt = null, bool ignoreAccessibility = false)
+        internal override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory? binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        )
         {
             TypeDeclarationSyntax typeDecl = GetSyntax();
             Debug.Assert(typeDecl.ParameterList is not null);
-            InMethodBinder result = (binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)).GetPrimaryConstructorInMethodBinder(this);
-            return new ExecutableCodeBinder(SyntaxNode, this, result.WithAdditionalFlags(ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None));
+            InMethodBinder result = (
+                binderFactoryOpt ?? this.DeclaringCompilation.GetBinderFactory(typeDecl.SyntaxTree)
+            ).GetPrimaryConstructorInMethodBinder(this);
+            return new ExecutableCodeBinder(
+                SyntaxNode,
+                this,
+                result.WithAdditionalFlags(
+                    ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
+                )
+            );
         }
 
         public IEnumerable<FieldSymbol> GetBackingFields()
         {
-            IReadOnlyDictionary<ParameterSymbol, FieldSymbol> capturedParameters = GetCapturedParameters();
+            IReadOnlyDictionary<ParameterSymbol, FieldSymbol> capturedParameters =
+                GetCapturedParameters();
 
             if (capturedParameters.Count == 0)
             {
                 return SpecializedCollections.EmptyEnumerable<FieldSymbol>();
             }
 
-            return capturedParameters.OrderBy(static pair => pair.Key.Ordinal).Select(static pair => pair.Value);
+            return capturedParameters
+                .OrderBy(static pair => pair.Key.Ordinal)
+                .Select(static pair => pair.Value);
         }
 
         public IReadOnlyDictionary<ParameterSymbol, FieldSymbol> GetCapturedParameters()
@@ -126,17 +167,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _capturedParameters;
             }
 
-            if (ContainingType is { IsRecord: true } or { IsRecordStruct: true } || ParameterCount == 0)
+            if (
+                ContainingType is { IsRecord: true } or { IsRecordStruct: true }
+                || ParameterCount == 0
+            )
             {
-                _capturedParameters = SpecializedCollections.EmptyReadOnlyDictionary<ParameterSymbol, FieldSymbol>();
+                _capturedParameters = SpecializedCollections.EmptyReadOnlyDictionary<
+                    ParameterSymbol,
+                    FieldSymbol
+                >();
                 return _capturedParameters;
             }
 
-            Interlocked.CompareExchange(ref _capturedParameters, Binder.CapturedParametersFinder.GetCapturedParameters(this), null);
+            Interlocked.CompareExchange(
+                ref _capturedParameters,
+                Binder.CapturedParametersFinder.GetCapturedParameters(this),
+                null
+            );
             return _capturedParameters;
         }
 
-        internal override (CSharpAttributeData?, BoundAttribute?) EarlyDecodeWellKnownAttribute(ref EarlyDecodeWellKnownAttributeArguments<EarlyWellKnownAttributeBinder, NamedTypeSymbol, AttributeSyntax, AttributeLocation> arguments)
+        internal override (CSharpAttributeData?, BoundAttribute?) EarlyDecodeWellKnownAttribute(
+            ref EarlyDecodeWellKnownAttributeArguments<
+                EarlyWellKnownAttributeBinder,
+                NamedTypeSymbol,
+                AttributeSyntax,
+                AttributeLocation
+            > arguments
+        )
         {
             Debug.Assert(arguments.SymbolPart == AttributeLocation.Method);
             arguments.SymbolPart = AttributeLocation.None;
@@ -145,7 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return result;
         }
 
-        protected override void DecodeWellKnownAttributeImpl(ref DecodeWellKnownAttributeArguments<AttributeSyntax, CSharpAttributeData, AttributeLocation> arguments)
+        protected override void DecodeWellKnownAttributeImpl(
+            ref DecodeWellKnownAttributeArguments<
+                AttributeSyntax,
+                CSharpAttributeData,
+                AttributeLocation
+            > arguments
+        )
         {
             Debug.Assert(arguments.SymbolPart == AttributeLocation.Method);
             arguments.SymbolPart = AttributeLocation.None;
@@ -153,13 +217,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             arguments.SymbolPart = AttributeLocation.Method;
         }
 
-        internal override void PostDecodeWellKnownAttributes(ImmutableArray<CSharpAttributeData> boundAttributes, ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes, BindingDiagnosticBag diagnostics, AttributeLocation symbolPart, WellKnownAttributeData decodedData)
+        internal override void PostDecodeWellKnownAttributes(
+            ImmutableArray<CSharpAttributeData> boundAttributes,
+            ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes,
+            BindingDiagnosticBag diagnostics,
+            AttributeLocation symbolPart,
+            WellKnownAttributeData decodedData
+        )
         {
             Debug.Assert(symbolPart is AttributeLocation.Method or AttributeLocation.Return);
-            base.PostDecodeWellKnownAttributes(boundAttributes, allAttributeSyntaxNodes, diagnostics, symbolPart is AttributeLocation.Method ? AttributeLocation.None : symbolPart, decodedData);
+            base.PostDecodeWellKnownAttributes(
+                boundAttributes,
+                allAttributeSyntaxNodes,
+                diagnostics,
+                symbolPart is AttributeLocation.Method ? AttributeLocation.None : symbolPart,
+                decodedData
+            );
         }
 
-        protected override bool ShouldBindAttributes(AttributeListSyntax attributeDeclarationSyntax, BindingDiagnosticBag diagnostics)
+        protected override bool ShouldBindAttributes(
+            AttributeListSyntax attributeDeclarationSyntax,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(attributeDeclarationSyntax.Target is object);
 
@@ -168,20 +247,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            if (attributeDeclarationSyntax.SyntaxTree == SyntaxRef.SyntaxTree &&
-                GetSyntax().AttributeLists.Contains(attributeDeclarationSyntax))
+            if (
+                attributeDeclarationSyntax.SyntaxTree == SyntaxRef.SyntaxTree
+                && GetSyntax().AttributeLists.Contains(attributeDeclarationSyntax)
+            )
             {
                 if (ContainingType is { IsRecord: true } or { IsRecordStruct: true })
                 {
-                    MessageID.IDS_FeaturePrimaryConstructors.CheckFeatureAvailability(diagnostics, attributeDeclarationSyntax, attributeDeclarationSyntax.Target.Identifier.GetLocation());
+                    MessageID.IDS_FeaturePrimaryConstructors.CheckFeatureAvailability(
+                        diagnostics,
+                        attributeDeclarationSyntax,
+                        attributeDeclarationSyntax.Target.Identifier.GetLocation()
+                    );
                 }
 
                 return true;
             }
 
             SyntaxToken target = attributeDeclarationSyntax.Target.Identifier;
-            diagnostics.Add(ErrorCode.WRN_AttributeLocationOnBadDeclaration,
-                            target.GetLocation(), target.ToString(), (AttributeOwner.AllowedAttributeLocations & ~AttributeLocation.Method).ToDisplayString());
+            diagnostics.Add(
+                ErrorCode.WRN_AttributeLocationOnBadDeclaration,
+                target.GetLocation(),
+                target.ToString(),
+                (
+                    AttributeOwner.AllowedAttributeLocations & ~AttributeLocation.Method
+                ).ToDisplayString()
+            );
 
             return false;
         }
@@ -193,11 +284,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _parametersPassedToTheBase;
             }
 
-            TryGetBodyBinder().BindConstructorInitializer(GetSyntax().PrimaryConstructorBaseTypeIfClass, BindingDiagnosticBag.Discarded);
+            TryGetBodyBinder()
+                .BindConstructorInitializer(
+                    GetSyntax().PrimaryConstructorBaseTypeIfClass,
+                    BindingDiagnosticBag.Discarded
+                );
 
             if (_parametersPassedToTheBase is null)
             {
-                _parametersPassedToTheBase = SpecializedCollections.EmptyReadOnlySet<ParameterSymbol>();
+                _parametersPassedToTheBase =
+                    SpecializedCollections.EmptyReadOnlySet<ParameterSymbol>();
             }
 
             return _parametersPassedToTheBase;

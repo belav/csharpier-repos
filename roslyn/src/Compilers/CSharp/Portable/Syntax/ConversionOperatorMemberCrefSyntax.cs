@@ -6,14 +6,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class ConversionOperatorMemberCrefSyntax
     {
-        public ConversionOperatorMemberCrefSyntax Update(SyntaxToken implicitOrExplicitKeyword, SyntaxToken operatorKeyword, TypeSyntax type, CrefParameterListSyntax? parameters)
+        public ConversionOperatorMemberCrefSyntax Update(
+            SyntaxToken implicitOrExplicitKeyword,
+            SyntaxToken operatorKeyword,
+            TypeSyntax type,
+            CrefParameterListSyntax? parameters
+        )
         {
             return Update(
                 implicitOrExplicitKeyword: implicitOrExplicitKeyword,
                 operatorKeyword: operatorKeyword,
                 checkedKeyword: this.CheckedKeyword,
                 type: type,
-                parameters: parameters);
+                parameters: parameters
+            );
         }
     }
 }

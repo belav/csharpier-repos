@@ -15,9 +15,7 @@ namespace System.Web.Mvc.Test
             ViewResultBaseHelper result = new ViewResultBaseHelper();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => result.ExecuteResult(null),
-                "context");
+            Assert.ThrowsArgumentNull(() => result.ExecuteResult(null), "context");
         }
 
         [Fact]
@@ -50,7 +48,11 @@ namespace System.Web.Mvc.Test
             ViewResultBaseHelper result = new ViewResultBaseHelper();
 
             // Act & Assert
-            MemberHelper.TestPropertyWithDefaultInstance(result, "ViewEngineCollection", viewEngineCollection);
+            MemberHelper.TestPropertyWithDefaultInstance(
+                result,
+                "ViewEngineCollection",
+                viewEngineCollection
+            );
         }
 
         [Fact]

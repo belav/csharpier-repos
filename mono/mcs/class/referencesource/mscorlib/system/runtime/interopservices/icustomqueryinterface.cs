@@ -1,20 +1,21 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** Class: ICustomQueryInterface
 **
 **
-** Purpose: This the interface that be implemented by class that want to 
+** Purpose: This the interface that be implemented by class that want to
 **          customize the behavior of QueryInterface.
 **
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
+namespace System.Runtime.InteropServices
+{
     using System;
 
     //====================================================================
@@ -24,9 +25,9 @@ namespace System.Runtime.InteropServices {
     [System.Runtime.InteropServices.ComVisible(false)]
     public enum CustomQueryInterfaceResult
     {
-        Handled                 = 0,
-        NotHandled              = 1,
-        Failed                  = 2,
+        Handled = 0,
+        NotHandled = 1,
+        Failed = 2,
     }
 
     //====================================================================
@@ -36,6 +37,6 @@ namespace System.Runtime.InteropServices {
     public interface ICustomQueryInterface
     {
         [System.Security.SecurityCritical]
-        CustomQueryInterfaceResult GetInterface([In]ref Guid iid, out IntPtr ppv);
+        CustomQueryInterfaceResult GetInterface([In] ref Guid iid, out IntPtr ppv);
     }
 }

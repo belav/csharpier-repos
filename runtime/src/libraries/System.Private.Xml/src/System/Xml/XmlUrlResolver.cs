@@ -38,7 +38,11 @@ namespace System.Xml
         // Maps a URI to an Object containing the actual resource.
         public override object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
         {
-            if (ofObjectToReturn is null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
+            if (
+                ofObjectToReturn is null
+                || ofObjectToReturn == typeof(Stream)
+                || ofObjectToReturn == typeof(object)
+            )
             {
                 return XmlDownloadManager.GetStream(absoluteUri, _credentials, _proxy);
             }
@@ -47,11 +51,21 @@ namespace System.Xml
         }
 
         // Maps a URI to an Object containing the actual resource.
-        public override async Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn)
+        public override async Task<object> GetEntityAsync(
+            Uri absoluteUri,
+            string? role,
+            Type? ofObjectToReturn
+        )
         {
-            if (ofObjectToReturn == null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
+            if (
+                ofObjectToReturn == null
+                || ofObjectToReturn == typeof(Stream)
+                || ofObjectToReturn == typeof(object)
+            )
             {
-                return await XmlDownloadManager.GetStreamAsync(absoluteUri, _credentials, _proxy).ConfigureAwait(false);
+                return await XmlDownloadManager
+                    .GetStreamAsync(absoluteUri, _credentials, _proxy)
+                    .ConfigureAwait(false);
             }
 
             throw new XmlException(SR.Xml_UnsupportedClass, string.Empty);

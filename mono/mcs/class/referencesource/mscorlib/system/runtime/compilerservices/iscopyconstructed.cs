@@ -6,7 +6,5 @@
 namespace System.Runtime.CompilerServices
 {
     [System.Runtime.InteropServices.ComVisible(true)]
-    public static class IsCopyConstructed
-    {}
+    public static class IsCopyConstructed { }
 }
-

@@ -15,19 +15,23 @@ namespace ABIStress
         internal const string StubPrefix = "ABIStress_Stub_";
 
         internal static StressModes StressModes { get; set; } = StressModes.None;
-        
+
         private const int DefaultSeed = 20010415;
+
         // The base seed. This value combined with the index of the
         // caller/pinvoker/callee will uniquely determine how it is generated
         // and which callee is used.
-        internal static int Seed { get; set; } = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
-        {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
-            string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
-        };
+        internal static int Seed { get; set; } =
+            Environment.GetEnvironmentVariable("CORECLR_SEED") switch
+            {
+                string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                    new Random().Next(),
+                string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
+                _ => DefaultSeed,
+            };
         internal const int MinParams = 1;
         internal static int MaxParams { get; set; } = 25;
+
         // The number of callees to use. When stressing tailcalls, this is the number of tailcallee parameter lists to pregenerate.
         // These parameter lists are pregenerated because we generate tailcallers
         // by first selecting a random parameter list. A callee is then
@@ -48,6 +52,7 @@ namespace ABIStress
         UnboxingStubs = 0x8,
         SharedGenericUnboxingStubs = 0x10,
 
-        All = TailCalls | PInvokes | InstantiatingStubs | UnboxingStubs | SharedGenericUnboxingStubs,
+        All =
+            TailCalls | PInvokes | InstantiatingStubs | UnboxingStubs | SharedGenericUnboxingStubs,
     }
 }

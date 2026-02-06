@@ -17,7 +17,12 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             // Test the Unix shims; but also run on Windows to ensure behavior is consistent.
             using (var alg = new DESCryptoServiceProvider())
             {
-                ShimHelpers.TestSymmetricAlgorithmProperties(alg, blockSize: 64, keySize: 64, key:KnownGoodKey);
+                ShimHelpers.TestSymmetricAlgorithmProperties(
+                    alg,
+                    blockSize: 64,
+                    keySize: 64,
+                    key: KnownGoodKey
+                );
             }
         }
 

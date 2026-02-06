@@ -13,10 +13,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsIntrinsic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -26,10 +23,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsNoInlining
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -38,10 +32,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsAggressiveInlining
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -50,10 +41,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsAggressiveOptimization
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -64,10 +52,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool RequireSecObject
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -75,10 +60,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsNoOptimization
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -87,10 +69,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsRuntimeImplemented
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -99,10 +78,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsInternalCall
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -111,10 +87,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -123,10 +96,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsUnmanagedCallersOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -135,10 +105,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsSpecialName
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 
@@ -147,90 +114,57 @@ namespace Internal.TypeSystem
     {
         public override bool IsIntrinsic
         {
-            get
-            {
-                return _methodDef.IsIntrinsic;
-            }
+            get { return _methodDef.IsIntrinsic; }
         }
 
         public override bool IsNoInlining
         {
-            get
-            {
-                return _methodDef.IsNoInlining;
-            }
+            get { return _methodDef.IsNoInlining; }
         }
 
         public override bool IsAggressiveOptimization
         {
-            get
-            {
-                return _methodDef.IsAggressiveOptimization;
-            }
+            get { return _methodDef.IsAggressiveOptimization; }
         }
 
         public override bool RequireSecObject
         {
-            get
-            {
-                return _methodDef.RequireSecObject;
-            }
+            get { return _methodDef.RequireSecObject; }
         }
 
         public override bool IsNoOptimization
         {
-            get
-            {
-                return _methodDef.IsNoOptimization;
-            }
+            get { return _methodDef.IsNoOptimization; }
         }
 
         public override bool IsAggressiveInlining
         {
-            get
-            {
-                return _methodDef.IsAggressiveInlining;
-            }
+            get { return _methodDef.IsAggressiveInlining; }
         }
 
         public override bool IsRuntimeImplemented
         {
-            get
-            {
-                return _methodDef.IsRuntimeImplemented;
-            }
+            get { return _methodDef.IsRuntimeImplemented; }
         }
 
         public override bool IsInternalCall
         {
-            get
-            {
-                return _methodDef.IsInternalCall;
-            }
+            get { return _methodDef.IsInternalCall; }
         }
 
         public override bool IsSynchronized
         {
-            get
-            {
-                return _methodDef.IsSynchronized;
-            }
+            get { return _methodDef.IsSynchronized; }
         }
 
         public override bool IsUnmanagedCallersOnly
         {
-            get
-            {
-                return _methodDef.IsUnmanagedCallersOnly;
-            }
+            get { return _methodDef.IsUnmanagedCallersOnly; }
         }
 
         public override bool IsSpecialName
         {
-            get
-            {
-                return _methodDef.IsSpecialName;
-            }
+            get { return _methodDef.IsSpecialName; }
         }
     }
 
@@ -239,90 +173,57 @@ namespace Internal.TypeSystem
     {
         public override bool IsIntrinsic
         {
-            get
-            {
-                return _typicalMethodDef.IsIntrinsic;
-            }
+            get { return _typicalMethodDef.IsIntrinsic; }
         }
 
         public override bool IsNoInlining
         {
-            get
-            {
-                return _typicalMethodDef.IsNoInlining;
-            }
+            get { return _typicalMethodDef.IsNoInlining; }
         }
 
         public override bool IsAggressiveOptimization
         {
-            get
-            {
-                return _typicalMethodDef.IsAggressiveOptimization;
-            }
+            get { return _typicalMethodDef.IsAggressiveOptimization; }
         }
 
         public override bool RequireSecObject
         {
-            get
-            {
-                return _typicalMethodDef.RequireSecObject;
-            }
+            get { return _typicalMethodDef.RequireSecObject; }
         }
 
         public override bool IsNoOptimization
         {
-            get
-            {
-                return _typicalMethodDef.IsNoOptimization;
-            }
+            get { return _typicalMethodDef.IsNoOptimization; }
         }
 
         public override bool IsAggressiveInlining
         {
-            get
-            {
-                return _typicalMethodDef.IsAggressiveInlining;
-            }
+            get { return _typicalMethodDef.IsAggressiveInlining; }
         }
 
         public override bool IsRuntimeImplemented
         {
-            get
-            {
-                return _typicalMethodDef.IsRuntimeImplemented;
-            }
+            get { return _typicalMethodDef.IsRuntimeImplemented; }
         }
 
         public override bool IsInternalCall
         {
-            get
-            {
-                return _typicalMethodDef.IsInternalCall;
-            }
+            get { return _typicalMethodDef.IsInternalCall; }
         }
 
         public override bool IsSynchronized
         {
-            get
-            {
-                return _typicalMethodDef.IsSynchronized;
-            }
+            get { return _typicalMethodDef.IsSynchronized; }
         }
 
         public override bool IsUnmanagedCallersOnly
         {
-            get
-            {
-                return _typicalMethodDef.IsUnmanagedCallersOnly;
-            }
+            get { return _typicalMethodDef.IsUnmanagedCallersOnly; }
         }
 
         public override bool IsSpecialName
         {
-            get
-            {
-                return _typicalMethodDef.IsSpecialName;
-            }
+            get { return _typicalMethodDef.IsSpecialName; }
         }
     }
 
@@ -331,10 +232,7 @@ namespace Internal.TypeSystem
     {
         public override bool IsIntrinsic
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsNoInlining

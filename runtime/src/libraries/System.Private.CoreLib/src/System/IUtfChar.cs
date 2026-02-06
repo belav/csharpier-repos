@@ -10,8 +10,7 @@ namespace System
     // Once inlining is improved on these hot code paths in formatting, we can remove this interface.
 
     /// <summary>Internal interface used to unify char and byte in formatting operations.</summary>
-    internal interface IUtfChar<TSelf> :
-        IBinaryInteger<TSelf>
+    internal interface IUtfChar<TSelf> : IBinaryInteger<TSelf>
         where TSelf : unmanaged, IUtfChar<TSelf>
     {
         /// <summary>Casts the specified value to this type.</summary>

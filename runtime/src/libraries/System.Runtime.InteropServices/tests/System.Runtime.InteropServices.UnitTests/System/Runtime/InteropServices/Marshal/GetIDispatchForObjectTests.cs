@@ -21,7 +21,10 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetIDispatchForObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetIDispatchForObject(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.GetIDispatchForObject(null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="CollabEnumTypes.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.PeerToPeer.Collaboration
@@ -19,7 +19,7 @@ namespace System.Net.PeerToPeer.Collaboration
         Idle,
         Busy,
         OnThePhone,
-        Online
+        Online,
     }
 
     public enum PeerScope
@@ -27,33 +27,33 @@ namespace System.Net.PeerToPeer.Collaboration
         None = 0,
         NearMe,
         Internet,
-        All = NearMe | Internet
+        All = NearMe | Internet,
     }
 
     public enum PeerApplicationRegistrationType
     {
         CurrentUser = 0,
-        AllUsers
+        AllUsers,
     }
 
     public enum PeerInvitationResponseType
     {
         Declined = 0,
         Accepted,
-        Expired
+        Expired,
     }
 
     public enum PeerChangeType
     {
         Added = 0,
         Deleted,
-        Updated
+        Updated,
     }
-    
+
     public enum SubscriptionType
     {
         Blocked = 0,
-        Allowed
+        Allowed,
     }
 
     internal enum PeerCollabEventType
@@ -68,6 +68,6 @@ namespace System.Net.PeerToPeer.Collaboration
         MyApplicationChanged = 8,
         MyObjectChanged = 9,
         PeopleNearMeChanged = 10,
-        RequestStatusChanged = 11
+        RequestStatusChanged = 11,
     }
 }

@@ -21,19 +21,21 @@ namespace Newtonsoft.Json.Tests.Converters
         public void SerializeUsingInternalConverter()
         {
             DefaultContractResolver contractResolver = new DefaultContractResolver();
-            JsonObjectContract contract = (JsonObjectContract)contractResolver.ResolveContract(typeof(KeyValuePair<string, int>));
+            JsonObjectContract contract = (JsonObjectContract)
+                contractResolver.ResolveContract(typeof(KeyValuePair<string, int>));
 
             Assert.AreEqual(typeof(KeyValuePairConverter), contract.InternalConverter.GetType());
 
             IList<KeyValuePair<string, int>> values = new List<KeyValuePair<string, int>>
             {
                 new KeyValuePair<string, int>("123", 123),
-                new KeyValuePair<string, int>("456", 456)
+                new KeyValuePair<string, int>("456", 456),
             };
 
             string json = JsonConvert.SerializeObject(values, Formatting.Indented);
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Key"": ""123"",
     ""Value"": 123
@@ -42,9 +44,13 @@ namespace Newtonsoft.Json.Tests.Converters
     ""Key"": ""456"",
     ""Value"": 456
   }
-]", json);
+]",
+                json
+            );
 
-            IList<KeyValuePair<string, int>> v2 = JsonConvert.DeserializeObject<IList<KeyValuePair<string, int>>>(json);
+            IList<KeyValuePair<string, int>> v2 = JsonConvert.DeserializeObject<
+                IList<KeyValuePair<string, int>>
+            >(json);
 
             Assert.AreEqual(2, v2.Count);
             Assert.AreEqual("123", v2[0].Key);
@@ -56,7 +62,11 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeUnexpectedEnd()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<KeyValuePair<string, int>>(@"{""Key"": ""123"","), "Unexpected end when reading JSON. Path 'Key', line 1, position 14.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                    JsonConvert.DeserializeObject<KeyValuePair<string, int>>(@"{""Key"": ""123"","),
+                "Unexpected end when reading JSON. Path 'Key', line 1, position 14."
+            );
         }
     }
 }

@@ -3,6 +3,13 @@
 
 public class RemoteBase_InSeparateAssembly
 {
-    protected interface IProtected_InSeparateAssembly { string Touch(); }
-    protected static string UseIProtected(IProtected_InSeparateAssembly intrf) { return intrf.Touch(); }
+    protected interface IProtected_InSeparateAssembly
+    {
+        string Touch();
+    }
+
+    protected static string UseIProtected(IProtected_InSeparateAssembly intrf)
+    {
+        return intrf.Touch();
+    }
 }

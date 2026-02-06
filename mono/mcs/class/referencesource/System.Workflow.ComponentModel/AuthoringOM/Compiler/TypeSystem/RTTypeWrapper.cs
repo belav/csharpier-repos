@@ -2,12 +2,12 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Globalization;
     using System.Reflection;
-    using System.CodeDom;
     using System.Text;
 
     internal sealed class RTTypeWrapper : Type, ICloneable
@@ -61,7 +61,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
             //we dont expect DesignTimeType to be passed to this class for wrapping purposes
             if (runtimeType.Assembly == null)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidRuntimeType), "runtimeType");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidRuntimeType),
+                    "runtimeType"
+                );
 
             this.typeProvider = typeProvider;
             this.runtimeType = runtimeType;
@@ -69,10 +72,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal ITypeProvider Provider
         {
-            get
-            {
-                return this.typeProvider;
-            }
+            get { return this.typeProvider; }
         }
 
         private RTTypeWrapper(ITypeProvider typeProvider, Type runtimeType, Type[] typeArgs)
@@ -82,20 +82,29 @@ namespace System.Workflow.ComponentModel.Compiler
 
             //we dont expect DesignTimeType to be passed to this class for wrapping purposes
             if (runtimeType.Assembly == null)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "runtimeType");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidArgumentValue),
+                    "runtimeType"
+                );
 
             this.typeProvider = typeProvider;
             this.runtimeType = runtimeType;
 
             if (!IsGenericTypeDefinition)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "runtimeType");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidArgumentValue),
+                    "runtimeType"
+                );
 
             this.typeArgs = new Type[typeArgs.Length];
             for (int i = 0; i < typeArgs.Length; i++)
             {
                 this.typeArgs[i] = typeArgs[i];
                 if (this.typeArgs[i] == null)
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "typeArgs");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidArgumentValue),
+                        "typeArgs"
+                    );
             }
         }
 
@@ -124,17 +133,11 @@ namespace System.Workflow.ComponentModel.Compiler
         }
         public override string AssemblyQualifiedName
         {
-            get
-            {
-                return this.FullName + ", " + this.runtimeType.Assembly.FullName;
-            }
+            get { return this.FullName + ", " + this.runtimeType.Assembly.FullName; }
         }
         public override Type BaseType
         {
-            get
-            {
-                return ResolveTypeFromTypeSystem(this.runtimeType.BaseType);
-            }
+            get { return ResolveTypeFromTypeSystem(this.runtimeType.BaseType); }
         }
         public override Type DeclaringType
         {
@@ -142,7 +145,9 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.runtimeType.DeclaringType == null)
                     return null;
-                return this.typeProvider.GetType(this.runtimeType.DeclaringType.AssemblyQualifiedName);
+                return this.typeProvider.GetType(
+                    this.runtimeType.DeclaringType.AssemblyQualifiedName
+                );
             }
         }
 
@@ -169,17 +174,11 @@ namespace System.Workflow.ComponentModel.Compiler
         }
         public override Guid GUID
         {
-            get
-            {
-                return this.runtimeType.GUID;
-            }
+            get { return this.runtimeType.GUID; }
         }
         public override Module Module
         {
-            get
-            {
-                return this.runtimeType.Module;
-            }
+            get { return this.runtimeType.Module; }
         }
         public override string Name
         {
@@ -195,25 +194,17 @@ namespace System.Workflow.ComponentModel.Compiler
         }
         public override string Namespace
         {
-            get
-            {
-                return this.runtimeType.Namespace;
-            }
+            get { return this.runtimeType.Namespace; }
         }
         public override RuntimeTypeHandle TypeHandle
         {
-            get
-            {
-                return this.runtimeType.TypeHandle;
-            }
+            get { return this.runtimeType.TypeHandle; }
         }
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return this.runtimeType.UnderlyingSystemType;
-            }
+            get { return this.runtimeType.UnderlyingSystemType; }
         }
+
         private bool IsAssignable(Type type1, Type type2)
         {
             Type typeTemp1 = ResolveTypeFromTypeSystem(type1);
@@ -241,7 +232,7 @@ namespace System.Workflow.ComponentModel.Compiler
             catch
             {
                 // Work aroundh: there are certain generic types whch we are not able to resolve
-                // form type system, this fix will make sure that we are in thowse cases returning 
+                // form type system, this fix will make sure that we are in thowse cases returning
                 // the original types
             }
             if (returnType == null)
@@ -298,10 +289,12 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             return this.runtimeType.GetCustomAttributes(inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return this.runtimeType.GetCustomAttributes(attributeType, inherit);
         }
+
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             List<ConstructorInfo> ctorInfos = new List<ConstructorInfo>();
@@ -309,6 +302,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 ctorInfos.Add(EnsureConstructorWrapped(ctorInfo));
             return ctorInfos.ToArray();
         }
+
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
             EventInfo eventInfo = this.runtimeType.GetEvent(name, bindingAttr);
@@ -316,6 +310,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 eventInfo = EnsureEventWrapped(eventInfo);
             return eventInfo;
         }
+
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             List<EventInfo> eventInfos = new List<EventInfo>();
@@ -323,6 +318,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 eventInfos.Add(EnsureEventWrapped(eventInfo));
             return eventInfos.ToArray();
         }
+
         public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
             FieldInfo field = this.runtimeType.GetField(name, bindingAttr);
@@ -330,6 +326,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 field = EnsureFieldWrapped(field);
             return field;
         }
+
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             List<FieldInfo> fieldInfos = new List<FieldInfo>();
@@ -337,6 +334,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 fieldInfos.Add(EnsureFieldWrapped(fieldInfo));
             return fieldInfos.ToArray();
         }
+
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             List<MethodInfo> methodInfos = new List<MethodInfo>();
@@ -344,6 +342,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 methodInfos.Add(EnsureMethodWrapped(methodInfo));
             return methodInfos.ToArray();
         }
+
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             List<PropertyInfo> propInfos = new List<PropertyInfo>();
@@ -351,13 +350,19 @@ namespace System.Workflow.ComponentModel.Compiler
                 propInfos.Add(EnsurePropertyWrapped(propInfo));
             return propInfos.ToArray();
         }
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             List<MemberInfo> memberInfos = new List<MemberInfo>();
             foreach (MemberInfo memberInfo in this.runtimeType.GetMember(name, type, bindingAttr))
                 memberInfos.Add(EnsureMemberWrapped(memberInfo));
             return memberInfos.ToArray();
         }
+
         public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
         {
             List<MemberInfo> memberInfos = new List<MemberInfo>();
@@ -365,6 +370,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 memberInfos.Add(EnsureMemberWrapped(memberInfo));
             return memberInfos.ToArray();
         }
+
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
             Type nestedType = this.runtimeType.GetNestedType(name, bindingAttr);
@@ -372,6 +378,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 nestedType = ResolveTypeFromTypeSystem(nestedType);
             return nestedType;
         }
+
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             List<Type> nestedTypes = new List<Type>();
@@ -379,6 +386,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 nestedTypes.Add(ResolveTypeFromTypeSystem(nestedType));
             return nestedTypes.ToArray();
         }
+
         public override Type GetInterface(string name, bool ignoreCase)
         {
             Type itfType = this.runtimeType.GetInterface(name, ignoreCase);
@@ -386,6 +394,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 itfType = ResolveTypeFromTypeSystem(itfType);
             return itfType;
         }
+
         public override Type[] GetInterfaces()
         {
             List<Type> itfTypes = new List<Type>();
@@ -396,14 +405,38 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return itfTypes.ToArray();
         }
-        public override object InvokeMember(string name, BindingFlags bindingFlags, Binder binder, object target, object[] providedArgs, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParams)
+
+        public override object InvokeMember(
+            string name,
+            BindingFlags bindingFlags,
+            Binder binder,
+            object target,
+            object[] providedArgs,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParams
+        )
         {
-            return this.runtimeType.InvokeMember(name, bindingFlags, binder, target, providedArgs, modifiers, culture, namedParams);
+            return this.runtimeType.InvokeMember(
+                name,
+                bindingFlags,
+                binder,
+                target,
+                providedArgs,
+                modifiers,
+                culture,
+                namedParams
+            );
         }
+
         public override bool IsSubclassOf(Type potentialBaseType)
         {
-            return System.Workflow.ComponentModel.Compiler.TypeProvider.IsSubclassOf(this.runtimeType, potentialBaseType);
+            return System.Workflow.ComponentModel.Compiler.TypeProvider.IsSubclassOf(
+                this.runtimeType,
+                potentialBaseType
+            );
         }
+
         public override bool IsAssignableFrom(Type c)
         {
             Type rtType = this.runtimeType;
@@ -412,18 +445,22 @@ namespace System.Workflow.ComponentModel.Compiler
 
             return System.Workflow.ComponentModel.Compiler.TypeProvider.IsAssignable(rtType, c);
         }
+
         public override string ToString()
         {
             return this.runtimeType.ToString();
         }
+
         public override int GetHashCode()
         {
             return this.runtimeType.GetHashCode();
         }
+
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             return this.runtimeType.IsDefined(attributeType, inherit);
         }
+
         public override Type GetElementType()
         {
             return ResolveTypeFromTypeSystem(this.runtimeType.GetElementType());
@@ -443,6 +480,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return wrapperInfo;
         }
+
         internal MethodInfo EnsureMethodWrapped(MethodInfo realInfo)
         {
             MethodInfo wrapperInfo = (MethodInfo)this.memberMapping[realInfo];
@@ -452,8 +490,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.memberMapping.Add(realInfo, wrapperInfo);
             }
             return wrapperInfo;
-
         }
+
         private MemberInfo EnsureMemberWrapped(MemberInfo memberInfo)
         {
             MemberInfo returnMemberInfo = null;
@@ -469,6 +507,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 returnMemberInfo = EnsureMethodWrapped(memberInfo as MethodInfo);
             return returnMemberInfo;
         }
+
         private ConstructorInfo EnsureConstructorWrapped(ConstructorInfo realInfo)
         {
             ConstructorInfo wrapperInfo = (ConstructorInfo)this.memberMapping[realInfo];
@@ -478,8 +517,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.memberMapping.Add(realInfo, wrapperInfo);
             }
             return wrapperInfo;
-
         }
+
         private EventInfo EnsureEventWrapped(EventInfo realInfo)
         {
             EventInfo wrapperInfo = (EventInfo)this.memberMapping[realInfo];
@@ -490,6 +529,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return wrapperInfo;
         }
+
         private FieldInfo EnsureFieldWrapped(FieldInfo realInfo)
         {
             FieldInfo wrapperInfo = (FieldInfo)this.memberMapping[realInfo];
@@ -515,17 +555,11 @@ namespace System.Workflow.ComponentModel.Compiler
         }
         public override bool IsGenericParameter
         {
-            get
-            {
-                return this.runtimeType.IsGenericParameter;
-            }
+            get { return this.runtimeType.IsGenericParameter; }
         }
         public override int GenericParameterPosition
         {
-            get
-            {
-                return this.runtimeType.GenericParameterPosition;
-            }
+            get { return this.runtimeType.GenericParameterPosition; }
         }
         public override bool IsGenericType
         {
@@ -545,16 +579,19 @@ namespace System.Workflow.ComponentModel.Compiler
                 return this.runtimeType.ContainsGenericParameters;
             }
         }
+
         public override Type[] GetGenericArguments()
         {
             return this.typeArgs;
         }
+
         public override Type GetGenericTypeDefinition()
         {
             if (this.IsGenericType)
                 return this.runtimeType;
             return this;
         }
+
         public override Type MakeGenericType(params Type[] typeArgs)
         {
             if (typeArgs == null)
@@ -563,20 +600,30 @@ namespace System.Workflow.ComponentModel.Compiler
             Type[] types = new Type[typeArgs.Length];
 
             if (!IsGenericTypeDefinition)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "typeArgs");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidArgumentValue),
+                    "typeArgs"
+                );
 
             for (int i = 0; i < typeArgs.Length; i++)
             {
                 types[i] = typeArgs[i];
                 if (types[i] == null)
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "typeArgs");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidArgumentValue),
+                        "typeArgs"
+                    );
             }
 
             Type returnType = this.boundedTypes[typeArgs] as Type;
             if (returnType == null)
             {
                 // handle Nullable<T> specially
-                if ((typeArgs.Length == 1) && (this.runtimeType == typeof(Nullable<>)) && !(typeArgs[0].IsEnum))
+                if (
+                    (typeArgs.Length == 1)
+                    && (this.runtimeType == typeof(Nullable<>))
+                    && !(typeArgs[0].IsEnum)
+                )
                 {
                     switch (Type.GetTypeCode(typeArgs[0]))
                     {
@@ -624,7 +671,11 @@ namespace System.Workflow.ComponentModel.Compiler
                             break;
                         default:
                             // no special handling, so make it as usual
-                            returnType = new RTTypeWrapper(this.typeProvider, this.runtimeType, typeArgs);
+                            returnType = new RTTypeWrapper(
+                                this.typeProvider,
+                                this.runtimeType,
+                                typeArgs
+                            );
                             break;
                     }
                 }
@@ -667,7 +718,13 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region implementation overrides
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             foreach (ConstructorInfo ctorInfo in this.runtimeType.GetConstructors(bindingAttr))
             {
@@ -690,11 +747,22 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return null;
         }
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             foreach (MethodInfo method in this.runtimeType.GetMethods(bindingAttr))
             {
-                bool matchName = ((bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase) ? string.Compare(method.Name, name, StringComparison.OrdinalIgnoreCase) == 0 : string.Compare(method.Name, name, StringComparison.Ordinal) == 0;
+                bool matchName =
+                    ((bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase)
+                        ? string.Compare(method.Name, name, StringComparison.OrdinalIgnoreCase) == 0
+                        : string.Compare(method.Name, name, StringComparison.Ordinal) == 0;
                 if (matchName)
                 {
                     bool mismatch = false;
@@ -704,7 +772,10 @@ namespace System.Workflow.ComponentModel.Compiler
                         if (parameters.GetLength(0) == types.Length)
                         {
                             for (int index = 0; !mismatch && index < parameters.Length; index++)
-                                mismatch = !IsAssignable(parameters[index].ParameterType, types[index]);
+                                mismatch = !IsAssignable(
+                                    parameters[index].ParameterType,
+                                    types[index]
+                                );
                         }
                         else
                         {
@@ -717,11 +788,23 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return null;
         }
-        protected override PropertyInfo GetPropertyImpl(String name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+
+        protected override PropertyInfo GetPropertyImpl(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             foreach (PropertyInfo propInfo in this.runtimeType.GetProperties(bindingAttr))
             {
-                bool matchName = ((bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase) ? string.Compare(propInfo.Name, name, StringComparison.OrdinalIgnoreCase) == 0 : string.Compare(propInfo.Name, name, StringComparison.Ordinal) == 0;
+                bool matchName =
+                    ((bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase)
+                        ? string.Compare(propInfo.Name, name, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        : string.Compare(propInfo.Name, name, StringComparison.Ordinal) == 0;
                 if (matchName && (returnType == null || (returnType.Equals(propInfo.PropertyType))))
                 {
                     bool mismatch = false;
@@ -731,7 +814,10 @@ namespace System.Workflow.ComponentModel.Compiler
                         if (parameters.GetLength(0) == types.Length)
                         {
                             for (int index = 0; !mismatch && index < parameters.Length; index++)
-                                mismatch = !IsAssignable(parameters[index].ParameterType, types[index]);
+                                mismatch = !IsAssignable(
+                                    parameters[index].ParameterType,
+                                    types[index]
+                                );
                         }
                         else
                         {
@@ -744,42 +830,52 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return null;
         }
+
         protected override TypeAttributes GetAttributeFlagsImpl()
         {
             return this.runtimeType.Attributes;
         }
+
         protected override bool HasElementTypeImpl()
         {
             return this.runtimeType.HasElementType;
         }
+
         public override int GetArrayRank()
         {
             return this.runtimeType.GetArrayRank();
         }
+
         protected override bool IsArrayImpl()
         {
             return this.runtimeType.IsArray;
         }
+
         protected override bool IsByRefImpl()
         {
             return this.runtimeType.IsByRef;
         }
+
         protected override bool IsCOMObjectImpl()
         {
             return this.runtimeType.IsCOMObject;
         }
+
         protected override bool IsContextfulImpl()
         {
             return this.runtimeType.IsContextful;
         }
+
         protected override bool IsMarshalByRefImpl()
         {
             return this.runtimeType.IsMarshalByRef;
         }
+
         protected override bool IsPointerImpl()
         {
             return this.runtimeType.IsPointer;
         }
+
         protected override bool IsPrimitiveImpl()
         {
             return this.runtimeType.IsPrimitive;
@@ -800,58 +896,87 @@ namespace System.Workflow.ComponentModel.Compiler
             private RTTypeWrapper rtTypeWrapper = null;
             private ConstructorInfo ctorInfo = null;
             private ParameterInfo[] wrappedParameters = null;
+
             public RTConstructorInfoWrapper(RTTypeWrapper rtTypeWrapper, ConstructorInfo ctorInfo)
             {
                 this.rtTypeWrapper = rtTypeWrapper;
                 this.ctorInfo = ctorInfo;
             }
-            public override object Invoke(BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+
+            public override object Invoke(
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            )
             {
                 return this.ctorInfo.Invoke(invokeAttr, binder, parameters, culture);
             }
+
             public override MethodAttributes Attributes
             {
                 get { return this.ctorInfo.Attributes; }
             }
+
             public override MethodImplAttributes GetMethodImplementationFlags()
             {
                 return this.ctorInfo.GetMethodImplementationFlags();
             }
+
             public override ParameterInfo[] GetParameters()
             {
                 if (this.wrappedParameters == null)
                 {
                     List<ParameterInfo> parameters = new List<ParameterInfo>();
                     foreach (ParameterInfo parameter in this.ctorInfo.GetParameters())
-                        parameters.Add(new RTParameterInfoWrapper(this.rtTypeWrapper, this.ctorInfo, parameter));
+                        parameters.Add(
+                            new RTParameterInfoWrapper(this.rtTypeWrapper, this.ctorInfo, parameter)
+                        );
                     this.wrappedParameters = parameters.ToArray();
                 }
                 return this.wrappedParameters;
             }
-            public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+
+            public override object Invoke(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            )
             {
                 return this.ctorInfo.Invoke(obj, invokeAttr, binder, parameters, culture);
             }
+
             public override RuntimeMethodHandle MethodHandle
             {
                 get { return this.ctorInfo.MethodHandle; }
             }
             public override Type DeclaringType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.ctorInfo.DeclaringType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.ctorInfo.DeclaringType
+                    );
+                }
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return this.ctorInfo.GetCustomAttributes(attributeType, inherit);
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.ctorInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.ctorInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberTypes MemberType
             {
                 get { return this.ctorInfo.MemberType; }
@@ -862,7 +987,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override Type ReflectedType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.ctorInfo.ReflectedType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.ctorInfo.ReflectedType
+                    );
+                }
             }
         }
 
@@ -874,11 +1004,13 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             private RTTypeWrapper rtTypeWrapper = null;
             private FieldInfo fieldInfo = null;
+
             public RTFieldInfoWrapper(RTTypeWrapper rtTypeWrapper, FieldInfo fieldInfo)
             {
                 this.rtTypeWrapper = rtTypeWrapper;
                 this.fieldInfo = fieldInfo;
             }
+
             public override int MetadataToken
             {
                 get { return this.fieldInfo.MetadataToken; }
@@ -897,32 +1029,53 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override Type FieldType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.fieldInfo.FieldType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.fieldInfo.FieldType);
+                }
             }
+
             public override object GetValue(object obj)
             {
                 return this.fieldInfo.GetValue(obj);
             }
-            public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+
+            public override void SetValue(
+                object obj,
+                object value,
+                BindingFlags invokeAttr,
+                Binder binder,
+                CultureInfo culture
+            )
             {
                 this.fieldInfo.SetValue(obj, value, invokeAttr, binder, culture);
             }
+
             public override Type DeclaringType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.fieldInfo.DeclaringType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.fieldInfo.DeclaringType
+                    );
+                }
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return this.fieldInfo.GetCustomAttributes(attributeType, inherit);
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.fieldInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.fieldInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberTypes MemberType
             {
                 get { return this.fieldInfo.MemberType; }
@@ -933,7 +1086,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override Type ReflectedType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.fieldInfo.ReflectedType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.fieldInfo.ReflectedType
+                    );
+                }
             }
         }
 
@@ -946,6 +1104,7 @@ namespace System.Workflow.ComponentModel.Compiler
             private PropertyInfo propertyInfo = null;
             private RTTypeWrapper rtTypeWrapper = null;
             private ParameterInfo[] wrappedParameters = null;
+
             public RTPropertyInfoWrapper(RTTypeWrapper rtTypeWrapper, PropertyInfo propertyInfo)
             {
                 this.rtTypeWrapper = rtTypeWrapper;
@@ -966,6 +1125,7 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get { return this.propertyInfo.CanWrite; }
             }
+
             public override MethodInfo[] GetAccessors(bool nonPublic)
             {
                 List<MethodInfo> methods = new List<MethodInfo>();
@@ -973,6 +1133,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     methods.Add(this.rtTypeWrapper.EnsureMethodWrapped(methodInfo));
                 return methods.ToArray();
             }
+
             public override MethodInfo GetGetMethod(bool nonPublic)
             {
                 MethodInfo methodInfo = this.propertyInfo.GetGetMethod(nonPublic);
@@ -980,17 +1141,25 @@ namespace System.Workflow.ComponentModel.Compiler
                     return null;
                 return this.rtTypeWrapper.EnsureMethodWrapped(methodInfo);
             }
+
             public override ParameterInfo[] GetIndexParameters()
             {
                 if (this.wrappedParameters == null)
                 {
                     List<ParameterInfo> parameters = new List<ParameterInfo>();
                     foreach (ParameterInfo parameter in this.propertyInfo.GetIndexParameters())
-                        parameters.Add(new RTParameterInfoWrapper(this.rtTypeWrapper, this.propertyInfo, parameter));
+                        parameters.Add(
+                            new RTParameterInfoWrapper(
+                                this.rtTypeWrapper,
+                                this.propertyInfo,
+                                parameter
+                            )
+                        );
                     this.wrappedParameters = parameters.ToArray();
                 }
                 return this.wrappedParameters;
             }
+
             public override MethodInfo GetSetMethod(bool nonPublic)
             {
                 MethodInfo methodInfo = this.propertyInfo.GetSetMethod(nonPublic);
@@ -998,34 +1167,65 @@ namespace System.Workflow.ComponentModel.Compiler
                     return null;
                 return this.rtTypeWrapper.EnsureMethodWrapped(methodInfo);
             }
-            public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+
+            public override object GetValue(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] index,
+                CultureInfo culture
+            )
             {
                 return this.propertyInfo.GetValue(obj, invokeAttr, binder, index, culture);
             }
+
             public override Type PropertyType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.propertyInfo.PropertyType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.propertyInfo.PropertyType
+                    );
+                }
             }
-            public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+
+            public override void SetValue(
+                object obj,
+                object value,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] index,
+                CultureInfo culture
+            )
             {
                 this.propertyInfo.SetValue(obj, value, invokeAttr, binder, index, culture);
             }
+
             public override Type DeclaringType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.propertyInfo.DeclaringType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.propertyInfo.DeclaringType
+                    );
+                }
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return this.propertyInfo.GetCustomAttributes(attributeType, inherit);
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.propertyInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.propertyInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberTypes MemberType
             {
                 get { return this.propertyInfo.MemberType; }
@@ -1036,7 +1236,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override Type ReflectedType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.propertyInfo.ReflectedType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.propertyInfo.ReflectedType
+                    );
+                }
             }
             public override int MetadataToken
             {
@@ -1058,19 +1263,23 @@ namespace System.Workflow.ComponentModel.Compiler
             private MethodInfo methodInfo = null;
             private RTTypeWrapper rtTypeWrapper = null;
             private ParameterInfo[] wrappedParameters = null;
+
             public RTMethodInfoWrapper(RTTypeWrapper rtTypeWrapper, MethodInfo methodInfo)
             {
                 this.rtTypeWrapper = rtTypeWrapper;
                 this.methodInfo = methodInfo;
             }
+
             public override Module Module
             {
                 get { return this.methodInfo.Module; }
             }
+
             public override MethodBody GetMethodBody()
             {
                 return this.methodInfo.GetMethodBody();
             }
+
             public override int MetadataToken
             {
                 get { return this.methodInfo.MetadataToken; }
@@ -1081,12 +1290,21 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override ParameterInfo ReturnParameter
             {
-                get { return new RTParameterInfoWrapper(this.rtTypeWrapper, this, this.methodInfo.ReturnParameter); }
+                get
+                {
+                    return new RTParameterInfoWrapper(
+                        this.rtTypeWrapper,
+                        this,
+                        this.methodInfo.ReturnParameter
+                    );
+                }
             }
+
             public override MethodInfo GetBaseDefinition()
             {
                 return this.methodInfo.GetBaseDefinition();
             }
+
             public override Type ReturnType
             {
                 get
@@ -1102,25 +1320,41 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get { return this.methodInfo.Attributes; }
             }
+
             public override MethodImplAttributes GetMethodImplementationFlags()
             {
                 return this.methodInfo.GetMethodImplementationFlags();
             }
+
             public override ParameterInfo[] GetParameters()
             {
                 if (this.wrappedParameters == null)
                 {
                     List<ParameterInfo> parameters = new List<ParameterInfo>();
                     foreach (ParameterInfo parameter in this.methodInfo.GetParameters())
-                        parameters.Add(new RTParameterInfoWrapper(this.rtTypeWrapper, this.methodInfo, parameter));
+                        parameters.Add(
+                            new RTParameterInfoWrapper(
+                                this.rtTypeWrapper,
+                                this.methodInfo,
+                                parameter
+                            )
+                        );
                     this.wrappedParameters = parameters.ToArray();
                 }
                 return this.wrappedParameters;
             }
-            public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+
+            public override object Invoke(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            )
             {
                 return this.methodInfo.Invoke(obj, invokeAttr, binder, parameters, culture);
             }
+
             public override RuntimeMethodHandle MethodHandle
             {
                 get { return this.methodInfo.MethodHandle; }
@@ -1130,21 +1364,27 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.methodInfo.DeclaringType);
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.methodInfo.DeclaringType
+                    );
                 }
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return this.methodInfo.GetCustomAttributes(attributeType, inherit);
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.methodInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.methodInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberTypes MemberType
             {
                 get { return this.methodInfo.MemberType; }
@@ -1157,7 +1397,9 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 get
                 {
-                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.methodInfo.ReflectedType);
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.methodInfo.ReflectedType
+                    );
                 }
             }
         }
@@ -1170,15 +1412,18 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             private RTTypeWrapper rtTypeWrapper = null;
             private EventInfo eventInfo = null;
+
             public RTEventInfoWrapper(RTTypeWrapper rtTypeWrapper, EventInfo eventInfo)
             {
                 this.rtTypeWrapper = rtTypeWrapper;
                 this.eventInfo = eventInfo;
             }
+
             public override EventAttributes Attributes
             {
                 get { return this.eventInfo.Attributes; }
             }
+
             public override MethodInfo GetAddMethod(bool nonPublic)
             {
                 MethodInfo methodInfo = this.eventInfo.GetAddMethod(nonPublic);
@@ -1186,6 +1431,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     return null;
                 return this.rtTypeWrapper.EnsureMethodWrapped(methodInfo);
             }
+
             public override MethodInfo GetRaiseMethod(bool nonPublic)
             {
                 MethodInfo methodInfo = this.eventInfo.GetRaiseMethod(nonPublic);
@@ -1193,6 +1439,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     return null;
                 return this.rtTypeWrapper.EnsureMethodWrapped(methodInfo);
             }
+
             public override MethodInfo GetRemoveMethod(bool nonPublic)
             {
                 MethodInfo methodInfo = this.eventInfo.GetRemoveMethod(nonPublic);
@@ -1200,22 +1447,32 @@ namespace System.Workflow.ComponentModel.Compiler
                     return null;
                 return this.rtTypeWrapper.EnsureMethodWrapped(methodInfo);
             }
+
             public override Type DeclaringType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.eventInfo.DeclaringType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.eventInfo.DeclaringType
+                    );
+                }
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return this.eventInfo.GetCustomAttributes(attributeType, inherit);
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.eventInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.eventInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberTypes MemberType
             {
                 get { return this.eventInfo.MemberType; }
@@ -1226,7 +1483,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             public override Type ReflectedType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.eventInfo.ReflectedType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.eventInfo.ReflectedType
+                    );
+                }
             }
 
             public override int MetadataToken
@@ -1249,55 +1511,70 @@ namespace System.Workflow.ComponentModel.Compiler
             private ParameterInfo paramInfo = null;
             private MemberInfo parentMember = null;
 
-            public RTParameterInfoWrapper(RTTypeWrapper rtTypeWrapper, MemberInfo parentMember, ParameterInfo paramInfo)
+            public RTParameterInfoWrapper(
+                RTTypeWrapper rtTypeWrapper,
+                MemberInfo parentMember,
+                ParameterInfo paramInfo
+            )
             {
                 this.parentMember = parentMember;
                 this.rtTypeWrapper = rtTypeWrapper;
                 this.paramInfo = paramInfo;
             }
+
             public override ParameterAttributes Attributes
             {
                 get { return this.paramInfo.Attributes; }
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return this.paramInfo.GetCustomAttributes(inherit);
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return this.paramInfo.IsDefined(attributeType, inherit);
             }
+
             public override MemberInfo Member
             {
                 get { return this.parentMember; }
             }
+
             public override Type[] GetOptionalCustomModifiers()
             {
                 return this.paramInfo.GetOptionalCustomModifiers();
             }
+
             public override string Name
             {
                 get { return this.paramInfo.Name; }
             }
             public override Type ParameterType
             {
-                get { return this.rtTypeWrapper.ResolveTypeFromTypeSystem(this.paramInfo.ParameterType); }
+                get
+                {
+                    return this.rtTypeWrapper.ResolveTypeFromTypeSystem(
+                        this.paramInfo.ParameterType
+                    );
+                }
             }
             public override int Position
             {
                 get { return this.paramInfo.Position; }
             }
+
             public override Type[] GetRequiredCustomModifiers()
             {
                 return this.paramInfo.GetRequiredCustomModifiers();
             }
+
             public override object DefaultValue
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503
-                    throw new global::System.NotImplementedException();
-                }
+                    throw new global::System.NotImplementedException(); }
             }
         }
         #endregion

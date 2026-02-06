@@ -46,24 +46,36 @@ internal class DefinitionContextTracker(
     ICodeDefinitionWindowService codeDefinitionWindowService,
     IThreadingContext threadingContext,
     IGlobalOptionService globalOptions,
-    IAsynchronousOperationListenerProvider listenerProvider) : ITextViewConnectionListener
+    IAsynchronousOperationListenerProvider listenerProvider
+) : ITextViewConnectionListener
 {
     private readonly HashSet<ITextView> _subscribedViews = [];
-    private readonly IMetadataAsSourceFileService _metadataAsSourceFileService = metadataAsSourceFileService;
-    private readonly ICodeDefinitionWindowService _codeDefinitionWindowService = codeDefinitionWindowService;
+    private readonly IMetadataAsSourceFileService _metadataAsSourceFileService =
+        metadataAsSourceFileService;
+    private readonly ICodeDefinitionWindowService _codeDefinitionWindowService =
+        codeDefinitionWindowService;
     private readonly IThreadingContext _threadingContext = threadingContext;
-    private readonly IAsynchronousOperationListener _asyncListener = listenerProvider.GetListener(FeatureAttribute.CodeDefinitionWindow);
+    private readonly IAsynchronousOperationListener _asyncListener = listenerProvider.GetListener(
+        FeatureAttribute.CodeDefinitionWindow
+    );
     private readonly IGlobalOptionService _globalOptions = globalOptions;
 
     private CancellationTokenSource? _currentUpdateCancellationToken;
 
-    void ITextViewConnectionListener.SubjectBuffersConnected(ITextView textView, ConnectionReason reason, IReadOnlyCollection<ITextBuffer> subjectBuffers)
+    void ITextViewConnectionListener.SubjectBuffersConnected(
+        ITextView textView,
+        ConnectionReason reason,
+        IReadOnlyCollection<ITextBuffer> subjectBuffers
+    )
     {
         Contract.ThrowIfFalse(_threadingContext.JoinableTaskContext.IsOnMainThread);
 
         // We won't listen to caret changes in the code definition window itself, since navigations there would cause it to
         // keep refreshing itself.
-        if (!_subscribedViews.Contains(textView) && !textView.Roles.Contains(PredefinedTextViewRoles.CodeDefinitionView))
+        if (
+            !_subscribedViews.Contains(textView)
+            && !textView.Roles.Contains(PredefinedTextViewRoles.CodeDefinitionView)
+        )
         {
             _subscribedViews.Add(textView);
             textView.Caret.PositionChanged += OnTextViewCaretPositionChanged;
@@ -71,12 +83,22 @@ internal class DefinitionContextTracker(
         }
     }
 
-    void ITextViewConnectionListener.SubjectBuffersDisconnected(ITextView textView, ConnectionReason reason, IReadOnlyCollection<ITextBuffer> subjectBuffers)
+    void ITextViewConnectionListener.SubjectBuffersDisconnected(
+        ITextView textView,
+        ConnectionReason reason,
+        IReadOnlyCollection<ITextBuffer> subjectBuffers
+    )
     {
         Contract.ThrowIfFalse(_threadingContext.JoinableTaskContext.IsOnMainThread);
 
-        if (reason == ConnectionReason.TextViewLifetime ||
-            !textView.BufferGraph.GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)).Any())
+        if (
+            reason == ConnectionReason.TextViewLifetime
+            || !textView
+                .BufferGraph.GetTextBuffers(b =>
+                    b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                )
+                .Any()
+        )
         {
             if (_subscribedViews.Remove(textView))
             {
@@ -100,7 +122,10 @@ internal class DefinitionContextTracker(
         _currentUpdateCancellationToken?.Cancel();
 
         // See if we moved somewhere else in a projection that we care about
-        var pointInRoslynSnapshot = caretPosition.Point.GetPoint(tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType), caretPosition.Affinity);
+        var pointInRoslynSnapshot = caretPosition.Point.GetPoint(
+            tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
+            caretPosition.Affinity
+        );
         if (pointInRoslynSnapshot == null)
         {
             return;
@@ -109,20 +134,32 @@ internal class DefinitionContextTracker(
         _currentUpdateCancellationToken = new CancellationTokenSource();
 
         var cancellationToken = _currentUpdateCancellationToken.Token;
-        var asyncToken = _asyncListener.BeginAsyncOperation(nameof(DefinitionContextTracker) + "." + nameof(QueueUpdateForCaretPosition));
-        UpdateForCaretPositionAsync(pointInRoslynSnapshot.Value, cancellationToken).CompletesAsyncOperation(asyncToken);
+        var asyncToken = _asyncListener.BeginAsyncOperation(
+            nameof(DefinitionContextTracker) + "." + nameof(QueueUpdateForCaretPosition)
+        );
+        UpdateForCaretPositionAsync(pointInRoslynSnapshot.Value, cancellationToken)
+            .CompletesAsyncOperation(asyncToken);
     }
 
-    private async Task UpdateForCaretPositionAsync(SnapshotPoint pointInRoslynSnapshot, CancellationToken cancellationToken)
+    private async Task UpdateForCaretPositionAsync(
+        SnapshotPoint pointInRoslynSnapshot,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
-            await _asyncListener.Delay(DelayTimeSpan.Short, cancellationToken).ConfigureAwait(false);
+            await _asyncListener
+                .Delay(DelayTimeSpan.Short, cancellationToken)
+                .ConfigureAwait(false);
 
             // If it's not open, don't do anything, since if we are going to show locations in metadata that might
             // be expensive. This doesn't cause a functional issue, since opening the window clears whatever was previously there
             // so the user won't notice we weren't doing anything when it was open.
-            if (!await _codeDefinitionWindowService.IsWindowOpenAsync(cancellationToken).ConfigureAwait(false))
+            if (
+                !await _codeDefinitionWindowService
+                    .IsWindowOpenAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            )
                 return;
 
             var snapshot = pointInRoslynSnapshot.Snapshot;
@@ -134,39 +171,69 @@ internal class DefinitionContextTracker(
             // Ensure we're off the UI thread for the rest of this since we don't want to be computing locations on the UI thread.
             await TaskScheduler.Default;
 
-            var locations = await GetContextFromPointAsync(workspace, document, pointInRoslynSnapshot, cancellationToken).ConfigureAwait(true);
-            await _codeDefinitionWindowService.SetContextAsync(locations, cancellationToken).ConfigureAwait(false);
+            var locations = await GetContextFromPointAsync(
+                    workspace,
+                    document,
+                    pointInRoslynSnapshot,
+                    cancellationToken
+                )
+                .ConfigureAwait(true);
+            await _codeDefinitionWindowService
+                .SetContextAsync(locations, cancellationToken)
+                .ConfigureAwait(false);
         }
-        catch (OperationCanceledException)
-        {
-        }
-        catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-        {
-        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
     }
 
     /// <summary>
     /// Internal for testing purposes.
     /// </summary>
     internal async Task<ImmutableArray<CodeDefinitionWindowLocation>> GetContextFromPointAsync(
-        Workspace workspace, Document document, int position, CancellationToken cancellationToken)
+        Workspace workspace,
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
-        var navigableItems = await GetNavigableItemsAsync(document, position, cancellationToken).ConfigureAwait(false);
+        var navigableItems = await GetNavigableItemsAsync(document, position, cancellationToken)
+            .ConfigureAwait(false);
         if (navigableItems.Length > 0)
         {
-            var navigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
+            var navigationService =
+                workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
-            using var _ = PooledObjects.ArrayBuilder<CodeDefinitionWindowLocation>.GetInstance(navigableItems.Length, out var builder);
+            using var _ = PooledObjects.ArrayBuilder<CodeDefinitionWindowLocation>.GetInstance(
+                navigableItems.Length,
+                out var builder
+            );
             foreach (var item in navigableItems)
             {
-                if (await navigationService.CanNavigateToSpanAsync(workspace, item.Document.Id, item.SourceSpan, cancellationToken).ConfigureAwait(false))
+                if (
+                    await navigationService
+                        .CanNavigateToSpanAsync(
+                            workspace,
+                            item.Document.Id,
+                            item.SourceSpan,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
-                    var text = await item.Document.GetTextAsync(document.Project.Solution, cancellationToken).ConfigureAwait(false);
+                    var text = await item
+                        .Document.GetTextAsync(document.Project.Solution, cancellationToken)
+                        .ConfigureAwait(false);
                     var linePositionSpan = text.Lines.GetLinePositionSpan(item.SourceSpan);
 
                     if (item.Document.FilePath != null)
                     {
-                        builder.Add(new CodeDefinitionWindowLocation(item.DisplayTaggedParts.JoinText(), item.Document.FilePath, linePositionSpan.Start));
+                        builder.Add(
+                            new CodeDefinitionWindowLocation(
+                                item.DisplayTaggedParts.JoinText(),
+                                item.Document.FilePath,
+                                linePositionSpan.Start
+                            )
+                        );
                     }
                 }
             }
@@ -177,41 +244,73 @@ internal class DefinitionContextTracker(
         // We didn't have regular source references, but possibly:
         // 1. Another language (like XAML) will take over via ISymbolNavigationService
         // 2. There are no locations from source, so we'll try to generate a metadata as source file and use that
-        var symbol = await SymbolFinder.FindSymbolAtPositionAsync(
-            document,
-            position,
-            cancellationToken: cancellationToken).ConfigureAwait(false);
+        var symbol = await SymbolFinder
+            .FindSymbolAtPositionAsync(document, position, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         if (symbol == null)
         {
             return ImmutableArray<CodeDefinitionWindowLocation>.Empty;
         }
 
-        var symbolNavigationService = workspace.Services.GetRequiredService<ISymbolNavigationService>();
-        var definitionItem = symbol.ToNonClassifiedDefinitionItem(document.Project.Solution, includeHiddenLocations: false);
-        var result = await symbolNavigationService.GetExternalNavigationSymbolLocationAsync(definitionItem, cancellationToken).ConfigureAwait(false);
+        var symbolNavigationService =
+            workspace.Services.GetRequiredService<ISymbolNavigationService>();
+        var definitionItem = symbol.ToNonClassifiedDefinitionItem(
+            document.Project.Solution,
+            includeHiddenLocations: false
+        );
+        var result = await symbolNavigationService
+            .GetExternalNavigationSymbolLocationAsync(definitionItem, cancellationToken)
+            .ConfigureAwait(false);
 
         if (result != null)
         {
-            return ImmutableArray.Create(new CodeDefinitionWindowLocation(symbol.ToDisplayString(), result.Value.filePath, result.Value.linePosition));
+            return ImmutableArray.Create(
+                new CodeDefinitionWindowLocation(
+                    symbol.ToDisplayString(),
+                    result.Value.filePath,
+                    result.Value.linePosition
+                )
+            );
         }
         else if (_metadataAsSourceFileService.IsNavigableMetadataSymbol(symbol))
         {
             var options = _globalOptions.GetMetadataAsSourceOptions(document.Project.Services);
-            var declarationFile = await _metadataAsSourceFileService.GetGeneratedFileAsync(workspace, document.Project, symbol, signaturesOnly: false, options, cancellationToken).ConfigureAwait(false);
+            var declarationFile = await _metadataAsSourceFileService
+                .GetGeneratedFileAsync(
+                    workspace,
+                    document.Project,
+                    symbol,
+                    signaturesOnly: false,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var identifierSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
-            return ImmutableArray.Create(new CodeDefinitionWindowLocation(symbol.ToDisplayString(), declarationFile.FilePath, identifierSpan.Start));
+            return ImmutableArray.Create(
+                new CodeDefinitionWindowLocation(
+                    symbol.ToDisplayString(),
+                    declarationFile.FilePath,
+                    identifierSpan.Start
+                )
+            );
         }
 
         return ImmutableArray<CodeDefinitionWindowLocation>.Empty;
     }
 
-    private static async Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(Document document, int position, CancellationToken cancellationToken)
+    private static async Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
         // Try IFindDefinitionService first. Until partners implement this, it could fail to find a service, so fall back if it's null.
         var findDefinitionService = document.GetLanguageService<INavigableItemsService>();
         return findDefinitionService != null
-            ? await findDefinitionService.GetNavigableItemsAsync(document, position, cancellationToken).ConfigureAwait(false)
+            ? await findDefinitionService
+                .GetNavigableItemsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false)
             : ImmutableArray<INavigableItem>.Empty;
     }
 }

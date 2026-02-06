@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.Debugger
     {
         private readonly Dictionary<Guid, object> _dataItems = new Dictionary<Guid, object>();
 
-        public T GetDataItem<T>() where T : DkmDataItem
+        public T GetDataItem<T>()
+            where T : DkmDataItem
         {
             object value;
             if (_dataItems.TryGetValue(typeof(T).GUID, out value))
@@ -29,7 +30,8 @@ namespace Microsoft.VisualStudio.Debugger
             return null;
         }
 
-        public void SetDataItem<T>(DkmDataCreationDisposition creationDisposition, T item) where T : DkmDataItem
+        public void SetDataItem<T>(DkmDataCreationDisposition creationDisposition, T item)
+            where T : DkmDataItem
         {
             if (item == null)
             {

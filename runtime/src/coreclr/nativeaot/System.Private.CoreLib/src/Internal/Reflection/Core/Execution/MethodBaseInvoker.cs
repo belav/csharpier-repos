@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Core.Execution
@@ -21,32 +20,72 @@ namespace Internal.Reflection.Core.Execution
         protected MethodBaseInvoker() { }
 
         [DebuggerGuidedStepThrough]
-        public object? Invoke(object thisObject, object?[] arguments, Binder? binder, BindingFlags invokeAttr, CultureInfo? cultureInfo)
+        public object? Invoke(
+            object thisObject,
+            object?[] arguments,
+            Binder? binder,
+            BindingFlags invokeAttr,
+            CultureInfo? cultureInfo
+        )
         {
             BinderBundle binderBundle = binder.ToBinderBundle(invokeAttr, cultureInfo);
-            bool wrapInTargetInvocationException = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
-            object? result = Invoke(thisObject, arguments, binderBundle, wrapInTargetInvocationException);
+            bool wrapInTargetInvocationException =
+                (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
+            object? result = Invoke(
+                thisObject,
+                arguments,
+                binderBundle,
+                wrapInTargetInvocationException
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
         [DebuggerGuidedStepThrough]
-        public object CreateInstance(object?[] arguments, Binder? binder, BindingFlags invokeAttr, CultureInfo? cultureInfo)
+        public object CreateInstance(
+            object?[] arguments,
+            Binder? binder,
+            BindingFlags invokeAttr,
+            CultureInfo? cultureInfo
+        )
         {
             BinderBundle binderBundle = binder.ToBinderBundle(invokeAttr, cultureInfo);
-            bool wrapInTargetInvocationException = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
-            object result = CreateInstance(arguments, binderBundle, wrapInTargetInvocationException);
+            bool wrapInTargetInvocationException =
+                (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
+            object result = CreateInstance(
+                arguments,
+                binderBundle,
+                wrapInTargetInvocationException
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
-        protected abstract object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException);
-        protected abstract object CreateInstance(object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException);
+        protected abstract object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        );
+        protected abstract object CreateInstance(
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        );
         protected internal abstract object CreateInstance(Span<object?> arguments);
         protected internal abstract object CreateInstanceWithFewArgs(Span<object?> arguments);
-        public abstract Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen);
+        public abstract Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        );
         protected internal abstract object? Invoke(object? thisObject, Span<object?> arguments);
-        protected internal abstract object? InvokeDirectWithFewArgs(object? thisObject, Span<object?> arguments);
+        protected internal abstract object? InvokeDirectWithFewArgs(
+            object? thisObject,
+            Span<object?> arguments
+        );
 
         // This property is used to retrieve the target method pointer. It is used by the RuntimeMethodHandle.GetFunctionPointer API
         public abstract IntPtr LdFtnResult { get; }

@@ -15,14 +15,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class MemberDeclarationSyntaxExtensions
     {
-        private static readonly ConditionalWeakTable<MemberDeclarationSyntax, Dictionary<string, ImmutableArray<SyntaxToken>>> s_declarationCache = new();
+        private static readonly ConditionalWeakTable<
+            MemberDeclarationSyntax,
+            Dictionary<string, ImmutableArray<SyntaxToken>>
+        > s_declarationCache = new();
 
-        public static LocalDeclarationMap GetLocalDeclarationMap(this MemberDeclarationSyntax member)
-            => new(s_declarationCache.GetValue(member, static member =>
-            {
-                var dictionary = DeclarationFinder.GetAllDeclarations(member);
-                return dictionary.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.AsImmutable());
-            }));
+        public static LocalDeclarationMap GetLocalDeclarationMap(
+            this MemberDeclarationSyntax member
+        ) =>
+            new(
+                s_declarationCache.GetValue(
+                    member,
+                    static member =>
+                    {
+                        var dictionary = DeclarationFinder.GetAllDeclarations(member);
+                        return dictionary.ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value.AsImmutable()
+                        );
+                    }
+                )
+            );
 
         public static SyntaxToken GetNameToken(this MemberDeclarationSyntax member)
         {
@@ -41,9 +54,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.DelegateDeclaration:
                         return ((DelegateDeclarationSyntax)member).Identifier;
                     case SyntaxKind.FieldDeclaration:
-                        return ((FieldDeclarationSyntax)member).Declaration.Variables.First().Identifier;
+                        return ((FieldDeclarationSyntax)member)
+                            .Declaration.Variables.First()
+                            .Identifier;
                     case SyntaxKind.EventFieldDeclaration:
-                        return ((EventFieldDeclarationSyntax)member).Declaration.Variables.First().Identifier;
+                        return ((EventFieldDeclarationSyntax)member)
+                            .Declaration.Variables.First()
+                            .Identifier;
                     case SyntaxKind.PropertyDeclaration:
                         return ((PropertyDeclarationSyntax)member).Identifier;
                     case SyntaxKind.EventDeclaration:
@@ -87,7 +104,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return 0;
         }
 
-        public static TypeParameterListSyntax GetTypeParameterList(this MemberDeclarationSyntax member)
+        public static TypeParameterListSyntax GetTypeParameterList(
+            this MemberDeclarationSyntax member
+        )
         {
             if (member != null)
             {
@@ -111,24 +130,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static MemberDeclarationSyntax WithParameterList(
             this MemberDeclarationSyntax member,
-            BaseParameterListSyntax parameterList)
+            BaseParameterListSyntax parameterList
+        )
         {
             if (member != null)
             {
                 switch (member.Kind())
                 {
                     case SyntaxKind.DelegateDeclaration:
-                        return ((DelegateDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((DelegateDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.MethodDeclaration:
-                        return ((MethodDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((MethodDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.ConstructorDeclaration:
-                        return ((ConstructorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((ConstructorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.IndexerDeclaration:
-                        return ((IndexerDeclarationSyntax)member).WithParameterList((BracketedParameterListSyntax)parameterList);
+                        return ((IndexerDeclarationSyntax)member).WithParameterList(
+                            (BracketedParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((OperatorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)member).WithParameterList((ParameterListSyntax)parameterList);
+                        return ((ConversionOperatorDeclarationSyntax)member).WithParameterList(
+                            (ParameterListSyntax)parameterList
+                        );
                 }
             }
 
@@ -163,18 +195,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return null;
         }
 
-        public static bool HasMethodShape(this MemberDeclarationSyntax memberDeclaration)
-            => memberDeclaration is BaseMethodDeclarationSyntax;
+        public static bool HasMethodShape(this MemberDeclarationSyntax memberDeclaration) =>
+            memberDeclaration is BaseMethodDeclarationSyntax;
 
-        public static BlockSyntax GetBody(this MemberDeclarationSyntax memberDeclaration)
-            => memberDeclaration switch
+        public static BlockSyntax GetBody(this MemberDeclarationSyntax memberDeclaration) =>
+            memberDeclaration switch
             {
                 BaseMethodDeclarationSyntax method => method.Body,
                 _ => null,
             };
 
-        public static ArrowExpressionClauseSyntax GetExpressionBody(this MemberDeclarationSyntax memberDeclaration)
-            => memberDeclaration switch
+        public static ArrowExpressionClauseSyntax GetExpressionBody(
+            this MemberDeclarationSyntax memberDeclaration
+        ) =>
+            memberDeclaration switch
             {
                 BaseMethodDeclarationSyntax method => method.ExpressionBody,
                 IndexerDeclarationSyntax indexer => indexer.ExpressionBody,
@@ -182,7 +216,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 _ => null,
             };
 
-        public static MemberDeclarationSyntax WithBody(this MemberDeclarationSyntax memberDeclaration, BlockSyntax body)
-            => (memberDeclaration as BaseMethodDeclarationSyntax)?.WithBody(body);
+        public static MemberDeclarationSyntax WithBody(
+            this MemberDeclarationSyntax memberDeclaration,
+            BlockSyntax body
+        ) => (memberDeclaration as BaseMethodDeclarationSyntax)?.WithBody(body);
     }
 }

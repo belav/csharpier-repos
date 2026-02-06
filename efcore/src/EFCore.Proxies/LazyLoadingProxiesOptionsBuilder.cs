@@ -36,8 +36,9 @@ public class LazyLoadingProxiesOptionsBuilder
     ///     <see langword="true" /> to ignore navigations that are not virtual. The default value is
     ///     <see langword="false" />, meaning an exception will be thrown if a non-virtual navigation is found.
     /// </param>
-    public virtual LazyLoadingProxiesOptionsBuilder IgnoreNonVirtualNavigations(bool ignoreNonVirtualNavigations = true)
-        => WithOption(e => e.WithIgnoreNonVirtualNavigations(ignoreNonVirtualNavigations));
+    public virtual LazyLoadingProxiesOptionsBuilder IgnoreNonVirtualNavigations(
+        bool ignoreNonVirtualNavigations = true
+    ) => WithOption(e => e.WithIgnoreNonVirtualNavigations(ignoreNonVirtualNavigations));
 
     /// <summary>
     ///     Sets an option by cloning the extension used to store the settings. This ensures the builder
@@ -45,10 +46,16 @@ public class LazyLoadingProxiesOptionsBuilder
     /// </summary>
     /// <param name="setAction">An action to set the option.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    protected virtual LazyLoadingProxiesOptionsBuilder WithOption(Func<ProxiesOptionsExtension, ProxiesOptionsExtension> setAction)
+    protected virtual LazyLoadingProxiesOptionsBuilder WithOption(
+        Func<ProxiesOptionsExtension, ProxiesOptionsExtension> setAction
+    )
     {
         ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
-            setAction(OptionsBuilder.Options.FindExtension<ProxiesOptionsExtension>() ?? new ProxiesOptionsExtension()));
+            setAction(
+                OptionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+                    ?? new ProxiesOptionsExtension()
+            )
+        );
 
         return this;
     }

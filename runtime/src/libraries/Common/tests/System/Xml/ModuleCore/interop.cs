@@ -21,7 +21,7 @@ namespace OLEDB.Test.ModuleCore
         eVariationStatusTimedOut,
         eVariationStatusConformanceWarning,
         eVariationStatusException,
-        eVariationStatusAborted
+        eVariationStatusAborted,
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ namespace OLEDB.Test.ModuleCore
         HR_OPTIONAL,
         HR_SUCCEED,
         HR_FAIL,
-        HR_WARNING
+        HR_WARNING,
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -43,12 +43,11 @@ namespace OLEDB.Test.ModuleCore
     ////////////////////////////////////////////////////////////////////////
     public enum tagCONSOLEFLAGS
     {
-        CONSOLE_RAW = 0x00000000,   //No fixup - Don't use, unless you know the text contains no CR/LF, no Xml reserved tokens, or no other non-representable characters
-        CONSOLE_TEXT = 0x00000001,  //Default  - Automatically fixup CR/LF correctly for log files, fixup xml tokens, etc
-        CONSOLE_XML = 0x00000002,   //For Xml  - User text is placed into a CDATA section (with no xml fixups)
-        CONSOLE_IGNORE = 0x00000004,    //Ignore   - User text is placed into ignore tags (can combine this with console_xml as well)
+        CONSOLE_RAW = 0x00000000, //No fixup - Don't use, unless you know the text contains no CR/LF, no Xml reserved tokens, or no other non-representable characters
+        CONSOLE_TEXT = 0x00000001, //Default  - Automatically fixup CR/LF correctly for log files, fixup xml tokens, etc
+        CONSOLE_XML = 0x00000002, //For Xml  - User text is placed into a CDATA section (with no xml fixups)
+        CONSOLE_IGNORE = 0x00000004, //Ignore   - User text is placed into ignore tags (can combine this with console_xml as well)
     }
-
 
     ////////////////////////////////////////////////////////////////////////
     // IError
@@ -82,26 +81,19 @@ namespace OLEDB.Test.ModuleCore
         // When an error message is output to LTM, the file name and line numbers
         // are recorded there as well.
         //
-        bool Validate(int hrActual,
-                             string bstrFileName,
-                             int lLineNo,
-                             int hrExpected);
+        bool Validate(int hrActual, string bstrFileName, int lLineNo, int hrExpected);
 
         // 'Compare' will output an error message (similar to that output by 'Validate')
         // if the fWereEqual parameter passed in is FALSE.
         //
-        bool Compare(bool fWereEqual,
-                             string bstrFileName,
-                             int lLineNo);
+        bool Compare(bool fWereEqual, string bstrFileName, int lLineNo);
 
         // The 'LogxxxxxxxxHr' methods output error or status message to the LTM
         // window. The HRESULT parameters passed in are converted to string
         // messages for this purpose.
         //
         void LogExpectedHr(int hrExpected);
-        void LogReceivedHr(int hrReceived,
-                             string bstrFileName,
-                             int lLineNo);
+        void LogReceivedHr(int hrReceived, string bstrFileName, int lLineNo);
 
         // The 'ResetxxxxErrors' methods simply reset the internal error count of
         // a Module, Case, or Variation (respectively.)
@@ -149,17 +141,18 @@ namespace OLEDB.Test.ModuleCore
     public interface ITestConsole
     {
         //(Error) Logging routines
-        void Log(string bstrActual,
-                        string bstrExpected,
-                        string bstrSource,
-                        string bstrMessage,
-                        string bstrDetails,
-                        tagCONSOLEFLAGS flags,
-                        string bstrFilename,
-                        int iline);
+        void Log(
+            string bstrActual,
+            string bstrExpected,
+            string bstrSource,
+            string bstrMessage,
+            string bstrDetails,
+            tagCONSOLEFLAGS flags,
+            string bstrFilename,
+            int iline
+        );
 
-        void Write(tagCONSOLEFLAGS flags,
-                        string bstrString);
+        void Write(tagCONSOLEFLAGS flags, string bstrString);
         void WriteLine();
     }
 

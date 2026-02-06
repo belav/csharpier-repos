@@ -17,16 +17,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.InlineMethod
 {
-    internal abstract partial class AbstractInlineMethodRefactoringProvider<TMethodDeclarationSyntax, TStatementSyntax, TExpressionSyntax, TInvocationSyntax>
+    internal abstract partial class AbstractInlineMethodRefactoringProvider<
+        TMethodDeclarationSyntax,
+        TStatementSyntax,
+        TExpressionSyntax,
+        TInvocationSyntax
+    >
     {
         /// <summary>
         /// Information about the callee method parameters to compute <see cref="InlineMethodContext"/>.
         /// </summary>
         private readonly struct MethodParametersInfo(
-            ImmutableArray<(IParameterSymbol parameterSymbol, string name)> parametersWithVariableDeclarationArgument,
-            ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax initExpression)> parametersToGenerateFreshVariablesFor,
+            ImmutableArray<(
+                IParameterSymbol parameterSymbol,
+                string name
+            )> parametersWithVariableDeclarationArgument,
+            ImmutableArray<(
+                IParameterSymbol parameterSymbol,
+                TExpressionSyntax initExpression
+            )> parametersToGenerateFreshVariablesFor,
             ImmutableDictionary<IParameterSymbol, TExpressionSyntax> parametersToReplace,
-            bool mergeInlineContentAndVariableDeclarationArgument)
+            bool mergeInlineContentAndVariableDeclarationArgument
+        )
         {
             /// <summary>
             /// Parameters map to variable declaration argument's name.
@@ -45,7 +57,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             /// }
             /// void Callee(out int i) => i = 100;
             /// </summary>
-            public ImmutableArray<(IParameterSymbol parameterSymbol, string name)> ParametersWithVariableDeclarationArgument { get; } = parametersWithVariableDeclarationArgument;
+            public ImmutableArray<(
+                IParameterSymbol parameterSymbol,
+                string name
+            )> ParametersWithVariableDeclarationArgument { get; } =
+                parametersWithVariableDeclarationArgument;
 
             /// <summary>
             /// Operations that represent Parameter has argument but the argument is not identifier or literal.
@@ -73,7 +89,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ///     DoSomething(a, b);
             /// }
             /// </summary>
-            public ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax initExpression)> ParametersToGenerateFreshVariablesFor { get; } = parametersToGenerateFreshVariablesFor;
+            public ImmutableArray<(
+                IParameterSymbol parameterSymbol,
+                TExpressionSyntax initExpression
+            )> ParametersToGenerateFreshVariablesFor { get; } =
+                parametersToGenerateFreshVariablesFor;
 
             /// <summary>
             /// A dictionary that contains Parameter that should be directly replaced. Key is the parameter and Value is the replacement exprssion
@@ -121,7 +141,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             /// In this case, parameters 'a' and 'b' should just be replaced by the argument expression.
             /// Note: this might cause semantics changes. It is by design.
             /// </summary>
-            public ImmutableDictionary<IParameterSymbol, TExpressionSyntax> ParametersToReplace { get; } = parametersToReplace;
+            public ImmutableDictionary<
+                IParameterSymbol,
+                TExpressionSyntax
+            > ParametersToReplace { get; } = parametersToReplace;
 
             /// <summary>
             /// Indicate should inline expression and variable declaration be merged into one line.
@@ -147,7 +170,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             /// }
             /// void Callee(out int i) => i = 100;
             /// </summary>
-            public bool MergeInlineContentAndVariableDeclarationArgument { get; } = mergeInlineContentAndVariableDeclarationArgument;
+            public bool MergeInlineContentAndVariableDeclarationArgument { get; } =
+                mergeInlineContentAndVariableDeclarationArgument;
         }
 
         private async Task<MethodParametersInfo> GetMethodParametersInfoAsync(
@@ -157,11 +181,16 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TStatementSyntax? statementContainingInvocation,
             TExpressionSyntax rawInlineExpression,
             IInvocationOperation invocationOperation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var callerSemanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var callerSemanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var allArgumentOperations = invocationOperation.Arguments;
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(calleeMethodNode.SyntaxTree);
+            var calleeDocument = document.Project.Solution.GetRequiredDocument(
+                calleeMethodNode.SyntaxTree
+            );
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
             if (statementContainingInvocation != null)
             {
@@ -188,9 +217,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // {
                 //     DoSomething(a, b, c);
                 // }
-                var operationsWithIdentifierArgument = allArgumentOperations
-                    .WhereAsArray(argument =>
-                        _syntaxFacts.IsIdentifierName(argument.Value.Syntax) && argument.ArgumentKind == ArgumentKind.Explicit);
+                var operationsWithIdentifierArgument = allArgumentOperations.WhereAsArray(
+                    argument =>
+                        _syntaxFacts.IsIdentifierName(argument.Value.Syntax)
+                        && argument.ArgumentKind == ArgumentKind.Explicit
+                );
 
                 // 2. Find all the declaration arguments (e.g. out var declaration in C#).
                 // After inlining, an declaration needs to be put before the invocation. And also use the declared identifier to replace the mapping parameter in callee.
@@ -209,9 +240,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 //     x = 100;
                 // }
                 // void Callee(out int i) => i = 100;
-                var operationsWithVariableDeclarationArgument = allArgumentOperations
-                    .WhereAsArray(argument =>
-                        _syntaxFacts.IsDeclarationExpression(argument.Value.Syntax) && argument.ArgumentKind == ArgumentKind.Explicit);
+                var operationsWithVariableDeclarationArgument = allArgumentOperations.WhereAsArray(
+                    argument =>
+                        _syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
+                        && argument.ArgumentKind == ArgumentKind.Explicit
+                );
 
                 // 3. Find the literal arguments, and the mapping parameter will be replaced by that literal expression
                 // Example:
@@ -233,9 +266,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // {
                 //     DoSomething(i, j);
                 // }
-                var operationsWithLiteralArgument = allArgumentOperations
-                    .WhereAsArray(argument =>
-                        _syntaxFacts.IsLiteralExpression(argument.Value.Syntax) && argument.ArgumentKind == ArgumentKind.Explicit);
+                var operationsWithLiteralArgument = allArgumentOperations.WhereAsArray(argument =>
+                    _syntaxFacts.IsLiteralExpression(argument.Value.Syntax)
+                    && argument.ArgumentKind == ArgumentKind.Explicit
+                );
 
                 // 4. Find the default value parameters. Similarly to 3, they should be replaced by the default value.
                 // Example:
@@ -257,8 +291,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // {
                 //     DoSomething(i, j);
                 // }
-                var operationsWithDefaultValue = allArgumentOperations
-                    .WhereAsArray(argument => argument.ArgumentKind == ArgumentKind.DefaultValue);
+                var operationsWithDefaultValue = allArgumentOperations.WhereAsArray(argument =>
+                    argument.ArgumentKind == ArgumentKind.DefaultValue
+                );
 
                 // 5. All the remaining arguments, which might includes method call and a lot of other expressions.
                 // Generate a declaration in the caller.
@@ -311,26 +346,31 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // }
                 // Note: this change might change the order of evaluation. Strictly keep the semantics will make the
                 // code becomes strange so it is by design.
-                var operationsReadOnlyOnce =
-                    await GetArgumentsReadOnlyOnceAsync(
+                var operationsReadOnlyOnce = await GetArgumentsReadOnlyOnceAsync(
                         calleeDocument,
                         operationsToGenerateFreshVariablesFor,
                         calleeMethodNode,
-                        cancellationToken).ConfigureAwait(false);
-                operationsToGenerateFreshVariablesFor = operationsToGenerateFreshVariablesFor.RemoveRange(operationsReadOnlyOnce);
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                operationsToGenerateFreshVariablesFor =
+                    operationsToGenerateFreshVariablesFor.RemoveRange(operationsReadOnlyOnce);
                 var parametersToGenerateFreshVariablesFor = operationsToGenerateFreshVariablesFor
-                    // We excluded arglist callees, so Parameter will always be non null
-                    .SelectAsArray(argument => (argument.Parameter!, GenerateArgumentExpression(syntaxGenerator, argument)));
+                // We excluded arglist callees, so Parameter will always be non null
+                .SelectAsArray(argument =>
+                    (argument.Parameter!, GenerateArgumentExpression(syntaxGenerator, argument))
+                );
 
-                var parameterToReplaceMap =
-                    operationsWithLiteralArgument
+                var parameterToReplaceMap = operationsWithLiteralArgument
                     .Concat(operationsWithIdentifierArgument)
                     .Concat(operationsReadOnlyOnce)
                     .Concat(operationsWithDefaultValue)
                     .ToImmutableDictionary(
                         // We excluded arglist callees, so Parameter will always be non null
                         keySelector: argument => argument.Parameter!,
-                        elementSelector: argument => GenerateArgumentExpression(syntaxGenerator, argument));
+                        elementSelector: argument =>
+                            GenerateArgumentExpression(syntaxGenerator, argument)
+                    );
 
                 // Use array instead of dictionary because using dictionary will make the parameter becomes unordered.
                 // Example:
@@ -350,25 +390,36 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // }
                 // void Callee(out int i, out int j) => DoSomething(out i, out j);
                 // 'y' might becomes the first declaration if using dictionary instead of array.
-                var parametersWithVariableDeclarationArgument = operationsWithVariableDeclarationArgument
-                    .Select(argument => (
-                        argument.Parameter,
-                        callerSemanticModel.GetSymbolInfo(argument.Value.Syntax, cancellationToken).GetAnySymbol()?.Name))
-                    .Where(parameterAndArgumentName => parameterAndArgumentName.Name != null)
-                    .ToImmutableArray();
+                var parametersWithVariableDeclarationArgument =
+                    operationsWithVariableDeclarationArgument
+                        .Select(argument =>
+                            (
+                                argument.Parameter,
+                                callerSemanticModel
+                                    .GetSymbolInfo(argument.Value.Syntax, cancellationToken)
+                                    .GetAnySymbol()
+                                    ?.Name
+                            )
+                        )
+                        .Where(parameterAndArgumentName => parameterAndArgumentName.Name != null)
+                        .ToImmutableArray();
 
-                var mergeInlineContentAndVariableDeclarationArgument = await ShouldMergeInlineContentAndVariableDeclarationArgumentAsync(
-                    calleeDocument,
-                    calleeInvocationNode,
-                    parametersWithVariableDeclarationArgument!,
-                    rawInlineExpression,
-                    cancellationToken).ConfigureAwait(false);
+                var mergeInlineContentAndVariableDeclarationArgument =
+                    await ShouldMergeInlineContentAndVariableDeclarationArgumentAsync(
+                            calleeDocument,
+                            calleeInvocationNode,
+                            parametersWithVariableDeclarationArgument!,
+                            rawInlineExpression,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 return new MethodParametersInfo(
                     parametersWithVariableDeclarationArgument!,
                     parametersToGenerateFreshVariablesFor,
                     parameterToReplaceMap,
-                    mergeInlineContentAndVariableDeclarationArgument);
+                    mergeInlineContentAndVariableDeclarationArgument
+                );
             }
             else
             {
@@ -377,17 +428,25 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // This such case, just use the argument expression to parameter.
                 // Note: this might also cause semantics changes but is acceptable for a refactoring
                 var parameterToReplaceMap = allArgumentOperations
-                    .Where(argument => argument.Value.Syntax is TExpressionSyntax
-                       && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax))
+                    .Where(argument =>
+                        argument.Value.Syntax is TExpressionSyntax
+                        && !_syntaxFacts.IsDeclarationExpression(argument.Value.Syntax)
+                    )
                     .ToImmutableDictionary(
                         // We excluded arglist callees, so Parameter will always be non null
                         keySelector: argument => argument.Parameter!,
-                        elementSelector: argument => GenerateArgumentExpression(syntaxGenerator, argument));
+                        elementSelector: argument =>
+                            GenerateArgumentExpression(syntaxGenerator, argument)
+                    );
                 return new MethodParametersInfo(
                     ImmutableArray<(IParameterSymbol parameterSymbol, string name)>.Empty,
-                    ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax initExpression)>.Empty,
+                    ImmutableArray<(
+                        IParameterSymbol parameterSymbol,
+                        TExpressionSyntax initExpression
+                    )>.Empty,
                     parameterToReplaceMap,
-                    false);
+                    false
+                );
             }
         }
 
@@ -431,7 +490,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             Document document,
             ImmutableArray<IArgumentOperation> arguments,
             TMethodDeclarationSyntax calleeMethodNode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<IArgumentOperation>.GetInstance(out var builder);
             foreach (var argument in arguments)
@@ -439,18 +499,34 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 var parameterSymbol = argument.Parameter;
                 Contract.ThrowIfNull(parameterSymbol, "We filtered out varags methods earlier.");
                 var allReferences = await SymbolFinder
-                    .FindReferencesAsync(parameterSymbol, document.Project.Solution, ImmutableHashSet<Document>.Empty.Add(document), cancellationToken).ConfigureAwait(false);
+                    .FindReferencesAsync(
+                        parameterSymbol,
+                        document.Project.Solution,
+                        ImmutableHashSet<Document>.Empty.Add(document),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 // Need to check if the node is in CalleeMethodNode, because for this case
                 // void Caller() { Callee(i: 10); }
                 // void Callee(int i) { DoSomething(); }
                 // the 'i' in the caller will be considered as the referenced location
                 var allReferencedLocations = allReferences
                     .SelectMany(@ref => @ref.Locations)
-                    .Where(location => !location.IsImplicit && calleeMethodNode.Contains(location.Location.FindNode(getInnermostNodeForTie: true, cancellationToken)))
+                    .Where(location =>
+                        !location.IsImplicit
+                        && calleeMethodNode.Contains(
+                            location.Location.FindNode(
+                                getInnermostNodeForTie: true,
+                                cancellationToken
+                            )
+                        )
+                    )
                     .ToImmutableArray();
 
-                if (allReferencedLocations.Length == 1
-                    && allReferencedLocations[0].SymbolUsageInfo.IsReadFrom())
+                if (
+                    allReferencedLocations.Length == 1
+                    && allReferencedLocations[0].SymbolUsageInfo.IsReadFrom()
+                )
                 {
                     builder.Add(argument);
                 }
@@ -480,29 +556,43 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         private async Task<bool> ShouldMergeInlineContentAndVariableDeclarationArgumentAsync(
             Document calleeDocument,
             TInvocationSyntax calleInvocationNode,
-            ImmutableArray<(IParameterSymbol parameterSymbol, string name)> parametersWithVariableDeclarationArgument,
+            ImmutableArray<(
+                IParameterSymbol parameterSymbol,
+                string name
+            )> parametersWithVariableDeclarationArgument,
             TExpressionSyntax inlineExpressionNode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await calleeDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await calleeDocument
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             return parametersWithVariableDeclarationArgument.Length == 1
-               && _syntaxFacts.IsExpressionStatement(calleInvocationNode.Parent)
-               && semanticModel.GetOperation(inlineExpressionNode, cancellationToken) is ISimpleAssignmentOperation simpleAssignmentOperation
-               && simpleAssignmentOperation.Target is IParameterReferenceOperation parameterOperation
-               && parameterOperation.Parameter.Equals(parametersWithVariableDeclarationArgument[0].parameterSymbol);
+                && _syntaxFacts.IsExpressionStatement(calleInvocationNode.Parent)
+                && semanticModel.GetOperation(inlineExpressionNode, cancellationToken)
+                    is ISimpleAssignmentOperation simpleAssignmentOperation
+                && simpleAssignmentOperation.Target
+                    is IParameterReferenceOperation parameterOperation
+                && parameterOperation.Parameter.Equals(
+                    parametersWithVariableDeclarationArgument[0].parameterSymbol
+                );
         }
 
         private TExpressionSyntax GenerateArgumentExpression(
             SyntaxGenerator syntaxGenerator,
-            IArgumentOperation argumentOperation)
+            IArgumentOperation argumentOperation
+        )
         {
             var parameterSymbol = argumentOperation.Parameter;
             Debug.Assert(parameterSymbol is not null);
             var argumentExpressionOperation = argumentOperation.Value;
-            if (argumentOperation.ArgumentKind == ArgumentKind.ParamArray
+            if (
+                argumentOperation.ArgumentKind == ArgumentKind.ParamArray
                 && parameterSymbol.Type is IArrayTypeSymbol paramArrayParameter
-                && argumentExpressionOperation is IArrayCreationOperation { Initializer: { } initializer }
-                && argumentOperation.IsImplicit)
+                && argumentExpressionOperation
+                    is IArrayCreationOperation { Initializer: { } initializer }
+                && argumentOperation.IsImplicit
+            )
             {
                 // if this argument is a param array & the array creation operation is implicitly generated,
                 // it means it is in this format:
@@ -510,20 +600,29 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 // void Callee(params int[] x) { }
                 // Collect each of these arguments and generate a new array for it.
                 // Note: it could be empty.
-                return (TExpressionSyntax)syntaxGenerator.AddParentheses(
-                    syntaxGenerator.ArrayCreationExpression(
-                        GenerateTypeSyntax(paramArrayParameter.ElementType, allowVar: false),
-                        initializer.ElementValues.SelectAsArray(op => op.Syntax)));
+                return (TExpressionSyntax)
+                    syntaxGenerator.AddParentheses(
+                        syntaxGenerator.ArrayCreationExpression(
+                            GenerateTypeSyntax(paramArrayParameter.ElementType, allowVar: false),
+                            initializer.ElementValues.SelectAsArray(op => op.Syntax)
+                        )
+                    );
             }
 
             // In all the other cases, one parameter should only maps to one argument.
-            if (argumentOperation.ArgumentKind == ArgumentKind.DefaultValue
-                && parameterSymbol.HasExplicitDefaultValue)
+            if (
+                argumentOperation.ArgumentKind == ArgumentKind.DefaultValue
+                && parameterSymbol.HasExplicitDefaultValue
+            )
             {
-                return GenerateLiteralExpression(parameterSymbol.Type, parameterSymbol.ExplicitDefaultValue);
+                return GenerateLiteralExpression(
+                    parameterSymbol.Type,
+                    parameterSymbol.ExplicitDefaultValue
+                );
             }
 
-            return (TExpressionSyntax)syntaxGenerator.AddParentheses(argumentExpressionOperation.Syntax);
+            return (TExpressionSyntax)
+                syntaxGenerator.AddParentheses(argumentExpressionOperation.Syntax);
         }
     }
 }

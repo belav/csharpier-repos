@@ -1095,8 +1095,8 @@ public class HealthCheckPublisherHostedServiceTest
 
     private static async Task AssertCanceledAsync(CancellationToken cancellationToken)
     {
-        await Assert.ThrowsAsync<TaskCanceledException>(
-            () => Task.Delay(TimeSpan.FromSeconds(10), cancellationToken)
+        await Assert.ThrowsAsync<TaskCanceledException>(() =>
+            Task.Delay(TimeSpan.FromSeconds(10), cancellationToken)
         );
     }
 

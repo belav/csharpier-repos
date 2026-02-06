@@ -39,7 +39,10 @@ namespace System.Reflection.Emit
         private Type[]? _typeArguments;
         private MethodInfo? _genericMethodDefinition;
 
-        internal MethodOnTypeBuilderInstantiation(MethodOnTypeBuilderInstantiation gmd, Type[] typeArguments)
+        internal MethodOnTypeBuilderInstantiation(
+            MethodOnTypeBuilderInstantiation gmd,
+            Type[] typeArguments
+        )
             : this(gmd._method, gmd._type)
         {
             _typeArguments = new Type[typeArguments.Length];
@@ -85,11 +88,17 @@ namespace System.Reflection.Emit
             }
         }
 
-        public override bool IsGenericMethodDefinition => _method.IsGenericMethodDefinition && _typeArguments == null;
+        public override bool IsGenericMethodDefinition =>
+            _method.IsGenericMethodDefinition && _typeArguments == null;
 
-        public override MethodInfo GetGenericMethodDefinition() { return _genericMethodDefinition ?? _method; }
+        public override MethodInfo GetGenericMethodDefinition()
+        {
+            return _genericMethodDefinition ?? _method;
+        }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArgs)
         {
             if (!_method.IsGenericMethodDefinition || (_typeArguments != null))
@@ -98,7 +107,13 @@ namespace System.Reflection.Emit
             ArgumentNullException.ThrowIfNull(typeArgs);
 
             if (_method.GetGenericArguments().Length != typeArgs.Length)
-                throw new ArgumentException(SR.Format(SR.Argument_NotEnoughGenArguments, _method.GetGenericArguments().Length, typeArgs.Length));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_NotEnoughGenArguments,
+                        _method.GetGenericArguments().Length,
+                        typeArgs.Length
+                    )
+                );
 
             foreach (Type type in typeArgs)
             {
@@ -109,9 +124,12 @@ namespace System.Reflection.Emit
         }
 
         // Called from the runtime to return the corresponding finished MethodInfo object
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "MethodOnTypeBuilderInst is Reflection.Emit's underlying implementation of MakeGenericMethod. " +
-                "Callers of the outer calls to MakeGenericMethod will be warned as appropriate.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "MethodOnTypeBuilderInst is Reflection.Emit's underlying implementation of MakeGenericMethod. "
+                + "Callers of the outer calls to MakeGenericMethod will be warned as appropriate."
+        )]
         internal MethodInfo RuntimeResolve()
         {
             Type type = _type.InternalResolve();

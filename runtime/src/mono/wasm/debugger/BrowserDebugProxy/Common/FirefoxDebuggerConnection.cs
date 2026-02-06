@@ -21,7 +21,7 @@ internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
     private readonly byte[] _lengthBuffer;
 
     public FirefoxDebuggerConnection(TcpClient tcpClient, string id, ILogger logger)
-            : base(id)
+        : base(id)
     {
         ArgumentNullException.ThrowIfNull(tcpClient);
         ArgumentNullException.ThrowIfNull(logger);
@@ -43,8 +43,10 @@ internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
                 return null;
 
             if (bytesRead + 1 > _lengthBuffer.Length)
-                throw new IOException($"Protocol error: did not get the expected length preceding a message, " +
-                                      $"after reading {bytesRead} bytes. Instead got: {Encoding.UTF8.GetString(_lengthBuffer)}");
+                throw new IOException(
+                    $"Protocol error: did not get the expected length preceding a message, "
+                        + $"after reading {bytesRead} bytes. Instead got: {Encoding.UTF8.GetString(_lengthBuffer)}"
+                );
 
             int readLen = await stream.ReadAsync(_lengthBuffer, bytesRead, 1, token);
             bytesRead += readLen;
@@ -82,7 +84,10 @@ internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
 
     public override Task SendAsync(byte[] bytes, CancellationToken token)
     {
-        byte[]? bytesWithHeader = Encoding.UTF8.GetBytes($"{bytes.Length}:").Concat(bytes).ToArray();
+        byte[]? bytesWithHeader = Encoding
+            .UTF8.GetBytes($"{bytes.Length}:")
+            .Concat(bytes)
+            .ToArray();
         NetworkStream toStream = TcpClient.GetStream();
         return toStream.WriteAsync(bytesWithHeader, token).AsTask();
     }

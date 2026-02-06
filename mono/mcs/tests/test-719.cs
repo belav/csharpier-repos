@@ -2,17 +2,15 @@
 
 public unsafe struct A
 {
-	public B* pB;
+    public B* pB;
 }
 
 public unsafe struct B
 {
-	public A* pA;
+    public A* pA;
 }
 
 public class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,26 +13,31 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Serialization {
-
+namespace System.Runtime.Serialization
+{
+    using System;
     using System.Runtime.Remoting;
     using System.Security.Permissions;
-    using System;
-[System.Runtime.InteropServices.ComVisible(true)]
-    public interface ISurrogateSelector {
+
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface ISurrogateSelector
+    {
         // Interface does not need to be marked with the serializable attribute
         // Specifies the next ISurrogateSelector to be examined for surrogates if the current
         // instance doesn't have a surrogate for the given type and assembly in the given context.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ChainSelector(ISurrogateSelector selector);
-    
+
         // Returns the appropriate surrogate for the given type in the given context.
-        [System.Security.SecurityCritical]  // auto-generated_required
-        ISerializationSurrogate GetSurrogate(Type type, StreamingContext context, out ISurrogateSelector selector);
-    
-    
+        [System.Security.SecurityCritical] // auto-generated_required
+        ISerializationSurrogate GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector selector
+        );
+
         // Return the next surrogate in the chain. Returns null if no more exist.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         ISurrogateSelector GetNextSelector();
     }
 }

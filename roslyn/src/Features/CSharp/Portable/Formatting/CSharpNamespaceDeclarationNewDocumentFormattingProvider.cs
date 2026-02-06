@@ -20,28 +20,44 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     [ExportNewDocumentFormattingProvider(LanguageNames.CSharp), Shared]
-    internal class CSharpNamespaceDeclarationNewDocumentFormattingProvider : INewDocumentFormattingProvider
+    internal class CSharpNamespaceDeclarationNewDocumentFormattingProvider
+        : INewDocumentFormattingProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNamespaceDeclarationNewDocumentFormattingProvider()
-        {
-        }
+        public CSharpNamespaceDeclarationNewDocumentFormattingProvider() { }
 
-        public async Task<Document> FormatNewDocumentAsync(Document document, Document? hintDocument, CodeCleanupOptions options, CancellationToken cancellationToken)
+        public async Task<Document> FormatNewDocumentAsync(
+            Document document,
+            Document? hintDocument,
+            CodeCleanupOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var root = (CompilationUnitSyntax)await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)
+                await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             var formattingOptions = (CSharpSyntaxFormattingOptions)options.FormattingOptions;
 
-            var namespaces = GetNamespacesToReplace(document, root, formattingOptions.NamespaceDeclarations).ToList();
+            var namespaces = GetNamespacesToReplace(
+                    document,
+                    root,
+                    formattingOptions.NamespaceDeclarations
+                )
+                .ToList();
             if (namespaces.Count != 1)
                 return document;
 
-            return await ConvertNamespaceTransform.ConvertAsync(document, namespaces[0], formattingOptions, cancellationToken).ConfigureAwait(false);
+            return await ConvertNamespaceTransform
+                .ConvertAsync(document, namespaces[0], formattingOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static IEnumerable<BaseNamespaceDeclarationSyntax> GetNamespacesToReplace(Document document, CompilationUnitSyntax root, CodeStyleOption2<NamespaceDeclarationPreference> option)
+        private static IEnumerable<BaseNamespaceDeclarationSyntax> GetNamespacesToReplace(
+            Document document,
+            CompilationUnitSyntax root,
+            CodeStyleOption2<NamespaceDeclarationPreference> option
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var declarations = root.DescendantNodes().OfType<BaseNamespaceDeclarationSyntax>();
@@ -49,8 +65,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             foreach (var declaration in declarations)
             {
                 // Passing in forAnalyzer: true means we'll only get a result if the declaration doesn't match the preferences
-                if (ConvertNamespaceAnalysis.CanOfferUseBlockScoped(option, declaration, forAnalyzer: true) ||
-                    ConvertNamespaceAnalysis.CanOfferUseFileScoped(option, root, declaration, forAnalyzer: true))
+                if (
+                    ConvertNamespaceAnalysis.CanOfferUseBlockScoped(
+                        option,
+                        declaration,
+                        forAnalyzer: true
+                    )
+                    || ConvertNamespaceAnalysis.CanOfferUseFileScoped(
+                        option,
+                        root,
+                        declaration,
+                        forAnalyzer: true
+                    )
+                )
                 {
                     yield return declaration;
                 }

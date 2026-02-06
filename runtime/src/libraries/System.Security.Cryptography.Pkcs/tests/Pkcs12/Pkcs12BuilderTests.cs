@@ -20,12 +20,14 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static readonly PbeParameters s_pbkdf2Parameters = new PbeParameters(
             PbeEncryptionAlgorithm.Aes256Cbc,
             HashAlgorithmName.SHA384,
-            0x1001);
+            0x1001
+        );
 
         private static readonly PbeParameters s_win7Pbe = new PbeParameters(
             PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
             HashAlgorithmName.SHA1,
-            2048);
+            2048
+        );
 
         [Theory]
         [InlineData(false, false)]
@@ -63,9 +65,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12SafeContents readContents = authSafe[0];
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.Password,
-                readContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.Password, readContents.ConfidentialityMode);
 
             if (encryptBytes)
             {
@@ -90,9 +90,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 }
             }
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.None,
-                readContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.None, readContents.ConfidentialityMode);
 
             List<Pkcs12SafeBag> bags = readContents.GetBags().ToList();
             Assert.Equal(1, bags.Count);
@@ -110,8 +108,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12Builder builder = new Pkcs12Builder();
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => builder.AddSafeContentsEncrypted(contents, s_derNull.Span, s_win7Pbe));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                builder.AddSafeContentsEncrypted(contents, s_derNull.Span, s_win7Pbe)
+            );
         }
 
         [Fact]
@@ -120,7 +119,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Builder builder = new Pkcs12Builder();
             Assert.False(builder.IsSealed);
             Assert.Throws<InvalidOperationException>(() => builder.Encode());
-            Assert.Throws<InvalidOperationException>(() => builder.TryEncode(Span<byte>.Empty, out _));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.TryEncode(Span<byte>.Empty, out _)
+            );
         }
 
         [Theory]
@@ -161,7 +162,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Span<byte> bufSpan = buf;
 
             // Span too small
-            Assert.False(builder2.TryEncode(buf.AsSpan(0, encoded.Length - 1), out int bytesWritten));
+            Assert.False(
+                builder2.TryEncode(buf.AsSpan(0, encoded.Length - 1), out int bytesWritten)
+            );
             Assert.Equal(0, bytesWritten);
 
             // Span exactly right
@@ -179,13 +182,16 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             // The same contents except the MAC (different random salt)
             Assert.Equal(
                 encoded.AsSpan(0, bytesWritten - macTrailerLength).ByteArrayToHex(),
-                buf.AsSpan(1, bytesWritten - macTrailerLength).ByteArrayToHex());
+                buf.AsSpan(1, bytesWritten - macTrailerLength).ByteArrayToHex()
+            );
 
             if (macTrailerLength > 0)
             {
                 Assert.NotEqual(
                     encoded.AsSpan(bytesWritten - macTrailerLength).ByteArrayToHex(),
-                    buf.AsSpan(1 + bytesWritten - macTrailerLength, macTrailerLength).ByteArrayToHex());
+                    buf.AsSpan(1 + bytesWritten - macTrailerLength, macTrailerLength)
+                        .ByteArrayToHex()
+                );
             }
 
             // Span larger than needed
@@ -204,13 +210,16 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             // The same contents except the MAC (different random salt)
             Assert.Equal(
                 encoded.AsSpan(0, bytesWritten - macTrailerLength).ByteArrayToHex(),
-                buf.AsSpan(2, bytesWritten - macTrailerLength).ByteArrayToHex());
+                buf.AsSpan(2, bytesWritten - macTrailerLength).ByteArrayToHex()
+            );
 
             if (macTrailerLength > 0)
             {
                 Assert.NotEqual(
                     encoded.AsSpan(bytesWritten - macTrailerLength).ByteArrayToHex(),
-                    buf.AsSpan(2 + bytesWritten - macTrailerLength, macTrailerLength).ByteArrayToHex());
+                    buf.AsSpan(2 + bytesWritten - macTrailerLength, macTrailerLength)
+                        .ByteArrayToHex()
+                );
             }
         }
 
@@ -222,8 +231,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Assert.Throws<InvalidOperationException>(() => builder.SealWithoutIntegrity());
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.SealWithMac(ReadOnlySpan<char>.Empty, HashAlgorithmName.SHA1, 2));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.SealWithMac(ReadOnlySpan<char>.Empty, HashAlgorithmName.SHA1, 2)
+            );
         }
 
         [Theory]
@@ -239,7 +249,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             if (withSpan)
             {
-                builder1.AddSafeContentsEncrypted(contents, ReadOnlySpan<byte>.Empty, s_pbkdf2Parameters);
+                builder1.AddSafeContentsEncrypted(
+                    contents,
+                    ReadOnlySpan<byte>.Empty,
+                    s_pbkdf2Parameters
+                );
             }
             else
             {
@@ -269,7 +283,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
             contents.AddSecret(s_zeroOid, s_derNull);
 
-            builder1.AddSafeContentsEncrypted(contents, ReadOnlySpan<byte>.Empty, s_pbkdf2Parameters);
+            builder1.AddSafeContentsEncrypted(
+                contents,
+                ReadOnlySpan<byte>.Empty,
+                s_pbkdf2Parameters
+            );
             builder1.SealWithoutIntegrity();
 
             byte[] encoded = builder1.Encode();
@@ -279,17 +297,23 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentException>(
                 "safeContents",
-                () => builder2.AddSafeContentsEncrypted(
-                    info.AuthenticatedSafe[0],
-                    "nope",
-                    s_pbkdf2Parameters));
+                () =>
+                    builder2.AddSafeContentsEncrypted(
+                        info.AuthenticatedSafe[0],
+                        "nope",
+                        s_pbkdf2Parameters
+                    )
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "safeContents",
-                () => builder2.AddSafeContentsEncrypted(
-                    info.AuthenticatedSafe[0],
-                    s_derNull.Span,
-                    s_pbkdf2Parameters));
+                () =>
+                    builder2.AddSafeContentsEncrypted(
+                        info.AuthenticatedSafe[0],
+                        s_derNull.Span,
+                        s_pbkdf2Parameters
+                    )
+            );
         }
 
         [Fact]
@@ -301,20 +325,33 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Builder builder = new Pkcs12Builder();
             builder.SealWithoutIntegrity();
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsUnencrypted(contents));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsUnencrypted(contents)
+            );
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsEncrypted(contents, Array.Empty<byte>(), s_pbkdf2Parameters));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(contents, Array.Empty<byte>(), s_pbkdf2Parameters)
+            );
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<byte>.Empty, s_pbkdf2Parameters));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(
+                    contents,
+                    ReadOnlySpan<byte>.Empty,
+                    s_pbkdf2Parameters
+                )
+            );
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsEncrypted(contents, string.Empty, s_pbkdf2Parameters));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(contents, string.Empty, s_pbkdf2Parameters)
+            );
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<char>.Empty, s_pbkdf2Parameters));
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(
+                    contents,
+                    ReadOnlySpan<char>.Empty,
+                    s_pbkdf2Parameters
+                )
+            );
         }
 
         [Fact]
@@ -324,23 +361,39 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => builder.AddSafeContentsUnencrypted(null));
+                () => builder.AddSafeContentsUnencrypted(null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => builder.AddSafeContentsEncrypted(null, Array.Empty<byte>(), s_pbkdf2Parameters));
+                () =>
+                    builder.AddSafeContentsEncrypted(null, Array.Empty<byte>(), s_pbkdf2Parameters)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => builder.AddSafeContentsEncrypted(null, ReadOnlySpan<byte>.Empty, s_pbkdf2Parameters));
+                () =>
+                    builder.AddSafeContentsEncrypted(
+                        null,
+                        ReadOnlySpan<byte>.Empty,
+                        s_pbkdf2Parameters
+                    )
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => builder.AddSafeContentsEncrypted(null, string.Empty, s_pbkdf2Parameters));
+                () => builder.AddSafeContentsEncrypted(null, string.Empty, s_pbkdf2Parameters)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => builder.AddSafeContentsEncrypted(null, ReadOnlySpan<char>.Empty, s_pbkdf2Parameters));
+                () =>
+                    builder.AddSafeContentsEncrypted(
+                        null,
+                        ReadOnlySpan<char>.Empty,
+                        s_pbkdf2Parameters
+                    )
+            );
         }
 
         [Fact]
@@ -351,19 +404,23 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "pbeParameters",
-                () => builder.AddSafeContentsEncrypted(contents, Array.Empty<byte>(), null));
+                () => builder.AddSafeContentsEncrypted(contents, Array.Empty<byte>(), null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "pbeParameters",
-                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<byte>.Empty, null));
+                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<byte>.Empty, null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "pbeParameters",
-                () => builder.AddSafeContentsEncrypted(contents, string.Empty, null));
+                () => builder.AddSafeContentsEncrypted(contents, string.Empty, null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "pbeParameters",
-                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<char>.Empty, null));
+                () => builder.AddSafeContentsEncrypted(contents, ReadOnlySpan<char>.Empty, null)
+            );
         }
 
         [Theory]
@@ -390,8 +447,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             byte[] encoded = builder.Encode();
 
             const string EmptyHex =
-                "3029020103302406092A864886F70D010701A01704153013301106092A864886" +
-                "F70D010701A00404023000";
+                "3029020103302406092A864886F70D010701A01704153013301106092A864886"
+                + "F70D010701A00404023000";
 
             if (withMac)
             {
@@ -417,7 +474,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "iterationCount",
-                () => builder.SealWithMac("hi", HashAlgorithmName.SHA1, iterationCount));
+                () => builder.SealWithMac("hi", HashAlgorithmName.SHA1, iterationCount)
+            );
         }
 
         [Theory]
@@ -441,8 +499,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             byte[] encoded = builder.Encode();
 
-            const string FullyEmptyHex =
-                "3016020103301106092A864886F70D010701A00404023000";
+            const string FullyEmptyHex = "3016020103301106092A864886F70D010701A00404023000";
 
             if (withMac)
             {

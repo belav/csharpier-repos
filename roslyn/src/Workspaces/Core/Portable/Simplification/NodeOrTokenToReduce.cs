@@ -7,5 +7,6 @@ namespace Microsoft.CodeAnalysis.Simplification
     internal readonly record struct NodeOrTokenToReduce(
         SyntaxNodeOrToken NodeOrToken,
         bool SimplifyAllDescendants,
-        SyntaxNodeOrToken OriginalNodeOrToken);
+        SyntaxNodeOrToken OriginalNodeOrToken
+    );
 }

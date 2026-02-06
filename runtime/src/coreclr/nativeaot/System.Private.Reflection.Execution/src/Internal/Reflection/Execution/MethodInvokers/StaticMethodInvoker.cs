@@ -13,19 +13,23 @@ namespace Internal.Reflection.Execution.MethodInvokers
     internal sealed class StaticMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
         public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo)
-            : base(methodInvokeInfo)
-        {
-        }
+            : base(methodInvokeInfo) { }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             object? result = MethodInvokeInfo.Invoke(
                 null, // this pointer is ignored for static methods
                 MethodInvokeInfo.LdFtnResult,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -36,24 +40,32 @@ namespace Internal.Reflection.Execution.MethodInvokers
             object? result = MethodInvokeInfo.Invoke(
                 null, // this pointer is ignored for static methods
                 MethodInvokeInfo.LdFtnResult,
-                arguments);
+                arguments
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? InvokeDirectWithFewArgs(object? thisObject, Span<object?> arguments)
+        protected sealed override object? InvokeDirectWithFewArgs(
+            object? thisObject,
+            Span<object?> arguments
+        )
         {
             object? result = MethodInvokeInfo.InvokeDirectWithFewArgs(
                 null, // this pointer is ignored for static methods
                 MethodInvokeInfo.LdFtnResult,
-                arguments);
+                arguments
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
-
-        protected sealed override object CreateInstance(object[] arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object CreateInstance(
+            object[] arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             throw NotImplemented.ByDesign;
         }

@@ -15,16 +15,28 @@ namespace ComInterfaceGenerator.Tests
             [UnmanagedObjectUnwrapperAttribute<VTableGCHandlePair<IStaticMethodTable>>]
             internal partial interface IStaticMethodTable : IUnmanagedInterfaceType
             {
-                static void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation => null;
+                static void* IUnmanagedInterfaceType.VirtualMethodTableManagedImplementation =>
+                    null;
 
-                [VirtualMethodIndex(0, Direction = MarshalDirection.ManagedToUnmanaged, ImplicitThisParameter = false)]
+                [VirtualMethodIndex(
+                    0,
+                    Direction = MarshalDirection.ManagedToUnmanaged,
+                    ImplicitThisParameter = false
+                )]
                 int Add(int x, int y);
-                [VirtualMethodIndex(1, Direction = MarshalDirection.ManagedToUnmanaged, ImplicitThisParameter = false)]
+
+                [VirtualMethodIndex(
+                    1,
+                    Direction = MarshalDirection.ManagedToUnmanaged,
+                    ImplicitThisParameter = false
+                )]
                 int Multiply(int x, int y);
             }
 
             [NativeMarshalling(typeof(StaticMethodTableMarshaller))]
-            public class StaticMethodTable : IStaticMethodTable.Native, IUnmanagedVirtualMethodTableProvider
+            public class StaticMethodTable
+                : IStaticMethodTable.Native,
+                    IUnmanagedVirtualMethodTableProvider
             {
                 private readonly void* _vtableStart;
 
@@ -40,10 +52,15 @@ namespace ComInterfaceGenerator.Tests
                 }
             }
 
-            [CustomMarshaller(typeof(StaticMethodTable), MarshalMode.ManagedToUnmanagedOut, typeof(StaticMethodTableMarshaller))]
+            [CustomMarshaller(
+                typeof(StaticMethodTable),
+                MarshalMode.ManagedToUnmanagedOut,
+                typeof(StaticMethodTableMarshaller)
+            )]
             static class StaticMethodTableMarshaller
             {
-                public static StaticMethodTable ConvertToManaged(void* value) => new StaticMethodTable(value);
+                public static StaticMethodTable ConvertToManaged(void* value) =>
+                    new StaticMethodTable(value);
             }
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_static_function_table")]
@@ -59,7 +76,8 @@ namespace ComInterfaceGenerator.Tests
             int x = 7;
             int y = 56;
 
-            NativeExportsNE.NoImplicitThis.IStaticMethodTable staticMethodTable = NativeExportsNE.NoImplicitThis.GetStaticFunctionTable();
+            NativeExportsNE.NoImplicitThis.IStaticMethodTable staticMethodTable =
+                NativeExportsNE.NoImplicitThis.GetStaticFunctionTable();
 
             Assert.Equal(x + y, staticMethodTable.Add(x, y));
             Assert.Equal(x * y, staticMethodTable.Multiply(x, y));

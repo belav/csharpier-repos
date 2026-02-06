@@ -25,7 +25,7 @@ namespace System.Data.Objects
         // Note: There are NO public constructors for this class - it is for internal
         // ObjectQuery<T> use only, but must be public so that an instance thereof can be
         // a public property on ObjectQuery<T>.
-    
+
         #region Internal Constructors
 
         // ---------------------
@@ -41,7 +41,7 @@ namespace System.Data.Objects
         internal ObjectParameterCollection(ClrPerspective perspective)
         {
             EntityUtil.CheckArgumentNull(perspective, "perspective");
- 
+
             // The perspective is required to do type-checking on parameters as they
             // are added to the collection.
             this._perspective = perspective;
@@ -71,7 +71,7 @@ namespace System.Data.Objects
         private List<ObjectParameter> _parameters;
 
         /// <summary>
-        ///   A CLR perspective necessary to do type-checking on parameters as they 
+        ///   A CLR perspective necessary to do type-checking on parameters as they
         ///   are added to the collection.
         /// </summary>
         private ClrPerspective _perspective;
@@ -94,10 +94,7 @@ namespace System.Data.Objects
         /// </summary>
         public int Count
         {
-            get
-            {
-                return this._parameters.Count;
-            }
+            get { return this._parameters.Count; }
         }
 
         /// <summary>
@@ -108,10 +105,7 @@ namespace System.Data.Objects
         /// </summary>
         bool ICollection<ObjectParameter>.IsReadOnly
         {
-            get
-            {
-                return (this._locked);
-            }
+            get { return (this._locked); }
         }
 
         #endregion
@@ -144,7 +138,12 @@ namespace System.Data.Objects
 
                 if (index == -1)
                 {
-                    throw EntityUtil.ArgumentOutOfRange(System.Data.Entity.Strings.ObjectParameterCollection_ParameterNameNotFound(name), "name");
+                    throw EntityUtil.ArgumentOutOfRange(
+                        System.Data.Entity.Strings.ObjectParameterCollection_ParameterNameNotFound(
+                            name
+                        ),
+                        "name"
+                    );
                 }
 
                 return this._parameters[index];
@@ -163,7 +162,7 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This method adds the specified parameter object to the collection. If
-        ///   the parameter object already exists in the collection, an exception is 
+        ///   the parameter object already exists in the collection, an exception is
         ///   thrown.
         /// </summary>
         /// <param name="parameter">
@@ -174,37 +173,52 @@ namespace System.Data.Objects
         ///   If the value of the parameter argument is null.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   If the parameter argument already exists in the collection. This 
+        ///   If the parameter argument already exists in the collection. This
         ///   behavior differs from that of most collections which allow duplicate
         ///   entries.
         /// </exception>
         /// <exception cref="ArgumentException">
         ///   If another parameter with the same name as the parameter argument
         ///   already exists in the collection. Note that the lookup is case-
-        ///   insensitive. This behavior differs from that of most collections,  
+        ///   insensitive. This behavior differs from that of most collections,
         ///   and is more like that of a Dictionary.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///   If the type of the specified parameter is invalid. 
+        ///   If the type of the specified parameter is invalid.
         /// </exception>
-        public void Add (ObjectParameter parameter)
+        public void Add(ObjectParameter parameter)
         {
             EntityUtil.CheckArgumentNull(parameter, "parameter");
             CheckUnlocked();
 
             if (this.Contains(parameter))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectParameterCollection_ParameterAlreadyExists(parameter.Name), "parameter");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectParameterCollection_ParameterAlreadyExists(
+                        parameter.Name
+                    ),
+                    "parameter"
+                );
             }
 
             if (this.Contains(parameter.Name))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectParameterCollection_DuplicateParameterName(parameter.Name), "parameter");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectParameterCollection_DuplicateParameterName(
+                        parameter.Name
+                    ),
+                    "parameter"
+                );
             }
 
             if (!parameter.ValidateParameterType(this._perspective))
             {
-                throw EntityUtil.ArgumentOutOfRange(System.Data.Entity.Strings.ObjectParameter_InvalidParameterType(parameter.ParameterType.FullName), "parameter");
+                throw EntityUtil.ArgumentOutOfRange(
+                    System.Data.Entity.Strings.ObjectParameter_InvalidParameterType(
+                        parameter.ParameterType.FullName
+                    ),
+                    "parameter"
+                );
             }
 
             this._parameters.Add(parameter);
@@ -241,15 +255,15 @@ namespace System.Data.Objects
         ///   True if the parameter object was found in the collection, false otherwise.
         ///   Note that this is a reference-based lookup, which means that if the para-
         ///   meter argument has the same name as a parameter object in the collection,
-        ///   this method will only return true if it's the same object. 
+        ///   this method will only return true if it's the same object.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   If the value of the parameter argument is null.
         /// </exception>
-        public bool Contains (ObjectParameter parameter)
+        public bool Contains(ObjectParameter parameter)
         {
             EntityUtil.CheckArgumentNull(parameter, "parameter");
-            
+
             return this._parameters.Contains(parameter);
         }
 
@@ -259,7 +273,7 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This method checks for the existence of a given parameter in the collection
-        ///   by name. 
+        ///   by name.
         /// </summary>
         /// <param name="name">
         ///   The name of the parameter to look for in the collection.
@@ -271,10 +285,10 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentNullException">
         ///   If the value of the parameter argument is null.
         /// </exception>
-        public bool Contains (string name)
+        public bool Contains(string name)
         {
             EntityUtil.CheckArgumentNull(name, "name");
-            
+
             if (this.IndexOf(name) != -1)
             {
                 return true;
@@ -298,7 +312,7 @@ namespace System.Data.Objects
         ///   The index in the array at which to start copying the parameters.
         /// </param>
         /// <returns></returns>
-        public void CopyTo (ObjectParameter[] array, int index)
+        public void CopyTo(ObjectParameter[] array, int index)
         {
             this._parameters.CopyTo(array, index);
         }
@@ -308,8 +322,8 @@ namespace System.Data.Objects
         #region Remove
 
         /// <summary>
-        ///   This method removes an instance of a parameter from the collection by 
-        ///   reference if it exists in the collection.  To remove a parameter by name, 
+        ///   This method removes an instance of a parameter from the collection by
+        ///   reference if it exists in the collection.  To remove a parameter by name,
         ///   first use the Contains(name) method or this[name] indexer to retrieve
         ///   the parameter instance, then remove it using this method.
         /// </summary>
@@ -318,21 +332,21 @@ namespace System.Data.Objects
         /// </param>
         /// <returns>
         ///   True if the parameter object was found and removed from the collection,
-        ///   false otherwise. Note that this is a reference-based lookup, which means 
-        ///   that if the parameter argument has the same name as a parameter object 
-        ///   in the collection, this method will remove it only if it's the same object.  
+        ///   false otherwise. Note that this is a reference-based lookup, which means
+        ///   that if the parameter argument has the same name as a parameter object
+        ///   in the collection, this method will remove it only if it's the same object.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   If the value of the parameter argument is null.
         /// </exception>
-        public bool Remove (ObjectParameter parameter)
+        public bool Remove(ObjectParameter parameter)
         {
             EntityUtil.CheckArgumentNull(parameter, "parameter");
             CheckUnlocked();
-            
+
             bool removed = this._parameters.Remove(parameter);
 
-            // If the specified parameter was found in the collection and removed, 
+            // If the specified parameter was found in the collection and removed,
             // clear out the cached string representation of this parameter collection
             // so that the next call to GetCacheKey (if any) will regenerate it based on
             // the new state of this collection.
@@ -345,19 +359,21 @@ namespace System.Data.Objects
         }
 
         #endregion
-  
+
         #region GetEnumerator
 
         /// <summary>
         ///   These methods return enumerator instances, which allow the collection to
         ///   be iterated through and traversed.
         /// </summary>
-        IEnumerator<ObjectParameter> IEnumerable<ObjectParameter>.GetEnumerator() 
+        IEnumerator<ObjectParameter> IEnumerable<ObjectParameter>.GetEnumerator()
         {
-            return ((System.Collections.Generic.ICollection<ObjectParameter>)this._parameters).GetEnumerator();
+            return (
+                (System.Collections.Generic.ICollection<ObjectParameter>)this._parameters
+            ).GetEnumerator();
         }
-        
-        IEnumerator IEnumerable.GetEnumerator() 
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return ((System.Collections.ICollection)this._parameters).GetEnumerator();
         }
@@ -382,14 +398,15 @@ namespace System.Data.Objects
         {
             if (null == this._cacheKey)
             {
-                if(this._parameters.Count > 0)
+                if (this._parameters.Count > 0)
                 {
                     // Future Enhancement: If the separate branch for a single parameter does not have a measurable perf advantage, remove it.
                     if (1 == this._parameters.Count)
                     {
                         // if its one parameter only, there is no need to use stringbuilder
                         ObjectParameter theParam = this._parameters[0];
-                        this._cacheKey = "@@1" + theParam.Name + ":" + theParam.ParameterType.FullName;
+                        this._cacheKey =
+                            "@@1" + theParam.Name + ":" + theParam.ParameterType.FullName;
                     }
                     else
                     {
@@ -400,7 +417,7 @@ namespace System.Data.Objects
                         for (int idx = 0; idx < this._parameters.Count; idx++)
                         {
                             //
-                            // 
+                            //
 
                             if (idx > 0)
                             {
@@ -426,7 +443,10 @@ namespace System.Data.Objects
         /// Calling this method consecutively with the same value has no effect but does not throw an exception.
         /// </summary>
         /// <param name="isReadOnly">If <c>true</c>, this parameter collection is now locked; otherwise it is unlocked</param>
-        internal void SetReadOnly(bool isReadOnly) { this._locked = isReadOnly; }
+        internal void SetReadOnly(bool isReadOnly)
+        {
+            this._locked = isReadOnly;
+        }
 
         /// <summary>
         /// Creates a new copy of the specified parameter collection containing copies of its element <see cref="ObjectParameter"/>s.
@@ -441,7 +461,9 @@ namespace System.Data.Objects
                 return null;
             }
 
-            ObjectParameterCollection retParams = new ObjectParameterCollection(copyParams._perspective);
+            ObjectParameterCollection retParams = new ObjectParameterCollection(
+                copyParams._perspective
+            );
             foreach (ObjectParameter param in copyParams)
             {
                 retParams.Add(param.ShallowCopy());
@@ -460,10 +482,10 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This private method checks for the existence of a given parameter object
-        ///   by name by iterating through the list and comparing each parameter name 
+        ///   by name by iterating through the list and comparing each parameter name
         ///   to the specified name. This is a case-insensitive lookup.
         /// </summary>
-        private int IndexOf (string name)
+        private int IndexOf(string name)
         {
             int index = 0;
 
@@ -488,7 +510,9 @@ namespace System.Data.Objects
         {
             if (this._locked)
             {
-                throw EntityUtil.InvalidOperation(Strings.ObjectParameterCollection_ParametersLocked);
+                throw EntityUtil.InvalidOperation(
+                    Strings.ObjectParameterCollection_ParametersLocked
+                );
             }
         }
 

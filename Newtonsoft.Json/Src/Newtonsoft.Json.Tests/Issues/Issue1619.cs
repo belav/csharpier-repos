@@ -41,10 +41,7 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            Foo value = new Foo
-            {
-                Bar = new DirectoryInfo(@"c:\temp")
-            };
+            Foo value = new Foo { Bar = new DirectoryInfo(@"c:\temp") };
 
             string json = JsonConvert.SerializeObject(value, new DirectoryInfoJsonConverter());
             Assert.AreEqual(@"{""Bar"":""c:\\temp""}", json);
@@ -62,7 +59,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 return objectType == typeof(DirectoryInfo);
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 if (reader.Value is string s)
                 {
@@ -72,7 +74,11 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new ArgumentOutOfRangeException(nameof(reader));
             }
 
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 if (!(value is DirectoryInfo directoryInfo))
                 {

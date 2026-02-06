@@ -9,14 +9,10 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeEvpPKeyCtxHandle : SafeHandle
     {
         public SafeEvpPKeyCtxHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         public SafeEvpPKeyCtxHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

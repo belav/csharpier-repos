@@ -26,8 +26,7 @@ public abstract class HandlerDescriptor : IMethodDescriptor
     private protected abstract IEnumerable<ParameterDescriptor> InitializeParameterDescriptors();
 
     /// <inheritdoc />
-    public override string ToString() =>
-        $"{Parent} ({string.Join(", ", ParameterDescriptors)})";
+    public override string ToString() => $"{Parent} ({string.Join(", ", ParameterDescriptors)})";
 
     /// <summary>
     /// Creates a descriptor based on the specified method.

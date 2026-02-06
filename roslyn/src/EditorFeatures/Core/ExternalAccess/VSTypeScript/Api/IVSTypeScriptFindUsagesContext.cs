@@ -29,8 +29,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// </summary>
         ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken);
 
-        ValueTask OnDefinitionFoundAsync(VSTypeScriptDefinitionItem definition, CancellationToken cancellationToken);
-        ValueTask OnReferenceFoundAsync(VSTypeScriptSourceReferenceItem reference, CancellationToken cancellationToken);
+        ValueTask OnDefinitionFoundAsync(
+            VSTypeScriptDefinitionItem definition,
+            CancellationToken cancellationToken
+        );
+        ValueTask OnReferenceFoundAsync(
+            VSTypeScriptSourceReferenceItem reference,
+            CancellationToken cancellationToken
+        );
 
         ValueTask OnCompletedAsync(CancellationToken cancellationToken);
     }
@@ -43,98 +49,158 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 
     internal abstract class VSTypeScriptDefinitionItemNavigator
     {
-        public abstract Task<bool> CanNavigateToAsync(Workspace workspace, CancellationToken cancellationToken);
-        public abstract Task<bool> TryNavigateToAsync(Workspace workspace, bool showInPreviewTab, bool activateTab, CancellationToken cancellationToken);
+        public abstract Task<bool> CanNavigateToAsync(
+            Workspace workspace,
+            CancellationToken cancellationToken
+        );
+        public abstract Task<bool> TryNavigateToAsync(
+            Workspace workspace,
+            bool showInPreviewTab,
+            bool activateTab,
+            CancellationToken cancellationToken
+        );
     }
 
     internal sealed class VSTypeScriptDefinitionItem
     {
-        private sealed class ExternalDefinitionItem(VSTypeScriptDefinitionItemNavigator navigator, ImmutableArray<string> tags, ImmutableArray<TaggedText> displayParts) : DefinitionItem(tags,
-                   displayParts,
-                   ImmutableArray<TaggedText>.Empty,
-                   originationParts: default,
-                   sourceSpans: default,
-                   properties: null,
-                   displayIfNoReferences: true)
+        private sealed class ExternalDefinitionItem(
+            VSTypeScriptDefinitionItemNavigator navigator,
+            ImmutableArray<string> tags,
+            ImmutableArray<TaggedText> displayParts
+        )
+            : DefinitionItem(
+                tags,
+                displayParts,
+                ImmutableArray<TaggedText>.Empty,
+                originationParts: default,
+                sourceSpans: default,
+                properties: null,
+                displayIfNoReferences: true
+            )
         {
             private readonly VSTypeScriptDefinitionItemNavigator _navigator = navigator;
 
             internal override bool IsExternal => true;
 
-            public override async Task<INavigableLocation?> GetNavigableLocationAsync(Workspace workspace, CancellationToken cancellationToken)
+            public override async Task<INavigableLocation?> GetNavigableLocationAsync(
+                Workspace workspace,
+                CancellationToken cancellationToken
+            )
             {
-                if (!await _navigator.CanNavigateToAsync(workspace, cancellationToken).ConfigureAwait(false))
+                if (
+                    !await _navigator
+                        .CanNavigateToAsync(workspace, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                     return null;
 
-                return new NavigableLocation((options, cancellationToken) =>
-                    _navigator.TryNavigateToAsync(workspace, options.PreferProvisionalTab, options.ActivateTab, cancellationToken));
+                return new NavigableLocation(
+                    (options, cancellationToken) =>
+                        _navigator.TryNavigateToAsync(
+                            workspace,
+                            options.PreferProvisionalTab,
+                            options.ActivateTab,
+                            cancellationToken
+                        )
+                );
             }
         }
 
         internal readonly DefinitionItem UnderlyingObject;
 
-        internal VSTypeScriptDefinitionItem(DefinitionItem underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        internal VSTypeScriptDefinitionItem(DefinitionItem underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
         public static VSTypeScriptDefinitionItem Create(
             ImmutableArray<string> tags,
             ImmutableArray<TaggedText> displayParts,
             ImmutableArray<VSTypeScriptDocumentSpan> sourceSpans,
             ImmutableArray<TaggedText> nameDisplayParts = default,
-            bool displayIfNoReferences = true)
+            bool displayIfNoReferences = true
+        )
         {
-            return new(DefinitionItem.Create(
-                tags, displayParts, sourceSpans.SelectAsArray(span => span.ToDocumentSpan()), nameDisplayParts,
-                properties: null, displayableProperties: ImmutableDictionary<string, string>.Empty, displayIfNoReferences: displayIfNoReferences));
+            return new(
+                DefinitionItem.Create(
+                    tags,
+                    displayParts,
+                    sourceSpans.SelectAsArray(span => span.ToDocumentSpan()),
+                    nameDisplayParts,
+                    properties: null,
+                    displayableProperties: ImmutableDictionary<string, string>.Empty,
+                    displayIfNoReferences: displayIfNoReferences
+                )
+            );
         }
 
         public static VSTypeScriptDefinitionItem CreateExternal(
             VSTypeScriptDefinitionItemNavigator navigator,
             ImmutableArray<string> tags,
-            ImmutableArray<TaggedText> displayParts)
-            => new(new ExternalDefinitionItem(navigator, tags, displayParts));
+            ImmutableArray<TaggedText> displayParts
+        ) => new(new ExternalDefinitionItem(navigator, tags, displayParts));
 
         [Obsolete]
-        public static VSTypeScriptDefinitionItem Create(VSTypeScriptDefinitionItemBase item)
-            => new(item);
+        public static VSTypeScriptDefinitionItem Create(VSTypeScriptDefinitionItemBase item) =>
+            new(item);
 
         public ImmutableArray<string> Tags => UnderlyingObject.Tags;
         public ImmutableArray<TaggedText> DisplayParts => UnderlyingObject.DisplayParts;
 
-        public ImmutableArray<VSTypeScriptDocumentSpan> GetSourceSpans()
-            => UnderlyingObject.SourceSpans.SelectAsArray(span => new VSTypeScriptDocumentSpan(span));
+        public ImmutableArray<VSTypeScriptDocumentSpan> GetSourceSpans() =>
+            UnderlyingObject.SourceSpans.SelectAsArray(span => new VSTypeScriptDocumentSpan(span));
 
-        public async Task<bool> CanNavigateToAsync(Workspace workspace, CancellationToken cancellationToken)
-            => await UnderlyingObject.GetNavigableLocationAsync(workspace, cancellationToken).ConfigureAwait(false) != null;
+        public async Task<bool> CanNavigateToAsync(
+            Workspace workspace,
+            CancellationToken cancellationToken
+        ) =>
+            await UnderlyingObject
+                .GetNavigableLocationAsync(workspace, cancellationToken)
+                .ConfigureAwait(false) != null;
 
-        public async Task<bool> TryNavigateToAsync(Workspace workspace, bool showInPreviewTab, bool activateTab, CancellationToken cancellationToken)
+        public async Task<bool> TryNavigateToAsync(
+            Workspace workspace,
+            bool showInPreviewTab,
+            bool activateTab,
+            CancellationToken cancellationToken
+        )
         {
-            var location = await UnderlyingObject.GetNavigableLocationAsync(workspace, cancellationToken).ConfigureAwait(false);
-            return location != null &&
-                await location.NavigateToAsync(new NavigationOptions(showInPreviewTab, activateTab), cancellationToken).ConfigureAwait(false);
+            var location = await UnderlyingObject
+                .GetNavigableLocationAsync(workspace, cancellationToken)
+                .ConfigureAwait(false);
+            return location != null
+                && await location
+                    .NavigateToAsync(
+                        new NavigationOptions(showInPreviewTab, activateTab),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
     }
 
     internal sealed class VSTypeScriptSourceReferenceItem(
         VSTypeScriptDefinitionItem definition,
         VSTypeScriptDocumentSpan sourceSpan,
-        VSTypeScriptSymbolUsageInfo symbolUsageInfo)
+        VSTypeScriptSymbolUsageInfo symbolUsageInfo
+    )
     {
-        internal readonly SourceReferenceItem UnderlyingObject = new SourceReferenceItem(definition.UnderlyingObject, sourceSpan.ToDocumentSpan(), symbolUsageInfo.UnderlyingObject);
+        internal readonly SourceReferenceItem UnderlyingObject = new SourceReferenceItem(
+            definition.UnderlyingObject,
+            sourceSpan.ToDocumentSpan(),
+            symbolUsageInfo.UnderlyingObject
+        );
 
-        public VSTypeScriptDocumentSpan GetSourceSpan()
-            => new(UnderlyingObject.SourceSpan);
+        public VSTypeScriptDocumentSpan GetSourceSpan() => new(UnderlyingObject.SourceSpan);
     }
 
     internal readonly struct VSTypeScriptSymbolUsageInfo
     {
         internal readonly SymbolUsageInfo UnderlyingObject;
 
-        private VSTypeScriptSymbolUsageInfo(SymbolUsageInfo underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        private VSTypeScriptSymbolUsageInfo(SymbolUsageInfo underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static VSTypeScriptSymbolUsageInfo Create(VSTypeScriptValueUsageInfo valueUsageInfo)
-            => new(SymbolUsageInfo.Create((ValueUsageInfo)valueUsageInfo));
+        public static VSTypeScriptSymbolUsageInfo Create(
+            VSTypeScriptValueUsageInfo valueUsageInfo
+        ) => new(SymbolUsageInfo.Create((ValueUsageInfo)valueUsageInfo));
     }
 
     [Flags]
@@ -148,6 +214,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         ReadWrite = ValueUsageInfo.ReadWrite,
         ReadableReference = ValueUsageInfo.ReadableReference,
         WritableReference = ValueUsageInfo.WritableReference,
-        ReadableWritableReference = ValueUsageInfo.ReadableWritableReference
+        ReadableWritableReference = ValueUsageInfo.ReadableWritableReference,
     }
 }

@@ -22,16 +22,19 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
     {
         private readonly EmbeddedLanguageInfo _info;
 
-        protected AbstractJsonDetectionCodeFixProvider(
-            EmbeddedLanguageInfo info)
+        protected AbstractJsonDetectionCodeFixProvider(EmbeddedLanguageInfo info)
         {
             _info = info;
         }
 
-        protected abstract void AddComment(SyntaxEditor editor, SyntaxToken stringLiteral, string commentContents);
+        protected abstract void AddComment(
+            SyntaxEditor editor,
+            SyntaxToken stringLiteral,
+            string commentContents
+        );
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(AbstractJsonDetectionAnalyzer.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(AbstractJsonDetectionAnalyzer.DiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -39,17 +42,25 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                 CodeAction.Create(
                     FeaturesResources.Enable_all_JSON_editor_features,
                     GetDocumentUpdater(context),
-                    nameof(FeaturesResources.Enable_all_JSON_editor_features)),
-                context.Diagnostics);
+                    nameof(FeaturesResources.Enable_all_JSON_editor_features)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
-        public void Fix(SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+        public void Fix(
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             var stringLiteral = diagnostic.Location.FindToken(cancellationToken);
             Debug.Assert(_info.IsAnyStringLiteral(stringLiteral.RawKind));
 
-            var commentContents = diagnostic.Properties.ContainsKey(AbstractJsonDetectionAnalyzer.StrictKey)
+            var commentContents = diagnostic.Properties.ContainsKey(
+                AbstractJsonDetectionAnalyzer.StrictKey
+            )
                 ? "lang=json,strict"
                 : "lang=json";
 
@@ -57,8 +68,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
                 Fix(editor, diagnostic, cancellationToken);

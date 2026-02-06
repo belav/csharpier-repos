@@ -59,7 +59,8 @@ namespace System.Net.Mime
 
         private void WriteAndFold(string value, int charsAlreadyOnLine, bool allowUnicode)
         {
-            int lastSpace = 0, startOfLine = 0;
+            int lastSpace = 0,
+                startOfLine = 0;
             for (int index = 0; index < value.Length; index++)
             {
                 // When we find a FWS (CRLF) copy it as is.
@@ -73,9 +74,17 @@ namespace System.Net.Mime
                     charsAlreadyOnLine = 0;
                 }
                 // When we pass the line length limit, and know where there was a space to fold at, fold there
-                else if (((index - startOfLine) > (_lineLength - charsAlreadyOnLine)) && lastSpace != startOfLine)
+                else if (
+                    ((index - startOfLine) > (_lineLength - charsAlreadyOnLine))
+                    && lastSpace != startOfLine
+                )
                 {
-                    _bufferBuilder.Append(value, startOfLine, lastSpace - startOfLine, allowUnicode);
+                    _bufferBuilder.Append(
+                        value,
+                        startOfLine,
+                        lastSpace - startOfLine,
+                        allowUnicode
+                    );
                     _bufferBuilder.Append("\r\n"u8);
                     startOfLine = lastSpace;
                     charsAlreadyOnLine = 0;
@@ -113,7 +122,10 @@ namespace System.Net.Mime
             _bufferBuilder.Append("\r\n"u8);
             Flush(multiResult);
 
-            ClosableStream cs = new ClosableStream(new EightBitStream(_stream, _shouldEncodeLeadingDots), _onCloseHandler);
+            ClosableStream cs = new ClosableStream(
+                new EightBitStream(_stream, _shouldEncodeLeadingDots),
+                _onCloseHandler
+            );
             _contentStream = cs;
             return cs;
         }
@@ -155,8 +167,13 @@ namespace System.Net.Mime
                 if (multiResult != null)
                 {
                     multiResult.Enter();
-                    IAsyncResult result = _stream.BeginWrite(_bufferBuilder.GetBuffer(), 0,
-                        _bufferBuilder.Length, s_onWrite, multiResult);
+                    IAsyncResult result = _stream.BeginWrite(
+                        _bufferBuilder.GetBuffer(),
+                        0,
+                        _bufferBuilder.Length,
+                        s_onWrite,
+                        multiResult
+                    );
                     if (result.CompletedSynchronously)
                     {
                         _stream.EndWrite(result);

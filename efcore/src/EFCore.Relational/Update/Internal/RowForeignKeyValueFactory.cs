@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeignKeyValueFactory<TKey>
+public abstract class RowForeignKeyValueFactory<TKey, TForeignKey>
+    : IRowForeignKeyValueFactory<TKey>
 {
     private readonly IForeignKeyConstraint _foreignKey;
     private readonly ValueConverter? _valueConverter;
@@ -29,7 +30,8 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
         IForeignKeyConstraint foreignKey,
         IColumn column,
         ColumnAccessors columnAccessors,
-        IValueConverterSelector valueConverterSelector)
+        IValueConverterSelector valueConverterSelector
+    )
     {
         _foreignKey = foreignKey;
         Column = column;
@@ -40,34 +42,52 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
         }
         else
         {
-            var converterInfos = valueConverterSelector.Select(typeof(TKey), typeof(TForeignKey)).ToList();
+            var converterInfos = valueConverterSelector
+                .Select(typeof(TKey), typeof(TForeignKey))
+                .ToList();
             if (converterInfos.Count == 0)
             {
                 var pkColumn = foreignKey.PrincipalColumns[0];
                 throw new InvalidOperationException(
                     RelationalStrings.StoredKeyTypesNotConvertable(
-                        column.Name, column.StoreType, pkColumn.StoreType, pkColumn.Name));
+                        column.Name,
+                        column.StoreType,
+                        pkColumn.StoreType,
+                        pkColumn.Name
+                    )
+                );
             }
 
             _valueConverter = converterInfos.First().Create();
 
             ColumnAccessors = new ColumnAccessors(
-                ConvertAccessor((Func<IReadOnlyModificationCommand, (TForeignKey, bool)>)columnAccessors.CurrentValueGetter),
-                ConvertAccessor((Func<IReadOnlyModificationCommand, (TForeignKey, bool)>)columnAccessors.OriginalValueGetter));
+                ConvertAccessor(
+                    (Func<IReadOnlyModificationCommand, (TForeignKey, bool)>)
+                        columnAccessors.CurrentValueGetter
+                ),
+                ConvertAccessor(
+                    (Func<IReadOnlyModificationCommand, (TForeignKey, bool)>)
+                        columnAccessors.OriginalValueGetter
+                )
+            );
         }
 
         _principalKeyValueFactory =
-            (IRowKeyValueFactory<TKey>)((UniqueConstraint)foreignKey.PrincipalUniqueConstraint).GetRowKeyValueFactory();
+            (IRowKeyValueFactory<TKey>)
+                ((UniqueConstraint)foreignKey.PrincipalUniqueConstraint).GetRowKeyValueFactory();
     }
 
     private Func<IReadOnlyModificationCommand, (TKey, bool)> ConvertAccessor(
-        Func<IReadOnlyModificationCommand, (TForeignKey, bool)> columnAccessor)
-        => command =>
+        Func<IReadOnlyModificationCommand, (TForeignKey, bool)> columnAccessor
+    ) =>
+        command =>
         {
             var tuple = columnAccessor(command);
-            return (tuple.Item1 == null
-                ? (default, tuple.Item2)
-                : ((TKey)_valueConverter!.ConvertFromProvider(tuple.Item1)!, tuple.Item2))!;
+            return (
+                tuple.Item1 == null
+                    ? (default, tuple.Item2)
+                    : ((TKey)_valueConverter!.ConvertFromProvider(tuple.Item1)!, tuple.Item2)
+            )!;
         };
 
     /// <summary>
@@ -100,11 +120,15 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreatePrincipalEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => new EquatableKeyValue<TKey>(
+    public virtual object CreatePrincipalEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        new EquatableKeyValue<TKey>(
             _foreignKey,
             _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues),
-            EqualityComparer);
+            EqualityComparer
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,8 +136,11 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? CreateDependentEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
+    public virtual object? CreateDependentEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateDependentKeyValue(command, fromOriginalValues, out var keyValue)
             ? new EquatableKeyValue<TKey>(_foreignKey, keyValue, EqualityComparer)
             : null;
 
@@ -125,7 +152,8 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     /// </summary>
     public abstract bool TryCreateDependentKeyValue(
         object?[] keyValues,
-        [NotNullWhen(true)] out TKey? key);
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,7 +163,8 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     /// </summary>
     public abstract bool TryCreateDependentKeyValue(
         IDictionary<string, object?> keyPropertyValues,
-        [NotNullWhen(true)] out TKey? key);
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -146,7 +175,8 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     public abstract bool TryCreateDependentKeyValue(
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
-        [NotNullWhen(true)] out TKey? key);
+        [NotNullWhen(true)] out TKey? key
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -156,7 +186,8 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     /// </summary>
     protected virtual IEqualityComparer<TKey> CreateKeyEqualityComparer(IColumn column)
 #pragma warning disable EF1001 // Internal EF Core API usage.
-        => NullableComparerAdapter<TKey>.Wrap(column.ProviderValueComparer, _valueConverter);
+        =>
+        NullableComparerAdapter<TKey>.Wrap(column.ProviderValueComparer, _valueConverter);
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
     /// <summary>
@@ -165,8 +196,10 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object[] CreatePrincipalKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => new object[] { _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues)! };
+    public virtual object[] CreatePrincipalKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) => new object[] { _principalKeyValueFactory.CreateKeyValue(command, fromOriginalValues)! };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -174,8 +207,11 @@ public abstract class RowForeignKeyValueFactory<TKey, TForeignKey> : IRowForeign
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object[]? CreateDependentKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateDependentKeyValue(command, fromOriginalValues, out var value)
+    public virtual object[]? CreateDependentKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateDependentKeyValue(command, fromOriginalValues, out var value)
             ? (new object[] { value })
             : null;
 }

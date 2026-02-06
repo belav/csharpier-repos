@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -12,8 +13,15 @@ namespace Test
         public float[] m_afField1 = new float[16];
         public int m_nField2 = 0;
 
-        public static double[] SomeAlloc(ref int param2) { return null; }
-        public static bool Static4(uint[] param1) { return false; }
+        public static double[] SomeAlloc(ref int param2)
+        {
+            return null;
+        }
+
+        public static bool Static4(uint[] param1)
+        {
+            return false;
+        }
 
         public static float FailingFunc(ref int param1)
         {
@@ -48,7 +56,7 @@ namespace Test
 }
 /*
 ---------------------------
-Assert Failure (PID 1024, Thread 1564/61c)        
+Assert Failure (PID 1024, Thread 1564/61c)
 ---------------------------
 ((emitThisGCrefRegs & regMask) && (ins == INS_add)) || ((emitThisByrefRegs & regMask) && (ins == INS_add || ins == INS_sub))
 
@@ -63,6 +71,6 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

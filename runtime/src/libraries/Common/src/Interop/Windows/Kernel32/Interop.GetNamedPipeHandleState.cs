@@ -17,6 +17,7 @@ internal static partial class Interop
             uint* lpMaxCollectionCount,
             uint* lpCollectDataTimeout,
             char* lpUserName,
-            uint nMaxUserNameSize);
+            uint nMaxUserNameSize
+        );
     }
 }

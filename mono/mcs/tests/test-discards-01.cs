@@ -2,35 +2,35 @@ using System;
 
 class X
 {
-	public static void Main ()
-	{
-		string s = null;
+    public static void Main()
+    {
+        string s = null;
 
-		_ = 1;
-		{
-			char _ = '4';
-		}
+        _ = 1;
+        {
+            char _ = '4';
+        }
 
-		_ = TestValue ();
+        _ = TestValue();
 
-		_ = _ = s;
+        _ = _ = s;
 
-		byte k1;
-		var s1 = (k1, _) = (1, s);
+        byte k1;
+        var s1 = (k1, _) = (1, s);
 
-		Func<object> l1 = () => _ = (_, _) = (1, s);
+        Func<object> l1 = () => _ = (_, _) = (1, s);
 
-		TryGetValue (out _);
-	}
+        TryGetValue(out _);
+    }
 
-	static bool TryGetValue (out int arg)
-	{
-		arg = 3;
-		return true;
-	}
+    static bool TryGetValue(out int arg)
+    {
+        arg = 3;
+        return true;
+    }
 
-	static int TestValue ()
-	{
-		return 4;
-	}
+    static int TestValue()
+    {
+        return 4;
+    }
 }

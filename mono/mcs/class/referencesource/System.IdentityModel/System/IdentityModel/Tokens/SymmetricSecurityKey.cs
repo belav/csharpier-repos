@@ -8,7 +8,13 @@ namespace System.IdentityModel.Tokens
 
     public abstract class SymmetricSecurityKey : SecurityKey
     {
-        public abstract byte[] GenerateDerivedKey(string algorithm, byte[] label, byte[] nonce, int derivedKeyLength, int offset);
+        public abstract byte[] GenerateDerivedKey(
+            string algorithm,
+            byte[] label,
+            byte[] nonce,
+            int derivedKeyLength,
+            int offset
+        );
         public abstract ICryptoTransform GetDecryptionTransform(string algorithm, byte[] iv);
         public abstract ICryptoTransform GetEncryptionTransform(string algorithm, byte[] iv);
         public abstract int GetIVSize(string algorithm);

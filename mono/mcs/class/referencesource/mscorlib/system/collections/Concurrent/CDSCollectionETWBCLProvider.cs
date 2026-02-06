@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -9,9 +9,9 @@
 //
 // <OWNER>Microsoft</OWNER>
 //
-// A helper class for firing ETW events related to the Coordination Data Structure 
-// collection types. This provider is used by CDS collections in both mscorlib.dll 
-// and System.dll. The purpose of sharing the provider class is to be able to enable 
+// A helper class for firing ETW events related to the Coordination Data Structure
+// collection types. This provider is used by CDS collections in both mscorlib.dll
+// and System.dll. The purpose of sharing the provider class is to be able to enable
 // ETW tracing on all CDS collection with a single ETW provider GUID, and to minimize
 // the number of providers in use.
 //
@@ -29,8 +29,9 @@ namespace System.Collections.Concurrent
     [System.Runtime.CompilerServices.FriendAccessAllowed]
     [EventSource(
         Name = "System.Collections.Concurrent.ConcurrentCollectionsEventSource",
-        Guid = "35167F8E-49B2-4b96-AB86-435B59336B5E", 
-        LocalizationResources = "mscorlib")]
+        Guid = "35167F8E-49B2-4b96-AB86-435B59336B5E",
+        LocalizationResources = "mscorlib"
+    )]
     internal sealed class CDSCollectionETWBCLProvider : EventSource
     {
         /// <summary>
@@ -38,6 +39,7 @@ namespace System.Collections.Concurrent
         /// The collection provider GUID is {35167F8E-49B2-4b96-AB86-435B59336B5E}.
         /// </summary>
         public static CDSCollectionETWBCLProvider Log = new CDSCollectionETWBCLProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private CDSCollectionETWBCLProvider() { }
 
@@ -45,7 +47,7 @@ namespace System.Collections.Concurrent
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);
 
         //-----------------------------------------------------------------------------------
-        //        
+        //
         // CDS Collection Event IDs (must be unique)
         //
 
@@ -54,7 +56,6 @@ namespace System.Collections.Concurrent
         private const int CONCURRENTDICTIONARY_ACQUIRINGALLLOCKS_ID = 3;
         private const int CONCURRENTBAG_TRYTAKESTEALS_ID = 4;
         private const int CONCURRENTBAG_TRYPEEKSTEALS_ID = 5;
-
 
         /////////////////////////////////////////////////////////////////////////////////////
         //
@@ -79,7 +80,6 @@ namespace System.Collections.Concurrent
             }
         }
 
-
         /////////////////////////////////////////////////////////////////////////////////////
         //
         // ConcurrentDictionary Events
@@ -93,8 +93,6 @@ namespace System.Collections.Concurrent
                 WriteEvent(CONCURRENTDICTIONARY_ACQUIRINGALLLOCKS_ID, numOfBuckets);
             }
         }
-
-
 
         //
         // Events below this point are used by the CDS types in System.DLL

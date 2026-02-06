@@ -22,9 +22,11 @@ namespace System.CodeDom
             set => _name = value;
         }
 
-        public CodeTypeReferenceCollection Constraints => _constraints ??= new CodeTypeReferenceCollection();
+        public CodeTypeReferenceCollection Constraints =>
+            _constraints ??= new CodeTypeReferenceCollection();
 
-        public CodeAttributeDeclarationCollection CustomAttributes => _customAttributes ??= new CodeAttributeDeclarationCollection();
+        public CodeAttributeDeclarationCollection CustomAttributes =>
+            _customAttributes ??= new CodeAttributeDeclarationCollection();
 
         public bool HasConstructorConstraint { get; set; }
     }

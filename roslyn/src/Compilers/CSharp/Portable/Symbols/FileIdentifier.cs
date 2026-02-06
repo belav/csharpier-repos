@@ -12,14 +12,21 @@ namespace Microsoft.CodeAnalysis.CSharp;
 
 internal sealed class FileIdentifier
 {
-    private class FileIdentifierData(string? encoderFallbackErrorMessage, string displayFilePath, ImmutableArray<byte> filePathChecksumOpt)
+    private class FileIdentifierData(
+        string? encoderFallbackErrorMessage,
+        string displayFilePath,
+        ImmutableArray<byte> filePathChecksumOpt
+    )
     {
         public readonly string? EncoderFallbackErrorMessage = encoderFallbackErrorMessage;
         public readonly string DisplayFilePath = displayFilePath;
         public readonly ImmutableArray<byte> FilePathChecksumOpt = filePathChecksumOpt;
     }
 
-    private static readonly Encoding s_encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    private static readonly Encoding s_encoding = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
 
     private readonly string _filePath;
     private FileIdentifierData? _data;
@@ -31,7 +38,11 @@ internal sealed class FileIdentifier
 
     private FileIdentifier(ImmutableArray<byte> filePathChecksumOpt, string displayFilePath)
     {
-        _data = new FileIdentifierData(encoderFallbackErrorMessage: null, displayFilePath, filePathChecksumOpt);
+        _data = new FileIdentifierData(
+            encoderFallbackErrorMessage: null,
+            displayFilePath,
+            filePathChecksumOpt
+        );
         _filePath = string.Empty;
     }
 
@@ -89,12 +100,14 @@ internal sealed class FileIdentifier
         }
     }
 
-    public static FileIdentifier Create(SyntaxTree syntaxTree, SourceReferenceResolver? resolver)
-        => new FileIdentifier(syntaxTree.GetNormalizedPath(resolver));
+    public static FileIdentifier Create(SyntaxTree syntaxTree, SourceReferenceResolver? resolver) =>
+        new FileIdentifier(syntaxTree.GetNormalizedPath(resolver));
 
-    public static FileIdentifier Create(string normalizedFilePath)
-        => new FileIdentifier(normalizedFilePath);
+    public static FileIdentifier Create(string normalizedFilePath) =>
+        new FileIdentifier(normalizedFilePath);
 
-    public static FileIdentifier Create(ImmutableArray<byte> filePathChecksumOpt, string displayFilePath)
-        => new FileIdentifier(filePathChecksumOpt, displayFilePath);
+    public static FileIdentifier Create(
+        ImmutableArray<byte> filePathChecksumOpt,
+        string displayFilePath
+    ) => new FileIdentifier(filePathChecksumOpt, displayFilePath);
 }

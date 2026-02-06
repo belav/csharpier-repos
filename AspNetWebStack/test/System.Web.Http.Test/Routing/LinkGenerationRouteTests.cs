@@ -60,11 +60,12 @@ namespace System.Web.Http.Routing
             Assert.Equal(data, result);
         }
 
-        // Route where everything is not implemented. Tests that the generated route is not forwarding calls. 
+        // Route where everything is not implemented. Tests that the generated route is not forwarding calls.
         private class InnerRoute : IHttpRoute
         {
             private readonly IHttpRouteData _routeData = new Mock<IHttpRouteData>().Object;
-            private readonly IHttpVirtualPathData _virtualPathData = new Mock<IHttpVirtualPathData>().Object;
+            private readonly IHttpVirtualPathData _virtualPathData =
+                new Mock<IHttpVirtualPathData>().Object;
 
             public InnerRoute()
             {
@@ -98,7 +99,10 @@ namespace System.Web.Http.Routing
                 return _routeData;
             }
 
-            public IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, Collections.Generic.IDictionary<string, object> values)
+            public IHttpVirtualPathData GetVirtualPath(
+                HttpRequestMessage request,
+                Collections.Generic.IDictionary<string, object> values
+            )
             {
                 return _virtualPathData;
             }

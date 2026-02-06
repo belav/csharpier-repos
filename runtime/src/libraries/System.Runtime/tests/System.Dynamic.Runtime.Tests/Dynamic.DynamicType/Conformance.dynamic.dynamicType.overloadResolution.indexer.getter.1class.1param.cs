@@ -122,6 +122,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         RefReadonlyLocal, // Cannot pass '{0}' as a ref or out argument because it is read-only
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
+
         // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
@@ -148,44 +149,59 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public enum RuntimeErrorId
     {
         None,
+
         // RuntimeBinderInternalCompilerException
         InternalCompilerError, // An unexpected exception occurred while binding a dynamic operation
+
         // ArgumentException
         BindRequireArguments, // Cannot bind call with no calling object
+
         // RuntimeBinderException
         BindCallFailedOverloadResolution, // Overload resolution failed
+
         // ArgumentException
         BindBinaryOperatorRequireTwoArguments, // Binary operators must be invoked with two arguments
+
         // ArgumentException
         BindUnaryOperatorRequireOneArgument, // Unary operators must be invoked with one argument
+
         // RuntimeBinderException
         BindPropertyFailedMethodGroup, // The name '{0}' is bound to a method and cannot be used like a property
+
         // RuntimeBinderException
         BindPropertyFailedEvent, // The event '{0}' can only appear on the left hand side of += or -=
+
         // RuntimeBinderException
         BindInvokeFailedNonDelegate, // Cannot invoke a non-delegate type
+
         // ArgumentException
         BindImplicitConversionRequireOneArgument, // Implicit conversion takes exactly one argument
+
         // ArgumentException
         BindExplicitConversionRequireOneArgument, // Explicit conversion takes exactly one argument
+
         // ArgumentException
         BindBinaryAssignmentRequireTwoArguments, // Binary operators cannot be invoked with one argument
+
         // RuntimeBinderException
         BindBinaryAssignmentFailedNullReference, // Cannot perform member assignment on a null reference
+
         // RuntimeBinderException
         NullReferenceOnMemberException, // Cannot perform runtime binding on a null reference
+
         // RuntimeBinderException
         BindCallToConditionalMethod, // Cannot dynamically invoke method '{0}' because it has a Conditional attribute
+
         // RuntimeBinderException
         BindToVoidMethodButExpectResult, // Cannot implicitly convert type 'void' to 'object'
+
         // EE?
         EmptyDynamicView, // No further information on this object could be discovered
+
         // MissingMemberException
         GetValueonWriteOnlyProperty, // Write Only properties are not supported
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Oneparam.param012.param012
 {
@@ -205,16 +221,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -240,8 +254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Oneparam.param014.param014
 {
     // <Title>Call methods that have different parameter modifiers with dynamic</Title>
@@ -259,10 +271,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
     }
 

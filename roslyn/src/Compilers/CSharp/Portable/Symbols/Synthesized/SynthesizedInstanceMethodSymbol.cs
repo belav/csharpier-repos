@@ -20,26 +20,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public sealed override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public sealed override bool AreLocalsZeroed
         {
-            get
-            {
-                return ContainingType.AreLocalsZeroed;
-            }
+            get { return ContainingType.AreLocalsZeroed; }
         }
 
         internal override bool TryGetThisParameter(out ParameterSymbol thisParameter)
@@ -48,7 +39,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if ((object)_lazyThisParameter == null)
             {
-                Interlocked.CompareExchange(ref _lazyThisParameter, new ThisParameterSymbol(this), null);
+                Interlocked.CompareExchange(
+                    ref _lazyThisParameter,
+                    new ThisParameterSymbol(this),
+                    null
+                );
             }
 
             thisParameter = _lazyThisParameter;
@@ -64,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => null;
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => null;
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
@@ -75,13 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsInitOnly => false;
 
-        public sealed override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public sealed override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         internal override bool IsNullableAnalysisEnabled() => false;
 
         internal sealed override bool HasUnscopedRefAttribute => false;
 
-        internal sealed override bool UseUpdatedEscapeRules => ContainingModule.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            ContainingModule.UseUpdatedEscapeRules;
 
         internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol builderArgument)
         {

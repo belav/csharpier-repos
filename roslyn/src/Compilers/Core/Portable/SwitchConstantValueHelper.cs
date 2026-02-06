@@ -106,8 +106,10 @@ namespace Microsoft.CodeAnalysis
                     var secondConstant = second as ConstantValue;
                     if (secondConstant != null)
                     {
-                        if (!IsValidSwitchCaseLabelConstant(firstConstant)
-                            || !IsValidSwitchCaseLabelConstant(secondConstant))
+                        if (
+                            !IsValidSwitchCaseLabelConstant(firstConstant)
+                            || !IsValidSwitchCaseLabelConstant(secondConstant)
+                        )
                         {
                             // We don't care about invalid case labels with duplicate value as
                             // we will generate diagnostics for invalid case label.
@@ -121,7 +123,11 @@ namespace Microsoft.CodeAnalysis
                 var firstString = first as string;
                 if (firstString != null)
                 {
-                    return string.Equals(firstString, second as string, System.StringComparison.Ordinal);
+                    return string.Equals(
+                        firstString,
+                        second as string,
+                        System.StringComparison.Ordinal
+                    );
                 }
 
                 return first.Equals(second);

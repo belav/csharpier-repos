@@ -13,7 +13,8 @@ namespace System.Runtime.Caching
             Debug.Assert(x != null && x is MemoryCacheKey);
             Debug.Assert(y != null && y is MemoryCacheKey);
 
-            MemoryCacheKey a, b;
+            MemoryCacheKey a,
+                b;
             a = (MemoryCacheKey)x;
             b = (MemoryCacheKey)y;
 

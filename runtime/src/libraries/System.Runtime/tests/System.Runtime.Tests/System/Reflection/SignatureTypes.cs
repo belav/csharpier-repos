@@ -47,8 +47,16 @@ namespace System.Reflection.Tests
                 yield return new object[] { sigType.MakePointerType(), true };
                 yield return new object[] { typeof(List<>).MakeGenericType(sigType), true };
 
-                yield return new object[] { Type.MakeGenericSignatureType(typeof(List<>), typeof(int)), true };
-                yield return new object[] { Type.MakeGenericSignatureType(typeof(List<>), sigType), true };
+                yield return new object[]
+                {
+                    Type.MakeGenericSignatureType(typeof(List<>), typeof(int)),
+                    true,
+                };
+                yield return new object[]
+                {
+                    Type.MakeGenericSignatureType(typeof(List<>), sigType),
+                    true,
+                };
             }
         }
 
@@ -56,7 +64,8 @@ namespace System.Reflection.Tests
         public static void GetMethodWithGenericParameterCount()
         {
             Type t = typeof(TestClass1);
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
             Type[] args = { typeof(int) };
             MethodInfo m;
 
@@ -69,7 +78,14 @@ namespace System.Reflection.Tests
                 AssertIsMarked(m, genericParameterCount);
 
                 // Verify that generic parameter count filtering occurs before candidates are passed to the binder.
-                m = t.GetMethod("Moo", genericParameterCount, bf, new InflexibleBinder(genericParameterCount), args, null);
+                m = t.GetMethod(
+                    "Moo",
+                    genericParameterCount,
+                    bf,
+                    new InflexibleBinder(genericParameterCount),
+                    args,
+                    null
+                );
                 Assert.NotNull(m);
                 AssertIsMarked(m, genericParameterCount);
             }
@@ -85,21 +101,59 @@ namespace System.Reflection.Tests
                 _genericParameterCount = genericParameterCount;
             }
 
-            public sealed override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo culture) => throw null;
-            public sealed override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] names, out object state) => throw null;
-            public sealed override object ChangeType(object value, Type type, CultureInfo culture) => throw null;
-            public sealed override void ReorderArgumentArray(ref object[] args, object state) => throw null;
+            public sealed override FieldInfo BindToField(
+                BindingFlags bindingAttr,
+                FieldInfo[] match,
+                object value,
+                CultureInfo culture
+            ) => throw null;
 
-            public sealed override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[] modifiers)
+            public sealed override MethodBase BindToMethod(
+                BindingFlags bindingAttr,
+                MethodBase[] match,
+                ref object[] args,
+                ParameterModifier[] modifiers,
+                CultureInfo culture,
+                string[] names,
+                out object state
+            ) => throw null;
+
+            public sealed override object ChangeType(
+                object value,
+                Type type,
+                CultureInfo culture
+            ) => throw null;
+
+            public sealed override void ReorderArgumentArray(ref object[] args, object state) =>
+                throw null;
+
+            public sealed override MethodBase SelectMethod(
+                BindingFlags bindingAttr,
+                MethodBase[] match,
+                Type[] types,
+                ParameterModifier[] modifiers
+            )
             {
                 foreach (MethodBase methodBase in match)
                 {
-                    Assert.True(methodBase is MethodInfo methodInfo && methodInfo.GetGenericArguments().Length == _genericParameterCount);
+                    Assert.True(
+                        methodBase is MethodInfo methodInfo
+                            && methodInfo.GetGenericArguments().Length == _genericParameterCount
+                    );
                 }
                 return Type.DefaultBinder.SelectMethod(bindingAttr, match, types, modifiers);
             }
 
-            public sealed override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType, Type[] indexes, ParameterModifier[] modifiers) { throw null; }
+            public sealed override PropertyInfo SelectProperty(
+                BindingFlags bindingAttr,
+                PropertyInfo[] match,
+                Type returnType,
+                Type[] indexes,
+                ParameterModifier[] modifiers
+            )
+            {
+                throw null;
+            }
 
             private readonly int _genericParameterCount;
         }
@@ -108,9 +162,13 @@ namespace System.Reflection.Tests
         public static void GetMethodWithNegativeGenericParameterCount()
         {
             Type t = typeof(TestClass1);
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
             Type[] args = { typeof(int) };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("genericParameterCount", () => t.GetMethod("Moo", -1, bf, args));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "genericParameterCount",
+                () => t.GetMethod("Moo", -1, bf, args)
+            );
         }
 
         [Theory]
@@ -124,7 +182,11 @@ namespace System.Reflection.Tests
             {
                 bf |= BindingFlags.ExactBinding;
             }
-            Type[] args = { Type.MakeGenericMethodParameter(0), Type.MakeGenericMethodParameter(1).MakeArrayType() };
+            Type[] args =
+            {
+                Type.MakeGenericMethodParameter(0),
+                Type.MakeGenericMethodParameter(1).MakeArrayType(),
+            };
             MethodInfo moo = t.GetMethod("Moo", 2, bf, null, args, null);
             AssertIsMarked(moo, 3);
         }
@@ -133,8 +195,13 @@ namespace System.Reflection.Tests
         public static void GetMethodBindingFlagsAndArgs()
         {
             Type t = typeof(SignatureTypeTests);
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
-            MethodInfo testMethod = t.GetMethod(nameof(GetMethodBindingFlagsAndArgs), bf, Type.EmptyTypes);
+            const BindingFlags bf =
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            MethodInfo testMethod = t.GetMethod(
+                nameof(GetMethodBindingFlagsAndArgs),
+                bf,
+                Type.EmptyTypes
+            );
             Assert.NotNull(testMethod);
 
             t = typeof(TestClass1);
@@ -148,7 +215,9 @@ namespace System.Reflection.Tests
         public static void SignatureTypeComparisonLogicCodeCoverage(bool exactBinding)
         {
             Type t = typeof(TestClass3<,>);
-            MethodInfo[] methods = t.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            MethodInfo[] methods = t.GetMethods(
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
+            );
             BindingFlags bf = BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly;
             if (exactBinding)
             {
@@ -163,7 +232,14 @@ namespace System.Reflection.Tests
                 {
                     sigTypes[i] = parameters[i].ParameterType.ToSignatureType();
                 }
-                MethodInfo match = t.GetMethod("Moo", m.GetGenericArguments().Length, bf, null, sigTypes, null);
+                MethodInfo match = t.GetMethod(
+                    "Moo",
+                    m.GetGenericArguments().Length,
+                    bf,
+                    null,
+                    sigTypes,
+                    null
+                );
                 Assert.NotNull(match);
                 Assert.True(m.HasSameMetadataDefinitionAs(match));
             }
@@ -175,26 +251,73 @@ namespace System.Reflection.Tests
             // Make sure the framework can't be tricked into throwing an exception because it tried to look up a nonexistent method generic parameter
             // or trying to construct a generic type where the constraints don't validate.
             Type t = typeof(TestClass4<>);
-            Type[] args = { typeof(TestClass4<>).MakeGenericType(Type.MakeGenericMethodParameter(1)), Type.MakeGenericMethodParameter(500) };
+            Type[] args =
+            {
+                typeof(TestClass4<>).MakeGenericType(Type.MakeGenericMethodParameter(1)),
+                Type.MakeGenericMethodParameter(500),
+            };
             CountingBinder binder = new CountingBinder();
-            Assert.Null(t.GetMethod("Moo", BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly, binder, args, null));
+            Assert.Null(
+                t.GetMethod(
+                    "Moo",
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly,
+                    binder,
+                    args,
+                    null
+                )
+            );
             Assert.Equal(3, binder.NumCandidatesReceived);
         }
 
         private sealed class CountingBinder : Binder
         {
-            public sealed override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo culture) => throw null;
-            public sealed override MethodBase BindToMethod(BindingFlags bindingAttr, MethodBase[] match, ref object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] names, out object state) => throw null;
-            public sealed override object ChangeType(object value, Type type, CultureInfo culture) => throw null;
-            public sealed override void ReorderArgumentArray(ref object[] args, object state) => throw null;
+            public sealed override FieldInfo BindToField(
+                BindingFlags bindingAttr,
+                FieldInfo[] match,
+                object value,
+                CultureInfo culture
+            ) => throw null;
 
-            public sealed override MethodBase SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[] modifiers)
+            public sealed override MethodBase BindToMethod(
+                BindingFlags bindingAttr,
+                MethodBase[] match,
+                ref object[] args,
+                ParameterModifier[] modifiers,
+                CultureInfo culture,
+                string[] names,
+                out object state
+            ) => throw null;
+
+            public sealed override object ChangeType(
+                object value,
+                Type type,
+                CultureInfo culture
+            ) => throw null;
+
+            public sealed override void ReorderArgumentArray(ref object[] args, object state) =>
+                throw null;
+
+            public sealed override MethodBase SelectMethod(
+                BindingFlags bindingAttr,
+                MethodBase[] match,
+                Type[] types,
+                ParameterModifier[] modifiers
+            )
             {
                 NumCandidatesReceived += match.Length;
                 return Type.DefaultBinder.SelectMethod(bindingAttr, match, types, modifiers);
             }
 
-            public sealed override PropertyInfo SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type returnType, Type[] indexes, ParameterModifier[] modifiers) { throw null; }
+            public sealed override PropertyInfo SelectProperty(
+                BindingFlags bindingAttr,
+                PropertyInfo[] match,
+                Type returnType,
+                Type[] indexes,
+                ParameterModifier[] modifiers
+            )
+            {
+                throw null;
+            }
 
             public int NumCandidatesReceived { get; private set; }
         }
@@ -220,7 +343,10 @@ namespace System.Reflection.Tests
         [InlineData(int.MinValue)]
         public static void MakeGenericMethodParameterNegative(int position)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () => Type.MakeGenericMethodParameter(position));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "position",
+                () => Type.MakeGenericMethodParameter(position)
+            );
         }
 
         [Fact]
@@ -298,8 +424,13 @@ namespace System.Reflection.Tests
         {
             Type gmp = Type.MakeGenericMethodParameter(5);
 
-            Type[] testTypes = { genericTypeDefinition.MakeGenericType(gmp), Type.MakeGenericSignatureType(genericTypeDefinition, gmp) };
-            Assert.All(testTypes,
+            Type[] testTypes =
+            {
+                genericTypeDefinition.MakeGenericType(gmp),
+                Type.MakeGenericSignatureType(genericTypeDefinition, gmp),
+            };
+            Assert.All(
+                testTypes,
                 (Type t) =>
                 {
                     Assert.True(t.IsConstructedGenericType);
@@ -314,15 +445,25 @@ namespace System.Reflection.Tests
                     Assert.Equal(5, et.GenericParameterPosition);
 
                     TestSignatureTypeInvariants(t);
-                });
+                }
+            );
         }
 
         [Fact]
         public static void MakeGenericSignatureTypeValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>("genericTypeDefinition", () => Type.MakeGenericSignatureType(null));
-            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () => Type.MakeGenericSignatureType(typeof(IList<>), typeArguments: null));
-            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () => Type.MakeGenericSignatureType(typeof(IList<>), new Type[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "genericTypeDefinition",
+                () => Type.MakeGenericSignatureType(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArguments",
+                () => Type.MakeGenericSignatureType(typeof(IList<>), typeArguments: null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArguments",
+                () => Type.MakeGenericSignatureType(typeof(IList<>), new Type[] { null })
+            );
         }
 
         private static Type ToSignatureType(this Type type)
@@ -339,7 +480,9 @@ namespace System.Reflection.Tests
                 return type.GetElementType().ToSignatureType().MakePointerType();
             if (type.IsConstructedGenericType)
             {
-                Type[] genericTypeArguments = type.GenericTypeArguments.Select(t => t.ToSignatureType()).ToArray();
+                Type[] genericTypeArguments = type
+                    .GenericTypeArguments.Select(t => t.ToSignatureType())
+                    .ToArray();
                 return type.GetGenericTypeDefinition().MakeGenericType(genericTypeArguments);
             }
             if (type.IsGenericTypeParameter)
@@ -370,42 +513,136 @@ namespace System.Reflection.Tests
 
         private sealed class TestClass1
         {
-            [Marker(0)] public static void Moo(int x) { }
-            [Marker(1)] public static void Moo<T1>(int x) { }
-            [Marker(2)] public static void Moo<T1, T2>(int x) { }
-            [Marker(3)] public static void Moo<T1, T2, T3>(int x) {}
+            [Marker(0)]
+            public static void Moo(int x) { }
+
+            [Marker(1)]
+            public static void Moo<T1>(int x) { }
+
+            [Marker(2)]
+            public static void Moo<T1, T2>(int x) { }
+
+            [Marker(3)]
+            public static void Moo<T1, T2, T3>(int x) { }
         }
 
         private class TestClass2
         {
-            [Marker(0)] public static void Moo(int x, int[] y) { }
-            [Marker(1)] public static void Moo<T>(T x, T[] y) { }
-            [Marker(2)] public static void Moo<T>(int x, int[] y) { }
-            [Marker(3)] public static void Moo<T, U>(T x, U[] y) { }
-            [Marker(4)] public static void Moo<T, U>(int x, int[] y) { }
+            [Marker(0)]
+            public static void Moo(int x, int[] y) { }
+
+            [Marker(1)]
+            public static void Moo<T>(T x, T[] y) { }
+
+            [Marker(2)]
+            public static void Moo<T>(int x, int[] y) { }
+
+            [Marker(3)]
+            public static void Moo<T, U>(T x, U[] y) { }
+
+            [Marker(4)]
+            public static void Moo<T, U>(int x, int[] y) { }
         }
 
-        private class TestClass3<T,U>
+        private class TestClass3<T, U>
         {
-            public static void Moo(T p1, T[] p2, T[,] p3, ref T p4, TestClass3<T, T> p5, ref TestClass3<T, T[]>[,] p6) { }
-            public static void Moo(U p1, U[] p2, U[,] p3, ref U p4, TestClass3<U, U> p5, ref TestClass3<U, U[]>[,] p6) { }
-            public static void Moo<M>(T p1, T[] p2, T[,] p3, ref T p4, TestClass3<T, T> p5, ref TestClass3<T, T[]>[,] p6) { }
-            public static void Moo<M>(U p1, U[] p2, U[,] p3, ref U p4, TestClass3<U, U> p5, ref TestClass3<U, U[]>[,] p6) { }
-            public static void Moo<M>(M p1, M[] p2, M[,] p3, ref M p4, TestClass3<M, M> p5, ref TestClass3<M, M[]>[,] p6) { }
-            public static void Moo<M, N>(T p1, T[] p2, T[,] p3, ref T p4, TestClass3<T, T> p5, ref TestClass3<T, T[]>[,] p6) { }
-            public static void Moo<M, N>(U p1, U[] p2, U[,] p3, ref U p4, TestClass3<U, U> p5, ref TestClass3<U, U[]>[,] p6) { }
-            public static void Moo<M, N>(M p1, M[] p2, M[,] p3, ref M p4, TestClass3<M, M> p5, ref TestClass3<M, M[]>[,] p6) { }
-            public static void Moo<M, N>(N p1, N[] p2, N[,] p3, ref N p4, TestClass3<N, N> p5, ref TestClass3<N, N[]>[,] p6) { }
+            public static void Moo(
+                T p1,
+                T[] p2,
+                T[,] p3,
+                ref T p4,
+                TestClass3<T, T> p5,
+                ref TestClass3<T, T[]>[,] p6
+            ) { }
+
+            public static void Moo(
+                U p1,
+                U[] p2,
+                U[,] p3,
+                ref U p4,
+                TestClass3<U, U> p5,
+                ref TestClass3<U, U[]>[,] p6
+            ) { }
+
+            public static void Moo<M>(
+                T p1,
+                T[] p2,
+                T[,] p3,
+                ref T p4,
+                TestClass3<T, T> p5,
+                ref TestClass3<T, T[]>[,] p6
+            ) { }
+
+            public static void Moo<M>(
+                U p1,
+                U[] p2,
+                U[,] p3,
+                ref U p4,
+                TestClass3<U, U> p5,
+                ref TestClass3<U, U[]>[,] p6
+            ) { }
+
+            public static void Moo<M>(
+                M p1,
+                M[] p2,
+                M[,] p3,
+                ref M p4,
+                TestClass3<M, M> p5,
+                ref TestClass3<M, M[]>[,] p6
+            ) { }
+
+            public static void Moo<M, N>(
+                T p1,
+                T[] p2,
+                T[,] p3,
+                ref T p4,
+                TestClass3<T, T> p5,
+                ref TestClass3<T, T[]>[,] p6
+            ) { }
+
+            public static void Moo<M, N>(
+                U p1,
+                U[] p2,
+                U[,] p3,
+                ref U p4,
+                TestClass3<U, U> p5,
+                ref TestClass3<U, U[]>[,] p6
+            ) { }
+
+            public static void Moo<M, N>(
+                M p1,
+                M[] p2,
+                M[,] p3,
+                ref M p4,
+                TestClass3<M, M> p5,
+                ref TestClass3<M, M[]>[,] p6
+            ) { }
+
+            public static void Moo<M, N>(
+                N p1,
+                N[] p2,
+                N[,] p3,
+                ref N p4,
+                TestClass3<N, N> p5,
+                ref TestClass3<N, N[]>[,] p6
+            ) { }
         }
 
-        private class TestClass4<T> where T: NoOneSubclasses, new()
+        private class TestClass4<T>
+            where T : NoOneSubclasses, new()
         {
-            public static void Moo<M>(int p1, int p2) where M : NoOneSubclassesThisEither { }
-            public static void Moo<N, O>(TestClass4<N> p1, int p2) where N : NoOneSubclasses, new() { }
-            public static void Moo<N, O>(O p1, int p2) where N : NoOneSubclasses, new() { }
+            public static void Moo<M>(int p1, int p2)
+                where M : NoOneSubclassesThisEither { }
+
+            public static void Moo<N, O>(TestClass4<N> p1, int p2)
+                where N : NoOneSubclasses, new() { }
+
+            public static void Moo<N, O>(O p1, int p2)
+                where N : NoOneSubclasses, new() { }
         }
 
         private class NoOneSubclasses { }
+
         private class NoOneSubclassesThisEither { }
 
         private static void TestSignatureTypeInvariants(Type type)
@@ -435,7 +672,10 @@ namespace System.Reflection.Tests
                 categorized = true;
                 Assert.True(type.HasElementType);
                 Assert.True(type.IsSZArray != type.IsVariableBoundArray);
-                Assert.Equal(type.GetElementType().ContainsGenericParameters, type.ContainsGenericParameters);
+                Assert.Equal(
+                    type.GetElementType().ContainsGenericParameters,
+                    type.ContainsGenericParameters
+                );
                 string elementTypeName = type.GetElementType().Name;
                 if (type.IsSZArray)
                 {
@@ -453,7 +693,10 @@ namespace System.Reflection.Tests
                     }
                     else
                     {
-                        Assert.Equal(elementTypeName + "[" + new string(',', rank - 1) + "]", type.Name);
+                        Assert.Equal(
+                            elementTypeName + "[" + new string(',', rank - 1) + "]",
+                            type.Name
+                        );
                     }
                 }
             }
@@ -464,7 +707,10 @@ namespace System.Reflection.Tests
                 categorized = true;
 
                 Assert.True(type.HasElementType);
-                Assert.Equal(type.GetElementType().ContainsGenericParameters, type.ContainsGenericParameters);
+                Assert.Equal(
+                    type.GetElementType().ContainsGenericParameters,
+                    type.ContainsGenericParameters
+                );
                 string elementTypeName = type.GetElementType().Name;
                 Assert.Equal(elementTypeName + "&", type.Name);
             }
@@ -475,7 +721,10 @@ namespace System.Reflection.Tests
                 categorized = true;
 
                 Assert.True(type.HasElementType);
-                Assert.Equal(type.GetElementType().ContainsGenericParameters, type.ContainsGenericParameters);
+                Assert.Equal(
+                    type.GetElementType().ContainsGenericParameters,
+                    type.ContainsGenericParameters
+                );
                 string elementTypeName = type.GetElementType().Name;
                 Assert.Equal(elementTypeName + "*", type.Name);
             }
@@ -496,7 +745,10 @@ namespace System.Reflection.Tests
                 Assert.NotSame(genericTypeArguments, genericTypeArgumentsClone);
                 Type[] genericTypeArgumentsFromProperty = type.GenericTypeArguments;
                 Type[] genericTypeArgumentsFromPropertyClone = type.GenericTypeArguments;
-                Assert.NotSame(genericTypeArgumentsFromProperty, genericTypeArgumentsFromPropertyClone);
+                Assert.NotSame(
+                    genericTypeArgumentsFromProperty,
+                    genericTypeArgumentsFromPropertyClone
+                );
                 for (int i = 0; i < genericTypeArguments.Length; i++)
                 {
                     if (genericTypeArguments[i].IsSignatureType)
@@ -507,11 +759,12 @@ namespace System.Reflection.Tests
                 Assert.Equal(genericTypeDefinition.Name, type.Name);
                 Assert.Equal(genericTypeDefinition.Namespace, type.Namespace);
 
-
                 bool containsGenericParameters = false;
                 for (int i = 0; i < genericTypeArguments.Length; i++)
                 {
-                    containsGenericParameters = containsGenericParameters || genericTypeArguments[i].ContainsGenericParameters;
+                    containsGenericParameters =
+                        containsGenericParameters
+                        || genericTypeArguments[i].ContainsGenericParameters;
                 }
                 Assert.Equal(containsGenericParameters, type.ContainsGenericParameters);
             }
@@ -530,7 +783,9 @@ namespace System.Reflection.Tests
 
                 if (type.IsGenericTypeParameter)
                 {
-                    throw new Exception("Unexpected: There is no mechanism at this time to create Signature Types of generic parameters on types.");
+                    throw new Exception(
+                        "Unexpected: There is no mechanism at this time to create Signature Types of generic parameters on types."
+                    );
                 }
                 else
                 {

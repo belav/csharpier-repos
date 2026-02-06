@@ -16,8 +16,6 @@ namespace Microsoft.AspNet.Facebook
         /// </summary>
         /// <param name="promptUrl">The url that the prompt exists at.</param>
         public ShowPromptResult(Uri promptUrl)
-            : base(promptUrl)
-        {
-        }
+            : base(promptUrl) { }
     }
 }

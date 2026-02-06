@@ -9,12 +9,23 @@ namespace System.IO.Tests
     {
         protected const int c_DefaultBufferSize = 4096;
 
-        protected sealed override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share)
+        protected sealed override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        )
         {
             return CreateFileStream(path, mode, access, share, c_DefaultBufferSize);
         }
 
-        protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
+        protected virtual FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize
+        )
         {
             return new FileStream(path, mode, access, share, bufferSize);
         }
@@ -24,22 +35,43 @@ namespace System.IO.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 GetExpectedParamName("bufferSize"),
-                () => CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, -1));
+                () =>
+                    CreateFileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.ReadWrite,
+                        FileShare.Read,
+                        -1
+                    )
+            );
         }
 
         [Fact]
         public void ZeroBufferSizeDoesNotThrow()
         {
-            using (CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 0))
-            {
-            }
+            using (
+                CreateFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    0
+                )
+            ) { }
         }
 
         [Fact]
         public void ValidBufferSize()
         {
-            using (FileStream fs = CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, 64 * 1024))
-            { }
+            using (
+                FileStream fs = CreateFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite,
+                    64 * 1024
+                )
+            ) { }
         }
     }
 }

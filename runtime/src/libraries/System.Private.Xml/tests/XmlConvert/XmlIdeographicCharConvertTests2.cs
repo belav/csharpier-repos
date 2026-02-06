@@ -14,7 +14,13 @@ namespace System.Xml.XmlConvertTests
         {
             for (int i = 0; i < _byte_Ideographic.Length; i = i + 2)
             {
-                AddVariation(new CVariation(this, "EncodeNmToken-EncodeLocalNmToken : " + _Expbyte_Ideographic[i / 2], XmlEncodeName));
+                AddVariation(
+                    new CVariation(
+                        this,
+                        "EncodeNmToken-EncodeLocalNmToken : " + _Expbyte_Ideographic[i / 2],
+                        XmlEncodeName
+                    )
+                );
             }
         }
 
@@ -27,7 +33,8 @@ namespace System.Xml.XmlConvertTests
             int i = ((CurVariation.id) - 1) * 2;
             string strEnVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_Ideographic, i, 2));
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_Ideographic, i, 2));
             strEnVal = XmlConvert.EncodeNmToken(c.ToString());
             if (_Expbyte_Ideographic[i / 2] != "_x302A_")
             {

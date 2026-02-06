@@ -13,78 +13,84 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Net;
 using System.Configuration;
+using System.Net;
 
 //
 // This file contains configuration collections that are used by multiple sections
 //
 #if ORCAS
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [ConfigurationCollection(typeof(DateTimeConfigurationElement))]
-    public sealed class DateTimeConfigurationCollection : ConfigurationElementCollection {
+    public sealed class DateTimeConfigurationCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static DateTimeConfigurationCollection() {
+        static DateTimeConfigurationCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         //
         // Constructor
         //
-        public DateTimeConfigurationCollection() {
-        }
+        public DateTimeConfigurationCollection() { }
 
         //
         // Accessors
         //
 
-        public DateTime this[int index] {
-            get {
-                return (DateTime)((DateTimeConfigurationElement)BaseGet(index)).Value;
-            }
-            set {
-                if (BaseGet(index) != null) {
+        public DateTime this[int index]
+        {
+            get { return (DateTime)((DateTimeConfigurationElement)BaseGet(index)).Value; }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
                 BaseAdd(index, new DateTimeConfigurationElement(value));
             }
         }
 
-        public object[] AllKeys {
-            get {
-                return BaseGetAllKeys();
-            }
+        public object[] AllKeys
+        {
+            get { return BaseGetAllKeys(); }
         }
 
         //
         // Methods
         //
 
-        public void Add(DateTime dateTime) {
+        public void Add(DateTime dateTime)
+        {
             BaseAdd(new DateTimeConfigurationElement(dateTime));
         }
 
-        public void Remove(DateTime dateTime) {
+        public void Remove(DateTime dateTime)
+        {
             BaseRemove(dateTime);
         }
-        public void Clear() {
+
+        public void Clear()
+        {
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new DateTimeConfigurationElement();
         }
 
-        protected override object GetElementKey(ConfigurationElement element) {
+        protected override object GetElementKey(ConfigurationElement element)
+        {
             return ((DateTimeConfigurationElement)element).Value;
         }
     }

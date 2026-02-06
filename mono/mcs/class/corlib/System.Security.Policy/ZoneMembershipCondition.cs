@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,108 +32,116 @@ using System.Collections;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class ZoneMembershipCondition : IMembershipCondition, IConstantMembershipCondition
+    {
+        private readonly int version = 1;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class ZoneMembershipCondition : IMembershipCondition, IConstantMembershipCondition {
+        private SecurityZone zone;
 
-		private readonly int version = 1;
+        // so System.Activator.CreateInstance can create an instance...
+        internal ZoneMembershipCondition() { }
 
-                private SecurityZone zone;
-
-		// so System.Activator.CreateInstance can create an instance...
-		internal ZoneMembershipCondition ()
-		{
-		}
-                
-                public ZoneMembershipCondition (SecurityZone zone)
-                {
-			// we need the validations
-                        SecurityZone = zone;
-                }
-
-                public SecurityZone SecurityZone {
-                        get { return zone; }
-                        set {
-				if (!Enum.IsDefined (typeof (SecurityZone), value)) {
-					throw new ArgumentException (Locale.GetText (
-						"invalid zone"));
-				}
-				if (value == SecurityZone.NoZone) {
-					throw new ArgumentException (Locale.GetText (
-						"NoZone isn't valid for membership condition"));
-				}
-
-				zone = value;
-			}
-                }
-
-                public bool Check (Evidence evidence)
-                {
-			if (evidence == null)
-				return false;
-
-			IEnumerator e = evidence.GetHostEnumerator ();
-			while (e.MoveNext ()) {
-				Zone z = (e.Current as Zone);
-				if (z != null) {
-					if (z.SecurityZone == zone)
-						return true;
-				}
-			}
-                        return false;
-                }
-
-                public IMembershipCondition Copy ()
-                {
-                        return new ZoneMembershipCondition (zone);
-                }
-
-		public override bool Equals (object o)
-		{
-			ZoneMembershipCondition zmc = (o as ZoneMembershipCondition);
-			if (zmc == null)
-				return false;
-			return (zmc.SecurityZone == zone);
-		}
-
-                public void FromXml (SecurityElement e)
-                {
-                        FromXml (e, null);
-                }
-
-		public void FromXml (SecurityElement e, PolicyLevel level)
-		{
-			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-
-			string z = e.Attribute ("Zone");
-			if (z != null) {
-				zone = (SecurityZone) Enum.Parse (typeof (SecurityZone), z);
-			}
-		}
-
-                public override int GetHashCode ()
-                {
-                        return zone.GetHashCode ();
-                }
-
-                public override string ToString ()
-                {
-                        return "Zone - " + zone;
-                }
-
-                public SecurityElement ToXml ()
-                {
-                        return ToXml (null);
-                }
-
-                public SecurityElement ToXml (PolicyLevel level)
-                {
-			// PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-			SecurityElement se = MembershipConditionHelper.Element (typeof (ZoneMembershipCondition), version);
-                        se.AddAttribute ("Zone", zone.ToString ());
-                        return se;
-                }
+        public ZoneMembershipCondition(SecurityZone zone)
+        {
+            // we need the validations
+            SecurityZone = zone;
         }
+
+        public SecurityZone SecurityZone
+        {
+            get { return zone; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(SecurityZone), value))
+                {
+                    throw new ArgumentException(Locale.GetText("invalid zone"));
+                }
+                if (value == SecurityZone.NoZone)
+                {
+                    throw new ArgumentException(
+                        Locale.GetText("NoZone isn't valid for membership condition")
+                    );
+                }
+
+                zone = value;
+            }
+        }
+
+        public bool Check(Evidence evidence)
+        {
+            if (evidence == null)
+                return false;
+
+            IEnumerator e = evidence.GetHostEnumerator();
+            while (e.MoveNext())
+            {
+                Zone z = (e.Current as Zone);
+                if (z != null)
+                {
+                    if (z.SecurityZone == zone)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public IMembershipCondition Copy()
+        {
+            return new ZoneMembershipCondition(zone);
+        }
+
+        public override bool Equals(object o)
+        {
+            ZoneMembershipCondition zmc = (o as ZoneMembershipCondition);
+            if (zmc == null)
+                return false;
+            return (zmc.SecurityZone == zone);
+        }
+
+        public void FromXml(SecurityElement e)
+        {
+            FromXml(e, null);
+        }
+
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
+
+            string z = e.Attribute("Zone");
+            if (z != null)
+            {
+                zone = (SecurityZone)Enum.Parse(typeof(SecurityZone), z);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return zone.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "Zone - " + zone;
+        }
+
+        public SecurityElement ToXml()
+        {
+            return ToXml(null);
+        }
+
+        public SecurityElement ToXml(PolicyLevel level)
+        {
+            // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(ZoneMembershipCondition),
+                version
+            );
+            se.AddAttribute("Zone", zone.ToString());
+            return se;
+        }
+    }
 }

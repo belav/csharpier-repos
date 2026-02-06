@@ -9,9 +9,7 @@ public class ValueConvertersEndToEndInMemoryTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndInMemoryTest.ValueConvertersEndToEndInMemoryFixture>
 {
     public ValueConvertersEndToEndInMemoryTest(ValueConvertersEndToEndInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -25,8 +23,12 @@ public class ValueConvertersEndToEndInMemoryTest
 
             if (async)
             {
-                await set.CountAsync(p => p.NullableListOfInt != nullList && p.NullableListOfInt!.Count > 0);
-                await set.CountAsync(p => p.NullableListOfInt != null && p.NullableListOfInt.Count > 0);
+                await set.CountAsync(p =>
+                    p.NullableListOfInt != nullList && p.NullableListOfInt!.Count > 0
+                );
+                await set.CountAsync(p =>
+                    p.NullableListOfInt != null && p.NullableListOfInt.Count > 0
+                );
             }
             else
             {
@@ -38,7 +40,6 @@ public class ValueConvertersEndToEndInMemoryTest
 
     public class ValueConvertersEndToEndInMemoryFixture : ValueConvertersEndToEndFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

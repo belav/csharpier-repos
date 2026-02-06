@@ -3,9 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
@@ -28,12 +26,23 @@ namespace ILCompiler.DependencyAnalysis
             return "Delegate target method: " + _method.ToString();
         }
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory) => null;
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

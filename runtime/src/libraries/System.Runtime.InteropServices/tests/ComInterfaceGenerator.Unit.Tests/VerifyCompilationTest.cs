@@ -7,19 +7,19 @@ using Microsoft.Interop.UnitTests;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
-    internal class VerifyCompilationTest<T> : Microsoft.Interop.UnitTests.Verifiers.CSharpSourceGeneratorVerifier<T>.Test
+    internal class VerifyCompilationTest<T>
+        : Microsoft.Interop.UnitTests.Verifiers.CSharpSourceGeneratorVerifier<T>.Test
         where T : new()
     {
         public required Action<Compilation> CompilationVerifier { get; init; }
 
-        public VerifyCompilationTest(TestTargetFramework targetFramework) : base(targetFramework)
-        {
-        }
+        public VerifyCompilationTest(TestTargetFramework targetFramework)
+            : base(targetFramework) { }
 
-        public VerifyCompilationTest(bool referenceAncillaryInterop) : base(referenceAncillaryInterop)
-        {
-        }
+        public VerifyCompilationTest(bool referenceAncillaryInterop)
+            : base(referenceAncillaryInterop) { }
 
-        protected override void VerifyFinalCompilation(Compilation compilation) => CompilationVerifier(compilation);
+        protected override void VerifyFinalCompilation(Compilation compilation) =>
+            CompilationVerifier(compilation);
     }
 }

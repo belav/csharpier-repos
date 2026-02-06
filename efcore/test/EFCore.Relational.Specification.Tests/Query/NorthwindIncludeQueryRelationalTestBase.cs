@@ -3,24 +3,30 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NorthwindIncludeQueryRelationalTestBase<TFixture> : NorthwindIncludeQueryTestBase<TFixture>
+public abstract class NorthwindIncludeQueryRelationalTestBase<TFixture>
+    : NorthwindIncludeQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
     protected NorthwindIncludeQueryRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override async Task Include_collection_with_last_no_orderby(bool async)
-        => Assert.Equal(
+    public override async Task Include_collection_with_last_no_orderby(bool async) =>
+        Assert.Equal(
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Include_collection_with_last_no_orderby(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Include_collection_with_last_no_orderby(async)
+                )
+            ).Message
+        );
 
-    protected virtual bool CanExecuteQueryString
-        => false;
+    protected virtual bool CanExecuteQueryString => false;
 
-    protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-        => new RelationalQueryAsserter(
-            fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+    protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+        new RelationalQueryAsserter(
+            fixture,
+            RewriteExpectedQueryExpression,
+            RewriteServerQueryExpression,
+            canExecuteQueryString: CanExecuteQueryString
+        );
 }

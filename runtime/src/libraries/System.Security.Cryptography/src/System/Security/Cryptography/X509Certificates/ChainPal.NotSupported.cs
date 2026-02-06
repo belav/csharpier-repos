@@ -8,12 +8,16 @@ namespace System.Security.Cryptography.X509Certificates
 #pragma warning disable IDE0060
         internal static partial IChainPal FromHandle(IntPtr chainContext)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial IChainPal? BuildChain(
@@ -28,9 +32,12 @@ namespace System.Security.Cryptography.X509Certificates
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
+            bool disableAia
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 #pragma warning restore IDE0060
     }

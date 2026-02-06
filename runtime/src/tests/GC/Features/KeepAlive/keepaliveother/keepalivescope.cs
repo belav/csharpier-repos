@@ -6,69 +6,73 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class Test_keepalivescope {
-
+public class Test_keepalivescope
+{
     public static int returnValue = 0;
-	public class Dummy {
 
-		public static bool visited;
-		~Dummy() {
-			//Console.WriteLine("In Finalize() of Dummy");	
-			visited=true;
-		}
-	}
+    public class Dummy
+    {
+        public static bool visited;
 
-	public class CreateObj {
-		public Dummy obj;
-		public bool result;
+        ~Dummy()
+        {
+            //Console.WriteLine("In Finalize() of Dummy");
+            visited = true;
+        }
+    }
 
-		public CreateObj() {
-			obj = new Dummy();
-			result=false;
-		}
+    public class CreateObj
+    {
+        public Dummy obj;
+        public bool result;
 
-		[MethodImpl(MethodImplOptions.NoInlining)]
-		public void RunTestInner() {
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-			
-			if((Dummy.visited == false)) {  // has not visited the Finalize() yet
-				result=true;
-			}
-		
-			GC.KeepAlive(obj);	// will keep alive 'obj' till this point
-		
-			obj=null;
-		}
-		
-		[MethodImpl(MethodImplOptions.NoInlining)]
-		public void RunTest() {
-			RunTestInner();
+        public CreateObj()
+        {
+            obj = new Dummy();
+            result = false;
+        }
 
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		
-			if(result==true && Dummy.visited==true)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public void RunTestInner()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            if ((Dummy.visited == false))
+            { // has not visited the Finalize() yet
+                result = true;
+            }
+
+            GC.KeepAlive(obj); // will keep alive 'obj' till this point
+
+            obj = null;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public void RunTest()
+        {
+            RunTestInner();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            if (result == true && Dummy.visited == true)
                 returnValue = 100;
-			else
+            else
                 returnValue = 1;
-		}
+        }
+    }
 
-	}
+    public static int Main()
+    {
+        CreateObj temp = new CreateObj();
+        temp.RunTest();
 
-	public static int Main() {
-
-		CreateObj temp = new CreateObj();
-		temp.RunTest();
-
-        if (returnValue == 100) 
-			Console.WriteLine("Test passed!");		
-		else
-			Console.WriteLine("Test failed!");
+        if (returnValue == 100)
+            Console.WriteLine("Test passed!");
+        else
+            Console.WriteLine("Test failed!");
 
         return returnValue;
-	}
+    }
 }
-
-
-

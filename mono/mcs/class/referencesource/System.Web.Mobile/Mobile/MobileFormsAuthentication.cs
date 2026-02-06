@@ -6,9 +6,9 @@
 
 using System.Diagnostics;
 using System.Security;
+using System.Security.Permissions;
 using System.Web.Security;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
 
 namespace System.Web.Mobile
 {
@@ -19,27 +19,44 @@ namespace System.Web.Mobile
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobileFormsAuthentication
     {
         // Class only contains statics, so make the constructor private.
-        private MobileFormsAuthentication()
-        {
-        }
+        private MobileFormsAuthentication() { }
 
         /// <include file='doc\MobileFormsAuthentication.uex' path='docs/doc[@for="MobileFormsAuthentication.RedirectFromLoginPage"]/*' />
         public static void RedirectFromLoginPage(String userName, bool createPersistentCookie)
         {
-            FormsAuthentication.RedirectFromLoginPage(userName, createPersistentCookie, FormsAuthentication.FormsCookiePath);
+            FormsAuthentication.RedirectFromLoginPage(
+                userName,
+                createPersistentCookie,
+                FormsAuthentication.FormsCookiePath
+            );
         }
 
         /// <include file='doc\MobileFormsAuthentication.uex' path='docs/doc[@for="MobileFormsAuthentication.RedirectFromLoginPage1"]/*' />
-        public static void RedirectFromLoginPage(String userName, bool createPersistentCookie, String strCookiePath)
+        public static void RedirectFromLoginPage(
+            String userName,
+            bool createPersistentCookie,
+            String strCookiePath
+        )
         {
-            FormsAuthentication.RedirectFromLoginPage(userName, createPersistentCookie, strCookiePath);
+            FormsAuthentication.RedirectFromLoginPage(
+                userName,
+                createPersistentCookie,
+                strCookiePath
+            );
             /*
             // Disallow redirection to an absolute url.
             String requestReturnUrl = HttpContext.Current.Request["ReturnUrl"];
@@ -99,35 +116,33 @@ namespace System.Web.Mobile
             FormsAuthentication.SignOut();
         }
 
-/*
-        private static void InternalSignOut ()
-        {
-            HttpContext context = HttpContext.Current;
-            String userName =
-                context.User == null || context.User.Identity == null || context.User.Identity.Name == null ?
-                "" :
-                context.User.Identity.Name;
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket (
-                1, // version
-                userName,
-                DateTime.Now, // Issue-Date
-                new DateTime(1999, 10, 12), // Expiration
-                false, // IsPersistent
-                "", // User-Data
-                FormsAuthentication.FormsCookiePath);
-            String encryptedTicket = FormsAuthentication.Encrypt (ticket);
-            if (encryptedTicket == null) { // Encrypt returned null
-                encryptedTicket = "x";
-            }
-            HttpCookie cookie = new HttpCookie (FormsAuthentication.FormsCookieName, encryptedTicket);
-            cookie.Path = FormsAuthentication.FormsCookiePath;
-            cookie.Expires = new System.DateTime (1999, 10, 12);
-            cookie.Secure = FormsAuthentication.RequireSSL;
-            context.Response.Cookies.Remove (FormsAuthentication.FormsCookieName);
-            context.Response.Cookies.Add (cookie);
-        }
-        */
+        /*
+                private static void InternalSignOut ()
+                {
+                    HttpContext context = HttpContext.Current;
+                    String userName =
+                        context.User == null || context.User.Identity == null || context.User.Identity.Name == null ?
+                        "" :
+                        context.User.Identity.Name;
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket (
+                        1, // version
+                        userName,
+                        DateTime.Now, // Issue-Date
+                        new DateTime(1999, 10, 12), // Expiration
+                        false, // IsPersistent
+                        "", // User-Data
+                        FormsAuthentication.FormsCookiePath);
+                    String encryptedTicket = FormsAuthentication.Encrypt (ticket);
+                    if (encryptedTicket == null) { // Encrypt returned null
+                        encryptedTicket = "x";
+                    }
+                    HttpCookie cookie = new HttpCookie (FormsAuthentication.FormsCookieName, encryptedTicket);
+                    cookie.Path = FormsAuthentication.FormsCookiePath;
+                    cookie.Expires = new System.DateTime (1999, 10, 12);
+                    cookie.Secure = FormsAuthentication.RequireSSL;
+                    context.Response.Cookies.Remove (FormsAuthentication.FormsCookieName);
+                    context.Response.Cookies.Add (cookie);
+                }
+                */
     }
 }
-
-

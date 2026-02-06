@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey> : RowForeignKeyValueFactory<TKey, TForeignKey>
+public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey>
+    : RowForeignKeyValueFactory<TKey, TForeignKey>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,7 +24,8 @@ public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey> : Row
         IForeignKeyConstraint foreignKey,
         IColumn column,
         ColumnAccessors columnAccessors,
-        IValueConverterSelector valueConverterSelector)
+        IValueConverterSelector valueConverterSelector
+    )
         : base(foreignKey, column, columnAccessors, valueConverterSelector)
     {
         EqualityComparer = CreateKeyEqualityComparer(column);
@@ -33,7 +35,10 @@ public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey> : Row
     public override IEqualityComparer<TKey> EqualityComparer { get; }
 
     /// <inheritdoc />
-    public override bool TryCreateDependentKeyValue(object?[] keyValues, [NotNullWhen(true)] out TKey? key)
+    public override bool TryCreateDependentKeyValue(
+        object?[] keyValues,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = (TKey?)keyValues[0]!;
         return true;
@@ -42,7 +47,8 @@ public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey> : Row
     /// <inheritdoc />
     public override bool TryCreateDependentKeyValue(
         IDictionary<string, object?> keyPropertyValues,
-        [NotNullWhen(true)] out TKey? key)
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         if (keyPropertyValues.TryGetValue(Column.Name, out var value))
         {
@@ -58,11 +64,17 @@ public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey> : Row
     public override bool TryCreateDependentKeyValue(
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
-        [NotNullWhen(true)] out TKey? key)
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         (key, var present) = fromOriginalValues
-            ? ((Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.OriginalValueGetter)(command)
-            : ((Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.CurrentValueGetter)(command);
+            ? (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    ColumnAccessors.OriginalValueGetter
+            )(command)
+            : (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)ColumnAccessors.CurrentValueGetter
+            )(command);
         return present;
     }
 }

@@ -38,7 +38,10 @@ public class ReferenceEntry : NavigationEntry
         LocalDetectChanges();
 
         // ReSharper disable once VirtualMemberCallInConstructor
-        Check.DebugAssert(Metadata is INavigation, "Issue #21673. Non-collection skip navigations not supported.");
+        Check.DebugAssert(
+            Metadata is INavigation,
+            "Issue #21673. Non-collection skip navigations not supported."
+        );
     }
 
     /// <summary>
@@ -54,7 +57,10 @@ public class ReferenceEntry : NavigationEntry
         LocalDetectChanges();
 
         // ReSharper disable once VirtualMemberCallInConstructor
-        Check.DebugAssert(Metadata is INavigation, "Issue #21673. Non-collection skip navigations not supported.");
+        Check.DebugAssert(
+            Metadata is INavigation,
+            "Issue #21673. Non-collection skip navigations not supported."
+        );
     }
 
     private void LocalDetectChanges()
@@ -65,8 +71,10 @@ public class ReferenceEntry : NavigationEntry
             if (target != null)
             {
                 var context = InternalEntry.Context;
-                if (context.ChangeTracker.AutoDetectChangesEnabled
-                    && !((IRuntimeModel)context.Model).SkipDetectChanges)
+                if (
+                    context.ChangeTracker.AutoDetectChangesEnabled
+                    && !((IRuntimeModel)context.Model).SkipDetectChanges
+                )
                 {
                     context.GetDependencies().ChangeDetector.DetectChanges(target);
                 }
@@ -84,8 +92,7 @@ public class ReferenceEntry : NavigationEntry
     ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public override void Load()
-        => Load(LoadOptions.None);
+    public override void Load() => Load(LoadOptions.None);
 
     /// <summary>
     ///     Loads the entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
@@ -123,8 +130,8 @@ public class ReferenceEntry : NavigationEntry
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public override Task LoadAsync(CancellationToken cancellationToken = default)
-        => LoadAsync(LoadOptions.None, cancellationToken);
+    public override Task LoadAsync(CancellationToken cancellationToken = default) =>
+        LoadAsync(LoadOptions.None, cancellationToken);
 
     /// <summary>
     ///     Loads entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
@@ -144,10 +151,18 @@ public class ReferenceEntry : NavigationEntry
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public override Task LoadAsync(LoadOptions options, CancellationToken cancellationToken = default)
-        => IsLoaded
+    public override Task LoadAsync(
+        LoadOptions options,
+        CancellationToken cancellationToken = default
+    ) =>
+        IsLoaded
             ? Task.CompletedTask
-            : TargetFinder.LoadAsync((INavigation)Metadata, InternalEntry, options, cancellationToken);
+            : TargetFinder.LoadAsync(
+                (INavigation)Metadata,
+                InternalEntry,
+                options,
+                cancellationToken
+            );
 
     /// <summary>
     ///     Returns the query that would be used by <see cref="Load()" /> to load entities referenced by
@@ -164,8 +179,7 @@ public class ReferenceEntry : NavigationEntry
     ///     </para>
     /// </remarks>
     /// <returns>The query to load related entities.</returns>
-    public override IQueryable Query()
-        => TargetFinder.Query((INavigation)Metadata, InternalEntry);
+    public override IQueryable Query() => TargetFinder.Query((INavigation)Metadata, InternalEntry);
 
     /// <summary>
     ///     Gets or sets a value indicating whether any of foreign key property values associated
@@ -200,7 +214,10 @@ public class ReferenceEntry : NavigationEntry
                 var navigationValue = CurrentValue;
                 if (navigationValue != null)
                 {
-                    var relatedEntry = InternalEntry.StateManager.TryGetEntry(navigationValue, Metadata.TargetEntityType);
+                    var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+                        navigationValue,
+                        Metadata.TargetEntityType
+                    );
                     if (relatedEntry != null)
                     {
                         SetFkPropertiesModified(navigation, relatedEntry, value);
@@ -213,15 +230,19 @@ public class ReferenceEntry : NavigationEntry
     private static void SetFkPropertiesModified(
         INavigation navigation,
         InternalEntityEntry internalEntityEntry,
-        bool modified)
+        bool modified
+    )
     {
         var anyNonPk = navigation.ForeignKey.Properties.Any(p => !p.IsPrimaryKey());
         foreach (var property in navigation.ForeignKey.Properties)
         {
-            if (anyNonPk
-                && !property.IsPrimaryKey())
+            if (anyNonPk && !property.IsPrimaryKey())
             {
-                internalEntityEntry.SetPropertyModified(property, isModified: modified, acceptChanges: false);
+                internalEntityEntry.SetPropertyModified(
+                    property,
+                    isModified: modified,
+                    acceptChanges: false
+                );
             }
         }
     }
@@ -233,12 +254,17 @@ public class ReferenceEntry : NavigationEntry
             return false;
         }
 
-        var relatedEntry = InternalEntry.StateManager.TryGetEntry(relatedEntity, Metadata.TargetEntityType);
+        var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+            relatedEntity,
+            Metadata.TargetEntityType
+        );
 
         return relatedEntry != null
-            && (relatedEntry.EntityState == EntityState.Added
+            && (
+                relatedEntry.EntityState == EntityState.Added
                 || relatedEntry.EntityState == EntityState.Deleted
-                || navigation.ForeignKey.Properties.Any(relatedEntry.IsModified));
+                || navigation.ForeignKey.Properties.Any(relatedEntry.IsModified)
+            );
     }
 
     /// <summary>
@@ -265,11 +291,11 @@ public class ReferenceEntry : NavigationEntry
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityEntry? GetTargetEntry()
-        => CurrentValue == null
+    protected virtual InternalEntityEntry? GetTargetEntry() =>
+        CurrentValue == null
             ? null
             : InternalEntry.StateManager.GetOrCreateEntry(CurrentValue, Metadata.TargetEntityType);
 
-    private IEntityFinder TargetFinder
-        => _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);
+    private IEntityFinder TargetFinder =>
+        _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);
 }

@@ -12,10 +12,7 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         private IMemoryCache CreateCache(ISystemClock clock)
         {
-            return new MemoryCache(new MemoryCacheOptions()
-            {
-                Clock = clock,
-            });
+            return new MemoryCache(new MemoryCacheOptions() { Clock = clock });
         }
 
         [Fact]
@@ -27,7 +24,11 @@ namespace Microsoft.Extensions.Caching.Memory
             var obj = new object();
 
             var expected = clock.UtcNow - TimeSpan.FromMinutes(1);
-            var result = cache.Set(key, obj, new MemoryCacheEntryOptions().SetAbsoluteExpiration(expected));
+            var result = cache.Set(
+                key,
+                obj,
+                new MemoryCacheEntryOptions().SetAbsoluteExpiration(expected)
+            );
 
             Assert.Null(cache.Get(key));
         }
@@ -65,12 +66,15 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var options = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(clock.UtcNow + TimeSpan.FromMinutes(1))
-                .RegisterPostEvictionCallback((subkey, subValue, reason, state) =>
-                {
-                    // TODO: Verify params
-                    var localCallbackInvoked = (ManualResetEvent)state;
-                    localCallbackInvoked.Set();
-                }, callbackInvoked);
+                .RegisterPostEvictionCallback(
+                    (subkey, subValue, reason, state) =>
+                    {
+                        // TODO: Verify params
+                        var localCallbackInvoked = (ManualResetEvent)state;
+                        localCallbackInvoked.Set();
+                    },
+                    callbackInvoked
+                );
             var result = cache.Set(key, value, options);
             Assert.Same(value, result);
 
@@ -96,8 +100,17 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow), () =>
-                cache.Set(key, value, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(-1))));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow),
+                () =>
+                    cache.Set(
+                        key,
+                        value,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(
+                            TimeSpan.FromMinutes(-1)
+                        )
+                    )
+            );
         }
 
         [Fact]
@@ -108,8 +121,15 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow), () =>
-                cache.Set(key, value, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.Zero)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow),
+                () =>
+                    cache.Set(
+                        key,
+                        value,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.Zero)
+                    )
+            );
         }
 
         [Fact]
@@ -142,8 +162,15 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(MemoryCacheEntryOptions.SlidingExpiration), () =>
-                cache.Set(key, value, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(-1))));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(MemoryCacheEntryOptions.SlidingExpiration),
+                () =>
+                    cache.Set(
+                        key,
+                        value,
+                        new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(-1))
+                    )
+            );
         }
 
         [Fact]
@@ -154,8 +181,15 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(MemoryCacheEntryOptions.SlidingExpiration), () =>
-                cache.Set(key, value, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.Zero)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(MemoryCacheEntryOptions.SlidingExpiration),
+                () =>
+                    cache.Set(
+                        key,
+                        value,
+                        new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.Zero)
+                    )
+            );
         }
 
         [Fact]
@@ -166,7 +200,11 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            var result = cache.Set(key, value, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(1)));
+            var result = cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(1))
+            );
             Assert.Same(value, result);
 
             var found = cache.TryGetValue(key, out result);
@@ -188,8 +226,11 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            var result = cache.Set(key, value, new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(1)));
+            var result = cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(1))
+            );
             Assert.Same(value, result);
 
             var found = cache.TryGetValue(key, out result);
@@ -214,9 +255,13 @@ namespace Microsoft.Extensions.Caching.Memory
             var key = "myKey";
             var value = new object();
 
-            var result = cache.Set(key, value, new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(1))
-                .SetAbsoluteExpiration(TimeSpan.FromMinutes(2)));
+            var result = cache.Set(
+                key,
+                value,
+                new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(1))
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(2))
+            );
             Assert.Same(value, result);
 
             var found = cache.TryGetValue(key, out result);

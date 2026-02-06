@@ -9,7 +9,11 @@ namespace ILCompiler.DependencyAnalysis
 {
     public static class MethodSignatureExtensions
     {
-        public static void AppendName(this MethodSignature signature, StringBuilder nameBuilder, UniqueTypeNameFormatter typeNameFormatter)
+        public static void AppendName(
+            this MethodSignature signature,
+            StringBuilder nameBuilder,
+            UniqueTypeNameFormatter typeNameFormatter
+        )
         {
             if (signature.GenericParameterCount > 0)
             {
@@ -147,7 +151,11 @@ namespace ILCompiler.DependencyAnalysis
             AppendEscapedIdentifier(sb, assembly.GetName().Name);
         }
 
-        protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+        protected override void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        )
         {
             AppendName(sb, containingType);
 
@@ -172,7 +180,19 @@ namespace ILCompiler.DependencyAnalysis
             return type.Namespace;
         }
 
-        private static char[] s_escapedChars = new char[] { ',', '=', '"', ']', '[', '*', '&', '+', '\\' };
+        private static char[] s_escapedChars = new char[]
+        {
+            ',',
+            '=',
+            '"',
+            ']',
+            '[',
+            '*',
+            '&',
+            '+',
+            '\\',
+        };
+
         private static void AppendEscapedIdentifier(StringBuilder sb, string identifier)
         {
             if (identifier.IndexOfAny(s_escapedChars) < 0)
@@ -181,7 +201,10 @@ namespace ILCompiler.DependencyAnalysis
                 foreach (char escapedChar in s_escapedChars)
                 {
                     string escapedCharString = new string(escapedChar, 1);
-                    escapedIdentifier = escapedIdentifier.Replace(escapedCharString, "\\" + escapedCharString);
+                    escapedIdentifier = escapedIdentifier.Replace(
+                        escapedCharString,
+                        "\\" + escapedCharString
+                    );
                 }
                 sb.Append(escapedIdentifier);
             }

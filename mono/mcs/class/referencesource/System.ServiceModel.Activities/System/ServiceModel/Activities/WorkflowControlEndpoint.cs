@@ -5,15 +5,15 @@ namespace System.ServiceModel.Activities
 {
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Runtime;
     using System.Threading;
-    using System.Security;
-    using System.Security.Permissions;
-    
+
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowControlEndpoint : ServiceEndpoint
     {
@@ -25,10 +25,15 @@ namespace System.ServiceModel.Activities
         static object workflowContractDescriptionLock = new object();
 
         public WorkflowControlEndpoint()
-            : this(WorkflowControlEndpoint.GetDefaultBinding(),
-            new EndpointAddress(new Uri(WorkflowControlEndpoint.DefaultBaseUri, new Uri(Guid.NewGuid().ToString(), UriKind.Relative))))
-        {
-        }
+            : this(
+                WorkflowControlEndpoint.GetDefaultBinding(),
+                new EndpointAddress(
+                    new Uri(
+                        WorkflowControlEndpoint.DefaultBaseUri,
+                        new Uri(Guid.NewGuid().ToString(), UriKind.Relative)
+                    )
+                )
+            ) { }
 
         public WorkflowControlEndpoint(Binding binding, EndpointAddress address)
             : base(WorkflowControlEndpoint.WorkflowControlServiceContract, binding, address)
@@ -46,11 +51,14 @@ namespace System.ServiceModel.Activities
                     {
                         if (workflowControlServiceBaseContract == null)
                         {
-                            foreach (OperationDescription operation in WorkflowControlServiceContract.Operations)
+                            foreach (
+                                OperationDescription operation in WorkflowControlServiceContract.Operations
+                            )
                             {
                                 if (operation.DeclaringContract != WorkflowControlServiceContract)
                                 {
-                                    workflowControlServiceBaseContract = operation.DeclaringContract;
+                                    workflowControlServiceBaseContract =
+                                        operation.DeclaringContract;
                                     break;
                                 }
                             }
@@ -71,12 +79,17 @@ namespace System.ServiceModel.Activities
                     {
                         if (workflowControlServiceContract == null)
                         {
-                            ContractDescription tempControlServiceContract = ContractDescription.GetContract(
-                                typeof(IWorkflowUpdateableInstanceManagement));
-                            tempControlServiceContract.Behaviors.Add(new ServiceMetadataContractBehavior(true));
+                            ContractDescription tempControlServiceContract =
+                                ContractDescription.GetContract(
+                                    typeof(IWorkflowUpdateableInstanceManagement)
+                                );
+                            tempControlServiceContract.Behaviors.Add(
+                                new ServiceMetadataContractBehavior(true)
+                            );
                             ApplyOperationBehaviors(tempControlServiceContract);
                             // For back-compat, need to support existing code which expects the old contract type
-                            tempControlServiceContract.ContractType = typeof(IWorkflowInstanceManagement);
+                            tempControlServiceContract.ContractType =
+                                typeof(IWorkflowInstanceManagement);
                             workflowControlServiceContract = tempControlServiceContract;
                         }
                     }
@@ -85,8 +98,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because it retreives the Process Id via Process.Id, which has a link demand for Full Trust.",
-            Safe = "Safe because it demands FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because it retreives the Process Id via Process.Id, which has a link demand for Full Trust.",
+            Safe = "Safe because it demands FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         static void RetrieveProcessIdAndAppDomainId(out int processId, out int appDomainId)
@@ -108,14 +123,24 @@ namespace System.ServiceModel.Activities
                         int processId;
                         int appDomainId;
                         RetrieveProcessIdAndAppDomainId(out processId, out appDomainId);
-                        defaultBaseUri = new Uri(string.Format(CultureInfo.InvariantCulture, "net.pipe://localhost/workflowControlServiceEndpoint/{0}/{1}",
-                            processId,
-                            appDomainId));
+                        defaultBaseUri = new Uri(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "net.pipe://localhost/workflowControlServiceEndpoint/{0}/{1}",
+                                processId,
+                                appDomainId
+                            )
+                        );
                     }
                     else
                     {
-                        Uri tempUri = new Uri(string.Format(CultureInfo.InvariantCulture, "net.pipe://localhost/workflowControlServiceEndpoint/{0}",
-                            Guid.NewGuid().ToString()));
+                        Uri tempUri = new Uri(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "net.pipe://localhost/workflowControlServiceEndpoint/{0}",
+                                Guid.NewGuid().ToString()
+                            )
+                        );
                         // Using Interlocked.CompareExchange because new Guid.NewGuid is not atomic.
                         Interlocked.CompareExchange(ref defaultBaseUri, tempUri, null);
                     }
@@ -126,7 +151,10 @@ namespace System.ServiceModel.Activities
 
         static Binding GetDefaultBinding()
         {
-            return new NetNamedPipeBinding(NetNamedPipeSecurityMode.None) { TransactionFlow = true };
+            return new NetNamedPipeBinding(NetNamedPipeSecurityMode.None)
+            {
+                TransactionFlow = true,
+            };
         }
 
         static void ApplyOperationBehaviors(ContractDescription contractDescription)
@@ -166,7 +194,8 @@ namespace System.ServiceModel.Activities
 
         static void EnsureTransactedInvoke(OperationDescription operationDescription)
         {
-            OperationBehaviorAttribute operationAttribute = operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute operationAttribute =
+                operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
             operationAttribute.TransactionScopeRequired = true;
         }
     }

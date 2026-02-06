@@ -32,7 +32,11 @@ namespace System.Buffers.Text
             // (So a value of 0x01010200 means the string parsed as "nn:nn:nn.nnnnnnn")
             public uint Separators;
 
-            public bool TrySplitTimeSpan(ReadOnlySpan<byte> source, bool periodUsedToSeparateDay, out int bytesConsumed)
+            public bool TrySplitTimeSpan(
+                ReadOnlySpan<byte> source,
+                bool periodUsedToSeparateDay,
+                out int bytesConsumed
+            )
             {
                 int srcIndex = 0;
                 byte c = default;
@@ -82,7 +86,12 @@ namespace System.Buffers.Text
                 // the fraction is always the fourth component at earliest, so if we do see a period at this stage, always parse the integer as a regular integer, not as
                 // a fraction.
                 //
-                ComponentParseResult result = ParseComponent(source, neverParseAsFraction: periodUsedToSeparateDay, ref srcIndex, out V2);
+                ComponentParseResult result = ParseComponent(
+                    source,
+                    neverParseAsFraction: periodUsedToSeparateDay,
+                    ref srcIndex,
+                    out V2
+                );
                 if (result == ComponentParseResult.ParseFailure)
                 {
                     bytesConsumed = 0;
@@ -95,7 +104,10 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Debug.Assert(result == ComponentParseResult.Colon || result == ComponentParseResult.Period);
+                    Debug.Assert(
+                        result == ComponentParseResult.Colon
+                            || result == ComponentParseResult.Period
+                    );
                     Separators |= ((uint)result) << 24;
                 }
 
@@ -115,7 +127,10 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Debug.Assert(result == ComponentParseResult.Colon || result == ComponentParseResult.Period);
+                    Debug.Assert(
+                        result == ComponentParseResult.Colon
+                            || result == ComponentParseResult.Period
+                    );
                     Separators |= ((uint)result) << 16;
                 }
 
@@ -135,7 +150,10 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Debug.Assert(result == ComponentParseResult.Colon || result == ComponentParseResult.Period);
+                    Debug.Assert(
+                        result == ComponentParseResult.Colon
+                            || result == ComponentParseResult.Period
+                    );
                     Separators |= ((uint)result) << 8;
                 }
 
@@ -155,7 +173,10 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Debug.Assert(result == ComponentParseResult.Colon || result == ComponentParseResult.Period);
+                    Debug.Assert(
+                        result == ComponentParseResult.Colon
+                            || result == ComponentParseResult.Period
+                    );
                     Separators |= (uint)result;
                 }
 
@@ -163,7 +184,13 @@ namespace System.Buffers.Text
                 // There cannot legally be a sixth number. If the next character is a period or colon, treat this as a error as it's likely
                 // to indicate the start of a sixth number. Otherwise, treat as end of parse with data left over.
                 //
-                if (srcIndex != source.Length && (source[srcIndex] == Utf8Constants.Period || source[srcIndex] == Utf8Constants.Colon))
+                if (
+                    srcIndex != source.Length
+                    && (
+                        source[srcIndex] == Utf8Constants.Period
+                        || source[srcIndex] == Utf8Constants.Colon
+                    )
+                )
                 {
                     bytesConsumed = 0;
                     return false;
@@ -176,7 +203,12 @@ namespace System.Buffers.Text
             //
             // Look for a separator followed by an unsigned integer.
             //
-            private static ComponentParseResult ParseComponent(ReadOnlySpan<byte> source, bool neverParseAsFraction, ref int srcIndex, out uint value)
+            private static ComponentParseResult ParseComponent(
+                ReadOnlySpan<byte> source,
+                bool neverParseAsFraction,
+                ref int srcIndex,
+                out uint value
+            )
             {
                 if (srcIndex == source.Length)
                 {
@@ -196,13 +228,21 @@ namespace System.Buffers.Text
                     }
 
                     srcIndex += bytesConsumed;
-                    return c == Utf8Constants.Colon ? ComponentParseResult.Colon : ComponentParseResult.Period;
+                    return c == Utf8Constants.Colon
+                        ? ComponentParseResult.Colon
+                        : ComponentParseResult.Period;
                 }
                 else if (c == Utf8Constants.Period)
                 {
                     srcIndex++;
 
-                    if (!TryParseTimeSpanFraction(source.Slice(srcIndex), out value, out int bytesConsumed))
+                    if (
+                        !TryParseTimeSpanFraction(
+                            source.Slice(srcIndex),
+                            out value,
+                            out int bytesConsumed
+                        )
+                    )
                     {
                         value = default;
                         return ComponentParseResult.ParseFailure;

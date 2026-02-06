@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,25 +33,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System
 {
-	[TestFixture]
-	public class UriTemplateTableTest
-	{
-		[Test]
-		[ExpectedException (typeof (InvalidOperationException))]
-		public void MatchSingleNoPair ()
-		{
-			var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
-			// at least one UriTemplate must exist in the table.
-			t.MatchSingle (new Uri ("http://localhost:37564"));
-		}
+    [TestFixture]
+    public class UriTemplateTableTest
+    {
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MatchSingleNoPair()
+        {
+            var t = new UriTemplateTable(new Uri("http://localhost:37564"));
+            // at least one UriTemplate must exist in the table.
+            t.MatchSingle(new Uri("http://localhost:37564"));
+        }
 
-		[Test]
-		public void MatchSingle ()
-		{
-			var t = new UriTemplateTable (new Uri ("http://localhost:37564"));
-			t.KeyValuePairs.Add (new KeyValuePair<UriTemplate,object> (new UriTemplate ("/jsdebug"), null));
-			Assert.IsNull (t.MatchSingle (new Uri ("http://localhost:37564/js")), "#1");
-			Assert.IsNotNull (t.MatchSingle (new Uri ("http://localhost:37564/jsdebug")), "#2");
-		}
-	}
+        [Test]
+        public void MatchSingle()
+        {
+            var t = new UriTemplateTable(new Uri("http://localhost:37564"));
+            t.KeyValuePairs.Add(
+                new KeyValuePair<UriTemplate, object>(new UriTemplate("/jsdebug"), null)
+            );
+            Assert.IsNull(t.MatchSingle(new Uri("http://localhost:37564/js")), "#1");
+            Assert.IsNotNull(t.MatchSingle(new Uri("http://localhost:37564/jsdebug")), "#2");
+        }
+    }
 }

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         internal AbstractFormattingResult(
             TreeData treeInfo,
             TokenStream tokenStream,
-            TextSpan formattedSpan)
+            TextSpan formattedSpan
+        )
         {
             this.TreeInfo = treeInfo;
             this.TokenStream = tokenStream;
@@ -41,15 +42,18 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <summary>
         /// rewrite the tree info root node with the trivia information in the map
         /// </summary>
-        protected abstract SyntaxNode Rewriter(Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map, CancellationToken cancellationToken);
+        protected abstract SyntaxNode Rewriter(
+            Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
+            CancellationToken cancellationToken
+        );
 
         #region IFormattingResult implementation
 
-        public IList<TextChange> GetTextChanges(CancellationToken cancellationToken)
-            => _lazyChanges.GetValue(cancellationToken);
+        public IList<TextChange> GetTextChanges(CancellationToken cancellationToken) =>
+            _lazyChanges.GetValue(cancellationToken);
 
-        public SyntaxNode GetFormattedRoot(CancellationToken cancellationToken)
-            => _lazyNode.GetValue(cancellationToken);
+        public SyntaxNode GetFormattedRoot(CancellationToken cancellationToken) =>
+            _lazyNode.GetValue(cancellationToken);
 
         private IList<TextChange> CreateTextChanges(CancellationToken cancellationToken)
         {
@@ -73,14 +77,28 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
         }
 
-        private void AddTextChanges(List<TextChange> list, SyntaxToken token1, SyntaxToken token2, TriviaData data)
+        private void AddTextChanges(
+            List<TextChange> list,
+            SyntaxToken token1,
+            SyntaxToken token2,
+            TriviaData data
+        )
         {
-            var span = TextSpan.FromBounds(token1.RawKind == 0 ? this.TreeInfo.StartPosition : token1.Span.End, token2.RawKind == 0 ? this.TreeInfo.EndPosition : token2.SpanStart);
+            var span = TextSpan.FromBounds(
+                token1.RawKind == 0 ? this.TreeInfo.StartPosition : token1.Span.End,
+                token2.RawKind == 0 ? this.TreeInfo.EndPosition : token2.SpanStart
+            );
             var originalString = this.TreeInfo.GetTextBetween(token1, token2);
 
             foreach (var change in data.GetTextChanges(span))
             {
-                var oldText = (change.Span == span) ? originalString : originalString.Substring(change.Span.Start - span.Start, change.Span.Length);
+                var oldText =
+                    (change.Span == span)
+                        ? originalString
+                        : originalString.Substring(
+                            change.Span.Start - span.Start,
+                            change.Span.Length
+                        );
                 list.Add(change.SimpleDiff(oldText));
             }
         }
@@ -92,7 +110,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var changes = GetChanges(cancellationToken);
 
                 // create a map
-                using var pooledObject = SharedPools.Default<Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>>().GetPooledObject();
+                using var pooledObject = SharedPools
+                    .Default<Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>>()
+                    .GetPooledObject();
 
                 var map = pooledObject.Object;
                 changes.Do(change => map.Add(change.Item1, change.Item2));
@@ -107,8 +127,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
         }
 
-        internal IEnumerable<ValueTuple<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>> GetChanges(CancellationToken cancellationToken)
-            => TokenStream.GetTriviaDataWithTokenPair(cancellationToken).Where(d => d.Item2.ContainsChanges);
+        internal IEnumerable<
+            ValueTuple<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>
+        > GetChanges(CancellationToken cancellationToken) =>
+            TokenStream
+                .GetTriviaDataWithTokenPair(cancellationToken)
+                .Where(d => d.Item2.ContainsChanges);
 
         #endregion
     }

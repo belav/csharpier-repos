@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     internal partial class StateDesigner : FreeformActivityDesigner
     {
@@ -40,18 +40,12 @@ namespace System.Workflow.Activities
 
             internal SetStateActivity SetState
             {
-                get
-                {
-                    return _setState;
-                }
+                get { return _setState; }
             }
 
             internal CompositeActivity EventHandler
             {
-                get
-                {
-                    return _eventHandler;
-                }
+                get { return _eventHandler; }
             }
 
             internal StateActivity SourceState
@@ -68,26 +62,14 @@ namespace System.Workflow.Activities
 
             internal StateActivity TargetState
             {
-                get
-                {
-                    return _targetState;
-                }
-                set
-                {
-                    _targetState = value;
-                }
+                get { return _targetState; }
+                set { _targetState = value; }
             }
 
             internal StateDesignerConnector Connector
             {
-                get
-                {
-                    return _connector;
-                }
-                set
-                {
-                    _connector = value;
-                }
+                get { return _connector; }
+                set { _connector = value; }
             }
 
             internal bool Matches(StateDesignerConnector stateDesignerConnector)
@@ -95,16 +77,17 @@ namespace System.Workflow.Activities
                 if (stateDesignerConnector == null)
                     throw new ArgumentNullException("stateDesignerConnector");
 
-                if (this.Connector != null &&
-                    this.Connector == stateDesignerConnector)
+                if (this.Connector != null && this.Connector == stateDesignerConnector)
                     return true;
 
                 // this transitioninfo is incomplete,
                 // therefore, it cannot match an existing connector
-                if (this.SetState == null ||
-                    this.SourceState == null ||
-                    this.TargetState == null ||
-                    this.EventHandler == null)
+                if (
+                    this.SetState == null
+                    || this.SourceState == null
+                    || this.TargetState == null
+                    || this.EventHandler == null
+                )
                     return false;
 
                 if (this.SetState.QualifiedName != stateDesignerConnector.SetStateName)
@@ -113,8 +96,11 @@ namespace System.Workflow.Activities
                 if (this.SourceState.QualifiedName != stateDesignerConnector.SourceStateName)
                     return false;
 
-                if (this.TargetState.QualifiedName != stateDesignerConnector.TargetStateName ||
-                    stateDesignerConnector.Target.AssociatedDesigner.Activity.QualifiedName != stateDesignerConnector.TargetStateName)
+                if (
+                    this.TargetState.QualifiedName != stateDesignerConnector.TargetStateName
+                    || stateDesignerConnector.Target.AssociatedDesigner.Activity.QualifiedName
+                        != stateDesignerConnector.TargetStateName
+                )
                     return false;
 
                 if (this.EventHandler.QualifiedName != stateDesignerConnector.EventHandlerName)
@@ -123,7 +109,9 @@ namespace System.Workflow.Activities
                 return true;
             }
 
-            internal static ReadOnlyCollection<TransitionInfo> ParseStateMachine(StateActivity rootState)
+            internal static ReadOnlyCollection<TransitionInfo> ParseStateMachine(
+                StateActivity rootState
+            )
             {
                 List<TransitionInfo> transitions = new List<TransitionInfo>();
                 Dictionary<string, StateActivity> states = new Dictionary<string, StateActivity>();
@@ -155,7 +143,10 @@ namespace System.Workflow.Activities
                     string targetStateName = transitionInfo.SetState.TargetStateName;
                     if (!String.IsNullOrEmpty(targetStateName))
                     {
-                        states.TryGetValue(transitionInfo.SetState.TargetStateName, out targetState);
+                        states.TryGetValue(
+                            transitionInfo.SetState.TargetStateName,
+                            out targetState
+                        );
                         transitionInfo.TargetState = targetState;
                     }
                 }
@@ -163,7 +154,10 @@ namespace System.Workflow.Activities
                 return transitions.AsReadOnly();
             }
 
-            private static void ParseEventHandler(CompositeActivity eventHandler, List<TransitionInfo> transitions)
+            private static void ParseEventHandler(
+                CompositeActivity eventHandler,
+                List<TransitionInfo> transitions
+            )
             {
                 Queue<Activity> processingQueue = new Queue<Activity>();
                 processingQueue.Enqueue(eventHandler);

@@ -2,12 +2,12 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.Text;
-    using System.Collections;
-    using System.Collections.Generic;
 
     internal static class Helper
     {
@@ -30,7 +30,9 @@ namespace System.Workflow.ComponentModel.Compiler
             return paramAttributes;
         }
 
-        internal static MethodAttributes ConvertToMethodAttributes(MemberAttributes memberAttributes)
+        internal static MethodAttributes ConvertToMethodAttributes(
+            MemberAttributes memberAttributes
+        )
         {
             MethodAttributes methodAttributes = MethodAttributes.ReuseSlot;
             // convert access attributes
@@ -38,16 +40,22 @@ namespace System.Workflow.ComponentModel.Compiler
                 methodAttributes |= MethodAttributes.Assembly;
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Family)
                 methodAttributes |= MethodAttributes.Family;
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyAndAssembly)
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyAndAssembly
+            )
                 methodAttributes |= MethodAttributes.FamANDAssem;
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyOrAssembly)
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyOrAssembly
+            )
                 methodAttributes |= MethodAttributes.FamORAssem;
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Private)
                 methodAttributes |= MethodAttributes.Private;
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Public)
                 methodAttributes |= MethodAttributes.Public;
 
-            // covert scope attributes 
+            // covert scope attributes
             if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract)
                 methodAttributes |= MethodAttributes.Abstract;
             else if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Final)
@@ -55,13 +63,13 @@ namespace System.Workflow.ComponentModel.Compiler
             else if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Static)
                 methodAttributes |= MethodAttributes.Static;
             //else if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Override)
-            // methodAttributes |= MethodAttributes.ReuseSlot;// 
+            // methodAttributes |= MethodAttributes.ReuseSlot;//
 
             // convert vtable slot
             if ((memberAttributes & MemberAttributes.VTableMask) == MemberAttributes.New)
                 methodAttributes |= MethodAttributes.NewSlot;
             //if ((memberAttributes & MemberAttributes.VTableMask) == MemberAttributes.Overloaded)
-            // methodAttributes |= MethodAttributes.HideBySig; // 
+            // methodAttributes |= MethodAttributes.HideBySig; //
 
             return methodAttributes;
         }
@@ -74,9 +82,15 @@ namespace System.Workflow.ComponentModel.Compiler
                 fieldAttributes |= FieldAttributes.Assembly;
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Family)
                 fieldAttributes |= FieldAttributes.Family;
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyAndAssembly)
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyAndAssembly
+            )
                 fieldAttributes |= FieldAttributes.FamANDAssem;
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyOrAssembly)
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyOrAssembly
+            )
                 fieldAttributes |= FieldAttributes.FamORAssem;
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Private)
                 fieldAttributes |= FieldAttributes.Private;
@@ -91,25 +105,54 @@ namespace System.Workflow.ComponentModel.Compiler
             return fieldAttributes;
         }
 
-        internal static TypeAttributes ConvertToTypeAttributes(MemberAttributes memberAttributes, Type declaringType)
+        internal static TypeAttributes ConvertToTypeAttributes(
+            MemberAttributes memberAttributes,
+            Type declaringType
+        )
         {
             TypeAttributes typeAttributes = default(TypeAttributes);
 
             // convert access attributes
             if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Assembly)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedAssembly : TypeAttributes.NotPublic);
+                typeAttributes |= (
+                    (declaringType != null)
+                        ? TypeAttributes.NestedAssembly
+                        : TypeAttributes.NotPublic
+                );
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Family)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedFamily : TypeAttributes.NotPublic);
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyAndAssembly)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedFamANDAssem : TypeAttributes.NotPublic);
-            else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.FamilyOrAssembly)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedFamORAssem : TypeAttributes.NotPublic);
+                typeAttributes |= (
+                    (declaringType != null) ? TypeAttributes.NestedFamily : TypeAttributes.NotPublic
+                );
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyAndAssembly
+            )
+                typeAttributes |= (
+                    (declaringType != null)
+                        ? TypeAttributes.NestedFamANDAssem
+                        : TypeAttributes.NotPublic
+                );
+            else if (
+                (memberAttributes & MemberAttributes.AccessMask)
+                == MemberAttributes.FamilyOrAssembly
+            )
+                typeAttributes |= (
+                    (declaringType != null)
+                        ? TypeAttributes.NestedFamORAssem
+                        : TypeAttributes.NotPublic
+                );
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Private)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedPrivate : TypeAttributes.NotPublic);
+                typeAttributes |= (
+                    (declaringType != null)
+                        ? TypeAttributes.NestedPrivate
+                        : TypeAttributes.NotPublic
+                );
             else if ((memberAttributes & MemberAttributes.AccessMask) == MemberAttributes.Public)
-                typeAttributes |= ((declaringType != null) ? TypeAttributes.NestedPublic : TypeAttributes.Public);
+                typeAttributes |= (
+                    (declaringType != null) ? TypeAttributes.NestedPublic : TypeAttributes.Public
+                );
 
-            // covert scope attributes 
+            // covert scope attributes
             if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract)
                 typeAttributes |= TypeAttributes.Abstract;
             else if ((memberAttributes & MemberAttributes.ScopeMask) == MemberAttributes.Final)
@@ -134,7 +177,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return false;
         }
 
-        internal static Attribute[] LoadCustomAttributes(CodeAttributeDeclarationCollection codeAttributeCollection, DesignTimeType declaringType)
+        internal static Attribute[] LoadCustomAttributes(
+            CodeAttributeDeclarationCollection codeAttributeCollection,
+            DesignTimeType declaringType
+        )
         {
             if (declaringType == null)
                 throw new ArgumentNullException("declaringType");
@@ -144,7 +190,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
             List<Attribute> attributes = new List<Attribute>();
 
-            // walk through the attributes 
+            // walk through the attributes
             foreach (CodeAttributeDeclaration codeAttribute in codeAttributeCollection)
             {
                 String[] argumentNames = new String[codeAttribute.Arguments.Count];
@@ -162,48 +208,72 @@ namespace System.Workflow.ComponentModel.Compiler
                         argumentNames[index] = codeArgument.Name;
 
                         if (codeArgument.Value is CodePrimitiveExpression)
-                            argumentValues[index] = (codeArgument.Value as CodePrimitiveExpression).Value;
+                            argumentValues[index] = (
+                                codeArgument.Value as CodePrimitiveExpression
+                            ).Value;
                         else if (codeArgument.Value is CodeTypeOfExpression)
                             argumentValues[index] = codeArgument.Value;
                         else if (codeArgument.Value is CodeSnippetExpression)
-                            argumentValues[index] = (codeArgument.Value as CodeSnippetExpression).Value;
+                            argumentValues[index] = (
+                                codeArgument.Value as CodeSnippetExpression
+                            ).Value;
                         else
-                            argumentValues[index] = new ArgumentException(SR.GetString(SR.Error_TypeSystemAttributeArgument));
+                            argumentValues[index] = new ArgumentException(
+                                SR.GetString(SR.Error_TypeSystemAttributeArgument)
+                            );
 
                         index++;
                     }
                     bool alreadyExists = false;
                     foreach (AttributeInfoAttribute attribInfo in attributes)
                     {
-                        if (attribInfo.AttributeInfo.AttributeType.FullName.Equals(attributeType.FullName))
+                        if (
+                            attribInfo.AttributeInfo.AttributeType.FullName.Equals(
+                                attributeType.FullName
+                            )
+                        )
                         {
                             alreadyExists = true;
                             break;
                         }
                     }
-                    // 
+                    //
 
                     bool allowMultiple = false;
                     if (alreadyExists && attributeType.Assembly != null)
                     {
-                        object[] usageAttribs = attributeType.GetCustomAttributes(typeof(System.AttributeUsageAttribute), true);
+                        object[] usageAttribs = attributeType.GetCustomAttributes(
+                            typeof(System.AttributeUsageAttribute),
+                            true
+                        );
                         if (usageAttribs != null && usageAttribs.Length > 0)
                         {
-                            AttributeUsageAttribute usage = usageAttribs[0] as AttributeUsageAttribute;
+                            AttributeUsageAttribute usage =
+                                usageAttribs[0] as AttributeUsageAttribute;
                             allowMultiple = usage.AllowMultiple;
                         }
                     }
                     // now create and add the placeholder attribute
                     if (!alreadyExists || allowMultiple)
-                        attributes.Add(AttributeInfoAttribute.CreateAttributeInfoAttribute(attributeType, argumentNames, argumentValues));
+                        attributes.Add(
+                            AttributeInfoAttribute.CreateAttributeInfoAttribute(
+                                attributeType,
+                                argumentNames,
+                                argumentValues
+                            )
+                        );
                 }
             }
             return attributes.ToArray();
         }
 
-        internal static object[] GetCustomAttributes(Type attributeType, bool inherit, Attribute[] attributes, MemberInfo memberInfo)
+        internal static object[] GetCustomAttributes(
+            Type attributeType,
+            bool inherit,
+            Attribute[] attributes,
+            MemberInfo memberInfo
+        )
         {
-
             if (attributeType == null)
                 throw new ArgumentNullException("attributeType");
 
@@ -234,17 +304,37 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (memberInfo is Type)
                     baseMemberInfo = ((Type)memberInfo).BaseType;
                 else
-                    baseMemberInfo = ((DesignTimeType)memberInfo.DeclaringType).GetBaseMember(memberInfo.GetType(), memberInfo.DeclaringType.BaseType, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance, new DesignTimeType.MemberSignature(memberInfo));
+                    baseMemberInfo = ((DesignTimeType)memberInfo.DeclaringType).GetBaseMember(
+                        memberInfo.GetType(),
+                        memberInfo.DeclaringType.BaseType,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance,
+                        new DesignTimeType.MemberSignature(memberInfo)
+                    );
 
                 // Add base attributes
                 if (baseMemberInfo != null)
                 {
-                    object[] baseAttributes = baseMemberInfo.GetCustomAttributes(attributeType, inherit);
+                    object[] baseAttributes = baseMemberInfo.GetCustomAttributes(
+                        attributeType,
+                        inherit
+                    );
 
-                    // check that attributes are not repeated 
+                    // check that attributes are not repeated
                     foreach (Attribute baseAttribute in baseAttributes)
                     {
-                        if (!(baseAttribute is AttributeInfoAttribute) || (!attributeTypes.Contains(((AttributeInfoAttribute)baseAttribute).AttributeInfo.AttributeType)))
+                        if (
+                            !(baseAttribute is AttributeInfoAttribute)
+                            || (
+                                !attributeTypes.Contains(
+                                    ((AttributeInfoAttribute)baseAttribute)
+                                        .AttributeInfo
+                                        .AttributeType
+                                )
+                            )
+                        )
                             attributeList.Add(baseAttribute);
                     }
                 }
@@ -253,7 +343,12 @@ namespace System.Workflow.ComponentModel.Compiler
             return attributeList.ToArray();
         }
 
-        internal static bool IsDefined(Type attributeType, bool inherit, Attribute[] attributes, MemberInfo memberInfo)
+        internal static bool IsDefined(
+            Type attributeType,
+            bool inherit,
+            Attribute[] attributes,
+            MemberInfo memberInfo
+        )
         {
             if (attributeType == null)
                 throw new ArgumentNullException("attributeType");
@@ -261,7 +356,13 @@ namespace System.Workflow.ComponentModel.Compiler
             foreach (Attribute attribute in attributes)
             {
                 // check to see if a type is wrapped in an AttributeInfoAttribute
-                if ((attribute is AttributeInfoAttribute) && ((attribute as AttributeInfoAttribute).AttributeInfo.AttributeType == attributeType))
+                if (
+                    (attribute is AttributeInfoAttribute)
+                    && (
+                        (attribute as AttributeInfoAttribute).AttributeInfo.AttributeType
+                        == attributeType
+                    )
+                )
                     return true;
             }
 
@@ -271,7 +372,15 @@ namespace System.Workflow.ComponentModel.Compiler
             if (memberInfo is Type)
                 baseMemberInfo = ((Type)memberInfo).BaseType;
             else
-                baseMemberInfo = ((DesignTimeType)memberInfo.DeclaringType).GetBaseMember(memberInfo.GetType(), memberInfo.DeclaringType.BaseType, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance, new DesignTimeType.MemberSignature(memberInfo));
+                baseMemberInfo = ((DesignTimeType)memberInfo.DeclaringType).GetBaseMember(
+                    memberInfo.GetType(),
+                    memberInfo.DeclaringType.BaseType,
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Static
+                        | BindingFlags.Instance,
+                    new DesignTimeType.MemberSignature(memberInfo)
+                );
 
             // Add base attributes
             if (baseMemberInfo != null)
@@ -289,7 +398,10 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (typeName.StartsWith("@", StringComparison.Ordinal))
                     typeName = typeName.Substring(1);
-                else if (typeName.StartsWith("[", StringComparison.Ordinal) && typeName.EndsWith("]", StringComparison.Ordinal))
+                else if (
+                    typeName.StartsWith("[", StringComparison.Ordinal)
+                    && typeName.EndsWith("]", StringComparison.Ordinal)
+                )
                     typeName = typeName.Substring(1, typeName.Length - 1);
             }
             else

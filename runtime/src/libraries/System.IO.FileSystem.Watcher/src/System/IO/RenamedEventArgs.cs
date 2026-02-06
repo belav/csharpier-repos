@@ -14,7 +14,12 @@ namespace System.IO
         /// <devdoc>
         ///    Initializes a new instance of the <see cref='System.IO.RenamedEventArgs'/> class.
         /// </devdoc>
-        public RenamedEventArgs(WatcherChangeTypes changeType, string directory, string? name, string? oldName)
+        public RenamedEventArgs(
+            WatcherChangeTypes changeType,
+            string directory,
+            string? name,
+            string? oldName
+        )
             : base(changeType, directory, name)
         {
             _oldName = oldName;
@@ -26,10 +31,7 @@ namespace System.IO
         /// </devdoc>
         public string OldFullPath
         {
-            get
-            {
-                return _oldFullPath;
-            }
+            get { return _oldFullPath; }
         }
 
         /// <devdoc>
@@ -37,10 +39,7 @@ namespace System.IO
         /// </devdoc>
         public string? OldName
         {
-            get
-            {
-                return _oldName;
-            }
+            get { return _oldName; }
         }
     }
 }

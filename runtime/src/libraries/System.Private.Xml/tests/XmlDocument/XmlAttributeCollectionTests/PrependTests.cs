@@ -20,7 +20,10 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlAttribute anotherDocumentAttr = new XmlDocument().CreateAttribute("attr");
             XmlAttributeCollection target = doc.DocumentElement.Attributes;
-            AssertExtensions.Throws<ArgumentException>(null, () => target.Prepend(anotherDocumentAttr));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => target.Prepend(anotherDocumentAttr)
+            );
         }
 
         [Fact]
@@ -49,7 +52,9 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute anotherAttr = element.Attributes.Append(doc.CreateAttribute("anotherAttribute"));
+            XmlAttribute anotherAttr = element.Attributes.Append(
+                doc.CreateAttribute("anotherAttribute")
+            );
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri));
             // assert on implicitly set preconditions
             Assert.Same(anotherAttr, element.Attributes[0]);
@@ -90,6 +95,5 @@ namespace System.Xml.XmlDocumentTests
 
             Assert.Same(newAttr, result);
         }
-
     }
 }

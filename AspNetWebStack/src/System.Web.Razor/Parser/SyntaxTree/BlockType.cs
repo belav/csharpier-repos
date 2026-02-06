@@ -18,6 +18,6 @@ namespace System.Web.Razor.Parser.SyntaxTree
         Template,
 
         // Special
-        Comment
+        Comment,
     }
 }

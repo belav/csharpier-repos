@@ -10,23 +10,22 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpClassSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpClassSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "class";
 
         [WpfFact]
         public async Task InsertClassSnippetInNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace
                 {
                     class MyClass
@@ -35,21 +34,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetInFileScopedNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace;
 
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace;
 
                 class MyClass
@@ -57,58 +58,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetTest()
         {
-            var markupBeforeCommit =
-@"$$";
+            var markupBeforeCommit = @"$$";
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class MyClass
                 {
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassTopLevelSnippetTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 System.Console.WriteLine();
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 System.Console.WriteLine();
                 class MyClass
                 {
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetInClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class MyClass
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class MyClass
                 {
                     class MyClass1
@@ -117,22 +124,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetInRecordTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 record MyRecord
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 record MyRecord
                 {
                     class MyClass
@@ -141,22 +150,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetInStructTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct MyStruct
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyStruct
                 {
                     class MyClass
@@ -165,22 +176,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertClassSnippetInInterfaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 interface MyInterface
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 interface MyInterface
                 {
                     class MyClass
@@ -189,7 +202,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -218,14 +235,17 @@ public class MyClass
     $$
 }}
 ";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoClassSnippetInEnumTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 enum MyEnum
                 {
                     $$
@@ -238,8 +258,7 @@ public class MyClass
         [WpfFact]
         public async Task NoClassSnippetInMethodTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -254,8 +273,7 @@ public class MyClass
         [WpfFact]
         public async Task NoClassSnippetInConstructorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public Program()
@@ -284,7 +302,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -317,7 +339,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -336,7 +362,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -355,7 +385,9 @@ public class MyClass
         [InlineData("protected")]
         [InlineData("private protected")]
         [InlineData("protected internal")]
-        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(string modifier)
+        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(
+            string modifier
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
@@ -379,7 +411,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/69600")]
@@ -407,7 +443,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/69600")]
@@ -434,7 +474,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -461,7 +505,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -488,7 +536,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -515,7 +567,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -542,7 +598,11 @@ public class MyClass
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

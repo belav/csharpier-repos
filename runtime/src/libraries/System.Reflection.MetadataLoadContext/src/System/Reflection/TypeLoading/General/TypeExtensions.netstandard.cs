@@ -11,12 +11,23 @@ namespace System.Reflection.TypeLoading
         // On NetStandard, have to do with slower emulations.
 #pragma warning disable IDE0060
         public static bool IsSignatureType(this Type type) => false;
-        public static bool IsSZArray(this Type type) => type.IsArray && type.GetArrayRank() == 1 && type.Name.EndsWith("[]", StringComparison.Ordinal);
-        public static bool IsVariableBoundArray(this Type type) => type.IsArray && !type.IsSZArray();
-        public static bool IsGenericMethodParameter(this Type type) => type.IsGenericParameter && type.DeclaringMethod != null;
+
+        public static bool IsSZArray(this Type type) =>
+            type.IsArray
+            && type.GetArrayRank() == 1
+            && type.Name.EndsWith("[]", StringComparison.Ordinal);
+
+        public static bool IsVariableBoundArray(this Type type) =>
+            type.IsArray && !type.IsSZArray();
+
+        public static bool IsGenericMethodParameter(this Type type) =>
+            type.IsGenericParameter && type.DeclaringMethod != null;
 
         // Signature Types do not exist on NetStandard 2.0 but it's possible we could reach this if a NetCore app uses the NetStandard build of this library.
-        public static Type MakeSignatureGenericType(this Type genericTypeDefinition, Type[] typeArguments) => throw new NotSupportedException(SR.NotSupported_MakeGenericType_SignatureTypes);
+        public static Type MakeSignatureGenericType(
+            this Type genericTypeDefinition,
+            Type[] typeArguments
+        ) => throw new NotSupportedException(SR.NotSupported_MakeGenericType_SignatureTypes);
 #pragma warning restore IDE0060
     }
 
@@ -36,14 +47,16 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class LeveledTypeInfo : TypeDelegator
     {
-        protected LeveledTypeInfo() : base() { }
+        protected LeveledTypeInfo()
+            : base() { }
 
         // This is an api that TypeDelegator overrides that it needn't have. Since RoType expects to fall through to System.Type's method, we have to reimplement
         // System.Type's behavior here to avoid getting TypeDelegator's method.
         //
         // This is an annoying and fragile requirement as we have to do this for any api that (1) RoType declines to override and (2) TypeDelegator does override.
         // This could be policed by an analyzer that searches RoType's method bodies for non-virtual calls to apis declared on TypeDelegator.
-        public override EventInfo[] GetEvents() => GetEvents(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
+        public override EventInfo[] GetEvents() =>
+            GetEvents(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
 
         public abstract bool IsGenericTypeParameter { get; }
         public abstract bool IsGenericMethodParameter { get; }
@@ -52,7 +65,15 @@ namespace System.Reflection.TypeLoading
         public abstract bool IsTypeDefinition { get; }
         public abstract bool IsByRefLike { get; }
         public virtual bool IsSignatureType => false;
-        protected abstract MethodInfo GetMethodImpl(string name, int genericParameterCount, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers);
+        protected abstract MethodInfo GetMethodImpl(
+            string name,
+            int genericParameterCount,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        );
         public abstract bool HasSameMetadataDefinitionAs(MemberInfo other);
 
         public abstract bool IsFunctionPointer { get; }

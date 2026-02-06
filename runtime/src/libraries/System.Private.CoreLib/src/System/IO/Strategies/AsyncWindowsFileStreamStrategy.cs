@@ -10,18 +10,27 @@ namespace System.IO.Strategies
 {
     internal sealed partial class AsyncWindowsFileStreamStrategy : OSFileStreamStrategy
     {
-        internal AsyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access) : base(handle, access)
-        {
-        }
+        internal AsyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access)
+            : base(handle, access) { }
 
-        internal AsyncWindowsFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode)
-            : base(path, mode, access, share, options, preallocationSize, unixCreateMode)
-        {
-        }
+        internal AsyncWindowsFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode
+        )
+            : base(path, mode, access, share, options, preallocationSize, unixCreateMode) { }
 
         internal override bool IsAsync => true;
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             // Fail if the file was closed
             if (_fileHandle.IsClosed)
@@ -42,7 +51,11 @@ namespace System.IO.Strategies
             return AsyncModeCopyToAsync(destination, bufferSize, cancellationToken);
         }
 
-        private async Task AsyncModeCopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        private async Task AsyncModeCopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanRead, "_parent.CanRead");
@@ -50,7 +63,14 @@ namespace System.IO.Strategies
             try
             {
                 await FileStreamHelpers
-                    .AsyncModeCopyToAsync(_fileHandle, CanSeek, _filePosition, destination, bufferSize, cancellationToken)
+                    .AsyncModeCopyToAsync(
+                        _fileHandle,
+                        CanSeek,
+                        _filePosition,
+                        destination,
+                        bufferSize,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             finally

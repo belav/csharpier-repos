@@ -11,42 +11,60 @@ namespace System.Tests
         [Fact]
         public void NullSwitchName_EnableSwitch()
         {
-            AssertExtensions.Throws<ArgumentNullException>("switchName", () => AppContext.SetSwitch(null, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "switchName",
+                () => AppContext.SetSwitch(null, true)
+            );
         }
 
         [Fact]
         public void NullSwitchName_DisableSwitch()
         {
-            AssertExtensions.Throws<ArgumentNullException>("switchName", () => AppContext.SetSwitch(null, false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "switchName",
+                () => AppContext.SetSwitch(null, false)
+            );
         }
 
         [Fact]
         public void NullSwitchName_TryGetSwitchValue()
         {
-            AssertExtensions.Throws<ArgumentNullException>("switchName", () =>
-            {
-                bool output;
-                AppContext.TryGetSwitch(null, out output);
-            });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "switchName",
+                () =>
+                {
+                    bool output;
+                    AppContext.TryGetSwitch(null, out output);
+                }
+            );
         }
 
         [Fact]
         public void EmptySwitchName_EnableSwitch()
         {
-            AssertExtensions.Throws<ArgumentException>("switchName", () => AppContext.SetSwitch(string.Empty, true));
+            AssertExtensions.Throws<ArgumentException>(
+                "switchName",
+                () => AppContext.SetSwitch(string.Empty, true)
+            );
         }
 
         [Fact]
         public void EmptySwitchName_DisableSwitch()
         {
-            AssertExtensions.Throws<ArgumentException>("switchName", () => AppContext.SetSwitch(string.Empty, false));
+            AssertExtensions.Throws<ArgumentException>(
+                "switchName",
+                () => AppContext.SetSwitch(string.Empty, false)
+            );
         }
 
         [Fact]
         public void EmptySwitchName_TryGetSwitchValue()
         {
             bool output;
-            AssertExtensions.Throws<ArgumentException>("switchName", () => AppContext.TryGetSwitch(string.Empty, out output));
+            AssertExtensions.Throws<ArgumentException>(
+                "switchName",
+                () => AppContext.TryGetSwitch(string.Empty, out output)
+            );
         }
     }
 }

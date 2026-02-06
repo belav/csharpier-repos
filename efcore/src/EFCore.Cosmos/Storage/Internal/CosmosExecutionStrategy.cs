@@ -20,11 +20,8 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosExecutionStrategy(
-        DbContext context)
-        : this(context, DefaultMaxRetryCount)
-    {
-    }
+    public CosmosExecutionStrategy(DbContext context)
+        : this(context, DefaultMaxRetryCount) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,11 +29,8 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosExecutionStrategy(
-        ExecutionStrategyDependencies dependencies)
-        : this(dependencies, DefaultMaxRetryCount)
-    {
-    }
+    public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
+        : this(dependencies, DefaultMaxRetryCount) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,12 +38,26 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosExecutionStrategy(
-        DbContext context,
-        int maxRetryCount)
-        : this(context, maxRetryCount, DefaultMaxDelay)
-    {
-    }
+    public CosmosExecutionStrategy(DbContext context, int maxRetryCount)
+        : this(context, maxRetryCount, DefaultMaxDelay) { }
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies, int maxRetryCount)
+        : this(dependencies, maxRetryCount, DefaultMaxDelay) { }
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public CosmosExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
+        : base(context, maxRetryCount, maxRetryDelay) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,32 +67,10 @@ public class CosmosExecutionStrategy : ExecutionStrategy
     /// </summary>
     public CosmosExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
-        int maxRetryCount)
-        : this(dependencies, maxRetryCount, DefaultMaxDelay)
-    {
-    }
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public CosmosExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
-        : base(context, maxRetryCount, maxRetryDelay)
-    {
-    }
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public CosmosExecutionStrategy(ExecutionStrategyDependencies dependencies, int maxRetryCount, TimeSpan maxRetryDelay)
-        : base(dependencies, maxRetryCount, maxRetryDelay)
-    {
-    }
+        int maxRetryCount,
+        TimeSpan maxRetryDelay
+    )
+        : base(dependencies, maxRetryCount, maxRetryDelay) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,13 +84,18 @@ public class CosmosExecutionStrategy : ExecutionStrategy
         {
             CosmosException cosmosException => IsTransient(cosmosException.StatusCode),
             HttpException httpException => IsTransient(httpException.Response.StatusCode),
-            WebException webException => IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
-            _ => false
+            WebException webException => IsTransient(
+                ((HttpWebResponse)webException.Response!).StatusCode
+            ),
+            _ => false,
         };
 
-        static bool IsTransient(HttpStatusCode statusCode)
-            => statusCode is HttpStatusCode.ServiceUnavailable or HttpStatusCode.TooManyRequests or HttpStatusCode.RequestTimeout
-                or HttpStatusCode.Gone;
+        static bool IsTransient(HttpStatusCode statusCode) =>
+            statusCode
+                is HttpStatusCode.ServiceUnavailable
+                    or HttpStatusCode.TooManyRequests
+                    or HttpStatusCode.RequestTimeout
+                    or HttpStatusCode.Gone;
     }
 
     /// <summary>
@@ -118,8 +109,7 @@ public class CosmosExecutionStrategy : ExecutionStrategy
         var baseDelay = base.GetNextDelay(lastException);
         return baseDelay == null
             ? null
-            : (CallOnWrappedException(lastException, GetDelayFromException)
-                ?? baseDelay);
+            : (CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay);
     }
 
     private static TimeSpan? GetDelayFromException(Exception exception)
@@ -131,14 +121,20 @@ public class CosmosExecutionStrategy : ExecutionStrategy
 
             case HttpException httpException:
             {
-                if (httpException.Response.Headers.TryGetValues("x-ms-retry-after-ms", out var values)
-                    && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay))
+                if (
+                    httpException.Response.Headers.TryGetValues(
+                        "x-ms-retry-after-ms",
+                        out var values
+                    ) && TryParseMsRetryAfter(values.FirstOrDefault(), out var delay)
+                )
                 {
                     return delay;
                 }
 
-                if (httpException.Response.Headers.TryGetValues("Retry-After", out values)
-                    && TryParseRetryAfter(values.FirstOrDefault(), out delay))
+                if (
+                    httpException.Response.Headers.TryGetValues("Retry-After", out values)
+                    && TryParseRetryAfter(values.FirstOrDefault(), out delay)
+                )
                 {
                     return delay;
                 }
@@ -150,7 +146,9 @@ public class CosmosExecutionStrategy : ExecutionStrategy
             {
                 var response = (HttpWebResponse)webException.Response!;
 
-                var delayString = response.Headers.GetValues("x-ms-retry-after-ms")?.FirstOrDefault();
+                var delayString = response
+                    .Headers.GetValues("x-ms-retry-after-ms")
+                    ?.FirstOrDefault();
                 if (TryParseMsRetryAfter(delayString, out var delay))
                 {
                     return delay;
@@ -200,7 +198,14 @@ public class CosmosExecutionStrategy : ExecutionStrategy
                 return true;
             }
 
-            if (DateTimeOffset.TryParse(delayString, CultureInfo.InvariantCulture, DateTimeStyles.None, out var retryDate))
+            if (
+                DateTimeOffset.TryParse(
+                    delayString,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out var retryDate
+                )
+            )
             {
                 delay = retryDate.Subtract(DateTimeOffset.Now);
                 delay = delay <= TimeSpan.Zero ? TimeSpan.FromMilliseconds(1) : delay;

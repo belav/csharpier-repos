@@ -3,19 +3,17 @@
 //------------------------------------------------------------
 namespace System.Workflow.Activities.Design
 {
-
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.Activities;
     using System.ComponentModel;
+    using System.Text;
+    using System.Workflow.Activities;
+    using System.Workflow.ComponentModel;
 
     [ListItemView(typeof(ServiceOperationViewControl))]
     [ListItemDetailView(typeof(ListItemViewControl))]
     internal abstract class ServiceOperationListItem : object
     {
-
         public CancelEventHandler Validating;
         private List<Activity> implementingActivities;
 
@@ -26,10 +24,7 @@ namespace System.Workflow.Activities.Design
 
         public virtual String ContractName
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public List<Activity> ImplementingActivities
@@ -37,7 +32,6 @@ namespace System.Workflow.Activities.Design
             get { return implementingActivities; }
         }
 
-        public abstract string Name
-        { get; set; }
+        public abstract string Name { get; set; }
     }
 }

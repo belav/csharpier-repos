@@ -12,7 +12,8 @@ namespace System.Data
     /// </summary>
     public class InternalDataCollectionBase : ICollection
     {
-        internal static readonly CollectionChangeEventArgs s_refreshEventArgs = new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null);
+        internal static readonly CollectionChangeEventArgs s_refreshEventArgs =
+            new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null);
 
         /// <summary>
         /// Gets the total number of elements in a collection.
@@ -34,7 +35,12 @@ namespace System.Data
         // > 0 (1)  : CaseSensitve equal
         // < 0 (-1) : Case-Insensitive Equal
         // = 0      : Not Equal
-        internal static int NamesEqual(string? s1, string? s2, bool fCaseSensitive, CultureInfo locale)
+        internal static int NamesEqual(
+            string? s1,
+            string? s2,
+            bool fCaseSensitive,
+            CultureInfo locale
+        )
         {
             if (fCaseSensitive)
             {
@@ -42,14 +48,21 @@ namespace System.Data
             }
 
             // Case, kana and width -Insensitive compare
-            if (locale.CompareInfo.Compare(s1, s2, CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth) == 0)
+            if (
+                locale.CompareInfo.Compare(
+                    s1,
+                    s2,
+                    CompareOptions.IgnoreCase
+                        | CompareOptions.IgnoreKanaType
+                        | CompareOptions.IgnoreWidth
+                ) == 0
+            )
             {
                 return string.Compare(s1, s2, false, locale) == 0 ? 1 : -1;
             }
 
             return 0;
         }
-
 
         [Browsable(false)]
         public object SyncRoot => this;

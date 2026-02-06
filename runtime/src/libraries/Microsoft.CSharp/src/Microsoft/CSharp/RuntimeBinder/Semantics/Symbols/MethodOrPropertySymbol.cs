@@ -24,14 +24,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal abstract class MethodOrPropertySymbol : ParentSymbol
     {
-        public uint modOptCount;              // number of CMOD_OPTs in signature and return type
+        public uint modOptCount; // number of CMOD_OPTs in signature and return type
 
-        public new bool isStatic;               // Static member?
-        public bool isOverride;             // Overrides an inherited member. Only valid if isVirtual is set.
-                                            // false implies that a new vtable slot is required for this method.
-        public bool isOperator;             // a user defined operator (or default indexed property)
-        public bool isParamArray;           // new style varargs
-        public bool isHideByName;           // this property hides all below it regardless of signature
+        public new bool isStatic; // Static member?
+        public bool isOverride; // Overrides an inherited member. Only valid if isVirtual is set.
+
+        // false implies that a new vtable slot is required for this method.
+        public bool isOperator; // a user defined operator (or default indexed property)
+        public bool isParamArray; // new style varargs
+        public bool isHideByName; // this property hides all below it regardless of signature
         public List<Name> ParameterNames { get; private set; }
         private bool[] _optionalParameterIndex;
         private bool[] _defaultParameterIndex;
@@ -47,15 +48,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // If this symbol is a property and an explicit interface member implementation, the swtSlot
         // may be an event. This is filled in during prepare.
         public SymWithType swtSlot;
-        public CType RetType;            // Return type.
+        public CType RetType; // Return type.
 
         private TypeArray _Params;
         public TypeArray Params
         {
-            get
-            {
-                return _Params;
-            }
+            get { return _Params; }
             set
             {
                 Debug.Assert(_Params == null, "Should only be set once");
@@ -63,7 +61,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 int count = value.Count;
                 if (count == 0)
                 {
-                    _optionalParameterIndex = _defaultParameterIndex = _marshalAsIndex = Array.Empty<bool>();
+                    _optionalParameterIndex =
+                        _defaultParameterIndex =
+                        _marshalAsIndex =
+                            Array.Empty<bool>();
                     _defaultParameters = Array.Empty<ConstVal>();
                     _defaultParameterConstValTypes = Array.Empty<CType>();
                     _marshalAsBuffer = Array.Empty<UnmanagedType>();
@@ -170,7 +171,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (IsMarshalAsParameter(index))
             {
                 UnmanagedType marshalAsType = GetMarshalAsParameterValue(index);
-                return marshalAsType == UnmanagedType.Interface || marshalAsType == UnmanagedType.IUnknown || marshalAsType == UnmanagedType.IDispatch;
+                return marshalAsType == UnmanagedType.Interface
+                    || marshalAsType == UnmanagedType.IUnknown
+                    || marshalAsType == UnmanagedType.IDispatch;
             }
 
             return false;

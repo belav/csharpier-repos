@@ -42,7 +42,7 @@ namespace System.ServiceModel.Activities
                 {
                     xmlSerializerFormatAttribute = new XmlSerializerFormatAttribute
                     {
-                        SupportFaults = true
+                        SupportFaults = true,
                     };
                 }
                 return xmlSerializerFormatAttribute;
@@ -80,41 +80,59 @@ namespace System.ServiceModel.Activities
             if (string.IsNullOrEmpty(serviceContractName.NamespaceName))
             {
                 // If no namespace is given by the user, we provide default namespace. This is consistent with WCF.
-                serviceContractName = XName.Get(serviceContractName.LocalName, NamingHelper.DefaultNamespace);
+                serviceContractName = XName.Get(
+                    serviceContractName.LocalName,
+                    NamingHelper.DefaultNamespace
+                );
             }
         }
 
-        public static ContractDescription CreateContractFromOperation(XName serviceContractName, OperationDescription operation)
+        public static ContractDescription CreateContractFromOperation(
+            XName serviceContractName,
+            OperationDescription operation
+        )
         {
             Fx.Assert(serviceContractName != null, "serviceContractName cannot be null");
             ProvideDefaultNamespace(ref serviceContractName);
 
-            ContractDescription contract = new ContractDescription(serviceContractName.LocalName, serviceContractName.NamespaceName)
+            ContractDescription contract = new ContractDescription(
+                serviceContractName.LocalName,
+                serviceContractName.NamespaceName
+            )
             {
                 // For inferred client side contracts, we do not set ContractType
 
                 ConfigurationName = serviceContractName.LocalName,
-                SessionMode = SessionMode.Allowed
+                SessionMode = SessionMode.Allowed,
             };
             contract.Operations.Add(operation);
             return contract;
         }
 
-        public static ContractDescription CreateOutputChannelContractDescription(XName serviceContractName, ProtectionLevel? protectionLevel)
+        public static ContractDescription CreateOutputChannelContractDescription(
+            XName serviceContractName,
+            ProtectionLevel? protectionLevel
+        )
         {
             Fx.Assert(serviceContractName != null, "cannot be null");
             Type channelType = typeof(IOutputChannel);
 
             ProvideDefaultNamespace(ref serviceContractName);
-            
-            ContractDescription contract = new ContractDescription(serviceContractName.LocalName, serviceContractName.NamespaceName)
+
+            ContractDescription contract = new ContractDescription(
+                serviceContractName.LocalName,
+                serviceContractName.NamespaceName
+            )
             {
                 ContractType = channelType,
                 ConfigurationName = serviceContractName.LocalName,
-                SessionMode = SessionMode.Allowed
+                SessionMode = SessionMode.Allowed,
             };
             OperationDescription operation = new OperationDescription("Send", contract);
-            MessageDescription message = new MessageDescription(MessageHeaders.WildcardAction, MessageDirection.Input);
+            MessageDescription message = new MessageDescription(
+                MessageHeaders.WildcardAction,
+                MessageDirection.Input
+            );
             operation.Messages.Add(message);
 
             if (protectionLevel.HasValue)
@@ -126,22 +144,34 @@ namespace System.ServiceModel.Activities
             return contract;
         }
 
-        public static ContractDescription CreateRequestChannelContractDescription(XName serviceContractName, ProtectionLevel? protectionLevel)
+        public static ContractDescription CreateRequestChannelContractDescription(
+            XName serviceContractName,
+            ProtectionLevel? protectionLevel
+        )
         {
             Fx.Assert(serviceContractName != null, "cannot be null");
             Type channelType = typeof(IRequestChannel);
 
             ProvideDefaultNamespace(ref serviceContractName);
 
-            ContractDescription contract = new ContractDescription(serviceContractName.LocalName, serviceContractName.NamespaceName)
+            ContractDescription contract = new ContractDescription(
+                serviceContractName.LocalName,
+                serviceContractName.NamespaceName
+            )
             {
                 ContractType = channelType,
                 ConfigurationName = serviceContractName.LocalName,
-                SessionMode = SessionMode.Allowed
+                SessionMode = SessionMode.Allowed,
             };
             OperationDescription operation = new OperationDescription("Request", contract);
-            MessageDescription request = new MessageDescription(MessageHeaders.WildcardAction, MessageDirection.Input);
-            MessageDescription reply = new MessageDescription(MessageHeaders.WildcardAction, MessageDirection.Output);
+            MessageDescription request = new MessageDescription(
+                MessageHeaders.WildcardAction,
+                MessageDirection.Input
+            );
+            MessageDescription reply = new MessageDescription(
+                MessageHeaders.WildcardAction,
+                MessageDirection.Output
+            );
             operation.Messages.Add(request);
             operation.Messages.Add(reply);
 
@@ -159,7 +189,8 @@ namespace System.ServiceModel.Activities
             XName serviceContractName,
             string operationName,
             string action,
-            ProtectionLevel? protectionLevel)
+            ProtectionLevel? protectionLevel
+        )
         {
             Fx.Assert(serviceEndpoint != null, "ServiceEndpoint cannot be null!");
 
@@ -167,9 +198,14 @@ namespace System.ServiceModel.Activities
             if (serviceEndpoint.Contract.ContractType == null)
             {
                 // If we are using the real contract, we only need to add TrancactionFlowAttribute to the operation
-                Fx.Assert(serviceEndpoint.Contract.Operations.Count == 1, "Client side contract should have exactly one operation!");
+                Fx.Assert(
+                    serviceEndpoint.Contract.Operations.Count == 1,
+                    "Client side contract should have exactly one operation!"
+                );
 
-                serviceEndpoint.Contract.Operations[0].Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
+                serviceEndpoint
+                    .Contract.Operations[0]
+                    .Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
             }
             else
             {
@@ -187,18 +223,26 @@ namespace System.ServiceModel.Activities
                 // because the TransactionChannelFactory has a dictionary of "Directional Action" to
                 // transaction flow value that it uses to decide whether or not to include the
                 // transaction header in the message.
-                Fx.Assert(serviceContractName != null, "Argument serviceContractName cannot be null!");
+                Fx.Assert(
+                    serviceContractName != null,
+                    "Argument serviceContractName cannot be null!"
+                );
                 Fx.Assert(operationName != null, "Argument operationName cannot be null!");
 
                 ProvideDefaultNamespace(ref serviceContractName);
 
-                contract = new ContractDescription(serviceContractName.LocalName, serviceContractName.NamespaceName)
+                contract = new ContractDescription(
+                    serviceContractName.LocalName,
+                    serviceContractName.NamespaceName
+                )
                 {
                     ContractType = channelType,
-                    SessionMode = SessionMode.Allowed
+                    SessionMode = SessionMode.Allowed,
                 };
                 operation = new OperationDescription(operationName, contract);
-                operation.Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
+                operation.Behaviors.Add(
+                    new TransactionFlowAttribute(TransactionFlowOption.Allowed)
+                );
 
                 string requestAction = null;
                 string replyAction = null;
@@ -248,22 +292,34 @@ namespace System.ServiceModel.Activities
             return CreateOperationDescriptionCore(send, null);
         }
 
-        public static OperationDescription CreateTwoWayOperationDescription(Send send, ReceiveReply receiveReply)
+        public static OperationDescription CreateTwoWayOperationDescription(
+            Send send,
+            ReceiveReply receiveReply
+        )
         {
             Fx.Assert(send != null && receiveReply != null, "Arguments cannot be null!");
             return CreateOperationDescriptionCore(send, receiveReply);
         }
 
-        static OperationDescription CreateOperationDescriptionCore(Send send, ReceiveReply receiveReply)
+        static OperationDescription CreateOperationDescriptionCore(
+            Send send,
+            ReceiveReply receiveReply
+        )
         {
             XName contractXName = send.ServiceContractName;
             ProvideDefaultNamespace(ref contractXName);
 
             // Infer Name, Namespace, ConfigurationName
-            ContractDescription contract = new ContractDescription(contractXName.LocalName, contractXName.NamespaceName);
+            ContractDescription contract = new ContractDescription(
+                contractXName.LocalName,
+                contractXName.NamespaceName
+            );
             contract.ConfigurationName = send.EndpointConfigurationName;
 
-            OperationDescription operation = new OperationDescription(NamingHelper.XmlName(send.OperationName), contract);
+            OperationDescription operation = new OperationDescription(
+                NamingHelper.XmlName(send.OperationName),
+                contract
+            );
             if (send.ProtectionLevel.HasValue)
             {
                 operation.ProtectionLevel = send.ProtectionLevel.Value;
@@ -277,7 +333,11 @@ namespace System.ServiceModel.Activities
             // Infer Out-Message
             if (receiveReply != null)
             {
-                receiveReply.InternalContent.InferMessageDescription(operation, receiveReply, MessageDirection.Output);
+                receiveReply.InternalContent.InferMessageDescription(
+                    operation,
+                    receiveReply,
+                    MessageDirection.Output
+                );
             }
 
             PostProcessOperation(operation);
@@ -288,15 +348,24 @@ namespace System.ServiceModel.Activities
             return operation;
         }
 
-        // Create server side OperationDescription. 
+        // Create server side OperationDescription.
         // Note this method assumes that CacheMetadata has been called on the Receive activity (as part of
-        // the activity tree walk that is done in WorkflowService.GetContractDescriptions) because it relies on 
+        // the activity tree walk that is done in WorkflowService.GetContractDescriptions) because it relies on
         // InternalReceiveMessage property of the Receive actitivy to be non-null.
-        public static OperationDescription CreateOperationDescription(Receive receive, ContractDescription contract)
+        public static OperationDescription CreateOperationDescription(
+            Receive receive,
+            ContractDescription contract
+        )
         {
-            Fx.Assert(receive.InternalReceive != null, "This method can only be called if CacheMetadata has been called on the receive activity");
+            Fx.Assert(
+                receive.InternalReceive != null,
+                "This method can only be called if CacheMetadata has been called on the receive activity"
+            );
 
-            OperationDescription operation = new OperationDescription(NamingHelper.XmlName(receive.OperationName), contract);
+            OperationDescription operation = new OperationDescription(
+                NamingHelper.XmlName(receive.OperationName),
+                contract
+            );
 
             if (receive.ProtectionLevel.HasValue)
             {
@@ -304,33 +373,55 @@ namespace System.ServiceModel.Activities
             }
 
             // Infer In-Message
-            receive.InternalContent.InferMessageDescription(operation, receive, MessageDirection.Input);
+            receive.InternalContent.InferMessageDescription(
+                operation,
+                receive,
+                MessageDirection.Input
+            );
 
             // Infer Out-Message
             if (receive.HasReply)
             {
                 // At this point, we already know all the following SendReplies are equivalent
                 SendReply sendReply = receive.FollowingReplies[0];
-                sendReply.InternalContent.InferMessageDescription(operation, sendReply, MessageDirection.Output);
+                sendReply.InternalContent.InferMessageDescription(
+                    operation,
+                    sendReply,
+                    MessageDirection.Output
+                );
             }
             else if (receive.HasFault)
             {
                 // We infer Receive-SendFault pair as a two-way operation with void return value
                 CheckForDisposableParameters(operation, Constants.EmptyTypeArray);
-                AddOutputMessage(operation, null, Constants.EmptyStringArray, Constants.EmptyTypeArray);
+                AddOutputMessage(
+                    operation,
+                    null,
+                    Constants.EmptyStringArray,
+                    Constants.EmptyTypeArray
+                );
             }
 
             PostProcessOperation(operation);
 
             // Behaviors
             AddSerializerProvider(operation, receive.SerializerOption);
-            AddWorkflowOperationBehaviors(operation, receive.InternalReceive.OperationBookmarkName, receive.CanCreateInstance);
+            AddWorkflowOperationBehaviors(
+                operation,
+                receive.InternalReceive.OperationBookmarkName,
+                receive.CanCreateInstance
+            );
 
             if (receive.InternalReceive.AdditionalData.IsInsideTransactedReceiveScope)
             {
                 operation.IsInsideTransactedReceiveScope = true;
                 EnableTransactionBehavior(operation);
-                if (receive.InternalReceive.AdditionalData.IsFirstReceiveOfTransactedReceiveScopeTree)
+                if (
+                    receive
+                        .InternalReceive
+                        .AdditionalData
+                        .IsFirstReceiveOfTransactedReceiveScopeTree
+                )
                 {
                     operation.IsFirstReceiveOfTransactedReceiveScopeTree = true;
                 }
@@ -339,55 +430,100 @@ namespace System.ServiceModel.Activities
             return operation;
         }
 
-        public static void AddInputMessage(OperationDescription operation, string overridingAction, Type type, SerializerOption serializerOption)
+        public static void AddInputMessage(
+            OperationDescription operation,
+            string overridingAction,
+            Type type,
+            SerializerOption serializerOption
+        )
         {
             Fx.Assert(operation.Messages.Count == 0, "Operation already has input message");
 
             bool isResponse = false;
             MessageDescription message = MessageBuilder.CreateMessageDescription(
-                operation, isResponse, MessageDirection.Input, overridingAction, type, serializerOption);
+                operation,
+                isResponse,
+                MessageDirection.Input,
+                overridingAction,
+                type,
+                serializerOption
+            );
 
             operation.Messages.Add(message);
         }
 
-        public static void AddInputMessage(OperationDescription operation, string overridingAction,
-            string[] argumentNames, Type[] argumentTypes)
+        public static void AddInputMessage(
+            OperationDescription operation,
+            string overridingAction,
+            string[] argumentNames,
+            Type[] argumentTypes
+        )
         {
             Fx.Assert(operation.Messages.Count == 0, "Operation already has input message");
 
             bool isResponse = false;
             MessageDescription message = MessageBuilder.CreateMessageDescription(
-                operation, isResponse, MessageDirection.Input, overridingAction, argumentNames, argumentTypes);
+                operation,
+                isResponse,
+                MessageDirection.Input,
+                overridingAction,
+                argumentNames,
+                argumentTypes
+            );
 
             operation.Messages.Add(message);
         }
 
-        public static void AddOutputMessage(OperationDescription operation, string overridingAction, Type type, SerializerOption serializerOption)
+        public static void AddOutputMessage(
+            OperationDescription operation,
+            string overridingAction,
+            Type type,
+            SerializerOption serializerOption
+        )
         {
             Fx.Assert(operation.Messages.Count > 0, "Operation does not have input message");
             Fx.Assert(operation.Messages.Count < 2, "Operation already has output message");
 
             bool isResponse = true;
             MessageDescription message = MessageBuilder.CreateMessageDescription(
-                operation, isResponse, MessageDirection.Output, overridingAction, type, serializerOption);
+                operation,
+                isResponse,
+                MessageDirection.Output,
+                overridingAction,
+                type,
+                serializerOption
+            );
 
             operation.Messages.Add(message);
         }
 
-        public static void AddOutputMessage(OperationDescription operation, string overridingAction,
-            string[] argumentNames, Type[] argumentTypes)
+        public static void AddOutputMessage(
+            OperationDescription operation,
+            string overridingAction,
+            string[] argumentNames,
+            Type[] argumentTypes
+        )
         {
             Fx.Assert(operation.Messages.Count > 0, "Operation does not have input message");
             Fx.Assert(operation.Messages.Count < 2, "Operation already has output message");
 
             bool isResponse = true;
             MessageDescription message = MessageBuilder.CreateMessageDescription(
-                operation, isResponse, MessageDirection.Output, overridingAction, argumentNames, argumentTypes);
+                operation,
+                isResponse,
+                MessageDirection.Output,
+                overridingAction,
+                argumentNames,
+                argumentTypes
+            );
 
             operation.Messages.Add(message);
         }
 
-        static void AddKnownTypesToOperation(OperationDescription operation, Collection<Type> knownTypes)
+        static void AddKnownTypesToOperation(
+            OperationDescription operation,
+            Collection<Type> knownTypes
+        )
         {
             if (knownTypes != null)
             {
@@ -402,7 +538,7 @@ namespace System.ServiceModel.Activities
         {
             if (type == null)
             {
-                 operation.HasNoDisposableParameters = true;
+                operation.HasNoDisposableParameters = true;
             }
             else
             {
@@ -410,7 +546,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public static void CheckForDisposableParameters(OperationDescription operation, Type[] types)
+        public static void CheckForDisposableParameters(
+            OperationDescription operation,
+            Type[] types
+        )
         {
             Fx.Assert(types != null, "Argument cannot be null!");
 
@@ -429,7 +568,8 @@ namespace System.ServiceModel.Activities
         {
             Fx.Assert(operationDescription != null, "OperationDescription is null");
 
-            OperationBehaviorAttribute attribute = operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
+            OperationBehaviorAttribute attribute =
+                operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
             if (attribute != null)
             {
                 attribute.TransactionScopeRequired = true;
@@ -440,33 +580,43 @@ namespace System.ServiceModel.Activities
                 OperationBehaviorAttribute attr = new OperationBehaviorAttribute
                 {
                     TransactionAutoComplete = false,
-                    TransactionScopeRequired = true
+                    TransactionScopeRequired = true,
                 };
                 operationDescription.Behaviors.Add(attr);
             }
-            TransactionFlowAttribute transactionFlowAttribute = operationDescription.Behaviors.Find<TransactionFlowAttribute>();
+            TransactionFlowAttribute transactionFlowAttribute =
+                operationDescription.Behaviors.Find<TransactionFlowAttribute>();
             if (transactionFlowAttribute != null)
             {
                 if (transactionFlowAttribute.Transactions != TransactionFlowOption.Allowed)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ContractInferenceValidationForTransactionFlowBehavior));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.ContractInferenceValidationForTransactionFlowBehavior
+                        )
+                    );
                 }
             }
             else
             {
                 if (!operationDescription.IsOneWay)
                 {
-                    operationDescription.Behaviors.Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
+                    operationDescription.Behaviors.Add(
+                        new TransactionFlowAttribute(TransactionFlowOption.Allowed)
+                    );
                 }
             }
         }
-        
+
         static void PostProcessOperation(OperationDescription operation)
         {
             MessageBuilder.ClearWrapperNames(operation);
         }
 
-        static void AddSerializerProvider(OperationDescription operation, SerializerOption serializerOption)
+        static void AddSerializerProvider(
+            OperationDescription operation,
+            SerializerOption serializerOption
+        )
         {
             switch (serializerOption)
             {
@@ -483,10 +633,19 @@ namespace System.ServiceModel.Activities
         {
             if (operation.Behaviors.Find<DataContractSerializerOperationBehavior>() != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.OperationHasSerializerBehavior(
-                    operation.Name, operation.DeclaringContract.Name, typeof(DataContractSerializerOperationBehavior))));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.OperationHasSerializerBehavior(
+                            operation.Name,
+                            operation.DeclaringContract.Name,
+                            typeof(DataContractSerializerOperationBehavior)
+                        )
+                    )
+                );
             }
-            operation.Behaviors.Add(new DataContractSerializerOperationBehavior(operation, DataContractFormatAttribute));
+            operation.Behaviors.Add(
+                new DataContractSerializerOperationBehavior(operation, DataContractFormatAttribute)
+            );
             if (!operation.Behaviors.Contains(typeof(DataContractSerializerOperationGenerator)))
             {
                 operation.Behaviors.Add(new DataContractSerializerOperationGenerator());
@@ -497,38 +656,67 @@ namespace System.ServiceModel.Activities
         {
             if (operation.Behaviors.Find<XmlSerializerOperationBehavior>() != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                    SR.OperationHasSerializerBehavior(operation.Name, operation.DeclaringContract.Name, typeof(XmlSerializerOperationBehavior))));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.OperationHasSerializerBehavior(
+                            operation.Name,
+                            operation.DeclaringContract.Name,
+                            typeof(XmlSerializerOperationBehavior)
+                        )
+                    )
+                );
             }
-            operation.Behaviors.Add(new XmlSerializerOperationBehavior(operation, XmlSerializerFormatAttribute));
+            operation.Behaviors.Add(
+                new XmlSerializerOperationBehavior(operation, XmlSerializerFormatAttribute)
+            );
             if (!operation.Behaviors.Contains(typeof(XmlSerializerOperationGenerator)))
             {
-                operation.Behaviors.Add(new XmlSerializerOperationGenerator(new XmlSerializerImportOptions()));
+                operation.Behaviors.Add(
+                    new XmlSerializerOperationGenerator(new XmlSerializerImportOptions())
+                );
             }
         }
 
-        static void AddWorkflowOperationBehaviors(OperationDescription operation, string bookmarkName, bool canCreateInstance)
+        static void AddWorkflowOperationBehaviors(
+            OperationDescription operation,
+            string bookmarkName,
+            bool canCreateInstance
+        )
         {
             KeyedByTypeCollection<IOperationBehavior> behaviors = operation.Behaviors;
-            WorkflowOperationBehavior workflowOperationBehavior = behaviors.Find<WorkflowOperationBehavior>();
+            WorkflowOperationBehavior workflowOperationBehavior =
+                behaviors.Find<WorkflowOperationBehavior>();
             if (workflowOperationBehavior == null)
             {
-                behaviors.Add(new WorkflowOperationBehavior(new Bookmark(bookmarkName), canCreateInstance));
+                behaviors.Add(
+                    new WorkflowOperationBehavior(new Bookmark(bookmarkName), canCreateInstance)
+                );
             }
             else
             {
-                workflowOperationBehavior.CanCreateInstance = workflowOperationBehavior.CanCreateInstance || canCreateInstance;
+                workflowOperationBehavior.CanCreateInstance =
+                    workflowOperationBehavior.CanCreateInstance || canCreateInstance;
             }
         }
 
-        public static void CorrectOutMessageForOperation(Receive receive, OperationDescription operation)
+        public static void CorrectOutMessageForOperation(
+            Receive receive,
+            OperationDescription operation
+        )
         {
             // Remove the original outMessage
-            Fx.Assert(operation.Messages.Count == 2, "OperationDescription must be two-way for CorrectOutMessageForOperation to be invoked!");
+            Fx.Assert(
+                operation.Messages.Count == 2,
+                "OperationDescription must be two-way for CorrectOutMessageForOperation to be invoked!"
+            );
             operation.Messages.RemoveAt(1);
 
             SendReply sendReply = receive.FollowingReplies[0];
-            sendReply.InternalContent.InferMessageDescription(operation, sendReply, MessageDirection.Output);
+            sendReply.InternalContent.InferMessageDescription(
+                operation,
+                sendReply,
+                MessageDirection.Output
+            );
 
             ContractInferenceHelper.PostProcessOperation(operation);
         }
@@ -560,10 +748,11 @@ namespace System.ServiceModel.Activities
                     }
                     else
                     {
-                        SendParametersContent sendReplyParameters = sendFault.InternalContent as SendParametersContent;
+                        SendParametersContent sendReplyParameters =
+                            sendFault.InternalContent as SendParametersContent;
                         if (sendReplyParameters != null)
                         {
-                            type = sendReplyParameters.ArgumentTypes[0];  // Exception should be the only parameter in SendFault
+                            type = sendReplyParameters.ArgumentTypes[0]; // Exception should be the only parameter in SendFault
                         }
                     }
 
@@ -573,14 +762,18 @@ namespace System.ServiceModel.Activities
                         Type faultType = type.GetGenericArguments()[0];
                         bool exists = false;
 
-                        // We expect the number of fault types to be small, so we use iterative comparison 
+                        // We expect the number of fault types to be small, so we use iterative comparison
                         foreach (FaultDescription faultDescription in operation.Faults)
                         {
                             if (faultDescription.DetailType == faultType)
                             {
                                 if (faultDescription.Action != action)
                                 {
-                                    throw FxTrace.Exception.AsError(new ValidationException(SR.SendRepliesHaveSameFaultTypeDifferentAction));
+                                    throw FxTrace.Exception.AsError(
+                                        new ValidationException(
+                                            SR.SendRepliesHaveSameFaultTypeDifferentAction
+                                        )
+                                    );
                                 }
                                 else
                                 {
@@ -592,7 +785,8 @@ namespace System.ServiceModel.Activities
 
                         if (!exists)
                         {
-                            FaultDescription faultDescription = MessageBuilder.CreateFaultDescription(operation, faultType, action);
+                            FaultDescription faultDescription =
+                                MessageBuilder.CreateFaultDescription(operation, faultType, action);
                             operation.Faults.Add(faultDescription);
                         }
                     }
@@ -608,7 +802,7 @@ namespace System.ServiceModel.Activities
             {
                 foreach (Type knownType in knownTypes)
                 {
-                    // We expect the number of known types to be small, so we use iterative comparison 
+                    // We expect the number of known types to be small, so we use iterative comparison
                     if (!operation.KnownTypes.Contains(knownType))
                     {
                         operation.KnownTypes.Add(knownType);
@@ -617,12 +811,16 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public static void AddReceiveToFormatterBehavior(Receive receive, OperationDescription operation)
+        public static void AddReceiveToFormatterBehavior(
+            Receive receive,
+            OperationDescription operation
+        )
         {
             Fx.Assert(receive != null && operation != null, "Argument cannot be null!");
 
             KeyedByTypeCollection<IOperationBehavior> behaviors = operation.Behaviors;
-            WorkflowFormatterBehavior formatterBehavior = behaviors.Find<WorkflowFormatterBehavior>();
+            WorkflowFormatterBehavior formatterBehavior =
+                behaviors.Find<WorkflowFormatterBehavior>();
             if (formatterBehavior == null)
             {
                 formatterBehavior = new WorkflowFormatterBehavior();
@@ -632,28 +830,41 @@ namespace System.ServiceModel.Activities
             formatterBehavior.Receives.Add(receive);
         }
 
-        public static void RemoveReceiveFromFormatterBehavior(Receive receive, OperationDescription operation)
+        public static void RemoveReceiveFromFormatterBehavior(
+            Receive receive,
+            OperationDescription operation
+        )
         {
             Fx.Assert(receive != null && operation != null, "Arguments cannot be null!");
 
             KeyedByTypeCollection<IOperationBehavior> behaviors = operation.Behaviors;
-            WorkflowFormatterBehavior formatterBehavior = behaviors.Find<WorkflowFormatterBehavior>();
+            WorkflowFormatterBehavior formatterBehavior =
+                behaviors.Find<WorkflowFormatterBehavior>();
             if (formatterBehavior != null)
             {
                 formatterBehavior.Receives.Remove(receive);
             }
         }
 
-        public static CorrelationQuery CreateServerCorrelationQuery(MessageQuerySet select, Collection<CorrelationInitializer> correlationInitializers,
-            OperationDescription operation, bool isResponse)
+        public static CorrelationQuery CreateServerCorrelationQuery(
+            MessageQuerySet select,
+            Collection<CorrelationInitializer> correlationInitializers,
+            OperationDescription operation,
+            bool isResponse
+        )
         {
             Fx.Assert(operation != null, "Argument cannot be null!");
 
-            CorrelationQuery correlationQuery = CreateCorrelationQueryCore(select, correlationInitializers);
+            CorrelationQuery correlationQuery = CreateCorrelationQueryCore(
+                select,
+                correlationInitializers
+            );
 
             if (correlationQuery != null)
             {
-                string action = !isResponse ? operation.Messages[0].Action : operation.Messages[1].Action;
+                string action = !isResponse
+                    ? operation.Messages[0].Action
+                    : operation.Messages[1].Action;
                 correlationQuery.Where = new CorrelationActionMessageFilter { Action = action };
             }
 
@@ -661,27 +872,52 @@ namespace System.ServiceModel.Activities
         }
 
         // this method generates the correlationQuery for client side send and receiveReply
-        public static Collection<CorrelationQuery> CreateClientCorrelationQueries(MessageQuerySet select, Collection<CorrelationInitializer> correlationInitializers,
-            string overridingAction, XName serviceContractName, string operationName, bool isResponse)
+        public static Collection<CorrelationQuery> CreateClientCorrelationQueries(
+            MessageQuerySet select,
+            Collection<CorrelationInitializer> correlationInitializers,
+            string overridingAction,
+            XName serviceContractName,
+            string operationName,
+            bool isResponse
+        )
         {
-            Fx.Assert(serviceContractName != null && operationName != null, "Argument cannot be null!");
+            Fx.Assert(
+                serviceContractName != null && operationName != null,
+                "Argument cannot be null!"
+            );
 
             Collection<CorrelationQuery> queryCollection = new Collection<CorrelationQuery>();
-            CorrelationQuery correlationQuery = CreateCorrelationQueryCore(select, correlationInitializers);
+            CorrelationQuery correlationQuery = CreateCorrelationQueryCore(
+                select,
+                correlationInitializers
+            );
 
             if (correlationQuery != null)
             {
                 if (overridingAction != null)
                 {
-                    correlationQuery.Where = new CorrelationActionMessageFilter { Action = overridingAction };
+                    correlationQuery.Where = new CorrelationActionMessageFilter
+                    {
+                        Action = overridingAction,
+                    };
                 }
                 else
                 {
                     ProvideDefaultNamespace(ref serviceContractName);
-                    string defaultAction = NamingHelper.GetMessageAction(new XmlQualifiedName(serviceContractName.LocalName, serviceContractName.NamespaceName),
-                        operationName, null, isResponse);
+                    string defaultAction = NamingHelper.GetMessageAction(
+                        new XmlQualifiedName(
+                            serviceContractName.LocalName,
+                            serviceContractName.NamespaceName
+                        ),
+                        operationName,
+                        null,
+                        isResponse
+                    );
 
-                    correlationQuery.Where = new CorrelationActionMessageFilter { Action = defaultAction };
+                    correlationQuery.Where = new CorrelationActionMessageFilter
+                    {
+                        Action = defaultAction,
+                    };
                 }
 
                 queryCollection.Add(correlationQuery);
@@ -690,7 +926,10 @@ namespace System.ServiceModel.Activities
                 {
                     // we need an additional query with empty action to support soap1.1 reply cases
                     CorrelationQuery noActionQuery = correlationQuery.Clone();
-                    noActionQuery.Where = new CorrelationActionMessageFilter { Action = String.Empty };
+                    noActionQuery.Where = new CorrelationActionMessageFilter
+                    {
+                        Action = String.Empty,
+                    };
                     queryCollection.Add(noActionQuery);
                 }
             }
@@ -698,7 +937,10 @@ namespace System.ServiceModel.Activities
             return queryCollection;
         }
 
-        static CorrelationQuery CreateCorrelationQueryCore(MessageQuerySet select, Collection<CorrelationInitializer> correlationInitializers)
+        static CorrelationQuery CreateCorrelationQueryCore(
+            MessageQuerySet select,
+            Collection<CorrelationInitializer> correlationInitializers
+        )
         {
             CorrelationQuery correlationQuery = null;
 
@@ -706,20 +948,21 @@ namespace System.ServiceModel.Activities
             {
                 Fx.Assert(select.Count != 0, "Empty MessageQuerySet is not allowed!");
 
-                correlationQuery = new CorrelationQuery
-                {
-                    Select = select
-                };
+                correlationQuery = new CorrelationQuery { Select = select };
             }
 
             if (correlationInitializers != null && correlationInitializers.Count > 0)
             {
                 foreach (CorrelationInitializer correlation in correlationInitializers)
                 {
-                    QueryCorrelationInitializer queryCorrelation = correlation as QueryCorrelationInitializer;
+                    QueryCorrelationInitializer queryCorrelation =
+                        correlation as QueryCorrelationInitializer;
                     if (queryCorrelation != null)
                     {
-                        Fx.Assert(queryCorrelation.MessageQuerySet.Count != 0, "Empty MessageQuerySet is not allowed!");
+                        Fx.Assert(
+                            queryCorrelation.MessageQuerySet.Count != 0,
+                            "Empty MessageQuerySet is not allowed!"
+                        );
 
                         correlationQuery = correlationQuery ?? new CorrelationQuery();
                         correlationQuery.SelectAdditional.Add(queryCorrelation.MessageQuerySet);

@@ -11,7 +11,8 @@ public partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorHWAccelTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorHWAccelTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorHWAccel(T a, T b, T c)
         {
@@ -40,7 +41,8 @@ public partial class VectorTest
     public static int TestEntryPoint()
     {
         int returnVal = Pass;
-        if (VectorHWAccelTest<float>.VectorHWAccel(1, 2, (float)(1 + 2)) != Pass) returnVal = Fail;
+        if (VectorHWAccelTest<float>.VectorHWAccel(1, 2, (float)(1 + 2)) != Pass)
+            returnVal = Fail;
         return returnVal;
     }
 }

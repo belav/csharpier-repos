@@ -8,8 +8,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class DoStatementSyntax
     {
-        public DoStatementSyntax Update(SyntaxToken doKeyword, StatementSyntax statement, SyntaxToken whileKeyword, SyntaxToken openParenToken, ExpressionSyntax condition, SyntaxToken closeParenToken, SyntaxToken semicolonToken)
-            => Update(AttributeLists, doKeyword, statement, whileKeyword, openParenToken, condition, closeParenToken, semicolonToken);
+        public DoStatementSyntax Update(
+            SyntaxToken doKeyword,
+            StatementSyntax statement,
+            SyntaxToken whileKeyword,
+            SyntaxToken openParenToken,
+            ExpressionSyntax condition,
+            SyntaxToken closeParenToken,
+            SyntaxToken semicolonToken
+        ) =>
+            Update(
+                AttributeLists,
+                doKeyword,
+                statement,
+                whileKeyword,
+                openParenToken,
+                condition,
+                closeParenToken,
+                semicolonToken
+            );
     }
 }
 
@@ -17,7 +34,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static DoStatementSyntax DoStatement(SyntaxToken doKeyword, StatementSyntax statement, SyntaxToken whileKeyword, SyntaxToken openParenToken, ExpressionSyntax condition, SyntaxToken closeParenToken, SyntaxToken semicolonToken)
-            => DoStatement(attributeLists: default, doKeyword, statement, whileKeyword, openParenToken, condition, closeParenToken, semicolonToken);
+        public static DoStatementSyntax DoStatement(
+            SyntaxToken doKeyword,
+            StatementSyntax statement,
+            SyntaxToken whileKeyword,
+            SyntaxToken openParenToken,
+            ExpressionSyntax condition,
+            SyntaxToken closeParenToken,
+            SyntaxToken semicolonToken
+        ) =>
+            DoStatement(
+                attributeLists: default,
+                doKeyword,
+                statement,
+                whileKeyword,
+                openParenToken,
+                condition,
+                closeParenToken,
+                semicolonToken
+            );
     }
 }

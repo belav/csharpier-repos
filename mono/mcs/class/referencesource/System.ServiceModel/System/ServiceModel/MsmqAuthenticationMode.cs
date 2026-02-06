@@ -14,7 +14,8 @@ namespace System.ServiceModel
     {
         public static bool IsDefined(MsmqAuthenticationMode mode)
         {
-            return mode >= MsmqAuthenticationMode.None && mode <= MsmqAuthenticationMode.Certificate;
+            return mode >= MsmqAuthenticationMode.None
+                && mode <= MsmqAuthenticationMode.Certificate;
         }
     }
 }

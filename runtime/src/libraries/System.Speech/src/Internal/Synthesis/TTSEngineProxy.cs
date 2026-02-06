@@ -21,7 +21,10 @@ namespace System.Speech.Internal.Synthesis
         internal abstract void ReleaseInterface();
         internal abstract char[] ConvertPhonemes(char[] phones, AlphabetType alphabet);
         internal abstract AlphabetType EngineAlphabet { get; }
-        internal AlphabetConverter AlphabetConverter { get { return _alphabetConverter; } }
+        internal AlphabetConverter AlphabetConverter
+        {
+            get { return _alphabetConverter; }
+        }
 
         protected AlphabetConverter _alphabetConverter;
     }
@@ -84,18 +87,13 @@ namespace System.Speech.Internal.Synthesis
 
         internal override AlphabetType EngineAlphabet
         {
-            get
-            {
-                return AlphabetType.Ipa;
-            }
+            get { return AlphabetType.Ipa; }
         }
 
         /// <summary>
         /// Release the COM interface for COM object
         /// </summary>
-        internal override void ReleaseInterface()
-        {
-        }
+        internal override void ReleaseInterface() { }
 
         #endregion
 
@@ -156,7 +154,13 @@ namespace System.Speech.Internal.Synthesis
                     Guid formatId = SAPIGuids.SPDFID_WaveFormatEx;
                     try
                     {
-                        _sapiEngine.Speak(0, ref formatId, waveFormat, spvTextFragment.AddrOfPinnedObject(), _iSite);
+                        _sapiEngine.Speak(
+                            0,
+                            ref formatId,
+                            waveFormat,
+                            spvTextFragment.AddrOfPinnedObject(),
+                            _iSite
+                        );
                     }
                     finally
                     {
@@ -172,10 +176,7 @@ namespace System.Speech.Internal.Synthesis
 
         internal override AlphabetType EngineAlphabet
         {
-            get
-            {
-                return AlphabetType.Sapi;
-            }
+            get { return AlphabetType.Sapi; }
         }
 
         internal override char[] ConvertPhonemes(char[] phones, AlphabetType alphabet)

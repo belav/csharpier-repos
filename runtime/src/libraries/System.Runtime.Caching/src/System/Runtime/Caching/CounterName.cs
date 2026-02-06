@@ -13,6 +13,6 @@ namespace System.Runtime.Caching
         HitRatioBase,
         Misses,
         Trims,
-        Turnover
+        Turnover,
     }
 }

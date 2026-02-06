@@ -15,7 +15,8 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSizeInBytes,
-            bool encrypting)
+            bool encrypting
+        )
         {
             BasicSymmetricCipher cipher = new AppleCCCryptor(
                 Interop.AppleCrypto.PAL_SymmetricAlgorithm.TripleDES,
@@ -25,7 +26,8 @@ namespace System.Security.Cryptography
                 iv,
                 encrypting,
                 feedbackSizeInBytes,
-                paddingSize);
+                paddingSize
+            );
 
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
@@ -37,7 +39,8 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSizeInBytes,
-            bool encrypting)
+            bool encrypting
+        )
         {
             return new AppleCCCryptorLite(
                 Interop.AppleCrypto.PAL_SymmetricAlgorithm.TripleDES,
@@ -47,7 +50,8 @@ namespace System.Security.Cryptography
                 iv,
                 encrypting,
                 feedbackSizeInBytes,
-                paddingSize);
+                paddingSize
+            );
         }
     }
 }

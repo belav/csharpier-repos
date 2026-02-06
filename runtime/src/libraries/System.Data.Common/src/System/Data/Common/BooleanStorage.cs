@@ -14,10 +14,8 @@ namespace System.Data.Common
 
         private bool[] _values = default!; // Late-initialized
 
-        internal BooleanStorage(DataColumn column) :
-            base(column, typeof(bool), defaultValue, StorageType.Boolean)
-        {
-        }
+        internal BooleanStorage(DataColumn column)
+            : base(column, typeof(bool), defaultValue, StorageType.Boolean) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -182,7 +180,12 @@ namespace System.Data.Common
             return new bool[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             bool[] typedStore = (bool[])store;
             typedStore[storeIndex] = _values[record];

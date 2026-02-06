@@ -9,9 +9,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeThreadPoolIOHandle : SafeHandle
     {
         public SafeThreadPoolIOHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+            : base(IntPtr.Zero, true) { }
 
         public override bool IsInvalid
         {

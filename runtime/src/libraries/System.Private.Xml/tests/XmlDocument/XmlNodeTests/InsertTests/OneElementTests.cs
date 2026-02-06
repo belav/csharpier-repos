@@ -7,8 +7,20 @@ namespace System.Xml.XmlDocumentTests
 {
     public static class OneElementTests
     {
-        private static readonly InsertType[] s_InsertTypes = new[] { InsertType.Prepend, InsertType.Append };
-        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.SignificantWhitespace, XmlNodeType.CDATA, XmlNodeType.Text, XmlNodeType.Comment, XmlNodeType.Element /*, XmlNodeType.EntityReference*/ };
+        private static readonly InsertType[] s_InsertTypes = new[]
+        {
+            InsertType.Prepend,
+            InsertType.Append,
+        };
+        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[]
+        {
+            XmlNodeType.Whitespace,
+            XmlNodeType.SignificantWhitespace,
+            XmlNodeType.CDATA,
+            XmlNodeType.Text,
+            XmlNodeType.Comment,
+            XmlNodeType.Element, /*, XmlNodeType.EntityReference*/
+        };
 
         private static void OneTextNodeBase(string xml, InsertType insertType, XmlNodeType nodeType)
         {
@@ -19,7 +31,10 @@ namespace System.Xml.XmlDocumentTests
             var parent = xmlDocument.DocumentElement;
             var child = parent.FirstChild;
             var newChild = TestHelper.CreateNode(xmlDocument, nodeType);
-            var expected = (insertType == InsertType.Prepend) ? (newChild.OuterXml + child.OuterXml) : (child.OuterXml + newChild.OuterXml);
+            var expected =
+                (insertType == InsertType.Prepend)
+                    ? (newChild.OuterXml + child.OuterXml)
+                    : (child.OuterXml + newChild.OuterXml);
 
             // insert new child
             insertDelegate(parent, newChild);
@@ -59,11 +74,12 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace()
         {
-            var xml = @"<W>
+            var xml =
+                @"<W>
         </W>";
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -71,8 +87,8 @@ namespace System.Xml.XmlDocumentTests
         {
             var xml = @"<S xml:space=""preserve""> 	</S>";
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -81,8 +97,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<C><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></C>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -91,8 +107,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<T>text</T>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace System.Net.NetworkInformation
         None = 0,
         StartIPv4 = 1,
         StartIPv6 = 2,
-        Both = 3
+        Both = 3,
     }
 }

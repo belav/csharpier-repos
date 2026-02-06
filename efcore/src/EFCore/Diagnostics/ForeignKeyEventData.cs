@@ -21,7 +21,8 @@ public class ForeignKeyEventData : EventData
     public ForeignKeyEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        IReadOnlyForeignKey foreignKey)
+        IReadOnlyForeignKey foreignKey
+    )
         : base(eventDefinition, messageGenerator)
     {
         ForeignKey = foreignKey;

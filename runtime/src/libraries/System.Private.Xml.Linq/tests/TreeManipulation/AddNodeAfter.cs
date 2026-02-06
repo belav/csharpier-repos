@@ -19,21 +19,165 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(AddingMultipleNodesIntoElement) { Attribute = new VariationAttribute("Adding multiple (4) objects into XElement - connected") { Params = new object[] { true, 4 }, Priority = 1 } });
-            AddChild(new TestVariation(AddingMultipleNodesIntoElement) { Attribute = new VariationAttribute("Adding single object into XElement - not connected") { Params = new object[] { false, 1 }, Priority = 1 } });
-            AddChild(new TestVariation(AddingMultipleNodesIntoElement) { Attribute = new VariationAttribute("Adding multiple (4) objects into XElement - not connected") { Params = new object[] { false, 4 }, Priority = 1 } });
-            AddChild(new TestVariation(AddingMultipleNodesIntoElement) { Attribute = new VariationAttribute("Adding single object into XElement - connected") { Params = new object[] { true, 1 }, Priority = 1 } });
-            AddChild(new TestVariation(InvalidNodeTypes) { Attribute = new VariationAttribute("Invalid node types - single object") { Priority = 2 } });
-            AddChild(new TestVariation(ValidAddIntoXDocument) { Attribute = new VariationAttribute("XDocument valid add - not connected (multiple)") { Params = new object[] { false, 3 }, Priority = 1 } });
-            AddChild(new TestVariation(ValidAddIntoXDocument) { Attribute = new VariationAttribute("XDocument valid add - connected (single)") { Params = new object[] { true, 1 }, Priority = 0 } });
-            AddChild(new TestVariation(ValidAddIntoXDocument) { Attribute = new VariationAttribute("XDocument valid add - not connected (single)") { Params = new object[] { false, 1 }, Priority = 0 } });
-            AddChild(new TestVariation(ValidAddIntoXDocument) { Attribute = new VariationAttribute("XDocument valid add - connected (multiple)") { Params = new object[] { true, 3 }, Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument1) { Attribute = new VariationAttribute("XDocument invalid add - double DTD") { Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument2) { Attribute = new VariationAttribute("XDocument invalid add - DTD after element") { Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument4) { Attribute = new VariationAttribute("XDocument invalid add - multiple root elements") { Priority = 1 } });
-            AddChild(new TestVariation(InvalidAddIntoXDocument5) { Attribute = new VariationAttribute("XDocument invalid add - CData, attribute, text (no whitespace)") { Priority = 1 } });
-            AddChild(new TestVariation(WorkOnTextNodes1) { Attribute = new VariationAttribute("Working on the text nodes 1.") { Priority = 1 } });
-            AddChild(new TestVariation(WorkOnTextNodes2) { Attribute = new VariationAttribute("Working on the text nodes 2.") { Priority = 1 } });
+            AddChild(
+                new TestVariation(AddingMultipleNodesIntoElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Adding multiple (4) objects into XElement - connected"
+                    )
+                    {
+                        Params = new object[] { true, 4 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddingMultipleNodesIntoElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Adding single object into XElement - not connected"
+                    )
+                    {
+                        Params = new object[] { false, 1 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddingMultipleNodesIntoElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Adding multiple (4) objects into XElement - not connected"
+                    )
+                    {
+                        Params = new object[] { false, 4 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddingMultipleNodesIntoElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Adding single object into XElement - connected"
+                    )
+                    {
+                        Params = new object[] { true, 1 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidNodeTypes)
+                {
+                    Attribute = new VariationAttribute("Invalid node types - single object")
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(ValidAddIntoXDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument valid add - not connected (multiple)"
+                    )
+                    {
+                        Params = new object[] { false, 3 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(ValidAddIntoXDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument valid add - connected (single)")
+                    {
+                        Params = new object[] { true, 1 },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(ValidAddIntoXDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument valid add - not connected (single)"
+                    )
+                    {
+                        Params = new object[] { false, 1 },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(ValidAddIntoXDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument valid add - connected (multiple)")
+                    {
+                        Params = new object[] { true, 3 },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument1)
+                {
+                    Attribute = new VariationAttribute("XDocument invalid add - double DTD")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument2)
+                {
+                    Attribute = new VariationAttribute("XDocument invalid add - DTD after element")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument4)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument invalid add - multiple root elements"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(InvalidAddIntoXDocument5)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument invalid add - CData, attribute, text (no whitespace)"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(WorkOnTextNodes1)
+                {
+                    Attribute = new VariationAttribute("Working on the text nodes 1.")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(WorkOnTextNodes2)
+                {
+                    Attribute = new VariationAttribute("Working on the text nodes 2.")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         // - order
@@ -55,10 +199,20 @@ namespace XLinqTests
 
         public void AddingMultipleNodesIntoElement()
         {
-            AddingMultipleNodesIntoElement(delegate(XNode n, object[] content) { n.AddAfterSelf(content); }, CalculateExpectedValuesAddAfter);
+            AddingMultipleNodesIntoElement(
+                delegate(XNode n, object[] content)
+                {
+                    n.AddAfterSelf(content);
+                },
+                CalculateExpectedValuesAddAfter
+            );
         }
 
-        public IEnumerable<ExpectedValue> CalculateExpectedValuesAddAfter(XContainer orig, int startPos, IEnumerable<object> newNodes)
+        public IEnumerable<ExpectedValue> CalculateExpectedValuesAddAfter(
+            XContainer orig,
+            int startPos,
+            IEnumerable<object> newNodes
+        )
         {
             int counter = 0;
             for (XNode node = orig.FirstNode; node != null; node = node.NextNode, counter++)
@@ -68,7 +222,12 @@ namespace XLinqTests
                 {
                     foreach (object o in newNodes)
                     {
-                        yield return new ExpectedValue(o is XNode && (o as XNode).Parent == null && (o as XNode).Document == null, o);
+                        yield return new ExpectedValue(
+                            o is XNode
+                                && (o as XNode).Parent == null
+                                && (o as XNode).Document == null,
+                            o
+                        );
                     }
                 }
             }
@@ -89,7 +248,10 @@ namespace XLinqTests
             runWithEvents = (bool)Params[0];
             try
             {
-                var doc = new XDocument(new XDocumentType("root", null, null, null), new XElement("A"));
+                var doc = new XDocument(
+                    new XDocumentType("root", null, null, null),
+                    new XElement("A")
+                );
                 var o = new XDocumentType("D", null, null, null);
                 if (runWithEvents)
                 {
@@ -102,9 +264,7 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - DTD after element")]
@@ -126,9 +286,7 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - multiple root elements")]
@@ -150,16 +308,23 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "Exception expected");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument invalid add - CData, attribute, text (no whitespace)")]
         public void InvalidAddIntoXDocument5()
         {
             runWithEvents = (bool)Params[0];
-            foreach (object o in new object[] { new XCData("CD"), new XAttribute("a1", "avalue"), "text1", new XText("text2"), new XDocument() })
+            foreach (
+                object o in new object[]
+                {
+                    new XCData("CD"),
+                    new XAttribute("a1", "avalue"),
+                    "text1",
+                    new XText("text2"),
+                    new XDocument(),
+                }
+            )
             {
                 try
                 {
@@ -175,21 +340,28 @@ namespace XLinqTests
                     }
                     TestLog.Compare(false, "Exception expected");
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
             }
         }
 
         public void InvalidNodeTypes()
         {
             runWithEvents = (bool)Params[0];
-            var root = new XElement("root", new XAttribute("a", "b"), new XElement("here"), "tests");
+            var root = new XElement(
+                "root",
+                new XAttribute("a", "b"),
+                new XElement("here"),
+                "tests"
+            );
             var rootCopy = new XElement(root);
             XElement elem = root.Element("here");
 
-            object[] nodes = { new XAttribute("xx", "yy"), new XDocument(),
-                new XDocumentType("root", null, null, null) };
+            object[] nodes =
+            {
+                new XAttribute("xx", "yy"),
+                new XDocument(),
+                new XDocumentType("root", null, null, null),
+            };
 
             if (runWithEvents)
             {
@@ -219,7 +391,13 @@ namespace XLinqTests
         //[Variation(Priority = 1, Desc = "XDocument valid add - not connected (multiple)", Params = new object[] { false, 3 })]
         public void ValidAddIntoXDocument()
         {
-            ValidAddIntoXDocument(delegate(XNode n, object[] content) { n.AddAfterSelf(content); }, CalculateExpectedValuesAddAfter);
+            ValidAddIntoXDocument(
+                delegate(XNode n, object[] content)
+                {
+                    n.AddAfterSelf(content);
+                },
+                CalculateExpectedValuesAddAfter
+            );
         }
 
         //[Variation(Priority = 1, Desc = "Working on the text nodes 1.")]
@@ -241,7 +419,11 @@ namespace XLinqTests
             }
 
             TestLog.Compare(elem.Nodes().Count(), 3, "elem.Nodes().Count(), 3");
-            TestLog.Compare((n as XText).Value, "text0text1text2", "(n as XText).Value, text0text1text2");
+            TestLog.Compare(
+                (n as XText).Value,
+                "text0text1text2",
+                "(n as XText).Value, text0text1text2"
+            );
         }
 
         //[Variation(Priority = 1, Desc = "Working on the text nodes 2.")]
@@ -262,7 +444,11 @@ namespace XLinqTests
             }
 
             TestLog.Compare(elem.Nodes().Count(), 3, "elem.Nodes().Count(), 3");
-            TestLog.Compare((n as XText).Value, "text0text1text2", "(n as XText).Value, text0text1text2");
+            TestLog.Compare(
+                (n as XText).Value,
+                "text0text1text2",
+                "(n as XText).Value, text0text1text2"
+            );
         }
         #endregion
     }

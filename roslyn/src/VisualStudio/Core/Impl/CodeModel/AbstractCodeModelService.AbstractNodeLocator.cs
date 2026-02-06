@@ -22,16 +22,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             protected abstract EnvDTE.vsCMPart DefaultPart { get; }
 
-            protected abstract VirtualTreePoint? GetStartPoint(SourceText text, LineFormattingOptions options, SyntaxNode node, EnvDTE.vsCMPart part);
-            protected abstract VirtualTreePoint? GetEndPoint(SourceText text, LineFormattingOptions options, SyntaxNode node, EnvDTE.vsCMPart part);
+            protected abstract VirtualTreePoint? GetStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                SyntaxNode node,
+                EnvDTE.vsCMPart part
+            );
+            protected abstract VirtualTreePoint? GetEndPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                SyntaxNode node,
+                EnvDTE.vsCMPart part
+            );
 
-            public VirtualTreePoint? GetStartPoint(SyntaxNode node, LineFormattingOptions options, EnvDTE.vsCMPart? part)
+            public VirtualTreePoint? GetStartPoint(
+                SyntaxNode node,
+                LineFormattingOptions options,
+                EnvDTE.vsCMPart? part
+            )
             {
                 var text = node.SyntaxTree.GetText();
                 return GetStartPoint(text, options, node, part ?? DefaultPart);
             }
 
-            public VirtualTreePoint? GetEndPoint(SyntaxNode node, LineFormattingOptions options, EnvDTE.vsCMPart? part)
+            public VirtualTreePoint? GetEndPoint(
+                SyntaxNode node,
+                LineFormattingOptions options,
+                EnvDTE.vsCMPart? part
+            )
             {
                 var text = node.SyntaxTree.GetText();
                 return GetEndPoint(text, options, node, part ?? DefaultPart);

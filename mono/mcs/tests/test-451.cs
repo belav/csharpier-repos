@@ -1,14 +1,17 @@
 using System;
 
-enum Foo { foo };
+enum Foo
+{
+    foo,
+};
 
 public class Test
 {
-        public static void Main ()
-        {
-                ValueType vt = (ValueType) 1;
-		IComparable ic = (IComparable) 1;
+    public static void Main()
+    {
+        ValueType vt = (ValueType)1;
+        IComparable ic = (IComparable)1;
 
-		Enum e = (Enum) Foo.foo;
-        }
+        Enum e = (Enum)Foo.foo;
+    }
 }

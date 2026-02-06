@@ -24,30 +24,52 @@ namespace System.Net.Test.Common
             _request = request;
         }
 
-        public static async Task CreateClientAndServerAsync(Func<HttpMessageHandler, Uri, Task> clientFunc, Func<HttpMessageHandlerLoopbackServer, Task> serverFunc)
+        public static async Task CreateClientAndServerAsync(
+            Func<HttpMessageHandler, Uri, Task> clientFunc,
+            Func<HttpMessageHandlerLoopbackServer, Task> serverFunc
+        )
         {
-            await clientFunc(new LoopbackServerHttpMessageHandler(serverFunc), new Uri("http://example.com")).ConfigureAwait(false);
+            await clientFunc(
+                    new LoopbackServerHttpMessageHandler(serverFunc),
+                    new Uri("http://example.com")
+                )
+                .ConfigureAwait(false);
         }
 
-        public async override Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public override async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
             ResponseStatusCode = statusCode;
             ResponseHeaders = headers;
             ResponseContentString = content;
-            return await HttpRequestData.FromHttpRequestMessageAsync(_request).ConfigureAwait(false);
+            return await HttpRequestData
+                .FromHttpRequestMessageAsync(_request)
+                .ConfigureAwait(false);
         }
 
-        public async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode, IList<HttpHeaderData> headers, byte[] bytes)
+        public async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode,
+            IList<HttpHeaderData> headers,
+            byte[] bytes
+        )
         {
             ResponseStatusCode = statusCode;
             ResponseHeaders = headers;
             ResponseContentBytes = bytes;
-            return await HttpRequestData.FromHttpRequestMessageAsync(_request).ConfigureAwait(false);
+            return await HttpRequestData
+                .FromHttpRequestMessageAsync(_request)
+                .ConfigureAwait(false);
         }
 
-        public override Task AcceptConnectionAsync(Func<GenericLoopbackConnection, Task> funcAsync) => throw new NotImplementedException();
+        public override Task AcceptConnectionAsync(
+            Func<GenericLoopbackConnection, Task> funcAsync
+        ) => throw new NotImplementedException();
 
-        public override Task<GenericLoopbackConnection> EstablishGenericConnectionAsync() => throw new NotImplementedException();
+        public override Task<GenericLoopbackConnection> EstablishGenericConnectionAsync() =>
+            throw new NotImplementedException();
 
         public override void Dispose() { }
 
@@ -55,19 +77,27 @@ namespace System.Net.Test.Common
         {
             Func<HttpMessageHandlerLoopbackServer, Task> _serverFunc;
 
-            public LoopbackServerHttpMessageHandler(Func<HttpMessageHandlerLoopbackServer, Task> serverFunc)
+            public LoopbackServerHttpMessageHandler(
+                Func<HttpMessageHandlerLoopbackServer, Task> serverFunc
+            )
             {
                 _serverFunc = serverFunc;
             }
 
 #if NETCOREAPP
-            protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override HttpResponseMessage Send(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return SendAsync(request, cancellationToken).GetAwaiter().GetResult();
             }
 #endif
 
-            protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 var server = new HttpMessageHandlerLoopbackServer(request);
                 await _serverFunc(server).ConfigureAwait(false);
@@ -84,10 +114,19 @@ namespace System.Net.Test.Common
 
                 foreach (var header in server.ResponseHeaders ?? Array.Empty<HttpHeaderData>())
                 {
-                    if (String.Equals(header.Name, "Content-Type", StringComparison.InvariantCultureIgnoreCase))
+                    if (
+                        String.Equals(
+                            header.Name,
+                            "Content-Type",
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
+                    )
                     {
                         response.Content.Headers.Remove("Content-Type");
-                        response.Content.Headers.TryAddWithoutValidation("Content-Type", header.Value);
+                        response.Content.Headers.TryAddWithoutValidation(
+                            "Content-Type",
+                            header.Value
+                        );
                     }
                     else
                     {

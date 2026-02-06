@@ -1,11 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Net;
-using System.Diagnostics;
-using System.Collections.Concurrent;
-using System.Runtime.InteropServices;
 using System;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Mono.Options;
 
@@ -24,13 +24,15 @@ namespace HttpServer
     {
         private static bool Verbose = false;
         private static string URLSuffix = "";
-        private ConcurrentDictionary<string, Session> Sessions = new ConcurrentDictionary<string, Session>();
+        private ConcurrentDictionary<string, Session> Sessions =
+            new ConcurrentDictionary<string, Session>();
         private Dictionary<string, FileContent> cache = new(StringComparer.OrdinalIgnoreCase);
 
         static List<string> ProcessArguments(string[] args)
         {
             var help = false;
-            var options = new OptionSet {
+            var options = new OptionSet
+            {
                 $"Usage: HttpServer OPTIONS*",
                 "",
                 "Simple http server for browser-bench sample",
@@ -38,15 +40,13 @@ namespace HttpServer
                 "Copyright 2022, 2023 Microsoft Corporation",
                 "",
                 "Options:",
-                { "h|help|?",
-                    "Show this message and exit",
-                    v => help = v != null },
-                { "s=",
-                    "URL {suffix}",
-                    v => URLSuffix =  v },
-                { "v|verbose",
+                { "h|help|?", "Show this message and exit", v => help = v != null },
+                { "s=", "URL {suffix}", v => URLSuffix = v },
+                {
+                    "v|verbose",
                     "Output more information during the run of the server.",
-                    v => Verbose = true },
+                    v => Verbose = true
+                },
             };
 
             var remaining = options.Parse(args);
@@ -194,7 +194,9 @@ namespace HttpServer
                 if (Verbose)
                     Console.WriteLine($"  writting POST stream to '{path}' file");
 
-                var content = await new StreamReader(context.Request.InputStream).ReadToEndAsync().ConfigureAwait(false);
+                var content = await new StreamReader(context.Request.InputStream)
+                    .ReadToEndAsync()
+                    .ConfigureAwait(false);
                 await File.WriteAllTextAsync(path, content).ConfigureAwait(false);
             }
             else
@@ -215,7 +217,9 @@ namespace HttpServer
             if (url == null)
                 return;
 
-            string path = url.LocalPath.EndsWith("/") ? url.LocalPath + "index.html" : url.LocalPath;
+            string path = url.LocalPath.EndsWith("/")
+                ? url.LocalPath + "index.html"
+                : url.LocalPath;
             if (Verbose)
                 Console.WriteLine($"  serving: {path}");
 

@@ -46,10 +46,7 @@ namespace Newtonsoft.Json.Tests.Issues
             var namingStrategy = new SnakeCaseNamingStrategy();
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = namingStrategy
-                }
+                ContractResolver = new DefaultContractResolver { NamingStrategy = namingStrategy },
             };
 
             string json = @"{""dict"":{""value1"":""a"",""text_value"":""b""}}";
@@ -67,16 +64,19 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.AreEqual("b", c1.Dict[MyEnum.TextValue]);
 
             // Non-dictionary values should still error
-            ExceptionAssert.Throws<JsonSerializationException>(() =>
-            {
-                JsonConvert.DeserializeObject<List<MyEnum>>(@"[""text_value""]", settings);
-            }, @"Error converting value ""text_value"" to type 'Newtonsoft.Json.Tests.Issues.Issue2444+MyEnum'. Path '[0]', line 1, position 13.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject<List<MyEnum>>(@"[""text_value""]", settings);
+                },
+                @"Error converting value ""text_value"" to type 'Newtonsoft.Json.Tests.Issues.Issue2444+MyEnum'. Path '[0]', line 1, position 13."
+            );
         }
 
         public enum MyEnum
         {
             Value1,
-            TextValue
+            TextValue,
         }
 
         public class DataClass

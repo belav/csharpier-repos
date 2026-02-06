@@ -10,27 +10,34 @@ namespace System.Data
     /// The exception that is throwing from strong typed DataSet when user access to DBNull value.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class StrongTypingException : DataException
     {
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected StrongTypingException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
-        public StrongTypingException() : base()
-        {
-            HResult = HResults.StrongTyping;
-        }
-
-        public StrongTypingException(string? message) : base(message)
+        public StrongTypingException()
+            : base()
         {
             HResult = HResults.StrongTyping;
         }
 
-        public StrongTypingException(string? s, Exception? innerException) : base(s, innerException)
+        public StrongTypingException(string? message)
+            : base(message)
+        {
+            HResult = HResults.StrongTyping;
+        }
+
+        public StrongTypingException(string? s, Exception? innerException)
+            : base(s, innerException)
         {
             HResult = HResults.StrongTyping;
         }

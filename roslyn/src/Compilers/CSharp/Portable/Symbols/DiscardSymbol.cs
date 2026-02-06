@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol? ContainingSymbol => null;
         public override Accessibility DeclaredAccessibility => Accessibility.NotApplicable;
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
         public override bool IsAbstract => false;
         public override bool IsExtern => false;
         public override bool IsImplicitlyDeclared => true;
@@ -31,11 +32,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override SymbolKind Kind => SymbolKind.Discard;
         public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
         internal override ObsoleteAttributeData? ObsoleteAttributeData => null;
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument a) => visitor.VisitDiscard(this, a);
-        public override void Accept(CSharpSymbolVisitor visitor) => visitor.VisitDiscard(this);
-        public override TResult Accept<TResult>(CSharpSymbolVisitor<TResult> visitor) => visitor.VisitDiscard(this);
 
-        public override bool Equals(Symbol? obj, TypeCompareKind compareKind) => obj is DiscardSymbol other && this.TypeWithAnnotations.Equals(other.TypeWithAnnotations, compareKind);
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument a
+        ) => visitor.VisitDiscard(this, a);
+
+        public override void Accept(CSharpSymbolVisitor visitor) => visitor.VisitDiscard(this);
+
+        public override TResult Accept<TResult>(CSharpSymbolVisitor<TResult> visitor) =>
+            visitor.VisitDiscard(this);
+
+        public override bool Equals(Symbol? obj, TypeCompareKind compareKind) =>
+            obj is DiscardSymbol other
+            && this.TypeWithAnnotations.Equals(other.TypeWithAnnotations, compareKind);
+
         public override int GetHashCode() => this.TypeWithAnnotations.GetHashCode();
 
         protected override ISymbol CreateISymbol()

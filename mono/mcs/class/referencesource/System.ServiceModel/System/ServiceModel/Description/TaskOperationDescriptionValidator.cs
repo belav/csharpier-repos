@@ -35,7 +35,16 @@ namespace System.ServiceModel.Description
             {
                 string method1Name = operation.TaskMethod.Name;
                 string method2Name = operation.SyncMethod.Name;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotHaveTwoOperationsWithTheSameName3, method1Name, method2Name, operation.DeclaringContract.ContractType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.CannotHaveTwoOperationsWithTheSameName3,
+                            method1Name,
+                            method2Name,
+                            operation.DeclaringContract.ContractType
+                        )
+                    )
+                );
             }
         }
 
@@ -45,7 +54,16 @@ namespace System.ServiceModel.Description
             {
                 string method1Name = operation.TaskMethod.Name;
                 string method2Name = operation.BeginMethod.Name;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotHaveTwoOperationsWithTheSameName3, method1Name, method2Name, operation.DeclaringContract.ContractType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.CannotHaveTwoOperationsWithTheSameName3,
+                            method1Name,
+                            method2Name,
+                            operation.DeclaringContract.ContractType
+                        )
+                    )
+                );
             }
         }
 
@@ -54,10 +72,20 @@ namespace System.ServiceModel.Description
             foreach (ParameterInfo parameter in method.GetParameters())
             {
                 Type parameterType = parameter.ParameterType;
-                if ((parameterType == ServiceReflector.CancellationTokenType) ||
-                    (parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == ServiceReflector.IProgressType))
+                if (
+                    (parameterType == ServiceReflector.CancellationTokenType)
+                    || (
+                        parameterType.IsGenericType
+                        && parameterType.GetGenericTypeDefinition()
+                            == ServiceReflector.IProgressType
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.TaskMethodParameterNotSupported, parameterType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.TaskMethodParameterNotSupported, parameterType)
+                        )
+                    );
                 }
             }
         }
@@ -66,7 +94,11 @@ namespace System.ServiceModel.Description
         {
             if (ServiceReflector.HasOutputParameters(method, false))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TaskMethodMustNotHaveOutParameter)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TaskMethodMustNotHaveOutParameter)
+                    )
+                );
             }
         }
     }

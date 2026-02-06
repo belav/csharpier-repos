@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,53 +41,56 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	[XmlRoot ("MetadataReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex")]
-	public class MetadataReference : IXmlSerializable
-	{
-		EndpointAddress address;
-		AddressingVersion address_version;
+    [MonoTODO]
+    [XmlRoot("MetadataReference", Namespace = "http://schemas.xmlsoap.org/ws/2004/09/mex")]
+    public class MetadataReference : IXmlSerializable
+    {
+        EndpointAddress address;
+        AddressingVersion address_version;
 
-		public MetadataReference ()
-			: this (null, null)
-		{
-		}
+        public MetadataReference()
+            : this(null, null) { }
 
-		public MetadataReference (EndpointAddress address, AddressingVersion addressVersion)
-		{
-			this.address = address;
-			this.address_version = addressVersion;
-		}
+        public MetadataReference(EndpointAddress address, AddressingVersion addressVersion)
+        {
+            this.address = address;
+            this.address_version = addressVersion;
+        }
 
-		public EndpointAddress Address {
-			get { return address; }
-			set { address = value; }
-		}
+        public EndpointAddress Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
 
-		public AddressingVersion AddressVersion {
-			get { return address_version; }
-			set { address_version = value; }
-		}
-		
-		XmlSchema IXmlSerializable.GetSchema ()
-		{
-			return null;
-		}
+        public AddressingVersion AddressVersion
+        {
+            get { return address_version; }
+            set { address_version = value; }
+        }
 
-		void IXmlSerializable.ReadXml (XmlReader reader)
-		{
-			if (reader.NodeType != XmlNodeType.Element || 
-				reader.LocalName != "MetadataReference" || 
-				reader.NamespaceURI != "http://schemas.xmlsoap.org/ws/2004/09/mex") 
-				throw new InvalidOperationException (String.Format ("Unexpected : <{0} ..", reader.LocalName));
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
-			throw new NotImplementedException ("Implement me!");
-		}
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
+            if (
+                reader.NodeType != XmlNodeType.Element
+                || reader.LocalName != "MetadataReference"
+                || reader.NamespaceURI != "http://schemas.xmlsoap.org/ws/2004/09/mex"
+            )
+                throw new InvalidOperationException(
+                    String.Format("Unexpected : <{0} ..", reader.LocalName)
+                );
 
-		void IXmlSerializable.WriteXml (XmlWriter writer)
-		{
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException("Implement me!");
+        }
 
-	}
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

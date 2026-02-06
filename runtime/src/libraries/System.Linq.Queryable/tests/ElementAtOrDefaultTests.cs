@@ -29,7 +29,10 @@ namespace System.Linq.Tests
             int[] source = { 1, 2, 3, 4 };
 
             Assert.Equal(default, source.AsQueryable().ElementAtOrDefault(source.Length));
-            Assert.Equal(default, source.AsQueryable().ElementAtOrDefault(new Index(source.Length)));
+            Assert.Equal(
+                default,
+                source.AsQueryable().ElementAtOrDefault(new Index(source.Length))
+            );
             Assert.Equal(default, source.AsQueryable().ElementAtOrDefault(^0));
         }
 
@@ -66,9 +69,18 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAtOrDefault(2));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAtOrDefault(new Index(2)));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).ElementAtOrDefault(^2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAtOrDefault(2)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAtOrDefault(new Index(2))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).ElementAtOrDefault(^2)
+            );
         }
 
         [Fact]

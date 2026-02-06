@@ -75,16 +75,23 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var a3 = (AGeneric<ByteStruct>)Activator.CreateInstance(typeof(AGeneric<ByteStruct>));
+                var a3 =
+                    (AGeneric<ByteStruct>)Activator.CreateInstance(typeof(AGeneric<ByteStruct>));
                 a3._aVal._dVal = 1;
-                if (1 != ((ByteStruct)typeof(AGeneric<ByteStruct>).GetField("_aVal").GetValue(a3))._dVal)
+                if (
+                    1
+                    != (
+                        (ByteStruct)typeof(AGeneric<ByteStruct>).GetField("_aVal").GetValue(a3)
+                    )._dVal
+                )
                 {
                     ATest.ReportTestFailure("C a3_aVal", a3, ref failure);
                 }
             }
 
             {
-                var a4 = (ABoringGeneric<byte>)Activator.CreateInstance(typeof(ABoringGeneric<byte>));
+                var a4 =
+                    (ABoringGeneric<byte>)Activator.CreateInstance(typeof(ABoringGeneric<byte>));
                 a4._aVal = 1;
                 if (1 != (byte)typeof(ABoringGeneric<byte>).GetField("_aVal").GetValue(a4))
                 {
@@ -93,14 +100,15 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var a5 = (ABoringGeneric<ByteStruct>)Activator.CreateInstance(typeof(ABoringGeneric<ByteStruct>));
+                var a5 =
+                    (ABoringGeneric<ByteStruct>)
+                        Activator.CreateInstance(typeof(ABoringGeneric<ByteStruct>));
                 a5._aVal = 1;
                 if (1 != (byte)typeof(ABoringGeneric<ByteStruct>).GetField("_aVal").GetValue(a5))
                 {
                     ATest.ReportTestFailure("C a5_aVal", a5, ref failure);
                 }
             }
-
 
             {
                 var b = (B_A)Activator.CreateInstance(typeof(B_A));
@@ -139,7 +147,9 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var b5 = (B_A_byte_Generic<byte>)Activator.CreateInstance(typeof(B_A_byte_Generic<byte>));
+                var b5 =
+                    (B_A_byte_Generic<byte>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<byte>));
                 b5._bVal = 1;
                 if (1 != (byte)typeof(B_A_byte_Generic<byte>).GetField("_bVal").GetValue(b5))
                 {
@@ -157,27 +167,49 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var b7 = (B_A_Generic<ByteStruct>)Activator.CreateInstance(typeof(B_A_Generic<ByteStruct>));
+                var b7 =
+                    (B_A_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_Generic<ByteStruct>));
                 b7._bVal._dVal = 1;
-                if (1 != ((ByteStruct)typeof(B_A_Generic<ByteStruct>).GetField("_bVal").GetValue(b7))._dVal)
+                if (
+                    1
+                    != (
+                        (ByteStruct)typeof(B_A_Generic<ByteStruct>).GetField("_bVal").GetValue(b7)
+                    )._dVal
+                )
                 {
                     ATest.ReportTestFailure("C b7_bVal", b7, ref failure);
                 }
             }
 
             {
-                var b8 = (B_A_byte_Generic<ByteStruct>)Activator.CreateInstance(typeof(B_A_byte_Generic<ByteStruct>));
+                var b8 =
+                    (B_A_byte_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_byte_Generic<ByteStruct>));
                 b8._bVal._dVal = 1;
-                if (1 != ((ByteStruct)typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal").GetValue(b8))._dVal)
+                if (
+                    1
+                    != (
+                        (ByteStruct)
+                            typeof(B_A_byte_Generic<ByteStruct>).GetField("_bVal").GetValue(b8)
+                    )._dVal
+                )
                 {
                     ATest.ReportTestFailure("C b8_bVal", b8, ref failure);
                 }
             }
 
             {
-                var b9 = (B_A_D_Generic<ByteStruct>)Activator.CreateInstance(typeof(B_A_D_Generic<ByteStruct>));
+                var b9 =
+                    (B_A_D_Generic<ByteStruct>)
+                        Activator.CreateInstance(typeof(B_A_D_Generic<ByteStruct>));
                 b9._bVal._dVal = 1;
-                if (1 != ((ByteStruct)typeof(B_A_D_Generic<ByteStruct>).GetField("_bVal").GetValue(b9))._dVal)
+                if (
+                    1
+                    != (
+                        (ByteStruct)typeof(B_A_D_Generic<ByteStruct>).GetField("_bVal").GetValue(b9)
+                    )._dVal
+                )
                 {
                     ATest.ReportTestFailure("C b9_bVal", b9, ref failure);
                 }
@@ -238,7 +270,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c5 = (C_B_A_byte_Generic_byte)Activator.CreateInstance(typeof(C_B_A_byte_Generic_byte));
+                var c5 = (C_B_A_byte_Generic_byte)
+                    Activator.CreateInstance(typeof(C_B_A_byte_Generic_byte));
                 c5._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_byte_Generic_byte).GetField("_cVal").GetValue(c5))
                 {
@@ -247,7 +280,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c6 = (C_B_A_D_Generic_byte)Activator.CreateInstance(typeof(C_B_A_D_Generic_byte));
+                var c6 = (C_B_A_D_Generic_byte)
+                    Activator.CreateInstance(typeof(C_B_A_D_Generic_byte));
                 c6._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_D_Generic_byte).GetField("_cVal").GetValue(c6))
                 {
@@ -265,7 +299,8 @@ namespace CrossBoundaryLayout
             }
 
             {
-                var c8 = (C_B_A_byte_Generic_D)Activator.CreateInstance(typeof(C_B_A_byte_Generic_D));
+                var c8 = (C_B_A_byte_Generic_D)
+                    Activator.CreateInstance(typeof(C_B_A_byte_Generic_D));
                 c8._cVal = 1;
                 if (1 != (byte)typeof(C_B_A_byte_Generic_D).GetField("_cVal").GetValue(c8))
                 {

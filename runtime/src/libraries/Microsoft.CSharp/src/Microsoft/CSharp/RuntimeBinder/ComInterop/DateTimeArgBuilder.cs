@@ -30,10 +30,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             // DateTime.FromOADate(value)
             return base.UnmarshalFromRef(
-                Expression.Call(
-                    typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)),
-                    value
-                )
+                Expression.Call(typeof(DateTime).GetMethod(nameof(DateTime.FromOADate)), value)
             );
         }
     }

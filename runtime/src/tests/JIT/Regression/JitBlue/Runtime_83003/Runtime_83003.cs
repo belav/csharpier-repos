@@ -6,22 +6,24 @@ using Xunit;
 
 public class Foo
 {
-    internal virtual void foo() {
-    }
+    internal virtual void foo() { }
 }
 
 public class Derived : Foo
 {
-    void foo2 (Action a) {
+    void foo2(Action a)
+    {
         a();
     }
 
-    internal override void foo() {
+    internal override void foo()
+    {
         foo2(base.foo);
     }
 
     [Fact]
-    public static void TestEntryPoint() {
+    public static void TestEntryPoint()
+    {
         var d = new Derived();
         d.foo();
     }

@@ -236,7 +236,8 @@ public class BringUpTest
         Environment.Exit(Fail);
     }
 
-    static int CatchGenericException<T>(int a, int b) where T : Exception
+    static int CatchGenericException<T>(int a, int b)
+        where T : Exception
     {
         try
         {
@@ -279,9 +280,7 @@ public class BringUpTest
         {
             throw exception;
         }
-        catch (Exception e) when (check(e))
-        {
-        }
+        catch (Exception e) when (check(e)) { }
         AppDomain.CurrentDomain.FirstChanceException -= handler;
     }
 
@@ -301,4 +300,3 @@ public class BringUpTest
         return true;
     }
 }
-

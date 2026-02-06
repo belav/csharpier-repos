@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis
 
         public AssemblyIdentityMap()
         {
-            _map = new Dictionary<string, OneOrMany<KeyValuePair<AssemblyIdentity, TValue>>>(AssemblyIdentityComparer.SimpleNameComparer);
+            _map = new Dictionary<string, OneOrMany<KeyValuePair<AssemblyIdentity, TValue>>>(
+                AssemblyIdentityComparer.SimpleNameComparer
+            );
         }
 
         public bool Contains(AssemblyIdentity identity, bool allowHigherVersion = true)
@@ -30,7 +32,11 @@ namespace Microsoft.CodeAnalysis
             return TryGetValue(identity, out value, allowHigherVersion);
         }
 
-        public bool TryGetValue(AssemblyIdentity identity, out TValue value, bool allowHigherVersion = true)
+        public bool TryGetValue(
+            AssemblyIdentity identity,
+            out TValue value,
+            bool allowHigherVersion = true
+        )
         {
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
             if (_map.TryGetValue(identity.Name, out sameName))
@@ -55,7 +61,11 @@ namespace Microsoft.CodeAnalysis
                             continue;
                         }
 
-                        if (minHigherVersionCandidate == -1 || currentIdentity.Version < sameName[minHigherVersionCandidate].Key.Version)
+                        if (
+                            minHigherVersionCandidate == -1
+                            || currentIdentity.Version
+                                < sameName[minHigherVersionCandidate].Key.Version
+                        )
                         {
                             minHigherVersionCandidate = i;
                         }
@@ -73,7 +83,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public bool TryGetValue(AssemblyIdentity identity, out TValue value, Func<Version, Version, TValue, bool> comparer)
+        public bool TryGetValue(
+            AssemblyIdentity identity,
+            out TValue value,
+            Func<Version, Version, TValue, bool> comparer
+        )
         {
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
             if (_map.TryGetValue(identity.Name, out sameName))
@@ -82,8 +96,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     AssemblyIdentity currentIdentity = sameName[i].Key;
 
-                    if (comparer(identity.Version, currentIdentity.Version, sameName[i].Value) &&
-                        AssemblyIdentity.EqualIgnoringNameAndVersion(currentIdentity, identity))
+                    if (
+                        comparer(identity.Version, currentIdentity.Version, sameName[i].Value)
+                        && AssemblyIdentity.EqualIgnoringNameAndVersion(currentIdentity, identity)
+                    )
                     {
                         value = sameName[i].Value;
                         return true;
@@ -100,7 +116,9 @@ namespace Microsoft.CodeAnalysis
             var pair = KeyValuePairUtil.Create(identity, value);
 
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
-            _map[identity.Name] = _map.TryGetValue(identity.Name, out sameName) ? sameName.Add(pair) : OneOrMany.Create(pair);
+            _map[identity.Name] = _map.TryGetValue(identity.Name, out sameName)
+                ? sameName.Add(pair)
+                : OneOrMany.Create(pair);
         }
     }
 }

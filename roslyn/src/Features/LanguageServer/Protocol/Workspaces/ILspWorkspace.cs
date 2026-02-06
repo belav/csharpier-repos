@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Text;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
@@ -37,5 +37,9 @@ internal interface ILspWorkspace
     /// name="sourceText"/>.  Does nothing if the document is not present in the workspace (for example if something
     /// else removed it).
     /// </summary>
-    ValueTask UpdateTextIfPresentAsync(DocumentId documentId, SourceText sourceText, CancellationToken cancellationToken);
+    ValueTask UpdateTextIfPresentAsync(
+        DocumentId documentId,
+        SourceText sourceText,
+        CancellationToken cancellationToken
+    );
 }

@@ -15,12 +15,20 @@ namespace Roslyn.Test.Utilities
     {
         private readonly TextAndVersion _textAndVersion;
 
-        public TestTextLoader(string text = "test", SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithms.Default)
+        public TestTextLoader(
+            string text = "test",
+            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithms.Default
+        )
         {
-            _textAndVersion = TextAndVersion.Create(SourceText.From(text, encoding: null, checksumAlgorithm), VersionStamp.Create());
+            _textAndVersion = TextAndVersion.Create(
+                SourceText.From(text, encoding: null, checksumAlgorithm),
+                VersionStamp.Create()
+            );
         }
 
-        public override Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-            => Task.FromResult(_textAndVersion);
+        public override Task<TextAndVersion> LoadTextAndVersionAsync(
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(_textAndVersion);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,28 +25,31 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using NUnit.Framework;
 using System;
 using System.Web;
 using System.Web.UI;
 using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-	[TestFixture]
-	public class PageParserTest
-	{
-		[TestFixtureSetUp]
-		public void SetupTest ()
-		{
-			WebTest.CopyResource (GetType (), "MissingMasterFile.aspx", "MissingMasterFile.aspx");
-		}
-		
-		[Test]
-		public void MissingMasterFile ()
-		{
-			string pageHtml = new WebTest ("MissingMasterFile.aspx").Run ();
-			Assert.IsTrue (pageHtml.IndexOf ("[System.Web.Compilation.ParseException]:") != -1, "#A1");
-		}
-	}
+    [TestFixture]
+    public class PageParserTest
+    {
+        [TestFixtureSetUp]
+        public void SetupTest()
+        {
+            WebTest.CopyResource(GetType(), "MissingMasterFile.aspx", "MissingMasterFile.aspx");
+        }
+
+        [Test]
+        public void MissingMasterFile()
+        {
+            string pageHtml = new WebTest("MissingMasterFile.aspx").Run();
+            Assert.IsTrue(
+                pageHtml.IndexOf("[System.Web.Compilation.ParseException]:") != -1,
+                "#A1"
+            );
+        }
+    }
 }

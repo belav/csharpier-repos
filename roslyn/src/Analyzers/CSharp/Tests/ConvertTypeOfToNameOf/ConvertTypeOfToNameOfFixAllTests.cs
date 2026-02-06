@@ -10,8 +10,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
-        CSharpConvertTypeOfToNameOfCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
+        CSharpConvertTypeOfToNameOfCodeFixProvider
+    >;
 
     public partial class ConvertTypeOfToNameOfTests
     {
@@ -20,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentBasic()
         {
-            var input = @"class Test
+            var input =
+                @"class Test
 {
     static void Main()
     {
@@ -31,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 }
 ";
 
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     static void Main()
     {
@@ -50,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentVariedSingleLine()
         {
-            var input = @"class Test
+            var input =
+                @"class Test
 {
     static void Main()
     {
@@ -59,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 }
 ";
 
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     static void Main()
     {
@@ -76,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentVariedWithUsing()
         {
-            var input = @"using System;
+            var input =
+                @"using System;
 
 class Test
 {
@@ -90,7 +97,8 @@ class Test
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Test
 {
@@ -142,8 +150,8 @@ class Test2
         var typeName4 = [|typeof(Double).Name|];
     }
 }
-"
-                    }
+",
+                    },
                 },
                 FixedState =
                 {
@@ -174,8 +182,8 @@ class Test2
     }
 }
 ",
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -214,7 +222,7 @@ class Test2
         var typeName4 = [|typeof(Double).Name|];
     }
 }
-"
+",
                     },
                     AdditionalProjects =
                     {
@@ -230,10 +238,10 @@ class Test3
         var typeName2 = [|typeof(int).Name|]; var typeName3 = [|typeof(System.String).Name|];
     }
 }
-"
-                            }
-                        }
-                    }
+",
+                            },
+                        },
+                    },
                 },
                 FixedState =
                 {
@@ -263,7 +271,7 @@ class Test2
         var typeName4 = nameof(Double);
     }
 }
-"
+",
                     },
                     AdditionalProjects =
                     {
@@ -279,11 +287,11 @@ class Test3
         var typeName2 = nameof(System.Int32); var typeName3 = nameof(System.String);
     }
 }
-"
-                            }
-                        }
-                    }
-                }
+",
+                            },
+                        },
+                    },
+                },
             }.RunAsync();
         }
     }

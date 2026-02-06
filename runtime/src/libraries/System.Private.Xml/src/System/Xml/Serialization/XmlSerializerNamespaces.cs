@@ -22,9 +22,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces()
-        {
-        }
+        public XmlSerializerNamespaces() { }
 
         /// <internalonly/>
         /// <devdoc>
@@ -56,7 +54,6 @@ namespace System.Xml.Serialization
             foreach (var qname in namespaces)
                 _namespaces.Add(qname.Name, qname);
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -98,9 +95,11 @@ namespace System.Xml.Serialization
             get { return (_namespaces == null) ? 0 : _namespaces.Count; }
         }
 
-        internal Dictionary<string, XmlQualifiedName>.ValueCollection Namespaces => NamespacesInternal.Values;
+        internal Dictionary<string, XmlQualifiedName>.ValueCollection Namespaces =>
+            NamespacesInternal.Values;
 
-        private Dictionary<string, XmlQualifiedName> NamespacesInternal => _namespaces ??= new Dictionary<string, XmlQualifiedName>();
+        private Dictionary<string, XmlQualifiedName> NamespacesInternal =>
+            _namespaces ??= new Dictionary<string, XmlQualifiedName>();
 
         internal ArrayList? NamespaceList
         {

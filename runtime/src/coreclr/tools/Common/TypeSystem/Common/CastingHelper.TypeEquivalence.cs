@@ -1,21 +1,30 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Debug = System.Diagnostics.Debug;
 using System.Collections.Generic;
 using Internal.TypeSystem.Ecma;
+using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {
     public static partial class CastingHelper
     {
-        static partial void IsEquivalentTo(this TypeDesc thisType, TypeDesc otherType, StackOverflowProtect visited, ref bool isEquivalentTo)
+        static partial void IsEquivalentTo(
+            this TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect visited,
+            ref bool isEquivalentTo
+        )
         {
             isEquivalentTo = IsEquivalentToHelper(thisType, otherType, visited);
             return;
         }
 
-        private static bool IsEquivalentToHelper(TypeDesc thisType, TypeDesc otherType, StackOverflowProtect visited)
+        private static bool IsEquivalentToHelper(
+            TypeDesc thisType,
+            TypeDesc otherType,
+            StackOverflowProtect visited
+        )
         {
             if (thisType == otherType)
                 return true;
@@ -35,12 +44,18 @@ namespace Internal.TypeSystem
                     var otherArrayType = (ArrayType)otherType;
                     if (arrayType.Rank != otherArrayType.Rank)
                         return false;
-                    return arrayType.ParameterType.IsEquivalentTo(otherArrayType.ParameterType, visited);
+                    return arrayType.ParameterType.IsEquivalentTo(
+                        otherArrayType.ParameterType,
+                        visited
+                    );
 
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType).ParameterType.IsEquivalentTo(((ParameterizedType)otherType).ParameterType, visited);
+                    return ((ParameterizedType)thisType).ParameterType.IsEquivalentTo(
+                        ((ParameterizedType)otherType).ParameterType,
+                        visited
+                    );
 
                 case TypeFlags.FunctionPointer:
                     return false;
@@ -62,7 +77,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        private static bool IsEquivalentToDefType(this DefType thisType, DefType otherType, StackOverflowProtect visited)
+        private static bool IsEquivalentToDefType(
+            this DefType thisType,
+            DefType otherType,
+            StackOverflowProtect visited
+        )
         {
             if (thisType.HasInstantiation)
             {
@@ -83,7 +102,11 @@ namespace Internal.TypeSystem
 
                 for (int i = 0; i < thisType.Instantiation.Length; i++)
                 {
-                    if (!thisType.Instantiation[i].IsEquivalentTo(otherType.Instantiation[i], visited))
+                    if (
+                        !thisType
+                            .Instantiation[i]
+                            .IsEquivalentTo(otherType.Instantiation[i], visited)
+                    )
                     {
                         return false;
                     }
@@ -92,9 +115,17 @@ namespace Internal.TypeSystem
                 return true;
             }
 
-            return IsEquivalentTo_TypeDefinition((MetadataType)thisType.GetTypeDefinition(), (MetadataType)otherType.GetTypeDefinition(), visited);
+            return IsEquivalentTo_TypeDefinition(
+                (MetadataType)thisType.GetTypeDefinition(),
+                (MetadataType)otherType.GetTypeDefinition(),
+                visited
+            );
 
-            static bool IsEquivalentTo_TypeDefinition(MetadataType type1, MetadataType type2, StackOverflowProtect visited)
+            static bool IsEquivalentTo_TypeDefinition(
+                MetadataType type1,
+                MetadataType type2,
+                StackOverflowProtect visited
+            )
             {
                 Debug.Assert(type1.GetTypeDefinition() == type1);
                 Debug.Assert(type2.GetTypeDefinition() == type2);
@@ -109,7 +140,10 @@ namespace Internal.TypeSystem
                     }
                 }
 
-                StackOverflowProtect protect = new StackOverflowProtect(stackOverflowProtectKey, visited);
+                StackOverflowProtect protect = new StackOverflowProtect(
+                    stackOverflowProtectKey,
+                    visited
+                );
 
                 TypeIdentifierData data1 = type1.TypeIdentifierData;
                 TypeIdentifierData data2 = type2.TypeIdentifierData;
@@ -140,7 +174,10 @@ namespace Internal.TypeSystem
                     return false;
                 }
 
-                if ((containingType1 != null) && !IsEquivalentTo_TypeDefinition(containingType1, containingType2, visited))
+                if (
+                    (containingType1 != null)
+                    && !IsEquivalentTo_TypeDefinition(containingType1, containingType2, visited)
+                )
                 {
                     return false;
                 }
@@ -174,7 +211,11 @@ namespace Internal.TypeSystem
                 return false;
             }
 
-            static bool CompareDelegatesForEquivalence(MetadataType type1, MetadataType type2, StackOverflowProtect visited)
+            static bool CompareDelegatesForEquivalence(
+                MetadataType type1,
+                MetadataType type2,
+                StackOverflowProtect visited
+            )
             {
                 var invoke1 = type1.GetMethod("Invoke", null);
                 var invoke2 = type2.GetMethod("Invoke", null);
@@ -188,7 +229,12 @@ namespace Internal.TypeSystem
                 return invoke1.Signature.EquivalentTo(invoke2.Signature, visited);
             }
 
-            static bool CompareStructuresForEquivalence(MetadataType type1, MetadataType type2, StackOverflowProtect visited, bool enumMode)
+            static bool CompareStructuresForEquivalence(
+                MetadataType type1,
+                MetadataType type2,
+                StackOverflowProtect visited,
+                bool enumMode
+            )
             {
                 foreach (var method in type1.GetMethods())
                 {
@@ -210,10 +256,18 @@ namespace Internal.TypeSystem
                 {
                     bool nonTypeEquivalentValidFieldFound;
 
-                    FieldDesc field1 = GetNextTypeEquivalentField(fields1, enumMode, out nonTypeEquivalentValidFieldFound);
+                    FieldDesc field1 = GetNextTypeEquivalentField(
+                        fields1,
+                        enumMode,
+                        out nonTypeEquivalentValidFieldFound
+                    );
                     if (nonTypeEquivalentValidFieldFound)
                         return false;
-                    FieldDesc field2 = GetNextTypeEquivalentField(fields2, enumMode, out nonTypeEquivalentValidFieldFound);
+                    FieldDesc field2 = GetNextTypeEquivalentField(
+                        fields2,
+                        enumMode,
+                        out nonTypeEquivalentValidFieldFound
+                    );
                     if (nonTypeEquivalentValidFieldFound)
                         return false;
 
@@ -289,11 +343,16 @@ namespace Internal.TypeSystem
 
                     var layoutMetadata1 = type1.GetClassLayout();
                     var layoutMetadata2 = type2.GetClassLayout();
-                    if ((layoutMetadata1.PackingSize != layoutMetadata2.PackingSize) ||
-                        (layoutMetadata1.Size != layoutMetadata2.Size))
+                    if (
+                        (layoutMetadata1.PackingSize != layoutMetadata2.PackingSize)
+                        || (layoutMetadata1.Size != layoutMetadata2.Size)
+                    )
                         return false;
 
-                    if ((explicitLayout) && !(layoutMetadata1.Offsets == null && layoutMetadata2.Offsets == null))
+                    if (
+                        (explicitLayout)
+                        && !(layoutMetadata1.Offsets == null && layoutMetadata2.Offsets == null)
+                    )
                     {
                         if (layoutMetadata1.Offsets == null)
                             return false;
@@ -303,7 +362,10 @@ namespace Internal.TypeSystem
 
                         for (int index = 0; index < layoutMetadata1.Offsets.Length; index++)
                         {
-                            if (layoutMetadata1.Offsets[index].Offset != layoutMetadata2.Offsets[index].Offset)
+                            if (
+                                layoutMetadata1.Offsets[index].Offset
+                                != layoutMetadata2.Offsets[index].Offset
+                            )
                                 return false;
                         }
                     }
@@ -311,14 +373,21 @@ namespace Internal.TypeSystem
                     return true;
                 }
 
-                static FieldDesc GetNextTypeEquivalentField(IEnumerator<FieldDesc> fieldEnum, bool enumMode, out bool fieldNotValidInEquivalentTypeFound)
+                static FieldDesc GetNextTypeEquivalentField(
+                    IEnumerator<FieldDesc> fieldEnum,
+                    bool enumMode,
+                    out bool fieldNotValidInEquivalentTypeFound
+                )
                 {
                     fieldNotValidInEquivalentTypeFound = false;
                     while (fieldEnum.MoveNext())
                     {
                         var field = fieldEnum.Current;
 
-                        if (field.GetAttributeEffectiveVisibility() == EffectiveVisibility.Public && !field.IsStatic)
+                        if (
+                            field.GetAttributeEffectiveVisibility() == EffectiveVisibility.Public
+                            && !field.IsStatic
+                        )
                             return field;
 
                         // Only public instance fields, and literal fields on enums are permitted in type equivalent structures

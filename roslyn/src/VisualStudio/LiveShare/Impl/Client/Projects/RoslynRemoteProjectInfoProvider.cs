@@ -24,19 +24,35 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
     {
         private const string SystemUriSchemeExternal = "vslsexternal";
 
-        private readonly string[] _secondaryBufferFileExtensions = [".cshtml", ".razor", ".html", ".aspx", ".vue"];
+        private readonly string[] _secondaryBufferFileExtensions =
+        [
+            ".cshtml",
+            ".razor",
+            ".html",
+            ".aspx",
+            ".vue",
+        ];
         private readonly CSharpLspClientServiceFactory _roslynLspClientServiceFactory;
         private readonly RemoteLanguageServiceWorkspace _remoteLanguageServiceWorkspace;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RoslynRemoteProjectInfoProvider(CSharpLspClientServiceFactory roslynLspClientServiceFactory, RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace)
+        public RoslynRemoteProjectInfoProvider(
+            CSharpLspClientServiceFactory roslynLspClientServiceFactory,
+            RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace
+        )
         {
-            _roslynLspClientServiceFactory = roslynLspClientServiceFactory ?? throw new ArgumentNullException(nameof(roslynLspClientServiceFactory));
-            _remoteLanguageServiceWorkspace = remoteLanguageServiceWorkspace ?? throw new ArgumentNullException(nameof(RemoteLanguageServiceWorkspace));
+            _roslynLspClientServiceFactory =
+                roslynLspClientServiceFactory
+                ?? throw new ArgumentNullException(nameof(roslynLspClientServiceFactory));
+            _remoteLanguageServiceWorkspace =
+                remoteLanguageServiceWorkspace
+                ?? throw new ArgumentNullException(nameof(RemoteLanguageServiceWorkspace));
         }
 
-        public async Task<ImmutableArray<ProjectInfo>> GetRemoteProjectInfosAsync(CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ProjectInfo>> GetRemoteProjectInfosAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (!_remoteLanguageServiceWorkspace.IsRemoteSession)
             {
@@ -52,8 +68,12 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
             CustomProtocol.Project[] projects;
             try
             {
-                var request = new LspRequest<object, CustomProtocol.Project[]>(CustomProtocol.RoslynMethods.ProjectsName);
-                projects = await lspClient.RequestAsync(request, new object(), cancellationToken).ConfigureAwait(false);
+                var request = new LspRequest<object, CustomProtocol.Project[]>(
+                    CustomProtocol.RoslynMethods.ProjectsName
+                );
+                projects = await lspClient
+                    .RequestAsync(request, new object(), cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -72,19 +92,37 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                 // file to a different project but with the same path. This used to be ok in Dev15 but in Dev16 this confuses Roslyn and causes downstream
                 // issues. There's no need to add the actual cshtml file to the workspace - so filter those out.
                 // This is also the case for files for which TypeScript adds the generated TypeScript buffer to a different project.
-                var filesTasks = project.SourceFiles
-                    .Where(f => f.Scheme != SystemUriSchemeExternal)
-                    .Where(f => !_secondaryBufferFileExtensions.Any(ext => f.LocalPath.EndsWith(ext)))
-                    .Select(f => lspClient.ProtocolConverter.FromProtocolUriAsync(f, false, cancellationToken));
+                var filesTasks = project
+                    .SourceFiles.Where(f => f.Scheme != SystemUriSchemeExternal)
+                    .Where(f =>
+                        !_secondaryBufferFileExtensions.Any(ext => f.LocalPath.EndsWith(ext))
+                    )
+                    .Select(f =>
+                        lspClient.ProtocolConverter.FromProtocolUriAsync(
+                            f,
+                            false,
+                            cancellationToken
+                        )
+                    );
                 var files = await Task.WhenAll(filesTasks).ConfigureAwait(false);
-                var projectInfo = CreateProjectInfo(project.Name, project.Language, files.Select(f => f.LocalPath).ToImmutableArray(), _remoteLanguageServiceWorkspace.Services.SolutionServices);
+                var projectInfo = CreateProjectInfo(
+                    project.Name,
+                    project.Language,
+                    files.Select(f => f.LocalPath).ToImmutableArray(),
+                    _remoteLanguageServiceWorkspace.Services.SolutionServices
+                );
                 projectInfos.Add(projectInfo);
             }
 
             return projectInfos.ToImmutableArray();
         }
 
-        private static ProjectInfo CreateProjectInfo(string projectName, string language, ImmutableArray<string> files, SolutionServices services)
+        private static ProjectInfo CreateProjectInfo(
+            string projectName,
+            string language,
+            ImmutableArray<string> files,
+            SolutionServices services
+        )
         {
             var projectId = ProjectId.CreateNewId();
             var checksumAlgorithm = SourceHashAlgorithms.Default;
@@ -93,8 +131,14 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                 DocumentInfo.Create(
                     DocumentId.CreateNewId(projectId),
                     name: Path.GetFileNameWithoutExtension(path),
-                    loader: new WorkspaceFileTextLoaderNoException(services, path, defaultEncoding: null),
-                    filePath: path));
+                    loader: new WorkspaceFileTextLoaderNoException(
+                        services,
+                        path,
+                        defaultEncoding: null
+                    ),
+                    filePath: path
+                )
+            );
 
             return ProjectInfo.Create(
                 new ProjectInfo.ProjectAttributes(
@@ -104,8 +148,10 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
                     assemblyName: projectName,
                     language,
                     compilationOutputFilePaths: default,
-                    checksumAlgorithm),
-                documents: docInfos);
+                    checksumAlgorithm
+                ),
+                documents: docInfos
+            );
         }
     }
 }

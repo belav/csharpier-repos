@@ -5,28 +5,41 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace MS.Internal.Xml.XPath {
+namespace MS.Internal.Xml.XPath
+{
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
+    using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Collections;
+    using System.Xml;
+    using System.Xml.XPath;
 
-    internal sealed class OperandQuery : ValueQuery {
+    internal sealed class OperandQuery : ValueQuery
+    {
         internal object val;
 
-        public OperandQuery(object val) {
+        public OperandQuery(object val)
+        {
             this.val = val;
         }
 
-        public override object Evaluate(XPathNodeIterator nodeIterator) {
+        public override object Evaluate(XPathNodeIterator nodeIterator)
+        {
             return val;
         }
-        public override XPathResultType StaticType { get { return GetXPathType(val); } }
-        public override XPathNodeIterator Clone() { return this; }
 
-        public override void PrintQuery(XmlWriter w) {
+        public override XPathResultType StaticType
+        {
+            get { return GetXPathType(val); }
+        }
+
+        public override XPathNodeIterator Clone()
+        {
+            return this;
+        }
+
+        public override void PrintQuery(XmlWriter w)
+        {
             w.WriteStartElement(this.GetType().Name);
             w.WriteAttributeString("value", Convert.ToString(val, CultureInfo.InvariantCulture));
             w.WriteEndElement();

@@ -38,11 +38,17 @@ namespace System.CodeDom.Tests
 
             CodeStatement statement1 = new CodeCommentStatement("Value1");
             method.Statements.Add(statement1);
-            Assert.Equal(new CodeStatement[] { statement1 }, method.Statements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                method.Statements.Cast<CodeStatement>()
+            );
 
             CodeStatement statement2 = new CodeCommentStatement("Value2");
             method.Statements.Add(statement2);
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, method.Statements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                method.Statements.Cast<CodeStatement>()
+            );
         }
 
         [Fact]
@@ -57,9 +63,14 @@ namespace System.CodeDom.Tests
                 Assert.Equal(EventArgs.Empty, args);
             };
 
-            CodeStatement statement = new CodeMethodReturnStatement(new CodePrimitiveExpression("Value2"));
+            CodeStatement statement = new CodeMethodReturnStatement(
+                new CodePrimitiveExpression("Value2")
+            );
             method.Statements.Add(statement);
-            Assert.Equal(new CodeStatement[] { statement }, method.Statements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement },
+                method.Statements.Cast<CodeStatement>()
+            );
             Assert.True(calledPopulateStatements);
 
             // Only calls PopulateStatements once
@@ -73,13 +84,25 @@ namespace System.CodeDom.Tests
         {
             var method = new CodeMemberMethod();
 
-            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name1");
+            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name1"
+            );
             method.Parameters.Add(parameter1);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1 }, method.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1 },
+                method.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
 
-            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name2");
+            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name2"
+            );
             method.Parameters.Add(parameter2);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1, parameter2 }, method.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1, parameter2 },
+                method.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
         }
 
         [Fact]
@@ -94,9 +117,15 @@ namespace System.CodeDom.Tests
                 Assert.Equal(EventArgs.Empty, args);
             };
 
-            CodeParameterDeclarationExpression parameter = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name1");
+            CodeParameterDeclarationExpression parameter = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name1"
+            );
             method.Parameters.Add(parameter);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter }, method.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter },
+                method.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
             Assert.True(calledPopulateParameters);
 
             // Only calls PopulateParameters once
@@ -120,11 +149,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             method.ImplementationTypes.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, method.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                method.ImplementationTypes.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(int));
             method.ImplementationTypes.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, method.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                method.ImplementationTypes.Cast<CodeTypeReference>()
+            );
         }
 
         [Fact]
@@ -141,7 +176,10 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type = new CodeTypeReference(typeof(int));
             method.ImplementationTypes.Add(type);
-            Assert.Equal(new CodeTypeReference[] { type }, method.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type },
+                method.ImplementationTypes.Cast<CodeTypeReference>()
+            );
             Assert.True(calledImplementationTypes);
 
             // Only calls PopulateImplementationTypes once
@@ -157,11 +195,17 @@ namespace System.CodeDom.Tests
 
             CodeAttributeDeclaration attribute1 = new CodeAttributeDeclaration("Name1");
             method.ReturnTypeCustomAttributes.Add(attribute1);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1 }, method.ReturnTypeCustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1 },
+                method.ReturnTypeCustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
 
             CodeAttributeDeclaration attribute2 = new CodeAttributeDeclaration("Name2");
             method.ReturnTypeCustomAttributes.Add(attribute2);
-            Assert.Equal(new CodeAttributeDeclaration[] { attribute1, attribute2 }, method.ReturnTypeCustomAttributes.Cast<CodeAttributeDeclaration>());
+            Assert.Equal(
+                new CodeAttributeDeclaration[] { attribute1, attribute2 },
+                method.ReturnTypeCustomAttributes.Cast<CodeAttributeDeclaration>()
+            );
         }
 
         [Fact]
@@ -171,11 +215,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeParameter parameter1 = new CodeTypeParameter("Name1");
             method.TypeParameters.Add(parameter1);
-            Assert.Equal(new CodeTypeParameter[] { parameter1 }, method.TypeParameters.Cast<CodeTypeParameter>());
+            Assert.Equal(
+                new CodeTypeParameter[] { parameter1 },
+                method.TypeParameters.Cast<CodeTypeParameter>()
+            );
 
             CodeTypeParameter parameter2 = new CodeTypeParameter("Name2");
             method.TypeParameters.Add(parameter2);
-            Assert.Equal(new CodeTypeParameter[] { parameter1, parameter2 }, method.TypeParameters.Cast<CodeTypeParameter>());
+            Assert.Equal(
+                new CodeTypeParameter[] { parameter1, parameter2 },
+                method.TypeParameters.Cast<CodeTypeParameter>()
+            );
         }
     }
 }

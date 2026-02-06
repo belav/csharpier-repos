@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Text;
-
 using Internal.DeveloperExperience;
 using Internal.Reflection.Augments;
 
@@ -48,7 +47,11 @@ namespace System.Diagnostics
 
         private bool TryInitializeMethodBase()
         {
-            if (_noMethodBaseAvailable || _ipAddress == IntPtr.Zero || _ipAddress == Exception.EdiSeparator)
+            if (
+                _noMethodBaseAvailable
+                || _ipAddress == IntPtr.Zero
+                || _ipAddress == Exception.EdiSeparator
+            )
                 return false;
 
             if (_method != null)
@@ -56,7 +59,10 @@ namespace System.Diagnostics
 
             IntPtr methodStartAddress = _ipAddress - _nativeOffset;
             Debug.Assert(RuntimeImports.RhFindMethodStartAddress(_ipAddress) == methodStartAddress);
-            _method = ReflectionAugments.ReflectionCoreCallbacks.GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
+            _method =
+                ReflectionAugments.ReflectionCoreCallbacks.GetMethodBaseFromStartAddressIfAvailable(
+                    methodStartAddress
+                );
             if (_method == null)
             {
                 _noMethodBaseAvailable = true;
@@ -99,7 +105,8 @@ namespace System.Diagnostics
                         _ipAddress,
                         out _fileName,
                         out _lineNumber,
-                        out _columnNumber);
+                        out _columnNumber
+                    );
                 }
             }
         }
@@ -143,7 +150,13 @@ namespace System.Diagnostics
         /// </summary>
         private bool AppendStackFrameWithoutMethodBase(StringBuilder builder)
         {
-            builder.Append(DeveloperExperience.Default.CreateStackTraceString(_ipAddress, includeFileInfo: false, out _));
+            builder.Append(
+                DeveloperExperience.Default.CreateStackTraceString(
+                    _ipAddress,
+                    includeFileInfo: false,
+                    out _
+                )
+            );
             return true;
         }
 
@@ -162,7 +175,11 @@ namespace System.Diagnostics
         {
             if (_ipAddress != Exception.EdiSeparator)
             {
-                string s = DeveloperExperience.Default.CreateStackTraceString(_ipAddress, _needFileInfo, out bool isStackTraceHidden);
+                string s = DeveloperExperience.Default.CreateStackTraceString(
+                    _ipAddress,
+                    _needFileInfo,
+                    out bool isStackTraceHidden
+                );
                 if (!isStackTraceHidden)
                 {
                     // Passing a default string for "at" in case SR.UsingResourceKeys() is true
@@ -175,9 +192,11 @@ namespace System.Diagnostics
             if (_isLastFrameFromForeignExceptionStackTrace)
             {
                 // Passing default for Exception_EndStackTraceFromPreviousThrow in case SR.UsingResourceKeys is set.
-                builder.AppendLine(SR.UsingResourceKeys() ?
-                    "--- End of stack trace from previous location ---" :
-                    SR.Exception_EndStackTraceFromPreviousThrow);
+                builder.AppendLine(
+                    SR.UsingResourceKeys()
+                        ? "--- End of stack trace from previous location ---"
+                        : SR.Exception_EndStackTraceFromPreviousThrow
+                );
             }
         }
     }

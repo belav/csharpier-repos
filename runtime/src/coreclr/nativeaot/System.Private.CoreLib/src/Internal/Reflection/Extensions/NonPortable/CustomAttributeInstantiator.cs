@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Internal.Runtime.Augments;
 
 //==================================================================================================================
@@ -26,10 +25,13 @@ namespace Internal.Reflection.Extensions.NonPortable
         // however, it is included as a concession to that the fact the Reflection.Execution which implements this contract
         // also needs this functionality to implement default values, and we don't want to duplicate this code.
         //
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "property setters and fiels which are accessed by any attribute instantiation which is present in the code linker has analyzed." +
-                            "As such enumerating all fields and properties may return different results after trimming" +
-                            "but all those which are needed to actually have data should be there.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "property setters and fiels which are accessed by any attribute instantiation which is present in the code linker has analyzed."
+                + "As such enumerating all fields and properties may return different results after trimming"
+                + "but all those which are needed to actually have data should be there."
+        )]
         public static Attribute Instantiate(this CustomAttributeData cad)
         {
             if (cad == null)
@@ -42,7 +44,14 @@ namespace Internal.Reflection.Extensions.NonPortable
             ConstructorInfo? matchingCtor = null;
             ReadOnlySpan<ParameterInfo> matchingParameters = default;
             IList<CustomAttributeTypedArgument> constructorArguments = cad.ConstructorArguments;
-            foreach (ConstructorInfo ctor in attributeType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            foreach (
+                ConstructorInfo ctor in attributeType.GetConstructors(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                )
+            )
             {
                 ReadOnlySpan<ParameterInfo> parameters = ctor.GetParametersAsSpan();
                 if (parameters.Length != constructorArguments.Count)
@@ -51,8 +60,12 @@ namespace Internal.Reflection.Extensions.NonPortable
                 for (i = 0; i < parameters.Length; i++)
                 {
                     Type parameterType = parameters[i].ParameterType;
-                    if (!(parameterType.Equals(constructorArguments[i].ArgumentType) ||
-                          parameterType == typeof(object)))
+                    if (
+                        !(
+                            parameterType.Equals(constructorArguments[i].ArgumentType)
+                            || parameterType == typeof(object)
+                        )
+                    )
                         break;
                 }
                 if (i == parameters.Length)
@@ -63,7 +76,10 @@ namespace Internal.Reflection.Extensions.NonPortable
                 }
             }
             if (matchingCtor == null)
-                throw new MissingMethodException(attributeType.FullName, ConstructorInfo.ConstructorName);
+                throw new MissingMethodException(
+                    attributeType.FullName,
+                    ConstructorInfo.ConstructorName
+                );
 
             //
             // Found the right constructor. Instantiate the Attribute.
@@ -87,9 +103,15 @@ namespace Internal.Reflection.Extensions.NonPortable
                 if (namedArgument.IsField)
                 {
                     // Field
-                    for (;;)
+                    for (; ; )
                     {
-                        FieldInfo? fieldInfo = walk.GetField(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+                        FieldInfo? fieldInfo = walk.GetField(
+                            name,
+                            BindingFlags.Public
+                                | BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.DeclaredOnly
+                        );
                         if (fieldInfo != null)
                         {
                             fieldInfo.SetValue(newAttribute, argumentValue);
@@ -97,16 +119,24 @@ namespace Internal.Reflection.Extensions.NonPortable
                         }
                         Type? baseType = walk.BaseType;
                         if (baseType == null)
-                            throw new CustomAttributeFormatException(SR.Format(SR.RFLCT_InvalidFieldFail, name));
+                            throw new CustomAttributeFormatException(
+                                SR.Format(SR.RFLCT_InvalidFieldFail, name)
+                            );
                         walk = baseType;
                     }
                 }
                 else
                 {
                     // Property
-                    for (;;)
+                    for (; ; )
                     {
-                        PropertyInfo? propertyInfo = walk.GetProperty(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+                        PropertyInfo? propertyInfo = walk.GetProperty(
+                            name,
+                            BindingFlags.Public
+                                | BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.DeclaredOnly
+                        );
                         if (propertyInfo != null)
                         {
                             propertyInfo.SetValue(newAttribute, argumentValue);
@@ -114,7 +144,9 @@ namespace Internal.Reflection.Extensions.NonPortable
                         }
                         Type? baseType = walk.BaseType;
                         if (baseType == null)
-                            throw new CustomAttributeFormatException(SR.Format(SR.RFLCT_InvalidPropFail, name));
+                            throw new CustomAttributeFormatException(
+                                SR.Format(SR.RFLCT_InvalidPropFail, name)
+                            );
                         walk = baseType;
                     }
                 }
@@ -139,7 +171,8 @@ namespace Internal.Reflection.Extensions.NonPortable
             }
             else
             {
-                IList<CustomAttributeTypedArgument>? typedElements = (IList<CustomAttributeTypedArgument>?)(typedArgument.Value);
+                IList<CustomAttributeTypedArgument>? typedElements =
+                    (IList<CustomAttributeTypedArgument>?)(typedArgument.Value);
                 if (typedElements == null)
                     return null;
                 Array array = Array.CreateInstanceFromArrayType(argumentType, typedElements.Count);
@@ -157,8 +190,16 @@ namespace Internal.Reflection.Extensions.NonPortable
         //
         private static bool IsValidNamedArgumentTarget(this FieldInfo fieldInfo)
         {
-            if ((fieldInfo.Attributes & (FieldAttributes.FieldAccessMask | FieldAttributes.Static | FieldAttributes.Literal)) !=
-                FieldAttributes.Public)
+            if (
+                (
+                    fieldInfo.Attributes
+                    & (
+                        FieldAttributes.FieldAccessMask
+                        | FieldAttributes.Static
+                        | FieldAttributes.Literal
+                    )
+                ) != FieldAttributes.Public
+            )
                 return false;
             return true;
         }
@@ -172,11 +213,17 @@ namespace Internal.Reflection.Extensions.NonPortable
             MethodInfo? setter = propertyInfo.SetMethod;
             if (getter == null)
                 return false;
-            if ((getter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask)) != MethodAttributes.Public)
+            if (
+                (getter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask))
+                != MethodAttributes.Public
+            )
                 return false;
             if (setter == null)
                 return false;
-            if ((setter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask)) != MethodAttributes.Public)
+            if (
+                (setter.Attributes & (MethodAttributes.Static | MethodAttributes.MemberAccessMask))
+                != MethodAttributes.Public
+            )
                 return false;
             return true;
         }

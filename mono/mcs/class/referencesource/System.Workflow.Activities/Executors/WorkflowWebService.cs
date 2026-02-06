@@ -5,17 +5,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using System.Web;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Text;
 using System.Threading;
+using System.Web;
 using System.Web.Services;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Reflection;
 #endregion
 
 namespace System.Workflow.Activities
@@ -23,19 +23,28 @@ namespace System.Workflow.Activities
     /// <summary>
     /// Abstract WorkflowWebService Base class for all the Workflow's Web Service.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class WorkflowWebService : WebService
     {
         Type workflowType;
+
         /// <summary>
         /// Protected Constructor for the Workflow Web Service.
         /// </summary>
-        /// <param name="workflowType"></param>        
+        /// <param name="workflowType"></param>
         protected WorkflowWebService(Type workflowType)
         {
             this.workflowType = workflowType;
         }
-        protected Object[] Invoke(Type interfaceType, String methodName, bool isActivation, Object[] parameters)
+
+        protected Object[] Invoke(
+            Type interfaceType,
+            String methodName,
+            bool isActivation,
+            Object[] parameters
+        )
         {
             Guid workflowInstanceId = GetWorkflowInstanceId(ref isActivation);
             WorkflowInstance wfInstance;
@@ -58,7 +67,12 @@ namespace System.Workflow.Activities
                 }
             }
 
-            MethodMessage methodMessage = PrepareMessage(interfaceType, methodName, parameters, responseRequired);
+            MethodMessage methodMessage = PrepareMessage(
+                interfaceType,
+                methodName,
+                parameters,
+                responseRequired
+            );
 
             EventHandler<WorkflowTerminatedEventArgs> workflowTerminationHandler = null;
             EventHandler<WorkflowCompletedEventArgs> workflowCompletedHandler = null;
@@ -67,7 +81,11 @@ namespace System.Workflow.Activities
             {
                 if (isActivation)
                 {
-                    wfInstance = WorkflowRuntime.CreateWorkflow(this.workflowType, null, workflowInstanceId);
+                    wfInstance = WorkflowRuntime.CreateWorkflow(
+                        this.workflowType,
+                        null,
+                        workflowInstanceId
+                    );
                     SafeEnqueueItem(wfInstance, key, methodMessage);
                     wfInstance.Start();
                 }
@@ -93,14 +111,22 @@ namespace System.Workflow.Activities
                 {
                     if (e.WorkflowInstance.InstanceId.Equals(workflowInstanceId))
                     {
-                        methodMessage.SendException(new ApplicationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_WorkflowCompleted)));
+                        methodMessage.SendException(
+                            new ApplicationException(
+                                SR.GetString(
+                                    System.Globalization.CultureInfo.CurrentCulture,
+                                    SR.Error_WorkflowCompleted
+                                )
+                            )
+                        );
                     }
                 };
 
                 WorkflowRuntime.WorkflowTerminated += workflowTerminationHandler;
                 WorkflowRuntime.WorkflowCompleted += workflowCompletedHandler;
 
-                ManualWorkflowSchedulerService scheduler = WorkflowRuntime.GetService<ManualWorkflowSchedulerService>();
+                ManualWorkflowSchedulerService scheduler =
+                    WorkflowRuntime.GetService<ManualWorkflowSchedulerService>();
 
                 if (scheduler != null)
                 {
@@ -120,7 +146,13 @@ namespace System.Workflow.Activities
                     if (!workflowTerminated)
                         throw response.Exception;
                     else
-                        throw new ApplicationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_WorkflowTerminated), response.Exception);
+                        throw new ApplicationException(
+                            SR.GetString(
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                SR.Error_WorkflowTerminated
+                            ),
+                            response.Exception
+                        );
                 }
 
                 if (response.OutArgs != null)
@@ -137,6 +169,7 @@ namespace System.Workflow.Activities
                     WorkflowRuntime.WorkflowCompleted -= workflowCompletedHandler;
             }
         }
+
         protected WorkflowRuntime WorkflowRuntime
         {
             get
@@ -175,7 +208,13 @@ namespace System.Workflow.Activities
             }
             return workflowInstanceId;
         }
-        private static MethodMessage PrepareMessage(Type interfaceType, String operation, object[] parameters, bool responseRequired)
+
+        private static MethodMessage PrepareMessage(
+            Type interfaceType,
+            String operation,
+            object[] parameters,
+            bool responseRequired
+        )
         {
             // construct IMethodMessage object
             String securityIdentifier = null;
@@ -186,11 +225,22 @@ namespace System.Workflow.Activities
             else if (identity != null)
                 securityIdentifier = identity.Name;
 
-            MethodMessage msg = new MethodMessage(interfaceType, operation, parameters, securityIdentifier, responseRequired);
+            MethodMessage msg = new MethodMessage(
+                interfaceType,
+                operation,
+                parameters,
+                securityIdentifier,
+                responseRequired
+            );
             return msg;
         }
+
         //Back - off logic for conflicting workflow load across workflow runtime boundaries.
-        static void SafeEnqueueItem(WorkflowInstance instance, EventQueueName key, MethodMessage message)
+        static void SafeEnqueueItem(
+            WorkflowInstance instance,
+            EventQueueName key,
+            MethodMessage message
+        )
         {
             while (true) //When Execution times out ASP.NET going to forcefully plung this request.
             {
@@ -201,7 +251,15 @@ namespace System.Workflow.Activities
                 }
                 catch (WorkflowOwnershipException)
                 {
-                    WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Warning, 0, String.Format(System.Globalization.CultureInfo.InvariantCulture, "Workflow Web Host Encountered Workflow Instance Ownership conflict for instanceid {0}.", instance.InstanceId));
+                    WorkflowActivityTrace.Activity.TraceEvent(
+                        TraceEventType.Warning,
+                        0,
+                        String.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            "Workflow Web Host Encountered Workflow Instance Ownership conflict for instanceid {0}.",
+                            instance.InstanceId
+                        )
+                    );
                     //Back-off for 1/2 sec. Should we make this configurable?
                     System.Threading.Thread.Sleep(500);
                     continue;
@@ -227,7 +285,9 @@ namespace System.Workflow.Activities
                     {
                         if (wRuntime == null)
                         {
-                            WorkflowRuntime workflowRuntimeTemp = new WorkflowRuntime(ConfigSectionName);
+                            WorkflowRuntime workflowRuntimeTemp = new WorkflowRuntime(
+                                ConfigSectionName
+                            );
                             try
                             {
                                 workflowRuntimeTemp.StartRuntime();

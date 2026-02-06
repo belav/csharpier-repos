@@ -18,7 +18,10 @@ namespace System
         private const string InitializeMethodName = "Initialize";
         private const string DisallowedSimpleAssemblyNameSuffix = ".dll";
 
-        private static bool IsSupported => AppContext.TryGetSwitch("System.StartupHookProvider.IsSupported", out bool isSupported) ? isSupported : true;
+        private static bool IsSupported =>
+            AppContext.TryGetSwitch("System.StartupHookProvider.IsSupported", out bool isSupported)
+                ? isSupported
+                : true;
 
         private struct StartupHookNameOrPath
         {
@@ -50,7 +53,9 @@ namespace System
             }
 
             // Parse startup hooks variable
-            StartupHookNameOrPath[] startupHooks = new StartupHookNameOrPath[startupHookParts.Count];
+            StartupHookNameOrPath[] startupHooks = new StartupHookNameOrPath[
+                startupHookParts.Count
+            ];
             for (int i = 0; i < startupHookParts.Count; i++)
             {
                 ParseStartupHook(ref startupHooks[i], startupHookParts[i]);
@@ -67,8 +72,11 @@ namespace System
 
         // Parse a string specifying a single entry containing a startup hook,
         // and call the hook.
-        [UnconditionalSuppressMessageAttribute("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "An ILLink warning when trimming an app with System.StartupHookProvider.IsSupported=true already exists for ProcessStartupHooks.")]
+        [UnconditionalSuppressMessageAttribute(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "An ILLink warning when trimming an app with System.StartupHookProvider.IsSupported=true already exists for ProcessStartupHooks."
+        )]
         private static unsafe void CallStartupHook(char* pStartupHookPart)
         {
             if (!IsSupported)
@@ -83,15 +91,18 @@ namespace System
 #pragma warning restore IL2026
         }
 
-        private static void ParseStartupHook(ref StartupHookNameOrPath startupHook, string startupHookPart)
+        private static void ParseStartupHook(
+            ref StartupHookNameOrPath startupHook,
+            string startupHookPart
+        )
         {
-            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars = stackalloc char[4]
-            {
-                Path.DirectorySeparatorChar,
-                Path.AltDirectorySeparatorChar,
-                ' ',
-                ','
-            };
+            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars =
+                stackalloc char[4] {
+                    Path.DirectorySeparatorChar,
+                    Path.AltDirectorySeparatorChar,
+                    ' ',
+                    ',',
+                };
 
             if (string.IsNullOrEmpty(startupHookPart))
             {
@@ -111,13 +122,25 @@ namespace System
                 {
                     if (startupHookPart.Contains(disallowedSimpleAssemblyNameChars[j]))
                     {
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidStartupHookSimpleAssemblyName,
+                                startupHookPart
+                            )
+                        );
                     }
                 }
 
-                if (startupHookPart.EndsWith(DisallowedSimpleAssemblyNameSuffix, StringComparison.OrdinalIgnoreCase))
+                if (
+                    startupHookPart.EndsWith(
+                        DisallowedSimpleAssemblyNameSuffix,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart)
+                    );
                 }
 
                 try
@@ -127,15 +150,23 @@ namespace System
                 }
                 catch (Exception assemblyNameException)
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart), assemblyNameException);
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Argument_InvalidStartupHookSimpleAssemblyName,
+                            startupHookPart
+                        ),
+                        assemblyNameException
+                    );
                 }
             }
         }
 
         // Load the specified assembly, and call the specified type's
         // "static void Initialize()" method.
-        [RequiresUnreferencedCode("The StartupHookSupport feature switch has been enabled for this app which is being trimmed. " +
-            "Startup hook code is not observable by the trimmer and so required assemblies, types and members may be removed")]
+        [RequiresUnreferencedCode(
+            "The StartupHookSupport feature switch has been enabled for this app which is being trimmed. "
+                + "Startup hook code is not observable by the trimmer and so required assemblies, types and members may be removed"
+        )]
         private static void CallStartupHook(StartupHookNameOrPath startupHook)
         {
             Assembly assembly;
@@ -149,7 +180,9 @@ namespace System
                 else if (startupHook.AssemblyName != null)
                 {
                     Debug.Assert(startupHook.AssemblyName != null);
-                    assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(startupHook.AssemblyName);
+                    assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
+                        startupHook.AssemblyName
+                    );
                 }
                 else
                 {
@@ -160,19 +193,25 @@ namespace System
             catch (Exception assemblyLoadException)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.Argument_StartupHookAssemblyLoadFailed, startupHook.Path ?? startupHook.AssemblyName!.ToString()),
-                    assemblyLoadException);
+                    SR.Format(
+                        SR.Argument_StartupHookAssemblyLoadFailed,
+                        startupHook.Path ?? startupHook.AssemblyName!.ToString()
+                    ),
+                    assemblyLoadException
+                );
             }
 
             Debug.Assert(assembly != null);
             Type type = assembly.GetType(StartupHookTypeName, throwOnError: true)!;
 
             // Look for a static method without any parameters
-            MethodInfo? initializeMethod = type.GetMethod(InitializeMethodName,
-                                                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
-                                                         null, // use default binder
-                                                         Type.EmptyTypes, // parameters
-                                                         null); // no parameter modifiers
+            MethodInfo? initializeMethod = type.GetMethod(
+                InitializeMethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                null, // use default binder
+                Type.EmptyTypes, // parameters
+                null
+            ); // no parameter modifiers
             if (initializeMethod == null)
             {
                 // There weren't any static methods without
@@ -182,9 +221,13 @@ namespace System
                 {
                     // This could find zero, one, or multiple methods
                     // with the correct name.
-                    MethodInfo? wrongSigMethod = type.GetMethod(InitializeMethodName,
-                                                      BindingFlags.Public | BindingFlags.NonPublic |
-                                                      BindingFlags.Static | BindingFlags.Instance);
+                    MethodInfo? wrongSigMethod = type.GetMethod(
+                        InitializeMethodName,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    );
                     // Didn't find any
                     if (wrongSigMethod == null)
                     {
@@ -201,15 +244,21 @@ namespace System
             // Found Initialize method(s) with non-conforming signatures
             if (initializeMethod == null || initializeMethod.ReturnType != typeof(void))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSignature,
-                                                      StartupHookTypeName + Type.Delimiter + InitializeMethodName,
-                                                      startupHook.Path ?? startupHook.AssemblyName.ToString()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_InvalidStartupHookSignature,
+                        StartupHookTypeName + Type.Delimiter + InitializeMethodName,
+                        startupHook.Path ?? startupHook.AssemblyName.ToString()
+                    )
+                );
             }
 
-            Debug.Assert(initializeMethod != null &&
-                         initializeMethod.IsStatic &&
-                         initializeMethod.ReturnType == typeof(void) &&
-                         initializeMethod.GetParametersAsSpan().Length == 0);
+            Debug.Assert(
+                initializeMethod != null
+                    && initializeMethod.IsStatic
+                    && initializeMethod.ReturnType == typeof(void)
+                    && initializeMethod.GetParametersAsSpan().Length == 0
+            );
 
             initializeMethod.Invoke(null, null);
         }

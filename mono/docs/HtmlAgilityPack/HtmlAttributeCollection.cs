@@ -12,7 +12,8 @@ namespace HtmlAgilityPack
     {
         #region Fields
 
-        internal Dictionary<string, HtmlAttribute> Hashitems = new Dictionary<string, HtmlAttribute>();
+        internal Dictionary<string, HtmlAttribute> Hashitems =
+            new Dictionary<string, HtmlAttribute>();
         private HtmlNode _ownernode;
         private List<HtmlAttribute> items = new List<HtmlAttribute>();
 

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,30 +26,27 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-
 using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	internal class ProfilePropertyNameValidator : StringValidator
-	{
-		public ProfilePropertyNameValidator () : base (1)
-		{
-		}
+    internal class ProfilePropertyNameValidator : StringValidator
+    {
+        public ProfilePropertyNameValidator()
+            : base(1) { }
 
-		public override void Validate (object value)
-		{
-			base.Validate (value);
+        public override void Validate(object value)
+        {
+            base.Validate(value);
 
-			string val = value as string;
-			if (value == null)
-				throw new ArgumentNullException ("value");
-			val = val.Trim ();
-			if (String.IsNullOrEmpty (val))
-				throw new ArgumentException ("name cannot be empty.");
-			if (val.Contains ("."))
-				throw new ArgumentException ("name cannot contain period");
-		}
-	}
+            string val = value as string;
+            if (value == null)
+                throw new ArgumentNullException("value");
+            val = val.Trim();
+            if (String.IsNullOrEmpty(val))
+                throw new ArgumentException("name cannot be empty.");
+            if (val.Contains("."))
+                throw new ArgumentException("name cannot contain period");
+        }
+    }
 }
-

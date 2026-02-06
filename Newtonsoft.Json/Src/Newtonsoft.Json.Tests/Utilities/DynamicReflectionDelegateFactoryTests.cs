@@ -53,9 +53,13 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInString()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass)).Single(c => c.GetParameters().Count() == 1);
+            ConstructorInfo constructor = TestReflectionUtils
+                .GetConstructors(typeof(InTestClass))
+                .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
+            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                constructor
+            );
 
             object[] args = new object[] { "Value" };
             InTestClass o = (InTestClass)creator(args);
@@ -66,9 +70,13 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithInStringAndBool()
         {
-            ConstructorInfo constructor = TestReflectionUtils.GetConstructors(typeof(InTestClass)).Single(c => c.GetParameters().Count() == 2);
+            ConstructorInfo constructor = TestReflectionUtils
+                .GetConstructors(typeof(InTestClass))
+                .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
+            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                constructor
+            );
 
             object[] args = new object[] { "Value", true };
             InTestClass o = (InTestClass)creator(args);
@@ -80,9 +88,13 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefString()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors().Single(c => c.GetParameters().Count() == 1);
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
+                .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
+            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                constructor
+            );
 
             object[] args = new object[] { "Input" };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -93,9 +105,13 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefStringAndOutBool()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors().Single(c => c.GetParameters().Count() == 2);
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
+                .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
+            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                constructor
+            );
 
             object[] args = new object[] { "Input", false };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -107,9 +123,13 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorWithRefStringAndRefBoolAndRefBool()
         {
-            ConstructorInfo constructor = typeof(OutAndRefTestClass).GetConstructors().Single(c => c.GetParameters().Count() == 3);
+            ConstructorInfo constructor = typeof(OutAndRefTestClass)
+                .GetConstructors()
+                .Single(c => c.GetParameters().Count() == 3);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
+            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
+                constructor
+            );
 
             object[] args = new object[] { "Input", true, null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -122,75 +142,99 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateGetWithBadObjectTarget()
         {
-            ExceptionAssert.Throws<InvalidCastException>(() =>
-            {
-                Person p = new Person();
-                p.Name = "Hi";
+            ExceptionAssert.Throws<InvalidCastException>(
+                () =>
+                {
+                    Person p = new Person();
+                    p.Name = "Hi";
 
-                var setter = DynamicReflectionDelegateFactory.Instance.CreateGet<object>(typeof(Movie).GetProperty("Name"));
+                    var setter = DynamicReflectionDelegateFactory.Instance.CreateGet<object>(
+                        typeof(Movie).GetProperty("Name")
+                    );
 
-                setter(p);
-            }, "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.");
+                    setter(p);
+                },
+                "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'."
+            );
         }
 
         [Test]
         public void CreateSetWithBadObjectTarget()
         {
-            ExceptionAssert.Throws<InvalidCastException>(() =>
-            {
-                Person p = new Person();
-                Movie m = new Movie();
+            ExceptionAssert.Throws<InvalidCastException>(
+                () =>
+                {
+                    Person p = new Person();
+                    Movie m = new Movie();
 
-                var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(typeof(Movie).GetProperty("Name"));
+                    var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(
+                        typeof(Movie).GetProperty("Name")
+                    );
 
-                setter(m, "Hi");
+                    setter(m, "Hi");
 
-                Assert.AreEqual(m.Name, "Hi");
+                    Assert.AreEqual(m.Name, "Hi");
 
-                setter(p, "Hi");
+                    setter(p, "Hi");
 
-                Assert.AreEqual(p.Name, "Hi");
-            }, "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'.");
+                    Assert.AreEqual(p.Name, "Hi");
+                },
+                "Unable to cast object of type 'Newtonsoft.Json.Tests.TestObjects.Organization.Person' to type 'Newtonsoft.Json.Tests.TestObjects.Movie'."
+            );
         }
 
         [Test]
         public void CreateSetWithBadTarget()
         {
-            ExceptionAssert.Throws<InvalidCastException>(() =>
-            {
-                object structTest = new StructTest();
+            ExceptionAssert.Throws<InvalidCastException>(
+                () =>
+                {
+                    object structTest = new StructTest();
 
-                var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(typeof(StructTest).GetProperty("StringProperty"));
+                    var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(
+                        typeof(StructTest).GetProperty("StringProperty")
+                    );
 
-                setter(structTest, "Hi");
+                    setter(structTest, "Hi");
 
-                Assert.AreEqual("Hi", ((StructTest)structTest).StringProperty);
+                    Assert.AreEqual("Hi", ((StructTest)structTest).StringProperty);
 
-                setter(new TimeSpan(), "Hi");
-            }, "Specified cast is not valid.");
+                    setter(new TimeSpan(), "Hi");
+                },
+                "Specified cast is not valid."
+            );
         }
 
         [Test]
         public void CreateSetWithBadObjectValue()
         {
-            ExceptionAssert.Throws<InvalidCastException>(() =>
-            {
-                Movie m = new Movie();
+            ExceptionAssert.Throws<InvalidCastException>(
+                () =>
+                {
+                    Movie m = new Movie();
 
-                var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(typeof(Movie).GetProperty("Name"));
+                    var setter = DynamicReflectionDelegateFactory.Instance.CreateSet<object>(
+                        typeof(Movie).GetProperty("Name")
+                    );
 
-                setter(m, new Version("1.1.1.1"));
-            }, "Unable to cast object of type 'System.Version' to type 'System.String'.");
+                    setter(m, new Version("1.1.1.1"));
+                },
+                "Unable to cast object of type 'System.Version' to type 'System.String'."
+            );
         }
 
         [Test]
         public void CreateStaticMethodCall()
         {
-            MethodInfo castMethodInfo = typeof(DictionaryKey).GetMethod("op_Implicit", new[] { typeof(string) });
+            MethodInfo castMethodInfo = typeof(DictionaryKey).GetMethod(
+                "op_Implicit",
+                new[] { typeof(string) }
+            );
 
             Assert.IsNotNull(castMethodInfo);
 
-            MethodCall<object, object> call = DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(castMethodInfo);
+            MethodCall<object, object> call =
+                DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(castMethodInfo);
 
             object result = call(null, "First!");
             Assert.IsNotNull(result);
@@ -206,7 +250,9 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(namePropertyInfo);
 
-            var call = DynamicReflectionDelegateFactory.Instance.CreateGet<Person>(namePropertyInfo);
+            var call = DynamicReflectionDelegateFactory.Instance.CreateGet<Person>(
+                namePropertyInfo
+            );
 
             Person p = new Person();
             p.Name = "Name!";
@@ -220,11 +266,17 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void ConstructorStruct()
         {
-            var creator1 = DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(typeof(MyStruct));
+            var creator1 =
+                DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<object>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct1 = (MyStruct)creator1.Invoke();
             Assert.AreEqual(0, myStruct1.IntProperty);
 
-            var creator2 = DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(typeof(MyStruct));
+            var creator2 =
+                DynamicReflectionDelegateFactory.Instance.CreateDefaultConstructor<MyStruct>(
+                    typeof(MyStruct)
+                );
             MyStruct myStruct2 = creator2.Invoke();
             Assert.AreEqual(0, myStruct2.IntProperty);
         }
@@ -247,11 +299,15 @@ namespace Newtonsoft.Json.Tests.Utilities
         [Test]
         public void CreateStructMethodCall()
         {
-            MethodInfo methodInfo = typeof(DynamicReflectionDelegateFactoryTests).GetMethod(nameof(StructMethod), new[] { typeof(TestStruct) });
+            MethodInfo methodInfo = typeof(DynamicReflectionDelegateFactoryTests).GetMethod(
+                nameof(StructMethod),
+                new[] { typeof(TestStruct) }
+            );
 
             Assert.IsNotNull(methodInfo);
 
-            MethodCall<object, object> call = DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(methodInfo);
+            MethodCall<object, object> call =
+                DynamicReflectionDelegateFactory.Instance.CreateMethodCall<object>(methodInfo);
 
             object result = call(null, new TestStruct(123));
             Assert.IsNotNull(result);

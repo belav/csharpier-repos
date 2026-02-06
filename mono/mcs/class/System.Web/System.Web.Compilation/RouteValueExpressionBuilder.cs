@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,72 +32,92 @@ using System;
 using System.CodeDom;
 using System.ComponentModel;
 using System.Reflection;
-using System.Web.UI;
 using System.Web.Routing;
+using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-	[ExpressionEditor ("System.Web.UI.Design.RouteValueExpressionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-	[ExpressionPrefix ("Routes")]
-	public class RouteValueExpressionBuilder : ExpressionBuilder
-	{
-		public override bool SupportsEvaluate { get { return true; } }
-		
-		public RouteValueExpressionBuilder ()
-		{
-		}
+    [ExpressionEditor(
+        "System.Web.UI.Design.RouteValueExpressionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [ExpressionPrefix("Routes")]
+    public class RouteValueExpressionBuilder : ExpressionBuilder
+    {
+        public override bool SupportsEvaluate
+        {
+            get { return true; }
+        }
 
-		// This method is used only from within pages that aren't compiled
-		public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-		{
-			// Mono doesn't use this, so let's leave it like that for now
-			throw new NotImplementedException ();
-		}
+        public RouteValueExpressionBuilder() { }
 
-		public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
-		{
-			if (entry == null)
-				throw new NullReferenceException (".NET emulation (entry == null)");
-			
-			var ret = new CodeMethodInvokeExpression ();
-			ret.Method = new CodeMethodReferenceExpression (new CodeTypeReferenceExpression (typeof (RouteValueExpressionBuilder)), "GetRouteValue");
+        // This method is used only from within pages that aren't compiled
+        public override object EvaluateExpression(
+            object target,
+            BoundPropertyEntry entry,
+            object parsedData,
+            ExpressionBuilderContext context
+        )
+        {
+            // Mono doesn't use this, so let's leave it like that for now
+            throw new NotImplementedException();
+        }
 
-			var thisref = new CodeThisReferenceExpression ();
-			CodeExpressionCollection parameters = ret.Parameters;
-			parameters.Add (new CodePropertyReferenceExpression (thisref, "Page"));
-			parameters.Add (new CodePrimitiveExpression (entry.Expression));
-			parameters.Add (new CodeTypeOfExpression (new CodeTypeReference (entry.DeclaringType)));
-			parameters.Add (new CodePrimitiveExpression (entry.Name));
-			
-			return ret;
-		}
+        public override CodeExpression GetCodeExpression(
+            BoundPropertyEntry entry,
+            object parsedData,
+            ExpressionBuilderContext context
+        )
+        {
+            if (entry == null)
+                throw new NullReferenceException(".NET emulation (entry == null)");
 
-		public static object GetRouteValue (Page page, string key, Type controlType, string propertyName)
-		{
-			RouteData rd = page != null ? page.RouteData : null;
-			if (rd == null || String.IsNullOrEmpty (key))
-				return null;
-			
-			object value = rd.Values [key];
-			if (value == null)
-				return null;
+            var ret = new CodeMethodInvokeExpression();
+            ret.Method = new CodeMethodReferenceExpression(
+                new CodeTypeReferenceExpression(typeof(RouteValueExpressionBuilder)),
+                "GetRouteValue"
+            );
 
-			if (controlType == null || String.IsNullOrEmpty (propertyName) || !(value is string))
-				return value;
+            var thisref = new CodeThisReferenceExpression();
+            CodeExpressionCollection parameters = ret.Parameters;
+            parameters.Add(new CodePropertyReferenceExpression(thisref, "Page"));
+            parameters.Add(new CodePrimitiveExpression(entry.Expression));
+            parameters.Add(new CodeTypeOfExpression(new CodeTypeReference(entry.DeclaringType)));
+            parameters.Add(new CodePrimitiveExpression(entry.Name));
 
-			PropertyDescriptorCollection pcoll = TypeDescriptor.GetProperties (controlType);
-			if (pcoll == null || pcoll.Count == 0)
-				return value;
+            return ret;
+        }
 
-			PropertyDescriptor pdesc = pcoll [propertyName];
-			if (pdesc == null)
-				return value;
+        public static object GetRouteValue(
+            Page page,
+            string key,
+            Type controlType,
+            string propertyName
+        )
+        {
+            RouteData rd = page != null ? page.RouteData : null;
+            if (rd == null || String.IsNullOrEmpty(key))
+                return null;
 
-			TypeConverter cvt = pdesc.Converter;
-			if (cvt == null || !cvt.CanConvertFrom (typeof (string)))
-				return value;
+            object value = rd.Values[key];
+            if (value == null)
+                return null;
 
-			return cvt.ConvertFrom (value);
-		}
-	}
+            if (controlType == null || String.IsNullOrEmpty(propertyName) || !(value is string))
+                return value;
+
+            PropertyDescriptorCollection pcoll = TypeDescriptor.GetProperties(controlType);
+            if (pcoll == null || pcoll.Count == 0)
+                return value;
+
+            PropertyDescriptor pdesc = pcoll[propertyName];
+            if (pdesc == null)
+                return value;
+
+            TypeConverter cvt = pdesc.Converter;
+            if (cvt == null || !cvt.CanConvertFrom(typeof(string)))
+                return value;
+
+            return cvt.ConvertFrom(value);
+        }
+    }
 }

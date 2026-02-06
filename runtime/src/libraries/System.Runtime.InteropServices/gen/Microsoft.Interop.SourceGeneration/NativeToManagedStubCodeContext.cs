@@ -20,7 +20,8 @@ namespace Microsoft.Interop
 
         public NativeToManagedStubCodeContext(
             string returnIdentifier,
-            string nativeReturnIdentifier)
+            string nativeReturnIdentifier
+        )
         {
             _returnIdentifier = returnIdentifier;
             _nativeReturnIdentifier = nativeReturnIdentifier;

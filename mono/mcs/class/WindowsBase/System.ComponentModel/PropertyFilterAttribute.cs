@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,45 +26,48 @@
 
 using System;
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
+    public sealed class PropertyFilterAttribute : Attribute
+    {
+        public static readonly PropertyFilterAttribute Default = new PropertyFilterAttribute(
+            PropertyFilterOptions.All
+        );
 
-	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Method)]
-	public sealed class PropertyFilterAttribute : Attribute
-	{
-		public static readonly PropertyFilterAttribute Default = new PropertyFilterAttribute(PropertyFilterOptions.All);
+        private PropertyFilterOptions options;
 
-		private PropertyFilterOptions options;
+        public PropertyFilterAttribute(PropertyFilterOptions filter)
+        {
+            options = filter;
+        }
 
-		public PropertyFilterAttribute (PropertyFilterOptions filter)
-		{
-			options = filter;
-		}
+        public PropertyFilterOptions Filter
+        {
+            get { return options; }
+        }
 
-		public PropertyFilterOptions Filter {
-			get { return options; }
-		}
+        public override bool Equals(object value)
+        {
+            if (!(value is PropertyFilterAttribute))
+                return false;
+            return ((PropertyFilterAttribute)value).options == options;
+        }
 
-		public override bool Equals (object value)
-		{
-			if (!(value is PropertyFilterAttribute))
-				return false;
-			return ((PropertyFilterAttribute)value).options == options;
-		}
+        public override int GetHashCode()
+        {
+            return options.GetHashCode();
+        }
 
-		public override int GetHashCode ()
-		{
-			return options.GetHashCode ();
-		}
+        public override bool Match(object value)
+        {
+            if (!(value is PropertyFilterAttribute))
+                return false;
 
-		public override bool Match (object value)
-		{
-			if (!(value is PropertyFilterAttribute))
-				return false;
+            PropertyFilterOptions other = ((PropertyFilterAttribute)value).options;
+            PropertyFilterOptions common = other & options;
 
-			PropertyFilterOptions other = ((PropertyFilterAttribute)value).options;
-			PropertyFilterOptions common = other & options;	
-
-			return common == options;
-		}
-	}
+            return common == options;
+        }
+    }
 }

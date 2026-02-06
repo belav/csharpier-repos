@@ -20,25 +20,36 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
                 var sdkDirectory = new DirectoryInfo(Path.Combine(solutionDir, @".dotnet\sdk"));
                 pathsToSearch.AddRange(sdkDirectory.EnumerateDirectories().Select(x => x.FullName));
 
-                var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                var programFiles = Environment.GetFolderPath(
+                    Environment.SpecialFolder.ProgramFiles
+                );
                 if (programFiles is not null)
                 {
                     var sdkPath = Path.Combine(programFiles, "dotnet", "sdk");
                     if (Directory.Exists(sdkPath))
                     {
                         sdkDirectory = new DirectoryInfo(Path.Combine(programFiles, @"dotnet\sdk"));
-                        pathsToSearch.AddRange(sdkDirectory.EnumerateDirectories().Select(x => x.FullName));
+                        pathsToSearch.AddRange(
+                            sdkDirectory.EnumerateDirectories().Select(x => x.FullName)
+                        );
                     }
                 }
 
-                var programFilesX86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                var programFilesX86 = Environment.GetFolderPath(
+                    Environment.SpecialFolder.ProgramFilesX86
+                );
                 if (programFilesX86 is not null)
                 {
                     var installs = Path.Combine(programFiles, "Microsoft Visual Studio", "2019");
                     if (Directory.Exists(installs))
                     {
-                        pathsToSearch.AddRange(new DirectoryInfo(installs).EnumerateDirectories()
-                            .Select(install => Path.Combine(install.FullName, "MSBuild", "Current", "Bin")));
+                        pathsToSearch.AddRange(
+                            new DirectoryInfo(installs)
+                                .EnumerateDirectories()
+                                .Select(install =>
+                                    Path.Combine(install.FullName, "MSBuild", "Current", "Bin")
+                                )
+                        );
                     }
                 }
 

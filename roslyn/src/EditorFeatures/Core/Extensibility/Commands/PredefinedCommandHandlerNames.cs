@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// Command handler name for Navigate to Highlighted Reference.
         /// </summary>
-        public const string NavigateToHighlightedReference = "Navigate to Highlighted Reference Command Handler";
+        public const string NavigateToHighlightedReference =
+            "Navigate to Highlighted Reference Command Handler";
 
         /// <summary>
         /// Command handler name for Organize Document.
@@ -135,17 +136,20 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// Command handler name for Rename Tracking cancellation.
         /// </summary>
-        public const string RenameTrackingCancellation = "Rename Tracking Cancellation Command Handler";
+        public const string RenameTrackingCancellation =
+            "Rename Tracking Cancellation Command Handler";
 
         /// <summary>
         /// Command handler name for a Signature Help command handler executing before <see cref="PredefinedCompletionNames.CompletionCommandHandler"/>.
         /// </summary>
-        public const string SignatureHelpBeforeCompletion = "Signature Help Before Completion Command Handler";
+        public const string SignatureHelpBeforeCompletion =
+            "Signature Help Before Completion Command Handler";
 
         /// <summary>
         /// Command handler name for a Signature Help command handler executing after <see cref="PredefinedCompletionNames.CompletionCommandHandler"/>.
         /// </summary>
-        public const string SignatureHelpAfterCompletion = "Signature Help After Completion Command Handler";
+        public const string SignatureHelpAfterCompletion =
+            "Signature Help After Completion Command Handler";
 
         /// <summary>
         /// Command handler name for String Copy Paste.
@@ -165,7 +169,7 @@ namespace Microsoft.CodeAnalysis.Editor
         public const string ToggleLineComment = "Toggle Line Comment Command Handler";
 
         /// <summary>
-        /// Command handler name for Paste Content in Interactive Format. 
+        /// Command handler name for Paste Content in Interactive Format.
         /// </summary>
         public const string InteractivePaste = "Interactive Paste Command Handler";
 

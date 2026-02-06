@@ -5,12 +5,11 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class NonSharedModelBulkUpdatesSqliteTest : NonSharedModelBulkUpdatesTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_aggregate_root_when_eager_loaded_owned_collection(bool async)
     {
@@ -19,7 +18,8 @@ public class NonSharedModelBulkUpdatesSqliteTest : NonSharedModelBulkUpdatesTest
         AssertSql(
             """
 DELETE FROM "Owner" AS "o"
-""");
+"""
+        );
     }
 
     public override async Task Delete_aggregate_root_when_table_sharing_with_owned(bool async)
@@ -29,10 +29,13 @@ DELETE FROM "Owner" AS "o"
         AssertSql(
             """
 DELETE FROM "Owner" AS "o"
-""");
+"""
+        );
     }
 
-    public override async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(bool async)
+    public override async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(
+        bool async
+    )
     {
         await base.Delete_aggregate_root_when_table_sharing_with_non_owned_throws(async);
 
@@ -47,7 +50,8 @@ DELETE FROM "Owner" AS "o"
             """
 UPDATE "Owner" AS "o"
 SET "Title" = 'SomeValue'
-""");
+"""
+        );
     }
 
     public override async Task Update_non_owned_property_on_entity_with_owned2(bool async)
@@ -58,7 +62,8 @@ SET "Title" = 'SomeValue'
             """
 UPDATE "Owner" AS "o"
 SET "Title" = COALESCE("o"."Title", '') || '_Suffix'
-""");
+"""
+        );
     }
 
     public override async Task Update_owned_and_non_owned_properties_with_table_sharing(bool async)
@@ -70,7 +75,8 @@ SET "Title" = COALESCE("o"."Title", '') || '_Suffix'
 UPDATE "Owner" AS "o"
 SET "OwnedReference_Number" = length("o"."Title"),
     "Title" = CAST("o"."OwnedReference_Number" AS TEXT)
-""");
+"""
+        );
     }
 
     public override async Task Update_main_table_in_entity_with_entity_splitting(bool async)
@@ -81,7 +87,8 @@ SET "OwnedReference_Number" = length("o"."Title"),
             """
 UPDATE "Blogs" AS "b"
 SET "CreationTimestamp" = '2020-01-01 00:00:00'
-""");
+"""
+        );
     }
 
     public override async Task Update_non_main_table_in_entity_with_entity_splitting(bool async)
@@ -93,11 +100,14 @@ SET "CreationTimestamp" = '2020-01-01 00:00:00'
 UPDATE "BlogsPart1" AS "b0"
 SET "Rating" = length("b0"."Title"),
     "Title" = CAST("b0"."Rating" AS TEXT)
-""");
+"""
+        );
     }
 
-    public override Task Delete_entity_with_auto_include(bool async)
-        => Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => base.Delete_entity_with_auto_include(async));
+    public override Task Delete_entity_with_auto_include(bool async) =>
+        Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+            base.Delete_entity_with_auto_include(async)
+        );
 
     public override async Task Delete_predicate_based_on_optional_navigation(bool async)
     {
@@ -112,7 +122,8 @@ WHERE "p"."Id" IN (
     LEFT JOIN "Blogs" AS "b" ON "p0"."BlogId" = "b"."Id"
     WHERE "b"."Title" LIKE 'Arthur%'
 )
-""");
+"""
+        );
     }
 
     public override async Task Update_with_alias_uniquification_in_setter_subquery(bool async)
@@ -127,15 +138,17 @@ SET "Total" = (
     FROM "OrderProduct" AS "o0"
     WHERE "o"."Id" = "o0"."OrderId")
 WHERE "o"."Id" = 1
-""");
+"""
+        );
     }
 
-    protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(wcb => wcb.Log(SqliteEventId.CompositeKeyWithValueGeneration));
+    protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(wcb => wcb.Log(SqliteEventId.CompositeKeyWithValueGeneration));
 
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

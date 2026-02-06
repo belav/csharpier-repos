@@ -24,7 +24,8 @@ namespace System.Numerics
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal readonly ref readonly Impl AsROImpl() => ref Unsafe.As<Matrix3x2, Impl>(ref Unsafe.AsRef(in this));
+        internal readonly ref readonly Impl AsROImpl() =>
+            ref Unsafe.As<Matrix3x2, Impl>(ref Unsafe.AsRef(in this));
 
         internal struct Impl : IEquatable<Impl>
         {
@@ -32,16 +33,14 @@ namespace System.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public ref Matrix3x2 AsM3x2() => ref Unsafe.As<Impl, Matrix3x2>(ref this);
 
-            private const float RotationEpsilon = 0.001f * MathF.PI / 180f;     // 0.1% of a degree
+            private const float RotationEpsilon = 0.001f * MathF.PI / 180f; // 0.1% of a degree
 
             public Vector2 X;
             public Vector2 Y;
             public Vector2 Z;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Init(float m11, float m12,
-                             float m21, float m22,
-                             float m31, float m32)
+            public void Init(float m11, float m12, float m21, float m22, float m31, float m32)
             {
                 X = new Vector2(m11, m12);
                 Y = new Vector2(m21, m22);
@@ -75,7 +74,6 @@ namespace System.Numerics
 
                     return Unsafe.Add(ref Unsafe.AsRef(in this.X), row)[column];
                 }
-
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 set
                 {
@@ -90,27 +88,15 @@ namespace System.Numerics
             public readonly bool IsIdentity
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get
-                {
-                    return (X == Vector2.UnitX)
-                        && (Y == Vector2.UnitY)
-                        && (Z == Vector2.Zero);
-                }
+                get { return (X == Vector2.UnitX) && (Y == Vector2.UnitY) && (Z == Vector2.Zero); }
             }
 
             public Vector2 Translation
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                readonly get
-                {
-                    return Z;
-                }
-
+                readonly get { return Z; }
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                set
-                {
-                    Z = value;
-                }
+                set { Z = value; }
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -128,17 +114,13 @@ namespace System.Numerics
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool operator ==(in Impl left, in Impl right)
             {
-                return (left.X == right.X)
-                    && (left.Y == right.Y)
-                    && (left.Z == right.Z);
+                return (left.X == right.X) && (left.Y == right.Y) && (left.Z == right.Z);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool operator !=(in Impl left, in Impl right)
             {
-                return (left.X != right.X)
-                    || (left.Y != right.Y)
-                    || (left.Z != right.Z);
+                return (left.X != right.X) || (left.Y != right.Y) || (left.Z != right.Z);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -212,19 +194,28 @@ namespace System.Numerics
                     c = 1;
                     s = 0;
                 }
-                else if (radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon)
+                else if (
+                    radians > MathF.PI / 2 - RotationEpsilon
+                    && radians < MathF.PI / 2 + RotationEpsilon
+                )
                 {
                     // Exact case for 90 degree rotation.
                     c = 0;
                     s = 1;
                 }
-                else if (radians < -MathF.PI + RotationEpsilon || radians > MathF.PI - RotationEpsilon)
+                else if (
+                    radians < -MathF.PI + RotationEpsilon
+                    || radians > MathF.PI - RotationEpsilon
+                )
                 {
                     // Exact case for 180 degree rotation.
                     c = -1;
                     s = 0;
                 }
-                else if (radians > -MathF.PI / 2 - RotationEpsilon && radians < -MathF.PI / 2 + RotationEpsilon)
+                else if (
+                    radians > -MathF.PI / 2 - RotationEpsilon
+                    && radians < -MathF.PI / 2 + RotationEpsilon
+                )
                 {
                     // Exact case for 270 degree rotation.
                     c = 0;
@@ -243,7 +234,7 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector2( c, s);
+                result.X = new Vector2(c, s);
                 result.Y = new Vector2(-s, c);
                 result.Z = Vector2.Zero;
 
@@ -255,7 +246,8 @@ namespace System.Numerics
             {
                 radians = MathF.IEEERemainder(radians, MathF.PI * 2);
 
-                float c, s;
+                float c,
+                    s;
 
                 if (radians > -RotationEpsilon && radians < RotationEpsilon)
                 {
@@ -263,19 +255,28 @@ namespace System.Numerics
                     c = 1;
                     s = 0;
                 }
-                else if (radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon)
+                else if (
+                    radians > MathF.PI / 2 - RotationEpsilon
+                    && radians < MathF.PI / 2 + RotationEpsilon
+                )
                 {
                     // Exact case for 90 degree rotation.
                     c = 0;
                     s = 1;
                 }
-                else if (radians < -MathF.PI + RotationEpsilon || radians > MathF.PI - RotationEpsilon)
+                else if (
+                    radians < -MathF.PI + RotationEpsilon
+                    || radians > MathF.PI - RotationEpsilon
+                )
                 {
                     // Exact case for 180 degree rotation.
                     c = -1;
                     s = 0;
                 }
-                else if (radians > -MathF.PI / 2 - RotationEpsilon && radians < -MathF.PI / 2 + RotationEpsilon)
+                else if (
+                    radians > -MathF.PI / 2 - RotationEpsilon
+                    && radians < -MathF.PI / 2 + RotationEpsilon
+                )
                 {
                     // Exact case for 270 degree rotation.
                     c = 0;
@@ -297,9 +298,9 @@ namespace System.Numerics
 
                 Impl result;
 
-                result.X = new Vector2( c, s);
+                result.X = new Vector2(c, s);
                 result.Y = new Vector2(-s, c);
-                result.Z = new Vector2( x, y);
+                result.Z = new Vector2(x, y);
 
                 return result;
             }
@@ -448,14 +449,8 @@ namespace System.Numerics
 
                 float invDet = 1.0f / det;
 
-                result.X = new Vector2(
-                    +matrix.Y.Y * invDet,
-                    -matrix.X.Y * invDet
-                );
-                result.Y = new Vector2(
-                    -matrix.Y.X * invDet,
-                    +matrix.X.X * invDet
-                );
+                result.X = new Vector2(+matrix.Y.Y * invDet, -matrix.X.Y * invDet);
+                result.Y = new Vector2(-matrix.Y.X * invDet, +matrix.X.X * invDet);
                 result.Z = new Vector2(
                     (matrix.Y.X * matrix.Z.Y - matrix.Z.X * matrix.Y.Y) * invDet,
                     (matrix.Z.X * matrix.X.Y - matrix.X.X * matrix.Z.Y) * invDet
@@ -477,8 +472,8 @@ namespace System.Numerics
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public override readonly bool Equals([NotNullWhen(true)] object? obj)
-                => (obj is Matrix3x2 other) && Equals(in other.AsImpl());
+            public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+                (obj is Matrix3x2 other) && Equals(in other.AsImpl());
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public readonly bool Equals(in Impl other)
@@ -486,9 +481,7 @@ namespace System.Numerics
                 // This function needs to account for floating-point equality around NaN
                 // and so must behave equivalently to the underlying float/double.Equals
 
-                return X.Equals(other.X)
-                    && Y.Equals(other.Y)
-                    && Z.Equals(other.Z);
+                return X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

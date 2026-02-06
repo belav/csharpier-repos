@@ -22,7 +22,10 @@ namespace System.Security.Cryptography
 
         internal static bool WasWorkLimitExceeded()
         {
-            Debug.Assert(t_state != null, "This method should only be called within a protected block.");
+            Debug.Assert(
+                t_state != null,
+                "This method should only be called within a protected block."
+            );
             return t_state.WorkLimitWasExceeded;
         }
 
@@ -60,7 +63,9 @@ namespace System.Security.Cryptography
             {
                 if (!state.WorkLimitWasExceeded)
                 {
-                    state.RemainingAllowedWork = checked(state.RemainingAllowedWork - (ulong)workCount);
+                    state.RemainingAllowedWork = checked(
+                        state.RemainingAllowedWork - (ulong)workCount
+                    );
                     success = true;
                 }
             }

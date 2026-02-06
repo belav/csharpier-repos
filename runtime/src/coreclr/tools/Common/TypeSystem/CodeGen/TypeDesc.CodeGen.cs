@@ -13,7 +13,10 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.IsIntrinsic | TypeFlags.AttributeCacheComputed) & TypeFlags.IsIntrinsic) != 0;
+                return (
+                        GetTypeFlags(TypeFlags.IsIntrinsic | TypeFlags.AttributeCacheComputed)
+                        & TypeFlags.IsIntrinsic
+                    ) != 0;
             }
         }
     }

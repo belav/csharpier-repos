@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
     [Trait(Traits.Feature, Traits.Features.SplitComment)]
     public class SplitCommentCommandHandlerTests : AbstractSplitCommentCommandHandlerTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup)
-            => TestWorkspace.CreateCSharp(markup);
+        protected override TestWorkspace CreateWorkspace(string markup) =>
+            TestWorkspace.CreateCSharp(markup);
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
         [WpfFact]
@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         //Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -82,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         /[||]/Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                     public static void Main(string[] args) 
                     { 
                         //Test Comment[||]
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         [||]//Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -128,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         //[||]Test[||] Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -154,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         //Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -180,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         ////Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -197,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         //[||]//Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/48547")]
@@ -213,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // goo[||]  //Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/48547")]
@@ -229,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // goo [||] //Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/48547")]
@@ -245,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // goo  [||]//Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/48547")]
@@ -261,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // [|goo|] //Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -287,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         // Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -313,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
                         //Test Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -325,14 +340,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitComment
         public void TestCommentWithMultipleLeadingSpaces(string commentValue)
         {
             TestHandled(
-@$"public class Program
+                @$"public class Program
 {{
     public static void Main(string[] args) 
     {{ 
         //    {commentValue}
     }}
 }}",
-"""
+                """
 public class Program
 {
     public static void Main(string[] args) 
@@ -341,7 +356,8 @@ public class Program
         //    Test Comment
     }
 }
-""");
+"""
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -354,14 +370,14 @@ public class Program
         public void TestQuadCommentWithMultipleLeadingSpaces(string commentValue)
         {
             TestHandled(
-@$"public class Program
+                @$"public class Program
 {{
     public static void Main(string[] args) 
     {{ 
         ////    {commentValue}
     }}
 }}",
-"""
+                """
 public class Program
 {
     public static void Main(string[] args) 
@@ -370,7 +386,8 @@ public class Program
         ////    Test Comment
     }
 }
-""");
+"""
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -396,7 +413,8 @@ public class Program
                         // Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -412,7 +430,8 @@ public class Program
                         // Test Comment[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -436,7 +455,8 @@ public class Program
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -460,7 +480,8 @@ public class Program
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/38516")]
@@ -486,7 +507,9 @@ public class Program
                 		// Test Comment
                 	}
                 }
-                """, useTabs: true);
+                """,
+                useTabs: true
+            );
         }
 
         [WpfFact]
@@ -504,7 +527,8 @@ public class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

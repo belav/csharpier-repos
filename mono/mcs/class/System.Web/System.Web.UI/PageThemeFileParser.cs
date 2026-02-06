@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,30 +37,28 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-	internal sealed class PageThemeFileParser: UserControlParser
-	{
-		internal PageThemeFileParser (VirtualPath virtualPath, string inputFile, HttpContext context)
-		: base (virtualPath, inputFile, context, "System.Web.UI.PageTheme")
-		{
-		}
-		
-		internal override void HandleOptions (object obj)
-		{
-		}
+    internal sealed class PageThemeFileParser : UserControlParser
+    {
+        internal PageThemeFileParser(VirtualPath virtualPath, string inputFile, HttpContext context)
+            : base(virtualPath, inputFile, context, "System.Web.UI.PageTheme") { }
 
-		internal override void AddDirective (string directive, IDictionary atts)
-		{
-			int cmp = String.Compare ("Register", directive, StringComparison.OrdinalIgnoreCase);
-			if (cmp == 0) {
-				base.AddDirective (directive, atts);
-				return;
-			}
+        internal override void HandleOptions(object obj) { }
 
-			ThrowParseException ("Unknown directive: " + directive);
-		}
+        internal override void AddDirective(string directive, IDictionary atts)
+        {
+            int cmp = String.Compare("Register", directive, StringComparison.OrdinalIgnoreCase);
+            if (cmp == 0)
+            {
+                base.AddDirective(directive, atts);
+                return;
+            }
 
-		internal override string DefaultBaseTypeName {
-			get { return "System.Web.UI.PageTheme"; }
-		}
-	}
+            ThrowParseException("Unknown directive: " + directive);
+        }
+
+        internal override string DefaultBaseTypeName
+        {
+            get { return "System.Web.UI.PageTheme"; }
+        }
+    }
 }

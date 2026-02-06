@@ -13,9 +13,7 @@ internal sealed class VisualStudioLspWorkspaceRegistrationService : LspWorkspace
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VisualStudioLspWorkspaceRegistrationService()
-    {
-    }
+    public VisualStudioLspWorkspaceRegistrationService() { }
 
     public override void Register(Workspace? workspace)
     {

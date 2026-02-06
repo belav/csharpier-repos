@@ -10,7 +10,8 @@ namespace System.ServiceModel.Channels
     {
         Uri Uri { get; }
 
-        T GetProperty<T>() where T : class;
+        T GetProperty<T>()
+            where T : class;
 
         bool WaitForChannel(TimeSpan timeout);
         IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state);

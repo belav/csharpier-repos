@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,40 +28,42 @@
 
 using System.Collections;
 
-namespace Mono.ILASM {
+namespace Mono.ILASM
+{
+    public class PermissionSet
+    {
+        PEAPI.SecurityAction sec_action;
+        ArrayList permissions;
+        PEAPI.PermissionSet ps;
 
-        public class PermissionSet
+        public PermissionSet(PEAPI.SecurityAction sec_action, ArrayList permissions)
         {
-                PEAPI.SecurityAction sec_action;
-                ArrayList permissions;
-                PEAPI.PermissionSet ps;
-
-                public PermissionSet (PEAPI.SecurityAction sec_action, ArrayList permissions)
-                {
-                        this.sec_action = sec_action;
-                        this.permissions = permissions;
-                }
-
-                public ArrayList Permissions {
-                        get { return permissions; }
-                }
-
-                public PEAPI.SecurityAction SecurityAction {
-                        get { return sec_action; }
-                }
-
-                public void AddPermission (Permission perm)
-                {
-                        permissions.Add (perm);
-                }
-
-                public PEAPI.PermissionSet Resolve (CodeGen code_gen)
-                {
-                       ps = new PEAPI.PermissionSet (sec_action); 
-                       foreach (Permission perm in permissions)
-                               ps.AddPermission (perm.Resolve (code_gen));
-
-                       return ps;
-                }
+            this.sec_action = sec_action;
+            this.permissions = permissions;
         }
+
+        public ArrayList Permissions
+        {
+            get { return permissions; }
+        }
+
+        public PEAPI.SecurityAction SecurityAction
+        {
+            get { return sec_action; }
+        }
+
+        public void AddPermission(Permission perm)
+        {
+            permissions.Add(perm);
+        }
+
+        public PEAPI.PermissionSet Resolve(CodeGen code_gen)
+        {
+            ps = new PEAPI.PermissionSet(sec_action);
+            foreach (Permission perm in permissions)
+                ps.AddPermission(perm.Resolve(code_gen));
+
+            return ps;
+        }
+    }
 }

@@ -22,43 +22,66 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
 {
     using static CSharpRemoveUnnecessaryLambdaExpressionDiagnosticAnalyzer;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryLambdaExpression), Shared]
-    internal partial class CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryLambdaExpression
+        ),
+        Shared
+    ]
+    internal partial class CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider()
-        {
-        }
+        public CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryLambdaExpressionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryLambdaExpressionDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Remove_unnecessary_lambda_expression, nameof(CSharpAnalyzersResources.Remove_unnecessary_lambda_expression));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Remove_unnecessary_lambda_expression,
+                nameof(CSharpAnalyzersResources.Remove_unnecessary_lambda_expression)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                var anonymousFunction = diagnostic.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var anonymousFunction = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
-                editor.ReplaceNode(anonymousFunction,
+                editor.ReplaceNode(
+                    anonymousFunction,
                     (current, generator) =>
                     {
-                        if (current is AnonymousFunctionExpressionSyntax anonymousFunction &&
-                            TryGetAnonymousFunctionInvocation(anonymousFunction, out var invocation, out _))
+                        if (
+                            current is AnonymousFunctionExpressionSyntax anonymousFunction
+                            && TryGetAnonymousFunctionInvocation(
+                                anonymousFunction,
+                                out var invocation,
+                                out _
+                            )
+                        )
                         {
                             return invocation.Expression.WithTriviaFrom(current).Parenthesize();
                         }
 
                         return current;
-                    });
+                    }
+                );
             }
 
             return Task.CompletedTask;

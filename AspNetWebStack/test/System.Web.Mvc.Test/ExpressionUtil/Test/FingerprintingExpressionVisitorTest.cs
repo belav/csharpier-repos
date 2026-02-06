@@ -21,13 +21,25 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // it can properly set the "I gave up" flag when it encounters an Expression it's not familiar
             // with.
 
-            var methodsOnExpressionVisitorRequiringOverride = typeof(ExpressionVisitor).GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).Where(mi => mi.IsVirtual).Select(mi => mi.GetBaseDefinition()).Where(mi => mi.DeclaringType == typeof(ExpressionVisitor));
-            var methodsOnFingerprintingExpressionVisitor = typeof(FingerprintingExpressionVisitor).GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).Where(mi => mi.DeclaringType == typeof(FingerprintingExpressionVisitor));
+            var methodsOnExpressionVisitorRequiringOverride = typeof(ExpressionVisitor)
+                .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                .Where(mi => mi.IsVirtual)
+                .Select(mi => mi.GetBaseDefinition())
+                .Where(mi => mi.DeclaringType == typeof(ExpressionVisitor));
+            var methodsOnFingerprintingExpressionVisitor = typeof(FingerprintingExpressionVisitor)
+                .GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+                .Where(mi => mi.DeclaringType == typeof(FingerprintingExpressionVisitor));
 
-            var missingMethods = methodsOnExpressionVisitorRequiringOverride.Except(methodsOnFingerprintingExpressionVisitor.Select(mi => mi.GetBaseDefinition())).ToArray();
+            var missingMethods = methodsOnExpressionVisitorRequiringOverride
+                .Except(
+                    methodsOnFingerprintingExpressionVisitor.Select(mi => mi.GetBaseDefinition())
+                )
+                .ToArray();
             if (missingMethods.Length != 0)
             {
-                StringBuilder sb = new StringBuilder("The following methods are declared on ExpressionVisitor and must be overridden on FingerprintingExpressionVisitor:");
+                StringBuilder sb = new StringBuilder(
+                    "The following methods are declared on ExpressionVisitor and must be overridden on FingerprintingExpressionVisitor:"
+                );
                 foreach (MethodInfo method in missingMethods)
                 {
                     sb.AppendLine();
@@ -47,7 +59,8 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
@@ -61,11 +74,13 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // if we fingerprinted ctors, would fingerprint as [ NEW(StringBuilder(int)):StringBuilder, PARAM(0):int ]
             // but since we don't fingerprint ctors, should just return null (signaling failure)
-            Expression expr = (Expression<Func<int, StringBuilder>>)(capacity => new StringBuilder(capacity));
+            Expression expr =
+                (Expression<Func<int, StringBuilder>>)(capacity => new StringBuilder(capacity));
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Null(fingerprint); // Can't fingerprint ctor
@@ -78,18 +93,29 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
 
             // fingerprints as [ OP_GREATERTHAN:bool, CONST:int, CONST:int ]
-            Expression expr = Expression.MakeBinary(ExpressionType.GreaterThan, Expression.Constant(42), Expression.Constant(84));
+            Expression expr = Expression.MakeBinary(
+                ExpressionType.GreaterThan,
+                Expression.Constant(42),
+                Expression.Constant(84)
+            );
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { 42, 84 }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new BinaryExpressionFingerprint(ExpressionType.GreaterThan, typeof(bool), null /* method */),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)));
+            AssertChainEquals(
+                fingerprint,
+                new BinaryExpressionFingerprint(
+                    ExpressionType.GreaterThan,
+                    typeof(bool),
+                    null /* method */
+                ),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int))
+            );
         }
 
         [Fact]
@@ -98,19 +124,26 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
 
             // fingerprints as [ CONDITIONAL:int, CONST:bool, CONST:int, CONST:int ]
-            Expression expr = Expression.Condition(Expression.Constant(true), Expression.Constant(42), Expression.Constant(84));
+            Expression expr = Expression.Condition(
+                Expression.Constant(true),
+                Expression.Constant(42),
+                Expression.Constant(84)
+            );
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { true, 42, 84 }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new ConditionalExpressionFingerprint(ExpressionType.Conditional, typeof(int)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(bool)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)));
+            AssertChainEquals(
+                fingerprint,
+                new ConditionalExpressionFingerprint(ExpressionType.Conditional, typeof(int)),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(bool)),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int))
+            );
         }
 
         [Fact]
@@ -123,12 +156,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { 42 }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)));
+            AssertChainEquals(
+                fingerprint,
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int))
+            );
         }
 
         [Fact]
@@ -141,11 +177,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
-            AssertChainEquals(fingerprint, new DefaultExpressionFingerprint(ExpressionType.Default, typeof(int)));
+            AssertChainEquals(
+                fingerprint,
+                new DefaultExpressionFingerprint(ExpressionType.Default, typeof(int))
+            );
         }
 
         [Fact]
@@ -154,18 +194,34 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
 
             // fingerprints as [ INDEX:object, PARAM(0):object[], CONST:int ]
-            Expression expr = Expression.MakeIndex(Expression.Parameter(typeof(object[])), null /* indexer */, new Expression[] { Expression.Constant(42) });
+            Expression expr = Expression.MakeIndex(
+                Expression.Parameter(typeof(object[])),
+                null /* indexer */
+                ,
+                new Expression[] { Expression.Constant(42) }
+            );
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { 42 }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new IndexExpressionFingerprint(ExpressionType.Index, typeof(object), null /* indexer */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(object[]), 0 /* parameterIndex */),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)));
+            AssertChainEquals(
+                fingerprint,
+                new IndexExpressionFingerprint(
+                    ExpressionType.Index,
+                    typeof(object),
+                    null /* indexer */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(object[]),
+                    0 /* parameterIndex */
+                ),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int))
+            );
         }
 
         [Fact]
@@ -178,14 +234,21 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { 42 }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new LambdaExpressionFingerprint(ExpressionType.Lambda, typeof(Func<string, int>)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(string), 0 /* parameterIndex */));
+            AssertChainEquals(
+                fingerprint,
+                new LambdaExpressionFingerprint(ExpressionType.Lambda, typeof(Func<string, int>)),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(int)),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(string),
+                    0 /* parameterIndex */
+                )
+            );
         }
 
         [Fact]
@@ -198,13 +261,20 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
-            AssertChainEquals(fingerprint,
-                              new MemberExpressionFingerprint(ExpressionType.MemberAccess, typeof(string), typeof(string).GetField("Empty")),
-                              _nullFingerprint);
+            AssertChainEquals(
+                fingerprint,
+                new MemberExpressionFingerprint(
+                    ExpressionType.MemberAccess,
+                    typeof(string),
+                    typeof(string).GetField("Empty")
+                ),
+                _nullFingerprint
+            );
         }
 
         [Fact]
@@ -213,18 +283,32 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             // Arrange
 
             // fingerprints as [ CALL(GC.KeepAlive):void, NULL, PARAM(0):object ]
-            Expression expr = Expression.Call(typeof(GC).GetMethod("KeepAlive"), Expression.Parameter(typeof(object)));
+            Expression expr = Expression.Call(
+                typeof(GC).GetMethod("KeepAlive"),
+                Expression.Parameter(typeof(object))
+            );
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
-            AssertChainEquals(fingerprint,
-                              new MethodCallExpressionFingerprint(ExpressionType.Call, typeof(void), typeof(GC).GetMethod("KeepAlive")),
-                              _nullFingerprint,
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(object), 0 /* parameterIndex */));
+            AssertChainEquals(
+                fingerprint,
+                new MethodCallExpressionFingerprint(
+                    ExpressionType.Call,
+                    typeof(void),
+                    typeof(GC).GetMethod("KeepAlive")
+                ),
+                _nullFingerprint,
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(object),
+                    0 /* parameterIndex */
+                )
+            );
         }
 
         [Fact]
@@ -239,21 +323,60 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
-            AssertChainEquals(fingerprint,
-                              new LambdaExpressionFingerprint(ExpressionType.Lambda, typeof(Func<int, int, int>)),
-                              new BinaryExpressionFingerprint(ExpressionType.Add, typeof(int), null /* method */),
-                              new BinaryExpressionFingerprint(ExpressionType.Add, typeof(int), null /* method */),
-                              new BinaryExpressionFingerprint(ExpressionType.Add, typeof(int), null /* method */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 0 /* parameterIndex */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 0 /* parameterIndex */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 1 /* parameterIndex */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 0 /* parameterIndex */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 1 /* parameterIndex */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 0 /* parameterIndex */));
+            AssertChainEquals(
+                fingerprint,
+                new LambdaExpressionFingerprint(ExpressionType.Lambda, typeof(Func<int, int, int>)),
+                new BinaryExpressionFingerprint(
+                    ExpressionType.Add,
+                    typeof(int),
+                    null /* method */
+                ),
+                new BinaryExpressionFingerprint(
+                    ExpressionType.Add,
+                    typeof(int),
+                    null /* method */
+                ),
+                new BinaryExpressionFingerprint(
+                    ExpressionType.Add,
+                    typeof(int),
+                    null /* method */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    0 /* parameterIndex */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    0 /* parameterIndex */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    1 /* parameterIndex */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    0 /* parameterIndex */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    1 /* parameterIndex */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    0 /* parameterIndex */
+                )
+            );
         }
 
         [Fact]
@@ -266,13 +389,20 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Equal(new object[] { "hello" }, capturedConstants.ToArray());
-            AssertChainEquals(fingerprint,
-                              new TypeBinaryExpressionFingerprint(ExpressionType.TypeIs, typeof(bool), typeof(DateTime)),
-                              new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(string)));
+            AssertChainEquals(
+                fingerprint,
+                new TypeBinaryExpressionFingerprint(
+                    ExpressionType.TypeIs,
+                    typeof(bool),
+                    typeof(DateTime)
+                ),
+                new ConstantExpressionFingerprint(ExpressionType.Constant, typeof(string))
+            );
         }
 
         [Fact]
@@ -285,16 +415,30 @@ namespace System.Web.Mvc.ExpressionUtil.Test
 
             // Act
             List<object> capturedConstants;
-            ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+            ExpressionFingerprintChain fingerprint =
+                FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
 
             // Assert
             Assert.Empty(capturedConstants);
-            AssertChainEquals(fingerprint,
-                              new UnaryExpressionFingerprint(ExpressionType.Not, typeof(int), null /* method */),
-                              new ParameterExpressionFingerprint(ExpressionType.Parameter, typeof(int), 0 /* parameterIndex */));
+            AssertChainEquals(
+                fingerprint,
+                new UnaryExpressionFingerprint(
+                    ExpressionType.Not,
+                    typeof(int),
+                    null /* method */
+                ),
+                new ParameterExpressionFingerprint(
+                    ExpressionType.Parameter,
+                    typeof(int),
+                    0 /* parameterIndex */
+                )
+            );
         }
 
-        internal static void AssertChainEquals(ExpressionFingerprintChain fingerprintChain, params ExpressionFingerprint[] expectedElements)
+        internal static void AssertChainEquals(
+            ExpressionFingerprintChain fingerprintChain,
+            params ExpressionFingerprint[] expectedElements
+        )
         {
             ExpressionFingerprintChain newChain = new ExpressionFingerprintChain();
             newChain.Elements.AddRange(expectedElements);

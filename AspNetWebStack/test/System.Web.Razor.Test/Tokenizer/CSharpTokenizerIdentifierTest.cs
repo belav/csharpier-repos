@@ -53,7 +53,10 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Contain_Non_Spacing_Mark()
         {
-            TestTokenizer("foo\u0300", new CSharpSymbol(0, 0, 0, "foo\u0300", CSharpSymbolType.Identifier));
+            TestTokenizer(
+                "foo\u0300",
+                new CSharpSymbol(0, 0, 0, "foo\u0300", CSharpSymbolType.Identifier)
+            );
         }
 
         [Fact]
@@ -71,13 +74,19 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void Identifier_Can_Contain_Connector_Punctuation()
         {
-            TestTokenizer("foo‿bar", new CSharpSymbol(0, 0, 0, "foo‿bar", CSharpSymbolType.Identifier));
+            TestTokenizer(
+                "foo‿bar",
+                new CSharpSymbol(0, 0, 0, "foo‿bar", CSharpSymbolType.Identifier)
+            );
         }
 
         [Fact]
         public void Identifier_Can_Contain_Format_Character()
         {
-            TestTokenizer("foo؃bar", new CSharpSymbol(0, 0, 0, "foo؃bar", CSharpSymbolType.Identifier));
+            TestTokenizer(
+                "foo؃bar",
+                new CSharpSymbol(0, 0, 0, "foo؃bar", CSharpSymbolType.Identifier)
+            );
         }
 
         [Fact]
@@ -164,7 +173,13 @@ namespace System.Web.Razor.Test.Tokenizer
 
         private void TestKeyword(string keyword, CSharpKeyword keywordType)
         {
-            TestTokenizer(keyword, new CSharpSymbol(0, 0, 0, keyword, CSharpSymbolType.Keyword) { Keyword = keywordType });
+            TestTokenizer(
+                keyword,
+                new CSharpSymbol(0, 0, 0, keyword, CSharpSymbolType.Keyword)
+                {
+                    Keyword = keywordType,
+                }
+            );
         }
     }
 }

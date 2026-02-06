@@ -9,7 +9,8 @@ namespace System.Diagnostics.Metrics
     /// Measurement stores one observed metrics value and its associated tags. This type is used by Observable instruments' Observe() method when reporting current measurements.
     /// with the associated tags.
     /// </summary>
-    public readonly struct Measurement<T> where T : struct
+    public readonly struct Measurement<T>
+        where T : struct
     {
         private readonly KeyValuePair<string, object?>[] _tags;
 
@@ -76,6 +77,11 @@ namespace System.Diagnostics.Metrics
         public T Value { get; }
 
         // Private helper to copy IEnumerable to array. We have it to avoid adding dependencies on System.Linq
-        private static KeyValuePair<string, object?>[] ToArray(IEnumerable<KeyValuePair<string, object?>>? tags) => tags is null ? Instrument.EmptyTags : new List<KeyValuePair<string, object?>>(tags).ToArray();
+        private static KeyValuePair<string, object?>[] ToArray(
+            IEnumerable<KeyValuePair<string, object?>>? tags
+        ) =>
+            tags is null
+                ? Instrument.EmptyTags
+                : new List<KeyValuePair<string, object?>>(tags).ToArray();
     }
 }

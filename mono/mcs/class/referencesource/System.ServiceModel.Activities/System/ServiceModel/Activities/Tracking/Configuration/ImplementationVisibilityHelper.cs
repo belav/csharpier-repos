@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-
     using System.Activities.Tracking;
 
     static class ImplementationVisibilityHelper
     {
         public static bool IsDefined(ImplementationVisibility value)
         {
-            return value == ImplementationVisibility.All || value == ImplementationVisibility.RootScope;
+            return value == ImplementationVisibility.All
+                || value == ImplementationVisibility.RootScope;
         }
     }
 }

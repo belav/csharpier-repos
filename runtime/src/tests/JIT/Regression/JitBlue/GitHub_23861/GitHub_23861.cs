@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace GitHub_23861
@@ -11,6 +11,7 @@ namespace GitHub_23861
     public class Program
     {
         static int returnVal = 100;
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -18,7 +19,7 @@ namespace GitHub_23861
 
             if (returnVal == 100)
             {
-                Console.WriteLine("Pass");                
+                Console.WriteLine("Pass");
             }
             else
             {
@@ -27,9 +28,13 @@ namespace GitHub_23861
             return returnVal;
         }
 
-        internal static void LessThanAllDouble() { TestVectorLessThanAll<double>(); }
+        internal static void LessThanAllDouble()
+        {
+            TestVectorLessThanAll<double>();
+        }
 
-        private static void TestVectorLessThanAll<T>() where T : struct, INumber<T>
+        private static void TestVectorLessThanAll<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -67,4 +72,3 @@ namespace GitHub_23861
         }
     }
 }
-

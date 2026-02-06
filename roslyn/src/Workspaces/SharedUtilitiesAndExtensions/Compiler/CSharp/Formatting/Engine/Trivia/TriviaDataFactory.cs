@@ -13,18 +13,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     /// <summary>
     /// trivia factory.
-    /// 
+    ///
     /// it will cache some commonly used trivia to reduce memory footprint and heap allocation
     /// </summary>
     internal partial class TriviaDataFactory : AbstractTriviaDataFactory
     {
         public TriviaDataFactory(TreeData treeInfo, SyntaxFormattingOptions options)
-            : base(treeInfo, options)
-        {
-        }
+            : base(treeInfo, options) { }
 
-        private static bool IsCSharpWhitespace(char c)
-            => SyntaxFacts.IsWhitespace(c) || SyntaxFacts.IsNewLine(c);
+        private static bool IsCSharpWhitespace(char c) =>
+            SyntaxFacts.IsWhitespace(c) || SyntaxFacts.IsNewLine(c);
 
         public override TriviaData CreateLeadingTrivia(SyntaxToken token)
         {
@@ -71,7 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // no trivia in between
             if (!token1.HasTrailingTrivia && !token2.HasLeadingTrivia)
             {
-                Debug.Assert(string.IsNullOrWhiteSpace(this.TreeInfo.GetTextBetween(token1, token2)));
+                Debug.Assert(
+                    string.IsNullOrWhiteSpace(this.TreeInfo.GetTextBetween(token1, token2))
+                );
                 return GetSpaceTriviaData(space: 0);
             }
 
@@ -79,7 +79,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             var info = GetWhitespaceOnlyTriviaInfo(token1, token2, result);
             if (info != null)
             {
-                Debug.Assert(string.IsNullOrWhiteSpace(this.TreeInfo.GetTextBetween(token1, token2)));
+                Debug.Assert(
+                    string.IsNullOrWhiteSpace(this.TreeInfo.GetTextBetween(token1, token2))
+                );
                 return info;
             }
 
@@ -88,15 +90,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private static bool ContainsOnlyWhitespace(Analyzer.AnalysisResult result)
         {
-            return
-                !result.HasComments &&
-                !result.HasPreprocessor &&
-                !result.HasSkippedTokens &&
-                !result.HasSkippedOrDisabledText &&
-                !result.HasConflictMarker;
+            return !result.HasComments
+                && !result.HasPreprocessor
+                && !result.HasSkippedTokens
+                && !result.HasSkippedOrDisabledText
+                && !result.HasConflictMarker;
         }
 
-        private TriviaData? GetWhitespaceOnlyTriviaInfo(SyntaxToken token1, SyntaxToken token2, Analyzer.AnalysisResult result)
+        private TriviaData? GetWhitespaceOnlyTriviaInfo(
+            SyntaxToken token1,
+            SyntaxToken token2,
+            Analyzer.AnalysisResult result
+        )
         {
             if (!ContainsOnlyWhitespace(result))
             {
@@ -118,24 +123,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             {
                 // calculate actual space size from tab
                 var spaces = CalculateSpaces(token1, token2);
-                return new ModifiedWhitespace(this.Options, result.LineBreaks, indentation: spaces, elastic: result.TreatAsElastic, language: LanguageNames.CSharp);
+                return new ModifiedWhitespace(
+                    this.Options,
+                    result.LineBreaks,
+                    indentation: spaces,
+                    elastic: result.TreatAsElastic,
+                    language: LanguageNames.CSharp
+                );
             }
 
             // check whether we can cache trivia info for current indentation
             var lineCountAndIndentation = GetLineBreaksAndIndentation(result);
 
-            return GetWhitespaceTriviaData(lineCountAndIndentation.lineBreaks, lineCountAndIndentation.indentation, lineCountAndIndentation.canUseTriviaAsItIs, result.TreatAsElastic);
+            return GetWhitespaceTriviaData(
+                lineCountAndIndentation.lineBreaks,
+                lineCountAndIndentation.indentation,
+                lineCountAndIndentation.canUseTriviaAsItIs,
+                result.TreatAsElastic
+            );
         }
 
         private int CalculateSpaces(SyntaxToken token1, SyntaxToken token2)
         {
-            var initialColumn = (token1.RawKind == 0) ? 0 : this.TreeInfo.GetOriginalColumn(Options.TabSize, token1) + token1.Span.Length;
+            var initialColumn =
+                (token1.RawKind == 0)
+                    ? 0
+                    : this.TreeInfo.GetOriginalColumn(Options.TabSize, token1) + token1.Span.Length;
             var textSnippet = this.TreeInfo.GetTextBetween(token1, token2);
 
-            return textSnippet.ConvertTabToSpace(Options.TabSize, initialColumn, textSnippet.Length);
+            return textSnippet.ConvertTabToSpace(
+                Options.TabSize,
+                initialColumn,
+                textSnippet.Length
+            );
         }
 
-        private (bool canUseTriviaAsItIs, int lineBreaks, int indentation) GetLineBreaksAndIndentation(Analyzer.AnalysisResult result)
+        private (
+            bool canUseTriviaAsItIs,
+            int lineBreaks,
+            int indentation
+        ) GetLineBreaksAndIndentation(Analyzer.AnalysisResult result)
         {
             Debug.Assert(result.Tab >= 0);
             Debug.Assert(result.LineBreaks >= 0);
@@ -183,7 +210,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private static int GetSpaceOnSingleLine(Analyzer.AnalysisResult result)
         {
-            if (result.HasTrailingSpace || result.HasUnknownWhitespace || result.LineBreaks > 0 || result.Tab > 0)
+            if (
+                result.HasTrailingSpace
+                || result.HasUnknownWhitespace
+                || result.LineBreaks > 0
+                || result.Tab > 0
+            )
             {
                 return -1;
             }

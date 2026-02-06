@@ -121,7 +121,12 @@ namespace System.DirectoryServices.AccountManagement
             _passwordSetTimeChanged = true;
         }
 
-        protected void AdvancedFilterSet(string attribute, object value, Type objectType, MatchType mt)
+        protected void AdvancedFilterSet(
+            string attribute,
+            object value,
+            Type objectType,
+            MatchType mt
+        )
         {
             _p.AdvancedFilterSet(attribute, value, objectType, mt);
         }
@@ -132,7 +137,11 @@ namespace System.DirectoryServices.AccountManagement
 
         internal bool? GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AdvancedFilters", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AdvancedFilters",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             return propertyName switch
             {
@@ -158,7 +167,11 @@ namespace System.DirectoryServices.AccountManagement
         // If the property is a PrincipalCollection, the return value is the PrincipalCollection itself.
         internal object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AdvancedFilters", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AdvancedFilters",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             return propertyName switch
             {

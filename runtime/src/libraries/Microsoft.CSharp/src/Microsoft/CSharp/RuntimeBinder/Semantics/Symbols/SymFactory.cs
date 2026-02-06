@@ -8,10 +8,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal static class SymFactory
     {
-        private static Symbol NewBasicSymbol(
-            SYMKIND kind,
-            Name name,
-            ParentSymbol parent)
+        private static Symbol NewBasicSymbol(SYMKIND kind, Name name, ParentSymbol parent)
         {
             Symbol sym;
             switch (kind)
@@ -75,7 +72,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // Namespace
         public static NamespaceSymbol CreateNamespace(Name name, NamespaceSymbol parent)
         {
-            NamespaceSymbol sym = (NamespaceSymbol)NewBasicSymbol(SYMKIND.SK_NamespaceSymbol, name, parent);
+            NamespaceSymbol sym = (NamespaceSymbol)NewBasicSymbol(
+                SYMKIND.SK_NamespaceSymbol,
+                name,
+                parent
+            );
             sym.SetAccess(ACCESS.ACC_PUBLIC);
 
             return sym;
@@ -87,7 +88,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(name != null);
             Debug.Assert(parent != null);
 
-            AggregateSymbol sym = (AggregateSymbol)NewBasicSymbol(SYMKIND.SK_AggregateSymbol, name, parent);
+            AggregateSymbol sym = (AggregateSymbol)NewBasicSymbol(
+                SYMKIND.SK_AggregateSymbol,
+                name,
+                parent
+            );
             sym.name = name;
             sym.SetSealed(false);
             sym.SetAccess(ACCESS.ACC_UNKNOWN);
@@ -111,9 +116,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public static LocalVariableSymbol CreateLocalVar(Name name, Scope parent, CType type)
         {
-            LocalVariableSymbol sym = (LocalVariableSymbol)NewBasicSymbol(SYMKIND.SK_LocalVariableSymbol, name, parent);
+            LocalVariableSymbol sym = (LocalVariableSymbol)NewBasicSymbol(
+                SYMKIND.SK_LocalVariableSymbol,
+                name,
+                parent
+            );
             sym.SetType(type);
-            sym.SetAccess(ACCESS.ACC_UNKNOWN);    // required for Symbol::hasExternalAccess which is used by refactoring
+            sym.SetAccess(ACCESS.ACC_UNKNOWN); // required for Symbol::hasExternalAccess which is used by refactoring
             sym.wrap = null;
 
             return sym;
@@ -124,7 +133,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public static PropertySymbol CreateProperty(Name name, AggregateSymbol parent)
         {
-            PropertySymbol sym = NewBasicSymbol(SYMKIND.SK_PropertySymbol, name, parent) as PropertySymbol;
+            PropertySymbol sym =
+                NewBasicSymbol(SYMKIND.SK_PropertySymbol, name, parent) as PropertySymbol;
             Debug.Assert(sym != null);
             return sym;
         }
@@ -137,9 +147,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return sym;
         }
 
-        public static TypeParameterSymbol CreateMethodTypeParameter(Name pName, MethodSymbol pParent, int index, int indexTotal)
+        public static TypeParameterSymbol CreateMethodTypeParameter(
+            Name pName,
+            MethodSymbol pParent,
+            int index,
+            int indexTotal
+        )
         {
-            TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(SYMKIND.SK_TypeParameterSymbol, pName, pParent);
+            TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(
+                SYMKIND.SK_TypeParameterSymbol,
+                pName,
+                pParent
+            );
             pResult.SetIndexInOwnParameters(index);
             pResult.SetIndexInTotalParameters(indexTotal);
 
@@ -149,9 +168,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return pResult;
         }
 
-        public static TypeParameterSymbol CreateClassTypeParameter(Name pName, AggregateSymbol pParent, int index, int indexTotal)
+        public static TypeParameterSymbol CreateClassTypeParameter(
+            Name pName,
+            AggregateSymbol pParent,
+            int index,
+            int indexTotal
+        )
         {
-            TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(SYMKIND.SK_TypeParameterSymbol, pName, pParent);
+            TypeParameterSymbol pResult = (TypeParameterSymbol)NewBasicSymbol(
+                SYMKIND.SK_TypeParameterSymbol,
+                pName,
+                pParent
+            );
             pResult.SetIndexInOwnParameters(index);
             pResult.SetIndexInTotalParameters(indexTotal);
 
@@ -165,7 +193,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public static IndexerSymbol CreateIndexer(Name name, ParentSymbol parent)
         {
-            IndexerSymbol sym = (IndexerSymbol)NewBasicSymbol(SYMKIND.SK_IndexerSymbol, name, parent);
+            IndexerSymbol sym = (IndexerSymbol)NewBasicSymbol(
+                SYMKIND.SK_IndexerSymbol,
+                name,
+                parent
+            );
             sym.setKind(SYMKIND.SK_PropertySymbol);
             sym.isOperator = true;
 

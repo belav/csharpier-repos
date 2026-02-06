@@ -14,12 +14,12 @@ namespace Internal.TypeSystem
     {
         None = 0x0000,
 
-        UnmanagedCallingConventionMask       = 0x000F,
-        UnmanagedCallingConventionCdecl      = 0x0001,
-        UnmanagedCallingConventionStdCall    = 0x0002,
-        UnmanagedCallingConventionThisCall   = 0x0003,
-        CallingConventionVarargs             = 0x0005,
-        UnmanagedCallingConvention           = 0x0009,
+        UnmanagedCallingConventionMask = 0x000F,
+        UnmanagedCallingConventionCdecl = 0x0001,
+        UnmanagedCallingConventionStdCall = 0x0002,
+        UnmanagedCallingConventionThisCall = 0x0003,
+        CallingConventionVarargs = 0x0005,
+        UnmanagedCallingConvention = 0x0009,
 
         Static = 0x0010,
     }
@@ -56,15 +56,24 @@ namespace Internal.TypeSystem
         // Value of <see cref="EmbeddedSignatureData.index" /> for any custom modifiers on
         // SomeStruct when SomeStruct *, or SomeStruct & is the type of a parameter or return type
         // Parameter index 0 represents the return type, and indices 1-n represent the parameters to the signature
-        public static string GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(int parameterIndex)
+        public static string GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(
+            int parameterIndex
+        )
         {
             return $"0.1.1.2.{(parameterIndex + 1).ToStringInvariant()}.1";
         }
 
         // Provide a means to create a MethodSignature which ignores EmbeddedSignature data in the MethodSignatures it is compared to
-        public static EmbeddedSignatureData[] EmbeddedSignatureMismatchPermittedFlag = Array.Empty<EmbeddedSignatureData>();
+        public static EmbeddedSignatureData[] EmbeddedSignatureMismatchPermittedFlag =
+            Array.Empty<EmbeddedSignatureData>();
 
-        public MethodSignature(MethodSignatureFlags flags, int genericParameterCount, TypeDesc returnType, TypeDesc[] parameters, EmbeddedSignatureData[] embeddedSignatureData = null)
+        public MethodSignature(
+            MethodSignatureFlags flags,
+            int genericParameterCount,
+            TypeDesc returnType,
+            TypeDesc[] parameters,
+            EmbeddedSignatureData[] embeddedSignatureData = null
+        )
         {
             _flags = flags;
             _genericParameterCount = genericParameterCount;
@@ -82,7 +91,10 @@ namespace Internal.TypeSystem
 
             bool needsNewMethodSignature = false;
             TypeDesc[] newParameters = _parameters; // Re-use existing array until conflict appears
-            TypeDesc returnTypeNew = _returnType.InstantiateSignature(substitution, default(Instantiation));
+            TypeDesc returnTypeNew = _returnType.InstantiateSignature(
+                substitution,
+                default(Instantiation)
+            );
             if (returnTypeNew != _returnType)
             {
                 needsNewMethodSignature = true;
@@ -91,7 +103,8 @@ namespace Internal.TypeSystem
 
             for (int i = 0; i < newParameters.Length; i++)
             {
-                TypeDesc newParameter = newParameters[i].InstantiateSignature(substitution, default(Instantiation));
+                TypeDesc newParameter = newParameters[i]
+                    .InstantiateSignature(substitution, default(Instantiation));
                 if (newParameter != newParameters[i])
                 {
                     if (!needsNewMethodSignature)
@@ -105,7 +118,13 @@ namespace Internal.TypeSystem
 
             if (needsNewMethodSignature)
             {
-                return new MethodSignature(_flags, _genericParameterCount, returnTypeNew, newParameters, _embeddedSignatureData);
+                return new MethodSignature(
+                    _flags,
+                    _genericParameterCount,
+                    returnTypeNew,
+                    newParameters,
+                    _embeddedSignatureData
+                );
             }
             else
             {
@@ -115,34 +134,22 @@ namespace Internal.TypeSystem
 
         public MethodSignatureFlags Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         }
 
         public bool IsStatic
         {
-            get
-            {
-                return (_flags & MethodSignatureFlags.Static) != 0;
-            }
+            get { return (_flags & MethodSignatureFlags.Static) != 0; }
         }
 
         public int GenericParameterCount
         {
-            get
-            {
-                return _genericParameterCount;
-            }
+            get { return _genericParameterCount; }
         }
 
         public TypeDesc ReturnType
         {
-            get
-            {
-                return _returnType;
-            }
+            get { return _returnType; }
         }
 
         /// <summary>
@@ -151,10 +158,7 @@ namespace Internal.TypeSystem
         [IndexerName("Parameter")]
         public TypeDesc this[int index]
         {
-            get
-            {
-                return _parameters[index];
-            }
+            get { return _parameters[index]; }
         }
 
         /// <summary>
@@ -162,26 +166,17 @@ namespace Internal.TypeSystem
         /// </summary>
         public int Length
         {
-            get
-            {
-                return _parameters.Length;
-            }
+            get { return _parameters.Length; }
         }
 
         public bool HasEmbeddedSignatureData
         {
-            get
-            {
-                return _embeddedSignatureData != null && _embeddedSignatureData.Length != 0;
-            }
+            get { return _embeddedSignatureData != null && _embeddedSignatureData.Length != 0; }
         }
 
         public bool EmbeddedSignatureMismatchPermitted
         {
-            get
-            {
-                return _embeddedSignatureData == EmbeddedSignatureMismatchPermittedFlag;
-            }
+            get { return _embeddedSignatureData == EmbeddedSignatureMismatchPermittedFlag; }
         }
 
         public EmbeddedSignatureData[] GetEmbeddedSignatureData()
@@ -189,7 +184,9 @@ namespace Internal.TypeSystem
             return GetEmbeddedSignatureData(default);
         }
 
-        public EmbeddedSignatureData[] GetEmbeddedSignatureData(ReadOnlySpan<EmbeddedSignatureDataKind> kinds)
+        public EmbeddedSignatureData[] GetEmbeddedSignatureData(
+            ReadOnlySpan<EmbeddedSignatureDataKind> kinds
+        )
         {
             if ((_embeddedSignatureData == null) || (_embeddedSignatureData.Length == 0))
                 return null;
@@ -224,15 +221,30 @@ namespace Internal.TypeSystem
 
         public bool EquivalentTo(MethodSignature otherSignature)
         {
-            return Equals(otherSignature, allowCovariantReturn: false, allowEquivalence: true, visited: null);
+            return Equals(
+                otherSignature,
+                allowCovariantReturn: false,
+                allowEquivalence: true,
+                visited: null
+            );
         }
 
         internal bool EquivalentTo(MethodSignature otherSignature, StackOverflowProtect visited)
         {
-            return Equals(otherSignature, allowCovariantReturn: false, allowEquivalence: true, visited: visited);
+            return Equals(
+                otherSignature,
+                allowCovariantReturn: false,
+                allowEquivalence: true,
+                visited: visited
+            );
         }
 
-        private bool Equals(MethodSignature otherSignature, bool allowCovariantReturn, bool allowEquivalence, StackOverflowProtect visited = null)
+        private bool Equals(
+            MethodSignature otherSignature,
+            bool allowCovariantReturn,
+            bool allowEquivalence,
+            StackOverflowProtect visited = null
+        )
         {
             if (this._flags != otherSignature._flags)
                 return false;
@@ -240,7 +252,14 @@ namespace Internal.TypeSystem
             if (this._genericParameterCount != otherSignature._genericParameterCount)
                 return false;
 
-            if (!IsTypeEqualHelper(this._returnType, otherSignature._returnType, allowEquivalence, visited))
+            if (
+                !IsTypeEqualHelper(
+                    this._returnType,
+                    otherSignature._returnType,
+                    allowEquivalence,
+                    visited
+                )
+            )
             {
                 if (!allowCovariantReturn)
                     return false;
@@ -254,25 +273,43 @@ namespace Internal.TypeSystem
 
             for (int i = 0; i < this._parameters.Length; i++)
             {
-                if (!IsTypeEqualHelper(this._parameters[i], otherSignature._parameters[i], allowEquivalence, visited))
+                if (
+                    !IsTypeEqualHelper(
+                        this._parameters[i],
+                        otherSignature._parameters[i],
+                        allowEquivalence,
+                        visited
+                    )
+                )
                     return false;
             }
 
-            if (this._embeddedSignatureData == null && otherSignature._embeddedSignatureData == null)
+            if (
+                this._embeddedSignatureData == null
+                && otherSignature._embeddedSignatureData == null
+            )
             {
                 return true;
             }
 
             // Array methods do not need to have matching details for the array parameters they support
-            if (this.EmbeddedSignatureMismatchPermitted ||
-                otherSignature.EmbeddedSignatureMismatchPermitted)
+            if (
+                this.EmbeddedSignatureMismatchPermitted
+                || otherSignature.EmbeddedSignatureMismatchPermitted
+            )
             {
                 return true;
             }
 
-            if (this._embeddedSignatureData != null && otherSignature._embeddedSignatureData != null)
+            if (
+                this._embeddedSignatureData != null
+                && otherSignature._embeddedSignatureData != null
+            )
             {
-                if (this._embeddedSignatureData.Length != otherSignature._embeddedSignatureData.Length)
+                if (
+                    this._embeddedSignatureData.Length
+                    != otherSignature._embeddedSignatureData.Length
+                )
                 {
                     return false;
                 }
@@ -280,11 +317,20 @@ namespace Internal.TypeSystem
                 for (int i = 0; i < this._embeddedSignatureData.Length; i++)
                 {
                     ref EmbeddedSignatureData thisData = ref this._embeddedSignatureData[i];
-                    ref EmbeddedSignatureData otherData = ref otherSignature._embeddedSignatureData[i];
+                    ref EmbeddedSignatureData otherData = ref otherSignature._embeddedSignatureData[
+                        i
+                    ];
 
-                    if (thisData.index != otherData.index ||
-                        thisData.kind != otherData.kind ||
-                        !IsTypeEqualHelper(thisData.type, otherData.type, allowEquivalence, visited))
+                    if (
+                        thisData.index != otherData.index
+                        || thisData.kind != otherData.kind
+                        || !IsTypeEqualHelper(
+                            thisData.type,
+                            otherData.type,
+                            allowEquivalence,
+                            visited
+                        )
+                    )
                     {
                         return false;
                     }
@@ -295,7 +341,12 @@ namespace Internal.TypeSystem
 
             return false;
 
-            static bool IsTypeEqualHelper(TypeDesc type1, TypeDesc type2, bool allowEquivalence, StackOverflowProtect visited)
+            static bool IsTypeEqualHelper(
+                TypeDesc type1,
+                TypeDesc type2,
+                bool allowEquivalence,
+                StackOverflowProtect visited
+            )
             {
                 if (type1 == type2)
                     return true;
@@ -318,7 +369,10 @@ namespace Internal.TypeSystem
 
         public override int GetHashCode()
         {
-            return TypeHashingAlgorithms.ComputeMethodSignatureHashCode(_returnType.GetHashCode(), _parameters);
+            return TypeHashingAlgorithms.ComputeMethodSignatureHashCode(
+                _returnType.GetHashCode(),
+                _parameters
+            );
         }
 
         public SignatureEnumerator GetEnumerator()
@@ -377,18 +431,12 @@ namespace Internal.TypeSystem
 
         public MethodSignatureFlags Flags
         {
-            set
-            {
-                _flags = value;
-            }
+            set { _flags = value; }
         }
 
         public TypeDesc ReturnType
         {
-            set
-            {
-                _returnType = value;
-            }
+            set { _returnType = value; }
         }
 
         [System.Runtime.CompilerServices.IndexerName("Parameter")]
@@ -426,14 +474,22 @@ namespace Internal.TypeSystem
 
         public MethodSignature ToSignature()
         {
-            if (_template == null ||
-                _flags != _template._flags ||
-                _genericParameterCount != _template._genericParameterCount ||
-                _returnType != _template._returnType ||
-                _parameters != _template._parameters ||
-                _embeddedSignatureData != _template._embeddedSignatureData)
+            if (
+                _template == null
+                || _flags != _template._flags
+                || _genericParameterCount != _template._genericParameterCount
+                || _returnType != _template._returnType
+                || _parameters != _template._parameters
+                || _embeddedSignatureData != _template._embeddedSignatureData
+            )
             {
-                _template = new MethodSignature(_flags, _genericParameterCount, _returnType, _parameters, _embeddedSignatureData);
+                _template = new MethodSignature(
+                    _flags,
+                    _genericParameterCount,
+                    _returnType,
+                    _parameters,
+                    _embeddedSignatureData
+                );
             }
 
             return _template;
@@ -486,13 +542,18 @@ namespace Internal.TypeSystem
         /// </summary>
         protected virtual int ComputeHashCode()
         {
-            return TypeHashingAlgorithms.ComputeMethodHashCode(OwningType.GetHashCode(), TypeHashingAlgorithms.ComputeNameHashCode(Name));
+            return TypeHashingAlgorithms.ComputeMethodHashCode(
+                OwningType.GetHashCode(),
+                TypeHashingAlgorithms.ComputeNameHashCode(Name)
+            );
         }
 
         public override bool Equals(object o)
         {
             // Its only valid to compare two MethodDescs in the same context
-            Debug.Assert(o is not MethodDesc || ReferenceEquals(((MethodDesc)o).Context, this.Context));
+            Debug.Assert(
+                o is not MethodDesc || ReferenceEquals(((MethodDesc)o).Context, this.Context)
+            );
             return ReferenceEquals(this, o);
         }
 
@@ -500,18 +561,12 @@ namespace Internal.TypeSystem
         /// Gets the type that owns this method. This will be a <see cref="DefType"/> or
         /// an <see cref="ArrayType"/>.
         /// </summary>
-        public abstract TypeDesc OwningType
-        {
-            get;
-        }
+        public abstract TypeDesc OwningType { get; }
 
         /// <summary>
         /// Gets the signature of the method.
         /// </summary>
-        public abstract MethodSignature Signature
-        {
-            get;
-        }
+        public abstract MethodSignature Signature { get; }
 
         /// <summary>
         /// Gets the generic instantiation information of this method.
@@ -520,10 +575,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         /// <summary>
@@ -532,10 +584,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasInstantiation
         {
-            get
-            {
-                return this.Instantiation.Length != 0;
-            }
+            get { return this.Instantiation.Length != 0; }
         }
 
         /// <summary>
@@ -557,10 +606,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsDefaultConstructor
         {
-            get
-            {
-                return OwningType.GetDefaultConstructor() == this;
-            }
+            get { return OwningType.GetDefaultConstructor() == this; }
         }
 
         /// <summary>
@@ -568,10 +614,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsStaticConstructor
         {
-            get
-            {
-                return this == this.OwningType.GetStaticConstructor();
-            }
+            get { return this == this.OwningType.GetStaticConstructor(); }
         }
 
         /// <summary>
@@ -579,10 +622,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual string Name
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -590,10 +630,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -602,10 +639,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsNewSlot
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -614,10 +648,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -625,18 +656,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual bool IsPublic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public abstract bool HasCustomAttribute(string attributeNamespace, string attributeName);
@@ -657,10 +682,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsMethodDefinition
         {
-            get
-            {
-                return GetMethodDefinition() == this;
-            }
+            get { return GetMethodDefinition() == this; }
         }
 
         /// <summary>
@@ -678,10 +700,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsTypicalMethodDefinition
         {
-            get
-            {
-                return GetTypicalMethodDefinition() == this;
-            }
+            get { return GetTypicalMethodDefinition() == this; }
         }
 
         /// <summary>
@@ -689,10 +708,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsGenericMethodDefinition
         {
-            get
-            {
-                return HasInstantiation && IsMethodDefinition;
-            }
+            get { return HasInstantiation && IsMethodDefinition; }
         }
 
         public bool IsFinalizer
@@ -700,11 +716,15 @@ namespace Internal.TypeSystem
             get
             {
                 TypeDesc owningType = OwningType;
-                return (owningType.IsObject && Name == "Finalize") || (owningType.HasFinalizer && owningType.GetFinalizer() == this);
+                return (owningType.IsObject && Name == "Finalize")
+                    || (owningType.HasFinalizer && owningType.GetFinalizer() == this);
             }
         }
 
-        public virtual MethodDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public virtual MethodDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             Instantiation instantiation = Instantiation;
             TypeDesc[] clone = null;
@@ -730,15 +750,26 @@ namespace Internal.TypeSystem
             MethodDesc method = this;
 
             TypeDesc owningType = method.OwningType;
-            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedOwningType = owningType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (owningType != instantiatedOwningType)
             {
-                method = Context.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), (InstantiatedType)instantiatedOwningType);
+                method = Context.GetMethodForInstantiatedType(
+                    method.GetTypicalMethodDefinition(),
+                    (InstantiatedType)instantiatedOwningType
+                );
                 if (clone == null && instantiation.Length != 0)
                     return Context.GetInstantiatedMethod(method, instantiation);
             }
 
-            return (clone == null) ? method : Context.GetInstantiatedMethod(method.GetMethodDefinition(), new Instantiation(clone));
+            return (clone == null)
+                ? method
+                : Context.GetInstantiatedMethod(
+                    method.GetMethodDefinition(),
+                    new Instantiation(clone)
+                );
         }
     }
 }

@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         [Fact]
         public async Task MergedOnMiddleIfMergableWithNextOnly()
         {
-            const string Initial =
-                """
+            const string Initial = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -29,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                     }
                 }
                 """;
-            const string Expected =
-                """
+            const string Expected = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -51,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         [Fact]
         public async Task MergedOnMiddleIfMergableWithPreviousOnly()
         {
-            const string Initial =
-                """
+            const string Initial = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -66,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                     }
                 }
                 """;
-            const string Expected =
-                """
+            const string Expected = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -87,8 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         [Fact]
         public async Task MergedOnMiddleIfMergableWithBoth()
         {
-            const string Initial =
-                """
+            const string Initial = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -102,8 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                     }
                 }
                 """;
-            const string Expected1 =
-                """
+            const string Expected1 = """
                 class C
                 {
                     void M(bool a, bool b, bool c)
@@ -115,8 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                     }
                 }
                 """;
-            const string Expected2 =
-                """
+            const string Expected2 = """
                 class C
                 {
                     void M(bool a, bool b, bool c)

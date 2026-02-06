@@ -5,7 +5,5 @@ using System.Text;
 
 namespace MonoTests.DataObjects
 {
-	public class SeasonalEmployee : Employee
-	{
-	}
+    public class SeasonalEmployee : Employee { }
 }

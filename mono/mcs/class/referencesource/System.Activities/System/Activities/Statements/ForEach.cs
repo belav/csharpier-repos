@@ -4,14 +4,14 @@
 
 namespace System.Activities.Statements
 {
+    using System.Activities;
+    using System.Activities.Validation;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Windows.Markup;
-    using System.Activities;
-    using System.Activities.Validation;
     using SA = System.Activities;
 
     [ContentProperty("Body")]
@@ -27,19 +27,11 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public ActivityAction<T> Body
-        {
-            get;
-            set;
-        }
+        public ActivityAction<T> Body { get; set; }
 
-        [RequiredArgument]        
+        [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<IEnumerable<T>> Values
-        {
-            get;
-            set;
-        }
+        public InArgument<IEnumerable<T>> Values { get; set; }
 
         CompletionCallback OnChildComplete
         {
@@ -54,14 +46,22 @@ namespace System.Activities.Statements
             }
         }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument valuesArgument = new RuntimeArgument("Values", typeof(IEnumerable<T>), ArgumentDirection.In, true);
+            RuntimeArgument valuesArgument = new RuntimeArgument(
+                "Values",
+                typeof(IEnumerable<T>),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Values, valuesArgument);
 
             metadata.AddArgument(valuesArgument);
@@ -74,7 +74,11 @@ namespace System.Activities.Statements
             IEnumerable<T> values = this.Values.Get(context);
             if (values == null)
             {
-                throw SA.FxTrace.Exception.AsError(new InvalidOperationException(SA.SR.ForEachRequiresNonNullValues(this.DisplayName)));
+                throw SA.FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SA.SR.ForEachRequiresNonNullValues(this.DisplayName)
+                    )
+                );
             }
 
             IEnumerator<T> valueEnumerator = values.GetEnumerator();
@@ -84,8 +88,9 @@ namespace System.Activities.Statements
             {
                 while (valueEnumerator.MoveNext())
                 {
-                    // do nothing                
-                };
+                    // do nothing
+                }
+                ;
                 valueEnumerator.Dispose();
                 return;
             }
@@ -99,16 +104,28 @@ namespace System.Activities.Statements
             InternalExecute(context, completedInstance, valueEnumerator);
         }
 
-        void InternalExecute(NativeActivityContext context, ActivityInstance completedInstance, IEnumerator<T> valueEnumerator)
+        void InternalExecute(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            IEnumerator<T> valueEnumerator
+        )
         {
-            Fx.Assert(this.Body != null && this.Body.Handler != null, "Body and Body.Handler should not be null");
+            Fx.Assert(
+                this.Body != null && this.Body.Handler != null,
+                "Body and Body.Handler should not be null"
+            );
 
             if (!valueEnumerator.MoveNext())
             {
                 if (completedInstance != null)
                 {
-                    if (completedInstance.State == ActivityInstanceState.Canceled ||
-                        (context.IsCancellationRequested && completedInstance.State == ActivityInstanceState.Faulted))
+                    if (
+                        completedInstance.State == ActivityInstanceState.Canceled
+                        || (
+                            context.IsCancellationRequested
+                            && completedInstance.State == ActivityInstanceState.Faulted
+                        )
+                    )
                     {
                         context.MarkCanceled();
                     }

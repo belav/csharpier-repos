@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
     using System.IO;
@@ -15,32 +15,36 @@ namespace System.Web.Configuration {
     using System.Web.Configuration;
     using System.Web.Util;
     using System.Xml;
-
     using Pair = System.Web.UI.Pair;
 
-    internal class DelayedRegex {
-
+    internal class DelayedRegex
+    {
         private String _regstring;
         private Regex _regex;
 
-        internal DelayedRegex(String s) {
+        internal DelayedRegex(String s)
+        {
             _regex = null;
             _regstring = s;
         }
 
-        internal Match Match(String s) {
+        internal Match Match(String s)
+        {
             EnsureRegex();
             return _regex.Match(s);
         }
 
-        internal int GroupNumberFromName(String name) {
+        internal int GroupNumberFromName(String name)
+        {
             EnsureRegex();
             return _regex.GroupNumberFromName(name);
-        } 
+        }
 
-        internal void EnsureRegex() {
+        internal void EnsureRegex()
+        {
             string regstring = _regstring;
-            if(_regex == null) {
+            if (_regex == null)
+            {
                 _regex = new Regex(regstring);
                 //free original
                 _regstring = null;

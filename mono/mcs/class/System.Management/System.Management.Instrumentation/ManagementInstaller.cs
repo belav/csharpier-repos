@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,44 +28,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Configuration.Install;
 using System.Collections;
+using System.Configuration.Install;
 
 namespace System.Management.Instrumentation
 {
-	public class ManagementInstaller : Installer {
-		[MonoTODO]
-		public ManagementInstaller()
-		{
-		}
+    public class ManagementInstaller : Installer
+    {
+        [MonoTODO]
+        public ManagementInstaller() { }
 
-		[MonoTODO]
-		public override string HelpText {
-			get { throw new NotImplementedException(); }
-		}
+        [MonoTODO]
+        public override string HelpText
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override void Commit (IDictionary savedState)
-		{
-			throw new NotImplementedException();
-		}
+        [MonoTODO]
+        public override void Commit(IDictionary savedState)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override void Install (IDictionary savedState)
-		{
-			throw new NotImplementedException();
-		}
+        [MonoTODO]
+        public override void Install(IDictionary savedState)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override void Rollback (IDictionary savedState)
-		{
-			throw new NotImplementedException();
-		}
+        [MonoTODO]
+        public override void Rollback(IDictionary savedState)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override void Uninstall (IDictionary savedState)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        [MonoTODO]
+        public override void Uninstall(IDictionary savedState)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

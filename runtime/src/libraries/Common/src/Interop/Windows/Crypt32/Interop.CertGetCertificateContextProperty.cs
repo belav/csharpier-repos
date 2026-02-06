@@ -15,15 +15,21 @@ internal static partial class Interop
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             byte[]? pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
-        [LibraryImport(Libraries.Crypt32, SetLastError = true, EntryPoint = "CertGetCertificateContextProperty")]
+        [LibraryImport(
+            Libraries.Crypt32,
+            SetLastError = true,
+            EntryPoint = "CertGetCertificateContextProperty"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static unsafe partial bool CertGetCertificateContextPropertyPtr(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             byte* pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -31,7 +37,8 @@ internal static partial class Interop
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             out IntPtr pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -39,6 +46,7 @@ internal static partial class Interop
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             out DATA_BLOB pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
     }
 }

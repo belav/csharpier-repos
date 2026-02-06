@@ -10,15 +10,19 @@ namespace System.ServiceModel.Configuration
     using System.IO;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
+    using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Text;
 
     public sealed partial class XPathMessageFilterElement : ConfigurationElement
     {
         const int DefaultNodeQuota = 1000;
 
-        [ConfigurationProperty(ConfigurationStrings.Filter, DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Filter,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         public XPathMessageFilter Filter
         {
             get { return (XPathMessageFilter)base[ConfigurationStrings.Filter]; }
@@ -43,7 +47,12 @@ namespace System.ServiceModel.Configuration
                     for (int i = 0; i < reader.AttributeCount; i++)
                     {
                         reader.MoveToAttribute(i);
-                        if (reader.Name.Equals(ConfigurationStrings.NodeQuota, StringComparison.Ordinal))
+                        if (
+                            reader.Name.Equals(
+                                ConfigurationStrings.NodeQuota,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             nodeQuotaStringValue = reader.Value;
                         }
@@ -51,8 +60,16 @@ namespace System.ServiceModel.Configuration
                         {
                             if (reader.Name.Contains(":"))
                             {
-                                string[] attributeName = reader.Name.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                                tempWriter.WriteAttributeString(attributeName[0], attributeName[1], null, reader.Value);
+                                string[] attributeName = reader.Name.Split(
+                                    new char[] { ':' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
+                                tempWriter.WriteAttributeString(
+                                    attributeName[0],
+                                    attributeName[1],
+                                    null,
+                                    reader.Value
+                                );
                             }
                             else
                             {
@@ -68,8 +85,11 @@ namespace System.ServiceModel.Configuration
                 filterString = filterString.Trim();
                 if (String.IsNullOrEmpty(filterString))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.ConfigXPathFilterMustNotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ConfigXPathFilterMustNotBeEmpty)
+                        )
+                    );
                 }
                 tempWriter.WriteString(filterString);
                 tempWriter.WriteEndElement();
@@ -107,7 +127,10 @@ namespace System.ServiceModel.Configuration
             {
                 //this.Filter.WriteXPathTo(writer, null, elementName, null, true);
                 writer.WriteStartElement(elementName);
-                writer.WriteAttributeString(ConfigurationStrings.NodeQuota, Filter.NodeQuota.ToString(NumberFormatInfo.CurrentInfo));
+                writer.WriteAttributeString(
+                    ConfigurationStrings.NodeQuota,
+                    Filter.NodeQuota.ToString(NumberFormatInfo.CurrentInfo)
+                );
 
                 StringBuilder filterStringBuilder = new StringBuilder();
 
@@ -148,6 +171,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

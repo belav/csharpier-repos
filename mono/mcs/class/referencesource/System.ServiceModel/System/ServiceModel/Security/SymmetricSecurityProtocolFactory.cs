@@ -21,21 +21,14 @@ namespace System.ServiceModel.Security
         SecurityTokenParameters protectionTokenParameters;
 
         public SymmetricSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         internal SymmetricSecurityProtocolFactory(MessageSecurityProtocolFactory factory)
-            : base(factory)
-        {
-        }
+            : base(factory) { }
 
         public SecurityTokenParameters SecurityTokenParameters
         {
-            get
-            {
-                return this.tokenParameters;
-            }
+            get { return this.tokenParameters; }
             set
             {
                 ThrowIfImmutable();
@@ -45,26 +38,17 @@ namespace System.ServiceModel.Security
 
         public SecurityTokenProvider RecipientAsymmetricTokenProvider
         {
-            get
-            {
-                return this.recipientAsymmetricTokenProvider;
-            }
+            get { return this.recipientAsymmetricTokenProvider; }
         }
 
         public SecurityTokenAuthenticator RecipientSymmetricTokenAuthenticator
         {
-            get
-            {
-                return this.recipientSymmetricTokenAuthenticator;
-            }
+            get { return this.recipientSymmetricTokenAuthenticator; }
         }
 
         public ReadOnlyCollection<SecurityTokenResolver> RecipientOutOfBandTokenResolverList
         {
-            get
-            {
-                return this.recipientOutOfBandTokenResolverList;
-            }
+            get { return this.recipientOutOfBandTokenResolverList; }
         }
 
         public override EndpointIdentity GetIdentityOfSelf()
@@ -74,7 +58,9 @@ namespace System.ServiceModel.Security
             {
                 SecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
                 this.SecurityTokenParameters.InitializeSecurityTokenRequirement(requirement);
-                identity = ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(requirement);
+                identity = ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(
+                    requirement
+                );
             }
             else
             {
@@ -87,10 +73,20 @@ namespace System.ServiceModel.Security
         {
             if (typeof(T) == typeof(Collection<ISecurityContextSecurityTokenCache>))
             {
-                Collection<ISecurityContextSecurityTokenCache> result = base.GetProperty<Collection<ISecurityContextSecurityTokenCache>>();
-                if (this.recipientSymmetricTokenAuthenticator is ISecurityContextSecurityTokenCacheProvider)
+                Collection<ISecurityContextSecurityTokenCache> result = base.GetProperty<
+                    Collection<ISecurityContextSecurityTokenCache>
+                >();
+                if (
+                    this.recipientSymmetricTokenAuthenticator
+                    is ISecurityContextSecurityTokenCacheProvider
+                )
                 {
-                    result.Add(((ISecurityContextSecurityTokenCacheProvider)this.recipientSymmetricTokenAuthenticator).TokenCache);
+                    result.Add(
+                        (
+                            (ISecurityContextSecurityTokenCacheProvider)
+                                this.recipientSymmetricTokenAuthenticator
+                        ).TokenCache
+                    );
                 }
                 return (T)(object)(result);
             }
@@ -107,11 +103,17 @@ namespace System.ServiceModel.Security
             {
                 if (this.recipientSymmetricTokenAuthenticator != null)
                 {
-                    SecurityUtils.CloseTokenAuthenticatorIfRequired(this.recipientSymmetricTokenAuthenticator, timeoutHelper.RemainingTime());
+                    SecurityUtils.CloseTokenAuthenticatorIfRequired(
+                        this.recipientSymmetricTokenAuthenticator,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 if (this.recipientAsymmetricTokenProvider != null)
                 {
-                    SecurityUtils.CloseTokenProviderIfRequired(this.recipientAsymmetricTokenProvider, timeoutHelper.RemainingTime());
+                    SecurityUtils.CloseTokenProviderIfRequired(
+                        this.recipientAsymmetricTokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
             base.OnClose(timeoutHelper.RemainingTime());
@@ -123,26 +125,39 @@ namespace System.ServiceModel.Security
             {
                 if (this.recipientSymmetricTokenAuthenticator != null)
                 {
-                    SecurityUtils.AbortTokenAuthenticatorIfRequired(this.recipientSymmetricTokenAuthenticator);
+                    SecurityUtils.AbortTokenAuthenticatorIfRequired(
+                        this.recipientSymmetricTokenAuthenticator
+                    );
                 }
                 if (this.recipientAsymmetricTokenProvider != null)
                 {
-                    SecurityUtils.AbortTokenProviderIfRequired(this.recipientAsymmetricTokenProvider);
+                    SecurityUtils.AbortTokenProviderIfRequired(
+                        this.recipientAsymmetricTokenProvider
+                    );
                 }
             }
             base.OnAbort();
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             return new SymmetricSecurityProtocol(this, target, via);
         }
 
         RecipientServiceModelSecurityTokenRequirement CreateRecipientTokenRequirement()
         {
-            RecipientServiceModelSecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
+            RecipientServiceModelSecurityTokenRequirement requirement =
+                CreateRecipientSecurityTokenRequirement();
             this.SecurityTokenParameters.InitializeSecurityTokenRequirement(requirement);
-            requirement.KeyUsage = (this.SecurityTokenParameters.HasAsymmetricKey) ? SecurityKeyUsage.Exchange : SecurityKeyUsage.Signature;
+            requirement.KeyUsage =
+                (this.SecurityTokenParameters.HasAsymmetricKey)
+                    ? SecurityKeyUsage.Exchange
+                    : SecurityKeyUsage.Signature;
             return requirement;
         }
 
@@ -158,38 +173,65 @@ namespace System.ServiceModel.Security
 
             if (!this.ActAsInitiator)
             {
-                SecurityTokenRequirement recipientTokenRequirement = CreateRecipientTokenRequirement();
+                SecurityTokenRequirement recipientTokenRequirement =
+                    CreateRecipientTokenRequirement();
                 SecurityTokenResolver resolver = null;
                 if (this.SecurityTokenParameters.HasAsymmetricKey)
                 {
-                    this.recipientAsymmetricTokenProvider = this.SecurityTokenManager.CreateSecurityTokenProvider(recipientTokenRequirement);
+                    this.recipientAsymmetricTokenProvider =
+                        this.SecurityTokenManager.CreateSecurityTokenProvider(
+                            recipientTokenRequirement
+                        );
                 }
                 else
                 {
-                    this.recipientSymmetricTokenAuthenticator = this.SecurityTokenManager.CreateSecurityTokenAuthenticator(recipientTokenRequirement, out resolver);
+                    this.recipientSymmetricTokenAuthenticator =
+                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
+                            recipientTokenRequirement,
+                            out resolver
+                        );
                 }
-                if (this.RecipientSymmetricTokenAuthenticator != null && this.RecipientAsymmetricTokenProvider != null)
+                if (
+                    this.RecipientSymmetricTokenAuthenticator != null
+                    && this.RecipientAsymmetricTokenProvider != null
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected)
+                        )
+                    );
                 }
                 if (resolver != null)
                 {
                     Collection<SecurityTokenResolver> tmp = new Collection<SecurityTokenResolver>();
                     tmp.Add(resolver);
-                    this.recipientOutOfBandTokenResolverList = new ReadOnlyCollection<SecurityTokenResolver>(tmp);
+                    this.recipientOutOfBandTokenResolverList =
+                        new ReadOnlyCollection<SecurityTokenResolver>(tmp);
                 }
                 else
                 {
-                    this.recipientOutOfBandTokenResolverList = EmptyReadOnlyCollection<SecurityTokenResolver>.Instance;
+                    this.recipientOutOfBandTokenResolverList =
+                        EmptyReadOnlyCollection<SecurityTokenResolver>.Instance;
                 }
 
                 if (this.RecipientAsymmetricTokenProvider != null)
                 {
-                    Open("RecipientAsymmetricTokenProvider", true, this.RecipientAsymmetricTokenProvider, timeoutHelper.RemainingTime());
+                    Open(
+                        "RecipientAsymmetricTokenProvider",
+                        true,
+                        this.RecipientAsymmetricTokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 else
                 {
-                    Open("RecipientSymmetricTokenAuthenticator", true, this.RecipientSymmetricTokenAuthenticator, timeoutHelper.RemainingTime());
+                    Open(
+                        "RecipientSymmetricTokenAuthenticator",
+                        true,
+                        this.RecipientSymmetricTokenAuthenticator,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
             if (this.tokenParameters.RequireDerivedKeys)
@@ -199,7 +241,8 @@ namespace System.ServiceModel.Security
             if (this.tokenParameters.HasAsymmetricKey)
             {
                 this.protectionTokenParameters = new WrappedKeySecurityTokenParameters();
-                this.protectionTokenParameters.RequireDerivedKeys = this.SecurityTokenParameters.RequireDerivedKeys;
+                this.protectionTokenParameters.RequireDerivedKeys =
+                    this.SecurityTokenParameters.RequireDerivedKeys;
             }
             else
             {

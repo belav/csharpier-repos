@@ -15,15 +15,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
-    public class AddDocCommentNodesCodesFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class AddDocCommentNodesCodesFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddDocCommentNodesCodesFixProviderTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddDocCommentNodesCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddDocCommentNodesCodeFixProvider());
 
         private async Task TestAsync(string initial, string expected)
         {
@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NoNodesBefore()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -46,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -65,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NoNodesAfter()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -77,8 +74,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -96,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NodesBeforeAndAfter()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -109,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -128,8 +122,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NodesBeforeAndAfter_RawTextInComment()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -142,8 +135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -162,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NodesBeforeAndAfter_WithContent()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -175,8 +166,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -194,8 +184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_NestedInSummaryTag()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -205,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -223,8 +211,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_BeforeNode_EverythingOnOneLine()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary></summary> <param name="j"></param>
@@ -232,8 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary></summary>
@@ -248,8 +234,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_AfterNode_EverythingOnOneLine()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary></summary> <param name="j"></param>
@@ -257,8 +242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary></summary>
@@ -273,8 +257,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_BeforeNode_JustParamNode()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <param name="j"></param>
@@ -282,8 +265,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <param name="i"></param>
@@ -298,8 +280,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_AfterNode_JustParamNode()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <param name="j"></param>
@@ -307,8 +288,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <param name="i"></param>
@@ -323,8 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_MultipleDocComments()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary></summary>
@@ -337,8 +316,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary></summary>
@@ -358,8 +336,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_Ctor()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -370,8 +347,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -389,8 +365,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_Delegate()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -401,8 +376,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -420,8 +394,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_Operator()
         {
-            var initial =
-                """
+            var initial = """
                 public struct MyStruct
                 {
                     public int Val { get; }
@@ -443,8 +416,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 public struct MyStruct
                 {
                     public int Val { get; }
@@ -473,8 +445,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument_MultipleParamNodesInVariousPlaces()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     /// <summary>
@@ -485,8 +456,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     /// <summary>
@@ -847,7 +817,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_Class()
         {
-            var initial = @"
+            var initial =
+                @"
 /// <summary>
 /// 
 /// </summary>
@@ -855,7 +826,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
 class R(int [|First|], int Second, int Third);
 ";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// 
 /// </summary>
@@ -870,7 +842,8 @@ class R(int First, int Second, int Third);
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddDocCommentNodes)]
         public async Task AddsParamTag_Struct()
         {
-            var initial = @"
+            var initial =
+                @"
 /// <summary>
 /// 
 /// </summary>
@@ -878,7 +851,8 @@ class R(int First, int Second, int Third);
 struct R(int [|First|], int Second, int Third);
 ";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// 
 /// </summary>

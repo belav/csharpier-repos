@@ -7,9 +7,9 @@
 // Reduced from 625.1 KiB to 1.5 KiB in 00:03:14
 // Debug: Outputs 0
 // Release: Outputs 1
-using Xunit;
 using System;
 using System.Runtime.CompilerServices;
+using Xunit;
 
 public struct S0
 {
@@ -56,7 +56,5 @@ public class Runtime_75442
     private static int UpperBound() => 2;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Use(int val)
-    {
-    }
+    private static void Use(int val) { }
 }

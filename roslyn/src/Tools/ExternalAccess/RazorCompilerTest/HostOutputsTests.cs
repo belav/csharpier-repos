@@ -21,22 +21,35 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.UnitTests
                 class C { }
                 """;
             var parseOptions = TestOptions.Regular;
-            var compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugDllThrowing,
+                parseOptions: parseOptions
+            );
             compilation.VerifyDiagnostics();
 
             Assert.Single(compilation.SyntaxTrees);
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                var syntaxProvider = ctx.SyntaxProvider.CreateSyntaxProvider((n, _) => n.IsKind(SyntaxKind.ClassDeclaration), (c, _) => c.Node);
+                var syntaxProvider = ctx.SyntaxProvider.CreateSyntaxProvider(
+                    (n, _) => n.IsKind(SyntaxKind.ClassDeclaration),
+                    (c, _) => c.Node
+                );
 
-                ctx.RegisterHostOutput(syntaxProvider, static (hpc, node, _) =>
-                {
-                    hpc.AddOutput("test", node.ToFullString());
-                });
+                ctx.RegisterHostOutput(
+                    syntaxProvider,
+                    static (hpc, node, _) =>
+                    {
+                        hpc.AddOutput("test", node.ToFullString());
+                    }
+                );
             });
 
-            GeneratorDriver driver = CSharpGeneratorDriver.Create(new[] { generator.AsSourceGenerator() }, parseOptions: parseOptions);
+            GeneratorDriver driver = CSharpGeneratorDriver.Create(
+                new[] { generator.AsSourceGenerator() },
+                parseOptions: parseOptions
+            );
             driver = driver.RunGenerators(compilation);
 
             var result = driver.GetRunResult().Results.Single();

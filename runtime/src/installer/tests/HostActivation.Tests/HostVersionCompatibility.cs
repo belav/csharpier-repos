@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build.Framework;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.DotNet.Cli.Build.Framework;
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
@@ -31,31 +31,42 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             RuntimeConfig appConfig = RuntimeConfig.FromFile(app.RuntimeConfigJson);
             Assert.NotEqual(appConfig.Tfm, TestContext.Tfm);
-            Assert.NotEqual(appConfig.GetIncludedFramework(Constants.MicrosoftNETCoreApp).Version, TestContext.MicrosoftNETCoreAppVersion);
+            Assert.NotEqual(
+                appConfig.GetIncludedFramework(Constants.MicrosoftNETCoreApp).Version,
+                TestContext.MicrosoftNETCoreAppVersion
+            );
 
             // Use the newer apphost
             // This emulates the case when:
             //  1) Newer runtime installed
             //  2) Newer runtime uninstalled (installer preserves newer apphost)
             app.CreateAppHost();
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining($"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}");
+                .And.HaveStdErrContaining(
+                    $"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}"
+                );
 
             // Use the newer apphost and hostFxr
             // This emulates the case when:
             //  1) Newer runtime installed
             //  2) A roll-forward to the newer runtime did not occur
             File.Copy(Binaries.HostFxr.FilePath, app.HostFxrDll, true);
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining($"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}");
+                .And.HaveStdErrContaining(
+                    $"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}"
+                );
         }
 
         [Fact]
@@ -69,8 +80,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             TestApp app = sharedTestState.AppLatest.Copy();
             string appExe = app.AppExe;
 
-            RuntimeConfig previousAppConfig = RuntimeConfig.FromFile(previousVersionApp.RuntimeConfigJson);
-            string previousVersion = previousAppConfig.GetIncludedFramework(Constants.MicrosoftNETCoreApp).Version;
+            RuntimeConfig previousAppConfig = RuntimeConfig.FromFile(
+                previousVersionApp.RuntimeConfigJson
+            );
+            string previousVersion = previousAppConfig
+                .GetIncludedFramework(Constants.MicrosoftNETCoreApp)
+                .Version;
             Assert.NotEqual(TestContext.Tfm, previousAppConfig.Tfm);
             Assert.NotEqual(TestContext.MicrosoftNETCoreAppVersion, previousVersion);
 
@@ -79,10 +94,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             //  1) Newer runtime installed
             //  2) App rolls forward to newer runtime
             File.Copy(previousVersionApp.AppExe, appExe, true);
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
 
@@ -94,10 +111,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             if (OperatingSystem.IsWindows())
             {
                 File.Copy(previousVersionApp.HostFxrDll, app.HostFxrDll, true);
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .Execute()
-                    .Should().Pass()
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("Hello World")
                     .And.HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
             }
@@ -112,7 +131,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             public SharedTestState()
             {
-                App60 = TestApp.CreateFromBuiltAssets(AppName, Path.Combine("SelfContained", "net6.0"));
+                App60 = TestApp.CreateFromBuiltAssets(
+                    AppName,
+                    Path.Combine("SelfContained", "net6.0")
+                );
 
                 AppLatest = TestApp.CreateFromBuiltAssets(AppName);
                 AppLatest.PopulateSelfContained(TestApp.MockedComponent.None);

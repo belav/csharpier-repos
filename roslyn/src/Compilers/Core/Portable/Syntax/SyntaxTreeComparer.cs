@@ -24,13 +24,16 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            return string.Equals(x.FilePath, y.FilePath, StringComparison.OrdinalIgnoreCase) &&
-                SourceTextComparer.Instance.Equals(x.GetText(), y.GetText());
+            return string.Equals(x.FilePath, y.FilePath, StringComparison.OrdinalIgnoreCase)
+                && SourceTextComparer.Instance.Equals(x.GetText(), y.GetText());
         }
 
         public int GetHashCode(SyntaxTree obj)
         {
-            return Hash.Combine(obj.FilePath.GetHashCode(), SourceTextComparer.Instance.GetHashCode(obj.GetText()));
+            return Hash.Combine(
+                obj.FilePath.GetHashCode(),
+                SourceTextComparer.Instance.GetHashCode(obj.GetText())
+            );
         }
     }
 }

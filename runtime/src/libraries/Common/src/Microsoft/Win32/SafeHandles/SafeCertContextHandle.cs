@@ -84,11 +84,7 @@ namespace Microsoft.Win32.SafeHandles
         private bool CertHasProperty(CertContextPropId propertyId)
         {
             int cb = 0;
-            bool hasProperty = CertGetCertificateContextProperty(
-                this,
-                propertyId,
-                null,
-                ref cb);
+            bool hasProperty = CertGetCertificateContextProperty(this, propertyId, null, ref cb);
 
             return hasProperty;
         }

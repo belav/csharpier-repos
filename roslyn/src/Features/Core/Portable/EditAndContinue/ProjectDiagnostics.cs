@@ -9,11 +9,17 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
-internal readonly record struct ProjectDiagnostics(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics);
+internal readonly record struct ProjectDiagnostics(
+    ProjectId ProjectId,
+    ImmutableArray<Diagnostic> Diagnostics
+);
 
 internal static partial class Extensions
 {
-    public static ImmutableArray<DiagnosticData> ToDiagnosticData(this ImmutableArray<ProjectDiagnostics> diagnostics, Solution solution)
+    public static ImmutableArray<DiagnosticData> ToDiagnosticData(
+        this ImmutableArray<ProjectDiagnostics> diagnostics,
+        Solution solution
+    )
     {
         using var _ = ArrayBuilder<DiagnosticData>.GetInstance(out var result);
 
@@ -24,7 +30,10 @@ internal static partial class Extensions
             foreach (var diagnostic in projectDiagnostics)
             {
                 var document = solution.GetDocument(diagnostic.Location.SourceTree);
-                var data = (document != null) ? DiagnosticData.Create(diagnostic, document) : DiagnosticData.Create(solution, diagnostic, project);
+                var data =
+                    (document != null)
+                        ? DiagnosticData.Create(diagnostic, document)
+                        : DiagnosticData.Create(solution, diagnostic, project);
                 result.Add(data);
             }
         }

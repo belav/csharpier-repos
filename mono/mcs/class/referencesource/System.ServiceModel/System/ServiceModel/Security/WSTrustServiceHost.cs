@@ -12,14 +12,14 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Description;
     using System.Web.Configuration;
     using System.Web.Hosting;
-    
+
     /// <summary>
     /// ServiceHost for registering SecurityTokenService. The ServiceHost will have multiple endpoints
     /// registered based on the number of listeners registered in the config.
     /// </summary>
     public class WSTrustServiceHost : ServiceHost
     {
-        WSTrustServiceContract _serviceContract;        
+        WSTrustServiceContract _serviceContract;
 
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustServiceHost"/>
@@ -32,10 +32,11 @@ namespace System.ServiceModel.Security
         /// setting properties on the configuration instance after the host is initialization may not result in
         /// behavioral changes.
         /// </remarks>
-        public WSTrustServiceHost(SecurityTokenServiceConfiguration securityTokenServiceConfiguration, params Uri[] baseAddresses)
-            : this(new WSTrustServiceContract(securityTokenServiceConfiguration), baseAddresses)
-        {
-        }
+        public WSTrustServiceHost(
+            SecurityTokenServiceConfiguration securityTokenServiceConfiguration,
+            params Uri[] baseAddresses
+        )
+            : this(new WSTrustServiceContract(securityTokenServiceConfiguration), baseAddresses) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustServiceHost"/>
@@ -43,7 +44,10 @@ namespace System.ServiceModel.Security
         /// <param name="serviceContract">ServiceContract implementation to use.</param>
         /// <param name="baseAddresses">BaseAddress collection for the service host</param>
         /// <exception cref="ArgumentNullException">One of the input argument is null.</exception>
-        public WSTrustServiceHost(WSTrustServiceContract serviceContract, params Uri[] baseAddresses)
+        public WSTrustServiceHost(
+            WSTrustServiceContract serviceContract,
+            params Uri[] baseAddresses
+        )
             : base(serviceContract, baseAddresses)
         {
             if (serviceContract == null)
@@ -53,7 +57,9 @@ namespace System.ServiceModel.Security
 
             if (serviceContract.SecurityTokenServiceConfiguration == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceContract.SecurityTokenServiceConfiguration");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceContract.SecurityTokenServiceConfiguration"
+                );
             }
 
             _serviceContract = serviceContract;
@@ -64,10 +70,7 @@ namespace System.ServiceModel.Security
         /// </summary>
         public WSTrustServiceContract ServiceContract
         {
-            get
-            {
-                return _serviceContract;
-            }
+            get { return _serviceContract; }
         }
 
         /// <summary>
@@ -75,37 +78,39 @@ namespace System.ServiceModel.Security
         /// </summary>
         public SecurityTokenServiceConfiguration SecurityTokenServiceConfiguration
         {
-            get
-            {
-                return _serviceContract.SecurityTokenServiceConfiguration;
-            }
+            get { return _serviceContract.SecurityTokenServiceConfiguration; }
         }
 
         /// <summary>
-        /// Configures metadata (WSDL) for the service host. The method loops through the 
+        /// Configures metadata (WSDL) for the service host. The method loops through the
         /// base addresses, and adds mex endpoints for http, https, net.tcp and net.pipe
-        /// addresses, only when no mex endpoints have been previously added by the user. 
-        /// For http and htps addresses, HTTP and HTTPS "Get" mechanism for WSDL retrieval 
+        /// addresses, only when no mex endpoints have been previously added by the user.
+        /// For http and htps addresses, HTTP and HTTPS "Get" mechanism for WSDL retrieval
         /// is enabled.
         /// </summary>
         protected virtual void ConfigureMetadata()
         {
             if (this.BaseAddresses == null || this.BaseAddresses.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3140));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID3140)
+                );
             }
 
             // Check if a ServiceMetadataBehavior is added.
-            ServiceMetadataBehavior metadataBehavior = Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior metadataBehavior =
+                Description.Behaviors.Find<ServiceMetadataBehavior>();
             if (metadataBehavior == null)
             {
                 metadataBehavior = new ServiceMetadataBehavior();
                 Description.Behaviors.Add(metadataBehavior);
             }
 
-            // Check if an Mex endpoint has alread been added by user. This can be enabled through 
+            // Check if an Mex endpoint has alread been added by user. This can be enabled through
             // configuration.
-            bool isMexEndpointAlreadyAdded = (Description.Endpoints.Find(typeof(IMetadataExchange)) != null);
+            bool isMexEndpointAlreadyAdded = (
+                Description.Endpoints.Find(typeof(IMetadataExchange)) != null
+            );
 
             Binding mexBinding = null;
             foreach (Uri baseAddress in this.BaseAddresses)
@@ -115,16 +120,25 @@ namespace System.ServiceModel.Security
                     metadataBehavior.HttpGetEnabled = true;
                     mexBinding = MetadataExchangeBindings.CreateMexHttpBinding();
                 }
-                else if (StringComparer.OrdinalIgnoreCase.Equals(baseAddress.Scheme, Uri.UriSchemeHttps))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(baseAddress.Scheme, Uri.UriSchemeHttps)
+                )
                 {
                     metadataBehavior.HttpsGetEnabled = true;
                     mexBinding = MetadataExchangeBindings.CreateMexHttpsBinding();
                 }
-                else if (StringComparer.OrdinalIgnoreCase.Equals(baseAddress.Scheme, Uri.UriSchemeNetTcp))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(baseAddress.Scheme, Uri.UriSchemeNetTcp)
+                )
                 {
                     mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
                 }
-                else if (StringComparer.OrdinalIgnoreCase.Equals(baseAddress.Scheme, Uri.UriSchemeNetPipe))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(
+                        baseAddress.Scheme,
+                        Uri.UriSchemeNetPipe
+                    )
+                )
                 {
                     mexBinding = MetadataExchangeBindings.CreateMexNamedPipeBinding();
                 }
@@ -165,7 +179,9 @@ namespace System.ServiceModel.Security
         {
             if (Description.Endpoints.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3097)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID3097))
+                );
             }
 
             UpdateServiceConfiguration();

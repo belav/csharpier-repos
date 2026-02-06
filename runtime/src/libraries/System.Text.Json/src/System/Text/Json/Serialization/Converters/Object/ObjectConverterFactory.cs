@@ -34,19 +34,36 @@ namespace System.Text.Json.Serialization.Converters
             return true;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2067:UnrecognizedReflectionPattern",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        public override JsonConverter CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             JsonConverter converter;
             Type converterType;
 
-            bool useDefaultConstructorInUnannotatedStructs = _useDefaultConstructorInUnannotatedStructs && !typeToConvert.IsKeyValuePair();
-            if (!typeToConvert.TryGetDeserializationConstructor(useDefaultConstructorInUnannotatedStructs, out ConstructorInfo? constructor))
+            bool useDefaultConstructorInUnannotatedStructs =
+                _useDefaultConstructorInUnannotatedStructs && !typeToConvert.IsKeyValuePair();
+            if (
+                !typeToConvert.TryGetDeserializationConstructor(
+                    useDefaultConstructorInUnannotatedStructs,
+                    out ConstructorInfo? constructor
+                )
+            )
             {
-                ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(typeToConvert);
+                ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(
+                    typeToConvert
+                );
             }
 
             ParameterInfo[]? parameters = constructor?.GetParameters();
@@ -62,7 +79,9 @@ namespace System.Text.Json.Serialization.Converters
                 if (parameterCount <= JsonConstants.UnboxedParameterCountThreshold)
                 {
                     Type placeHolderType = JsonTypeInfo.ObjectType;
-                    Type[] typeArguments = new Type[JsonConstants.UnboxedParameterCountThreshold + 1];
+                    Type[] typeArguments = new Type[
+                        JsonConstants.UnboxedParameterCountThreshold + 1
+                    ];
 
                     typeArguments[0] = typeToConvert;
                     for (int i = 0; i < JsonConstants.UnboxedParameterCountThreshold; i++)
@@ -78,20 +97,28 @@ namespace System.Text.Json.Serialization.Converters
                         }
                     }
 
-                    converterType = typeof(SmallObjectWithParameterizedConstructorConverter<,,,,>).MakeGenericType(typeArguments);
+                    converterType =
+                        typeof(SmallObjectWithParameterizedConstructorConverter<,,,,>).MakeGenericType(
+                            typeArguments
+                        );
                 }
                 else
                 {
-                    converterType = typeof(LargeObjectWithParameterizedConstructorConverterWithReflection<>).MakeGenericType(typeToConvert);
+                    converterType =
+                        typeof(LargeObjectWithParameterizedConstructorConverterWithReflection<>).MakeGenericType(
+                            typeToConvert
+                        );
                 }
             }
 
-            converter = (JsonConverter)Activator.CreateInstance(
+            converter = (JsonConverter)
+                Activator.CreateInstance(
                     converterType,
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: null,
-                    culture: null)!;
+                    culture: null
+                )!;
 
             converter.ConstructorInfo = constructor!;
             return converter;

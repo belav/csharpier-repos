@@ -12,10 +12,13 @@ namespace System.ComponentModel.Composition.Primitives
         [Fact]
         public void Constructor_NullAsCatalogArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("catalog", () =>
-            {
-                new ComposablePartCatalogDebuggerProxy((ComposablePartCatalog)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "catalog",
+                () =>
+                {
+                    new ComposablePartCatalogDebuggerProxy((ComposablePartCatalog)null);
+                }
+            );
         }
 
         [Fact]
@@ -30,5 +33,5 @@ namespace System.ComponentModel.Composition.Primitives
                 EqualityExtensions.CheckEquals(e.Parts, proxy.Parts);
             }
         }
-   }
+    }
 }

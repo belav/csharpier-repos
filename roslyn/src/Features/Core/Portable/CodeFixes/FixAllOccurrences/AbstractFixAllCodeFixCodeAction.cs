@@ -16,20 +16,27 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     /// </summary>
     internal abstract class AbstractFixAllCodeFixCodeAction : AbstractFixAllCodeAction
     {
-        private static readonly HashSet<string> s_predefinedCodeFixProviderNames = GetPredefinedCodeFixProviderNames();
+        private static readonly HashSet<string> s_predefinedCodeFixProviderNames =
+            GetPredefinedCodeFixProviderNames();
 
         protected AbstractFixAllCodeFixCodeAction(
-            IFixAllState fixAllState, bool showPreviewChangesDialog)
-            : base(fixAllState, showPreviewChangesDialog)
-        {
-        }
+            IFixAllState fixAllState,
+            bool showPreviewChangesDialog
+        )
+            : base(fixAllState, showPreviewChangesDialog) { }
 
-        protected sealed override IFixAllContext CreateFixAllContext(IFixAllState fixAllState, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
-            => new FixAllContext((FixAllState)fixAllState, progressTracker, cancellationToken);
+        protected sealed override IFixAllContext CreateFixAllContext(
+            IFixAllState fixAllState,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        ) => new FixAllContext((FixAllState)fixAllState, progressTracker, cancellationToken);
 
         protected sealed override bool IsInternalProvider(IFixAllState fixAllState)
         {
-            var exportAttributes = fixAllState.Provider.GetType().GetTypeInfo().GetCustomAttributes(typeof(ExportCodeFixProviderAttribute), false);
+            var exportAttributes = fixAllState
+                .Provider.GetType()
+                .GetTypeInfo()
+                .GetCustomAttributes(typeof(ExportCodeFixProviderAttribute), false);
             if (exportAttributes?.Any() == true)
             {
                 var exportAttribute = (ExportCodeFixProviderAttribute)exportAttributes.First();

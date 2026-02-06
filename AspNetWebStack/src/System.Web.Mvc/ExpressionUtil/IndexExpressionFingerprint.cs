@@ -12,7 +12,11 @@ namespace System.Web.Mvc.ExpressionUtil
     // IndexExpression fingerprint class
     // Represents certain forms of array access or indexer property access
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class IndexExpressionFingerprint : ExpressionFingerprint
     {
         public IndexExpressionFingerprint(ExpressionType nodeType, Type type, PropertyInfo indexer)
@@ -30,9 +34,7 @@ namespace System.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             IndexExpressionFingerprint other = obj as IndexExpressionFingerprint;
-            return (other != null)
-                   && Equals(this.Indexer, other.Indexer)
-                   && this.Equals(other);
+            return (other != null) && Equals(this.Indexer, other.Indexer) && this.Equals(other);
         }
 
         internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)

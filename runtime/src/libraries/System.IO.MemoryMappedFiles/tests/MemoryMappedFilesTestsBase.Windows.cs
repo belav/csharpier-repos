@@ -46,16 +46,23 @@ namespace System.IO.MemoryMappedFiles.Tests
 
         protected static int geteuid() => throw new PlatformNotSupportedException();
 
-        protected static int mkfifo(string path, int mode) => throw new PlatformNotSupportedException();
+        protected static int mkfifo(string path, int mode) =>
+            throw new PlatformNotSupportedException();
 
         /// <summary>Asserts that the handle's inheritability matches the specified value.</summary>
-        protected static void AssertInheritability(SafeHandle handle, HandleInheritability inheritability)
+        protected static void AssertInheritability(
+            SafeHandle handle,
+            HandleInheritability inheritability
+        )
         {
             if (OperatingSystem.IsWindows())
             {
                 uint flags;
                 Assert.True(GetHandleInformation(handle.DangerousGetHandle(), out flags));
-                Assert.Equal(inheritability == HandleInheritability.Inheritable, (flags & HANDLE_FLAG_INHERIT) != 0);
+                Assert.Equal(
+                    inheritability == HandleInheritability.Inheritable,
+                    (flags & HANDLE_FLAG_INHERIT) != 0
+                );
             }
         }
     }

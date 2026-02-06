@@ -10,6 +10,12 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static unsafe partial bool GetUserObjectInformationW(IntPtr hObj, int nIndex, void* pvBuffer, uint nLength, ref uint lpnLengthNeeded);
+        public static unsafe partial bool GetUserObjectInformationW(
+            IntPtr hObj,
+            int nIndex,
+            void* pvBuffer,
+            uint nLength,
+            ref uint lpnLengthNeeded
+        );
     }
 }

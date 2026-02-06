@@ -60,10 +60,7 @@ namespace System.Speech.Recognition
 
         internal SemanticKeyElement SemanticKeyElement
         {
-            get
-            {
-                return _semanticKey;
-            }
+            get { return _semanticKey; }
         }
 
         #endregion

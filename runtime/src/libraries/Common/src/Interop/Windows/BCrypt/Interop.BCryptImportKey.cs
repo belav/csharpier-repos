@@ -11,7 +11,10 @@ internal static partial class Interop
 {
     internal static partial class BCrypt
     {
-        internal static unsafe SafeKeyHandle BCryptImportKey(SafeAlgorithmHandle hAlg, ReadOnlySpan<byte> key)
+        internal static unsafe SafeKeyHandle BCryptImportKey(
+            SafeAlgorithmHandle hAlg,
+            ReadOnlySpan<byte> key
+        )
         {
             const string BCRYPT_KEY_DATA_BLOB = "KeyDataBlob";
             int keySize = key.Length;
@@ -37,10 +40,19 @@ internal static partial class Interop
                 pBlob->dwVersion = BCRYPT_KEY_DATA_BLOB_HEADER.BCRYPT_KEY_DATA_BLOB_VERSION1;
                 pBlob->cbKeyData = (uint)keySize;
 
-
                 key.CopyTo(blob.Slice(sizeof(BCRYPT_KEY_DATA_BLOB_HEADER)));
                 SafeKeyHandle hKey;
-                NTSTATUS ntStatus = BCryptImportKey(hAlg, IntPtr.Zero, BCRYPT_KEY_DATA_BLOB, out hKey, IntPtr.Zero, 0, pbBlob, blobSize, 0);
+                NTSTATUS ntStatus = BCryptImportKey(
+                    hAlg,
+                    IntPtr.Zero,
+                    BCRYPT_KEY_DATA_BLOB,
+                    out hKey,
+                    IntPtr.Zero,
+                    0,
+                    pbBlob,
+                    blobSize,
+                    0
+                );
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {
                     throw CreateCryptographicException(ntStatus);
@@ -62,6 +74,16 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        private static unsafe partial NTSTATUS BCryptImportKey(SafeAlgorithmHandle hAlgorithm, IntPtr hImportKey, string pszBlobType, out SafeKeyHandle hKey, IntPtr pbKeyObject, int cbKeyObject, byte* pbInput, int cbInput, int dwFlags);
+        private static unsafe partial NTSTATUS BCryptImportKey(
+            SafeAlgorithmHandle hAlgorithm,
+            IntPtr hImportKey,
+            string pszBlobType,
+            out SafeKeyHandle hKey,
+            IntPtr pbKeyObject,
+            int cbKeyObject,
+            byte* pbInput,
+            int cbInput,
+            int dwFlags
+        );
     }
 }

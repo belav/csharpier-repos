@@ -17,7 +17,8 @@ namespace System.IO.Tests
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => false,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -46,7 +47,8 @@ namespace System.IO.Tests
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => false,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -70,7 +72,8 @@ namespace System.IO.Tests
                 canSeekFunc: () => true,
                 readFunc: (buffer, offset, count) => 0,
                 lengthFunc: () => 0L,
-                positionGetFunc: () => 0L);
+                positionGetFunc: () => 0L
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -88,7 +91,8 @@ namespace System.IO.Tests
                 canSeekFunc: () => true,
                 readFunc: (buffer, offset, count) => 0,
                 lengthFunc: () => 0L,
-                positionGetFunc: () => 0L);
+                positionGetFunc: () => 0L
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -100,7 +104,10 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(LengthIsLessThanOrEqualToPosition))]
-        public void IfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(long length, long position)
+        public void IfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(
+            long length,
+            long position
+        )
         {
             // Streams with their Lengths <= their Positions, e.g.
             // new MemoryStream { Position = 3 }.SetLength(1)
@@ -112,7 +119,8 @@ namespace System.IO.Tests
                 canSeekFunc: () => true,
                 lengthFunc: () => length,
                 positionGetFunc: () => position,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -133,16 +141,23 @@ namespace System.IO.Tests
             Assert.InRange(outerCount, 1, int.MaxValue);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(LengthIsLessThanOrEqualToPosition))]
-        public async Task AsyncIfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(long length, long position)
+        public async Task AsyncIfLengthIsLessThanOrEqualToPositionCopyToShouldStillBeCalledWithAPositiveBufferSize(
+            long length,
+            long position
+        )
         {
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => true,
                 lengthFunc: () => length,
                 positionGetFunc: () => position,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -155,7 +170,10 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(LengthMinusPositionPositiveOverflows))]
-        public void IfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(long length, long position)
+        public void IfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(
+            long length,
+            long position
+        )
         {
             // The new implementation of Stream.CopyTo calculates the bytes left
             // in the Stream by calling Length - Position. This can overflow to a
@@ -167,7 +185,8 @@ namespace System.IO.Tests
                 canSeekFunc: () => true,
                 lengthFunc: () => length,
                 positionGetFunc: () => position,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -188,16 +207,23 @@ namespace System.IO.Tests
             Assert.InRange(outerCount, 1, int.MaxValue);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(LengthMinusPositionPositiveOverflows))]
-        public async Task AsyncIfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(long length, long position)
+        public async Task AsyncIfLengthMinusPositionPositiveOverflowsBufferSizeShouldStillBePositive(
+            long length,
+            long position
+        )
         {
             var baseStream = new DelegateStream(
                 canReadFunc: () => true,
                 canSeekFunc: () => true,
                 lengthFunc: () => length,
                 positionGetFunc: () => position,
-                readFunc: (buffer, offset, count) => 0);
+                readFunc: (buffer, offset, count) => 0
+            );
             var trackingStream = new CallTrackingStream(baseStream);
 
             var dest = Stream.Null;
@@ -214,7 +240,10 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(LengthIsGreaterThanPositionAndDoesNotOverflow))]
-        public void IfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(long length, long position)
+        public void IfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(
+            long length,
+            long position
+        )
         {
             const int ReadLimit = 7;
 
@@ -237,17 +266,24 @@ namespace System.IO.Tests
 
                     // CopyTo should always pass in the same buffer/offset/count
 
-                    if (outerBuffer != null) Assert.Same(outerBuffer, buffer);
-                    else outerBuffer = buffer;
+                    if (outerBuffer != null)
+                        Assert.Same(outerBuffer, buffer);
+                    else
+                        outerBuffer = buffer;
 
-                    if (outerOffset != null) Assert.Equal(outerOffset, offset);
-                    else outerOffset = offset;
+                    if (outerOffset != null)
+                        Assert.Equal(outerOffset, offset);
+                    else
+                        outerOffset = offset;
 
-                    if (outerCount != null) Assert.Equal(outerCount, count);
-                    else outerCount = count;
+                    if (outerCount != null)
+                        Assert.Equal(outerCount, count);
+                    else
+                        outerCount = count;
 
                     return --readsLeft; // CopyTo will call Read on this ReadLimit times before stopping
-                });
+                }
+            );
 
             var src = new CallTrackingStream(srcBase);
 
@@ -258,7 +294,8 @@ namespace System.IO.Tests
                     Assert.Same(outerBuffer, buffer);
                     Assert.Equal(outerOffset, offset);
                     Assert.Equal(readsLeft, count);
-                });
+                }
+            );
 
             var dest = new CallTrackingStream(destBase);
             src.CopyTo(dest);
@@ -267,9 +304,15 @@ namespace System.IO.Tests
             Assert.Equal(ReadLimit - 1, dest.TimesCalled(nameof(dest.Write)));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(LengthIsGreaterThanPositionAndDoesNotOverflow))]
-        public async Task AsyncIfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(long length, long position)
+        public async Task AsyncIfLengthIsGreaterThanPositionAndDoesNotOverflowEverythingShouldGoNormally(
+            long length,
+            long position
+        )
         {
             const int ReadLimit = 7;
 
@@ -292,17 +335,24 @@ namespace System.IO.Tests
 
                     // CopyTo should always pass in the same buffer/offset/count
 
-                    if (outerBuffer != null) Assert.Same(outerBuffer, buffer);
-                    else outerBuffer = buffer;
+                    if (outerBuffer != null)
+                        Assert.Same(outerBuffer, buffer);
+                    else
+                        outerBuffer = buffer;
 
-                    if (outerOffset != null) Assert.Equal(outerOffset, offset);
-                    else outerOffset = offset;
+                    if (outerOffset != null)
+                        Assert.Equal(outerOffset, offset);
+                    else
+                        outerOffset = offset;
 
-                    if (outerCount != null) Assert.Equal(outerCount, count);
-                    else outerCount = count;
+                    if (outerCount != null)
+                        Assert.Equal(outerCount, count);
+                    else
+                        outerCount = count;
 
                     return --readsLeft; // CopyTo will call Read on this ReadLimit times before stopping
-                });
+                }
+            );
 
             var src = new CallTrackingStream(srcBase);
 
@@ -313,7 +363,8 @@ namespace System.IO.Tests
                     Assert.Same(outerBuffer, buffer);
                     Assert.Equal(outerOffset, offset);
                     Assert.Equal(readsLeft, count);
-                });
+                }
+            );
 
             var dest = new CallTrackingStream(destBase);
             await src.CopyToAsync(dest);
@@ -331,7 +382,13 @@ namespace System.IO.Tests
         public void CopyToAsync_StreamToken_InvalidArgsThrows()
         {
             Stream s = new MemoryStream();
-            AssertExtensions.Throws<ArgumentNullException>("destination", () => { s.CopyToAsync(null, default(CancellationToken)); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destination",
+                () =>
+                {
+                    s.CopyToAsync(null, default(CancellationToken));
+                }
+            );
         }
 
         [Theory]
@@ -345,20 +402,29 @@ namespace System.IO.Tests
             s.Position = 0;
 
             const int DefaultCopyBufferSize = 81920;
-            Assert.Equal(Math.Max(1, Math.Min(length, DefaultCopyBufferSize)), ((Task<int>)s.CopyToAsync(Stream.Null, default(CancellationToken))).Result);
+            Assert.Equal(
+                Math.Max(1, Math.Min(length, DefaultCopyBufferSize)),
+                ((Task<int>)s.CopyToAsync(Stream.Null, default(CancellationToken))).Result
+            );
         }
 
         private sealed class CustomMemoryStream : MemoryStream
         {
-            public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken) =>
-                Task.FromResult(bufferSize);
+            public override Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(bufferSize);
         }
 
         [Fact]
         public void CopyToAsync_StreamToken_PrecanceledToken_Cancels()
         {
             var src = new MemoryStream();
-            Assert.Equal(TaskStatus.Canceled, src.CopyToAsync(Stream.Null, new CancellationToken(true)).Status);
+            Assert.Equal(
+                TaskStatus.Canceled,
+                src.CopyToAsync(Stream.Null, new CancellationToken(true)).Status
+            );
         }
 
         [Fact]

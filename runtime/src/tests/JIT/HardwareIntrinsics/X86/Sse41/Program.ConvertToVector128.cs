@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["ConvertToVector128Int16.Byte"] = ConvertToVector128Int16Byte,
                 ["ConvertToVector128Int16.SByte"] = ConvertToVector128Int16SByte,
                 ["ConvertToVector128Int32.Byte"] = ConvertToVector128Int32Byte,

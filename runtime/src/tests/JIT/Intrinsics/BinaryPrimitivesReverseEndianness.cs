@@ -30,8 +30,28 @@ namespace BinaryPrimitivesReverseEndianness
         private static readonly byte[] s_bufferLE = new byte[] { 0x32, 0x54, 0x76, 0x98 };
         private static readonly byte[] s_bufferBE = new byte[] { 0x98, 0x76, 0x54, 0x32 };
 
-        private static readonly byte[] s_bufferLESigned64 = new byte[] { 0x10, 0x32, 0x54, 0x76, 0x98, 0xba, 0xdc, 0x1e };
-        private static readonly byte[] s_bufferBESigned64 = new byte[] { 0x1e, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10 };
+        private static readonly byte[] s_bufferLESigned64 = new byte[]
+        {
+            0x10,
+            0x32,
+            0x54,
+            0x76,
+            0x98,
+            0xba,
+            0xdc,
+            0x1e,
+        };
+        private static readonly byte[] s_bufferBESigned64 = new byte[]
+        {
+            0x1e,
+            0xdc,
+            0xba,
+            0x98,
+            0x76,
+            0x54,
+            0x32,
+            0x10,
+        };
 
         static int Main()
         {
@@ -42,21 +62,36 @@ namespace BinaryPrimitivesReverseEndianness
             ushort swappedUInt16 = BinaryPrimitives.ReverseEndianness(ConstantUInt16Input);
             if (swappedUInt16 != ConstantUInt16Expected)
             {
-                ReportError("const UInt16", ConstantUInt16Input, swappedUInt16, ConstantUInt16Expected);
+                ReportError(
+                    "const UInt16",
+                    ConstantUInt16Input,
+                    swappedUInt16,
+                    ConstantUInt16Expected
+                );
                 return Fail;
             }
 
             uint swappedUInt32 = BinaryPrimitives.ReverseEndianness(ConstantUInt32Input);
             if (swappedUInt32 != ConstantUInt32Expected)
             {
-                ReportError("const UInt32", ConstantUInt32Input, swappedUInt32, ConstantUInt32Expected);
+                ReportError(
+                    "const UInt32",
+                    ConstantUInt32Input,
+                    swappedUInt32,
+                    ConstantUInt32Expected
+                );
                 return Fail;
             }
 
             ulong swappedUInt64 = BinaryPrimitives.ReverseEndianness(ConstantUInt64Input);
             if (swappedUInt64 != ConstantUInt64Expected)
             {
-                ReportError("const UInt64", ConstantUInt64Input, swappedUInt64, ConstantUInt64Expected);
+                ReportError(
+                    "const UInt64",
+                    ConstantUInt64Input,
+                    swappedUInt64,
+                    ConstantUInt64Expected
+                );
                 return Fail;
             }
 
@@ -65,26 +100,49 @@ namespace BinaryPrimitivesReverseEndianness
              */
 
             Span<byte> spanInt16 = BitConverter.IsLittleEndian ? s_bufferLE.AsSpan(2) : s_bufferBE;
-            short swappedInt16 = BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<short>(spanInt16));
+            short swappedInt16 = BinaryPrimitives.ReverseEndianness(
+                MemoryMarshal.Read<short>(spanInt16)
+            );
             if (swappedInt16 != ConstantUInt16Expected)
             {
-                ReportError("sign-extended Int16", ConstantUInt16Input, (int)swappedInt16, ConstantUInt16Expected);
+                ReportError(
+                    "sign-extended Int16",
+                    ConstantUInt16Input,
+                    (int)swappedInt16,
+                    ConstantUInt16Expected
+                );
                 return Fail;
             }
 
             Span<byte> spanInt32 = BitConverter.IsLittleEndian ? s_bufferLE : s_bufferBE;
-            int swappedInt32 = BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<int>(spanInt32));
+            int swappedInt32 = BinaryPrimitives.ReverseEndianness(
+                MemoryMarshal.Read<int>(spanInt32)
+            );
             if (swappedInt32 != ConstantUInt32Expected)
             {
-                ReportError("sign-extended Int32", ConstantUInt32Input, (long)swappedInt32, ConstantUInt32Expected);
+                ReportError(
+                    "sign-extended Int32",
+                    ConstantUInt32Input,
+                    (long)swappedInt32,
+                    ConstantUInt32Expected
+                );
                 return Fail;
             }
 
-            Span<byte> spanInt64 = BitConverter.IsLittleEndian ? s_bufferLESigned64 : s_bufferBESigned64;
-            long swappedSpanInt64 = BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<long>(spanInt64));
+            Span<byte> spanInt64 = BitConverter.IsLittleEndian
+                ? s_bufferLESigned64
+                : s_bufferBESigned64;
+            long swappedSpanInt64 = BinaryPrimitives.ReverseEndianness(
+                MemoryMarshal.Read<long>(spanInt64)
+            );
             if (swappedSpanInt64 != ConstantInt64Expected)
             {
-                ReportError("sign-extended Int64", ConstantInt64Input, swappedSpanInt64, ConstantInt64Expected);
+                ReportError(
+                    "sign-extended Int64",
+                    ConstantInt64Input,
+                    swappedSpanInt64,
+                    ConstantInt64Expected
+                );
                 return Fail;
             }
 
@@ -97,7 +155,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort nonConstUInt16Expected = ByteSwapUInt16_Control(nonConstUInt16Input);
             if (nonConstUInt16Output != nonConstUInt16Expected)
             {
-                ReportError("non-const UInt16", nonConstUInt16Input, nonConstUInt16Output, nonConstUInt16Expected);
+                ReportError(
+                    "non-const UInt16",
+                    nonConstUInt16Input,
+                    nonConstUInt16Output,
+                    nonConstUInt16Expected
+                );
                 return Fail;
             }
 
@@ -106,7 +169,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint nonConstUInt32Expected = ByteSwapUInt32_Control(nonConstUInt32Input);
             if (nonConstUInt32Output != nonConstUInt32Expected)
             {
-                ReportError("non-const UInt32", nonConstUInt32Input, nonConstUInt32Output, nonConstUInt32Expected);
+                ReportError(
+                    "non-const UInt32",
+                    nonConstUInt32Input,
+                    nonConstUInt32Output,
+                    nonConstUInt32Expected
+                );
                 return Fail;
             }
 
@@ -115,7 +183,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong nonConstUInt64Expected = ByteSwapUInt64_Control(nonConstUInt64Input);
             if (nonConstUInt64Output != nonConstUInt64Expected)
             {
-                ReportError("non-const UInt64", nonConstUInt64Input, nonConstUInt64Output, nonConstUInt64Expected);
+                ReportError(
+                    "non-const UInt64",
+                    nonConstUInt64Input,
+                    nonConstUInt64Output,
+                    nonConstUInt64Expected
+                );
                 return Fail;
             }
 
@@ -128,7 +201,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort readCastUInt16Expected = ByteSwapUInt16_Control(readCastUInt16Input);
             if (readCastUInt16Output != readCastUInt16Expected)
             {
-                ReportError("read cast UInt16", readCastUInt16Input, readCastUInt16Output, readCastUInt16Expected);
+                ReportError(
+                    "read cast UInt16",
+                    readCastUInt16Input,
+                    readCastUInt16Output,
+                    readCastUInt16Expected
+                );
                 return Fail;
             }
 
@@ -137,7 +215,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint readCastUInt32Expected = ByteSwapUInt32_Control(readCastUInt32Input);
             if (readCastUInt32Output != readCastUInt32Expected)
             {
-                ReportError("read cast UInt32", readCastUInt32Input, readCastUInt32Output, readCastUInt32Expected);
+                ReportError(
+                    "read cast UInt32",
+                    readCastUInt32Input,
+                    readCastUInt32Output,
+                    readCastUInt32Expected
+                );
                 return Fail;
             }
 
@@ -146,7 +229,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong readCastUInt64Expected = ByteSwapUInt64_Control(readCastUInt64Input);
             if (readCastUInt64Output != readCastUInt64Expected)
             {
-                ReportError("read cast UInt64", readCastUInt64Input, readCastUInt64Output, readCastUInt64Expected);
+                ReportError(
+                    "read cast UInt64",
+                    readCastUInt64Input,
+                    readCastUInt64Output,
+                    readCastUInt64Expected
+                );
                 return Fail;
             }
 
@@ -159,7 +247,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort writeUInt16Expected = ByteSwapUInt16_Control(writeUInt16Input);
             if (writeUInt16Output != writeUInt16Expected)
             {
-                ReportError("write UInt16", writeUInt16Input, writeUInt16Output, writeUInt16Expected);
+                ReportError(
+                    "write UInt16",
+                    writeUInt16Input,
+                    writeUInt16Output,
+                    writeUInt16Expected
+                );
                 return Fail;
             }
 
@@ -168,7 +261,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint writeUInt32Expected = ByteSwapUInt32_Control(writeUInt32Input);
             if (writeUInt32Output != writeUInt32Expected)
             {
-                ReportError("write UInt32", writeUInt32Input, writeUInt32Output, writeUInt32Expected);
+                ReportError(
+                    "write UInt32",
+                    writeUInt32Input,
+                    writeUInt32Output,
+                    writeUInt32Expected
+                );
                 return Fail;
             }
 
@@ -177,7 +275,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeUInt64Expected = ByteSwapUInt64_Control(writeUInt64Input);
             if (writeUInt64Output != writeUInt64Expected)
             {
-                ReportError("write UInt64", writeUInt64Input, writeUInt64Output, writeUInt64Expected);
+                ReportError(
+                    "write UInt64",
+                    writeUInt64Input,
+                    writeUInt64Output,
+                    writeUInt64Expected
+                );
                 return Fail;
             }
 
@@ -190,7 +293,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort writeLeaUInt16Expected = ByteSwapUInt16_Control(writeLeaUInt16Input);
             if (writeLeaUInt16Output != writeLeaUInt16Expected)
             {
-                ReportError("write lea UInt16", writeLeaUInt16Input, writeLeaUInt16Output, writeLeaUInt16Expected);
+                ReportError(
+                    "write lea UInt16",
+                    writeLeaUInt16Input,
+                    writeLeaUInt16Output,
+                    writeLeaUInt16Expected
+                );
                 return Fail;
             }
 
@@ -199,7 +307,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint writeLeaUInt32Expected = ByteSwapUInt32_Control(writeLeaUInt32Input);
             if (writeLeaUInt32Output != writeLeaUInt32Expected)
             {
-                ReportError("write lea UInt32", writeLeaUInt32Input, writeLeaUInt32Output, writeLeaUInt32Expected);
+                ReportError(
+                    "write lea UInt32",
+                    writeLeaUInt32Input,
+                    writeLeaUInt32Output,
+                    writeLeaUInt32Expected
+                );
                 return Fail;
             }
 
@@ -208,7 +321,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeLeaUInt64Expected = ByteSwapUInt64_Control(writeLeaUInt64Input);
             if (writeLeaUInt64Output != writeLeaUInt64Expected)
             {
-                ReportError("write lea UInt64", writeLeaUInt64Input, writeLeaUInt64Output, writeLeaUInt64Expected);
+                ReportError(
+                    "write lea UInt64",
+                    writeLeaUInt64Input,
+                    writeLeaUInt64Output,
+                    writeLeaUInt64Expected
+                );
                 return Fail;
             }
 
@@ -222,7 +340,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeCastUInt8Expected = (byte)ByteSwapUInt64_Control(writeCastUInt8Input);
             if (writeCastUInt8Output != writeCastUInt8Expected)
             {
-                ReportError("write cast UInt8", writeCastUInt8Input, writeCastUInt8Output, writeCastUInt8Expected);
+                ReportError(
+                    "write cast UInt8",
+                    writeCastUInt8Input,
+                    writeCastUInt8Output,
+                    writeCastUInt8Expected
+                );
                 return Fail;
             }
 
@@ -232,7 +355,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeCastUInt16Expected = (ushort)ByteSwapUInt64_Control(writeCastUInt16Input);
             if (writeCastUInt16Output != writeCastUInt16Expected)
             {
-                ReportError("write cast UInt16", writeCastUInt16Input, writeCastUInt16Output, writeCastUInt16Expected);
+                ReportError(
+                    "write cast UInt16",
+                    writeCastUInt16Input,
+                    writeCastUInt16Output,
+                    writeCastUInt16Expected
+                );
                 return Fail;
             }
 
@@ -242,7 +370,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeCastUInt32Expected = (uint)ByteSwapUInt64_Control(writeCastUInt32Input);
             if (writeCastUInt32Output != writeCastUInt32Expected)
             {
-                ReportError("write cast UInt32", writeCastUInt32Input, writeCastUInt32Output, writeCastUInt32Expected);
+                ReportError(
+                    "write cast UInt32",
+                    writeCastUInt32Input,
+                    writeCastUInt32Output,
+                    writeCastUInt32Expected
+                );
                 return Fail;
             }
 
@@ -256,7 +389,12 @@ namespace BinaryPrimitivesReverseEndianness
             ushort writeBackUInt16Expected = ByteSwapUInt16_Control(writeBackUInt16Input);
             if (writeBackUInt16Output != writeBackUInt16Expected)
             {
-                ReportError("write back UInt16", writeBackUInt16Input, writeBackUInt16Output, writeBackUInt16Expected);
+                ReportError(
+                    "write back UInt16",
+                    writeBackUInt16Input,
+                    writeBackUInt16Output,
+                    writeBackUInt16Expected
+                );
                 return Fail;
             }
 
@@ -266,7 +404,12 @@ namespace BinaryPrimitivesReverseEndianness
             uint writeBackUInt32Expected = ByteSwapUInt32_Control(writeBackUInt32Input);
             if (writeBackUInt32Output != writeBackUInt32Expected)
             {
-                ReportError("write back UInt32", writeBackUInt32Input, writeBackUInt32Output, writeBackUInt32Expected);
+                ReportError(
+                    "write back UInt32",
+                    writeBackUInt32Input,
+                    writeBackUInt32Output,
+                    writeBackUInt32Expected
+                );
                 return Fail;
             }
 
@@ -276,7 +419,12 @@ namespace BinaryPrimitivesReverseEndianness
             ulong writeBackUInt64Expected = ByteSwapUInt64_Control(writeBackUInt64Input);
             if (writeBackUInt64Output != writeBackUInt64Expected)
             {
-                ReportError("write back UInt64", writeBackUInt64Input, writeBackUInt64Output, writeBackUInt64Expected);
+                ReportError(
+                    "write back UInt64",
+                    writeBackUInt64Input,
+                    writeBackUInt64Output,
+                    writeBackUInt64Expected
+                );
                 return Fail;
             }
 
@@ -414,7 +562,7 @@ namespace BinaryPrimitivesReverseEndianness
         {
             value = BinaryPrimitives.ReverseEndianness(value);
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void ByteSwapUInt8_WriteCast(ref byte output, ulong input)
         {
@@ -458,6 +606,5 @@ namespace BinaryPrimitivesReverseEndianness
             Console.WriteLine($"Output:   0x{GetHexString(output)}");
             Console.WriteLine($"Expected: 0x{GetHexString(expected)}");
         }
-
     }
 }

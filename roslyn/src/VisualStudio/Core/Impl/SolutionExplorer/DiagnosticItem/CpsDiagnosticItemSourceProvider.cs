@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     [Name(nameof(CpsDiagnosticItemSourceProvider))]
     [Order]
     [AppliesToProject("(CSharp | VB) & CPS")]
-    internal sealed class CpsDiagnosticItemSourceProvider : AttachedCollectionSourceProvider<IVsHierarchyItem>
+    internal sealed class CpsDiagnosticItemSourceProvider
+        : AttachedCollectionSourceProvider<IVsHierarchyItem>
     {
         private readonly IAnalyzersCommandHandler _commandHandler;
         private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService;
@@ -35,19 +36,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public CpsDiagnosticItemSourceProvider(
             [Import(typeof(AnalyzersCommandHandler))] IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService diagnosticAnalyzerService,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
         {
             _commandHandler = commandHandler;
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
             _workspace = workspace;
         }
 
-        protected override IAttachedCollectionSource? CreateCollectionSource(IVsHierarchyItem item, string relationshipName)
+        protected override IAttachedCollectionSource? CreateCollectionSource(
+            IVsHierarchyItem item,
+            string relationshipName
+        )
         {
-            if (item != null &&
-                item.HierarchyIdentity != null &&
-                item.HierarchyIdentity.NestedHierarchy != null &&
-                relationshipName == KnownRelationships.Contains)
+            if (
+                item != null
+                && item.HierarchyIdentity != null
+                && item.HierarchyIdentity.NestedHierarchy != null
+                && relationshipName == KnownRelationships.Contains
+            )
             {
                 if (NestedHierarchyHasProjectTreeCapability(item, "AnalyzerDependency"))
                 {
@@ -55,14 +62,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     if (projectRootItem != null)
                     {
                         var hierarchyMapper = TryGetProjectMap();
-                        if (hierarchyMapper != null &&
-                            hierarchyMapper.TryGetProjectId(projectRootItem, targetFrameworkMoniker, out var projectId))
+                        if (
+                            hierarchyMapper != null
+                            && hierarchyMapper.TryGetProjectId(
+                                projectRootItem,
+                                targetFrameworkMoniker,
+                                out var projectId
+                            )
+                        )
                         {
                             var hierarchy = projectRootItem.HierarchyIdentity.NestedHierarchy;
                             var itemId = projectRootItem.HierarchyIdentity.NestedItemID;
-                            if (hierarchy.GetCanonicalName(itemId, out var projectCanonicalName) == VSConstants.S_OK)
+                            if (
+                                hierarchy.GetCanonicalName(itemId, out var projectCanonicalName)
+                                == VSConstants.S_OK
+                            )
                             {
-                                return new CpsDiagnosticItemSource(_workspace, projectCanonicalName, projectId, item, _commandHandler, _diagnosticAnalyzerService);
+                                return new CpsDiagnosticItemSource(
+                                    _workspace,
+                                    projectCanonicalName,
+                                    projectId,
+                                    item,
+                                    _commandHandler,
+                                    _diagnosticAnalyzerService
+                                );
                             }
                         }
                     }
@@ -74,10 +97,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         /// <summary>
         /// Starting at the given item, walks up the tree to find the item representing the project root.
-        /// If the item is located under a target-framwork specific node, the corresponding 
+        /// If the item is located under a target-framwork specific node, the corresponding
         /// TargetFrameworkMoniker will be found as well.
         /// </summary>
-        private static IVsHierarchyItem? FindProjectRootItem(IVsHierarchyItem item, out string? targetFrameworkMoniker)
+        private static IVsHierarchyItem? FindProjectRootItem(
+            IVsHierarchyItem item,
+            out string? targetFrameworkMoniker
+        )
         {
             targetFrameworkMoniker = null;
 
@@ -122,18 +148,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             return isTargetNode ? potentialTFM : null;
         }
 
-        private static bool NestedHierarchyHasProjectTreeCapability(IVsHierarchyItem item, string capability)
+        private static bool NestedHierarchyHasProjectTreeCapability(
+            IVsHierarchyItem item,
+            string capability
+        )
         {
             var hierarchy = item.HierarchyIdentity.NestedHierarchy;
             var itemId = item.HierarchyIdentity.NestedItemID;
 
             var projectTreeCapabilities = GetProjectTreeCapabilities(hierarchy, itemId);
-            return projectTreeCapabilities.Any(static (c, capability) => c.Equals(capability), capability);
+            return projectTreeCapabilities.Any(
+                static (c, capability) => c.Equals(capability),
+                capability
+            );
         }
 
-        private static ImmutableArray<string> GetProjectTreeCapabilities(IVsHierarchy hierarchy, uint itemId)
+        private static ImmutableArray<string> GetProjectTreeCapabilities(
+            IVsHierarchy hierarchy,
+            uint itemId
+        )
         {
-            if (hierarchy.GetProperty(itemId, (int)__VSHPROPID7.VSHPROPID_ProjectTreeCapabilities, out var capabilitiesObj) == VSConstants.S_OK)
+            if (
+                hierarchy.GetProperty(
+                    itemId,
+                    (int)__VSHPROPID7.VSHPROPID_ProjectTreeCapabilities,
+                    out var capabilitiesObj
+                ) == VSConstants.S_OK
+            )
             {
                 var capabilitiesString = (string)capabilitiesObj;
                 return ImmutableArray.Create(capabilitiesString.Split(' '));

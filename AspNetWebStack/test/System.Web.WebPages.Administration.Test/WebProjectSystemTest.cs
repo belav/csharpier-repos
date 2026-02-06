@@ -66,9 +66,20 @@ namespace System.Web.WebPages.Administration.Test
 
             var fileSystem = new Mock<IFileSystem>();
             fileSystem.SetupGet(f => f.Root).Returns("x:\\my-website");
-            fileSystem.Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(false).Verifiable();
-            fileSystem.Setup(f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>()))
-                .Callback<string, Stream>((_, s) => { s.CopyTo(memoryStream); });
+            fileSystem
+                .Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath))))
+                .Returns(false)
+                .Verifiable();
+            fileSystem
+                .Setup(f =>
+                    f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+                )
+                .Callback<string, Stream>(
+                    (_, s) =>
+                    {
+                        s.CopyTo(memoryStream);
+                    }
+                );
 
             var references = "System";
 
@@ -83,10 +94,13 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
+            var assemblies = document
+                .Root.Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
 
             Assert.Equal(references, assemblies.Elements().First().Attribute("assembly").Value);
         }
@@ -111,10 +125,23 @@ namespace System.Web.WebPages.Administration.Test
 
             var fileSystem = new Mock<IFileSystem>();
             fileSystem.SetupGet(f => f.Root).Returns("x:\\my-website");
-            fileSystem.Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(true).Verifiable();
-            fileSystem.Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(webConfigContent);
-            fileSystem.Setup(f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>()))
-                .Callback<string, Stream>((_, s) => { s.CopyTo(memoryStream); });
+            fileSystem
+                .Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath))))
+                .Returns(true)
+                .Verifiable();
+            fileSystem
+                .Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath))))
+                .Returns(webConfigContent);
+            fileSystem
+                .Setup(f =>
+                    f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+                )
+                .Callback<string, Stream>(
+                    (_, s) =>
+                    {
+                        s.CopyTo(memoryStream);
+                    }
+                );
 
             var references = "System.Data";
 
@@ -129,20 +156,38 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
+            var assemblies = document
+                .Root.Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
 
             Assert.Equal(references, assemblies.Elements().First().Attribute("assembly").Value);
 
             // Make sure the original web.config content is unaffected
-            Assert.Equal("test", document.Root
-                                     .Elements().SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
-                                     .Elements().SingleOrDefault(e => e.Name.ToString().Equals("add"))
-                                     .Attributes().SingleOrDefault(e => e.Name.ToString().Equals("name")).Value);
+            Assert.Equal(
+                "test",
+                document
+                    .Root.Elements()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
+                    .Elements()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("add"))
+                    .Attributes()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("name"))
+                    .Value
+            );
 
-            Assert.Equal("awesomeprofile", document.Root.Element("system.web").Element("profiles").Element("add").Attribute("name").Value);
+            Assert.Equal(
+                "awesomeprofile",
+                document
+                    .Root.Element("system.web")
+                    .Element("profiles")
+                    .Element("add")
+                    .Attribute("name")
+                    .Value
+            );
         }
 
         [Fact]
@@ -150,7 +195,8 @@ namespace System.Web.WebPages.Administration.Test
         {
             // Arrange
             var webConfigPath = @"x:\my-website\web.config";
-            var memoryStream = new NeverCloseMemoryStream(@"<?xml version=""1.0""?>
+            var memoryStream = new NeverCloseMemoryStream(
+                @"<?xml version=""1.0""?>
                 <configuration>
                     <connectionStrings>
                         <add name=""test"" />
@@ -165,18 +211,31 @@ namespace System.Web.WebPages.Administration.Test
                     </system.web>
                 </configuration>
 
-");
+"
+            );
 
             var fileSystem = new Mock<IFileSystem>();
             fileSystem.SetupGet(f => f.Root).Returns("x:\\my-website");
-            fileSystem.Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(true);
-            fileSystem.Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath)))).Returns(() =>
-            {
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                return memoryStream;
-            });
-            fileSystem.Setup(f => f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>()))
-                .Callback<string, Stream>((_, stream) => { memoryStream = new NeverCloseMemoryStream(stream.ReadToEnd()); });
+            fileSystem
+                .Setup(f => f.FileExists(It.Is<string>(p => p.Equals(webConfigPath))))
+                .Returns(true);
+            fileSystem
+                .Setup(f => f.OpenFile(It.Is<string>(p => p.Equals(webConfigPath))))
+                .Returns(() =>
+                {
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    return memoryStream;
+                });
+            fileSystem
+                .Setup(f =>
+                    f.AddFile(It.Is<string>(p => p.Equals(webConfigPath)), It.IsAny<Stream>())
+                )
+                .Callback<string, Stream>(
+                    (_, stream) =>
+                    {
+                        memoryStream = new NeverCloseMemoryStream(stream.ReadToEnd());
+                    }
+                );
 
             // Act
             WebProjectSystem.AddReferencesToConfig(fileSystem.Object, "System.Data");
@@ -190,24 +249,46 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal("configuration", element.Name);
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
-            var assemblies = document.Root
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
-                .Elements().SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
+            var assemblies = document
+                .Root.Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
+                .Elements()
+                .SingleOrDefault(e => e.Name.ToString().Equals("assemblies"));
 
             Assert.Equal(2, assemblies.Elements("add").Count());
-            Assert.Equal("System.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35",
-                         assemblies.Elements().First().Attribute("assembly").Value);
-            Assert.Equal("Microsoft.Abstractions",
-                         assemblies.Elements().Last().Attribute("assembly").Value);
+            Assert.Equal(
+                "System.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35",
+                assemblies.Elements().First().Attribute("assembly").Value
+            );
+            Assert.Equal(
+                "Microsoft.Abstractions",
+                assemblies.Elements().Last().Attribute("assembly").Value
+            );
 
             // Make sure the original web.config content is unaffected
-            Assert.Equal("test", document.Root
-                                     .Elements().SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
-                                     .Elements().SingleOrDefault(e => e.Name.ToString().Equals("add"))
-                                     .Attributes().SingleOrDefault(e => e.Name.ToString().Equals("name")).Value);
+            Assert.Equal(
+                "test",
+                document
+                    .Root.Elements()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
+                    .Elements()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("add"))
+                    .Attributes()
+                    .SingleOrDefault(e => e.Name.ToString().Equals("name"))
+                    .Value
+            );
 
-            Assert.Equal("awesomeprofile", document.Root.Element("system.web").Element("profiles").Element("add").Attribute("name").Value);
+            Assert.Equal(
+                "awesomeprofile",
+                document
+                    .Root.Element("system.web")
+                    .Element("profiles")
+                    .Element("add")
+                    .Attribute("name")
+                    .Value
+            );
         }
 
         [Fact]
@@ -216,12 +297,30 @@ namespace System.Web.WebPages.Administration.Test
             // Arrange
             var commonAssemblies = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                { "System.Data", "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" },
-                { "System.Data.Linq", "System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" },
-                { "System.Net", "System.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" },
-                { "System.Runtime.Caching", "System.Runtime.Caching, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" },
-                { "System.Xml", "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" },
-                { "System.Web.DynamicData", "System.Web.DynamicData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" },
+                {
+                    "System.Data",
+                    "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                },
+                {
+                    "System.Data.Linq",
+                    "System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                },
+                {
+                    "System.Net",
+                    "System.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                },
+                {
+                    "System.Runtime.Caching",
+                    "System.Runtime.Caching, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                },
+                {
+                    "System.Xml",
+                    "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                },
+                {
+                    "System.Web.DynamicData",
+                    "System.Web.DynamicData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+                },
             };
 
             // Act and Assert
@@ -243,9 +342,7 @@ namespace System.Web.WebPages.Administration.Test
         private class NeverCloseMemoryStream : MemoryStream
         {
             public NeverCloseMemoryStream(string content)
-                : base(Encoding.UTF8.GetBytes(content))
-            {
-            }
+                : base(Encoding.UTF8.GetBytes(content)) { }
 
             protected override void Dispose(bool disposing)
             {

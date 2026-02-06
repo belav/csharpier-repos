@@ -15,33 +15,54 @@ namespace System.ServiceModel.Channels
         private NetworkInterfaceMessageProperty networkInterfaceMessageProperty;
         private UdpOutputChannel outputChannel;
         private Uri via;
-        
+
         public UdpRequestContext(UdpOutputChannel outputChannel, Message requestMessage)
-            : base(requestMessage, outputChannel.InternalCloseTimeout, outputChannel.InternalSendTimeout)
+            : base(
+                requestMessage,
+                outputChannel.InternalCloseTimeout,
+                outputChannel.InternalSendTimeout
+            )
         {
             Fx.Assert(outputChannel != null, "replyChannel can't be null");
             this.outputChannel = outputChannel;
-            
-            if (!NetworkInterfaceMessageProperty.TryGet(requestMessage, out this.networkInterfaceMessageProperty))
+
+            if (
+                !NetworkInterfaceMessageProperty.TryGet(
+                    requestMessage,
+                    out this.networkInterfaceMessageProperty
+                )
+            )
             {
                 Fx.Assert("requestMessage must always contain NetworkInterfaceMessageProperty");
             }
 
             RemoteEndpointMessageProperty remoteEndpointMessageProperty;
-            if (!requestMessage.Properties.TryGetValue(RemoteEndpointMessageProperty.Name, out remoteEndpointMessageProperty))
+            if (
+                !requestMessage.Properties.TryGetValue(
+                    RemoteEndpointMessageProperty.Name,
+                    out remoteEndpointMessageProperty
+                )
+            )
             {
                 Fx.Assert("requestMessage must always contain RemoteEndpointMessageProperty");
             }
 
-            UriBuilder uriBuilder = new UriBuilder(UdpConstants.Scheme, remoteEndpointMessageProperty.Address, remoteEndpointMessageProperty.Port);
+            UriBuilder uriBuilder = new UriBuilder(
+                UdpConstants.Scheme,
+                remoteEndpointMessageProperty.Address,
+                remoteEndpointMessageProperty.Port
+            );
             this.via = uriBuilder.Uri;
         }
-        
-        protected override void OnAbort()
-        {
-        }
 
-        protected override IAsyncResult OnBeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override void OnAbort() { }
+
+        protected override IAsyncResult OnBeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message != null)
             {
@@ -54,9 +75,7 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnEndReply(IAsyncResult result)
         {
@@ -68,7 +87,7 @@ namespace System.ServiceModel.Channels
             if (message != null)
             {
                 this.SetAddressingInformation(message);
-                this.outputChannel.Send(message, timeout);                
+                this.outputChannel.Send(message, timeout);
             }
         }
 

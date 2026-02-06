@@ -8,125 +8,132 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class ObjectManagerTest
-	{
-		[Test] // bug 76931
-		public void TestSerialization ()
-		{
-			using (MemoryStream ms = new MemoryStream ()) {
-				Bar bar = new Bar (8, 3, 5, 21);
-				bar.Save (ms);
+    [TestFixture]
+    public class ObjectManagerTest
+    {
+        [Test] // bug 76931
+        public void TestSerialization()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Bar bar = new Bar(8, 3, 5, 21);
+                bar.Save(ms);
 
-				ms.Position = 0;
+                ms.Position = 0;
 
-				bar = Bar.Load (ms);
-				
-				Assert.AreEqual ("Bar [Foo (16),(Foo (6),Foo (10),Foo (42)]",
-					bar.ToString (), "#1");
-			}
-		}
-	}
+                bar = Bar.Load(ms);
 
-	public class Foo
-	{
-		public int Data;
+                Assert.AreEqual("Bar [Foo (16),(Foo (6),Foo (10),Foo (42)]", bar.ToString(), "#1");
+            }
+        }
+    }
 
-		public Foo (int data)
-		{
-			this.Data = data;
-		}
+    public class Foo
+    {
+        public int Data;
 
-		public override string ToString ()
-		{
-			return String.Format ("Foo ({0})", Data);
-		}
+        public Foo(int data)
+        {
+            this.Data = data;
+        }
 
-		internal class SerializationSurrogate : ISerializationSurrogate
-		{
-			public void GetObjectData (object obj, SerializationInfo info, StreamingContext context)
-			{
-				Foo foo = (Foo) obj;
+        public override string ToString()
+        {
+            return String.Format("Foo ({0})", Data);
+        }
 
-				info.AddValue ("data", foo.Data);
-			}
+        internal class SerializationSurrogate : ISerializationSurrogate
+        {
+            public void GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+            {
+                Foo foo = (Foo)obj;
 
-			public object SetObjectData (object obj, SerializationInfo info,
-							 StreamingContext context,
-							 ISurrogateSelector selector)
-			{
-				Foo foo = (Foo) obj;
+                info.AddValue("data", foo.Data);
+            }
 
-				foo.Data = info.GetInt32 ("data");
+            public object SetObjectData(
+                object obj,
+                SerializationInfo info,
+                StreamingContext context,
+                ISurrogateSelector selector
+            )
+            {
+                Foo foo = (Foo)obj;
 
-				return new Foo (2 * foo.Data);
-			}
-		}
-	}
+                foo.Data = info.GetInt32("data");
 
-	[Serializable]
-	public class Bar
-	{
-		public readonly Foo Foo;
-		public readonly Foo[] Array;
+                return new Foo(2 * foo.Data);
+            }
+        }
+    }
 
-		public Bar (int a, params int[] b)
-		{
-			Foo = new Foo (a);
-			Array = new Foo[b.Length];
-			for (int i = 0; i < b.Length; i++)
-				Array[i] = new Foo (b[i]);
-		}
+    [Serializable]
+    public class Bar
+    {
+        public readonly Foo Foo;
+        public readonly Foo[] Array;
 
-		public void Save (Stream stream)
-		{
-			SurrogateSelector ss = new SurrogateSelector ();
+        public Bar(int a, params int[] b)
+        {
+            Foo = new Foo(a);
+            Array = new Foo[b.Length];
+            for (int i = 0; i < b.Length; i++)
+                Array[i] = new Foo(b[i]);
+        }
 
-			StreamingContext context = new StreamingContext (
-				StreamingContextStates.Persistence, this);
+        public void Save(Stream stream)
+        {
+            SurrogateSelector ss = new SurrogateSelector();
 
-			ss.AddSurrogate (typeof (Foo), context, new Foo.SerializationSurrogate ());
+            StreamingContext context = new StreamingContext(
+                StreamingContextStates.Persistence,
+                this
+            );
 
-			BinaryFormatter formatter = new BinaryFormatter (ss, context);
+            ss.AddSurrogate(typeof(Foo), context, new Foo.SerializationSurrogate());
 
-			formatter.Serialize (stream, this);
-		}
+            BinaryFormatter formatter = new BinaryFormatter(ss, context);
 
-		public static Bar Load (Stream stream)
-		{
-			SurrogateSelector ss = new SurrogateSelector ();
+            formatter.Serialize(stream, this);
+        }
 
-			StreamingContext context = new StreamingContext (
-				StreamingContextStates.Persistence, null);
+        public static Bar Load(Stream stream)
+        {
+            SurrogateSelector ss = new SurrogateSelector();
 
-			ss.AddSurrogate (typeof (Foo), context, new Foo.SerializationSurrogate ());
+            StreamingContext context = new StreamingContext(
+                StreamingContextStates.Persistence,
+                null
+            );
 
-			BinaryFormatter formatter = new BinaryFormatter (ss, context);
+            ss.AddSurrogate(typeof(Foo), context, new Foo.SerializationSurrogate());
 
-			return (Bar) formatter.Deserialize (stream);
-		}
+            BinaryFormatter formatter = new BinaryFormatter(ss, context);
 
-		public override string ToString ()
-		{
-			StringBuilder sb = new StringBuilder ();
-			sb.Append ("Bar [");
-			sb.Append (Foo);
-			sb.Append (",(");
-			for (int i = 0; i < Array.Length; i++) {
-				if (i > 0)
-					sb.Append (",");
-				sb.Append (Array[i]);
-			}
-			sb.Append ("]");
-			return sb.ToString ();
-		}
-	}
+            return (Bar)formatter.Deserialize(stream);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Bar [");
+            sb.Append(Foo);
+            sb.Append(",(");
+            for (int i = 0; i < Array.Length; i++)
+            {
+                if (i > 0)
+                    sb.Append(",");
+                sb.Append(Array[i]);
+            }
+            sb.Append("]");
+            return sb.ToString();
+        }
+    }
 }

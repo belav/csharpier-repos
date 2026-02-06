@@ -21,69 +21,65 @@
 //
 
 using System;
-using System.Threading;
 using System.ComponentModel;
-
+using System.Threading;
 
 // Some implementation details:
 // http://msdn.microsoft.com/msdnmag/issues/06/06/NETMatters/default.aspx
 namespace System.Windows.Forms
 {
-	public sealed class WindowsFormsSynchronizationContext : SynchronizationContext, IDisposable
-	{
-		private static bool auto_installed;
-		private static Control invoke_control;
-		private static SynchronizationContext previous_context;
-		
-		#region Public Constructor
-		public WindowsFormsSynchronizationContext ()
-		{
-		}
-		
-		static WindowsFormsSynchronizationContext ()
-		{
-			invoke_control = new Control ();
-			invoke_control.CreateControl ();
-			auto_installed = true;
-			previous_context = SynchronizationContext.Current;
-		}
-		#endregion
+    public sealed class WindowsFormsSynchronizationContext : SynchronizationContext, IDisposable
+    {
+        private static bool auto_installed;
+        private static Control invoke_control;
+        private static SynchronizationContext previous_context;
 
-		#region Public Properties
-		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public static bool AutoInstall {
-			get { return auto_installed; }
-			set { auto_installed = value; }
-		}
-		#endregion
+        #region Public Constructor
+        public WindowsFormsSynchronizationContext() { }
 
-		#region Public Methods
-		public override SynchronizationContext CreateCopy ()
-		{
-			return base.CreateCopy ();
-		}
-		
-		public void Dispose ()
-		{
-		}
+        static WindowsFormsSynchronizationContext()
+        {
+            invoke_control = new Control();
+            invoke_control.CreateControl();
+            auto_installed = true;
+            previous_context = SynchronizationContext.Current;
+        }
+        #endregion
 
-		public override void Post (SendOrPostCallback d, object state)
-		{
-			invoke_control.BeginInvoke (d, new object[] { state });
-		}
+        #region Public Properties
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public static bool AutoInstall
+        {
+            get { return auto_installed; }
+            set { auto_installed = value; }
+        }
+        #endregion
 
-		public override void Send (SendOrPostCallback d, object state)
-		{
-			invoke_control.Invoke (d, new object[] { state });
-		}
-		
-		public static void Uninstall ()
-		{
-			if (previous_context == null)
-				previous_context = new SynchronizationContext ();
-				
-			SynchronizationContext.SetSynchronizationContext (previous_context);
-		}
-		#endregion
-	}
+        #region Public Methods
+        public override SynchronizationContext CreateCopy()
+        {
+            return base.CreateCopy();
+        }
+
+        public void Dispose() { }
+
+        public override void Post(SendOrPostCallback d, object state)
+        {
+            invoke_control.BeginInvoke(d, new object[] { state });
+        }
+
+        public override void Send(SendOrPostCallback d, object state)
+        {
+            invoke_control.Invoke(d, new object[] { state });
+        }
+
+        public static void Uninstall()
+        {
+            if (previous_context == null)
+                previous_context = new SynchronizationContext();
+
+            SynchronizationContext.SetSynchronizationContext(previous_context);
+        }
+        #endregion
+    }
 }

@@ -5,9 +5,13 @@ namespace System.Reflection
 {
     public abstract partial class MemberInfo
     {
-        internal virtual bool CacheEquals(object? o) { throw new NotImplementedException(); }
+        internal virtual bool CacheEquals(object? o)
+        {
+            throw new NotImplementedException();
+        }
 
-        internal bool HasSameMetadataDefinitionAsCore<TOther>(MemberInfo other) where TOther : MemberInfo
+        internal bool HasSameMetadataDefinitionAsCore<TOther>(MemberInfo other)
+            where TOther : MemberInfo
         {
             ArgumentNullException.ThrowIfNull(other);
 

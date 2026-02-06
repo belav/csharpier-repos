@@ -47,7 +47,12 @@ namespace Microsoft.TestCommon
 
         private static bool ExcludeStackFrame(string stackFrame)
         {
-            if (stackFrame.StartsWith("at Microsoft.TestCommon.Assert.", StringComparison.OrdinalIgnoreCase))
+            if (
+                stackFrame.StartsWith(
+                    "at Microsoft.TestCommon.Assert.",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return true;
             }

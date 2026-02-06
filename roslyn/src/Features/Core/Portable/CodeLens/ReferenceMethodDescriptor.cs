@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
     ///  namespace/type is delimited by '.' and nested type is delimited by '+'
     /// </remarks>
     [DataContract]
-    internal sealed class ReferenceMethodDescriptor(string fullName, string filePath, string outputFilePath)
+    internal sealed class ReferenceMethodDescriptor(
+        string fullName,
+        string filePath,
+        string outputFilePath
+    )
     {
         /// <summary>
         ///  Returns method's fully quilified name without parameters

@@ -40,7 +40,7 @@ namespace System.Net.Mail
         XPriority,
         XReceiver,
         XSender,
-        ZMaxEnumValue = XSender,  // Keep this to equal to the last "known" enum entry if you add to the end
-        Unknown = -1
+        ZMaxEnumValue = XSender, // Keep this to equal to the last "known" enum entry if you add to the end
+        Unknown = -1,
     }
 }

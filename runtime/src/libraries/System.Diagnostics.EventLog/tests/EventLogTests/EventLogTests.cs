@@ -4,8 +4,8 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -84,7 +84,7 @@ namespace System.Diagnostics.Tests
             using (EventLog eventLog = new EventLog("Application"))
             {
                 Assert.False(string.IsNullOrEmpty(eventLog.LogDisplayName));
-                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en" )
+                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en")
                     Assert.Equal("Application", eventLog.LogDisplayName);
             }
         }
@@ -116,7 +116,7 @@ namespace System.Diagnostics.Tests
                 eventLog.Log = "Application";
 
                 Assert.False(string.IsNullOrEmpty(eventLog.LogDisplayName));
-                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en" )
+                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en")
                     Assert.Equal("Application", eventLog.LogDisplayName);
             }
         }
@@ -161,7 +161,9 @@ namespace System.Diagnostics.Tests
             {
                 eventLog.Log = "Application";
                 Assert.Throws<ArgumentOutOfRangeException>(() => eventLog.MaximumKilobytes = 2);
-                Assert.Throws<ArgumentOutOfRangeException>(() => eventLog.MaximumKilobytes = 0x3FFFC1);
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    eventLog.MaximumKilobytes = 0x3FFFC1
+                );
             }
         }
 
@@ -228,7 +230,9 @@ namespace System.Diagnostics.Tests
             using (EventLog eventLog = new EventLog())
             {
                 eventLog.Log = "Application";
-                Assert.Throws<ArgumentOutOfRangeException>(() => eventLog.ModifyOverflowPolicy(OverflowAction.OverwriteOlder, 400));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    eventLog.ModifyOverflowPolicy(OverflowAction.OverwriteOlder, 400)
+                );
             }
         }
 
@@ -244,7 +248,9 @@ namespace System.Diagnostics.Tests
                 {
                     EventLog.CreateEventSource(source, eventLog.LogDisplayName);
                     Assert.Equal(eventLog.MachineName, Environment.MachineName.ToLowerInvariant());
-                    Assert.True(EventLog.SourceExists(source, Environment.MachineName.ToLowerInvariant()));
+                    Assert.True(
+                        EventLog.SourceExists(source, Environment.MachineName.ToLowerInvariant())
+                    );
                 }
                 finally
                 {
@@ -373,7 +379,11 @@ namespace System.Diagnostics.Tests
         public void GetEventLogContainsSecurityLogTest()
         {
             EventLog[] eventlogs = EventLog.GetEventLogs();
-            Assert.Contains("Security", eventlogs.Select(t => t.Log), StringComparer.OrdinalIgnoreCase);
+            Assert.Contains(
+                "Security",
+                eventlogs.Select(t => t.Log),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 }

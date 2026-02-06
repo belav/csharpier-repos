@@ -15,7 +15,12 @@ namespace System.Runtime
         /// <returns>The number of bytes of IL the JIT has compiled.</returns>
         public static long GetCompiledILBytes(bool currentThread = false)
         {
-            return currentThread ? 0 : (long)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.JIT_IL_BYTES_JITTED);
+            return currentThread
+                ? 0
+                : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_IL_BYTES_JITTED
+                    );
         }
 
         /// <summary>
@@ -26,13 +31,23 @@ namespace System.Runtime
         /// <returns>The number of methods the JIT has compiled.</returns>
         public static long GetCompiledMethodCount(bool currentThread = false)
         {
-            return currentThread ? 0 : (long)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.JIT_METHODS_JITTED);
+            return currentThread
+                ? 0
+                : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_METHODS_JITTED
+                    );
         }
 
         // normalized to 100ns ticks on vm side
         private static long GetCompilationTimeInTicks(bool currentThread = false)
         {
-            return currentThread ? 0 : (long)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.JIT_TICKS_IN_JIT);
+            return currentThread
+                ? 0
+                : (long)
+                    EventPipeInternal.GetRuntimeCounterValue(
+                        EventPipeInternal.RuntimeCounters.JIT_TICKS_IN_JIT
+                    );
         }
     }
 }

@@ -53,27 +53,50 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("typeName", () => new EditorAttribute(null, "baseTypeName"));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("typeName", () => new EditorAttribute((string)null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "typeName",
+                () => new EditorAttribute(null, "baseTypeName")
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "typeName",
+                () => new EditorAttribute((string)null, typeof(int))
+            );
         }
 
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("type", () => new EditorAttribute((Type)null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "type",
+                () => new EditorAttribute((Type)null, typeof(int))
+            );
         }
 
         [Fact]
         public void Ctor_NullBaseType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("baseType", () => new EditorAttribute("typeName", (Type)null));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("baseType", () => new EditorAttribute(typeof(int), null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "baseType",
+                () => new EditorAttribute("typeName", (Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "baseType",
+                () => new EditorAttribute(typeof(int), null)
+            );
         }
 
         public static IEnumerable<object[]> TypeId_TestData()
         {
-            yield return new object[] { "BaseTypeName", "System.ComponentModel.EditorAttributeBaseTypeName" };
-            yield return new object[] { "BaseTypeName,Other", "System.ComponentModel.EditorAttributeBaseTypeName" };
+            yield return new object[]
+            {
+                "BaseTypeName",
+                "System.ComponentModel.EditorAttributeBaseTypeName",
+            };
+            yield return new object[]
+            {
+                "BaseTypeName,Other",
+                "System.ComponentModel.EditorAttributeBaseTypeName",
+            };
             yield return new object[] { string.Empty, "System.ComponentModel.EditorAttribute" };
             yield return new object[] { null, "System.ComponentModel.EditorAttribute" };
         }
@@ -92,14 +115,49 @@ namespace System.ComponentModel.Tests
             var attribute = new EditorAttribute("typeName", "baseTypeName");
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new EditorAttribute("typeName", "baseTypeName"), true };
-            yield return new object[] { attribute, new EditorAttribute("typename", "baseTypeName"), false };
-            yield return new object[] { attribute, new EditorAttribute("typeName", "basetypename"), false };
-            yield return new object[] { attribute, new EditorAttribute("typeName", (string)null), false };
+            yield return new object[]
+            {
+                attribute,
+                new EditorAttribute("typeName", "baseTypeName"),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new EditorAttribute("typename", "baseTypeName"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new EditorAttribute("typeName", "basetypename"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new EditorAttribute("typeName", (string)null),
+                false,
+            };
 
-            yield return new object[] { new EditorAttribute("typeName", (string)null), new EditorAttribute("typeName", (string)null), true };
-            yield return new object[] { new EditorAttribute("typeName", (string)null), new EditorAttribute("typename", (string)null), false };
-            yield return new object[] { new EditorAttribute("typeName", (string)null), new EditorAttribute("typeName", "baseTypeName"), false };
+            yield return new object[]
+            {
+                new EditorAttribute("typeName", (string)null),
+                new EditorAttribute("typeName", (string)null),
+                true,
+            };
+            yield return new object[]
+            {
+                new EditorAttribute("typeName", (string)null),
+                new EditorAttribute("typename", (string)null),
+                false,
+            };
+            yield return new object[]
+            {
+                new EditorAttribute("typeName", (string)null),
+                new EditorAttribute("typeName", "baseTypeName"),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -107,7 +165,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(EditorAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            EditorAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

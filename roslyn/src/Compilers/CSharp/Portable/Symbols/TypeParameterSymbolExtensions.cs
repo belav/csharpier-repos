@@ -4,11 +4,15 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal static class TypeParameterSymbolExtensions
     {
-        public static bool DependsOn(this TypeParameterSymbol typeParameter1, TypeParameterSymbol typeParameter2)
+        public static bool DependsOn(
+            this TypeParameterSymbol typeParameter1,
+            TypeParameterSymbol typeParameter2
+        )
         {
             Debug.Assert((object)typeParameter1 != null);
             Debug.Assert((object)typeParameter2 != null);

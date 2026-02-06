@@ -25,7 +25,10 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public delegate void PropertyValueChangedEventHandler(object s, PropertyValueChangedEventArgs e);
+    public delegate void PropertyValueChangedEventHandler(
+        object s,
+        PropertyValueChangedEventArgs e
+    );
 }

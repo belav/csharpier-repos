@@ -3,7 +3,6 @@
 
 using Internal.TypeSystem;
 using Internal.TypeSystem.Interop;
-
 using Xunit;
 
 namespace TypeSystemTests

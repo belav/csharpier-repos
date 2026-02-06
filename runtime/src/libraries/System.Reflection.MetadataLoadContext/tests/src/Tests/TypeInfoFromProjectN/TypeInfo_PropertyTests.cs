@@ -9,7 +9,6 @@ using Xunit;
 namespace System.Reflection.Tests
 {
     [System.Runtime.InteropServices.Guid("FD80F123-BEDD-4492-B50A-5D46AE94DD4E")]
-
     public class TypeInfoPropertyTests
     {
         // Verify BaseType() method
@@ -45,7 +44,12 @@ namespace System.Reflection.Tests
 
             bool hasgenericParam = ti.ContainsGenericParameters;
 
-            Assert.True(hasgenericParam, string.Format("Failed!! TestContainsGenericParameter did not return correct result. "));
+            Assert.True(
+                hasgenericParam,
+                string.Format(
+                    "Failed!! TestContainsGenericParameter did not return correct result. "
+                )
+            );
         }
 
         // Verify ContainsGenericParameter
@@ -57,7 +61,12 @@ namespace System.Reflection.Tests
 
             bool hasgenericParam = ti.ContainsGenericParameters;
 
-            Assert.False(hasgenericParam, string.Format("Failed!! TestContainsGenericParameter did not return correct result. "));
+            Assert.False(
+                hasgenericParam,
+                string.Format(
+                    "Failed!! TestContainsGenericParameter did not return correct result. "
+                )
+            );
         }
 
         // Verify FullName
@@ -70,7 +79,6 @@ namespace System.Reflection.Tests
             string fname = ti.FullName;
             Assert.Equal("System.Int32", fname);
         }
-
 
         // Verify Guid
         [Fact]
@@ -90,21 +98,33 @@ namespace System.Reflection.Tests
             Type t = typeof(int).Project();
             TypeInfo ti = t.GetTypeInfo();
 
-            Assert.False(ti.HasElementType, "Failed!! .HasElementType returned true for a type that does not contain element ");
+            Assert.False(
+                ti.HasElementType,
+                "Failed!! .HasElementType returned true for a type that does not contain element "
+            );
 
             int[] nums = { 1, 1, 2, 3 };
             Type te = nums.GetType();
             TypeInfo tei = te.GetTypeInfo();
 
-            Assert.True(tei.HasElementType, "Failed!! .HasElementType returned false for a type that contains element ");
+            Assert.True(
+                tei.HasElementType,
+                "Failed!! .HasElementType returned false for a type that contains element "
+            );
         }
 
         //Verify IsAbstract
         [Fact]
         public static void TestIsAbstract()
         {
-            Assert.True(typeof(abstractClass).Project().GetTypeInfo().IsAbstract, "Failed!! .IsAbstract returned false for a type that is abstract.");
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsAbstract, "Failed!! .IsAbstract returned true for a type that is not abstract.");
+            Assert.True(
+                typeof(abstractClass).Project().GetTypeInfo().IsAbstract,
+                "Failed!! .IsAbstract returned false for a type that is abstract."
+            );
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsAbstract,
+                "Failed!! .IsAbstract returned true for a type that is not abstract."
+            );
         }
 
         //Verify IsAnsiClass
@@ -123,8 +143,14 @@ namespace System.Reflection.Tests
         {
             int[] myarray = { 1, 2, 3 };
             Type arraytype = myarray.GetType();
-            Assert.True(arraytype.GetTypeInfo().IsArray, "Failed!! .IsArray returned false for a type that is array.");
-            Assert.False(typeof(int).Project().GetTypeInfo().IsArray, "Failed!! .IsArray returned true for a type that is not an array.");
+            Assert.True(
+                arraytype.GetTypeInfo().IsArray,
+                "Failed!! .IsArray returned false for a type that is array."
+            );
+            Assert.False(
+                typeof(int).Project().GetTypeInfo().IsArray,
+                "Failed!! .IsArray returned true for a type that is not an array."
+            );
         }
 
         // VerifyIsByRef
@@ -136,43 +162,67 @@ namespace System.Reflection.Tests
 
             Assert.NotNull(byreftype);
             Assert.True(byreftype.IsByRef, "Failed!!  IsByRefType() returned false");
-            Assert.False(typeof(int).Project().GetTypeInfo().IsByRef, "Failed!!  IsByRefType() returned true");
+            Assert.False(
+                typeof(int).Project().GetTypeInfo().IsByRef,
+                "Failed!!  IsByRefType() returned true"
+            );
         }
-
 
         // VerifyIsClass
         [Fact]
         public static void TestIsClass()
         {
-            Assert.True(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsClass, "Failed!!  IsClass returned false for a class Type");
-            Assert.False(typeof(MYENUM).Project().GetTypeInfo().IsClass, "Failed!!  IsClass returned true for a non-class Type");
+            Assert.True(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsClass,
+                "Failed!!  IsClass returned false for a class Type"
+            );
+            Assert.False(
+                typeof(MYENUM).Project().GetTypeInfo().IsClass,
+                "Failed!!  IsClass returned true for a non-class Type"
+            );
         }
-
 
         // VerifyIsEnum
         [Fact]
         public static void TestIsEnum()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsEnum, "Failed!!  IsEnum returned true for a class Type");
-            Assert.True(typeof(MYENUM).Project().GetTypeInfo().IsEnum, "Failed!!  IsEnum returned false for a Enum Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsEnum,
+                "Failed!!  IsEnum returned true for a class Type"
+            );
+            Assert.True(
+                typeof(MYENUM).Project().GetTypeInfo().IsEnum,
+                "Failed!!  IsEnum returned false for a Enum Type"
+            );
         }
 
         // VerifyIsInterface
         [Fact]
         public static void TestIsInterface()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsInterface, "Failed!!  IsInterface returned true for a class Type");
-            Assert.True(typeof(ITest).Project().GetTypeInfo().IsInterface, "Failed!!   IsInterface returned false for a interface Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsInterface,
+                "Failed!!  IsInterface returned true for a class Type"
+            );
+            Assert.True(
+                typeof(ITest).Project().GetTypeInfo().IsInterface,
+                "Failed!!   IsInterface returned false for a interface Type"
+            );
         }
 
         // VerifyIsNested
         [Fact]
         public static void TestIsNested()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsNested, "Failed!!  IsNested returned true for a non nested class Type");
-            Assert.True(typeof(PublicClass.PublicNestedType).Project().GetTypeInfo().IsNested, "Failed!!    IsNested returned false for a nested class Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsNested,
+                "Failed!!  IsNested returned true for a non nested class Type"
+            );
+            Assert.True(
+                typeof(PublicClass.PublicNestedType).Project().GetTypeInfo().IsNested,
+                "Failed!!    IsNested returned false for a nested class Type"
+            );
         }
-
 
         // Verify IsPointer
         [Fact]
@@ -183,105 +233,190 @@ namespace System.Reflection.Tests
 
             Assert.NotNull(ptrtype);
             Assert.True(ptrtype.IsPointer, "Failed!!  IsPointer returned false for pointer type");
-            Assert.False(typeof(int).Project().GetTypeInfo().IsPointer, "Failed!!  IsPointer returned true for non -pointer type");
+            Assert.False(
+                typeof(int).Project().GetTypeInfo().IsPointer,
+                "Failed!!  IsPointer returned true for non -pointer type"
+            );
         }
-
 
         // VerifyIsPrimitive
         [Fact]
         public static void TestIsPrimitive()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsPrimitive, "Failed!!  IsPrimitive returned true for a non primitive Type");
-            Assert.True(typeof(int).Project().GetTypeInfo().IsPrimitive, "Failed!!    IsPrimitive returned true for a primitive Type");
-            Assert.True(typeof(char).Project().GetTypeInfo().IsPrimitive, "Failed!!    IsPrimitive returned true for a primitive Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsPrimitive,
+                "Failed!!  IsPrimitive returned true for a non primitive Type"
+            );
+            Assert.True(
+                typeof(int).Project().GetTypeInfo().IsPrimitive,
+                "Failed!!    IsPrimitive returned true for a primitive Type"
+            );
+            Assert.True(
+                typeof(char).Project().GetTypeInfo().IsPrimitive,
+                "Failed!!    IsPrimitive returned true for a primitive Type"
+            );
         }
-
-
 
         // VerifyIsPublic
         [Fact]
         public static void TestIsPublic()
         {
-            Assert.True(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsPublic, "Failed!!  IsPublic returned false for a public Type");
-            Assert.True(typeof(TypeInfoPropertyDerived).Project().GetTypeInfo().IsPublic, "Failed!!  IsPublic returned false for a public Type");
-            Assert.True(typeof(PublicClass).Project().GetTypeInfo().IsPublic, "Failed!!  IsPublic returned false for a public Type");
-            Assert.True(typeof(ITest).Project().GetTypeInfo().IsPublic, "Failed!!  IsPublic returned false for a public Type");
-            Assert.True(typeof(ImplClass).Project().GetTypeInfo().IsPublic, "Failed!!  IsPublic returned false for a public Type");
+            Assert.True(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsPublic,
+                "Failed!!  IsPublic returned false for a public Type"
+            );
+            Assert.True(
+                typeof(TypeInfoPropertyDerived).Project().GetTypeInfo().IsPublic,
+                "Failed!!  IsPublic returned false for a public Type"
+            );
+            Assert.True(
+                typeof(PublicClass).Project().GetTypeInfo().IsPublic,
+                "Failed!!  IsPublic returned false for a public Type"
+            );
+            Assert.True(
+                typeof(ITest).Project().GetTypeInfo().IsPublic,
+                "Failed!!  IsPublic returned false for a public Type"
+            );
+            Assert.True(
+                typeof(ImplClass).Project().GetTypeInfo().IsPublic,
+                "Failed!!  IsPublic returned false for a public Type"
+            );
         }
-
 
         // VerifyIsNotPublic
         [Fact]
         public static void TestIsNotPublic()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsNotPublic, "Failed!!  IsNotPublic returned false for a public Type");
-            Assert.False(typeof(TypeInfoPropertyDerived).Project().GetTypeInfo().IsNotPublic, "Failed!!  IsNotPublic returned false for a public Type");
-            Assert.False(typeof(PublicClass).Project().GetTypeInfo().IsNotPublic, "Failed!! IsNotPublic returned false for a public Type");
-            Assert.False(typeof(ITest).Project().GetTypeInfo().IsNotPublic, "Failed!!  IsNotPublic returned false for a public Type");
-            Assert.False(typeof(ImplClass).Project().GetTypeInfo().IsNotPublic, "Failed!!  IsNotPublic returned false for a public Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsNotPublic,
+                "Failed!!  IsNotPublic returned false for a public Type"
+            );
+            Assert.False(
+                typeof(TypeInfoPropertyDerived).Project().GetTypeInfo().IsNotPublic,
+                "Failed!!  IsNotPublic returned false for a public Type"
+            );
+            Assert.False(
+                typeof(PublicClass).Project().GetTypeInfo().IsNotPublic,
+                "Failed!! IsNotPublic returned false for a public Type"
+            );
+            Assert.False(
+                typeof(ITest).Project().GetTypeInfo().IsNotPublic,
+                "Failed!!  IsNotPublic returned false for a public Type"
+            );
+            Assert.False(
+                typeof(ImplClass).Project().GetTypeInfo().IsNotPublic,
+                "Failed!!  IsNotPublic returned false for a public Type"
+            );
         }
-
 
         // VerifyIsNestedPublic
         [Fact]
         public static void TestIsNestedPublic()
         {
-            Assert.True(typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsNestedPublic, "Failed!!  IsNestedPublic returned false for a nested public Type");
+            Assert.True(
+                typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsNestedPublic,
+                "Failed!!  IsNestedPublic returned false for a nested public Type"
+            );
         }
 
         // VerifyIsNestedPrivate
         [Fact]
         public static void TestIsNestedPrivate()
         {
-            Assert.False(typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsNestedPrivate, "Failed!!  IsNestedPrivate returned true for a nested public Type");
+            Assert.False(
+                typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsNestedPrivate,
+                "Failed!!  IsNestedPrivate returned true for a nested public Type"
+            );
         }
-
 
         // Verify IsSealed
         [Fact]
         public static void TestIsSealed()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsSealed, "Failed!!  IsSealed returned true for a Type that is not sealed");
-            Assert.True(typeof(sealedClass).Project().GetTypeInfo().IsSealed, "Failed!!  IsSealed returned false for a Type that is sealed");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsSealed,
+                "Failed!!  IsSealed returned true for a Type that is not sealed"
+            );
+            Assert.True(
+                typeof(sealedClass).Project().GetTypeInfo().IsSealed,
+                "Failed!!  IsSealed returned false for a Type that is sealed"
+            );
         }
-
 
         // Verify IsSerializable
         [Fact]
         public static void TestIsSerializable()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsSerializable, "Failed!!  IsSerializable returned true for a Type that is not serializable");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsSerializable,
+                "Failed!!  IsSerializable returned true for a Type that is not serializable"
+            );
         }
 
         // VerifyIsValueType
         [Fact]
         public static void TestIsValueType()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsValueType, "Failed!!  IsValueType returned true for a class Type");
-            Assert.True(typeof(MYENUM).Project().GetTypeInfo().IsValueType, "Failed!!  IsValueType returned false for a Enum Type");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsValueType,
+                "Failed!!  IsValueType returned true for a class Type"
+            );
+            Assert.True(
+                typeof(MYENUM).Project().GetTypeInfo().IsValueType,
+                "Failed!!  IsValueType returned false for a Enum Type"
+            );
         }
 
         // VerifyIsValueType
         [Fact]
         public static void TestIsVisible()
         {
-            Assert.True(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsVisible, "Failed!!  IsVisible returned false");
-            Assert.True(typeof(ITest).Project().GetTypeInfo().IsVisible, "Failed!!  IsVisible returned false");
-            Assert.True(typeof(MYENUM).Project().GetTypeInfo().IsVisible, "Failed!!  IsVisible returned false");
-            Assert.True(typeof(PublicClass).Project().GetTypeInfo().IsVisible, "Failed!!  IsVisible returned false");
-            Assert.True(typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsVisible, "Failed!!  IsVisible returned false");
+            Assert.True(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsVisible,
+                "Failed!!  IsVisible returned false"
+            );
+            Assert.True(
+                typeof(ITest).Project().GetTypeInfo().IsVisible,
+                "Failed!!  IsVisible returned false"
+            );
+            Assert.True(
+                typeof(MYENUM).Project().GetTypeInfo().IsVisible,
+                "Failed!!  IsVisible returned false"
+            );
+            Assert.True(
+                typeof(PublicClass).Project().GetTypeInfo().IsVisible,
+                "Failed!!  IsVisible returned false"
+            );
+            Assert.True(
+                typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().IsVisible,
+                "Failed!!  IsVisible returned false"
+            );
         }
-
 
         // Verify Namespace property
         [Fact]
         public static void TestNamespace()
         {
-            Assert.Equal("System.Reflection.Tests", typeof(TypeInfoPropertyBase).Project().GetTypeInfo().Namespace);
-            Assert.Equal("System.Reflection.Tests", typeof(ITest).Project().GetTypeInfo().Namespace);
-            Assert.Equal("System.Reflection.Tests", typeof(MYENUM).Project().GetTypeInfo().Namespace);
-            Assert.Equal("System.Reflection.Tests", typeof(PublicClass).Project().GetTypeInfo().Namespace);
-            Assert.Equal("System.Reflection.Tests", typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().Namespace);
+            Assert.Equal(
+                "System.Reflection.Tests",
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().Namespace
+            );
+            Assert.Equal(
+                "System.Reflection.Tests",
+                typeof(ITest).Project().GetTypeInfo().Namespace
+            );
+            Assert.Equal(
+                "System.Reflection.Tests",
+                typeof(MYENUM).Project().GetTypeInfo().Namespace
+            );
+            Assert.Equal(
+                "System.Reflection.Tests",
+                typeof(PublicClass).Project().GetTypeInfo().Namespace
+            );
+            Assert.Equal(
+                "System.Reflection.Tests",
+                typeof(PublicClass.publicNestedClass).Project().GetTypeInfo().Namespace
+            );
             Assert.Equal("System", typeof(int).Project().GetTypeInfo().Namespace);
         }
 
@@ -289,8 +424,14 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestIsImport()
         {
-            Assert.False(typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsImport, "Failed!!  IsImport returned true for a class Type that is not imported.");
-            Assert.False(typeof(MYENUM).Project().GetTypeInfo().IsImport, "Failed!!  IsImport returned true for a non-class Type that is not imported.");
+            Assert.False(
+                typeof(TypeInfoPropertyBase).Project().GetTypeInfo().IsImport,
+                "Failed!!  IsImport returned true for a class Type that is not imported."
+            );
+            Assert.False(
+                typeof(MYENUM).Project().GetTypeInfo().IsImport,
+                "Failed!!  IsImport returned true for a non-class Type that is not imported."
+            );
         }
 
         // VerifyIsUnicodeClass
@@ -301,8 +442,14 @@ namespace System.Reflection.Tests
             Type type = str.GetType();
             Type ref_type = type.MakeByRefType();
 
-            Assert.False(type.GetTypeInfo().IsUnicodeClass, "Failed!!  IsUnicodeClass returned true for string.");
-            Assert.False(ref_type.GetTypeInfo().IsUnicodeClass, "Failed!!  IsUnicodeClass returned true for string.");
+            Assert.False(
+                type.GetTypeInfo().IsUnicodeClass,
+                "Failed!!  IsUnicodeClass returned true for string."
+            );
+            Assert.False(
+                ref_type.GetTypeInfo().IsUnicodeClass,
+                "Failed!!  IsUnicodeClass returned true for string."
+            );
         }
 
         // Verify IsAutoClass
@@ -313,10 +460,15 @@ namespace System.Reflection.Tests
             Type type = str.GetType();
             Type ref_type = type.MakeByRefType();
 
-            Assert.False(type.GetTypeInfo().IsAutoClass, "Failed!!  IsAutoClass returned true for string.");
-            Assert.False(ref_type.GetTypeInfo().IsAutoClass, "Failed!!  IsAutoClass returned true for string.");
+            Assert.False(
+                type.GetTypeInfo().IsAutoClass,
+                "Failed!!  IsAutoClass returned true for string."
+            );
+            Assert.False(
+                ref_type.GetTypeInfo().IsAutoClass,
+                "Failed!!  IsAutoClass returned true for string."
+            );
         }
-
 
         [Fact]
         public static void TestIsMarshalByRef()
@@ -326,42 +478,58 @@ namespace System.Reflection.Tests
             Type ptr_type = type.MakePointerType();
             Type ref_type = type.MakeByRefType();
 
-            Assert.False(type.GetTypeInfo().IsMarshalByRef, "Failed!!  IsMarshalByRef returned true.");
-            Assert.False(ptr_type.GetTypeInfo().IsMarshalByRef, "Failed!!  IsMarshalByRef returned true.");
-            Assert.False(ref_type.GetTypeInfo().IsMarshalByRef, "Failed!!  IsMarshalByRef returned true.");
+            Assert.False(
+                type.GetTypeInfo().IsMarshalByRef,
+                "Failed!!  IsMarshalByRef returned true."
+            );
+            Assert.False(
+                ptr_type.GetTypeInfo().IsMarshalByRef,
+                "Failed!!  IsMarshalByRef returned true."
+            );
+            Assert.False(
+                ref_type.GetTypeInfo().IsMarshalByRef,
+                "Failed!!  IsMarshalByRef returned true."
+            );
         }
-
-
 
         // VerifyIsNestedAssembly
         [Fact]
         public static void TestIsNestedAssembly()
         {
-            Assert.False(typeof(PublicClass).Project().GetTypeInfo().IsNestedAssembly, "Failed!!  IsNestedAssembly returned true for a class with public visibility.");
+            Assert.False(
+                typeof(PublicClass).Project().GetTypeInfo().IsNestedAssembly,
+                "Failed!!  IsNestedAssembly returned true for a class with public visibility."
+            );
         }
-
 
         // VerifyIsNestedFamily
         [Fact]
         public static void TestIsNestedFamily()
         {
-            Assert.False(typeof(PublicClass).Project().GetTypeInfo().IsNestedFamily, "Failed!!  IsNestedFamily returned true for a class with private visibility.");
+            Assert.False(
+                typeof(PublicClass).Project().GetTypeInfo().IsNestedFamily,
+                "Failed!!  IsNestedFamily returned true for a class with private visibility."
+            );
         }
-
 
         // VerifyIsNestedFamANDAssem
         [Fact]
         public static void TestIsNestedFamAndAssem()
         {
-            Assert.False(typeof(PublicClass).Project().GetTypeInfo().IsNestedFamANDAssem, "Failed!!  IsNestedFamAndAssem returned true for a class with private visibility.");
+            Assert.False(
+                typeof(PublicClass).Project().GetTypeInfo().IsNestedFamANDAssem,
+                "Failed!!  IsNestedFamAndAssem returned true for a class with private visibility."
+            );
         }
-
 
         // VerifyIsNestedFamOrAssem
         [Fact]
         public static void TestIsNestedFamOrAssem()
         {
-            Assert.False(typeof(PublicClass).Project().GetTypeInfo().IsNestedFamORAssem, "Failed!!  IsNestedFamOrAssem returned true for a class with private visibility.");
+            Assert.False(
+                typeof(PublicClass).Project().GetTypeInfo().IsNestedFamORAssem,
+                "Failed!!  IsNestedFamOrAssem returned true for a class with private visibility."
+            );
         }
     }
 
@@ -373,31 +541,50 @@ namespace System.Reflection.Tests
 
         public PublicClass() { }
 
-
         public void PublicMethod() { }
+
         public void overRiddenMethod() { }
+
         public void overRiddenMethod(int i) { }
+
         public void overRiddenMethod(string s) { }
+
         public void overRiddenMethod(object o) { }
 
         public static void PublicStaticMethod() { }
+
         public class PublicNestedType { }
 
-        public int PublicProperty { get { return default(int); } set { } }
+        public int PublicProperty
+        {
+            get { return default(int); }
+            set { }
+        }
 
         public class publicNestedClass { }
     }
 
     public sealed class sealedClass { }
+
     public abstract class abstractClass { }
+
     public interface ITest { }
+
     public class TypeInfoPropertyBase { }
+
     public class TypeInfoPropertyDerived : TypeInfoPropertyBase { }
+
     public class ImplClass : ITest { }
+
     public class TypeInfoPropertyGenericClass<T> { }
+
     public class ClassWithConstraints<T, U>
         where T : TypeInfoPropertyBase, ITest
-        where U : class, new()
-    { }
-    public enum MYENUM { one = 1, Two = 2 }
+        where U : class, new() { }
+
+    public enum MYENUM
+    {
+        one = 1,
+        Two = 2,
+    }
 }

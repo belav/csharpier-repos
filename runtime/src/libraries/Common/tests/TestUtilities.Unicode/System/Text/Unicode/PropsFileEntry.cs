@@ -21,7 +21,10 @@ namespace System.Text.Unicode
         {
             Assert.True(firstCodePoint <= 0x10FFFF, "First code point is out of range.");
             Assert.True(lastCodePoint <= 0x10FFFF, "Last code point is out of range.");
-            Assert.True(firstCodePoint <= lastCodePoint, "First code point is after last code point.");
+            Assert.True(
+                firstCodePoint <= lastCodePoint,
+                "First code point is after last code point."
+            );
 
             FirstCodePoint = (int)firstCodePoint;
             LastCodePoint = (int)lastCodePoint;
@@ -40,19 +43,34 @@ namespace System.Text.Unicode
                 return false;
             }
 
-            uint firstCodePoint = uint.Parse(match.Groups["firstCodePoint"].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+            uint firstCodePoint = uint.Parse(
+                match.Groups["firstCodePoint"].Value,
+                NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture
+            );
             uint lastCodePoint = firstCodePoint; // assume no "..YYYY" segment for now
 
             if (match.Groups["lastCodePoint"].Success)
             {
-                lastCodePoint = uint.Parse(match.Groups["lastCodePoint"].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                lastCodePoint = uint.Parse(
+                    match.Groups["lastCodePoint"].Value,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture
+                );
             }
 
-            value = new PropsFileEntry(firstCodePoint, lastCodePoint, match.Groups["propName"].Value);
+            value = new PropsFileEntry(
+                firstCodePoint,
+                lastCodePoint,
+                match.Groups["propName"].Value
+            );
             return true;
         }
 
-        [GeneratedRegex(@"^\s*(?<firstCodePoint>[0-9a-f]{4,})(\.\.(?<lastCodePoint>[0-9a-f]{4,}))?\s*;\s*(?<propName>.+?)\s*(#\s*(?<comment>.*))?$", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(
+            @"^\s*(?<firstCodePoint>[0-9a-f]{4,})(\.\.(?<lastCodePoint>[0-9a-f]{4,}))?\s*;\s*(?<propName>.+?)\s*(#\s*(?<comment>.*))?$",
+            RegexOptions.IgnoreCase
+        )]
         private static partial Regex GetRegex();
     }
 }

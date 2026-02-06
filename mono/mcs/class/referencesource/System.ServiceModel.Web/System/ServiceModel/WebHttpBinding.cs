@@ -4,33 +4,37 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.ComponentModel;
     using System.Configuration;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Text;
     using System.Xml;
-    using System.ComponentModel;
 
     public class WebHttpBinding : Binding, IBindingRuntimePreferences
     {
         HttpsTransportBindingElement httpsTransportBindingElement;
+
         // private BindingElements
         HttpTransportBindingElement httpTransportBindingElement;
         WebHttpSecurity security = new WebHttpSecurity();
         WebMessageEncodingBindingElement webMessageEncodingBindingElement;
 
-        public WebHttpBinding() : base()
+        public WebHttpBinding()
+            : base()
         {
             Initialize();
         }
 
-        public WebHttpBinding(string configurationName) : this()
+        public WebHttpBinding(string configurationName)
+            : this()
         {
             ApplyConfiguration(configurationName);
         }
 
-        public WebHttpBinding(WebHttpSecurityMode securityMode) : base()
+        public WebHttpBinding(WebHttpSecurityMode securityMode)
+            : base()
         {
             Initialize();
             this.security.Mode = securityMode;
@@ -132,7 +136,9 @@ namespace System.ServiceModel
         }
 
         public override string Scheme
-        { get { return GetTransport().Scheme; } }
+        {
+            get { return GetTransport().Scheme; }
+        }
 
         public WebHttpSecurity Security
         {
@@ -171,43 +177,51 @@ namespace System.ServiceModel
         public Encoding WriteEncoding
         {
             get { return webMessageEncodingBindingElement.WriteEncoding; }
-            set
-            {
-                webMessageEncodingBindingElement.WriteEncoding = value;
-            }
+            set { webMessageEncodingBindingElement.WriteEncoding = value; }
         }
 
         public WebContentTypeMapper ContentTypeMapper
         {
             get { return webMessageEncodingBindingElement.ContentTypeMapper; }
-            set
-            {
-                webMessageEncodingBindingElement.ContentTypeMapper = value;
-            }
+            set { webMessageEncodingBindingElement.ContentTypeMapper = value; }
         }
 
         public bool CrossDomainScriptAccessEnabled
         {
             get { return webMessageEncodingBindingElement.CrossDomainScriptAccessEnabled; }
-            set
-            {
-                webMessageEncodingBindingElement.CrossDomainScriptAccessEnabled = value;
-            }
+            set { webMessageEncodingBindingElement.CrossDomainScriptAccessEnabled = value; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")] // Microsoft, This is the pattern we use on the standard bindings in Indigo V1
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1033:InterfaceMethodsShouldBeCallableByChildTypes"
+        )] // Microsoft, This is the pattern we use on the standard bindings in Indigo V1
         bool IBindingRuntimePreferences.ReceiveSynchronously
         {
             get { return false; }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingParameterCollection parameters)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
-            if ((security.Mode == WebHttpSecurityMode.Transport ||
-                security.Mode == WebHttpSecurityMode.TransportCredentialOnly) &&
-                security.Transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost)
+            if (
+                (
+                    security.Mode == WebHttpSecurityMode.Transport
+                    || security.Mode == WebHttpSecurityMode.TransportCredentialOnly
+                )
+                && security.Transport.ClientCredentialType
+                    == HttpClientCredentialType.InheritedFromHost
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.HttpClientCredentialTypeInvalid, security.Transport.ClientCredentialType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpClientCredentialTypeInvalid,
+                            security.Transport.ClientCredentialType
+                        )
+                    )
+                );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -218,7 +232,7 @@ namespace System.ServiceModel
             // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
-            // add encoding 
+            // add encoding
             bindingElements.Add(webMessageEncodingBindingElement);
             // add transport (http or https)
             bindingElements.Add(GetTransport());
@@ -228,14 +242,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            WebHttpBindingCollectionElement section = WebHttpBindingCollectionElement.GetBindingCollectionElement();
+            WebHttpBindingCollectionElement section =
+                WebHttpBindingCollectionElement.GetBindingCollectionElement();
             WebHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR2.GetString(SR2.ConfigInvalidBindingConfigurationName,
-                    configurationName,
-                    WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR2.GetString(
+                            SR2.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {

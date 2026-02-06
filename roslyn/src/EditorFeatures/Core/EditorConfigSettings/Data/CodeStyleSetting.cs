@@ -9,7 +9,12 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal abstract class CodeStyleSetting(OptionKey2 optionKey, string description, OptionUpdater updater, SettingLocation location) : Setting(optionKey, description, updater, location)
+    internal abstract class CodeStyleSetting(
+        OptionKey2 optionKey,
+        string description,
+        OptionUpdater updater,
+        SettingLocation location
+    ) : Setting(optionKey, description, updater, location)
     {
         private static readonly bool[] s_boolValues = [true, false];
 
@@ -23,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             return severity;
         }
 
-        public sealed override object? GetValue()
-            => GetCodeStyle();
+        public sealed override object? GetValue() => GetCodeStyle();
 
         public abstract string[] GetValueDescriptions();
         public abstract string GetCurrentValueDescription();
@@ -56,18 +60,31 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             TieredAnalyzerConfigOptions options,
             OptionUpdater updater,
             string? trueValueDescription = null,
-            string? falseValueDescription = null)
+            string? falseValueDescription = null
+        )
         {
             var optionKey = new OptionKey2(option);
-            options.GetInitialLocationAndValue<CodeStyleOption2<bool>>(option, out var initialLocation, out var initialValue);
+            options.GetInitialLocationAndValue<CodeStyleOption2<bool>>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
 
             var valueDescriptions = new[]
             {
                 trueValueDescription ?? EditorFeaturesResources.Yes,
-                falseValueDescription ?? EditorFeaturesResources.No
+                falseValueDescription ?? EditorFeaturesResources.No,
             };
 
-            return new CodeStyleSetting<bool>(optionKey, description, updater, initialLocation, initialValue, s_boolValues, valueDescriptions);
+            return new CodeStyleSetting<bool>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue,
+                s_boolValues,
+                valueDescriptions
+            );
         }
 
         internal static CodeStyleSetting Create(
@@ -76,18 +93,31 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             TieredAnalyzerConfigOptions options,
             OptionUpdater updater,
             string? trueValueDescription = null,
-            string? falseValueDescription = null)
+            string? falseValueDescription = null
+        )
         {
             var optionKey = new OptionKey2(option, options.Language);
-            options.GetInitialLocationAndValue<CodeStyleOption2<bool>>(option, out var initialLocation, out var initialValue);
+            options.GetInitialLocationAndValue<CodeStyleOption2<bool>>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
 
             var valueDescriptions = new[]
             {
                 trueValueDescription ?? EditorFeaturesResources.Yes,
-                falseValueDescription ?? EditorFeaturesResources.No
+                falseValueDescription ?? EditorFeaturesResources.No,
             };
 
-            return new CodeStyleSetting<bool>(optionKey, description, updater, initialLocation, initialValue, s_boolValues, valueDescriptions);
+            return new CodeStyleSetting<bool>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue,
+                s_boolValues,
+                valueDescriptions
+            );
         }
 
         internal static CodeStyleSetting Create<T>(
@@ -96,12 +126,25 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             TieredAnalyzerConfigOptions options,
             OptionUpdater updater,
             T[] enumValues,
-            string[] valueDescriptions)
+            string[] valueDescriptions
+        )
             where T : Enum
         {
             var optionKey = new OptionKey2(option);
-            options.GetInitialLocationAndValue<CodeStyleOption2<T>>(option, out var initialLocation, out var initialValue);
-            return new CodeStyleSetting<T>(optionKey, description, updater, initialLocation, initialValue, enumValues, valueDescriptions);
+            options.GetInitialLocationAndValue<CodeStyleOption2<T>>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
+            return new CodeStyleSetting<T>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue,
+                enumValues,
+                valueDescriptions
+            );
         }
 
         internal static CodeStyleSetting Create<T>(
@@ -110,12 +153,25 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             TieredAnalyzerConfigOptions options,
             OptionUpdater updater,
             T[] enumValues,
-            string[] valueDescriptions)
+            string[] valueDescriptions
+        )
             where T : Enum
         {
             var optionKey = new OptionKey2(option, options.Language);
-            options.GetInitialLocationAndValue<CodeStyleOption2<T>>(option, out var initialLocation, out var initialValue);
-            return new CodeStyleSetting<T>(optionKey, description, updater, initialLocation, initialValue, enumValues, valueDescriptions);
+            options.GetInitialLocationAndValue<CodeStyleOption2<T>>(
+                option,
+                out var initialLocation,
+                out var initialValue
+            );
+            return new CodeStyleSetting<T>(
+                optionKey,
+                description,
+                updater,
+                initialLocation,
+                initialValue,
+                enumValues,
+                valueDescriptions
+            );
         }
     }
 }

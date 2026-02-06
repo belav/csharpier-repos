@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -35,7 +35,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInputOutput"></typeparam>
     /// <typeparam name="THashKey"></typeparam>
     /// <typeparam name="TOrderKey"></typeparam>
-    internal abstract class HashRepartitionStream<TInputOutput, THashKey, TOrderKey> : PartitionedStream<Pair<TInputOutput, THashKey>, TOrderKey>
+    internal abstract class HashRepartitionStream<TInputOutput, THashKey, TOrderKey>
+        : PartitionedStream<Pair<TInputOutput, THashKey>, TOrderKey>
     {
         private readonly IEqualityComparer<THashKey> m_keyComparer; // The optional key comparison routine.
         private readonly IEqualityComparer<TInputOutput> m_elementComparer; // The optional element comparison routine.
@@ -46,8 +47,11 @@ namespace System.Linq.Parallel
         //
 
         internal HashRepartitionStream(
-            int partitionsCount, IComparer<TOrderKey> orderKeyComparer, IEqualityComparer<THashKey> hashKeyComparer, 
-            IEqualityComparer<TInputOutput> elementComparer)
+            int partitionsCount,
+            IComparer<TOrderKey> orderKeyComparer,
+            IEqualityComparer<THashKey> hashKeyComparer,
+            IEqualityComparer<TInputOutput> elementComparer
+        )
             : base(partitionsCount, orderKeyComparer, OrdinalIndexState.Shuffled)
         {
             // elementComparer is used by operators that use elements themselves as the hash keys.
@@ -56,7 +60,9 @@ namespace System.Linq.Parallel
             m_elementComparer = elementComparer;
 
             Contract.Assert(m_keyComparer == null || m_elementComparer == null);
-            Contract.Assert(m_elementComparer == null || typeof(THashKey) == typeof(NoKeyMemoizationRequired));
+            Contract.Assert(
+                m_elementComparer == null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
+            );
 
             // We use the following constant when distributing hash-codes into partition streams.
             // It's an (arbitrary) prime number to account for poor hashing functions, e.g. those
@@ -90,22 +96,26 @@ namespace System.Linq.Parallel
 
         internal int GetHashCode(TInputOutput element)
         {
-            return
-                (0x7fffffff &
-                    (m_elementComparer == null ? 
-                        (element == null ? NULL_ELEMENT_HASH_CODE : element.GetHashCode()) :
-                        m_elementComparer.GetHashCode(element)))
-                        % m_distributionMod;
+            return (
+                    0x7fffffff
+                    & (
+                        m_elementComparer == null
+                            ? (element == null ? NULL_ELEMENT_HASH_CODE : element.GetHashCode())
+                            : m_elementComparer.GetHashCode(element)
+                    )
+                ) % m_distributionMod;
         }
 
         internal int GetHashCode(THashKey key)
         {
-            return
-                (0x7fffffff &
-                    (m_keyComparer == null ?
-                        (key == null ? NULL_ELEMENT_HASH_CODE : key.GetHashCode()) :
-                        m_keyComparer.GetHashCode(key))) % m_distributionMod;
+            return (
+                    0x7fffffff
+                    & (
+                        m_keyComparer == null
+                            ? (key == null ? NULL_ELEMENT_HASH_CODE : key.GetHashCode())
+                            : m_keyComparer.GetHashCode(key)
+                    )
+                ) % m_distributionMod;
         }
     }
-
 }

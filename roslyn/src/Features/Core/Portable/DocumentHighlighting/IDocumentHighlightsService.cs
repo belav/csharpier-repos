@@ -28,14 +28,18 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
         [DataMember(Order = 1)]
         public HighlightSpanKind Kind { get; }
 
-        public HighlightSpan(TextSpan textSpan, HighlightSpanKind kind) : this()
+        public HighlightSpan(TextSpan textSpan, HighlightSpanKind kind)
+            : this()
         {
             TextSpan = textSpan;
             Kind = kind;
         }
     }
 
-    internal readonly struct DocumentHighlights(Document document, ImmutableArray<HighlightSpan> highlightSpans)
+    internal readonly struct DocumentHighlights(
+        Document document,
+        ImmutableArray<HighlightSpan> highlightSpans
+    )
     {
         public Document Document { get; } = document;
         public ImmutableArray<HighlightSpan> HighlightSpans { get; } = highlightSpans;
@@ -48,6 +52,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     internal interface IDocumentHighlightsService : ILanguageService
     {
         Task<ImmutableArray<DocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, HighlightingOptions options, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 }

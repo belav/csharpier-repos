@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,96 +34,124 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	public class DataContractSerializerOperationBehavior : IOperationBehavior, IWsdlExportExtension
-	{
-		DataContractFormatAttribute format;
-		OperationDescription operation;
+    public class DataContractSerializerOperationBehavior : IOperationBehavior, IWsdlExportExtension
+    {
+        DataContractFormatAttribute format;
+        OperationDescription operation;
 
-		public DataContractSerializerOperationBehavior (OperationDescription operation)
-		{
-			format = new DataContractFormatAttribute ();
-			this.operation = operation;
-			MaxItemsInObjectGraph = int.MaxValue;
-		}
+        public DataContractSerializerOperationBehavior(OperationDescription operation)
+        {
+            format = new DataContractFormatAttribute();
+            this.operation = operation;
+            MaxItemsInObjectGraph = int.MaxValue;
+        }
 
-		public DataContractSerializerOperationBehavior (
-			OperationDescription operation,
-			DataContractFormatAttribute dataContractFormatAttribute)
-		{
-			this.format = dataContractFormatAttribute;
-			this.operation = operation;
-			MaxItemsInObjectGraph = int.MaxValue;
-		}
+        public DataContractSerializerOperationBehavior(
+            OperationDescription operation,
+            DataContractFormatAttribute dataContractFormatAttribute
+        )
+        {
+            this.format = dataContractFormatAttribute;
+            this.operation = operation;
+            MaxItemsInObjectGraph = int.MaxValue;
+        }
 
-		public DataContractFormatAttribute DataContractFormatAttribute {
-			get { return format; }
-		}
+        public DataContractFormatAttribute DataContractFormatAttribute
+        {
+            get { return format; }
+        }
 
-		public DataContractResolver DataContractResolver { get; set; }
+        public DataContractResolver DataContractResolver { get; set; }
 
-		public bool IgnoreExtensionDataObject { get; set; }
+        public bool IgnoreExtensionDataObject { get; set; }
 
-		public int MaxItemsInObjectGraph { get; set; }
+        public int MaxItemsInObjectGraph { get; set; }
 
 #if !MOBILE
-		public IDataContractSurrogate DataContractSurrogate { get; set; }
+        public IDataContractSurrogate DataContractSurrogate { get; set; }
 #endif
 
-		public virtual XmlObjectSerializer CreateSerializer (Type type, string name, string ns, IList<Type> knownTypes)
-		{
+        public virtual XmlObjectSerializer CreateSerializer(
+            Type type,
+            string name,
+            string ns,
+            IList<Type> knownTypes
+        )
+        {
 #if MOBILE
-			return new DataContractSerializer (type, name, ns, knownTypes);
+            return new DataContractSerializer(type, name, ns, knownTypes);
 #else
-			return new DataContractSerializer (type, name, ns, knownTypes, MaxItemsInObjectGraph, IgnoreExtensionDataObject, false, DataContractSurrogate);
+            return new DataContractSerializer(
+                type,
+                name,
+                ns,
+                knownTypes,
+                MaxItemsInObjectGraph,
+                IgnoreExtensionDataObject,
+                false,
+                DataContractSurrogate
+            );
 #endif
-		}
+        }
 
-		public virtual XmlObjectSerializer CreateSerializer (Type type, XmlDictionaryString name, XmlDictionaryString ns, IList<Type> knownTypes)
-		{
+        public virtual XmlObjectSerializer CreateSerializer(
+            Type type,
+            XmlDictionaryString name,
+            XmlDictionaryString ns,
+            IList<Type> knownTypes
+        )
+        {
 #if MOBILE
-			return new DataContractSerializer (type, name, ns, knownTypes);
+            return new DataContractSerializer(type, name, ns, knownTypes);
 #else
-			return new DataContractSerializer (type, name, ns, knownTypes, MaxItemsInObjectGraph, IgnoreExtensionDataObject, false, DataContractSurrogate);
+            return new DataContractSerializer(
+                type,
+                name,
+                ns,
+                knownTypes,
+                MaxItemsInObjectGraph,
+                IgnoreExtensionDataObject,
+                false,
+                DataContractSurrogate
+            );
 #endif
-		}
+        }
 
-		void IOperationBehavior.AddBindingParameters (
-			OperationDescription description,
-			BindingParameterCollection parameters)
-		{
-		}
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-		void IOperationBehavior.ApplyDispatchBehavior (
-			OperationDescription description,
-			DispatchOperation dispatch)
-		{
-			dispatch.Formatter = new DataContractMessagesFormatter (description, format);
-		}
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        )
+        {
+            dispatch.Formatter = new DataContractMessagesFormatter(description, format);
+        }
 
-		void IOperationBehavior.ApplyClientBehavior (
-			OperationDescription description,
-			ClientOperation proxy)
-		{
-			proxy.Formatter = new DataContractMessagesFormatter (description, format);
-		}
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        )
+        {
+            proxy.Formatter = new DataContractMessagesFormatter(description, format);
+        }
 
-		void IOperationBehavior.Validate (
-			OperationDescription description)
-		{
-		}
-		
+        void IOperationBehavior.Validate(OperationDescription description) { }
+
 #if !MOBILE && !XAMMAC_4_5
-		//IWsdlExportExtension
+        //IWsdlExportExtension
 
-		void IWsdlExportExtension.ExportContract (WsdlExporter exporter,
-			WsdlContractConversionContext context)
-		{
-		}
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
-		void IWsdlExportExtension.ExportEndpoint (WsdlExporter exporter,
-			WsdlEndpointConversionContext context)
-		{
-		}
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        ) { }
 #endif
-	}
+    }
 }

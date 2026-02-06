@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,57 +34,63 @@ using System.Security.Permissions;
 
 namespace System.Web.DynamicData.ModelProviders
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class ColumnProvider
-	{
-		protected ColumnProvider (TableProvider table)
-		{
-			if (table == null)
-				throw new ArgumentNullException ("table");
-			this.Table = table;
-		}
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class ColumnProvider
+    {
+        protected ColumnProvider(TableProvider table)
+        {
+            if (table == null)
+                throw new ArgumentNullException("table");
+            this.Table = table;
+        }
 
-		[MonoTODO]
-		public virtual AssociationProvider Association { get; protected set; }
+        [MonoTODO]
+        public virtual AssociationProvider Association { get; protected set; }
 
-		[MonoTODO]
-		public virtual Type ColumnType { get; protected set; }
+        [MonoTODO]
+        public virtual Type ColumnType { get; protected set; }
 
-		[MonoTODO]
-		public virtual PropertyInfo EntityTypeProperty { get; protected set; }
+        [MonoTODO]
+        public virtual PropertyInfo EntityTypeProperty { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool IsCustomProperty { get; protected set; }
+        [MonoTODO]
+        public virtual bool IsCustomProperty { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool IsForeignKeyComponent { get; protected set; }
+        [MonoTODO]
+        public virtual bool IsForeignKeyComponent { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool IsGenerated { get; protected set; }
+        [MonoTODO]
+        public virtual bool IsGenerated { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool IsPrimaryKey { get; protected set; }
+        [MonoTODO]
+        public virtual bool IsPrimaryKey { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool IsSortable { get; protected set; }
+        [MonoTODO]
+        public virtual bool IsSortable { get; protected set; }
 
-		[MonoTODO]
-		public virtual int MaxLength { get; protected set; }
+        [MonoTODO]
+        public virtual int MaxLength { get; protected set; }
 
-		[MonoTODO]
-		public virtual string Name { get; protected set; }
+        [MonoTODO]
+        public virtual string Name { get; protected set; }
 
-		[MonoTODO]
-		public virtual bool Nullable { get; protected set; }
+        [MonoTODO]
+        public virtual bool Nullable { get; protected set; }
 
-		[MonoTODO]
-		public TableProvider Table { get; private set; }
+        [MonoTODO]
+        public TableProvider Table { get; private set; }
 
-		[MonoTODO]
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

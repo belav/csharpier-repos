@@ -18,7 +18,12 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Create an instance of AudioFileOut.
         /// </summary>
-        internal AudioFileOut(Stream stream, SpeechAudioFormatInfo formatInfo, bool headerInfo, IAsyncDispatch asyncDispatch)
+        internal AudioFileOut(
+            Stream stream,
+            SpeechAudioFormatInfo formatInfo,
+            bool headerInfo,
+            IAsyncDispatch asyncDispatch
+        )
         {
             _asyncDispatch = asyncDispatch;
             _stream = stream;
@@ -41,7 +46,8 @@ namespace System.Speech.Internal.Synthesis
                 _wfxOut = WAVEFORMATEX.Default;
             }
             _wfxOut.nBlockAlign = (short)(_wfxOut.nChannels * _wfxOut.wBitsPerSample / 8);
-            _wfxOut.nAvgBytesPerSec = _wfxOut.wBitsPerSample * _wfxOut.nSamplesPerSec * _wfxOut.nChannels / 8;
+            _wfxOut.nAvgBytesPerSec =
+                _wfxOut.wBitsPerSample * _wfxOut.nSamplesPerSec * _wfxOut.nChannels / 8;
         }
 
         public void Dispose()
@@ -188,9 +194,7 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         internal override void WaitUntilDone()
         {
-            lock (_noWriteOutLock)
-            {
-            }
+            lock (_noWriteOutLock) { }
         }
 
         #endregion
@@ -207,24 +211,20 @@ namespace System.Speech.Internal.Synthesis
                 {
                     return new TimeSpan(0);
                 }
-                return new TimeSpan((_bytesWritten * TimeSpan.TicksPerSecond) / _wfxIn.nAvgBytesPerSec);
+                return new TimeSpan(
+                    (_bytesWritten * TimeSpan.TicksPerSecond) / _wfxIn.nAvgBytesPerSec
+                );
             }
         }
 
         internal override long Position
         {
-            get
-            {
-                return _stream.Position;
-            }
+            get { return _stream.Position; }
         }
 
         internal override byte[] WaveFormat
         {
-            get
-            {
-                return _wfxOut.ToBytes();
-            }
+            get { return _wfxOut.ToBytes(); }
         }
 
         #endregion

@@ -13,7 +13,10 @@ namespace System.Data.Entity.Design
         public static readonly Version Version1 = new Version(1, 0, 0, 0);
         public static readonly Version Version2 = new Version(2, 0, 0, 0);
         public static readonly Version Version3 = new Version(3, 0, 0, 0);
-        internal static Version EdmVersion1_1 { get { return new Version(1, 1, 0, 0); } }
+        internal static Version EdmVersion1_1
+        {
+            get { return new Version(1, 1, 0, 0); }
+        }
 
         internal static Version ConvertToVersion(double runtimeVersion)
         {
@@ -23,7 +26,7 @@ namespace System.Data.Entity.Design
             }
             else if (runtimeVersion == 1.1)
             {
-                // this is not a valid EntityFramework version, 
+                // this is not a valid EntityFramework version,
                 // but only a valid EdmVersion
                 return EdmVersion1_1;
             }

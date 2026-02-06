@@ -18,39 +18,39 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web.DynamicData;
-using System.Runtime.CompilerServices;
 
 namespace System.Web.UI.WebControls
 {
     public class EntityDataSourceView : DataSourceView, IStateManager
     {
         /// <summary>
-        /// Helper class used to manage EntityDataSourceWrapperCollection collections. 
+        /// Helper class used to manage EntityDataSourceWrapperCollection collections.
         /// </summary>
         /// <remarks>
-        /// Entities in EntityDataSourceWrapperCollection are wrapped in order to allow for easy access to nested properties (and also 
-        /// to be able to handle independendent associations - it was especially important in v1 where foreign keys were not supported). 
-        /// This is handy when we need to get or set property values because we set values the same way regeradless if a 
-        /// property is nested or not. Additional benefit is that the entities from EntityDataSourceWrapperCollection can be 
+        /// Entities in EntityDataSourceWrapperCollection are wrapped in order to allow for easy access to nested properties (and also
+        /// to be able to handle independendent associations - it was especially important in v1 where foreign keys were not supported).
+        /// This is handy when we need to get or set property values because we set values the same way regeradless if a
+        /// property is nested or not. Additional benefit is that the entities from EntityDataSourceWrapperCollection can be
         /// easily stored and restored into/from the viewstate.
         /// We cache entities in EntityDataSourceWrapperCollection in two cases:
-        /// - EntityDataSource.EnableFlattening flag is set to true. In this case the user requested entities to be flattened and wrapping allows 
+        /// - EntityDataSource.EnableFlattening flag is set to true. In this case the user requested entities to be flattened and wrapping allows
         ///   for an easy translation between tabular and hierarchical forms
         /// - EntityDataSource.EnableUpdate flag is set meaning the user allows for updating entities. In this case we use EntityDataSourceWrapperCollection
-        ///   to cache original values so that we can store them easily in the viewstate. The reason for storing values in the viewstate is that the 
+        ///   to cache original values so that we can store them easily in the viewstate. The reason for storing values in the viewstate is that the
         ///   update operation can be mapped to a function. If we don't store the original values we would invoke the update function but some parameters
         ///   would not be. This would result in data corruption as we would override existing data in the database with default values (nulls) or an exception
         ///   if the target column in the database does not allow null values.
-        ///   When the parameters would not be set? This happens when the dictionary containing oldValues passed to ExecuteUpdate method is missing some 
+        ///   When the parameters would not be set? This happens when the dictionary containing oldValues passed to ExecuteUpdate method is missing some
         ///   values. This in turn can happen if EnableFlattening is set to false and the entity contains a complex property. The values of child properties of the
-        ///   complex property are not displayed to the user and as a result the values for columns that were not shown are not passed back to the 
+        ///   complex property are not displayed to the user and as a result the values for columns that were not shown are not passed back to the
         ///   ExecuteUpdate method. Another case is when the user uses a GridView bound to EntityDataSource. If the user hides some columns the values
         ///   for the hidden columns will not be passed to the ExecuteUpdate method.
         /// Note that when entity flattening is enabled we will always store values returned from Select in the viewstate so we don't need to do anything special
         /// for update. When entity flattening is disabled we always store the values if EnableUpdate is set to true. This is not really needed if the update operation
-        /// is not mapped to a function but if you are not inside System.Data.Entity.dll there is no way to tell whether the operation is mapped to a function so we need 
+        /// is not mapped to a function but if you are not inside System.Data.Entity.dll there is no way to tell whether the operation is mapped to a function so we need
         /// to do it always.
         /// </remarks>
         private class WrapperCollectionManager
@@ -58,13 +58,13 @@ namespace System.Web.UI.WebControls
             /// <summary>
             /// Modes the manager can be working in.
             /// </summary>
-            public enum ManagerMode 
-            { 
+            public enum ManagerMode
+            {
                 /// <summary>
-                /// None - entities are not stored. <see cref="_collection"/> is null. 
+                /// None - entities are not stored. <see cref="_collection"/> is null.
                 /// Both <see cref="FlattenedEntityCollection"/> and <see cref="UpdateCache"/> return null.
                 /// </summary>
-                None, 
+                None,
 
                 /// <summary>
                 /// Entites are stored because <see cref="EntityDataSource.EnableFlattening"/> flag is set to true.
@@ -73,11 +73,11 @@ namespace System.Web.UI.WebControls
                 FlattenedEntities,
 
                 /// <summary>
-                /// Entites are stored because <see cref="EntityDataSource.EnableFlattening"/> flag is set to false but 
+                /// Entites are stored because <see cref="EntityDataSource.EnableFlattening"/> flag is set to false but
                 /// <see cref="EntityDataSource.EnableUpdate"/> is set to true.
                 /// <see cref="FlattenedEntityCollection"/> returns non-null value whiel <see cref="UpdateCache"/> returns null.
                 /// </summary>
-                UpdateCache 
+                UpdateCache,
             }
 
             private ManagerMode _collectionMode;
@@ -96,7 +96,10 @@ namespace System.Web.UI.WebControls
             /// </summary>
             public EntityDataSourceWrapperCollection FlattenedEntityCollection
             {
-                get { return _collectionMode == ManagerMode.FlattenedEntities ? _collection : null; }
+                get
+                {
+                    return _collectionMode == ManagerMode.FlattenedEntities ? _collection : null;
+                }
             }
 
             /// <summary>
@@ -104,7 +107,7 @@ namespace System.Web.UI.WebControls
             /// </summary>
             public EntityDataSourceWrapperCollection UpdateCache
             {
-                get { return _collectionMode == ManagerMode.UpdateCache ? _collection : null; } 
+                get { return _collectionMode == ManagerMode.UpdateCache ? _collection : null; }
             }
 
             /// <summary>
@@ -114,15 +117,27 @@ namespace System.Web.UI.WebControls
             /// <param name="entitySet">Entity set the stored belongs to.</param>
             /// <param name="CSpaceFilteredEntityType">What entity type restrict the collection to. Null if all derived entity types are allowed.</param>
             /// <param name="mode">What mode to store the entities. Never <see cref="ManagerMode.None"/>.</param>
-            public void CreateCollection(ObjectContext context, EntitySet entitySet, EntityType CSpaceFilteredEntityType, ManagerMode mode)
+            public void CreateCollection(
+                ObjectContext context,
+                EntitySet entitySet,
+                EntityType CSpaceFilteredEntityType,
+                ManagerMode mode
+            )
             {
                 Debug.Assert(context != null);
                 Debug.Assert(entitySet != null);
                 Debug.Assert(mode != ManagerMode.None);
-                Debug.Assert(_collectionMode == ManagerMode.None || _collectionMode == mode, "Cannot reset a collection working in a different mode.");
+                Debug.Assert(
+                    _collectionMode == ManagerMode.None || _collectionMode == mode,
+                    "Cannot reset a collection working in a different mode."
+                );
 
                 _collectionMode = mode;
-                _collection = new EntityDataSourceWrapperCollection(context, entitySet, CSpaceFilteredEntityType);
+                _collection = new EntityDataSourceWrapperCollection(
+                    context,
+                    entitySet,
+                    CSpaceFilteredEntityType
+                );
             }
 
             /// <summary>
@@ -165,9 +180,9 @@ namespace System.Web.UI.WebControls
         private WrapperCollectionManager _collectionManager = new WrapperCollectionManager();
 
         #region Constructor
-        
+
         /// <summary>
-        /// Initialize a new named instance of the EntityDataSourceView class, and 
+        /// Initialize a new named instance of the EntityDataSourceView class, and
         /// associates the specified EntityDataSource with it.
         /// </summary>
         public EntityDataSourceView(EntityDataSource owner, string viewName)
@@ -179,12 +194,30 @@ namespace System.Web.UI.WebControls
 
         #region ExecuteSelect
 
-        private static readonly MethodInfo _executeSelectMethod = typeof(EntityDataSourceView).GetMethod("ExecuteSelectTyped", BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly MethodInfo _continueSelectMethod = typeof(EntityDataSourceView).GetMethod("ContinueSelectTyped", BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly Type[] queryBuilderCreatorArgTypes = { typeof(DataSourceSelectArguments), typeof(string), typeof(ObjectParameter[]), 
-                                                                             typeof(string), typeof(ObjectParameter[]), typeof(string),
-                                                                             typeof(string), typeof(string), typeof(ObjectParameter[]),
-                                                                             typeof(OrderByBuilder), typeof(string) };
+        private static readonly MethodInfo _executeSelectMethod =
+            typeof(EntityDataSourceView).GetMethod(
+                "ExecuteSelectTyped",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+        private static readonly MethodInfo _continueSelectMethod =
+            typeof(EntityDataSourceView).GetMethod(
+                "ContinueSelectTyped",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+        private static readonly Type[] queryBuilderCreatorArgTypes =
+        {
+            typeof(DataSourceSelectArguments),
+            typeof(string),
+            typeof(ObjectParameter[]),
+            typeof(string),
+            typeof(ObjectParameter[]),
+            typeof(string),
+            typeof(string),
+            typeof(string),
+            typeof(ObjectParameter[]),
+            typeof(OrderByBuilder),
+            typeof(string),
+        };
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         protected override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
@@ -209,28 +242,45 @@ namespace System.Web.UI.WebControls
             if (_owner.ValidateWrappable() || CanUpdate)
             {
                 _collectionManager.CreateCollection(
-                    Context, 
-                    EntitySet, 
+                    Context,
+                    EntitySet,
                     CSpaceFilteredEntityType,
-                    _owner.ValidateWrappable() ? WrapperCollectionManager.ManagerMode.FlattenedEntities : WrapperCollectionManager.ManagerMode.UpdateCache);
-            }            
+                    _owner.ValidateWrappable()
+                        ? WrapperCollectionManager.ManagerMode.FlattenedEntities
+                        : WrapperCollectionManager.ManagerMode.UpdateCache
+                );
+            }
 
             if (!string.IsNullOrEmpty(_owner.Select))
             {
-                return ExecuteSelectTyped<DbDataRecord>(arguments, EntityDataSourceRecordQueryBuilder.Create);
+                return ExecuteSelectTyped<DbDataRecord>(
+                    arguments,
+                    EntityDataSourceRecordQueryBuilder.Create
+                );
             }
             else if (!string.IsNullOrEmpty(_owner.CommandText))
             {
-                return ExecuteSelectTyped<object>(arguments, EntityDataSourceObjectQueryBuilder<object>.Create);
+                return ExecuteSelectTyped<object>(
+                    arguments,
+                    EntityDataSourceObjectQueryBuilder<object>.Create
+                );
             }
             else
             {
-                Type builderType = typeof(EntityDataSourceObjectQueryBuilder<>).MakeGenericType(EntityClrType);
-                MethodInfo getCreatorMethod = builderType.GetMethod("GetCreator", BindingFlags.Static | BindingFlags.NonPublic);
+                Type builderType = typeof(EntityDataSourceObjectQueryBuilder<>).MakeGenericType(
+                    EntityClrType
+                );
+                MethodInfo getCreatorMethod = builderType.GetMethod(
+                    "GetCreator",
+                    BindingFlags.Static | BindingFlags.NonPublic
+                );
                 object createDelegate = getCreatorMethod.Invoke(null, null);
                 try
                 {
-                    return (IEnumerable)_executeSelectMethod.MakeGenericMethod(EntityClrType).Invoke(this, new object[] { arguments, createDelegate });
+                    return (IEnumerable)
+                        _executeSelectMethod
+                            .MakeGenericMethod(EntityClrType)
+                            .Invoke(this, new object[] { arguments, createDelegate });
                 }
                 catch (TargetInvocationException e)
                 {
@@ -240,31 +290,47 @@ namespace System.Web.UI.WebControls
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private IEnumerable ExecuteSelectTyped<T>(DataSourceSelectArguments arguments, EntityDataSourceQueryBuilder<T>.Creator qbConstructor)
+        private IEnumerable ExecuteSelectTyped<T>(
+            DataSourceSelectArguments arguments,
+            EntityDataSourceQueryBuilder<T>.Creator qbConstructor
+        )
         {
             string whereClause;
             ObjectParameter[] whereParameters;
             GenerateWhereClause(out whereClause, out whereParameters);
             string entitySetQueryExpression = GenerateEntitySetQueryExpression();
 
-            var orderByBuilder = new OrderByBuilder(arguments.SortExpression, _collectionManager.FlattenedEntityCollection,
-                _owner.OrderBy, _owner.AutoGenerateOrderByClause, _owner.OrderByParameters,
+            var orderByBuilder = new OrderByBuilder(
+                arguments.SortExpression,
+                _collectionManager.FlattenedEntityCollection,
+                _owner.OrderBy,
+                _owner.AutoGenerateOrderByClause,
+                _owner.OrderByParameters,
                 CanPage, //There's no need to generate the default OrderBy clause if paging is disabled. Prevents an unnecessary sort at the server.
-                _owner);
+                _owner
+            );
 
-            EntityDataSourceQueryBuilder<T> queryBuilder =
-                qbConstructor(
-                        arguments,
-                        _owner.CommandText, _owner.GetCommandParameters(),
-                        whereClause, whereParameters, entitySetQueryExpression,
-                        _owner.Select, _owner.GroupBy, _owner.GetSelectParameters(),
-                        orderByBuilder,
-                        _owner.Include);
+            EntityDataSourceQueryBuilder<T> queryBuilder = qbConstructor(
+                arguments,
+                _owner.CommandText,
+                _owner.GetCommandParameters(),
+                whereClause,
+                whereParameters,
+                entitySetQueryExpression,
+                _owner.Select,
+                _owner.GroupBy,
+                _owner.GetSelectParameters(),
+                orderByBuilder,
+                _owner.Include
+            );
 
             // We need to keep two copies, the unsorted and sorted because if the event does not
             // modify the query we'll need to revert back to the unsorted one so we can re-apply the
             // ESQL sort criteria as part of skip/take.
-            ObjectQuery<T> query = queryBuilder.BuildBasicQuery(Context, arguments.RetrieveTotalRowCount);
+            ObjectQuery<T> query = queryBuilder.BuildBasicQuery(
+                Context,
+                arguments.RetrieveTotalRowCount
+            );
             ObjectQuery<T> sortedQuery = queryBuilder.ApplyOrderBy(query);
 
             var queryEventArgs = new QueryCreatedEventArgs(sortedQuery);
@@ -277,7 +343,12 @@ namespace System.Web.UI.WebControls
                 // Check that we still have an object query
                 if (queryReturned as ObjectQuery == null)
                 {
-                    throw new InvalidOperationException(Strings.EntityDataSourceView_QueryCreatedNotAnObjectQuery(queryReturned.GetType().FullName, typeof(T).Name));
+                    throw new InvalidOperationException(
+                        Strings.EntityDataSourceView_QueryCreatedNotAnObjectQuery(
+                            queryReturned.GetType().FullName,
+                            typeof(T).Name
+                        )
+                    );
                 }
 
                 // Check that new type is at least substitutable
@@ -286,42 +357,98 @@ namespace System.Web.UI.WebControls
                 {
                     if (!typeof(T).IsAssignableFrom(elementType))
                     {
-                        throw new InvalidOperationException(Strings.EntityDataSourceView_QueryCreatedWrongType(elementType.Name, typeof(T).Name));
+                        throw new InvalidOperationException(
+                            Strings.EntityDataSourceView_QueryCreatedWrongType(
+                                elementType.Name,
+                                typeof(T).Name
+                            )
+                        );
                     }
 
                     // Recreate the query builder for new type and then run it
-                    var newQueryBuilderCreateMethod = typeof(EntityDataSourceObjectQueryBuilder<>).MakeGenericType(queryReturned.ElementType).GetMethod("Create", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic, null, queryBuilderCreatorArgTypes, null);
-                    Debug.Assert(newQueryBuilderCreateMethod != null, "Unable to bind to EntityDataSourceObjectQueryBuilder<T>.Create (static, non-visible) method");
+                    var newQueryBuilderCreateMethod = typeof(EntityDataSourceObjectQueryBuilder<>)
+                        .MakeGenericType(queryReturned.ElementType)
+                        .GetMethod(
+                            "Create",
+                            System.Reflection.BindingFlags.Static
+                                | System.Reflection.BindingFlags.NonPublic,
+                            null,
+                            queryBuilderCreatorArgTypes,
+                            null
+                        );
+                    Debug.Assert(
+                        newQueryBuilderCreateMethod != null,
+                        "Unable to bind to EntityDataSourceObjectQueryBuilder<T>.Create (static, non-visible) method"
+                    );
 
                     // If the query results were wrapped before, we need to reset the wrapper to use the new type
-                    if (_collectionManager.Mode == WrapperCollectionManager.ManagerMode.FlattenedEntities)
+                    if (
+                        _collectionManager.Mode
+                        == WrapperCollectionManager.ManagerMode.FlattenedEntities
+                    )
                     {
                         Debug.Assert(_collectionManager.FlattenedEntityCollection != null);
 
                         MetadataWorkspace workspace = Context.MetadataWorkspace;
-                        EntityType newOSpaceType = workspace.GetItem<EntityType>(elementType.FullName, DataSpace.OSpace);
-                        EntityType newCSpaceType = (EntityType)workspace.GetEdmSpaceType((StructuralType)newOSpaceType);
+                        EntityType newOSpaceType = workspace.GetItem<EntityType>(
+                            elementType.FullName,
+                            DataSpace.OSpace
+                        );
+                        EntityType newCSpaceType = (EntityType)
+                            workspace.GetEdmSpaceType((StructuralType)newOSpaceType);
 
-                        _collectionManager.CreateCollection(Context, EntitySet, newCSpaceType, WrapperCollectionManager.ManagerMode.FlattenedEntities);
-                        
+                        _collectionManager.CreateCollection(
+                            Context,
+                            EntitySet,
+                            newCSpaceType,
+                            WrapperCollectionManager.ManagerMode.FlattenedEntities
+                        );
+
                         // Don't need to regenerate the where clause and parameters because they must be declaratively specified and if they reference
                         // properties that only exist in the subtype we would have already failed to generate the where clause previously and couldn't get this far
-                        
+
                         // Regeneate the OrderByBuilder so that we can apply the sort expression later based on the new wrapper properties
-                        orderByBuilder = new OrderByBuilder(arguments.SortExpression, _collectionManager.FlattenedEntityCollection,
-                            _owner.OrderBy, _owner.AutoGenerateOrderByClause, _owner.OrderByParameters,
+                        orderByBuilder = new OrderByBuilder(
+                            arguments.SortExpression,
+                            _collectionManager.FlattenedEntityCollection,
+                            _owner.OrderBy,
+                            _owner.AutoGenerateOrderByClause,
+                            _owner.OrderByParameters,
                             CanPage, //There's no need to generate the default OrderBy clause if paging is disabled. Prevents an unnecessary sort at the server.
-                            _owner);
+                            _owner
+                        );
                     }
 
-                    object newQueryBuilder = newQueryBuilderCreateMethod.Invoke(null, new object[] {
-                         arguments,
-                        _owner.CommandText, _owner.GetCommandParameters(),
-                        whereClause, whereParameters, entitySetQueryExpression,
-                        _owner.Select, _owner.GroupBy, _owner.GetSelectParameters(),
-                        orderByBuilder,
-                        _owner.Include });
-                    return (IEnumerable)_continueSelectMethod.MakeGenericMethod(elementType).Invoke(this, new object[] { arguments, newQueryBuilder, queryReturned, wasQueryModified });
+                    object newQueryBuilder = newQueryBuilderCreateMethod.Invoke(
+                        null,
+                        new object[]
+                        {
+                            arguments,
+                            _owner.CommandText,
+                            _owner.GetCommandParameters(),
+                            whereClause,
+                            whereParameters,
+                            entitySetQueryExpression,
+                            _owner.Select,
+                            _owner.GroupBy,
+                            _owner.GetSelectParameters(),
+                            orderByBuilder,
+                            _owner.Include,
+                        }
+                    );
+                    return (IEnumerable)
+                        _continueSelectMethod
+                            .MakeGenericMethod(elementType)
+                            .Invoke(
+                                this,
+                                new object[]
+                                {
+                                    arguments,
+                                    newQueryBuilder,
+                                    queryReturned,
+                                    wasQueryModified,
+                                }
+                            );
                 }
 
                 // Type hasn't changed, we can dispatch as normal
@@ -331,11 +458,21 @@ namespace System.Web.UI.WebControls
             return ContinueSelectTyped<T>(arguments, queryBuilder, query, wasQueryModified);
         }
 
-        private IEnumerable ContinueSelectTyped<T>(DataSourceSelectArguments arguments, EntityDataSourceQueryBuilder<T> queryBuilder, ObjectQuery<T> queryT, bool wasQueryModified)
+        private IEnumerable ContinueSelectTyped<T>(
+            DataSourceSelectArguments arguments,
+            EntityDataSourceQueryBuilder<T> queryBuilder,
+            ObjectQuery<T> queryT,
+            bool wasQueryModified
+        )
         {
             // Reset the MergeOption to AppendOnly
             queryT.MergeOption = MergeOption.AppendOnly;
-            queryT = queryBuilder.CompleteBuild(queryT, Context, arguments.RetrieveTotalRowCount, wasQueryModified);
+            queryT = queryBuilder.CompleteBuild(
+                queryT,
+                Context,
+                arguments.RetrieveTotalRowCount,
+                wasQueryModified
+            );
 
             // SelectedEventArgs.TotalRowCount has three possible states:
             //  1. The databound control requests it via arguments.RetrieveTotalRowCount
@@ -357,10 +494,11 @@ namespace System.Web.UI.WebControls
             if (!_disableUpdates)
             {
                 Debug.Assert(null != EntitySet, "Can't be updatable with a null EntitySet");
-                EntityDataSourceUtil.
-                  CheckNonPolymorphicTypeUsage(EntitySet.ElementType,
-                                             Context.MetadataWorkspace.GetItemCollection(DataSpace.CSpace),
-                                             _owner.EntityTypeFilter);
+                EntityDataSourceUtil.CheckNonPolymorphicTypeUsage(
+                    EntitySet.ElementType,
+                    Context.MetadataWorkspace.GetItemCollection(DataSpace.CSpace),
+                    _owner.EntityTypeFilter
+                );
             }
 
             IEnumerable entities = null;
@@ -388,26 +526,48 @@ namespace System.Web.UI.WebControls
                     // Paging is disabled, totalRowCount gets the number of rows returned from this query.
                     totalRowCount = ((IList)entities).Count;
                 }
-                OnSelected(new EntityDataSourceSelectedEventArgs(Context, entities, totalRowCount, arguments));
+                OnSelected(
+                    new EntityDataSourceSelectedEventArgs(
+                        Context,
+                        entities,
+                        totalRowCount,
+                        arguments
+                    )
+                );
             }
 
-            var checkEntitySet = wasQueryModified && !String.IsNullOrEmpty(_owner.EntitySetName) && (CanDelete || CanUpdate);
+            var checkEntitySet =
+                wasQueryModified
+                && !String.IsNullOrEmpty(_owner.EntitySetName)
+                && (CanDelete || CanUpdate);
 
-            if (_collectionManager.Mode == WrapperCollectionManager.ManagerMode.None && !checkEntitySet)
+            if (
+                _collectionManager.Mode == WrapperCollectionManager.ManagerMode.None
+                && !checkEntitySet
+            )
             {
                 Debug.Assert(
-                    _collectionManager.FlattenedEntityCollection == null && _collectionManager.UpdateCache == null,
-                    "ManagerMode is None so both collections should be null.");
+                    _collectionManager.FlattenedEntityCollection == null
+                        && _collectionManager.UpdateCache == null,
+                    "ManagerMode is None so both collections should be null."
+                );
 
                 return entities;
             }
 
             foreach (object element in entities)
             {
-                var elementEntitySet = Context.ObjectStateManager.GetObjectStateEntry(element).EntitySet;
+                var elementEntitySet = Context
+                    .ObjectStateManager.GetObjectStateEntry(element)
+                    .EntitySet;
                 if (elementEntitySet != EntitySet)
                 {
-                    throw new InvalidOperationException(Strings.EntityDataSourceView_EntitySetMismatchWithQueryResults(elementEntitySet, EntitySet));
+                    throw new InvalidOperationException(
+                        Strings.EntityDataSourceView_EntitySetMismatchWithQueryResults(
+                            elementEntitySet,
+                            EntitySet
+                        )
+                    );
                 }
                 if (_collectionManager.Mode != WrapperCollectionManager.ManagerMode.None)
                 {
@@ -415,13 +575,13 @@ namespace System.Web.UI.WebControls
                 }
             }
 
-            // If EnableFlattening flag is true return flattened entities. Otherwise if we ended up here 
-            // because we needed to cache values in the viewstate for further updates we return non-flattened entities. 
-            // Same happens if neither of the above is true and we ended up here because we needed to verify that 
+            // If EnableFlattening flag is true return flattened entities. Otherwise if we ended up here
+            // because we needed to cache values in the viewstate for further updates we return non-flattened entities.
+            // Same happens if neither of the above is true and we ended up here because we needed to verify that
             // all entities are from the same entity set.
-            return _collectionManager.Mode == WrapperCollectionManager.ManagerMode.FlattenedEntities ? 
-                    _collectionManager.FlattenedEntityCollection : 
-                    entities;
+            return _collectionManager.Mode == WrapperCollectionManager.ManagerMode.FlattenedEntities
+                ? _collectionManager.FlattenedEntityCollection
+                : entities;
         }
 
         /// <summary>
@@ -435,21 +595,28 @@ namespace System.Web.UI.WebControls
                 return String.Empty;
             }
 
-            string entitySetIdentifier = EntityDataSourceUtil.CreateEntitySqlSetIdentifier(EntitySet);
+            string entitySetIdentifier = EntityDataSourceUtil.CreateEntitySqlSetIdentifier(
+                EntitySet
+            );
 
             if (String.IsNullOrEmpty(_owner.EntityTypeFilter))
             {
                 return entitySetIdentifier;
             }
 
-            Debug.Assert(EntityOSpaceType != null, "EntitySet is not null, EntityOSpaceType should also be defined.");
+            Debug.Assert(
+                EntityOSpaceType != null,
+                "EntitySet is not null, EntityOSpaceType should also be defined."
+            );
 
             // oftype ([Northwind].[Products], only [Northwind].[ActiveProducts])
             StringBuilder queryExpressionBuilder = new StringBuilder();
             queryExpressionBuilder.Append("oftype (");
             queryExpressionBuilder.Append(entitySetIdentifier);
             queryExpressionBuilder.Append(", only ");
-            queryExpressionBuilder.Append(EntityDataSourceUtil.CreateEntitySqlTypeIdentifier(EntityOSpaceType));
+            queryExpressionBuilder.Append(
+                EntityDataSourceUtil.CreateEntitySqlTypeIdentifier(EntityOSpaceType)
+            );
             queryExpressionBuilder.Append(")");
 
             return queryExpressionBuilder.ToString();
@@ -459,11 +626,17 @@ namespace System.Web.UI.WebControls
 
         #region ExecuteUpdate
 
-        protected override int ExecuteUpdate(IDictionary keys, IDictionary values, IDictionary oldValues)
+        protected override int ExecuteUpdate(
+            IDictionary keys,
+            IDictionary values,
+            IDictionary oldValues
+        )
         {
             if (!CanUpdate)
             {
-                throw new InvalidOperationException(Strings.EntityDataSourceView_UpdateDisabledForThisControl);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_UpdateDisabledForThisControl
+                );
             }
 
             ConstructContext();
@@ -474,7 +647,7 @@ namespace System.Web.UI.WebControls
                 new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
             EntityDataSourceWrapper modifiedEntityWrapper;
             try
-            {               
+            {
                 object entity = EntityDataSourceUtil.InitializeType(this.EntityClrType);
                 Context.AddObject(_owner.FQEntitySetName, entity);
                 modifiedEntityWrapper = new EntityDataSourceWrapper(wrapperCollection, entity);
@@ -483,15 +656,32 @@ namespace System.Web.UI.WebControls
                 // 1. Key values from the page
                 // 2. Values from view state
                 // 3. Values from oldValues
-                ConvertProperties(keys, modifiedEntityWrapper.GetProperties(), /* ParameterCollection */null, originalEntityValues);
+                ConvertProperties(
+                    keys,
+                    modifiedEntityWrapper.GetProperties(), /* ParameterCollection */
+                    null,
+                    originalEntityValues
+                );
                 GetValuesFromViewState(originalEntityValues);
-                ConvertProperties(oldValues, modifiedEntityWrapper.GetProperties(), /* ParameterCollection */null, originalEntityValues);
+                ConvertProperties(
+                    oldValues,
+                    modifiedEntityWrapper.GetProperties(), /* ParameterCollection */
+                    null,
+                    originalEntityValues
+                );
 
                 // Validate that we have values for key properties
-                EntityDataSourceUtil.ValidateKeyPropertyValuesExist(modifiedEntityWrapper, originalEntityValues);
+                EntityDataSourceUtil.ValidateKeyPropertyValuesExist(
+                    modifiedEntityWrapper,
+                    originalEntityValues
+                );
 
                 // Populate the entity with values
-                EntityDataSourceUtil.SetAllPropertiesWithVerification(modifiedEntityWrapper, originalEntityValues, /*overwrite*/true);
+                EntityDataSourceUtil.SetAllPropertiesWithVerification(
+                    modifiedEntityWrapper,
+                    originalEntityValues, /*overwrite*/
+                    true
+                );
             }
             catch (EntityDataSourceValidationException e)
             {
@@ -509,7 +699,12 @@ namespace System.Web.UI.WebControls
             try
             {
                 Context.AcceptAllChanges(); //Puts modifiedEntityWrapper into unchanged state.
-                UpdateEntity(originalEntityValues, values, modifiedEntityWrapper, _owner.UpdateParameters);
+                UpdateEntity(
+                    originalEntityValues,
+                    values,
+                    modifiedEntityWrapper,
+                    _owner.UpdateParameters
+                );
             }
             catch (EntityDataSourceValidationException e)
             {
@@ -556,7 +751,10 @@ namespace System.Web.UI.WebControls
                 return -1;
             }
 
-            changingArgs = new EntityDataSourceChangingEventArgs(Context, modifiedEntityWrapper.WrappedEntity);
+            changingArgs = new EntityDataSourceChangingEventArgs(
+                Context,
+                modifiedEntityWrapper.WrappedEntity
+            );
             OnUpdating(changingArgs);
             if (changingArgs.Cancel)
             {
@@ -570,7 +768,9 @@ namespace System.Web.UI.WebControls
             catch (Exception e)
             {
                 // Catches SaveChanges exceptions.
-                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(e);
+                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(
+                    e
+                );
                 OnUpdated(changedArgs);
                 OnException(new DynamicValidatorEventArgs(e, DynamicDataSourceOperation.Update));
                 if (!changedArgs.ExceptionHandled)
@@ -579,9 +779,10 @@ namespace System.Web.UI.WebControls
                 }
                 return -1;
             }
-            OnUpdated(new EntityDataSourceChangedEventArgs(Context, modifiedEntityWrapper.WrappedEntity));
+            OnUpdated(
+                new EntityDataSourceChangedEventArgs(Context, modifiedEntityWrapper.WrappedEntity)
+            );
             return 1;
-
         }
 
         #endregion ExecuteUpdate
@@ -591,12 +792,15 @@ namespace System.Web.UI.WebControls
         {
             if (!CanDelete)
             {
-                throw new InvalidOperationException(Strings.EntityDataSourceView_DeleteDisabledForThiscontrol);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_DeleteDisabledForThiscontrol
+                );
             }
 
             ConstructContext();
 
-            EntityDataSourceWrapperCollection wrapperCollection = new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
+            EntityDataSourceWrapperCollection wrapperCollection =
+                new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
             EntityDataSourceWrapper entityWrapper;
             object entity;
             EntityDataSourceChangingEventArgs changingArgs;
@@ -611,15 +815,29 @@ namespace System.Web.UI.WebControls
                 // 2. Values from view state
                 // 3. Values from oldValues
                 Dictionary<string, object> entityValues = new Dictionary<string, object>();
-                ConvertProperties(keys, entityWrapper.GetProperties(), _owner.DeleteParameters, entityValues);
+                ConvertProperties(
+                    keys,
+                    entityWrapper.GetProperties(),
+                    _owner.DeleteParameters,
+                    entityValues
+                );
                 GetValuesFromViewState(entityValues);
-                ConvertProperties(oldValues, entityWrapper.GetProperties(), _owner.DeleteParameters, entityValues);
+                ConvertProperties(
+                    oldValues,
+                    entityWrapper.GetProperties(),
+                    _owner.DeleteParameters,
+                    entityValues
+                );
 
                 // Validate that we have values for key properties
                 EntityDataSourceUtil.ValidateKeyPropertyValuesExist(entityWrapper, entityValues);
 
                 // Populate the entity with values
-                EntityDataSourceUtil.SetAllPropertiesWithVerification(entityWrapper, entityValues, /*overwrite*/true);
+                EntityDataSourceUtil.SetAllPropertiesWithVerification(
+                    entityWrapper,
+                    entityValues, /*overwrite*/
+                    true
+                );
 
                 Context.AcceptAllChanges(); //Force the entity just added into unchanged state. Wrapped entities must be tracked.
             }
@@ -634,7 +852,10 @@ namespace System.Web.UI.WebControls
                 }
                 return -1;
             }
-            changingArgs = new EntityDataSourceChangingEventArgs(Context, entityWrapper.WrappedEntity);
+            changingArgs = new EntityDataSourceChangingEventArgs(
+                Context,
+                entityWrapper.WrappedEntity
+            );
             OnDeleting(changingArgs); //Outside "try" to prevent from begin called twice.
             if (changingArgs.Cancel)
             {
@@ -649,7 +870,9 @@ namespace System.Web.UI.WebControls
             catch (Exception e)
             {
                 // Catches errors on the context.
-                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(e);
+                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(
+                    e
+                );
                 OnDeleted(changedArgs);
                 OnException(new DynamicValidatorEventArgs(e, DynamicDataSourceOperation.Delete));
                 if (!changedArgs.ExceptionHandled)
@@ -669,13 +892,16 @@ namespace System.Web.UI.WebControls
         {
             if (!CanInsert)
             {
-                throw new InvalidOperationException(Strings.EntityDataSourceView_InsertDisabledForThisControl);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_InsertDisabledForThisControl
+                );
             }
 
             ConstructContext();
 
             EntityDataSourceChangingEventArgs changingArgs;
-            EntityDataSourceWrapperCollection wrapperCollection = new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
+            EntityDataSourceWrapperCollection wrapperCollection =
+                new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
             EntityDataSourceWrapper entityWrapper;
             try
             {
@@ -696,7 +922,10 @@ namespace System.Web.UI.WebControls
                 return -1;
             }
 
-            changingArgs = new EntityDataSourceChangingEventArgs(Context, entityWrapper.WrappedEntity);
+            changingArgs = new EntityDataSourceChangingEventArgs(
+                Context,
+                entityWrapper.WrappedEntity
+            );
             OnInserting(changingArgs); //Could return an entity to insert.
             if (changingArgs.Cancel)
             {
@@ -716,7 +945,9 @@ namespace System.Web.UI.WebControls
             }
             catch (Exception e)
             {
-                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(e);
+                EntityDataSourceChangedEventArgs changedArgs = new EntityDataSourceChangedEventArgs(
+                    e
+                );
                 OnInserted(changedArgs);
                 OnException(new DynamicValidatorEventArgs(e, DynamicDataSourceOperation.Insert));
                 if (!changedArgs.ExceptionHandled)
@@ -738,7 +969,11 @@ namespace System.Web.UI.WebControls
             if (_owner.ValidateWrappable())
             {
                 ConstructContext();
-                EntityDataSourceWrapperCollection wrappers = new EntityDataSourceWrapperCollection(Context, EntitySet, CSpaceFilteredEntityType);
+                EntityDataSourceWrapperCollection wrappers = new EntityDataSourceWrapperCollection(
+                    Context,
+                    EntitySet,
+                    CSpaceFilteredEntityType
+                );
                 propTable = new EntityDataSourceViewSchema(wrappers);
             }
             else
@@ -759,8 +994,14 @@ namespace System.Web.UI.WebControls
                     {
                         // If the results have an identity/primary keys, gather them from restricted type or the element type from the set the control is querying
                         // Make sure to use keys from the ObjectSpace type in case there were name mappings
-                        EntityType entityType = Context.MetadataWorkspace.GetObjectSpaceType(CSpaceFilteredEntityType ?? EntitySet.ElementType) as EntityType;
-                        propTable = new EntityDataSourceViewSchema(results, entityType.KeyMembers.Select(x => x.Name).ToArray());
+                        EntityType entityType =
+                            Context.MetadataWorkspace.GetObjectSpaceType(
+                                CSpaceFilteredEntityType ?? EntitySet.ElementType
+                            ) as EntityType;
+                        propTable = new EntityDataSourceViewSchema(
+                            results,
+                            entityType.KeyMembers.Select(x => x.Name).ToArray()
+                        );
                     }
                     else
                     {
@@ -780,7 +1021,10 @@ namespace System.Web.UI.WebControls
 
         #region ExecuteSelect Support
 
-        private void GenerateWhereClause(out string whereClause, out ObjectParameter[] whereParameters)
+        private void GenerateWhereClause(
+            out string whereClause,
+            out ObjectParameter[] whereParameters
+        )
         {
             if (!_owner.AutoGenerateWhereClause)
             {
@@ -790,7 +1034,10 @@ namespace System.Web.UI.WebControls
             }
 
             //This is the automatically generated Where clause.
-            IOrderedDictionary paramValues = _owner.WhereParameters.GetValues(_owner.HttpContext, _owner);
+            IOrderedDictionary paramValues = _owner.WhereParameters.GetValues(
+                _owner.HttpContext,
+                _owner
+            );
             // Under some conditions, the paramValues has a null entry.
             StringBuilder whereClauseBuilder = new StringBuilder();
             List<ObjectParameter> whereParameterList = new List<ObjectParameter>();
@@ -802,9 +1049,22 @@ namespace System.Web.UI.WebControls
                 string propertyName = (string)(de.Key);
                 if (0 < propertyName.Length && null != de.Value)
                 {
-                    if (!String.IsNullOrEmpty(_owner.EntitySetName) && !EntityDataSourceUtil.PropertyIsOnEntity(propertyName, _collectionManager.FlattenedEntityCollection, EntitySet, null))
+                    if (
+                        !String.IsNullOrEmpty(_owner.EntitySetName)
+                        && !EntityDataSourceUtil.PropertyIsOnEntity(
+                            propertyName,
+                            _collectionManager.FlattenedEntityCollection,
+                            EntitySet,
+                            null
+                        )
+                    )
                     {
-                        throw new InvalidOperationException(Strings.EntityDataSourceView_PropertyDoesNotExistOnEntity(propertyName, EntityClrType.FullName));
+                        throw new InvalidOperationException(
+                            Strings.EntityDataSourceView_PropertyDoesNotExistOnEntity(
+                                propertyName,
+                                EntityClrType.FullName
+                            )
+                        );
                     }
 
                     if (first)
@@ -816,9 +1076,15 @@ namespace System.Web.UI.WebControls
                         whereClauseBuilder.Append(" AND ");
                     }
 
-                    string namedParameterName = "NamedParameter" + idx.ToString(CultureInfo.InvariantCulture);
+                    string namedParameterName =
+                        "NamedParameter" + idx.ToString(CultureInfo.InvariantCulture);
 
-                    whereClauseBuilder.Append(EntityDataSourceUtil.GetEntitySqlValueForColumnName(propertyName, _collectionManager.FlattenedEntityCollection));
+                    whereClauseBuilder.Append(
+                        EntityDataSourceUtil.GetEntitySqlValueForColumnName(
+                            propertyName,
+                            _collectionManager.FlattenedEntityCollection
+                        )
+                    );
                     whereClauseBuilder.Append("=@");
                     whereClauseBuilder.Append(namedParameterName);
 
@@ -835,7 +1101,11 @@ namespace System.Web.UI.WebControls
 
         #region Entity Creation Support for Update/Insert/Delete
 
-        private object ConvertProperty(object origPropertyValue, PropertyDescriptor propertyDescriptor, WebControlParameterProxy referenceParameter)
+        private object ConvertProperty(
+            object origPropertyValue,
+            PropertyDescriptor propertyDescriptor,
+            WebControlParameterProxy referenceParameter
+        )
         {
             if (null == propertyDescriptor)
             {
@@ -844,20 +1114,30 @@ namespace System.Web.UI.WebControls
 
             object propValue = origPropertyValue;
             propValue = Parameter_GetValue(propValue, referenceParameter, true);
-            propValue = EntityDataSourceUtil.ConvertType(propValue, propertyDescriptor.PropertyType, propertyDescriptor.Name);
+            propValue = EntityDataSourceUtil.ConvertType(
+                propValue,
+                propertyDescriptor.PropertyType,
+                propertyDescriptor.Name
+            );
             return propValue;
         }
 
-        private void ConvertWCProperty(IDictionary values,
+        private void ConvertWCProperty(
+            IDictionary values,
             Dictionary<string, object> convertedValues,
             List<string> visitedProperties,
             PropertyDescriptor pd,
             ParameterCollection referenceParameters,
-            ref Dictionary<string, Exception> exceptions)
+            ref Dictionary<string, Exception> exceptions
+        )
         {
             Debug.Assert(pd != null, "PropertyDescriptor is null");
             string propertyName = pd.Name;
-            WebControlParameterProxy wcParameter = new WebControlParameterProxy(propertyName, referenceParameters, _owner);
+            WebControlParameterProxy wcParameter = new WebControlParameterProxy(
+                propertyName,
+                referenceParameters,
+                _owner
+            );
             object propValue = null;
             object value = null;
             if (null != values)
@@ -879,7 +1159,13 @@ namespace System.Web.UI.WebControls
             convertedValues[propertyName] = propValue;
             visitedProperties.Add(propertyName);
         }
-        private void ConvertProperties(IDictionary values, PropertyDescriptorCollection propertyDescriptors, ParameterCollection referenceParameters, Dictionary<string, object> convertedValues)
+
+        private void ConvertProperties(
+            IDictionary values,
+            PropertyDescriptorCollection propertyDescriptors,
+            ParameterCollection referenceParameters,
+            Dictionary<string, object> convertedValues
+        )
         {
             List<string> visitedProperties = new List<string>();
             Dictionary<string, Exception> exceptions = null;
@@ -889,13 +1175,24 @@ namespace System.Web.UI.WebControls
             {
                 if (!convertedValues.ContainsKey(propertyName))
                 {
-                    PropertyDescriptor pd = propertyDescriptors.Find(propertyName, /*ignoreCase*/ false);
+                    PropertyDescriptor pd = propertyDescriptors.Find(
+                        propertyName, /*ignoreCase*/
+                        false
+                    );
                     if (pd == null)
                     {
-                        throw new InvalidOperationException(Strings.EntityDataSourceView_UnknownProperty(propertyName));
+                        throw new InvalidOperationException(
+                            Strings.EntityDataSourceView_UnknownProperty(propertyName)
+                        );
                     }
-                    ConvertWCProperty(values, convertedValues, visitedProperties,
-                        pd, referenceParameters, ref exceptions);
+                    ConvertWCProperty(
+                        values,
+                        convertedValues,
+                        visitedProperties,
+                        pd,
+                        referenceParameters,
+                        ref exceptions
+                    );
                 }
                 // else ignore the value because it is already contained in the set of output values
             }
@@ -905,18 +1202,32 @@ namespace System.Web.UI.WebControls
             // columns that are not set by the control
             if (null != referenceParameters)
             {
-                IOrderedDictionary referenceValues = referenceParameters.GetValues(_owner.HttpContext, _owner);
+                IOrderedDictionary referenceValues = referenceParameters.GetValues(
+                    _owner.HttpContext,
+                    _owner
+                );
                 foreach (string propertyName in referenceValues.Keys)
                 {
                     if (!visitedProperties.Contains(propertyName))
                     {
-                        PropertyDescriptor pd = propertyDescriptors.Find(propertyName, /*ignoreCase*/ false);
+                        PropertyDescriptor pd = propertyDescriptors.Find(
+                            propertyName, /*ignoreCase*/
+                            false
+                        );
                         if (pd == null)
                         {
-                            throw new InvalidOperationException(Strings.EntityDataSourceView_UnknownProperty(propertyName));
+                            throw new InvalidOperationException(
+                                Strings.EntityDataSourceView_UnknownProperty(propertyName)
+                            );
                         }
-                        ConvertWCProperty(null, convertedValues, visitedProperties,
-                            pd, referenceParameters, ref exceptions);
+                        ConvertWCProperty(
+                            null,
+                            convertedValues,
+                            visitedProperties,
+                            pd,
+                            referenceParameters,
+                            ref exceptions
+                        );
                     }
                 }
             }
@@ -928,28 +1239,59 @@ namespace System.Web.UI.WebControls
                 //   "Error while setting property 'ProductName': 'The value cannot be null.'."
                 string key = exceptions.Keys.First();
                 throw new EntityDataSourceValidationException(
-                    Strings.EntityDataSourceView_DataConversionError(
-                        key, exceptions[key].Message), exceptions);
+                    Strings.EntityDataSourceView_DataConversionError(key, exceptions[key].Message),
+                    exceptions
+                );
             }
         }
 
-        private void CreateEntityForInsert(EntityDataSourceWrapper entityWrapper, IDictionary values, ParameterCollection insertParameters)
+        private void CreateEntityForInsert(
+            EntityDataSourceWrapper entityWrapper,
+            IDictionary values,
+            ParameterCollection insertParameters
+        )
         {
-            EntityDataSourceUtil.ValidateWebControlParameterNames(entityWrapper, insertParameters, _owner);
+            EntityDataSourceUtil.ValidateWebControlParameterNames(
+                entityWrapper,
+                insertParameters,
+                _owner
+            );
 
             // Throws EntityDataSourceValidationException if data conversion fails
             Dictionary<string, object> entityValues = new Dictionary<string, object>();
-            ConvertProperties(values, entityWrapper.GetProperties(), insertParameters, entityValues);
+            ConvertProperties(
+                values,
+                entityWrapper.GetProperties(),
+                insertParameters,
+                entityValues
+            );
 
-            EntityDataSourceUtil.SetAllPropertiesWithVerification(entityWrapper, entityValues, /*overwrite*/true);
+            EntityDataSourceUtil.SetAllPropertiesWithVerification(
+                entityWrapper,
+                entityValues, /*overwrite*/
+                true
+            );
         }
 
-        private void UpdateEntity(Dictionary<string, object> originalEntityValues, IDictionary values,
-                                  EntityDataSourceWrapper entityWrapper, ParameterCollection updateParameters)
+        private void UpdateEntity(
+            Dictionary<string, object> originalEntityValues,
+            IDictionary values,
+            EntityDataSourceWrapper entityWrapper,
+            ParameterCollection updateParameters
+        )
         {
-            EntityDataSourceUtil.ValidateWebControlParameterNames(entityWrapper, updateParameters, _owner);
+            EntityDataSourceUtil.ValidateWebControlParameterNames(
+                entityWrapper,
+                updateParameters,
+                _owner
+            );
             Dictionary<string, object> currentEntityValues = new Dictionary<string, object>();
-            ConvertProperties(values, entityWrapper.GetProperties(), updateParameters, currentEntityValues);
+            ConvertProperties(
+                values,
+                entityWrapper.GetProperties(),
+                updateParameters,
+                currentEntityValues
+            );
             Dictionary<string, object> allModifiedProperties = new Dictionary<string, object>();
 
             // Compare the propertyValues from the original values from the page to those in the new "values" properties.
@@ -968,7 +1310,11 @@ namespace System.Web.UI.WebControls
                 }
             }
 
-            EntityDataSourceUtil.SetAllPropertiesWithVerification(entityWrapper, allModifiedProperties, /*overwrite*/false);
+            EntityDataSourceUtil.SetAllPropertiesWithVerification(
+                entityWrapper,
+                allModifiedProperties, /*overwrite*/
+                false
+            );
         }
 
         #endregion Entity Creation Support
@@ -977,12 +1323,15 @@ namespace System.Web.UI.WebControls
 
         internal void StoreOriginalPropertiesIntoViewState()
         {
-            EntityDataSourceWrapperCollection wrapperCollection = _collectionManager.FlattenedEntityCollection ?? _collectionManager.UpdateCache;
+            EntityDataSourceWrapperCollection wrapperCollection =
+                _collectionManager.FlattenedEntityCollection ?? _collectionManager.UpdateCache;
 
-            if (null == wrapperCollection ||
-                0 == wrapperCollection.Count ||
-                !_owner.StoreOriginalValuesInViewState ||
-                (!CanDelete && !CanUpdate)) //Only store entities into viewstate if Delete or Update is enabled.
+            if (
+                null == wrapperCollection
+                || 0 == wrapperCollection.Count
+                || !_owner.StoreOriginalValuesInViewState
+                || (!CanDelete && !CanUpdate)
+            ) //Only store entities into viewstate if Delete or Update is enabled.
             {
                 return;
             }
@@ -996,9 +1345,13 @@ namespace System.Web.UI.WebControls
             {
                 foreach (PropertyDescriptor propertyDescriptor in collection)
                 {
-                    EntityDataSourceWrapperPropertyDescriptor wrapperPropertyDescriptor = (EntityDataSourceWrapperPropertyDescriptor)propertyDescriptor;
+                    EntityDataSourceWrapperPropertyDescriptor wrapperPropertyDescriptor =
+                        (EntityDataSourceWrapperPropertyDescriptor)propertyDescriptor;
 
-                    if (wrapperPropertyDescriptor.Column.IsInteresting && wrapperPropertyDescriptor.Column.IsScalar)
+                    if (
+                        wrapperPropertyDescriptor.Column.IsInteresting
+                        && wrapperPropertyDescriptor.Column.IsScalar
+                    )
                     {
                         object property = wrapperPropertyDescriptor.GetValue(wrapper);
                         string propertyName = wrapperPropertyDescriptor.DisplayName;
@@ -1041,7 +1394,8 @@ namespace System.Web.UI.WebControls
                 return -1;
             }
 
-            Dictionary<string, object> localMergedKeysAndOldValues = (Dictionary<string, object>)mergedKeysAndOldValues;
+            Dictionary<string, object> localMergedKeysAndOldValues =
+                (Dictionary<string, object>)mergedKeysAndOldValues;
 
             // This get the number of entities from the first property's values.
             // The ArrayList that holds the values contains the count of the number of entities.
@@ -1107,7 +1461,8 @@ namespace System.Web.UI.WebControls
             this.DisposeContext();
 
             Type contextType = null;
-            EntityDataSourceContextCreatingEventArgs creatingArgs = new EntityDataSourceContextCreatingEventArgs();
+            EntityDataSourceContextCreatingEventArgs creatingArgs =
+                new EntityDataSourceContextCreatingEventArgs();
             OnContextCreating(creatingArgs);
             if (null != creatingArgs.Context) //Context was created in event code
             {
@@ -1123,24 +1478,37 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    contextType = System.Web.Compilation.BuildManager.GetType(_owner.ContextTypeName, /*throw on error*/ true);
+                    contextType = System.Web.Compilation.BuildManager.GetType(
+                        _owner.ContextTypeName, /*throw on error*/
+                        true
+                    );
                 }
 
                 ConstructorInfo ctxInfo = contextType.GetConstructor(
-                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance,
-                    null, System.Type.EmptyTypes, null);
+                    BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.CreateInstance,
+                    null,
+                    System.Type.EmptyTypes,
+                    null
+                );
 
                 if (null == ctxInfo)
                 {
-                    throw new InvalidOperationException(Strings.EntityDataSourceView_NoParameterlessConstructorForTheContext);
+                    throw new InvalidOperationException(
+                        Strings.EntityDataSourceView_NoParameterlessConstructorForTheContext
+                    );
                 }
 
                 _ctx = (ObjectContext)ctxInfo.Invoke(new object[0]);
             }
             else // Non-strongly-typed context built from ConnectionString and DefaultContainerName
             {
-                if (!String.IsNullOrEmpty(_owner.DefaultContainerName) &&
-                    !String.IsNullOrEmpty(_owner.ConnectionString))
+                if (
+                    !String.IsNullOrEmpty(_owner.DefaultContainerName)
+                    && !String.IsNullOrEmpty(_owner.ConnectionString)
+                )
                 {
                     _ctx = new ObjectContext(_owner.ConnectionString);
 
@@ -1149,7 +1517,8 @@ namespace System.Web.UI.WebControls
                         // Since we don't have the type from the strongly-typed context,
                         // load from all of the referenced assemblies, including code from App_Code and the top-level directory:
                         // http://msdn2.microsoft.com/en-us/library/system.web.compilation.buildmanager.getreferencedassemblies.aspx
-                        ICollection codeAssemblies = System.Web.Compilation.BuildManager.GetReferencedAssemblies();
+                        ICollection codeAssemblies =
+                            System.Web.Compilation.BuildManager.GetReferencedAssemblies();
                         foreach (Assembly assembly in codeAssemblies)
                         {
                             if (ShouldTryLoadTypesFrom(assembly))
@@ -1160,35 +1529,40 @@ namespace System.Web.UI.WebControls
                                 }
                                 catch (ReflectionTypeLoadException)
                                 {
-                                    // BuildManager returns all assemblies that could possibly be involved in generating this page (e.g. 
+                                    // BuildManager returns all assemblies that could possibly be involved in generating this page (e.g.
                                     // assemblies that are defined in config files, assemblies generated for the files compiled on the fly,
-                                    // assemblies that are in the bin folder. If for some reason (security, missing dependencies etc.) we are 
-                                    // not able to load one of these just skip it and continue looking instead of dying. In vast majority of 
-                                    // cases the assembly causing problem is not the assembly that contains the types we are interested in. 
-                                    // If this exception happens for an assembly we are interested in then we will be missing OSpace type for 
+                                    // assemblies that are in the bin folder. If for some reason (security, missing dependencies etc.) we are
+                                    // not able to load one of these just skip it and continue looking instead of dying. In vast majority of
+                                    // cases the assembly causing problem is not the assembly that contains the types we are interested in.
+                                    // If this exception happens for an assembly we are interested in then we will be missing OSpace type for
                                     // a CSpace type and will throw when we will try using the type for the first time.
                                 }
                             }
                         }
                     }
                 }
-                else if (!String.IsNullOrEmpty(_owner.DefaultContainerName) &&
-                          null != _owner.Connection)
+                else if (
+                    !String.IsNullOrEmpty(_owner.DefaultContainerName)
+                    && null != _owner.Connection
+                )
                 {
                     _ctx = new ObjectContext(_owner.Connection);
                 }
                 else
                 {
-                    throw new InvalidOperationException(Strings.EntityDataSourceView_ObjectContextMustBeSpecified);
+                    throw new InvalidOperationException(
+                        Strings.EntityDataSourceView_ObjectContextMustBeSpecified
+                    );
                 }
                 // Must set the DefaultContainerName for both of the above conditions.
                 _ctx.DefaultContainerName = _owner.DefaultContainerName;
                 contextType = typeof(ObjectContext);
             }
 
-            _ctx.MetadataWorkspace.LoadFromAssembly(System.Reflection.Assembly.GetCallingAssembly());
+            _ctx.MetadataWorkspace.LoadFromAssembly(
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
             _ctx.MetadataWorkspace.LoadFromAssembly(contextType.Assembly);
-
 
             // Error Checking on the Context
             ValidateContainerName();
@@ -1217,7 +1591,8 @@ namespace System.Web.UI.WebControls
         {
             if (null != _ctx)
             {
-                EntityDataSourceContextDisposingEventArgs disposeArgs = new EntityDataSourceContextDisposingEventArgs(_ctx);
+                EntityDataSourceContextDisposingEventArgs disposeArgs =
+                    new EntityDataSourceContextDisposingEventArgs(_ctx);
                 OnContextDisposing(disposeArgs);
                 if (!disposeArgs.Cancel)
                 {
@@ -1268,6 +1643,7 @@ namespace System.Web.UI.WebControls
                 handler(this, args);
             }
         }
+
         public event EventHandler<DynamicValidatorEventArgs> Exception
         {
             add { Events.AddHandler(EventException, value); }
@@ -1277,12 +1653,15 @@ namespace System.Web.UI.WebControls
         // ContextCreating Event
         private void OnContextCreating(EntityDataSourceContextCreatingEventArgs e)
         {
-            var handler = (EventHandler<EntityDataSourceContextCreatingEventArgs>)Events[EventContextCreating];
+            var handler =
+                (EventHandler<EntityDataSourceContextCreatingEventArgs>)
+                    Events[EventContextCreating];
             if (null != handler)
             {
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceContextCreatingEventArgs> ContextCreating
         {
             add { Events.AddHandler(EventContextCreating, value); }
@@ -1292,12 +1671,14 @@ namespace System.Web.UI.WebControls
         // ContextCreated Event
         private void OnContextCreated(EntityDataSourceContextCreatedEventArgs e)
         {
-            var handler = (EventHandler<EntityDataSourceContextCreatedEventArgs>)Events[EventContextCreated];
+            var handler =
+                (EventHandler<EntityDataSourceContextCreatedEventArgs>)Events[EventContextCreated];
             if (null != handler)
             {
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceContextCreatedEventArgs> ContextCreated
         {
             add { Events.AddHandler(EventContextCreated, value); }
@@ -1307,12 +1688,15 @@ namespace System.Web.UI.WebControls
         // ContextDisposing Event
         private void OnContextDisposing(EntityDataSourceContextDisposingEventArgs e)
         {
-            var handler = (EventHandler<EntityDataSourceContextDisposingEventArgs>)Events[EventContextDisposing];
+            var handler =
+                (EventHandler<EntityDataSourceContextDisposingEventArgs>)
+                    Events[EventContextDisposing];
             if (null != handler)
             {
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceContextDisposingEventArgs> ContextDisposing
         {
             add { Events.AddHandler(EventContextDisposing, value); }
@@ -1328,6 +1712,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceSelectingEventArgs> Selecting
         {
             add { Events.AddHandler(EventSelecting, value); }
@@ -1343,6 +1728,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceSelectedEventArgs> Selected
         {
             add { Events.AddHandler(EventSelected, value); }
@@ -1358,6 +1744,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangingEventArgs> Deleting
         {
             add { Events.AddHandler(EventDeleting, value); }
@@ -1373,6 +1760,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangedEventArgs> Deleted
         {
             add { Events.AddHandler(EventDeleted, value); }
@@ -1388,6 +1776,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangingEventArgs> Inserting
         {
             add { Events.AddHandler(EventInserting, value); }
@@ -1403,6 +1792,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangedEventArgs> Inserted
         {
             add { Events.AddHandler(EventInserted, value); }
@@ -1418,6 +1808,7 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangingEventArgs> Updating
         {
             add { Events.AddHandler(EventUpdating, value); }
@@ -1433,12 +1824,12 @@ namespace System.Web.UI.WebControls
                 handler(this, e);
             }
         }
+
         public event EventHandler<EntityDataSourceChangedEventArgs> Updated
         {
             add { Events.AddHandler(EventUpdated, value); }
             remove { Events.RemoveHandler(EventUpdated, value); }
         }
-
 
         internal void RaiseChangedEvent()
         {
@@ -1459,12 +1850,14 @@ namespace System.Web.UI.WebControls
                 {
                     return null;
                 }
-                StructuralType oSpaceType = Context.MetadataWorkspace.GetObjectSpaceType(EntityCSpaceType);
+                StructuralType oSpaceType = Context.MetadataWorkspace.GetObjectSpaceType(
+                    EntityCSpaceType
+                );
                 return oSpaceType;
             }
         }
 
-        // Returns the type for EntityTypeFilter, or 
+        // Returns the type for EntityTypeFilter, or
         // null if both EntitySet and EntityTypeFilter are not specified.
         private EntityType CSpaceFilteredEntityType
         {
@@ -1479,16 +1872,31 @@ namespace System.Web.UI.WebControls
                 // Return the type specified in EntityTypeFilter
                 if (!String.IsNullOrEmpty(_owner.EntityTypeFilter))
                 {
-                    cSpaceType = (EntityType)Context.MetadataWorkspace.GetType(_owner.EntityTypeFilter, EntitySet.ElementType.NamespaceName, DataSpace.CSpace);
-                    if (!EntityDataSourceUtil.IsTypeOrSubtypeOf(EntitySet.ElementType, cSpaceType, Context.MetadataWorkspace.GetItemCollection(DataSpace.CSpace)))
+                    cSpaceType = (EntityType)
+                        Context.MetadataWorkspace.GetType(
+                            _owner.EntityTypeFilter,
+                            EntitySet.ElementType.NamespaceName,
+                            DataSpace.CSpace
+                        );
+                    if (
+                        !EntityDataSourceUtil.IsTypeOrSubtypeOf(
+                            EntitySet.ElementType,
+                            cSpaceType,
+                            Context.MetadataWorkspace.GetItemCollection(DataSpace.CSpace)
+                        )
+                    )
                     {
-                        throw new InvalidOperationException(Strings.EntityDataSourceView_FilteredEntityTypeMustBeDerivableFromEntitySet(_owner.EntityTypeFilter, _owner.EntitySetName));
+                        throw new InvalidOperationException(
+                            Strings.EntityDataSourceView_FilteredEntityTypeMustBeDerivableFromEntitySet(
+                                _owner.EntityTypeFilter,
+                                _owner.EntitySetName
+                            )
+                        );
                     }
                     return cSpaceType;
                 }
 
                 return null;
-
             }
         }
 
@@ -1511,14 +1919,16 @@ namespace System.Web.UI.WebControls
                 }
                 return cSpaceType;
             }
-
         }
 
         private EntityContainer EntityContainer
         {
             get
             {
-                return Context.MetadataWorkspace.GetEntityContainer(ContainerName, DataSpace.CSpace);
+                return Context.MetadataWorkspace.GetEntityContainer(
+                    ContainerName,
+                    DataSpace.CSpace
+                );
             }
         }
 
@@ -1534,7 +1944,10 @@ namespace System.Web.UI.WebControls
                 {
                     return null;
                 }
-                return EntityContainer.GetEntitySetByName(_owner.EntitySetName, /*ignoreCase*/ false);
+                return EntityContainer.GetEntitySetByName(
+                    _owner.EntitySetName, /*ignoreCase*/
+                    false
+                );
             }
         }
 
@@ -1542,8 +1955,9 @@ namespace System.Web.UI.WebControls
         {
             get
             {
-                ObjectItemCollection objectItemCollection =
-                    (ObjectItemCollection)(Context.MetadataWorkspace.GetItemCollection(DataSpace.OSpace));
+                ObjectItemCollection objectItemCollection = (ObjectItemCollection)(
+                    Context.MetadataWorkspace.GetItemCollection(DataSpace.OSpace)
+                );
                 Type clrType = objectItemCollection.GetClrType(EntityOSpaceType);
                 return clrType;
             }
@@ -1564,8 +1978,14 @@ namespace System.Web.UI.WebControls
             {
                 if (null == _keyMembers)
                 {
-                    EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(ContainerName, DataSpace.CSpace);
-                    EntitySet entitySet = entityContainer.GetEntitySetByName(_owner.EntitySetName, false);
+                    EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(
+                        ContainerName,
+                        DataSpace.CSpace
+                    );
+                    EntitySet entitySet = entityContainer.GetEntitySetByName(
+                        _owner.EntitySetName,
+                        false
+                    );
 
                     _keyMembers = ((EntityType)(entitySet.ElementType)).KeyMembers;
                 }
@@ -1585,7 +2005,9 @@ namespace System.Web.UI.WebControls
                 {
                     return Context.DefaultContainerName;
                 }
-                throw new InvalidOperationException(Strings.EntityDataSourceView_ContainerNameMustBeSpecified);
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_ContainerNameMustBeSpecified
+                );
             }
         }
 
@@ -1600,6 +2022,7 @@ namespace System.Web.UI.WebControls
         {
             get { return _tracking; }
         }
+
         void IStateManager.LoadViewState(object savedState)
         {
             if (null != savedState)
@@ -1615,6 +2038,7 @@ namespace System.Web.UI.WebControls
             StoreOriginalPropertiesIntoViewState();
             return new Pair(_disableUpdates, _originalProperties);
         }
+
         void IStateManager.TrackViewState()
         {
             _tracking = true;
@@ -1638,26 +2062,52 @@ namespace System.Web.UI.WebControls
 
         internal void ValidateEntitySetName()
         {
-            EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(ContainerName, DataSpace.CSpace);
+            EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(
+                ContainerName,
+                DataSpace.CSpace
+            );
             EntitySet entitySet;
-            if (!entityContainer.TryGetEntitySetByName(_owner.EntitySetName, /*ignoreCase*/false, out entitySet))
+            if (
+                !entityContainer.TryGetEntitySetByName(
+                    _owner.EntitySetName, /*ignoreCase*/
+                    false,
+                    out entitySet
+                )
+            )
             {
-                throw new InvalidOperationException(Strings.EntityDataSourceView_EntitySetDoesNotExistOnTheContainer(_owner.EntitySetName));
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_EntitySetDoesNotExistOnTheContainer(
+                        _owner.EntitySetName
+                    )
+                );
             }
         }
 
         private void ValidateContainerName()
         {
             EntityContainer container;
-            if (!Context.MetadataWorkspace.TryGetEntityContainer(ContainerName, DataSpace.CSpace, out container))
+            if (
+                !Context.MetadataWorkspace.TryGetEntityContainer(
+                    ContainerName,
+                    DataSpace.CSpace,
+                    out container
+                )
+            )
             {
-                throw new InvalidOperationException(Strings.EntityDataSourceView_ContainerNameDoesNotExistOnTheContext(ContainerName));
+                throw new InvalidOperationException(
+                    Strings.EntityDataSourceView_ContainerNameDoesNotExistOnTheContext(
+                        ContainerName
+                    )
+                );
             }
         }
 
         // From LinqDataSourceHelper. Timestamp columns (of type byte[]) are of type IEnumerable.
-        // This routine compares all elements of the IEnumerable. 
-        private static bool EnumerableContentEquals(IEnumerable enumerableA, IEnumerable enumerableB)
+        // This routine compares all elements of the IEnumerable.
+        private static bool EnumerableContentEquals(
+            IEnumerable enumerableA,
+            IEnumerable enumerableB
+        )
         {
             IEnumerator enumeratorA = enumerableA.GetEnumerator();
             IEnumerator enumeratorB = enumerableB.GetEnumerator();
@@ -1681,7 +2131,11 @@ namespace System.Web.UI.WebControls
         }
 
         // This routine modified from System.Web.Ui.WebControls.
-        private static object Parameter_GetValue(object value, WebControlParameterProxy parameter, bool ignoreNullableTypeChanges)
+        private static object Parameter_GetValue(
+            object value,
+            WebControlParameterProxy parameter,
+            bool ignoreNullableTypeChanges
+        )
         {
             // Convert.ChangeType() throws if you attempt to convert to DBNull, so we have to special case it.
             if (parameter.TypeCode == TypeCode.DBNull)
@@ -1697,12 +2151,11 @@ namespace System.Web.UI.WebControls
                 {
                     value = null;
                 }
-
             }
 
             if (value == null) // Fill it with values from referenceParameters
             {
-                // Use the parameter value if it is non-null 
+                // Use the parameter value if it is non-null
                 if (!parameter.HasValue)
                 {
                     return value;
@@ -1710,7 +2163,11 @@ namespace System.Web.UI.WebControls
 
                 object parameterValue = parameter.Value;
                 string valueString = parameterValue as String;
-                if (parameter.TypeCode == TypeCode.String && parameter.ConvertEmptyStringToNull && String.IsNullOrEmpty(valueString))
+                if (
+                    parameter.TypeCode == TypeCode.String
+                    && parameter.ConvertEmptyStringToNull
+                    && String.IsNullOrEmpty(valueString)
+                )
                 {
                     parameterValue = null;
                 }
@@ -1734,19 +2191,55 @@ namespace System.Web.UI.WebControls
             if (ignoreNullableTypeChanges)
             {
                 Type valueType = value.GetType();
-                if (valueType.IsGenericType && (valueType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                if (
+                    valueType.IsGenericType
+                    && (valueType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                )
                 {
                     return value;
                 }
             }
-            return value = Convert.ChangeType(value, parameter.TypeCode, CultureInfo.CurrentCulture); ;
+            return value = Convert.ChangeType(
+                value,
+                parameter.TypeCode,
+                CultureInfo.CurrentCulture
+            );
+            ;
         }
 
-
-
-        private static byte[] EcmaPublicKeyToken      = { 0xb7, 0x7a, 0x5c, 0x56, 0x19, 0x34, 0xe0, 0x89 }; // b77a5c561934e089
-        private static byte[] MicrosoftPublicKeyToken = { 0xb0, 0x3f, 0x5f, 0x7f, 0x11, 0xd5, 0x0a, 0x3a }; // b03f5f7f11d50a3a
-        private static byte[] SharedLibPublicKeyToken = { 0x31, 0xbf, 0x38, 0x56, 0xad, 0x36, 0x4e, 0x35 }; // 31bf3856ad364e35
+        private static byte[] EcmaPublicKeyToken =
+        {
+            0xb7,
+            0x7a,
+            0x5c,
+            0x56,
+            0x19,
+            0x34,
+            0xe0,
+            0x89,
+        }; // b77a5c561934e089
+        private static byte[] MicrosoftPublicKeyToken =
+        {
+            0xb0,
+            0x3f,
+            0x5f,
+            0x7f,
+            0x11,
+            0xd5,
+            0x0a,
+            0x3a,
+        }; // b03f5f7f11d50a3a
+        private static byte[] SharedLibPublicKeyToken =
+        {
+            0x31,
+            0xbf,
+            0x38,
+            0x56,
+            0xad,
+            0x36,
+            0x4e,
+            0x35,
+        }; // 31bf3856ad364e35
 
         /// <summary>
         /// Checks whether to try loading types from the <paramref name="assembly"/>.
@@ -1754,7 +2247,7 @@ namespace System.Web.UI.WebControls
         /// <param name="assembly">Assembly to be checked.</param>
         /// <returns><c>true</c> if we should try loading types from this assembly. <c>false</c> otherwise.</returns>
         /// <remarks>
-        /// Assemblies that are part of .NET Framework don't have entity/complex/enum types that could correspond to EdmTypes. 
+        /// Assemblies that are part of .NET Framework don't have entity/complex/enum types that could correspond to EdmTypes.
         /// Therefore we should not try loading types from these assemblies. There are a lot of types there so it is costly
         /// but we know that we would not find any interesting types there. This method filters out these assemblies.
         /// </remarks>
@@ -1766,9 +2259,11 @@ namespace System.Web.UI.WebControls
 
             Debug.Assert(asmPublicKeyToken != null);
 
-            return !(asmPublicKeyToken.SequenceEqual(EcmaPublicKeyToken) ||
-                      asmPublicKeyToken.SequenceEqual(MicrosoftPublicKeyToken) ||
-                      asmPublicKeyToken.SequenceEqual(SharedLibPublicKeyToken));
+            return !(
+                asmPublicKeyToken.SequenceEqual(EcmaPublicKeyToken)
+                || asmPublicKeyToken.SequenceEqual(MicrosoftPublicKeyToken)
+                || asmPublicKeyToken.SequenceEqual(SharedLibPublicKeyToken)
+            );
         }
 
         #endregion Utilities
@@ -1777,6 +2272,5 @@ namespace System.Web.UI.WebControls
         //public override void Insert(IDictionary values, DataSourceViewOperationCallback callback){}
         //public override void Select(DataSourceSelectArguments arguments, DataSourceViewSelectCallback callback){}
         //public override void Update(IDictionary keys, IDictionary values, IDictionary oldValues, DataSourceViewOperationCallback callback){}
-
     }
 }

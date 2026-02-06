@@ -15,7 +15,13 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
 
-        internal TextFragmentEngine(SpeakInfo speakInfo, string ssmlText, bool pexml, ResourceLoader resourceLoader, List<LexiconEntry> lexicons)
+        internal TextFragmentEngine(
+            SpeakInfo speakInfo,
+            string ssmlText,
+            bool pexml,
+            ResourceLoader resourceLoader,
+            List<LexiconEntry> lexicons
+        )
         {
             _lexicons = lexicons;
             _ssmlText = ssmlText;
@@ -27,13 +33,24 @@ namespace System.Speech.Internal.Synthesis
 
         #region Internal Methods
 
-        public object ProcessSpeak(string sVersion, string sBaseUri, CultureInfo culture, List<SsmlXmlAttribute> extraNamespace)
+        public object ProcessSpeak(
+            string sVersion,
+            string sBaseUri,
+            CultureInfo culture,
+            List<SsmlXmlAttribute> extraNamespace
+        )
         {
             _speakInfo.SetVoice(null, culture, VoiceGender.NotSet, VoiceAge.NotSet, 1);
             return _speakInfo.Voice;
         }
 
-        public void ProcessText(string text, object voice, ref FragmentState fragmentState, int position, bool fIgnore)
+        public void ProcessText(
+            string text,
+            object voice,
+            ref FragmentState fragmentState,
+            int position,
+            bool fIgnore
+        )
         {
             if (!fIgnore)
             {
@@ -54,7 +71,10 @@ namespace System.Speech.Internal.Synthesis
                     _sentenceStarted = false;
                 }
                 fragmentState.Action = ActionTextFragment(action);
-                _speakInfo.AddText((TTSVoice)voice, new TextFragment(fragmentState, text, _ssmlText, position, text.Length));
+                _speakInfo.AddText(
+                    (TTSVoice)voice,
+                    new TextFragment(fragmentState, text, _ssmlText, position, text.Length)
+                );
                 fragmentState.Action = action;
             }
         }
@@ -92,7 +112,13 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessBreak(object voice, ref FragmentState fragmentState, EmphasisBreak eBreak, int time, bool fIgnore)
+        public void ProcessBreak(
+            object voice,
+            ref FragmentState fragmentState,
+            EmphasisBreak eBreak,
+            int time,
+            bool fIgnore
+        )
         {
             if (!fIgnore)
             {
@@ -103,15 +129,16 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessDesc(CultureInfo culture)
-        {
-        }
+        public void ProcessDesc(CultureInfo culture) { }
 
-        public void ProcessEmphasis(bool noLevel, EmphasisWord word)
-        {
-        }
+        public void ProcessEmphasis(bool noLevel, EmphasisWord word) { }
 
-        public void ProcessMark(object voice, ref FragmentState fragmentState, string name, bool fIgnore)
+        public void ProcessMark(
+            object voice,
+            ref FragmentState fragmentState,
+            string name,
+            bool fIgnore
+        )
         {
             if (!fIgnore)
             {
@@ -122,7 +149,15 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public object ProcessTextBlock(bool isParagraph, object voice, ref FragmentState fragmentState, CultureInfo culture, bool newCulture, VoiceGender gender, VoiceAge age)
+        public object ProcessTextBlock(
+            bool isParagraph,
+            object voice,
+            ref FragmentState fragmentState,
+            CultureInfo culture,
+            bool newCulture,
+            VoiceGender gender,
+            VoiceAge age
+        )
         {
             if (culture != null && newCulture)
             {
@@ -151,26 +186,48 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessPhoneme(ref FragmentState fragmentState, AlphabetType alphabet, string ph, char[] phoneIds)
+        public void ProcessPhoneme(
+            ref FragmentState fragmentState,
+            AlphabetType alphabet,
+            string ph,
+            char[] phoneIds
+        )
         {
             fragmentState.Action = TtsEngineAction.Pronounce;
             fragmentState.Phoneme = _speakInfo.Voice.TtsEngine.ConvertPhonemes(phoneIds, alphabet);
         }
 
-        public void ProcessProsody(string pitch, string range, string rate, string volume, string duration, string points)
-        {
-        }
+        public void ProcessProsody(
+            string pitch,
+            string range,
+            string rate,
+            string volume,
+            string duration,
+            string points
+        ) { }
 
-        public void ProcessSayAs(string interpretAs, string format, string detail)
-        {
-        }
+        public void ProcessSayAs(string interpretAs, string format, string detail) { }
 
-        public void ProcessSub(string alias, object voice, ref FragmentState fragmentState, int position, bool fIgnore)
+        public void ProcessSub(
+            string alias,
+            object voice,
+            ref FragmentState fragmentState,
+            int position,
+            bool fIgnore
+        )
         {
             ProcessText(alias, voice, ref fragmentState, position, fIgnore);
         }
 
-        public object ProcessVoice(string name, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, bool fNewCulture, List<SsmlXmlAttribute> extraNamespace)
+        public object ProcessVoice(
+            string name,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            bool fNewCulture,
+            List<SsmlXmlAttribute> extraNamespace
+        )
         {
             _speakInfo.SetVoice(name, culture, gender, age, variant);
             return _speakInfo.Voice;
@@ -181,7 +238,11 @@ namespace System.Speech.Internal.Synthesis
             _lexicons.Add(new LexiconEntry(uri, type));
         }
 
-        public void ProcessUnknownElement(object voice, ref FragmentState fragmentState, XmlReader reader)
+        public void ProcessUnknownElement(
+            object voice,
+            ref FragmentState fragmentState,
+            XmlReader reader
+        )
         {
             StringWriter sw = new(CultureInfo.InvariantCulture);
             XmlTextWriter writer = new(sw);
@@ -192,40 +253,63 @@ namespace System.Speech.Internal.Synthesis
             AddParseUnknownFragment(voice, ref fragmentState, text);
         }
 
-        public void StartProcessUnknownAttributes(object voice, ref FragmentState fragmentState, string element, List<SsmlXmlAttribute> extraAttributes)
+        public void StartProcessUnknownAttributes(
+            object voice,
+            ref FragmentState fragmentState,
+            string element,
+            List<SsmlXmlAttribute> extraAttributes
+        )
         {
             StringBuilder sb = new();
             sb.AppendFormat(CultureInfo.InvariantCulture, "<{0}", element);
             foreach (SsmlXmlAttribute attribute in extraAttributes)
             {
-                sb.AppendFormat(CultureInfo.InvariantCulture, " {0}:{1}=\"{2}\" xmlns:{3}=\"{4}\"", attribute._prefix, attribute._name, attribute._value, attribute._prefix, attribute._ns);
+                sb.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    " {0}:{1}=\"{2}\" xmlns:{3}=\"{4}\"",
+                    attribute._prefix,
+                    attribute._name,
+                    attribute._value,
+                    attribute._prefix,
+                    attribute._ns
+                );
             }
             sb.Append('>');
 
             AddParseUnknownFragment(voice, ref fragmentState, sb.ToString());
         }
 
-        public void EndProcessUnknownAttributes(object voice, ref FragmentState fragmentState, string element, List<SsmlXmlAttribute> extraAttributes)
+        public void EndProcessUnknownAttributes(
+            object voice,
+            ref FragmentState fragmentState,
+            string element,
+            List<SsmlXmlAttribute> extraAttributes
+        )
         {
-            AddParseUnknownFragment(voice, ref fragmentState, string.Format(CultureInfo.InvariantCulture, "</{0}>", element));
+            AddParseUnknownFragment(
+                voice,
+                ref fragmentState,
+                string.Format(CultureInfo.InvariantCulture, "</{0}>", element)
+            );
         }
 
         #region Prompt Engine
 
-        public void ContainsPexml(string pexmlPrefix)
-        {
-        }
+        public void ContainsPexml(string pexmlPrefix) { }
 
         public bool BeginPromptEngineOutput(object voice)
         {
             return false;
         }
 
-        public void EndPromptEngineOutput(object voice)
-        {
-        }
+        public void EndPromptEngineOutput(object voice) { }
 
-        public bool ProcessPromptEngineDatabase(object voice, string fname, string delta, string idset)
+        public bool ProcessPromptEngineDatabase(
+            object voice,
+            string fname,
+            string delta,
+            string idset
+        )
         {
             return false;
         }
@@ -245,36 +329,26 @@ namespace System.Speech.Internal.Synthesis
             return false;
         }
 
-        public void EndPromptEngineTts(object voice)
-        {
-        }
+        public void EndPromptEngineTts(object voice) { }
 
         public bool BeginPromptEngineWithTag(object voice, string tag)
         {
             return false;
         }
 
-        public void EndPromptEngineWithTag(object voice, string tag)
-        {
-        }
+        public void EndPromptEngineWithTag(object voice, string tag) { }
 
         public bool BeginPromptEngineRule(object voice, string name)
         {
             return false;
         }
 
-        public void EndPromptEngineRule(object voice, string name)
-        {
-        }
+        public void EndPromptEngineRule(object voice, string name) { }
         #endregion
 
-        public void EndElement()
-        {
-        }
+        public void EndElement() { }
 
-        public void EndSpeakElement()
-        {
-        }
+        public void EndSpeakElement() { }
 
         #endregion
 
@@ -282,10 +356,7 @@ namespace System.Speech.Internal.Synthesis
 
         public string Ssml
         {
-            get
-            {
-                return _ssmlText;
-            }
+            get { return _ssmlText; }
         }
 
         #endregion
@@ -297,7 +368,11 @@ namespace System.Speech.Internal.Synthesis
             return action;
         }
 
-        private void AddParseUnknownFragment(object voice, ref FragmentState fragmentState, string text)
+        private void AddParseUnknownFragment(
+            object voice,
+            ref FragmentState fragmentState,
+            string text
+        )
         {
             TtsEngineAction action = fragmentState.Action;
             fragmentState.Action = TtsEngineAction.ParseUnknownTag;

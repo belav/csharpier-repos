@@ -8,13 +8,16 @@ namespace System.ServiceModel.Configuration
     using System.Runtime;
     using System.Security;
 
-    public sealed partial class ServiceElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public sealed partial class ServiceElement
+        : ConfigurationElement,
+            IConfigurationContextProviderInternal
     {
         [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
         EvaluationContextHelper contextHelper;
 
-        public ServiceElement() : base() { }
+        public ServiceElement()
+            : base() { }
 
         public ServiceElement(string serviceName)
             : this()
@@ -37,19 +40,32 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public ServiceEndpointElementCollection Endpoints
         {
-            get { return (ServiceEndpointElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (ServiceEndpointElementCollection)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Host, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Host,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public HostElement Host
         {
             get { return (HostElement)base[ConfigurationStrings.Host]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Name
         {
@@ -78,8 +94,10 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
-            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition"
+        )]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
@@ -87,6 +105,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

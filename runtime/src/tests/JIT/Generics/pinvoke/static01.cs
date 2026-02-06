@@ -11,7 +11,6 @@ internal class Win32Interop
     public static extern bool CloseHandle(IntPtr hObject);
 }
 
-
 public class Gen<T>
 {
     public static int PInvokeTest()
@@ -30,6 +29,7 @@ public class Test_static01
 {
     public static uint counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -61,5 +61,3 @@ public class Test_static01
         }
     }
 }
-
-

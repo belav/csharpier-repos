@@ -14,12 +14,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly TypeWithAnnotations _possiblyRestrictedTypeSymbol;
 
-        internal LazyArrayElementCantBeRefAnyDiagnosticInfo(TypeWithAnnotations possiblyRestrictedTypeSymbol)
+        internal LazyArrayElementCantBeRefAnyDiagnosticInfo(
+            TypeWithAnnotations possiblyRestrictedTypeSymbol
+        )
         {
             _possiblyRestrictedTypeSymbol = possiblyRestrictedTypeSymbol;
         }
 
-        private LazyArrayElementCantBeRefAnyDiagnosticInfo(LazyArrayElementCantBeRefAnyDiagnosticInfo original, DiagnosticSeverity severity) : base(original, severity)
+        private LazyArrayElementCantBeRefAnyDiagnosticInfo(
+            LazyArrayElementCantBeRefAnyDiagnosticInfo original,
+            DiagnosticSeverity severity
+        )
+            : base(original, severity)
         {
             _possiblyRestrictedTypeSymbol = original._possiblyRestrictedTypeSymbol;
         }
@@ -33,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_possiblyRestrictedTypeSymbol.IsRestrictedType())
             {
-                return new CSDiagnosticInfo(ErrorCode.ERR_ArrayElementCantBeRefAny, _possiblyRestrictedTypeSymbol.Type);
+                return new CSDiagnosticInfo(
+                    ErrorCode.ERR_ArrayElementCantBeRefAny,
+                    _possiblyRestrictedTypeSymbol.Type
+                );
             }
 
             return null;

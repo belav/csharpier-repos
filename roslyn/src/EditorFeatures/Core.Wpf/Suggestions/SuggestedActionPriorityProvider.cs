@@ -14,14 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions;
 /// </param>
 internal sealed class SuggestedActionPriorityProvider(
     CodeActionRequestPriority priority,
-    ConcurrentSet<DiagnosticAnalyzer> lowPriorityAnalyzers)
-    : ICodeActionRequestPriorityProvider
+    ConcurrentSet<DiagnosticAnalyzer> lowPriorityAnalyzers
+) : ICodeActionRequestPriorityProvider
 {
     public CodeActionRequestPriority? Priority { get; } = priority;
 
-    public void AddDeprioritizedAnalyzerWithLowPriority(DiagnosticAnalyzer analyzer)
-        => lowPriorityAnalyzers.Add(analyzer);
+    public void AddDeprioritizedAnalyzerWithLowPriority(DiagnosticAnalyzer analyzer) =>
+        lowPriorityAnalyzers.Add(analyzer);
 
-    public bool IsDeprioritizedAnalyzerWithLowPriority(DiagnosticAnalyzer analyzer)
-        => lowPriorityAnalyzers.Contains(analyzer);
+    public bool IsDeprioritizedAnalyzerWithLowPriority(DiagnosticAnalyzer analyzer) =>
+        lowPriorityAnalyzers.Contains(analyzer);
 }

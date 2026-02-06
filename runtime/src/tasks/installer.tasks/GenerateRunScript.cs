@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 using System;
 using System.IO;
 using System.Text;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
@@ -27,7 +27,9 @@ namespace Microsoft.DotNet.Build.Tasks
         {
             if (RunCommands.Length == 0)
             {
-                Log.LogError("Please provide at least one test command to execute via the RunCommands property.");
+                Log.LogError(
+                    "Please provide at least one test command to execute via the RunCommands property."
+                );
                 return false;
             }
 
@@ -51,7 +53,9 @@ namespace Microsoft.DotNet.Build.Tasks
                     WriteRunScript(templateContent, extension);
                     break;
                 default:
-                    Log.LogError($"Generating runner scripts with extension '{extension}' is not supported.");
+                    Log.LogError(
+                        $"Generating runner scripts with extension '{extension}' is not supported."
+                    );
                     return false;
             }
 
@@ -67,7 +71,8 @@ namespace Microsoft.DotNet.Build.Tasks
             var setCommandsBuilder = new StringBuilder();
             for (int i = 0; i < SetCommands.Length; i++)
             {
-                string[] setCommandsSplit = SetCommands[i].Split(newlineSeparator, StringSplitOptions.None);
+                string[] setCommandsSplit = SetCommands[i]
+                    .Split(newlineSeparator, StringSplitOptions.None);
                 for (int j = 0; j < setCommandsSplit.Length; j++)
                 {
                     setCommandsBuilder.Append(setCommandsSplit[j]);
@@ -77,12 +82,16 @@ namespace Microsoft.DotNet.Build.Tasks
                     }
                 }
             }
-            templateContent = templateContent.Replace("[[SetCommands]]", setCommandsBuilder.ToString());
+            templateContent = templateContent.Replace(
+                "[[SetCommands]]",
+                setCommandsBuilder.ToString()
+            );
 
             var runCommandsBuilder = new StringBuilder();
             for (int i = 0; i < RunCommands.Length; i++)
             {
-                string[] runCommandsSplit = RunCommands[i].Split(newlineSeparator, StringSplitOptions.None);
+                string[] runCommandsSplit = RunCommands[i]
+                    .Split(newlineSeparator, StringSplitOptions.None);
                 for (int j = 0; j < runCommandsSplit.Length; j++)
                 {
                     runCommandsBuilder.Append(runCommandsSplit[j]);
@@ -92,29 +101,50 @@ namespace Microsoft.DotNet.Build.Tasks
                     }
                 }
             }
-            templateContent = templateContent.Replace("[[RunCommands]]", runCommandsBuilder.ToString());
-
+            templateContent = templateContent.Replace(
+                "[[RunCommands]]",
+                runCommandsBuilder.ToString()
+            );
 
             var setCommandEchoesBuilder = new StringBuilder();
             foreach (string setCommand in SetCommands)
             {
-                foreach (string setCommandOneLine in setCommand.Split(newlineSeparator, StringSplitOptions.None))
+                foreach (
+                    string setCommandOneLine in setCommand.Split(
+                        newlineSeparator,
+                        StringSplitOptions.None
+                    )
+                )
                 {
-                    setCommandEchoesBuilder.Append($"echo {SanitizeEcho(setCommandOneLine,isUnix)}{lineFeed}");
+                    setCommandEchoesBuilder.Append(
+                        $"echo {SanitizeEcho(setCommandOneLine, isUnix)}{lineFeed}"
+                    );
                 }
             }
-            templateContent = templateContent.Replace("[[SetCommandsEcho]]", setCommandEchoesBuilder.ToString());
+            templateContent = templateContent.Replace(
+                "[[SetCommandsEcho]]",
+                setCommandEchoesBuilder.ToString()
+            );
 
             var runCommandEchoesBuilder = new StringBuilder();
             foreach (string runCommand in RunCommands)
             {
-                foreach (string runCommandOneLine in runCommand.Split(newlineSeparator, StringSplitOptions.None))
+                foreach (
+                    string runCommandOneLine in runCommand.Split(
+                        newlineSeparator,
+                        StringSplitOptions.None
+                    )
+                )
                 {
-                    runCommandEchoesBuilder.Append($"echo {SanitizeEcho(runCommandOneLine,isUnix)}{lineFeed}");
+                    runCommandEchoesBuilder.Append(
+                        $"echo {SanitizeEcho(runCommandOneLine, isUnix)}{lineFeed}"
+                    );
                 }
             }
-            templateContent = templateContent.Replace("[[RunCommandsEcho]]", runCommandEchoesBuilder.ToString());
-
+            templateContent = templateContent.Replace(
+                "[[RunCommandsEcho]]",
+                runCommandEchoesBuilder.ToString()
+            );
 
             if (isUnix)
             {
@@ -132,21 +162,24 @@ namespace Microsoft.DotNet.Build.Tasks
             Log.LogMessage($"Wrote {extension} run script to {OutputPath}");
         }
 
-        private static string SanitizeEcho(string command, bool isUnix){
+        private static string SanitizeEcho(string command, bool isUnix)
+        {
             // Escape backtick and question mark characters to avoid running commands instead of echo'ing them.
-            string sanitizedRunCommand = command.Replace("`", "\\`")
-                                                    .Replace("?", "\\")
-                                                    .Replace("\r","")
-                                                    .Replace("\n"," ")
-                                                    .Replace("&", "^&")
-                                                    .Replace(">", "^>");
+            string sanitizedRunCommand = command
+                .Replace("`", "\\`")
+                .Replace("?", "\\")
+                .Replace("\r", "")
+                .Replace("\n", " ")
+                .Replace("&", "^&")
+                .Replace(">", "^>");
 
             if (isUnix)
             {
                 // Remove parentheses and quotes from echo command before wrapping it in quotes to avoid errors on Linux.
-                sanitizedRunCommand = "\"" + sanitizedRunCommand.Replace("\"", "")
-                                    .Replace("(", "")
-                                    .Replace(")", "") + "\"";
+                sanitizedRunCommand =
+                    "\""
+                    + sanitizedRunCommand.Replace("\"", "").Replace("(", "").Replace(")", "")
+                    + "\"";
             }
             return sanitizedRunCommand;
         }

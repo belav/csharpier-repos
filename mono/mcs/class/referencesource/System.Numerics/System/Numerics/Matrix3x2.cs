@@ -15,34 +15,34 @@ namespace System.Numerics
         /// The first element of the first row
         /// </summary>
         public float M11;
+
         /// <summary>
         /// The second element of the first row
         /// </summary>
         public float M12;
+
         /// <summary>
         /// The first element of the second row
         /// </summary>
         public float M21;
+
         /// <summary>
         /// The second element of the second row
         /// </summary>
         public float M22;
+
         /// <summary>
         /// The first element of the third row
         /// </summary>
         public float M31;
+
         /// <summary>
         /// The second element of the third row
         /// </summary>
         public float M32;
         #endregion Public Fields
 
-        private static readonly Matrix3x2 _identity = new Matrix3x2
-        (
-            1f, 0f,
-            0f, 1f,
-            0f, 0f
-        );
+        private static readonly Matrix3x2 _identity = new Matrix3x2(1f, 0f, 0f, 1f, 0f, 0f);
 
         /// <summary>
         /// Returns the multiplicative identity matrix.
@@ -59,10 +59,13 @@ namespace System.Numerics
         {
             get
             {
-                return M11 == 1f && M22 == 1f && // Check diagonal element first for early out.
-                                    M12 == 0f &&
-                       M21 == 0f &&
-                       M31 == 0f && M32 == 0f;
+                return M11 == 1f
+                    && M22 == 1f
+                    && // Check diagonal element first for early out.
+                    M12 == 0f
+                    && M21 == 0f
+                    && M31 == 0f
+                    && M32 == 0f;
             }
         }
 
@@ -71,11 +74,7 @@ namespace System.Numerics
         /// </summary>
         public Vector2 Translation
         {
-            get
-            {
-                return new Vector2(M31, M32);
-            }
-
+            get { return new Vector2(M31, M32); }
             set
             {
                 M31 = value.X;
@@ -86,9 +85,7 @@ namespace System.Numerics
         /// <summary>
         /// Constructs a Matrix3x2 from the given components.
         /// </summary>
-        public Matrix3x2(float m11, float m12,
-                         float m21, float m22,
-                         float m31, float m32)
+        public Matrix3x2(float m11, float m12, float m21, float m22, float m31, float m32)
         {
             this.M11 = m11;
             this.M12 = m12;
@@ -328,9 +325,10 @@ namespace System.Numerics
 
             radians = (float)Math.IEEERemainder(radians, Math.PI * 2);
 
-            float c, s;
+            float c,
+                s;
 
-            const float epsilon = 0.001f * (float)Math.PI / 180f;     // 0.1% of a degree
+            const float epsilon = 0.001f * (float)Math.PI / 180f; // 0.1% of a degree
 
             if (radians > -epsilon && radians < epsilon)
             {
@@ -388,9 +386,10 @@ namespace System.Numerics
 
             radians = (float)Math.IEEERemainder(radians, Math.PI * 2);
 
-            float c, s;
+            float c,
+                s;
 
-            const float epsilon = 0.001f * (float)Math.PI / 180f;     // 0.1% of a degree
+            const float epsilon = 0.001f * (float)Math.PI / 180f; // 0.1% of a degree
 
             if (radians > -epsilon && radians < epsilon)
             {
@@ -440,7 +439,7 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Calculates the determinant for this matrix. 
+        /// Calculates the determinant for this matrix.
         /// The determinant is calculated by expanding the matrix with a third column whose values are (0,0,1).
         /// </summary>
         /// <returns>The determinant.</returns>
@@ -477,7 +476,14 @@ namespace System.Numerics
 
             if (Math.Abs(det) < float.Epsilon)
             {
-                result = new Matrix3x2(float.NaN, float.NaN, float.NaN, float.NaN, float.NaN, float.NaN);
+                result = new Matrix3x2(
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN
+                );
                 return false;
             }
 
@@ -735,10 +741,15 @@ namespace System.Numerics
         /// <returns>True if the matrices are equal; False otherwise.</returns>
         public static bool operator ==(Matrix3x2 value1, Matrix3x2 value2)
         {
-            return (value1.M11 == value2.M11 && value1.M22 == value2.M22 && // Check diagonal element first for early out.
-                                                value1.M12 == value2.M12 &&
-                    value1.M21 == value2.M21 &&
-                    value1.M31 == value2.M31 && value1.M32 == value2.M32);
+            return (
+                value1.M11 == value2.M11
+                && value1.M22 == value2.M22
+                && // Check diagonal element first for early out.
+                value1.M12 == value2.M12
+                && value1.M21 == value2.M21
+                && value1.M31 == value2.M31
+                && value1.M32 == value2.M32
+            );
         }
 
         /// <summary>
@@ -749,9 +760,14 @@ namespace System.Numerics
         /// <returns>True if the matrices are not equal; False if they are equal.</returns>
         public static bool operator !=(Matrix3x2 value1, Matrix3x2 value2)
         {
-            return (value1.M11 != value2.M11 || value1.M12 != value2.M12 ||
-                    value1.M21 != value2.M21 || value1.M22 != value2.M22 ||
-                    value1.M31 != value2.M31 || value1.M32 != value2.M32);
+            return (
+                value1.M11 != value2.M11
+                || value1.M12 != value2.M12
+                || value1.M21 != value2.M21
+                || value1.M22 != value2.M22
+                || value1.M31 != value2.M31
+                || value1.M32 != value2.M32
+            );
         }
 
         /// <summary>
@@ -761,10 +777,15 @@ namespace System.Numerics
         /// <returns>True if this matrix is equal to other; False otherwise.</returns>
         public bool Equals(Matrix3x2 other)
         {
-            return (M11 == other.M11 && M22 == other.M22 && // Check diagonal element first for early out.
-                                        M12 == other.M12 &&
-                    M21 == other.M21 &&
-                    M31 == other.M31 && M32 == other.M32);
+            return (
+                M11 == other.M11
+                && M22 == other.M22
+                && // Check diagonal element first for early out.
+                M12 == other.M12
+                && M21 == other.M21
+                && M31 == other.M31
+                && M32 == other.M32
+            );
         }
 
         /// <summary>
@@ -789,10 +810,16 @@ namespace System.Numerics
         public override string ToString()
         {
             CultureInfo ci = CultureInfo.CurrentCulture;
-            return String.Format(ci, "{{ {{M11:{0} M12:{1}}} {{M21:{2} M22:{3}}} {{M31:{4} M32:{5}}} }}",
-                                 M11.ToString(ci), M12.ToString(ci),
-                                 M21.ToString(ci), M22.ToString(ci),
-                                 M31.ToString(ci), M32.ToString(ci));
+            return String.Format(
+                ci,
+                "{{ {{M11:{0} M12:{1}}} {{M21:{2} M22:{3}}} {{M31:{4} M32:{5}}} }}",
+                M11.ToString(ci),
+                M12.ToString(ci),
+                M21.ToString(ci),
+                M22.ToString(ci),
+                M31.ToString(ci),
+                M32.ToString(ci)
+            );
         }
 
         /// <summary>
@@ -801,9 +828,12 @@ namespace System.Numerics
         /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
-            return M11.GetHashCode() + M12.GetHashCode() +
-                   M21.GetHashCode() + M22.GetHashCode() +
-                   M31.GetHashCode() + M32.GetHashCode();
+            return M11.GetHashCode()
+                + M12.GetHashCode()
+                + M21.GetHashCode()
+                + M22.GetHashCode()
+                + M31.GetHashCode()
+                + M32.GetHashCode();
         }
     }
 }

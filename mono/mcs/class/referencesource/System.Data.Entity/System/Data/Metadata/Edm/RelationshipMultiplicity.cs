@@ -31,6 +31,6 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Lower bound is zero and upper bound is null
         /// </summary>
-        Many
+        Many,
     }
 }

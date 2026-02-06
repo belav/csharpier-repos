@@ -11,29 +11,53 @@ namespace System.Reflection.Tests
 {
     public static class MethodBodyTests
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsMethodBodySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMethodBodySupported)
+        )]
         public static void Test_MethodBody_ExceptionHandlingClause()
         {
-            MethodInfo mi = typeof(MethodBodyTests).GetMethod("MethodBodyExample", BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo mi = typeof(MethodBodyTests).GetMethod(
+                "MethodBodyExample",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             MethodBody mb = mi.GetMethodBody();
 
-            Assert.True(mb.InitLocals);  // local variables are initialized
+            Assert.True(mb.InitLocals); // local variables are initialized
 #if DEBUG
             Assert.Equal(2, mb.MaxStackSize);
             Assert.Equal(5, mb.LocalVariables.Count);
 
             foreach (LocalVariableInfo lvi in mb.LocalVariables)
             {
-                if (lvi.LocalIndex == 0) { Assert.Equal(typeof(int), lvi.LocalType); }
-                if (lvi.LocalIndex == 1) { Assert.Equal(typeof(string), lvi.LocalType); }
-                if (lvi.LocalIndex == 2) { Assert.Equal(typeof(bool), lvi.LocalType); }
-                if (lvi.LocalIndex == 3) { Assert.Equal(typeof(bool), lvi.LocalType); }
-                if (lvi.LocalIndex == 4) { Assert.Equal(typeof(Exception), lvi.LocalType); }
+                if (lvi.LocalIndex == 0)
+                {
+                    Assert.Equal(typeof(int), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 1)
+                {
+                    Assert.Equal(typeof(string), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 2)
+                {
+                    Assert.Equal(typeof(bool), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 3)
+                {
+                    Assert.Equal(typeof(bool), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 4)
+                {
+                    Assert.Equal(typeof(Exception), lvi.LocalType);
+                }
             }
 
             foreach (ExceptionHandlingClause ehc in mb.ExceptionHandlingClauses)
             {
-                if (ehc.Flags != ExceptionHandlingClauseOptions.Finally && ehc.Flags != ExceptionHandlingClauseOptions.Filter)
+                if (
+                    ehc.Flags != ExceptionHandlingClauseOptions.Finally
+                    && ehc.Flags != ExceptionHandlingClauseOptions.Filter
+                )
                 {
                     Assert.Equal(typeof(Exception), ehc.CatchType);
                     Assert.Equal(19, ehc.HandlerLength);
@@ -49,14 +73,26 @@ namespace System.Reflection.Tests
 
             foreach (LocalVariableInfo lvi in mb.LocalVariables)
             {
-                if (lvi.LocalIndex == 0) { Assert.Equal(typeof(int), lvi.LocalType); }
-                if (lvi.LocalIndex == 1) { Assert.Equal(typeof(string), lvi.LocalType); }
-                if (lvi.LocalIndex == 2) { Assert.Equal(typeof(Exception), lvi.LocalType); }
+                if (lvi.LocalIndex == 0)
+                {
+                    Assert.Equal(typeof(int), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 1)
+                {
+                    Assert.Equal(typeof(string), lvi.LocalType);
+                }
+                if (lvi.LocalIndex == 2)
+                {
+                    Assert.Equal(typeof(Exception), lvi.LocalType);
+                }
             }
 
             foreach (ExceptionHandlingClause ehc in mb.ExceptionHandlingClauses)
             {
-                if (ehc.Flags != ExceptionHandlingClauseOptions.Finally && ehc.Flags != ExceptionHandlingClauseOptions.Filter)
+                if (
+                    ehc.Flags != ExceptionHandlingClauseOptions.Finally
+                    && ehc.Flags != ExceptionHandlingClauseOptions.Filter
+                )
                 {
                     Assert.Equal(typeof(Exception), ehc.CatchType);
                     Assert.Equal(14, ehc.HandlerLength);

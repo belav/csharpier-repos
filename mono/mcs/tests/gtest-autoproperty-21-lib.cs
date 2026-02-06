@@ -2,5 +2,5 @@
 
 public abstract class Base
 {
-	public abstract string Value { get; }
+    public abstract string Value { get; }
 }

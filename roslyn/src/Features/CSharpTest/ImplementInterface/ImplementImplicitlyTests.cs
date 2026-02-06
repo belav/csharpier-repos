@@ -23,11 +23,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
         private const int SameInterface = 1;
         private const int AllInterfaces = 2;
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpImplementImplicitlyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpImplementImplicitlyCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task TestSingleMember()
@@ -58,7 +61,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     void IBar.Bar() { }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -90,7 +95,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     void IBar.Bar() { }
                 }
-                """, index: SameInterface);
+                """,
+                index: SameInterface
+            );
         }
 
         [Fact]
@@ -122,7 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     public void Bar() { }
                 }
-                """, index: AllInterfaces);
+                """,
+                index: AllInterfaces
+            );
         }
 
         [Fact]
@@ -144,7 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     public int Goo1 { get { } }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -166,7 +177,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     public event Action E { add { } remove { } }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact]
@@ -180,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     public void [||]Goo1() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     void IGoo.[||]Goo1() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -220,7 +235,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                     private void Goo1() { }
                 }
-                """, index: SingleMember);
+                """,
+                index: SingleMember
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48027")]
@@ -238,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                         throw new NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -260,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 {
                     public readonly void Goo1() { }
                 }
-                """);
+                """
+            );
         }
     }
 }

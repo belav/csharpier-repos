@@ -61,7 +61,8 @@ namespace Mono
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern unsafe IntPtr GetTypeFromClass(RuntimeStructs.MonoClass* klass);
 
-        internal RuntimeTypeHandle GetTypeHandle() => new RuntimeTypeHandle(GetTypeFromClass(value));
+        internal RuntimeTypeHandle GetTypeHandle() =>
+            new RuntimeTypeHandle(GetTypeFromClass(value));
     }
 
     internal unsafe struct RuntimeRemoteClassHandle
@@ -75,10 +76,7 @@ namespace Mono
 
         internal RuntimeClassHandle ProxyClass
         {
-            get
-            {
-                return new RuntimeClassHandle(value->proxy_class);
-            }
+            get { return new RuntimeClassHandle(value->proxy_class); }
         }
     }
 
@@ -119,7 +117,8 @@ namespace Mono
             RuntimeStructs.MonoClass** p = value->constraints;
             while (p != null && *p != null)
             {
-                p++; i++;
+                p++;
+                i++;
             }
             return i;
         }

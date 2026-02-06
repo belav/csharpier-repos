@@ -126,7 +126,10 @@ namespace System.Globalization
             // The GetWeekday method will normalize this into the 1-7 range required by ISO.
             if ((int)dayOfWeek < 0 || (int)dayOfWeek > 7)
             {
-                throw new ArgumentOutOfRangeException(nameof(dayOfWeek), SR.ArgumentOutOfRange_DayOfWeek);
+                throw new ArgumentOutOfRangeException(
+                    nameof(dayOfWeek),
+                    SR.ArgumentOutOfRange_DayOfWeek
+                );
             }
 
             var jan4 = new DateTime(year, month: 1, day: 4);

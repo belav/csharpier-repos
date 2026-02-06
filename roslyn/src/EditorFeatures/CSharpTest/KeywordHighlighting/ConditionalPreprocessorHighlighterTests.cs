@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class ConditionalPreprocessorHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(ConditionalPreprocessorHighlighter);
+        internal override Type GetHighlighterType() => typeof(ConditionalPreprocessorHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -48,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -204,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 [|#endif|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -228,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 [|#endif|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -252,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 [|#endif|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -276,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 {|Cursor:[|#endif|]|}
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

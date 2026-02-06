@@ -20,7 +20,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullInstallerType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("installerType", () => new InstallerTypeAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "installerType",
+                () => new InstallerTypeAttribute((Type)null)
+            );
         }
 
         [Theory]
@@ -36,7 +39,10 @@ namespace System.ComponentModel.Tests
         public void Ctor_NullTypeName_InstallerTypeThrowsArgumentNullException()
         {
             var attribute = new InstallerTypeAttribute((string)null);
-            AssertExtensions.Throws<ArgumentNullException>("typeName", () => attribute.InstallerType);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeName",
+                () => attribute.InstallerType
+            );
         }
 
         [Theory]
@@ -55,11 +61,25 @@ namespace System.ComponentModel.Tests
             yield return new object[] { attribute, attribute, true };
             yield return new object[] { attribute, new InstallerTypeAttribute("typeName"), true };
             yield return new object[] { attribute, new InstallerTypeAttribute("typename"), false };
-            yield return new object[] { attribute, new InstallerTypeAttribute((string)null), false };
+            yield return new object[]
+            {
+                attribute,
+                new InstallerTypeAttribute((string)null),
+                false,
+            };
 
-
-            yield return new object[] { new InstallerTypeAttribute((string)null), new InstallerTypeAttribute((string)null), true };
-            yield return new object[] { new InstallerTypeAttribute((string)null), new InstallerTypeAttribute("typeName"), false };
+            yield return new object[]
+            {
+                new InstallerTypeAttribute((string)null),
+                new InstallerTypeAttribute((string)null),
+                true,
+            };
+            yield return new object[]
+            {
+                new InstallerTypeAttribute((string)null),
+                new InstallerTypeAttribute("typeName"),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -67,7 +87,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(InstallerTypeAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            InstallerTypeAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is InstallerTypeAttribute)

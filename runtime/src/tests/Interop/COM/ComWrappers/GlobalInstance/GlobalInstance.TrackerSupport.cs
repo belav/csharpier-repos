@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace ComWrappersTests.GlobalInstance
 {
     using System;
     using System.Runtime.InteropServices;
-
     using ComWrappersTests.Common;
     using TestLibrary;
     using Xunit;
@@ -23,7 +23,10 @@ namespace ComWrappersTests.GlobalInstance
 
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
             object objWrapper = Marshal.GetObjectForIUnknown(trackerObjRaw);
-            Assert.False(objWrapper is FakeWrapper, $"ComWrappers instance should not have been called");
+            Assert.False(
+                objWrapper is FakeWrapper,
+                $"ComWrappers instance should not have been called"
+            );
         }
 
         [Fact]
@@ -39,7 +42,10 @@ namespace ComWrappersTests.GlobalInstance
 #endif
 
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject
+                );
                 Marshal.Release(trackerObjRaw);
 
                 ValidateNotifyEndOfReferenceTrackingOnThread();
@@ -72,4 +78,3 @@ namespace ComWrappersTests.GlobalInstance
         }
     }
 }
-

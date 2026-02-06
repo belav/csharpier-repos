@@ -18,8 +18,7 @@ struct Struct_32bytes
 
     public int Sum()
     {
-        return m_i0 + m_i1 + m_i2 + m_i3 +
-            m_i4 + m_i5 + m_i6 + m_i7;
+        return m_i0 + m_i1 + m_i2 + m_i3 + m_i4 + m_i5 + m_i6 + m_i7;
     }
 }
 
@@ -36,8 +35,14 @@ struct Struct_256bytes
 
     public int Sum()
     {
-        return m_i0.Sum() + m_i1.Sum() + m_i2.Sum() + m_i3.Sum() +
-            m_i4.Sum() + m_i5.Sum() + m_i6.Sum() + m_i7.Sum();
+        return m_i0.Sum()
+            + m_i1.Sum()
+            + m_i2.Sum()
+            + m_i3.Sum()
+            + m_i4.Sum()
+            + m_i5.Sum()
+            + m_i6.Sum()
+            + m_i7.Sum();
     }
 }
 
@@ -54,8 +59,14 @@ struct Struct_2Kbytes
 
     public int Sum()
     {
-        return m_i0.Sum() + m_i1.Sum() + m_i2.Sum() + m_i3.Sum() +
-            m_i4.Sum() + m_i5.Sum() + m_i6.Sum() + m_i7.Sum();
+        return m_i0.Sum()
+            + m_i1.Sum()
+            + m_i2.Sum()
+            + m_i3.Sum()
+            + m_i4.Sum()
+            + m_i5.Sum()
+            + m_i6.Sum()
+            + m_i7.Sum();
     }
 }
 
@@ -72,10 +83,15 @@ struct Struct_16Kbytes
 
     public int Sum()
     {
-        return m_i0.Sum() + m_i1.Sum() + m_i2.Sum() + m_i3.Sum() +
-            m_i4.Sum() + m_i5.Sum() + m_i6.Sum() + m_i7.Sum();
+        return m_i0.Sum()
+            + m_i1.Sum()
+            + m_i2.Sum()
+            + m_i3.Sum()
+            + m_i4.Sum()
+            + m_i5.Sum()
+            + m_i6.Sum()
+            + m_i7.Sum();
     }
-
 }
 
 struct Struct_128Kbytes
@@ -91,10 +107,15 @@ struct Struct_128Kbytes
 
     public int Sum()
     {
-        return m_i0.Sum() + m_i1.Sum() + m_i2.Sum() + m_i3.Sum() +
-            m_i4.Sum() + m_i5.Sum() + m_i6.Sum() + m_i7.Sum();
+        return m_i0.Sum()
+            + m_i1.Sum()
+            + m_i2.Sum()
+            + m_i3.Sum()
+            + m_i4.Sum()
+            + m_i5.Sum()
+            + m_i6.Sum()
+            + m_i7.Sum();
     }
-
 }
 
 public class bug178119
@@ -108,8 +129,7 @@ public class bug178119
         Struct_128Kbytes s4 = new Struct_128Kbytes();
         Struct_128Kbytes s5 = new Struct_128Kbytes();
 
-        int result = s0.Sum() + s1.Sum() + s2.Sum() + s3.Sum() +
-            s4.Sum() + s5.Sum();
+        int result = s0.Sum() + s1.Sum() + s2.Sum() + s3.Sum() + s4.Sum() + s5.Sum();
 
         GC.Collect();
         return result;
@@ -126,8 +146,8 @@ public class bug178119
         Struct_128Kbytes s6 = new Struct_128Kbytes();
         Struct_128Kbytes s7 = new Struct_128Kbytes();
 
-        int result = s0.Sum() + s1.Sum() + s2.Sum() + s3.Sum() +
-            s4.Sum() + s5.Sum() + s6.Sum() + s7.Sum();
+        int result =
+            s0.Sum() + s1.Sum() + s2.Sum() + s3.Sum() + s4.Sum() + s5.Sum() + s6.Sum() + s7.Sum();
 
         GC.Collect();
         return result;

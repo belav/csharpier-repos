@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="List.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -12,11 +12,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -32,14 +32,30 @@ namespace System.Web.UI.MobileControls
         DefaultProperty("DataSource"),
         Designer(typeof(System.Web.UI.Design.MobileControls.ListDesigner)),
         DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerListAdapter)),
-        Editor(typeof(System.Web.UI.Design.MobileControls.ListComponentEditor), typeof(ComponentEditor)),
+        Editor(
+            typeof(System.Web.UI.Design.MobileControls.ListComponentEditor),
+            typeof(ComponentEditor)
+        ),
         ToolboxData("<{0}:List runat=\"server\"></{0}:List>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign),
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class List : PagedControl, INamingContainer, IListControl, ITemplateable, IPostBackEventHandler
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class List
+        : PagedControl,
+            INamingContainer,
+            IListControl,
+            ITemplateable,
+            IPostBackEventHandler
     {
         private static readonly Object EventItemCommand = new Object();
         private static readonly Object EventItemDataBind = new Object();
@@ -47,9 +63,12 @@ namespace System.Web.UI.MobileControls
         private ListDataHelper _dataHelper;
         private ListDecoration _decoration = ListDecoration.None;
 
-        private ListDataHelper DataHelper {
-            get {
-                if (_dataHelper == null) {
+        private ListDataHelper DataHelper
+        {
+            get
+            {
+                if (_dataHelper == null)
+                {
                     _dataHelper = new ListDataHelper(this, ViewState);
                 }
 
@@ -71,17 +90,10 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.List_DataSource)
         ]
-        public virtual Object DataSource 
+        public virtual Object DataSource
         {
-            get 
-            {
-                return DataHelper.DataSource;
-            }
-
-            set 
-            {
-                DataHelper.DataSource = value;
-            }
+            get { return DataHelper.DataSource; }
+            set { DataHelper.DataSource = value; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.DataMember"]/*' />
@@ -90,19 +102,14 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.List_DataMember),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter)
+            )
         ]
         public virtual String DataMember
         {
-            get 
-            {
-                return DataHelper.DataMember;
-            }
-
-            set 
-            {
-                DataHelper.DataMember = value;
-            }
+            get { return DataHelper.DataMember; }
+            set { DataHelper.DataMember = value; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.DataTextField"]/*' />
@@ -112,16 +119,10 @@ namespace System.Web.UI.MobileControls
             MobileSysDescription(SR.List_DataTextField),
             TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataFieldConverter))
         ]
-        public String DataTextField 
+        public String DataTextField
         {
-            get 
-            {
-                return DataHelper.DataTextField;
-            }
-            set 
-            {
-                DataHelper.DataTextField = value;
-            }
+            get { return DataHelper.DataTextField; }
+            set { DataHelper.DataTextField = value; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.DataValueField"]/*' />
@@ -131,18 +132,11 @@ namespace System.Web.UI.MobileControls
             MobileSysDescription(SR.List_DataValueField),
             TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataFieldConverter))
         ]
-        public String DataValueField 
+        public String DataValueField
         {
-            get 
-            {
-                return DataHelper.DataValueField;
-            }
-            set 
-            {
-                DataHelper.DataValueField = value;
-            }
+            get { return DataHelper.DataValueField; }
+            set { DataHelper.DataValueField = value; }
         }
-
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.ItemsAsLinks"]/*' />
         [
@@ -156,29 +150,26 @@ namespace System.Web.UI.MobileControls
             get
             {
                 Object b = ViewState["ItemsAsLinks"];
-                return (b != null) ? (bool) b : false;
+                return (b != null) ? (bool)b : false;
             }
-            set
-            {
-                ViewState["ItemsAsLinks"] = value;
-            }
+            set { ViewState["ItemsAsLinks"] = value; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.Items"]/*' />
         [
             Bindable(false),
             DefaultValue(null),
-            Editor(typeof(System.Web.UI.Design.MobileControls.ItemCollectionEditor), typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.ItemCollectionEditor),
+                typeof(UITypeEditor)
+            ),
             MergableProperty(false),
             MobileSysDescription(SR.List_Items),
             PersistenceMode(PersistenceMode.InnerDefaultProperty)
         ]
         public MobileListItemCollection Items
         {
-            get
-            {
-                return DataHelper.Items;
-            }
+            get { return DataHelper.Items; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.EnsureTemplatedUI"]/*' />
@@ -195,7 +186,7 @@ namespace System.Web.UI.MobileControls
                 if (obj is MobileListItem)
                 {
                     DataHelper.AddItem((MobileListItem)obj);
-                } 
+                }
                 else
                 {
                     base.AddParsedSubObject(obj);
@@ -204,7 +195,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.CreateChildControls"]/*' />
-        protected override void CreateChildControls() 
+        protected override void CreateChildControls()
         {
             CreateChildControls(false);
         }
@@ -212,8 +203,8 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\List.uex' path='docs/doc[@for="List.EnsureChildControls"]/*' />
         protected override void EnsureChildControls()
         {
-            // Whenever EnsureChildControls is called before items are created 
-            // (e.g., at LoadPrivateViewState), there are no controls.  
+            // Whenever EnsureChildControls is called before items are created
+            // (e.g., at LoadPrivateViewState), there are no controls.
             // Rebuild children for this case by setting ChildControlsCreated to false.
             ChildControlsCreated = ChildControlsCreated && Controls.Count > 0;
             base.EnsureChildControls();
@@ -228,9 +219,9 @@ namespace System.Web.UI.MobileControls
             }
             ChildControlsCreated = true;
         }
-        
+
         /// <include file='doc\List.uex' path='docs/doc[@for="List.OnDataBinding"]/*' />
-        protected override void OnDataBinding(EventArgs e) 
+        protected override void OnDataBinding(EventArgs e)
         {
             base.OnDataBinding(e);
             if (DataHelper.ResolvedDataSource != null)
@@ -243,13 +234,13 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.CreateItems"]/*' />
-        protected virtual void CreateItems(IEnumerable dataSource) 
+        protected virtual void CreateItems(IEnumerable dataSource)
         {
             DataHelper.CreateItems(dataSource);
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.CreateDefaultTemplatedUI"]/*' />
-        public override void CreateDefaultTemplatedUI(bool doDataBind) 
+        public override void CreateDefaultTemplatedUI(bool doDataBind)
         {
             MobileListItemCollection items = Items;
 
@@ -263,37 +254,38 @@ namespace System.Web.UI.MobileControls
                 alternatingItemTemplate = itemTemplate;
             }
 
-            CreateControlItem(MobileListItemType.HeaderItem, 
-                              headerTemplate,
-                              doDataBind);
+            CreateControlItem(MobileListItemType.HeaderItem, headerTemplate, doDataBind);
             for (int i = 0; i < items.Count; i++)
             {
                 if (i > 0)
                 {
-                    CreateControlItem(MobileListItemType.SeparatorItem, 
-                                      separatorTemplate, 
-                                      doDataBind);
+                    CreateControlItem(
+                        MobileListItemType.SeparatorItem,
+                        separatorTemplate,
+                        doDataBind
+                    );
                 }
-                AddItemAsControl(i, 
-                                 items[i], 
-                                 ((i & 1) == 1) ? alternatingItemTemplate : itemTemplate, 
-                                 doDataBind);
+                AddItemAsControl(
+                    i,
+                    items[i],
+                    ((i & 1) == 1) ? alternatingItemTemplate : itemTemplate,
+                    doDataBind
+                );
             }
-            CreateControlItem(MobileListItemType.FooterItem, 
-                              footerTemplate,
-                              doDataBind);
+            CreateControlItem(MobileListItemType.FooterItem, footerTemplate, doDataBind);
         }
 
         private void AddItemAsControl(
             int itemIndex,
             MobileListItem item,
-            ITemplate itemTemplate, 
-            bool doDataBind)
+            ITemplate itemTemplate,
+            bool doDataBind
+        )
         {
             if (itemTemplate != null)
             {
                 item.Controls.Clear();
-                CheckedInstantiateTemplate (itemTemplate, item, this);
+                CheckedInstantiateTemplate(itemTemplate, item, this);
                 Controls.Add(item);
                 if (doDataBind)
                 {
@@ -303,9 +295,10 @@ namespace System.Web.UI.MobileControls
         }
 
         private void CreateControlItem(
-            MobileListItemType itemType, 
-            ITemplate itemTemplate, 
-            bool doDataBind)
+            MobileListItemType itemType,
+            ITemplate itemTemplate,
+            bool doDataBind
+        )
         {
             if (itemTemplate != null)
             {
@@ -326,17 +319,18 @@ namespace System.Web.UI.MobileControls
                 int lastVisibleItem = firstVisibleItem + pageSize - 1;
                 int itemIndex = 0;
                 int separatorIndex = 0;
-                foreach(MobileListItem item in Controls)
+                foreach (MobileListItem item in Controls)
                 {
                     if (item.ItemType == MobileListItemType.ListItem)
                     {
-                        item.Visible = itemIndex >= firstVisibleItem && itemIndex <= lastVisibleItem;
+                        item.Visible =
+                            itemIndex >= firstVisibleItem && itemIndex <= lastVisibleItem;
                         itemIndex++;
                     }
                     else if (item.ItemType == MobileListItemType.SeparatorItem)
                     {
-                        item.Visible = separatorIndex >= firstVisibleItem && 
-                                            separatorIndex < lastVisibleItem;
+                        item.Visible =
+                            separatorIndex >= firstVisibleItem && separatorIndex < lastVisibleItem;
                         separatorIndex++;
                     }
                 }
@@ -350,7 +344,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (DataHelper.HasItems())
                 {
-                    Debug.Assert (Items.Count >= 0);
+                    Debug.Assert(Items.Count >= 0);
                     return Items.Count;
                 }
                 else
@@ -358,7 +352,6 @@ namespace System.Web.UI.MobileControls
                     return 0;
                 }
             }
-            
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.OnPageChange"]/*' />
@@ -372,32 +365,23 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.ItemCommand"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.List_OnItemCommand)
-        ]
-        public event ListCommandEventHandler ItemCommand 
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.List_OnItemCommand)]
+        public event ListCommandEventHandler ItemCommand
         {
-            add 
-            {
-                Events.AddHandler(EventItemCommand, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemCommand, value);
-            }
+            add { Events.AddHandler(EventItemCommand, value); }
+            remove { Events.RemoveHandler(EventItemCommand, value); }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.OnItemCommand"]/*' />
-        protected virtual void OnItemCommand(ListCommandEventArgs e) 
+        protected virtual void OnItemCommand(ListCommandEventArgs e)
         {
-            ListCommandEventHandler onItemCommandHandler = (ListCommandEventHandler)Events[EventItemCommand];
+            ListCommandEventHandler onItemCommandHandler = (ListCommandEventHandler)
+                Events[EventItemCommand];
             if (onItemCommandHandler != null)
             {
                 onItemCommandHandler(this, e);
             }
         }
-
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.HasItemCommandHandler"]/*' />
         [
@@ -407,10 +391,7 @@ namespace System.Web.UI.MobileControls
         ]
         public bool HasItemCommandHandler
         {
-            get
-            {
-                return Events[EventItemCommand] != null;
-            }
+            get { return Events[EventItemCommand] != null; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.Decoration"]/*' />
@@ -422,38 +403,23 @@ namespace System.Web.UI.MobileControls
         ]
         public ListDecoration Decoration
         {
-            get
-            {
-                return _decoration;
-            }
-            set
-            {
-                _decoration = value;
-            }
+            get { return _decoration; }
+            set { _decoration = value; }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.ItemDataBind"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.List_OnItemDataBind)
-        ]
-        public event ListDataBindEventHandler ItemDataBind 
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.List_OnItemDataBind)]
+        public event ListDataBindEventHandler ItemDataBind
         {
-            add 
-            {
-                Events.AddHandler(EventItemDataBind, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemDataBind, value);
-            }
+            add { Events.AddHandler(EventItemDataBind, value); }
+            remove { Events.RemoveHandler(EventItemDataBind, value); }
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.OnItemDataBind"]/*' />
-        protected virtual void OnItemDataBind(ListDataBindEventArgs e) 
+        protected virtual void OnItemDataBind(ListDataBindEventArgs e)
         {
-            ListDataBindEventHandler onItemDataBindHandler = 
-                (ListDataBindEventHandler)Events[EventItemDataBind];
+            ListDataBindEventHandler onItemDataBindHandler = (ListDataBindEventHandler)
+                Events[EventItemDataBind];
             if (onItemDataBindHandler != null)
             {
                 onItemDataBindHandler(this, e);
@@ -461,11 +427,11 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.OnBubbleEvent"]/*' />
-        protected override bool OnBubbleEvent(Object sender, EventArgs e) 
+        protected override bool OnBubbleEvent(Object sender, EventArgs e)
         {
             bool handled = false;
 
-            if (e is ListCommandEventArgs) 
+            if (e is ListCommandEventArgs)
             {
                 OnItemCommand((ListCommandEventArgs)e);
                 handled = true;
@@ -477,10 +443,10 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         protected void RaisePostBackEvent(String eventArgument)
         {
-            if(!ItemsAsLinks)
+            if (!ItemsAsLinks)
             {
                 // Non-templated list got a click event. There really
-                // isn't a command source, so we'll set it to the 
+                // isn't a command source, so we'll set it to the
                 // default of null.
                 int item = Int32.Parse(eventArgument, CultureInfo.InvariantCulture);
                 item = TranslateVirtualItemIndex(item);
@@ -533,7 +499,7 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.TrackViewState"]/*' />
-        protected override void TrackViewState() 
+        protected override void TrackViewState()
         {
             base.TrackViewState();
             if (DataHelper.HasItems())
@@ -543,9 +509,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.SaveViewState"]/*' />
-        protected override Object SaveViewState() 
+        protected override Object SaveViewState()
         {
-            Object baseState, itemsState;
+            Object baseState,
+                itemsState;
 
             if (DataHelper.HasItems())
             {
@@ -557,7 +524,7 @@ namespace System.Web.UI.MobileControls
             }
             baseState = base.SaveViewState();
 
-            if (itemsState != null || Decoration != ListDecoration.None )
+            if (itemsState != null || Decoration != ListDecoration.None)
             {
                 return new Object[3] { baseState, itemsState, Decoration };
             }
@@ -569,9 +536,9 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.LoadViewState"]/*' />
-        protected override void LoadViewState(Object savedState) 
+        protected override void LoadViewState(Object savedState)
         {
-            if (savedState != null) 
+            if (savedState != null)
             {
                 Object[] state = (Object[])savedState;
                 base.LoadViewState(state[0]);
@@ -579,7 +546,7 @@ namespace System.Web.UI.MobileControls
                 if (state.Length > 1)
                 {
                     ((IStateManager)Items).LoadViewState(state[1]);
-                    Decoration = (ListDecoration) state[2];
+                    Decoration = (ListDecoration)state[2];
                 }
             }
         }
@@ -599,7 +566,7 @@ namespace System.Web.UI.MobileControls
 
         /// <include file='doc\List.uex' path='docs/doc[@for="List.IListControl.OnItemDataBind"]/*' />
         /// <internalonly/>
-        void IListControl.OnItemDataBind(ListDataBindEventArgs e) 
+        void IListControl.OnItemDataBind(ListDataBindEventArgs e)
         {
             OnItemDataBind(e);
         }
@@ -608,16 +575,14 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         bool IListControl.TrackingViewState
         {
-            get
-            {
-                return IsTrackingViewState;
-            }
+            get { return IsTrackingViewState; }
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
 }

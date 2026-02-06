@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal class IdentifierCollection
     {
         #region Constructors

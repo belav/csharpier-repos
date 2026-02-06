@@ -12,7 +12,8 @@ public abstract class GearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureB
         var discriminatorMapping = new Dictionary<(Type, string), Func<object, object>>
         {
             {
-                (typeof(Gear), "Discriminator"), e =>
+                (typeof(Gear), "Discriminator"),
+                e =>
                 {
                     switch (((Gear)e)?.Nickname)
                     {
@@ -31,7 +32,8 @@ public abstract class GearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureB
                 }
             },
             {
-                (typeof(Faction), "Discriminator"), e =>
+                (typeof(Faction), "Discriminator"),
+                e =>
                 {
                     switch (((Faction)e)?.Id)
                     {
@@ -45,7 +47,8 @@ public abstract class GearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureB
                 }
             },
             {
-                (typeof(LocustLeader), "Discriminator"), e =>
+                (typeof(LocustLeader), "Discriminator"),
+                e =>
                 {
                     switch (((LocustLeader)e)?.Name)
                     {
@@ -68,18 +71,19 @@ public abstract class GearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtureB
 
         foreach (var shadowPropertyMappingElement in base.GetShadowPropertyMappings())
         {
-            discriminatorMapping.Add(shadowPropertyMappingElement.Key, shadowPropertyMappingElement.Value);
+            discriminatorMapping.Add(
+                shadowPropertyMappingElement.Key,
+                shadowPropertyMappingElement.Value
+            );
         }
 
         return discriminatorMapping;
     }
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Query.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Query.Name;
 }

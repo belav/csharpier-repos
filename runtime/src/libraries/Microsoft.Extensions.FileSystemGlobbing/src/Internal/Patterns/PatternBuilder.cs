@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
             List<IPathSegment>? segmentsPatternEndsWith = null;
 
             int endPattern = pattern.Length;
-            for (int scanPattern = 0; scanPattern < endPattern;)
+            for (int scanPattern = 0; scanPattern < endPattern; )
             {
                 int beginSegment = scanPattern;
                 int endSegment = NextIndex(pattern, _slashes, scanPattern, endPattern);
@@ -55,9 +55,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment == 3)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '.' &&
-                        pattern[beginSegment + 2] == '*')
+                    if (
+                        pattern[beginSegment] == '*'
+                        && pattern[beginSegment + 1] == '.'
+                        && pattern[beginSegment + 2] == '*'
+                    )
                     {
                         // turn *.* into *
                         beginSegment += 2;
@@ -66,20 +68,20 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment == 2)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '*')
+                    if (pattern[beginSegment] == '*' && pattern[beginSegment + 1] == '*')
                     {
                         // recognized **
                         segment = new RecursiveWildcardSegment();
                     }
-                    else if (pattern[beginSegment] == '.' &&
-                             pattern[beginSegment + 1] == '.')
+                    else if (pattern[beginSegment] == '.' && pattern[beginSegment + 1] == '.')
                     {
                         // recognized ..
 
                         if (!isParentSegmentLegal)
                         {
-                            throw new ArgumentException("\"..\" can be only added at the beginning of the pattern.");
+                            throw new ArgumentException(
+                                "\"..\" can be only added at the beginning of the pattern."
+                            );
                         }
                         segment = new ParentPathSegment();
                     }
@@ -96,9 +98,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
                 if (segment == null && endSegment - beginSegment > 2)
                 {
-                    if (pattern[beginSegment] == '*' &&
-                        pattern[beginSegment + 1] == '*' &&
-                        pattern[beginSegment + 2] == '.')
+                    if (
+                        pattern[beginSegment] == '*'
+                        && pattern[beginSegment + 1] == '*'
+                        && pattern[beginSegment + 2] == '.'
+                    )
                     {
                         // recognize **.
                         // swallow the first *, add the recursive path segment and
@@ -114,7 +118,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                     var contains = new List<string>();
                     string endsWith = string.Empty;
 
-                    for (int scanSegment = beginSegment; scanSegment < endSegment;)
+                    for (int scanSegment = beginSegment; scanSegment < endSegment; )
                     {
                         int beginLiteral = scanSegment;
                         int endLiteral = NextIndex(pattern, _star, scanSegment, endSegment);
@@ -124,7 +128,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                             if (endLiteral == endSegment)
                             {
                                 // and the only bit
-                                segment = new LiteralPathSegment(Portion(pattern, beginLiteral, endLiteral), ComparisonType);
+                                segment = new LiteralPathSegment(
+                                    Portion(pattern, beginLiteral, endLiteral),
+                                    ComparisonType
+                                );
                             }
                             else
                             {
@@ -154,7 +161,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
                         scanSegment = endLiteral + 1;
                     }
 
-                    segment ??= new WildcardPathSegment(beginsWith, contains, endsWith, ComparisonType);
+                    segment ??= new WildcardPathSegment(
+                        beginsWith,
+                        contains,
+                        endsWith,
+                        ComparisonType
+                    );
                 }
 
                 if (segment is not ParentPathSegment)
@@ -199,7 +211,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
             }
             else
             {
-                return new RaggedPattern(allSegments, segmentsPatternStartsWith, segmentsPatternEndsWith!, segmentsPatternContains!);
+                return new RaggedPattern(
+                    allSegments,
+                    segmentsPatternStartsWith,
+                    segmentsPatternEndsWith!,
+                    segmentsPatternContains!
+                );
             }
         }
 
@@ -236,7 +253,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns
 
         private sealed class RaggedPattern : IRaggedPattern
         {
-            public RaggedPattern(List<IPathSegment> allSegments, IList<IPathSegment> segmentsPatternStartsWith, IList<IPathSegment> segmentsPatternEndsWith, IList<IList<IPathSegment>> segmentsPatternContains)
+            public RaggedPattern(
+                List<IPathSegment> allSegments,
+                IList<IPathSegment> segmentsPatternStartsWith,
+                IList<IPathSegment> segmentsPatternEndsWith,
+                IList<IList<IPathSegment>> segmentsPatternContains
+            )
             {
                 Segments = allSegments;
                 StartsWith = segmentsPatternStartsWith;

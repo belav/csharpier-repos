@@ -33,17 +33,21 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
     protected UpdateAndSelectSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public override ResultSetMapping AppendInsertOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendInsertAndSelectOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendInsertAndSelectOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for inserting a row to the commands being built, via an INSERT followed by an optional SELECT to retrieve any
@@ -58,7 +62,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -67,7 +72,13 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         var writeOperations = operations.Where(o => o.IsWrite).ToList();
         var readOperations = operations.Where(o => o.IsRead).ToList();
 
-        AppendInsertCommand(commandStringBuilder, name, schema, writeOperations, readOperations: Array.Empty<IColumnModification>());
+        AppendInsertCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            writeOperations,
+            readOperations: Array.Empty<IColumnModification>()
+        );
 
         if (readOperations.Count > 0)
         {
@@ -75,12 +86,24 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
 
             requiresTransaction = true;
 
-            return AppendSelectAffectedCommand(commandStringBuilder, name, schema, readOperations, keyOperations, commandPosition);
+            return AppendSelectAffectedCommand(
+                commandStringBuilder,
+                name,
+                schema,
+                readOperations,
+                keyOperations,
+                commandPosition
+            );
         }
 
         requiresTransaction = false;
 
-        return AppendSelectAffectedCountCommand(commandStringBuilder, name, schema, commandPosition);
+        return AppendSelectAffectedCountCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            commandPosition
+        );
     }
 
     /// <inheritdoc />
@@ -88,8 +111,14 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendUpdateAndSelectOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendUpdateAndSelectOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for updating a row to the commands being built, via an UPDATE followed by a SELECT to retrieve any
@@ -104,7 +133,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -114,7 +144,14 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         var conditionOperations = operations.Where(o => o.IsCondition).ToList();
         var readOperations = operations.Where(o => o.IsRead).ToList();
 
-        AppendUpdateCommand(commandStringBuilder, name, schema, writeOperations, Array.Empty<IColumnModification>(), conditionOperations);
+        AppendUpdateCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            writeOperations,
+            Array.Empty<IColumnModification>(),
+            conditionOperations
+        );
 
         if (readOperations.Count > 0)
         {
@@ -122,12 +159,24 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
 
             requiresTransaction = true;
 
-            return AppendSelectAffectedCommand(commandStringBuilder, name, schema, readOperations, keyOperations, commandPosition);
+            return AppendSelectAffectedCommand(
+                commandStringBuilder,
+                name,
+                schema,
+                readOperations,
+                keyOperations,
+                commandPosition
+            );
         }
 
         requiresTransaction = false;
 
-        return AppendSelectAffectedCountCommand(commandStringBuilder, name, schema, commandPosition);
+        return AppendSelectAffectedCountCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            commandPosition
+        );
     }
 
     /// <inheritdoc />
@@ -135,8 +184,14 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendDeleteAndSelectOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendDeleteAndSelectOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for updating a row to the commands being built, via a DELETE followed by a SELECT for concurrency checking.
@@ -150,7 +205,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -160,9 +216,20 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
 
         requiresTransaction = false;
 
-        AppendDeleteCommand(commandStringBuilder, name, schema, Array.Empty<IColumnModification>(), conditionOperations);
+        AppendDeleteCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            Array.Empty<IColumnModification>(),
+            conditionOperations
+        );
 
-        return AppendSelectAffectedCountCommand(commandStringBuilder, name, schema, commandPosition);
+        return AppendSelectAffectedCountCommand(
+            commandStringBuilder,
+            name,
+            schema,
+            commandPosition
+        );
     }
 
     /// <summary>
@@ -181,13 +248,13 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         string? schema,
         IReadOnlyList<IColumnModification> readOperations,
         IReadOnlyList<IColumnModification> conditionOperations,
-        int commandPosition)
+        int commandPosition
+    )
     {
         AppendSelectCommandHeader(commandStringBuilder, readOperations);
         AppendFromClause(commandStringBuilder, name, schema);
         AppendWhereAffectedClause(commandStringBuilder, conditionOperations);
-        commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator)
-            .AppendLine();
+        commandStringBuilder.AppendLine(SqlGenerationHelper.StatementTerminator).AppendLine();
 
         return ResultSetMapping.LastInResultSet;
     }
@@ -199,13 +266,15 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// <param name="operations">The operations representing the data to be read.</param>
     protected virtual void AppendSelectCommandHeader(
         StringBuilder commandStringBuilder,
-        IReadOnlyList<IColumnModification> operations)
-        => commandStringBuilder
+        IReadOnlyList<IColumnModification> operations
+    ) =>
+        commandStringBuilder
             .Append("SELECT ")
             .AppendJoin(
                 operations,
                 SqlGenerationHelper,
-                (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName));
+                (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+            );
 
     /// <summary>
     ///     Appends a SQL fragment for starting a <c>FROM</c> clause.
@@ -216,11 +285,10 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     protected virtual void AppendFromClause(
         StringBuilder commandStringBuilder,
         string name,
-        string? schema)
+        string? schema
+    )
     {
-        commandStringBuilder
-            .AppendLine()
-            .Append("FROM ");
+        commandStringBuilder.AppendLine().Append("FROM ");
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
     }
 
@@ -231,11 +299,10 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// <param name="operations">The operations from which to build the conditions.</param>
     protected virtual void AppendWhereAffectedClause(
         StringBuilder commandStringBuilder,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
-        commandStringBuilder
-            .AppendLine()
-            .Append("WHERE ");
+        commandStringBuilder.AppendLine().Append("WHERE ");
 
         AppendRowsAffectedWhereCondition(commandStringBuilder, 1);
 
@@ -244,7 +311,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
             commandStringBuilder
                 .Append(" AND ")
                 .AppendJoin(
-                    operations, (sb, v) =>
+                    operations,
+                    (sb, v) =>
                     {
                         if (v is { IsKey: true, IsRead: false })
                         {
@@ -259,7 +327,9 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
                         }
 
                         return false;
-                    }, " AND ");
+                    },
+                    " AND "
+                );
         }
     }
 
@@ -268,8 +338,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// </summary>
     /// <param name="modification">The column modification.</param>
     /// <returns><see langword="true" /> if the given modification represents an auto-incrementing column.</returns>
-    protected virtual bool IsIdentityOperation(IColumnModification modification)
-        => modification is { IsKey: true, IsRead: true };
+    protected virtual bool IsIdentityOperation(IColumnModification modification) =>
+        modification is { IsKey: true, IsRead: true };
 
     /// <summary>
     ///     Appends a <c>WHERE</c> condition checking rows affected.
@@ -278,7 +348,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// <param name="expectedRowsAffected">The expected number of rows affected.</param>
     protected abstract void AppendRowsAffectedWhereCondition(
         StringBuilder commandStringBuilder,
-        int expectedRowsAffected);
+        int expectedRowsAffected
+    );
 
     /// <summary>
     ///     Appends a <c>WHERE</c> condition for the identity (i.e. key value) of the given column.
@@ -287,7 +358,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     /// <param name="columnModification">The column for which the condition is being generated.</param>
     protected abstract void AppendIdentityWhereCondition(
         StringBuilder commandStringBuilder,
-        IColumnModification columnModification);
+        IColumnModification columnModification
+    );
 
     /// <summary>
     ///     Appends a SQL command for selecting the number of rows affected.
@@ -301,5 +373,6 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
         StringBuilder commandStringBuilder,
         string name,
         string? schema,
-        int commandPosition);
+        int commandPosition
+    );
 }

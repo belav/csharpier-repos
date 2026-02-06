@@ -16,7 +16,7 @@ namespace System.ServiceModel.Dispatcher
         SendOrPostCallback threadAffinityEndCallback;
         static Action<object> cleanThreadCallback;
         readonly SynchronizationContext context;
-       
+
         internal ThreadBehavior(DispatchRuntime dispatch)
         {
             this.context = dispatch.SynchronizationContext;
@@ -28,7 +28,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.threadAffinityStartCallback == null)
                 {
-                    this.threadAffinityStartCallback = new SendOrPostCallback(this.SynchronizationContextStartCallback);
+                    this.threadAffinityStartCallback = new SendOrPostCallback(
+                        this.SynchronizationContextStartCallback
+                    );
                 }
                 return this.threadAffinityStartCallback;
             }
@@ -39,7 +41,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.threadAffinityEndCallback == null)
                 {
-                    this.threadAffinityEndCallback = new SendOrPostCallback(this.SynchronizationContextEndCallback);
+                    this.threadAffinityEndCallback = new SendOrPostCallback(
+                        this.SynchronizationContextEndCallback
+                    );
                 }
                 return this.threadAffinityEndCallback;
             }
@@ -51,7 +55,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (ThreadBehavior.cleanThreadCallback == null)
                 {
-                    ThreadBehavior.cleanThreadCallback = new Action<object>(ThreadBehavior.CleanThreadCallback);
+                    ThreadBehavior.cleanThreadCallback = new Action<object>(
+                        ThreadBehavior.CleanThreadCallback
+                    );
                 }
                 return ThreadBehavior.cleanThreadCallback;
             }
@@ -94,7 +100,8 @@ namespace System.ServiceModel.Dispatcher
         SynchronizationContext GetSyncContext(InstanceContext instanceContext)
         {
             Fx.Assert(instanceContext != null, "instanceContext is null !");
-            SynchronizationContext syncContext = instanceContext.SynchronizationContext ?? this.context;
+            SynchronizationContext syncContext =
+                instanceContext.SynchronizationContext ?? this.context;
             return syncContext;
         }
 
@@ -102,6 +109,7 @@ namespace System.ServiceModel.Dispatcher
         {
             ResumeProcessing((IResumeMessageRpc)state);
         }
+
         void SynchronizationContextEndCallback(object state)
         {
             IResumeMessageRpc resume = (IResumeMessageRpc)state;
@@ -112,6 +120,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(syncContext != null, "syncContext is null !?");
             syncContext.OperationCompleted();
         }
+
         void ResumeProcessing(IResumeMessageRpc resume)
         {
             bool alreadyResumedNoLock;
@@ -119,8 +128,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (alreadyResumedNoLock)
             {
-                string text = SR.GetString(SR.SFxMultipleCallbackFromSynchronizationContext, context.GetType().ToString());
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(text));
+                string text = SR.GetString(
+                    SR.SFxMultipleCallbackFromSynchronizationContext,
+                    context.GetType().ToString()
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(text)
+                );
             }
         }
 

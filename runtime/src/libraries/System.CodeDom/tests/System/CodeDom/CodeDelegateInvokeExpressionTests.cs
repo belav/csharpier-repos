@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeDelegateInvokeExpressionTests : CodeObjectTestBase<CodeDelegateInvokeExpression>
+    public class CodeDelegateInvokeExpressionTests
+        : CodeObjectTestBase<CodeDelegateInvokeExpression>
     {
         [Fact]
         public void Ctor_Default()
@@ -30,13 +31,24 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeExpression_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, new CodeExpression[0] };
-            yield return new object[] { new CodePrimitiveExpression(""), new CodeExpression[] { new CodePrimitiveExpression() } };
-            yield return new object[] { new CodePrimitiveExpression("Hello"), new CodeExpression[] { new CodePrimitiveExpression("Value1") } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression(""),
+                new CodeExpression[] { new CodePrimitiveExpression() },
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Hello"),
+                new CodeExpression[] { new CodePrimitiveExpression("Value1") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_ParamsCodeExpression_TestData))]
-        public void Ctor_CodeExpression_ParamsCodeExpression(CodeExpression targetObject, CodeExpression[] parameters)
+        public void Ctor_CodeExpression_ParamsCodeExpression(
+            CodeExpression targetObject,
+            CodeExpression[] parameters
+        )
         {
             var delegateInvoke = new CodeDelegateInvokeExpression(targetObject, parameters);
             Assert.Equal(targetObject, delegateInvoke.TargetObject);
@@ -46,14 +58,24 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullParameters_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInParameters_ThrowsArgumentNullException()
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), parameters));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    new CodeDelegateInvokeExpression(
+                        new CodePrimitiveExpression("Hello"),
+                        parameters
+                    )
+            );
         }
 
         [Theory]
@@ -70,13 +92,25 @@ namespace System.CodeDom.Tests
         {
             var delegateInvoke = new CodeDelegateInvokeExpression();
 
-            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name1");
+            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name1"
+            );
             delegateInvoke.Parameters.Add(parameter1);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1 }, delegateInvoke.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1 },
+                delegateInvoke.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
 
-            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name2");
+            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name2"
+            );
             delegateInvoke.Parameters.Add(parameter2);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1, parameter2 }, delegateInvoke.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1, parameter2 },
+                delegateInvoke.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
         }
     }
 }

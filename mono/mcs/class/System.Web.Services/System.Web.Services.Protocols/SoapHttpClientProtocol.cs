@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapHttpClientProtocol.cs
 //
 // Author:
@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,381 +31,494 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Web;
-using System.Xml;
-using System.Text;
 using System.Reflection;
-using System.Web.Services;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Web;
+using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
-using System.Xml.Serialization;
+using System.Xml;
 using System.Xml.Schema;
-using System.Collections;
-using System.Threading;
+using System.Xml.Serialization;
 
-namespace System.Web.Services.Protocols 
+namespace System.Web.Services.Protocols
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class SoapHttpClientProtocol : HttpWebClientProtocol 
-	{
-		SoapTypeStubInfo type_info;
-		SoapProtocolVersion soapVersion;
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class SoapHttpClientProtocol : HttpWebClientProtocol
+    {
+        SoapTypeStubInfo type_info;
+        SoapProtocolVersion soapVersion;
 
-		#region SoapWebClientAsyncResult class
+        #region SoapWebClientAsyncResult class
 
-		internal class SoapWebClientAsyncResult: WebClientAsyncResult
-		{
-			public SoapWebClientAsyncResult (WebRequest request, AsyncCallback callback, object asyncState)
-			: base (request, callback, asyncState)
-			{
-			}
-		
-			public SoapClientMessage Message;
-			public SoapExtension[] Extensions;
-		}
-		#endregion
+        internal class SoapWebClientAsyncResult : WebClientAsyncResult
+        {
+            public SoapWebClientAsyncResult(
+                WebRequest request,
+                AsyncCallback callback,
+                object asyncState
+            )
+                : base(request, callback, asyncState) { }
 
-		#region Constructors
+            public SoapClientMessage Message;
+            public SoapExtension[] Extensions;
+        }
+        #endregion
 
-		public SoapHttpClientProtocol () 
-		{
-			type_info = (SoapTypeStubInfo) TypeStubManager.GetTypeStub (this.GetType (), "Soap");
-		}
+        #region Constructors
 
-		#endregion // Constructors
+        public SoapHttpClientProtocol()
+        {
+            type_info = (SoapTypeStubInfo)TypeStubManager.GetTypeStub(this.GetType(), "Soap");
+        }
 
-		#region Methods
+        #endregion // Constructors
 
-		protected IAsyncResult BeginInvoke (string methodName, object[] parameters, AsyncCallback callback, object asyncState)
-		{
-			SoapMethodStubInfo msi = (SoapMethodStubInfo) type_info.GetMethod (methodName);
+        #region Methods
 
-			SoapWebClientAsyncResult ainfo = null;
-			try
-			{
-				SoapClientMessage message = new SoapClientMessage (this, msi, Url, parameters);
-				message.CollectHeaders (this, message.MethodStubInfo.Headers, SoapHeaderDirection.In);
-				
-				WebRequest request = GetRequestForMessage (uri, message);
-				
-				ainfo = new SoapWebClientAsyncResult (request, callback, asyncState);
-				ainfo.Message = message;
-				ainfo.Extensions = SoapExtension.CreateExtensionChain (type_info.SoapExtensions[0], msi.SoapExtensions, type_info.SoapExtensions[1]);
+        protected IAsyncResult BeginInvoke(
+            string methodName,
+            object[] parameters,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            SoapMethodStubInfo msi = (SoapMethodStubInfo)type_info.GetMethod(methodName);
 
-				ainfo.Request.BeginGetRequestStream (new AsyncCallback (AsyncGetRequestStreamDone), ainfo);
-				RegisterMapping (asyncState, ainfo);
-			}
-			catch (Exception ex)
-			{
-				if (ainfo != null)
-					ainfo.SetCompleted (null, ex, false);
-			}
+            SoapWebClientAsyncResult ainfo = null;
+            try
+            {
+                SoapClientMessage message = new SoapClientMessage(this, msi, Url, parameters);
+                message.CollectHeaders(
+                    this,
+                    message.MethodStubInfo.Headers,
+                    SoapHeaderDirection.In
+                );
 
-			return ainfo;
-		}
+                WebRequest request = GetRequestForMessage(uri, message);
 
-		void AsyncGetRequestStreamDone (IAsyncResult ar)
-		{
-			SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult) ar.AsyncState;
-			try
-			{
-				SendRequest (ainfo.Request.EndGetRequestStream (ar), ainfo.Message, ainfo.Extensions);
-				ainfo.Request.BeginGetResponse (new AsyncCallback (AsyncGetResponseDone), ainfo);
-			}
-			catch (Exception ex)
-			{
-				ainfo.SetCompleted (null, ex, true);
-			}
-		}
+                ainfo = new SoapWebClientAsyncResult(request, callback, asyncState);
+                ainfo.Message = message;
+                ainfo.Extensions = SoapExtension.CreateExtensionChain(
+                    type_info.SoapExtensions[0],
+                    msi.SoapExtensions,
+                    type_info.SoapExtensions[1]
+                );
 
-		void AsyncGetResponseDone (IAsyncResult ar)
-		{
-			SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult) ar.AsyncState;
-			WebResponse response = null;
+                ainfo.Request.BeginGetRequestStream(
+                    new AsyncCallback(AsyncGetRequestStreamDone),
+                    ainfo
+                );
+                RegisterMapping(asyncState, ainfo);
+            }
+            catch (Exception ex)
+            {
+                if (ainfo != null)
+                    ainfo.SetCompleted(null, ex, false);
+            }
 
-			try {
-				response = GetWebResponse (ainfo.Request, ar);
-			}
-			catch (WebException ex) {
-				response = ex.Response;
-				HttpWebResponse http_response = response as HttpWebResponse;
-				if (http_response == null || http_response.StatusCode != HttpStatusCode.InternalServerError) {
-					ainfo.SetCompleted (null, ex, true);
-					return;
-				}
-			}
-			catch (Exception ex) {
-				ainfo.SetCompleted (null, ex, true);
-				return;
-			}
+            return ainfo;
+        }
 
-			try {
-				object[] result = ReceiveResponse (response, ainfo.Message, ainfo.Extensions);
-				ainfo.SetCompleted (result, null, true);
-			}
-			catch (Exception ex) {
-				ainfo.SetCompleted (null, ex, true);
-			}
-			finally {
-				response.Close();
-			}
-		}
+        void AsyncGetRequestStreamDone(IAsyncResult ar)
+        {
+            SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult)ar.AsyncState;
+            try
+            {
+                SendRequest(ainfo.Request.EndGetRequestStream(ar), ainfo.Message, ainfo.Extensions);
+                ainfo.Request.BeginGetResponse(new AsyncCallback(AsyncGetResponseDone), ainfo);
+            }
+            catch (Exception ex)
+            {
+                ainfo.SetCompleted(null, ex, true);
+            }
+        }
 
-		protected object[] EndInvoke (IAsyncResult asyncResult)
-		{
-			if (!(asyncResult is SoapWebClientAsyncResult)) throw new ArgumentException ("asyncResult is not the return value from BeginInvoke");
+        void AsyncGetResponseDone(IAsyncResult ar)
+        {
+            SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult)ar.AsyncState;
+            WebResponse response = null;
 
-			SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult) asyncResult;
-			lock (ainfo)
-			{
-				if (!ainfo.IsCompleted)
-					ainfo.WaitForComplete ();
+            try
+            {
+                response = GetWebResponse(ainfo.Request, ar);
+            }
+            catch (WebException ex)
+            {
+                response = ex.Response;
+                HttpWebResponse http_response = response as HttpWebResponse;
+                if (
+                    http_response == null
+                    || http_response.StatusCode != HttpStatusCode.InternalServerError
+                )
+                {
+                    ainfo.SetCompleted(null, ex, true);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                ainfo.SetCompleted(null, ex, true);
+                return;
+            }
 
-				UnregisterMapping (ainfo.AsyncState);
-				
-				if (ainfo.Exception != null)
-					throw ainfo.Exception;
-				else
-					return (object[]) ainfo.Result;
-			}
-		}
+            try
+            {
+                object[] result = ReceiveResponse(response, ainfo.Message, ainfo.Extensions);
+                ainfo.SetCompleted(result, null, true);
+            }
+            catch (Exception ex)
+            {
+                ainfo.SetCompleted(null, ex, true);
+            }
+            finally
+            {
+                response.Close();
+            }
+        }
 
-		public void Discover ()
-		{
-			BindingInfo bnd = (BindingInfo) type_info.Bindings [0];
-			
-			DiscoveryClientProtocol discoverer = new DiscoveryClientProtocol ();
-			discoverer.Discover (Url);
-			
-			foreach (object info in discoverer.AdditionalInformation)
-			{
-				System.Web.Services.Discovery.SoapBinding sb = info as System.Web.Services.Discovery.SoapBinding;
-				if (sb != null && sb.Binding.Name == bnd.Name && sb.Binding.Namespace == bnd.Namespace) {
-					Url = sb.Address;
-					return;
-				}
-			}
-			
-			string msg = string.Format (
-		        	"The binding named '{0}' from namespace '{1}' was not found in the discovery document at '{2}'",
-				bnd.Name, bnd.Namespace, Url);
-			throw new Exception (msg);
-		}
+        protected object[] EndInvoke(IAsyncResult asyncResult)
+        {
+            if (!(asyncResult is SoapWebClientAsyncResult))
+                throw new ArgumentException("asyncResult is not the return value from BeginInvoke");
 
-		protected override WebRequest GetWebRequest (Uri uri)
-		{
-			return base.GetWebRequest (uri);
-		}
+            SoapWebClientAsyncResult ainfo = (SoapWebClientAsyncResult)asyncResult;
+            lock (ainfo)
+            {
+                if (!ainfo.IsCompleted)
+                    ainfo.WaitForComplete();
 
-		WebRequest GetRequestForMessage (Uri uri, SoapClientMessage message)
-		{
-			WebRequest request = GetWebRequest (uri);
-			request.Method = "POST";
-			WebHeaderCollection headers = request.Headers;
-			request.ContentType = message.ContentType + "; charset=utf-8";
-			if (!message.IsSoap12) {
-				headers.Add ("SOAPAction", "\"" + message.Action + "\"");
-			} else {
-				request.ContentType += "; action=\"" + message.Action + "\"";
-			}
-			return request;
-		}
+                UnregisterMapping(ainfo.AsyncState);
 
-		[MonoTODO]
-		protected virtual
-		XmlReader GetReaderForMessage (
-			SoapClientMessage message, int bufferSize)
-		{
-			throw new NotImplementedException ();
-		}
+                if (ainfo.Exception != null)
+                    throw ainfo.Exception;
+                else
+                    return (object[])ainfo.Result;
+            }
+        }
 
-		[MonoTODO]
-		protected virtual
-		XmlWriter GetWriterForMessage (
-			SoapClientMessage message, int bufferSize)
-		{
-			throw new NotImplementedException ();
-		}
+        public void Discover()
+        {
+            BindingInfo bnd = (BindingInfo)type_info.Bindings[0];
 
-		void SendRequest (Stream s, SoapClientMessage message, SoapExtension[] extensions)
-		{
-			using (s) {
+            DiscoveryClientProtocol discoverer = new DiscoveryClientProtocol();
+            discoverer.Discover(Url);
 
-				if (extensions != null) {
-					s = SoapExtension.ExecuteChainStream (extensions, s);
-					message.SetStage (SoapMessageStage.BeforeSerialize);
-					SoapExtension.ExecuteProcessMessage (extensions, message, s, true);
-				}
+            foreach (object info in discoverer.AdditionalInformation)
+            {
+                System.Web.Services.Discovery.SoapBinding sb =
+                    info as System.Web.Services.Discovery.SoapBinding;
+                if (
+                    sb != null
+                    && sb.Binding.Name == bnd.Name
+                    && sb.Binding.Namespace == bnd.Namespace
+                )
+                {
+                    Url = sb.Address;
+                    return;
+                }
+            }
 
-				XmlTextWriter xtw = WebServiceHelper.CreateXmlWriter (s);
-				WebServiceHelper.WriteSoapMessage (xtw, message.MethodStubInfo, SoapHeaderDirection.In, message.Parameters, message.Headers, message.IsSoap12);
+            string msg = string.Format(
+                "The binding named '{0}' from namespace '{1}' was not found in the discovery document at '{2}'",
+                bnd.Name,
+                bnd.Namespace,
+                Url
+            );
+            throw new Exception(msg);
+        }
 
-				if (extensions != null) {
-					message.SetStage (SoapMessageStage.AfterSerialize);
-					SoapExtension.ExecuteProcessMessage (extensions, message, s, true);
-				}
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
+            return base.GetWebRequest(uri);
+        }
 
-				xtw.Flush ();
-				xtw.Close ();
-			 }
-		}
+        WebRequest GetRequestForMessage(Uri uri, SoapClientMessage message)
+        {
+            WebRequest request = GetWebRequest(uri);
+            request.Method = "POST";
+            WebHeaderCollection headers = request.Headers;
+            request.ContentType = message.ContentType + "; charset=utf-8";
+            if (!message.IsSoap12)
+            {
+                headers.Add("SOAPAction", "\"" + message.Action + "\"");
+            }
+            else
+            {
+                request.ContentType += "; action=\"" + message.Action + "\"";
+            }
+            return request;
+        }
 
+        [MonoTODO]
+        protected virtual XmlReader GetReaderForMessage(SoapClientMessage message, int bufferSize)
+        {
+            throw new NotImplementedException();
+        }
 
-		//
-		// TODO:
-		//    Handle other web responses (multi-output?)
-		//    
-		object [] ReceiveResponse (WebResponse response, SoapClientMessage message, SoapExtension[] extensions)
-		{
-			SoapMethodStubInfo msi = message.MethodStubInfo;
-			HttpWebResponse http_response = response as HttpWebResponse;
+        [MonoTODO]
+        protected virtual XmlWriter GetWriterForMessage(SoapClientMessage message, int bufferSize)
+        {
+            throw new NotImplementedException();
+        }
 
-			if (http_response != null)
-			{
-				HttpStatusCode code = http_response.StatusCode;
-	
-				if (!(code == HttpStatusCode.Accepted || code == HttpStatusCode.OK || code == HttpStatusCode.InternalServerError)) {
-					string msg = "The request failed with HTTP status {0}: {1}";
-					msg = String.Format (msg, (int) code, code);
-					throw new WebException (msg, null, WebExceptionStatus.ProtocolError, http_response);
-				}
-				if (message.OneWay && response.ContentLength <= 0 && (code == HttpStatusCode.Accepted || code == HttpStatusCode.OK)) {
-					return new object[0];
-				}
-			}
-			
-			//
-			// Remove optional encoding
-			//
-			string ctype;
-			Encoding encoding = WebServiceHelper.GetContentEncoding (response.ContentType, out ctype);
-			ctype = ctype.ToLower (CultureInfo.InvariantCulture);
-			if ((!message.IsSoap12 || ctype != "application/soap+xml") && ctype != "text/xml")
-				WebServiceHelper.InvalidOperation (
-					String.Format ("Not supported Content-Type in the response: '{0}'", response.ContentType),
-					response, encoding);
+        void SendRequest(Stream s, SoapClientMessage message, SoapExtension[] extensions)
+        {
+            using (s)
+            {
+                if (extensions != null)
+                {
+                    s = SoapExtension.ExecuteChainStream(extensions, s);
+                    message.SetStage(SoapMessageStage.BeforeSerialize);
+                    SoapExtension.ExecuteProcessMessage(extensions, message, s, true);
+                }
 
-			message.ContentType = ctype;
-			message.ContentEncoding = encoding.WebName;
-			
-			Stream stream = response.GetResponseStream ();
+                XmlTextWriter xtw = WebServiceHelper.CreateXmlWriter(s);
+                WebServiceHelper.WriteSoapMessage(
+                    xtw,
+                    message.MethodStubInfo,
+                    SoapHeaderDirection.In,
+                    message.Parameters,
+                    message.Headers,
+                    message.IsSoap12
+                );
 
-			if (extensions != null) {
-				stream = SoapExtension.ExecuteChainStream (extensions, stream);
-				message.SetStage (SoapMessageStage.BeforeDeserialize);
-				SoapExtension.ExecuteProcessMessage (extensions, message, stream, false);
-			}
-			
-			// Deserialize the response
+                if (extensions != null)
+                {
+                    message.SetStage(SoapMessageStage.AfterSerialize);
+                    SoapExtension.ExecuteProcessMessage(extensions, message, s, true);
+                }
 
-			SoapHeaderCollection headers;
-			object content;
+                xtw.Flush();
+                xtw.Close();
+            }
+        }
 
-			using (StreamReader reader = new StreamReader (stream, encoding, false)) {
-				XmlTextReader xml_reader = new XmlTextReader (reader);
+        //
+        // TODO:
+        //    Handle other web responses (multi-output?)
+        //
+        object[] ReceiveResponse(
+            WebResponse response,
+            SoapClientMessage message,
+            SoapExtension[] extensions
+        )
+        {
+            SoapMethodStubInfo msi = message.MethodStubInfo;
+            HttpWebResponse http_response = response as HttpWebResponse;
 
-				WebServiceHelper.ReadSoapMessage (xml_reader, msi, SoapHeaderDirection.Out, message.IsSoap12, out content, out headers);
-			}
+            if (http_response != null)
+            {
+                HttpStatusCode code = http_response.StatusCode;
 
-			if (content is Soap12Fault) {
-				SoapException ex = WebServiceHelper.Soap12FaultToSoapException ((Soap12Fault) content);
-				message.SetException (ex);
-			}
-			else
-			if (content is Fault) {
-				Fault fault = (Fault) content;
-				SoapException ex = new SoapException (fault.faultstring, fault.faultcode, fault.faultactor, fault.detail);
-				message.SetException (ex);
-			}
-			else
-				message.OutParameters = (object[]) content;
-			
-			message.SetHeaders (headers);
-			message.UpdateHeaderValues (this, message.MethodStubInfo.Headers);
+                if (
+                    !(
+                        code == HttpStatusCode.Accepted
+                        || code == HttpStatusCode.OK
+                        || code == HttpStatusCode.InternalServerError
+                    )
+                )
+                {
+                    string msg = "The request failed with HTTP status {0}: {1}";
+                    msg = String.Format(msg, (int)code, code);
+                    throw new WebException(
+                        msg,
+                        null,
+                        WebExceptionStatus.ProtocolError,
+                        http_response
+                    );
+                }
+                if (
+                    message.OneWay
+                    && response.ContentLength <= 0
+                    && (code == HttpStatusCode.Accepted || code == HttpStatusCode.OK)
+                )
+                {
+                    return new object[0];
+                }
+            }
 
-			if (extensions != null) {
-				message.SetStage (SoapMessageStage.AfterDeserialize);
-				SoapExtension.ExecuteProcessMessage (extensions, message, stream, false);
-			}
+            //
+            // Remove optional encoding
+            //
+            string ctype;
+            Encoding encoding = WebServiceHelper.GetContentEncoding(
+                response.ContentType,
+                out ctype
+            );
+            ctype = ctype.ToLower(CultureInfo.InvariantCulture);
+            if ((!message.IsSoap12 || ctype != "application/soap+xml") && ctype != "text/xml")
+                WebServiceHelper.InvalidOperation(
+                    String.Format(
+                        "Not supported Content-Type in the response: '{0}'",
+                        response.ContentType
+                    ),
+                    response,
+                    encoding
+                );
 
-			if (message.Exception == null)
-				return message.OutParameters;
-			else
-				throw message.Exception;
-		}
+            message.ContentType = ctype;
+            message.ContentEncoding = encoding.WebName;
 
-		protected object[] Invoke (string method_name, object[] parameters)
-		{
-			SoapMethodStubInfo msi = (SoapMethodStubInfo) type_info.GetMethod (method_name);
-			
-			SoapClientMessage message = new SoapClientMessage (this, msi, Url, parameters);
-			message.CollectHeaders (this, message.MethodStubInfo.Headers, SoapHeaderDirection.In);
+            Stream stream = response.GetResponseStream();
 
-			SoapExtension[] extensions = SoapExtension.CreateExtensionChain (type_info.SoapExtensions[0], msi.SoapExtensions, type_info.SoapExtensions[1]);
+            if (extensions != null)
+            {
+                stream = SoapExtension.ExecuteChainStream(extensions, stream);
+                message.SetStage(SoapMessageStage.BeforeDeserialize);
+                SoapExtension.ExecuteProcessMessage(extensions, message, stream, false);
+            }
 
-			WebResponse response;
-			try
-			{
-				WebRequest request = GetRequestForMessage (uri, message);
-				SendRequest (request.GetRequestStream (), message, extensions);
-				response = GetWebResponse (request);
-			}
-			catch (WebException ex)
-			{
-				response = ex.Response;
-				HttpWebResponse http_response = response as HttpWebResponse;
-				if (http_response == null || http_response.StatusCode != HttpStatusCode.InternalServerError)
-					throw ex;
-			}
+            // Deserialize the response
 
-			try {
-				return ReceiveResponse (response, message, extensions);
-			}
-			finally {
-				response.Close();
-			}
-		}
-		
+            SoapHeaderCollection headers;
+            object content;
 
-		[MonoTODO ("Do something with this")]
-		[System.Runtime.InteropServices.ComVisible(false)]
-		[DefaultValue (SoapProtocolVersion.Default)]
-		public SoapProtocolVersion SoapVersion {
-			get { return soapVersion; }
-			set { soapVersion = value; }
-		}
-		
-		protected void InvokeAsync (string methodName, object[] parameters, SendOrPostCallback callback)
-		{
-			InvokeAsync (methodName, parameters, callback, null);
-		}
+            using (StreamReader reader = new StreamReader(stream, encoding, false))
+            {
+                XmlTextReader xml_reader = new XmlTextReader(reader);
 
-		protected void InvokeAsync (string methodName, object[] parameters, SendOrPostCallback callback, object userState)
-		{
-			InvokeAsyncInfo info = new InvokeAsyncInfo (callback, userState);
-			BeginInvoke (methodName, parameters, new AsyncCallback (InvokeAsyncCallback), info);
-		}
-		
-		void InvokeAsyncCallback (IAsyncResult ar)
-		{
-			InvokeAsyncInfo info = (InvokeAsyncInfo) ar.AsyncState;
-			SoapWebClientAsyncResult sar = (SoapWebClientAsyncResult) ar;
-			InvokeCompletedEventArgs args = new InvokeCompletedEventArgs (sar.Exception, false, info.UserState, (object[]) sar.Result);
-			UnregisterMapping (ar.AsyncState);
-			if (info.Context != null)
-				info.Context.Send (info.Callback, args);
-			else
-				info.Callback (args);
-		}
+                WebServiceHelper.ReadSoapMessage(
+                    xml_reader,
+                    msi,
+                    SoapHeaderDirection.Out,
+                    message.IsSoap12,
+                    out content,
+                    out headers
+                );
+            }
 
+            if (content is Soap12Fault)
+            {
+                SoapException ex = WebServiceHelper.Soap12FaultToSoapException(
+                    (Soap12Fault)content
+                );
+                message.SetException(ex);
+            }
+            else if (content is Fault)
+            {
+                Fault fault = (Fault)content;
+                SoapException ex = new SoapException(
+                    fault.faultstring,
+                    fault.faultcode,
+                    fault.faultactor,
+                    fault.detail
+                );
+                message.SetException(ex);
+            }
+            else
+                message.OutParameters = (object[])content;
 
-		#endregion // Methods
-	}
+            message.SetHeaders(headers);
+            message.UpdateHeaderValues(this, message.MethodStubInfo.Headers);
+
+            if (extensions != null)
+            {
+                message.SetStage(SoapMessageStage.AfterDeserialize);
+                SoapExtension.ExecuteProcessMessage(extensions, message, stream, false);
+            }
+
+            if (message.Exception == null)
+                return message.OutParameters;
+            else
+                throw message.Exception;
+        }
+
+        protected object[] Invoke(string method_name, object[] parameters)
+        {
+            SoapMethodStubInfo msi = (SoapMethodStubInfo)type_info.GetMethod(method_name);
+
+            SoapClientMessage message = new SoapClientMessage(this, msi, Url, parameters);
+            message.CollectHeaders(this, message.MethodStubInfo.Headers, SoapHeaderDirection.In);
+
+            SoapExtension[] extensions = SoapExtension.CreateExtensionChain(
+                type_info.SoapExtensions[0],
+                msi.SoapExtensions,
+                type_info.SoapExtensions[1]
+            );
+
+            WebResponse response;
+            try
+            {
+                WebRequest request = GetRequestForMessage(uri, message);
+                SendRequest(request.GetRequestStream(), message, extensions);
+                response = GetWebResponse(request);
+            }
+            catch (WebException ex)
+            {
+                response = ex.Response;
+                HttpWebResponse http_response = response as HttpWebResponse;
+                if (
+                    http_response == null
+                    || http_response.StatusCode != HttpStatusCode.InternalServerError
+                )
+                    throw ex;
+            }
+
+            try
+            {
+                return ReceiveResponse(response, message, extensions);
+            }
+            finally
+            {
+                response.Close();
+            }
+        }
+
+        [MonoTODO("Do something with this")]
+        [System.Runtime.InteropServices.ComVisible(false)]
+        [DefaultValue(SoapProtocolVersion.Default)]
+        public SoapProtocolVersion SoapVersion
+        {
+            get { return soapVersion; }
+            set { soapVersion = value; }
+        }
+
+        protected void InvokeAsync(
+            string methodName,
+            object[] parameters,
+            SendOrPostCallback callback
+        )
+        {
+            InvokeAsync(methodName, parameters, callback, null);
+        }
+
+        protected void InvokeAsync(
+            string methodName,
+            object[] parameters,
+            SendOrPostCallback callback,
+            object userState
+        )
+        {
+            InvokeAsyncInfo info = new InvokeAsyncInfo(callback, userState);
+            BeginInvoke(methodName, parameters, new AsyncCallback(InvokeAsyncCallback), info);
+        }
+
+        void InvokeAsyncCallback(IAsyncResult ar)
+        {
+            InvokeAsyncInfo info = (InvokeAsyncInfo)ar.AsyncState;
+            SoapWebClientAsyncResult sar = (SoapWebClientAsyncResult)ar;
+            InvokeCompletedEventArgs args = new InvokeCompletedEventArgs(
+                sar.Exception,
+                false,
+                info.UserState,
+                (object[])sar.Result
+            );
+            UnregisterMapping(ar.AsyncState);
+            if (info.Context != null)
+                info.Context.Send(info.Callback, args);
+            else
+                info.Callback(args);
+        }
+
+        #endregion // Methods
+    }
 }
-

@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System.Diagnostics;
+    using System.Diagnostics.PerformanceData;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Administration;
-    using System.Diagnostics.PerformanceData;
 
     abstract class OperationPerformanceCountersBase : PerformanceCountersBase
     {
@@ -32,10 +32,10 @@ namespace System.ServiceModel.Diagnostics
             CallsNotAuthorizedPerSecond,
             TxFlowed,
             TxFlowedPerSecond,
-            TotalCounters = TxFlowedPerSecond + 1
+            TotalCounters = TxFlowedPerSecond + 1,
         }
 
-        protected static readonly string[] perfCounterNames = 
+        protected static readonly string[] perfCounterNames =
         {
             PerformanceCounterStrings.SERVICEMODELOPERATION.Calls,
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallsPerSecond,
@@ -46,8 +46,12 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallsFaultedPerSecond,
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallDuration,
             PerformanceCounterStrings.SERVICEMODELOPERATION.CallDurationBase,
-            PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityValidationAuthenticationFailures,
-            PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityValidationAuthenticationFailuresPerSecond,
+            PerformanceCounterStrings
+                .SERVICEMODELOPERATION
+                .SecurityValidationAuthenticationFailures,
+            PerformanceCounterStrings
+                .SERVICEMODELOPERATION
+                .SecurityValidationAuthenticationFailuresPerSecond,
             PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityCallsNotAuthorized,
             PerformanceCounterStrings.SERVICEMODELOPERATION.SecurityCallsNotAuthorizedPerSecond,
             PerformanceCounterStrings.SERVICEMODELOPERATION.TxFlowed,
@@ -56,6 +60,7 @@ namespace System.ServiceModel.Diagnostics
 
         const int maxCounterLength = 64;
         const int hashLength = 2;
+
         [Flags]
         enum truncOptions : uint
         {
@@ -63,23 +68,37 @@ namespace System.ServiceModel.Diagnostics
             service7 = 0x01,
             contract7 = 0x02,
             operation15 = 0x04,
-            uri32 = 0x08
+            uri32 = 0x08,
         }
 
-        internal OperationPerformanceCountersBase(string service, string contract, string operationName, string uri)
+        internal OperationPerformanceCountersBase(
+            string service,
+            string contract,
+            string operationName,
+            string uri
+        )
         {
             this.operationName = operationName;
             this.instanceName = CreateFriendlyInstanceName(service, contract, operationName, uri);
         }
 
-
-        private static string GetFullInstanceName(string service, string contract, string operation, string uri) 
+        private static string GetFullInstanceName(
+            string service,
+            string contract,
+            string operation,
+            string uri
+        )
         {
             // instance name is: serviceName.interfaceName.operationName@uri
             return String.Format("{0}.{1}.{2}@{3}", service, contract, operation, uri);
         }
 
-        private static string GetShortInstanceName(string service, string contract, string operation, string uri)
+        private static string GetShortInstanceName(
+            string service,
+            string contract,
+            string operation,
+            string uri
+        )
         {
             int length = service.Length + contract.Length + operation.Length + uri.Length + 3;
 
@@ -88,27 +107,47 @@ namespace System.ServiceModel.Diagnostics
                 int count = 0;
 
                 truncOptions tasks = OperationPerformanceCounters.GetCompressionTasks(
-                    length, service.Length, contract.Length, operation.Length, uri.Length);
+                    length,
+                    service.Length,
+                    contract.Length,
+                    operation.Length,
+                    uri.Length
+                );
 
                 //if necessary, compress service name to 5 chars with a 2 char hash code
                 if ((tasks & truncOptions.service7) > 0)
                 {
                     count = 7;
-                    service = GetHashedString(service, count - hashLength, service.Length - count + hashLength, true);
+                    service = GetHashedString(
+                        service,
+                        count - hashLength,
+                        service.Length - count + hashLength,
+                        true
+                    );
                 }
 
                 //if necessary, compress contract name to 5 chars with a 2 char hash code
                 if ((tasks & truncOptions.contract7) > 0)
                 {
                     count = 7;
-                    contract = GetHashedString(contract, count - hashLength, contract.Length - count + hashLength, true);
+                    contract = GetHashedString(
+                        contract,
+                        count - hashLength,
+                        contract.Length - count + hashLength,
+                        true
+                    );
                 }
 
                 //if necessary, compress operation name to 13 chars with a 2 char hash code
                 if ((tasks & truncOptions.operation15) > 0)
                 {
                     count = 15;
-                    operation = GetHashedString(operation, count - hashLength, operation.Length - count + hashLength, true);
+                    operation = GetHashedString(
+                        operation,
+                        count - hashLength,
+                        operation.Length - count + hashLength,
+                        true
+                    );
                 }
 
                 //if necessary,  compress uri to 30 chars with a 2 char hash code
@@ -123,7 +162,12 @@ namespace System.ServiceModel.Diagnostics
             return service + "." + contract + "." + operation + "@" + uri.Replace('/', '|');
         }
 
-        internal static string CreateFriendlyInstanceName(string service, string contract, string operation, string uri)
+        internal static string CreateFriendlyInstanceName(
+            string service,
+            string contract,
+            string operation,
+            string uri
+        )
         {
             string shortInstanceName = GetShortInstanceName(service, contract, operation, uri);
             if (!ServiceModelAppSettings.EnsureUniquePerformanceCounterInstanceNames)
@@ -133,10 +177,19 @@ namespace System.ServiceModel.Diagnostics
 
             string fullInstanceName = GetFullInstanceName(service, contract, operation, uri);
 
-            return EnsureUniqueInstanceName(PerformanceCounterStrings.SERVICEMODELOPERATION.OperationPerfCounters, shortInstanceName, fullInstanceName);
+            return EnsureUniqueInstanceName(
+                PerformanceCounterStrings.SERVICEMODELOPERATION.OperationPerfCounters,
+                shortInstanceName,
+                fullInstanceName
+            );
         }
 
-        internal static string GetFriendlyInstanceName(string service, string contract, string operation, string uri)
+        internal static string GetFriendlyInstanceName(
+            string service,
+            string contract,
+            string operation,
+            string uri
+        )
         {
             string shortInstanceName = GetShortInstanceName(service, contract, operation, uri);
             if (!ServiceModelAppSettings.EnsureUniquePerformanceCounterInstanceNames)
@@ -146,10 +199,20 @@ namespace System.ServiceModel.Diagnostics
 
             string fullInstanceName = GetFullInstanceName(service, contract, operation, uri);
 
-            return GetUniqueInstanceName(PerformanceCounterStrings.SERVICEMODELOPERATION.OperationPerfCounters, shortInstanceName, fullInstanceName);
+            return GetUniqueInstanceName(
+                PerformanceCounterStrings.SERVICEMODELOPERATION.OperationPerfCounters,
+                shortInstanceName,
+                fullInstanceName
+            );
         }
 
-        static truncOptions GetCompressionTasks(int totalLen, int serviceLen, int contractLen, int operationLen, int uriLen)
+        static truncOptions GetCompressionTasks(
+            int totalLen,
+            int serviceLen,
+            int contractLen,
+            int operationLen,
+            int uriLen
+        )
         {
             truncOptions bitmask = 0;
 
@@ -184,10 +247,7 @@ namespace System.ServiceModel.Diagnostics
 
         internal override string InstanceName
         {
-            get
-            {
-                return this.instanceName;
-            }
+            get { return this.instanceName; }
         }
 
         internal string OperationName
@@ -197,10 +257,7 @@ namespace System.ServiceModel.Diagnostics
 
         internal override string[] CounterNames
         {
-            get
-            {
-                return perfCounterNames;
-            }
+            get { return perfCounterNames; }
         }
 
         internal override int PerfCounterStart

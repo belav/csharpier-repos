@@ -85,13 +85,17 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.IsTrue(await reader.ReadAsync());
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await  reader.ReadAsInt32Async(), "Cannot read NaN value. Path 'float', line 1, position 11.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsInt32Async(),
+                "Cannot read NaN value. Path 'float', line 1, position 11."
+            );
         }
 
         [Test]
         public async Task Float_NaNAndInifinity_ReadAsDoubleAsync()
         {
-            const string testJson = @"[
+            const string testJson =
+                @"[
   NaN,
   Infinity,
   -Infinity
@@ -120,7 +124,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task Float_NaNAndInifinity_ReadAsStringAsync()
         {
-            const string testJson = @"[
+            const string testJson =
+                @"[
   NaN,
   Infinity,
   -Infinity
@@ -149,7 +154,8 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
         [Test]
         public async Task FloatParseHandling_ReadAsStringAsync()
         {
-            string json = "[9223372036854775807, 1.7976931348623157E+308, 792281625142643375935439503.35, 792281625142643375935555555555555555555555555555555555555555555555555439503.35]";
+            string json =
+                "[9223372036854775807, 1.7976931348623157E+308, 792281625142643375935439503.35, 792281625142643375935555555555555555555555555555555555555555555555555439503.35]";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
             reader.FloatParseHandling = FloatParseHandling.Decimal;
@@ -169,9 +175,15 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.AreEqual(JsonToken.String, reader.TokenType);
             Assert.AreEqual("792281625142643375935439503.35", reader.Value);
 
-            Assert.AreEqual("792281625142643375935555555555555555555555555555555555555555555555555439503.35", reader.ReadAsString());
+            Assert.AreEqual(
+                "792281625142643375935555555555555555555555555555555555555555555555555439503.35",
+                reader.ReadAsString()
+            );
             Assert.AreEqual(JsonToken.String, reader.TokenType);
-            Assert.AreEqual("792281625142643375935555555555555555555555555555555555555555555555555439503.35", reader.Value);
+            Assert.AreEqual(
+                "792281625142643375935555555555555555555555555555555555555555555555555439503.35",
+                reader.Value
+            );
 
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.EndArray, reader.TokenType);
@@ -223,13 +235,17 @@ namespace Newtonsoft.Json.Tests.JsonTextReaderTests
             Assert.IsTrue(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.StartArray, reader.TokenType);
 
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () => await reader.ReadAsync(), "Cannot read NaN value. Path '', line 1, position 4.");
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () => await reader.ReadAsync(),
+                "Cannot read NaN value. Path '', line 1, position 4."
+            );
         }
 
         [Test]
         public async Task FloatingPointNonFiniteNumbersAsync()
         {
-            string input = @"[
+            string input =
+                @"[
   NaN,
   Infinity,
   -Infinity

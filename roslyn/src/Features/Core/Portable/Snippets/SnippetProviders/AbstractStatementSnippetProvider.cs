@@ -11,11 +11,19 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
 {
     internal abstract class AbstractStatementSnippetProvider : AbstractSingleChangeSnippetProvider
     {
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
 
-            var syntaxContext = document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var syntaxContext = document
+                .GetRequiredLanguageService<ISyntaxContextService>()
+                .CreateContext(document, semanticModel, position, cancellationToken);
             return syntaxContext.IsStatementContext || syntaxContext.IsGlobalStatementContext;
         }
     }

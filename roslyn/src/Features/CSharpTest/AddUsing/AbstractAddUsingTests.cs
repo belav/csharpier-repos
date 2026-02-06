@@ -17,17 +17,18 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
 {
-    public abstract class AbstractAddUsingTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public abstract class AbstractAddUsingTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         protected AbstractAddUsingTests(ITestOutputHelper logger = null)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddImportCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddImportCodeFixProvider());
 
-        private protected OptionsCollection SeparateGroups => Option(GenerationOptions.SeparateImportDirectiveGroups, true);
+        private protected OptionsCollection SeparateGroups =>
+            Option(GenerationOptions.SeparateImportDirectiveGroups, true);
 
         internal async Task TestAsync(
             string initialMarkup,
@@ -35,13 +36,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
             TestHost testHost,
             int index = 0,
             CodeActionPriority? priority = null,
-            OptionsCollection options = null)
+            OptionsCollection options = null
+        )
         {
             await TestInRegularAndScript1Async(
                 initialMarkup,
                 expectedMarkup,
                 index,
-                parameters: new TestParameters(options: options, testHost: testHost, priority: priority));
+                parameters: new TestParameters(
+                    options: options,
+                    testHost: testHost,
+                    priority: priority
+                )
+            );
         }
     }
 }

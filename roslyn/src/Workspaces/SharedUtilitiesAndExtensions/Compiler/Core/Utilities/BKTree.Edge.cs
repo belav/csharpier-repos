@@ -9,7 +9,7 @@ namespace Roslyn.Utilities
         private readonly struct Edge(int editDistance, int childNodeIndex)
         {
             // The edit distance between the child and parent connected by this edge.
-            // The child can be found in _nodes at ChildNodeIndex. 
+            // The child can be found in _nodes at ChildNodeIndex.
             public readonly int EditDistance = editDistance;
 
             /// <summary>Where the child node can be found in <see cref="_nodes"/>.</summary>
@@ -21,8 +21,8 @@ namespace Roslyn.Utilities
                 writer.WriteInt32(ChildNodeIndex);
             }
 
-            internal static Edge ReadFrom(ObjectReader reader)
-                => new(editDistance: reader.ReadInt32(), childNodeIndex: reader.ReadInt32());
+            internal static Edge ReadFrom(ObjectReader reader) =>
+                new(editDistance: reader.ReadInt32(), childNodeIndex: reader.ReadInt32());
         }
     }
 }

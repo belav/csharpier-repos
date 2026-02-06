@@ -19,7 +19,8 @@ namespace Microsoft.DiaSymReader
     {
         private static readonly IntPtr s_ignoreIErrorInfo = new IntPtr(-1);
 
-        internal static T[] NullToEmpty<T>(T[] items) => (items == null) ? EmptyArray<T>.Instance : items;
+        internal static T[] NullToEmpty<T>(T[] items) =>
+            (items == null) ? EmptyArray<T>.Instance : items;
 
         internal static void ThrowExceptionForHR(int hr)
         {
@@ -31,7 +32,13 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        internal static unsafe void CopyQualifiedTypeName(char* qualifiedName, int qualifiedNameBufferLength, int* qualifiedNameLength, string namespaceStr, string nameStr)
+        internal static unsafe void CopyQualifiedTypeName(
+            char* qualifiedName,
+            int qualifiedNameBufferLength,
+            int* qualifiedNameLength,
+            string namespaceStr,
+            string nameStr
+        )
         {
             Debug.Assert(nameStr != null);
 
@@ -42,12 +49,16 @@ namespace Microsoft.DiaSymReader
 
             if (qualifiedNameLength != null)
             {
-                int fullLength = (namespaceStr.Length > 0 ? namespaceStr.Length + 1 : 0) + nameStr.Length;
+                int fullLength =
+                    (namespaceStr.Length > 0 ? namespaceStr.Length + 1 : 0) + nameStr.Length;
                 if (qualifiedName != null)
                 {
                     // If the buffer is given return the length of the possibly truncated name not including NUL.
                     // If we returned length greater than the buffer length the SymWriter would replace the name with CRC32 hash.
-                    *qualifiedNameLength = Math.Min(fullLength, Math.Max(0, qualifiedNameBufferLength - 1));
+                    *qualifiedNameLength = Math.Min(
+                        fullLength,
+                        Math.Max(0, qualifiedNameBufferLength - 1)
+                    );
                 }
                 else
                 {

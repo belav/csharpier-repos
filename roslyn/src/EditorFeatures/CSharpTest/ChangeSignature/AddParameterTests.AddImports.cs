@@ -27,14 +27,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(
                         null,
                         "Dictionary<ConsoleColor, Task<AsyncOperation>>",
                         "test",
-                        CallSiteKind.Todo),
-                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>")};
+                        CallSiteKind.Todo
+                    ),
+                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
+                ),
+            };
 
             var updatedCode = """
                 using System;
@@ -48,7 +52,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -63,14 +72,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(
                         null,
                         "Dictionary<ConsoleColor, Task<AsyncOperation>>",
                         "test",
-                        CallSiteKind.Todo),
-                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>")};
+                        CallSiteKind.Todo
+                    ),
+                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
+                ),
+            };
 
             var updatedCode = """
                 using System;
@@ -84,7 +97,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -115,14 +133,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(
                         null,
                         "Dictionary<ConsoleColor, Task<AsyncOperation>>",
                         "test",
-                        CallSiteKind.Todo),
-                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>")};
+                        CallSiteKind.Todo
+                    ),
+                    "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
+                ),
+            };
 
             var updatedCode = """
                 using System;
@@ -153,7 +175,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

@@ -12,9 +12,7 @@ namespace System.ServiceModel.Channels
     abstract class OutputChannel : ChannelBase, IOutputChannel
     {
         protected OutputChannel(ChannelManagerBase manager)
-            : base(manager)
-        {
-        }
+            : base(manager) { }
 
         public abstract EndpointAddress RemoteAddress { get; }
         public abstract Uri Via { get; }
@@ -24,14 +22,24 @@ namespace System.ServiceModel.Channels
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
 
             if (timeout < TimeSpan.Zero)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             ThrowIfDisposedOrNotOpen();
             AddHeadersTo(message);
@@ -62,7 +70,12 @@ namespace System.ServiceModel.Channels
 
         protected abstract void OnSend(Message message, TimeSpan timeout);
 
-        protected abstract IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         protected abstract void OnEndSend(IAsyncResult result);
 
@@ -78,7 +91,12 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             ThrowIfDisposedOrNotOpen();
 
@@ -96,14 +114,17 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageSent,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MessageSent,
                     SR.GetString(SR.TraceCodeMessageSent),
-                    this.CreateSendTrace(message), this, null);
+                    this.CreateSendTrace(message),
+                    this,
+                    null
+                );
             }
         }
 
-        protected virtual void AddHeadersTo(Message message)
-        {
-        }
+        protected virtual void AddHeadersTo(Message message) { }
     }
 }

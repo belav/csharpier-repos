@@ -61,6 +61,7 @@ namespace System.Globalization
         internal NumberFormatInfo? _numInfo;
         internal DateTimeFormatInfo? _dateTimeInfo;
         private Calendar? _calendar;
+
         //
         // The CultureData instance that we are going to read data from.
         // For supported culture, this will be the CultureData instance that read data from mscorlib assembly.
@@ -102,7 +103,10 @@ namespace System.Globalization
         private static volatile CultureInfo? s_userDefaultUICulture;
 
         // The Invariant culture;
-        private static readonly CultureInfo s_InvariantCultureInfo = new CultureInfo(CultureData.Invariant, isReadOnly: true);
+        private static readonly CultureInfo s_InvariantCultureInfo = new CultureInfo(
+            CultureData.Invariant,
+            isReadOnly: true
+        );
 
         // These are defaults that we use if a thread has not opted into having an explicit culture
         private static volatile CultureInfo? s_DefaultThreadCurrentUICulture;
@@ -110,18 +114,23 @@ namespace System.Globalization
 
         [ThreadStatic]
         private static CultureInfo? s_currentThreadCulture;
+
         [ThreadStatic]
         private static CultureInfo? s_currentThreadUICulture;
 
         private static AsyncLocal<CultureInfo>? s_asyncLocalCurrentCulture;
         private static AsyncLocal<CultureInfo>? s_asyncLocalCurrentUICulture;
 
-        private static void AsyncLocalSetCurrentCulture(AsyncLocalValueChangedArgs<CultureInfo> args)
+        private static void AsyncLocalSetCurrentCulture(
+            AsyncLocalValueChangedArgs<CultureInfo> args
+        )
         {
             s_currentThreadCulture = args.CurrentValue;
         }
 
-        private static void AsyncLocalSetCurrentUICulture(AsyncLocalValueChangedArgs<CultureInfo> args)
+        private static void AsyncLocalSetCurrentUICulture(
+            AsyncLocalValueChangedArgs<CultureInfo> args
+        )
         {
             s_currentThreadUICulture = args.CurrentValue;
         }
@@ -134,12 +143,12 @@ namespace System.Globalization
 
         // LOCALE constants of interest to us internally and privately for LCID functions
         // (ie: avoid using these and use names if possible)
-        internal const int LOCALE_NEUTRAL        = 0x0000;
-        private  const int LOCALE_USER_DEFAULT   = 0x0400;
-        private  const int LOCALE_SYSTEM_DEFAULT = 0x0800;
+        internal const int LOCALE_NEUTRAL = 0x0000;
+        private const int LOCALE_USER_DEFAULT = 0x0400;
+        private const int LOCALE_SYSTEM_DEFAULT = 0x0800;
         internal const int LOCALE_CUSTOM_UNSPECIFIED = 0x1000;
-        internal const int LOCALE_CUSTOM_DEFAULT  = 0x0c00;
-        internal const int LOCALE_INVARIANT       = 0x007F;
+        internal const int LOCALE_CUSTOM_DEFAULT = 0x0c00;
+        internal const int LOCALE_INVARIANT = 0x007F;
 
         private static CultureInfo InitializeUserDefaultCulture()
         {
@@ -149,15 +158,21 @@ namespace System.Globalization
 
         private static CultureInfo InitializeUserDefaultUICulture()
         {
-            Interlocked.CompareExchange(ref s_userDefaultUICulture, GetUserDefaultUICulture(), null);
+            Interlocked.CompareExchange(
+                ref s_userDefaultUICulture,
+                GetUserDefaultUICulture(),
+                null
+            );
             return s_userDefaultUICulture!;
         }
 
-        private static string GetCultureNotSupportedExceptionMessage() => GlobalizationMode.Invariant ? SR.Argument_CultureNotSupportedInInvariantMode : SR.Argument_CultureNotSupported;
+        private static string GetCultureNotSupportedExceptionMessage() =>
+            GlobalizationMode.Invariant
+                ? SR.Argument_CultureNotSupportedInInvariantMode
+                : SR.Argument_CultureNotSupported;
 
-        public CultureInfo(string name) : this(name, true)
-        {
-        }
+        public CultureInfo(string name)
+            : this(name, true) { }
 
         public CultureInfo(string name, bool useUserOverride)
         {
@@ -168,7 +183,11 @@ namespace System.Globalization
 
             if (cultureData == null)
             {
-                throw new CultureNotFoundException(nameof(name), name, GetCultureNotSupportedExceptionMessage());
+                throw new CultureNotFoundException(
+                    nameof(name),
+                    name,
+                    GetCultureNotSupportedExceptionMessage()
+                );
             }
 
             _cultureData = cultureData;
@@ -196,9 +215,8 @@ namespace System.Globalization
             return new CultureInfo(cultureData);
         }
 
-        public CultureInfo(int culture) : this(culture, true)
-        {
-        }
+        public CultureInfo(int culture)
+            : this(culture, true) { }
 
         public CultureInfo(int culture, bool useUserOverride)
         {
@@ -214,7 +232,11 @@ namespace System.Globalization
                 case LOCALE_CUSTOM_UNSPECIFIED:
                     // Can't support unknown custom cultures and we do not support neutral or
                     // non-custom user locales.
-                    throw new CultureNotFoundException(nameof(culture), culture, SR.Argument_CultureNotSupported);
+                    throw new CultureNotFoundException(
+                        nameof(culture),
+                        culture,
+                        SR.Argument_CultureNotSupported
+                    );
                 default:
                     // Now see if this LCID is supported in the system default CultureData table.
                     _cultureData = CultureData.GetCultureData(culture, useUserOverride);
@@ -236,8 +258,13 @@ namespace System.Globalization
         {
             ArgumentNullException.ThrowIfNull(textAndCompareCultureName);
 
-            CultureData? cultureData = CultureData.GetCultureData(cultureName, false) ??
-                throw new CultureNotFoundException(nameof(cultureName), cultureName, GetCultureNotSupportedExceptionMessage());
+            CultureData? cultureData =
+                CultureData.GetCultureData(cultureName, false)
+                ?? throw new CultureNotFoundException(
+                    nameof(cultureName),
+                    cultureName,
+                    GetCultureNotSupportedExceptionMessage()
+                );
 
             _cultureData = cultureData;
 
@@ -256,10 +283,7 @@ namespace System.Globalization
         {
             try
             {
-                return new CultureInfo(name)
-                {
-                    _isReadOnly = true
-                };
+                return new CultureInfo(name) { _isReadOnly = true };
             }
             catch (ArgumentException)
             {
@@ -338,7 +362,9 @@ namespace System.Globalization
                 }
                 if (throwException)
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidResourceCultureName, cultureName));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidResourceCultureName, cultureName)
+                    );
                 }
                 return false;
             }
@@ -376,10 +402,10 @@ namespace System.Globalization
         {
             get
             {
-                return s_currentThreadCulture ??
-                    s_DefaultThreadCurrentCulture ??
-                    s_userDefaultCulture ??
-                    InitializeUserDefaultCulture();
+                return s_currentThreadCulture
+                    ?? s_DefaultThreadCurrentCulture
+                    ?? s_userDefaultCulture
+                    ?? InitializeUserDefaultCulture();
             }
             set
             {
@@ -387,7 +413,11 @@ namespace System.Globalization
 
                 if (s_asyncLocalCurrentCulture == null)
                 {
-                    Interlocked.CompareExchange(ref s_asyncLocalCurrentCulture, new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentCulture), null);
+                    Interlocked.CompareExchange(
+                        ref s_asyncLocalCurrentCulture,
+                        new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentCulture),
+                        null
+                    );
                 }
                 s_asyncLocalCurrentCulture!.Value = value;
             }
@@ -397,9 +427,9 @@ namespace System.Globalization
         {
             get
             {
-                return s_currentThreadUICulture ??
-                    s_DefaultThreadCurrentUICulture ??
-                    UserDefaultUICulture;
+                return s_currentThreadUICulture
+                    ?? s_DefaultThreadCurrentUICulture
+                    ?? UserDefaultUICulture;
             }
             set
             {
@@ -409,7 +439,11 @@ namespace System.Globalization
 
                 if (s_asyncLocalCurrentUICulture == null)
                 {
-                    Interlocked.CompareExchange(ref s_asyncLocalCurrentUICulture, new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentUICulture), null);
+                    Interlocked.CompareExchange(
+                        ref s_asyncLocalCurrentUICulture,
+                        new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentUICulture),
+                        null
+                    );
                 }
 
                 // this one will set s_currentThreadUICulture too
@@ -417,9 +451,11 @@ namespace System.Globalization
             }
         }
 
-        internal static CultureInfo UserDefaultUICulture => s_userDefaultUICulture ?? InitializeUserDefaultUICulture();
+        internal static CultureInfo UserDefaultUICulture =>
+            s_userDefaultUICulture ?? InitializeUserDefaultUICulture();
 
-        public static CultureInfo InstalledUICulture => s_userDefaultCulture ?? InitializeUserDefaultCulture();
+        public static CultureInfo InstalledUICulture =>
+            s_userDefaultCulture ?? InitializeUserDefaultCulture();
 
         public static CultureInfo? DefaultThreadCurrentCulture
         {
@@ -490,19 +526,30 @@ namespace System.Globalization
                             //      zh-SG -> zh-Hans -> zh -> Invariant
                             //      zh-TW -> zh-Hant -> zh -> Invariant
 
-                            if ((_name[3] == 'C' && _name[4] == 'N' ) || // zh-CN
-                                (_name[3] == 'S' && _name[4] == 'G' ))   // zh-SG
+                            if (
+                                (_name[3] == 'C' && _name[4] == 'N')
+                                || // zh-CN
+                                (_name[3] == 'S' && _name[4] == 'G')
+                            ) // zh-SG
                             {
                                 parentName = "zh-Hans";
                             }
-                            else if ((_name[3] == 'H' && _name[4] == 'K' ) ||   // zh-HK
-                                    (_name[3] == 'M' && _name[4] == 'O' ) ||    // zh-MO
-                                    (_name[3] == 'T' && _name[4] == 'W' ))      // zh-TW
+                            else if (
+                                (_name[3] == 'H' && _name[4] == 'K')
+                                || // zh-HK
+                                (_name[3] == 'M' && _name[4] == 'O')
+                                || // zh-MO
+                                (_name[3] == 'T' && _name[4] == 'W')
+                            ) // zh-TW
                             {
                                 parentName = "zh-Hant";
                             }
                         }
-                        else if (_name.Length > 8 && _name.AsSpan(2, 4) is "-Han" && _name[7] == '-') // cultures like zh-Hant-* and zh-Hans-*
+                        else if (
+                            _name.Length > 8
+                            && _name.AsSpan(2, 4) is "-Han"
+                            && _name[7] == '-'
+                        ) // cultures like zh-Hant-* and zh-Hans-*
                         {
                             if (_name[6] == 't') // zh-Hant-*
                             {
@@ -521,7 +568,9 @@ namespace System.Globalization
                     }
                     else
                     {
-                        culture = CreateCultureInfoNoThrow(parentName, _cultureData.UseUserOverride) ??
+                        culture =
+                            CreateCultureInfoNoThrow(parentName, _cultureData.UseUserOverride)
+                            ??
                             // For whatever reason our IPARENT or SPARENT wasn't correct, so use invariant
                             // We can't allow ourselves to fail.  In case of custom cultures the parent of the
                             // current custom culture isn't installed.
@@ -567,13 +616,13 @@ namespace System.Globalization
         internal string? InteropName => _cultureData.InteropName;
 
         public string IetfLanguageTag =>
-                // special case the compatibility cultures
-                Name switch
-                {
-                    "zh-CHT" => "zh-Hant",
-                    "zh-CHS" => "zh-Hans",
-                    _ => Name,
-                };
+            // special case the compatibility cultures
+            Name switch
+            {
+                "zh-CHT" => "zh-Hant",
+                "zh-CHS" => "zh-Hans",
+                _ => Name,
+            };
 
         /// <summary>
         /// Returns the full name of the CultureInfo in the localized language.
@@ -584,7 +633,10 @@ namespace System.Globalization
         {
             get
             {
-                Debug.Assert(_name != null, "[CultureInfo.DisplayName] Always expect _name to be set");
+                Debug.Assert(
+                    _name != null,
+                    "[CultureInfo.DisplayName] Always expect _name to be set"
+                );
                 return _cultureData.DisplayName;
             }
         }
@@ -617,15 +669,17 @@ namespace System.Globalization
         /// Returns the 3 letter windows language name for the current instance.  eg: "ENU"
         /// The ISO names are much preferred
         /// </summary>
-        public virtual string ThreeLetterWindowsLanguageName => _cultureData.ThreeLetterWindowsLanguageName;
+        public virtual string ThreeLetterWindowsLanguageName =>
+            _cultureData.ThreeLetterWindowsLanguageName;
 
         /// <summary>
         /// Gets the CompareInfo for this culture.
         /// </summary>
-        public virtual CompareInfo CompareInfo => _compareInfo ??=
-            // Since CompareInfo's don't have any overrideable properties, get the CompareInfo from
-            // the Non-Overridden CultureInfo so that we only create one CompareInfo per culture
-            (UseUserOverride ? GetCultureInfo(_name).CompareInfo : new CompareInfo(this));
+        public virtual CompareInfo CompareInfo =>
+            _compareInfo ??=
+                // Since CompareInfo's don't have any overrideable properties, get the CompareInfo from
+                // the Non-Overridden CultureInfo so that we only create one CompareInfo per culture
+                (UseUserOverride ? GetCultureInfo(_name).CompareInfo : new CompareInfo(this));
 
         /// <summary>
         /// Gets the TextInfo for this culture.
@@ -693,9 +747,9 @@ namespace System.Globalization
         {
             get
             {
-                CultureTypes types = _cultureData.IsNeutralCulture ?
-                    CultureTypes.NeutralCultures :
-                    CultureTypes.SpecificCultures;
+                CultureTypes types = _cultureData.IsNeutralCulture
+                    ? CultureTypes.NeutralCultures
+                    : CultureTypes.SpecificCultures;
 
                 if (CultureData.IsWin32Installed)
                 {
@@ -754,7 +808,6 @@ namespace System.Globalization
                 }
                 return _dateTimeInfo!;
             }
-
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -815,23 +868,23 @@ namespace System.Globalization
 
             switch (calType)
             {
-                case CalendarId.GREGORIAN_US:               // Gregorian (U.S.) calendar
-                case CalendarId.GREGORIAN_ME_FRENCH:        // Gregorian Middle East French calendar
-                case CalendarId.GREGORIAN_ARABIC:           // Gregorian Arabic calendar
-                case CalendarId.GREGORIAN_XLIT_ENGLISH:     // Gregorian Transliterated English calendar
-                case CalendarId.GREGORIAN_XLIT_FRENCH:      // Gregorian Transliterated French calendar
+                case CalendarId.GREGORIAN_US: // Gregorian (U.S.) calendar
+                case CalendarId.GREGORIAN_ME_FRENCH: // Gregorian Middle East French calendar
+                case CalendarId.GREGORIAN_ARABIC: // Gregorian Arabic calendar
+                case CalendarId.GREGORIAN_XLIT_ENGLISH: // Gregorian Transliterated English calendar
+                case CalendarId.GREGORIAN_XLIT_FRENCH: // Gregorian Transliterated French calendar
                     return new GregorianCalendar((GregorianCalendarTypes)calType);
-                case CalendarId.TAIWAN:                     // Taiwan Era calendar
+                case CalendarId.TAIWAN: // Taiwan Era calendar
                     return new TaiwanCalendar();
-                case CalendarId.JAPAN:                      // Japanese Emperor Era calendar
+                case CalendarId.JAPAN: // Japanese Emperor Era calendar
                     return new JapaneseCalendar();
-                case CalendarId.KOREA:                      // Korean Tangun Era calendar
+                case CalendarId.KOREA: // Korean Tangun Era calendar
                     return new KoreanCalendar();
-                case CalendarId.THAI:                       // Thai calendar
+                case CalendarId.THAI: // Thai calendar
                     return new ThaiBuddhistCalendar();
-                case CalendarId.HIJRI:                      // Hijri (Arabic Lunar) calendar
+                case CalendarId.HIJRI: // Hijri (Arabic Lunar) calendar
                     return new HijriCalendar();
-                case CalendarId.HEBREW:                     // Hebrew (Lunar) calendar
+                case CalendarId.HEBREW: // Hebrew (Lunar) calendar
                     return new HebrewCalendar();
                 case CalendarId.UMALQURA:
                     return new UmAlQuraCalendar();
@@ -1036,7 +1089,11 @@ namespace System.Globalization
             }
             catch (ArgumentException)
             {
-                throw new CultureNotFoundException(nameof(culture), culture, GetCultureNotSupportedExceptionMessage());
+                throw new CultureNotFoundException(
+                    nameof(culture),
+                    culture,
+                    GetCultureNotSupportedExceptionMessage()
+                );
             }
 
             lock (lcidTable)
@@ -1067,8 +1124,13 @@ namespace System.Globalization
                 }
             }
 
-            result = CreateCultureInfoNoThrow(name, useUserOverride: false) ??
-                throw new CultureNotFoundException(nameof(name), name, GetCultureNotSupportedExceptionMessage());
+            result =
+                CreateCultureInfoNoThrow(name, useUserOverride: false)
+                ?? throw new CultureNotFoundException(
+                    nameof(name),
+                    name,
+                    GetCultureNotSupportedExceptionMessage()
+                );
             result._isReadOnly = true;
 
             // Remember our name as constructed.  Do NOT use alternate sort name versions because
@@ -1114,7 +1176,10 @@ namespace System.Globalization
             catch (ArgumentException)
             {
 #pragma warning disable CA2208 // Instantiate argument exceptions correctly, combination of arguments used
-                throw new CultureNotFoundException("name/altName", SR.Format(SR.Argument_OneOfCulturesNotSupported, name, altName));
+                throw new CultureNotFoundException(
+                    "name/altName",
+                    SR.Format(SR.Argument_OneOfCulturesNotSupported, name, altName)
+                );
 #pragma warning restore CA2208
             }
 
@@ -1132,9 +1197,17 @@ namespace System.Globalization
 
             if (predefinedOnly && !GlobalizationMode.Invariant)
             {
-                if (GlobalizationMode.UseNls ? !CultureData.NlsIsEnsurePredefinedLocaleName(name): !CultureData.IcuIsEnsurePredefinedLocaleName(name))
+                if (
+                    GlobalizationMode.UseNls
+                        ? !CultureData.NlsIsEnsurePredefinedLocaleName(name)
+                        : !CultureData.IcuIsEnsurePredefinedLocaleName(name)
+                )
                 {
-                    throw new CultureNotFoundException(nameof(name), name, SR.Format(SR.Argument_InvalidPredefinedCultureName, name));
+                    throw new CultureNotFoundException(
+                        nameof(name),
+                        name,
+                        SR.Format(SR.Argument_InvalidPredefinedCultureName, name)
+                    );
                 }
             }
 
@@ -1149,7 +1222,9 @@ namespace System.Globalization
                 if (cache is null)
                 {
                     cache = new Dictionary<string, CultureInfo>();
-                    cache = Interlocked.CompareExchange(ref s_cachedCulturesByName, cache, null) ?? cache;
+                    cache =
+                        Interlocked.CompareExchange(ref s_cachedCulturesByName, cache, null)
+                        ?? cache;
                 }
 
                 return cache;
@@ -1164,7 +1239,9 @@ namespace System.Globalization
                 if (cache is null)
                 {
                     cache = new Dictionary<int, CultureInfo>();
-                    cache = Interlocked.CompareExchange(ref s_cachedCulturesByLcid, cache, null) ?? cache;
+                    cache =
+                        Interlocked.CompareExchange(ref s_cachedCulturesByLcid, cache, null)
+                        ?? cache;
                 }
 
                 return cache;
@@ -1176,7 +1253,10 @@ namespace System.Globalization
             // Disallow old zh-CHT/zh-CHS names
             if (name == "zh-CHT" || name == "zh-CHS")
             {
-                throw new CultureNotFoundException(nameof(name), SR.Format(SR.Argument_CultureIetfNotSupported, name));
+                throw new CultureNotFoundException(
+                    nameof(name),
+                    SR.Format(SR.Argument_CultureIetfNotSupported, name)
+                );
             }
 
             CultureInfo ci = GetCultureInfo(name);
@@ -1184,7 +1264,10 @@ namespace System.Globalization
             // Disallow alt sorts and es-es_TS
             if (ci.LCID > 0xffff || ci.LCID == 0x040a)
             {
-                throw new CultureNotFoundException(nameof(name), SR.Format(SR.Argument_CultureIetfNotSupported, name));
+                throw new CultureNotFoundException(
+                    nameof(name),
+                    SR.Format(SR.Argument_CultureIetfNotSupported, name)
+                );
             }
 
             return ci;
