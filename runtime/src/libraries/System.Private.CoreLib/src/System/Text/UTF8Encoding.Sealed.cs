@@ -56,8 +56,9 @@ namespace System.Text
                 Debug.Assert(s != null);
                 Debug.Assert(s.Length <= MaxSmallInputElementCount);
 
-                byte* pDestination =
-                    stackalloc byte[MaxSmallInputElementCount * MaxUtf8BytesPerChar];
+                byte* pDestination = stackalloc byte[
+                    MaxSmallInputElementCount * MaxUtf8BytesPerChar
+                ];
 
                 int sourceLength = s.Length; // hoist this to avoid having the JIT auto-insert null checks
                 int bytesWritten;

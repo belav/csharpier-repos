@@ -164,8 +164,9 @@ namespace System
 
             int i = start;
             int prevInputPos = start;
-            byte* bytes =
-                stackalloc byte[c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar]; // 40*4=160
+            byte* bytes = stackalloc byte[
+                c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
+            ]; // 40*4=160
 
             fixed (char* pStr = input)
             {

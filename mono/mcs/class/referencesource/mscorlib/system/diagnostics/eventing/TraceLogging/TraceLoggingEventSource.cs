@@ -551,10 +551,9 @@ namespace System.Diagnostics.Tracing
 
                 // We make a descriptor for each EventData, and because we morph strings to counted strings
                 // we may have 2 for each arg, so we allocate enough for this.
-                var descriptors =
-                    stackalloc EventData[
-                        eventTypes.dataCount + eventTypes.typeInfos.Length * 2 + 3
-                    ];
+                var descriptors = stackalloc EventData[
+                    eventTypes.dataCount + eventTypes.typeInfos.Length * 2 + 3
+                ];
 
                 fixed (
                     byte* pMetadata0 = this.providerMetadata,

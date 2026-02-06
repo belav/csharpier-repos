@@ -1020,7 +1020,8 @@ namespace System
                         // Load special control character codes used for input processing
                         const int NumControlCharacterNames = 4;
                         Interop.Sys.ControlCharacterNames* controlCharacterNames =
-                            stackalloc Interop.Sys.ControlCharacterNames[NumControlCharacterNames] {
+                            stackalloc Interop.Sys.ControlCharacterNames[NumControlCharacterNames]
+                            {
                                 Interop.Sys.ControlCharacterNames.VERASE,
                                 Interop.Sys.ControlCharacterNames.VEOL,
                                 Interop.Sys.ControlCharacterNames.VEOL2,

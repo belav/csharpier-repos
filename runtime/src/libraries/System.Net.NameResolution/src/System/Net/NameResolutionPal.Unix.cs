@@ -173,10 +173,9 @@ namespace System.Net
             out int nativeErrorCode
         )
         {
-            byte* buffer =
-                stackalloc byte[
-                    Interop.Sys.NI_MAXHOST + 1 /*for null*/
-                ];
+            byte* buffer = stackalloc byte[
+                Interop.Sys.NI_MAXHOST + 1 /*for null*/
+            ];
 
             byte isIPv6;
             int rawAddressLength;

@@ -337,10 +337,9 @@ namespace System.IO
         //
         public virtual void Write(Half value)
         {
-            Span<byte> buffer =
-                stackalloc byte[
-                    sizeof(ushort) /* = sizeof(Half) */
-                ];
+            Span<byte> buffer = stackalloc byte[
+                sizeof(ushort) /* = sizeof(Half) */
+            ];
             BinaryPrimitives.WriteHalfLittleEndian(buffer, value);
             OutStream.Write(buffer);
         }

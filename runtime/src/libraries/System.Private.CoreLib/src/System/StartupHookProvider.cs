@@ -96,13 +96,13 @@ namespace System
             string startupHookPart
         )
         {
-            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars =
-                stackalloc char[4] {
-                    Path.DirectorySeparatorChar,
-                    Path.AltDirectorySeparatorChar,
-                    ' ',
-                    ',',
-                };
+            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars = stackalloc char[4]
+            {
+                Path.DirectorySeparatorChar,
+                Path.AltDirectorySeparatorChar,
+                ' ',
+                ',',
+            };
 
             if (string.IsNullOrEmpty(startupHookPart))
             {

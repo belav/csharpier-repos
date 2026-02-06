@@ -178,8 +178,19 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void TryWriteUInt64LittleEndian_SuccessCases()
         {
-            Span<byte> span =
-                stackalloc byte[10] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09 };
+            Span<byte> span = stackalloc byte[10]
+            {
+                0x00,
+                0x01,
+                0x02,
+                0x03,
+                0x04,
+                0x05,
+                0x06,
+                0x07,
+                0x08,
+                0x09,
+            };
             Assert.True(SpanUtility.TryWriteUInt64LittleEndian(span, 0, 0x10203040_50607080));
             Assert.Equal(
                 new byte[] { 0x80, 0x70, 0x60, 0x50, 0x40, 0x30, 0x20, 0x10, 0x08, 0x09 },

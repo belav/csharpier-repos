@@ -75,8 +75,9 @@ namespace System.Runtime.Diagnostics
                     string2Bytes = value3
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -124,8 +125,9 @@ namespace System.Runtime.Diagnostics
                     string2Bytes = value2
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -170,8 +172,9 @@ namespace System.Runtime.Diagnostics
                     string2Bytes = value2
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -218,8 +221,9 @@ namespace System.Runtime.Diagnostics
                     string3Bytes = value3
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -272,8 +276,9 @@ namespace System.Runtime.Diagnostics
                     string4Bytes = value4
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -332,8 +337,9 @@ namespace System.Runtime.Diagnostics
                     string5Bytes = value5
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -398,8 +404,9 @@ namespace System.Runtime.Diagnostics
                     string6Bytes = value6
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -470,8 +477,9 @@ namespace System.Runtime.Diagnostics
                     string7Bytes = value7
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -548,8 +556,9 @@ namespace System.Runtime.Diagnostics
                     string8Bytes = value8
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -632,8 +641,9 @@ namespace System.Runtime.Diagnostics
                     string9Bytes = value9
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -722,8 +732,9 @@ namespace System.Runtime.Diagnostics
                     string10Bytes = value10
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -818,8 +829,9 @@ namespace System.Runtime.Diagnostics
                     string11Bytes = value11
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -920,8 +932,9 @@ namespace System.Runtime.Diagnostics
                     string12Bytes = value12
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1028,8 +1041,9 @@ namespace System.Runtime.Diagnostics
                     string13Bytes = value13
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1097,8 +1111,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1131,8 +1146,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1169,8 +1185,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1208,8 +1225,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1242,8 +1260,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1280,8 +1299,9 @@ namespace System.Runtime.Diagnostics
             bool status = true;
 
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1362,8 +1382,9 @@ namespace System.Runtime.Diagnostics
                     string12Bytes = value15
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1484,8 +1505,9 @@ namespace System.Runtime.Diagnostics
                     string13Bytes = value17
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1589,8 +1611,9 @@ namespace System.Runtime.Diagnostics
                     string6Bytes = value9
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1676,8 +1699,9 @@ namespace System.Runtime.Diagnostics
                     string8Bytes = value11
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1775,8 +1799,9 @@ namespace System.Runtime.Diagnostics
                     string10Bytes = value13
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1883,8 +1908,9 @@ namespace System.Runtime.Diagnostics
                     string11Bytes = value14
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -1990,8 +2016,9 @@ namespace System.Runtime.Diagnostics
                     string9Bytes = value13
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 
@@ -2073,8 +2100,9 @@ namespace System.Runtime.Diagnostics
                     string3Bytes = value4
             )
             {
-                byte* eventData =
-                    stackalloc byte[sizeof(UnsafeNativeMethods.EventData) * argumentCount];
+                byte* eventData = stackalloc byte[
+                    sizeof(UnsafeNativeMethods.EventData) * argumentCount
+                ];
                 UnsafeNativeMethods.EventData* eventDataPtr =
                     (UnsafeNativeMethods.EventData*)eventData;
 

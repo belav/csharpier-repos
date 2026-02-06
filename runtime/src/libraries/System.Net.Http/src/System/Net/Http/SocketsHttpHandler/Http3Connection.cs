@@ -501,8 +501,9 @@ namespace System.Net.Http
 
         public static byte[] BuildSettingsFrame(HttpConnectionSettings settings)
         {
-            Span<byte> buffer =
-                stackalloc byte[4 + VariableLengthIntegerHelper.MaximumEncodedLength];
+            Span<byte> buffer = stackalloc byte[
+                4 + VariableLengthIntegerHelper.MaximumEncodedLength
+            ];
 
             int integerLength = VariableLengthIntegerHelper.WriteInteger(
                 buffer.Slice(4),

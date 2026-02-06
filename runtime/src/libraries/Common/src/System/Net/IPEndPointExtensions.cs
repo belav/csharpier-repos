@@ -91,10 +91,12 @@ namespace System.Net.Sockets
                 }
                 else
                 {
-                    Span<byte> addressBuffer1 =
-                        stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
-                    Span<byte> addressBuffer2 =
-                        stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
+                    Span<byte> addressBuffer1 = stackalloc byte[
+                        IPAddressParserStatics.IPv6AddressBytes
+                    ];
+                    Span<byte> addressBuffer2 = stackalloc byte[
+                        IPAddressParserStatics.IPv6AddressBytes
+                    ];
                     SocketAddressPal.GetIPv6Address(
                         socketAddressBuffer,
                         addressBuffer1,

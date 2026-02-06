@@ -1312,8 +1312,9 @@ namespace System.Text.Json
                     return false;
                 }
 
-                Span<byte> stackSpan =
-                    stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+                Span<byte> stackSpan = stackalloc byte[
+                    JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                ];
                 ValueSequence.CopyTo(stackSpan);
                 span = stackSpan.Slice(0, (int)sequenceLength);
             }
@@ -1390,8 +1391,9 @@ namespace System.Text.Json
                     return false;
                 }
 
-                Span<byte> stackSpan =
-                    stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+                Span<byte> stackSpan = stackalloc byte[
+                    JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+                ];
                 ValueSequence.CopyTo(stackSpan);
                 span = stackSpan.Slice(0, (int)sequenceLength);
             }

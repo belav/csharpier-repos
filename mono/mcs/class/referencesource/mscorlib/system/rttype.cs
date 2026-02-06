@@ -824,8 +824,9 @@ namespace System
                         while (RuntimeTypeHandle.IsGenericVariable(declaringType))
                             declaringType = declaringType.GetBaseType();
 
-                        bool* overrides =
-                            stackalloc bool[RuntimeTypeHandle.GetNumVirtuals(declaringType)];
+                        bool* overrides = stackalloc bool[
+                            RuntimeTypeHandle.GetNumVirtuals(declaringType)
+                        ];
                         bool isValueType = declaringType.IsValueType;
 
                         do

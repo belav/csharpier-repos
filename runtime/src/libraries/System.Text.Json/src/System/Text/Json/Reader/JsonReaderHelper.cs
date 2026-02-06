@@ -85,8 +85,9 @@ namespace System.Text.Json
         public static bool TryGetEscapedDateTime(ReadOnlySpan<byte> source, out DateTime value)
         {
             Debug.Assert(source.Length <= JsonConstants.MaximumEscapedDateTimeOffsetParseLength);
-            Span<byte> sourceUnescaped =
-                stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+            Span<byte> sourceUnescaped = stackalloc byte[
+                JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+            ];
 
             Unescape(source, sourceUnescaped, out int written);
             Debug.Assert(written > 0);
@@ -113,8 +114,9 @@ namespace System.Text.Json
         )
         {
             Debug.Assert(source.Length <= JsonConstants.MaximumEscapedDateTimeOffsetParseLength);
-            Span<byte> sourceUnescaped =
-                stackalloc byte[JsonConstants.MaximumEscapedDateTimeOffsetParseLength];
+            Span<byte> sourceUnescaped = stackalloc byte[
+                JsonConstants.MaximumEscapedDateTimeOffsetParseLength
+            ];
 
             Unescape(source, sourceUnescaped, out int written);
             Debug.Assert(written > 0);

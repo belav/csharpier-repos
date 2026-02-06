@@ -215,8 +215,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteLoadTest()
         {
-            byte* value =
-                stackalloc byte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            byte* value = stackalloc byte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128<byte> vector = Vector128.Load(value);
 
@@ -335,8 +352,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteLoadTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            sbyte* value = stackalloc sbyte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128<sbyte> vector = Vector128.Load(value);
 
@@ -1133,8 +1167,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteLoadUnsafeTest()
         {
-            byte* value =
-                stackalloc byte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            byte* value = stackalloc byte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128<byte> vector = Vector128.LoadUnsafe(ref value[0]);
 
@@ -1253,8 +1304,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteLoadUnsafeTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            sbyte* value = stackalloc sbyte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128<sbyte> vector = Vector128.LoadUnsafe(ref value[0]);
 
@@ -1319,26 +1387,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteLoadUnsafeIndexTest()
         {
-            byte* value =
-                stackalloc byte[16 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                };
+            byte* value = stackalloc byte[16 + 1]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+            };
 
             Vector128<byte> vector = Vector128.LoadUnsafe(ref value[0], 1);
 
@@ -1457,26 +1525,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteLoadUnsafeIndexTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                };
+            sbyte* value = stackalloc sbyte[16 + 1]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+            };
 
             Vector128<sbyte> vector = Vector128.LoadUnsafe(ref value[0], 1);
 
@@ -2692,8 +2760,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteStoreTest()
         {
-            byte* value =
-                stackalloc byte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            byte* value = stackalloc byte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128.Create((byte)0x1).Store(value);
 
@@ -2812,8 +2897,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteStoreTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            sbyte* value = stackalloc sbyte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128.Create((sbyte)0x1).Store(value);
 
@@ -3610,8 +3712,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteStoreUnsafeTest()
         {
-            byte* value =
-                stackalloc byte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            byte* value = stackalloc byte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128.Create((byte)0x1).StoreUnsafe(ref value[0]);
 
@@ -3730,8 +3849,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteStoreUnsafeTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            sbyte* value = stackalloc sbyte[16]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+            };
 
             Vector128.Create((sbyte)0x1).StoreUnsafe(ref value[0]);
 
@@ -3796,26 +3932,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128ByteStoreUnsafeIndexTest()
         {
-            byte* value =
-                stackalloc byte[16 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                };
+            byte* value = stackalloc byte[16 + 1]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+            };
 
             Vector128.Create((byte)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3934,26 +4070,26 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector128SByteStoreUnsafeIndexTest()
         {
-            sbyte* value =
-                stackalloc sbyte[16 + 1] {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                };
+            sbyte* value = stackalloc sbyte[16 + 1]
+            {
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+            };
 
             Vector128.Create((sbyte)0x1).StoreUnsafe(ref value[0], 1);
 
