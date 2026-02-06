@@ -188,8 +188,9 @@ namespace System.Net.Sockets
                             break;
 
                         case AddressFamily.InterNetworkV6:
-                            Span<byte> address =
-                                stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
+                            Span<byte> address = stackalloc byte[
+                                IPAddressParserStatics.IPv6AddressBytes
+                            ];
                             SocketAddressPal.GetIPv6Address(
                                 buffer.Slice(0, bufferLength),
                                 address,
@@ -234,10 +235,9 @@ namespace System.Net.Sockets
                                             break;
 
                                         case AddressFamily.InterNetworkV6:
-                                            Span<byte> address =
-                                                stackalloc byte[
-                                                    IPAddressParserStatics.IPv6AddressBytes
-                                                ];
+                                            Span<byte> address = stackalloc byte[
+                                                IPAddressParserStatics.IPv6AddressBytes
+                                            ];
                                             SocketAddressPal.GetIPv6Address(
                                                 buffer.Slice(0, bufferLength),
                                                 address,
@@ -352,8 +352,9 @@ namespace System.Net.Sockets
 
                 if (_localEndPoint == null)
                 {
-                    Span<byte> buffer =
-                        stackalloc byte[SocketAddress.GetMaximumAddressSize(_addressFamily)];
+                    Span<byte> buffer = stackalloc byte[
+                        SocketAddress.GetMaximumAddressSize(_addressFamily)
+                    ];
                     int size = buffer.Length;
 
                     unsafe
@@ -409,8 +410,9 @@ namespace System.Net.Sockets
                         return null;
                     }
 
-                    Span<byte> buffer =
-                        stackalloc byte[SocketAddress.GetMaximumAddressSize(_addressFamily)];
+                    Span<byte> buffer = stackalloc byte[
+                        SocketAddress.GetMaximumAddressSize(_addressFamily)
+                    ];
                     int size = buffer.Length;
                     // This may throw ObjectDisposedException.
                     SocketError errorCode = SocketPal.GetPeerName(_handle, buffer, ref size);

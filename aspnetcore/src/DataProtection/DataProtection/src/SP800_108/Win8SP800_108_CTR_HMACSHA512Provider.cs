@@ -28,10 +28,9 @@ internal sealed unsafe class Win8SP800_108_CTR_HMACSHA512Provider
     )
     {
         const int SHA512_ALG_CHAR_COUNT = 7;
-        char* pszHashAlgorithm =
-            stackalloc char[
-                SHA512_ALG_CHAR_COUNT /* includes terminating null */
-            ];
+        char* pszHashAlgorithm = stackalloc char[
+            SHA512_ALG_CHAR_COUNT /* includes terminating null */
+        ];
         pszHashAlgorithm[0] = 'S';
         pszHashAlgorithm[1] = 'H';
         pszHashAlgorithm[2] = 'A';

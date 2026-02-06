@@ -664,11 +664,10 @@ namespace System.Net.WebSockets
             // GUID appended by the server as part of the security key response.  Defined in the RFC.
             ReadOnlySpan<byte> wsServerGuidBytes = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"u8;
 
-            Span<byte> bytes =
-                stackalloc byte[
-                    24 /* Base64 guid length */
-                        + wsServerGuidBytes.Length
-                ];
+            Span<byte> bytes = stackalloc byte[
+                24 /* Base64 guid length */
+                    + wsServerGuidBytes.Length
+            ];
 
             // Base64-encode a new Guid's bytes to get the security key
             bool success = Guid.NewGuid().TryWriteBytes(bytes);

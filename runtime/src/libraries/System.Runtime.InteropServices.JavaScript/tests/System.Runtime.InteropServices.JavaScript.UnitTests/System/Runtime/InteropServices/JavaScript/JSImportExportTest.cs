@@ -632,19 +632,19 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void JsImportSpanOfDouble()
         {
-            var expectedBytes =
-                stackalloc double[] {
-                    0,
-                    1,
-                    -1,
-                    double.Pi,
-                    42,
-                    double.MaxValue,
-                    double.MinValue,
-                    double.NaN,
-                    double.PositiveInfinity,
-                    double.NegativeInfinity,
-                };
+            var expectedBytes = stackalloc double[]
+            {
+                0,
+                1,
+                -1,
+                double.Pi,
+                42,
+                double.MaxValue,
+                double.MinValue,
+                double.NaN,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
             Span<double> expected = new Span<double>(expectedBytes, 10);
             Assert.True(Unsafe.AsPointer(ref expected.GetPinnableReference()) == expectedBytes);
             Span<double> actual = JavaScriptTestHelper.echo1_SpanOfDouble(expected, false);

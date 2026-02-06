@@ -69,7 +69,8 @@ namespace System.Text.Encodings.Web
             _innerEncoder = new OptimizedInboxTextEncoder(
                 EscaperImplementation.Singleton,
                 settings.GetAllowedCodePointsBitmap(),
-                extraCharactersToEscape: stackalloc char[] {
+                extraCharactersToEscape: stackalloc char[]
+                {
                     ' ', // chars from Basic Latin which aren't already disallowed by the base encoder
                     '#',
                     '%',

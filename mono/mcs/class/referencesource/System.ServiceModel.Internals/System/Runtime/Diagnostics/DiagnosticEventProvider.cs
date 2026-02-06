@@ -606,8 +606,9 @@ namespace System.Runtime.Diagnostics
                             stackalloc UnsafeNativeMethods.EventData[argCount];
                         UnsafeNativeMethods.EventData* userDataPtr =
                             (UnsafeNativeMethods.EventData*)userData;
-                        byte* dataBuffer =
-                            stackalloc byte[basicTypeAllocationBufferSize * argCount]; // Assume 16 chars for non-string argument
+                        byte* dataBuffer = stackalloc byte[
+                            basicTypeAllocationBufferSize * argCount
+                        ]; // Assume 16 chars for non-string argument
                         byte* currentBuffer = dataBuffer;
 
                         //
@@ -896,8 +897,9 @@ namespace System.Runtime.Diagnostics
                             stackalloc UnsafeNativeMethods.EventData[argCount]; // allocation for the data descriptors
                         UnsafeNativeMethods.EventData* userDataPtr =
                             (UnsafeNativeMethods.EventData*)userData;
-                        byte* dataBuffer =
-                            stackalloc byte[basicTypeAllocationBufferSize * argCount]; // 16 byte for unboxing non-string argument
+                        byte* dataBuffer = stackalloc byte[
+                            basicTypeAllocationBufferSize * argCount
+                        ]; // 16 byte for unboxing non-string argument
                         byte* currentBuffer = dataBuffer;
 
                         //

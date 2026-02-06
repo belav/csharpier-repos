@@ -262,11 +262,11 @@ namespace System
 
             object? instantiatedObject = null;
 
-            IntPtr* pTypeHandles =
-                stackalloc IntPtr[] {
-                    genericParameter1.TypeHandle.Value,
-                    genericParameter2.TypeHandle.Value,
-                };
+            IntPtr* pTypeHandles = stackalloc IntPtr[]
+            {
+                genericParameter1.TypeHandle.Value,
+                genericParameter2.TypeHandle.Value,
+            };
 
             CreateInstanceForAnotherGenericParameter(
                 new QCallTypeHandle(ref type),

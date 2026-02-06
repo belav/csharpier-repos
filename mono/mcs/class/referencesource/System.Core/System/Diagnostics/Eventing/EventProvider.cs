@@ -708,8 +708,9 @@ namespace System.Diagnostics.Eventing
                         string[] dataString = new string[s_etwAPIMaxStringCount]; // string arrays from the eventPayload parameter
                         EventData* userData = stackalloc EventData[argCount]; // allocation for the data descriptors
                         userDataPtr = (EventData*)userData;
-                        byte* dataBuffer =
-                            stackalloc byte[s_basicTypeAllocationBufferSize * argCount]; // 16 byte for unboxing non-string argument
+                        byte* dataBuffer = stackalloc byte[
+                            s_basicTypeAllocationBufferSize * argCount
+                        ]; // 16 byte for unboxing non-string argument
                         byte* currentBuffer = dataBuffer;
 
                         //

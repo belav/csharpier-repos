@@ -161,8 +161,9 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
             // Use the KDF to recreate the symmetric block cipher key
             // We'll need a temporary buffer to hold the symmetric encryption subkey
-            byte* pbSymmetricDecryptionSubkey =
-                stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
+            byte* pbSymmetricDecryptionSubkey = stackalloc byte[
+                checked((int)_symmetricAlgorithmSubkeyLengthInBytes)
+            ];
             try
             {
                 _sp800_108_ctr_hmac_provider.DeriveKeyWithContextHeader(
@@ -313,8 +314,9 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
             // Use the KDF to generate a new symmetric block cipher key
             // We'll need a temporary buffer to hold the symmetric encryption subkey
-            byte* pbSymmetricEncryptionSubkey =
-                stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
+            byte* pbSymmetricEncryptionSubkey = stackalloc byte[
+                checked((int)_symmetricAlgorithmSubkeyLengthInBytes)
+            ];
             try
             {
                 _sp800_108_ctr_hmac_provider.DeriveKeyWithContextHeader(

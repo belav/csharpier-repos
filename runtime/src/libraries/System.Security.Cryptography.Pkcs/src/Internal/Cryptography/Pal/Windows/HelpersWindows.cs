@@ -541,11 +541,11 @@ namespace Internal.Cryptography.Pal.Windows
             // enough to hold the DWORD "can't fail" values.
             Span<byte> stackSpan = stackalloc byte[
 #if DEBUG
-                    sizeof(int)
+                sizeof(int)
 #else
-                    64
+                64
 #endif
-                ];
+            ];
 
             stackSpan.Clear();
             int size = stackSpan.Length;

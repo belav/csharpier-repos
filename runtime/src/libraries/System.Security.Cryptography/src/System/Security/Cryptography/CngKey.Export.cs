@@ -154,8 +154,9 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> pkcs12TripleDesOidBytes = "1.2.840.113549.1.12.1.3\0"u8; // the Windows APIs for OID strings are ASCII-only
                 fixed (byte* oidPtr = &MemoryMarshal.GetReference(pkcs12TripleDesOidBytes))
                 {
-                    Interop.NCrypt.NCryptBuffer* buffers =
-                        stackalloc Interop.NCrypt.NCryptBuffer[3];
+                    Interop.NCrypt.NCryptBuffer* buffers = stackalloc Interop.NCrypt.NCryptBuffer[
+                        3
+                    ];
 
                     Interop.NCrypt.PBE_PARAMS pbeParams = default;
                     Span<byte> salt = new Span<byte>(

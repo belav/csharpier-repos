@@ -843,9 +843,9 @@ namespace System.Net.Http.HPack
         {
             Span<byte> span =
 #if DEBUG
-                stackalloc byte[4]; // to validate growth algorithm
+            stackalloc byte[4]; // to validate growth algorithm
 #else
-                stackalloc byte[512];
+            stackalloc byte[512];
 #endif
             while (true)
             {

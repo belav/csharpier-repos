@@ -623,8 +623,9 @@ namespace System.Net.Security
             input.Span.CopyTo(new Span<byte>(output, headerSize, input.Length));
 
             const int NumSecBuffers = 4; // header + data + trailer + empty
-            Interop.SspiCli.SecBuffer* unmanagedBuffer =
-                stackalloc Interop.SspiCli.SecBuffer[NumSecBuffers];
+            Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[
+                NumSecBuffers
+            ];
             Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(
                 NumSecBuffers
             )
@@ -697,8 +698,9 @@ namespace System.Net.Security
             const int NumSecBuffers = 4; // data + empty + empty + empty
             fixed (byte* bufferPtr = buffer)
             {
-                Interop.SspiCli.SecBuffer* unmanagedBuffer =
-                    stackalloc Interop.SspiCli.SecBuffer[NumSecBuffers];
+                Interop.SspiCli.SecBuffer* unmanagedBuffer = stackalloc Interop.SspiCli.SecBuffer[
+                    NumSecBuffers
+                ];
                 Interop.SspiCli.SecBuffer* dataBuffer = &unmanagedBuffer[0];
                 dataBuffer->BufferType = SecurityBufferType.SECBUFFER_DATA;
                 dataBuffer->pvBuffer = (IntPtr)bufferPtr;
