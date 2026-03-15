@@ -3442,8 +3442,7 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
         var origBatchReferenceFrames = renderer.Batches.Single().ReferenceFrames;
-        var childComponentFrame = origBatchReferenceFrames.Single(f =>
-            f.Component is EventComponent
+        var childComponentFrame = origBatchReferenceFrames.Single(f => f.Component is EventComponent
         );
         var childComponentId = childComponentFrame.ComponentId;
         childComponent = (EventComponent)childComponentFrame.Component;

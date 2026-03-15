@@ -1162,8 +1162,7 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             SyntaxNodeOrTokenList list
         ) =>
             new(
-                list.Select(v =>
-                    ConvertArgumentOrToken(generator, parameterNamingRule, isRecord, v)
+                list.Select(v => ConvertArgumentOrToken(generator, parameterNamingRule, isRecord, v)
                 )
             );
 

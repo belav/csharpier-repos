@@ -295,8 +295,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             )
             {
                 var (actions, _) = await GetCodeActionsAsync(workspace, parameters);
-                var changeNamespaceAction = actions.Single(a =>
-                    a is CodeAction.SolutionChangeAction
+                var changeNamespaceAction = actions.Single(a => a is CodeAction.SolutionChangeAction
                 );
                 var operations = await changeNamespaceAction.GetOperationsAsync(
                     CancellationToken.None

@@ -454,8 +454,7 @@ public abstract partial class ModelBuilderTest
         [ConditionalFact]
         public virtual void Conventions_can_be_added()
         {
-            var modelBuilder = CreateModelBuilder(c =>
-                c.Conventions.Add(s => new TestConvention())
+            var modelBuilder = CreateModelBuilder(c => c.Conventions.Add(s => new TestConvention())
             );
 
             var model = modelBuilder.FinalizeModel();

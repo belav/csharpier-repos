@@ -1504,8 +1504,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     : _sqlExpressionFactory.In(
                         discriminatorColumn,
                         concreteEntityTypes
-                            .Select(et =>
-                                _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
+                            .Select(et => _sqlExpressionFactory.Constant(et.GetDiscriminatorValue())
                             )
                             .ToArray()
                     );

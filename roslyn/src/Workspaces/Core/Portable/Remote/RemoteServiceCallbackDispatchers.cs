@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Remote
         private readonly ImmutableDictionary<
             Type,
             Lazy<IRemoteServiceCallbackDispatcher, ExportMetadata>
-        > _callbackDispatchers = dispatchers.ToImmutableDictionary(d =>
-            d.Metadata.ServiceInterface
+        > _callbackDispatchers = dispatchers.ToImmutableDictionary(d => d.Metadata.ServiceInterface
         );
 
         public IRemoteServiceCallbackDispatcher GetDispatcher(Type serviceType) =>

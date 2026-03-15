@@ -29,8 +29,7 @@ public class DatabaseErrorPageMiddlewareTest
                 webHostBuilder
                     .UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                    .Configure(app =>
-                        app.UseDatabaseErrorPage()
+                    .Configure(app => app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
                         .UseMiddleware<SuccessMiddleware>()
                     );

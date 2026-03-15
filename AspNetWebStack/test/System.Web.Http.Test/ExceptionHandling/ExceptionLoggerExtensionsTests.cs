@@ -42,8 +42,7 @@ namespace System.Web.Http.ExceptionHandling
                 mock.Verify(
                     h =>
                         h.LogAsync(
-                            It.Is<ExceptionLoggerContext>(c =>
-                                c.ExceptionContext == expectedContext
+                            It.Is<ExceptionLoggerContext>(c => c.ExceptionContext == expectedContext
                             ),
                             expectedCancellationToken
                         ),

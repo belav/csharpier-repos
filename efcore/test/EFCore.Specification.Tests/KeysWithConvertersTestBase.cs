@@ -797,8 +797,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(new ComparableIntStructKey { Id = 111 })),
                 context
                     .Set<ComparableIntStructKeyRequiredDependent>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new ComparableIntStructKey { Id = oneTwelve })
+                    .FirstOrDefault(e => e.Id.Equals(new ComparableIntStructKey { Id = oneTwelve })
                     ),
                 context
                     .Set<ComparableIntStructKeyRequiredDependent>()
@@ -974,8 +973,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             {
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependent>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new GenericComparableIntStructKey { Id = 111 })
+                    .FirstOrDefault(e => e.Id.Equals(new GenericComparableIntStructKey { Id = 111 })
                     ),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependent>()
@@ -987,8 +985,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(oneThirteen)),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependent>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new GenericComparableIntStructKey { Id = 114 })
+                    .FirstOrDefault(e => e.Id.Equals(new GenericComparableIntStructKey { Id = 114 })
                     ),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependent>()
@@ -1626,8 +1623,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<BytesStructKeyPrincipal>()
                     .Include(e => e.OptionalDependents)
-                    .Single(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 4, 4, 4, 4 } })
+                    .Single(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 4, 4, 4, 4 } })
                     ),
             };
 
@@ -1978,8 +1974,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<ComparableBytesStructKeyPrincipal>()
                     .Include(e => e.OptionalDependents)
-                    .Single(e =>
-                        e.Id.Equals(new ComparableBytesStructKey { Id = new byte[] { 1 } })
+                    .Single(e => e.Id.Equals(new ComparableBytesStructKey { Id = new byte[] { 1 } })
                     ),
                 context
                     .Set<ComparableBytesStructKeyPrincipal>()
@@ -2374,8 +2369,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             {
                 context
                     .Set<BytesStructKeyRequiredDependent>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 111 } })
+                    .FirstOrDefault(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 111 } })
                     ),
                 context
                     .Set<BytesStructKeyRequiredDependent>()
@@ -2385,8 +2379,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(oneThirteen)),
                 context
                     .Set<BytesStructKeyRequiredDependent>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 114 } })
+                    .FirstOrDefault(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 114 } })
                     ),
                 context
                     .Set<BytesStructKeyRequiredDependent>()
@@ -2731,8 +2724,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<StructuralComparableBytesStructKeyPrincipal>()
                     .Include(e => e.RequiredDependents)
-                    .Single(e =>
-                        e.Id.Equals(new StructuralComparableBytesStructKey { Id = twelve })
+                    .Single(e => e.Id.Equals(new StructuralComparableBytesStructKey { Id = twelve })
                     ),
                 context
                     .Set<StructuralComparableBytesStructKeyPrincipal>()
@@ -4574,8 +4566,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(new ComparableIntStructKey { Id = 111 })),
                 context
                     .Set<ComparableIntStructKeyRequiredDependentShadow>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new ComparableIntStructKey { Id = oneTwelve })
+                    .FirstOrDefault(e => e.Id.Equals(new ComparableIntStructKey { Id = oneTwelve })
                     ),
                 context
                     .Set<ComparableIntStructKeyRequiredDependentShadow>()
@@ -4818,8 +4809,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             {
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependentShadow>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new GenericComparableIntStructKey { Id = 111 })
+                    .FirstOrDefault(e => e.Id.Equals(new GenericComparableIntStructKey { Id = 111 })
                     ),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependentShadow>()
@@ -4831,8 +4821,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(oneThirteen)),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependentShadow>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new GenericComparableIntStructKey { Id = 114 })
+                    .FirstOrDefault(e => e.Id.Equals(new GenericComparableIntStructKey { Id = 114 })
                     ),
                 context
                     .Set<GenericComparableIntStructKeyRequiredDependentShadow>()
@@ -5777,8 +5766,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<BytesStructKeyPrincipalShadow>()
                     .Include(e => e.OptionalDependents)
-                    .Single(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 4, 4, 4, 4 } })
+                    .Single(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 4, 4, 4, 4 } })
                     ),
             };
 
@@ -6307,8 +6295,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<ComparableBytesStructKeyPrincipalShadow>()
                     .Include(e => e.OptionalDependents)
-                    .Single(e =>
-                        e.Id.Equals(new ComparableBytesStructKey { Id = new byte[] { 1 } })
+                    .Single(e => e.Id.Equals(new ComparableBytesStructKey { Id = new byte[] { 1 } })
                     ),
                 context
                     .Set<ComparableBytesStructKeyPrincipalShadow>()
@@ -6871,8 +6858,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             {
                 context
                     .Set<BytesStructKeyRequiredDependentShadow>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 111 } })
+                    .FirstOrDefault(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 111 } })
                     ),
                 context
                     .Set<BytesStructKeyRequiredDependentShadow>()
@@ -6882,8 +6868,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                     .FirstOrDefault(e => e.Id.Equals(oneThirteen)),
                 context
                     .Set<BytesStructKeyRequiredDependentShadow>()
-                    .FirstOrDefault(e =>
-                        e.Id.Equals(new BytesStructKey { Id = new byte[] { 114 } })
+                    .FirstOrDefault(e => e.Id.Equals(new BytesStructKey { Id = new byte[] { 114 } })
                     ),
                 context
                     .Set<BytesStructKeyRequiredDependentShadow>()
@@ -7396,8 +7381,7 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
                 context
                     .Set<StructuralComparableBytesStructKeyPrincipalShadow>()
                     .Include(e => e.RequiredDependents)
-                    .Single(e =>
-                        e.Id.Equals(new StructuralComparableBytesStructKey { Id = twelve })
+                    .Single(e => e.Id.Equals(new StructuralComparableBytesStructKey { Id = twelve })
                     ),
                 context
                     .Set<StructuralComparableBytesStructKeyPrincipalShadow>()

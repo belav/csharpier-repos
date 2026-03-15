@@ -485,8 +485,7 @@ public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTes
                 AssertInclude(
                     e,
                     a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x =>
-                        x.ReferenceOnBase
+                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.ReferenceOnBase
                     )
                 )
         );

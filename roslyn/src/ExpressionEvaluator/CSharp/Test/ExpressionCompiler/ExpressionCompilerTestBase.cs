@@ -612,8 +612,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     ? candidates.FirstOrDefault()
                     : candidates.FirstOrDefault(c =>
                         parameterTypeNames.SequenceEqual(
-                            ((MethodSymbol)c).Parameters.Select(p =>
-                                p.TypeWithAnnotations.Type.Name
+                            ((MethodSymbol)c).Parameters.Select(p => p.TypeWithAnnotations.Type.Name
                             )
                         )
                     );

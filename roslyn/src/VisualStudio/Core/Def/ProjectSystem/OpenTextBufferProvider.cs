@@ -119,8 +119,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 if (!_monikerToTextBufferMap.ContainsKey(filePath))
                 {
                     _monikerToTextBufferMap = _monikerToTextBufferMap.Add(filePath, textBuffer);
-                    RaiseEventForEachListener(l =>
-                        l.OnOpenDocument(filePath, textBuffer, hierarchy)
+                    RaiseEventForEachListener(l => l.OnOpenDocument(filePath, textBuffer, hierarchy)
                     );
                 }
             }

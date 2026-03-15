@@ -1745,8 +1745,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                         if (bp == null && context.ParentContext != null)
                         {
                             bp = context
-                                .ParentContext.BreakpointRequests.Values.SelectMany(v =>
-                                    v.Locations
+                                .ParentContext.BreakpointRequests.Values.SelectMany(v => v.Locations
                                 )
                                 .FirstOrDefault(b => b.RemoteId == request_id);
                         }

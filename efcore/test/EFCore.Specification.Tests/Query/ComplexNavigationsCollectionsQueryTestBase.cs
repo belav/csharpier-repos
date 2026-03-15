@@ -818,8 +818,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(e => EF.Property<Level2>(e, "OneToOne_Optional_FK1"))
-                        .ThenInclude(e =>
-                            EF.Property<ICollection<Level3>>(e, "OneToMany_Optional2")
+                        .ThenInclude(e => EF.Property<ICollection<Level3>>(e, "OneToMany_Optional2")
                         )
                     .Include(e => EF.Property<ICollection<Level2>>(e, "OneToMany_Optional1"))
                         .ThenInclude(e => EF.Property<Level3>(e, "OneToOne_Optional_FK2")),

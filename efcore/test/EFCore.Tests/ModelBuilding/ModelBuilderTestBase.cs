@@ -1607,8 +1607,7 @@ public abstract partial class ModelBuilderTest
                 )!;
                 var targetForeignKey = targetDependentType.FindForeignKey(
                     sourceNavigation
-                        .ForeignKey.Properties.Select(p =>
-                            targetDependentType.FindProperty(p.Name)!
+                        .ForeignKey.Properties.Select(p => targetDependentType.FindProperty(p.Name)!
                         )
                         .ToList(),
                     targetKey,

@@ -42,8 +42,7 @@ internal sealed class TopLevelCodeDeclarationBody(CompilationUnitSyntax unit) : 
 
     public override StateMachineInfo GetStateMachineInfo()
     {
-        var isAsync = GlobalStatements.Any(static s =>
-            SyntaxUtilities.GetSuspensionPoints(s).Any()
+        var isAsync = GlobalStatements.Any(static s => SyntaxUtilities.GetSuspensionPoints(s).Any()
         );
         return new StateMachineInfo(
             IsAsync: isAsync,

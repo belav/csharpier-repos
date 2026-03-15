@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis
         /// The list of all other projects within the same solution that this project references.
         /// </summary>
         public IEnumerable<ProjectReference> ProjectReferences =>
-            _projectState.ProjectReferences.Where(pr =>
-                this.Solution.ContainsProject(pr.ProjectId)
+            _projectState.ProjectReferences.Where(pr => this.Solution.ContainsProject(pr.ProjectId)
             );
 
         /// <summary>

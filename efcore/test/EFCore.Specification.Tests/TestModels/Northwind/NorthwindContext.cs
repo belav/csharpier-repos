@@ -101,8 +101,7 @@ public class NorthwindContext : PoolableDbContext
             .HasQueryFilter(o => o.Customer != null && o.Customer.CompanyName != null);
         modelBuilder
             .Entity<OrderDetail>()
-            .HasQueryFilter(od =>
-                od.Order != null && EF.Property<short>(od, "Quantity") > _quantity
+            .HasQueryFilter(od => od.Order != null && EF.Property<short>(od, "Quantity") > _quantity
             );
         modelBuilder.Entity<Employee>().HasQueryFilter(e => e.Address.StartsWith("A"));
         modelBuilder.Entity<Product>().HasQueryFilter(p => ClientMethod(p));

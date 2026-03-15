@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 .ToImmutableArray();
 
             var analyzers = project
-                .AnalyzerReferences.SelectMany(reference =>
-                    reference.GetAnalyzers(project.Language)
+                .AnalyzerReferences.SelectMany(reference => reference.GetAnalyzers(project.Language)
                 )
                 .ToImmutableArray();
             return new AnalyzersAndFixers(

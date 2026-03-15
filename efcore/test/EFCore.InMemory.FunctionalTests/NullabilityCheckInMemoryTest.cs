@@ -26,8 +26,7 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
                 .Throws<DbUpdateException>(() =>
                 {
                     var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                    modelBuilder.Entity<SomeEntity>(eb =>
-                        eb.Property(p => p.Property).IsRequired()
+                    modelBuilder.Entity<SomeEntity>(eb => eb.Property(p => p.Property).IsRequired()
                     );
 
                     var optionsBuilder = new DbContextOptionsBuilder()
@@ -57,8 +56,7 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
                 .Throws<DbUpdateException>(() =>
                 {
                     var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-                    modelBuilder.Entity<SomeEntity>(eb =>
-                        eb.Property(p => p.Property).IsRequired()
+                    modelBuilder.Entity<SomeEntity>(eb => eb.Property(p => p.Property).IsRequired()
                     );
 
                     var optionsBuilder = new DbContextOptionsBuilder()

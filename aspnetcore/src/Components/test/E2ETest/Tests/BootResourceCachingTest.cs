@@ -56,8 +56,7 @@ public class BootResourceCachingTest : ServerTestBase<AspNetSiteServerFixture>
             initialResourcesRequested.Where(path => path.EndsWith(".js", StringComparison.Ordinal))
         );
         Assert.NotEmpty(
-            initialResourcesRequested.Where(path =>
-                path.EndsWith(".wasm", StringComparison.Ordinal)
+            initialResourcesRequested.Where(path => path.EndsWith(".wasm", StringComparison.Ordinal)
             )
         );
 

@@ -160,8 +160,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // Analyzers are only supported for C# and VB currently.
             var projectsWithHierarchy = currentSolution
-                .Projects.Where(p =>
-                    p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
+                .Projects.Where(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
                 )
                 .Where(p => _workspace.GetHierarchy(p.Id) == hierarchy);
 

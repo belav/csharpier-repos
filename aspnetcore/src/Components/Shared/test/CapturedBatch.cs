@@ -17,8 +17,7 @@ public class CapturedBatch
 
     public IEnumerable<RenderTreeFrame> GetComponentFrames<T>()
         where T : IComponent =>
-        ReferenceFrames.Where(f =>
-            f.FrameType == RenderTreeFrameType.Component && f.Component is T
+        ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component && f.Component is T
         );
 
     public IEnumerable<RenderTreeDiff> GetComponentDiffs<T>()

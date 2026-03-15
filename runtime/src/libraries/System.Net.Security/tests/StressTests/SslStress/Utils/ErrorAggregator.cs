@@ -90,8 +90,7 @@ namespace SslStress.Utils
 
             int i = 0;
             foreach (
-                ErrorType failure in _failureTypes.Values.OrderByDescending(x =>
-                    x.Occurrences.Count
+                ErrorType failure in _failureTypes.Values.OrderByDescending(x => x.Occurrences.Count
                 )
             )
             {

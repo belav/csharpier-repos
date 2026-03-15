@@ -744,8 +744,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             // Specific child checks.
             if (
-                expression.CheckParent<CommonForEachStatementSyntax>(f =>
-                    f.Expression == expression
+                expression.CheckParent<CommonForEachStatementSyntax>(f => f.Expression == expression
                 )
                 || expression.CheckParent<MemberAccessExpressionSyntax>(m =>
                     m.Expression == expression

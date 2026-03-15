@@ -1420,8 +1420,7 @@ public class CosmosModelBuilderGenericTest : ModelBuilderGenericTest
             expectedProperties = expectedProperties.Where(p =>
                 p.Name != "__jObject" && p.Name != "__id"
             );
-            actualProperties = actualProperties.Where(p =>
-                p.Name != "__jObject" && p.Name != "__id"
+            actualProperties = actualProperties.Where(p => p.Name != "__jObject" && p.Name != "__id"
             );
 
             base.AssertEqual(expectedProperties, actualProperties, assertOrder, compareAnnotations);

@@ -474,8 +474,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 .GetMembers()
                 .OfType<IPropertySymbol>()
                 .ToImmutableArray();
-            var newProperties = originalProperties.SelectAsArray(p =>
-                GenerateProperty(document, p)
+            var newProperties = originalProperties.SelectAsArray(p => GenerateProperty(document, p)
             );
 
             // If we changed the names of any properties, record that name mapping.  We'll

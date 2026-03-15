@@ -475,8 +475,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         )
         {
             var pdbStreamConverted = new MemoryStream();
-            var converter = new PdbConverter(diagnostic =>
-                Assert.True(false, diagnostic.ToString())
+            var converter = new PdbConverter(diagnostic => Assert.True(false, diagnostic.ToString())
             );
 
             peStreamOriginal.Position = 0;

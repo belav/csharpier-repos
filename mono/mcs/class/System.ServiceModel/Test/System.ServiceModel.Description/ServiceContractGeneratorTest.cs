@@ -70,8 +70,7 @@ namespace MonoTests.System.ServiceModel.Description
             g.GenerateServiceContractType(ContractDescription.GetContract(typeof(ITestService)));
             var cns = g.TargetCompileUnit.Namespaces[0];
             Assert.AreEqual(3, cns.Types.Count, "#1");
-            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "ITestService"
+            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "ITestService"
             );
             Assert.AreEqual(2, iface.Members.Count, "#2-0");
             Assert.IsNotNull(
@@ -109,8 +108,7 @@ namespace MonoTests.System.ServiceModel.Description
             g.GenerateServiceContractType(ContractDescription.GetContract(typeof(ITestService)));
             var cns = g.TargetCompileUnit.Namespaces[0];
             Assert.AreEqual(3, cns.Types.Count, "#1");
-            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t =>
-                t.Name == "ITestService"
+            var iface = cns.Types.FirstOrDefault<CodeTypeDeclaration>(t => t.Name == "ITestService"
             );
             Assert.AreEqual(6, iface.Members.Count, "#2-0");
             Assert.IsNotNull(

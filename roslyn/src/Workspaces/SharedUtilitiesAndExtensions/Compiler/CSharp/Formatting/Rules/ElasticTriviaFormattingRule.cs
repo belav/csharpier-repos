@@ -352,8 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         {
             // see whether first non whitespace trivia after before the current member is a comment or not
             var triviaList = currentToken.LeadingTrivia;
-            var firstNonWhitespaceTrivia = triviaList.FirstOrDefault(trivia =>
-                !IsWhitespace(trivia)
+            var firstNonWhitespaceTrivia = triviaList.FirstOrDefault(trivia => !IsWhitespace(trivia)
             );
             if (!firstNonWhitespaceTrivia.IsRegularOrDocComment())
             {

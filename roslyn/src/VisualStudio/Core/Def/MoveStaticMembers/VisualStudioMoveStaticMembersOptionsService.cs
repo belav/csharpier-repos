@@ -94,8 +94,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     language == LanguageNames.CSharp ? ".cs" : ".vb"
                 );
                 var selectedMembers =
-                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm =>
-                        vm.Symbol
+                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm => vm.Symbol
                     );
 
                 if (viewModel.DestinationName.IsNew)

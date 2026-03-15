@@ -114,8 +114,7 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
             if (
                 semanticModel
                     .GetDiagnostics(forEachStatement.Span, cancellationToken)
-                    .Any(static diagnostic =>
-                        diagnostic.DefaultSeverity == DiagnosticSeverity.Error
+                    .Any(static diagnostic => diagnostic.DefaultSeverity == DiagnosticSeverity.Error
                     )
             )
             {

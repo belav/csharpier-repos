@@ -93,8 +93,7 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder
                 .ForTypesDerivedFrom<IFoo>()
-                .Export(e =>
-                    e.AsContractName(t => "Contract:" + t.FullName).AsContractType<IFoo>()
+                .Export(e => e.AsContractName(t => "Contract:" + t.FullName).AsContractType<IFoo>()
                 );
 
             ExportAttribute exportAtt = GetExportAttribute(builder);

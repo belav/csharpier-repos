@@ -145,8 +145,7 @@ public class ILChecker
     {
         var attrs = linkResult
             .TestCase.FindTypeDefinition(original)
-            .CustomAttributes.Where(attr =>
-                attr.AttributeType.Name == nameof(SkipILVerifyAttribute)
+            .CustomAttributes.Where(attr => attr.AttributeType.Name == nameof(SkipILVerifyAttribute)
             );
         skipCheckEntirely = false;
         assembliesToSkip = new HashSet<string>();

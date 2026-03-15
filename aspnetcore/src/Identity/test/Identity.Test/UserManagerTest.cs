@@ -518,20 +518,17 @@ public class UserManagerTest
             .ReturnsAsync(IdentityResult.Success)
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();
@@ -612,8 +609,7 @@ public class UserManagerTest
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
@@ -658,20 +654,17 @@ public class UserManagerTest
             .ReturnsAsync(IdentityResult.Success)
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("C"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
@@ -700,14 +693,12 @@ public class UserManagerTest
             .Returns(Task.FromResult(0))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("A"), CancellationToken.None)
             )
             .Returns(Task.FromResult(true))
             .Verifiable();
         store
-            .Setup(s =>
-                s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
+            .Setup(s => s.IsInRoleAsync(user, normalizer.NormalizeName("B"), CancellationToken.None)
             )
             .Returns(Task.FromResult(false))
             .Verifiable();

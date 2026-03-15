@@ -136,8 +136,7 @@ namespace Roslyn.Test.Utilities.PDB
                     continue;
                 }
 
-                var testReference = references.Single(x =>
-                    x.MetadataReferenceInfo.Mvid == info.Mvid
+                var testReference = references.Single(x => x.MetadataReferenceInfo.Mvid == info.Mvid
                 );
                 testReference.MetadataReferenceInfo.AssertEqual(info);
                 count++;

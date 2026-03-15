@@ -1751,8 +1751,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 async,
                 ss =>
                     ss.Set<Level4>()
-                        .Select(l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
                         .Include(l2 => l2.OneToOne_Optional_FK2),
                 elementAsserter: (e, a) =>
@@ -1790,8 +1789,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 async,
                 ss =>
                     ss.Set<Level4>()
-                        .Select(l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
                         .Include("OneToOne_Optional_FK2"),
                 elementAsserter: (e, a) =>
@@ -1809,8 +1807,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                 async,
                 ss =>
                     ss.Set<Level4>()
-                        .Select(l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
                         .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
                 elementAsserter: (e, a) =>
@@ -2282,8 +2279,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         l1.Id < 3
                         && !l1
                             .OneToMany_Optional1.Select(l2 =>
-                                l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.MaybeScalar(x =>
-                                    x.Id
+                                l2.OneToOne_Optional_FK2.OneToOne_Optional_FK3.MaybeScalar(x => x.Id
                                 )
                             )
                             .All(a => true)
@@ -3196,8 +3192,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                         .Where(t => t != null)
                         .Select(l3 => l3.OneToOne_Required_PK3)
                         .Where(t => t != null)
-                        .Select(l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
                         .Include(l2 => l2.OneToOne_Optional_FK2),
                 elementAsserter: (e, a) =>

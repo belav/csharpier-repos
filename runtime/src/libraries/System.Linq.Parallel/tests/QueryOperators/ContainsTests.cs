@@ -118,8 +118,7 @@ namespace System.Linq.Parallel.Tests
         public static void Contains_OperationCanceledException_PreCanceled()
         {
             AssertThrows.AlreadyCanceled(source => source.Contains(0));
-            AssertThrows.AlreadyCanceled(source =>
-                source.Contains(0, EqualityComparer<int>.Default)
+            AssertThrows.AlreadyCanceled(source => source.Contains(0, EqualityComparer<int>.Default)
             );
         }
 

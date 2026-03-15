@@ -244,11 +244,9 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
                     var hasJsonBodyOrQuery = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasJsonBodyOrQuery
                     );
-                    var hasJsonBody = endpoints.Any(endpoint =>
-                        endpoint.EmitterContext.HasJsonBody
+                    var hasJsonBody = endpoints.Any(endpoint => endpoint.EmitterContext.HasJsonBody
                     );
-                    var hasFormBody = endpoints.Any(endpoint =>
-                        endpoint.EmitterContext.HasFormBody
+                    var hasFormBody = endpoints.Any(endpoint => endpoint.EmitterContext.HasFormBody
                     );
                     var hasRouteOrQuery = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasRouteOrQuery
@@ -256,8 +254,7 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
                     var hasBindAsync = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasBindAsync
                     );
-                    var hasParsable = endpoints.Any(endpoint =>
-                        endpoint.EmitterContext.HasParsable
+                    var hasParsable = endpoints.Any(endpoint => endpoint.EmitterContext.HasParsable
                     );
                     var hasEndpointMetadataProvider = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasEndpointMetadataProvider
@@ -265,8 +262,7 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
                     var hasEndpointParameterMetadataProvider = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasEndpointParameterMetadataProvider
                     );
-                    var hasIResult = endpoints.Any(endpoint =>
-                        endpoint.Response?.IsIResult == true
+                    var hasIResult = endpoints.Any(endpoint => endpoint.Response?.IsIResult == true
                     );
 
                     using var stringWriter = new StringWriter(CultureInfo.InvariantCulture);
@@ -342,8 +338,7 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
             .Select(
                 (endpoints, _) =>
                 {
-                    var hasFormBody = endpoints.Any(endpoint =>
-                        endpoint.EmitterContext.HasFormBody
+                    var hasFormBody = endpoints.Any(endpoint => endpoint.EmitterContext.HasFormBody
                     );
                     var hasJsonBody = endpoints.Any(endpoint =>
                         endpoint.EmitterContext.HasJsonBody

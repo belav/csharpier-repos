@@ -28,8 +28,7 @@ public class MigrationsEndPointMiddlewareTest
             {
                 webHostBuilder
                     .UseTestServer()
-                    .Configure(app =>
-                        app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
+                    .Configure(app => app.UseMigrationsEndPoint().UseMiddleware<SuccessMiddleware>()
                     );
             })
             .Build();

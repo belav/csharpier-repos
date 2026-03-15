@@ -2930,8 +2930,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                         c.CustomerID,
                         ListWithSubList = c
                             .Orders.OrderBy(e => e.OrderID)
-                            .Select(o =>
-                                o.OrderDetails.Select(e => new { e.OrderID, e.ProductID })
+                            .Select(o => o.OrderDetails.Select(e => new { e.OrderID, e.ProductID })
                             ),
                     }),
             elementSorter: e => e.CustomerID,

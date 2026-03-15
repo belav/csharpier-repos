@@ -3740,8 +3740,7 @@ namespace System.Tests
                 '\u202F', // narrow no-break space
             };
             return spaceTypes.SelectMany(formatSpaceChar =>
-                spaceTypes.Select(parseSpaceChar =>
-                    new object[] { formatSpaceChar, parseSpaceChar }
+                spaceTypes.Select(parseSpaceChar => new object[] { formatSpaceChar, parseSpaceChar }
                 )
             );
         }

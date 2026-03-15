@@ -112,8 +112,7 @@ namespace Mono.Linker.Tests.Extensions
             string name
         )
         {
-            return provider.CustomAttributes.Any(ca =>
-                ca.AttributeType.Resolve().DerivesFrom(name)
+            return provider.CustomAttributes.Any(ca => ca.AttributeType.Resolve().DerivesFrom(name)
             );
         }
 

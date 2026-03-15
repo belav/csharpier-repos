@@ -324,8 +324,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("B")).Single(x =>
-                        x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("B")).Single(x => x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1043,8 +1042,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 code,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("G")).Single(x =>
-                        x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("G")).Single(x => x.Kind != "Method"
                     );
                     var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
 

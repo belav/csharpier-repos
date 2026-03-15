@@ -1824,8 +1824,7 @@ public class WebHostBuilderTests
                     Assert.NotNull(wheDescriptor.ImplementationInstance);
                 })
                 .ConfigureServices(services => services.AddSingleton<ServiceA>())
-                .ConfigureServices(services =>
-                    services.AddSingleton<ITestSink>(loggerProvider.Sink)
+                .ConfigureServices(services => services.AddSingleton<ITestSink>(loggerProvider.Sink)
                 )
                 .ConfigureLogging((_, lf) => lf.AddProvider(loggerProvider))
                 .ConfigureAppConfiguration(

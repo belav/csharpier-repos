@@ -742,8 +742,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
 
             // void GetResult() || T GetResult()
-            return methods.Any(m =>
-                m.Name == WellKnownMemberNames.GetResult && !m.Parameters.Any()
+            return methods.Any(m => m.Name == WellKnownMemberNames.GetResult && !m.Parameters.Any()
             );
         }
 

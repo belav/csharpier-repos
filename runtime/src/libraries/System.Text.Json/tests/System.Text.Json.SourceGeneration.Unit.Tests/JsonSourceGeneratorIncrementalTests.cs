@@ -477,8 +477,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             return typeof(CompilationHelper)
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(m => m.ReturnType == typeof(Compilation) && m.GetParameters().Length == 0)
-                .Select(m =>
-                    new object[] { Delegate.CreateDelegate(typeof(Func<Compilation>), m) }
+                .Select(m => new object[] { Delegate.CreateDelegate(typeof(Func<Compilation>), m) }
                 );
         }
     }

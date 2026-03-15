@@ -24,8 +24,7 @@ public class DefaultFilesMiddlewareTests
         ) { }
 
         // PathString(null) is OK.
-        using var host = await StaticFilesTestServer.Create(app =>
-            app.UseDefaultFiles((string)null)
+        using var host = await StaticFilesTestServer.Create(app => app.UseDefaultFiles((string)null)
         );
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("/");

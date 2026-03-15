@@ -75,8 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             serviceCollection.BuildServiceProvider().GetService<IEnumerable<IFakeOuterService>>();
 
-            var callsiteBuiltEvent = _listener.EventData.Single(e =>
-                e.EventName == "CallSiteBuilt"
+            var callsiteBuiltEvent = _listener.EventData.Single(e => e.EventName == "CallSiteBuilt"
             );
 
             Assert.Equal(
@@ -269,8 +268,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 scope.ServiceProvider.GetService<IFakeService>();
             }
 
-            var scopeDisposedEvent = _listener.EventData.Single(e =>
-                e.EventName == "ScopeDisposed"
+            var scopeDisposedEvent = _listener.EventData.Single(e => e.EventName == "ScopeDisposed"
             );
 
             Assert.Equal(1, GetProperty<int>(scopeDisposedEvent, "scopedServicesResolved"));

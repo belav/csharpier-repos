@@ -2151,8 +2151,7 @@ public class EndpointHtmlRendererTest
             NullLogger<ComponentStatePersistenceManager>
         >();
         services.AddSingleton<ComponentStatePersistenceManager>();
-        services.AddSingleton(sp =>
-            sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        services.AddSingleton(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State
         );
         services.AddSingleton<ServerComponentSerializer>();
         services.AddSingleton<HttpContextFormDataProvider>();

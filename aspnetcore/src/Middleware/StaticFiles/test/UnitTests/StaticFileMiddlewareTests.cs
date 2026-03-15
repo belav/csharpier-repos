@@ -179,8 +179,7 @@ public class StaticFileMiddlewareTests : LoggedTest
         ) { }
 
         // PathString(null) is OK.
-        using var host = await StaticFilesTestServer.Create(app =>
-            app.UseStaticFiles((string)null)
+        using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles((string)null)
         );
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("/");

@@ -264,8 +264,7 @@ namespace MonoTests.Mono.Profiler.Log
                     .SingleOrDefault(ev => ev.Name == "Mono.Profiling.Tests.BacktraceTest:Two ()");
                 var jitThree = events
                     .OfType<JitEvent>()
-                    .SingleOrDefault(ev =>
-                        ev.Name == "Mono.Profiling.Tests.BacktraceTest:Three ()"
+                    .SingleOrDefault(ev => ev.Name == "Mono.Profiling.Tests.BacktraceTest:Three ()"
                     );
                 var jitFour = events
                     .OfType<JitEvent>()
@@ -438,8 +437,7 @@ namespace MonoTests.Mono.Profiler.Log
                     .SingleOrDefault(ev => ev.Name == "Mono.Profiling.Tests.BacktraceTest:Two ()");
                 var jitThree = events
                     .OfType<JitEvent>()
-                    .SingleOrDefault(ev =>
-                        ev.Name == "Mono.Profiling.Tests.BacktraceTest:Three ()"
+                    .SingleOrDefault(ev => ev.Name == "Mono.Profiling.Tests.BacktraceTest:Three ()"
                     );
                 var jitFour = events
                     .OfType<JitEvent>()

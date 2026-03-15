@@ -652,7 +652,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // if initializer was null we wouldn't have found expressions
                         // any constructed nodes (default/null) should give -1 because parent is null
                         expression =>
-                        objectCreationExpression.Initializer!.Expressions.IndexOf(expression.Parent)
+                            objectCreationExpression.Initializer!.Expressions.IndexOf(
+                                expression.Parent
+                            )
                     );
 
                     documentEditor.ReplaceNode(

@@ -685,8 +685,7 @@ public class C
             var compilation = GetCompilation(source, LanguageNames.CSharp);
             var symbols = GetDeclaredSymbols(compilation)
                 .OfType<IMethodSymbol>()
-                .SelectMany(ms =>
-                    GetInteriorSymbols(ms, compilation).OfType<IRangeVariableSymbol>()
+                .SelectMany(ms => GetInteriorSymbols(ms, compilation).OfType<IRangeVariableSymbol>()
                 )
                 .ToList();
             Assert.Equal(2, symbols.Count);

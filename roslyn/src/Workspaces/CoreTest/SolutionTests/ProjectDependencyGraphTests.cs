@@ -717,8 +717,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Assert.Same(dependencyGraph, solution.State.GetProjectDependencyGraph());
 
             b = solution.GetProjectsByName("B").Single();
-            var remainingBToC = b.ProjectReferences.Single(reference =>
-                reference.ProjectId == c.Id
+            var remainingBToC = b.ProjectReferences.Single(reference => reference.ProjectId == c.Id
             );
             solution = solution.RemoveProjectReference(b.Id, remainingBToC);
             Assert.NotSame(dependencyGraph, solution.State.GetProjectDependencyGraph());

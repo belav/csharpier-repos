@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var actualOrder = ExtensionOrderer.Order(csharpProviders).ToArray();
             Assert.True(actualOrder.Length > 0);
             Assert.True(
-                actualOrder.IndexOf(p =>
-                    p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
+                actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
                 )
                     < actualOrder.IndexOf(p =>
                         p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify
@@ -61,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             actualOrder = ExtensionOrderer.Order(vbProviders).ToArray();
             Assert.True(actualOrder.Length > 0);
             Assert.True(
-                actualOrder.IndexOf(p =>
-                    p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
+                actualOrder.IndexOf(p => p.Metadata.Name == PredefinedCodeFixProviderNames.AddImport
                 )
                     < actualOrder.IndexOf(p =>
                         p.Metadata.Name == PredefinedCodeFixProviderNames.FullyQualify

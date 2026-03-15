@@ -1906,8 +1906,7 @@ namespace CSharpSyntaxGenerator
             );
             if (listCount == 1)
             {
-                return nd.Fields.First(f =>
-                    IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
+                return nd.Fields.First(f => IsAnyNodeList(f.Type) && !IsAttributeOrModifiersList(f)
                 );
             }
             else

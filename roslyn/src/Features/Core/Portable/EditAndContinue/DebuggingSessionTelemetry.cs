@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         .SolutionSessionId.ToString("B")
                         .ToUpperInvariant();
                     map[SessionId] = debugSessionId;
-                    map["SessionCount"] = data.EditSessionData.Count(session =>
-                        session.InBreakState
+                    map["SessionCount"] = data.EditSessionData.Count(session => session.InBreakState
                     );
                     map["EmptySessionCount"] = data.EmptyEditSessionCount;
                     map["HotReloadSessionCount"] = data.EditSessionData.Count(session =>

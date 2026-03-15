@@ -158,8 +158,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             var nonSupressionCodeFixes = fixes.WhereAsArray(f =>
                 !IsTopLevelSuppressionAction(f.Action)
             );
-            var supressionCodeFixes = fixes.WhereAsArray(f =>
-                IsTopLevelSuppressionAction(f.Action)
+            var supressionCodeFixes = fixes.WhereAsArray(f => IsTopLevelSuppressionAction(f.Action)
             );
 
             await AddCodeActionsAsync(
@@ -981,8 +980,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                     .SelectAsArray(s => WithPriority(s, CodeActionPriority.Low));
 
                 var highPriFixes = fixes.WhereAsArray(s => s.Priority == CodeActionPriority.High);
-                var nonHighPriFixes = fixes.WhereAsArray(s =>
-                    s.Priority != CodeActionPriority.High
+                var nonHighPriFixes = fixes.WhereAsArray(s => s.Priority != CodeActionPriority.High
                 );
 
                 return highPriFixes

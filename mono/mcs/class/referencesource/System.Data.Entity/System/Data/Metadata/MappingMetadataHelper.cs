@@ -106,8 +106,7 @@ namespace System.Data.Metadata.Edm
             )
             {
                 if (
-                    mapping.IsOfTypes.Any(parentType =>
-                        parentType.IsAssignableFrom(childEntityType)
+                    mapping.IsOfTypes.Any(parentType => parentType.IsAssignableFrom(childEntityType)
                     ) || mapping.Types.Contains(childEntityType)
                 )
                 {

@@ -42,8 +42,7 @@ internal sealed class DocumentDiagnosticSource(DiagnosticKind diagnosticKind, Do
         // Drop the source suppressed diagnostics.
         // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1824321 tracks
         // adding LSP support for returning source suppressed diagnostics.
-        allSpanDiagnostics = allSpanDiagnostics.WhereAsArray(diagnostic =>
-            !diagnostic.IsSuppressed
+        allSpanDiagnostics = allSpanDiagnostics.WhereAsArray(diagnostic => !diagnostic.IsSuppressed
         );
 
         return allSpanDiagnostics;

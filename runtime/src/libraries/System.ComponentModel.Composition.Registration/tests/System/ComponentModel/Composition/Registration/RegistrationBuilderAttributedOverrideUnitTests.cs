@@ -411,8 +411,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportPropertyConvention_CustomExportAttribute_ConventionIgnored()
         {
             RegistrationBuilder convention =
-                ConfigureExportPropertyConvention<CustomExportPropertyDeclarationOverride>(t =>
-                    t.AB
+                ConfigureExportPropertyConvention<CustomExportPropertyDeclarationOverride>(t => t.AB
                 );
 
             AssertHasDeclaredAttributesUnderConvention<CustomExportPropertyDeclarationOverride>(
@@ -451,8 +450,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportPropertyConvention_NonExportPropertyDeclarationAttributes_ConventionApplied()
         {
             RegistrationBuilder convention =
-                ConfigureExportPropertyConvention<NonExportPropertyDeclarationAttributes>(t =>
-                    t.AB
+                ConfigureExportPropertyConvention<NonExportPropertyDeclarationAttributes>(t => t.AB
                 );
 
             var unionOfConventionAndDeclared = typeof(NonExportPropertyDeclarationAttributes)
@@ -554,8 +552,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ImportPropertyConvention_NonImportPropertyDeclarationAttributes_ConventionApplied()
         {
             RegistrationBuilder convention =
-                ConfigureImportPropertyConvention<NonImportPropertyDeclarationAttributes>(t =>
-                    t.AB
+                ConfigureImportPropertyConvention<NonImportPropertyDeclarationAttributes>(t => t.AB
                 );
 
             var unionOfConventionAndDeclared = typeof(NonImportPropertyDeclarationAttributes)

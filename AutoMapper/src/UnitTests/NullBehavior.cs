@@ -752,8 +752,7 @@ public class When_overriding_null_behavior_in_sub_profile : AutoMapperSpecBase
                             d => d.SubExpressionName,
                             opt =>
                                 opt.MapFrom(src =>
-                                    src.Subs.FirstOrDefault(spt =>
-                                        spt.Sub.Something == src.Id
+                                    src.Subs.FirstOrDefault(spt => spt.Sub.Something == src.Id
                                     ).Something
                                 )
                         )

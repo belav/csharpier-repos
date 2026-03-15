@@ -137,8 +137,7 @@ namespace Microsoft.Interop.Analyzers
             );
             AttributeData dllImportAttribute = method
                 .GetAttributes()
-                .First(attr =>
-                    attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute
+                .First(attr => attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute
                 );
             SignatureContext targetSignatureContext = SignatureContext.Create(
                 method,

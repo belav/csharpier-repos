@@ -145,8 +145,7 @@ public class OpenGenerics_With_Struct : AutoMapperSpecBase
     public struct Id<T> { }
 
     protected override MapperConfiguration CreateConfiguration() =>
-        new(mapper =>
-            mapper.CreateMap(typeof(Id<>), typeof(long)).ConvertUsing((_, __) => (long)42)
+        new(mapper => mapper.CreateMap(typeof(Id<>), typeof(long)).ConvertUsing((_, __) => (long)42)
         );
 
     [Fact]
@@ -702,8 +701,7 @@ public class OpenGenerics
     [Fact]
     public void Can_map_simple_generic_types()
     {
-        var config = new MapperConfiguration(cfg =>
-            cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
+        var config = new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
         );
 
         var source = new Source<int> { Value = 5 };
@@ -716,8 +714,7 @@ public class OpenGenerics
     [Fact]
     public void Can_map_non_generic_members()
     {
-        var config = new MapperConfiguration(cfg =>
-            cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
+        var config = new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
         );
 
         var source = new Source<int> { A = 5 };
@@ -730,8 +727,7 @@ public class OpenGenerics
     [Fact]
     public void Can_map_recursive_generic_types()
     {
-        var config = new MapperConfiguration(cfg =>
-            cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
+        var config = new MapperConfiguration(cfg => cfg.CreateMap(typeof(Source<>), typeof(Dest<>))
         );
 
         var source = new Source<Source<int>> { Value = new Source<int> { Value = 5 } };

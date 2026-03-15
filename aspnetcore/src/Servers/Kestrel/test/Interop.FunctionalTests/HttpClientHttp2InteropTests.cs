@@ -1550,8 +1550,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
         {
             ConfigureKestrel(webHostBuilder, scheme);
-            webHostBuilder.ConfigureKestrel(options =>
-                options.Limits.Http2.MaxFrameSize = 1024 * 20
+            webHostBuilder.ConfigureKestrel(options => options.Limits.Http2.MaxFrameSize = 1024 * 20
             ); // The default is 16kb
             webHostBuilder
                 .ConfigureServices(AddTestLogging)

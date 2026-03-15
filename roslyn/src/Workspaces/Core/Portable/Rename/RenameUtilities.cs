@@ -142,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Rename
                             )
                         )
                         .Distinct();
-                    return relevantProjects.SelectMany(p =>
-                        solution.GetRequiredProject(p).Documents
+                    return relevantProjects.SelectMany(p => solution.GetRequiredProject(p).Documents
                     );
                 }
             }

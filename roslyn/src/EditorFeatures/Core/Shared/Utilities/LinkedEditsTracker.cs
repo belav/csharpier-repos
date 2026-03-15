@@ -111,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 from trackingSpan in _trackingSpans
                 let mappedSpan = trackingSpan.GetSpan(args.After)
                 where
-                    intersection.All(intersectionSpan =>
-                        mappedSpan.IntersectsWith(intersectionSpan)
+                    intersection.All(intersectionSpan => mappedSpan.IntersectsWith(intersectionSpan)
                     )
                 select trackingSpan;
 

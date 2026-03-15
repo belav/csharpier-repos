@@ -318,8 +318,7 @@ namespace System.Formats.Tar.Tests
                         entries.Add(entry);
                     }
 
-                    int directoriesCount = entries.Count(e =>
-                        e.EntryType == TarEntryType.Directory
+                    int directoriesCount = entries.Count(e => e.EntryType == TarEntryType.Directory
                     );
                     Assert.Equal(10, directoriesCount);
 

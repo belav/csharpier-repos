@@ -118,14 +118,12 @@ public class QueryableExtensionsTest
             value.ContainsAsync(0, cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int, int>(value => value.CountAsync(default));
-        VerifyProducedExpression<int, int>(value =>
-            value.CountAsync(cancellationTokenSource.Token)
+        VerifyProducedExpression<int, int>(value => value.CountAsync(cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int, int>(value =>
             value.CountAsync(e => true, cancellationTokenSource.Token)
         );
-        VerifyProducedExpression<int, int>(value =>
-            value.FirstAsync(cancellationTokenSource.Token)
+        VerifyProducedExpression<int, int>(value => value.FirstAsync(cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int, int>(value =>
             value.FirstAsync(e => true, cancellationTokenSource.Token)
@@ -151,8 +149,7 @@ public class QueryableExtensionsTest
             value.MinAsync(e => e, cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int, int>(value => value.SingleAsync(default));
-        VerifyProducedExpression<int, int>(value =>
-            value.SingleAsync(cancellationTokenSource.Token)
+        VerifyProducedExpression<int, int>(value => value.SingleAsync(cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int, int>(value => value.SingleAsync(e => true, default));
         VerifyProducedExpression<int, int>(value =>
@@ -171,14 +168,12 @@ public class QueryableExtensionsTest
         VerifyProducedExpression<int, int>(value =>
             value.SumAsync(e => e, cancellationTokenSource.Token)
         );
-        VerifyProducedExpression<int?, int?>(value =>
-            value.SumAsync(cancellationTokenSource.Token)
+        VerifyProducedExpression<int?, int?>(value => value.SumAsync(cancellationTokenSource.Token)
         );
         VerifyProducedExpression<int?, int?>(value =>
             value.SumAsync(e => e, cancellationTokenSource.Token)
         );
-        VerifyProducedExpression<long, long>(value =>
-            value.SumAsync(cancellationTokenSource.Token)
+        VerifyProducedExpression<long, long>(value => value.SumAsync(cancellationTokenSource.Token)
         );
         VerifyProducedExpression<long, long>(value =>
             value.SumAsync(e => e, cancellationTokenSource.Token)

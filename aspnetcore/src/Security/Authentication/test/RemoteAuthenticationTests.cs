@@ -112,8 +112,7 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         using var host = await CreateHostWithServices(
             services =>
             {
-                var builder = services.AddAuthentication(o =>
-                    o.DefaultSignInScheme = DefaultScheme
+                var builder = services.AddAuthentication(o => o.DefaultSignInScheme = DefaultScheme
                 );
                 RegisterAuth(builder, o => o.SignInScheme = null);
             },

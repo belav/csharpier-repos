@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                 cancellationToken
             );
             var innermostClauses = new HashSet<SyntaxNode>(
-                matches.Select(expr =>
-                    expr.GetAncestorsOrThis<SyntaxNode>().First(IsAnyQueryClause)
+                matches.Select(expr => expr.GetAncestorsOrThis<SyntaxNode>().First(IsAnyQueryClause)
                 )
             );
 

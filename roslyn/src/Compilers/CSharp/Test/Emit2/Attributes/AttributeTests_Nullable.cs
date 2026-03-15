@@ -6415,8 +6415,7 @@ class C
                         .ToArray();
 
                     // Nested tuple
-                    var field = fieldDefs.Single(f =>
-                        reader.StringComparer.Equals(f.Name, "Nested")
+                    var field = fieldDefs.Single(f => reader.StringComparer.Equals(f.Name, "Nested")
                     );
                     var customAttributes = field.GetCustomAttributes();
                     AssertAttributes(

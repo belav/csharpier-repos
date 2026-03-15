@@ -276,8 +276,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // Get the compilation unit usings and set them up to format when moved.
             var usingsToAdd = compilationUnit
                 .Usings.Where(u => u.GlobalKeyword == default)
-                .Select(d =>
-                    d.WithAdditionalAnnotations(Formatter.Annotation, s_warningAnnotation)
+                .Select(d => d.WithAdditionalAnnotations(Formatter.Annotation, s_warningAnnotation)
                 );
 
             // Remove usings and fix leading trivia for compilation unit.

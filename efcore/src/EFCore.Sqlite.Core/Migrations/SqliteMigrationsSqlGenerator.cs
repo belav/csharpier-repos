@@ -177,8 +177,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                             ? model
                                 ?.GetRelationalModel()
                                 .FindTable(renameIndexOperation.Table, renameIndexOperation.Schema)
-                                ?.Indexes.FirstOrDefault(i =>
-                                    i.Name == renameIndexOperation.NewName
+                                ?.Indexes.FirstOrDefault(i => i.Name == renameIndexOperation.NewName
                                 )
                             : null;
                     if (index != null)

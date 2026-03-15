@@ -150,8 +150,7 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source =>
-                operation.Item(source, () => { }).All(x => true)
+            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).All(x => true)
             );
         }
 
@@ -190,8 +189,7 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Any());
-            AssertThrows.AlreadyCanceled(source =>
-                operation.Item(source, () => { }).Any(x => true)
+            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Any(x => true)
             );
         }
 
@@ -753,8 +751,7 @@ namespace System.Linq.Parallel.Tests
         )
         {
             AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Last());
-            AssertThrows.AlreadyCanceled(source =>
-                operation.Item(source, () => { }).Last(x => true)
+            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).Last(x => true)
             );
         }
 
@@ -804,8 +801,7 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(source =>
-                operation.Item(source, () => { }).LastOrDefault()
+            AssertThrows.AlreadyCanceled(source => operation.Item(source, () => { }).LastOrDefault()
             );
             AssertThrows.AlreadyCanceled(source =>
                 operation.Item(source, () => { }).LastOrDefault(x => true)

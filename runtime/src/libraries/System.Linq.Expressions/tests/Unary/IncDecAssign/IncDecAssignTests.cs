@@ -219,15 +219,13 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> NullableUInt64sAndDecrements()
         {
-            return NullableUInt64s.Select(i =>
-                new object[] { typeof(ulong?), i, unchecked(i - 1) }
+            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i - 1) }
             );
         }
 
         public static IEnumerable<object[]> NullableUInt64sAndIncrements()
         {
-            return NullableUInt64s.Select(i =>
-                new object[] { typeof(ulong?), i, unchecked(i + 1) }
+            return NullableUInt64s.Select(i => new object[] { typeof(ulong?), i, unchecked(i + 1) }
             );
         }
 

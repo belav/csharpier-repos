@@ -788,8 +788,7 @@ namespace System.Text.Tests
             if (suppressExpectedCancellationTokenAsserts)
             {
                 delegatingInnerStreamMock
-                    .Setup(o =>
-                        o.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
+                    .Setup(o => o.ReadAsync(It.IsAny<Memory<byte>>(), It.IsAny<CancellationToken>())
                     )
                     .Returns<Memory<byte>, CancellationToken>(innerStream.ReadAsync);
             }

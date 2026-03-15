@@ -1452,8 +1452,7 @@ class C : I
 
                     var classEventImpl = @class
                         .GetMembers()
-                        .Where(m =>
-                            m.GetExplicitInterfaceImplementations().Contains(interfaceEvent)
+                        .Where(m => m.GetExplicitInterfaceImplementations().Contains(interfaceEvent)
                         )
                         .Single();
                     var classPropertyImpl = @class

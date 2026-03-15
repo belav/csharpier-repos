@@ -516,8 +516,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     .Analyzers.OfType<DiagnosticSuppressor>()
                     .ToImmutableHashSet();
                 analyzers = analyzers.AddRange(
-                    suppressors.Where(suppressor =>
-                        !suppressorsInAnalysisScope.Contains(suppressor)
+                    suppressors.Where(suppressor => !suppressorsInAnalysisScope.Contains(suppressor)
                     )
                 );
             }

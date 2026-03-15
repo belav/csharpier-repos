@@ -1535,8 +1535,7 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(c =>
-                        new { x = c.City, y = c.Country } == new { x = "London", y = "UK" }
+                    .Where(c => new { x = c.City, y = c.Country } == new { x = "London", y = "UK" }
                     ),
             ss => ss.Set<Customer>().Where(c => c.City == "London" && c.Country == "UK")
         );
@@ -2282,8 +2281,7 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             ss =>
                 ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID != prm1 && c.CustomerID != prm2 && c.CustomerID != prm3
+                    .Where(c => c.CustomerID != prm1 && c.CustomerID != prm2 && c.CustomerID != prm3
                     )
         );
     }

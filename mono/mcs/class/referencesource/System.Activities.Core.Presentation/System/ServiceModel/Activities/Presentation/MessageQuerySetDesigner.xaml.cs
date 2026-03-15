@@ -111,8 +111,7 @@ namespace System.ServiceModel.Activities.Presentation
                 //add new entry with created key and query
                 messageQuerySet.Add(name, query);
                 //look for created key value pair
-                var entry = messageQuerySet.First(p =>
-                    string.Equals(p.Key.GetCurrentValue(), name)
+                var entry = messageQuerySet.First(p => string.Equals(p.Key.GetCurrentValue(), name)
                 );
                 //wrap it
                 var wrapper = new MessageQueryEntry(entry);

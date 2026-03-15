@@ -1238,8 +1238,7 @@ public class InternalForeignKeyBuilder
             .ToList();
 
         if (
-            invertedOwnerships.Any(fk =>
-                !configurationSource.Overrides(fk.GetConfigurationSource())
+            invertedOwnerships.Any(fk => !configurationSource.Overrides(fk.GetConfigurationSource())
             )
         )
         {
@@ -1984,8 +1983,7 @@ public class InternalForeignKeyBuilder
         var keysToDetach = temporaryProperties
             .SelectMany(p =>
                 p.GetContainingKeys()
-                    .Where(k =>
-                        ConfigurationSource.Convention.Overrides(k.GetConfigurationSource())
+                    .Where(k => ConfigurationSource.Convention.Overrides(k.GetConfigurationSource())
                     )
             )
             .Distinct()

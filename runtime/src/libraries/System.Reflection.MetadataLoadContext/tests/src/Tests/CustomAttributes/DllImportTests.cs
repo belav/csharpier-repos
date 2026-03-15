@@ -31,8 +31,7 @@ namespace System.Reflection.Tests
                 DllImportAttribute expected = runtimeMethods[i]
                     .GetCustomAttribute<DllImportAttribute>();
                 CustomAttributeData cad = ecmaMethods[i]
-                    .CustomAttributes.Single(c =>
-                        c.AttributeType.Name == nameof(DllImportAttribute)
+                    .CustomAttributes.Single(c => c.AttributeType.Name == nameof(DllImportAttribute)
                     );
                 DllImportAttribute actual = cad.UnprojectAndInstantiate<DllImportAttribute>();
                 AssertEqual(expected, actual);

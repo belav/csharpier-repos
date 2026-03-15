@@ -334,8 +334,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             }
 
             using var _ = ArrayBuilder<PickMembersOption>.GetInstance(out var pickMemberOptions);
-            var canAddNullCheck = viableMembers.Any(static m =>
-                m.GetSymbolType().CanAddNullCheck()
+            var canAddNullCheck = viableMembers.Any(static m => m.GetSymbolType().CanAddNullCheck()
             );
 
             if (canAddNullCheck)

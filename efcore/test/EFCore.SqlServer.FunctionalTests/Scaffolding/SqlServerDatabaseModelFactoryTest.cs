@@ -55,8 +55,7 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 Assert.Null(defaultSequence.MinValue);
                 Assert.Null(defaultSequence.MaxValue);
 
-                var customSequence = dbModel.Sequences.First(ds =>
-                    ds.Name == "CustomFacetsSequence"
+                var customSequence = dbModel.Sequences.First(ds => ds.Name == "CustomFacetsSequence"
                 );
                 Assert.Equal("db2", customSequence.Schema);
                 Assert.Equal("CustomFacetsSequence", customSequence.Name);
