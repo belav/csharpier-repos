@@ -8,18 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// View over a Qil operator having N children.
     /// </summary>
     /// <remarks>
     /// Don't construct QIL nodes directly; instead, use the <see cref="QilFactory">QilFactory</see>.
     /// </remarks>
-    internal class QilList : QilNode {
+    internal class QilList : QilNode
+    {
         private int count;
         private QilNode[] members;
-
 
         //-----------------------------------------------
         // Constructor
@@ -28,11 +28,12 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a new (empty) QilList
         /// </summary>
-        public QilList(QilNodeType nodeType) : base(nodeType) {
+        public QilList(QilNodeType nodeType)
+            : base(nodeType)
+        {
             this.members = new QilNode[4];
             this.xmlType = null;
         }
-
 
         //-----------------------------------------------
         // QilNode methods
@@ -41,19 +42,25 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Lazily create the XmlQueryType.
         /// </summary>
-        public override XmlQueryType XmlType {
-            get {
-                if (this.xmlType == null) {
+        public override XmlQueryType XmlType
+        {
+            get
+            {
+                if (this.xmlType == null)
+                {
                     XmlQueryType xt = XmlQueryTypeFactory.Empty;
 
-                    if (this.count > 0) {
-                        if (this.nodeType == QilNodeType.Sequence) {
+                    if (this.count > 0)
+                    {
+                        if (this.nodeType == QilNodeType.Sequence)
+                        {
                             for (int i = 0; i < this.count; i++)
                                 xt = XmlQueryTypeFactory.Sequence(xt, this.members[i].XmlType);
 
                             Debug.Assert(!xt.IsDod, "Sequences do not preserve DocOrderDistinct");
                         }
-                        else if (this.nodeType == QilNodeType.BranchList) {
+                        else if (this.nodeType == QilNodeType.BranchList)
+                        {
                             xt = this.members[0].XmlType;
                             for (int i = 1; i < this.count; i++)
                                 xt = XmlQueryTypeFactory.Choice(xt, this.members[i].XmlType);
@@ -70,30 +77,34 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Override in order to clone the "members" array.
         /// </summary>
-        public override QilNode ShallowClone(QilFactory f) {
-            QilList n = (QilList) MemberwiseClone();
-            n.members = (QilNode[]) this.members.Clone();
+        public override QilNode ShallowClone(QilFactory f)
+        {
+            QilList n = (QilList)MemberwiseClone();
+            n.members = (QilNode[])this.members.Clone();
             f.TraceNode(n);
             return n;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
         //-----------------------------------------------
 
-        public override int Count {
+        public override int Count
+        {
             get { return this.count; }
         }
 
-        public override QilNode this[int index] {
-            get {
+        public override QilNode this[int index]
+        {
+            get
+            {
                 if (index >= 0 && index < this.count)
                     return this.members[index];
 
                 throw new IndexOutOfRangeException();
             }
-            set {
+            set
+            {
                 if (index >= 0 && index < this.count)
                     this.members[index] = value;
                 else
@@ -104,11 +115,13 @@ namespace System.Xml.Xsl.Qil {
             }
         }
 
-        public override void Insert(int index, QilNode node) {
+        public override void Insert(int index, QilNode node)
+        {
             if (index < 0 || index > this.count)
                 throw new IndexOutOfRangeException();
 
-            if (this.count == this.members.Length) {
+            if (this.count == this.members.Length)
+            {
                 QilNode[] membersNew = new QilNode[this.count * 2];
                 Array.Copy(this.members, membersNew, this.count);
                 this.members = membersNew;
@@ -124,7 +137,8 @@ namespace System.Xml.Xsl.Qil {
             this.xmlType = null;
         }
 
-        public override void RemoveAt(int index) {
+        public override void RemoveAt(int index)
+        {
             if (index < 0 || index >= this.count)
                 throw new IndexOutOfRangeException();
 

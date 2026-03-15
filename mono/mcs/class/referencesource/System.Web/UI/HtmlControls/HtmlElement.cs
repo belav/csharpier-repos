@@ -4,39 +4,40 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System.ComponentModel;
     using System.Web;
     using System.Web.UI;
 
-    public class HtmlElement : HtmlContainerControl {
-
-        public HtmlElement() : base("html") {
-        }
+    public class HtmlElement : HtmlContainerControl
+    {
+        public HtmlElement()
+            : base("html") { }
 
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        UrlProperty()
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            UrlProperty()
         ]
-        public string Manifest {
-            get {
+        public string Manifest
+        {
+            get
+            {
                 string s = Attributes["manifest"];
                 return s ?? String.Empty;
             }
-            set {
-                Attributes["manifest"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["manifest"] = MapStringAttributeToString(value); }
         }
 
         /*
          * Override to process manifest attribute
          */
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             PreProcessRelativeReferenceAttribute(writer, "manifest");
             base.RenderAttributes(writer);
         }
-
     }
 }

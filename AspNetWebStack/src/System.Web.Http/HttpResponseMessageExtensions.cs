@@ -50,7 +50,10 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="response">The response.</param>
         /// <param name="request">The request.</param>
-        internal static void EnsureResponseHasRequest(this HttpResponseMessage response, HttpRequestMessage request)
+        internal static void EnsureResponseHasRequest(
+            this HttpResponseMessage response,
+            HttpRequestMessage request
+        )
         {
             if (response != null && response.RequestMessage == null)
             {

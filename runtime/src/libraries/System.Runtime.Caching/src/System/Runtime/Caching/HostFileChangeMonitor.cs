@@ -37,7 +37,13 @@ namespace System.Runtime.Caching
                     string path = _filePaths[0];
                     DateTimeOffset lastWrite;
                     long fileSize;
-                    s_fcn.StartMonitoring(path, new OnChangedCallback(OnChanged), out _fcnState, out lastWrite, out fileSize);
+                    s_fcn.StartMonitoring(
+                        path,
+                        new OnChangedCallback(OnChanged),
+                        out _fcnState,
+                        out lastWrite,
+                        out fileSize
+                    );
                     uniqueId = $"{path}{lastWrite.UtcDateTime.Ticks:X}{fileSize:X}";
                     _lastModified = lastWrite;
                 }
@@ -46,7 +52,9 @@ namespace System.Runtime.Caching
                     int capacity = 0;
                     foreach (string path in _filePaths)
                     {
-                        capacity += path.Length + (2 * MAX_CHAR_COUNT_OF_LONG_CONVERTED_TO_HEXADECIMAL_STRING);
+                        capacity +=
+                            path.Length
+                            + (2 * MAX_CHAR_COUNT_OF_LONG_CONVERTED_TO_HEXADECIMAL_STRING);
                     }
                     Hashtable fcnState = new Hashtable(_filePaths.Count);
                     _fcnState = fcnState;
@@ -60,10 +68,18 @@ namespace System.Runtime.Caching
                         DateTimeOffset lastWrite;
                         long fileSize;
                         object state;
-                        s_fcn.StartMonitoring(path, new OnChangedCallback(OnChanged), out state, out lastWrite, out fileSize);
+                        s_fcn.StartMonitoring(
+                            path,
+                            new OnChangedCallback(OnChanged),
+                            out state,
+                            out lastWrite,
+                            out fileSize
+                        );
                         fcnState[path] = state;
                         sb.Append(path);
-                        sb.Append(lastWrite.UtcDateTime.Ticks.ToString("X", CultureInfo.InvariantCulture));
+                        sb.Append(
+                            lastWrite.UtcDateTime.Ticks.ToString("X", CultureInfo.InvariantCulture)
+                        );
                         sb.Append(fileSize.ToString("X", CultureInfo.InvariantCulture));
                         if (lastWrite > _lastModified)
                         {
@@ -93,13 +109,19 @@ namespace System.Runtime.Caching
                 IServiceProvider host = ObjectCache.Host;
                 if (host != null)
                 {
-                    fcn = host.GetService(typeof(IFileChangeNotificationSystem)) as IFileChangeNotificationSystem;
+                    fcn =
+                        host.GetService(typeof(IFileChangeNotificationSystem))
+                        as IFileChangeNotificationSystem;
                 }
 #pragma warning disable IDE0074 // Use compound assignment
                 if (fcn == null)
                 {
 #if NETCOREAPP
-                    if (OperatingSystem.IsBrowser() || (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst()) || OperatingSystem.IsTvOS())
+                    if (
+                        OperatingSystem.IsBrowser()
+                        || (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst())
+                        || OperatingSystem.IsTvOS()
+                    )
                     {
                         throw new PlatformNotSupportedException();
                     }
@@ -153,9 +175,18 @@ namespace System.Runtime.Caching
         // public and internal members
         //
 
-        public override ReadOnlyCollection<string> FilePaths { get { return _filePaths; } }
-        public override string UniqueId { get { return _uniqueId; } }
-        public override DateTimeOffset LastModified { get { return _lastModified; } }
+        public override ReadOnlyCollection<string> FilePaths
+        {
+            get { return _filePaths; }
+        }
+        public override string UniqueId
+        {
+            get { return _uniqueId; }
+        }
+        public override DateTimeOffset LastModified
+        {
+            get { return _lastModified; }
+        }
 
         public HostFileChangeMonitor(IList<string> filePaths)
         {
@@ -183,7 +214,9 @@ namespace System.Runtime.Caching
             {
                 if (string.IsNullOrEmpty(path))
                 {
-                    throw new ArgumentException(RH.Format(SR.Collection_contains_null_or_empty_string, nameof(filePaths)));
+                    throw new ArgumentException(
+                        RH.Format(SR.Collection_contains_null_or_empty_string, nameof(filePaths))
+                    );
                 }
                 else
                 {

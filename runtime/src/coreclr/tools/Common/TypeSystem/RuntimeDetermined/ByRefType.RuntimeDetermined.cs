@@ -5,9 +5,16 @@ namespace Internal.TypeSystem
 {
     public partial class ByRefType
     {
-        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
-            TypeDesc parameterTypeConverted = ParameterType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(typeInstantiation, methodInstantiation);
+            TypeDesc parameterTypeConverted =
+                ParameterType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                    typeInstantiation,
+                    methodInstantiation
+                );
             if (ParameterType != parameterTypeConverted)
             {
                 return Context.GetByRefType(parameterTypeConverted);

@@ -27,20 +27,30 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetAssembly_ReturnsCorrectAssemblyName()
         {
-            Assert.Equal(_customModule.Assembly.FullName, typeof(ProjectingModuleTests).Assembly.FullName);
+            Assert.Equal(
+                _customModule.Assembly.FullName,
+                typeof(ProjectingModuleTests).Assembly.FullName
+            );
         }
 
         [Fact]
         public void GetCustomAttribute_WithType_ReturnsTestModuleAttribute()
         {
-            Assert.Equal(typeof(TestModuleAttribute), _customModule.GetCustomAttribute(typeof(TestModuleAttribute)).GetType());
+            Assert.Equal(
+                typeof(TestModuleAttribute),
+                _customModule.GetCustomAttribute(typeof(TestModuleAttribute)).GetType()
+            );
         }
 
         [Fact]
         public void GetCustomAttributesData_ReturnsTestModuleAttribute()
         {
-            List<CustomAttributeData> customAttributesData = _customModule.GetCustomAttributesData().ToList();
-            var testModuleAttribute = customAttributesData.FirstOrDefault(x => x.AttributeType.Name == "TestModuleAttribute");
+            List<CustomAttributeData> customAttributesData = _customModule
+                .GetCustomAttributesData()
+                .ToList();
+            var testModuleAttribute = customAttributesData.FirstOrDefault(x =>
+                x.AttributeType.Name == "TestModuleAttribute"
+            );
             Assert.NotNull(testModuleAttribute);
         }
 

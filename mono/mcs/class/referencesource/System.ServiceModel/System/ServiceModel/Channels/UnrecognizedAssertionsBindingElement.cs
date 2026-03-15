@@ -18,7 +18,10 @@ namespace System.ServiceModel.Channels
         IDictionary<OperationDescription, ICollection<XmlElement>> operationAssertions;
         IDictionary<MessageDescription, ICollection<XmlElement>> messageAssertions;
 
-        internal protected UnrecognizedAssertionsBindingElement(XmlQualifiedName wsdlBinding, ICollection<XmlElement> bindingAsserions)
+        protected internal UnrecognizedAssertionsBindingElement(
+            XmlQualifiedName wsdlBinding,
+            ICollection<XmlElement> bindingAsserions
+        )
         {
             Fx.Assert(wsdlBinding != null, "");
             this.wsdlBinding = wsdlBinding;
@@ -45,7 +48,8 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (this.operationAssertions == null)
-                    this.operationAssertions = new Dictionary<OperationDescription, ICollection<XmlElement>>();
+                    this.operationAssertions =
+                        new Dictionary<OperationDescription, ICollection<XmlElement>>();
                 return this.operationAssertions;
             }
         }
@@ -55,7 +59,8 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (this.messageAssertions == null)
-                    this.messageAssertions = new Dictionary<MessageDescription, ICollection<XmlElement>>();
+                    this.messageAssertions =
+                        new Dictionary<MessageDescription, ICollection<XmlElement>>();
                 return this.messageAssertions;
             }
         }
@@ -88,7 +93,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected UnrecognizedAssertionsBindingElement(UnrecognizedAssertionsBindingElement elementToBeCloned)
+        protected UnrecognizedAssertionsBindingElement(
+            UnrecognizedAssertionsBindingElement elementToBeCloned
+        )
             : base(elementToBeCloned)
         {
             this.wsdlBinding = elementToBeCloned.wsdlBinding;
@@ -110,8 +117,10 @@ namespace System.ServiceModel.Channels
         {
             //throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedBindingElementClone, typeof(UnrecognizedAssertionsBindingElement).Name)));
             // do not allow Cloning, return an empty BindingElement
-            return new UnrecognizedAssertionsBindingElement(new XmlQualifiedName(wsdlBinding.Name, wsdlBinding.Namespace), null);
+            return new UnrecognizedAssertionsBindingElement(
+                new XmlQualifiedName(wsdlBinding.Name, wsdlBinding.Namespace),
+                null
+            );
         }
     }
 }
-

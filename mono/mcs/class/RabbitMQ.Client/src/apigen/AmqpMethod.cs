@@ -58,8 +58,10 @@ using System;
 using System.Collections;
 using System.Xml;
 
-namespace RabbitMQ.Client.Apigen {
-    public class AmqpMethod: AmqpEntity {
+namespace RabbitMQ.Client.Apigen
+{
+    public class AmqpMethod : AmqpEntity
+    {
         public ArrayList m_Fields;
         public ArrayList m_ResponseMethods;
 
@@ -67,31 +69,30 @@ namespace RabbitMQ.Client.Apigen {
             : base(n)
         {
             m_Fields = new ArrayList();
-            foreach (XmlNode f in n.SelectNodes("field")) {
+            foreach (XmlNode f in n.SelectNodes("field"))
+            {
                 m_Fields.Add(new AmqpField(f));
             }
             m_ResponseMethods = new ArrayList();
-            foreach (XmlNode r in n.SelectNodes("response")) {
+            foreach (XmlNode r in n.SelectNodes("response"))
+            {
                 m_ResponseMethods.Add(Apigen.GetString(r, "@name"));
             }
         }
 
-        public bool HasContent {
-            get {
-                return GetString("@content", null) != null;
-            }
+        public bool HasContent
+        {
+            get { return GetString("@content", null) != null; }
         }
 
-        public bool IsSimpleRpcRequest {
-            get {
-                return m_ResponseMethods.Count == 1;
-            }
+        public bool IsSimpleRpcRequest
+        {
+            get { return m_ResponseMethods.Count == 1; }
         }
 
-        public int Index {
-            get {
-                return GetInt("@index");
-            }
+        public int Index
+        {
+            get { return GetInt("@index"); }
         }
     }
 }

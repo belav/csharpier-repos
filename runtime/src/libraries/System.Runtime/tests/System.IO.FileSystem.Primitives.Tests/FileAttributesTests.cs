@@ -29,6 +29,5 @@ namespace System.IO.Tests
             Assert.Equal(0x8000, (int)FileAttributes.IntegrityStream);
             Assert.Equal(0x20000, (int)FileAttributes.NoScrubData);
         }
-
     }
 }

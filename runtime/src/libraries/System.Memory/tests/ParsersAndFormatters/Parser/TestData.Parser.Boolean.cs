@@ -11,7 +11,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<bool> testData in BooleanFormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<bool> testData in BooleanFormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -33,7 +35,12 @@ namespace System.Buffers.Text.Tests
                 {
                     foreach (string unparsableText in booleanNegativeInput)
                     {
-                        yield return new ParserTestData<bool>(unparsableText, default, formatSymbol, expectedSuccess: false);
+                        yield return new ParserTestData<bool>(
+                            unparsableText,
+                            default,
+                            formatSymbol,
+                            expectedSuccess: false
+                        );
                     }
                 }
             }

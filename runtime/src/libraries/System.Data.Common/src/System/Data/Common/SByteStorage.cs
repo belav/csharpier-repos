@@ -14,9 +14,7 @@ namespace System.Data.Common
         private sbyte[] _values = default!; // Late-initialized
 
         public SByteStorage(DataColumn column)
-        : base(column, typeof(sbyte), defaultValue, StorageType.SByte)
-        {
-        }
+            : base(column, typeof(sbyte), defaultValue, StorageType.SByte) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -31,7 +29,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -47,14 +48,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record]; }
+                            checked
+                            {
+                                meanSum += _values[record];
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             sbyte mean;
-                            checked { mean = (sbyte)(meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (sbyte)(meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -256,7 +263,12 @@ namespace System.Data.Common
             return new sbyte[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             sbyte[] typedStore = (sbyte[])store;
             typedStore[storeIndex] = _values[record];

@@ -21,34 +21,47 @@ namespace System.ServiceModel.Configuration
     {
         Collection<IssuedTokenParametersElement> optionalIssuedTokenParameters = null;
 
-        public IssuedTokenParametersElement()
-        {
-        }
+        public IssuedTokenParametersElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.DefaultMessageSecurityVersion)]
         [TypeConverter(typeof(MessageSecurityVersionConverter))]
         public MessageSecurityVersion DefaultMessageSecurityVersion
         {
-            get { return (MessageSecurityVersion)base[ConfigurationStrings.DefaultMessageSecurityVersion]; }
+            get
+            {
+                return (MessageSecurityVersion)
+                    base[ConfigurationStrings.DefaultMessageSecurityVersion];
+            }
             set { base[ConfigurationStrings.DefaultMessageSecurityVersion] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.AdditionalRequestParameters)]
         public XmlElementElementCollection AdditionalRequestParameters
         {
-            get { return (XmlElementElementCollection)base[ConfigurationStrings.AdditionalRequestParameters]; }
+            get
+            {
+                return (XmlElementElementCollection)
+                    base[ConfigurationStrings.AdditionalRequestParameters];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ClaimTypeRequirements)]
         public ClaimTypeElementCollection ClaimTypeRequirements
         {
-            get { return (ClaimTypeElementCollection)base[ConfigurationStrings.ClaimTypeRequirements]; }
+            get
+            {
+                return (ClaimTypeElementCollection)base[ConfigurationStrings.ClaimTypeRequirements];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Issuer)]
         public IssuedTokenParametersEndpointAddressElement Issuer
         {
-            get { return (IssuedTokenParametersEndpointAddressElement)base[ConfigurationStrings.Issuer]; }
+            get
+            {
+                return (IssuedTokenParametersEndpointAddressElement)
+                    base[ConfigurationStrings.Issuer];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.IssuerMetadata)]
@@ -65,7 +78,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.KeySize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.KeyType, DefaultValue = IssuedSecurityTokenParameters.defaultKeyType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.KeyType,
+            DefaultValue = IssuedSecurityTokenParameters.defaultKeyType
+        )]
         [ServiceModelEnumValidator(typeof(System.IdentityModel.Tokens.SecurityKeyTypeHelper))]
         public SecurityKeyType KeyType
         {
@@ -83,20 +99,24 @@ namespace System.ServiceModel.Configuration
                 // user code can not capture.
                 if (this.IsReadOnly())
                 {
-                    Fx.Assert("IssuedTokenParametersElement.OptionalIssuedTokenParameters should only be called by Admin APIs");
-                    DiagnosticUtility.FailFast("IssuedTokenParametersElement.OptionalIssuedTokenParameters should only be called by Admin APIs");
+                    Fx.Assert(
+                        "IssuedTokenParametersElement.OptionalIssuedTokenParameters should only be called by Admin APIs"
+                    );
+                    DiagnosticUtility.FailFast(
+                        "IssuedTokenParametersElement.OptionalIssuedTokenParameters should only be called by Admin APIs"
+                    );
                 }
 
                 // No need to worry about a race condition here-- this method is not meant to be called by multi-threaded
                 // apps. It is only supposed to be called by svcutil and single threaded equivalents.
                 if (this.optionalIssuedTokenParameters == null)
                 {
-                    this.optionalIssuedTokenParameters = new Collection<IssuedTokenParametersElement>();
+                    this.optionalIssuedTokenParameters =
+                        new Collection<IssuedTokenParametersElement>();
                 }
                 return this.optionalIssuedTokenParameters;
             }
         }
-
 
         [ConfigurationProperty(ConfigurationStrings.TokenType, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -124,7 +144,9 @@ namespace System.ServiceModel.Configuration
         internal void ApplyConfiguration(IssuedSecurityTokenParameters parameters)
         {
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parameters"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters")
+                );
 
             if (this.AdditionalRequestParameters != null)
             {
@@ -138,7 +160,9 @@ namespace System.ServiceModel.Configuration
             {
                 foreach (ClaimTypeElement c in this.ClaimTypeRequirements)
                 {
-                    parameters.ClaimTypeRequirements.Add(new ClaimTypeRequirement(c.ClaimType, c.IsOptional));
+                    parameters.ClaimTypeRequirements.Add(
+                        new ClaimTypeRequirement(c.ClaimType, c.IsOptional)
+                    );
                 }
             }
 
@@ -151,7 +175,10 @@ namespace System.ServiceModel.Configuration
             {
                 parameters.TokenType = this.TokenType;
             }
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin
+            )
             {
                 this.Issuer.Validate();
 
@@ -159,13 +186,24 @@ namespace System.ServiceModel.Configuration
 
                 if (!string.IsNullOrEmpty(this.Issuer.Binding))
                 {
-                    parameters.IssuerBinding = ConfigLoader.LookupBinding(this.Issuer.Binding, this.Issuer.BindingConfiguration, this.EvaluationContext);
+                    parameters.IssuerBinding = ConfigLoader.LookupBinding(
+                        this.Issuer.Binding,
+                        this.Issuer.BindingConfiguration,
+                        this.EvaluationContext
+                    );
                 }
             }
 
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.IssuerMetadata].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
+            )
             {
-                parameters.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(this.IssuerMetadata);
+                parameters.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(
+                    this.IssuerMetadata
+                );
             }
         }
 
@@ -173,7 +211,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == source)
             {
@@ -198,17 +238,29 @@ namespace System.ServiceModel.Configuration
             this.DefaultMessageSecurityVersion = source.DefaultMessageSecurityVersion;
             this.UseStrTransform = source.UseStrTransform;
 
-            if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != source.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin
+            )
             {
                 this.Issuer.Copy(source.Issuer);
             }
-            if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.IssuerMetadata].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
+            )
             {
                 this.IssuerMetadata.Copy(source.IssuerMetadata);
             }
         }
 
-        internal IssuedSecurityTokenParameters Create(bool createTemplateOnly, SecurityKeyType templateKeyType)
+        internal IssuedSecurityTokenParameters Create(
+            bool createTemplateOnly,
+            SecurityKeyType templateKeyType
+        )
         {
             IssuedSecurityTokenParameters result = new IssuedSecurityTokenParameters();
             if (!createTemplateOnly)
@@ -222,7 +274,10 @@ namespace System.ServiceModel.Configuration
             return result;
         }
 
-        internal void InitializeFrom(IssuedSecurityTokenParameters source, bool initializeNestedBindings)
+        internal void InitializeFrom(
+            IssuedSecurityTokenParameters source,
+            bool initializeNestedBindings
+        )
         {
             if (null == source)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("source");
@@ -233,21 +288,29 @@ namespace System.ServiceModel.Configuration
                 SetPropertyValueIfNotDefaultValue(ConfigurationStrings.KeySize, source.KeySize);
             }
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TokenType, source.TokenType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.UseStrTransform, source.UseStrTransform);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.UseStrTransform,
+                source.UseStrTransform
+            );
 
             if (source.IssuerAddress != null)
                 this.Issuer.InitializeFrom(source.IssuerAddress);
 
             if (source.DefaultMessageSecurityVersion != null)
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.DefaultMessageSecurityVersion, source.DefaultMessageSecurityVersion);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.DefaultMessageSecurityVersion,
+                    source.DefaultMessageSecurityVersion
+                );
 
             if (source.IssuerBinding != null && initializeNestedBindings)
             {
                 this.Issuer.BindingConfiguration = this.Issuer.Address.ToString();
                 string bindingSectionName;
-                BindingsSection.TryAdd(this.Issuer.BindingConfiguration,
+                BindingsSection.TryAdd(
+                    this.Issuer.BindingConfiguration,
                     source.IssuerBinding,
-                    out bindingSectionName);
+                    out bindingSectionName
+                );
                 this.Issuer.Binding = bindingSectionName;
             }
 
@@ -266,7 +329,9 @@ namespace System.ServiceModel.Configuration
                 this.ClaimTypeRequirements.Add(new ClaimTypeElement(c.ClaimType, c.IsOptional));
             }
 
-            foreach (IssuedSecurityTokenParameters.AlternativeIssuerEndpoint alternativeIssuer in source.AlternativeIssuerEndpoints)
+            foreach (
+                IssuedSecurityTokenParameters.AlternativeIssuerEndpoint alternativeIssuer in source.AlternativeIssuerEndpoints
+            )
             {
                 IssuedTokenParametersElement element = new IssuedTokenParametersElement();
                 element.Issuer.InitializeFrom(alternativeIssuer.IssuerAddress);
@@ -274,9 +339,11 @@ namespace System.ServiceModel.Configuration
                 {
                     element.Issuer.BindingConfiguration = element.Issuer.Address.ToString();
                     string bindingSectionName;
-                    BindingsSection.TryAdd(element.Issuer.BindingConfiguration,
+                    BindingsSection.TryAdd(
+                        element.Issuer.BindingConfiguration,
                         alternativeIssuer.IssuerBinding,
-                        out bindingSectionName);
+                        out bindingSectionName
+                    );
                     element.Issuer.Binding = bindingSectionName;
                 }
                 this.OptionalIssuedTokenParameters.Add(element);
@@ -293,14 +360,25 @@ namespace System.ServiceModel.Configuration
                 using (XmlTextWriter commentWriter = new XmlTextWriter(memoryStream, Encoding.UTF8))
                 {
                     commentWriter.Formatting = Formatting.Indented;
-                    commentWriter.WriteStartElement(ConfigurationStrings.AlternativeIssuedTokenParameters);
-                    foreach (IssuedTokenParametersElement element in this.OptionalIssuedTokenParameters)
+                    commentWriter.WriteStartElement(
+                        ConfigurationStrings.AlternativeIssuedTokenParameters
+                    );
+                    foreach (
+                        IssuedTokenParametersElement element in this.OptionalIssuedTokenParameters
+                    )
                     {
-                        element.SerializeToXmlElement(commentWriter, ConfigurationStrings.IssuedTokenParameters);
+                        element.SerializeToXmlElement(
+                            commentWriter,
+                            ConfigurationStrings.IssuedTokenParameters
+                        );
                     }
                     commentWriter.WriteEndElement();
                     commentWriter.Flush();
-                    string commentString = new UTF8Encoding().GetString(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                    string commentString = new UTF8Encoding().GetString(
+                        memoryStream.GetBuffer(),
+                        0,
+                        (int)memoryStream.Length
+                    );
                     writer.WriteComment(commentString.Substring(1, commentString.Length - 1));
                     commentWriter.Close();
                 }
@@ -308,7 +386,11 @@ namespace System.ServiceModel.Configuration
             return writeMe || writeComment;
         }
 
-        protected override void Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        protected override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             if (sourceElement is IssuedTokenParametersElement)
             {
@@ -320,6 +402,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

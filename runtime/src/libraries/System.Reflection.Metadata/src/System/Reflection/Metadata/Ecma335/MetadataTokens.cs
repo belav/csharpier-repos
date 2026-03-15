@@ -156,7 +156,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Zero based offset, or -1 if <paramref name="handle"/> can only be interpreted in a context of a specific <see cref="MetadataReader"/> or <see cref="MetadataBuilder"/>.
         /// See <see cref="GetHeapOffset(MetadataReader, Handle)"/>.
         /// </returns>
-        public static int GetHeapOffset(BlobHandle handle) => handle.IsVirtual ? -1 : handle.GetHeapOffset();
+        public static int GetHeapOffset(BlobHandle handle) =>
+            handle.IsVirtual ? -1 : handle.GetHeapOffset();
 
         /// <summary>
         /// Returns the offset of metadata heap data that corresponds
@@ -184,7 +185,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// Zero based offset, or -1 if <paramref name="handle"/> can only be interpreted in a context of a specific <see cref="MetadataReader"/> or <see cref="MetadataBuilder"/>.
         /// See <see cref="GetHeapOffset(MetadataReader, Handle)"/>.
         /// </returns>
-        public static int GetHeapOffset(StringHandle handle) => handle.IsVirtual ? -1 : handle.GetHeapOffset();
+        public static int GetHeapOffset(StringHandle handle) =>
+            handle.IsVirtual ? -1 : handle.GetHeapOffset();
 
         /// <summary>
         /// Returns the metadata token of the specified <paramref name="handle"/>.
@@ -417,7 +419,9 @@ namespace System.Reflection.Metadata.Ecma335
             return Metadata.GenericParameterHandle.FromRowId(ToRowId(rowNumber));
         }
 
-        public static GenericParameterConstraintHandle GenericParameterConstraintHandle(int rowNumber)
+        public static GenericParameterConstraintHandle GenericParameterConstraintHandle(
+            int rowNumber
+        )
         {
             return Metadata.GenericParameterConstraintHandle.FromRowId(ToRowId(rowNumber));
         }
@@ -437,7 +441,9 @@ namespace System.Reflection.Metadata.Ecma335
             return Metadata.CustomAttributeHandle.FromRowId(ToRowId(rowNumber));
         }
 
-        public static DeclarativeSecurityAttributeHandle DeclarativeSecurityAttributeHandle(int rowNumber)
+        public static DeclarativeSecurityAttributeHandle DeclarativeSecurityAttributeHandle(
+            int rowNumber
+        )
         {
             return Metadata.DeclarativeSecurityAttributeHandle.FromRowId(ToRowId(rowNumber));
         }

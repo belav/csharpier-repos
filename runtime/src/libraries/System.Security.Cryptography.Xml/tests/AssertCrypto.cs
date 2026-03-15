@@ -13,10 +13,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class AssertCrypto
     {
-
         // because most crypto stuff works with byte[] buffers
         public static void AssertEquals(string msg, byte[] array1, byte[] array2)
         {

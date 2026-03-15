@@ -24,7 +24,11 @@ namespace Tracing.Tests.Common
 
         public override long Length => ProxiedStream.Length;
 
-        public override long Position { get => ProxiedStream.Position; set => ProxiedStream.Position = value; }
+        public override long Position
+        {
+            get => ProxiedStream.Position;
+            set => ProxiedStream.Position = value;
+        }
 
         public StreamProxy(Stream streamToProxy)
         {
@@ -56,10 +60,14 @@ namespace Tracing.Tests.Common
                 // so this is when we should throw an exception, just like
                 // System.IO.PipeStream. This will result in the dispose method
                 // being called and the culprit stream data being dumped to disk
-                Logger.logger.Log($"[Error] Attempted to read {count} bytes into a buffer of length {buffer.Length} at offset {offset}");
+                Logger.logger.Log(
+                    $"[Error] Attempted to read {count} bytes into a buffer of length {buffer.Length} at offset {offset}"
+                );
 
                 // Throw the exception like what would have happened in System.IO.PipeStream
-                throw new ArgumentException($"Attempted to read {count} bytes into a buffer of length {buffer.Length} at offset {offset}");
+                throw new ArgumentException(
+                    $"Attempted to read {count} bytes into a buffer of length {buffer.Length} at offset {offset}"
+                );
             }
 
             // copy the data into the caller's buffer
@@ -69,7 +77,8 @@ namespace Tracing.Tests.Common
             return readCount;
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => ProxiedStream.Seek(offset, origin);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            ProxiedStream.Seek(offset, origin);
 
         public override void SetLength(long value) => ProxiedStream.SetLength(value);
 
@@ -80,6 +89,7 @@ namespace Tracing.Tests.Common
         }
 
         protected bool disposed = false;
+
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
@@ -96,7 +106,9 @@ namespace Tracing.Tests.Common
 
         public void DumpStreamToDisk()
         {
-            var helixWorkItemDirectory = System.Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
+            var helixWorkItemDirectory = System.Environment.GetEnvironmentVariable(
+                "HELIX_WORKITEM_UPLOAD_ROOT"
+            );
             if (helixWorkItemDirectory != null && Directory.Exists(helixWorkItemDirectory))
             {
                 Logger.logger.Log($"\t HELIX_WORKITEM_UPLOAD_ROOT = {helixWorkItemDirectory}");

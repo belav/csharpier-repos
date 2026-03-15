@@ -17,10 +17,11 @@ namespace System.Reflection
 
             Type? declaringType = DeclaringType;
 
-            if (ContainsGenericParameters // Method has unbound generics
+            if (
+                ContainsGenericParameters // Method has unbound generics
                 || IsDisallowedByRefType(ReturnType) // Return type is an invalid by-ref (i.e., by-ref-like or void*)
                 || (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+            )
             {
                 invocationFlags = InvocationFlags.NoInvoke;
             }
@@ -99,12 +100,18 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[]? parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             // ContainsStackPointers means that the struct (either the declaring type or the return type)
             // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
             // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers)
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -132,7 +139,13 @@ namespace System.Reflection
                 case 4:
                     return Invoker.InvokeWithFewArgs(obj, invokeAttr, binder, parameters!, culture);
                 default:
-                    return Invoker.InvokeWithManyArgs(obj, invokeAttr, binder, parameters!, culture);
+                    return Invoker.InvokeWithManyArgs(
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    );
             }
         }
     }

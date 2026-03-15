@@ -11,7 +11,9 @@ namespace System.Threading
     public static partial class ThreadPool
     {
         [SupportedOSPlatform("windows")]
-        private static unsafe bool UnsafeQueueNativeOverlappedPortableCore(NativeOverlapped* overlapped)
+        private static unsafe bool UnsafeQueueNativeOverlappedPortableCore(
+            NativeOverlapped* overlapped
+        )
         {
             if (overlapped == null)
             {
@@ -25,7 +27,9 @@ namespace System.Threading
             return true;
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         private static bool BindHandlePortableCore(IntPtr osHandle)
         {
@@ -42,7 +46,9 @@ namespace System.Threading
             try
             {
                 osHandle.DangerousAddRef(ref mustReleaseSafeHandle);
-                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(osHandle.DangerousGetHandle());
+                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(
+                    osHandle.DangerousGetHandle()
+                );
                 return true;
             }
             finally

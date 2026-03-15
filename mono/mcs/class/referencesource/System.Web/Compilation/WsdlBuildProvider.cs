@@ -1,71 +1,75 @@
 //------------------------------------------------------------------------------
 // <copyright file="WsdlBuildProvider.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
+    using System;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Services.Description;
+    using System.Web.Util;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Util = System.Web.UI.Util;
 
-using System;
-using System.Globalization;
-using System.IO;
-using System.Diagnostics;
-using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Serialization;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Web.Configuration;
-using System.Web.Hosting;
-using System.Web.Util;
-using Util=System.Web.UI.Util;
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]
+    internal class WsdlBuildProvider : BuildProvider
+    {
+        public override void GenerateCode(AssemblyBuilder assemblyBuilder)
+        {
+            // Get the namespace that we will use
+            string ns = Util.GetNamespaceFromVirtualPath(VirtualPathObject);
 
-[BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]
-internal class WsdlBuildProvider: BuildProvider {
+            ServiceDescription sd;
 
-    public override void GenerateCode(AssemblyBuilder assemblyBuilder)  {
-
-        // Get the namespace that we will use
-        string ns = Util.GetNamespaceFromVirtualPath(VirtualPathObject);
-
-        ServiceDescription sd;
-
-        // Load the wsdl file
-        using (Stream stream = VirtualPathObject.OpenFile()) {
-            try {
-                sd = ServiceDescription.Read(stream);
+            // Load the wsdl file
+            using (Stream stream = VirtualPathObject.OpenFile())
+            {
+                try
+                {
+                    sd = ServiceDescription.Read(stream);
+                }
+                catch (InvalidOperationException e)
+                {
+                    // It can throw an InvalidOperationException, with the relevant
+                    // XmlException as the inner exception.  If so, throw that instead.
+                    XmlException xmlException = e.InnerException as XmlException;
+                    if (xmlException != null)
+                        throw xmlException;
+                    throw;
+                }
             }
-            catch (InvalidOperationException e) {
-                // It can throw an InvalidOperationException, with the relevant
-                // XmlException as the inner exception.  If so, throw that instead.
-                XmlException xmlException = e.InnerException as XmlException;
-                if (xmlException != null)
-                    throw xmlException;
-                throw;
-            }
-        }
 
-        ServiceDescriptionImporter importer = new ServiceDescriptionImporter();
+            ServiceDescriptionImporter importer = new ServiceDescriptionImporter();
 
 #if !FEATURE_PAL
-        importer.CodeGenerator = assemblyBuilder.CodeDomProvider;
+            importer.CodeGenerator = assemblyBuilder.CodeDomProvider;
 
-        importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties |
-            CodeGenerationOptions.GenerateNewAsync | CodeGenerationOptions.GenerateOldAsync;
+            importer.CodeGenerationOptions =
+                CodeGenerationOptions.GenerateProperties
+                | CodeGenerationOptions.GenerateNewAsync
+                | CodeGenerationOptions.GenerateOldAsync;
 #endif // !FEATURE_PAL
-        importer.ServiceDescriptions.Add(sd);
+            importer.ServiceDescriptions.Add(sd);
 
-        CodeCompileUnit codeCompileUnit = new CodeCompileUnit();
+            CodeCompileUnit codeCompileUnit = new CodeCompileUnit();
 
-        CodeNamespace codeNamespace = new CodeNamespace(ns);
-        codeCompileUnit.Namespaces.Add(codeNamespace);
+            CodeNamespace codeNamespace = new CodeNamespace(ns);
+            codeCompileUnit.Namespaces.Add(codeNamespace);
 
-        // Create the code compile unit
-        importer.Import(codeNamespace, codeCompileUnit);
+            // Create the code compile unit
+            importer.Import(codeNamespace, codeCompileUnit);
 
-        // Add the CodeCompileUnit to the compilation
-        assemblyBuilder.AddCodeCompileUnit(this, codeCompileUnit);
+            // Add the CodeCompileUnit to the compilation
+            assemblyBuilder.AddCodeCompileUnit(this, codeCompileUnit);
+        }
     }
-}
-
 }

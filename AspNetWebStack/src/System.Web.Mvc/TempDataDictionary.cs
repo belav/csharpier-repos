@@ -12,8 +12,12 @@ namespace System.Web.Mvc
         internal const string TempDataSerializationKey = "__tempData";
 
         private Dictionary<string, object> _data;
-        private HashSet<string> _initialKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        private HashSet<string> _retainedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private HashSet<string> _initialKeys = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
+        private HashSet<string> _retainedKeys = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public TempDataDictionary()
         {
@@ -72,10 +76,16 @@ namespace System.Web.Mvc
 
         public void Load(ControllerContext controllerContext, ITempDataProvider tempDataProvider)
         {
-            IDictionary<string, object> providerDictionary = tempDataProvider.LoadTempData(controllerContext);
-            _data = (providerDictionary != null)
-                ? new Dictionary<string, object>(providerDictionary, StringComparer.OrdinalIgnoreCase)
-                : new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            IDictionary<string, object> providerDictionary = tempDataProvider.LoadTempData(
+                controllerContext
+            );
+            _data =
+                (providerDictionary != null)
+                    ? new Dictionary<string, object>(
+                        providerDictionary,
+                        StringComparer.OrdinalIgnoreCase
+                    )
+                    : new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _initialKeys = new HashSet<string>(_data.Keys, StringComparer.OrdinalIgnoreCase);
             _retainedKeys.Clear();
         }
@@ -90,12 +100,15 @@ namespace System.Web.Mvc
         public void Save(ControllerContext controllerContext, ITempDataProvider tempDataProvider)
         {
             // Frequently called so ensure delegate is stateless
-            _data.RemoveFromDictionary((KeyValuePair<string, object> entry, TempDataDictionary tempData) =>
+            _data.RemoveFromDictionary(
+                (KeyValuePair<string, object> entry, TempDataDictionary tempData) =>
                 {
                     string key = entry.Key;
-                    return !tempData._initialKeys.Contains(key) 
+                    return !tempData._initialKeys.Contains(key)
                         && !tempData._retainedKeys.Contains(key);
-                }, this);
+                },
+                this
+            );
 
             tempDataProvider.SaveTempData(controllerContext, _data);
         }
@@ -141,23 +154,32 @@ namespace System.Web.Mvc
             return _data.TryGetValue(key, out value);
         }
 
-        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int index)
+        void ICollection<KeyValuePair<string, object>>.CopyTo(
+            KeyValuePair<string, object>[] array,
+            int index
+        )
         {
             ((ICollection<KeyValuePair<string, object>>)_data).CopyTo(array, index);
         }
 
-        void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> keyValuePair)
+        void ICollection<KeyValuePair<string, object>>.Add(
+            KeyValuePair<string, object> keyValuePair
+        )
         {
             _initialKeys.Add(keyValuePair.Key);
             ((ICollection<KeyValuePair<string, object>>)_data).Add(keyValuePair);
         }
 
-        bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> keyValuePair)
+        bool ICollection<KeyValuePair<string, object>>.Contains(
+            KeyValuePair<string, object> keyValuePair
+        )
         {
             return ((ICollection<KeyValuePair<string, object>>)_data).Contains(keyValuePair);
         }
 
-        bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> keyValuePair)
+        bool ICollection<KeyValuePair<string, object>>.Remove(
+            KeyValuePair<string, object> keyValuePair
+        )
         {
             _initialKeys.Remove(keyValuePair.Key);
             return ((ICollection<KeyValuePair<string, object>>)_data).Remove(keyValuePair);
@@ -168,7 +190,8 @@ namespace System.Web.Mvc
             return new TempDataDictionaryEnumerator(this);
         }
 
-        private sealed class TempDataDictionaryEnumerator : IEnumerator<KeyValuePair<string, object>>
+        private sealed class TempDataDictionaryEnumerator
+            : IEnumerator<KeyValuePair<string, object>>
         {
             private IEnumerator<KeyValuePair<string, object>> _enumerator;
             private TempDataDictionary _tempData;

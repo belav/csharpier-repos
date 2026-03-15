@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,40 +26,40 @@
 using System;
 using System.IO;
 
-namespace System.IO.Packaging {
+namespace System.IO.Packaging
+{
+    public class StreamInfo
+    {
+        internal StreamInfo() { }
 
-	public class StreamInfo
-	{
-		internal StreamInfo ()
-		{
-		}
+        public CompressionOption CompressionOption
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public CompressionOption CompressionOption {
-			get { throw new NotImplementedException (); }
-		}
+        public EncryptionOption EncryptionOption
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public EncryptionOption EncryptionOption {
-			get { throw new NotImplementedException (); }
-		}
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
+        public Stream GetStream()
+        {
+            throw new NotImplementedException();
+        }
 
-		public Stream GetStream ()
-		{
-			throw new NotImplementedException ();
-		}
+        public Stream GetStream(FileMode mode)
+        {
+            throw new NotImplementedException();
+        }
 
-		public Stream GetStream (FileMode mode)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public Stream GetStream (FileMode mode, FileAccess access)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        public Stream GetStream(FileMode mode, FileAccess access)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

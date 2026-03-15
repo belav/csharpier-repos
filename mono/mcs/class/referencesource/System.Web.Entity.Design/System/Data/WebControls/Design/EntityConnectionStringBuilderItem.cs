@@ -12,13 +12,16 @@ using System.Diagnostics;
 
 namespace System.Web.UI.Design.WebControls
 {
-    internal class EntityConnectionStringBuilderItem : IComparable<EntityConnectionStringBuilderItem>
+    internal class EntityConnectionStringBuilderItem
+        : IComparable<EntityConnectionStringBuilderItem>
     {
         // Only one of the following should be set. This is enforced through the constructors and the fact that these fields are readonly.
         private readonly EntityConnectionStringBuilder _connectionStringBuilder;
         private readonly string _unknownConnectionString; // used when the string cannot be loaded into a connection string builder or is missing some required keywords
 
-        internal EntityConnectionStringBuilderItem(EntityConnectionStringBuilder connectionStringBuilder)
+        internal EntityConnectionStringBuilderItem(
+            EntityConnectionStringBuilder connectionStringBuilder
+        )
         {
             // empty connection string builder is allowed, but not null
             Debug.Assert(connectionStringBuilder != null, "null connectionStringBuilder");
@@ -29,7 +32,10 @@ namespace System.Web.UI.Design.WebControls
         internal EntityConnectionStringBuilderItem(string unknownConnectionString)
         {
             // empty is not allowed -- use the constructor that takes a builder if the string is empty
-            Debug.Assert(!String.IsNullOrEmpty(unknownConnectionString), "null or empty unknownConnectionString");
+            Debug.Assert(
+                !String.IsNullOrEmpty(unknownConnectionString),
+                "null or empty unknownConnectionString"
+            );
             _unknownConnectionString = unknownConnectionString;
         }
 
@@ -50,18 +56,12 @@ namespace System.Web.UI.Design.WebControls
 
         internal EntityConnectionStringBuilder EntityConnectionStringBuilder
         {
-            get
-            {
-                return _connectionStringBuilder;
-            }
+            get { return _connectionStringBuilder; }
         }
 
         internal bool IsEmpty
         {
-            get
-            {
-                return String.IsNullOrEmpty(this.ConnectionString);
-            }
+            get { return String.IsNullOrEmpty(this.ConnectionString); }
         }
 
         internal bool IsNamedConnection
@@ -79,7 +79,7 @@ namespace System.Web.UI.Design.WebControls
                 }
             }
         }
-        
+
         public override string ToString()
         {
             // Display just the name for named connections, but the full connection string otherwise
@@ -100,9 +100,17 @@ namespace System.Web.UI.Design.WebControls
             }
         }
 
-        int IComparable<EntityConnectionStringBuilderItem>.CompareTo(EntityConnectionStringBuilderItem other)
+        int IComparable<EntityConnectionStringBuilderItem>.CompareTo(
+            EntityConnectionStringBuilderItem other
+        )
         {
-            return (String.Compare(this.ToString(), other.ToString(), StringComparison.OrdinalIgnoreCase));
+            return (
+                String.Compare(
+                    this.ToString(),
+                    other.ToString(),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
     }
 }

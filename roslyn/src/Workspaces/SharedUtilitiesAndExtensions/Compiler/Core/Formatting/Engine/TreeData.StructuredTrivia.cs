@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 _treeData = (text == null) ? new Node(root) : new NodeAndText(root, text);
             }
 
-            public override string GetTextBetween(SyntaxToken token1, SyntaxToken token2)
-                => _treeData.GetTextBetween(token1, token2);
+            public override string GetTextBetween(SyntaxToken token1, SyntaxToken token2) =>
+                _treeData.GetTextBetween(token1, token2);
 
             public override int GetOriginalColumn(int tabSize, SyntaxToken token)
             {
@@ -54,7 +54,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 var parent = _trivia.Token.Parent;
-                if (parent != null && parent.SyntaxTree != null && parent.SyntaxTree.GetText() != null)
+                if (
+                    parent != null
+                    && parent.SyntaxTree != null
+                    && parent.SyntaxTree.GetText() != null
+                )
                 {
                     return parent.SyntaxTree.GetText();
                 }

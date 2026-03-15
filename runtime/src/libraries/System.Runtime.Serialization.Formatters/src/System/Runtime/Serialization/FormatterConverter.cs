@@ -5,7 +5,11 @@ using System.Globalization;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class FormatterConverter : IFormatterConverter
     {
         public object Convert(object value, Type type)

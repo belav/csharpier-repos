@@ -24,16 +24,17 @@ namespace System.Runtime.Loader.Tests
 
         public static void TestDelegateMarshalling()
         {
-            EnumWindows((IntPtr wnd, IntPtr param) =>
-            {
-                return true;
-            }, IntPtr.Zero);
+            EnumWindows(
+                (IntPtr wnd, IntPtr param) =>
+                {
+                    return true;
+                },
+                IntPtr.Zero
+            );
         }
 
         [ComImport]
         [Guid("AC7A1319-E041-4F75-9481-AB5F632F95F7")]
-        public class COMClass
-        {
-        }
+        public class COMClass { }
     }
 }

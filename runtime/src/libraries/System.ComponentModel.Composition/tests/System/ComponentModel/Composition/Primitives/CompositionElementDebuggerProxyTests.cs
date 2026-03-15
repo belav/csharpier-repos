@@ -11,10 +11,13 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Constructor_NullAsElementArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("element", () =>
-            {
-                new CompositionElementDebuggerProxy((CompositionElement)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "element",
+                () =>
+                {
+                    new CompositionElementDebuggerProxy((CompositionElement)null);
+                }
+            );
         }
 
         [Fact]
@@ -66,5 +69,5 @@ namespace System.ComponentModel.Composition.Hosting
         {
             return new CompositionElement(underlyingObject);
         }
-   }
+    }
 }

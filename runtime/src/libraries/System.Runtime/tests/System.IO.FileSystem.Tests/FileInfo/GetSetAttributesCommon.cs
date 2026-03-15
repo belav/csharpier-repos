@@ -7,7 +7,11 @@ namespace System.IO.Tests
     public class FileInfo_GetSetAttributesCommon : FileGetSetAttributes
     {
         protected override bool CanBeReadOnly => true;
-        protected override FileAttributes GetAttributes(string path) => new FileInfo(path).Attributes;
-        protected override void SetAttributes(string path, FileAttributes attributes) => new FileInfo(path).Attributes = attributes;
+
+        protected override FileAttributes GetAttributes(string path) =>
+            new FileInfo(path).Attributes;
+
+        protected override void SetAttributes(string path, FileAttributes attributes) =>
+            new FileInfo(path).Attributes = attributes;
     }
 }

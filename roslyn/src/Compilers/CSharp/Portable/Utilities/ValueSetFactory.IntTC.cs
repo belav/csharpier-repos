@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return value - 1;
             }
 
-            public int FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? 0 : constantValue.Int32Value;
+            public int FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? 0 : constantValue.Int32Value;
 
             public ConstantValue ToConstantValue(int value) => ConstantValue.Create(value);
 

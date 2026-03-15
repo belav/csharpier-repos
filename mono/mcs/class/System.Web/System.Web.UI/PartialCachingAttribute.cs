@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,80 +28,102 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class PartialCachingAttribute : Attribute
+    {
+        int duration;
+        string varyByControls;
+        string varyByCustom;
+        string varyByParams;
+        bool shared;
+        string sqlDependency;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class PartialCachingAttribute : Attribute
-	{
-		int duration;
-		string varyByControls;
-		string varyByCustom;
-		string varyByParams;
-		bool shared;
-		string sqlDependency;
-		
-		public PartialCachingAttribute (int duration)
-		{
-			this.duration = duration;
-		}
+        public PartialCachingAttribute(int duration)
+        {
+            this.duration = duration;
+        }
 
-		public PartialCachingAttribute (int duration, string varyByParams,
-						string varyByControls, string varyByCustom)
-		{
-			this.duration = duration;
-			this.varyByParams = varyByParams;
-			this.varyByControls = varyByControls;
-			this.varyByCustom = varyByCustom;
-		}
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom
+        )
+        {
+            this.duration = duration;
+            this.varyByParams = varyByParams;
+            this.varyByControls = varyByControls;
+            this.varyByCustom = varyByCustom;
+        }
 
-		public PartialCachingAttribute (int duration, string varyByParams, string varyByControls,
-						string varyByCustom, bool shared)
-		{
-			this.duration = duration;
-			this.varyByParams = varyByParams;
-			this.varyByControls = varyByControls;
-			this.varyByCustom = varyByCustom;
-			this.shared = shared;
-		}
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom,
+            bool shared
+        )
+        {
+            this.duration = duration;
+            this.varyByParams = varyByParams;
+            this.varyByControls = varyByControls;
+            this.varyByCustom = varyByCustom;
+            this.shared = shared;
+        }
 
-		public PartialCachingAttribute (int duration, string varyByParams, string varyByControls,
-						string varyByCustom, string sqlDependency, bool shared)
-		{
-			this.duration = duration;
-			this.varyByParams = varyByParams;
-			this.varyByControls = varyByControls;
-			this.varyByCustom = varyByCustom;
-			this.sqlDependency = sqlDependency;
-			this.shared = shared;
-		}
+        public PartialCachingAttribute(
+            int duration,
+            string varyByParams,
+            string varyByControls,
+            string varyByCustom,
+            string sqlDependency,
+            bool shared
+        )
+        {
+            this.duration = duration;
+            this.varyByParams = varyByParams;
+            this.varyByControls = varyByControls;
+            this.varyByCustom = varyByCustom;
+            this.sqlDependency = sqlDependency;
+            this.shared = shared;
+        }
 
-		public int Duration {
-			get { return duration; }
-		}
-		public string ProviderName {
-			get; set;
-		}
-		public string VaryByParams {
-			get { return varyByParams; }
-		}
+        public int Duration
+        {
+            get { return duration; }
+        }
+        public string ProviderName { get; set; }
+        public string VaryByParams
+        {
+            get { return varyByParams; }
+        }
 
-		public string VaryByControls {
-			get { return varyByControls; }
-		}
+        public string VaryByControls
+        {
+            get { return varyByControls; }
+        }
 
-		public string VaryByCustom {
-			get { return varyByCustom; }
-		}
+        public string VaryByCustom
+        {
+            get { return varyByCustom; }
+        }
 
-		public bool Shared {
-			get { return shared; }
-		}
+        public bool Shared
+        {
+            get { return shared; }
+        }
 
-		public string SqlDependency {
-			get { return sqlDependency; }
-		}
-	}
+        public string SqlDependency
+        {
+            get { return sqlDependency; }
+        }
+    }
 }

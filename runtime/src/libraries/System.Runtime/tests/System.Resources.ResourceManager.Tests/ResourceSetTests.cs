@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
-using System.IO;
-using System.Reflection;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using Xunit;
 
 namespace System.Resources.Tests
 {
@@ -15,7 +15,8 @@ namespace System.Resources.Tests
         /// <summary>
         ///  An empty .resources file in base64 created with ResourceWriter on .NET Framework
         /// </summary>
-        public const string Empty = "zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA";
+        public const string Empty =
+            "zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA";
 
         /// <summary>
         ///  A .resources file in base64 with the following keys:
@@ -25,7 +26,8 @@ namespace System.Resources.Tests
         ///    Bytes: new byte[]{ 41, 42, 43, 44, 192, 168, 1, 1 }
         ///    ByteStream: new UnmanagedMemoryStream(new byte[]{ 41, 42, 43, 44, 192, 168, 1, 1 })
         /// </summary>
-        public const string WithData = "zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAFAAAAAAAAAFBBRFBBRFCTxNurUOnkxTbThwtVRFcMfHGiDAAAAABCAAAANwAAACgAAAAZAAAALwEAABRCAHkAdABlAFMAdAByAGUAYQBtAAAAAAAKQgB5AHQAZQBzAA0AAAAKRgBsAG8AYQB0ABoAAAAGSQBuAHQAIwAAAAxTAHQAcgBpAG4AZwAoAAAAIQgAAAApKisswKgBASAIAAAAKSorLMCoAQENboYb8PkhCUAIKgAAAAEHbWVzc2FnZQ==";
+        public const string WithData =
+            "zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAFAAAAAAAAAFBBRFBBRFCTxNurUOnkxTbThwtVRFcMfHGiDAAAAABCAAAANwAAACgAAAAZAAAALwEAABRCAHkAdABlAFMAdAByAGUAYQBtAAAAAAAKQgB5AHQAZQBzAA0AAAAKRgBsAG8AYQB0ABoAAAAGSQBuAHQAIwAAAAxTAHQAcgBpAG4AZwAoAAAAIQgAAAApKisswKgBASAIAAAAKSorLMCoAQENboYb8PkhCUAIKgAAAAEHbWVzc2FnZQ==";
     }
 
     public abstract class ResourceSetTests
@@ -58,14 +60,7 @@ namespace System.Resources.Tests
         public void Enumerate()
         {
             var set = GetSet(StaticResources.WithData);
-            var keys = new List<string>
-            {
-                "String",
-                "Int",
-                "Float",
-                "Bytes",
-                "ByteStream"
-            };
+            var keys = new List<string> { "String", "Int", "Float", "Bytes", "ByteStream" };
             var enumerator = set.GetEnumerator();
             var idx = 0;
             while (enumerator.MoveNext())
@@ -107,6 +102,7 @@ namespace System.Resources.Tests
         class SimpleResourceReader : IResourceReader
         {
             Hashtable data;
+
             public SimpleResourceReader()
             {
                 data = new Hashtable();
@@ -125,13 +121,9 @@ namespace System.Resources.Tests
                 return data.GetEnumerator();
             }
 
-            public void Close()
-            {
-            }
+            public void Close() { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         [Fact]
@@ -169,9 +161,7 @@ namespace System.Resources.Tests
         {
             var rs = new ResourceSet(new SimpleResourceReader());
 
-            var expected = new HashSet<object>() {
-                1, "String", "Int32"
-            };
+            var expected = new HashSet<object>() { 1, "String", "Int32" };
 
             foreach (DictionaryEntry entry in rs)
             {
@@ -195,7 +185,9 @@ namespace System.Resources.Tests
     {
         public override ResourceSet GetSet(string base64Data)
         {
-            return new ResourceSet(new ResourceReader(new MemoryStream(Convert.FromBase64String(base64Data))));
+            return new ResourceSet(
+                new ResourceReader(new MemoryStream(Convert.FromBase64String(base64Data)))
+            );
         }
     }
 }

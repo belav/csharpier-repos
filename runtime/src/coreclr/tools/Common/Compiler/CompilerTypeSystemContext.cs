@@ -2,22 +2,25 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {
-    public partial class CompilerTypeSystemContext : MetadataTypeSystemContext, IMetadataStringDecoderProvider
+    public partial class CompilerTypeSystemContext
+        : MetadataTypeSystemContext,
+            IMetadataStringDecoderProvider
     {
-        private readonly MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm = new MetadataRuntimeInterfacesAlgorithm();
-        private readonly MetadataVirtualMethodAlgorithm _virtualMethodAlgorithm = new MetadataVirtualMethodAlgorithm();
+        private readonly MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm =
+            new MetadataRuntimeInterfacesAlgorithm();
+        private readonly MetadataVirtualMethodAlgorithm _virtualMethodAlgorithm =
+            new MetadataVirtualMethodAlgorithm();
 
         private MetadataStringDecoder _metadataStringDecoder;
 
@@ -36,24 +39,29 @@ namespace ILCompiler
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(ModuleData value)
             {
                 return value.Module.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(EcmaModule key, ModuleData value)
             {
                 return ReferenceEquals(key, value.Module);
             }
+
             protected override bool CompareValueToValue(ModuleData value1, ModuleData value2)
             {
                 return ReferenceEquals(value1.Module, value2.Module);
             }
+
             protected override ModuleData CreateValueFromKey(EcmaModule key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
         }
+
         private readonly ModuleHashtable _moduleHashtable = new ModuleHashtable();
 
         private sealed class SimpleNameHashtable : LockFreeReaderHashtable<string, ModuleData>
@@ -64,41 +72,41 @@ namespace ILCompiler
             {
                 return _comparer.GetHashCode(key);
             }
+
             protected override int GetValueHashCode(ModuleData value)
             {
                 return _comparer.GetHashCode(value.SimpleName);
             }
+
             protected override bool CompareKeyToValue(string key, ModuleData value)
             {
                 return _comparer.Equals(key, value.SimpleName);
             }
+
             protected override bool CompareValueToValue(ModuleData value1, ModuleData value2)
             {
                 return _comparer.Equals(value1.SimpleName, value2.SimpleName);
             }
+
             protected override ModuleData CreateValueFromKey(string key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
         }
+
         private readonly SimpleNameHashtable _simpleNameHashtable = new SimpleNameHashtable();
 
         private readonly SharedGenericsMode _genericsMode;
 
-        public IReadOnlyDictionary<string, string> InputFilePaths
-        {
-            get;
-            set;
-        }
+        public IReadOnlyDictionary<string, string> InputFilePaths { get; set; }
 
-        public IReadOnlyDictionary<string, string> ReferenceFilePaths
-        {
-            get;
-            set;
-        }
+        public IReadOnlyDictionary<string, string> ReferenceFilePaths { get; set; }
 
-        public override ModuleDesc ResolveAssembly(System.Reflection.AssemblyName name, bool throwIfNotFound)
+        public override ModuleDesc ResolveAssembly(
+            System.Reflection.AssemblyName name,
+            bool throwIfNotFound
+        )
         {
             // TODO: catch typesystem BadImageFormatException and throw a new one that also captures the
             // assembly name that caused the failure. (Along with the reason, which makes this rather annoying).
@@ -110,22 +118,31 @@ namespace ILCompiler
             if (_simpleNameHashtable.TryGetValue(simpleName, out ModuleData existing))
                 return existing.Module;
 
-            if (InputFilePaths.TryGetValue(simpleName, out string filePath)
-                || ReferenceFilePaths.TryGetValue(simpleName, out filePath))
+            if (
+                InputFilePaths.TryGetValue(simpleName, out string filePath)
+                || ReferenceFilePaths.TryGetValue(simpleName, out filePath)
+            )
                 return AddModule(filePath, simpleName, true);
 
             // TODO: the exception is wrong for two reasons: for one, this should be assembly full name, not simple name.
             // The other reason is that on CoreCLR, the exception also captures the reason. We should be passing two
             // string IDs. This makes this rather annoying.
             if (throwIfNotFound)
-                ThrowHelper.ThrowFileNotFoundException(ExceptionStringID.FileLoadErrorGeneric, simpleName);
+                ThrowHelper.ThrowFileNotFoundException(
+                    ExceptionStringID.FileLoadErrorGeneric,
+                    simpleName
+                );
 
             return null;
         }
 
         public EcmaModule GetModuleFromPath(string filePath, bool throwOnFailureToLoad = true)
         {
-            return GetOrAddModuleFromPath(filePath, true, throwOnFailureToLoad: throwOnFailureToLoad);
+            return GetOrAddModuleFromPath(
+                filePath,
+                true,
+                throwOnFailureToLoad: throwOnFailureToLoad
+            );
         }
 
         public EcmaModule GetMetadataOnlyModuleFromPath(string filePath)
@@ -133,7 +150,11 @@ namespace ILCompiler
             return GetOrAddModuleFromPath(filePath, false);
         }
 
-        private EcmaModule GetOrAddModuleFromPath(string filePath, bool useForBinding, bool throwOnFailureToLoad = true)
+        private EcmaModule GetOrAddModuleFromPath(
+            string filePath,
+            bool useForBinding,
+            bool throwOnFailureToLoad = true
+        )
         {
             filePath = Path.GetFullPath(filePath);
 
@@ -144,10 +165,18 @@ namespace ILCompiler
                     return entry.Module;
             }
 
-            return AddModule(filePath, null, useForBinding, throwOnFailureToLoad: throwOnFailureToLoad);
+            return AddModule(
+                filePath,
+                null,
+                useForBinding,
+                throwOnFailureToLoad: throwOnFailureToLoad
+            );
         }
 
-        public static unsafe PEReader OpenPEFile(string filePath, out MemoryMappedViewAccessor mappedViewAccessor)
+        public static unsafe PEReader OpenPEFile(
+            string filePath,
+            out MemoryMappedViewAccessor mappedViewAccessor
+        )
         {
             // System.Reflection.Metadata has heuristic that tries to save virtual address space. This heuristic does not work
             // well for us since it can make IL access very slow (call to OS for each method IL query). We will map the file
@@ -159,13 +188,28 @@ namespace ILCompiler
             try
             {
                 // Create stream because CreateFromFile(string, ...) uses FileShare.None which is too strict
-                fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1);
+                fileStream = new FileStream(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 1
+                );
                 mappedFile = MemoryMappedFile.CreateFromFile(
-                    fileStream, null, fileStream.Length, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
+                    fileStream,
+                    null,
+                    fileStream.Length,
+                    MemoryMappedFileAccess.Read,
+                    HandleInheritability.None,
+                    true
+                );
                 accessor = mappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
 
                 var safeBuffer = accessor.SafeMemoryMappedViewHandle;
-                var peReader = new PEReader((byte*)safeBuffer.DangerousGetHandle(), (int)safeBuffer.ByteLength);
+                var peReader = new PEReader(
+                    (byte*)safeBuffer.DangerousGetHandle(),
+                    (int)safeBuffer.ByteLength
+                );
 
                 // MemoryMappedFile does not need to be kept around. MemoryMappedViewAccessor is enough.
 
@@ -182,7 +226,13 @@ namespace ILCompiler
             }
         }
 
-        private EcmaModule AddModule(string filePath, string expectedSimpleName, bool useForBinding, ModuleData oldModuleData = null, bool throwOnFailureToLoad = true)
+        private EcmaModule AddModule(
+            string filePath,
+            string expectedSimpleName,
+            bool useForBinding,
+            ModuleData oldModuleData = null,
+            bool throwOnFailureToLoad = true
+        )
         {
             PEReader peReader = null;
             MemoryMappedViewAccessor mappedViewAccessor = null;
@@ -195,12 +245,23 @@ namespace ILCompiler
                     peReader = OpenPEFile(filePath, out mappedViewAccessor);
 
 #if !READYTORUN
-                if (peReader.HasMetadata && (peReader.PEHeaders.CorHeader.Flags & (CorFlags.ILLibrary | CorFlags.ILOnly)) == 0)
-                    throw new NotSupportedException($"Error: C++/CLI is not supported: '{filePath}'");
+                    if (
+                        peReader.HasMetadata
+                        && (
+                            peReader.PEHeaders.CorHeader.Flags
+                            & (CorFlags.ILLibrary | CorFlags.ILOnly)
+                        ) == 0
+                    )
+                        throw new NotSupportedException(
+                            $"Error: C++/CLI is not supported: '{filePath}'"
+                        );
 #endif
 
-                    pdbReader = PortablePdbSymbolReader.TryOpenEmbedded(peReader, GetMetadataStringDecoder())
-                                ?? OpenAssociatedSymbolFile(filePath, peReader);
+                    pdbReader =
+                        PortablePdbSymbolReader.TryOpenEmbedded(
+                            peReader,
+                            GetMetadataStringDecoder()
+                        ) ?? OpenAssociatedSymbolFile(filePath, peReader);
                 }
                 else
                 {
@@ -215,31 +276,47 @@ namespace ILCompiler
                     return null;
                 }
 
-                EcmaModule module = EcmaModule.Create(this, peReader, containingAssembly: null, pdbReader);
+                EcmaModule module = EcmaModule.Create(
+                    this,
+                    peReader,
+                    containingAssembly: null,
+                    pdbReader
+                );
 
                 MetadataReader metadataReader = module.MetadataReader;
-                string simpleName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+                string simpleName = metadataReader.GetString(
+                    metadataReader.GetAssemblyDefinition().Name
+                );
 
-                if (expectedSimpleName != null && !simpleName.Equals(expectedSimpleName, StringComparison.OrdinalIgnoreCase))
-                    throw new FileNotFoundException("Assembly name does not match filename " + filePath);
+                if (
+                    expectedSimpleName != null
+                    && !simpleName.Equals(expectedSimpleName, StringComparison.OrdinalIgnoreCase)
+                )
+                    throw new FileNotFoundException(
+                        "Assembly name does not match filename " + filePath
+                    );
 
                 ModuleData moduleData = new ModuleData()
                 {
                     SimpleName = simpleName,
                     FilePath = filePath,
                     Module = module,
-                    MappedViewAccessor = mappedViewAccessor
+                    MappedViewAccessor = mappedViewAccessor,
                 };
 
                 lock (this)
                 {
                     if (useForBinding)
                     {
-                        ModuleData actualModuleData = _simpleNameHashtable.AddOrGetExisting(moduleData);
+                        ModuleData actualModuleData = _simpleNameHashtable.AddOrGetExisting(
+                            moduleData
+                        );
                         if (actualModuleData != moduleData)
                         {
                             if (actualModuleData.FilePath != filePath)
-                                throw new FileNotFoundException("Module with same simple name already exists " + filePath);
+                                throw new FileNotFoundException(
+                                    "Module with same simple name already exists " + filePath
+                                );
                             return actualModuleData.Module;
                         }
                     }
@@ -260,13 +337,19 @@ namespace ILCompiler
 
         protected void InheritOpenModules(CompilerTypeSystemContext oldTypeSystemContext)
         {
-            foreach (ModuleData oldModuleData in ModuleHashtable.Enumerator.Get(oldTypeSystemContext._moduleHashtable))
+            foreach (
+                ModuleData oldModuleData in ModuleHashtable.Enumerator.Get(
+                    oldTypeSystemContext._moduleHashtable
+                )
+            )
             {
                 AddModule(null, null, true, oldModuleData);
             }
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(DefType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
+            DefType type
+        )
         {
             return _metadataRuntimeInterfacesAlgorithm;
         }
@@ -278,10 +361,18 @@ namespace ILCompiler
             return _virtualMethodAlgorithm;
         }
 
-        protected override Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind, out bool changed)
+        protected override Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind,
+            out bool changed
+        )
         {
             if (_genericsMode == SharedGenericsMode.CanonicalReferenceTypes)
-                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(instantiation, kind, out changed);
+                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(
+                    instantiation,
+                    kind,
+                    out changed
+                );
 
             Debug.Assert(_genericsMode == SharedGenericsMode.Disabled);
             changed = false;
@@ -291,16 +382,25 @@ namespace ILCompiler
         protected override TypeDesc ConvertToCanon(TypeDesc typeToConvert, CanonicalFormKind kind)
         {
             if (_genericsMode == SharedGenericsMode.CanonicalReferenceTypes)
-                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertToCanon(typeToConvert, kind);
+                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertToCanon(
+                    typeToConvert,
+                    kind
+                );
 
             Debug.Assert(_genericsMode == SharedGenericsMode.Disabled);
             return typeToConvert;
         }
 
-        protected override TypeDesc ConvertToCanon(TypeDesc typeToConvert, ref CanonicalFormKind kind)
+        protected override TypeDesc ConvertToCanon(
+            TypeDesc typeToConvert,
+            ref CanonicalFormKind kind
+        )
         {
             if (_genericsMode == SharedGenericsMode.CanonicalReferenceTypes)
-                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertToCanon(typeToConvert, ref kind);
+                return RuntimeDeterminedCanonicalizationAlgorithm.ConvertToCanon(
+                    typeToConvert,
+                    ref kind
+                );
 
             Debug.Assert(_genericsMode == SharedGenericsMode.Disabled);
             return typeToConvert;
@@ -329,13 +429,17 @@ namespace ILCompiler
                 if (debugEntry.Type != DebugDirectoryEntryType.CodeView)
                     continue;
 
-                CodeViewDebugDirectoryData debugDirectoryData = peReader.ReadCodeViewDebugDirectoryData(debugEntry);
+                CodeViewDebugDirectoryData debugDirectoryData =
+                    peReader.ReadCodeViewDebugDirectoryData(debugEntry);
 
-                string candidatePath  = debugDirectoryData.Path;
+                string candidatePath = debugDirectoryData.Path;
                 if (!Path.IsPathRooted(candidatePath) || !File.Exists(candidatePath))
                 {
                     // Also check next to the PE file
-                    candidatePath = Path.Combine(Path.GetDirectoryName(peFilePath), Path.GetFileName(candidatePath));
+                    candidatePath = Path.Combine(
+                        Path.GetDirectoryName(peFilePath),
+                        Path.GetFileName(candidatePath)
+                    );
                     if (!File.Exists(candidatePath))
                         continue;
                 }
@@ -349,9 +453,16 @@ namespace ILCompiler
                 return null;
 
             // Try to open the symbol file as portable pdb first
-            PdbSymbolReader reader = PortablePdbSymbolReader.TryOpen(pdbFileName, GetMetadataStringDecoder(), pdbContentId);
+            PdbSymbolReader reader = PortablePdbSymbolReader.TryOpen(
+                pdbFileName,
+                GetMetadataStringDecoder(),
+                pdbContentId
+            );
             // Fallback to the diasymreader for non-portable pdbs
-            reader ??= UnmanagedPdbSymbolReader.TryOpenSymbolReaderForMetadataFile(peFilePath, Path.GetDirectoryName(pdbFileName));
+            reader ??= UnmanagedPdbSymbolReader.TryOpenSymbolReaderForMetadataFile(
+                peFilePath,
+                Path.GetDirectoryName(pdbFileName)
+            );
 
             return reader;
         }

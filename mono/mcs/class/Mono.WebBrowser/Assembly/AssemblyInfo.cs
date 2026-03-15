@@ -10,8 +10,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Mono.WebBrowser")]
 [assembly: AssemblyCopyright("(c) 2007, 2008 Andreia Gaita")]
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
 [assembly: AssemblyDelaySign(true)]

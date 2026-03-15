@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetElements()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<doc> <elem1 attr1=\"attr1\" attr2=\"foo\" attr3=\"foo\">This is a test</elem1> text after </doc>");
+            xmlDocument.LoadXml(
+                "<doc> <elem1 attr1=\"attr1\" attr2=\"foo\" attr3=\"foo\">This is a test</elem1> text after </doc>"
+            );
 
             var node = (XmlElement)xmlDocument.DocumentElement.FirstChild;
             Assert.Equal(3, node.Attributes.Count);
@@ -29,7 +31,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveAttribute()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>"
+            );
 
             Assert.Equal(6, xmlDocument.DocumentElement.Attributes.Count);
             xmlDocument.DocumentElement.RemoveAttribute("att1", "ns2");
@@ -40,7 +44,9 @@ namespace System.Xml.XmlDocumentTests
         public static void WrongNamespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>"
+            );
 
             Assert.Equal(6, xmlDocument.DocumentElement.Attributes.Count);
             xmlDocument.DocumentElement.RemoveAttribute("att1", "nsaa");
@@ -51,7 +57,9 @@ namespace System.Xml.XmlDocumentTests
         public static void WrongName()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>"
+            );
 
             Assert.Equal(6, xmlDocument.DocumentElement.Attributes.Count);
             xmlDocument.DocumentElement.RemoveAttribute("att26", "ns2");

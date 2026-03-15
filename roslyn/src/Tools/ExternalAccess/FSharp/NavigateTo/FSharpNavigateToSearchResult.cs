@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.NavigateTo
             string kind,
             FSharpNavigateToMatchKind matchKind,
             string name,
-            FSharpNavigableItem navigateItem)
+            FSharpNavigableItem navigateItem
+        )
         {
             AdditionalInformation = additionalInformation;
             Kind = kind;

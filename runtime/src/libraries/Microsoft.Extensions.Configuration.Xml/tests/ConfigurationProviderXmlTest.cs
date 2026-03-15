@@ -53,16 +53,17 @@ Section3:
             AssertDebugView(configRoot, expected);
         }
 
-        protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(TestSection testConfig)
+        protected override (
+            IConfigurationProvider Provider,
+            Action Initializer
+        ) LoadThroughProvider(TestSection testConfig)
         {
             var xmlBuilder = new StringBuilder();
             SectionToXml(xmlBuilder, "settings", testConfig);
 
             var provider = new XmlConfigurationProvider(
-                new XmlConfigurationSource
-                {
-                    Optional = true
-                });
+                new XmlConfigurationSource { Optional = true }
+            );
 
             var xml = xmlBuilder.ToString();
             return (provider, () => provider.Load(TestStreamHelpers.StringToStream(xml)));
@@ -82,7 +83,9 @@ Section3:
                 {
                     for (var i = 0; i < tuple.Value.AsArray.Length; i++)
                     {
-                        xmlBuilder.AppendLine($"<{tuple.Key}>{tuple.Value.AsArray[i]}</{tuple.Key}>");
+                        xmlBuilder.AppendLine(
+                            $"<{tuple.Key}>{tuple.Value.AsArray[i]}</{tuple.Key}>"
+                        );
                     }
                 }
             }

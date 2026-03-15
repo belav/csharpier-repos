@@ -34,14 +34,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// Entry point to the array initialization.
         /// Assumes that we have newly created array on the stack.
-        /// 
+        ///
         /// inits could be an array of values for a single dimensional array
         /// or an array (of array)+ of values for a multidimensional case
-        /// 
-        /// in either case it is expected that number of leaf values will match number 
+        ///
+        /// in either case it is expected that number of leaf values will match number
         /// of elements in the array and nesting level should match the rank of the array.
         /// </summary>
-        private void EmitArrayInitializers(ArrayTypeSymbol arrayType, BoundArrayInitialization inits)
+        private void EmitArrayInitializers(
+            ArrayTypeSymbol arrayType,
+            BoundArrayInitialization inits
+        )
         {
             var initExprs = inits.Initializers;
             var initializationStyle = ShouldEmitBlockInitializer(arrayType.ElementType, initExprs);
@@ -63,9 +66,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitElementInitializers(ArrayTypeSymbol arrayType,
-                                            ImmutableArray<BoundExpression> inits,
-                                            bool includeConstants)
+        private void EmitElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        )
         {
             if (!IsMultidimensionalInitializer(inits))
             {
@@ -77,9 +82,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitVectorElementInitializers(ArrayTypeSymbol arrayType,
-                    ImmutableArray<BoundExpression> inits,
-                    bool includeConstants)
+        private void EmitVectorElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        )
         {
             for (int i = 0; i < inits.Length; i++)
             {
@@ -108,14 +115,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// To handle array initialization of arbitrary rank it is convenient to 
+        /// To handle array initialization of arbitrary rank it is convenient to
         /// approach multidimensional initialization as a recursively nested.
-        /// 
-        /// ForAll{i, j, k} Init(i, j, k) ===> 
+        ///
+        /// ForAll{i, j, k} Init(i, j, k) ===>
         /// ForAll{i} ForAll{j, k} Init(i, j, k) ===>
         /// ForAll{i} ForAll{j} ForAll{k} Init(i, j, k)
-        /// 
-        /// This structure is used for capturing initializers of a given index and 
+        ///
+        /// This structure is used for capturing initializers of a given index and
         /// the index value itself.
         /// </summary>
         private readonly struct IndexDesc
@@ -130,9 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             public readonly ImmutableArray<BoundExpression> Initializers;
         }
 
-        private void EmitMultidimensionalElementInitializers(ArrayTypeSymbol arrayType,
-                                                            ImmutableArray<BoundExpression> inits,
-                                                            bool includeConstants)
+        private void EmitMultidimensionalElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        )
         {
             // Using a List for the stack instead of the framework Stack because IEnumerable from Stack is top to bottom.
             // This algorithm requires the IEnumerable to be from bottom to top. See extensions for List in CollectionExtensions.vb.
@@ -151,22 +160,24 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         /// <summary>
         /// Emits all initializers that match indices on the stack recursively.
-        /// 
-        /// Example: 
+        ///
+        /// Example:
         ///  if array has [0..2, 0..3, 0..2] shape
         ///  and we have {1, 2} indices on the stack
-        ///  initializers for 
+        ///  initializers for
         ///              [1, 2, 0]
         ///              [1, 2, 1]
         ///              [1, 2, 2]
-        /// 
-        ///  will be emitted and the top index will be pushed off the stack 
-        ///  as at that point we would be completely done with emitting initializers 
+        ///
+        ///  will be emitted and the top index will be pushed off the stack
+        ///  as at that point we would be completely done with emitting initializers
         ///  corresponding to that index.
         /// </summary>
-        private void EmitAllElementInitializersRecursive(ArrayTypeSymbol arrayType,
-                                                         ArrayBuilder<IndexDesc> indices,
-                                                         bool includeConstants)
+        private void EmitAllElementInitializersRecursive(
+            ArrayTypeSymbol arrayType,
+            ArrayBuilder<IndexDesc> indices,
+            bool includeConstants
+        )
         {
             var top = indices.Peek();
             var inits = top.Initializers;
@@ -176,7 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 // emit initializers for the less significant indices recursively
                 for (int i = 0; i < inits.Length; i++)
                 {
-                    indices.Push(new IndexDesc(i, ((BoundArrayInitialization)inits[i]).Initializers));
+                    indices.Push(
+                        new IndexDesc(i, ((BoundArrayInitialization)inits[i]).Initializers)
+                    );
                     EmitAllElementInitializersRecursive(arrayType, indices, includeConstants);
                 }
             }
@@ -236,13 +249,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// </remarks>
         private bool EnableEnumArrayBlockInitialization
         {
-            get
-            {
-                return _module.Compilation.EnableEnumArrayBlockInitialization;
-            }
+            get { return _module.Compilation.EnableEnumArrayBlockInitialization; }
         }
 
-        private ArrayInitializerStyle ShouldEmitBlockInitializer(TypeSymbol elementType, ImmutableArray<BoundExpression> inits)
+        private ArrayInitializerStyle ShouldEmitBlockInitializer(
+            TypeSymbol elementType,
+            ImmutableArray<BoundExpression> inits
+        )
         {
             if (_module.IsEncDelta)
             {
@@ -293,7 +306,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// Count of all nontrivial initializers and count of those that are constants.
         /// </summary>
-        private void InitializerCountRecursive(ImmutableArray<BoundExpression> inits, ref int initCount, ref int constInits)
+        private void InitializerCountRecursive(
+            ImmutableArray<BoundExpression> inits,
+            ref int initCount,
+            ref int constInits
+        )
         {
             if (inits.Length == 0)
             {
@@ -306,11 +323,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (asArrayInit != null)
                 {
-                    InitializerCountRecursive(asArrayInit.Initializers, ref initCount, ref constInits);
+                    InitializerCountRecursive(
+                        asArrayInit.Initializers,
+                        ref initCount,
+                        ref constInits
+                    );
                 }
                 else
                 {
-                    // NOTE: default values do not need to be initialized. 
+                    // NOTE: default values do not need to be initialized.
                     //       .NET arrays are always zero-inited.
                     if (!init.IsDefaultValue())
                     {
@@ -331,7 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private ImmutableArray<byte> GetRawData(ImmutableArray<BoundExpression> initializers)
         {
             // the initial size is a guess.
-            // there is no point to be precise here as MemoryStream always has N + 1 storage 
+            // there is no point to be precise here as MemoryStream always has N + 1 storage
             // and will need to be trimmed regardless
             var writer = new BlobBuilder(initializers.Length * 4);
 
@@ -366,9 +387,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// </summary>
         private static bool IsMultidimensionalInitializer(ImmutableArray<BoundExpression> inits)
         {
-            Debug.Assert(inits.All((init) => init.Kind != BoundKind.ArrayInitialization) ||
-                         inits.All((init) => init.Kind == BoundKind.ArrayInitialization),
-                         "all or none should be nested");
+            Debug.Assert(
+                inits.All((init) => init.Kind != BoundKind.ArrayInitialization)
+                    || inits.All((init) => init.Kind == BoundKind.ArrayInitialization),
+                "all or none should be nested"
+            );
 
             return inits.Length != 0 && inits[0].Kind == BoundKind.ArrayInitialization;
         }
@@ -394,7 +417,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// And if false and <paramref name="avoidInPlace"/> is true (in which case <paramref name="inPlaceTarget"/> must have been non-null), the caller
         /// may try again but with a null <paramref name="inPlaceTarget"/>.
         /// </returns>
-        private bool TryEmitReadonlySpanAsBlobWrapper(NamedTypeSymbol spanType, BoundExpression wrappedExpression, bool used, BoundExpression inPlaceTarget, out bool avoidInPlace, BoundExpression? start = null, BoundExpression? length = null)
+        private bool TryEmitReadonlySpanAsBlobWrapper(
+            NamedTypeSymbol spanType,
+            BoundExpression wrappedExpression,
+            bool used,
+            BoundExpression inPlaceTarget,
+            out bool avoidInPlace,
+            BoundExpression? start = null,
+            BoundExpression? length = null
+        )
         {
             // The purpose of this optimization is to replace a BoundArrayCreation with better code generation.
             // We're looking for an expression like:
@@ -429,8 +460,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // is also the reason this method accepts a start/length, in order to support trimming
             // the null terminator off as part of creating the span instance.
 
-            Debug.Assert(inPlaceTarget is null || TargetIsNotOnHeap(inPlaceTarget), "in-place construction target should not be on heap");
-            Debug.Assert(_diagnostics.DiagnosticBag is not null, $"Expected non-null {nameof(_diagnostics)}.{nameof(_diagnostics.DiagnosticBag)}");
+            Debug.Assert(
+                inPlaceTarget is null || TargetIsNotOnHeap(inPlaceTarget),
+                "in-place construction target should not be on heap"
+            );
+            Debug.Assert(
+                _diagnostics.DiagnosticBag is not null,
+                $"Expected non-null {nameof(_diagnostics)}.{nameof(_diagnostics.DiagnosticBag)}"
+            );
 
             if (start is null != length is null)
             {
@@ -454,7 +491,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // all optimizations.  Technically, if this ctor isn't available but the ReadOnlySpan(T[]) constructor is, we could still
             // proceed to use the cached array mechanism.  But all known ReadOnlySpan implementations have always provided both
             // constructors, and it's not worth trying to optimize here for an arbitrary implementation that has a different shape.
-            var rosPointerCtor = (MethodSymbol?)Binder.GetWellKnownTypeMember(_module.Compilation, WellKnownMember.System_ReadOnlySpan_T__ctor_Pointer, _diagnostics, syntax: wrappedExpression.Syntax, isOptional: true);
+            var rosPointerCtor = (MethodSymbol?)
+                Binder.GetWellKnownTypeMember(
+                    _module.Compilation,
+                    WellKnownMember.System_ReadOnlySpan_T__ctor_Pointer,
+                    _diagnostics,
+                    syntax: wrappedExpression.Syntax,
+                    isOptional: true
+                );
             if (rosPointerCtor is null)
             {
                 return false;
@@ -497,7 +541,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (start is not null)
             {
                 // The start expression needs to be 0.
-                if (start.ConstantValueOpt?.IsDefaultValue != true || start.ConstantValueOpt.Discriminator != ConstantValueTypeDiscriminator.Int32)
+                if (
+                    start.ConstantValueOpt?.IsDefaultValue != true
+                    || start.ConstantValueOpt.Discriminator != ConstantValueTypeDiscriminator.Int32
+                )
                 {
                     return false;
                 }
@@ -571,7 +618,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
 
                 // Map a field to the block (that makes it addressable).
-                var field = _builder.module.GetFieldForData(data, alignment: 1, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
+                var field = _builder.module.GetFieldForData(
+                    data,
+                    alignment: 1,
+                    wrappedExpression.Syntax,
+                    _diagnostics.DiagnosticBag
+                );
                 _builder.EmitOpCode(ILOpCode.Ldsflda);
                 _builder.EmitToken(field, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
 
@@ -589,7 +641,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     _builder.EmitOpCode(ILOpCode.Newobj, stackAdjustment: -1);
                 }
 
-                EmitSymbolToken(rosPointerCtor.AsMember(spanType), wrappedExpression.Syntax, optArgList: null);
+                EmitSymbolToken(
+                    rosPointerCtor.AsMember(spanType),
+                    wrappedExpression.Syntax,
+                    optArgList: null
+                );
 
                 if (inPlaceTarget is not null && used)
                 {
@@ -600,7 +656,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
 
             // We're dealing with a primitive that's larger than a single byte.
-            Debug.Assert(specialElementType.SizeInBytes() is 2 or 4 or 8, "Supported primitives are expected to be 2, 4, or 8 bytes");
+            Debug.Assert(
+                specialElementType.SizeInBytes() is 2 or 4 or 8,
+                "Supported primitives are expected to be 2, 4, or 8 bytes"
+            );
 
             if (lengthForConstructor != elementCount)
             {
@@ -624,7 +683,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // As we're dealing with multi-byte types, endianness needs to be considered. Such handling is provided by the
             // runtime's RuntimeHelpers.CreateSpan, which will wrap a span around the blob on little endian and which will
             // allocate an array and cache it on big endian.
-            MethodSymbol? createSpan = (MethodSymbol?)Binder.GetWellKnownTypeMember(_module.Compilation, WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__CreateSpanRuntimeFieldHandle, _diagnostics, syntax: wrappedExpression.Syntax, isOptional: true);
+            MethodSymbol? createSpan = (MethodSymbol?)
+                Binder.GetWellKnownTypeMember(
+                    _module.Compilation,
+                    WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__CreateSpanRuntimeFieldHandle,
+                    _diagnostics,
+                    syntax: wrappedExpression.Syntax,
+                    isOptional: true
+                );
             if (createSpan is not null)
             {
                 // CreateSpan was available. Use it.
@@ -632,11 +698,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 // ldtoken <PrivateImplementationDetails>...
                 // call ReadOnlySpan<elementType> RuntimeHelpers::CreateSpan<elementType>(fldHandle)
-                var field = _builder.module.GetFieldForData(data, alignment: (ushort)specialElementType.SizeInBytes(), wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
+                var field = _builder.module.GetFieldForData(
+                    data,
+                    alignment: (ushort)specialElementType.SizeInBytes(),
+                    wrappedExpression.Syntax,
+                    _diagnostics.DiagnosticBag
+                );
                 _builder.EmitOpCode(ILOpCode.Ldtoken);
                 _builder.EmitToken(field, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
                 _builder.EmitOpCode(ILOpCode.Call, stackAdjustment: 0);
-                EmitSymbolToken(createSpan.Construct(elementType), wrappedExpression.Syntax, optArgList: null);
+                EmitSymbolToken(
+                    createSpan.Construct(elementType),
+                    wrappedExpression.Syntax,
+                    optArgList: null
+                );
                 return true;
             }
 
@@ -644,7 +719,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // and use it as a lazily-initialized cache for an array for this data:
             //     new ReadOnlySpan<T>(PrivateImplementationDetails.ArrayField ??= RuntimeHelpers.InitializeArray(new int[Length], PrivateImplementationDetails.DataField));
 
-            var rosArrayCtor = (MethodSymbol?)Binder.GetWellKnownTypeMember(_module.Compilation, WellKnownMember.System_ReadOnlySpan_T__ctor_Array, _diagnostics, syntax: wrappedExpression.Syntax, isOptional: true);
+            var rosArrayCtor = (MethodSymbol?)
+                Binder.GetWellKnownTypeMember(
+                    _module.Compilation,
+                    WellKnownMember.System_ReadOnlySpan_T__ctor_Array,
+                    _diagnostics,
+                    syntax: wrappedExpression.Syntax,
+                    isOptional: true
+                );
             if (rosArrayCtor is null)
             {
                 // The ReadOnlySpan<T>(T[] array) constructor we need is missing or something went wrong.
@@ -662,9 +744,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // Also, even if we're not dealing with an enum, we still create a new array type that drops any
             // annotations that may have initially been associated with the element type; this is similarly to
             // ensure deterministic behavior.
-            arrayType = arrayType.WithElementType(TypeWithAnnotations.Create(elementType.EnumUnderlyingTypeOrSelf()));
+            arrayType = arrayType.WithElementType(
+                TypeWithAnnotations.Create(elementType.EnumUnderlyingTypeOrSelf())
+            );
 
-            var cachingField = _builder.module.GetArrayCachingFieldForData(data, _module.Translate(arrayType), wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
+            var cachingField = _builder.module.GetArrayCachingFieldForData(
+                data,
+                _module.Translate(arrayType),
+                wrappedExpression.Syntax,
+                _diagnostics.DiagnosticBag
+            );
             var arrayNotNullLabel = new object();
 
             // T[]? array = PrivateImplementationDetails.cachingField;
@@ -681,7 +770,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             _builder.EmitIntConstant(elementCount);
             _builder.EmitOpCode(ILOpCode.Newarr);
             EmitSymbolToken(arrayType.ElementType, wrappedExpression.Syntax);
-            _builder.EmitArrayBlockInitializer(data, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
+            _builder.EmitArrayBlockInitializer(
+                data,
+                wrappedExpression.Syntax,
+                _diagnostics.DiagnosticBag
+            );
             _builder.EmitOpCode(ILOpCode.Dup);
             _builder.EmitOpCode(ILOpCode.Stsfld);
             _builder.EmitToken(cachingField, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
@@ -690,36 +783,53 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             // new ReadOnlySpan<T>(array)
             _builder.MarkLabel(arrayNotNullLabel);
             _builder.EmitOpCode(ILOpCode.Newobj, 0);
-            EmitSymbolToken(rosArrayCtor.AsMember(spanType), wrappedExpression.Syntax, optArgList: null);
+            EmitSymbolToken(
+                rosArrayCtor.AsMember(spanType),
+                wrappedExpression.Syntax,
+                optArgList: null
+            );
             return true;
         }
 
         /// <summary>Gets whether the element type of an array is appropriate for storing in a blob.</summary>
-        internal static bool IsTypeAllowedInBlobWrapper(SpecialType type) => type is
-            // 1 byte
-            // For primitives that are a single byte in size, a span can point directly to a blob
-            // containing the constant data.
-            SpecialType.System_SByte or SpecialType.System_Byte or SpecialType.System_Boolean or
+        internal static bool IsTypeAllowedInBlobWrapper(SpecialType type) =>
+            type
+                is
+                    // 1 byte
+                    // For primitives that are a single byte in size, a span can point directly to a blob
+                    // containing the constant data.
+                    SpecialType.System_SByte
+                    or SpecialType.System_Byte
+                    or SpecialType.System_Boolean
+                    or
+                    // For primitives that are > 1 byte in size, we can either use CreateSpan if it's available
+                    // or fall back to caching an array.
 
-            // For primitives that are > 1 byte in size, we can either use CreateSpan if it's available
-            // or fall back to caching an array.
-
-            // 2 bytes
-            SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
-
-            // 4 bytes
-            SpecialType.System_Int32 or SpecialType.System_UInt32 or SpecialType.System_Single or
-
-            // 8 bytes
-            SpecialType.System_Int64 or SpecialType.System_UInt64 or SpecialType.System_Double;
+                    // 2 bytes
+                    SpecialType.System_Int16
+                    or SpecialType.System_UInt16
+                    or SpecialType.System_Char
+                    or
+                    // 4 bytes
+                    SpecialType.System_Int32
+                    or SpecialType.System_UInt32
+                    or SpecialType.System_Single
+                    or
+                    // 8 bytes
+                    SpecialType.System_Int64
+                    or SpecialType.System_UInt64
+                    or SpecialType.System_Double;
 
 #nullable disable
 
         /// <summary>
-        ///  Returns a byte blob that matches serialized content of single array initializer.    
+        ///  Returns a byte blob that matches serialized content of single array initializer.
         ///  returns -1 if the initializer is null or not an array of literals
         /// </summary>
-        private int TryGetRawDataForArrayInit(BoundArrayInitialization initializer, out ImmutableArray<byte> data)
+        private int TryGetRawDataForArrayInit(
+            BoundArrayInitialization initializer,
+            out ImmutableArray<byte> data
+        )
         {
             data = default;
 

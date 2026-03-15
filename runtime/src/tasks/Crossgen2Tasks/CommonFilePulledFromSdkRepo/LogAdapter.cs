@@ -29,7 +29,8 @@ namespace Microsoft.NET.Build.Tasks
                         columnNumber: default,
                         endLineNumber: default,
                         endColumnNumber: default,
-                        message: message.Text);
+                        message: message.Text
+                    );
                     break;
 
                 case MessageLevel.Warning:
@@ -42,7 +43,8 @@ namespace Microsoft.NET.Build.Tasks
                         columnNumber: default,
                         endLineNumber: default,
                         endColumnNumber: default,
-                        message: message.Text);
+                        message: message.Text
+                    );
                     break;
 
                 case MessageLevel.HighImportance:
@@ -68,14 +70,16 @@ namespace Microsoft.NET.Build.Tasks
                             endLineNumber: default,
                             endColumnNumber: default,
                             importance: message.Level.ToImportance(),
-                            message: message.Text);
+                            message: message.Text
+                        );
                     }
                     break;
 
                 default:
                     throw new ArgumentException(
                         $"Message \"{message.Code}: {message.Text}\" logged with invalid Level=${message.Level}",
-                        paramName: nameof(message));
+                        paramName: nameof(message)
+                    );
             }
         }
     }

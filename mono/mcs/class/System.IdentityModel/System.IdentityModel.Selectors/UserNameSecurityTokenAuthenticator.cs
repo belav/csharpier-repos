@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,32 +32,34 @@ using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {
-	public abstract class UserNameSecurityTokenAuthenticator
-		: SecurityTokenAuthenticator
-	{
-		protected UserNameSecurityTokenAuthenticator ()
-		{
-		}
+    public abstract class UserNameSecurityTokenAuthenticator : SecurityTokenAuthenticator
+    {
+        protected UserNameSecurityTokenAuthenticator() { }
 
-		protected override bool CanValidateTokenCore (SecurityToken token)
-		{
-			if (token == null)
-				throw new ArgumentNullException ("token");
-			return token is UserNameSecurityToken;
-		}
+        protected override bool CanValidateTokenCore(SecurityToken token)
+        {
+            if (token == null)
+                throw new ArgumentNullException("token");
+            return token is UserNameSecurityToken;
+        }
 
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateTokenCore (SecurityToken token)
-		{
-			if (token == null)
-				throw new ArgumentNullException ("token");
-			UserNameSecurityToken ut = token as UserNameSecurityToken;
-			if (ut == null)
-				throw new InvalidOperationException (String.Format ("Security token '{0}' is not supported", token));
-			return ValidateUserNamePasswordCore (ut.UserName, ut.Password);
-		}
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
+        {
+            if (token == null)
+                throw new ArgumentNullException("token");
+            UserNameSecurityToken ut = token as UserNameSecurityToken;
+            if (ut == null)
+                throw new InvalidOperationException(
+                    String.Format("Security token '{0}' is not supported", token)
+                );
+            return ValidateUserNamePasswordCore(ut.UserName, ut.Password);
+        }
 
-		protected abstract ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateUserNamePasswordCore (string userName, string password);
-	}
+        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        );
+    }
 }

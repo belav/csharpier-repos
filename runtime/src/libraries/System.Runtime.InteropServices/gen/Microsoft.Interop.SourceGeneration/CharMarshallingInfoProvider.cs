@@ -20,13 +20,21 @@ namespace Microsoft.Interop
             _defaultMarshallingInfo = defaultMarshallingInfo;
         }
 
-        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) => type.SpecialType == SpecialType.System_Char;
+        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) =>
+            type.SpecialType == SpecialType.System_Char;
 
-        public MarshallingInfo GetMarshallingInfo(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public MarshallingInfo GetMarshallingInfo(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             // No marshalling info was computed, but a character encoding was provided.
             // If the type is a character then pass on these details.
-            return _defaultMarshallingInfo.CharEncoding == CharEncoding.Undefined ? new UnmanagedBlittableMarshallingInfo(IsStrictlyBlittable: false) : new MarshallingInfoStringSupport(_defaultMarshallingInfo.CharEncoding);
+            return _defaultMarshallingInfo.CharEncoding == CharEncoding.Undefined
+                ? new UnmanagedBlittableMarshallingInfo(IsStrictlyBlittable: false)
+                : new MarshallingInfoStringSupport(_defaultMarshallingInfo.CharEncoding);
         }
     }
 }

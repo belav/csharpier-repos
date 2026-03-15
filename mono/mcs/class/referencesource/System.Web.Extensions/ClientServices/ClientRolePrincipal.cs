@@ -11,12 +11,17 @@ namespace System.Web.ClientServices
 
     public class ClientRolePrincipal : IPrincipal
     {
-        public IIdentity Identity { get { return _Identity; } }
+        public IIdentity Identity
+        {
+            get { return _Identity; }
+        }
         private IIdentity _Identity;
 
-        public ClientRolePrincipal(IIdentity identity) {
+        public ClientRolePrincipal(IIdentity identity)
+        {
             _Identity = identity;
         }
+
         public bool IsInRole(string role)
         {
             return System.Web.Security.Roles.IsUserInRole(_Identity.Name, role);

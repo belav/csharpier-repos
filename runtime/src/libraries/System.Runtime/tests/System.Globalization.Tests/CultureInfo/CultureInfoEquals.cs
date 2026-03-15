@@ -15,7 +15,12 @@ namespace System.Globalization.Tests
             yield return new object[] { frFRCulture, frFRCulture, true };
             yield return new object[] { new CultureInfo("en"), new CultureInfo("en"), true };
             yield return new object[] { new CultureInfo("en-US"), new CultureInfo("en-US"), true };
-            yield return new object[] { CultureInfo.InvariantCulture, CultureInfo.InvariantCulture, true };
+            yield return new object[]
+            {
+                CultureInfo.InvariantCulture,
+                CultureInfo.InvariantCulture,
+                true,
+            };
             yield return new object[] { CultureInfo.InvariantCulture, new CultureInfo(""), true };
 
             yield return new object[] { new CultureInfo("en"), new CultureInfo("en-US"), false };

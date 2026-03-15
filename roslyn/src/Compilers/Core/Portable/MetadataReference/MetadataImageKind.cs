@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The PE file is a module.
         /// </summary>
-        Module = 1
+        Module = 1,
     }
 
     internal static partial class EnumBounds

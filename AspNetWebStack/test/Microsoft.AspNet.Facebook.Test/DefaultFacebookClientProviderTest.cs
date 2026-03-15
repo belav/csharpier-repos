@@ -12,7 +12,10 @@ namespace Microsoft.AspNet.Facebook.Test
         [Fact]
         public void Constructor_ThrowsArgumentNullException()
         {
-            Assert.ThrowsArgumentNull(() => new DefaultFacebookClientProvider(null), "configuration");
+            Assert.ThrowsArgumentNull(
+                () => new DefaultFacebookClientProvider(null),
+                "configuration"
+            );
         }
 
         [Fact]
@@ -23,9 +26,11 @@ namespace Microsoft.AspNet.Facebook.Test
             FacebookConfiguration config = new FacebookConfiguration
             {
                 AppId = appId,
-                AppSecret = appSecret
+                AppSecret = appSecret,
             };
-            DefaultFacebookClientProvider clientProvider = new DefaultFacebookClientProvider(config);
+            DefaultFacebookClientProvider clientProvider = new DefaultFacebookClientProvider(
+                config
+            );
             FacebookClient client = clientProvider.CreateClient();
 
             Assert.Equal(appId, client.AppId);

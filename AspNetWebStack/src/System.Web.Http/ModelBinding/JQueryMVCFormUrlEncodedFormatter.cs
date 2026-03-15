@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace System.Web.Http.ModelBinding
 {
-    // Supports JQuery schema on FormURL. 
+    // Supports JQuery schema on FormURL.
     public class JQueryMvcFormUrlEncodedFormatter : FormUrlEncodedMediaTypeFormatter
     {
         private readonly HttpConfiguration _configuration = null;
 
-        public JQueryMvcFormUrlEncodedFormatter()
-        {
-        }
+        public JQueryMvcFormUrlEncodedFormatter() { }
 
         public JQueryMvcFormUrlEncodedFormatter(HttpConfiguration config)
         {
@@ -32,7 +30,12 @@ namespace System.Web.Http.ModelBinding
             return true;
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -53,14 +56,30 @@ namespace System.Web.Http.ModelBinding
             return ReadFromStreamAsyncCore(type, readStream, content, formatterLogger);
         }
 
-        private async Task<object> ReadFromStreamAsyncCore(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        private async Task<object> ReadFromStreamAsyncCore(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
-            object obj = await base.ReadFromStreamAsync(typeof(FormDataCollection), readStream, content, formatterLogger);
+            object obj = await base.ReadFromStreamAsync(
+                typeof(FormDataCollection),
+                readStream,
+                content,
+                formatterLogger
+            );
             FormDataCollection fd = (FormDataCollection)obj;
 
             try
             {
-                return fd.ReadAs(type, String.Empty, RequiredMemberSelector, formatterLogger, _configuration);
+                return fd.ReadAs(
+                    type,
+                    String.Empty,
+                    RequiredMemberSelector,
+                    formatterLogger,
+                    _configuration
+                );
             }
             catch (Exception e)
             {

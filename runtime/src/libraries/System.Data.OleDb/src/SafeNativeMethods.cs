@@ -18,9 +18,7 @@ namespace System.Data.Common
             Marshal.Copy(zeroes, 0, ptr, length);
         }
 
-        internal static unsafe IntPtr InterlockedExchangePointer(
-                IntPtr lpAddress,
-                IntPtr lpValue)
+        internal static unsafe IntPtr InterlockedExchangePointer(IntPtr lpAddress, IntPtr lpValue)
         {
             IntPtr previousPtr;
             IntPtr actualPtr = *(IntPtr*)lpAddress.ToPointer();
@@ -28,9 +26,12 @@ namespace System.Data.Common
             do
             {
                 previousPtr = actualPtr;
-                actualPtr = Interlocked.CompareExchange(ref *(IntPtr*)lpAddress.ToPointer(), lpValue, previousPtr);
-            }
-            while (actualPtr != previousPtr);
+                actualPtr = Interlocked.CompareExchange(
+                    ref *(IntPtr*)lpAddress.ToPointer(),
+                    lpValue,
+                    previousPtr
+                );
+            } while (actualPtr != previousPtr);
 
             return actualPtr;
         }

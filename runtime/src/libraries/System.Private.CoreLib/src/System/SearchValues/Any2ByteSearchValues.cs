@@ -8,7 +8,8 @@ namespace System.Buffers
 {
     internal sealed class Any2ByteSearchValues : SearchValues<byte>
     {
-        private readonly byte _e0, _e1;
+        private readonly byte _e0,
+            _e1;
 
         public Any2ByteSearchValues(ReadOnlySpan<byte> values)
         {
@@ -19,12 +20,10 @@ namespace System.Buffers
         internal override byte[] GetValues() => new[] { _e0, _e1 };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override bool ContainsCore(byte value) =>
-            value == _e0 || value == _e1;
+        internal override bool ContainsCore(byte value) => value == _e0 || value == _e1;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override int IndexOfAny(ReadOnlySpan<byte> span) =>
-            span.IndexOfAny(_e0, _e1);
+        internal override int IndexOfAny(ReadOnlySpan<byte> span) => span.IndexOfAny(_e0, _e1);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAnyExcept(ReadOnlySpan<byte> span) =>

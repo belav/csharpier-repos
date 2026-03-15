@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>ShawnFa</OWNER>
-// 
+//
 
 //
 // IIdentity.cs
@@ -14,12 +14,13 @@
 
 namespace System.Security.Principal
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security.Util;
 
-[System.Runtime.InteropServices.ComVisible(true)]
-    public interface IIdentity {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface IIdentity
+    {
         // Access to the name string
         string Name { get; }
 

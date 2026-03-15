@@ -1,5 +1,5 @@
-// 
-// XmlSerializerImplementation.cs 
+//
+// XmlSerializerImplementation.cs
 //
 // Author:
 //   Atsushi Enomoto  <atsushi@ximian.com>
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,35 +33,39 @@ using System.Collections;
 
 namespace System.Xml.Serialization
 {
-	public
-	
-	abstract class XmlSerializerImplementation
-	{
-		public virtual XmlSerializationReader Reader {
-			get { throw new NotSupportedException (); }
-		}
+    public abstract class XmlSerializerImplementation
+    {
+        public virtual XmlSerializationReader Reader
+        {
+            get { throw new NotSupportedException(); }
+        }
 
-		public virtual Hashtable ReadMethods {
-			get { throw new NotSupportedException (); }
-		}
-		public virtual Hashtable TypedSerializers {
-			get { throw new NotSupportedException (); }
-		}
-		public virtual Hashtable WriteMethods {
-			get { throw new NotSupportedException (); }
-		}
+        public virtual Hashtable ReadMethods
+        {
+            get { throw new NotSupportedException(); }
+        }
+        public virtual Hashtable TypedSerializers
+        {
+            get { throw new NotSupportedException(); }
+        }
+        public virtual Hashtable WriteMethods
+        {
+            get { throw new NotSupportedException(); }
+        }
 
-		public virtual XmlSerializationWriter Writer {
-			get { throw new NotSupportedException (); }
-		}
-		public virtual bool CanSerialize (Type type)
-		{
-			throw new NotSupportedException ();
-		}
-		public virtual XmlSerializer GetSerializer (Type type)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public virtual XmlSerializationWriter Writer
+        {
+            get { throw new NotSupportedException(); }
+        }
+
+        public virtual bool CanSerialize(Type type)
+        {
+            throw new NotSupportedException();
+        }
+
+        public virtual XmlSerializer GetSerializer(Type type)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }
-

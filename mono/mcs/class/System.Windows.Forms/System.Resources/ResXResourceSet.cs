@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,37 +27,43 @@
 // COMPLETE
 
 using System;
-using System.IO;
 using System.Collections;
+using System.IO;
 
-namespace System.Resources {
-	public class ResXResourceSet : ResourceSet {
-		#region Local Variables
+namespace System.Resources
+{
+    public class ResXResourceSet : ResourceSet
+    {
+        #region Local Variables
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors
-		public ResXResourceSet(Stream stream) {
-			this.Reader = new ResXResourceReader(stream);
-			this.Table = new Hashtable();
-			this.ReadResources();
-		}
+        #region Public Constructors
+        public ResXResourceSet(Stream stream)
+        {
+            this.Reader = new ResXResourceReader(stream);
+            this.Table = new Hashtable();
+            this.ReadResources();
+        }
 
-		public ResXResourceSet(string fileName) {
-			this.Reader = new ResXResourceReader(fileName);
-			this.Table = new Hashtable();
-			this.ReadResources();
-		}
-		#endregion	// Public Constructors
+        public ResXResourceSet(string fileName)
+        {
+            this.Reader = new ResXResourceReader(fileName);
+            this.Table = new Hashtable();
+            this.ReadResources();
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Methods
-		public override Type GetDefaultReader() {
-			return typeof(ResXResourceReader);
-		}
+        #region Public Instance Methods
+        public override Type GetDefaultReader()
+        {
+            return typeof(ResXResourceReader);
+        }
 
-		public override Type GetDefaultWriter() {
-			return typeof(ResXResourceWriter);
-		}
-		#endregion	// Public Instance Methods
-	}
+        public override Type GetDefaultWriter()
+        {
+            return typeof(ResXResourceWriter);
+        }
+        #endregion	// Public Instance Methods
+    }
 }

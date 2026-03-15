@@ -12,9 +12,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     /*=================================MLangCodePageEncoding==================================
     ** This class is here only to deserialize the MLang classes from Everett (V1.1) into
@@ -29,13 +29,16 @@ namespace System.Text
         // Temp stuff
         [NonSerialized]
         private int m_codePage;
+
         [NonSerialized]
         private bool m_isReadOnly;
+
         [NonSerialized]
         private bool m_deserializedFromEverett = false;
 
         [NonSerialized]
         private EncoderFallback encoderFallback = null;
+
         [NonSerialized]
         private DecoderFallback decoderFallback = null;
 
@@ -47,7 +50,8 @@ namespace System.Text
         internal MLangCodePageEncoding(SerializationInfo info, StreamingContext context)
         {
             // Any info?
-            if (info==null) throw new ArgumentNullException("info");
+            if (info == null)
+                throw new ArgumentNullException("info");
             Contract.EndContractBlock();
 
             // All versions have a code page
@@ -61,8 +65,10 @@ namespace System.Text
                 //
                 this.m_isReadOnly = (bool)info.GetValue("m_isReadOnly", typeof(bool));
 
-                this.encoderFallback = (EncoderFallback)info.GetValue("encoderFallback", typeof(EncoderFallback));
-                this.decoderFallback = (DecoderFallback)info.GetValue("decoderFallback", typeof(DecoderFallback));
+                this.encoderFallback = (EncoderFallback)
+                    info.GetValue("encoderFallback", typeof(EncoderFallback));
+                this.decoderFallback = (DecoderFallback)
+                    info.GetValue("decoderFallback", typeof(DecoderFallback));
             }
             catch (SerializationException)
             {
@@ -77,7 +83,7 @@ namespace System.Text
         }
 
         // Just get it from GetEncoding
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public Object GetRealObject(StreamingContext context)
         {
             // Get our encoding (Note: This has default fallbacks for readonly and everett cases)
@@ -97,12 +103,17 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
         // ISerializable implementation
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // We cannot ever call this.
-            Contract.Assert(false, "Didn't expect to make it to MLangCodePageEncoding ISerializable.GetObjectData");
-            throw new ArgumentException(Environment.GetResourceString("Arg_ExecutionEngineException"));        
+            Contract.Assert(
+                false,
+                "Didn't expect to make it to MLangCodePageEncoding ISerializable.GetObjectData"
+            );
+            throw new ArgumentException(
+                Environment.GetResourceString("Arg_ExecutionEngineException")
+            );
         }
 #endif
 
@@ -118,14 +129,15 @@ namespace System.Text
             internal MLangEncoder(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 this.realEncoding = (Encoding)info.GetValue("m_encoding", typeof(Encoding));
             }
 
             // Just get it from GetEncoder
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public Object GetRealObject(StreamingContext context)
             {
                 return this.realEncoding.GetEncoder();
@@ -133,16 +145,20 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
             // ISerializable implementation, get data for this object
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 // We cannot ever call this.
-                Contract.Assert(false, "Didn't expect to make it to MLangCodePageEncoding.MLangEncoder.GetObjectData");
-                throw new ArgumentException(Environment.GetResourceString("Arg_ExecutionEngineException"));
+                Contract.Assert(
+                    false,
+                    "Didn't expect to make it to MLangCodePageEncoding.MLangEncoder.GetObjectData"
+                );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_ExecutionEngineException")
+                );
             }
 #endif
         }
-
 
         // Same problem with the Decoder, this only happens with Everett Decoders
         [Serializable]
@@ -156,14 +172,15 @@ namespace System.Text
             internal MLangDecoder(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 this.realEncoding = (Encoding)info.GetValue("m_encoding", typeof(Encoding));
             }
 
             // Just get it from GetDecoder
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public Object GetRealObject(StreamingContext context)
             {
                 return this.realEncoding.GetDecoder();
@@ -171,12 +188,17 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
             // ISerializable implementation, get data for this object
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 // We cannot ever call this.
-                Contract.Assert(false, "Didn't expect to make it to MLangCodePageEncoding.MLangDecoder.GetObjectData");
-                throw new ArgumentException(Environment.GetResourceString("Arg_ExecutionEngineException"));
+                Contract.Assert(
+                    false,
+                    "Didn't expect to make it to MLangCodePageEncoding.MLangDecoder.GetObjectData"
+                );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_ExecutionEngineException")
+                );
             }
 #endif
         }

@@ -1,32 +1,36 @@
 using System;
 using System.Collections.Generic;
 
-delegate void D (object param);
+delegate void D(object param);
 
 class T
 {
-	void Assert (object a) { }
-	void Execute (Action a) { }
+    void Assert(object a) { }
 
-	private D GetD<T> (object input)
-	{
-		return delegate (object param) {
-			IList<object> col = null;
+    void Execute(Action a) { }
 
-			try {
-				object v = null;
+    private D GetD<T>(object input)
+    {
+        return delegate(object param)
+        {
+            IList<object> col = null;
 
-				Execute (() => {
-						v = col[0];
-						Assert (input);
-					});
-			} finally {
-			}
-		};
-	}
+            try
+            {
+                object v = null;
 
-	public static void Main ()
-	{
-		new T ().GetD<long> (null) (9);
-	}
+                Execute(() =>
+                {
+                    v = col[0];
+                    Assert(input);
+                });
+            }
+            finally { }
+        };
+    }
+
+    public static void Main()
+    {
+        new T().GetD<long>(null)(9);
+    }
 }

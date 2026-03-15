@@ -13,7 +13,11 @@ namespace System.ComponentModel.DataAnnotations
     ///     of this attribute signals intent to the consumer of the attribute whether or not
     ///     the end user should be allowed to change the value via the client application.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public sealed class EditableAttribute : Attribute
     {
         /// <summary>

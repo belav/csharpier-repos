@@ -40,13 +40,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         internal bool SupportsUnannotatedAPIs { get; }
 
         public ExportEmbeddedLanguageFeatureServiceAttribute(
-            Type contractType, string name, string[] languages, params string[] identifiers)
-            : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers)
-        {
-        }
+            Type contractType,
+            string name,
+            string[] languages,
+            params string[] identifiers
+        )
+            : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers) { }
 
         internal ExportEmbeddedLanguageFeatureServiceAttribute(
-            Type contractType, string name, string[] languages, bool supportsUnannotatedAPIs, params string[] identifiers)
+            Type contractType,
+            string name,
+            string[] languages,
+            bool supportsUnannotatedAPIs,
+            params string[] identifiers
+        )
             : base(contractType)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -54,13 +61,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             Identifiers = identifiers ?? throw new ArgumentNullException(nameof(identifiers));
             SupportsUnannotatedAPIs = supportsUnannotatedAPIs;
 
-            Contract.ThrowIfFalse(contractType.IsInterface && typeof(IEmbeddedLanguageFeatureService).IsAssignableFrom(contractType),
-                $"{nameof(contractType)} must be an interface and derived from {typeof(IEmbeddedLanguageFeatureService).FullName}");
+            Contract.ThrowIfFalse(
+                contractType.IsInterface
+                    && typeof(IEmbeddedLanguageFeatureService).IsAssignableFrom(contractType),
+                $"{nameof(contractType)} must be an interface and derived from {typeof(IEmbeddedLanguageFeatureService).FullName}"
+            );
 
             if (SupportsUnannotatedAPIs)
             {
-                Contract.ThrowIfFalse(name is PredefinedEmbeddedLanguageNames.Regex or PredefinedEmbeddedLanguageNames.Json,
-                    $"Only '{PredefinedEmbeddedLanguageNames.Regex}' or '{PredefinedEmbeddedLanguageNames.Json}' are allowed to '{nameof(SupportsUnannotatedAPIs)}'");
+                Contract.ThrowIfFalse(
+                    name
+                        is PredefinedEmbeddedLanguageNames.Regex
+                            or PredefinedEmbeddedLanguageNames.Json,
+                    $"Only '{PredefinedEmbeddedLanguageNames.Regex}' or '{PredefinedEmbeddedLanguageNames.Json}' are allowed to '{nameof(SupportsUnannotatedAPIs)}'"
+                );
             }
         }
     }

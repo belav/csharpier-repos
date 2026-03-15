@@ -11,15 +11,13 @@ namespace System.Xml.Xsl.Runtime
 {
     internal sealed class TokenInfo
     {
-        public char startChar;      // First element of numbering sequence for format token
-        public int startIdx;       // Start index of separator token
-        public string? formatString;   // Format string for separator token
-        public int length;         // Length of separator token, or minimum length of decimal numbers for format token
+        public char startChar; // First element of numbering sequence for format token
+        public int startIdx; // Start index of separator token
+        public string? formatString; // Format string for separator token
+        public int length; // Length of separator token, or minimum length of decimal numbers for format token
 
         // Instances of this internal class must be created via CreateFormat and CreateSeparator
-        private TokenInfo()
-        {
-        }
+        private TokenInfo() { }
 
         [Conditional("DEBUG")]
         public void AssertSeparator(bool isSeparator)
@@ -123,7 +121,13 @@ namespace System.Xml.Xsl.Runtime
         private static readonly TokenInfo s_defaultSeparator = TokenInfo.CreateSeparator(".", 0, 1);
 
         // Creates a Format object parsing format string into format tokens (alphanumeric) and separators (non-alphanumeric).
-        public NumberFormatter(string formatString, int lang, string letterValue, string groupingSeparator, int groupingSize)
+        public NumberFormatter(
+            string formatString,
+            int lang,
+            string letterValue,
+            string groupingSeparator,
+            int groupingSize
+        )
         {
             Debug.Assert(groupingSeparator.Length <= 1);
             _formatString = formatString;
@@ -151,7 +155,10 @@ namespace System.Xml.Xsl.Runtime
             for (int idx = 0; idx <= formatString.Length; idx++)
             {
                 // Loop until a switch from formatString token to separator is detected (or vice-versa)
-                if (idx == formatString.Length || isAlphaNumeric != CharUtil.IsAlphaNumeric(formatString[idx]))
+                if (
+                    idx == formatString.Length
+                    || isAlphaNumeric != CharUtil.IsAlphaNumeric(formatString[idx])
+                )
                 {
                     if (isAlphaNumeric)
                     {
@@ -161,7 +168,9 @@ namespace System.Xml.Xsl.Runtime
                     else
                     {
                         // Just finished a separator token
-                        _tokens.Add(TokenInfo.CreateSeparator(formatString, idxStart, idx - idxStart));
+                        _tokens.Add(
+                            TokenInfo.CreateSeparator(formatString, idxStart, idx - idxStart)
+                        );
                     }
 
                     // Begin parsing the next format token or separator
@@ -210,7 +219,8 @@ namespace System.Xml.Xsl.Runtime
             else
             {
                 int cFormats = _tokens.Count;
-                TokenInfo? prefix = _tokens[0], suffix;
+                TokenInfo? prefix = _tokens[0],
+                    suffix;
 
                 if (cFormats % 2 == 0)
                 {
@@ -221,7 +231,8 @@ namespace System.Xml.Xsl.Runtime
                     suffix = _tokens[--cFormats];
                 }
 
-                TokenInfo? periodicSeparator = 2 < cFormats ? _tokens[cFormats - 2] : s_defaultSeparator;
+                TokenInfo? periodicSeparator =
+                    2 < cFormats ? _tokens[cFormats - 2] : s_defaultSeparator;
                 TokenInfo? periodicFormat = 0 < cFormats ? _tokens[cFormats - 1] : s_defaultFormat;
 
                 if (prefix != null)
@@ -238,9 +249,15 @@ namespace System.Xml.Xsl.Runtime
 
                     if (i > 0)
                     {
-                        TokenInfo? thisSeparator = haveFormat ? _tokens[formatIndex + 0] : periodicSeparator;
+                        TokenInfo? thisSeparator = haveFormat
+                            ? _tokens[formatIndex + 0]
+                            : periodicSeparator;
                         thisSeparator!.AssertSeparator(true);
-                        sb.Append(thisSeparator.formatString, thisSeparator.startIdx, thisSeparator.length);
+                        sb.Append(
+                            thisSeparator.formatString,
+                            thisSeparator.startIdx,
+                            thisSeparator.length
+                        );
                     }
 
                     TokenInfo? thisFormat = haveFormat ? _tokens[formatIndex + 1] : periodicFormat;
@@ -267,7 +284,10 @@ namespace System.Xml.Xsl.Runtime
             }
             else
             {
-                Debug.Assert(item.ValueType == typeof(double), "Item must be either of type int, or double");
+                Debug.Assert(
+                    item.ValueType == typeof(double),
+                    "Item must be either of type int, or double"
+                );
                 dblVal = XsltFunctions.Round(item.ValueAsDouble);
             }
 
@@ -290,12 +310,19 @@ namespace System.Xml.Xsl.Runtime
                 case 'i':
                     if (dblVal <= MaxRomanValue)
                     {
-                        ConvertToRoman(sb, dblVal, /*upperCase:*/ startChar == 'I');
+                        ConvertToRoman(
+                            sb,
+                            dblVal, /*upperCase:*/
+                            startChar == 'I'
+                        );
                         return;
                     }
                     break;
                 default:
-                    Debug.Assert(CharUtil.IsDecimalDigitOne(startChar), $"Unexpected startChar: {startChar}");
+                    Debug.Assert(
+                        CharUtil.IsDecimalDigitOne(startChar),
+                        $"Unexpected startChar: {startChar}"
+                    );
                     zero = (char)(startChar - 1);
                     break;
             }
@@ -303,9 +330,18 @@ namespace System.Xml.Xsl.Runtime
             sb.Append(ConvertToDecimal(dblVal, length, zero, _groupingSeparator, _groupingSize));
         }
 
-        private static string ConvertToDecimal(double val, int minLen, char zero, string groupSeparator, int groupSize)
+        private static string ConvertToDecimal(
+            double val,
+            int minLen,
+            char zero,
+            string groupSeparator,
+            int groupSize
+        )
         {
-            Debug.Assert(val >= 0 && val == Math.Round(val), "ConvertToArabic operates on non-negative integer numbers only");
+            Debug.Assert(
+                val >= 0 && val == Math.Round(val),
+                "ConvertToArabic operates on non-negative integer numbers only"
+            );
             string str = XPathConvert.DoubleToString(val);
             int shift = zero - '0';
 
@@ -317,7 +353,10 @@ namespace System.Xml.Xsl.Runtime
             if (groupSize != 0)
             {
                 Debug.Assert(groupSeparator.Length == 1);
-                checked { newLen += (newLen - 1) / groupSize; }
+                checked
+                {
+                    newLen += (newLen - 1) / groupSize;
+                }
             }
 
             // If the new number of characters equals the old one, no changes need to be made
@@ -352,12 +391,17 @@ namespace System.Xml.Xsl.Runtime
                         {
                             break;
                         }
-                        if (/*groupSize > 0 && */--cnt == 0)
+                        if ( /*groupSize > 0 && */
+                            --cnt == 0
+                        )
                         {
                             // Every groupSize digits insert the separator
                             *pNewEnd-- = separator;
                             cnt = groupSize;
-                            Debug.Assert(pNewEnd >= result, "Separator cannot be the first character");
+                            Debug.Assert(
+                                pNewEnd >= result,
+                                "Separator cannot be the first character"
+                            );
                         }
                     }
                 }

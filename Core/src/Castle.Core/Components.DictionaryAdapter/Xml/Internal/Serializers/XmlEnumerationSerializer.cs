@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -14,23 +14,27 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
+    using System;
 
-	public class XmlEnumerationSerializer : XmlStringSerializer
-	{
-		public static readonly new XmlEnumerationSerializer
-			Instance = new XmlEnumerationSerializer();
+    public class XmlEnumerationSerializer : XmlStringSerializer
+    {
+        public static new readonly XmlEnumerationSerializer Instance =
+            new XmlEnumerationSerializer();
 
-		protected XmlEnumerationSerializer() { }
+        protected XmlEnumerationSerializer() { }
 
-		public override XmlTypeKind Kind
-		{
-			get { return XmlTypeKind.Simple; }
-		}
+        public override XmlTypeKind Kind
+        {
+            get { return XmlTypeKind.Simple; }
+        }
 
-		public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
-		{
-			return Enum.Parse(node.ClrType, node.Value, true);
-		}
-	}
+        public override object GetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
+        {
+            return Enum.Parse(node.ClrType, node.Value, true);
+        }
+    }
 }

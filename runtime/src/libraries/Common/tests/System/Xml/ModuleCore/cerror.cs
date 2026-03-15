@@ -20,9 +20,7 @@ namespace OLEDB.Test.ModuleCore
         private static CLTMConsole s_rLTMConsole;
 
         //Constructor
-        public CError()
-        {
-        }
+        public CError() { }
 
         public static IError Error
         {
@@ -44,7 +42,6 @@ namespace OLEDB.Test.ModuleCore
                 //Disable Asserts
                 DisableAsserts();
             }
-
             get { return s_rIError; }
         }
 
@@ -68,9 +65,7 @@ namespace OLEDB.Test.ModuleCore
             s_rLTMConsole = null;
         }
 
-        internal static void DisableAsserts()
-        {
-        }
+        internal static void DisableAsserts() { }
 
         //Helpers
         public static void Increment()
@@ -222,7 +217,12 @@ namespace OLEDB.Test.ModuleCore
             throw new CTestFailedException(message, actual, expected, null);
         }
 
-        public static bool Compare(object actual, object expected1, object expected2, string message)
+        public static bool Compare(
+            object actual,
+            object expected1,
+            object expected2,
+            string message
+        )
         {
             if (InternalEquals(actual, expected1) || InternalEquals(actual, expected2))
                 return true;
@@ -325,7 +325,14 @@ namespace OLEDB.Test.ModuleCore
             return expected.Equals(actual);
         }
 
-        public static bool Log(object actual, object expected, string source, string message, string details, tagERRORLEVEL eErrorLevel)
+        public static bool Log(
+            object actual,
+            object expected,
+            string source,
+            string message,
+            string details,
+            tagERRORLEVEL eErrorLevel
+        )
         {
             //Obtain the error level
             tagERRORLEVEL rSavedLevel = ErrorLevel;
@@ -342,17 +349,17 @@ namespace OLEDB.Test.ModuleCore
                 if (TestConsole != null)
                 {
                     //ITestConsole.Log
-                    TestConsole.Log(Common.Format(actual),              //actual
-                                        Common.Format(expected),        //expected
-                                        source,                         //source
-                                        message,                        //message
-                                        details,                        //details
-                                        tagCONSOLEFLAGS.CONSOLE_TEXT,   //flags
-                                        "fake_filename",
-                                        999
-                                    );
+                    TestConsole.Log(
+                        Common.Format(actual), //actual
+                        Common.Format(expected), //expected
+                        source, //source
+                        message, //message
+                        details, //details
+                        tagCONSOLEFLAGS.CONSOLE_TEXT, //flags
+                        "fake_filename",
+                        999
+                    );
                 }
-
                 else if (Error != null)
                 {
                     //We call IError::Compare, which logs the error AND increments the error count...
@@ -363,7 +370,6 @@ namespace OLEDB.Test.ModuleCore
                     Console.WriteLine("Details:" + CError.NewLine + details);
                 }
             }
-
             finally
             {
                 //Restore the error level
@@ -375,7 +381,8 @@ namespace OLEDB.Test.ModuleCore
         private static string FixupXml(string value)
         {
             bool escapeXmlStuff = false;
-            if (value == null) return null;
+            if (value == null)
+                return null;
 
             StringBuilder b = new StringBuilder();
             for (int i = 0; i < value.Length; i++)
@@ -383,19 +390,34 @@ namespace OLEDB.Test.ModuleCore
                 switch (value[i])
                 {
                     case '&':
-                        if (escapeXmlStuff) b.Append("&amp;"); else b.Append('&');
+                        if (escapeXmlStuff)
+                            b.Append("&amp;");
+                        else
+                            b.Append('&');
                         break;
                     case '<':
-                        if (escapeXmlStuff) b.Append("&lt;"); else b.Append('<');
+                        if (escapeXmlStuff)
+                            b.Append("&lt;");
+                        else
+                            b.Append('<');
                         break;
                     case '>':
-                        if (escapeXmlStuff) b.Append("&gt;"); else b.Append('>');
+                        if (escapeXmlStuff)
+                            b.Append("&gt;");
+                        else
+                            b.Append('>');
                         break;
                     case '"':
-                        if (escapeXmlStuff) b.Append("&quot;"); else b.Append('"');
+                        if (escapeXmlStuff)
+                            b.Append("&quot;");
+                        else
+                            b.Append('"');
                         break;
                     case '\'':
-                        if (escapeXmlStuff) b.Append("&apos;"); else b.Append('\'');
+                        if (escapeXmlStuff)
+                            b.Append("&apos;");
+                        else
+                            b.Append('\'');
                         break;
                     case '\t':
                         b.Append('\t');

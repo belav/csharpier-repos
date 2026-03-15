@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,89 +23,119 @@
 
 using System;
 using System.Data;
-using System.Data.OracleClient ;
-
+using System.Data.OracleClient;
 using MonoTests.System.Data.Utils;
-
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-	[TestFixture]
-	public class OracleConnection_Close : GHTBase
-	{
-		[SetUp]
-		public void SetUp()
-		{
-			Exception exp = null;
-			BeginCase("Setup");
-			try
-			{
-			}
-			catch(Exception ex)	{exp = ex;}
-			finally	{EndCase(exp); exp = null;}
-		}
+    [TestFixture]
+    public class OracleConnection_Close : GHTBase
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            Exception exp = null;
+            BeginCase("Setup");
+            try { }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+        }
 
-		[TearDown]
-		public void TearDown()
-		{
-		}
+        [TearDown]
+        public void TearDown() { }
 
-		public static void Main()
-		{
-			OracleConnection_Close tc = new OracleConnection_Close();
-			Exception exp = null;
-			try
-			{
-				tc.BeginTest("OracleConnection_Close");
-				tc.SetUp();
-				tc.run();
-				tc.TearDown();
-			}
-			catch(Exception ex){exp = ex;}
-			finally	{tc.EndTest(exp);}
-		}
+        public static void Main()
+        {
+            OracleConnection_Close tc = new OracleConnection_Close();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleConnection_Close");
+                tc.SetUp();
+                tc.run();
+                tc.TearDown();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-		[Test]
-		public void run()
-		{
-			Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-			OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            OracleConnection con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
 
-			try
-			{
-				BeginCase("Close without open");
-				con.Close();
-				Compare(con.State , ConnectionState.Closed);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("Close without open");
+                con.Close();
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-			con.Open();
+            con.Open();
 
-			try
-			{
-				BeginCase("Close after open");
-				con.Close();
-				Compare(con.State , ConnectionState.Closed);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("Close after open");
+                con.Close();
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-			//An application can call Close more than one time. 
-			//No exception is generated.
-			try
-			{
-				BeginCase("Close again");
-				con.Close();
-				Compare(con.State , ConnectionState.Closed);
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
+            //An application can call Close more than one time.
+            //No exception is generated.
+            try
+            {
+                BeginCase("Close again");
+                con.Close();
+                Compare(con.State, ConnectionState.Closed);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-			if (con.State == ConnectionState.Open) con.Close();
-		}
-	}
+            if (con.State == ConnectionState.Open)
+                con.Close();
+        }
+    }
 }

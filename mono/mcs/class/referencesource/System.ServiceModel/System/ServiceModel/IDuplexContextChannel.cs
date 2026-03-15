@@ -11,7 +11,11 @@ namespace System.ServiceModel
         bool AutomaticInputSessionShutdown { get; set; }
         InstanceContext CallbackInstance { get; set; }
 
-        IAsyncResult BeginCloseOutputSession(TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginCloseOutputSession(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void EndCloseOutputSession(IAsyncResult result);
         void CloseOutputSession(TimeSpan timeout);
     }

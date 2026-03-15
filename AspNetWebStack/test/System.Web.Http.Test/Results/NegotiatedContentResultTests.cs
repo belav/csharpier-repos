@@ -30,10 +30,19 @@ namespace System.Web.Http.Results
                 IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    new NegotiatedContentResult<object>(statusCode, content, contentNegotiator, request, formatters);
-                }, "contentNegotiator");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        new NegotiatedContentResult<object>(
+                            statusCode,
+                            content,
+                            contentNegotiator,
+                            request,
+                            formatters
+                        );
+                    },
+                    "contentNegotiator"
+                );
             }
         }
 
@@ -48,10 +57,19 @@ namespace System.Web.Http.Results
             IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new NegotiatedContentResult<object>(statusCode, content, contentNegotiator, request, formatters);
-            }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new NegotiatedContentResult<object>(
+                        statusCode,
+                        content,
+                        contentNegotiator,
+                        request,
+                        formatters
+                    );
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -67,10 +85,19 @@ namespace System.Web.Http.Results
                 IEnumerable<MediaTypeFormatter> formatters = null;
 
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    new NegotiatedContentResult<object>(statusCode, content, contentNegotiator, request, formatters);
-                }, "formatters");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        new NegotiatedContentResult<object>(
+                            statusCode,
+                            content,
+                            contentNegotiator,
+                            request,
+                            formatters
+                        );
+                    },
+                    "formatters"
+                );
             }
         }
 
@@ -86,8 +113,13 @@ namespace System.Web.Http.Results
             {
                 IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(expectedStatusCode,
-                    content, contentNegotiator, request, formatters);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    expectedStatusCode,
+                    content,
+                    contentNegotiator,
+                    request,
+                    formatters
+                );
 
                 // Act
                 HttpStatusCode statusCode = result.StatusCode;
@@ -109,8 +141,13 @@ namespace System.Web.Http.Results
             {
                 IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode,
-                    expectedContent, contentNegotiator, request, formatters);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    expectedContent,
+                    contentNegotiator,
+                    request,
+                    formatters
+                );
 
                 // Act
                 object content = result.Content;
@@ -132,8 +169,13 @@ namespace System.Web.Http.Results
             {
                 IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    expectedContentNegotiator, request, formatters);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    expectedContentNegotiator,
+                    request,
+                    formatters
+                );
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -155,8 +197,13 @@ namespace System.Web.Http.Results
             {
                 IEnumerable<MediaTypeFormatter> formatters = CreateFormatters();
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    contentNegotiator, expectedRequest, formatters);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    contentNegotiator,
+                    expectedRequest,
+                    formatters
+                );
 
                 // Act
                 HttpRequestMessage request = result.Request;
@@ -178,8 +225,13 @@ namespace System.Web.Http.Results
             {
                 IEnumerable<MediaTypeFormatter> expectedFormatters = CreateFormatters();
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    contentNegotiator, request, expectedFormatters);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    contentNegotiator,
+                    request,
+                    expectedFormatters
+                );
 
                 // Act
                 IEnumerable<MediaTypeFormatter> formatters = result.Formatters;
@@ -197,19 +249,27 @@ namespace System.Web.Http.Results
             object expectedContent = CreateContent();
             MediaTypeFormatter expectedFormatter = CreateFormatter();
             MediaTypeHeaderValue expectedMediaType = CreateMediaType();
-            ContentNegotiationResult negotiationResult = new ContentNegotiationResult(expectedFormatter, expectedMediaType);
+            ContentNegotiationResult negotiationResult = new ContentNegotiationResult(
+                expectedFormatter,
+                expectedMediaType
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 IEnumerable<MediaTypeFormatter> expectedFormatters = CreateFormatters();
 
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
-                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, expectedFormatters)).Returns(
-                    negotiationResult);
+                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, expectedFormatters))
+                    .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
-                IHttpActionResult result = new NegotiatedContentResult<object>(expectedStatusCode, expectedContent,
-                    contentNegotiator, expectedRequest, expectedFormatters);
+                IHttpActionResult result = new NegotiatedContentResult<object>(
+                    expectedStatusCode,
+                    expectedContent,
+                    contentNegotiator,
+                    expectedRequest,
+                    expectedFormatters
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -222,7 +282,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(expectedStatusCode, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(content);
+                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
+                        content
+                    );
                     Assert.Same(expectedContent, typedContent.Value);
                     Assert.Same(expectedFormatter, typedContent.Formatter);
                     Assert.NotNull(typedContent.Headers);
@@ -245,12 +307,17 @@ namespace System.Web.Http.Results
                 IEnumerable<MediaTypeFormatter> expectedFormatters = CreateFormatters();
 
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
-                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, expectedFormatters)).Returns(
-                    negotiationResult);
+                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, expectedFormatters))
+                    .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
-                IHttpActionResult result = new NegotiatedContentResult<object>(statusCode, content, contentNegotiator,
-                    expectedRequest, expectedFormatters);
+                IHttpActionResult result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    contentNegotiator,
+                    expectedRequest,
+                    expectedFormatters
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -276,10 +343,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new NegotiatedContentResult<object>(statusCode, content, controller);
-            }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new NegotiatedContentResult<object>(statusCode, content, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -292,8 +362,10 @@ namespace System.Web.Http.Results
             MediaTypeFormatter expectedInputFormatter = CreateFormatter();
             MediaTypeFormatter expectedOutputFormatter = CreateFormatter();
             MediaTypeHeaderValue expectedMediaType = CreateMediaType();
-            ContentNegotiationResult negotiationResult = new ContentNegotiationResult(expectedOutputFormatter,
-                expectedMediaType);
+            ContentNegotiationResult negotiationResult = new ContentNegotiationResult(
+                expectedOutputFormatter,
+                expectedMediaType
+            );
 
             Expression<Func<IEnumerable<MediaTypeFormatter>, bool>> formattersMatch = (f) =>
                 f != null && f.AsArray().Length == 1 && f.AsArray()[0] == expectedInputFormatter;
@@ -301,18 +373,25 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 Mock<IContentNegotiator> spy = new Mock<IContentNegotiator>();
-                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, It.Is(formattersMatch))).Returns(
-                    negotiationResult);
+                spy.Setup(n => n.Negotiate(typeof(object), expectedRequest, It.Is(formattersMatch)))
+                    .Returns(negotiationResult);
                 IContentNegotiator contentNegotiator = spy.Object;
 
-                using (HttpConfiguration configuration = CreateConfiguration(expectedInputFormatter,
-                    contentNegotiator))
+                using (
+                    HttpConfiguration configuration = CreateConfiguration(
+                        expectedInputFormatter,
+                        contentNegotiator
+                    )
+                )
                 {
                     controller.Configuration = configuration;
                     controller.Request = expectedRequest;
 
-                    IHttpActionResult result = new NegotiatedContentResult<object>(expectedStatusCode, expectedContent,
-                        controller);
+                    IHttpActionResult result = new NegotiatedContentResult<object>(
+                        expectedStatusCode,
+                        expectedContent,
+                        controller
+                    );
 
                     // Act
                     Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -325,7 +404,9 @@ namespace System.Web.Http.Results
                         Assert.NotNull(response);
                         Assert.Equal(expectedStatusCode, response.StatusCode);
                         HttpContent content = response.Content;
-                        ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(content);
+                        ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
+                            content
+                        );
                         Assert.Same(expectedContent, typedContent.Value);
                         Assert.Same(expectedOutputFormatter, typedContent.Formatter);
                         Assert.NotNull(typedContent.Headers);
@@ -344,7 +425,12 @@ namespace System.Web.Http.Results
             object content = CreateContent();
             ApiController controller = CreateController();
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), CreateContentNegotiator()))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    CreateContentNegotiator()
+                )
+            )
             {
                 controller.Configuration = configuration;
 
@@ -352,11 +438,17 @@ namespace System.Web.Http.Results
                 {
                     controller.Request = request;
 
-                    NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                        controller);
+                    NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                        statusCode,
+                        content,
+                        controller
+                    );
 
                     IContentNegotiator expectedContentNegotiator = CreateContentNegotiator();
-                    configuration.Services.Replace(typeof(IContentNegotiator), expectedContentNegotiator);
+                    configuration.Services.Replace(
+                        typeof(IContentNegotiator),
+                        expectedContentNegotiator
+                    );
 
                     // Act
                     IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -377,11 +469,19 @@ namespace System.Web.Http.Results
             MediaTypeHeaderValue mediaType = CreateMediaType();
             ApiController controller = CreateController();
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), CreateContentNegotiator()))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    CreateContentNegotiator()
+                )
+            )
             {
                 controller.Configuration = configuration;
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 using (HttpRequestMessage expectedRequest = CreateRequest())
                 {
@@ -405,18 +505,31 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
             IContentNegotiator contentNegotiator = CreateContentNegotiator();
 
-            using (HttpConfiguration earlyConfiguration = CreateConfiguration(CreateFormatter(), contentNegotiator))
+            using (
+                HttpConfiguration earlyConfiguration = CreateConfiguration(
+                    CreateFormatter(),
+                    contentNegotiator
+                )
+            )
             using (HttpRequestMessage request = CreateRequest())
             {
                 controller.Configuration = earlyConfiguration;
                 controller.Request = request;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 MediaTypeFormatter expectedFormatter = CreateFormatter();
 
-                using (HttpConfiguration lateConfiguration = CreateConfiguration(expectedFormatter, contentNegotiator))
+                using (
+                    HttpConfiguration lateConfiguration = CreateConfiguration(
+                        expectedFormatter,
+                        contentNegotiator
+                    )
+                )
                 {
                     controller.Configuration = lateConfiguration;
 
@@ -440,18 +553,29 @@ namespace System.Web.Http.Results
             IContentNegotiator expectedContentNegotiator = CreateContentNegotiator();
             ApiController controller = CreateController();
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), expectedContentNegotiator))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    expectedContentNegotiator
+                )
+            )
             using (HttpRequestMessage request = CreateRequest())
             {
                 controller.Configuration = configuration;
                 controller.Request = request;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration.Services.Replace(typeof(IContentNegotiator), CreateContentNegotiator());
+                configuration.Services.Replace(
+                    typeof(IContentNegotiator),
+                    CreateContentNegotiator()
+                );
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -469,12 +593,20 @@ namespace System.Web.Http.Results
             object content = CreateContent();
             ApiController controller = CreateController();
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), CreateContentNegotiator()))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    CreateContentNegotiator()
+                )
+            )
             {
                 controller.Configuration = configuration;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 using (HttpRequestMessage expectedRequest = CreateRequest())
                 {
@@ -505,18 +637,31 @@ namespace System.Web.Http.Results
             MediaTypeFormatter expectedFormatter = CreateFormatter();
             IContentNegotiator contentNegotiator = CreateContentNegotiator();
 
-            using (HttpConfiguration earlyConfiguration = CreateConfiguration(expectedFormatter, contentNegotiator))
+            using (
+                HttpConfiguration earlyConfiguration = CreateConfiguration(
+                    expectedFormatter,
+                    contentNegotiator
+                )
+            )
             using (HttpRequestMessage request = CreateRequest())
             {
                 controller.Configuration = earlyConfiguration;
                 controller.Request = request;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 IEnumerable<MediaTypeFormatter> ignore = result.Formatters;
 
-                using (HttpConfiguration lateConfiguration = CreateConfiguration(CreateFormatter(), contentNegotiator))
+                using (
+                    HttpConfiguration lateConfiguration = CreateConfiguration(
+                        CreateFormatter(),
+                        contentNegotiator
+                    )
+                )
                 {
                     controller.Configuration = lateConfiguration;
 
@@ -544,13 +689,20 @@ namespace System.Web.Http.Results
             {
                 controller.ControllerContext = context;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 // Act & Assert
                 Assert.Throws<InvalidOperationException>(
-                    () => { IContentNegotiator ignore = result.ContentNegotiator; },
-                    "HttpControllerContext.Configuration must not be null.");
+                    () =>
+                    {
+                        IContentNegotiator ignore = result.ContentNegotiator;
+                    },
+                    "HttpControllerContext.Configuration must not be null."
+                );
             }
         }
 
@@ -567,14 +719,21 @@ namespace System.Web.Http.Results
             {
                 controller.Configuration = configuration;
 
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 // Act & Assert
                 Assert.Throws<InvalidOperationException>(
-                    () => { IContentNegotiator ignore = result.ContentNegotiator; },
-                    "The provided configuration does not have an instance of the " +
-                    "'System.Net.Http.Formatting.IContentNegotiator' service registered.");
+                    () =>
+                    {
+                        IContentNegotiator ignore = result.ContentNegotiator;
+                    },
+                    "The provided configuration does not have an instance of the "
+                        + "'System.Net.Http.Formatting.IContentNegotiator' service registered."
+                );
             }
         }
 
@@ -587,15 +746,28 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
             Assert.Null(controller.Request);
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), CreateContentNegotiator()))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    CreateContentNegotiator()
+                )
+            )
             {
                 controller.Configuration = configuration;
-                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(statusCode, content,
-                    controller);
+                NegotiatedContentResult<object> result = new NegotiatedContentResult<object>(
+                    statusCode,
+                    content,
+                    controller
+                );
 
                 // Act & Assert
-                InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                    { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+                InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        HttpRequestMessage ignore = result.Request;
+                    },
+                    "ApiController.Request must not be null."
+                );
             }
         }
 
@@ -608,14 +780,22 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            NegotiatedContentResult<object> result = controller.Content(expectedStatusCode, expectedContent);
+            NegotiatedContentResult<object> result = controller.Content(
+                expectedStatusCode,
+                expectedContent
+            );
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(expectedStatusCode, result.StatusCode);
             Assert.Same(expectedContent, result.Content);
 
-            using (HttpConfiguration configuration = CreateConfiguration(CreateFormatter(), CreateContentNegotiator()))
+            using (
+                HttpConfiguration configuration = CreateConfiguration(
+                    CreateFormatter(),
+                    CreateContentNegotiator()
+                )
+            )
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
                 controller.Configuration = configuration;
@@ -624,8 +804,10 @@ namespace System.Web.Http.Results
             }
         }
 
-        private static HttpConfiguration CreateConfiguration(MediaTypeFormatter formatter,
-            IContentNegotiator contentNegotiator)
+        private static HttpConfiguration CreateConfiguration(
+            MediaTypeFormatter formatter,
+            IContentNegotiator contentNegotiator
+        )
         {
             HttpConfiguration configuration = new HttpConfiguration();
             configuration.Formatters.Clear();
@@ -676,8 +858,11 @@ namespace System.Web.Http.Results
 
         private class DummyContentNegotiator : IContentNegotiator
         {
-            public ContentNegotiationResult Negotiate(Type type, HttpRequestMessage request,
-                IEnumerable<MediaTypeFormatter> formatters)
+            public ContentNegotiationResult Negotiate(
+                Type type,
+                HttpRequestMessage request,
+                IEnumerable<MediaTypeFormatter> formatters
+            )
             {
                 throw new NotImplementedException();
             }
@@ -696,8 +881,6 @@ namespace System.Web.Http.Results
             }
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

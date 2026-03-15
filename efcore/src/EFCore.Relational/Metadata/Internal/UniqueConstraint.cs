@@ -21,10 +21,7 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public UniqueConstraint(
-        string name,
-        Table table,
-        IReadOnlyList<Column> columns)
+    public UniqueConstraint(string name, Table table, IReadOnlyList<Column> columns)
     {
         Name = name;
         Table = table;
@@ -64,8 +61,7 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Table.Model.IsReadOnly;
+    public override bool IsReadOnly => Table.Model.IsReadOnly;
 
     private IRowKeyValueFactory? _rowKeyValueFactory;
 
@@ -75,13 +71,17 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowKeyValueFactory GetRowKeyValueFactory()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _rowKeyValueFactory, this,
+    public virtual IRowKeyValueFactory GetRowKeyValueFactory() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _rowKeyValueFactory,
+            this,
             static constraint =>
                 RuntimeFeature.IsDynamicCodeSupported
-                    ? constraint.Table.Model.Model.GetRelationalDependencies().RowKeyValueFactoryFactory.Create(constraint)
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel));
+                    ? constraint
+                        .Table.Model.Model.GetRelationalDependencies()
+                        .RowKeyValueFactoryFactory.Create(constraint)
+                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +90,8 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void SetRowKeyValueFactory(IRowKeyValueFactory factory)
-        => _rowKeyValueFactory = factory;
+    public virtual void SetRowKeyValueFactory(IRowKeyValueFactory factory) =>
+        _rowKeyValueFactory = factory;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,18 +99,15 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IUniqueConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IUniqueConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
-    ITable IUniqueConstraint.Table
-        => Table;
+    ITable IUniqueConstraint.Table => Table;
 
     /// <inheritdoc />
-    IReadOnlyList<IColumn> IUniqueConstraint.Columns
-        => Columns;
+    IReadOnlyList<IColumn> IUniqueConstraint.Columns => Columns;
 
     /// <inheritdoc />
-    IEnumerable<IKey> IUniqueConstraint.MappedKeys
-        => MappedKeys;
+    IEnumerable<IKey> IUniqueConstraint.MappedKeys => MappedKeys;
 }

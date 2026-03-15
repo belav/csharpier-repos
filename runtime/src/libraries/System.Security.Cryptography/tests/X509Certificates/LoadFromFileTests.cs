@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    issuer);
+                    issuer
+                );
             }
         }
 
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    subject);
+                    subject
+                );
             }
         }
 
@@ -86,8 +88,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             switch (hashAlgName)
             {
                 case "SHA1":
-                    expectedThumbprintHex =
-                        "108E2BA23632620C427C570B6D9DB51AC31387FE";
+                    expectedThumbprintHex = "108E2BA23632620C427C570B6D9DB51AC31387FE";
                     break;
                 case "SHA256":
                     expectedThumbprintHex =
@@ -99,8 +100,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     break;
                 case "SHA512":
                     expectedThumbprintHex =
-                        "8435635A12915A1A9C28BC2BCE7C3CAD08EB723FE276F13CD37D1C3B21416994" +
-                        "0661A27B419882DBA643B23A557CA9EBC03ACC3D7EE3D4D591AB4BA0E553B945";
+                        "8435635A12915A1A9C28BC2BCE7C3CAD08EB723FE276F13CD37D1C3B21416994"
+                        + "0661A27B419882DBA643B23A557CA9EBC03ACC3D7EE3D4D591AB4BA0E553B945";
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(hashAlgName));
@@ -123,24 +124,41 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     int bytesWritten;
 
                     // Too small.
-                    Assert.False(c.TryGetCertHash(alg, writeDest.Slice(0, expectedSize - 1), out bytesWritten));
+                    Assert.False(
+                        c.TryGetCertHash(
+                            alg,
+                            writeDest.Slice(0, expectedSize - 1),
+                            out bytesWritten
+                        )
+                    );
                     Assert.Equal(0, bytesWritten);
                     // Still all 0x55s.
-                    Assert.Equal(new string('5', thumbPrint.Length * 2), thumbPrint.ByteArrayToHex());
+                    Assert.Equal(
+                        new string('5', thumbPrint.Length * 2),
+                        thumbPrint.ByteArrayToHex()
+                    );
 
                     // Large enough (+7)
                     Assert.True(c.TryGetCertHash(alg, writeDest, out bytesWritten));
                     Assert.Equal(expectedSize, bytesWritten);
 
-                    Assert.Equal(expectedThumbprintHex, writeDest.Slice(0, bytesWritten).ByteArrayToHex());
+                    Assert.Equal(
+                        expectedThumbprintHex,
+                        writeDest.Slice(0, bytesWritten).ByteArrayToHex()
+                    );
                     Assert.Equal(FillByte, thumbPrint[expectedSize + WriteOffset]);
 
                     // Try again with a perfectly sized value
                     thumbPrint.AsSpan().Fill(FillByte);
-                    Assert.True(c.TryGetCertHash(alg, writeDest.Slice(0, expectedSize), out bytesWritten));
+                    Assert.True(
+                        c.TryGetCertHash(alg, writeDest.Slice(0, expectedSize), out bytesWritten)
+                    );
                     Assert.Equal(expectedSize, bytesWritten);
 
-                    Assert.Equal(expectedThumbprintHex, writeDest.Slice(0, bytesWritten).ByteArrayToHex());
+                    Assert.Equal(
+                        expectedThumbprintHex,
+                        writeDest.Slice(0, bytesWritten).ByteArrayToHex()
+                    );
                     Assert.Equal(FillByte, thumbPrint[expectedSize + WriteOffset]);
                 }
                 else
@@ -159,7 +177,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c = LoadCertificateFromFile())
             {
                 string format = c.GetFormat();
-                Assert.Equal("X509", format);  // Only one format is supported so this is very predictable api...
+                Assert.Equal("X509", format); // Only one format is supported so this is very predictable api...
             }
         }
 
@@ -191,15 +209,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestGetPublicKey()
         {
             string expectedPublicKeyHex =
-                "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb" +
-                "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb" +
-                "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba" +
-                "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1" +
-                "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd" +
-                "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425" +
-                "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801" +
-                "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643" +
-                "0b950005b14f6571c50203010001";
+                "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb"
+                + "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb"
+                + "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba"
+                + "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1"
+                + "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd"
+                + "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425"
+                + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
+                + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
+                + "0b950005b14f6571c50203010001";
             byte[] expectedPublicKey = expectedPublicKeyHex.HexToByteArray();
 
             using (X509Certificate2 c = LoadCertificateFromFile())
@@ -219,28 +237,37 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             string path = TestFiles.SignedMsuFile;
             if (!File.Exists(path))
-                throw new Exception(string.Format("Test infrastructure failure: Expected to find file \"{0}\".", path));
+                throw new Exception(
+                    string.Format(
+                        "Test infrastructure failure: Expected to find file \"{0}\".",
+                        path
+                    )
+                );
 
             using (X509Certificate2 c = new X509Certificate2(path))
             {
                 string issuer = c.Issuer;
                 Assert.Equal(
                     "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    issuer);
+                    issuer
+                );
 #pragma warning disable 0618
                 Assert.Equal(
                     "C=US, S=Washington, L=Redmond, O=Microsoft Corporation, CN=Microsoft Code Signing PCA",
-                    c.GetIssuerName());
+                    c.GetIssuerName()
+                );
 #pragma warning restore 0618
 
                 string subject = c.Subject;
                 Assert.Equal(
                     "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    subject);
+                    subject
+                );
 #pragma warning disable 0618
                 Assert.Equal(
                     "C=US, S=Washington, L=Redmond, O=Microsoft Corporation, OU=MOPR, CN=Microsoft Corporation",
-                    c.GetName());
+                    c.GetName()
+                );
 #pragma warning restore 0618
 
                 string expectedThumbprintHash = "67B1757863E3EFF760EA9EBB02849AF07D3A8080";
@@ -266,7 +293,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string path = TestFiles.MsCertificateDerFile;
             if (!File.Exists(path))
-                throw new Exception(string.Format("Test infrastructure failure: Expected to find file \"{0}\".", path));
+                throw new Exception(
+                    string.Format(
+                        "Test infrastructure failure: Expected to find file \"{0}\".",
+                        path
+                    )
+                );
             byte[] data = File.ReadAllBytes(path);
             Assert.Equal(TestData.MsCertificate, data);
 

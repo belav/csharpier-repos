@@ -19,6 +19,9 @@ namespace System.Runtime.Serialization
         /// <param name="typeDeclaration">A <see cref="CodeTypeDeclaration"/> to process that represents the type declaration generated during schema import.</param>
         /// <param name="compileUnit">The <see cref="CodeCompileUnit"/> that contains the other code generated during schema import.</param>
         /// <returns>A <see cref="CodeTypeDeclaration"/> that contains the processed type.</returns>
-        CodeTypeDeclaration ProcessImportedType(CodeTypeDeclaration typeDeclaration, CodeCompileUnit compileUnit);
+        CodeTypeDeclaration ProcessImportedType(
+            CodeTypeDeclaration typeDeclaration,
+            CodeCompileUnit compileUnit
+        );
     }
 }

@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool quoteIfNeeded,
             string dnSeparator,
             string multiValueSeparator,
-            bool addTrailingDelimiter)
+            bool addTrailingDelimiter
+        )
         {
             try
             {
@@ -166,16 +167,22 @@ namespace System.Security.Cryptography.X509Certificates
                         // NULL character which was literally embedded in the DER would cause a
                         // failure in .NET whereas it wouldn't have with strcmp.
                         binaryFallback = false;
-                        return tavReader.ReadCharacterString((UniversalTagNumber)tag.TagValue).TrimEnd('\0');
+                        return tavReader
+                            .ReadCharacterString((UniversalTagNumber)tag.TagValue)
+                            .TrimEnd('\0');
                     case UniversalTagNumber.OctetString:
                         // Windows will implicitly unwrap one OCTET STRING and display only the contents.
-                        if (tavReader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents))
+                        if (
+                            tavReader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
+                        )
                         {
                             binaryFallback = true;
                             return BinaryEncode(contents);
                         }
 
-                        Debug.Fail("TryReadPrimitiveOctetString should either succeed or throw with DER.");
+                        Debug.Fail(
+                            "TryReadPrimitiveOctetString should either succeed or throw with DER."
+                        );
                         throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }
             }
@@ -185,11 +192,15 @@ namespace System.Security.Cryptography.X509Certificates
 
             static string BinaryEncode(ReadOnlyMemory<byte> data)
             {
-                return string.Create(1 + data.Length * 2, data, static (buff, state) =>
-                {
-                    buff[0] = '#';
-                    HexConverter.EncodeToUtf16(state.Span, buff.Slice(1));
-                });
+                return string.Create(
+                    1 + data.Length * 2,
+                    data,
+                    static (buff, state) =>
+                    {
+                        buff[0] = '#';
+                        HexConverter.EncodeToUtf16(state.Span, buff.Slice(1));
+                    }
+                );
             }
         }
     }

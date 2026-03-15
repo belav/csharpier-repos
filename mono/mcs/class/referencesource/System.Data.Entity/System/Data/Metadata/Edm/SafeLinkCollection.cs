@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {
@@ -22,11 +22,15 @@ namespace System.Data.Metadata.Edm
     /// </summary>
     /// <typeparam name="TParent"></typeparam>
     /// <typeparam name="TChild"></typeparam>
-    internal class SafeLinkCollection<TParent, TChild> : ReadOnlyMetadataCollection<TChild> where TChild : MetadataItem where TParent : class
+    internal class SafeLinkCollection<TParent, TChild> : ReadOnlyMetadataCollection<TChild>
+        where TChild : MetadataItem
+        where TParent : class
     {
-        public SafeLinkCollection(TParent parent, Func<TChild, SafeLink<TParent>> getLink, MetadataCollection<TChild> children)
-            : base((IList<TChild>)SafeLink<TParent>.BindChildren(parent, getLink, children))
-        {
-        }
+        public SafeLinkCollection(
+            TParent parent,
+            Func<TChild, SafeLink<TParent>> getLink,
+            MetadataCollection<TChild> children
+        )
+            : base((IList<TChild>)SafeLink<TParent>.BindChildren(parent, getLink, children)) { }
     }
 }

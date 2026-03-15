@@ -29,7 +29,8 @@ namespace System.Reflection.Metadata
 
         private LocalVariableHandle Handle => LocalVariableHandle.FromRowId(_rowId);
 
-        public LocalVariableAttributes Attributes => _reader.LocalVariableTable.GetAttributes(Handle);
+        public LocalVariableAttributes Attributes =>
+            _reader.LocalVariableTable.GetAttributes(Handle);
         public int Index => _reader.LocalVariableTable.GetIndex(Handle);
         public StringHandle Name => _reader.LocalVariableTable.GetName(Handle);
     }

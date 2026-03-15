@@ -86,13 +86,23 @@ namespace System.Threading
             {
                 fixed (char* pThreadName = _name)
                 {
-                    StartInternal(GetNativeHandle(), _startHelper?._maxStackSize ?? 0, _priority, pThreadName);
+                    StartInternal(
+                        GetNativeHandle(),
+                        _startHelper?._maxStackSize ?? 0,
+                        _priority,
+                        pThreadName
+                    );
                 }
             }
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_Start")]
-        private static unsafe partial void StartInternal(ThreadHandle t, int stackSize, int priority, char* pThreadName);
+        private static unsafe partial void StartInternal(
+            ThreadHandle t,
+            int stackSize,
+            int priority,
+            char* pThreadName
+        );
 
         // Called from the runtime
         private void StartCallback()
@@ -154,7 +164,8 @@ namespace System.Threading
         public static bool Yield() => YieldInternal() != Interop.BOOL.FALSE;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static Thread InitializeCurrentThread() => t_currentThread = GetCurrentThreadNative();
+        private static Thread InitializeCurrentThread() =>
+            t_currentThread = GetCurrentThreadNative();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern Thread GetCurrentThreadNative();
@@ -173,7 +184,11 @@ namespace System.Threading
             InformThreadNameChange(GetNativeHandle(), value, value?.Length ?? 0);
         }
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ThreadNative_InformThreadNameChange", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ThreadNative_InformThreadNameChange",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         private static partial void InformThreadNameChange(ThreadHandle t, string? name, int len);
 
         /// <summary>Returns true if the thread has been started and is not dead.</summary>
@@ -312,9 +327,7 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern void DisableComObjectEagerCleanup();
 #else // !FEATURE_COMINTEROP
-        public void DisableComObjectEagerCleanup()
-        {
-        }
+        public void DisableComObjectEagerCleanup() { }
 #endif // FEATURE_COMINTEROP
 
         /// <summary>

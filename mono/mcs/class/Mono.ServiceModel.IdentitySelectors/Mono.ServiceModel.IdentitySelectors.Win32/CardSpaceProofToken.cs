@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,31 +33,35 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors.Win32
 {
-	class CardSpaceProofToken : SecurityToken
-	{
-		DateTime valid_to;
-		ReadOnlyCollection<SecurityKey> keys;
+    class CardSpaceProofToken : SecurityToken
+    {
+        DateTime valid_to;
+        ReadOnlyCollection<SecurityKey> keys;
 
-		public CardSpaceProofToken (DateTime validTo, AsymmetricSecurityKey proofKey)
-		{
-			valid_to = validTo;
-			keys = new ReadOnlyCollection<SecurityKey> (new SecurityKey [] {proofKey});
-		}
+        public CardSpaceProofToken(DateTime validTo, AsymmetricSecurityKey proofKey)
+        {
+            valid_to = validTo;
+            keys = new ReadOnlyCollection<SecurityKey>(new SecurityKey[] { proofKey });
+        }
 
-		public override DateTime ValidFrom {
-			get { return DateTime.MinValue.ToUniversalTime (); }
-		}
+        public override DateTime ValidFrom
+        {
+            get { return DateTime.MinValue.ToUniversalTime(); }
+        }
 
-		public override DateTime ValidTo {
-			get { return valid_to; }
-		}
+        public override DateTime ValidTo
+        {
+            get { return valid_to; }
+        }
 
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        public override string Id
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { return keys; }
-		}
-	}
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { return keys; }
+        }
+    }
 }

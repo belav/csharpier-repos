@@ -6,7 +6,6 @@ namespace System.ServiceModel.Configuration
 {
     using System.ServiceModel.Description;
 
-    public class WebHttpEndpointCollectionElement : StandardEndpointCollectionElement<WebHttpEndpoint, WebHttpEndpointElement>
-    {
-    }
+    public class WebHttpEndpointCollectionElement
+        : StandardEndpointCollectionElement<WebHttpEndpoint, WebHttpEndpointElement> { }
 }

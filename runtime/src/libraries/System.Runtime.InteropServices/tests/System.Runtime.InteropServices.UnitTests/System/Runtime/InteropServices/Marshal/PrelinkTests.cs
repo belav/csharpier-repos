@@ -20,7 +20,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Prelink_RuntimeSuppliedMethod_Success()
         {
-            MethodInfo method = typeof(Math).GetMethod(nameof(Math.Abs), new Type[] { typeof(double) });
+            MethodInfo method = typeof(Math).GetMethod(
+                nameof(Math.Abs),
+                new Type[] { typeof(double) }
+            );
             Marshal.Prelink(method);
             Marshal.Prelink(method);
         }
@@ -34,12 +37,17 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNativeAot))]
         public void Prelink_NonRuntimeMethod_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("m", null, () => Marshal.Prelink(new NonRuntimeMethodInfo()));
+            AssertExtensions.Throws<ArgumentException>(
+                "m",
+                null,
+                () => Marshal.Prelink(new NonRuntimeMethodInfo())
+            );
         }
 
         public class NonRuntimeMethodInfo : MethodInfo
         {
-            public override ICustomAttributeProvider ReturnTypeCustomAttributes => throw new NotImplementedException();
+            public override ICustomAttributeProvider ReturnTypeCustomAttributes =>
+                throw new NotImplementedException();
 
             public override RuntimeMethodHandle MethodHandle => throw new NotImplementedException();
 
@@ -53,17 +61,27 @@ namespace System.Runtime.InteropServices.Tests
 
             public override MethodInfo GetBaseDefinition() => throw new NotImplementedException();
 
-            public override object[] GetCustomAttributes(bool inherit) => throw new NotImplementedException();
+            public override object[] GetCustomAttributes(bool inherit) =>
+                throw new NotImplementedException();
 
-            public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
+            public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+                throw new NotImplementedException();
 
-            public override MethodImplAttributes GetMethodImplementationFlags() => throw new NotImplementedException();
+            public override MethodImplAttributes GetMethodImplementationFlags() =>
+                throw new NotImplementedException();
 
             public override ParameterInfo[] GetParameters() => throw new NotImplementedException();
 
-            public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture) => throw new NotImplementedException();
+            public override object Invoke(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            ) => throw new NotImplementedException();
 
-            public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();
+            public override bool IsDefined(Type attributeType, bool inherit) =>
+                throw new NotImplementedException();
         }
     }
 }

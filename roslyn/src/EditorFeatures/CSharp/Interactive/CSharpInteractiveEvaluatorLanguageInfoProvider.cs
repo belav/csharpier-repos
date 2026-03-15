@@ -12,28 +12,31 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
 {
-    internal sealed class CSharpInteractiveEvaluatorLanguageInfoProvider : InteractiveEvaluatorLanguageInfoProvider
+    internal sealed class CSharpInteractiveEvaluatorLanguageInfoProvider
+        : InteractiveEvaluatorLanguageInfoProvider
     {
         public static readonly CSharpInteractiveEvaluatorLanguageInfoProvider Instance = new();
 
-        private CSharpInteractiveEvaluatorLanguageInfoProvider()
-        {
-        }
+        private CSharpInteractiveEvaluatorLanguageInfoProvider() { }
 
-        private static readonly CSharpParseOptions s_parseOptions =
-            new(languageVersion: LanguageVersion.Latest, kind: SourceCodeKind.Script);
+        private static readonly CSharpParseOptions s_parseOptions = new(
+            languageVersion: LanguageVersion.Latest,
+            kind: SourceCodeKind.Script
+        );
 
-        public override string LanguageName
-            => LanguageNames.CSharp;
+        public override string LanguageName => LanguageNames.CSharp;
 
-        public override ParseOptions ParseOptions
-            => s_parseOptions;
+        public override ParseOptions ParseOptions => s_parseOptions;
 
-        public override CommandLineParser CommandLineParser
-            => CSharpCommandLineParser.Script;
+        public override CommandLineParser CommandLineParser => CSharpCommandLineParser.Script;
 
-        public override CompilationOptions GetSubmissionCompilationOptions(string name, MetadataReferenceResolver metadataReferenceResolver, SourceReferenceResolver sourceReferenceResolver, ImmutableArray<string> imports)
-            => CSharpScriptCompiler.WithTopLevelBinderFlags(
+        public override CompilationOptions GetSubmissionCompilationOptions(
+            string name,
+            MetadataReferenceResolver metadataReferenceResolver,
+            SourceReferenceResolver sourceReferenceResolver,
+            ImmutableArray<string> imports
+        ) =>
+            CSharpScriptCompiler.WithTopLevelBinderFlags(
                 new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,
                     scriptClassName: name,
@@ -42,16 +45,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
                     usings: imports,
                     sourceReferenceResolver: sourceReferenceResolver,
                     metadataReferenceResolver: metadataReferenceResolver,
-                    assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default));
+                    assemblyIdentityComparer: DesktopAssemblyIdentityComparer.Default
+                )
+            );
 
-        public override bool IsCompleteSubmission(string text)
-            => SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree(SourceText.From(text, encoding: null, SourceHashAlgorithms.Default), options: s_parseOptions));
+        public override bool IsCompleteSubmission(string text) =>
+            SyntaxFactory.IsCompleteSubmission(
+                SyntaxFactory.ParseSyntaxTree(
+                    SourceText.From(text, encoding: null, SourceHashAlgorithms.Default),
+                    options: s_parseOptions
+                )
+            );
 
-        public override string InteractiveResponseFileName
-            => "CSharpInteractive.rsp";
+        public override string InteractiveResponseFileName => "CSharpInteractive.rsp";
 
-        public override Type ReplServiceProviderType
-            => typeof(CSharpReplServiceProvider);
+        public override Type ReplServiceProviderType => typeof(CSharpReplServiceProvider);
 
         public override string Extension => ".csx";
     }

@@ -15,7 +15,9 @@ namespace System.IdentityModel.Selectors
         // public constructors
         //
 
-        public InfoCardRSAOAEPKeyExchangeDeformatter() : base() { }
+        public InfoCardRSAOAEPKeyExchangeDeformatter()
+            : base() { }
+
         public InfoCardRSAOAEPKeyExchangeDeformatter(AsymmetricAlgorithm key)
             : base(key)
         {

@@ -44,10 +44,10 @@
 //-----------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;   // For Dictionary<string, string>
-using System.Diagnostics;           // For Debug.Assert
+using System.Collections.Generic; // For Dictionary<string, string>
+using System.Diagnostics; // For Debug.Assert
 using System.Diagnostics.CodeAnalysis;
-using System.Text;                  // For StringBuilder
+using System.Text; // For StringBuilder
 
 namespace System.IO.Packaging
 {
@@ -83,7 +83,10 @@ namespace System.IO.Packaging
             }
             else
             {
-                if (IsLinearWhiteSpaceChar(contentType[0]) || IsLinearWhiteSpaceChar(contentType[contentType.Length - 1]))
+                if (
+                    IsLinearWhiteSpaceChar(contentType[0])
+                    || IsLinearWhiteSpaceChar(contentType[contentType.Length - 1])
+                )
                     throw new ArgumentException(SR.ContentTypeCannotHaveLeadingTrailingLWS);
 
                 //Carriage return can be expressed as '\r\n' or '\n\r'
@@ -117,10 +120,7 @@ namespace System.IO.Packaging
         /// </summary>
         internal string TypeComponent
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         /// <summary>
@@ -129,10 +129,7 @@ namespace System.IO.Packaging
         /// </summary>
         internal string SubTypeComponent
         {
-            get
-            {
-                return _subType;
-            }
+            get { return _subType; }
         }
 
         /// <summary>
@@ -202,8 +199,18 @@ namespace System.IO.Packaging
                 // safe comparison because the _type and _subType strings have been restricted to
                 // ASCII characters, digits, and a small set of symbols.  This is not a safe comparison
                 // for the broader set of strings that have not been restricted in the same way.
-                result = (string.Equals(_type, contentType.TypeComponent, StringComparison.OrdinalIgnoreCase) &&
-                          string.Equals(_subType, contentType.SubTypeComponent, StringComparison.OrdinalIgnoreCase));
+                result = (
+                    string.Equals(
+                        _type,
+                        contentType.TypeComponent,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && string.Equals(
+                        _subType,
+                        contentType.SubTypeComponent,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                );
             }
             return result;
         }
@@ -254,7 +261,10 @@ namespace System.IO.Packaging
         /// <param name="contentType"></param>
         private static void ValidateCarriageReturns(string contentType)
         {
-            Debug.Assert(!IsLinearWhiteSpaceChar(contentType[0]) && !IsLinearWhiteSpaceChar(contentType[contentType.Length - 1]));
+            Debug.Assert(
+                !IsLinearWhiteSpaceChar(contentType[0])
+                    && !IsLinearWhiteSpaceChar(contentType[contentType.Length - 1])
+            );
 
             //Prior to calling this method we have already checked that first and last
             //character of the content type are not Linear White Spaces. So its safe to
@@ -264,7 +274,10 @@ namespace System.IO.Packaging
 
             while (index != -1)
             {
-                if (contentType[index - 1] == s_linearWhiteSpaceChars[1] || contentType[index + 1] == s_linearWhiteSpaceChars[1])
+                if (
+                    contentType[index - 1] == s_linearWhiteSpaceChars[1]
+                    || contentType[index + 1] == s_linearWhiteSpaceChars[1]
+                )
                 {
                     index = contentType.IndexOf(s_linearWhiteSpaceChars[2], ++index);
                 }
@@ -287,8 +300,11 @@ namespace System.IO.Packaging
             typeAndSubType = typeAndSubType.TrimEnd(s_linearWhiteSpaceChars);
 
             int forwardSlashPos = typeAndSubType.IndexOf('/');
-            if (forwardSlashPos < 0 || // no slashes
-                typeAndSubType.Slice(forwardSlashPos + 1).IndexOf('/') >= 0) // more than one slash
+            if (
+                forwardSlashPos < 0
+                || // no slashes
+                typeAndSubType.Slice(forwardSlashPos + 1).IndexOf('/') >= 0
+            ) // more than one slash
             {
                 throw new ArgumentException(SR.InvalidTypeSubType);
             }
@@ -333,13 +349,23 @@ namespace System.IO.Packaging
                 int parameterStartIndex = equalSignIndex + 1;
 
                 //Get length of the parameter value
-                int parameterValueLength = GetLengthOfParameterValue(parameterAndValue, parameterStartIndex);
+                int parameterValueLength = GetLengthOfParameterValue(
+                    parameterAndValue,
+                    parameterStartIndex
+                );
 
                 (_parameterDictionary ??= new Dictionary<string, string>()).Add(
                     ValidateToken(parameterAndValue.Slice(0, equalSignIndex).ToString()),
-                    ValidateQuotedStringOrToken(parameterAndValue.Slice(parameterStartIndex, parameterValueLength).ToString()));
+                    ValidateQuotedStringOrToken(
+                        parameterAndValue
+                            .Slice(parameterStartIndex, parameterValueLength)
+                            .ToString()
+                    )
+                );
 
-                parameterAndValue = parameterAndValue.Slice(parameterStartIndex + parameterValueLength).TrimStart(s_linearWhiteSpaceChars);
+                parameterAndValue = parameterAndValue
+                    .Slice(parameterStartIndex + parameterValueLength)
+                    .TrimStart(s_linearWhiteSpaceChars);
             }
         }
 
@@ -365,7 +391,8 @@ namespace System.IO.Packaging
                 if (semicolonIndex != -1)
                 {
                     int lwsIndex = s.Slice(startIndex).IndexOfAny(s_linearWhiteSpaceChars);
-                    length = lwsIndex != -1 && lwsIndex < semicolonIndex ? lwsIndex : semicolonIndex;
+                    length =
+                        lwsIndex != -1 && lwsIndex < semicolonIndex ? lwsIndex : semicolonIndex;
                     length += startIndex; // the indexes from IndexOf{Any} are based on slicing from startIndex
                 }
                 else
@@ -440,9 +467,11 @@ namespace System.IO.Packaging
             if (string.IsNullOrEmpty(parameterValue))
                 throw new ArgumentException(SR.InvalidParameterValue);
 
-            if (parameterValue.Length >= 2 &&
-                parameterValue[0] == '"' &&
-                parameterValue[parameterValue.Length - 1] == '"')
+            if (
+                parameterValue.Length >= 2
+                && parameterValue[0] == '"'
+                && parameterValue[parameterValue.Length - 1] == '"'
+            )
             {
                 ValidateQuotedText(parameterValue.AsSpan(1, parameterValue.Length - 2));
             }
@@ -491,8 +520,7 @@ namespace System.IO.Packaging
         /// <param name="character">input character</param>
         /// <returns></returns>
         private static bool IsAsciiLetterOrDigit(char character) =>
-            ((((uint)character - 'A') & ~0x20) < 26) ||
-            (((uint)character - '0') < 10);
+            ((((uint)character - 'A') & ~0x20) < 26) || (((uint)character - '0') < 10);
 
         /// <summary>
         /// Returns true if the input character is one of the Linear White Space characters -
@@ -516,20 +544,46 @@ namespace System.IO.Packaging
         //This array is sorted by the ascii value of these characters.
         private static readonly char[] s_allowedCharacters =
         {
-            '!' /*33*/, '#'  /*35*/, '$'  /*36*/,
-            '%' /*37*/, '&'  /*38*/, '\'' /*39*/,
-            '*' /*42*/, '+'  /*43*/, '-'  /*45*/,
-            '.' /*46*/, '^'  /*94*/, '_'  /*95*/,
-            '`' /*96*/, '|' /*124*/, '~' /*126*/,
+            '!' /*33*/
+            ,
+            '#' /*35*/
+            ,
+            '$' /*36*/
+            ,
+            '%' /*37*/
+            ,
+            '&' /*38*/
+            ,
+            '\'' /*39*/
+            ,
+            '*' /*42*/
+            ,
+            '+' /*43*/
+            ,
+            '-' /*45*/
+            ,
+            '.' /*46*/
+            ,
+            '^' /*94*/
+            ,
+            '_' /*95*/
+            ,
+            '`' /*96*/
+            ,
+            '|' /*124*/
+            ,
+            '~' /*126*/
+            ,
         };
 
         //Linear White Space characters
         private static readonly char[] s_linearWhiteSpaceChars =
-         { ' ',  // space           - \x20
-           '\n', // new line        - \x0A
-           '\r', // carriage return - \x0D
-           '\t'  // horizontal tab  - \x09
-         };
+        {
+            ' ', // space           - \x20
+            '\n', // new line        - \x0A
+            '\r', // carriage return - \x0D
+            '\t', // horizontal tab  - \x09
+        };
 
         #endregion Private Members
     }

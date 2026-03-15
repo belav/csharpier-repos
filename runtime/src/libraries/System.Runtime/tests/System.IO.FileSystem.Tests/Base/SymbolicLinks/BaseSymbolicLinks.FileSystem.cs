@@ -37,12 +37,17 @@ namespace System.IO.Tests
         }
 
         /// <summary>Calls the actual public API for resolving the symbolic link target.</summary>
-        protected abstract FileSystemInfo ResolveLinkTarget(string linkPath, bool returnFinalTarget);
+        protected abstract FileSystemInfo ResolveLinkTarget(
+            string linkPath,
+            bool returnFinalTarget
+        );
 
         [Fact]
         public void CreateSymbolicLink_NullPathToTarget()
         {
-            Assert.Throws<ArgumentNullException>(() => CreateSymbolicLink(GetRandomFilePath(), pathToTarget: null));
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateSymbolicLink(GetRandomFilePath(), pathToTarget: null)
+            );
         }
 
         [Theory]
@@ -50,7 +55,9 @@ namespace System.IO.Tests
         [InlineData("\0")]
         public void CreateSymbolicLink_InvalidPathToTarget(string pathToTarget)
         {
-            Assert.Throws<ArgumentException>(() => CreateSymbolicLink(GetRandomFilePath(), pathToTarget));
+            Assert.Throws<ArgumentException>(() =>
+                CreateSymbolicLink(GetRandomFilePath(), pathToTarget)
+            );
         }
 
         [Fact]
@@ -64,7 +71,8 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: existentTarget,
-                targetPath: targetPath);
+                targetPath: targetPath
+            );
         }
 
         [Fact]
@@ -81,7 +89,8 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: existentTarget,
-                targetPath: targetPath);
+                targetPath: targetPath
+            );
         }
 
         [Fact]
@@ -93,7 +102,8 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: targetPath,
-                targetPath: targetPath);
+                targetPath: targetPath
+            );
         }
 
         [Fact]
@@ -110,7 +120,8 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: existentTarget,
-                targetPath: targetPath);
+                targetPath: targetPath
+            );
         }
 
         [Fact]
@@ -123,7 +134,8 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: nonExistentTarget,
-                targetPath: null); // do not create target
+                targetPath: null
+            ); // do not create target
         }
 
         [Fact]
@@ -136,10 +148,12 @@ namespace System.IO.Tests
             VerifySymbolicLinkAndResolvedTarget(
                 linkPath: linkPath,
                 expectedLinkTarget: nonExistentTarget,
-                targetPath: null); // do not create target
+                targetPath: null
+            ); // do not create target
         }
 
-        protected void ResolveLinkTarget_Throws_NotExists_Internal<T>() where T : Exception
+        protected void ResolveLinkTarget_Throws_NotExists_Internal<T>()
+            where T : Exception
         {
             string path = GetRandomFilePath();
             Assert.Throws<T>(() => ResolveLinkTarget(path, returnFinalTarget: false));
@@ -170,8 +184,9 @@ namespace System.IO.Tests
             Assert.NotNull(targetInfo);
             Assert.False(targetInfo.Exists);
 
-            string expectedTargetFullName = Path.IsPathFullyQualified(pathToTarget) ?
-                pathToTarget : Path.GetFullPath(Path.Join(Path.GetDirectoryName(linkPath), pathToTarget));
+            string expectedTargetFullName = Path.IsPathFullyQualified(pathToTarget)
+                ? pathToTarget
+                : Path.GetFullPath(Path.Join(Path.GetDirectoryName(linkPath), pathToTarget));
 
             Assert.Equal(expectedTargetFullName, targetInfo.FullName);
         }
@@ -200,7 +215,8 @@ namespace System.IO.Tests
                 link1Target: link2Path,
                 link2Path: link2Path,
                 link2Target: filePath,
-                filePath: filePath);
+                filePath: filePath
+            );
         }
 
         [Fact]
@@ -221,7 +237,8 @@ namespace System.IO.Tests
                 link1Target: Path.Join(dirPath, "..", dirName, link2FileName),
                 link2Path: link2Path,
                 link2Target: Path.Join(dirPath, "..", dirName, fileName),
-                filePath: filePath);
+                filePath: filePath
+            );
         }
 
         [Fact]
@@ -239,7 +256,8 @@ namespace System.IO.Tests
                 link1Target: link2FileName,
                 link2Path: link2Path,
                 link2Target: fileName,
-                filePath: filePath);
+                filePath: filePath
+            );
         }
 
         [Fact]
@@ -260,7 +278,8 @@ namespace System.IO.Tests
                 link1Target: Path.Join("..", dirName, link2FileName),
                 link2Path: link2Path,
                 link2Target: Path.Join("..", dirName, fileName),
-                filePath: filePath);
+                filePath: filePath
+            );
         }
 
         [Theory]
@@ -270,7 +289,10 @@ namespace System.IO.Tests
         [InlineData(1, true)]
         [InlineData(10, true)]
         [InlineData(20, true)]
-        public void ResolveLinkTarget_ReturnFinalTarget_ChainOfLinks_Succeeds(int length, bool relative)
+        public void ResolveLinkTarget_ReturnFinalTarget_ChainOfLinks_Succeeds(
+            int length,
+            bool relative
+        )
         {
             string target = GetRandomFilePath();
             CreateFileOrDirectory(target);
@@ -285,7 +307,10 @@ namespace System.IO.Tests
         // We also don't want to test for a very precise limit given that it is very inconsistent across Windows versions.
         [InlineData(100, false)]
         [InlineData(100, true)]
-        public void ResolveLinkTarget_ReturnFinalTarget_ChainOfLinks_ExceedsLimit_Throws(int length, bool relative)
+        public void ResolveLinkTarget_ReturnFinalTarget_ChainOfLinks_ExceedsLimit_Throws(
+            int length,
+            bool relative
+        )
         {
             string target = GetRandomFilePath();
             CreateFileOrDirectory(target);
@@ -301,7 +326,10 @@ namespace System.IO.Tests
             for (int i = 0; i < length; i++)
             {
                 string currentLinkPath = GetRandomLinkPath();
-                CreateSymbolicLink(currentLinkPath, relative ? Path.GetFileName(previousPath) : previousPath);
+                CreateSymbolicLink(
+                    currentLinkPath,
+                    relative ? Path.GetFileName(previousPath) : previousPath
+                );
                 previousPath = currentLinkPath;
             }
 
@@ -360,7 +388,11 @@ namespace System.IO.Tests
             Assert.Equal(targetPath, secondLinkInfo.ResolveLinkTarget(true).FullName);
         }
 
-        private void VerifySymbolicLinkAndResolvedTarget(string linkPath, string expectedLinkTarget, string targetPath = null)
+        private void VerifySymbolicLinkAndResolvedTarget(
+            string linkPath,
+            string expectedLinkTarget,
+            string targetPath = null
+        )
         {
             // linkPath -> expectedLinkTarget (created in targetPath if not null)
 
@@ -389,7 +421,13 @@ namespace System.IO.Tests
         /// Creates and Resolves a chain of links.
         /// link1 -> link2 -> file
         /// </summary>
-        private void ResolveLinkTarget_ReturnFinalTarget(string link1Path, string link1Target, string link2Path, string link2Target, string filePath)
+        private void ResolveLinkTarget_ReturnFinalTarget(
+            string link1Path,
+            string link1Target,
+            string link2Path,
+            string link2Target,
+            string filePath
+        )
         {
             Assert.True(Path.IsPathFullyQualified(link1Path));
             Assert.True(Path.IsPathFullyQualified(link2Path));
@@ -449,7 +487,9 @@ namespace System.IO.Tests
         }
 
         // Must call inside a remote executor
-        protected void CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(bool createOpposite)
+        protected void CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(
+            bool createOpposite
+        )
         {
             string tempCwd = ChangeCurrentDirectory();
 
@@ -467,7 +507,10 @@ namespace System.IO.Tests
 
             // Verify that Target is resolved and is relative to Link's directory and not to the cwd.
             Assert.False(targetInfo.Exists);
-            Assert.Equal(Path.GetDirectoryName(linkInfo.FullName), Path.GetDirectoryName(targetInfo.FullName));
+            Assert.Equal(
+                Path.GetDirectoryName(linkInfo.FullName),
+                Path.GetDirectoryName(targetInfo.FullName)
+            );
 
             Directory.SetCurrentDirectory(Path.GetTempPath());
         }
@@ -492,11 +535,12 @@ namespace System.IO.Tests
             return new FileSystemEnumerable<string?>(
                 windowsAppsDir,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
-                opts)
+                opts
+            )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    FileSystemName.MatchesWin32Expression("*.exe", entry.FileName) &&
-                    (entry.Attributes & FileAttributes.ReparsePoint) != 0
+                    FileSystemName.MatchesWin32Expression("*.exe", entry.FileName)
+                    && (entry.Attributes & FileAttributes.ReparsePoint) != 0,
             }.FirstOrDefault();
         }
     }

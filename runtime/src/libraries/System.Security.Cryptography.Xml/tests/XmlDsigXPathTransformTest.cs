@@ -15,12 +15,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     // Note: GetInnerXml is protected in XmlDsigXPathTransform making it
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigXPathTransform : XmlDsigXPathTransform
     {
-
         public XmlNodeList UnprotectedGetInnerXml()
         {
             return base.GetInnerXml();
@@ -29,7 +27,6 @@ namespace System.Security.Cryptography.Xml.Tests
 
     public class XmlDsigXPathTransformTest
     {
-
         protected UnprotectedXmlDsigXPathTransform transform;
 
         public XmlDsigXPathTransformTest()
@@ -101,11 +98,16 @@ namespace System.Security.Cryptography.Xml.Tests
 
         private XmlDocument GetDoc()
         {
-            string test = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist><price>10.90</price>";
-            test += "<year>1985</year></cd><cd><title>Hide your heart</title><artist>Bonnie Tyler</artist><price>9.90</price>";
-            test += "<year>1988</year></cd><cd><title>Greatest Hits</title><artist>Dolly Parton</artist><price>9.90</price>";
-            test += "<year>1982</year></cd><cd><title>Still got the blues</title><artist>Gary Moore</artist><price>10.20</price>";
-            test += "<year>1990</year></cd><cd><title>Eros</title><artist>Eros Ramazzotti</artist><price>9.90</price>";
+            string test =
+                "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist><price>10.90</price>";
+            test +=
+                "<year>1985</year></cd><cd><title>Hide your heart</title><artist>Bonnie Tyler</artist><price>9.90</price>";
+            test +=
+                "<year>1988</year></cd><cd><title>Greatest Hits</title><artist>Dolly Parton</artist><price>9.90</price>";
+            test +=
+                "<year>1982</year></cd><cd><title>Still got the blues</title><artist>Gary Moore</artist><price>10.20</price>";
+            test +=
+                "<year>1990</year></cd><cd><title>Eros</title><artist>Eros Ramazzotti</artist><price>9.90</price>";
             test += "<year>1997</year></cd></catalog>";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(test);
@@ -114,7 +116,8 @@ namespace System.Security.Cryptography.Xml.Tests
 
         private XmlNodeList InnerXml(string xpathExpr)
         {
-            string xpath = "<XPath xmlns=\"http://www.w3.org/2000/09/xmldsig#\">" + xpathExpr + "</XPath>";
+            string xpath =
+                "<XPath xmlns=\"http://www.w3.org/2000/09/xmldsig#\">" + xpathExpr + "</XPath>";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xpath);
             return doc.ChildNodes;
@@ -211,7 +214,10 @@ namespace System.Security.Cryptography.Xml.Tests
         public void UnsupportedOutput()
         {
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(doc.GetType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(doc.GetType())
+            );
         }
 
         [Fact]
@@ -265,17 +271,23 @@ namespace System.Security.Cryptography.Xml.Tests
             nl = (XmlNodeList)t.GetOutput();
             Assert.Equal(0, nl.Count);
 
-            doc.LoadXml("<element xmlns='urn:foo'><foo xmlns='urn:bar'><bar>test</bar></foo></element>");
+            doc.LoadXml(
+                "<element xmlns='urn:foo'><foo xmlns='urn:bar'><bar>test</bar></foo></element>"
+            );
             t.LoadInput(doc);
             nl = (XmlNodeList)t.GetOutput();
             Assert.Equal(0, nl.Count);
 
-            doc.LoadXml("<element xmlns='urn:foo' xmlns:x='urn:x'><foo xmlns='urn:bar'><bar>test</bar></foo></element>");
+            doc.LoadXml(
+                "<element xmlns='urn:foo' xmlns:x='urn:x'><foo xmlns='urn:bar'><bar>test</bar></foo></element>"
+            );
             t.LoadInput(doc);
             nl = (XmlNodeList)t.GetOutput();
             Assert.Equal(0, nl.Count);
 
-            doc.LoadXml("<envelope><Signature xmlns='http://www.w3.org/2000/09/xmldsig#'><XPath>blah</XPath></Signature></envelope>");
+            doc.LoadXml(
+                "<envelope><Signature xmlns='http://www.w3.org/2000/09/xmldsig#'><XPath>blah</XPath></Signature></envelope>"
+            );
             t.LoadInput(doc);
             nl = (XmlNodeList)t.GetOutput();
             Assert.Equal(0, nl.Count);

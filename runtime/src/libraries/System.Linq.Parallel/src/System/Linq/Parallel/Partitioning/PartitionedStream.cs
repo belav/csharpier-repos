@@ -35,7 +35,11 @@ namespace System.Linq.Parallel
         private readonly IComparer<TKey> _keyComparer; // Comparer for order keys.
         private readonly OrdinalIndexState _indexState; // State of the order keys.
 
-        internal PartitionedStream(int partitionCount, IComparer<TKey> keyComparer, OrdinalIndexState indexState)
+        internal PartitionedStream(
+            int partitionCount,
+            IComparer<TKey> keyComparer,
+            OrdinalIndexState indexState
+        )
         {
             Debug.Assert(partitionCount > 0);
             _partitions = new QueryOperatorEnumerator<TElement, TKey>[partitionCount];

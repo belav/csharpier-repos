@@ -30,7 +30,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct QIL from a rooted graph of QilNodes with a specific factory.
         /// </summary>
-        public QilExpression(QilNodeType nodeType, QilNode root, QilFactory factory) : base(nodeType)
+        public QilExpression(QilNodeType nodeType, QilNode root, QilFactory factory)
+            : base(nodeType)
         {
             _factory = factory;
             _isDebug = factory.False();
@@ -46,7 +47,6 @@ namespace System.Xml.Xsl.Qil
             _funList = factory.FunctionList();
             _rootNod = root;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -78,19 +78,35 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (index)
                 {
-                    case 0: _isDebug = value; break;
-                    case 1: _defWSet = value; break;
-                    case 2: _wsRules = value; break;
-                    case 3: _gloParams = value; break;
-                    case 4: _gloVars = value; break;
-                    case 5: _earlBnd = value; break;
-                    case 6: _funList = value; break;
-                    case 7: _rootNod = value; break;
-                    default: throw new IndexOutOfRangeException();
+                    case 0:
+                        _isDebug = value;
+                        break;
+                    case 1:
+                        _defWSet = value;
+                        break;
+                    case 2:
+                        _wsRules = value;
+                        break;
+                    case 3:
+                        _gloParams = value;
+                        break;
+                    case 4:
+                        _gloVars = value;
+                        break;
+                    case 5:
+                        _earlBnd = value;
+                        break;
+                    case 6:
+                        _funList = value;
+                        break;
+                    case 7:
+                        _rootNod = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilExpression methods

@@ -10,7 +10,10 @@ namespace System.Web.Mvc
         private readonly ActionDescriptor _actionDescriptor;
         private readonly ReflectedParameterBindingInfo _bindingInfo;
 
-        public ReflectedParameterDescriptor(ParameterInfo parameterInfo, ActionDescriptor actionDescriptor)
+        public ReflectedParameterDescriptor(
+            ParameterInfo parameterInfo,
+            ActionDescriptor actionDescriptor
+        )
         {
             if (parameterInfo == null)
             {

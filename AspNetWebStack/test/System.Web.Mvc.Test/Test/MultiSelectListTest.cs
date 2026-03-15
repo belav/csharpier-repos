@@ -52,7 +52,11 @@ namespace System.Web.Mvc.Test
             IEnumerable disabledValues = new[] { "B", "C" };
 
             // Act
-            MultiSelectList multiSelect = new MultiSelectList(items, selectedValues, disabledValues);
+            MultiSelectList multiSelect = new MultiSelectList(
+                items,
+                selectedValues,
+                disabledValues
+            );
 
             // Assert
             Assert.Same(items, multiSelect.Items);
@@ -69,7 +73,11 @@ namespace System.Web.Mvc.Test
             IEnumerable items = new object[0];
 
             // Act
-            MultiSelectList multiSelect = new MultiSelectList(items, "SomeValueField", "SomeTextField");
+            MultiSelectList multiSelect = new MultiSelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField"
+            );
 
             // Assert
             Assert.Same(items, multiSelect.Items);
@@ -86,7 +94,12 @@ namespace System.Web.Mvc.Test
             IEnumerable selectedValues = new object[0];
 
             // Act
-            MultiSelectList multiSelect = new MultiSelectList(items, "SomeValueField", "SomeTextField", selectedValues);
+            MultiSelectList multiSelect = new MultiSelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField",
+                selectedValues
+            );
 
             // Assert
             Assert.Same(items, multiSelect.Items);
@@ -99,11 +112,15 @@ namespace System.Web.Mvc.Test
         public void Constructor_SetsProperties_Items_SelectedValues_DisabledValues_Groups()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjectsWithGroups(),
-                "Letter", "FullWord", "Group",
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjectsWithGroups(),
+                "Letter",
+                "FullWord",
+                "Group",
                 selectedValues: new[] { "A", "C", "T" },
                 disabledValues: new[] { "C" },
-                disabledGroups: null);
+                disabledGroups: null
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -137,11 +154,15 @@ namespace System.Web.Mvc.Test
             // Arrange
             object[] disabledValues = { "C" };
             object[] disabledGroups = { "AB" };
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjectsWithGroups(),
-                "Letter", "FullWord", "Group",
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjectsWithGroups(),
+                "Letter",
+                "FullWord",
+                "Group",
                 selectedValues: new[] { "A", "C", "T" },
                 disabledValues: disabledValues,
-                disabledGroups: disabledGroups);
+                disabledGroups: disabledGroups
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -192,9 +213,14 @@ namespace System.Web.Mvc.Test
             IEnumerable disabledValues = new object[0];
 
             // Act
-            MultiSelectList multiSelect = new MultiSelectList(items, "SomeValueField", "SomeTextField", "SomeGroupField",
+            MultiSelectList multiSelect = new MultiSelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField",
+                "SomeGroupField",
                 selectedValues,
-                disabledValues);
+                disabledValues
+            );
 
             // Assert
             Assert.Same(items, multiSelect.Items);
@@ -213,8 +239,13 @@ namespace System.Web.Mvc.Test
             IEnumerable selectedValues = new object[0];
 
             // Act
-            MultiSelectList multiSelect = new MultiSelectList(items, "SomeValueField", "SomeTextField", "SomeGroupField",
-                selectedValues);
+            MultiSelectList multiSelect = new MultiSelectList(
+                items,
+                "SomeValueField",
+                "SomeTextField",
+                "SomeGroupField",
+                selectedValues
+            );
 
             // Assert
             Assert.Same(items, multiSelect.Items);
@@ -229,10 +260,13 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object[] disabledValues = { "C" };
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjectsWithGroups(),
-                "Letter", "FullWord",
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjectsWithGroups(),
+                "Letter",
+                "FullWord",
                 new[] { "A", "C", "T" },
-                disabledValues);
+                disabledValues
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -269,19 +303,40 @@ namespace System.Web.Mvc.Test
         public void ConstructorWithNullItemsThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new MultiSelectList(null /* items */, "dataValueField", "dataTextField", null /* selectedValues */); }, "items");
+                delegate
+                {
+                    new MultiSelectList(
+                        null /* items */
+                        ,
+                        "dataValueField",
+                        "dataTextField",
+                        null /* selectedValues */
+                    );
+                },
+                "items"
+            );
         }
 
         [Fact]
         public void GetListItemsThrowsOnBindingFailure()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleFieldObjects(),
-                                                              "Text", "Value", new string[] { "A", "C", "T" });
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleFieldObjects(),
+                "Text",
+                "Value",
+                new string[] { "A", "C", "T" }
+            );
 
             // Assert
             Assert.ThrowsHttpException(
-                delegate { IList<SelectListItem> listItems = multiSelect.GetListItems(); }, "DataBinding: 'System.Web.Mvc.Test.MultiSelectListTest+Item' does not contain a property with the name 'Text'.", 500);
+                delegate
+                {
+                    IList<SelectListItem> listItems = multiSelect.GetListItems();
+                },
+                "DataBinding: 'System.Web.Mvc.Test.MultiSelectListTest+Item' does not contain a property with the name 'Text'.",
+                500
+            );
         }
 
         [Fact]
@@ -310,7 +365,10 @@ namespace System.Web.Mvc.Test
         public void GetListItemsWithoutValueFieldWithSelections()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleStrings(), new string[] { "Alpha", "Charlie", "Tango" });
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleStrings(),
+                new string[] { "Alpha", "Charlie", "Tango" }
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -332,7 +390,11 @@ namespace System.Web.Mvc.Test
         public void GetListItemsWithValueField()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjects(), "Letter", "FullWord");
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjects(),
+                "Letter",
+                "FullWord"
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -354,10 +416,12 @@ namespace System.Web.Mvc.Test
         public void GetListItemsWithGroupField()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjectsWithGroups(),
-                                                              "Letter",
-                                                              "FullWord",
-                                                              "Group");
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjectsWithGroups(),
+                "Letter",
+                "FullWord",
+                "Group"
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -382,8 +446,12 @@ namespace System.Web.Mvc.Test
         public void GetListItemsWithValueFieldWithSelections()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjects(),
-                                                              "Letter", "FullWord", new string[] { "A", "C", "T" });
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjects(),
+                "Letter",
+                "FullWord",
+                new string[] { "A", "C", "T" }
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -405,8 +473,13 @@ namespace System.Web.Mvc.Test
         public void GetListItemsWithValueFieldWithSelectionsWithGroupField()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjectsWithGroups(),
-                "Letter", "FullWord", "Group", new string[] { "A", "C", "T" });
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjectsWithGroups(),
+                "Letter",
+                "FullWord",
+                "Group",
+                new string[] { "A", "C", "T" }
+            );
 
             // Act
             IList<SelectListItem> listItems = multiSelect.GetListItems();
@@ -431,8 +504,12 @@ namespace System.Web.Mvc.Test
         public void IEnumerableWithAnonymousObjectsAndTextValueFields()
         {
             // Arrange
-            MultiSelectList multiSelect = new MultiSelectList(GetSampleAnonymousObjects(),
-                                                              "Letter", "FullWord", new string[] { "A", "C", "T" });
+            MultiSelectList multiSelect = new MultiSelectList(
+                GetSampleAnonymousObjects(),
+                "Letter",
+                "FullWord",
+                new string[] { "A", "C", "T" }
+            );
 
             // Act
             IEnumerator enumerator = multiSelect.GetEnumerator();
@@ -463,7 +540,7 @@ namespace System.Web.Mvc.Test
             {
                 new { Letter = 'A', FullWord = "Alpha" },
                 new { Letter = 'B', FullWord = "Bravo" },
-                new { Letter = 'C', FullWord = "Charlie" }
+                new { Letter = 'C', FullWord = "Charlie" },
             };
         }
 
@@ -471,9 +548,24 @@ namespace System.Web.Mvc.Test
         {
             return new[]
             {
-                new { Letter = 'A', FullWord = "Alpha", Group = "AB" },
-                new { Letter = 'B', FullWord = "Bravo", Group = "AB" },
-                new { Letter = 'C', FullWord = "Charlie", Group = "C" },
+                new
+                {
+                    Letter = 'A',
+                    FullWord = "Alpha",
+                    Group = "AB",
+                },
+                new
+                {
+                    Letter = 'B',
+                    FullWord = "Bravo",
+                    Group = "AB",
+                },
+                new
+                {
+                    Letter = 'C',
+                    FullWord = "Charlie",
+                    Group = "C",
+                },
             };
         }
 
@@ -483,7 +575,7 @@ namespace System.Web.Mvc.Test
             {
                 new Item { Text = "A", Value = "Alpha" },
                 new Item { Text = "B", Value = "Bravo" },
-                new Item { Text = "C", Value = "Charlie" }
+                new Item { Text = "C", Value = "Charlie" },
             };
         }
 
@@ -494,12 +586,14 @@ namespace System.Web.Mvc.Test
 
             foreach (Person person in GetSamplePeople())
             {
-                list.Add(new SelectListItem
-                {
-                    Text = person.FirstName,
-                    Value = person.SSN,
-                    Selected = String.Equals(person.SSN, selectedSSN)
-                });
+                list.Add(
+                    new SelectListItem
+                    {
+                        Text = person.FirstName,
+                        Value = person.SSN,
+                        Selected = String.Equals(person.SSN, selectedSSN),
+                    }
+                );
             }
             return list;
         }
@@ -509,13 +603,14 @@ namespace System.Web.Mvc.Test
             Person[] people = GetSamplePeople();
 
             string selectedSSN = "111111111";
-            IEnumerable<SelectListItem> list = from person in people
-                                               select new SelectListItem
-                                               {
-                                                   Text = person.FirstName,
-                                                   Value = person.SSN,
-                                                   Selected = String.Equals(person.SSN, selectedSSN)
-                                               };
+            IEnumerable<SelectListItem> list =
+                from person in people
+                select new SelectListItem
+                {
+                    Text = person.FirstName,
+                    Value = person.SSN,
+                    Selected = String.Equals(person.SSN, selectedSSN),
+                };
             return list;
         }
 
@@ -528,21 +623,9 @@ namespace System.Web.Mvc.Test
         {
             return new Person[]
             {
-                new Person
-                {
-                    FirstName = "John",
-                    SSN = "123456789"
-                },
-                new Person
-                {
-                    FirstName = "Jane",
-                    SSN = "987654321"
-                },
-                new Person
-                {
-                    FirstName = "Joe",
-                    SSN = "111111111"
-                }
+                new Person { FirstName = "John", SSN = "123456789" },
+                new Person { FirstName = "Jane", SSN = "987654321" },
+                new Person { FirstName = "Joe", SSN = "111111111" },
             };
         }
 

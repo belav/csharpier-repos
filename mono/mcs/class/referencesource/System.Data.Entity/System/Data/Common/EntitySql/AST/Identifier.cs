@@ -22,9 +22,10 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes identifier.
         /// </summary>
-        internal Identifier(string name, bool isEscaped, string query, int inputPos) : base(query, inputPos)
+        internal Identifier(string name, bool isEscaped, string query, int inputPos)
+            : base(query, inputPos)
         {
-            // name may be empty in the case of "byte[]". 
+            // name may be empty in the case of "byte[]".
             // "byte" and "[]" come in as two identifiers where second one is escaped and empty.
 
             Debug.Assert(isEscaped || name[0] != '[', "isEscaped || name[0] != '['");
@@ -36,11 +37,17 @@ namespace System.Data.Common.EntitySql.AST
                 {
                     if (isIdentifierASCII)
                     {
-                        throw EntityUtil.EntitySqlError(this.ErrCtx, System.Data.Entity.Strings.InvalidSimpleIdentifier(name));
+                        throw EntityUtil.EntitySqlError(
+                            this.ErrCtx,
+                            System.Data.Entity.Strings.InvalidSimpleIdentifier(name)
+                        );
                     }
                     else
                     {
-                        throw EntityUtil.EntitySqlError(this.ErrCtx, System.Data.Entity.Strings.InvalidSimpleIdentifierNonASCII(name));
+                        throw EntityUtil.EntitySqlError(
+                            this.ErrCtx,
+                            System.Data.Entity.Strings.InvalidSimpleIdentifierNonASCII(name)
+                        );
                     }
                 }
             }

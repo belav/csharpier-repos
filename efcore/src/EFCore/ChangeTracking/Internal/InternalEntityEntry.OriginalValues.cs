@@ -22,7 +22,11 @@ public sealed partial class InternalEntityEntry
             if (index == -1)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringType.DisplayName()));
+                    CoreStrings.OriginalValueNotTracked(
+                        property.Name,
+                        property.DeclaringType.DisplayName()
+                    )
+                );
             }
 
             return IsEmpty ? entry[property] : _values[index];
@@ -33,7 +37,11 @@ public sealed partial class InternalEntityEntry
             if (index == -1)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringType.DisplayName()));
+                    CoreStrings.OriginalValueNotTracked(
+                        property.Name,
+                        property.DeclaringType.DisplayName()
+                    )
+                );
             }
 
             return IsEmpty ? entry.GetCurrentValue<T>(property) : _values.GetValue<T>(index);
@@ -50,16 +58,23 @@ public sealed partial class InternalEntityEntry
                 if (index == -1)
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringType.DisplayName()));
+                        CoreStrings.OriginalValueNotTracked(
+                            property.Name,
+                            property.DeclaringType.DisplayName()
+                        )
+                    );
                 }
             }
 
-            if (value == null
-                && !property.ClrType.IsNullableType())
+            if (value == null && !property.ClrType.IsNullableType())
             {
                 throw new InvalidOperationException(
                     CoreStrings.ValueCannotBeNull(
-                        property.Name, property.DeclaringType.DisplayName(), property.ClrType.DisplayName()));
+                        property.Name,
+                        property.DeclaringType.DisplayName(),
+                        property.ClrType.DisplayName()
+                    )
+                );
             }
 
             _values[index] = SnapshotValue(property, value);
@@ -99,10 +114,9 @@ public sealed partial class InternalEntityEntry
             }
         }
 
-        private static object? SnapshotValue(IProperty property, object? value)
-            => property.GetValueComparer().Snapshot(value);
+        private static object? SnapshotValue(IProperty property, object? value) =>
+            property.GetValueComparer().Snapshot(value);
 
-        public bool IsEmpty
-            => _values == null;
+        public bool IsEmpty => _values == null;
     }
 }

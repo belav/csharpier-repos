@@ -6,9 +6,7 @@ namespace System.Speech.Internal.SrgsParser
     /// <summary>
     /// Interface definition for the ISubset
     /// </summary>
-    internal interface ISubset : IElement
-    {
-    }
+    internal interface ISubset : IElement { }
 
     // Must be in the same order as the Srgs enum
     internal enum MatchMode
@@ -17,6 +15,6 @@ namespace System.Speech.Internal.SrgsParser
         Subsequence = 1,
         OrderedSubset = 3,
         SubsequenceContentRequired = 5,
-        OrderedSubsetContentRequired = 7
+        OrderedSubsetContentRequired = 7,
     }
 }

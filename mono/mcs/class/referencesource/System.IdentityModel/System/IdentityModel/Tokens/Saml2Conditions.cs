@@ -14,7 +14,8 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     public class Saml2Conditions
     {
-        private Collection<Saml2AudienceRestriction> audienceRestrictions = new Collection<Saml2AudienceRestriction>();
+        private Collection<Saml2AudienceRestriction> audienceRestrictions =
+            new Collection<Saml2AudienceRestriction>();
         private DateTime? notBefore;
         private DateTime? notOnOrAfter;
         private bool oneTimeUse;
@@ -23,9 +24,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes a new instance of <see cref="Saml2Conditions"/>. class.
         /// </summary>
-        public Saml2Conditions()
-        {
-        }
+        public Saml2Conditions() { }
 
         /// <summary>
         /// Gets a collection of <see cref="Saml2AudienceRestriction"/> that the assertion is addressed to.
@@ -42,11 +41,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public DateTime? NotBefore
         {
-            get 
-            { 
-                return this.notBefore; 
-            }
-
+            get { return this.notBefore; }
             set
             {
                 value = DateTimeUtil.ToUniversalTime(value);
@@ -56,10 +51,13 @@ namespace System.IdentityModel.Tokens
                 {
                     if (value.Value >= this.notOnOrAfter.Value)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4116));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ID4116)
+                        );
                     }
                 }
-             
+
                 this.notBefore = value;
             }
         }
@@ -70,11 +68,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public DateTime? NotOnOrAfter
         {
-            get 
-            { 
-                return this.notOnOrAfter; 
-            }
-
+            get { return this.notOnOrAfter; }
             set
             {
                 value = DateTimeUtil.ToUniversalTime(value);
@@ -84,7 +78,10 @@ namespace System.IdentityModel.Tokens
                 {
                     if (value.Value <= this.notBefore.Value)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4116));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.ID4116)
+                        );
                     }
                 }
 

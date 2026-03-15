@@ -17,16 +17,12 @@ namespace System.Web.Http.Results
         /// <summary>Initializes a new instance of the <see cref="OkResult"/> class.</summary>
         /// <param name="request">The request message which led to this result.</param>
         public OkResult(HttpRequestMessage request)
-            : this(new StatusCodeResult.DirectDependencyProvider(request))
-        {
-        }
+            : this(new StatusCodeResult.DirectDependencyProvider(request)) { }
 
         /// <summary>Initializes a new instance of the <see cref="OkResult"/> class.</summary>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public OkResult(ApiController controller)
-            : this(new StatusCodeResult.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 
         private OkResult(StatusCodeResult.IDependencyProvider dependencies)
         {
@@ -44,7 +40,9 @@ namespace System.Web.Http.Results
         /// <inheritdoc />
         public virtual Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-            return Task.FromResult(StatusCodeResult.Execute(HttpStatusCode.OK, _dependencies.Request));
+            return Task.FromResult(
+                StatusCodeResult.Execute(HttpStatusCode.OK, _dependencies.Request)
+            );
         }
     }
 }

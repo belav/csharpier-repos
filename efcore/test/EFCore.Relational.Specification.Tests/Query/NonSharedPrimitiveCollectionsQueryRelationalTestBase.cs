@@ -3,12 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NonSharedPrimitiveCollectionsQueryRelationalTestBase : NonSharedPrimitiveCollectionsQueryTestBase
+public abstract class NonSharedPrimitiveCollectionsQueryRelationalTestBase
+    : NonSharedPrimitiveCollectionsQueryTestBase
 {
     // On relational databases, byte[] gets mapped to a special binary data type, which isn't queryable as a regular primitive collection.
     [ConditionalFact]
-    public override Task Array_of_byte()
-        => AssertTranslationFailed(() => TestArray((byte)1, (byte)2));
+    public override Task Array_of_byte() =>
+        AssertTranslationFailed(() => TestArray((byte)1, (byte)2));
 
     [ConditionalFact(Skip = "#28688")]
     public virtual async Task Column_collection_inside_json_owned_entity()
@@ -19,9 +20,11 @@ public abstract class NonSharedPrimitiveCollectionsQueryRelationalTestBase : Non
             {
                 context.AddRange(
                     new TestOwner { Owned = new TestOwned { Strings = new[] { "foo", "bar" } } },
-                    new TestOwner { Owned = new TestOwned { Strings = new[] { "baz" } } });
+                    new TestOwner { Owned = new TestOwned { Strings = new[] { "baz" } } }
+                );
                 context.SaveChanges();
-            });
+            }
+        );
 
         await using var context = contextFactory.CreateContext();
 
@@ -44,12 +47,10 @@ public abstract class NonSharedPrimitiveCollectionsQueryRelationalTestBase : Non
         public string[] Strings { get; set; }
     }
 
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected void ClearLog()
-        => TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => TestSqlLoggerFactory.Clear();
 
-    protected void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 }

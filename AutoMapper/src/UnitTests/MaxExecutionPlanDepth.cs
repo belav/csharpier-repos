@@ -72,17 +72,19 @@ public class MaxExecutionPlanDepth : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.Internal().MaxExecutionPlanDepth = 2;
-        cfg.CreateMap<Source, Destination>();
-        cfg.CreateMap<Source1, Destination1>();
-        cfg.CreateMap<Source2, Destination2>();
-        cfg.CreateMap<Source3, Destination3>();
-        cfg.CreateMap<Source4, Destination4>();
-        cfg.CreateMap<Source5, Destination5>();
-        cfg.CreateMap<Source6, Destination6>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.Internal().MaxExecutionPlanDepth = 2;
+            cfg.CreateMap<Source, Destination>();
+            cfg.CreateMap<Source1, Destination1>();
+            cfg.CreateMap<Source2, Destination2>();
+            cfg.CreateMap<Source3, Destination3>();
+            cfg.CreateMap<Source4, Destination4>();
+            cfg.CreateMap<Source5, Destination5>();
+            cfg.CreateMap<Source6, Destination6>();
+        });
+
     [Fact]
     public void Should_set_inline_accordingly()
     {
@@ -103,6 +105,7 @@ public class MaxExecutionPlanDepth : AutoMapperSpecBase
         map.PropertyMaps.First().Inline.ShouldBeTrue();
     }
 }
+
 public class MaxExecutionPlanDepthDefault : AutoMapperSpecBase
 {
     class Source
@@ -175,16 +178,18 @@ public class MaxExecutionPlanDepthDefault : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-        cfg.CreateMap<Source1, Destination1>();
-        cfg.CreateMap<Source2, Destination2>();
-        cfg.CreateMap<Source3, Destination3>();
-        cfg.CreateMap<Source4, Destination4>();
-        cfg.CreateMap<Source5, Destination5>();
-        cfg.CreateMap<Source6, Destination6>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+            cfg.CreateMap<Source1, Destination1>();
+            cfg.CreateMap<Source2, Destination2>();
+            cfg.CreateMap<Source3, Destination3>();
+            cfg.CreateMap<Source4, Destination4>();
+            cfg.CreateMap<Source5, Destination5>();
+            cfg.CreateMap<Source6, Destination6>();
+        });
+
     [Fact]
     public void Should_set_inline_accordingly()
     {
@@ -205,6 +210,7 @@ public class MaxExecutionPlanDepthDefault : AutoMapperSpecBase
         map.PropertyMaps.First().Inline.ShouldBeTrue();
     }
 }
+
 public class MaxExecutionPlanDepthWithPreserveReferences : AutoMapperSpecBase
 {
     class Source
@@ -277,18 +283,19 @@ public class MaxExecutionPlanDepthWithPreserveReferences : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.Internal().MaxExecutionPlanDepth = 0;
-        cfg.CreateMap<Source, Destination>().PreserveReferences();
-        cfg.CreateMap<Source1, Destination1>().PreserveReferences();
-        cfg.CreateMap<Source2, Destination2>().PreserveReferences();
-        cfg.CreateMap<Source3, Destination3>().PreserveReferences();
-        cfg.CreateMap<Source4, Destination4>().PreserveReferences();
-        cfg.CreateMap<Source5, Destination5>().PreserveReferences();
-        cfg.CreateMap<Source6, Destination6>().PreserveReferences();
-    });
-   
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.Internal().MaxExecutionPlanDepth = 0;
+            cfg.CreateMap<Source, Destination>().PreserveReferences();
+            cfg.CreateMap<Source1, Destination1>().PreserveReferences();
+            cfg.CreateMap<Source2, Destination2>().PreserveReferences();
+            cfg.CreateMap<Source3, Destination3>().PreserveReferences();
+            cfg.CreateMap<Source4, Destination4>().PreserveReferences();
+            cfg.CreateMap<Source5, Destination5>().PreserveReferences();
+            cfg.CreateMap<Source6, Destination6>().PreserveReferences();
+        });
+
     [Fact]
     public void Should_set_inline_accordingly()
     {
@@ -307,17 +314,23 @@ public class MaxExecutionPlanDepthWithPreserveReferences : AutoMapperSpecBase
         map.PropertyMaps.First().Inline.ShouldBeFalse();
     }
 }
+
 public class InlineWithoutPreserveReferences : AutoMapperSpecBase
 {
     class Source
     {
         public Source Inner { get; set; }
     }
+
     class Destination
     {
         public Destination Inner { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Destination>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.CreateMap<Source, Destination>());
+
     [Fact]
-    public void Should_set_inline_accordingly() => FindTypeMapFor<Source, Destination>().PropertyMaps.First().Inline.ShouldBeFalse();
+    public void Should_set_inline_accordingly() =>
+        FindTypeMapFor<Source, Destination>().PropertyMaps.First().Inline.ShouldBeFalse();
 }

@@ -32,7 +32,10 @@ namespace Microsoft.CodeAnalysis.Formatting
         public int LineBreaks { get; protected set; }
         public int Spaces { get; protected set; }
 
-        public bool SecondTokenIsFirstTokenOnLine { get { return this.LineBreaks > 0; } }
+        public bool SecondTokenIsFirstTokenOnLine
+        {
+            get { return this.LineBreaks > 0; }
+        }
 
         public abstract bool TreatAsElastic { get; }
         public abstract bool IsWhitespaceOnlyTrivia { get; }
@@ -40,17 +43,33 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         public abstract IEnumerable<TextChange> GetTextChanges(TextSpan span);
 
-        public abstract TriviaData WithSpace(int space, FormattingContext context, ChainedFormattingRules formattingRules);
+        public abstract TriviaData WithSpace(
+            int space,
+            FormattingContext context,
+            ChainedFormattingRules formattingRules
+        );
 
-        public abstract TriviaData WithLine(int line, int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken);
+        public abstract TriviaData WithLine(
+            int line,
+            int indentation,
+            FormattingContext context,
+            ChainedFormattingRules formattingRules,
+            CancellationToken cancellationToken
+        );
 
-        public abstract TriviaData WithIndentation(int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken);
+        public abstract TriviaData WithIndentation(
+            int indentation,
+            FormattingContext context,
+            ChainedFormattingRules formattingRules,
+            CancellationToken cancellationToken
+        );
 
         public abstract void Format(
             FormattingContext context,
             ChainedFormattingRules formattingRules,
             Action<int, TokenStream, TriviaData> formattingResultApplier,
             CancellationToken cancellationToken,
-            int tokenPairIndex = TokenPairIndexNotNeeded);
+            int tokenPairIndex = TokenPairIndexNotNeeded
+        );
     }
 }

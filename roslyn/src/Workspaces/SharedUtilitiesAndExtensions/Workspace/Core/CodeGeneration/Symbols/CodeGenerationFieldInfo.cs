@@ -10,17 +10,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationFieldInfo
     {
-        private static readonly ConditionalWeakTable<IFieldSymbol, CodeGenerationFieldInfo> s_fieldToInfoMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            IFieldSymbol,
+            CodeGenerationFieldInfo
+        > s_fieldToInfoMap = new();
 
         private readonly bool _isUnsafe;
         private readonly bool _isWithEvents;
         private readonly SyntaxNode _initializer;
 
-        private CodeGenerationFieldInfo(
-            bool isUnsafe,
-            bool isWithEvents,
-            SyntaxNode initializer)
+        private CodeGenerationFieldInfo(bool isUnsafe, bool isWithEvents, SyntaxNode initializer)
         {
             _isUnsafe = isUnsafe;
             _isWithEvents = isWithEvents;
@@ -31,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IFieldSymbol field,
             bool isUnsafe,
             bool isWithEvents,
-            SyntaxNode initializer)
+            SyntaxNode initializer
+        )
         {
             var info = new CodeGenerationFieldInfo(isUnsafe, isWithEvents, initializer);
             s_fieldToInfoMap.Add(field, info);
@@ -43,22 +43,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        private static bool GetIsUnsafe(CodeGenerationFieldInfo info)
-            => info != null && info._isUnsafe;
+        private static bool GetIsUnsafe(CodeGenerationFieldInfo info) =>
+            info != null && info._isUnsafe;
 
-        public static bool GetIsUnsafe(IFieldSymbol field)
-            => GetIsUnsafe(GetInfo(field));
+        public static bool GetIsUnsafe(IFieldSymbol field) => GetIsUnsafe(GetInfo(field));
 
-        private static bool GetIsWithEvents(CodeGenerationFieldInfo info)
-            => info != null && info._isWithEvents;
+        private static bool GetIsWithEvents(CodeGenerationFieldInfo info) =>
+            info != null && info._isWithEvents;
 
-        public static bool GetIsWithEvents(IFieldSymbol field)
-            => GetIsWithEvents(GetInfo(field));
+        public static bool GetIsWithEvents(IFieldSymbol field) => GetIsWithEvents(GetInfo(field));
 
-        private static SyntaxNode GetInitializer(CodeGenerationFieldInfo info)
-            => info?._initializer;
+        private static SyntaxNode GetInitializer(CodeGenerationFieldInfo info) =>
+            info?._initializer;
 
-        public static SyntaxNode GetInitializer(IFieldSymbol field)
-            => GetInitializer(GetInfo(field));
+        public static SyntaxNode GetInitializer(IFieldSymbol field) =>
+            GetInitializer(GetInfo(field));
     }
 }

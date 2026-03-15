@@ -48,6 +48,6 @@ namespace Newtonsoft.Json.Bson
         TimeStamp = 17,
         Long = 18,
         MinKey = -1,
-        MaxKey = 127
+        MaxKey = 127,
     }
 }

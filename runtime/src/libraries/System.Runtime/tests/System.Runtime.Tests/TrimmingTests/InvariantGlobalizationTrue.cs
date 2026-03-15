@@ -12,22 +12,21 @@ class Program
 {
     static int Main(string[] args)
     {
-        const BindingFlags allStatics = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+        const BindingFlags allStatics =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
         try
         {
             CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
             return -1; // we expect new CultureInfo("tr-TR") to throw.
         }
-        catch (CultureNotFoundException)
-        {
-        }
+        catch (CultureNotFoundException) { }
 
         if ("i".ToUpper() != "I")
         {
             return -3;
         }
-        
+
         // Ensure the internal GlobalizationMode class is trimmed correctly.
         Type globalizationMode = GetCoreLibType("System.Globalization.GlobalizationMode");
 
@@ -42,20 +41,27 @@ class Program
                 }
 
                 // Windows still contains a static cctor and a backing field for UseNls.
-                if (member is ConstructorInfo || (member is FieldInfo field && field.Name.Contains("UseNls")))
+                if (
+                    member is ConstructorInfo
+                    || (member is FieldInfo field && field.Name.Contains("UseNls"))
+                )
                 {
                     continue;
                 }
 
                 // Some unexpected member was left on GlobalizationMode, fail
-                Console.WriteLine($"Member '{member.Name}' was not trimmed from GlobalizationMode, but should have been.");
+                Console.WriteLine(
+                    $"Member '{member.Name}' was not trimmed from GlobalizationMode, but should have been."
+                );
                 return -4;
             }
         }
         // On non Windows platforms, the full type is trimmed.
         else if (globalizationMode is not null)
         {
-            Console.WriteLine("It is expected to have System.Globalization.GlobalizationMode type trimmed in non-Windows platforms");
+            Console.WriteLine(
+                "It is expected to have System.Globalization.GlobalizationMode type trimmed in non-Windows platforms"
+            );
             return -5;
         }
 

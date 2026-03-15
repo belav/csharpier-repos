@@ -21,8 +21,7 @@ namespace System.Web.Razor
                     // Keep running until we get a null result or output
                     result = CurrentState();
                     CurrentState = result.Next;
-                }
-                while (result != null && !result.HasOutput);
+                } while (result != null && !result.HasOutput);
 
                 if (result == null)
                 {

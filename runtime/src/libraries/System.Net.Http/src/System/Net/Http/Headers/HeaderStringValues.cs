@@ -11,6 +11,7 @@ namespace System.Net.Http.Headers
     {
         /// <summary>The associated header.  This is used only for producing a string from <see cref="_value"/> when it's an array.</summary>
         private readonly HeaderDescriptor _header;
+
         /// <summary>A string or string array (or null if the instance is default).</summary>
         private readonly object _value;
 
@@ -33,21 +34,28 @@ namespace System.Net.Http.Headers
         }
 
         /// <summary>Gets the number of header values in the collection.</summary>
-        public int Count => _value switch
-        {
-            string => 1,
-            string[] values => values.Length,
-            _ => 0
-        };
+        public int Count =>
+            _value switch
+            {
+                string => 1,
+                string[] values => values.Length,
+                _ => 0,
+            };
 
         /// <summary>Gets a string containing all the headers in the collection.</summary>
         /// <returns></returns>
-        public override string ToString() => _value switch
-        {
-            string value => value,
-            string[] values => string.Join(_header.Parser is HttpHeaderParser parser && parser.SupportsMultipleValues ? parser.Separator : HttpHeaderParser.DefaultSeparator, values),
-            _ => string.Empty,
-        };
+        public override string ToString() =>
+            _value switch
+            {
+                string value => value,
+                string[] values => string.Join(
+                    _header.Parser is HttpHeaderParser parser && parser.SupportsMultipleValues
+                        ? parser.Separator
+                        : HttpHeaderParser.DefaultSeparator,
+                    values
+                ),
+                _ => string.Empty,
+            };
 
         /// <summary>Gets an enumerator for all of the strings in the collection.</summary>
         /// <returns></returns>
@@ -64,8 +72,10 @@ namespace System.Net.Http.Headers
         {
             /// <summary>If this wraps a string[], that array. Otherwise, null.</summary>
             private readonly string[]? _values;
+
             /// <summary>The current string header value.  If this wraps a single string, that string.</summary>
             private string? _current;
+
             /// <summary>Current state of the iteration.</summary>
             private int _index;
 

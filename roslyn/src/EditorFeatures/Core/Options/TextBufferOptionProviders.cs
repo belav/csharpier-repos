@@ -20,19 +20,51 @@ namespace Microsoft.CodeAnalysis.Options;
 
 internal static class TextBufferOptionProviders
 {
-    public static DocumentationCommentOptions GetDocumentationCommentOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, LanguageServices languageServices)
+    public static DocumentationCommentOptions GetDocumentationCommentOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        LanguageServices languageServices
+    )
     {
         var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
-        var lineFormattingOptions = GetLineFormattingOptionsImpl(textBuffer, editorOptions, optionsProvider.IndentationManager, explicitFormat: false);
-        return optionsProvider.GlobalOptions.GetDocumentationCommentOptions(lineFormattingOptions, languageServices.Language);
+        var lineFormattingOptions = GetLineFormattingOptionsImpl(
+            textBuffer,
+            editorOptions,
+            optionsProvider.IndentationManager,
+            explicitFormat: false
+        );
+        return optionsProvider.GlobalOptions.GetDocumentationCommentOptions(
+            lineFormattingOptions,
+            languageServices.Language
+        );
     }
 
-    public static LineFormattingOptions GetLineFormattingOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, bool explicitFormat)
-       => GetLineFormattingOptionsImpl(textBuffer, optionsProvider.Factory.GetOptions(textBuffer), optionsProvider.IndentationManager, explicitFormat);
+    public static LineFormattingOptions GetLineFormattingOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        bool explicitFormat
+    ) =>
+        GetLineFormattingOptionsImpl(
+            textBuffer,
+            optionsProvider.Factory.GetOptions(textBuffer),
+            optionsProvider.IndentationManager,
+            explicitFormat
+        );
 
-    private static LineFormattingOptions GetLineFormattingOptionsImpl(ITextBuffer textBuffer, IEditorOptions editorOptions, IIndentationManagerService indentationManager, bool explicitFormat)
+    private static LineFormattingOptions GetLineFormattingOptionsImpl(
+        ITextBuffer textBuffer,
+        IEditorOptions editorOptions,
+        IIndentationManagerService indentationManager,
+        bool explicitFormat
+    )
     {
-        indentationManager.GetIndentation(textBuffer, explicitFormat, out var convertTabsToSpaces, out var tabSize, out var indentSize);
+        indentationManager.GetIndentation(
+            textBuffer,
+            explicitFormat,
+            out var convertTabsToSpaces,
+            out var tabSize,
+            out var indentSize
+        );
 
         return new LineFormattingOptions()
         {
@@ -43,62 +75,138 @@ internal static class TextBufferOptionProviders
         };
     }
 
-    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, LanguageServices languageServices, bool explicitFormat)
-        => GetSyntaxFormattingOptionsImpl(textBuffer, optionsProvider.Factory.GetOptions(textBuffer), optionsProvider.IndentationManager, optionsProvider.GlobalOptions, languageServices, explicitFormat);
+    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        LanguageServices languageServices,
+        bool explicitFormat
+    ) =>
+        GetSyntaxFormattingOptionsImpl(
+            textBuffer,
+            optionsProvider.Factory.GetOptions(textBuffer),
+            optionsProvider.IndentationManager,
+            optionsProvider.GlobalOptions,
+            languageServices,
+            explicitFormat
+        );
 
-    private static SyntaxFormattingOptions GetSyntaxFormattingOptionsImpl(ITextBuffer textBuffer, IEditorOptions editorOptions, IIndentationManagerService indentationManager, IGlobalOptionService globalOptions, LanguageServices languageServices, bool explicitFormat)
+    private static SyntaxFormattingOptions GetSyntaxFormattingOptionsImpl(
+        ITextBuffer textBuffer,
+        IEditorOptions editorOptions,
+        IIndentationManagerService indentationManager,
+        IGlobalOptionService globalOptions,
+        LanguageServices languageServices,
+        bool explicitFormat
+    )
     {
         var configOptions = editorOptions.ToAnalyzerConfigOptions();
         var fallbackOptions = globalOptions.GetSyntaxFormattingOptions(languageServices);
         var options = configOptions.GetSyntaxFormattingOptions(languageServices, fallbackOptions);
-        var lineFormattingOptions = GetLineFormattingOptionsImpl(textBuffer, editorOptions, indentationManager, explicitFormat);
+        var lineFormattingOptions = GetLineFormattingOptionsImpl(
+            textBuffer,
+            editorOptions,
+            indentationManager,
+            explicitFormat
+        );
 
-        return options with { LineFormatting = lineFormattingOptions };
-    }
-
-    public static IndentationOptions GetIndentationOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, LanguageServices languageServices, bool explicitFormat)
-    {
-        var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
-        var formattingOptions = GetSyntaxFormattingOptionsImpl(textBuffer, editorOptions, optionsProvider.IndentationManager, optionsProvider.GlobalOptions, languageServices, explicitFormat);
-
-        return new IndentationOptions(formattingOptions)
+        return options with
         {
-            AutoFormattingOptions = optionsProvider.GlobalOptions.GetAutoFormattingOptions(languageServices.Language),
-            // TODO: Call editorOptions.GetIndentStyle() instead (see https://github.com/dotnet/roslyn/issues/62204):
-            IndentStyle = optionsProvider.GlobalOptions.GetOption(IndentationOptionsStorage.SmartIndent, languageServices.Language)
+            LineFormatting = lineFormattingOptions,
         };
     }
 
-    public static AddImportPlacementOptions GetAddImportPlacementOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, LanguageServices languageServices, bool allowInHiddenRegions)
+    public static IndentationOptions GetIndentationOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        LanguageServices languageServices,
+        bool explicitFormat
+    )
+    {
+        var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
+        var formattingOptions = GetSyntaxFormattingOptionsImpl(
+            textBuffer,
+            editorOptions,
+            optionsProvider.IndentationManager,
+            optionsProvider.GlobalOptions,
+            languageServices,
+            explicitFormat
+        );
+
+        return new IndentationOptions(formattingOptions)
+        {
+            AutoFormattingOptions = optionsProvider.GlobalOptions.GetAutoFormattingOptions(
+                languageServices.Language
+            ),
+            // TODO: Call editorOptions.GetIndentStyle() instead (see https://github.com/dotnet/roslyn/issues/62204):
+            IndentStyle = optionsProvider.GlobalOptions.GetOption(
+                IndentationOptionsStorage.SmartIndent,
+                languageServices.Language
+            ),
+        };
+    }
+
+    public static AddImportPlacementOptions GetAddImportPlacementOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        LanguageServices languageServices,
+        bool allowInHiddenRegions
+    )
     {
         var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
         var configOptions = editorOptions.ToAnalyzerConfigOptions();
-        var fallbackOptions = optionsProvider.GlobalOptions.GetAddImportPlacementOptions(languageServices);
-        return configOptions.GetAddImportPlacementOptions(languageServices, allowInHiddenRegions, fallbackOptions);
+        var fallbackOptions = optionsProvider.GlobalOptions.GetAddImportPlacementOptions(
+            languageServices
+        );
+        return configOptions.GetAddImportPlacementOptions(
+            languageServices,
+            allowInHiddenRegions,
+            fallbackOptions
+        );
     }
 
-    public static CodeCleanupOptions GetCodeCleanupOptions(this ITextBuffer textBuffer, EditorOptionsService optionsProvider, LanguageServices languageServices, bool explicitFormat, bool allowImportsInHiddenRegions)
+    public static CodeCleanupOptions GetCodeCleanupOptions(
+        this ITextBuffer textBuffer,
+        EditorOptionsService optionsProvider,
+        LanguageServices languageServices,
+        bool explicitFormat,
+        bool allowImportsInHiddenRegions
+    )
     {
         var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
         var configOptions = editorOptions.ToAnalyzerConfigOptions();
         var fallbackOptions = optionsProvider.GlobalOptions.GetCodeCleanupOptions(languageServices);
 
-        var options = configOptions.GetCodeCleanupOptions(languageServices, allowImportsInHiddenRegions, fallbackOptions);
-        var lineFormattingOptions = GetLineFormattingOptionsImpl(textBuffer, editorOptions, optionsProvider.IndentationManager, explicitFormat);
+        var options = configOptions.GetCodeCleanupOptions(
+            languageServices,
+            allowImportsInHiddenRegions,
+            fallbackOptions
+        );
+        var lineFormattingOptions = GetLineFormattingOptionsImpl(
+            textBuffer,
+            editorOptions,
+            optionsProvider.IndentationManager,
+            explicitFormat
+        );
 
-        return options with { FormattingOptions = options.FormattingOptions with { LineFormatting = lineFormattingOptions } };
+        return options with
+        {
+            FormattingOptions = options.FormattingOptions with
+            {
+                LineFormatting = lineFormattingOptions,
+            },
+        };
     }
 
-    public static IndentingStyle ToEditorIndentStyle(this FormattingOptions2.IndentStyle value)
-        => value switch
+    public static IndentingStyle ToEditorIndentStyle(this FormattingOptions2.IndentStyle value) =>
+        value switch
         {
             FormattingOptions2.IndentStyle.Smart => IndentingStyle.Smart,
             FormattingOptions2.IndentStyle.Block => IndentingStyle.Block,
             _ => IndentingStyle.None,
         };
 
-    public static FormattingOptions2.IndentStyle ToIndentStyle(this IndentingStyle value)
-        => value switch
+    public static FormattingOptions2.IndentStyle ToIndentStyle(this IndentingStyle value) =>
+        value switch
         {
             IndentingStyle.Smart => FormattingOptions2.IndentStyle.Smart,
             IndentingStyle.Block => FormattingOptions2.IndentStyle.Block,

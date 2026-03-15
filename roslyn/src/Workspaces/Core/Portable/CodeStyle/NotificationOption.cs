@@ -21,7 +21,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public string Name
         {
             get => Severity.GetDisplayString();
-
             [Obsolete("Modifying a NotificationOption is not supported.", error: true)]
             set => throw new InvalidOperationException();
         }
@@ -30,7 +29,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public ReportDiagnostic Severity
         {
             get => _notificationOptionImpl.Severity;
-
             [Obsolete("Modifying a NotificationOption is not supported.", error: true)]
             set => throw new InvalidOperationException();
         }
@@ -57,8 +55,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <inheritdoc cref="NotificationOption2.Error"/>
         public static readonly NotificationOption Error = new(NotificationOption2.Error);
 
-        private NotificationOption(NotificationOption2 notificationOptionImpl)
-            => _notificationOptionImpl = notificationOptionImpl;
+        private NotificationOption(NotificationOption2 notificationOptionImpl) =>
+            _notificationOptionImpl = notificationOptionImpl;
 
         public override string ToString() => Name;
     }

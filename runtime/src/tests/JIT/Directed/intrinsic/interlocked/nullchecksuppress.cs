@@ -3,9 +3,10 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
+
 public class NCS
 {
     public int field;
@@ -15,14 +16,17 @@ public class NCS
     {
         return Interlocked.Increment(ref value);
     }
+
     public static int Decrement(ref int value)
     {
         return Interlocked.Decrement(ref value);
     }
+
     public static int Add(ref int value, int other)
     {
         return Interlocked.Add(ref value, other);
     }
+
     public static int CompareExchange(ref int value, int newData, int oldData)
     {
         return Interlocked.CompareExchange(ref value, newData, oldData);

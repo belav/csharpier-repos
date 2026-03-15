@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
     internal interface IUnitTestingWorkCoordinatorPriorityService : ILanguageService
     {
         /// <summary>
-        /// True if this document is less important than other documents in the project it is 
+        /// True if this document is less important than other documents in the project it is
         /// contained in, and should have work scheduled for it happen after all other documents
         /// in the project.
         /// </summary>

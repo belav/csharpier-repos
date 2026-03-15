@@ -6,38 +6,42 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class Test_finalizearray 
+public class Test_finalizearray
 {
-    public class Dummy 
+    public class Dummy
     {
-        public static int count=0;
-        ~Dummy() 
+        public static int count = 0;
+
+        ~Dummy()
         {
             count++;
         }
     }
 
-    public class CreateObj 
+    public class CreateObj
     {
         public Dummy[] obj;
 
         // No inline to ensure no stray refs to the new array
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public CreateObj() {
+        public CreateObj()
+        {
             obj = new Dummy[10000];
-            for(int i=0;i<10000;i++) {
+            for (int i = 0; i < 10000; i++)
+            {
                 obj[i] = new Dummy();
             }
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public void RunTest() 
+        public void RunTest()
         {
-            obj=null;     // making sure collect is called even with /debug
+            obj = null; // making sure collect is called even with /debug
         }
     }
 
-    public static int Main() {
+    public static int Main()
+    {
         CreateObj temp = new CreateObj();
         temp.RunTest();
 
@@ -45,7 +49,7 @@ public class Test_finalizearray
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        if (Dummy.count == 10000)  // all objects in array finalized!
+        if (Dummy.count == 10000) // all objects in array finalized!
         {
             Console.WriteLine("Test for Finalize() for array of objects passed!");
             return 100;
@@ -55,6 +59,5 @@ public class Test_finalizearray
             Console.WriteLine("Test for Finalize() for array of objects failed!");
             return 1;
         }
-
     }
 }

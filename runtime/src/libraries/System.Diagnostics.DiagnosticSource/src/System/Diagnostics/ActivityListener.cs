@@ -8,7 +8,9 @@ namespace System.Diagnostics
     /// <summary>
     /// Define the callback that can be used in <see cref="ActivityListener"/> to allow deciding to create the Activity objects and with what data state.
     /// </summary>
-    public delegate ActivitySamplingResult SampleActivity<T>(ref ActivityCreationOptions<T> options);
+    public delegate ActivitySamplingResult SampleActivity<T>(
+        ref ActivityCreationOptions<T> options
+    );
 
     /// <summary>
     /// ActivityListener allows listening to the start and stop Activity events and give the opportunity to decide creating the Activity for sampling scenarios.
@@ -18,9 +20,7 @@ namespace System.Diagnostics
         /// <summary>
         /// Construct a new <see cref="ActivityListener"/> object to start listening to the <see cref="Activity"/> events.
         /// </summary>
-        public ActivityListener()
-        {
-        }
+        public ActivityListener() { }
 
         /// <summary>
         /// Set or get the callback used to listen to the <see cref="Activity"/> start event.
@@ -51,5 +51,5 @@ namespace System.Diagnostics
         /// Dispose will unregister this <see cref="ActivityListener"/> object from listening to <see cref="Activity"/> events.
         /// </summary>
         public void Dispose() => ActivitySource.DetachListener(this);
-   }
+    }
 }

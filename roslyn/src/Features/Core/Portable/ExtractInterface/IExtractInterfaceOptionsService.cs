@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             string generatedNameTypeParameterSuffix,
             string languageName,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

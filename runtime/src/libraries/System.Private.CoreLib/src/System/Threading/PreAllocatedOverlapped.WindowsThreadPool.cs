@@ -9,8 +9,11 @@ namespace System.Threading
     {
         internal readonly unsafe Win32ThreadPoolNativeOverlapped* _overlappedWindowsThreadPool;
 
-        private static PreAllocatedOverlapped UnsafeCreateWindowsThreadPool(IOCompletionCallback callback, object? state, object? pinData) =>
-            new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
+        private static PreAllocatedOverlapped UnsafeCreateWindowsThreadPool(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
 
         private bool AddRefWindowsThreadPool()
         {
@@ -22,7 +25,8 @@ namespace System.Threading
             _lifetime.Release(this);
         }
 
-        internal unsafe bool IsUserObject(byte[]? buffer) => _overlappedWindowsThreadPool->IsUserObject(buffer);
+        internal unsafe bool IsUserObject(byte[]? buffer) =>
+            _overlappedWindowsThreadPool->IsUserObject(buffer);
 
         private void DisposeWindowsThreadPool()
         {
@@ -37,7 +41,9 @@ namespace System.Threading
                 if (disposed)
                     Win32ThreadPoolNativeOverlapped.Free(_overlappedWindowsThreadPool);
                 else
-                    *Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(_overlappedWindowsThreadPool) = default(NativeOverlapped);
+                    *Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(
+                        _overlappedWindowsThreadPool
+                    ) = default(NativeOverlapped);
             }
         }
     }

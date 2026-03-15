@@ -3,17 +3,18 @@
 
 using Microsoft.TestCommon;
 
-namespace System.Web.Mvc.Test {
-    public class HttpPatchAttributeTest 
+namespace System.Web.Mvc.Test
+{
+    public class HttpPatchAttributeTest
     {
         [Fact]
-        public void IsValidForRequestReturnsFalseIfHttpVerbIsNotPatch() 
+        public void IsValidForRequestReturnsFalseIfHttpVerbIsNotPatch()
         {
             HttpVerbAttributeHelper.TestHttpVerbAttributeWithInvalidVerb<HttpPatchAttribute>("GET");
         }
 
         [Fact]
-        public void IsValidForRequestReturnsTrueIfHttpVerbIsPatch() 
+        public void IsValidForRequestReturnsTrueIfHttpVerbIsPatch()
         {
             HttpVerbAttributeHelper.TestHttpVerbAttributeWithValidVerb<HttpPatchAttribute>("PATCH");
         }

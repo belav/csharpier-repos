@@ -4,12 +4,13 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Threading;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
-    sealed class PeerInputChannelAcceptor : SingletonChannelAcceptor<IInputChannel, PeerInputChannel, Message>
+    sealed class PeerInputChannelAcceptor
+        : SingletonChannelAcceptor<IInputChannel, PeerInputChannel, Message>
     {
         PeerNodeImplementation peerNode;
         PeerNodeImplementation.Registration registration;
@@ -17,15 +18,33 @@ namespace System.ServiceModel.Channels
         Uri via;
         PeerMessageDispatcher<IInputChannel, PeerInputChannel> dispatcher = null;
 
-        public PeerInputChannelAcceptor(PeerNodeImplementation peerNode, PeerNodeImplementation.Registration registration, ChannelManagerBase channelManager, EndpointAddress localAddress, Uri via)
+        public PeerInputChannelAcceptor(
+            PeerNodeImplementation peerNode,
+            PeerNodeImplementation.Registration registration,
+            ChannelManagerBase channelManager,
+            EndpointAddress localAddress,
+            Uri via
+        )
             : base(channelManager)
         {
             this.registration = registration;
             this.peerNode = peerNode;
             this.localAddress = localAddress;
             this.via = via;
-            PeerMessageDispatcher<IInputChannel, PeerInputChannel>.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<IInputChannel, PeerInputChannel>.PeerMessageQueueAdapter(this);
-            dispatcher = new PeerMessageDispatcher<IInputChannel, PeerInputChannel>(queueHandler, peerNode, ChannelManager, localAddress, via);
+            PeerMessageDispatcher<
+                IInputChannel,
+                PeerInputChannel
+            >.PeerMessageQueueAdapter queueHandler = new PeerMessageDispatcher<
+                IInputChannel,
+                PeerInputChannel
+            >.PeerMessageQueueAdapter(this);
+            dispatcher = new PeerMessageDispatcher<IInputChannel, PeerInputChannel>(
+                queueHandler,
+                peerNode,
+                ChannelManager,
+                localAddress,
+                via
+            );
         }
 
         protected override PeerInputChannel OnCreateChannel()
@@ -37,15 +56,18 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageReceived,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MessageReceived,
                     SR.GetString(SR.TraceCodeMessageReceived),
-                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message), this, null);
+                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message),
+                    this,
+                    null
+                );
             }
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnClosing()
         {
@@ -66,19 +88,21 @@ namespace System.ServiceModel.Channels
                 dispatcher.Unregister(true);
                 dispatcher = null;
             }
-
         }
     }
-    
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    sealed class PeerInputChannelListener : PeerChannelListener<IInputChannel, PeerInputChannelAcceptor>
+
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    sealed class PeerInputChannelListener
+        : PeerChannelListener<IInputChannel, PeerInputChannelAcceptor>
     {
         PeerInputChannelAcceptor inputAcceptor;
 
-        public PeerInputChannelListener(PeerTransportBindingElement bindingElement, BindingContext context, PeerResolver peerResolver)
-            : base(bindingElement, context, peerResolver)
-        {
-        }
+        public PeerInputChannelListener(
+            PeerTransportBindingElement bindingElement,
+            BindingContext context,
+            PeerResolver peerResolver
+        )
+            : base(bindingElement, context, peerResolver) { }
 
         protected override PeerInputChannelAcceptor ChannelAcceptor
         {
@@ -87,7 +111,13 @@ namespace System.ServiceModel.Channels
 
         protected override void CreateAcceptor()
         {
-            this.inputAcceptor = new PeerInputChannelAcceptor(this.InnerNode, this.Registration, this, new EndpointAddress(this.Uri), this.Uri);
+            this.inputAcceptor = new PeerInputChannelAcceptor(
+                this.InnerNode,
+                this.Registration,
+                this,
+                new EndpointAddress(this.Uri),
+                this.Uri
+            );
         }
     }
 }

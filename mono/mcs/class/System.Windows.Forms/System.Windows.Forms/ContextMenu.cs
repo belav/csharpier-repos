@@ -30,144 +30,157 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	[DefaultEvent("Popup")]
-	public class ContextMenu : Menu
-	{
-		private RightToLeft right_to_left;
-		private Control	src_control;
+    [DefaultEvent("Popup")]
+    public class ContextMenu : Menu
+    {
+        private RightToLeft right_to_left;
+        private Control src_control;
 
-		#region Events
-		static object CollapseEvent = new object ();
-		static object PopupEvent = new object ();
+        #region Events
+        static object CollapseEvent = new object();
+        static object PopupEvent = new object();
 
-		public event EventHandler Collapse {
-			add { Events.AddHandler (CollapseEvent, value); }
-			remove { Events.RemoveHandler (CollapseEvent, value); }
-		}
+        public event EventHandler Collapse
+        {
+            add { Events.AddHandler(CollapseEvent, value); }
+            remove { Events.RemoveHandler(CollapseEvent, value); }
+        }
 
-		public event EventHandler Popup {
-			add { Events.AddHandler (PopupEvent, value); }
-			remove { Events.RemoveHandler (PopupEvent, value); }
-		}
-		
-		#endregion Events
+        public event EventHandler Popup
+        {
+            add { Events.AddHandler(PopupEvent, value); }
+            remove { Events.RemoveHandler(PopupEvent, value); }
+        }
 
-		public ContextMenu () : base (null)
-		{
-			tracker = new MenuTracker (this);
-			right_to_left = RightToLeft.Inherit;
-		}
+        #endregion Events
 
-		public ContextMenu (MenuItem [] menuItems) : base (menuItems)
-		{
-			tracker = new MenuTracker (this);
-			right_to_left = RightToLeft.Inherit;
-		}
-		
-		#region Public Properties
-		
-		[Localizable(true)]
-		[DefaultValue (RightToLeft.No)]
-		public virtual RightToLeft RightToLeft {
-			get { return right_to_left; }
-			set { right_to_left = value; }
-		}
+        public ContextMenu()
+            : base(null)
+        {
+            tracker = new MenuTracker(this);
+            right_to_left = RightToLeft.Inherit;
+        }
 
-		[Browsable(false)]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Control SourceControl {
-			get { return src_control; }
-			private set
-			{
-				if (src_control == value)
-					return;
-				src_control = value;
-				OnSetSourceControlDone (new SetSourceControlDoneArgs (value));
-			}
-		}
+        public ContextMenu(MenuItem[] menuItems)
+            : base(menuItems)
+        {
+            tracker = new MenuTracker(this);
+            right_to_left = RightToLeft.Inherit;
+        }
 
-		#endregion Public Properties
+        #region Public Properties
 
-		#region Public Methods
+        [Localizable(true)]
+        [DefaultValue(RightToLeft.No)]
+        public virtual RightToLeft RightToLeft
+        {
+            get { return right_to_left; }
+            set { right_to_left = value; }
+        }
 
-		protected internal virtual bool ProcessCmdKey (ref Message msg, Keys keyData, Control control)
-		{
-			SourceControl = control;
-			return ProcessCmdKey (ref msg, keyData);
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Control SourceControl
+        {
+            get { return src_control; }
+            private set
+            {
+                if (src_control == value)
+                    return;
+                src_control = value;
+                OnSetSourceControlDone(new SetSourceControlDoneArgs(value));
+            }
+        }
 
-		protected internal virtual void OnCollapse (EventArgs e)
-		{
-			EventHandler eh = (EventHandler) (Events [CollapseEvent]);
-			if (eh != null)
-				eh (this, e);
-		}
+        #endregion Public Properties
 
-		protected internal virtual void OnPopup (EventArgs e)
-		{
-			EventHandler eh = (EventHandler) (Events [PopupEvent]);
-			if (eh != null)
-				eh (this, e);
-		}
-		
-		public void Show (Control control, Point pos)
-		{
-			if (control == null)
-				throw new ArgumentException ();
+        #region Public Methods
 
-			SourceControl = control;
-			OnPopup (EventArgs.Empty);
+        protected internal virtual bool ProcessCmdKey(
+            ref Message msg,
+            Keys keyData,
+            Control control
+        )
+        {
+            SourceControl = control;
+            return ProcessCmdKey(ref msg, keyData);
+        }
 
-			pos = control.PointToScreen (pos);
-			MenuTracker.TrackPopupMenu (this, pos);
-			
-			SourceControl = null;
-			OnCollapse (EventArgs.Empty);
-		}
+        protected internal virtual void OnCollapse(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)(Events[CollapseEvent]);
+            if (eh != null)
+                eh(this, e);
+        }
 
-		public void Show (Control control, Point pos, LeftRightAlignment alignment)
-		{
-			Point point;
-			
-			if (alignment == LeftRightAlignment.Left)
-				point = new Point ((pos.X - control.Width), pos.Y);
-			else
-				point = pos;
+        protected internal virtual void OnPopup(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)(Events[PopupEvent]);
+            if (eh != null)
+                eh(this, e);
+        }
 
-			Show (control, point);
-		}
-		#endregion Public Methods
+        public void Show(Control control, Point pos)
+        {
+            if (control == null)
+                throw new ArgumentException();
 
-		internal void Hide ()
-		{
-			tracker.Deactivate ();
-			SourceControl = null;
-		}
+            SourceControl = control;
+            OnPopup(EventArgs.Empty);
 
-		#region Internal Events
+            pos = control.PointToScreen(pos);
+            MenuTracker.TrackPopupMenu(this, pos);
 
-		internal delegate void SetSourceControlDoneHandler (object sender, SetSourceControlDoneArgs e);
-		
-		// Is used by UIA API.
-		[Browsable (false)]
-		internal static event SetSourceControlDoneHandler SetSourceControlDone; 
+            SourceControl = null;
+            OnCollapse(EventArgs.Empty);
+        }
 
-		private void OnSetSourceControlDone (SetSourceControlDoneArgs e)
-		{
-			if (SetSourceControlDone != null)
-				SetSourceControlDone (this, e);
-		}
+        public void Show(Control control, Point pos, LeftRightAlignment alignment)
+        {
+            Point point;
 
-		internal class SetSourceControlDoneArgs : EventArgs
-		{
-			public readonly Control NewOwner;
+            if (alignment == LeftRightAlignment.Left)
+                point = new Point((pos.X - control.Width), pos.Y);
+            else
+                point = pos;
 
-			public SetSourceControlDoneArgs (Control newOwner)
-			{
-				NewOwner = newOwner;
-			}
-		}
+            Show(control, point);
+        }
+        #endregion Public Methods
 
-		#endregion
-	}
+        internal void Hide()
+        {
+            tracker.Deactivate();
+            SourceControl = null;
+        }
+
+        #region Internal Events
+
+        internal delegate void SetSourceControlDoneHandler(
+            object sender,
+            SetSourceControlDoneArgs e
+        );
+
+        // Is used by UIA API.
+        [Browsable(false)]
+        internal static event SetSourceControlDoneHandler SetSourceControlDone;
+
+        private void OnSetSourceControlDone(SetSourceControlDoneArgs e)
+        {
+            if (SetSourceControlDone != null)
+                SetSourceControlDone(this, e);
+        }
+
+        internal class SetSourceControlDoneArgs : EventArgs
+        {
+            public readonly Control NewOwner;
+
+            public SetSourceControlDoneArgs(Control newOwner)
+            {
+                NewOwner = newOwner;
+            }
+        }
+
+        #endregion
+    }
 }

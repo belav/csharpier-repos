@@ -22,10 +22,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         {
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
-            var hideAdvancedMembers = context.Options.GetOptions(document.Project.Services).HideAdvancedMembers;
+            var hideAdvancedMembers = context
+                .Options.GetOptions(document.Project.Services)
+                .HideAdvancedMembers;
 
             var service = document.GetRequiredLanguageService<IFullyQualifyService>();
-            var optFixData = await service.GetFixDataAsync(document, context.Span, hideAdvancedMembers, cancellationToken).ConfigureAwait(false);
+            var optFixData = await service
+                .GetFixDataAsync(document, context.Span, hideAdvancedMembers, cancellationToken)
+                .ConfigureAwait(false);
             if (optFixData is null)
                 return;
 
@@ -33,24 +37,32 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             if (fixData.IndividualFixData.Length == 0)
                 return;
 
-            var codeActions = fixData.IndividualFixData.SelectAsArray(
-                d => CodeAction.Create(
+            var codeActions = fixData.IndividualFixData.SelectAsArray(d =>
+                CodeAction.Create(
                     d.Title,
                     async cancellationToken =>
                     {
-                        var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                        var sourceText = await document
+                            .GetValueTextAsync(cancellationToken)
+                            .ConfigureAwait(false);
                         var newText = sourceText.WithChanges(d.TextChanges);
                         return document.WithText(newText);
                     },
-                    d.Title));
+                    d.Title
+                )
+            );
 
             if (codeActions.Length >= 2)
             {
                 // Wrap the actions into a single top level suggestion so as to not clutter the list.
-                context.RegisterCodeFix(CodeAction.Create(
-                    string.Format(FeaturesResources.Fully_qualify_0, fixData.Name),
-                    codeActions,
-                    isInlinable: true), context.Diagnostics);
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        string.Format(FeaturesResources.Fully_qualify_0, fixData.Name),
+                        codeActions,
+                        isInlinable: true
+                    ),
+                    context.Diagnostics
+                );
             }
             else
             {

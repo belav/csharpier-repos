@@ -16,9 +16,9 @@ public class Dummy
     {
         this.i = i;
     }
+
     public int i;
 }
-
 
 public class CastingTest
 {
@@ -47,7 +47,6 @@ public class CastingTest
         return false;
     }
 
-
     private bool FromZeroTest()
     {
         _numTests++;
@@ -69,7 +68,6 @@ public class CastingTest
         return false;
     }
 
-
     private bool ToZeroTest()
     {
         _numTests++;
@@ -87,7 +85,6 @@ public class CastingTest
         Console.WriteLine("ToZeroTest Failed");
         return false;
     }
-
 
     public bool RunTests()
     {
@@ -111,7 +108,6 @@ public class CastingTest
         Console.WriteLine();
         return (_numTests == numPassed);
     }
-
 
     public static int Main()
     {

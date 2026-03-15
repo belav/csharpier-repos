@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Tests.Utility;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Rendering.Tests
@@ -15,8 +15,7 @@ namespace System.CommandLine.Rendering.Tests
         public void Initialize_is_only_called_once()
         {
             var span = new ContainerSpan(
-                new ContainerSpan(
-                    new ContainerSpan()),
+                new ContainerSpan(new ContainerSpan()),
                 new ContentSpan("hello")
             );
 
@@ -45,24 +44,27 @@ namespace System.CommandLine.Rendering.Tests
                 new ContainerSpan(
                     ForegroundColorSpan.Red(),
                     new ContentSpan("the content"),
-                    ForegroundColorSpan.Reset()),
-                BackgroundColorSpan.Reset());
+                    ForegroundColorSpan.Reset()
+                ),
+                BackgroundColorSpan.Reset()
+            );
 
             var visitor = new RecordingSpanVisitor();
 
             visitor.Visit(outerContainer);
 
-            visitor.VisitedSpans
-                   .Select(s => s.GetType())
-                   .Should()
-                   .BeEquivalentSequenceTo(
-                       typeof(ContainerSpan),
-                       typeof(BackgroundColorSpan),
-                       typeof(ContainerSpan),
-                       typeof(ForegroundColorSpan),
-                       typeof(ContentSpan),
-                       typeof(ForegroundColorSpan),
-                       typeof(BackgroundColorSpan));
+            visitor
+                .VisitedSpans.Select(s => s.GetType())
+                .Should()
+                .BeEquivalentSequenceTo(
+                    typeof(ContainerSpan),
+                    typeof(BackgroundColorSpan),
+                    typeof(ContainerSpan),
+                    typeof(ForegroundColorSpan),
+                    typeof(ContentSpan),
+                    typeof(ForegroundColorSpan),
+                    typeof(BackgroundColorSpan)
+                );
         }
     }
 
@@ -79,9 +81,11 @@ namespace System.CommandLine.Rendering.Tests
 
         public override void VisitContentSpan(ContentSpan span) => VisitedSpans.Add(span);
 
-        public override void VisitForegroundColorSpan(ForegroundColorSpan span) => VisitedSpans.Add(span);
+        public override void VisitForegroundColorSpan(ForegroundColorSpan span) =>
+            VisitedSpans.Add(span);
 
-        public override void VisitBackgroundColorSpan(BackgroundColorSpan span) => VisitedSpans.Add(span);
+        public override void VisitBackgroundColorSpan(BackgroundColorSpan span) =>
+            VisitedSpans.Add(span);
 
         public override void VisitStyleSpan(StyleSpan span) => VisitedSpans.Add(span);
 

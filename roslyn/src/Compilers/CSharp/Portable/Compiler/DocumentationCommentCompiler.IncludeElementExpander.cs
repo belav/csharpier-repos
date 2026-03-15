@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 HashSet<TypeParameterSymbol> documentedTypeParameters,
                 DocumentationCommentIncludeCache includedFileCache,
                 BindingDiagnosticBag diagnostics,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _memberSymbol = memberSymbol;
                 _sourceIncludeElementNodes = sourceIncludeElementNodes;
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref DocumentationCommentIncludeCache includedFileCache,
                 TextWriter writer,
                 BindingDiagnosticBag diagnostics,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // If there are no include elements, then there's nothing to expand.
                 // NOTE: By skipping parsing and re-writing, we avoid slightly
@@ -101,8 +103,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // If one of the trees wasn't diagnosing doc comments, then an error might have slipped through.
                     // Otherwise, we shouldn't see exceptions from XDocument.Parse.
-                    Debug.Assert(sourceIncludeElementNodes.All(syntax => syntax.SyntaxTree.Options.DocumentationMode < DocumentationMode.Diagnose),
-                        "Why didn't our parser catch this exception? " + e);
+                    Debug.Assert(
+                        sourceIncludeElementNodes.All(syntax =>
+                            syntax.SyntaxTree.Options.DocumentationMode < DocumentationMode.Diagnose
+                        ),
+                        "Why didn't our parser catch this exception? " + e
+                    );
                     if (writer != null)
                     {
                         writer.Write(unprocessed);
@@ -120,9 +126,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     documentedTypeParameters,
                     includedFileCache,
                     diagnostics,
-                    cancellationToken);
+                    cancellationToken
+                );
 
-                foreach (XNode node in expander.Rewrite(doc, currentXmlFilePath: null, originatingSyntax: null))
+                foreach (
+                    XNode node in expander.Rewrite(
+                        doc,
+                        currentXmlFilePath: null,
+                        originatingSyntax: null
+                    )
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -132,7 +145,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                Debug.Assert(expander._nextSourceIncludeElementIndex == expander._sourceIncludeElementNodes.Length);
+                Debug.Assert(
+                    expander._nextSourceIncludeElementIndex
+                        == expander._sourceIncludeElementNodes.Length
+                );
 
                 documentedParameters = expander._documentedParameters;
                 documentedTypeParameters = expander._documentedTypeParameters;
@@ -144,7 +160,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// We're mutating the tree as we rewrite, so it's important to grab a snapshot of the
             /// nodes that we're going to reparent before we enumerate them.
             /// </remarks>
-            private XNode[] RewriteMany(XNode[] nodes, string currentXmlFilePath, CSharpSyntaxNode originatingSyntax)
+            private XNode[] RewriteMany(
+                XNode[] nodes,
+                string currentXmlFilePath,
+                CSharpSyntaxNode originatingSyntax
+            )
             {
                 Debug.Assert(nodes != null);
 
@@ -168,7 +188,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // CONSIDER: could add a depth count and just not rewrite below that depth.
-            private XNode[] Rewrite(XNode node, string currentXmlFilePath, CSharpSyntaxNode originatingSyntax)
+            private XNode[] Rewrite(
+                XNode node,
+                string currentXmlFilePath,
+                CSharpSyntaxNode originatingSyntax
+            )
             {
                 _cancellationToken.ThrowIfCancellationRequested();
 
@@ -179,7 +203,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     XElement element = (XElement)node;
                     if (ElementNameIs(element, DocumentationCommentXmlNames.IncludeElementName))
                     {
-                        XNode[] rewritten = RewriteIncludeElement(element, currentXmlFilePath, originatingSyntax, out commentMessage);
+                        XNode[] rewritten = RewriteIncludeElement(
+                            element,
+                            currentXmlFilePath,
+                            originatingSyntax,
+                            out commentMessage
+                        );
                         if (rewritten != null)
                         {
                             return rewritten;
@@ -190,7 +219,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 XContainer container = node as XContainer;
                 if (container == null)
                 {
-                    Debug.Assert(commentMessage == null, "How did we get an error comment for a non-container?");
+                    Debug.Assert(
+                        commentMessage == null,
+                        "How did we get an error comment for a non-container?"
+                    );
                     return new XNode[] { node.Copy(copyAttributeAnnotations: false) };
                 }
 
@@ -203,36 +235,83 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (oldNodes != null)
                 {
-                    XNode[] rewritten = RewriteMany(oldNodes.ToArray(), currentXmlFilePath, originatingSyntax);
+                    XNode[] rewritten = RewriteMany(
+                        oldNodes.ToArray(),
+                        currentXmlFilePath,
+                        originatingSyntax
+                    );
                     container.ReplaceNodes(rewritten);
                 }
 
                 // NOTE: we may modify the values of cref attributes, so don't do this until AFTER we've
-                // made a copy.  Also, we only care if we're included text - otherwise we've already 
+                // made a copy.  Also, we only care if we're included text - otherwise we've already
                 // processed the cref.
                 if (container.NodeType == XmlNodeType.Element && originatingSyntax != null)
                 {
                     XElement element = (XElement)container;
                     foreach (XAttribute attribute in element.Attributes())
                     {
-                        if (AttributeNameIs(attribute, DocumentationCommentXmlNames.CrefAttributeName))
+                        if (
+                            AttributeNameIs(
+                                attribute,
+                                DocumentationCommentXmlNames.CrefAttributeName
+                            )
+                        )
                         {
                             BindAndReplaceCref(attribute, originatingSyntax);
                         }
-                        else if (AttributeNameIs(attribute, DocumentationCommentXmlNames.NameAttributeName))
+                        else if (
+                            AttributeNameIs(
+                                attribute,
+                                DocumentationCommentXmlNames.NameAttributeName
+                            )
+                        )
                         {
-                            if (ElementNameIs(element, DocumentationCommentXmlNames.ParameterElementName) ||
-                                ElementNameIs(element, DocumentationCommentXmlNames.ParameterReferenceElementName))
+                            if (
+                                ElementNameIs(
+                                    element,
+                                    DocumentationCommentXmlNames.ParameterElementName
+                                )
+                                || ElementNameIs(
+                                    element,
+                                    DocumentationCommentXmlNames.ParameterReferenceElementName
+                                )
+                            )
                             {
-                                BindName(attribute, originatingSyntax, isParameter: true, isTypeParameterRef: false);
+                                BindName(
+                                    attribute,
+                                    originatingSyntax,
+                                    isParameter: true,
+                                    isTypeParameterRef: false
+                                );
                             }
-                            else if (ElementNameIs(element, DocumentationCommentXmlNames.TypeParameterElementName))
+                            else if (
+                                ElementNameIs(
+                                    element,
+                                    DocumentationCommentXmlNames.TypeParameterElementName
+                                )
+                            )
                             {
-                                BindName(attribute, originatingSyntax, isParameter: false, isTypeParameterRef: false);
+                                BindName(
+                                    attribute,
+                                    originatingSyntax,
+                                    isParameter: false,
+                                    isTypeParameterRef: false
+                                );
                             }
-                            else if (ElementNameIs(element, DocumentationCommentXmlNames.TypeParameterReferenceElementName))
+                            else if (
+                                ElementNameIs(
+                                    element,
+                                    DocumentationCommentXmlNames.TypeParameterReferenceElementName
+                                )
+                            )
                             {
-                                BindName(attribute, originatingSyntax, isParameter: false, isTypeParameterRef: true);
+                                BindName(
+                                    attribute,
+                                    originatingSyntax,
+                                    isParameter: false,
+                                    isTypeParameterRef: true
+                                );
                             }
                         }
                     }
@@ -251,56 +330,91 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private static bool ElementNameIs(XElement element, string name)
             {
-                return string.IsNullOrEmpty(element.Name.NamespaceName) && DocumentationCommentXmlNames.ElementEquals(element.Name.LocalName, name);
+                return string.IsNullOrEmpty(element.Name.NamespaceName)
+                    && DocumentationCommentXmlNames.ElementEquals(element.Name.LocalName, name);
             }
 
             private static bool AttributeNameIs(XAttribute attribute, string name)
             {
-                return string.IsNullOrEmpty(attribute.Name.NamespaceName) && DocumentationCommentXmlNames.AttributeEquals(attribute.Name.LocalName, name);
+                return string.IsNullOrEmpty(attribute.Name.NamespaceName)
+                    && DocumentationCommentXmlNames.AttributeEquals(attribute.Name.LocalName, name);
             }
 
             /// <remarks>
-            /// This method boils down to Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).  
+            /// This method boils down to Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).
             /// Everything else is error handling.
             /// </remarks>
-            private XNode[] RewriteIncludeElement(XElement includeElement, string currentXmlFilePath, CSharpSyntaxNode originatingSyntax, out string commentMessage)
+            private XNode[] RewriteIncludeElement(
+                XElement includeElement,
+                string currentXmlFilePath,
+                CSharpSyntaxNode originatingSyntax,
+                out string commentMessage
+            )
             {
-                Location location = GetIncludeElementLocation(includeElement, ref currentXmlFilePath, ref originatingSyntax);
+                Location location = GetIncludeElementLocation(
+                    includeElement,
+                    ref currentXmlFilePath,
+                    ref originatingSyntax
+                );
                 Debug.Assert(originatingSyntax != null);
 
-                bool diagnose = originatingSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics();
+                bool diagnose =
+                    originatingSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics();
 
                 if (!EnterIncludeElement(location))
                 {
                     // NOTE: these must exist since we're already processed this node elsewhere in the call stack.
-                    XAttribute fileAttr = includeElement.Attribute(XName.Get(DocumentationCommentXmlNames.FileAttributeName));
-                    XAttribute pathAttr = includeElement.Attribute(XName.Get(DocumentationCommentXmlNames.PathAttributeName));
+                    XAttribute fileAttr = includeElement.Attribute(
+                        XName.Get(DocumentationCommentXmlNames.FileAttributeName)
+                    );
+                    XAttribute pathAttr = includeElement.Attribute(
+                        XName.Get(DocumentationCommentXmlNames.PathAttributeName)
+                    );
                     string filePathValue = fileAttr.Value;
                     string xpathValue = pathAttr.Value;
 
                     if (diagnose)
                     {
-                        _diagnostics.Add(ErrorCode.WRN_FailedInclude, location, filePathValue, xpathValue, new LocalizableErrorArgument(MessageID.IDS_OperationCausedStackOverflow));
+                        _diagnostics.Add(
+                            ErrorCode.WRN_FailedInclude,
+                            location,
+                            filePathValue,
+                            xpathValue,
+                            new LocalizableErrorArgument(MessageID.IDS_OperationCausedStackOverflow)
+                        );
                     }
 
-                    commentMessage = ErrorFacts.GetMessage(MessageID.IDS_XMLNOINCLUDE, CultureInfo.CurrentUICulture);
+                    commentMessage = ErrorFacts.GetMessage(
+                        MessageID.IDS_XMLNOINCLUDE,
+                        CultureInfo.CurrentUICulture
+                    );
 
                     // Don't inspect the children - we're already in a cycle.
-                    return new XNode[] { new XComment(commentMessage), includeElement.Copy(copyAttributeAnnotations: false) };
+                    return new XNode[]
+                    {
+                        new XComment(commentMessage),
+                        includeElement.Copy(copyAttributeAnnotations: false),
+                    };
                 }
 
                 DiagnosticBag includeDiagnostics = DiagnosticBag.GetInstance();
 
                 try
                 {
-                    XAttribute fileAttr = includeElement.Attribute(XName.Get(DocumentationCommentXmlNames.FileAttributeName));
-                    XAttribute pathAttr = includeElement.Attribute(XName.Get(DocumentationCommentXmlNames.PathAttributeName));
+                    XAttribute fileAttr = includeElement.Attribute(
+                        XName.Get(DocumentationCommentXmlNames.FileAttributeName)
+                    );
+                    XAttribute pathAttr = includeElement.Attribute(
+                        XName.Get(DocumentationCommentXmlNames.PathAttributeName)
+                    );
 
                     bool hasFileAttribute = fileAttr != null;
                     bool hasPathAttribute = pathAttr != null;
                     if (!hasFileAttribute || !hasPathAttribute)
                     {
-                        var subMessage = hasFileAttribute ? MessageID.IDS_XMLMISSINGINCLUDEPATH.Localize() : MessageID.IDS_XMLMISSINGINCLUDEFILE.Localize();
+                        var subMessage = hasFileAttribute
+                            ? MessageID.IDS_XMLMISSINGINCLUDEPATH.Localize()
+                            : MessageID.IDS_XMLMISSINGINCLUDEFILE.Localize();
                         includeDiagnostics.Add(ErrorCode.WRN_InvalidInclude, location, subMessage);
                         commentMessage = MakeCommentMessage(location, MessageID.IDS_XMLBADINCLUDE);
                         return null;
@@ -312,18 +426,43 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var resolver = _compilation.Options.XmlReferenceResolver;
                     if (resolver == null)
                     {
-                        includeDiagnostics.Add(ErrorCode.WRN_FailedInclude, location, filePathValue, xpathValue, new CodeAnalysisResourcesLocalizableErrorArgument(nameof(CodeAnalysisResources.XmlReferencesNotSupported)));
-                        commentMessage = MakeCommentMessage(location, MessageID.IDS_XMLFAILEDINCLUDE);
+                        includeDiagnostics.Add(
+                            ErrorCode.WRN_FailedInclude,
+                            location,
+                            filePathValue,
+                            xpathValue,
+                            new CodeAnalysisResourcesLocalizableErrorArgument(
+                                nameof(CodeAnalysisResources.XmlReferencesNotSupported)
+                            )
+                        );
+                        commentMessage = MakeCommentMessage(
+                            location,
+                            MessageID.IDS_XMLFAILEDINCLUDE
+                        );
                         return null;
                     }
 
-                    string resolvedFilePath = resolver.ResolveReference(filePathValue, currentXmlFilePath);
+                    string resolvedFilePath = resolver.ResolveReference(
+                        filePathValue,
+                        currentXmlFilePath
+                    );
 
                     if (resolvedFilePath == null)
                     {
                         // NOTE: same behavior as IOException.
-                        includeDiagnostics.Add(ErrorCode.WRN_FailedInclude, location, filePathValue, xpathValue, new CodeAnalysisResourcesLocalizableErrorArgument(nameof(CodeAnalysisResources.FileNotFound)));
-                        commentMessage = MakeCommentMessage(location, MessageID.IDS_XMLFAILEDINCLUDE);
+                        includeDiagnostics.Add(
+                            ErrorCode.WRN_FailedInclude,
+                            location,
+                            filePathValue,
+                            xpathValue,
+                            new CodeAnalysisResourcesLocalizableErrorArgument(
+                                nameof(CodeAnalysisResources.FileNotFound)
+                            )
+                        );
+                        commentMessage = MakeCommentMessage(
+                            location,
+                            MessageID.IDS_XMLFAILEDINCLUDE
+                        );
                         return null;
                     }
 
@@ -343,8 +482,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                         catch (IOException e)
                         {
                             // NOTE: same behavior as resolvedFilePath == null.
-                            includeDiagnostics.Add(ErrorCode.WRN_FailedInclude, location, filePathValue, xpathValue, e.Message);
-                            commentMessage = MakeCommentMessage(location, MessageID.IDS_XMLFAILEDINCLUDE);
+                            includeDiagnostics.Add(
+                                ErrorCode.WRN_FailedInclude,
+                                location,
+                                filePathValue,
+                                xpathValue,
+                                e.Message
+                            );
+                            commentMessage = MakeCommentMessage(
+                                location,
+                                MessageID.IDS_XMLFAILEDINCLUDE
+                            );
                             return null;
                         }
 
@@ -352,12 +500,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         string errorMessage;
                         bool invalidXPath;
-                        XElement[] loadedElements = XmlUtilities.TrySelectElements(doc, xpathValue, out errorMessage, out invalidXPath);
+                        XElement[] loadedElements = XmlUtilities.TrySelectElements(
+                            doc,
+                            xpathValue,
+                            out errorMessage,
+                            out invalidXPath
+                        );
                         if (loadedElements == null)
                         {
-                            includeDiagnostics.Add(ErrorCode.WRN_FailedInclude, location, filePathValue, xpathValue, errorMessage);
+                            includeDiagnostics.Add(
+                                ErrorCode.WRN_FailedInclude,
+                                location,
+                                filePathValue,
+                                xpathValue,
+                                errorMessage
+                            );
 
-                            commentMessage = MakeCommentMessage(location, MessageID.IDS_XMLFAILEDINCLUDE);
+                            commentMessage = MakeCommentMessage(
+                                location,
+                                MessageID.IDS_XMLFAILEDINCLUDE
+                            );
                             if (invalidXPath)
                             {
                                 // leave the include node as is
@@ -379,7 +541,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (loadedElements != null && loadedElements.Length > 0)
                         {
                             // change the current XML file path for nodes contained in the document:
-                            XNode[] result = RewriteMany(loadedElements, resolvedFilePath, originatingSyntax);
+                            XNode[] result = RewriteMany(
+                                loadedElements,
+                                resolvedFilePath,
+                                originatingSyntax
+                            );
 
                             // The elements could be rewritten away if they are includes that refer to invalid
                             // (but existing and accessible) XML files.  If this occurs, behave as if we
@@ -402,11 +568,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // in the results and the location is in the included (vs includING) file.
 
                         Location errorLocation = XmlLocation.Create(e, resolvedFilePath);
-                        includeDiagnostics.Add(ErrorCode.WRN_XMLParseIncludeError, errorLocation, GetDescription(e)); //NOTE: location is in included file.
+                        includeDiagnostics.Add(
+                            ErrorCode.WRN_XMLParseIncludeError,
+                            errorLocation,
+                            GetDescription(e)
+                        ); //NOTE: location is in included file.
 
                         if (location.IsInSource)
                         {
-                            commentMessage = string.Format(ErrorFacts.GetMessage(MessageID.IDS_XMLIGNORED2, CultureInfo.CurrentUICulture), resolvedFilePath);
+                            commentMessage = string.Format(
+                                ErrorFacts.GetMessage(
+                                    MessageID.IDS_XMLIGNORED2,
+                                    CultureInfo.CurrentUICulture
+                                ),
+                                resolvedFilePath
+                            );
 
                             // As in Dev11, return only the comment - drop the include element.
                             return new XNode[] { new XComment(commentMessage) };
@@ -461,7 +637,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
 
-            private Location GetIncludeElementLocation(XElement includeElement, ref string currentXmlFilePath, ref CSharpSyntaxNode originatingSyntax)
+            private Location GetIncludeElementLocation(
+                XElement includeElement,
+                ref string currentXmlFilePath,
+                ref CSharpSyntaxNode originatingSyntax
+            )
             {
                 Location location = includeElement.Annotation<Location>();
                 if (location != null)
@@ -473,7 +653,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // order as the DocumentationCommentWalker, we can access the elements of includeElementNodes in order.
                 if (currentXmlFilePath == null)
                 {
-                    Debug.Assert(_nextSourceIncludeElementIndex < _sourceIncludeElementNodes.Length);
+                    Debug.Assert(
+                        _nextSourceIncludeElementIndex < _sourceIncludeElementNodes.Length
+                    );
                     Debug.Assert(originatingSyntax == null);
                     originatingSyntax = _sourceIncludeElementNodes[_nextSourceIncludeElementIndex];
                     location = originatingSyntax.Location;
@@ -492,7 +674,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return location;
             }
 
-            private void BindAndReplaceCref(XAttribute attribute, CSharpSyntaxNode originatingSyntax)
+            private void BindAndReplaceCref(
+                XAttribute attribute,
+                CSharpSyntaxNode originatingSyntax
+            )
             {
                 string attributeValue = attribute.Value;
                 CrefSyntax crefSyntax = SyntaxFactory.ParseCref(attributeValue);
@@ -509,11 +694,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 RecordSyntaxDiagnostics(crefSyntax, sourceLocation); // Respects DocumentationMode.
 
-                MemberDeclarationSyntax memberDeclSyntax = BinderFactory.GetAssociatedMemberForXmlSyntax(originatingSyntax);
-                Debug.Assert(memberDeclSyntax != null,
-                    "Why are we processing a documentation comment that is not attached to a member declaration?");
+                MemberDeclarationSyntax memberDeclSyntax =
+                    BinderFactory.GetAssociatedMemberForXmlSyntax(originatingSyntax);
+                Debug.Assert(
+                    memberDeclSyntax != null,
+                    "Why are we processing a documentation comment that is not attached to a member declaration?"
+                );
 
-                Binder binder = BinderFactory.MakeCrefBinder(crefSyntax, memberDeclSyntax, _compilation.GetBinderFactory(memberDeclSyntax.SyntaxTree));
+                Binder binder = BinderFactory.MakeCrefBinder(
+                    crefSyntax,
+                    memberDeclSyntax,
+                    _compilation.GetBinderFactory(memberDeclSyntax.SyntaxTree)
+                );
 
                 var crefDiagnostics = BindingDiagnosticBag.GetInstance(_diagnostics);
                 attribute.Value = GetDocumentationCommentId(crefSyntax, binder, crefDiagnostics); // NOTE: mutation (element must be a copy)
@@ -521,9 +713,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 crefDiagnostics.Free();
             }
 
-            private void BindName(XAttribute attribute, CSharpSyntaxNode originatingSyntax, bool isParameter, bool isTypeParameterRef)
+            private void BindName(
+                XAttribute attribute,
+                CSharpSyntaxNode originatingSyntax,
+                bool isParameter,
+                bool isTypeParameterRef
+            )
             {
-                XmlNameAttributeSyntax attrSyntax = ParseNameAttribute(attribute.ToString(), attribute.Parent.Name.LocalName);
+                XmlNameAttributeSyntax attrSyntax = ParseNameAttribute(
+                    attribute.ToString(),
+                    attribute.Parent.Name.LocalName
+                );
 
                 // CONSIDER: It would be easy to construct an XmlLocation from the XAttribute, so that
                 // we could point the user at the actual problem.
@@ -531,22 +731,47 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 RecordSyntaxDiagnostics(attrSyntax, sourceLocation); // Respects DocumentationMode.
 
-                MemberDeclarationSyntax memberDeclSyntax = BinderFactory.GetAssociatedMemberForXmlSyntax(originatingSyntax);
-                Debug.Assert(memberDeclSyntax != null,
-                    "Why are we processing a documentation comment that is not attached to a member declaration?");
+                MemberDeclarationSyntax memberDeclSyntax =
+                    BinderFactory.GetAssociatedMemberForXmlSyntax(originatingSyntax);
+                Debug.Assert(
+                    memberDeclSyntax != null,
+                    "Why are we processing a documentation comment that is not attached to a member declaration?"
+                );
 
                 var nameDiagnostics = BindingDiagnosticBag.GetInstance(_diagnostics);
-                Binder binder = MakeNameBinder(isParameter, isTypeParameterRef, _memberSymbol, _compilation, originatingSyntax.SyntaxTree);
-                DocumentationCommentCompiler.BindName(attrSyntax, binder, _memberSymbol, ref _documentedParameters, ref _documentedTypeParameters, nameDiagnostics);
+                Binder binder = MakeNameBinder(
+                    isParameter,
+                    isTypeParameterRef,
+                    _memberSymbol,
+                    _compilation,
+                    originatingSyntax.SyntaxTree
+                );
+                DocumentationCommentCompiler.BindName(
+                    attrSyntax,
+                    binder,
+                    _memberSymbol,
+                    ref _documentedParameters,
+                    ref _documentedTypeParameters,
+                    nameDiagnostics
+                );
                 RecordBindingDiagnostics(nameDiagnostics, sourceLocation); // Respects DocumentationMode.
                 nameDiagnostics.Free();
             }
 
             // NOTE: We're not sharing code with the BinderFactory visitor, because we already have the
             // member symbol in hand, which makes things much easier.
-            private static Binder MakeNameBinder(bool isParameter, bool isTypeParameterRef, Symbol memberSymbol, CSharpCompilation compilation, SyntaxTree syntaxTree)
+            private static Binder MakeNameBinder(
+                bool isParameter,
+                bool isTypeParameterRef,
+                Symbol memberSymbol,
+                CSharpCompilation compilation,
+                SyntaxTree syntaxTree
+            )
             {
-                Binder binder = new BuckStopsHereBinder(compilation, FileIdentifier.Create(syntaxTree, compilation.Options.SourceReferenceResolver));
+                Binder binder = new BuckStopsHereBinder(
+                    compilation,
+                    FileIdentifier.Create(syntaxTree, compilation.Options.SourceReferenceResolver)
+                );
 
                 // All binders should have a containing symbol.
                 Symbol containingSymbol = memberSymbol.ContainingSymbol;
@@ -555,7 +780,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (isParameter)
                 {
-                    ImmutableArray<ParameterSymbol> parameters = ImmutableArray<ParameterSymbol>.Empty;
+                    ImmutableArray<ParameterSymbol> parameters =
+                        ImmutableArray<ParameterSymbol>.Empty;
 
                     switch (memberSymbol.Kind)
                     {
@@ -599,7 +825,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 MethodSymbol methodSymbol = (MethodSymbol)currentSymbol;
                                 if (methodSymbol.Arity > 0)
                                 {
-                                    binder = new WithMethodTypeParametersBinder(methodSymbol, binder);
+                                    binder = new WithMethodTypeParametersBinder(
+                                        methodSymbol,
+                                        binder
+                                    );
                                 }
                                 break;
                         }
@@ -610,18 +839,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return binder;
             }
 
-            private static XmlNameAttributeSyntax ParseNameAttribute(string attributeText, string elementName)
+            private static XmlNameAttributeSyntax ParseNameAttribute(
+                string attributeText,
+                string elementName
+            )
             {
-                // NOTE: Rather than introducing a new code path that will have to be kept in 
-                // sync with other mode changes distributed throughout Lexer, SyntaxParser, and 
+                // NOTE: Rather than introducing a new code path that will have to be kept in
+                // sync with other mode changes distributed throughout Lexer, SyntaxParser, and
                 // DocumentationCommentParser, we'll just wrap the text in some lexable syntax
                 // and then extract the piece we want.
                 string commentText = string.Format(@"/// <{0} {1}/>", elementName, attributeText);
 
-                SyntaxTriviaList leadingTrivia = SyntaxFactory.ParseLeadingTrivia(commentText, CSharpParseOptions.Default.WithDocumentationMode(DocumentationMode.Diagnose));
+                SyntaxTriviaList leadingTrivia = SyntaxFactory.ParseLeadingTrivia(
+                    commentText,
+                    CSharpParseOptions.Default.WithDocumentationMode(DocumentationMode.Diagnose)
+                );
                 Debug.Assert(leadingTrivia.Count == 1);
                 SyntaxTrivia trivia = leadingTrivia.ElementAt(0);
-                DocumentationCommentTriviaSyntax structure = (DocumentationCommentTriviaSyntax)trivia.GetStructure();
+                DocumentationCommentTriviaSyntax structure = (DocumentationCommentTriviaSyntax)
+                    trivia.GetStructure();
                 Debug.Assert(structure.Content.Count == 2);
                 XmlEmptyElementSyntax elementSyntax = (XmlEmptyElementSyntax)structure.Content[1];
                 Debug.Assert(elementSyntax.Attributes.Count == 1);
@@ -631,13 +867,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <remarks>
             /// Respects the DocumentationMode at the source location.
             /// </remarks>
-            private void RecordSyntaxDiagnostics(CSharpSyntaxNode treelessSyntax, Location sourceLocation)
+            private void RecordSyntaxDiagnostics(
+                CSharpSyntaxNode treelessSyntax,
+                Location sourceLocation
+            )
             {
-                if (treelessSyntax.ContainsDiagnostics && sourceLocation.SourceTree.ReportDocumentationCommentDiagnostics())
+                if (
+                    treelessSyntax.ContainsDiagnostics
+                    && sourceLocation.SourceTree.ReportDocumentationCommentDiagnostics()
+                )
                 {
                     // NOTE: treelessSyntax doesn't have its own SyntaxTree, so we have to access the diagnostics
                     // via the Dummy tree.
-                    foreach (Diagnostic diagnostic in CSharpSyntaxTree.Dummy.GetDiagnostics(treelessSyntax))
+                    foreach (
+                        Diagnostic diagnostic in CSharpSyntaxTree.Dummy.GetDiagnostics(
+                            treelessSyntax
+                        )
+                    )
                     {
                         _diagnostics.Add(diagnostic.WithLocation(sourceLocation));
                     }
@@ -647,13 +893,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <remarks>
             /// Respects the DocumentationMode at the source location.
             /// </remarks>
-            private void RecordBindingDiagnostics(BindingDiagnosticBag bindingDiagnostics, Location sourceLocation)
+            private void RecordBindingDiagnostics(
+                BindingDiagnosticBag bindingDiagnostics,
+                Location sourceLocation
+            )
             {
                 if (sourceLocation.SourceTree.ReportDocumentationCommentDiagnostics())
                 {
                     if (bindingDiagnostics.DiagnosticBag?.IsEmptyWithoutResolution == false)
                     {
-                        foreach (Diagnostic diagnostic in bindingDiagnostics.DiagnosticBag.AsEnumerable())
+                        foreach (
+                            Diagnostic diagnostic in bindingDiagnostics.DiagnosticBag.AsEnumerable()
+                        )
                         {
                             // CONSIDER: Dev11 actually uses the originating location plus the offset into the cref/name
                             _diagnostics.Add(diagnostic.WithLocation(sourceLocation));

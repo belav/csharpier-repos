@@ -13,7 +13,10 @@ namespace Microsoft.Interop
     /// </summary>
     public sealed class UseSiteAttributeProvider
     {
-        private readonly ImmutableDictionary<int, UseSiteAttributeData> _useSiteAttributesByIndirectionDepth;
+        private readonly ImmutableDictionary<
+            int,
+            UseSiteAttributeData
+        > _useSiteAttributesByIndirectionDepth;
         private readonly int _maxIndirectionLevelDataProvided;
         private readonly GeneratorDiagnosticsBag _diagnostics;
         private int _maxIndirectionLevelUsed;
@@ -31,9 +34,16 @@ namespace Microsoft.Interop
             IEnumerable<AttributeData> useSiteAttributes,
             IElementInfoProvider elementInfoProvider,
             GeneratorDiagnosticsBag diagnostics,
-            GetMarshallingInfoCallback getMarshallingInfoCallback)
+            GetMarshallingInfoCallback getMarshallingInfoCallback
+        )
         {
-            ImmutableDictionary<int, UseSiteAttributeData>.Builder useSiteAttributesByIndirectionDepth = ImmutableDictionary.CreateBuilder<int, UseSiteAttributeData>();
+            ImmutableDictionary<
+                int,
+                UseSiteAttributeData
+            >.Builder useSiteAttributesByIndirectionDepth = ImmutableDictionary.CreateBuilder<
+                int,
+                UseSiteAttributeData
+            >();
             _maxIndirectionLevelDataProvided = 0;
             foreach (AttributeData attribute in useSiteAttributes)
             {
@@ -43,16 +53,27 @@ namespace Microsoft.Interop
                     int indirectionDepth = useSiteAttributeData.IndirectionDepth;
                     if (useSiteAttributesByIndirectionDepth.ContainsKey(indirectionDepth))
                     {
-                        diagnostics.ReportInvalidMarshallingAttributeInfo(attribute, nameof(SR.DuplicateMarshallingInfo), indirectionDepth.ToString());
+                        diagnostics.ReportInvalidMarshallingAttributeInfo(
+                            attribute,
+                            nameof(SR.DuplicateMarshallingInfo),
+                            indirectionDepth.ToString()
+                        );
                     }
                     else
                     {
-                        useSiteAttributesByIndirectionDepth.Add(indirectionDepth, useSiteAttributeData);
-                        _maxIndirectionLevelDataProvided = Math.Max(_maxIndirectionLevelDataProvided, indirectionDepth);
+                        useSiteAttributesByIndirectionDepth.Add(
+                            indirectionDepth,
+                            useSiteAttributeData
+                        );
+                        _maxIndirectionLevelDataProvided = Math.Max(
+                            _maxIndirectionLevelDataProvided,
+                            indirectionDepth
+                        );
                     }
                 }
             }
-            _useSiteAttributesByIndirectionDepth = useSiteAttributesByIndirectionDepth.ToImmutable();
+            _useSiteAttributesByIndirectionDepth =
+                useSiteAttributesByIndirectionDepth.ToImmutable();
             _diagnostics = diagnostics;
 
             UseSiteAttributeData? GetUseSiteInfoForAttribute(AttributeData attribute)
@@ -61,9 +82,16 @@ namespace Microsoft.Interop
                 {
                     // Automatically ignore invalid attributes.
                     // The compiler will already error on them.
-                    if (attribute.AttributeConstructor is not null && parser.CanParseAttributeType(attribute.AttributeClass))
+                    if (
+                        attribute.AttributeConstructor is not null
+                        && parser.CanParseAttributeType(attribute.AttributeClass)
+                    )
                     {
-                        return parser.ParseAttribute(attribute, elementInfoProvider, getMarshallingInfoCallback);
+                        return parser.ParseAttribute(
+                            attribute,
+                            elementInfoProvider,
+                            getMarshallingInfoCallback
+                        );
                     }
                 }
                 return null;
@@ -76,10 +104,16 @@ namespace Microsoft.Interop
         /// <param name="indirectionDepth">The indirection depth to retrieve info for.</param>
         /// <param name="useSiteInfo">The use site information, if it exists.</param>
         /// <returns><c>true</c> if an attribute was provided for the given indirection depth.</returns>
-        public bool TryGetUseSiteAttributeInfo(int indirectionDepth, out UseSiteAttributeData useSiteInfo)
+        public bool TryGetUseSiteAttributeInfo(
+            int indirectionDepth,
+            out UseSiteAttributeData useSiteInfo
+        )
         {
             _maxIndirectionLevelUsed = Math.Max(indirectionDepth, _maxIndirectionLevelUsed);
-            return _useSiteAttributesByIndirectionDepth.TryGetValue(indirectionDepth, out useSiteInfo);
+            return _useSiteAttributesByIndirectionDepth.TryGetValue(
+                indirectionDepth,
+                out useSiteInfo
+            );
         }
 
         /// <summary>
@@ -91,10 +125,13 @@ namespace Microsoft.Interop
             if (_maxIndirectionLevelUsed < _maxIndirectionLevelDataProvided)
             {
                 _diagnostics.ReportInvalidMarshallingAttributeInfo(
-                    _useSiteAttributesByIndirectionDepth[_maxIndirectionLevelDataProvided].AttributeData,
+                    _useSiteAttributesByIndirectionDepth[
+                        _maxIndirectionLevelDataProvided
+                    ].AttributeData,
                     nameof(SR.ExtraneousMarshallingInfo),
                     _maxIndirectionLevelDataProvided.ToString(),
-                    _maxIndirectionLevelUsed.ToString());
+                    _maxIndirectionLevelUsed.ToString()
+                );
             }
         }
     }

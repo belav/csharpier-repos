@@ -24,18 +24,28 @@ internal sealed partial class EnlistmentNotifyShim : NotificationShimBase, ITran
     // single phase commit request.
     private bool _ignoreSpuriousProxyNotifications;
 
-    internal EnlistmentNotifyShim(DtcProxyShimFactory shimFactory, OletxEnlistment enlistmentIdentifier)
+    internal EnlistmentNotifyShim(
+        DtcProxyShimFactory shimFactory,
+        OletxEnlistment enlistmentIdentifier
+    )
         : base(shimFactory, enlistmentIdentifier)
     {
         _ignoreSpuriousProxyNotifications = false;
     }
 
-    internal void SetIgnoreSpuriousProxyNotifications()
-        => _ignoreSpuriousProxyNotifications = true;
+    internal void SetIgnoreSpuriousProxyNotifications() => _ignoreSpuriousProxyNotifications = true;
 
-    public void PrepareRequest(bool fRetaining, OletxXactRm grfRM, bool fWantMoniker, bool fSinglePhase)
+    public void PrepareRequest(
+        bool fRetaining,
+        OletxXactRm grfRM,
+        bool fWantMoniker,
+        bool fSinglePhase
+    )
     {
-        ITransactionEnlistmentAsync? pEnlistmentAsync = Interlocked.Exchange(ref EnlistmentAsync, null);
+        ITransactionEnlistmentAsync? pEnlistmentAsync = Interlocked.Exchange(
+            ref EnlistmentAsync,
+            null
+        );
 
         if (pEnlistmentAsync is null)
         {

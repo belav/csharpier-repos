@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using Xunit;
 
 // Test derived from dotnet/corefx src\System.Numerics.Vectors\src\System\Numerics\Matrix4x4.cs, op_Multiply().
@@ -13,7 +13,7 @@ using Xunit;
 // instruction generated is a float local field, then we were computing the offset as integer, but the actual
 // instruction was float. In certain frame layouts, the range will be out of range in this case, but we will
 // not have allocated a "reserved" register which is used for generating large offsets.
-// 
+//
 // The key functions in the JIT that are related are Compiler::compRsvdRegCheck() and Compiler::lvaFrameAddress().
 
 public class Test
@@ -302,10 +302,24 @@ public class Test
         /// <summary>
         /// Constructs a Matrix4x4 from the given components.
         /// </summary>
-        public Matrix4x4(float m11, float m12, float m13, float m14,
-                         float m21, float m22, float m23, float m24,
-                         float m31, float m32, float m33, float m34,
-                         float m41, float m42, float m43, float m44)
+        public Matrix4x4(
+            float m11,
+            float m12,
+            float m13,
+            float m14,
+            float m21,
+            float m22,
+            float m23,
+            float m24,
+            float m31,
+            float m32,
+            float m33,
+            float m34,
+            float m41,
+            float m42,
+            float m43,
+            float m44
+        )
         {
             this.M11 = m11;
             this.M12 = m12;
@@ -336,10 +350,25 @@ public class Test
         /// <returns>True if the given matrices are equal; False otherwise.</returns>
         public static bool Equals(Matrix4x4 value1, Matrix4x4 value2)
         {
-            return (value1.M11 == value2.M11 && value1.M22 == value2.M22 && value1.M33 == value2.M33 && value1.M44 == value2.M44 && // Check diagonal element first for early out.
-                    value1.M12 == value2.M12 && value1.M13 == value2.M13 && value1.M14 == value2.M14 && value1.M21 == value2.M21 && 
-                    value1.M23 == value2.M23 && value1.M24 == value2.M24 && value1.M31 == value2.M31 && value1.M32 == value2.M32 && 
-                    value1.M34 == value2.M34 && value1.M41 == value2.M41 && value1.M42 == value2.M42 && value1.M43 == value2.M43);
+            return (
+                value1.M11 == value2.M11
+                && value1.M22 == value2.M22
+                && value1.M33 == value2.M33
+                && value1.M44 == value2.M44
+                && // Check diagonal element first for early out.
+                value1.M12 == value2.M12
+                && value1.M13 == value2.M13
+                && value1.M14 == value2.M14
+                && value1.M21 == value2.M21
+                && value1.M23 == value2.M23
+                && value1.M24 == value2.M24
+                && value1.M31 == value2.M31
+                && value1.M32 == value2.M32
+                && value1.M34 == value2.M34
+                && value1.M41 == value2.M41
+                && value1.M42 == value2.M42
+                && value1.M43 == value2.M43
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -354,7 +383,7 @@ public class Test
         {
             BigStruct b = new BigStruct();
 
-            b.float1   = value1.M11 + value2.M11;
+            b.float1 = value1.M11 + value2.M11;
             b.float255 = value1.M12 + value2.M12;
 
             AddHelper(ref b);
@@ -374,32 +403,88 @@ public class Test
         /// <returns>The string representation.</returns>
         public override string ToString()
         {
-            return string.Format("{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
-                                 M11, M12, M13, M14,
-                                 M21, M22, M23, M24,
-                                 M31, M32, M33, M34,
-                                 M41, M42, M43, M44);
+            return string.Format(
+                "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
+                M11,
+                M12,
+                M13,
+                M14,
+                M21,
+                M22,
+                M23,
+                M24,
+                M31,
+                M32,
+                M33,
+                M34,
+                M41,
+                M42,
+                M43,
+                M44
+            );
         }
 
         [Fact]
         public static int TestEntryPoint()
         {
-            Matrix4x4 m1 = new Matrix4x4(1.0F,2.0F,3.0F,4.0F,
-                                         5.0F,6.0F,7.0F,8.0F,
-                                         9.0F,10.0F,11.0F,12.0F,
-                                         13.0F,14.0F,15.0F,16.0F);
-            Matrix4x4 m2 = new Matrix4x4(13.0F,14.0F,15.0F,16.0F,
-                                         9.0F,10.0F,11.0F,12.0F,
-                                         5.0F,6.0F,7.0F,8.0F,
-                                         1.0F,2.0F,3.0F,4.0F);
+            Matrix4x4 m1 = new Matrix4x4(
+                1.0F,
+                2.0F,
+                3.0F,
+                4.0F,
+                5.0F,
+                6.0F,
+                7.0F,
+                8.0F,
+                9.0F,
+                10.0F,
+                11.0F,
+                12.0F,
+                13.0F,
+                14.0F,
+                15.0F,
+                16.0F
+            );
+            Matrix4x4 m2 = new Matrix4x4(
+                13.0F,
+                14.0F,
+                15.0F,
+                16.0F,
+                9.0F,
+                10.0F,
+                11.0F,
+                12.0F,
+                5.0F,
+                6.0F,
+                7.0F,
+                8.0F,
+                1.0F,
+                2.0F,
+                3.0F,
+                4.0F
+            );
 
-            Matrix4x4 m3 = AddTest(m1,m2);
+            Matrix4x4 m3 = AddTest(m1, m2);
 
-            Matrix4x4 mresult = new Matrix4x4(33.0F,-3.0F,3.0F,4.0F,
-                                              5.0F,6.0F,7.0F,8.0F,
-                                              9.0F,10.0F,11.0F,12.0F,
-                                              13.0F,14.0F,15.0F,16.0F);
-            if (Equals(m3,mresult))
+            Matrix4x4 mresult = new Matrix4x4(
+                33.0F,
+                -3.0F,
+                3.0F,
+                4.0F,
+                5.0F,
+                6.0F,
+                7.0F,
+                8.0F,
+                9.0F,
+                10.0F,
+                11.0F,
+                12.0F,
+                13.0F,
+                14.0F,
+                15.0F,
+                16.0F
+            );
+            if (Equals(m3, mresult))
             {
                 Console.WriteLine("PASS");
                 return 100;
@@ -412,7 +497,5 @@ public class Test
                 return 1;
             }
         }
-
     }
 }
-

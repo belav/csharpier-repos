@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,14 +21,13 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
@@ -64,7 +63,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         protected virtual Expression Translate(SpecialExpression specialExpression)
         {
             var operands = specialExpression.Operands.ToList();
-            switch (specialExpression.SpecialNodeType)  // SETuse
+            switch (specialExpression.SpecialNodeType) // SETuse
             {
                 case SpecialExpressionType.IsNull:
                     return TranslateIsNull(operands);
@@ -109,21 +108,28 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case SpecialExpressionType.Minute:
                 case SpecialExpressionType.Millisecond:
                 case SpecialExpressionType.Date:
-                    return GetStandardCallInvoke(specialExpression.SpecialNodeType.ToString(), operands);
+                    return GetStandardCallInvoke(
+                        specialExpression.SpecialNodeType.ToString(),
+                        operands
+                    );
                 case SpecialExpressionType.Now:
                     return GetDateTimeNowCall(operands);
                 case SpecialExpressionType.DateDiffInMilliseconds:
                     return GetCallDateDiffInMilliseconds(operands);
                 default:
-                    throw Error.BadArgument("S0078: Implement translator for {0}", specialExpression.SpecialNodeType);
-
+                    throw Error.BadArgument(
+                        "S0078: Implement translator for {0}",
+                        specialExpression.SpecialNodeType
+                    );
             }
         }
 
         private Expression GetCallDateDiffInMilliseconds(List<Expression> operands)
         {
-            return Expression.MakeMemberAccess(Expression.Subtract(operands.First(), operands.ElementAt(1)),
-                                                typeof(TimeSpan).GetProperty("TotalMilliseconds"));
+            return Expression.MakeMemberAccess(
+                Expression.Subtract(operands.First(), operands.ElementAt(1)),
+                typeof(TimeSpan).GetProperty("TotalMilliseconds")
+            );
         }
 
         private Expression GetDateTimeNowCall(List<Expression> operands)
@@ -136,23 +142,32 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return Expression.MakeMemberAccess(operands[0], typeof(string).GetProperty("Length"));
         }
 
-        protected virtual Expression GetStandardCallInvoke(string methodName, List<Expression> operands)
+        protected virtual Expression GetStandardCallInvoke(
+            string methodName,
+            List<Expression> operands
+        )
         {
             var parametersExpressions = operands.Skip(1);
-            return Expression.Call(operands[0],
-                                   operands[0].Type.GetMethod(methodName, parametersExpressions.Select(op => op.Type).ToArray()),
-                                   parametersExpressions);
+            return Expression.Call(
+                operands[0],
+                operands[0]
+                    .Type.GetMethod(
+                        methodName,
+                        parametersExpressions.Select(op => op.Type).ToArray()
+                    ),
+                parametersExpressions
+            );
         }
 
         //protected virtual Expression TranslateRemove(List<Expression> operands)
         //{
         //    if (operands.Count > 2)
         //    {
-        //        return Expression.Call(operands[0], 
-        //                            typeof(string).GetMethod("Remove", new[] { typeof(int), typeof(int) }), 
+        //        return Expression.Call(operands[0],
+        //                            typeof(string).GetMethod("Remove", new[] { typeof(int), typeof(int) }),
         //                            operands[1], operands[2]);
         //    }
-        //    return Expression.Call(operands[0], 
+        //    return Expression.Call(operands[0],
         //                            typeof(string).GetMethod("Remove", new[] { typeof(int) }),
         //                            operands[1]);
         //}
@@ -161,8 +176,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         //{
         //    if (operands.Count == 2 && operands[1].Type == typeof(string))
         //    {
-        //         return Expression.Call(operands[0], 
-        //                            typeof(string).GetMethod("IndexOf", new[] { typeof(string)}), 
+        //         return Expression.Call(operands[0],
+        //                            typeof(string).GetMethod("IndexOf", new[] { typeof(string)}),
         //                            operands[1]);
         //    }
         //    throw new NotSupportedException();

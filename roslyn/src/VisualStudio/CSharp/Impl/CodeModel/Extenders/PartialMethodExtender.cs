@@ -14,7 +14,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.Extenders
     [ComDefaultInterface(typeof(ICSPartialMethodExtender))]
     public class PartialMethodExtender : ICSPartialMethodExtender
     {
-        internal static ICSPartialMethodExtender Create(bool isPartial, bool isDeclaration, bool hasOtherPart)
+        internal static ICSPartialMethodExtender Create(
+            bool isPartial,
+            bool isDeclaration,
+            bool hasOtherPart
+        )
         {
             var result = new PartialMethodExtender(isPartial, isDeclaration, hasOtherPart);
             return (ICSPartialMethodExtender)ComAggregate.CreateAggregatedObject(result);

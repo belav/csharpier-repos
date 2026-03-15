@@ -14,14 +14,15 @@ namespace System.DirectoryServices.AccountManagement
     {
         NotSet = 0,
         Loaded,
-        Changed
+        Changed,
     }
 
     // These are the default options used when a user does not specify a context option to connect to the store.
     internal static class DefaultContextOptions
     {
         internal static ContextOptions MachineDefaultContextOption = ContextOptions.Negotiate;
-        internal static ContextOptions ADDefaultContextOption = ContextOptions.Negotiate | ContextOptions.Signing | ContextOptions.Sealing;
+        internal static ContextOptions ADDefaultContextOption =
+            ContextOptions.Negotiate | ContextOptions.Signing | ContextOptions.Sealing;
     }
 
     internal static class LdapConstants
@@ -30,6 +31,7 @@ namespace System.DirectoryServices.AccountManagement
         public static int LDAP_PORT = 389;
         internal static DateTime defaultUtcTime = new DateTime(1601, 1, 1, 0, 0, 0);
     }
+
     // The string constants used internally to specify each property
     internal static class PropertyNames
     {
@@ -48,7 +50,8 @@ namespace System.DirectoryServices.AccountManagement
 
         // AuthenticablePrincipal
         internal const string AuthenticablePrincipalEnabled = "AuthenticablePrincipal.Enabled";
-        internal const string AuthenticablePrincipalCertificates = "AuthenticablePrincipal.Certificates";
+        internal const string AuthenticablePrincipalCertificates =
+            "AuthenticablePrincipal.Certificates";
 
         // Group
         internal const string GroupIsSecurityGroup = "GroupPrincipal.IsSecurityGroup";
@@ -64,38 +67,55 @@ namespace System.DirectoryServices.AccountManagement
         internal const string UserEmployeeID = "UserPrincipal.EmployeeId";
 
         // Computer
-        internal const string ComputerServicePrincipalNames = "ComputerPrincipal.ServicePrincipalNames";
+        internal const string ComputerServicePrincipalNames =
+            "ComputerPrincipal.ServicePrincipalNames";
 
         // AccountInfo
         internal const string AcctInfoPrefix = "AuthenticablePrincipal.AccountInfo";
-        internal const string AcctInfoAcctLockoutTime = "AuthenticablePrincipal.AccountInfo.AccountLockoutTime";
+        internal const string AcctInfoAcctLockoutTime =
+            "AuthenticablePrincipal.AccountInfo.AccountLockoutTime";
         internal const string AcctInfoLastLogon = "AuthenticablePrincipal.AccountInfo.LastLogon";
-        internal const string AcctInfoPermittedWorkstations = "AuthenticablePrincipal.AccountInfo.PermittedWorkstations";
-        internal const string AcctInfoPermittedLogonTimes = "AuthenticablePrincipal.AccountInfo.PermittedLogonTimes";
-        internal const string AcctInfoExpirationDate = "AuthenticablePrincipal.AccountInfo.AccountExpirationDate";
-        internal const string AcctInfoSmartcardRequired = "AuthenticablePrincipal.AccountInfo.SmartcardLogonRequired";
-        internal const string AcctInfoDelegationPermitted = "AuthenticablePrincipal.AccountInfo.DelegationPermitted";
-        internal const string AcctInfoBadLogonCount = "AuthenticablePrincipal.AccountInfo.BadLogonCount";
-        internal const string AcctInfoHomeDirectory = "AuthenticablePrincipal.AccountInfo.HomeDirectory";
+        internal const string AcctInfoPermittedWorkstations =
+            "AuthenticablePrincipal.AccountInfo.PermittedWorkstations";
+        internal const string AcctInfoPermittedLogonTimes =
+            "AuthenticablePrincipal.AccountInfo.PermittedLogonTimes";
+        internal const string AcctInfoExpirationDate =
+            "AuthenticablePrincipal.AccountInfo.AccountExpirationDate";
+        internal const string AcctInfoSmartcardRequired =
+            "AuthenticablePrincipal.AccountInfo.SmartcardLogonRequired";
+        internal const string AcctInfoDelegationPermitted =
+            "AuthenticablePrincipal.AccountInfo.DelegationPermitted";
+        internal const string AcctInfoBadLogonCount =
+            "AuthenticablePrincipal.AccountInfo.BadLogonCount";
+        internal const string AcctInfoHomeDirectory =
+            "AuthenticablePrincipal.AccountInfo.HomeDirectory";
         internal const string AcctInfoHomeDrive = "AuthenticablePrincipal.AccountInfo.HomeDrive";
         internal const string AcctInfoScriptPath = "AuthenticablePrincipal.AccountInfo.ScriptPath";
+
         // This property is not publicly exposed but is used be a ReadOnlySearchFilter.
         internal const string AcctInfoExpiredAccount = "AuthenticablePrincipal.AccountInfoExpired";
 
         // PasswordInfo
         internal const string PwdInfoPrefix = "AuthenticablePrincipal.PasswordInfo";
-        internal const string PwdInfoLastPasswordSet = "AuthenticablePrincipal.PasswordInfo.LastPasswordSet";
-        internal const string PwdInfoLastBadPasswordAttempt = "AuthenticablePrincipal.PasswordInfo.LastBadPasswordAttempt";
-        internal const string PwdInfoPasswordNotRequired = "AuthenticablePrincipal.PasswordInfo.PasswordNotRequired";
-        internal const string PwdInfoPasswordNeverExpires = "AuthenticablePrincipal.PasswordInfo.PasswordNeverExpires";
-        internal const string PwdInfoCannotChangePassword = "AuthenticablePrincipal.PasswordInfo.UserCannotChangePassword";
-        internal const string PwdInfoAllowReversiblePasswordEncryption = "AuthenticablePrincipal.PasswordInfo.AllowReversiblePasswordEncryption";
+        internal const string PwdInfoLastPasswordSet =
+            "AuthenticablePrincipal.PasswordInfo.LastPasswordSet";
+        internal const string PwdInfoLastBadPasswordAttempt =
+            "AuthenticablePrincipal.PasswordInfo.LastBadPasswordAttempt";
+        internal const string PwdInfoPasswordNotRequired =
+            "AuthenticablePrincipal.PasswordInfo.PasswordNotRequired";
+        internal const string PwdInfoPasswordNeverExpires =
+            "AuthenticablePrincipal.PasswordInfo.PasswordNeverExpires";
+        internal const string PwdInfoCannotChangePassword =
+            "AuthenticablePrincipal.PasswordInfo.UserCannotChangePassword";
+        internal const string PwdInfoAllowReversiblePasswordEncryption =
+            "AuthenticablePrincipal.PasswordInfo.AllowReversiblePasswordEncryption";
 
         // these two are not publicly exposed properties, but are used internally to track ResetPassword/ExpirePasswordNow
         // operations against unpersisted principals, so that they can be performed once the principal has been Saved
         // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Not a password.")]
         internal const string PwdInfoPassword = "AuthenticablePrincipal.PasswordInfo.Password";
-        internal const string PwdInfoExpireImmediately = "AuthenticablePrincipal.PasswordInfo.ExpireImmediately";
+        internal const string PwdInfoExpireImmediately =
+            "AuthenticablePrincipal.PasswordInfo.ExpireImmediately";
     }
 
     // Given an internal property name (from PropertyNames), returns the external form of the name for use in error-reporting
@@ -133,7 +153,10 @@ namespace System.DirectoryServices.AccountManagement
         // (expressed as strings from the PropertyNames class)
         internal static readonly Hashtable Properties = new Hashtable()
         {
-            { typeof(GroupPrincipal), new ArrayList(1) { PropertyNames.GroupMembers } }
+            {
+                typeof(GroupPrincipal),
+                new ArrayList(1) { PropertyNames.GroupMembers }
+            },
         };
     }
 }

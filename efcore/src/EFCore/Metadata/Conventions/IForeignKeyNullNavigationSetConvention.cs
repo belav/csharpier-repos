@@ -22,5 +22,6 @@ public interface IForeignKeyNullNavigationSetConvention : IConvention
     void ProcessForeignKeyNullNavigationSet(
         IConventionForeignKeyBuilder relationshipBuilder,
         bool pointsToPrincipal,
-        IConventionContext<IConventionNavigation> context);
+        IConventionContext<IConventionNavigation> context
+    );
 }

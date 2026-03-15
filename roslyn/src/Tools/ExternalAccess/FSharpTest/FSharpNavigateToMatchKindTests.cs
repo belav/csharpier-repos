@@ -24,58 +24,60 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.UnitTests
             }
         }
 
-        internal static NavigateToMatchKind GetExpectedNavigateToMatchKind(FSharpNavigateToMatchKind kind)
+        internal static NavigateToMatchKind GetExpectedNavigateToMatchKind(
+            FSharpNavigateToMatchKind kind
+        )
         {
             switch (kind)
             {
                 case FSharpNavigateToMatchKind.Exact:
-                    {
-                        return NavigateToMatchKind.Exact;
-                    }
+                {
+                    return NavigateToMatchKind.Exact;
+                }
                 case FSharpNavigateToMatchKind.Prefix:
-                    {
-                        return NavigateToMatchKind.Prefix;
-                    }
+                {
+                    return NavigateToMatchKind.Prefix;
+                }
                 case FSharpNavigateToMatchKind.Substring:
-                    {
-                        return NavigateToMatchKind.Substring;
-                    }
+                {
+                    return NavigateToMatchKind.Substring;
+                }
                 case FSharpNavigateToMatchKind.Regular:
-                    {
-                        return NavigateToMatchKind.Regular;
-                    }
+                {
+                    return NavigateToMatchKind.Regular;
+                }
                 case FSharpNavigateToMatchKind.None:
-                    {
-                        return NavigateToMatchKind.None;
-                    }
+                {
+                    return NavigateToMatchKind.None;
+                }
                 case FSharpNavigateToMatchKind.CamelCaseExact:
-                    {
-                        return NavigateToMatchKind.CamelCaseExact;
-                    }
+                {
+                    return NavigateToMatchKind.CamelCaseExact;
+                }
                 case FSharpNavigateToMatchKind.CamelCasePrefix:
-                    {
-                        return NavigateToMatchKind.CamelCasePrefix;
-                    }
+                {
+                    return NavigateToMatchKind.CamelCasePrefix;
+                }
                 case FSharpNavigateToMatchKind.CamelCaseNonContiguousPrefix:
-                    {
-                        return NavigateToMatchKind.CamelCaseNonContiguousPrefix;
-                    }
+                {
+                    return NavigateToMatchKind.CamelCaseNonContiguousPrefix;
+                }
                 case FSharpNavigateToMatchKind.CamelCaseSubstring:
-                    {
-                        return NavigateToMatchKind.CamelCaseSubstring;
-                    }
+                {
+                    return NavigateToMatchKind.CamelCaseSubstring;
+                }
                 case FSharpNavigateToMatchKind.CamelCaseNonContiguousSubstring:
-                    {
-                        return NavigateToMatchKind.CamelCaseNonContiguousSubstring;
-                    }
+                {
+                    return NavigateToMatchKind.CamelCaseNonContiguousSubstring;
+                }
                 case FSharpNavigateToMatchKind.Fuzzy:
-                    {
-                        return NavigateToMatchKind.Fuzzy;
-                    }
+                {
+                    return NavigateToMatchKind.Fuzzy;
+                }
                 default:
-                    {
-                        throw ExceptionUtilities.UnexpectedValue(kind);
-                    }
+                {
+                    throw ExceptionUtilities.UnexpectedValue(kind);
+                }
             }
         }
 

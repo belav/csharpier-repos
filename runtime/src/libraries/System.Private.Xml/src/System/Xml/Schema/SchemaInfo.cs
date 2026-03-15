@@ -24,8 +24,10 @@ namespace System.Xml.Schema
 
     internal sealed class SchemaInfo : IDtdInfo
     {
-        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _elementDecls = new Dictionary<XmlQualifiedName, SchemaElementDecl>();
-        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _undeclaredElementDecls = new Dictionary<XmlQualifiedName, SchemaElementDecl>();
+        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _elementDecls =
+            new Dictionary<XmlQualifiedName, SchemaElementDecl>();
+        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _undeclaredElementDecls =
+            new Dictionary<XmlQualifiedName, SchemaElementDecl>();
 
         private Dictionary<XmlQualifiedName, SchemaEntity>? _generalEntities;
         private Dictionary<XmlQualifiedName, SchemaEntity>? _parameterEntities;
@@ -35,13 +37,15 @@ namespace System.Xml.Schema
         private bool _hasNonCDataAttributes;
         private bool _hasDefaultAttributes;
 
-        private readonly Dictionary<string, bool> _targetNamespaces = new Dictionary<string, bool>();
-        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attributeDecls = new Dictionary<XmlQualifiedName, SchemaAttDef>();
+        private readonly Dictionary<string, bool> _targetNamespaces =
+            new Dictionary<string, bool>();
+        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attributeDecls =
+            new Dictionary<XmlQualifiedName, SchemaAttDef>();
         private int _errorCount;
         private SchemaType _schemaType;
-        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _elementDeclsByType = new Dictionary<XmlQualifiedName, SchemaElementDecl>();
+        private readonly Dictionary<XmlQualifiedName, SchemaElementDecl> _elementDeclsByType =
+            new Dictionary<XmlQualifiedName, SchemaElementDecl>();
         private Dictionary<string, SchemaNotation>? _notations;
-
 
         internal SchemaInfo()
         {
@@ -128,7 +132,6 @@ namespace System.Xml.Schema
             return null;
         }
 
-
         internal XmlSchemaElement? GetElement(XmlQualifiedName qname)
         {
             SchemaElementDecl? ed = GetElementDecl(qname);
@@ -162,7 +165,10 @@ namespace System.Xml.Schema
                     {
                         throw new XmlSchemaException(SR.Sch_UndeclaredAttribute, qname.ToString());
                     }
-                    if (!_attributeDecls.TryGetValue(qname, out attdef) && _targetNamespaces.ContainsKey(qname.Namespace))
+                    if (
+                        !_attributeDecls.TryGetValue(qname, out attdef)
+                        && _targetNamespaces.ContainsKey(qname.Namespace)
+                    )
                     {
                         throw new XmlSchemaException(SR.Sch_UndeclaredAttribute, qname.ToString());
                     }
@@ -172,8 +178,12 @@ namespace System.Xml.Schema
             return attdef;
         }
 
-
-        internal SchemaAttDef? GetAttributeXsd(SchemaElementDecl? ed, XmlQualifiedName qname, XmlSchemaObject? partialValidationType, out AttributeMatchState attributeMatchState)
+        internal SchemaAttDef? GetAttributeXsd(
+            SchemaElementDecl? ed,
+            XmlQualifiedName qname,
+            XmlSchemaObject? partialValidationType,
+            out AttributeMatchState attributeMatchState
+        )
         {
             SchemaAttDef? attdef = null;
             attributeMatchState = AttributeMatchState.UndeclaredAttribute;
@@ -254,7 +264,11 @@ namespace System.Xml.Schema
             return attdef;
         }
 
-        internal SchemaAttDef? GetAttributeXsd(SchemaElementDecl? ed, XmlQualifiedName qname, ref bool skip)
+        internal SchemaAttDef? GetAttributeXsd(
+            SchemaElementDecl? ed,
+            XmlQualifiedName qname,
+            ref bool skip
+        )
         {
             AttributeMatchState attributeMatchState;
 
@@ -293,7 +307,12 @@ namespace System.Xml.Schema
             }
             else if (_schemaType != sinfo.SchemaType)
             {
-                eventhandler?.Invoke(this, new ValidationEventArgs(new XmlSchemaException(SR.Sch_MixSchemaTypes, string.Empty)));
+                eventhandler?.Invoke(
+                    this,
+                    new ValidationEventArgs(
+                        new XmlSchemaException(SR.Sch_MixSchemaTypes, string.Empty)
+                    )
+                );
                 return;
             }
 
@@ -309,7 +328,9 @@ namespace System.Xml.Schema
                     _elementDecls.Add(entry.Key, entry.Value);
                 }
             }
-            foreach (KeyValuePair<XmlQualifiedName, SchemaElementDecl> entry in sinfo._elementDeclsByType)
+            foreach (
+                KeyValuePair<XmlQualifiedName, SchemaElementDecl> entry in sinfo._elementDeclsByType
+            )
             {
                 if (!_elementDeclsByType.ContainsKey(entry.Key))
                 {
@@ -345,24 +366,19 @@ namespace System.Xml.Schema
                 elements = _undeclaredElementDecls;
             }
         }
+
         //
         // IDtdInfo interface
         //
         #region IDtdInfo Members
         bool IDtdInfo.HasDefaultAttributes
         {
-            get
-            {
-                return _hasDefaultAttributes;
-            }
+            get { return _hasDefaultAttributes; }
         }
 
         bool IDtdInfo.HasNonCDataAttributes
         {
-            get
-            {
-                return _hasNonCDataAttributes;
-            }
+            get { return _hasNonCDataAttributes; }
         }
 
         IDtdAttributeListInfo? IDtdInfo.LookupAttributeList(string prefix, string localName)

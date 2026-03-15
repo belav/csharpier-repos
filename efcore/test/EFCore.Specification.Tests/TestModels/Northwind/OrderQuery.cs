@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 public class OrderQuery
 {
-    public OrderQuery()
-    {
-    }
+    public OrderQuery() { }
 
     public OrderQuery(string customerID)
     {
@@ -18,8 +16,7 @@ public class OrderQuery
 
     public Customer Customer { get; set; }
 
-    protected bool Equals(OrderQuery other)
-        => string.Equals(CustomerID, other.CustomerID);
+    protected bool Equals(OrderQuery other) => string.Equals(CustomerID, other.CustomerID);
 
     public override bool Equals(object obj)
     {
@@ -30,19 +27,14 @@ public class OrderQuery
 
         return ReferenceEquals(this, obj)
             ? true
-            : obj.GetType() == GetType()
-            && Equals((OrderQuery)obj);
+            : obj.GetType() == GetType() && Equals((OrderQuery)obj);
     }
 
-    public static bool operator ==(OrderQuery left, OrderQuery right)
-        => Equals(left, right);
+    public static bool operator ==(OrderQuery left, OrderQuery right) => Equals(left, right);
 
-    public static bool operator !=(OrderQuery left, OrderQuery right)
-        => !Equals(left, right);
+    public static bool operator !=(OrderQuery left, OrderQuery right) => !Equals(left, right);
 
-    public override int GetHashCode()
-        => CustomerID.GetHashCode();
+    public override int GetHashCode() => CustomerID.GetHashCode();
 
-    public override string ToString()
-        => "OrderView " + CustomerID;
+    public override string ToString() => "OrderView " + CustomerID;
 }

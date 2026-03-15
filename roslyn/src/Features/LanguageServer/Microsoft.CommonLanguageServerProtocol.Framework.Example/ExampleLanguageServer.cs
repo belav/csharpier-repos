@@ -14,7 +14,12 @@ public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContex
 {
     private readonly Action<IServiceCollection>? _addExtraHandlers;
 
-    public ExampleLanguageServer(JsonRpc jsonRpc, ILspLogger logger, Action<IServiceCollection>? addExtraHandlers) : base(jsonRpc, logger)
+    public ExampleLanguageServer(
+        JsonRpc jsonRpc,
+        ILspLogger logger,
+        Action<IServiceCollection>? addExtraHandlers
+    )
+        : base(jsonRpc, logger)
     {
         _addExtraHandlers = addExtraHandlers;
         // This spins up the queue and ensure the LSP is ready to start receiving requests
@@ -27,9 +32,15 @@ public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContex
 
         var _ = AddHandlers(serviceCollection)
             .AddSingleton<ILspLogger>(_logger)
-            .AddSingleton<IRequestContextFactory<ExampleRequestContext>, ExampleRequestContextFactory>()
+            .AddSingleton<
+                IRequestContextFactory<ExampleRequestContext>,
+                ExampleRequestContextFactory
+            >()
             .AddSingleton<IHandlerProvider>(s => GetHandlerProvider())
-            .AddSingleton<IInitializeManager<InitializeParams, InitializeResult>, CapabilitiesManager>()
+            .AddSingleton<
+                IInitializeManager<InitializeParams, InitializeResult>,
+                CapabilitiesManager
+            >()
             .AddSingleton(this);
 
         var lifeCycleManager = GetLifeCycleManager();
@@ -52,8 +63,14 @@ public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContex
     {
         _ = serviceCollection
             .AddSingleton<IMethodHandler, MultiRegisteringHandler>()
-            .AddSingleton<IMethodHandler, InitializeHandler<InitializeParams, InitializeResult, ExampleRequestContext>>()
-            .AddSingleton<IMethodHandler, InitializedHandler<InitializedParams, ExampleRequestContext>>();
+            .AddSingleton<
+                IMethodHandler,
+                InitializeHandler<InitializeParams, InitializeResult, ExampleRequestContext>
+            >()
+            .AddSingleton<
+                IMethodHandler,
+                InitializedHandler<InitializedParams, ExampleRequestContext>
+            >();
 
         if (_addExtraHandlers is not null)
         {

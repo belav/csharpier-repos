@@ -15,7 +15,8 @@ namespace System.Diagnostics
             LogName = logName;
         }
 
-        internal EventSourceCreationData(string source, string logName, string machineName) : this(source, logName)
+        internal EventSourceCreationData(string source, string logName, string machineName)
+            : this(source, logName)
         {
             MachineName = machineName;
         }

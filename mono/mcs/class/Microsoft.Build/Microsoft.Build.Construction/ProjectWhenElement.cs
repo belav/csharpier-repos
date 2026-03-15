@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,48 +35,68 @@ using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("#Children={Count} Condition={Condition}")]
-        public class ProjectWhenElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute("#Children={Count} Condition={Condition}")]
+    public class ProjectWhenElement : ProjectElementContainer
+    {
+        internal ProjectWhenElement(string condition, ProjectRootElement containingProject)
         {
-                internal ProjectWhenElement (string condition, ProjectRootElement containingProject)
-                {
-                        Condition = condition;
-                        ContainingProject = containingProject;
-                }
-                public ICollection<ProjectPropertyGroupElement> PropertyGroups {
-                        get { return new CollectionFromEnumerable<ProjectPropertyGroupElement> (
-                                new FilteredEnumerable<ProjectPropertyGroupElement> (Children)); }
-                }
-                public ICollection<ProjectItemGroupElement> ItemGroups {
-                        get { return new CollectionFromEnumerable<ProjectItemGroupElement> (
-                                new FilteredEnumerable<ProjectItemGroupElement> (Children)); }
-                }
-                public ICollection<ProjectChooseElement> ChooseElements {
-                        get { return new CollectionFromEnumerable<ProjectChooseElement> (
-                                new FilteredEnumerable<ProjectChooseElement> (Children));}
-                }
-                internal override string XmlName {
-                        get { return "When"; }
-                }
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        switch (reader.LocalName) {
-                        case "PropertyGroup":
-                                var property = ContainingProject.CreatePropertyGroupElement ();
-                                AppendChild (property);
-                                return property;
-                        case "ItemGroup":
-                                var item = ContainingProject.CreateItemGroupElement ();
-                                AppendChild (item);
-                                return item;
-                        case "When":
-                                var when = ContainingProject.CreateWhenElement (null);
-                                AppendChild (when);
-                                return when;
-                        default:
-                                throw new InvalidProjectFileException (string.Format (
-                                        "Child \"{0}\" is not a known node type.", reader.LocalName));
-                        }
-                }
+            Condition = condition;
+            ContainingProject = containingProject;
         }
+
+        public ICollection<ProjectPropertyGroupElement> PropertyGroups
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectPropertyGroupElement>(
+                    new FilteredEnumerable<ProjectPropertyGroupElement>(Children)
+                );
+            }
+        }
+        public ICollection<ProjectItemGroupElement> ItemGroups
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectItemGroupElement>(
+                    new FilteredEnumerable<ProjectItemGroupElement>(Children)
+                );
+            }
+        }
+        public ICollection<ProjectChooseElement> ChooseElements
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectChooseElement>(
+                    new FilteredEnumerable<ProjectChooseElement>(Children)
+                );
+            }
+        }
+        internal override string XmlName
+        {
+            get { return "When"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            switch (reader.LocalName)
+            {
+                case "PropertyGroup":
+                    var property = ContainingProject.CreatePropertyGroupElement();
+                    AppendChild(property);
+                    return property;
+                case "ItemGroup":
+                    var item = ContainingProject.CreateItemGroupElement();
+                    AppendChild(item);
+                    return item;
+                case "When":
+                    var when = ContainingProject.CreateWhenElement(null);
+                    AppendChild(when);
+                    return when;
+                default:
+                    throw new InvalidProjectFileException(
+                        string.Format("Child \"{0}\" is not a known node type.", reader.LocalName)
+                    );
+            }
+        }
+    }
 }

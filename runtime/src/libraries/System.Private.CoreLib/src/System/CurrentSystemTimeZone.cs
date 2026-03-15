@@ -9,7 +9,9 @@ namespace System
     /// <summary>
     /// Represents the current system timezone.
     /// </summary>
-    [Obsolete("System.CurrentSystemTimeZone has been deprecated. Investigate the use of System.TimeZoneInfo.Local instead.")]
+    [Obsolete(
+        "System.CurrentSystemTimeZone has been deprecated. Investigate the use of System.TimeZoneInfo.Local instead."
+    )]
     internal sealed class CurrentSystemTimeZone : TimeZone
     {
         // Standard offset in ticks to the Universal time if
@@ -115,7 +117,10 @@ namespace System
         {
             if (year < 1 || year > 9999)
             {
-                throw new ArgumentOutOfRangeException(nameof(year), SR.Format(SR.ArgumentOutOfRange_Range, 1, 9999));
+                throw new ArgumentOutOfRangeException(
+                    nameof(year),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, 9999)
+                );
             }
 
             return GetCachedDaylightChanges(year);
@@ -129,12 +134,24 @@ namespace System
 
             if (TimeZoneInfo.Local.SupportsDaylightSavingTime)
             {
-                foreach (TimeZoneInfo.AdjustmentRule rule in TimeZoneInfo.Local.GetAdjustmentRules())
+                foreach (
+                    TimeZoneInfo.AdjustmentRule rule in TimeZoneInfo.Local.GetAdjustmentRules()
+                )
                 {
-                    if (rule.DateStart.Year <= year && rule.DateEnd.Year >= year && rule.DaylightDelta != TimeSpan.Zero)
+                    if (
+                        rule.DateStart.Year <= year
+                        && rule.DateEnd.Year >= year
+                        && rule.DaylightDelta != TimeSpan.Zero
+                    )
                     {
-                        start = TimeZoneInfo.TransitionTimeToDateTime(year, rule.DaylightTransitionStart);
-                        end = TimeZoneInfo.TransitionTimeToDateTime(year, rule.DaylightTransitionEnd);
+                        start = TimeZoneInfo.TransitionTimeToDateTime(
+                            year,
+                            rule.DaylightTransitionStart
+                        );
+                        end = TimeZoneInfo.TransitionTimeToDateTime(
+                            year,
+                            rule.DaylightTransitionEnd
+                        );
                         delta = rule.DaylightDelta;
                         break;
                     }
@@ -152,7 +169,9 @@ namespace System
             }
             else
             {
-                return new TimeSpan(CalculateUtcOffset(time, GetDaylightChanges(time.Year)).Ticks + m_ticksOffset);
+                return new TimeSpan(
+                    CalculateUtcOffset(time, GetDaylightChanges(time.Year)).Ticks + m_ticksOffset
+                );
             }
         }
 

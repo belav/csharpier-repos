@@ -16,9 +16,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public DataContractType()
-        {
-        }
+        public DataContractType() { }
 
         public DataContractType(int id, string name)
         {
@@ -29,11 +27,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [DataMember]
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
-
+            get { return this.id; }
             set
             {
                 this.IdSet = true;
@@ -44,11 +38,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [DataMember]
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 this.NameSet = true;
@@ -64,15 +54,21 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public static IEnumerable<DataContractType> GetTestData()
         {
-            return new DataContractType[] { new DataContractType(), new DataContractType(1, "SomeName") };
+            return new DataContractType[]
+            {
+                new DataContractType(),
+                new DataContractType(1, "SomeName"),
+            };
         }
 
         public static IEnumerable<DerivedDataContractType> GetDerivedTypeTestData()
         {
-            return new DerivedDataContractType[] { 
-                new DerivedDataContractType(), 
-                new DerivedDataContractType(1, "SomeName", null), 
-                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))};
+            return new DerivedDataContractType[]
+            {
+                new DerivedDataContractType(),
+                new DerivedDataContractType(1, "SomeName", null),
+                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
+            };
         }
     }
 }

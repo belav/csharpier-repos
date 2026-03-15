@@ -19,9 +19,9 @@ namespace System.Web.Mvc.Test
             {
                 return new List<object[]>
                 {
-                    new object[] { "string", },
-                    new object[] { 42, },
-                    new object[] { new System.Web.Http.AuthorizeAttribute(), },
+                    new object[] { "string" },
+                    new object[] { 42 },
+                    new object[] { new System.Web.Http.AuthorizeAttribute() },
                 };
             }
         }
@@ -31,21 +31,25 @@ namespace System.Web.Mvc.Test
         public void AddRejectsNonFilterInstances(object instance)
         {
             // Act + Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                _collection.Add(instance);
-            }, "The given filter instance must implement one or more of the following filter interfaces: System.Web.Mvc.IAuthorizationFilter, System.Web.Mvc.IActionFilter, System.Web.Mvc.IResultFilter, System.Web.Mvc.IExceptionFilter, System.Web.Mvc.Filters.IAuthenticationFilter.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    _collection.Add(instance);
+                },
+                "The given filter instance must implement one or more of the following filter interfaces: System.Web.Mvc.IAuthorizationFilter, System.Web.Mvc.IActionFilter, System.Web.Mvc.IResultFilter, System.Web.Mvc.IExceptionFilter, System.Web.Mvc.Filters.IAuthenticationFilter."
+            );
         }
 
         [Fact]
         public void AddAcceptsFilterInstances()
         {
             // Arrange
-            var filters = new object[] {
+            var filters = new object[]
+            {
                 GetFilterInstance<IActionFilter>(),
                 GetFilterInstance<IAuthorizationFilter>(),
                 GetFilterInstance<IResultFilter>(),
-                GetFilterInstance<IExceptionFilter>() 
+                GetFilterInstance<IExceptionFilter>(),
             }.ToList();
 
             // Act
@@ -124,7 +128,8 @@ namespace System.Web.Mvc.Test
             Assert.Same(_filterInstance, filter.Instance);
         }
 
-        private static TFilter GetFilterInstance<TFilter>() where TFilter : class
+        private static TFilter GetFilterInstance<TFilter>()
+            where TFilter : class
         {
             return new Mock<TFilter>().Object;
         }

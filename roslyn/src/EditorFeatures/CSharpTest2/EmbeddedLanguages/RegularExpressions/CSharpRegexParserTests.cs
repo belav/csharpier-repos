@@ -38,23 +38,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             return token;
         }
 
-        private void Test(string stringText, string expected, RegexOptions options,
+        private void Test(
+            string stringText,
+            string expected,
+            RegexOptions options,
             bool runSubTreeTests = true,
             bool allowIndexOutOfRange = false,
             bool allowNullReference = false,
             bool allowOutOfMemory = false,
-            bool allowDiagnosticsMismatch = false)
+            bool allowDiagnosticsMismatch = false
+        )
         {
-            var (tree, sourceText) = TryParseTree(stringText, options, conversionFailureOk: false,
-                allowIndexOutOfRange, allowNullReference, allowOutOfMemory, allowDiagnosticsMismatch);
+            var (tree, sourceText) = TryParseTree(
+                stringText,
+                options,
+                conversionFailureOk: false,
+                allowIndexOutOfRange,
+                allowNullReference,
+                allowOutOfMemory,
+                allowDiagnosticsMismatch
+            );
 
             // Tests are allowed to not run the subtree tests.  This is because some
             // subtrees can cause the native regex parser to exhibit very bad behavior
             // (like not ever actually finishing compiling).
             if (runSubTreeTests)
             {
-                TryParseSubTrees(stringText, options,
-                    allowIndexOutOfRange, allowNullReference, allowOutOfMemory, allowDiagnosticsMismatch);
+                TryParseSubTrees(
+                    stringText,
+                    options,
+                    allowIndexOutOfRange,
+                    allowNullReference,
+                    allowOutOfMemory,
+                    allowDiagnosticsMismatch
+                );
             }
 
             const string DoubleQuoteEscaping = "\"\"";
@@ -65,19 +82,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         }
 
         private void TryParseSubTrees(
-            string stringText, RegexOptions options,
+            string stringText,
+            RegexOptions options,
             bool allowIndexOutOfRange,
             bool allowNullReference,
             bool allowOutOfMemory,
-            bool allowDiagnosticsMismatch)
+            bool allowDiagnosticsMismatch
+        )
         {
             // Trim the input from the right and make sure tree invariants hold
             var current = stringText;
             while (current is not "@\"\"" and not "\"\"")
             {
                 current = current[..^2] + "\"";
-                TryParseTree(current, options, conversionFailureOk: true,
-                    allowIndexOutOfRange, allowNullReference, allowOutOfMemory, allowDiagnosticsMismatch);
+                TryParseTree(
+                    current,
+                    options,
+                    conversionFailureOk: true,
+                    allowIndexOutOfRange,
+                    allowNullReference,
+                    allowOutOfMemory,
+                    allowDiagnosticsMismatch
+                );
             }
 
             // Trim the input from the left and make sure tree invariants hold
@@ -93,22 +119,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                     current = "\"" + current[2..];
                 }
 
-                TryParseTree(current, options, conversionFailureOk: true,
-                    allowIndexOutOfRange, allowNullReference, allowOutOfMemory, allowDiagnosticsMismatch);
+                TryParseTree(
+                    current,
+                    options,
+                    conversionFailureOk: true,
+                    allowIndexOutOfRange,
+                    allowNullReference,
+                    allowOutOfMemory,
+                    allowDiagnosticsMismatch
+                );
             }
 
             for (var start = stringText[0] == '@' ? 2 : 1; start < stringText.Length - 1; start++)
             {
                 TryParseTree(
-                    stringText[..start] +
-                    stringText[(start + 1)..],
-                    options, conversionFailureOk: true,
-                    allowIndexOutOfRange, allowNullReference, allowOutOfMemory, allowDiagnosticsMismatch);
+                    stringText[..start] + stringText[(start + 1)..],
+                    options,
+                    conversionFailureOk: true,
+                    allowIndexOutOfRange,
+                    allowNullReference,
+                    allowOutOfMemory,
+                    allowDiagnosticsMismatch
+                );
             }
         }
 
         private (SyntaxToken, RegexTree, VirtualCharSequence) JustParseTree(
-            string stringText, RegexOptions options, bool conversionFailureOk)
+            string stringText,
+            RegexOptions options,
+            bool conversionFailureOk
+        )
         {
             var token = GetStringToken(stringText);
             var allChars = _service.TryConvertToVirtualChars(token);
@@ -123,12 +163,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
         }
 
         private (RegexTree, SourceText) TryParseTree(
-            string stringText, RegexOptions options,
+            string stringText,
+            RegexOptions options,
             bool conversionFailureOk,
             bool allowIndexOutOfRange,
             bool allowNullReference,
             bool allowOutOfMemory,
-            bool allowDiagnosticsMismatch = false)
+            bool allowDiagnosticsMismatch = false
+        )
         {
             var (token, tree, allChars) = JustParseTree(stringText, options, conversionFailureOk);
             if (tree == null)
@@ -184,52 +226,84 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             if (!tree.Diagnostics.IsEmpty && !allowDiagnosticsMismatch)
             {
                 var expectedDiagnostics = CreateDiagnosticsElement(sourceText, tree);
-                Assert.False(true, "Expected diagnostics: \r\n" + expectedDiagnostics.ToString().Replace(@"""", @""""""));
+                Assert.False(
+                    true,
+                    "Expected diagnostics: \r\n"
+                        + expectedDiagnostics.ToString().Replace(@"""", @"""""")
+                );
             }
 
-            Assert.True(regex.GetGroupNumbers().OrderBy(v => v).SequenceEqual(
-                tree.CaptureNumbersToSpan.Keys.OrderBy(v => v)));
+            Assert.True(
+                regex
+                    .GetGroupNumbers()
+                    .OrderBy(v => v)
+                    .SequenceEqual(tree.CaptureNumbersToSpan.Keys.OrderBy(v => v))
+            );
 
-            Assert.True(regex.GetGroupNames().Where(v => !int.TryParse(v, out _)).OrderBy(v => v).SequenceEqual(
-                tree.CaptureNamesToSpan.Keys.OrderBy(v => v)));
+            Assert.True(
+                regex
+                    .GetGroupNames()
+                    .Where(v => !int.TryParse(v, out _))
+                    .OrderBy(v => v)
+                    .SequenceEqual(tree.CaptureNamesToSpan.Keys.OrderBy(v => v))
+            );
 
             return treeAndText;
         }
 
         private static string TreeToText(SourceText text, RegexTree tree)
         {
-            var element = new XElement("Tree",
-                NodeToElement(tree.Root));
+            var element = new XElement("Tree", NodeToElement(tree.Root));
 
             if (tree.Diagnostics.Length > 0)
             {
                 element.Add(CreateDiagnosticsElement(text, tree));
             }
 
-            element.Add(new XElement("Captures",
-                tree.CaptureNumbersToSpan.OrderBy(kvp => kvp.Key).Select(kvp =>
-                    new XElement("Capture", new XAttribute("Name", kvp.Key), new XAttribute("Span", kvp.Value), GetTextAttribute(text, kvp.Value))),
-                tree.CaptureNamesToSpan.OrderBy(kvp => kvp.Key).Select(kvp =>
-                    new XElement("Capture", new XAttribute("Name", kvp.Key), new XAttribute("Span", kvp.Value), GetTextAttribute(text, kvp.Value)))));
+            element.Add(
+                new XElement(
+                    "Captures",
+                    tree.CaptureNumbersToSpan.OrderBy(kvp => kvp.Key)
+                        .Select(kvp => new XElement(
+                            "Capture",
+                            new XAttribute("Name", kvp.Key),
+                            new XAttribute("Span", kvp.Value),
+                            GetTextAttribute(text, kvp.Value)
+                        )),
+                    tree.CaptureNamesToSpan.OrderBy(kvp => kvp.Key)
+                        .Select(kvp => new XElement(
+                            "Capture",
+                            new XAttribute("Name", kvp.Key),
+                            new XAttribute("Span", kvp.Value),
+                            GetTextAttribute(text, kvp.Value)
+                        ))
+                )
+            );
 
             return element.ToString();
         }
 
-        private static XElement CreateDiagnosticsElement(SourceText text, RegexTree tree)
-            => new XElement("Diagnostics",
-                tree.Diagnostics.Select(d =>
-                    new XElement("Diagnostic",
-                        new XAttribute("Message", d.Message),
-                        new XAttribute("Span", d.Span),
-                        GetTextAttribute(text, d.Span))));
+        private static XElement CreateDiagnosticsElement(SourceText text, RegexTree tree) =>
+            new XElement(
+                "Diagnostics",
+                tree.Diagnostics.Select(d => new XElement(
+                    "Diagnostic",
+                    new XAttribute("Message", d.Message),
+                    new XAttribute("Span", d.Span),
+                    GetTextAttribute(text, d.Span)
+                ))
+            );
 
-        private static XAttribute GetTextAttribute(SourceText text, TextSpan span)
-            => new("Text", text.ToString(span));
+        private static XAttribute GetTextAttribute(SourceText text, TextSpan span) =>
+            new("Text", text.ToString(span));
 
         private static XElement NodeToElement(RegexNode node)
         {
             if (node is RegexAlternationNode alternationNode)
-                return AlternationToElement(alternationNode, alternationNode.SequenceList.NodesAndTokens.Length);
+                return AlternationToElement(
+                    alternationNode,
+                    alternationNode.SequenceList.NodesAndTokens.Length
+                );
 
             var element = new XElement(node.Kind.ToString());
             foreach (var child in node)
@@ -264,7 +338,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
 
             if (token.LeadingTrivia.Length > 0)
             {
-                element.Add(new XElement("Trivia", token.LeadingTrivia.Select(t => TriviaToElement(t))));
+                element.Add(
+                    new XElement("Trivia", token.LeadingTrivia.Select(t => TriviaToElement(t)))
+                );
             }
 
             if (token.VirtualChars.Length > 0)
@@ -275,10 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             return element;
         }
 
-        private static XElement TriviaToElement(RegexTrivia trivia)
-            => new XElement(
-                trivia.Kind.ToString(),
-                trivia.VirtualChars.CreateString());
+        private static XElement TriviaToElement(RegexTrivia trivia) =>
+            new XElement(trivia.Kind.ToString(), trivia.VirtualChars.CreateString());
 
         private static void CheckInvariants(RegexTree tree, VirtualCharSequence allChars)
         {
@@ -288,7 +362,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             Assert.Equal(allChars.Length, position);
         }
 
-        private static void CheckInvariants(RegexNode node, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            RegexNode node,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             foreach (var child in node)
             {
@@ -303,13 +381,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             }
         }
 
-        private static void CheckInvariants(RegexToken token, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            RegexToken token,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             CheckInvariants(token.LeadingTrivia, ref position, allChars);
             CheckCharacters(token.VirtualChars, ref position, allChars);
         }
 
-        private static void CheckInvariants(ImmutableArray<RegexTrivia> leadingTrivia, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            ImmutableArray<RegexTrivia> leadingTrivia,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             foreach (var trivia in leadingTrivia)
             {
@@ -317,7 +403,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             }
         }
 
-        private static void CheckInvariants(RegexTrivia trivia, ref int position, VirtualCharSequence allChars)
+        private static void CheckInvariants(
+            RegexTrivia trivia,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             switch (trivia.Kind)
             {
@@ -332,7 +422,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             CheckCharacters(trivia.VirtualChars, ref position, allChars);
         }
 
-        private static void CheckCharacters(VirtualCharSequence virtualChars, ref int position, VirtualCharSequence allChars)
+        private static void CheckCharacters(
+            VirtualCharSequence virtualChars,
+            ref int position,
+            VirtualCharSequence allChars
+        )
         {
             for (var i = 0; i < virtualChars.Length; i++)
             {
@@ -351,15 +445,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             return conj;
         }
 
-        private static string Not(string regex)
-            => $"(?({regex})[0-[0]]|.*)";
+        private static string Not(string regex) => $"(?({regex})[0-[0]]|.*)";
 
         [Fact]
         public void TestDeepRecursion()
         {
-            var (token, tree, chars) =
-                JustParseTree(
-@"@""((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
+            var (token, tree, chars) = JustParseTree(
+                @"@""((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
@@ -370,7 +462,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
 (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
-(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((""", RegexOptions.None, conversionFailureOk: false);
+(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((""",
+                RegexOptions.None,
+                conversionFailureOk: false
+            );
             Assert.False(token.IsMissing);
             Assert.False(chars.IsDefaultOrEmpty);
             Assert.Null(tree);
@@ -382,7 +477,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             for (var i = 1; i < 1200; i++)
             {
                 var text = new string('(', i);
-                var (token, _, chars) = JustParseTree($@"@""{text}""", RegexOptions.None, conversionFailureOk: false);
+                var (token, _, chars) = JustParseTree(
+                    $@"@""{text}""",
+                    RegexOptions.None,
+                    conversionFailureOk: false
+                );
                 Assert.False(token.IsMissing);
                 Assert.False(chars.IsDefaultOrEmpty);
             }

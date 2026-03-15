@@ -15,7 +15,10 @@ namespace System.ServiceModel.Channels
 
     abstract class WebSocketConnectionHandler : HttpMessageHandler
     {
-        protected internal virtual HttpResponseMessage AcceptWebSocket(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal virtual HttpResponseMessage AcceptWebSocket(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (this.AcceptWebSocket(request))
             {
@@ -32,28 +35,39 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        protected static HttpResponseMessage GetUpgradeRequiredResponseMessage(HttpRequestMessage request)
+        protected static HttpResponseMessage GetUpgradeRequiredResponseMessage(
+            HttpRequestMessage request
+        )
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.UpgradeRequired);
             response.RequestMessage = request;
             return response;
         }
 
-        protected static HttpResponseMessage GetBadRequestResponseMessage(HttpRequestMessage request)
+        protected static HttpResponseMessage GetBadRequestResponseMessage(
+            HttpRequestMessage request
+        )
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
             response.RequestMessage = request;
             return response;
         }
 
-        protected static HttpResponseMessage GetWebSocketAcceptedResponseMessage(HttpRequestMessage request)
+        protected static HttpResponseMessage GetWebSocketAcceptedResponseMessage(
+            HttpRequestMessage request
+        )
         {
-            HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
+            HttpResponseMessage message = new HttpResponseMessage(
+                HttpStatusCode.SwitchingProtocols
+            );
             message.RequestMessage = request;
             return message;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -61,8 +75,12 @@ namespace System.ServiceModel.Channels
             }
 
             return Task.Factory.StartNew(
-                                () => { return this.AcceptWebSocket(request, cancellationToken); }, 
-                                cancellationToken);
+                () =>
+                {
+                    return this.AcceptWebSocket(request, cancellationToken);
+                },
+                cancellationToken
+            );
         }
     }
 }

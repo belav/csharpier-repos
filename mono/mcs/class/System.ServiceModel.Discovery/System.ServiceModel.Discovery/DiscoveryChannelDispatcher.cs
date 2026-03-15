@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,117 +32,134 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	internal class DiscoveryChannelDispatcher : ChannelDispatcherBase
-	{
-		ServiceHostBase host;
-		AnnouncementClient client;
-		bool handle_announce_online;
+    internal class DiscoveryChannelDispatcher : ChannelDispatcherBase
+    {
+        ServiceHostBase host;
+        AnnouncementClient client;
+        bool handle_announce_online;
 
-		public DiscoveryChannelDispatcher (AnnouncementEndpoint endpoint, bool handleAnnounceOnline)
-		{
-			// The argument endpoint is to indicate "destination".
-			// It is different from the destination indicated in 
-			// "EndpointDiscoveryMetadata" argument in announcement messages sent by the "client".
-			this.client = new AnnouncementClient (endpoint);
-			this.handle_announce_online = handleAnnounceOnline;
-		}
+        public DiscoveryChannelDispatcher(AnnouncementEndpoint endpoint, bool handleAnnounceOnline)
+        {
+            // The argument endpoint is to indicate "destination".
+            // It is different from the destination indicated in
+            // "EndpointDiscoveryMetadata" argument in announcement messages sent by the "client".
+            this.client = new AnnouncementClient(endpoint);
+            this.handle_announce_online = handleAnnounceOnline;
+        }
 
-		public ICommunicationObject Communication {
-			get { return client; }
-		}
+        public ICommunicationObject Communication
+        {
+            get { return client; }
+        }
 
-		public override ServiceHostBase Host {
-			get { return host; }
-		}
+        public override ServiceHostBase Host
+        {
+            get { return host; }
+        }
 
-		public override IChannelListener Listener {
-			get { return null; }
-		}
+        public override IChannelListener Listener
+        {
+            get { return null; }
+        }
 
-		// might be different value
-		protected internal override TimeSpan DefaultOpenTimeout {
-			get { return client.Endpoint.Binding.OpenTimeout; }
-		}
+        // might be different value
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
+            get { return client.Endpoint.Binding.OpenTimeout; }
+        }
 
-		// might be different value
-		protected internal override TimeSpan DefaultCloseTimeout {
-			get { return client.Endpoint.Binding.CloseTimeout; }
-		}
+        // might be different value
+        protected internal override TimeSpan DefaultCloseTimeout
+        {
+            get { return client.Endpoint.Binding.CloseTimeout; }
+        }
 
-		protected internal override void Attach (ServiceHostBase host)
-		{
-			base.Attach (host);
-			this.host = host;
-		}
+        protected internal override void Attach(ServiceHostBase host)
+        {
+            base.Attach(host);
+            this.host = host;
+        }
 
-		protected internal override void Detach (ServiceHostBase host)
-		{
-			base.Detach (host);
-			this.host = null;
-		}
+        protected internal override void Detach(ServiceHostBase host)
+        {
+            base.Detach(host);
+            this.host = null;
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			if (!handle_announce_online)
-				return; // Offline announcement is done by another DiscoveryChannelDispatcher
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            if (!handle_announce_online)
+                return; // Offline announcement is done by another DiscoveryChannelDispatcher
 
-			DateTime start = DateTime.UtcNow;
-			Communication.Open (timeout);
+            DateTime start = DateTime.UtcNow;
+            Communication.Open(timeout);
 
-			// and call AnnouncementOnline().
-			var dx = host.Extensions.Find<DiscoveryServiceExtension> ();
-			// Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
-			if (dx != null) {
-				foreach (var edm in dx.PublishedEndpoints) {
-					client.InnerChannel.OperationTimeout = timeout - (DateTime.UtcNow - start);
-					client.AnnounceOnline (edm);
-				}
-			}
-		}
+            // and call AnnouncementOnline().
+            var dx = host.Extensions.Find<DiscoveryServiceExtension>();
+            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
+            if (dx != null)
+            {
+                foreach (var edm in dx.PublishedEndpoints)
+                {
+                    client.InnerChannel.OperationTimeout = timeout - (DateTime.UtcNow - start);
+                    client.AnnounceOnline(edm);
+                }
+            }
+        }
 
-		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return Communication.BeginOpen (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return Communication.BeginOpen(timeout, callback, state);
+        }
 
-		protected override void OnEndOpen (IAsyncResult result)
-		{
-			Communication.EndOpen (result);
-		}
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            Communication.EndOpen(result);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			if (handle_announce_online)
-				return; // Offline announcement is done by another DiscoveryChannelDispatcher
+        protected override void OnClose(TimeSpan timeout)
+        {
+            if (handle_announce_online)
+                return; // Offline announcement is done by another DiscoveryChannelDispatcher
 
-			DateTime start = DateTime.UtcNow;
-			// and call AnnouncementOnline().
-			var dx = host.Extensions.Find<DiscoveryServiceExtension> ();
-			// Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
-			if (dx != null) {
-				foreach (var edm in dx.PublishedEndpoints) {
-					client.InnerChannel.OperationTimeout = timeout - (DateTime.UtcNow - start);
-					client.AnnounceOffline (edm);
-				}
-			}
+            DateTime start = DateTime.UtcNow;
+            // and call AnnouncementOnline().
+            var dx = host.Extensions.Find<DiscoveryServiceExtension>();
+            // Published endpoints are added by DicoveryEndpointPublisherBehavior, which is added to each ServiceEndpoint in the primary (non-announcement) service.
+            if (dx != null)
+            {
+                foreach (var edm in dx.PublishedEndpoints)
+                {
+                    client.InnerChannel.OperationTimeout = timeout - (DateTime.UtcNow - start);
+                    client.AnnounceOffline(edm);
+                }
+            }
 
-			// Then close the client.
-			Communication.Close (timeout - (DateTime.UtcNow - start));
-		}
+            // Then close the client.
+            Communication.Close(timeout - (DateTime.UtcNow - start));
+        }
 
-		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return Communication.BeginClose (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return Communication.BeginClose(timeout, callback, state);
+        }
 
-		protected override void OnEndClose (IAsyncResult result)
-		{
-			Communication.EndClose (result);
-		}
-		
-		protected override void OnAbort ()
-		{
-			Communication.Abort ();
-		}
-	}
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            Communication.EndClose(result);
+        }
+
+        protected override void OnAbort()
+        {
+            Communication.Abort();
+        }
+    }
 }

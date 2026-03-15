@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,14 +21,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 using System.Text;
 using DbLinq.Util;
 using DbMetal.Utility;
@@ -79,10 +79,12 @@ namespace DbMetal
             /// TODO: add mandatory support in parameters check
             /// </summary>
             public bool Mandatory { get; set; }
+
             /// <summary>
             /// The name written in help
             /// </summary>
             public string Name { get; set; }
+
             /// <summary>
             /// Descriptions
             /// </summary>
@@ -113,7 +115,12 @@ namespace DbMetal
             set { log = value; }
         }
 
-        private static bool IsParameter(string arg, string switchPrefix, out string parameterName, out string parameterValue)
+        private static bool IsParameter(
+            string arg,
+            string switchPrefix,
+            out string parameterName,
+            out string parameterValue
+        )
         {
             bool isParameter;
             if (arg.StartsWith(switchPrefix))
@@ -156,11 +163,15 @@ namespace DbMetal
             return isParameter;
         }
 
-        protected static bool IsParameter(string arg, out string parameterName, out string parameterValue)
+        protected static bool IsParameter(
+            string arg,
+            out string parameterName,
+            out string parameterValue
+        )
         {
             return IsParameter(arg, "--", out parameterName, out parameterValue)
-                   || IsParameter(arg, "-", out parameterName, out parameterValue)
-                   || IsParameter(arg, "/", out parameterName, out parameterValue);
+                || IsParameter(arg, "-", out parameterName, out parameterValue)
+                || IsParameter(arg, "/", out parameterName, out parameterValue);
         }
 
         protected static object GetValue(string value, Type targetType)
@@ -185,7 +196,11 @@ namespace DbMetal
         protected virtual MemberInfo FindParameter(string name, Type type)
         {
             // the easy way: find propery or field name
-            var flags = BindingFlags.IgnoreCase | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public;
+            var flags =
+                BindingFlags.IgnoreCase
+                | BindingFlags.FlattenHierarchy
+                | BindingFlags.Instance
+                | BindingFlags.Public;
             var memberInfos = type.GetMember(name, flags);
             if (memberInfos.Length > 0)
                 return memberInfos[0];
@@ -193,7 +208,8 @@ namespace DbMetal
             memberInfos = type.GetMembers();
             foreach (var memberInfo in memberInfos)
             {
-                var alternates = (AlternateAttribute[])memberInfo.GetCustomAttributes(typeof(AlternateAttribute), true);
+                var alternates = (AlternateAttribute[])
+                    memberInfo.GetCustomAttributes(typeof(AlternateAttribute), true);
                 if (Array.Exists(alternates, a => string.Compare(a.Name, name) == 0))
                     return memberInfo;
             }
@@ -231,7 +247,8 @@ namespace DbMetal
         {
             foreach (string arg in args)
             {
-                string key, value;
+                string key,
+                    value;
                 if (IsParameter(arg, out key, out value))
                     SetParameter(key, value);
                 else
@@ -239,9 +256,7 @@ namespace DbMetal
             }
         }
 
-        protected AbstractParameters()
-        {
-        }
+        protected AbstractParameters() { }
 
         protected AbstractParameters(IList<string> args)
         {
@@ -291,6 +306,7 @@ namespace DbMetal
         }
 
         private static readonly char[] Quotes = new[] { '\'', '\"' };
+
         /// <summary>
         /// Extracts arguments from a full line, in a .NET compatible way
         /// (includes strange quotes trimming)
@@ -311,8 +327,13 @@ namespace DbMetal
         {
             if (string.IsNullOrEmpty(list))
                 return new string[0];
-            return (from entityInterface in list.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    select entityInterface.Trim()).ToArray();
+            return (
+                from entityInterface in list.Split(
+                    new[] { ',' },
+                    StringSplitOptions.RemoveEmptyEntries
+                )
+                select entityInterface.Trim()
+            ).ToArray();
         }
 
         /// <summary>
@@ -347,7 +368,12 @@ namespace DbMetal
             {
                 foreach (var argsFile in argsFiles)
                 {
-                    parameters.AddRange(GetParameterBatchFile<P>(commonArgs, Path.Combine(argsFileDirectory, argsFile)));
+                    parameters.AddRange(
+                        GetParameterBatchFile<P>(
+                            commonArgs,
+                            Path.Combine(argsFileDirectory, argsFile)
+                        )
+                    );
                 }
             }
             // if we don't, just use the args
@@ -411,10 +437,7 @@ namespace DbMetal
         /// </summary>
         protected static string ApplicationName
         {
-            get
-            {
-                return Assembly.GetEntryAssembly().GetName().Name;
-            }
+            get { return Assembly.GetEntryAssembly().GetName().Name; }
         }
 
         /// <summary>
@@ -424,7 +447,7 @@ namespace DbMetal
         {
             get
             {
-                // Assembly.GetEntryAssembly() is null when loading from the 
+                // Assembly.GetEntryAssembly() is null when loading from the
                 // non-default AppDomain.
                 var a = Assembly.GetEntryAssembly();
                 return a != null ? a.GetName().Version : new Version();
@@ -432,6 +455,7 @@ namespace DbMetal
         }
 
         private bool headerWritten;
+
         /// <summary>
         /// Writes the application header
         /// </summary>
@@ -455,9 +479,7 @@ namespace DbMetal
         /// <summary>
         /// Writes examples
         /// </summary>
-        public virtual void WriteExamples()
-        {
-        }
+        public virtual void WriteExamples() { }
 
         /// <summary>
         /// The "syntax" is a bried containing the application name, "[options]" and eventually files.
@@ -486,6 +508,7 @@ namespace DbMetal
             /// The member name (property or field)
             /// </summary>
             public string Name { get; set; }
+
             /// <summary>
             /// The attribute used to define the member as an option
             /// </summary>
@@ -501,6 +524,7 @@ namespace DbMetal
             /// The member name (property or field)
             /// </summary>
             public string Name { get; set; }
+
             /// <summary>
             /// The attribute used to define the member as an input file
             /// </summary>
@@ -533,13 +557,21 @@ namespace DbMetal
             {
                 var descriptions = (T[])propertyInfo.GetCustomAttributes(typeof(T), true);
                 if (descriptions.Length == 1)
-                    yield return new Pair<string, T> { First = propertyInfo.Name, Second = descriptions[0] };
+                    yield return new Pair<string, T>
+                    {
+                        First = propertyInfo.Name,
+                        Second = descriptions[0],
+                    };
             }
             foreach (var fieldInfo in t.GetFields())
             {
                 var descriptions = (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
                 if (descriptions.Length == 1)
-                    yield return new Pair<string, T> { First = fieldInfo.Name, Second = descriptions[0] };
+                    yield return new Pair<string, T>
+                    {
+                        First = fieldInfo.Name,
+                        Second = descriptions[0],
+                    };
             }
         }
 
@@ -551,7 +583,11 @@ namespace DbMetal
 
         protected IEnumerable<FileName> GetFiles()
         {
-            foreach (var pair in from p in EnumerateOptions<FileAttribute>() orderby p.Second.Mandatory select p)
+            foreach (
+                var pair in from p in EnumerateOptions<FileAttribute>()
+                orderby p.Second.Mandatory
+                select p
+            )
                 yield return new FileName { Name = pair.First, Description = pair.Second };
         }
 
@@ -581,9 +617,7 @@ namespace DbMetal
             var optionName = option.Name[0].ToString().ToLower() + option.Name.Substring(1);
             if (string.IsNullOrEmpty(option.Description.ValueName))
                 return optionName;
-            return string.Format("{0}:<{1}>",
-                optionName,
-                option.Description.ValueName);
+            return string.Format("{0}:<{1}>", optionName, option.Description.ValueName);
         }
 
         /// <summary>
@@ -602,7 +636,10 @@ namespace DbMetal
         /// <param name="options"></param>
         /// <param name="files"></param>
         /// <returns></returns>
-        private int GetMaximumLength(IDictionary<int, IList<Option>> options, IEnumerable<FileName> files)
+        private int GetMaximumLength(
+            IDictionary<int, IList<Option>> options,
+            IEnumerable<FileName> files
+        )
         {
             int maxLength = 0;
             foreach (var optionsList in options.Values)
@@ -667,13 +704,19 @@ namespace DbMetal
                 var optionsList = options[group];
                 foreach (var option in from o in optionsList orderby o.Name select o)
                 {
-                    WriteOption(string.Format("  /{0}", GetOptionText(option).PadRight(maxLength)), option.Description.Text);
+                    WriteOption(
+                        string.Format("  /{0}", GetOptionText(option).PadRight(maxLength)),
+                        option.Description.Text
+                    );
                 }
                 WriteLine();
             }
             foreach (var file in files)
             {
-                WriteOption(string.Format("  {0}", GetFileText(file).PadRight(maxLength + 1)), file.Description.Text);
+                WriteOption(
+                    string.Format("  {0}", GetFileText(file).PadRight(maxLength + 1)),
+                    file.Description.Text
+                );
             }
         }
 

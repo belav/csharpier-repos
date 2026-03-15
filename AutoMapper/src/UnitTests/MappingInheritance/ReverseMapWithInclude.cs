@@ -1,10 +1,15 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
+
 public class ReverseMapWithInclude : NonValidatingSpecBase
 {
     public class Duck : Animal { }
-    public class DuckDto : AnimalDto { } 
+
+    public class DuckDto : AnimalDto { }
+
     public abstract class Animal { }
+
     public abstract class AnimalDto { }
+
     public class DuckProxyClassFoo : Duck { }
 
     [Fact]
@@ -12,8 +17,7 @@ public class ReverseMapWithInclude : NonValidatingSpecBase
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Animal, AnimalDto>()
-                .Include<Duck, DuckDto>();
+            cfg.CreateMap<Animal, AnimalDto>().Include<Duck, DuckDto>();
 
             cfg.CreateMap<Duck, DuckDto>().ReverseMap();
         });
@@ -45,16 +49,17 @@ public class ReverseMapWithIncludeBase : AutoMapperSpecBase
 
     public class ConcreteSource : Source { }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .ForMember(dest => dest.Name, conf => conf.MapFrom(source => source.Title))
-            .ReverseMap()
-            .ForMember(dest => dest.Title, conf => conf.MapFrom(source => source.Name));
-        cfg.CreateMap<ConcreteSource, ConcreteDestination>()
-            .IncludeBase<Source, Destination>()
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(dest => dest.Name, conf => conf.MapFrom(source => source.Title))
+                .ReverseMap()
+                .ForMember(dest => dest.Title, conf => conf.MapFrom(source => source.Name));
+            cfg.CreateMap<ConcreteSource, ConcreteDestination>()
+                .IncludeBase<Source, Destination>()
+                .ReverseMap();
+        });
 
     protected override void Because_of()
     {

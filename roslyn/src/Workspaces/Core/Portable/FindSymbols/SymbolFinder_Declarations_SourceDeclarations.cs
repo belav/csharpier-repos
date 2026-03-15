@@ -9,27 +9,55 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    // All the logic for finding source declarations in a given solution/project with some name 
-    // is in this file.  
+    // All the logic for finding source declarations in a given solution/project with some name
+    // is in this file.
 
     public static partial class SymbolFinder
     {
         /// <summary>
         /// Find the symbols for declarations made in source with the specified name.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Solution solution, string name, bool ignoreCase, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsAsync(solution, name, ignoreCase, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Solution solution,
+            string name,
+            bool ignoreCase,
+            CancellationToken cancellationToken = default
+        ) =>
+            FindSourceDeclarationsAsync(
+                solution,
+                name,
+                ignoreCase,
+                SymbolFilter.All,
+                cancellationToken
+            );
 
         /// <summary>
         /// Find the symbols for declarations made in source with the specified name.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
-            Solution solution, string name, bool ignoreCase, SymbolFilter filter, CancellationToken cancellationToken = default)
+            Solution solution,
+            string name,
+            bool ignoreCase,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Solution_Name_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Solution_Name_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var declarations = await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
-                    solution, name, ignoreCase, filter, cancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindSourceDeclarationsWithNormalQueryAsync(
+                        solution,
+                        name,
+                        ignoreCase,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return declarations;
             }
         }
@@ -37,19 +65,47 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// Find the symbols for declarations made in source with the specified name.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(Project project, string name, bool ignoreCase, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsAsync(project, name, ignoreCase, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
+            Project project,
+            string name,
+            bool ignoreCase,
+            CancellationToken cancellationToken = default
+        ) =>
+            FindSourceDeclarationsAsync(
+                project,
+                name,
+                ignoreCase,
+                SymbolFilter.All,
+                cancellationToken
+            );
 
         /// <summary>
         /// Find the symbols for declarations made in source with the specified name.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsAsync(
-            Project project, string name, bool ignoreCase, SymbolFilter filter, CancellationToken cancellationToken = default)
+            Project project,
+            string name,
+            bool ignoreCase,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Project_Name_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Project_Name_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var declarations = await DeclarationFinder.FindSourceDeclarationsWithNormalQueryAsync(
-                    project, name, ignoreCase, filter, cancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindSourceDeclarationsWithNormalQueryAsync(
+                        project,
+                        name,
+                        ignoreCase,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }
@@ -64,8 +120,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// symbols previously matched by a pattern no longer are. However, the set of symbols matched by a
         /// specific release will be consistent for a specific pattern.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(Solution solution, string pattern, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsWithPatternAsync(solution, pattern, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(
+            Solution solution,
+            string pattern,
+            CancellationToken cancellationToken = default
+        ) =>
+            FindSourceDeclarationsWithPatternAsync(
+                solution,
+                pattern,
+                SymbolFilter.All,
+                cancellationToken
+            );
 
         /// <summary>
         /// Find the symbols for declarations made in source with the specified pattern. This pattern is matched
@@ -75,12 +140,27 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// specific release will be consistent for a specific pattern.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(
-            Solution solution, string pattern, SymbolFilter filter, CancellationToken cancellationToken = default)
+            Solution solution,
+            string pattern,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
-                    solution, pattern, filter, cancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindSourceDeclarationsWithPatternAsync(
+                        solution,
+                        pattern,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return declarations;
             }
         }
@@ -92,8 +172,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// symbols previously matched by a pattern no longer are. However, the set of symbols matched by a
         /// specific release will be consistent for a specific pattern.
         /// </summary>
-        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(Project project, string pattern, CancellationToken cancellationToken = default)
-            => FindSourceDeclarationsWithPatternAsync(project, pattern, SymbolFilter.All, cancellationToken);
+        public static Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(
+            Project project,
+            string pattern,
+            CancellationToken cancellationToken = default
+        ) =>
+            FindSourceDeclarationsWithPatternAsync(
+                project,
+                pattern,
+                SymbolFilter.All,
+                cancellationToken
+            );
 
         /// <summary>
         /// Find the symbols for declarations made in source with the specified pattern. This pattern is matched
@@ -103,12 +192,27 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// specific release will be consistent for a specific pattern.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindSourceDeclarationsWithPatternAsync(
-            Project project, string pattern, SymbolFilter filter, CancellationToken cancellationToken = default)
+            Project project,
+            string pattern,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var declarations = await DeclarationFinder.FindSourceDeclarationsWithPatternAsync(
-                    project, pattern, filter, cancellationToken).ConfigureAwait(false);
+                var declarations = await DeclarationFinder
+                    .FindSourceDeclarationsWithPatternAsync(
+                        project,
+                        pattern,
+                        filter,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }

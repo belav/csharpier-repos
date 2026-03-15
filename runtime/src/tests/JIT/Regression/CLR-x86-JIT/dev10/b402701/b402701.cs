@@ -5,7 +5,6 @@ using System;
 using System.Security;
 using Xunit;
 
-
 public class Foo
 {
     internal virtual void callee()

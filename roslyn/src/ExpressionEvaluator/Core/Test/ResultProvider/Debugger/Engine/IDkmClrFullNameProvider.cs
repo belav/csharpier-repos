@@ -20,28 +20,27 @@ namespace Microsoft.VisualStudio.Debugger.ComponentInterfaces
         string GetClrTypeName(
             DkmInspectionContext inspectionContext,
             DkmClrType clrType,
-            DkmClrCustomTypeInfo customTypeInfo);
+            DkmClrCustomTypeInfo customTypeInfo
+        );
 
-        string GetClrArrayIndexExpression(
-            DkmInspectionContext inspectionContext,
-            string[] indices);
+        string GetClrArrayIndexExpression(DkmInspectionContext inspectionContext, string[] indices);
 
         string GetClrCastExpression(
             DkmInspectionContext inspectionContext,
             string argument,
             DkmClrType clrType,
             DkmClrCustomTypeInfo customTypeInfo,
-            DkmClrCastExpressionOptions castExpressionOptions);
+            DkmClrCastExpressionOptions castExpressionOptions
+        );
 
         string GetClrObjectCreationExpression(
             DkmInspectionContext inspectionContext,
             DkmClrType clrType,
             DkmClrCustomTypeInfo customTypeInfo,
-            string[] arguments);
+            string[] arguments
+        );
 
-        string GetClrValidIdentifier(
-            DkmInspectionContext inspectionContext,
-            string identifier);
+        string GetClrValidIdentifier(DkmInspectionContext inspectionContext, string identifier);
 
         string GetClrMemberName(
             DkmInspectionContext inspectionContext,
@@ -50,16 +49,19 @@ namespace Microsoft.VisualStudio.Debugger.ComponentInterfaces
             DkmClrCustomTypeInfo customTypeInfo,
             string memberName,
             bool requiresExplicitCast,
-            bool isStatic);
+            bool isStatic
+        );
 
         bool ClrExpressionMayRequireParentheses(
             DkmInspectionContext inspectionContext,
-            string expression);
+            string expression
+        );
 
         string GetClrExpressionAndFormatSpecifiers(
             DkmInspectionContext inspectionContext,
             string expression,
-            out ReadOnlyCollection<string> formatSpecifiers);
+            out ReadOnlyCollection<string> formatSpecifiers
+        );
 
         string GetClrExpressionForNull(DkmInspectionContext inspectionContext);
 

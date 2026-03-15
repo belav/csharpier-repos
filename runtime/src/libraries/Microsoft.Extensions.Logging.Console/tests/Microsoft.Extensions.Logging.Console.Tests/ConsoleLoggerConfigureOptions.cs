@@ -42,15 +42,17 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void ConsoleLoggerConfigureOptions_InvalidConfigurationData(string key, string value)
         {
             var configuration = new ConfigurationManager();
-            configuration.AddInMemoryCollection(new[] { new KeyValuePair<string, string>(key, value) });
+            configuration.AddInMemoryCollection(
+                new[] { new KeyValuePair<string, string>(key, value) }
+            );
 
             IServiceProvider serviceProvider = new ServiceCollection()
-                .AddLogging(builder => builder
-                    .AddConfiguration(configuration)
-                    .AddConsole())
+                .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole())
                 .BuildServiceProvider();
 
-            InvalidOperationException e = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService<ILoggerProvider>());
+            InvalidOperationException e = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetRequiredService<ILoggerProvider>()
+            );
 
             // "Console:" is stripped off from the config path since that config section is read by the ConsoleLogger, and not part of the Options path.
             string configPath = key.Substring("Console:".Length);

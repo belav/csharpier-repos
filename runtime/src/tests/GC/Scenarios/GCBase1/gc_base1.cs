@@ -1,73 +1,71 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     public class GC_Base1
     {
         internal RandomNode[] CvA_RandomNode;
 
-        public static int Main( System.String [] Args )
+        public static int Main(System.String[] Args)
         {
-
             int iRep = 0;
             int iObj = 0;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            switch( Args.Length )
+            switch (Args.Length)
             {
-               case 1:
-                   if (!Int32.TryParse( Args[0], out iRep ))
-                   {
-                       iRep = 15;
-                   }
-               break;
-               case 2:
-                   if (!Int32.TryParse( Args[0], out iRep ))
-                   {
-                       iRep = 15;
-                   }
-                   if (!Int32.TryParse( Args[1], out iObj ))
-                   {
-                       iObj = 1000;
-                   }
-               break;
-               default:
-                   iRep = 15;
-                   iObj = 1000;
-               break;
+                case 1:
+                    if (!Int32.TryParse(Args[0], out iRep))
+                    {
+                        iRep = 15;
+                    }
+                    break;
+                case 2:
+                    if (!Int32.TryParse(Args[0], out iRep))
+                    {
+                        iRep = 15;
+                    }
+                    if (!Int32.TryParse(Args[1], out iObj))
+                    {
+                        iObj = 1000;
+                    }
+                    break;
+                default:
+                    iRep = 15;
+                    iObj = 1000;
+                    break;
             }
 
             GC_Base1 Mv_Base = new GC_Base1();
 
-            if(Mv_Base.runTest(iRep, iObj ))
+            if (Mv_Base.runTest(iRep, iObj))
             {
-                Console.WriteLine( "Test Passed" );
+                Console.WriteLine("Test Passed");
                 return 100;
             }
             else
             {
-                Console.WriteLine( "Test Failed" );
+                Console.WriteLine("Test Failed");
                 return 1;
             }
         }
 
-
-        public bool runTest( int Rep, int Obj )
+        public bool runTest(int Rep, int Obj)
         {
-
-            for( int i = 0; i < Rep; i++ )
+            for (int i = 0; i < Rep; i++)
             {
-                CvA_RandomNode = new RandomNode[ Obj ];
+                CvA_RandomNode = new RandomNode[Obj];
 
-                for( int j = 0; j < Obj; j++ )
+                for (int j = 0; j < Obj; j++)
                 {
-                    CvA_RandomNode[ j ] = new RandomNode( j, j );
-                    if( j == 0 )
+                    CvA_RandomNode[j] = new RandomNode(j, j);
+                    if (j == 0)
                     {
-                        CvA_RandomNode[ j ].setBigSize( 0 );
+                        CvA_RandomNode[j].setBigSize(0);
                     }
                 }
 
@@ -77,9 +75,7 @@ namespace DefaultNamespace {
             }
 
             return true;
-
         }
-
     }
 
     public class BaseNode
@@ -118,7 +114,6 @@ namespace DefaultNamespace {
         {
             return iType;
         }
-
     }
 
     public class RandomNode : BaseNode
@@ -140,7 +135,6 @@ namespace DefaultNamespace {
             }
 
             setSize(Size);
-
         }
 
         public virtual void setSize(int Size)
@@ -163,8 +157,5 @@ namespace DefaultNamespace {
         {
             iSize = Size;
         }
-
-
-
     }
 }

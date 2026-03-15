@@ -33,6 +33,5 @@ namespace System.Net.Http.Functional.Tests
         }
     }
 
-    public class ThrowingContentException : Exception
-    { }
+    public class ThrowingContentException : Exception { }
 }

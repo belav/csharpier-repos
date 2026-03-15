@@ -18,11 +18,19 @@ namespace System.Web.Http.ContentNegotiation
         {
             // Arrange
             Configuration.Formatters.Clear();
-            MediaTypeWithQualityHeaderValue requestContentType = new MediaTypeWithQualityHeaderValue("application/xml");
+            MediaTypeWithQualityHeaderValue requestContentType =
+                new MediaTypeWithQualityHeaderValue("application/xml");
             MediaTypeHeaderValue responseContentType = null;
 
             Mock<IContentNegotiator> selector = new Mock<IContentNegotiator>();
-            selector.Setup(s => s.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(), It.IsAny<IEnumerable<MediaTypeFormatter>>()))
+            selector
+                .Setup(s =>
+                    s.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
                 .Returns(new ContentNegotiationResult(new XmlMediaTypeFormatter(), null));
 
             Configuration.Services.Replace(typeof(IContentNegotiator), selector.Object);
@@ -35,7 +43,15 @@ namespace System.Web.Http.ContentNegotiation
             responseContentType = response.Content.Headers.ContentType;
 
             // Assert
-            selector.Verify(s => s.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(), It.IsAny<IEnumerable<MediaTypeFormatter>>()), Times.AtLeastOnce());
+            selector.Verify(
+                s =>
+                    s.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    ),
+                Times.AtLeastOnce()
+            );
         }
     }
 }

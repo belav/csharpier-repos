@@ -20,7 +20,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeMemberRequired;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeMemberRequired), Shared]
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.MakeMemberRequired
+    ),
+    Shared
+]
 [ExtensionOrder(Before = PredefinedCodeFixProviderNames.DeclareAsNullable)]
 internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBasedCodeFixProvider
 {
@@ -28,9 +34,7 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpMakeMemberRequiredCodeFixProvider()
-    {
-    }
+    public CSharpMakeMemberRequiredCodeFixProvider() { }
 
     public override ImmutableArray<string> FixableDiagnosticIds { get; } =
         ImmutableArray.Create(CS8618);
@@ -41,7 +45,9 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
         var span = context.Span;
         var cancellationToken = context.CancellationToken;
 
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         // Required members are available in C# 11 or higher
         if (root.GetLanguageVersion() < LanguageVersion.CSharp11)
@@ -53,12 +59,25 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
         // public string [|MyProperty|] { get; set; }
         // public string [|_myField|];
         // public string [|_myField1|], [|_myField2|];
-        if (node is not (PropertyDeclarationSyntax or VariableDeclaratorSyntax { Parent.Parent: FieldDeclarationSyntax }))
+        if (
+            node
+            is not (
+                PropertyDeclarationSyntax
+                or VariableDeclaratorSyntax { Parent.Parent: FieldDeclarationSyntax }
+            )
+        )
             return;
 
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-        if (semanticModel.Compilation.GetBestTypeByMetadataName("System.Runtime.CompilerServices.RequiredMemberAttribute") is null)
+        if (
+            semanticModel.Compilation.GetBestTypeByMetadataName(
+                "System.Runtime.CompilerServices.RequiredMemberAttribute"
+            )
+            is null
+        )
         {
             // The attribute necessary to support required members is not present
             return;
@@ -74,12 +93,20 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
                 return;
 
             var containingTypeVisibility = propertySymbol.ContainingType.GetResultantVisibility();
-            var minimalAccessibility = (Accessibility)Math.Min((int)propertySymbol.DeclaredAccessibility, (int)setMethod.DeclaredAccessibility);
+            var minimalAccessibility = (Accessibility)
+                Math.Min(
+                    (int)propertySymbol.DeclaredAccessibility,
+                    (int)setMethod.DeclaredAccessibility
+                );
 
             if (!CanBeAccessed(containingTypeVisibility, minimalAccessibility))
                 return;
 
-            RegisterCodeFix(context, CSharpCodeFixesResources.Make_property_required, nameof(CSharpCodeFixesResources.Make_property_required));
+            RegisterCodeFix(
+                context,
+                CSharpCodeFixesResources.Make_property_required,
+                nameof(CSharpCodeFixesResources.Make_property_required)
+            );
         }
         else if (fieldOrPropertySymbol is IFieldSymbol fieldSymbol)
         {
@@ -89,28 +116,42 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
             if (!CanBeAccessed(containingTypeVisibility, accessibility))
                 return;
 
-            RegisterCodeFix(context, CSharpCodeFixesResources.Make_field_required, nameof(CSharpCodeFixesResources.Make_field_required));
+            RegisterCodeFix(
+                context,
+                CSharpCodeFixesResources.Make_field_required,
+                nameof(CSharpCodeFixesResources.Make_field_required)
+            );
         }
 
         // The `required` modifier cannot be used if a member is not accessible from outside of type.
         // For instance, having private required property in a public class leads to compiler error.
         // This function checks whether the member can be accessed by checking containing type visibility (which is computed already taking into account whether the type is nested and what is its visibility based on that fact)
         // against accessibility of member we are trying to make required
-        static bool CanBeAccessed(SymbolVisibility containingTypeVisibility, Accessibility accessibility) => containingTypeVisibility switch
-        {
-            // Public is the highest accessibility. So in order to be accessible outside, member accessibility must be only public
-            SymbolVisibility.Public => accessibility is Accessibility.Public,
-            // In order to be accessible from an internal type, a member must have internal accessibility or higher
-            SymbolVisibility.Internal => accessibility is >= Accessibility.Internal,
-            // Private containing type visibility means it is nested in some other type.
-            // In such case member must be accessible to the outer type of containing one.
-            // This is possible with internal accessibility or higher
-            SymbolVisibility.Private => accessibility is >= Accessibility.Internal,
-            _ => throw ExceptionUtilities.Unreachable(),
-        };
+        static bool CanBeAccessed(
+            SymbolVisibility containingTypeVisibility,
+            Accessibility accessibility
+        ) =>
+            containingTypeVisibility switch
+            {
+                // Public is the highest accessibility. So in order to be accessible outside, member accessibility must be only public
+                SymbolVisibility.Public => accessibility is Accessibility.Public,
+                // In order to be accessible from an internal type, a member must have internal accessibility or higher
+                SymbolVisibility.Internal => accessibility is >= Accessibility.Internal,
+                // Private containing type visibility means it is nested in some other type.
+                // In such case member must be accessible to the outer type of containing one.
+                // This is possible with internal accessibility or higher
+                SymbolVisibility.Private => accessibility is >= Accessibility.Internal,
+                _ => throw ExceptionUtilities.Unreachable(),
+            };
     }
 
-    protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+    protected override Task FixAllAsync(
+        Document document,
+        ImmutableArray<Diagnostic> diagnostics,
+        SyntaxEditor editor,
+        CodeActionOptionsProvider fallbackOptions,
+        CancellationToken cancellationToken
+    )
     {
         var root = editor.OriginalRoot;
         var generator = editor.Generator;
@@ -128,7 +169,12 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
             // public required string _myField;
             // public required string _myField2;
             // ```
-            if (memberDeclarator is VariableDeclaratorSyntax { Parent.Parent: FieldDeclarationSyntax fieldDeclaration })
+            if (
+                memberDeclarator is VariableDeclaratorSyntax
+                {
+                    Parent.Parent: FieldDeclarationSyntax fieldDeclaration
+                }
+            )
             {
                 // Skip field declarations we already visited to not try changing the same declaration twice.
                 // Otherwise we get an exception in fix-all scenario like this:
@@ -143,7 +189,10 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
 
             var declarationModifiers = generator.GetModifiers(memberDeclarator);
             var newDeclarationModifiers = declarationModifiers.WithIsRequired(true);
-            editor.ReplaceNode(memberDeclarator, generator.WithModifiers(memberDeclarator, newDeclarationModifiers));
+            editor.ReplaceNode(
+                memberDeclarator,
+                generator.WithModifiers(memberDeclarator, newDeclarationModifiers)
+            );
         }
 
         return Task.CompletedTask;

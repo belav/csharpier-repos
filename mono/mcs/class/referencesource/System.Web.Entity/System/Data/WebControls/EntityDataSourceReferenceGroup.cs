@@ -9,19 +9,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Common;
 using System.Data.EntityClient;
 using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
-using System.ComponentModel;
-using System.Data.Common;
-using System.Data.Objects.DataClasses;
-using System.Data.Objects;
-using System.Data;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace System.Web.UI.WebControls
 {
@@ -39,18 +39,28 @@ namespace System.Web.UI.WebControls
             this.end = end;
         }
 
-        internal AssociationSetEnd End { get { return this.end; } }
+        internal AssociationSetEnd End
+        {
+            get { return this.end; }
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        internal static EntityDataSourceReferenceGroup Create(Type entityType, AssociationSetEnd end)
+        internal static EntityDataSourceReferenceGroup Create(
+            Type entityType,
+            AssociationSetEnd end
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(entityType, "entityType");
 
             Type groupType = typeof(EntityDataSourceReferenceGroup<>).MakeGenericType(entityType);
-            return (EntityDataSourceReferenceGroup)Activator.CreateInstance(groupType, new object[] { end });
+            return (EntityDataSourceReferenceGroup)
+                Activator.CreateInstance(groupType, new object[] { end });
         }
 
-        internal abstract void SetKeyValues(EntityDataSourceWrapper wrapper, Dictionary<string, object> newKeyValues);
+        internal abstract void SetKeyValues(
+            EntityDataSourceWrapper wrapper,
+            Dictionary<string, object> newKeyValues
+        );
 
         internal abstract EntityKey GetEntityKey(EntityDataSourceWrapper entity);
     }
@@ -59,11 +69,12 @@ namespace System.Web.UI.WebControls
         where T : class
     {
         public EntityDataSourceReferenceGroup(AssociationSetEnd end)
-            : base(end)
-        {
-        }
+            : base(end) { }
 
-        internal override void SetKeyValues(EntityDataSourceWrapper wrapper, Dictionary<string, object> newKeyValues)
+        internal override void SetKeyValues(
+            EntityDataSourceWrapper wrapper,
+            Dictionary<string, object> newKeyValues
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(wrapper, "wrapper");
 
@@ -71,10 +82,9 @@ namespace System.Web.UI.WebControls
 
             EntityKey originalEntityKeys = reference.EntityKey;
 
-            
             if (null != newKeyValues)
             {
-                if(null != originalEntityKeys)
+                if (null != originalEntityKeys)
                 {
                     // mix the missing keys from the original values
                     foreach (var originalEntityKey in originalEntityKeys.EntityKeyValues)
@@ -118,7 +128,10 @@ namespace System.Web.UI.WebControls
             }
             else
             {
-                reference.EntityKey = new EntityKey(EntityDataSourceUtil.GetQualifiedEntitySetName(End.EntitySet), (IEnumerable<KeyValuePair<string, object>>)newKeyValues);
+                reference.EntityKey = new EntityKey(
+                    EntityDataSourceUtil.GetQualifiedEntitySetName(End.EntitySet),
+                    (IEnumerable<KeyValuePair<string, object>>)newKeyValues
+                );
             }
         }
 
@@ -134,7 +147,8 @@ namespace System.Web.UI.WebControls
             Debug.Assert(relationshipManager != null, "couldn't get a relationship manager");
             EntityReference<T> reference = relationshipManager.GetRelatedReference<T>(
                 this.End.ParentAssociationSet.ElementType.FullName,
-                this.End.CorrespondingAssociationEndMember.Name);
+                this.End.CorrespondingAssociationEndMember.Name
+            );
             return reference;
         }
     }

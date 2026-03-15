@@ -13,20 +13,25 @@ namespace System.ServiceModel.Activation
     {
         public bool IsReusable
         {
-            [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - called outside PermitOnly context.")]
-            get
-            {
-                return true;
-            }
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "RequiresReview - called outside PermitOnly context."
+            )]
+            get { return true; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Entry-point from asp.net, called outside PermitOnly context.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Entry-point from asp.net, called outside PermitOnly context."
+        )]
         [SecurityCritical]
         public void ProcessRequest(HttpContext context)
         {
             ServiceHostingEnvironment.SafeEnsureInitialized();
 
-            HostedHttpRequestAsyncResult.ExecuteSynchronous(context.ApplicationInstance, true, false);
+            HostedHttpRequestAsyncResult.ExecuteSynchronous(
+                context.ApplicationInstance,
+                true,
+                false
+            );
         }
     }
 }

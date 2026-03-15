@@ -11,15 +11,18 @@ namespace System.Configuration
             {
                 ProtectedConfigurationSection config =
                     PrivilegedConfigurationManager.GetSection(
-                            BaseConfigurationRecord.ReservedSectionProtectedConfiguration) as
-                        ProtectedConfigurationSection;
-                return config == null ? new ProtectedConfigurationProviderCollection() : config.GetAllProviders();
+                        BaseConfigurationRecord.ReservedSectionProtectedConfiguration
+                    ) as ProtectedConfigurationSection;
+                return config == null
+                    ? new ProtectedConfigurationProviderCollection()
+                    : config.GetAllProviders();
             }
         }
 
         public const string RsaProviderName = "RsaProtectedConfigurationProvider";
         public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
-        public const string ProtectedDataSectionName = BaseConfigurationRecord.ReservedSectionProtectedConfiguration;
+        public const string ProtectedDataSectionName =
+            BaseConfigurationRecord.ReservedSectionProtectedConfiguration;
 
         public static string DefaultProvider
         {
@@ -27,8 +30,8 @@ namespace System.Configuration
             {
                 ProtectedConfigurationSection config =
                     PrivilegedConfigurationManager.GetSection(
-                            BaseConfigurationRecord.ReservedSectionProtectedConfiguration) as
-                        ProtectedConfigurationSection;
+                        BaseConfigurationRecord.ReservedSectionProtectedConfiguration
+                    ) as ProtectedConfigurationSection;
                 return config != null ? config.DefaultProvider : "";
             }
         }

@@ -15,7 +15,12 @@ namespace System.Security.Cryptography.X509Certificates
             throw new NotImplementedException($"{nameof(StorePal)}.{nameof(FromHandle)}");
         }
 
-        private static AndroidCertLoader FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, bool readingFromFile, X509KeyStorageFlags keyStorageFlags)
+        private static AndroidCertLoader FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            bool readingFromFile,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -24,8 +29,16 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (contentType == X509ContentType.Pkcs12)
             {
-                X509Certificate.EnforceIterationCountLimit(ref rawData, readingFromFile, password.PasswordProvided);
-                ICertificatePal[] certPals = ReadPkcs12Collection(rawData, password, ephemeralSpecified);
+                X509Certificate.EnforceIterationCountLimit(
+                    ref rawData,
+                    readingFromFile,
+                    password.PasswordProvided
+                );
+                ICertificatePal[] certPals = ReadPkcs12Collection(
+                    rawData,
+                    password,
+                    ephemeralSpecified
+                );
                 return new AndroidCertLoader(certPals);
             }
             else
@@ -35,15 +48,33 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static partial ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            return FromBlob(rawData, password, readingFromFile: false, keyStorageFlags: keyStorageFlags);
+            return FromBlob(
+                rawData,
+                password,
+                readingFromFile: false,
+                keyStorageFlags: keyStorageFlags
+            );
         }
 
-        internal static partial ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             byte[] fileBytes = File.ReadAllBytes(fileName);
-            return FromBlob(fileBytes, password, readingFromFile: true, keyStorageFlags: keyStorageFlags);
+            return FromBlob(
+                fileBytes,
+                password,
+                readingFromFile: true,
+                keyStorageFlags: keyStorageFlags
+            );
         }
 
         internal static partial IExportPal FromCertificate(ICertificatePalCore cert)
@@ -51,12 +82,18 @@ namespace System.Security.Cryptography.X509Certificates
             return new AndroidExportProvider(cert);
         }
 
-        internal static partial IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        internal static partial IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new AndroidExportProvider(certificates);
         }
 
-        internal static partial IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        internal static partial IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             bool isReadWrite = (openFlags & OpenFlags.ReadWrite) == OpenFlags.ReadWrite;
             if (isReadWrite && storeLocation == StoreLocation.LocalMachine)
@@ -64,7 +101,10 @@ namespace System.Security.Cryptography.X509Certificates
                 // All LocalMachine stores are read-only from an Android application's perspective
                 throw new CryptographicException(
                     SR.Cryptography_Unix_X509_MachineStoresReadOnly,
-                    new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresReadOnly));
+                    new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_MachineStoresReadOnly
+                    )
+                );
             }
 
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
@@ -109,14 +149,19 @@ namespace System.Security.Cryptography.X509Certificates
             if ((openFlags & OpenFlags.OpenExistingOnly) == OpenFlags.OpenExistingOnly)
                 throw new CryptographicException(SR.Cryptography_X509_StoreNotFound);
 
-            string message = SR.Format(SR.Cryptography_X509_StoreCannotCreate, storeName, storeLocation);
+            string message = SR.Format(
+                SR.Cryptography_X509_StoreCannotCreate,
+                storeName,
+                storeLocation
+            );
             throw new CryptographicException(message, new PlatformNotSupportedException(message));
         }
 
         private static ICertificatePal[] ReadPkcs12Collection(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            bool ephemeralSpecified)
+            bool ephemeralSpecified
+        )
         {
             using (var reader = new AndroidPkcs12Reader(rawData))
             {

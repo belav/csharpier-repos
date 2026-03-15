@@ -16,22 +16,24 @@ namespace AutoMapper.UnitTests
         {
             public Guid Id { get; set; }
         }
-        public class automapper_fails_to_map_custom_mappings_when_mapping_collections_for_an_interface : AutoMapperSpecBase
-        {
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<ITestDomainItem, TestDtoItem>()
-                    .ForMember(d => d.Id, s => s.MapFrom(x => x.ItemId));
-            });
 
+        public class automapper_fails_to_map_custom_mappings_when_mapping_collections_for_an_interface
+            : AutoMapperSpecBase
+        {
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<ITestDomainItem, TestDtoItem>()
+                        .ForMember(d => d.Id, s => s.MapFrom(x => x.ItemId));
+                });
 
             [Fact]
             public void should_map_the_id_property()
             {
                 var domainItems = new List<ITestDomainItem>
                 {
-                    new TestDomainItem {ItemId = Guid.NewGuid()},
-                    new TestDomainItem {ItemId = Guid.NewGuid()}
+                    new TestDomainItem { ItemId = Guid.NewGuid() },
+                    new TestDomainItem { ItemId = Guid.NewGuid() },
                 };
 
                 var dtos = Mapper.Map<IEnumerable<ITestDomainItem>, TestDtoItem[]>(domainItems);
@@ -68,17 +70,23 @@ namespace AutoMapper.UnitTests
                 }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>();
-                cfg.CreateMap<DateTime?, MyCustomDate>()
-                    .ConvertUsing(
-                        src => src.HasValue ? new MyCustomDate(src.Value.Day, src.Value.Month, src.Value.Year) : null);
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<DateTime?, MyCustomDate>()
+                        .ConvertUsing(src =>
+                            src.HasValue
+                                ? new MyCustomDate(src.Value.Day, src.Value.Month, src.Value.Year)
+                                : null
+                        );
+                });
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Source, Destination>(new Source { SomeDate = new DateTime(2005, 12, 1) });
+                _result = Mapper.Map<Source, Destination>(
+                    new Source { SomeDate = new DateTime(2005, 12, 1) }
+                );
             }
 
             [Fact]
@@ -97,19 +105,20 @@ namespace AutoMapper.UnitTests
 
         public class TestEnumerable : AutoMapperSpecBase
         {
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Person, PersonModel>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Person, PersonModel>();
+                });
 
             [Fact]
             public void MapsEnumerableTypes()
             {
-                Person[] personArr = new[] {new Person() {Name = "Name"}};
+                Person[] personArr = new[] { new Person() { Name = "Name" } };
                 People people = new People(personArr);
-                
+
                 var pmc = Mapper.Map<People, List<PersonModel>>(people);
-                
+
                 pmc.ShouldNotBeNull();
                 (pmc.Count == 1).ShouldBeTrue();
             }
@@ -117,10 +126,12 @@ namespace AutoMapper.UnitTests
             public class People : IEnumerable
             {
                 private readonly Person[] people;
+
                 public People(Person[] people)
                 {
                     this.people = people;
                 }
+
                 public IEnumerator GetEnumerator()
                 {
                     foreach (var person in people)
@@ -140,6 +151,5 @@ namespace AutoMapper.UnitTests
                 public string Name { get; set; }
             }
         }
-
     }
 }

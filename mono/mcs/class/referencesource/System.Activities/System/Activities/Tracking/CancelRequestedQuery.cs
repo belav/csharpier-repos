@@ -14,6 +14,5 @@ namespace System.Activities.Tracking
 
         public string ActivityName { get; set; }
         public string ChildActivityName { get; set; }
-
     }
 }

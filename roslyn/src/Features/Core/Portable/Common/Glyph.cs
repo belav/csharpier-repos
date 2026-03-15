@@ -112,6 +112,6 @@ namespace Microsoft.CodeAnalysis
 
         AddReference,
         NuGet,
-        TargetTypeMatch
+        TargetTypeMatch,
     }
 }

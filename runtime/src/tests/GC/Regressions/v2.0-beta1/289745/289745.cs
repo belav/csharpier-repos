@@ -6,7 +6,6 @@
  *  NOTE:           if unable to repro, tweak the array lengths depending on the amount of physical ram in your machine
  */
 
-
 using System;
 
 public class Test
@@ -16,6 +15,7 @@ public class Test
     public class Dummy
     {
         public int[] data;
+
         public Dummy()
         {
             data = new int[FACTOR * FACTOR];
@@ -57,5 +57,3 @@ public class Test
         return 100;
     }
 }
-
-

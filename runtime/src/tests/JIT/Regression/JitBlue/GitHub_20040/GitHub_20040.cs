@@ -15,14 +15,14 @@ namespace GitHub_20040
         [Fact]
         public static int TestEntryPoint()
         {
-            var array = new byte[] {0x00, 0x01};
+            var array = new byte[] { 0x00, 0x01 };
             var reader = new BinaryTokenStreamReader(array);
 
             var val = reader.ReadByte();
 
             if (val == 0x01)
             {
-                Console.WriteLine("Pass");                
+                Console.WriteLine("Pass");
                 return 100;
             }
             else

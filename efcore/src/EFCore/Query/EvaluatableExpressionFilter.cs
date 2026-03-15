@@ -8,32 +8,44 @@ public class EvaluatableExpressionFilter : IEvaluatableExpressionFilter
 {
     // This methods are non-deterministic and result varies based on time of running the query.
     // Hence we don't evaluate them. See issue#2069
-    private static readonly PropertyInfo DateTimeNow
-        = typeof(DateTime).GetTypeInfo().GetDeclaredProperty(nameof(DateTime.Now))!;
+    private static readonly PropertyInfo DateTimeNow = typeof(DateTime)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(DateTime.Now))!;
 
-    private static readonly PropertyInfo DateTimeUtcNow
-        = typeof(DateTime).GetTypeInfo().GetDeclaredProperty(nameof(DateTime.UtcNow))!;
+    private static readonly PropertyInfo DateTimeUtcNow = typeof(DateTime)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(DateTime.UtcNow))!;
 
-    private static readonly PropertyInfo DateTimeToday
-        = typeof(DateTime).GetTypeInfo().GetDeclaredProperty(nameof(DateTime.Today))!;
+    private static readonly PropertyInfo DateTimeToday = typeof(DateTime)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(DateTime.Today))!;
 
-    private static readonly PropertyInfo DateTimeOffsetNow
-        = typeof(DateTimeOffset).GetTypeInfo().GetDeclaredProperty(nameof(DateTimeOffset.Now))!;
+    private static readonly PropertyInfo DateTimeOffsetNow = typeof(DateTimeOffset)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(DateTimeOffset.Now))!;
 
-    private static readonly PropertyInfo DateTimeOffsetUtcNow
-        = typeof(DateTimeOffset).GetTypeInfo().GetDeclaredProperty(nameof(DateTimeOffset.UtcNow))!;
+    private static readonly PropertyInfo DateTimeOffsetUtcNow = typeof(DateTimeOffset)
+        .GetTypeInfo()
+        .GetDeclaredProperty(nameof(DateTimeOffset.UtcNow))!;
 
-    private static readonly MethodInfo GuidNewGuid
-        = typeof(Guid).GetTypeInfo().GetDeclaredMethod(nameof(Guid.NewGuid))!;
+    private static readonly MethodInfo GuidNewGuid = typeof(Guid)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(Guid.NewGuid))!;
 
-    private static readonly MethodInfo RandomNextNoArgs
-        = typeof(Random).GetRuntimeMethod(nameof(Random.Next), Type.EmptyTypes)!;
+    private static readonly MethodInfo RandomNextNoArgs = typeof(Random).GetRuntimeMethod(
+        nameof(Random.Next),
+        Type.EmptyTypes
+    )!;
 
-    private static readonly MethodInfo RandomNextOneArg
-        = typeof(Random).GetRuntimeMethod(nameof(Random.Next), new[] { typeof(int) })!;
+    private static readonly MethodInfo RandomNextOneArg = typeof(Random).GetRuntimeMethod(
+        nameof(Random.Next),
+        new[] { typeof(int) }
+    )!;
 
-    private static readonly MethodInfo RandomNextTwoArgs
-        = typeof(Random).GetRuntimeMethod(nameof(Random.Next), new[] { typeof(int), typeof(int) })!;
+    private static readonly MethodInfo RandomNextTwoArgs = typeof(Random).GetRuntimeMethod(
+        nameof(Random.Next),
+        new[] { typeof(int), typeof(int) }
+    )!;
 
     /// <summary>
     ///     <para>
@@ -45,8 +57,7 @@ public class EvaluatableExpressionFilter : IEvaluatableExpressionFilter
     ///     </para>
     /// </summary>
     /// <param name="dependencies">The dependencies to use.</param>
-    public EvaluatableExpressionFilter(
-        EvaluatableExpressionFilterDependencies dependencies)
+    public EvaluatableExpressionFilter(EvaluatableExpressionFilterDependencies dependencies)
     {
         Dependencies = dependencies;
     }
@@ -63,11 +74,13 @@ public class EvaluatableExpressionFilter : IEvaluatableExpressionFilter
         {
             case MemberExpression memberExpression:
                 var member = memberExpression.Member;
-                if (Equals(member, DateTimeNow)
+                if (
+                    Equals(member, DateTimeNow)
                     || Equals(member, DateTimeUtcNow)
                     || Equals(member, DateTimeToday)
                     || Equals(member, DateTimeOffsetNow)
-                    || Equals(member, DateTimeOffsetUtcNow))
+                    || Equals(member, DateTimeOffsetUtcNow)
+                )
                 {
                     return false;
                 }
@@ -77,11 +90,13 @@ public class EvaluatableExpressionFilter : IEvaluatableExpressionFilter
             case MethodCallExpression methodCallExpression:
                 var method = methodCallExpression.Method;
 
-                if (Equals(method, GuidNewGuid)
+                if (
+                    Equals(method, GuidNewGuid)
                     || Equals(method, RandomNextNoArgs)
                     || Equals(method, RandomNextOneArg)
                     || Equals(method, RandomNextTwoArgs)
-                    || method.DeclaringType == typeof(DbFunctionsExtensions))
+                    || method.DeclaringType == typeof(DbFunctionsExtensions)
+                )
                 {
                     return false;
                 }

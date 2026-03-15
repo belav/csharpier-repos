@@ -26,25 +26,30 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="ComposablePartExportProvider"/> class.
         /// </summary>
-        public ComposablePartExportProvider() :
-            this(false)
-        {
-        }
+        public ComposablePartExportProvider()
+            : this(false) { }
 
         public ComposablePartExportProvider(bool isThreadSafe)
-            : this(isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default)
-        {
-        }
+            : this(isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default) { }
 
         public ComposablePartExportProvider(CompositionOptions compositionOptions)
         {
-            if (compositionOptions > (CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe | CompositionOptions.ExportCompositionService))
+            if (
+                compositionOptions
+                > (
+                    CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+                    | CompositionOptions.ExportCompositionService
+                )
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(compositionOptions));
             }
 
             _compositionOptions = compositionOptions;
-            _lock = new CompositionLock(compositionOptions.HasFlag(CompositionOptions.IsThreadSafe));
+            _lock = new CompositionLock(
+                compositionOptions.HasFlag(CompositionOptions.IsThreadSafe)
+            );
         }
 
         /// <summary>
@@ -155,7 +160,10 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                     }
-                    ImportEngine? importEngine = new ImportEngine(_sourceProvider, _compositionOptions);
+                    ImportEngine? importEngine = new ImportEngine(
+                        _sourceProvider,
+                        _compositionOptions
+                    );
                     using (_lock.LockStateForWrite())
                     {
                         if (_importEngine == null)
@@ -194,7 +202,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
-        protected override IEnumerable<Export>? GetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition)
+        protected override IEnumerable<Export>? GetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -304,8 +315,9 @@ namespace System.ComponentModel.Composition.Hosting
             // - Satisfy imports on all newly added component parts
             foreach (ComposablePart part in batch.PartsToAdd)
             {
-                result = result.MergeResult(CompositionServices.TryInvoke(() =>
-                    ImportEngine.SatisfyImports(part)));
+                result = result.MergeResult(
+                    CompositionServices.TryInvoke(() => ImportEngine.SatisfyImports(part))
+                );
             }
 
             // return errors
@@ -362,19 +374,23 @@ namespace System.ComponentModel.Composition.Hosting
             // Recompose any imports effected by the these changes (the changes are
             // observable through GetExports in the appropriate atomicComposition, thus we can fire
             // the event
-            IEnumerable<ExportDefinition> addedExports = batch.PartsToAdd.Count != 0 ?
-                batch.PartsToAdd.SelectMany(part => part.ExportDefinitions).ToArray() :
-                Array.Empty<ExportDefinition>();
+            IEnumerable<ExportDefinition> addedExports =
+                batch.PartsToAdd.Count != 0
+                    ? batch.PartsToAdd.SelectMany(part => part.ExportDefinitions).ToArray()
+                    : Array.Empty<ExportDefinition>();
 
-            IEnumerable<ExportDefinition> removedExports = batch.PartsToRemove.Count != 0 ?
-                batch.PartsToRemove.SelectMany(part => part.ExportDefinitions).ToArray() :
-                Array.Empty<ExportDefinition>();
+            IEnumerable<ExportDefinition> removedExports =
+                batch.PartsToRemove.Count != 0
+                    ? batch.PartsToRemove.SelectMany(part => part.ExportDefinitions).ToArray()
+                    : Array.Empty<ExportDefinition>();
 
             OnExportsChanging(
-                new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition));
+                new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
+            );
 
-            atomicComposition.AddCompleteAction(() => OnExportsChanged(
-                new ExportsChangeEventArgs(addedExports, removedExports, null)));
+            atomicComposition.AddCompleteAction(() =>
+                OnExportsChanged(new ExportsChangeEventArgs(addedExports, removedExports, null))
+            );
         }
 
         private Export CreateExport(ComposablePart part, ExportDefinition export)
@@ -404,7 +420,9 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if (_sourceProvider == null)
             {
-                throw new InvalidOperationException(SR.Format(SR.ObjectMustBeInitialized, "SourceProvider")); // NOLOC
+                throw new InvalidOperationException(
+                    SR.Format(SR.ObjectMustBeInitialized, "SourceProvider")
+                ); // NOLOC
             }
         }
 

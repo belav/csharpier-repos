@@ -8,7 +8,7 @@ namespace System.IdentityModel.Tokens
 {
     using System;
     using System.Collections.ObjectModel;
-    
+
     /// <summary>
     /// A security token backed by a SAML2 assertion.
     /// </summary>
@@ -23,9 +23,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="assertion">A <see cref="Saml2Assertion"/> to initialize from.</param>
         public Saml2SecurityToken(Saml2Assertion assertion)
-            : this(assertion, EmptyReadOnlyCollection<SecurityKey>.Instance, null)
-        {
-        }
+            : this(assertion, EmptyReadOnlyCollection<SecurityKey>.Instance, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Saml2SecurityToken"/> from a <see cref="Saml2Assertion"/>.
@@ -33,7 +31,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="assertion">A <see cref="Saml2Assertion"/> to initialize from.</param>
         /// <param name="keys">A collection of <see cref="SecurityKey"/> to include in the token.</param>
         /// <param name="issuerToken">A <see cref="SecurityToken"/> representing the issuer.</param>
-        public Saml2SecurityToken(Saml2Assertion assertion, ReadOnlyCollection<SecurityKey> keys, SecurityToken issuerToken)
+        public Saml2SecurityToken(
+            Saml2Assertion assertion,
+            ReadOnlyCollection<SecurityKey> keys,
+            SecurityToken issuerToken
+        )
         {
             if (null == assertion)
             {
@@ -89,7 +91,10 @@ namespace System.IdentityModel.Tokens
         {
             get
             {
-                if (null != this.assertion.Conditions && null != this.assertion.Conditions.NotBefore)
+                if (
+                    null != this.assertion.Conditions
+                    && null != this.assertion.Conditions.NotBefore
+                )
                 {
                     return this.assertion.Conditions.NotBefore.Value;
                 }
@@ -107,7 +112,10 @@ namespace System.IdentityModel.Tokens
         {
             get
             {
-                if (null != this.assertion.Conditions && null != this.assertion.Conditions.NotOnOrAfter)
+                if (
+                    null != this.assertion.Conditions
+                    && null != this.assertion.Conditions.NotOnOrAfter
+                )
                 {
                     return this.assertion.Conditions.NotOnOrAfter.Value;
                 }
@@ -123,7 +131,9 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="keyIdentifierClause"><see cref="SecurityKeyIdentifierClause"/> to match.</param>
         /// <returns>True if the keyIdentifierClause is matched. False otherwise.</returns>
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             return Saml2AssertionKeyIdentifierClause.Matches(this.Id, keyIdentifierClause)
                 || base.MatchesKeyIdentifierClause(keyIdentifierClause);
@@ -141,7 +151,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates a <see cref="SecurityKeyIdentifierClause"/> that represents this token. 
+        /// Creates a <see cref="SecurityKeyIdentifierClause"/> that represents this token.
         /// </summary>
         /// <typeparam name="T">The type of the <see cref="SecurityKeyIdentifierClause"/> to create.</typeparam>
         /// <returns>A <see cref="SecurityKeyIdentifierClause"/> for this token.</returns>
@@ -153,7 +163,9 @@ namespace System.IdentityModel.Tokens
             }
             else if (typeof(T) == typeof(SamlAssertionKeyIdentifierClause))
             {
-                return new WrappedSaml2AssertionKeyIdentifierClause(new Saml2AssertionKeyIdentifierClause(this.assertion.Id.Value)) as T;
+                return new WrappedSaml2AssertionKeyIdentifierClause(
+                        new Saml2AssertionKeyIdentifierClause(this.assertion.Id.Value)
+                    ) as T;
             }
             else
             {

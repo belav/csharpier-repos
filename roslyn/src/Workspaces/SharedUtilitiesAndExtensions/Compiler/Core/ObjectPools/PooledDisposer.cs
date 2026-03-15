@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.PooledObjects
     internal readonly struct PooledDisposer<TPoolable>(TPoolable instance) : IDisposable
         where TPoolable : class, IPooled
     {
-        void IDisposable.Dispose()
-            => instance?.Free();
+        void IDisposable.Dispose() => instance?.Free();
     }
 }

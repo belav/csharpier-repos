@@ -7,10 +7,10 @@ namespace System.Activities.DynamicUpdate
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Text;
-    using System.Security;
     using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Text;
 
     [Serializable]
     public class InstanceUpdateException : Exception
@@ -18,48 +18,55 @@ namespace System.Activities.DynamicUpdate
         private ReadOnlyCollection<ActivityBlockingUpdate> blockingActivities;
 
         public InstanceUpdateException()
-            : base()
-        {
-        }
+            : base() { }
 
         public InstanceUpdateException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InstanceUpdateException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceUpdateException(IList<ActivityBlockingUpdate> blockingActivities)
-            : this(BuildMessage(blockingActivities), blockingActivities)
-        {
-        }
+            : this(BuildMessage(blockingActivities), blockingActivities) { }
 
-        public InstanceUpdateException(string message, IList<ActivityBlockingUpdate> blockingActivities)
+        public InstanceUpdateException(
+            string message,
+            IList<ActivityBlockingUpdate> blockingActivities
+        )
             : base(message)
         {
             if (blockingActivities != null)
             {
-                this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(blockingActivities);
+                this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(
+                    blockingActivities
+                );
             }
         }
 
-        public InstanceUpdateException(string message, IList<ActivityBlockingUpdate> blockingActivities, Exception innerException)
+        public InstanceUpdateException(
+            string message,
+            IList<ActivityBlockingUpdate> blockingActivities,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             if (blockingActivities != null)
             {
-                this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(blockingActivities);
+                this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(
+                    blockingActivities
+                );
             }
         }
 
         protected InstanceUpdateException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.blockingActivities = (ReadOnlyCollection<ActivityBlockingUpdate>)info.GetValue(
-                "blockingActivities", typeof(ReadOnlyCollection<ActivityBlockingUpdate>));
+            this.blockingActivities =
+                (ReadOnlyCollection<ActivityBlockingUpdate>)
+                    info.GetValue(
+                        "blockingActivities",
+                        typeof(ReadOnlyCollection<ActivityBlockingUpdate>)
+                    );
         }
 
         public IList<ActivityBlockingUpdate> BlockingActivities
@@ -68,14 +75,18 @@ namespace System.Activities.DynamicUpdate
             {
                 if (this.blockingActivities == null)
                 {
-                    this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(new ActivityBlockingUpdate[0]);
+                    this.blockingActivities = new ReadOnlyCollection<ActivityBlockingUpdate>(
+                        new ActivityBlockingUpdate[0]
+                    );
                 }
 
                 return this.blockingActivities;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are overriding a critical method in the base class.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are overriding a critical method in the base class."
+        )]
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -102,7 +113,8 @@ namespace System.Activities.DynamicUpdate
 
         private static string GetMessage(ActivityBlockingUpdate blockingActivity)
         {
-            object activity = (object)blockingActivity.Activity ?? blockingActivity.UpdatedActivityId;
+            object activity =
+                (object)blockingActivity.Activity ?? blockingActivity.UpdatedActivityId;
             if (activity != null)
             {
                 return SR.ActivityBlockingUpdate(activity, blockingActivity.Reason);
@@ -112,5 +124,5 @@ namespace System.Activities.DynamicUpdate
                 return blockingActivity.Reason;
             }
         }
-    }    
+    }
 }

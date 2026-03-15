@@ -24,8 +24,8 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Bson;
 using System.Globalization;
+using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Utilities;
 
 #nullable disable
@@ -35,7 +35,9 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="BsonObjectId"/> to and from JSON and BSON.
     /// </summary>
-    [Obsolete("BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details.")]
+    [Obsolete(
+        "BSON reading and writing has been moved to its own package. See https://www.nuget.org/packages/Newtonsoft.Json.Bson for more details."
+    )]
     public class BsonObjectIdConverter : JsonConverter
     {
         /// <summary>
@@ -66,11 +68,21 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             if (reader.TokenType != JsonToken.Bytes)
             {
-                throw new JsonSerializationException("Expected Bytes but got {0}.".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+                throw new JsonSerializationException(
+                    "Expected Bytes but got {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        reader.TokenType
+                    )
+                );
             }
 
             byte[] value = (byte[])reader.Value;

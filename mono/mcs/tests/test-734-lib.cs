@@ -2,5 +2,5 @@
 
 public abstract class C
 {
-	protected volatile bool run = true;
+    protected volatile bool run = true;
 }

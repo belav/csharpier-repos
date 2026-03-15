@@ -52,7 +52,14 @@ namespace System.Security.Cryptography
         {
             byte[] target = new byte[length];
 
-            if (value.TryWriteBytes(target, out int bytesWritten, isUnsigned: true, isBigEndian: true))
+            if (
+                value.TryWriteBytes(
+                    target,
+                    out int bytesWritten,
+                    isUnsigned: true,
+                    isBigEndian: true
+                )
+            )
             {
                 if (bytesWritten < length)
                 {
@@ -66,7 +73,10 @@ namespace System.Security.Cryptography
             throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
         }
 
-        internal static void WriteKeyParameterInteger(this AsnWriter writer, ReadOnlySpan<byte> integer)
+        internal static void WriteKeyParameterInteger(
+            this AsnWriter writer,
+            ReadOnlySpan<byte> integer
+        )
         {
             Debug.Assert(!integer.IsEmpty);
 

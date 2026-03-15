@@ -14,12 +14,12 @@
 
 namespace Castle.DynamicProxy.Contributors
 {
-	using Castle.DynamicProxy.Generators;
+    using Castle.DynamicProxy.Generators;
 
-	internal interface IMembersCollectorSink
-	{
-		void Add(MetaEvent @event);
-		void Add(MetaMethod method);
-		void Add(MetaProperty property);
-	}
+    internal interface IMembersCollectorSink
+    {
+        void Add(MetaEvent @event);
+        void Add(MetaMethod method);
+        void Add(MetaProperty property);
+    }
 }

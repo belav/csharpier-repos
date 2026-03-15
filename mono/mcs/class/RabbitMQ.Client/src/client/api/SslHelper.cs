@@ -64,40 +64,46 @@ using RabbitMQ.Client.Impl;
 
 namespace RabbitMQ.Client
 {
-
     ///<summary>Represents an SslHelper which does the actual heavy lifting
     ///to set up an SSL connection, using the config options in an SslOption
     ///to make things cleaner</summary>
     public class SslHelper
     {
-
         private SslOption m_sslOption;
 
-        private X509Certificate CertificateSelectionCallback(object sender,
-                                                             string targetHost,
-                                                             X509CertificateCollection localCertificates,
-                                                             X509Certificate remoteCertificate,
-                                                             string[] acceptableIssuers)
+        private X509Certificate CertificateSelectionCallback(
+            object sender,
+            string targetHost,
+            X509CertificateCollection localCertificates,
+            X509Certificate remoteCertificate,
+            string[] acceptableIssuers
+        )
         {
-            if (acceptableIssuers != null && acceptableIssuers.Length > 0 &&
-                localCertificates != null && localCertificates.Count > 0)
+            if (
+                acceptableIssuers != null
+                && acceptableIssuers.Length > 0
+                && localCertificates != null
+                && localCertificates.Count > 0
+            )
+            {
+                foreach (X509Certificate certificate in localCertificates)
                 {
-                    foreach (X509Certificate certificate in localCertificates)
-                        {
-                            if (Array.IndexOf(acceptableIssuers, certificate.Issuer) != -1)
-                                return certificate;
-                        }
+                    if (Array.IndexOf(acceptableIssuers, certificate.Issuer) != -1)
+                        return certificate;
                 }
+            }
             if (localCertificates != null && localCertificates.Count > 0)
                 return localCertificates[0];
 
             return null;
         }
 
-        private bool CertificateValidationCallback(object sender,
-                                                   X509Certificate certificate,
-                                                   X509Chain chain,
-                                                   SslPolicyErrors sslPolicyErrors)
+        private bool CertificateValidationCallback(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return (sslPolicyErrors & ~m_sslOption.AcceptablePolicyErrors) == SslPolicyErrors.None;
         }
@@ -107,14 +113,19 @@ namespace RabbitMQ.Client
         public static Stream TcpUpgrade(Stream tcpStream, SslOption sslOption)
         {
             SslHelper helper = new SslHelper(sslOption);
-            SslStream sslStream = new SslStream(tcpStream, false,
-                                                new RemoteCertificateValidationCallback(helper.CertificateValidationCallback),
-                                                new LocalCertificateSelectionCallback(helper.CertificateSelectionCallback));
-            
-            sslStream.AuthenticateAsClient(sslOption.ServerName,
-                                           sslOption.Certs,
-                                           sslOption.Version,
-                                           false);
+            SslStream sslStream = new SslStream(
+                tcpStream,
+                false,
+                new RemoteCertificateValidationCallback(helper.CertificateValidationCallback),
+                new LocalCertificateSelectionCallback(helper.CertificateSelectionCallback)
+            );
+
+            sslStream.AuthenticateAsClient(
+                sslOption.ServerName,
+                sslOption.Certs,
+                sslOption.Version,
+                false
+            );
 
             return sslStream;
         }
@@ -123,6 +134,5 @@ namespace RabbitMQ.Client
         {
             m_sslOption = sslOption;
         }
-
     }
 }

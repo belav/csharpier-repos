@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -17,7 +17,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         public object ActivateInstance(string activatableClassId)
         {
-            ManagedActivationFactory activationFactory = WindowsRuntimeMarshal.GetManagedActivationFactory(LoadWinRTType(activatableClassId));
+            ManagedActivationFactory activationFactory =
+                WindowsRuntimeMarshal.GetManagedActivationFactory(
+                    LoadWinRTType(activatableClassId)
+                );
             return activationFactory.ActivateInstance();
         }
 
@@ -27,8 +30,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             IntPtr activationFactory = IntPtr.Zero;
             try
             {
-                activationFactory = WindowsRuntimeMarshal.GetActivationFactoryForType(LoadWinRTType(activatableClassId));
-                
+                activationFactory = WindowsRuntimeMarshal.GetActivationFactoryForType(
+                    LoadWinRTType(activatableClassId)
+                );
+
                 IntPtr factoryInterface = IntPtr.Zero;
                 int hr = Marshal.QueryInterface(activationFactory, ref iid, out factoryInterface);
                 if (hr < 0)

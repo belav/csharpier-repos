@@ -23,7 +23,8 @@ namespace Internal.TypeSystem.Ecma
             if (result != 0)
                 return result;
 
-            return module.MetadataReader.GetToken(_handle) - otherModule.MetadataReader.GetToken(otherMethod._handle);
+            return module.MetadataReader.GetToken(_handle)
+                - otherModule.MetadataReader.GetToken(otherMethod._handle);
         }
     }
 }

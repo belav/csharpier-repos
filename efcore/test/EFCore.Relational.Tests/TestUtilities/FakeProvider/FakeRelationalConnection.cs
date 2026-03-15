@@ -22,51 +22,55 @@ public class FakeRelationalConnection : RelationalConnection
                     new LoggingOptions(),
                     new DiagnosticListener("FakeDiagnosticListener"),
                     new TestRelationalLoggingDefinitions(),
-                    new NullDbContextLogger()),
+                    new NullDbContextLogger()
+                ),
                 new RelationalConnectionDiagnosticsLogger(
                     new LoggerFactory(),
                     new LoggingOptions(),
                     new DiagnosticListener("FakeDiagnosticListener"),
                     new TestRelationalLoggingDefinitions(),
                     new NullDbContextLogger(),
-                    CreateOptions()),
+                    CreateOptions()
+                ),
                 new NamedConnectionStringResolver(options ?? CreateOptions()),
                 new RelationalTransactionFactory(
                     new RelationalTransactionFactoryDependencies(
                         new RelationalSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()))),
+                            new RelationalSqlGenerationHelperDependencies()
+                        )
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),
-                        new ExceptionDetector()))))
-    {
-    }
+                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        ),
+                        new ExceptionDetector()
+                    )
+                )
+            )
+        ) { }
 
-    private class FakeDbContext : DbContext
-    {
-    }
+    private class FakeDbContext : DbContext { }
 
     private static IDbContextOptions CreateOptions()
     {
         var optionsBuilder = new DbContextOptionsBuilder();
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
-            .AddOrUpdateExtension(new FakeRelationalOptionsExtension().WithConnectionString("Database=Dummy"));
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            new FakeRelationalOptionsExtension().WithConnectionString("Database=Dummy")
+        );
 
         return optionsBuilder.Options;
     }
 
-    public void UseConnection(DbConnection connection)
-        => _connection = connection;
+    public void UseConnection(DbConnection connection) => _connection = connection;
 
-    public override DbConnection DbConnection
-        => _connection ?? base.DbConnection;
+    public override DbConnection DbConnection => _connection ?? base.DbConnection;
 
-    public IReadOnlyList<FakeDbConnection> DbConnections
-        => _dbConnections;
+    public IReadOnlyList<FakeDbConnection> DbConnections => _dbConnections;
 
     protected override DbConnection CreateDbConnection()
     {

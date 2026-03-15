@@ -13,7 +13,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     public class TCGetExpectedAttributes : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCGetExpectedAttributes(ITestOutputHelper output): base(output)
+
+        public TCGetExpectedAttributes(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -25,18 +27,24 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public void CallAtRootLevel_Without_With_PartialValidationSet(bool partialValidation)
         {
             XmlSchemaValidator val;
-            XmlSchemaSet schemas = CreateSchemaSet("", "<?xml version=\"1.0\"?>\n" +
-                                                       "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                       "    <xs:attribute name=\"attr1\" />\n" +
-                                                       "    <xs:attribute name=\"attr2\" />\n" +
-                                                       "</xs:schema>");
+            XmlSchemaSet schemas = CreateSchemaSet(
+                "",
+                "<?xml version=\"1.0\"?>\n"
+                    + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                    + "    <xs:attribute name=\"attr1\" />\n"
+                    + "    <xs:attribute name=\"attr2\" />\n"
+                    + "</xs:schema>"
+            );
             schemas.Compile();
             val = CreateValidator(schemas);
 
             if (partialValidation)
             {
                 val.Initialize(schemas.GlobalAttributes[new XmlQualifiedName("attr1")]);
-                CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] { new XmlQualifiedName("attr1") });
+                CheckExpectedAttributes(
+                    val.GetExpectedAttributes(),
+                    new XmlQualifiedName[] { new XmlQualifiedName("attr1") }
+                );
             }
             else
             {
@@ -67,7 +75,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("Default")]
         [InlineData("Fixed")]
         [InlineData("FixedRequired")]
-        public void CallOnElementWith_Required_Optional_Default_Fixed_FixedRequired_AttributesAfterValidateElement(string attrType)
+        public void CallOnElementWith_Required_Optional_Default_Fixed_FixedRequired_AttributesAfterValidateElement(
+            string attrType
+        )
         {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -75,7 +85,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             val.Initialize();
             val.ValidateElement(attrType + "AttributesElement", "", info);
 
-            CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] { new XmlQualifiedName("a1"), new XmlQualifiedName("a2") });
+            CheckExpectedAttributes(
+                val.GetExpectedAttributes(),
+                new XmlQualifiedName[] { new XmlQualifiedName("a1"), new XmlQualifiedName("a2") }
+            );
 
             return;
         }
@@ -89,7 +102,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [InlineData("Fixed", "after")]
         [InlineData("FixedRequired", "before")]
         [InlineData("FixedRequired", "after")]
-        public void Call_Before_After_GetUnspecifiedDefaultAttributeWhenJust_Required_Optional_Fixed_FixedRequired_AttributesAreLeft(string attrType, string callOrder)
+        public void Call_Before_After_GetUnspecifiedDefaultAttributeWhenJust_Required_Optional_Fixed_FixedRequired_AttributesAreLeft(
+            string attrType,
+            string callOrder
+        )
         {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -102,7 +118,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             if (callOrder == "after")
                 val.GetUnspecifiedDefaultAttributes(def);
 
-            CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] { new XmlQualifiedName("a2") });
+            CheckExpectedAttributes(
+                val.GetExpectedAttributes(),
+                new XmlQualifiedName[] { new XmlQualifiedName("a2") }
+            );
 
             return;
         }
@@ -111,7 +130,9 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         [Theory]
         [InlineData("before")]
         [InlineData("after")]
-        public void Call_Before_After_GetUnspecifiedDefaultAttributesWhenJustDefaultAttributesAreLeft(string callOrder)
+        public void Call_Before_After_GetUnspecifiedDefaultAttributesWhenJustDefaultAttributesAreLeft(
+            string callOrder
+        )
         {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_ATTRIBUTES);
             XmlSchemaInfo info = new XmlSchemaInfo();

@@ -1139,8 +1139,8 @@ public partial class TypedResultsTests
     [Fact]
     public void Json_WithInvalidSerializerContext_ThrowsInvalidOperationException()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TypedResults.Json(string.Empty, context: ObjectJsonContext.Default)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TypedResults.Json(string.Empty, context: ObjectJsonContext.Default)
         );
         Assert.Equal(
             ex.Message,

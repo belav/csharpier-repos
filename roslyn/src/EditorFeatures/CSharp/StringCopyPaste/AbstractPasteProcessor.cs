@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             ITextSnapshot snapshotAfterPaste,
             Document documentBeforePaste,
             Document documentAfterPaste,
-            ExpressionSyntax stringExpressionBeforePaste)
+            ExpressionSyntax stringExpressionBeforePaste
+        )
         {
             NewLine = newLine;
             IndentationWhitespace = indentationWhitespace;
@@ -117,8 +118,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             DocumentAfterPaste = documentAfterPaste;
 
             StringExpressionBeforePaste = stringExpressionBeforePaste;
-            StringExpressionBeforePasteInfo = StringInfo.GetStringInfo(TextBeforePaste, stringExpressionBeforePaste);
-            TextContentsSpansAfterPaste = StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(MapSpanForward);
+            StringExpressionBeforePasteInfo = StringInfo.GetStringInfo(
+                TextBeforePaste,
+                stringExpressionBeforePaste
+            );
+            TextContentsSpansAfterPaste =
+                StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(MapSpanForward);
 
             Contract.ThrowIfTrue(StringExpressionBeforePasteInfo.ContentSpans.IsEmpty);
         }
@@ -132,21 +137,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         /// Takes a span in <see cref="SnapshotBeforePaste"/> and maps it appropriately (in an <see
         /// cref="SpanTrackingMode.EdgeInclusive"/> manner) to <see cref="SnapshotAfterPaste"/>.
         /// </summary>
-        protected TextSpan MapSpanForward(TextSpan span)
-            => MapSpan(span, SnapshotBeforePaste, SnapshotAfterPaste);
+        protected TextSpan MapSpanForward(TextSpan span) =>
+            MapSpan(span, SnapshotBeforePaste, SnapshotAfterPaste);
 
         /// <summary>
         /// Given an initial raw string literal, and the changes made to it by the paste, determines how many quotes to
         /// add to the start and end to keep things parsing properly.
         /// </summary>
         protected string? GetQuotesToAddToRawString(
-            SourceText textAfterChange, ImmutableArray<TextSpan> textContentSpansAfterChange)
+            SourceText textAfterChange,
+            ImmutableArray<TextSpan> textContentSpansAfterChange
+        )
         {
             Contract.ThrowIfFalse(IsAnyRawStringExpression(StringExpressionBeforePaste));
 
-            var longestQuoteSequence = textContentSpansAfterChange.Max(ts => GetLongestQuoteSequence(textAfterChange, ts));
+            var longestQuoteSequence = textContentSpansAfterChange.Max(ts =>
+                GetLongestQuoteSequence(textAfterChange, ts)
+            );
 
-            var quotesToAddCount = (longestQuoteSequence - StringExpressionBeforePasteInfo.DelimiterQuoteCount) + 1;
+            var quotesToAddCount =
+                (longestQuoteSequence - StringExpressionBeforePasteInfo.DelimiterQuoteCount) + 1;
             return quotesToAddCount <= 0 ? null : new string('"', quotesToAddCount);
         }
 
@@ -155,7 +165,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         /// signs to add to the start to keep things parsing properly.
         /// </summary>
         protected string? GetDollarSignsToAddToRawString(
-            SourceText textAfterChange, ImmutableArray<TextSpan> textContentSpansAfterChange)
+            SourceText textAfterChange,
+            ImmutableArray<TextSpan> textContentSpansAfterChange
+        )
         {
             Contract.ThrowIfFalse(IsAnyRawStringExpression(StringExpressionBeforePaste));
 
@@ -163,12 +175,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             if (StringExpressionBeforePaste is not InterpolatedStringExpressionSyntax)
                 return null;
 
-            var longestBraceSequence = textContentSpansAfterChange.Max(
-                ts => Math.Max(
+            var longestBraceSequence = textContentSpansAfterChange.Max(ts =>
+                Math.Max(
                     GetLongestOpenBraceSequence(textAfterChange, ts),
-                    GetLongestCloseBraceSequence(textAfterChange, ts)));
+                    GetLongestCloseBraceSequence(textAfterChange, ts)
+                )
+            );
 
-            var dollarsToAddCount = (longestBraceSequence - StringExpressionBeforePasteInfo.DelimiterDollarCount) + 1;
+            var dollarsToAddCount =
+                (longestBraceSequence - StringExpressionBeforePasteInfo.DelimiterDollarCount) + 1;
             return dollarsToAddCount <= 0 ? null : new string('$', dollarsToAddCount);
         }
     }

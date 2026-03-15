@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Runtime.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.ServiceModel;
+    using System.Xml;
 
     abstract class TransportOutputChannel : OutputChannel
     {
@@ -21,7 +21,13 @@ namespace System.ServiceModel.Channels
         ToHeader toHeader;
         EventTraceActivity channelEventTraceActivity;
 
-        protected TransportOutputChannel(ChannelManagerBase channelManager, EndpointAddress to, Uri via, bool manualAddressing, MessageVersion messageVersion)
+        protected TransportOutputChannel(
+            ChannelManagerBase channelManager,
+            EndpointAddress to,
+            Uri via,
+            bool manualAddressing,
+            MessageVersion messageVersion
+        )
             : base(channelManager)
         {
             this.manualAddressing = manualAddressing;
@@ -62,42 +68,27 @@ namespace System.ServiceModel.Channels
 
         protected bool ManualAddressing
         {
-            get
-            {
-                return this.manualAddressing;
-            }
+            get { return this.manualAddressing; }
         }
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
         public override EndpointAddress RemoteAddress
         {
-            get
-            {
-                return this.to;
-            }
+            get { return this.to; }
         }
 
         public override Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
         public EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.channelEventTraceActivity;
-            }
+            get { return this.channelEventTraceActivity; }
         }
 
         protected override void AddHeadersTo(Message message)
@@ -127,10 +118,7 @@ namespace System.ServiceModel.Channels
 
             public XmlDictionaryString To
             {
-                get
-                {
-                    return to;
-                }
+                get { return to; }
             }
 
             public bool TryLookup(string value, out XmlDictionaryString result)

@@ -7,7 +7,9 @@ namespace System.Reflection.Metadata.Tests
 {
     public class TestStream : TestStreamBase
     {
-        private readonly bool _canRead, _canWrite, _canSeek;
+        private readonly bool _canRead,
+            _canWrite,
+            _canSeek;
 
         public TestStream(bool canRead = false, bool canWrite = false, bool canSeek = false)
         {

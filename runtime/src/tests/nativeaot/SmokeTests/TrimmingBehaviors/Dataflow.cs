@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 #pragma warning disable 649 // 'blah' is never assigned to
@@ -36,19 +36,24 @@ class Dataflow
         class PublicOnly
         {
             public PublicOnly(int x) { }
+
             private PublicOnly(double x) { }
         }
 
         class PublicAndPrivate
         {
             public PublicAndPrivate(int x) { }
+
             private PublicAndPrivate(double x) { }
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         static Type GiveMePublic() => typeof(PublicOnly);
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         static Type GiveMePublicAndPrivate() => typeof(PublicAndPrivate);
 
         public static void Run()
@@ -86,7 +91,9 @@ class Dataflow
         static class TestType1
         {
             public static void TestMethod() => throw null;
+
             public static void UnreferencedMethod() => throw null;
+
             public static int TestField;
             public static int UnreferencedField;
         }
@@ -100,6 +107,7 @@ class Dataflow
         class TestType3
         {
             public TestType3(int val) { }
+
             private TestType3(double val) { }
         }
 
@@ -112,8 +120,12 @@ class Dataflow
             Assert.Equal(1, typeof(TestType1).CountFields());
 
             Assert.NotNull(typeof(TestType2).GetProperty(nameof(TestType2.TestProperty)));
-            Assert.NotNull(typeof(TestType2).GetProperty(nameof(TestType2.TestProperty)).GetGetMethod());
-            Assert.NotNull(typeof(TestType2).GetProperty(nameof(TestType2.TestProperty)).GetSetMethod());
+            Assert.NotNull(
+                typeof(TestType2).GetProperty(nameof(TestType2.TestProperty)).GetGetMethod()
+            );
+            Assert.NotNull(
+                typeof(TestType2).GetProperty(nameof(TestType2.TestProperty)).GetSetMethod()
+            );
             Assert.Equal(1, typeof(TestType2).CountProperties());
             Assert.Equal(2, typeof(TestType2).CountMethods());
 
@@ -124,13 +136,9 @@ class Dataflow
 
     class TestGetInterface
     {
-        interface INeverUsedInterface
-        {
-        }
+        interface INeverUsedInterface { }
 
-        class UsedType : INeverUsedInterface
-        {
-        }
+        class UsedType : INeverUsedInterface { }
 
         public static void Run()
         {
@@ -143,10 +151,7 @@ class Dataflow
     {
         class MyGenericType<T>
         {
-            public static void MyGenericMethod<U>(T param1, U param2)
-            {
-
-            }
+            public static void MyGenericMethod<U>(T param1, U param2) { }
         }
 
         static void GenericMethod<T, U>()
@@ -175,11 +180,15 @@ class Dataflow
     {
         class RequiresNonPublicMethods : Attribute
         {
-            public RequiresNonPublicMethods([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] Type needed)
-            {
-            }
+            public RequiresNonPublicMethods(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
+                    Type needed
+            ) { }
 
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods | DynamicallyAccessedMemberTypes.PublicMethods)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+            )]
             public Type AlsoNeeded { get; set; }
 
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
@@ -189,22 +198,29 @@ class Dataflow
         static class Type1WithNonPublicKept
         {
             private static void KeptMethod() { }
+
             public static void RemovedMethod() { }
         }
 
         static class Type2WithAllKept
         {
             private static void KeptMethod() { }
+
             public static void AlsoKeptMethod() { }
         }
 
         static class Type3WithPublicKept
         {
             public static void KeptMethod() { }
+
             private static void RemovedMethod() { }
         }
 
-        [RequiresNonPublicMethods(typeof(Type1WithNonPublicKept), AlsoNeeded = typeof(Type2WithAllKept), AndAlsoNeeded = typeof(Type3WithPublicKept))]
+        [RequiresNonPublicMethods(
+            typeof(Type1WithNonPublicKept),
+            AlsoNeeded = typeof(Type2WithAllKept),
+            AndAlsoNeeded = typeof(Type3WithPublicKept)
+        )]
         public static void Run()
         {
             // Make it so that the analysis believes the Run method needs metadata. We wouldn't look at the attributes otherwise.
@@ -225,61 +241,80 @@ class Dataflow
         class Type1WithNonPublicKept
         {
             private static void KeptMethod() { }
+
             private static void AlsoKeptMethod() { }
+
             public static void RemovedMethod() { }
         }
 
         class Type2WithPublicKept
         {
             public static void KeptMethod() { }
+
             public static void AlsoKeptMethod() { }
+
             private static void RemovedMethod() { }
         }
 
         class Type3WithPublicKept
         {
             public static void KeptMethod() { }
+
             public static void AlsoKeptMethod() { }
+
             private static void RemovedMethod() { }
         }
 
         class Type4WithPublicKept
         {
             public static void KeptMethod() { }
+
             public static void AlsoKeptMethod() { }
+
             private static void RemovedMethod() { }
         }
 
         struct Struct1WithPublicKept
         {
             public static void KeptMethod() { }
+
             public static void AlsoKeptMethod() { }
+
             private static void RemovedMethod() { }
         }
 
-
-        class KeepsNonPublic<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T>
+        class KeepsNonPublic<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] T
+        >
         {
             public KeepsNonPublic()
             {
-                Assert.NotNull(typeof(T).GetMethod("KeptMethod", BindingFlags.NonPublic | BindingFlags.Static));
+                Assert.NotNull(
+                    typeof(T).GetMethod("KeptMethod", BindingFlags.NonPublic | BindingFlags.Static)
+                );
             }
         }
 
-        class KeepsNonPublic : KeepsNonPublic<Type1WithNonPublicKept>
+        class KeepsNonPublic : KeepsNonPublic<Type1WithNonPublicKept> { }
+
+        static void KeepPublic<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+        >()
         {
+            Assert.NotNull(
+                typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static)
+            );
         }
 
-        static void KeepPublic<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>()
-        {
-            Assert.NotNull(typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static));
-        }
-
-        class KeepsPublic<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>
+        class KeepsPublic<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+        >
         {
             public static void Keep<U>()
             {
-                Assert.NotNull(typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static));
+                Assert.NotNull(
+                    typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static)
+                );
             }
         }
 
@@ -287,14 +322,20 @@ class Dataflow
 
         interface IKeepPublicThroughGvm
         {
-            void Keep<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>();
+            void Keep<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+            >();
         }
 
         class KeepPublicThroughGvm : IKeepPublicThroughGvm
         {
-            public void Keep<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>()
+            public void Keep<
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+            >()
             {
-                Assert.NotNull(typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static));
+                Assert.NotNull(
+                    typeof(T).GetMethod("KeptMethod", BindingFlags.Public | BindingFlags.Static)
+                );
             }
         }
 
@@ -343,11 +384,11 @@ class Dataflow
             private static int GetNumber() => 42;
         }
 
-        class Derived : Base
-        {
-        }
+        class Derived : Base { }
 
-        private static MethodInfo GetPrivateMethod([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t)
+        private static MethodInfo GetPrivateMethod(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t
+        )
         {
             return t.BaseType.GetMethod("GetNumber", BindingFlags.Static | BindingFlags.NonPublic);
         }
@@ -364,31 +405,37 @@ class Dataflow
         class TypeWithPublicMethodsKept
         {
             public int Method1() => throw null;
+
             protected int Method2() => throw null;
         }
 
         class TypeWithAllMethodsKept
         {
             public int Method1() => throw null;
+
             protected int Method2() => throw null;
         }
 
         class TypeWithSpecificMethodKept
         {
             public int Method1() => throw null;
+
             public int Method2() => throw null;
+
             public int Method3() => throw null;
         }
 
         class TypeWithSpecificOverloadKept
         {
             public int Method(int x, int y) => throw null;
+
             public int Method(int x, char y) => throw null;
         }
 
         class TypeWithAllOverloadsKept
         {
             public int Method(int x, int y) => throw null;
+
             public int Method(int x, char y) => throw null;
         }
 
@@ -399,15 +446,29 @@ class Dataflow
         }
 
         public static void DependentMethod() => throw null;
+
         public static void UnreachedMethod() => throw null;
 
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(TypeWithPublicMethodsKept))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods, typeof(TypeWithAllMethodsKept))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            typeof(TypeWithPublicMethodsKept)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods,
+            typeof(TypeWithAllMethodsKept)
+        )]
         [DynamicDependency("Method2", typeof(TypeWithSpecificMethodKept))]
-        [DynamicDependency("Method(System.Int32,System.Int32)", typeof(TypeWithSpecificOverloadKept))]
+        [DynamicDependency(
+            "Method(System.Int32,System.Int32)",
+            typeof(TypeWithSpecificOverloadKept)
+        )]
         [DynamicDependency("Method", typeof(TypeWithAllOverloadsKept))]
         [DynamicDependency(nameof(DependentMethod))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(TypeWithPublicPropertiesKept))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(TypeWithPublicPropertiesKept)
+        )]
         public static void Run()
         {
             Assert.Equal(1, typeof(TypeWithPublicMethodsKept).CountMethods());
@@ -428,31 +489,37 @@ class Dataflow
         class TypeWithPublicMethodsKept<T>
         {
             public int Method1() => throw null;
+
             protected int Method2() => throw null;
         }
 
         class TypeWithAllMethodsKept<T>
         {
             public int Method1() => throw null;
+
             protected int Method2() => throw null;
         }
 
         class TypeWithSpecificMethodKept<T>
         {
             public int Method1() => throw null;
+
             public int Method2() => throw null;
+
             public int Method3() => throw null;
         }
 
         class TypeWithSpecificOverloadKept<T>
         {
             public int Method(int x, int y) => throw null;
+
             public int Method(int x, char y) => throw null;
         }
 
         class TypeWithAllOverloadsKept<T>
         {
             public int Method(int x, int y) => throw null;
+
             public int Method(int x, char y) => throw null;
         }
 
@@ -462,12 +529,25 @@ class Dataflow
             private int Property2 { get; set; }
         }
 
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(TypeWithPublicMethodsKept<>))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods, typeof(TypeWithAllMethodsKept<>))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            typeof(TypeWithPublicMethodsKept<>)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods,
+            typeof(TypeWithAllMethodsKept<>)
+        )]
         [DynamicDependency("Method2", typeof(TypeWithSpecificMethodKept<>))]
-        [DynamicDependency("Method(System.Int32,System.Int32)", typeof(TypeWithSpecificOverloadKept<>))]
+        [DynamicDependency(
+            "Method(System.Int32,System.Int32)",
+            typeof(TypeWithSpecificOverloadKept<>)
+        )]
         [DynamicDependency("Method", typeof(TypeWithAllOverloadsKept<>))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(TypeWithPublicPropertiesKept<>))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(TypeWithPublicPropertiesKept<>)
+        )]
         public static void Run()
         {
             Assert.Equal(1, typeof(TypeWithPublicMethodsKept<>).CountMethods());
@@ -481,23 +561,28 @@ class Dataflow
 
     class TestObjectGetTypeDataflow
     {
-        static TypeWithNonPublicMethodsKept s_typeWithNonpublicMethodsKept = new TypeWithNonPublicMethodsKeptThroughBase();
+        static TypeWithNonPublicMethodsKept s_typeWithNonpublicMethodsKept =
+            new TypeWithNonPublicMethodsKeptThroughBase();
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
         class TypeWithNonPublicMethodsKept
         {
             private void Method1() { }
+
             public void Method2() { }
+
             private void Method3() { }
         }
 
         class TypeWithNonPublicMethodsKeptThroughBase : TypeWithNonPublicMethodsKept
         {
             private void Method4() { }
+
             public void Method5() { }
         }
 
-        static NeverAllocatedTypeAskingForNonPublicMethods s_neverAllocatedTypeAskingForNonPublicMethods = null;
+        static NeverAllocatedTypeAskingForNonPublicMethods s_neverAllocatedTypeAskingForNonPublicMethods =
+            null;
 
         class NeverAllocatedTypeAskingForNonPublicMethods : TypeWithNonPublicMethodsKept
         {
@@ -517,34 +602,45 @@ class Dataflow
             private static void Method4() { }
         }
 
-        static IInterfaceWithNonPublicMethodsKeptIndirectly s_interfaceWithNonPublicMethodsKeptIndirectly = new TypeWithNonPublicMethodsKeptThroughIndirectInterface();
+        static IInterfaceWithNonPublicMethodsKeptIndirectly s_interfaceWithNonPublicMethodsKeptIndirectly =
+            new TypeWithNonPublicMethodsKeptThroughIndirectInterface();
 
-        class TypeWithNonPublicMethodsKeptThroughIndirectInterface : IInterfaceWithNonPublicMethodsKeptIndirectly
+        class TypeWithNonPublicMethodsKeptThroughIndirectInterface
+            : IInterfaceWithNonPublicMethodsKeptIndirectly
         {
             private void Method1() { }
+
             public void Method2() { }
         }
 
-        class TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated : IInterfaceWithNonPublicMethodsKept
+        class TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated
+            : IInterfaceWithNonPublicMethodsKept
         {
             private void Method1() { }
+
             public void Method2() { }
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         interface IKeepNonPublicCtors { }
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         interface IKeepPublicMethods { }
 
         static BaseWithMixKept s_baseWithMixKept = new DerivedWithMixKept(123);
 
         class BaseWithMixKept : IKeepNonPublicCtors, IKeepPublicMethods { }
+
         class DerivedWithMixKept : BaseWithMixKept
         {
             public DerivedWithMixKept(int x) { }
+
             public DerivedWithMixKept(double x) { }
+
             private DerivedWithMixKept(string y) { }
+
             public void PublicMethod() { }
+
             private void PrivateMethod() { }
         }
 
@@ -560,25 +656,45 @@ class Dataflow
             {
                 // This should never be reached, but we need to trick analysis into seeing this
                 // so that we can tests this doesn't lead to keeping the type.
-                Assert.Equal(666, s_neverAllocatedTypeAskingForNonPublicMethods.GetType().CountMethods());
+                Assert.Equal(
+                    666,
+                    s_neverAllocatedTypeAskingForNonPublicMethods.GetType().CountMethods()
+                );
             }
             // This is not great - the GetType() call above "wished" NeverAllocatedTypeAskingForNonPublicMethods
             // into existence, but it shouldn't have. We could do better here if this is a problem.
             // If we do that, change this .NotNull to .Null.
-            Assert.NotNull(typeof(TestObjectGetTypeDataflow).GetNestedTypeSecretly(nameof(NeverAllocatedTypeAskingForNonPublicMethods)));
+            Assert.NotNull(
+                typeof(TestObjectGetTypeDataflow).GetNestedTypeSecretly(
+                    nameof(NeverAllocatedTypeAskingForNonPublicMethods)
+                )
+            );
             // Sanity check
-            Assert.NotNull(typeof(TestObjectGetTypeDataflow).GetNestedTypeSecretly(nameof(TypeWithNonPublicMethodsKept)));
+            Assert.NotNull(
+                typeof(TestObjectGetTypeDataflow).GetNestedTypeSecretly(
+                    nameof(TypeWithNonPublicMethodsKept)
+                )
+            );
 
             // DAM doesn't apply to the interface since it only goes into effect with an object.GetType call.
             Assert.Equal(0, typeof(IInterfaceWithNonPublicMethodsKept).CountMethods());
             Assert.Equal(0, typeof(IInterfaceWithNonPublicMethodsKeptIndirectly).CountMethods());
 
             Assert.Equal(1, s_interfaceWithNonPublicMethodsKeptIndirectly.GetType().CountMethods());
-            Assert.Equal(0, s_interfaceWithNonPublicMethodsKeptIndirectly.GetType().CountPublicMethods());
+            Assert.Equal(
+                0,
+                s_interfaceWithNonPublicMethodsKeptIndirectly.GetType().CountPublicMethods()
+            );
 
             // Typeof shouldn't make the DAM annotation on the type to kick in.
-            Assert.Equal(0, typeof(TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated).CountMethods());
-            Assert.Equal(0, typeof(TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated).CountPublicMethods());
+            Assert.Equal(
+                0,
+                typeof(TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated).CountMethods()
+            );
+            Assert.Equal(
+                0,
+                typeof(TypeWithNonPublicMethodsKeptThroughIndirectInterfaceNeverAllocated).CountPublicMethods()
+            );
 
             Assert.Equal(1, s_baseWithMixKept.GetType().CountMethods());
             Assert.Equal(1, s_baseWithMixKept.GetType().CountPublicMethods());
@@ -590,15 +706,34 @@ class Dataflow
     class TestMarshalIntrinsics
     {
         [StructLayout(LayoutKind.Sequential)]
-        class ClassWithLayout1 { public int Field; }
+        class ClassWithLayout1
+        {
+            public int Field;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
-        class ClassWithLayout2 { public int Field; }
+        class ClassWithLayout2
+        {
+            public int Field;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
-        class ClassWithLayout3 { public int Field; }
+        class ClassWithLayout3
+        {
+            public int Field;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
-        class ClassWithLayout4 { public int Field; }
+        class ClassWithLayout4
+        {
+            public int Field;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
-        class ClassWithLayout5 { public int Field; }
+        class ClassWithLayout5
+        {
+            public int Field;
+        }
 
         static Type s_secretType = typeof(ClassWithLayout5);
 
@@ -612,8 +747,11 @@ class Dataflow
 
             SanityTest();
 
-            [UnconditionalSuppressMessage("AotAnalysis", "IL3050:UnrecognizedAotPattern",
-                Justification = "That's the point")]
+            [UnconditionalSuppressMessage(
+                "AotAnalysis",
+                "IL3050:UnrecognizedAotPattern",
+                Justification = "That's the point"
+            )]
             static void SanityTest()
             {
                 // Sanity check that intrinsic detection is necessary
@@ -637,7 +775,8 @@ class Dataflow
     {
         private static void ReflectionInLambda()
         {
-            var func = () => {
+            var func = () =>
+            {
                 Type helpersType = Type.GetType(nameof(Helpers));
                 Assert.NotNull(helpersType);
             };
@@ -653,7 +792,8 @@ class Dataflow
             {
                 Type helpersType = Type.GetType(nameof(Helpers));
                 Assert.NotNull(helpersType);
-            };
+            }
+            ;
         }
 
         private static async void ReflectionInAsync()
@@ -667,7 +807,8 @@ class Dataflow
         {
             await System.Threading.Tasks.Task.Delay(100);
 
-            var func = () => {
+            var func = () =>
+            {
                 Type helpersType = Type.GetType(nameof(Helpers));
                 Assert.NotNull(helpersType);
             };
@@ -708,37 +849,97 @@ static class Assert
 
 static class Helpers
 {
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountConstructors(this Type t)
-        => t.GetConstructors(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountPublicConstructors(this Type t)
-        => t.GetConstructors(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountMethods(this Type t)
-        => t.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountPublicMethods(this Type t)
-        => t.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountFields(this Type t)
-        => t.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountProperties(this Type t)
-        => t.GetProperties(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly).Length;
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountInterfaces(this Type t)
-        => t.GetInterfaces().Length;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountConstructors(this Type t) =>
+        t.GetConstructors(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+        ).Length;
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static Type GetNestedTypeSecretly(this Type t, string name)
-        => t.GetNestedType(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountPublicConstructors(this Type t) =>
+        t.GetConstructors(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public).Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountMethods(this Type t) =>
+        t.GetMethods(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.DeclaredOnly
+        ).Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountPublicMethods(this Type t) =>
+        t.GetMethods(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.DeclaredOnly
+        ).Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountFields(this Type t) =>
+        t.GetFields(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.DeclaredOnly
+        ).Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountProperties(this Type t) =>
+        t.GetProperties(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.DeclaredOnly
+        ).Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountInterfaces(this Type t) => t.GetInterfaces().Length;
+
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static Type GetNestedTypeSecretly(this Type t, string name) =>
+        t.GetNestedType(
+            name,
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly
+        );
 }

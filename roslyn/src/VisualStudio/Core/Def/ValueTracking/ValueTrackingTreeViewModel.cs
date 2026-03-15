@@ -68,7 +68,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ValueTrackingTreeViewModel(IClassificationFormatMap classificationFormatMap, ClassificationTypeMap classificationTypeMap, IEditorFormatMapService formatMapService)
+        public ValueTrackingTreeViewModel(
+            IClassificationFormatMap classificationFormatMap,
+            ClassificationTypeMap classificationTypeMap,
+            IEditorFormatMapService formatMapService
+        )
         {
             ClassificationFormatMap = classificationFormatMap;
             ClassificationTypeMap = classificationTypeMap;
@@ -131,7 +135,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             NotifyPropertyChanged(name);
         }
 
-        private void NotifyPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private void NotifyPropertyChanged(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

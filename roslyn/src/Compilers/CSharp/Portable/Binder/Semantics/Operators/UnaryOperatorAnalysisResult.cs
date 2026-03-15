@@ -16,7 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly Conversion Conversion;
         public readonly OperatorAnalysisResultKind Kind;
 
-        private UnaryOperatorAnalysisResult(OperatorAnalysisResultKind kind, UnaryOperatorSignature signature, Conversion conversion)
+        private UnaryOperatorAnalysisResult(
+            OperatorAnalysisResultKind kind,
+            UnaryOperatorSignature signature,
+            Conversion conversion
+        )
         {
             this.Kind = kind;
             this.Signature = signature;
@@ -33,19 +37,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return this.Kind != OperatorAnalysisResultKind.Undefined; }
         }
 
-        public static UnaryOperatorAnalysisResult Applicable(UnaryOperatorSignature signature, Conversion conversion)
+        public static UnaryOperatorAnalysisResult Applicable(
+            UnaryOperatorSignature signature,
+            Conversion conversion
+        )
         {
-            return new UnaryOperatorAnalysisResult(OperatorAnalysisResultKind.Applicable, signature, conversion);
+            return new UnaryOperatorAnalysisResult(
+                OperatorAnalysisResultKind.Applicable,
+                signature,
+                conversion
+            );
         }
 
-        public static UnaryOperatorAnalysisResult Inapplicable(UnaryOperatorSignature signature, Conversion conversion)
+        public static UnaryOperatorAnalysisResult Inapplicable(
+            UnaryOperatorSignature signature,
+            Conversion conversion
+        )
         {
-            return new UnaryOperatorAnalysisResult(OperatorAnalysisResultKind.Inapplicable, signature, conversion);
+            return new UnaryOperatorAnalysisResult(
+                OperatorAnalysisResultKind.Inapplicable,
+                signature,
+                conversion
+            );
         }
 
         public UnaryOperatorAnalysisResult Worse()
         {
-            return new UnaryOperatorAnalysisResult(OperatorAnalysisResultKind.Worse, this.Signature, this.Conversion);
+            return new UnaryOperatorAnalysisResult(
+                OperatorAnalysisResultKind.Worse,
+                this.Signature,
+                this.Conversion
+            );
         }
     }
 }

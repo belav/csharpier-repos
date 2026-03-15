@@ -19,64 +19,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAfterIsKeyword()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is $$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is $$"));
         }
 
         [Fact]
         public async Task TestAfterNotKeyword()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is not $$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is not $$"));
         }
 
         [Fact]
         public async Task TestAfterNotKeywordAndOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is not ($$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is not ($$"));
         }
 
         [Fact]
         public async Task TestAfterAndKeyword_IntExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is 1 and $$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is 1 and $$"));
         }
 
         [Fact]
         public async Task TestAfterAndKeyword_StrExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is ""str"" and $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(InitializeObjectE + @"if (e is ""str"" and $$")
+            );
         }
 
         [Fact]
         public async Task TestAfterAndKeyword_RelationalExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is <= 1 and $$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is <= 1 and $$"));
         }
 
         [Fact]
         public async Task TestAfterOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is ($$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is ($$"));
         }
 
         [Fact]
         public async Task TestAfterMultipleOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is ((($$"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is ((($$"));
         }
 
         [Fact]
         public async Task TestInMiddleofCompletePattern()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is $$ 1 or 2)"));
+            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE + @"if (e is $$ 1 or 2)"));
         }
 
         [Fact]
@@ -96,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -116,123 +110,162 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInMiddleofCompletePattern_MultipleParens()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is ((($$ 1 or 2))))"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(InitializeObjectE + @"if (e is ((($$ 1 or 2))))")
+            );
         }
 
         [Fact]
         public async Task TestInMiddleofCompletePattern_EmptyListPattern()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is ($$ []) and var x)"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(InitializeObjectE + @"if (e is ($$ []) and var x)")
+            );
         }
 
         [Fact]
         public async Task TestAtBeginningOfSwitchExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                var result = e switch
-                {
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        var result = e switch
+                        {
+                            $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAtBeginningOfSwitchStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                switch (e)
-                {
-                    case $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        switch (e)
+                        {
+                            case $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInMiddleOfSwitchExpression()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                var result = e switch
-                {
-                    1 => 2,
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        var result = e switch
+                        {
+                            1 => 2,
+                            $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInMiddleOfSwitchStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                switch (e)
-                {
-                    case 1:
-                    case $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        switch (e)
+                        {
+                            case 1:
+                            case $$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAtBeginningOfSwitchExpression_AfterOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                var result = e switch
-                {
-                    ($$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        var result = e switch
+                        {
+                            ($$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInMiddleOfSwitchExpression_AfterOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                var result = e switch
-                {
-                    1 => 2,
-                    ($$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        var result = e switch
+                        {
+                            1 => 2,
+                            ($$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInMiddleOfSwitchExpression_ComplexCase()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                var result = e switch
-                {
-                    1 and ($$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        var result = e switch
+                        {
+                            1 and ($$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAtBeginningOfSwitchStatement_AfterOpenParen()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                switch (e)
-                {
-                    case ($$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        switch (e)
+                        {
+                            case ($$
+                        """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAtBeginningOfSwitchStatement_AfterOpenParen_CompleteStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(InitializeObjectE +
-                """
-                switch (e)
-                {
-                    case ($$ 1)
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    InitializeObjectE
+                        + """
+                        switch (e)
+                        {
+                            case ($$ 1)
+                        """
+                )
+            );
         }
 
         [Fact]
@@ -247,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void M(C test)
                     {
                         if (test is { P: $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -263,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void M(C test)
                     {
                         if (test is { P.P2: $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -278,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void M(C test)
                     {
                         if (test is { P: ($$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -293,35 +329,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void M(C test)
                     {
                         if (test is { P: (1 or $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMissingAfterConstant()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is 1 $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE + @"if (e is 1 $$"));
         }
 
         [Fact]
         public async Task TestMissingAfterMultipleConstants()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is 1 or 2 $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE + @"if (e is 1 or 2 $$"));
         }
 
         [Fact]
         public async Task TestAfterType()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is int $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE + @"if (e is int $$"));
         }
 
         [Fact]
         public async Task TestAfterRelationalOperator()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE +
-@"if (e is >= 0 $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(InitializeObjectE + @"if (e is >= 0 $$"));
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/61184")]
@@ -329,10 +362,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [InlineData("or")]
         public async Task TestAfterIdentifierPatternKeyword(string precedingKeyword)
         {
-            await VerifyKeywordAsync(InitializeObjectE +
-$@"if (e is Test.TestValue {precedingKeyword} $$)
+            await VerifyKeywordAsync(
+                InitializeObjectE
+                    + $@"if (e is Test.TestValue {precedingKeyword} $$)
 
-enum Test {{ TestValue }}");
+enum Test {{ TestValue }}"
+            );
         }
     }
 }

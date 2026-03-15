@@ -12,7 +12,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private delegate bool EnumThreadWindowsDelegate(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
-        private static extern bool EnumThreadWindows(int dwThreadId, EnumThreadWindowsDelegate plfn, IntPtr lParam);
+        private static extern bool EnumThreadWindows(
+            int dwThreadId,
+            EnumThreadWindowsDelegate plfn,
+            IntPtr lParam
+        );
 
         public static IntPtr WaitForPopupFromProcess(Process process, int timeout = 60000)
         {
@@ -28,12 +32,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 foreach (ProcessThread thread in process.Threads)
                 {
                     // We take the last window we find. There really should only be one at most anyways.
-                    EnumThreadWindows(thread.Id,
-                        (hWnd, lParam) => {
+                    EnumThreadWindows(
+                        thread.Id,
+                        (hWnd, lParam) =>
+                        {
                             windowHandle = hWnd;
                             return true;
                         },
-                        IntPtr.Zero);
+                        IntPtr.Zero
+                    );
                 }
 
                 if (windowHandle != IntPtr.Zero)

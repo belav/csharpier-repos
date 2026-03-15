@@ -30,10 +30,12 @@ namespace System.Data.EntityModel.Emitters
 
         #region Public Methods
 
-        public PropertyEmitter(ClientApiGenerator generator, EdmProperty property, bool declaringTypeUsesStandardBaseType)
-            : base(generator, property, declaringTypeUsesStandardBaseType)
-        {
-        }
+        public PropertyEmitter(
+            ClientApiGenerator generator,
+            EdmProperty property,
+            bool declaringTypeUsesStandardBaseType
+        )
+            : base(generator, property, declaringTypeUsesStandardBaseType) { }
 
         /// <summary>
         /// Emit the declaration of the property for the class.
@@ -42,7 +44,12 @@ namespace System.Data.EntityModel.Emitters
         public CodeMemberProperty EmitPropertyDeclaration(CodeTypeReference propertyReturnType)
         {
             MemberAttributes scope = AccessibilityFromGettersAndSetters(Item);
-            CodeMemberProperty memberProperty = EmitPropertyDeclaration(scope, propertyReturnType, IsVirtualProperty, HidesBaseClassProperty);
+            CodeMemberProperty memberProperty = EmitPropertyDeclaration(
+                scope,
+                propertyReturnType,
+                IsVirtualProperty,
+                HidesBaseClassProperty
+            );
 
             memberProperty.HasSet = true;
             memberProperty.HasGet = true;
@@ -60,7 +67,11 @@ namespace System.Data.EntityModel.Emitters
 
             // raise the PropertyGenerated event
             //
-            PropertyGeneratedEventArgs eventArgs = new PropertyGeneratedEventArgs(Item, FieldName, typeRef);
+            PropertyGeneratedEventArgs eventArgs = new PropertyGeneratedEventArgs(
+                Item,
+                FieldName,
+                typeRef
+            );
             this.Generator.RaisePropertyGeneratedEvent(eventArgs);
 
             // the event subscriber cannot change the return type of the property
@@ -89,14 +100,19 @@ namespace System.Data.EntityModel.Emitters
         /// CodeDOM does not support partial methods
         /// </summary>
         /// <param name="typeDecl"></param>
-        private void EmitPropertyOnChangePartialMethods(CodeTypeDeclaration typeDecl, CodeTypeReference returnType)
+        private void EmitPropertyOnChangePartialMethods(
+            CodeTypeDeclaration typeDecl,
+            CodeTypeReference returnType
+        )
         {
             CodeMemberMethod onChangingDomMethod = new CodeMemberMethod();
             Generator.AttributeEmitter.EmitGeneratedCodeAttribute(onChangingDomMethod);
             onChangingDomMethod.Name = OnChangingPartialMethodName(PropertyName);
             onChangingDomMethod.ReturnType = new CodeTypeReference(typeof(void));
             onChangingDomMethod.Attributes = MemberAttributes.Abstract | MemberAttributes.Public;
-            onChangingDomMethod.Parameters.Add(new CodeParameterDeclarationExpression(returnType, "value"));
+            onChangingDomMethod.Parameters.Add(
+                new CodeParameterDeclarationExpression(returnType, "value")
+            );
             typeDecl.Members.Add(onChangingDomMethod);
 
             CodeMemberMethod onChangedDomMethod = new CodeMemberMethod();
@@ -106,8 +122,18 @@ namespace System.Data.EntityModel.Emitters
             onChangedDomMethod.Attributes = MemberAttributes.Abstract | MemberAttributes.Public;
             typeDecl.Members.Add(onChangedDomMethod);
 
-            Generator.FixUps.Add(new FixUp(PropertyClassName + "." + OnChangingPartialMethodName(PropertyName), FixUpType.MarkAbstractMethodAsPartial));
-            Generator.FixUps.Add(new FixUp(PropertyClassName + "." + OnChangedPartialMethodName(PropertyName), FixUpType.MarkAbstractMethodAsPartial));
+            Generator.FixUps.Add(
+                new FixUp(
+                    PropertyClassName + "." + OnChangingPartialMethodName(PropertyName),
+                    FixUpType.MarkAbstractMethodAsPartial
+                )
+            );
+            Generator.FixUps.Add(
+                new FixUp(
+                    PropertyClassName + "." + OnChangedPartialMethodName(PropertyName),
+                    FixUpType.MarkAbstractMethodAsPartial
+                )
+            );
         }
 
         private void EmitField(CodeTypeDeclaration typeDecl, CodeTypeReference fieldType)
@@ -125,7 +151,10 @@ namespace System.Data.EntityModel.Emitters
 
             if (MetadataUtil.IsComplexType(Item.TypeUsage.EdmType))
             {
-                CodeMemberField complexInitField = new CodeMemberField(TypeReference.ForType(typeof(bool)), ComplexPropertyInitializedFieldName);
+                CodeMemberField complexInitField = new CodeMemberField(
+                    TypeReference.ForType(typeof(bool)),
+                    ComplexPropertyInitializedFieldName
+                );
                 Generator.AttributeEmitter.EmitGeneratedCodeAttribute(complexInitField);
                 complexInitField.Attributes = MemberAttributes.Private;
                 typeDecl.Members.Add(complexInitField);
@@ -135,9 +164,13 @@ namespace System.Data.EntityModel.Emitters
         /// <summary>
         /// Get a reference to the base class DataObject
         /// </summary>
-        public static CodeTypeReferenceExpression CreateEdmStructuralObjectRef(TypeReference typeReference)
+        public static CodeTypeReferenceExpression CreateEdmStructuralObjectRef(
+            TypeReference typeReference
+        )
         {
-            return new CodeTypeReferenceExpression(typeReference.ForType(typeof(System.Data.Objects.DataClasses.StructuralObject)));
+            return new CodeTypeReferenceExpression(
+                typeReference.ForType(typeof(System.Data.Objects.DataClasses.StructuralObject))
+            );
         }
 
         #endregion
@@ -155,10 +188,7 @@ namespace System.Data.EntityModel.Emitters
 
         public new EdmProperty Item
         {
-            get
-            {
-                return base.Item as EdmProperty;
-            }
+            get { return base.Item as EdmProperty; }
         }
 
         #endregion
@@ -170,10 +200,7 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         public string EntityPropertyName
         {
-            get
-            {
-                return Item.Name;
-            }
+            get { return Item.Name; }
         }
 
         #endregion
@@ -181,17 +208,26 @@ namespace System.Data.EntityModel.Emitters
         #region Private Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="memberProperty"></param>
         /// <param name="additionalAttributes">Additional attributes to emit</param>
-        private void EmitCustomAttributes(CodeMemberProperty memberProperty,
-                                          List<CodeAttributeDeclaration> additionalAttributes)
+        private void EmitCustomAttributes(
+            CodeMemberProperty memberProperty,
+            List<CodeAttributeDeclaration> additionalAttributes
+        )
         {
-            Generator.AttributeEmitter.EmitPropertyAttributes(this, memberProperty, additionalAttributes);
+            Generator.AttributeEmitter.EmitPropertyAttributes(
+                this,
+                memberProperty,
+                additionalAttributes
+            );
         }
 
-        private void EmitPropertyGetter(CodeMemberProperty memberProperty, List<CodeStatement> additionalGetStatements)
+        private void EmitPropertyGetter(
+            CodeMemberProperty memberProperty,
+            List<CodeStatement> additionalGetStatements
+        )
         {
             CodeStatementCollection statements = memberProperty.GetStatements;
 
@@ -212,16 +248,24 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    Generator.AddError(Strings.InvalidGetStatementSuppliedForProperty(Item.Name),
-                                       ModelBuilderErrorCode.InvalidGetStatementSuppliedForProperty,
-                                       EdmSchemaErrorSeverity.Error,
-                                       e);
+                    Generator.AddError(
+                        Strings.InvalidGetStatementSuppliedForProperty(Item.Name),
+                        ModelBuilderErrorCode.InvalidGetStatementSuppliedForProperty,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
 
             MemberAttributes access = memberProperty.Attributes & MemberAttributes.AccessMask;
 
-            AddGetterSetterFixUp(Generator.FixUps, PropertyFQName, GetGetterAccessibility(Item), access, true);
+            AddGetterSetterFixUp(
+                Generator.FixUps,
+                PropertyFQName,
+                GetGetterAccessibility(Item),
+                access,
+                true
+            );
 
             EmitPropertyGetterBody(statements);
         }
@@ -232,26 +276,32 @@ namespace System.Data.EntityModel.Emitters
             if (MetadataUtil.IsComplexType(Item.TypeUsage.EdmType))
             {
                 //Since Complex Collections are not supported by
-                //the stack, we don't need to do anything special 
+                //the stack, we don't need to do anything special
                 //like doing an Attach or Detatch like the way we do for complex types.
                 if (GetCollectionKind(Item.TypeUsage) == CollectionKind.None)
                 {
                     // _field = GetValidValue( _field, FieldPropertyInfo, _fieldInitialized);
                     statements.Add(
-                        new CodeAssignStatement(FieldRef,
+                        new CodeAssignStatement(
+                            FieldRef,
                             new CodeMethodInvokeExpression(
-                                    ThisRef,
-                                    Utils.GetValidValueMethodName,
-                                    new CodeDirectionExpression(FieldDirection.In, FieldRef),
-                                    new CodePrimitiveExpression(PropertyName),
-                                    new CodePrimitiveExpression(Item.Nullable),
-                                    ComplexPropertyInitializedFieldRef)));
+                                ThisRef,
+                                Utils.GetValidValueMethodName,
+                                new CodeDirectionExpression(FieldDirection.In, FieldRef),
+                                new CodePrimitiveExpression(PropertyName),
+                                new CodePrimitiveExpression(Item.Nullable),
+                                ComplexPropertyInitializedFieldRef
+                            )
+                        )
+                    );
 
                     // this._complexPropertyInitialized = true;
                     statements.Add(
                         new CodeAssignStatement(
                             ComplexPropertyInitializedFieldRef,
-                            new CodePrimitiveExpression(true)));
+                            new CodePrimitiveExpression(true)
+                        )
+                    );
                 }
                 // return _field;
                 statements.Add(new CodeMethodReturnStatement(FieldRef));
@@ -267,7 +317,10 @@ namespace System.Data.EntityModel.Emitters
                             new CodeMethodInvokeExpression(
                                 CreateEdmStructuralObjectRef(TypeReference),
                                 Utils.GetValidValueMethodName,
-                                this.FieldRef)));
+                                this.FieldRef
+                            )
+                        )
+                    );
                 }
                 else
                 {
@@ -277,43 +330,59 @@ namespace System.Data.EntityModel.Emitters
             }
         }
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="memberProperty"></param>
         /// <param name="additionalSetStatements">Additional statements to emit</param>
-        private void EmitPropertySetter(CodeMemberProperty memberProperty, List<CodeStatement> additionalSetStatements)
+        private void EmitPropertySetter(
+            CodeMemberProperty memberProperty,
+            List<CodeStatement> additionalSetStatements
+        )
         {
             CodeStatementCollection statements = memberProperty.SetStatements;
 
             MemberAttributes access = memberProperty.Attributes & MemberAttributes.AccessMask;
 
-            AddGetterSetterFixUp(Generator.FixUps, PropertyFQName, GetSetterAccessibility(Item), access, false);
+            AddGetterSetterFixUp(
+                Generator.FixUps,
+                PropertyFQName,
+                GetSetterAccessibility(Item),
+                access,
+                false
+            );
 
             EmitPropertySetterBody(statements, additionalSetStatements);
         }
 
         /// <summary>
-        /// This is a control function to delegate the creation of the 
+        /// This is a control function to delegate the creation of the
         /// setter statments to the correct code path
         /// </summary>
         /// <param name="statements">The collection that the setter statements should be added to.</param>
         /// <param name="additionalSetStatements">Additional statements to emit</param>
-        private void EmitPropertySetterBody(CodeStatementCollection statements, List<CodeStatement> additionalSetStatements)
+        private void EmitPropertySetterBody(
+            CodeStatementCollection statements,
+            List<CodeStatement> additionalSetStatements
+        )
         {
             // Invoke the partial method "On[PropertyName]Changing();
             statements.Add(
                 new CodeMethodInvokeExpression(
                     ThisRef,
-                    OnChangingPartialMethodName(PropertyName), new CodePropertySetValueReferenceExpression()));
+                    OnChangingPartialMethodName(PropertyName),
+                    new CodePropertySetValueReferenceExpression()
+                )
+            );
 
             // ReportPropertyChanging( _piFieldName );
             statements.Add(
                 new CodeMethodInvokeExpression(
                     ThisRef,
                     Utils.ReportPropertyChangingMethodName,
-                    new CodePrimitiveExpression(PropertyName)));
+                    new CodePrimitiveExpression(PropertyName)
+                )
+            );
 
             // insert additional statements following the PropertyChanging event
             if (additionalSetStatements != null && additionalSetStatements.Count > 0)
@@ -324,10 +393,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    Generator.AddError(Strings.InvalidSetStatementSuppliedForProperty(Item.Name),
-                                       ModelBuilderErrorCode.InvalidSetStatementSuppliedForProperty,
-                                       EdmSchemaErrorSeverity.Error,
-                                       e);
+                    Generator.AddError(
+                        Strings.InvalidSetStatementSuppliedForProperty(Item.Name),
+                        ModelBuilderErrorCode.InvalidSetStatementSuppliedForProperty,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
 
@@ -342,26 +413,37 @@ namespace System.Data.EntityModel.Emitters
             }
             else if (MetadataUtil.IsCollectionType(Item.TypeUsage.EdmType))
             {
-                if (MetadataUtil.IsComplexType(((CollectionType)Item.TypeUsage.EdmType).TypeUsage.EdmType))
+                if (
+                    MetadataUtil.IsComplexType(
+                        ((CollectionType)Item.TypeUsage.EdmType).TypeUsage.EdmType
+                    )
+                )
                 {
-                    EmitComplexTypePropertySetStatements(statements, GetCollectionKind(Item.TypeUsage));
+                    EmitComplexTypePropertySetStatements(
+                        statements,
+                        GetCollectionKind(Item.TypeUsage)
+                    );
                 }
                 else
                 {
-                    Debug.Assert(MetadataUtil.IsPrimitiveType(((CollectionType)Item.TypeUsage.EdmType).TypeUsage.EdmType),
-                        "Collections should be of primitive types or complex types");
-                    EmitScalarTypePropertySetStatements(statements, GetCollectionKind(Item.TypeUsage));
+                    Debug.Assert(
+                        MetadataUtil.IsPrimitiveType(
+                            ((CollectionType)Item.TypeUsage.EdmType).TypeUsage.EdmType
+                        ),
+                        "Collections should be of primitive types or complex types"
+                    );
+                    EmitScalarTypePropertySetStatements(
+                        statements,
+                        GetCollectionKind(Item.TypeUsage)
+                    );
                 }
-
             }
             else if (MetadataUtil.IsEnumerationType(Item.TypeUsage.EdmType))
             {
                 // this.fieldName = value;
                 statements.Add(
-                    new CodeAssignStatement(
-                            FieldRef,
-                            new CodePropertySetValueReferenceExpression()));
-
+                    new CodeAssignStatement(FieldRef, new CodePropertySetValueReferenceExpression())
+                );
             }
 
             // ReportPropertyChanged( _piFieldName );
@@ -369,13 +451,14 @@ namespace System.Data.EntityModel.Emitters
                 new CodeMethodInvokeExpression(
                     ThisRef,
                     Utils.ReportPropertyChangedMethodName,
-                    new CodePrimitiveExpression(PropertyName)));
+                    new CodePrimitiveExpression(PropertyName)
+                )
+            );
 
             // Invoke the partial method "On[PropertyName]Changed();
             statements.Add(
-                new CodeMethodInvokeExpression(
-                    ThisRef,
-                    OnChangedPartialMethodName(PropertyName)));
+                new CodeMethodInvokeExpression(ThisRef, OnChangedPartialMethodName(PropertyName))
+            );
         }
 
         /// <summary>
@@ -385,12 +468,21 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="accessibility">The accessibility for the getter or setter</param>
         /// <param name="propertyAccessibility">The property's accessibility</param>
         /// <param name="isGetter">True if this is a getter, false if a setter</param>
-        internal static void AddGetterSetterFixUp(FixUpCollection fixups, string propertyFqName, MemberAttributes accessibility, MemberAttributes propertyAccessibility, bool isGetter)
+        internal static void AddGetterSetterFixUp(
+            FixUpCollection fixups,
+            string propertyFqName,
+            MemberAttributes accessibility,
+            MemberAttributes propertyAccessibility,
+            bool isGetter
+        )
         {
             Debug.Assert(GetAccessibilityRank(accessibility) >= 0, "bad accessibility");
 
             // Private
-            if (accessibility == MemberAttributes.Private && propertyAccessibility != MemberAttributes.Private)
+            if (
+                accessibility == MemberAttributes.Private
+                && propertyAccessibility != MemberAttributes.Private
+            )
             {
                 if (isGetter)
                 {
@@ -403,7 +495,10 @@ namespace System.Data.EntityModel.Emitters
             }
 
             // Internal
-            if (accessibility == MemberAttributes.Assembly && propertyAccessibility != MemberAttributes.Assembly)
+            if (
+                accessibility == MemberAttributes.Assembly
+                && propertyAccessibility != MemberAttributes.Assembly
+            )
             {
                 if (isGetter)
                 {
@@ -416,7 +511,10 @@ namespace System.Data.EntityModel.Emitters
             }
 
             // Public
-            if (accessibility == MemberAttributes.Public && propertyAccessibility != MemberAttributes.Public)
+            if (
+                accessibility == MemberAttributes.Public
+                && propertyAccessibility != MemberAttributes.Public
+            )
             {
                 if (isGetter)
                 {
@@ -429,7 +527,10 @@ namespace System.Data.EntityModel.Emitters
             }
 
             // Protected
-            if (accessibility == MemberAttributes.Family && propertyAccessibility != MemberAttributes.Family)
+            if (
+                accessibility == MemberAttributes.Family
+                && propertyAccessibility != MemberAttributes.Family
+            )
             {
                 if (isGetter)
                 {
@@ -440,27 +541,33 @@ namespace System.Data.EntityModel.Emitters
                     fixups.Add(new FixUp(propertyFqName, FixUpType.MarkPropertySetAsProtected));
                 }
             }
-
         }
 
         /// <summary>
         /// Emit the set statements for a property that is a scalar type
         /// </summary>
         /// <param name="statements">The statement collection to add the set statements to.</param>
-        private void EmitScalarTypePropertySetStatements(CodeStatementCollection statements,
-            CollectionKind collectionKind)
+        private void EmitScalarTypePropertySetStatements(
+            CodeStatementCollection statements,
+            CollectionKind collectionKind
+        )
         {
             Debug.Assert(statements != null, "statments can't be null");
-            Debug.Assert(((MetadataUtil.IsPrimitiveType(Item.TypeUsage.EdmType)) || (MetadataUtil.IsCollectionType(Item.TypeUsage.EdmType)))
-                , "Must be a primitive type or collection type property");
+            Debug.Assert(
+                (
+                    (MetadataUtil.IsPrimitiveType(Item.TypeUsage.EdmType))
+                    || (MetadataUtil.IsCollectionType(Item.TypeUsage.EdmType))
+                ),
+                "Must be a primitive type or collection type property"
+            );
 
-            CodePropertySetValueReferenceExpression valueRef = new CodePropertySetValueReferenceExpression();
+            CodePropertySetValueReferenceExpression valueRef =
+                new CodePropertySetValueReferenceExpression();
             //Since collections are not supported by
-            //the stack, we don't need to do anything special 
+            //the stack, we don't need to do anything special
             //like doing an Attach or Detatch like the way we do for complex types.
             if (collectionKind == CollectionKind.None)
             {
-
                 PrimitiveType primitiveType = (PrimitiveType)Item.TypeUsage.EdmType;
 
                 // basic pattern
@@ -469,14 +576,13 @@ namespace System.Data.EntityModel.Emitters
                 List<CodeExpression> parameters = new List<CodeExpression>();
                 parameters.Add(valueRef);
 
-
                 // pattern for non Nullable<T> types (string, byte[])
                 //
                 // this.fieldName = SetValidVaue( value, nullability );
 
                 if (primitiveType.ClrEquivalentType.IsClass)
                 {
-                    // ref types have an extra boolean parameter to tell if the property is allowed to 
+                    // ref types have an extra boolean parameter to tell if the property is allowed to
                     // be null or not
                     parameters.Add(new CodePrimitiveExpression(Item.Nullable));
                 }
@@ -484,67 +590,74 @@ namespace System.Data.EntityModel.Emitters
                 // now create and add the built statement
                 statements.Add(
                     new CodeAssignStatement(
-                            FieldRef,
-                            new CodeMethodInvokeExpression(
-                                CreateEdmStructuralObjectRef(TypeReference),
-                                Utils.SetValidValueMethodName,
-                                parameters.ToArray())));
+                        FieldRef,
+                        new CodeMethodInvokeExpression(
+                            CreateEdmStructuralObjectRef(TypeReference),
+                            Utils.SetValidValueMethodName,
+                            parameters.ToArray()
+                        )
+                    )
+                );
             }
             else
             {
                 // this.fieldName = value;
-                statements.Add(
-                    new CodeAssignStatement(
-                        FieldRef, valueRef));
-
+                statements.Add(new CodeAssignStatement(FieldRef, valueRef));
             }
         }
 
         private CodeExpression GetEnumValue<T>(T value)
         {
             Type type = typeof(T);
-            return new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(TypeReference.ForType(type)), Enum.GetName(type, value));
+            return new CodeFieldReferenceExpression(
+                new CodeTypeReferenceExpression(TypeReference.ForType(type)),
+                Enum.GetName(type, value)
+            );
         }
 
         /// <summary>
         /// Emit the property set statments to properly set a ComplexType.
         /// </summary>
         /// <param name="statements">The collection of statements that the set statements should be added to.</param>
-        private void EmitComplexTypePropertySetStatements(CodeStatementCollection statements, CollectionKind collectionKind)
+        private void EmitComplexTypePropertySetStatements(
+            CodeStatementCollection statements,
+            CollectionKind collectionKind
+        )
         {
-            CodePropertySetValueReferenceExpression valueRef = new CodePropertySetValueReferenceExpression();
+            CodePropertySetValueReferenceExpression valueRef =
+                new CodePropertySetValueReferenceExpression();
             //Since collections are not supported by
-            //the stack, we don't need to do anything special 
+            //the stack, we don't need to do anything special
             //like doing an Attach or Detatch like the way we do for complex types.
             if (collectionKind == CollectionKind.None)
             {
-
                 // this.fieldName = SetValidValue( this.fieldName, value, _pifieldName);
                 statements.Add(
                     new CodeAssignStatement(
                         FieldRef,
                         new CodeMethodInvokeExpression(
-                                ThisRef,
-                                Utils.SetValidValueMethodName,
-                                FieldRef,
-                                valueRef,
-                                new CodePrimitiveExpression(PropertyName))));
+                            ThisRef,
+                            Utils.SetValidValueMethodName,
+                            FieldRef,
+                            valueRef,
+                            new CodePrimitiveExpression(PropertyName)
+                        )
+                    )
+                );
 
                 // this._complexPropertyInitialized = true;
                 statements.Add(
                     new CodeAssignStatement(
                         ComplexPropertyInitializedFieldRef,
-                        new CodePrimitiveExpression(true)));
+                        new CodePrimitiveExpression(true)
+                    )
+                );
             }
             else
             {
                 // this.fieldName = value;
-                statements.Add(
-                    new CodeAssignStatement(
-                        FieldRef, valueRef));
-
+                statements.Add(new CodeAssignStatement(FieldRef, valueRef));
             }
-
         }
 
         /// <summary>
@@ -574,19 +687,32 @@ namespace System.Data.EntityModel.Emitters
             }
             else if (MetadataUtil.IsComplexType(propertyType))
             {
-                types = new PropertyTypeReferences(TypeReference, (ComplexType)propertyType, Generator);
+                types = new PropertyTypeReferences(
+                    TypeReference,
+                    (ComplexType)propertyType,
+                    Generator
+                );
             }
             else if (Helper.IsCollectionType(propertyType))
             {
                 TypeUsage typeUsage = ((CollectionType)propertyType).TypeUsage;
                 if (MetadataUtil.IsPrimitiveType(typeUsage.EdmType))
                 {
-                    types = new PropertyTypeReferences(TypeReference, (PrimitiveType)typeUsage.EdmType, GetCollectionKind(property.TypeUsage));
+                    types = new PropertyTypeReferences(
+                        TypeReference,
+                        (PrimitiveType)typeUsage.EdmType,
+                        GetCollectionKind(property.TypeUsage)
+                    );
                 }
                 else
                 {
                     Debug.Assert(MetadataUtil.IsComplexType(typeUsage.EdmType));
-                    types = new PropertyTypeReferences(TypeReference, (ComplexType)typeUsage.EdmType, GetCollectionKind(property.TypeUsage), Generator);
+                    types = new PropertyTypeReferences(
+                        TypeReference,
+                        (ComplexType)typeUsage.EdmType,
+                        GetCollectionKind(property.TypeUsage),
+                        Generator
+                    );
                 }
             }
             else
@@ -600,7 +726,10 @@ namespace System.Data.EntityModel.Emitters
             //it is not part of the key we are using for the dictionary used to cache.
             if (!Helper.IsCollectionType(propertyType))
             {
-                Debug.Assert(types.NonNullable != null && types.Nullable != null, "did you forget to set the types variable?");
+                Debug.Assert(
+                    types.NonNullable != null && types.Nullable != null,
+                    "did you forget to set the types variable?"
+                );
             }
 
             if (property.Nullable)
@@ -613,7 +742,6 @@ namespace System.Data.EntityModel.Emitters
             }
         }
 
-
         private static CollectionKind GetCollectionKind(TypeUsage usage)
         {
             Facet collectionFacet;
@@ -625,8 +753,15 @@ namespace System.Data.EntityModel.Emitters
             return CollectionKind.None;
         }
 
-        private string OnChangingPartialMethodName(string propertyName) { return "On" + propertyName + "Changing"; }
-        private string OnChangedPartialMethodName(string propertyName) { return "On" + propertyName + "Changed"; }
+        private string OnChangingPartialMethodName(string propertyName)
+        {
+            return "On" + propertyName + "Changing";
+        }
+
+        private string OnChangedPartialMethodName(string propertyName)
+        {
+            return "On" + propertyName + "Changed";
+        }
 
         #endregion
 
@@ -648,7 +783,10 @@ namespace System.Data.EntityModel.Emitters
             get
             {
                 if (_complexPropertyInitializedFieldRef == null)
-                    _complexPropertyInitializedFieldRef = new CodeFieldReferenceExpression(ThisRef, ComplexPropertyInitializedFieldName);
+                    _complexPropertyInitializedFieldRef = new CodeFieldReferenceExpression(
+                        ThisRef,
+                        ComplexPropertyInitializedFieldName
+                    );
 
                 return _complexPropertyInitializedFieldRef;
             }
@@ -656,18 +794,12 @@ namespace System.Data.EntityModel.Emitters
 
         private string FieldName
         {
-            get
-            {
-                return Utils.FieldNameFromPropName(PropertyName);
-            }
+            get { return Utils.FieldNameFromPropName(PropertyName); }
         }
 
         private string ComplexPropertyInitializedFieldName
         {
-            get
-            {
-                return Utils.ComplexPropertyInitializedNameFromPropName(PropertyName);
-            }
+            get { return Utils.ComplexPropertyInitializedNameFromPropName(PropertyName); }
         }
 
         internal bool IsKeyProperty
@@ -692,8 +824,10 @@ namespace System.Data.EntityModel.Emitters
         {
             PrimitiveTypeKind type;
             object value = property.DefaultValue;
-            if (value != null
-                 && Utils.TryGetPrimitiveTypeKind(property.TypeUsage.EdmType, out type))
+            if (
+                value != null
+                && Utils.TryGetPrimitiveTypeKind(property.TypeUsage.EdmType, out type)
+            )
             {
                 if (!property.Nullable && value.Equals(TypeSystem.GetDefaultValue(value.GetType())))
                 {
@@ -711,29 +845,29 @@ namespace System.Data.EntityModel.Emitters
                     case PrimitiveTypeKind.Single:
                     case PrimitiveTypeKind.Double:
                     case PrimitiveTypeKind.String:
-                        {
-                            return new CodePrimitiveExpression(value);
-                        }
+                    {
+                        return new CodePrimitiveExpression(value);
+                    }
                     case PrimitiveTypeKind.Guid:
-                        {
-                            return GetCodeExpressionFromGuid(value);
-                        }
+                    {
+                        return GetCodeExpressionFromGuid(value);
+                    }
                     case PrimitiveTypeKind.DateTime:
-                        {
-                            return GetCodeExpressionFromDateTimeDefaultValue(value, property);
-                        }
+                    {
+                        return GetCodeExpressionFromDateTimeDefaultValue(value, property);
+                    }
                     case PrimitiveTypeKind.DateTimeOffset:
-                        {
-                            return GetCodeExpressionFromDateTimeOffsetDefaultValue(value, property);
-                        }
+                    {
+                        return GetCodeExpressionFromDateTimeOffsetDefaultValue(value, property);
+                    }
                     case PrimitiveTypeKind.Time:
-                        {
-                            return GetCodeExpressionFromTimeSpanDefaultValue(value, property);
-                        }
+                    {
+                        return GetCodeExpressionFromTimeSpanDefaultValue(value, property);
+                    }
                     case PrimitiveTypeKind.Binary:
-                        {
-                            return GetCodeExpressionFromBinary(value);
-                        }
+                    {
+                        return GetCodeExpressionFromBinary(value);
+                    }
                     default:
                         Debug.Fail("Unsupported property type:" + type.ToString());
                         break;
@@ -759,50 +893,74 @@ namespace System.Data.EntityModel.Emitters
         private CodeExpression GetCodeExpressionFromGuid(object value)
         {
             Guid guid = (Guid)value;
-            return new CodeObjectCreateExpression(TypeReference.Guid,
-                new CodePrimitiveExpression(guid.ToString("D", CultureInfo.InvariantCulture)));
+            return new CodeObjectCreateExpression(
+                TypeReference.Guid,
+                new CodePrimitiveExpression(guid.ToString("D", CultureInfo.InvariantCulture))
+            );
         }
 
-        private CodeExpression GetCodeExpressionFromDateTimeDefaultValue(object value, EdmProperty property)
+        private CodeExpression GetCodeExpressionFromDateTimeDefaultValue(
+            object value,
+            EdmProperty property
+        )
         {
             DateTime utc = (DateTime)value;
             DateTime dateTime = DateTime.SpecifyKind(utc, DateTimeKind.Unspecified);
 
-            return new CodeObjectCreateExpression(TypeReference.DateTime, new CodePrimitiveExpression(dateTime.Ticks), GetEnumValue(DateTimeKind.Unspecified));
+            return new CodeObjectCreateExpression(
+                TypeReference.DateTime,
+                new CodePrimitiveExpression(dateTime.Ticks),
+                GetEnumValue(DateTimeKind.Unspecified)
+            );
         }
 
-        private CodeExpression GetCodeExpressionFromDateTimeOffsetDefaultValue(object value, EdmProperty property)
+        private CodeExpression GetCodeExpressionFromDateTimeOffsetDefaultValue(
+            object value,
+            EdmProperty property
+        )
         {
             DateTimeOffset dateTimeOffset = (DateTimeOffset)value;
 
-            return new CodeObjectCreateExpression(TypeReference.DateTimeOffset, new CodePrimitiveExpression(dateTimeOffset.Ticks),
-                new CodeObjectCreateExpression(TypeReference.TimeSpan, new CodePrimitiveExpression(dateTimeOffset.Offset.Ticks)));
+            return new CodeObjectCreateExpression(
+                TypeReference.DateTimeOffset,
+                new CodePrimitiveExpression(dateTimeOffset.Ticks),
+                new CodeObjectCreateExpression(
+                    TypeReference.TimeSpan,
+                    new CodePrimitiveExpression(dateTimeOffset.Offset.Ticks)
+                )
+            );
         }
 
-        private CodeExpression GetCodeExpressionFromTimeSpanDefaultValue(object value, EdmProperty property)
+        private CodeExpression GetCodeExpressionFromTimeSpanDefaultValue(
+            object value,
+            EdmProperty property
+        )
         {
             TimeSpan timeSpan = (TimeSpan)value;
-            return new CodeObjectCreateExpression(TypeReference.TimeSpan, new CodePrimitiveExpression(timeSpan.Ticks));
+            return new CodeObjectCreateExpression(
+                TypeReference.TimeSpan,
+                new CodePrimitiveExpression(timeSpan.Ticks)
+            );
         }
 
         public bool IsVirtualProperty
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         private struct PropertyTypeReferences
         {
             CodeTypeReference _nonNullable;
             CodeTypeReference _nullable;
-            public PropertyTypeReferences(TypeReference typeReference, PrimitiveType primitiveType)
-                : this(typeReference, primitiveType, CollectionKind.None)
-            {
-            }
 
-            public PropertyTypeReferences(TypeReference typeReference, PrimitiveType primitiveType, CollectionKind collectionKind)
+            public PropertyTypeReferences(TypeReference typeReference, PrimitiveType primitiveType)
+                : this(typeReference, primitiveType, CollectionKind.None) { }
+
+            public PropertyTypeReferences(
+                TypeReference typeReference,
+                PrimitiveType primitiveType,
+                CollectionKind collectionKind
+            )
             {
                 Type type = primitiveType.ClrEquivalentType;
                 if (collectionKind == CollectionKind.None)
@@ -820,21 +978,36 @@ namespace System.Data.EntityModel.Emitters
                 else
                 {
                     CodeTypeReference primitiveTypeRef = typeReference.ForType(type);
-                    CodeTypeReference collectionType = GetCollectionTypeReference(typeReference, primitiveTypeRef, collectionKind);
+                    CodeTypeReference collectionType = GetCollectionTypeReference(
+                        typeReference,
+                        primitiveTypeRef,
+                        collectionKind
+                    );
                     _nonNullable = collectionType;
                     _nullable = collectionType;
                 }
             }
 
-            public PropertyTypeReferences(TypeReference typeReference, ComplexType complexType, CollectionKind collectionKind, ClientApiGenerator generator)
+            public PropertyTypeReferences(
+                TypeReference typeReference,
+                ComplexType complexType,
+                CollectionKind collectionKind,
+                ClientApiGenerator generator
+            )
             {
-                CodeTypeReference baseType = generator.GetLeastPossibleQualifiedTypeReference(complexType);
+                CodeTypeReference baseType = generator.GetLeastPossibleQualifiedTypeReference(
+                    complexType
+                );
                 baseType = GetCollectionTypeReference(typeReference, baseType, collectionKind);
                 _nonNullable = baseType;
                 _nullable = baseType;
             }
 
-            private static CodeTypeReference GetCollectionTypeReference(TypeReference typeReference, CodeTypeReference baseType, CollectionKind collectionKind)
+            private static CodeTypeReference GetCollectionTypeReference(
+                TypeReference typeReference,
+                CodeTypeReference baseType,
+                CollectionKind collectionKind
+            )
             {
                 if (collectionKind == CollectionKind.Bag)
                 {
@@ -846,26 +1019,43 @@ namespace System.Data.EntityModel.Emitters
                 }
                 else
                 {
-                    Debug.Assert(collectionKind == CollectionKind.None, "Was another CollectionKind value added");
+                    Debug.Assert(
+                        collectionKind == CollectionKind.None,
+                        "Was another CollectionKind value added"
+                    );
                     // nothing more to do for .None
                 }
                 return baseType;
             }
 
-            public PropertyTypeReferences(TypeReference typeReference, ComplexType complexType, ClientApiGenerator generator)
-                : this(typeReference, complexType, CollectionKind.None, generator)
-            {
-            }
+            public PropertyTypeReferences(
+                TypeReference typeReference,
+                ComplexType complexType,
+                ClientApiGenerator generator
+            )
+                : this(typeReference, complexType, CollectionKind.None, generator) { }
 
-            private static CodeTypeReference GetCollectionTypeReferenceForBagSemantics(TypeReference typeReference, CodeTypeReference baseType)
+            private static CodeTypeReference GetCollectionTypeReferenceForBagSemantics(
+                TypeReference typeReference,
+                CodeTypeReference baseType
+            )
             {
-                CodeTypeReference typeRef = typeReference.ForType(typeof(System.Collections.Generic.ICollection<>), baseType);
+                CodeTypeReference typeRef = typeReference.ForType(
+                    typeof(System.Collections.Generic.ICollection<>),
+                    baseType
+                );
                 return typeRef;
             }
 
-            private static CodeTypeReference GetCollectionTypeReferenceForListSemantics(TypeReference typeReference, CodeTypeReference baseType)
+            private static CodeTypeReference GetCollectionTypeReferenceForListSemantics(
+                TypeReference typeReference,
+                CodeTypeReference baseType
+            )
             {
-                CodeTypeReference typeRef = typeReference.ForType(typeof(System.Collections.Generic.IList<>), baseType);
+                CodeTypeReference typeRef = typeReference.ForType(
+                    typeof(System.Collections.Generic.IList<>),
+                    baseType
+                );
                 return typeRef;
             }
 
@@ -884,32 +1074,30 @@ namespace System.Data.EntityModel.Emitters
 
         public string PropertyFQName
         {
-            get
-            {
-                return Item.DeclaringType.FullName + "." + Item.Name;
-            }
+            get { return Item.DeclaringType.FullName + "." + Item.Name; }
         }
 
         public string PropertyName
         {
-            get
-            {
-                return EntityPropertyName;
-            }
+            get { return EntityPropertyName; }
         }
 
         private string PropertyClassName
         {
-            get
-            {
-                return Item.DeclaringType.Name;
-            }
+            get { return Item.DeclaringType.Name; }
         }
 
-        private CodeMemberProperty EmitPropertyDeclaration(MemberAttributes scope, CodeTypeReference propertyType, bool isVirtual,
-            bool hidesBaseProperty)
+        private CodeMemberProperty EmitPropertyDeclaration(
+            MemberAttributes scope,
+            CodeTypeReference propertyType,
+            bool isVirtual,
+            bool hidesBaseProperty
+        )
         {
-            Debug.Assert(GetAccessibilityRank(scope) >= 0, "scope should only be an accessibility attribute");
+            Debug.Assert(
+                GetAccessibilityRank(scope) >= 0,
+                "scope should only be an accessibility attribute"
+            );
 
             CodeMemberProperty memberProperty = new CodeMemberProperty();
             memberProperty.Name = PropertyName;
@@ -934,11 +1122,19 @@ namespace System.Data.EntityModel.Emitters
 
         private void DisallowReturnTypeChange(CodeTypeReference baseType, CodeTypeReference newType)
         {
-            if (Helper.IsCollectionType(Item.TypeUsage.EdmType) && GetCollectionKind(Item.TypeUsage) != CollectionKind.None)
+            if (
+                Helper.IsCollectionType(Item.TypeUsage.EdmType)
+                && GetCollectionKind(Item.TypeUsage) != CollectionKind.None
+            )
             {
                 if (newType == null)
                 {
-                    throw EDesignUtil.InvalidOperation(Strings.CannotChangePropertyReturnTypeToNull(Item.Name, Item.DeclaringType.Name));
+                    throw EDesignUtil.InvalidOperation(
+                        Strings.CannotChangePropertyReturnTypeToNull(
+                            Item.Name,
+                            Item.DeclaringType.Name
+                        )
+                    );
                 }
 
                 // you can change the return type of collection properties
@@ -946,14 +1142,17 @@ namespace System.Data.EntityModel.Emitters
                 return;
             }
 
-            if (!(baseType == null && newType == null) &&
-                (
-                    (baseType != null && !baseType.Equals(newType)) ||
-                    (newType != null && !newType.Equals(baseType))
+            if (
+                !(baseType == null && newType == null)
+                && (
+                    (baseType != null && !baseType.Equals(newType))
+                    || (newType != null && !newType.Equals(baseType))
                 )
-               )
+            )
             {
-                throw EDesignUtil.InvalidOperation(Strings.CannotChangePropertyReturnType(Item.Name, Item.DeclaringType.Name));
+                throw EDesignUtil.InvalidOperation(
+                    Strings.CannotChangePropertyReturnType(Item.Name, Item.DeclaringType.Name)
+                );
             }
         }
     }

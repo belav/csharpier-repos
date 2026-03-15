@@ -6,7 +6,14 @@
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         private partial class State
         {

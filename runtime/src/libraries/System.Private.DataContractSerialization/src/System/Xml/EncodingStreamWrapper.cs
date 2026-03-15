@@ -8,7 +8,6 @@ using System.IO;
 using System.Runtime.Serialization; // For SR
 using System.Text;
 
-
 namespace System.Xml
 {
     // This wrapper does not support seek.
@@ -25,8 +24,9 @@ namespace System.Xml
             UTF8,
             UTF16LE,
             UTF16BE,
-            None
+            None,
         }
+
         private const int BufferLength = 128;
 
         // UTF-8 is fastpath, so that's how these are stored
@@ -80,7 +80,13 @@ namespace System.Xml
                     }
 
                     FillBuffer(BufferLength);
-                    CheckUTF8DeclarationEncoding(_bytes, _byteOffset, _byteCount, declEnc, expectedEnc);
+                    CheckUTF8DeclarationEncoding(
+                        _bytes,
+                        _byteOffset,
+                        _byteCount,
+                        declEnc,
+                        expectedEnc
+                    );
                 }
                 else
                 {
@@ -91,7 +97,13 @@ namespace System.Xml
                     CleanupCharBreak();
                     int count = _encoding.GetChars(_bytes, _byteOffset, _byteCount, _chars, 0);
                     _byteOffset = 0;
-                    _byteCount = DataContractSerializer.ValidatingUTF8.GetBytes(_chars, 0, count, _bytes, 0);
+                    _byteCount = DataContractSerializer.ValidatingUTF8.GetBytes(
+                        _chars,
+                        0,
+                        count,
+                        _bytes,
+                        0
+                    );
 
                     // Check for declaration
                     if (_bytes[1] == '?' && _bytes[0] == '<')
@@ -200,7 +212,14 @@ namespace System.Xml
                 throw new XmlException(SR.UnexpectedEndOfFile);
 
             int preserve;
-            SupportedEncoding e = ReadBOMEncoding((byte)b1, (byte)b2, (byte)b3, (byte)b4, notOutOfBand, out preserve);
+            SupportedEncoding e = ReadBOMEncoding(
+                (byte)b1,
+                (byte)b2,
+                (byte)b3,
+                (byte)b4,
+                notOutOfBand,
+                out preserve
+            );
 
             EnsureByteBuffer();
             switch (preserve)
@@ -226,7 +245,14 @@ namespace System.Xml
             return e;
         }
 
-        private static SupportedEncoding ReadBOMEncoding(byte b1, byte b2, byte b3, byte b4, bool notOutOfBand, out int preserve)
+        private static SupportedEncoding ReadBOMEncoding(
+            byte b1,
+            byte b2,
+            byte b3,
+            byte b4,
+            bool notOutOfBand,
+            out int preserve
+        )
         {
             SupportedEncoding e = SupportedEncoding.UTF8; // Default
 
@@ -269,7 +295,7 @@ namespace System.Xml
                     throw new XmlException(SR.XmlBadBOM);
                 preserve = 1;
             }
-            else  // Assume UTF8
+            else // Assume UTF8
             {
                 preserve = 4;
             }
@@ -282,7 +308,11 @@ namespace System.Xml
             count -= _byteCount;
             if (count > 0)
             {
-                _byteCount += _stream.ReadAtLeast(_bytes.AsSpan(_byteOffset + _byteCount, count), count, throwOnEndOfStream: false);
+                _byteCount += _stream.ReadAtLeast(
+                    _bytes.AsSpan(_byteOffset + _byteCount, count),
+                    count,
+                    throwOnEndOfStream: false
+                );
             }
         }
 
@@ -305,7 +335,13 @@ namespace System.Xml
             _byteCount = 0;
         }
 
-        private static void CheckUTF8DeclarationEncoding(byte[] buffer, int offset, int count, SupportedEncoding e, SupportedEncoding expectedEnc)
+        private static void CheckUTF8DeclarationEncoding(
+            byte[] buffer,
+            int offset,
+            int count,
+            SupportedEncoding e,
+            SupportedEncoding expectedEnc
+        )
         {
             byte quot = 0;
             int encEq = -1;
@@ -314,7 +350,7 @@ namespace System.Xml
             // Encoding should be second "=", abort at first "?"
             int i;
             int eq = 0;
-            for (i = offset + 2; i < max; i++)  // Skip the "<?" so we don't get caught by the first "?"
+            for (i = offset + 2; i < max; i++) // Skip the "<?" so we don't get caught by the first "?"
             {
                 if (quot != 0)
                 {
@@ -338,7 +374,7 @@ namespace System.Xml
                     }
                     eq++;
                 }
-                else if (buffer[i] == (byte)'?')  // Not legal character in a decl before second "="
+                else if (buffer[i] == (byte)'?') // Not legal character in a decl before second "="
                 {
                     break;
                 }
@@ -356,7 +392,8 @@ namespace System.Xml
                 throw new XmlException(SR.XmlMalformedDecl);
 
             // Back off whitespace
-            for (i = encEq - 1; IsWhitespace(buffer[i]); i--) ;
+            for (i = encEq - 1; IsWhitespace(buffer[i]); i--)
+                ;
 
             // Check for encoding attribute
             if (!buffer.AsSpan(0, i + 1).EndsWith("encoding"u8))
@@ -367,7 +404,8 @@ namespace System.Xml
             }
 
             // Move ahead of whitespace
-            for (i = encEq + 1; i < max && IsWhitespace(buffer[i]); i++) ;
+            for (i = encEq + 1; i < max && IsWhitespace(buffer[i]); i++)
+                ;
 
             // Find the quotes
             if (buffer[i] != '\'' && buffer[i] != '"')
@@ -375,7 +413,8 @@ namespace System.Xml
             quot = buffer[i];
 
             int q = i;
-            for (i = q + 1; buffer[i] != quot && i < max; ++i) ;
+            for (i = q + 1; buffer[i] != quot && i < max; ++i)
+                ;
 
             if (buffer[i] != quot)
                 throw new XmlException(SR.XmlMalformedDecl);
@@ -385,30 +424,55 @@ namespace System.Xml
 
             // lookup the encoding
             SupportedEncoding declEnc = e;
-            if (encCount == s_encodingUTF8.Length && CompareCaseInsensitive(s_encodingUTF8, buffer, encStart))
+            if (
+                encCount == s_encodingUTF8.Length
+                && CompareCaseInsensitive(s_encodingUTF8, buffer, encStart)
+            )
             {
                 declEnc = SupportedEncoding.UTF8;
             }
-            else if (encCount == s_encodingUnicodeLE.Length && CompareCaseInsensitive(s_encodingUnicodeLE, buffer, encStart))
+            else if (
+                encCount == s_encodingUnicodeLE.Length
+                && CompareCaseInsensitive(s_encodingUnicodeLE, buffer, encStart)
+            )
             {
                 declEnc = SupportedEncoding.UTF16LE;
             }
-            else if (encCount == s_encodingUnicodeBE.Length && CompareCaseInsensitive(s_encodingUnicodeBE, buffer, encStart))
+            else if (
+                encCount == s_encodingUnicodeBE.Length
+                && CompareCaseInsensitive(s_encodingUnicodeBE, buffer, encStart)
+            )
             {
                 declEnc = SupportedEncoding.UTF16BE;
             }
-            else if (encCount == s_encodingUnicode.Length && CompareCaseInsensitive(s_encodingUnicode, buffer, encStart))
+            else if (
+                encCount == s_encodingUnicode.Length
+                && CompareCaseInsensitive(s_encodingUnicode, buffer, encStart)
+            )
             {
                 if (e == SupportedEncoding.UTF8)
-                    ThrowEncodingMismatch(DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount), DataContractSerializer.UTF8NoBom.GetString(s_encodingUTF8, 0, s_encodingUTF8.Length));
+                    ThrowEncodingMismatch(
+                        DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount),
+                        DataContractSerializer.UTF8NoBom.GetString(
+                            s_encodingUTF8,
+                            0,
+                            s_encodingUTF8.Length
+                        )
+                    );
             }
             else
             {
-                ThrowEncodingMismatch(DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount), e);
+                ThrowEncodingMismatch(
+                    DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount),
+                    e
+                );
             }
 
             if (e != declEnc)
-                ThrowEncodingMismatch(DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount), e);
+                ThrowEncodingMismatch(
+                    DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount),
+                    e
+                );
         }
 
         private static bool CompareCaseInsensitive(byte[] key, byte[] buffer, int offset)
@@ -429,7 +493,12 @@ namespace System.Xml
             return ch == (byte)' ' || ch == (byte)'\n' || ch == (byte)'\t' || ch == (byte)'\r';
         }
 
-        internal static ArraySegment<byte> ProcessBuffer(byte[] buffer, int offset, int count, Encoding? encoding)
+        internal static ArraySegment<byte> ProcessBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding
+        )
         {
             if (count < 4)
                 throw new XmlException(SR.UnexpectedEndOfFile);
@@ -440,7 +509,14 @@ namespace System.Xml
                 ArraySegment<byte> seg;
 
                 SupportedEncoding expectedEnc = GetSupportedEncoding(encoding);
-                SupportedEncoding declEnc = ReadBOMEncoding(buffer[offset], buffer[offset + 1], buffer[offset + 2], buffer[offset + 3], encoding == null, out preserve);
+                SupportedEncoding declEnc = ReadBOMEncoding(
+                    buffer[offset],
+                    buffer[offset + 1],
+                    buffer[offset + 2],
+                    buffer[offset + 3],
+                    encoding == null,
+                    out preserve
+                );
                 if (expectedEnc != SupportedEncoding.None && expectedEnc != declEnc)
                     ThrowExpectedEncodingMismatch(expectedEnc, declEnc);
 
@@ -471,7 +547,13 @@ namespace System.Xml
                 chars = new char[localEnc.GetMaxCharCount(inputCount)];
                 int ccount = localEnc.GetChars(buffer, offset, inputCount, chars, 0);
                 bytes = new byte[DataContractSerializer.ValidatingUTF8.GetMaxByteCount(ccount)];
-                int bcount = DataContractSerializer.ValidatingUTF8.GetBytes(chars, 0, ccount, bytes, 0);
+                int bcount = DataContractSerializer.ValidatingUTF8.GetBytes(
+                    chars,
+                    0,
+                    ccount,
+                    bytes,
+                    0
+                );
 
                 // Check for declaration
                 if (bytes[1] == '?' && bytes[0] == '<')
@@ -485,7 +567,11 @@ namespace System.Xml
                         throw new XmlException(SR.XmlDeclarationRequired);
                 }
 
-                seg = new ArraySegment<byte>(DataContractSerializer.ValidatingUTF8.GetBytes(GetEncoding(declEnc).GetChars(buffer, offset, count)));
+                seg = new ArraySegment<byte>(
+                    DataContractSerializer.ValidatingUTF8.GetBytes(
+                        GetEncoding(declEnc).GetChars(buffer, offset, count)
+                    )
+                );
                 return seg;
             }
             catch (DecoderFallbackException e)
@@ -494,9 +580,18 @@ namespace System.Xml
             }
         }
 
-        private static void ThrowExpectedEncodingMismatch(SupportedEncoding expEnc, SupportedEncoding actualEnc)
+        private static void ThrowExpectedEncodingMismatch(
+            SupportedEncoding expEnc,
+            SupportedEncoding actualEnc
+        )
         {
-            throw new XmlException(SR.Format(SR.XmlExpectedEncoding, GetEncodingName(expEnc), GetEncodingName(actualEnc)));
+            throw new XmlException(
+                SR.Format(
+                    SR.XmlExpectedEncoding,
+                    GetEncodingName(expEnc),
+                    GetEncodingName(actualEnc)
+                )
+            );
         }
 
         private static void ThrowEncodingMismatch(string declEnc, SupportedEncoding enc)
@@ -524,10 +619,7 @@ namespace System.Xml
         // The encoding conversion and buffering breaks seeking.
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // This stream wrapper does not support duplex
@@ -542,18 +634,11 @@ namespace System.Xml
             }
         }
 
-
         // The encoding conversion and buffering breaks seeking.
         public override long Position
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
 
         public override void Close()
@@ -655,7 +740,7 @@ namespace System.Xml
             {
                 w = _bytes[max - 1] + (_bytes[max - 2] << 8);
             }
-            if ((w & 0xDC00) != 0xDC00 && w >= 0xD800 && w <= 0xDBFF)  // First 16-bit number of surrogate pair
+            if ((w & 0xDC00) != 0xDC00 && w >= 0xD800 && w <= 0xDBFF) // First 16-bit number of surrogate pair
             {
                 int b1 = _stream.ReadByte();
                 int b2 = _stream.ReadByte();
@@ -707,8 +792,14 @@ namespace System.Xml
         }
 
         // Delegate properties
-        public override bool CanTimeout { get { return _stream.CanTimeout; } }
-        public override long Length { get { return _stream.Length; } }
+        public override bool CanTimeout
+        {
+            get { return _stream.CanTimeout; }
+        }
+        public override long Length
+        {
+            get { return _stream.Length; }
+        }
         public override int ReadTimeout
         {
             get { return _stream.ReadTimeout; }

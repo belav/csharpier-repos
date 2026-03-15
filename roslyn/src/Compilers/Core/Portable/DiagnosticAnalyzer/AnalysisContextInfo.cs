@@ -19,47 +19,60 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly SourceOrAdditionalFile? _file;
         private readonly SyntaxNode? _node;
 
-        public AnalysisContextInfo(Compilation compilation) :
-            this(compilation: compilation, operation: null, symbol: null, file: null, node: null)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation)
+            : this(compilation: compilation, operation: null, symbol: null, file: null, node: null)
+        { }
 
-        public AnalysisContextInfo(SemanticModel model) :
-            this(model.Compilation, new SourceOrAdditionalFile(model.SyntaxTree))
-        {
-        }
+        public AnalysisContextInfo(SemanticModel model)
+            : this(model.Compilation, new SourceOrAdditionalFile(model.SyntaxTree)) { }
 
-        public AnalysisContextInfo(Compilation compilation, ISymbol symbol) :
-            this(compilation: compilation, operation: null, symbol: symbol, file: null, node: null)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation, ISymbol symbol)
+            : this(
+                compilation: compilation,
+                operation: null,
+                symbol: symbol,
+                file: null,
+                node: null
+            ) { }
 
-        public AnalysisContextInfo(Compilation compilation, SourceOrAdditionalFile file) :
-            this(compilation: compilation, operation: null, symbol: null, file: file, node: null)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation, SourceOrAdditionalFile file)
+            : this(compilation: compilation, operation: null, symbol: null, file: file, node: null)
+        { }
 
-        public AnalysisContextInfo(Compilation compilation, SyntaxNode node) :
-            this(compilation: compilation, operation: null, symbol: null, file: new SourceOrAdditionalFile(node.SyntaxTree), node)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation, SyntaxNode node)
+            : this(
+                compilation: compilation,
+                operation: null,
+                symbol: null,
+                file: new SourceOrAdditionalFile(node.SyntaxTree),
+                node
+            ) { }
 
-        public AnalysisContextInfo(Compilation compilation, IOperation operation) :
-            this(compilation: compilation, operation: operation, symbol: null, file: new SourceOrAdditionalFile(operation.Syntax.SyntaxTree), node: operation.Syntax)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation, IOperation operation)
+            : this(
+                compilation: compilation,
+                operation: operation,
+                symbol: null,
+                file: new SourceOrAdditionalFile(operation.Syntax.SyntaxTree),
+                node: operation.Syntax
+            ) { }
 
-        public AnalysisContextInfo(Compilation compilation, ISymbol symbol, SyntaxNode node) :
-            this(compilation: compilation, operation: null, symbol: symbol, file: new SourceOrAdditionalFile(node.SyntaxTree), node)
-        {
-        }
+        public AnalysisContextInfo(Compilation compilation, ISymbol symbol, SyntaxNode node)
+            : this(
+                compilation: compilation,
+                operation: null,
+                symbol: symbol,
+                file: new SourceOrAdditionalFile(node.SyntaxTree),
+                node
+            ) { }
 
         private AnalysisContextInfo(
             Compilation? compilation,
             IOperation? operation,
             ISymbol? symbol,
             SourceOrAdditionalFile? file,
-            SyntaxNode? node)
+            SyntaxNode? node
+        )
         {
             Debug.Assert(node == null || file?.SourceTree != null);
             Debug.Assert(operation == null || file?.SourceTree != null);
@@ -112,7 +125,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var lineSpan = text?.Lines?.GetLinePositionSpan(_node.Span);
 
                 // can't use Kind since that is language specific. instead will output typename.
-                sb.AppendLine($"{nameof(SyntaxNode)}: {GetFlattenedNodeText(_node)} [{_node.GetType().Name}]@{_node.Span} {(lineSpan.HasValue ? lineSpan.Value.ToString() : string.Empty)}");
+                sb.AppendLine(
+                    $"{nameof(SyntaxNode)}: {GetFlattenedNodeText(_node)} [{_node.GetType().Name}]@{_node.Span} {(lineSpan.HasValue ? lineSpan.Value.ToString() : string.Empty)}"
+                );
             }
 
             return sb.ToString();

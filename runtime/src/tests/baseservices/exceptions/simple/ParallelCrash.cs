@@ -14,7 +14,7 @@ public class ParallelCrash
 {
     private const int ThreadCount = 10;
 
-    private volatile static int s_runningThreads;
+    private static volatile int s_runningThreads;
     private static bool s_crashMainThread;
     private static bool s_crashWorkerThreads;
 
@@ -27,8 +27,8 @@ public class ParallelCrash
             s_crashMainThread = (args[0] != "2");
             s_crashWorkerThreads = (args[0] != "1");
         }
-        
-        for (int threadIndex = ThreadCount; --threadIndex >= 0;)
+
+        for (int threadIndex = ThreadCount; --threadIndex >= 0; )
         {
             new Thread(CrashInParallel).Start();
         }
@@ -36,7 +36,7 @@ public class ParallelCrash
         {
             Environment.FailFast("Parallel crash in main thread");
         }
-        for (;;)
+        for (; ; )
         {
             Thread.Sleep(50);
         }
@@ -47,15 +47,13 @@ public class ParallelCrash
     {
         int threadIndex = Interlocked.Increment(ref s_runningThreads);
         string failFastMessage = string.Format("Parallel crash in thread {0}!\n", threadIndex);
-        while (s_runningThreads != ThreadCount)
-        {
-        }
+        while (s_runningThreads != ThreadCount) { }
         // Now all the worker threads should be running, fire!
         if (s_crashWorkerThreads)
         {
             Environment.FailFast(failFastMessage);
         }
-        for (;;)
+        for (; ; )
         {
             Thread.Sleep(50);
         }

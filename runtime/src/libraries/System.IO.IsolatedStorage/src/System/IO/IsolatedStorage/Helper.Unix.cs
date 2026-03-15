@@ -5,7 +5,10 @@ namespace System.IO.IsolatedStorage
 {
     internal static partial class Helper
     {
-        internal static void CreateDirectory(string path, IsolatedStorageScope _ /*scope*/)
+        internal static void CreateDirectory(
+            string path,
+            IsolatedStorageScope _ /*scope*/
+        )
         {
             Directory.CreateDirectory(path);
         }

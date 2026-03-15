@@ -8,8 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// An anonymous QilExpression function node.
     /// </summary>
@@ -23,8 +23,11 @@ namespace System.Xml.Xsl.Qil {
     /// override the types after setting the function's definition (for example, an XQuery
     /// might define a function's return type to be wider than its definition would imply.)</para>
     /// </remarks>
-    internal class QilFunction : QilReference {
-        private QilNode arguments, definition, sideEffects;
+    internal class QilFunction : QilReference
+    {
+        private QilNode arguments,
+            definition,
+            sideEffects;
 
         //-----------------------------------------------
         // Constructor
@@ -33,42 +36,64 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a node
         /// </summary>
-        public QilFunction(QilNodeType nodeType, QilNode arguments, QilNode definition, QilNode sideEffects, XmlQueryType resultType)
-            : base(nodeType) {
+        public QilFunction(
+            QilNodeType nodeType,
+            QilNode arguments,
+            QilNode definition,
+            QilNode sideEffects,
+            XmlQueryType resultType
+        )
+            : base(nodeType)
+        {
             this.arguments = arguments;
             this.definition = definition;
             this.sideEffects = sideEffects;
             this.xmlType = resultType;
         }
 
-
         //-----------------------------------------------
         // IList<QilNode> methods -- override
         //-----------------------------------------------
 
-        public override int Count {
+        public override int Count
+        {
             get { return 3; }
         }
 
-        public override QilNode this[int index] {
-            get {
-                switch (index) {
-                    case 0: return this.arguments;
-                    case 1: return this.definition;
-                    case 2: return this.sideEffects;
-                    default: throw new IndexOutOfRangeException();
+        public override QilNode this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:
+                        return this.arguments;
+                    case 1:
+                        return this.definition;
+                    case 2:
+                        return this.sideEffects;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
-            set {
-                switch (index) {
-                    case 0: this.arguments = value; break;
-                    case 1: this.definition = value; break;
-                    case 2: this.sideEffects = value; break;
-                    default: throw new IndexOutOfRangeException();
+            set
+            {
+                switch (index)
+                {
+                    case 0:
+                        this.arguments = value;
+                        break;
+                    case 1:
+                        this.definition = value;
+                        break;
+                    case 2:
+                        this.sideEffects = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
                 }
             }
         }
-
 
         //-----------------------------------------------
         // QilFunction methods
@@ -77,15 +102,17 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Formal arguments of this function.
         /// </summary>
-        public QilList Arguments {
-            get { return (QilList) this.arguments; }
+        public QilList Arguments
+        {
+            get { return (QilList)this.arguments; }
             set { this.arguments = value; }
         }
 
         /// <summary>
         /// Body of this function.
         /// </summary>
-        public QilNode Definition {
+        public QilNode Definition
+        {
             get { return this.definition; }
             set { this.definition = value; }
         }
@@ -93,7 +120,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// QilNodeType.True if this function might have side-effects.
         /// </summary>
-        public bool MaybeSideEffects {
+        public bool MaybeSideEffects
+        {
             get { return this.sideEffects.NodeType == QilNodeType.True; }
             set { this.sideEffects.NodeType = value ? QilNodeType.True : QilNodeType.False; }
         }

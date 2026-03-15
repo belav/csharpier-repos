@@ -16,24 +16,15 @@ namespace System.IdentityModel.Selectors
     public class UntrustedRecipientException : System.Exception
     {
         public UntrustedRecipientException()
-            : base()
-        {
-        }
+            : base() { }
 
-        public UntrustedRecipientException( string message )
-            : base( message )
-        {
-        }
+        public UntrustedRecipientException(string message)
+            : base(message) { }
 
-        public UntrustedRecipientException( string message, Exception innerException )
-            : base( message, innerException )
-        {
-        }
+        public UntrustedRecipientException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected UntrustedRecipientException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
-        {
-        }
+        protected UntrustedRecipientException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
-
 }

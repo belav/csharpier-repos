@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
     internal enum RelatedLocationType
     {
         /// <summary>
-        /// There was no conflict. 
+        /// There was no conflict.
         /// </summary>
         NoConflict = 0x0,
 
@@ -35,6 +35,6 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         /// </summary>
         UnresolvableConflict = 0x8,
 
-        UnresolvedConflict = PossiblyResolvableConflict | UnresolvableConflict
+        UnresolvedConflict = PossiblyResolvableConflict | UnresolvableConflict,
     }
 }

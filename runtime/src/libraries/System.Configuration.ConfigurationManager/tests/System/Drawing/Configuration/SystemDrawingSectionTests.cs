@@ -24,7 +24,9 @@ namespace System.Drawing.Configuration.Tests
             var section = new SystemDrawingSection { BitmapSuffix = bitmapSuffix };
             Assert.Equal(bitmapSuffix, section.BitmapSuffix);
 
-            PropertyInformation propertyInformation = section.ElementInformation.Properties["bitmapSuffix"];
+            PropertyInformation propertyInformation = section.ElementInformation.Properties[
+                "bitmapSuffix"
+            ];
             Assert.Equal(bitmapSuffix, propertyInformation.Value);
         }
     }

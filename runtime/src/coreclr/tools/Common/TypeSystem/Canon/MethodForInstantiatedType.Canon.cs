@@ -17,7 +17,10 @@ namespace Internal.TypeSystem
             if (canonicalizedTypeOfTargetMethod == OwningType)
                 return this;
 
-            return Context.GetMethodForInstantiatedType(GetTypicalMethodDefinition(), (InstantiatedType)canonicalizedTypeOfTargetMethod);
+            return Context.GetMethodForInstantiatedType(
+                GetTypicalMethodDefinition(),
+                (InstantiatedType)canonicalizedTypeOfTargetMethod
+            );
         }
     }
 }

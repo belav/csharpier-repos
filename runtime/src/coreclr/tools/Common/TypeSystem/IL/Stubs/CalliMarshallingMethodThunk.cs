@@ -16,9 +16,12 @@ namespace Internal.IL.Stubs
 
         private MethodSignature _signature;
 
-        public CalliMarshallingMethodThunk(MethodSignature targetSignature, TypeDesc owningType,
-                InteropStateManager interopStateManager,
-                bool runtimeMarshallingEnabled)
+        public CalliMarshallingMethodThunk(
+            MethodSignature targetSignature,
+            TypeDesc owningType,
+            InteropStateManager interopStateManager,
+            bool runtimeMarshallingEnabled
+        )
         {
             _targetSignature = targetSignature;
             _owningType = owningType;
@@ -28,26 +31,17 @@ namespace Internal.IL.Stubs
 
         public MethodSignature TargetSignature
         {
-            get
-            {
-                return _targetSignature;
-            }
+            get { return _targetSignature; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
@@ -61,9 +55,16 @@ namespace Internal.IL.Stubs
 
                     for (int i = 0; i < _targetSignature.Length; i++)
                         parameterTypes[i] = _targetSignature[i];
-                    parameterTypes[parameterTypes.Length - 1] = Context.GetWellKnownType(WellKnownType.IntPtr);
+                    parameterTypes[parameterTypes.Length - 1] = Context.GetWellKnownType(
+                        WellKnownType.IntPtr
+                    );
 
-                    _signature = new MethodSignature(MethodSignatureFlags.Static, 0, _targetSignature.ReturnType, parameterTypes);
+                    _signature = new MethodSignature(
+                        MethodSignatureFlags.Static,
+                        0,
+                        _targetSignature.ReturnType,
+                        parameterTypes
+                    );
                 }
                 return _signature;
             }
@@ -71,18 +72,12 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "CalliMarshallingMethodThunk";
-            }
+            get { return "CalliMarshallingMethodThunk"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "CalliMarshallingMethodThunk";
-            }
+            get { return "CalliMarshallingMethodThunk"; }
         }
 
         public bool RuntimeMarshallingEnabled { get; }
@@ -95,7 +90,11 @@ namespace Internal.IL.Stubs
 
         public override MethodIL EmitIL()
         {
-            return PInvokeILEmitter.EmitIL(this, default(PInvokeILEmitterConfiguration), _interopStateManager);
+            return PInvokeILEmitter.EmitIL(
+                this,
+                default(PInvokeILEmitterConfiguration),
+                _interopStateManager
+            );
         }
     }
 }

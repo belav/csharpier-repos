@@ -15,9 +15,12 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(TripleDES)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(TripleDES))
+            );
         }
 
         private static ILiteSymmetricCipher CreateLiteCipher(
@@ -27,9 +30,12 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(TripleDES)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(TripleDES))
+            );
         }
     }
 }

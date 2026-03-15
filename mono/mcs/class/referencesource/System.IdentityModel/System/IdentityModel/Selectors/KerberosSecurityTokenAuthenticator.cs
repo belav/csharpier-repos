@@ -8,14 +8,10 @@ namespace System.IdentityModel.Selectors
 
     public class KerberosSecurityTokenAuthenticator : WindowsSecurityTokenAuthenticator
     {
-        public KerberosSecurityTokenAuthenticator()
-        {
-        }
+        public KerberosSecurityTokenAuthenticator() { }
 
         public KerberosSecurityTokenAuthenticator(bool includeWindowsGroups)
-            : base(includeWindowsGroups)
-        {
-        }
+            : base(includeWindowsGroups) { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {

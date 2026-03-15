@@ -29,8 +29,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
 using Xunit;
 using SysConfig = System.Configuration.Configuration;
 
@@ -141,7 +141,10 @@ namespace MonoTests.System.Configuration
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21027", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21027",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void DuplicateAdd()
         {
             SysConfig cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

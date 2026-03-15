@@ -8,7 +8,6 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime;
 
 namespace System.Runtime
@@ -26,13 +25,14 @@ namespace System.Runtime
             // in the class library is not low level enough to be callable when GC statics are not initialized yet.
             // Feel free to restructure once that's not a problem.
 #if DEBUG
-            bool isValid = !pEEType->IsGenericTypeDefinition &&
-                !pEEType->IsInterface &&
-                !pEEType->IsArray &&
-                !pEEType->IsString &&
-                !pEEType->IsPointer &&
-                !pEEType->IsFunctionPointer &&
-                !pEEType->IsByRefLike;
+            bool isValid =
+                !pEEType->IsGenericTypeDefinition
+                && !pEEType->IsInterface
+                && !pEEType->IsArray
+                && !pEEType->IsString
+                && !pEEType->IsPointer
+                && !pEEType->IsFunctionPointer
+                && !pEEType->IsByRefLike;
             if (!isValid)
                 Debug.Assert(false);
 #endif
@@ -110,7 +110,11 @@ namespace System.Runtime
             // Perform any write barriers necessary for embedded reference fields.
             if (pEEType->ContainsGCPointers)
             {
-                InternalCalls.RhBulkMoveWithWriteBarrier(ref result.GetRawData(), ref dataAdjustedForNullable, pEEType->ValueTypeSize);
+                InternalCalls.RhBulkMoveWithWriteBarrier(
+                    ref result.GetRawData(),
+                    ref dataAdjustedForNullable,
+                    pEEType->ValueTypeSize
+                );
             }
             else
             {
@@ -135,7 +139,10 @@ namespace System.Runtime
             }
         }
 
-        private static unsafe bool UnboxAnyTypeCompare(MethodTable* pEEType, MethodTable* ptrUnboxToEEType)
+        private static unsafe bool UnboxAnyTypeCompare(
+            MethodTable* pEEType,
+            MethodTable* ptrUnboxToEEType
+        )
         {
             if (pEEType == ptrUnboxToEEType)
                 return true;
@@ -177,7 +184,8 @@ namespace System.Runtime
                 }
                 else
                 {
-                    isValid = (o != null) && UnboxAnyTypeCompare(o.GetMethodTable(), ptrUnboxToEEType);
+                    isValid =
+                        (o != null) && UnboxAnyTypeCompare(o.GetMethodTable(), ptrUnboxToEEType);
                 }
 
                 if (!isValid)
@@ -185,7 +193,8 @@ namespace System.Runtime
                     // Throw the invalid cast exception defined by the classlib, using the input unbox MethodTable*
                     // to find the correct classlib.
 
-                    ExceptionIDs exID = o == null ? ExceptionIDs.NullReference : ExceptionIDs.InvalidCast;
+                    ExceptionIDs exID =
+                        o == null ? ExceptionIDs.NullReference : ExceptionIDs.InvalidCast;
 
                     throw ptrUnboxToEEType->GetClasslibException(exID);
                 }
@@ -211,14 +220,19 @@ namespace System.Runtime
         {
             if ((obj == null) || !UnboxAnyTypeCompare(obj.GetMethodTable(), pUnboxToEEType))
             {
-                ExceptionIDs exID = obj == null ? ExceptionIDs.NullReference : ExceptionIDs.InvalidCast;
+                ExceptionIDs exID =
+                    obj == null ? ExceptionIDs.NullReference : ExceptionIDs.InvalidCast;
                 throw pUnboxToEEType->GetClasslibException(exID);
             }
             return ref obj.GetRawData();
         }
 
         [RuntimeExport("RhUnboxNullable")]
-        public static unsafe void RhUnboxNullable(ref byte data, MethodTable* pUnboxToEEType, object obj)
+        public static unsafe void RhUnboxNullable(
+            ref byte data,
+            MethodTable* pUnboxToEEType,
+            object obj
+        )
         {
             if (obj != null && obj.GetMethodTable() != pUnboxToEEType->NullableType)
             {
@@ -236,9 +250,7 @@ namespace System.Runtime
                 Debug.Assert(pUnboxToEEType != null && pUnboxToEEType->IsNullable);
 
                 // Set HasValue to false and clear the value (in case there were GC references we wish to stop reporting).
-                InternalCalls.RhpGcSafeZeroMemory(
-                    ref data,
-                    pUnboxToEEType->ValueTypeSize);
+                InternalCalls.RhpGcSafeZeroMemory(ref data, pUnboxToEEType->ValueTypeSize);
 
                 return;
             }
@@ -250,7 +262,11 @@ namespace System.Runtime
 
             // A special case is that we can unbox a value type T into a Nullable<T>. It's the only case where
             // pUnboxToEEType is useful.
-            Debug.Assert((pUnboxToEEType == null) || UnboxAnyTypeCompare(pEEType, pUnboxToEEType) || pUnboxToEEType->IsNullable);
+            Debug.Assert(
+                (pUnboxToEEType == null)
+                    || UnboxAnyTypeCompare(pEEType, pUnboxToEEType)
+                    || pUnboxToEEType->IsNullable
+            );
             if (pUnboxToEEType != null && pUnboxToEEType->IsNullable)
             {
                 Debug.Assert(pUnboxToEEType->NullableType == pEEType);
@@ -267,14 +283,18 @@ namespace System.Runtime
             if (pEEType->ContainsGCPointers)
             {
                 // Copy the boxed fields into the new location in a GC safe manner
-                InternalCalls.RhBulkMoveWithWriteBarrier(ref data, ref fields, pEEType->ValueTypeSize);
+                InternalCalls.RhBulkMoveWithWriteBarrier(
+                    ref data,
+                    ref fields,
+                    pEEType->ValueTypeSize
+                );
             }
             else
             {
                 // Copy the boxed fields into the new location.
-                fixed (byte *pData = &data)
-                    fixed (byte* pFields = &fields)
-                        InternalCalls.memmove(pData, pFields, pEEType->ValueTypeSize);
+                fixed (byte* pData = &data)
+                fixed (byte* pFields = &fields)
+                    InternalCalls.memmove(pData, pFields, pEEType->ValueTypeSize);
             }
         }
 
@@ -283,13 +303,21 @@ namespace System.Runtime
         public static unsafe int RhGetCurrentThreadStackTrace(IntPtr[] outputBuffer)
         {
             fixed (IntPtr* pOutputBuffer = outputBuffer)
-                return RhpGetCurrentThreadStackTrace(pOutputBuffer, (uint)((outputBuffer != null) ? outputBuffer.Length : 0), new UIntPtr(&pOutputBuffer));
+                return RhpGetCurrentThreadStackTrace(
+                    pOutputBuffer,
+                    (uint)((outputBuffer != null) ? outputBuffer.Length : 0),
+                    new UIntPtr(&pOutputBuffer)
+                );
         }
 
 #pragma warning disable SYSLIB1054 // Use DllImport here instead of LibraryImport because this file is used by Test.CoreLib.
         [DllImport(Redhawk.BaseName)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        private static extern unsafe int RhpGetCurrentThreadStackTrace(IntPtr* pOutputBuffer, uint outputBufferLength, UIntPtr addressInCurrentFrame);
+        private static extern unsafe int RhpGetCurrentThreadStackTrace(
+            IntPtr* pOutputBuffer,
+            uint outputBufferLength,
+            UIntPtr addressInCurrentFrame
+        );
 #pragma warning restore SYSLIB1054
 
         // Worker for RhGetCurrentThreadStackTrace.  RhGetCurrentThreadStackTrace just allocates a transition
@@ -304,8 +332,15 @@ namespace System.Runtime
         // NOTE: We don't want to allocate the array on behalf of the caller because we don't know which class
         // library's objects the caller understands (we support multiple class libraries with multiple root
         // System.Object types).
-        [UnmanagedCallersOnly(EntryPoint = "RhpCalculateStackTraceWorker", CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        private static unsafe int RhpCalculateStackTraceWorker(IntPtr* pOutputBuffer, uint outputBufferLength, UIntPtr addressInCurrentFrame)
+        [UnmanagedCallersOnly(
+            EntryPoint = "RhpCalculateStackTraceWorker",
+            CallConvs = new Type[] { typeof(CallConvCdecl) }
+        )]
+        private static unsafe int RhpCalculateStackTraceWorker(
+            IntPtr* pOutputBuffer,
+            uint outputBufferLength,
+            UIntPtr addressInCurrentFrame
+        )
         {
             uint nFrames = 0;
             bool success = true;
@@ -333,7 +368,10 @@ namespace System.Runtime
         }
 
         [RuntimeExport("RhGetRuntimeHelperForType")]
-        internal static unsafe IntPtr RhGetRuntimeHelperForType(MethodTable* pEEType, RuntimeHelperKind kind)
+        internal static unsafe IntPtr RhGetRuntimeHelperForType(
+            MethodTable* pEEType,
+            RuntimeHelperKind kind
+        )
         {
             switch (kind)
             {
@@ -342,42 +380,64 @@ namespace System.Runtime
                     if (pEEType->RequiresAlign8)
                     {
                         if (pEEType->IsFinalizable)
-                            return (IntPtr)(delegate*<MethodTable*, object>)&InternalCalls.RhpNewFinalizableAlign8;
-                        else if (pEEType->IsValueType)            // returns true for enum types as well
-                            return (IntPtr)(delegate*<MethodTable*, object>)&InternalCalls.RhpNewFastMisalign;
+                            return (IntPtr)
+                                (delegate* <MethodTable*, object>)
+                                    &InternalCalls.RhpNewFinalizableAlign8;
+                        else if (pEEType->IsValueType) // returns true for enum types as well
+                            return (IntPtr)
+                                (delegate* <MethodTable*, object>)&InternalCalls.RhpNewFastMisalign;
                         else
-                            return (IntPtr)(delegate*<MethodTable*, object>)&InternalCalls.RhpNewFastAlign8;
+                            return (IntPtr)
+                                (delegate* <MethodTable*, object>)&InternalCalls.RhpNewFastAlign8;
                     }
 #endif // FEATURE_64BIT_ALIGNMENT
 
                     if (pEEType->IsFinalizable)
-                        return (IntPtr)(delegate*<MethodTable*, object>)&InternalCalls.RhpNewFinalizable;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object>)&InternalCalls.RhpNewFinalizable;
                     else
-                        return (IntPtr)(delegate*<MethodTable*, object>)&InternalCalls.RhpNewFast;
+                        return (IntPtr)(delegate* <MethodTable*, object>)&InternalCalls.RhpNewFast;
 
                 case RuntimeHelperKind.IsInst:
-                    if (pEEType->HasGenericVariance || pEEType->IsParameterizedType || pEEType->IsFunctionPointer)
-                        return (IntPtr)(delegate*<MethodTable*, object, object?>)&TypeCast.IsInstanceOfAny;
+                    if (
+                        pEEType->HasGenericVariance
+                        || pEEType->IsParameterizedType
+                        || pEEType->IsFunctionPointer
+                    )
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object, object?>)&TypeCast.IsInstanceOfAny;
                     else if (pEEType->IsInterface)
-                        return (IntPtr)(delegate*<MethodTable*, object?, object?>)&TypeCast.IsInstanceOfInterface;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object?, object?>)
+                                &TypeCast.IsInstanceOfInterface;
                     else
-                        return (IntPtr)(delegate*<MethodTable*, object?, object?>)&TypeCast.IsInstanceOfClass;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object?, object?>)&TypeCast.IsInstanceOfClass;
 
                 case RuntimeHelperKind.CastClass:
-                    if (pEEType->HasGenericVariance || pEEType->IsParameterizedType || pEEType->IsFunctionPointer)
-                        return (IntPtr)(delegate*<MethodTable*, object, object>)&TypeCast.CheckCastAny;
+                    if (
+                        pEEType->HasGenericVariance
+                        || pEEType->IsParameterizedType
+                        || pEEType->IsFunctionPointer
+                    )
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object, object>)&TypeCast.CheckCastAny;
                     else if (pEEType->IsInterface)
-                        return (IntPtr)(delegate*<MethodTable*, object, object>)&TypeCast.CheckCastInterface;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object, object>)&TypeCast.CheckCastInterface;
                     else
-                        return (IntPtr)(delegate*<MethodTable*, object, object>)&TypeCast.CheckCastClass;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, object, object>)&TypeCast.CheckCastClass;
 
                 case RuntimeHelperKind.AllocateArray:
 #if FEATURE_64BIT_ALIGNMENT
                     if (pEEType->RequiresAlign8)
-                        return (IntPtr)(delegate*<MethodTable*, int, object>)&InternalCalls.RhpNewArrayAlign8;
+                        return (IntPtr)
+                            (delegate* <MethodTable*, int, object>)&InternalCalls.RhpNewArrayAlign8;
 #endif // FEATURE_64BIT_ALIGNMENT
 
-                    return (IntPtr)(delegate*<MethodTable*, int, object>)&InternalCalls.RhpNewArray;
+                    return (IntPtr)
+                        (delegate* <MethodTable*, int, object>)&InternalCalls.RhpNewArray;
 
                 default:
                     Debug.Assert(false, "Unknown RuntimeHelperKind");

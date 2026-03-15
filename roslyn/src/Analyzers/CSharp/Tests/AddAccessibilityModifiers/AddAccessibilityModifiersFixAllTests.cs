@@ -18,15 +18,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifiers
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAccessibilityModifiers)]
-    public class AddAccessibilityModifiersFixAllTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class AddAccessibilityModifiersFixAllTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddAccessibilityModifiersFixAllTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAddAccessibilityModifiersDiagnosticAnalyzer(), new CSharpAddAccessibilityModifiersCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpAddAccessibilityModifiersDiagnosticAnalyzer(),
+                new CSharpAddAccessibilityModifiersCodeFixProvider()
+            );
 
         [Fact, WorkItem("https://github.com/dotnet/vscode-csharp/issues/6611")]
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]

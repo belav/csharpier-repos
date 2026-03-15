@@ -12,10 +12,18 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptProtectMemory(SafeBuffer pData, uint cbData, uint dwFlags);
+        internal static partial bool CryptProtectMemory(
+            SafeBuffer pData,
+            uint cbData,
+            uint dwFlags
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CryptUnprotectMemory(SafeBuffer pData, uint cbData, uint dwFlags);
+        internal static partial bool CryptUnprotectMemory(
+            SafeBuffer pData,
+            uint cbData,
+            uint dwFlags
+        );
     }
 }

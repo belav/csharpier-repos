@@ -8,7 +8,6 @@ using Xunit;
 
 public static class SeekUnroll
 {
-
     // The purpose of this micro-benchmark is to measure the effect of unrolling
     // on this loop (taken from https://github.com/aspnet/KestrelHttpServer/pull/1138)
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -20,7 +19,8 @@ public static class SeekUnroll
         for (; i < Vector<long>.Count; i++)
         {
             longValue = vector64[i];
-            if (longValue == 0) continue;
+            if (longValue == 0)
+                continue;
             break;
         }
 
@@ -33,13 +33,16 @@ public static class SeekUnroll
     }
 
     // Magic constant used in FindByte
-    const ulong _xorPowerOfTwoToHighByte = (0x07ul |
-                                            0x06ul << 8 |
-                                            0x05ul << 16 |
-                                            0x04ul << 24 |
-                                            0x03ul << 32 |
-                                            0x02ul << 40 |
-                                            0x01ul << 48) + 1;
+    const ulong _xorPowerOfTwoToHighByte =
+        (
+            0x07ul
+            | 0x06ul << 8
+            | 0x05ul << 16
+            | 0x04ul << 24
+            | 0x03ul << 32
+            | 0x02ul << 40
+            | 0x01ul << 48
+        ) + 1;
 
     // Inner loop to repeatedly call FindByte
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -71,6 +74,7 @@ public static class SeekUnroll
             ManualLoopTimes[iteration] = timer.ElapsedMilliseconds;
         }
     }
+
     static long[] ManualLoopTimes;
 
     // Function that tests one input, dispatching to either the xunit-perf
@@ -118,15 +122,19 @@ public static class SeekUnroll
         int manualLoopCount = 1;
         if (arg == null)
         {
-            Console.WriteLine("Warning: no iteration count specified; defaulting to 1 iteration per case");
-            Console.WriteLine("To use multiple iterations per case, pass the desired number of iterations as the first command-line argument to this test");
+            Console.WriteLine(
+                "Warning: no iteration count specified; defaulting to 1 iteration per case"
+            );
+            Console.WriteLine(
+                "To use multiple iterations per case, pass the desired number of iterations as the first command-line argument to this test"
+            );
         }
         else
         {
             manualLoopCount = (int)arg;
         }
 
-        foreach(int index in IndicesToTest)
+        foreach (int index in IndicesToTest)
         {
             ManualLoopTimes = new long[manualLoopCount];
             bool passed = Test(index);
@@ -134,7 +142,11 @@ public static class SeekUnroll
             {
                 ++failures;
             }
-            Console.WriteLine("Index {0}, times (ms) [{1}]", index, String.Join(", ", ManualLoopTimes));
+            Console.WriteLine(
+                "Index {0}, times (ms) [{1}]",
+                index,
+                String.Join(", ", ManualLoopTimes)
+            );
         }
 
         return 100 + failures;

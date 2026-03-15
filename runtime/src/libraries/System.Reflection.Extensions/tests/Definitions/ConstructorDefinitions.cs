@@ -9,6 +9,7 @@ namespace System.Reflection.Tests
     {
         public static int Members = 3;
         public static int MembersEverything = 9;
+
         static ConstructorTestStaticClass() { }
     }
 
@@ -24,8 +25,11 @@ namespace System.Reflection.Tests
         protected ConstructorTestClassWithMultipleConstructors(int i) { }
 
         public ConstructorTestClassWithMultipleConstructors() { }
+
         public ConstructorTestClassWithMultipleConstructors(TimeSpan ts) { }
+
         public ConstructorTestClassWithMultipleConstructors(object o1, object o2) { }
+
         public ConstructorTestClassWithMultipleConstructors(object obj0, int i4) { }
     }
 
@@ -35,7 +39,9 @@ namespace System.Reflection.Tests
         public static int MembersEverything = 11;
 
         static ConstructorTestBaseClass() { }
+
         public ConstructorTestBaseClass() { }
+
         public ConstructorTestBaseClass(short i2) { }
     }
 
@@ -45,6 +51,7 @@ namespace System.Reflection.Tests
         public static new int MembersEverything = 11;
 
         public ConstructorTestSubClass(string s) { }
+
         public ConstructorTestSubClass(short i2) { }
     }
 }

@@ -23,23 +23,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
         protected abstract string LanguageName { get; }
         protected abstract ParseOptions DefaultParseOptions { get; }
 
-        protected async Task AssertNavigatedAsync(string code, bool next, SourceCodeKind? sourceCodeKind = null)
+        protected async Task AssertNavigatedAsync(
+            string code,
+            bool next,
+            SourceCodeKind? sourceCodeKind = null
+        )
         {
-            var kinds = sourceCodeKind != null
-                ? SpecializedCollections.SingletonEnumerable(sourceCodeKind.Value)
-                : new[] { SourceCodeKind.Regular, SourceCodeKind.Script };
+            var kinds =
+                sourceCodeKind != null
+                    ? SpecializedCollections.SingletonEnumerable(sourceCodeKind.Value)
+                    : new[] { SourceCodeKind.Regular, SourceCodeKind.Script };
 
             foreach (var kind in kinds)
             {
-                using (var workspace = TestWorkspace.Create(
-                    LanguageName,
-                    compilationOptions: null,
-                    parseOptions: DefaultParseOptions.WithKind(kind),
-                    content: code))
+                using (
+                    var workspace = TestWorkspace.Create(
+                        LanguageName,
+                        compilationOptions: null,
+                        parseOptions: DefaultParseOptions.WithKind(kind),
+                        content: code
+                    )
+                )
                 {
                     var hostDocument = workspace.DocumentWithCursor;
                     var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
-                    var parsedDocument = await ParsedDocument.CreateAsync(document, CancellationToken.None);
+                    var parsedDocument = await ParsedDocument.CreateAsync(
+                        document,
+                        CancellationToken.None
+                    );
                     Assert.Empty(parsedDocument.SyntaxTree.GetDiagnostics());
                     var service = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
@@ -47,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
                         service,
                         parsedDocument.Root,
                         hostDocument.CursorPosition.Value,
-                        next);
+                        next
+                    );
 
                     Assert.NotNull(targetPosition);
                     Assert.Equal(hostDocument.SelectedSpans.Single().Start, targetPosition.Value);
@@ -57,22 +69,29 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
 
         protected async Task<int?> GetTargetPositionAsync(string code, bool next)
         {
-            using (var workspace = TestWorkspace.Create(
-                LanguageName,
-                compilationOptions: null,
-                parseOptions: DefaultParseOptions,
-                content: code))
+            using (
+                var workspace = TestWorkspace.Create(
+                    LanguageName,
+                    compilationOptions: null,
+                    parseOptions: DefaultParseOptions,
+                    content: code
+                )
+            )
             {
                 var hostDocument = workspace.DocumentWithCursor;
                 var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
-                var parsedDocument = await ParsedDocument.CreateAsync(document, CancellationToken.None);
+                var parsedDocument = await ParsedDocument.CreateAsync(
+                    document,
+                    CancellationToken.None
+                );
                 Assert.Empty(parsedDocument.SyntaxTree.GetDiagnostics());
 
                 return GoToAdjacentMemberCommandHandler.GetTargetPosition(
                     document.GetRequiredLanguageService<ISyntaxFactsService>(),
                     parsedDocument.Root,
                     hostDocument.CursorPosition.Value,
-                    next);
+                    next
+                );
             }
         }
     }

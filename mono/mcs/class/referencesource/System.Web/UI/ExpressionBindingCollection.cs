@@ -4,159 +4,155 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Data;
-    using System.Web.Util;
     using System.Security.Permissions;
-
+    using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>
-    public sealed class ExpressionBindingCollection : ICollection {
+    public sealed class ExpressionBindingCollection : ICollection
+    {
         private EventHandler changedEvent;
 
         private Hashtable bindings;
         private Hashtable removedBindings;
 
-
         /// <devdoc>
         /// </devdoc>
-        public ExpressionBindingCollection() {
+        public ExpressionBindingCollection()
+        {
             this.bindings = new Hashtable(StringComparer.OrdinalIgnoreCase);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public int Count {
-            get {
-                return bindings.Count;
-            }
+        public int Count
+        {
+            get { return bindings.Count; }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public bool IsReadOnly {
-            get {
-                return false;
-            }
+        public bool IsReadOnly
+        {
+            get { return false; }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public ICollection RemovedBindings {
-            get {
+        public ICollection RemovedBindings
+        {
+            get
+            {
                 int bindingCount = 0;
                 ICollection keys = null;
 
-                if (removedBindings != null) {
+                if (removedBindings != null)
+                {
                     keys = removedBindings.Keys;
                     bindingCount = keys.Count;
 
                     string[] removedNames = new string[bindingCount];
                     int i = 0;
 
-                    foreach (string s in keys) {
+                    foreach (string s in keys)
+                    {
                         removedNames[i++] = s;
                     }
 
                     removedBindings.Clear();
                     return removedNames;
                 }
-                else {
+                else
+                {
                     return new string[0];
                 }
             }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        private Hashtable RemovedBindingsTable {
-            get {
-                if (removedBindings == null) {
+        private Hashtable RemovedBindingsTable
+        {
+            get
+            {
+                if (removedBindings == null)
+                {
                     removedBindings = new Hashtable(StringComparer.OrdinalIgnoreCase);
                 }
                 return removedBindings;
             }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public object SyncRoot {
-            get {
-                return this;
-            }
+        public object SyncRoot
+        {
+            get { return this; }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public ExpressionBinding this[string propertyName] {
-            get {
+        public ExpressionBinding this[string propertyName]
+        {
+            get
+            {
                 object o = bindings[propertyName];
                 if (o != null)
-                    return(ExpressionBinding)o;
+                    return (ExpressionBinding)o;
                 return null;
             }
         }
 
-
-        public event EventHandler Changed {
-            add {
-                changedEvent = (EventHandler)Delegate.Combine(changedEvent, value);
-            }
-            remove {
-                changedEvent = (EventHandler)Delegate.Remove(changedEvent, value);
-            }
+        public event EventHandler Changed
+        {
+            add { changedEvent = (EventHandler)Delegate.Combine(changedEvent, value); }
+            remove { changedEvent = (EventHandler)Delegate.Remove(changedEvent, value); }
         }
-
-
 
         /// <devdoc>
         /// </devdoc>
-        public void Add(ExpressionBinding binding) {
+        public void Add(ExpressionBinding binding)
+        {
             bindings[binding.PropertyName] = binding;
             RemovedBindingsTable.Remove(binding.PropertyName);
 
             OnChanged();
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public bool Contains(string propName) {
+        public bool Contains(string propName)
+        {
             return bindings.Contains(propName);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void Clear() {
+        public void Clear()
+        {
             ICollection keys = bindings.Keys;
-            if ((keys.Count != 0) && (removedBindings == null)) {
+            if ((keys.Count != 0) && (removedBindings == null))
+            {
                 // ensure the removedBindings hashtable is created
                 Hashtable h = RemovedBindingsTable;
             }
-            foreach (string s in keys) {
+            foreach (string s in keys)
+            {
                 removedBindings[s] = String.Empty;
             }
 
@@ -165,55 +161,59 @@ namespace System.Web.UI {
             OnChanged();
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void CopyTo(Array array, int index) {
-            for (IEnumerator e = this.GetEnumerator(); e.MoveNext();)
+        public void CopyTo(Array array, int index)
+        {
+            for (IEnumerator e = this.GetEnumerator(); e.MoveNext(); )
                 array.SetValue(e.Current, index++);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void CopyTo(ExpressionBinding[] array, int index) {
-            for (IEnumerator e = this.GetEnumerator(); e.MoveNext();)
+        public void CopyTo(ExpressionBinding[] array, int index)
+        {
+            for (IEnumerator e = this.GetEnumerator(); e.MoveNext(); )
                 array.SetValue(e.Current, index++);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return bindings.Values.GetEnumerator();
         }
 
-        private void OnChanged() {
-            if (changedEvent != null) {
+        private void OnChanged()
+        {
+            if (changedEvent != null)
+            {
                 changedEvent(this, EventArgs.Empty);
             }
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void Remove(string propertyName) {
+        public void Remove(string propertyName)
+        {
             Remove(propertyName, true);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void Remove(ExpressionBinding binding) {
+        public void Remove(ExpressionBinding binding)
+        {
             Remove(binding.PropertyName, true);
         }
 
-
         /// <devdoc>
         /// </devdoc>
-        public void Remove(string propertyName, bool addToRemovedList) {
-            if (Contains(propertyName)) {
-                if (addToRemovedList && bindings.Contains(propertyName)) {
+        public void Remove(string propertyName, bool addToRemovedList)
+        {
+            if (Contains(propertyName))
+            {
+                if (addToRemovedList && bindings.Contains(propertyName))
+                {
                     RemovedBindingsTable[propertyName] = String.Empty;
                 }
                 bindings.Remove(propertyName);
@@ -223,4 +223,3 @@ namespace System.Web.UI {
         }
     }
 }
-

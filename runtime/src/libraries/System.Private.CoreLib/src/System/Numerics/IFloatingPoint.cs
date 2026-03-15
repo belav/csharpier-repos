@@ -7,19 +7,21 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface IFloatingPoint<TSelf>
         : IFloatingPointConstants<TSelf>,
-          INumber<TSelf>,
-          ISignedNumber<TSelf>
+            INumber<TSelf>,
+            ISignedNumber<TSelf>
         where TSelf : IFloatingPoint<TSelf>?
     {
         /// <summary>Computes the ceiling of a value.</summary>
         /// <param name="x">The value whose ceiling is to be computed.</param>
         /// <returns>The ceiling of <paramref name="x" />.</returns>
-        static virtual TSelf Ceiling(TSelf x) => TSelf.Round(x, digits: 0, MidpointRounding.ToPositiveInfinity);
+        static virtual TSelf Ceiling(TSelf x) =>
+            TSelf.Round(x, digits: 0, MidpointRounding.ToPositiveInfinity);
 
         /// <summary>Computes the floor of a value.</summary>
         /// <param name="x">The value whose floor is to be computed.</param>
         /// <returns>The floor of <paramref name="x" />.</returns>
-        static virtual TSelf Floor(TSelf x) => TSelf.Round(x, digits: 0, MidpointRounding.ToNegativeInfinity);
+        static virtual TSelf Floor(TSelf x) =>
+            TSelf.Round(x, digits: 0, MidpointRounding.ToNegativeInfinity);
 
         /// <summary>Rounds a value to the nearest integer using the default rounding mode (<see cref="MidpointRounding.ToEven" />).</summary>
         /// <param name="x">The value to round.</param>
@@ -30,13 +32,15 @@ namespace System.Numerics
         /// <param name="x">The value to round.</param>
         /// <param name="digits">The number of fractional digits to which <paramref name="x" /> should be rounded.</param>
         /// <returns>The result of rounding <paramref name="x" /> to <paramref name="digits" /> fractional-digits using the default rounding mode.</returns>
-        static virtual TSelf Round(TSelf x, int digits) => TSelf.Round(x, digits, MidpointRounding.ToEven);
+        static virtual TSelf Round(TSelf x, int digits) =>
+            TSelf.Round(x, digits, MidpointRounding.ToEven);
 
         /// <summary>Rounds a value to the nearest integer using the specified rounding mode.</summary>
         /// <param name="x">The value to round.</param>
         /// <param name="mode">The mode under which <paramref name="x" /> should be rounded.</param>
         /// <returns>The result of rounding <paramref name="x" /> to the nearest integer using <paramref name="mode" />.</returns>
-        static virtual TSelf Round(TSelf x, MidpointRounding mode) => TSelf.Round(x, digits: 0, mode);
+        static virtual TSelf Round(TSelf x, MidpointRounding mode) =>
+            TSelf.Round(x, digits: 0, mode);
 
         /// <summary>Rounds a value to a specified number of fractional-digits using the specified rounding mode.</summary>
         /// <param name="x">The value to round.</param>
@@ -48,7 +52,8 @@ namespace System.Numerics
         /// <summary>Truncates a value.</summary>
         /// <param name="x">The value to truncate.</param>
         /// <returns>The truncation of <paramref name="x" />.</returns>
-        static virtual TSelf Truncate(TSelf x) => TSelf.Round(x, digits: 0, MidpointRounding.ToZero);
+        static virtual TSelf Truncate(TSelf x) =>
+            TSelf.Round(x, digits: 0, MidpointRounding.ToZero);
 
         /// <summary>Gets the number of bytes that will be written as part of <see cref="TryWriteExponentLittleEndian(Span{byte}, out int)" />.</summary>
         /// <returns>The number of bytes that will be written as part of <see cref="TryWriteExponentLittleEndian(Span{byte}, out int)" />.</returns>
@@ -219,7 +224,12 @@ namespace System.Numerics
         /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref name="startIndex" />.</returns>
         int WriteSignificandLittleEndian(byte[] destination, int startIndex)
         {
-            if (!TryWriteSignificandLittleEndian(destination.AsSpan(startIndex), out int bytesWritten))
+            if (
+                !TryWriteSignificandLittleEndian(
+                    destination.AsSpan(startIndex),
+                    out int bytesWritten
+                )
+            )
             {
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }

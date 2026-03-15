@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,35 +30,31 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices.CompensatingResourceManager {
+namespace System.EnterpriseServices.CompensatingResourceManager
+{
+    /// <summary>
+    ///   ApplicationCrmEnable Attribute for classes.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Assembly)]
+    [ComVisible(false)]
+    [ProgId("System.EnterpriseServices.Crm.ApplicationCrmEnabledAttribute")]
+    public sealed class ApplicationCrmEnabledAttribute : Attribute
+    {
+        bool val;
 
-	/// <summary>
-	///   ApplicationCrmEnable Attribute for classes. 
-	/// </summary>
-	
-	[AttributeUsage(AttributeTargets.Assembly)]
-	[ComVisible(false)]
-	[ProgId("System.EnterpriseServices.Crm.ApplicationCrmEnabledAttribute")]
-	public sealed class ApplicationCrmEnabledAttribute : Attribute
-	{
-		bool val;
+        public ApplicationCrmEnabledAttribute()
+        {
+            val = true;
+        }
 
-		public ApplicationCrmEnabledAttribute()
-		{
-			val = true;
-		}
+        public ApplicationCrmEnabledAttribute(bool val)
+        {
+            this.val = val;
+        }
 
-		public ApplicationCrmEnabledAttribute (bool val)
-		{
-			this.val = val;
-		}
-
-		public bool Value 
-		{
-			get
-			{
-				return val;
-			}
-		}
-	}
+        public bool Value
+        {
+            get { return val; }
+        }
+    }
 }

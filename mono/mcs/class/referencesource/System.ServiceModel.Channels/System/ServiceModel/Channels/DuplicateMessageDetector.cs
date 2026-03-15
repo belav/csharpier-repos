@@ -12,8 +12,13 @@ namespace System.ServiceModel.Channels
     {
         HashAlgorithm hashAlgorithm;
 
-        [Fx.Tag.Cache(typeof(string), Fx.Tag.CacheAttrition.PartialPurgeOnEachAccess, SizeLimit = "maxListLength parameter to constructor")]
+        [Fx.Tag.Cache(
+            typeof(string),
+            Fx.Tag.CacheAttrition.PartialPurgeOnEachAccess,
+            SizeLimit = "maxListLength parameter to constructor"
+        )]
         DuplicateDetector<string> duplicateDetector;
+
         [Fx.Tag.SynchronizationObject()]
         object thisLock;
         bool disposed;
@@ -41,15 +46,24 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw FxTrace.Exception.AsError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw FxTrace.Exception.AsError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
                 }
 
-                hash = this.hashAlgorithm.ComputeHash(msgBytes.Array, msgBytes.Offset, msgBytes.Count);
+                hash = this.hashAlgorithm.ComputeHash(
+                    msgBytes.Array,
+                    msgBytes.Offset,
+                    msgBytes.Count
+                );
             }
 
             hashString = Convert.ToBase64String(hash);
 
-            Fx.Assert(string.IsNullOrEmpty(hashString) == false, "computed hashstring is null or empty");
+            Fx.Assert(
+                string.IsNullOrEmpty(hashString) == false,
+                "computed hashstring is null or empty"
+            );
 
             lock (this.thisLock)
             {
@@ -69,7 +83,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.disposed)
                 {
-                    throw FxTrace.Exception.AsError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw FxTrace.Exception.AsError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
                 }
 
                 this.duplicateDetector.Remove(msgHash);

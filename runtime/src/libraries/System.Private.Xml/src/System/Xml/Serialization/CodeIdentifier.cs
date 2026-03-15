@@ -17,9 +17,7 @@ namespace System.Xml.Serialization
         internal const int MaxIdentifierLength = 511;
 
         [Obsolete("This class should never get constructed as it contains only static methods.")]
-        public CodeIdentifier()
-        {
-        }
+        public CodeIdentifier() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -34,11 +32,15 @@ namespace System.Xml.Serialization
             }
             else if (char.IsLower(identifier[0]))
             {
-                return string.Create(identifier.Length, identifier, static (buffer, identifier) =>
-                {
-                    identifier.CopyTo(buffer);
-                    buffer[0] = char.ToUpperInvariant(buffer[0]); // convert only first char to uppercase; leave all else as-is
-                });
+                return string.Create(
+                    identifier.Length,
+                    identifier,
+                    static (buffer, identifier) =>
+                    {
+                        identifier.CopyTo(buffer);
+                        buffer[0] = char.ToUpperInvariant(buffer[0]); // convert only first char to uppercase; leave all else as-is
+                    }
+                );
             }
             else
             {
@@ -59,11 +61,15 @@ namespace System.Xml.Serialization
             }
             else if (char.IsUpper(identifier[0]))
             {
-                return string.Create(identifier.Length, identifier, static (buffer, identifier) =>
-                {
-                    identifier.CopyTo(buffer);
-                    buffer[0] = char.ToLowerInvariant(buffer[0]); // convert only first char to lowercase; leave all else as-is
-                });
+                return string.Create(
+                    identifier.Length,
+                    identifier,
+                    static (buffer, identifier) =>
+                    {
+                        identifier.CopyTo(buffer);
+                        buffer[0] = char.ToLowerInvariant(buffer[0]); // convert only first char to lowercase; leave all else as-is
+                    }
+                );
             }
             else
             {
@@ -90,7 +96,8 @@ namespace System.Xml.Serialization
                     builder.Append(c);
                 }
             }
-            if (builder.Length == 0) return "Item";
+            if (builder.Length == 0)
+                return "Item";
             return builder.ToString();
         }
 
@@ -108,7 +115,15 @@ namespace System.Xml.Serialization
             // the given char is already a valid name character
 #if DEBUG
             // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
-            if (!IsValid(c)) throw new ArgumentException(SR.Format(SR.XmlInternalErrorDetails, "Invalid identifier character " + ((short)c).ToString(CultureInfo.InvariantCulture)), nameof(c));
+            if (!IsValid(c))
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.XmlInternalErrorDetails,
+                        "Invalid identifier character "
+                            + ((short)c).ToString(CultureInfo.InvariantCulture)
+                    ),
+                    nameof(c)
+                );
 #endif
 
             // First char cannot be a number
@@ -124,15 +139,15 @@ namespace System.Xml.Serialization
             //
             switch (uc)
             {
-                case UnicodeCategory.UppercaseLetter:        // Lu
-                case UnicodeCategory.LowercaseLetter:        // Ll
-                case UnicodeCategory.TitlecaseLetter:        // Lt
-                case UnicodeCategory.ModifierLetter:         // Lm
-                case UnicodeCategory.OtherLetter:            // Lo
-                case UnicodeCategory.DecimalDigitNumber:     // Nd
-                case UnicodeCategory.NonSpacingMark:         // Mn
-                case UnicodeCategory.SpacingCombiningMark:   // Mc
-                case UnicodeCategory.ConnectorPunctuation:   // Pc
+                case UnicodeCategory.UppercaseLetter: // Lu
+                case UnicodeCategory.LowercaseLetter: // Ll
+                case UnicodeCategory.TitlecaseLetter: // Lt
+                case UnicodeCategory.ModifierLetter: // Lm
+                case UnicodeCategory.OtherLetter: // Lo
+                case UnicodeCategory.DecimalDigitNumber: // Nd
+                case UnicodeCategory.NonSpacingMark: // Mn
+                case UnicodeCategory.SpacingCombiningMark: // Mc
+                case UnicodeCategory.ConnectorPunctuation: // Pc
                     break;
                 case UnicodeCategory.LetterNumber:
                 case UnicodeCategory.OtherNumber:
@@ -159,9 +174,12 @@ namespace System.Xml.Serialization
                 default:
 #if DEBUG
                     // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
-                    throw new ArgumentException(SR.Format(SR.XmlInternalErrorDetails, "Unhandled category " + uc), nameof(c));
+                    throw new ArgumentException(
+                        SR.Format(SR.XmlInternalErrorDetails, "Unhandled category " + uc),
+                        nameof(c)
+                    );
 #else
-                return false;
+                    return false;
 #endif
             }
             return true;
@@ -170,7 +188,10 @@ namespace System.Xml.Serialization
         internal static void CheckValidIdentifier([NotNull] string? ident)
         {
             if (!CSharpHelpers.IsValidLanguageIndependentIdentifier(ident))
-                throw new ArgumentException(SR.Format(SR.XmlInvalidIdentifier, ident), nameof(ident));
+                throw new ArgumentException(
+                    SR.Format(SR.XmlInvalidIdentifier, ident),
+                    nameof(ident)
+                );
 
             Debug.Assert(ident != null);
         }
@@ -197,7 +218,9 @@ namespace System.Xml.Serialization
             {
                 EscapeKeywords(name.Substring(0, nameEnd), sb);
                 sb.Append('<');
-                int arguments = int.Parse(name.AsSpan(nameEnd + 1), provider: CultureInfo.InvariantCulture) + index;
+                int arguments =
+                    int.Parse(name.AsSpan(nameEnd + 1), provider: CultureInfo.InvariantCulture)
+                    + index;
                 for (; index < arguments; index++)
                 {
                     sb.Append(GetCSharpName(parameters[index]));
@@ -237,7 +260,10 @@ namespace System.Xml.Serialization
                 }
             }
 
-            Type[] arguments = t.IsGenericType || t.ContainsGenericParameters ? t.GetGenericArguments() : Type.EmptyTypes;
+            Type[] arguments =
+                t.IsGenericType || t.ContainsGenericParameters
+                    ? t.GetGenericArguments()
+                    : Type.EmptyTypes;
             GetCSharpName(t, arguments, 0, sb);
             for (int i = 0; i < rank; i++)
             {
@@ -279,7 +305,8 @@ namespace System.Xml.Serialization
         [return: NotNullIfNotNull(nameof(identifier))]
         private static string? EscapeKeywords(string? identifier)
         {
-            if (string.IsNullOrEmpty(identifier)) return identifier;
+            if (string.IsNullOrEmpty(identifier))
+                return identifier;
             string originalIdentifier = identifier;
             string[] names = identifier.Split(s_identifierSeparators);
             StringBuilder sb = new StringBuilder();

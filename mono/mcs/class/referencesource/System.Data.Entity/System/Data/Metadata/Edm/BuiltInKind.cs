@@ -75,7 +75,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Edm Type Kind
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         EdmType,
 
         /// <summary>
@@ -111,7 +115,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// EdmFunction Kind
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         EdmFunction,
 
         /// <summary>
@@ -142,9 +150,13 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// EdmMember Type Kind
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         EdmMember,
-        
+
         /// <summary>
         /// Parameter Mode Kind
         /// </summary>
@@ -163,7 +175,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// EdmProperty Type Kind
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         EdmProperty,
 
         /// <summary>

@@ -15,7 +15,11 @@ namespace System.Security.Cryptography
             _keyBlob = Array.Empty<byte>();
         }
 
-        [Obsolete(Obsoletions.EcDhPublicKeyBlobMessage, DiagnosticId = Obsoletions.EcDhPublicKeyBlobDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EcDhPublicKeyBlobMessage,
+            DiagnosticId = Obsoletions.EcDhPublicKeyBlobDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         protected ECDiffieHellmanPublicKey(byte[] keyBlob)
         {
             ArgumentNullException.ThrowIfNull(keyBlob);
@@ -30,14 +34,22 @@ namespace System.Security.Cryptography
 
         protected virtual void Dispose(bool disposing) { }
 
-        [Obsolete(Obsoletions.EcDhPublicKeyBlobMessage, DiagnosticId = Obsoletions.EcDhPublicKeyBlobDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EcDhPublicKeyBlobMessage,
+            DiagnosticId = Obsoletions.EcDhPublicKeyBlobDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public virtual byte[] ToByteArray()
         {
             return (byte[])_keyBlob.Clone();
         }
 
         // This method must be implemented by derived classes. In order to conform to the contract, it cannot be abstract.
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public virtual string ToXmlString()
         {
             throw new NotImplementedException(SR.NotSupported_SubclassOverride);

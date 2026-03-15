@@ -16,42 +16,56 @@ namespace System.Activities.Persistence
         bool isLoadTransactionRequired;
         bool isIOParticipant;
 
-        protected PersistenceParticipant()
-        {
-        }
+        protected PersistenceParticipant() { }
 
-        internal PersistenceParticipant(bool isSaveTransactionRequired, bool isLoadTransactionRequired)
+        internal PersistenceParticipant(
+            bool isSaveTransactionRequired,
+            bool isLoadTransactionRequired
+        )
         {
             this.isIOParticipant = true;
             this.isSaveTransactionRequired = isSaveTransactionRequired;
             this.isLoadTransactionRequired = isLoadTransactionRequired;
         }
-        
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, 
-            Justification = "arch approved design. requires the two out dictionaries to avoid complex structures")]
-        protected virtual void CollectValues(out IDictionary<XName, object> readWriteValues, out IDictionary<XName, object> writeOnlyValues)
+
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "arch approved design. requires the two out dictionaries to avoid complex structures"
+        )]
+        protected virtual void CollectValues(
+            out IDictionary<XName, object> readWriteValues,
+            out IDictionary<XName, object> writeOnlyValues
+        )
         {
             readWriteValues = null;
             writeOnlyValues = null;
         }
 
         // Passed-in dictionaries are read-only.
-        protected virtual IDictionary<XName, object> MapValues(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues)
+        protected virtual IDictionary<XName, object> MapValues(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues
+        )
         {
             return null;
         }
 
         // Passed-in dictionary is read-only.
-        protected virtual void PublishValues(IDictionary<XName, object> readWriteValues)
-        {
-        }
+        protected virtual void PublishValues(IDictionary<XName, object> readWriteValues) { }
 
-        void IPersistencePipelineModule.CollectValues(out IDictionary<XName, object> readWriteValues, out IDictionary<XName, object> writeOnlyValues)
+        void IPersistencePipelineModule.CollectValues(
+            out IDictionary<XName, object> readWriteValues,
+            out IDictionary<XName, object> writeOnlyValues
+        )
         {
             CollectValues(out readWriteValues, out writeOnlyValues);
         }
 
-        IDictionary<XName, object> IPersistencePipelineModule.MapValues(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues)
+        IDictionary<XName, object> IPersistencePipelineModule.MapValues(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues
+        )
         {
             return MapValues(readWriteValues, writeOnlyValues);
         }
@@ -63,29 +77,26 @@ namespace System.Activities.Persistence
 
         bool IPersistencePipelineModule.IsIOParticipant
         {
-            get
-            {
-                return this.isIOParticipant;
-            }
+            get { return this.isIOParticipant; }
         }
 
         bool IPersistencePipelineModule.IsSaveTransactionRequired
         {
-            get
-            {
-                return this.isSaveTransactionRequired;
-            }
+            get { return this.isSaveTransactionRequired; }
         }
 
         bool IPersistencePipelineModule.IsLoadTransactionRequired
         {
-            get
-            {
-                return this.isLoadTransactionRequired;
-            }
+            get { return this.isLoadTransactionRequired; }
         }
 
-        IAsyncResult IPersistencePipelineModule.BeginOnSave(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult IPersistencePipelineModule.BeginOnSave(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InternalBeginOnSave(readWriteValues, writeOnlyValues, timeout, callback, state);
         }
@@ -95,7 +106,12 @@ namespace System.Activities.Persistence
             InternalEndOnSave(result);
         }
 
-        IAsyncResult IPersistencePipelineModule.BeginOnLoad(IDictionary<XName, object> readWriteValues, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult IPersistencePipelineModule.BeginOnLoad(
+            IDictionary<XName, object> readWriteValues,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InternalBeginOnLoad(readWriteValues, timeout, callback, state);
         }
@@ -110,7 +126,13 @@ namespace System.Activities.Persistence
             InternalAbort();
         }
 
-        internal virtual IAsyncResult InternalBeginOnSave(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues, TimeSpan timeout, AsyncCallback callback, object state)
+        internal virtual IAsyncResult InternalBeginOnSave(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Fx.AssertAndThrow("BeginOnSave should not be called on PersistenceParticipant.");
         }
@@ -120,7 +142,12 @@ namespace System.Activities.Persistence
             Fx.Assert("EndOnSave should not be called on PersistenceParticipant.");
         }
 
-        internal virtual IAsyncResult InternalBeginOnLoad(IDictionary<XName, object> readWriteValues, TimeSpan timeout, AsyncCallback callback, object state)
+        internal virtual IAsyncResult InternalBeginOnLoad(
+            IDictionary<XName, object> readWriteValues,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Fx.AssertAndThrow("BeginOnLoad should not be called on PersistenceParticipant.");
         }
@@ -130,8 +157,6 @@ namespace System.Activities.Persistence
             Fx.Assert("EndOnLoad should not be called on PersistenceParticipant.");
         }
 
-        internal virtual void InternalAbort()
-        {
-        }
+        internal virtual void InternalAbort() { }
     }
 }

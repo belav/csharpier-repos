@@ -29,9 +29,18 @@ namespace System.Xml.Xsl.XsltOld
             _keyNodes = null;
         }
 
-        public XmlQualifiedName Name { get { return _name; } }
-        public int MatchKey { get { return _matchKey; } }
-        public int UseKey { get { return _useKey; } }
+        public XmlQualifiedName Name
+        {
+            get { return _name; }
+        }
+        public int MatchKey
+        {
+            get { return _matchKey; }
+        }
+        public int UseKey
+        {
+            get { return _useKey; }
+        }
 
         public void AddKey(XPathNavigator root, Hashtable table)
         {
@@ -71,8 +80,14 @@ namespace System.Xml.Xsl.XsltOld
             _keyTable = keyTable;
         }
 
-        public XPathNavigator RootNav { get { return _rootNav; } }
-        public Hashtable KeyTable { get { return _keyTable; } }
+        public XPathNavigator RootNav
+        {
+            get { return _rootNav; }
+        }
+        public Hashtable KeyTable
+        {
+            get { return _keyTable; }
+        }
     }
 
     internal sealed class RootAction : TemplateBaseAction
@@ -92,7 +107,10 @@ namespace System.Xml.Xsl.XsltOld
          */
         internal override void Compile(Compiler compiler)
         {
-            CompileDocument(compiler, /*inInclude*/ false);
+            CompileDocument(
+                compiler, /*inInclude*/
+                false
+            );
         }
 
         internal void InsertKey(XmlQualifiedName name, int MatchKey, int UseKey)
@@ -110,7 +128,6 @@ namespace System.Xml.Xsl.XsltOld
             }
             return action;
         }
-
 
         public void PorcessAttributeSets(Stylesheet rootStylesheet)
         {
@@ -135,7 +152,8 @@ namespace System.Xml.Xsl.XsltOld
                 foreach (AttributeSetAction srcAttSet in stylesheet.AttributeSetTable.Values)
                 {
                     ArrayList? srcAttList = srcAttSet.containedActions;
-                    AttributeSetAction? dstAttSet = (AttributeSetAction?)_attributeSetTable[srcAttSet.Name!];
+                    AttributeSetAction? dstAttSet = (AttributeSetAction?)
+                        _attributeSetTable[srcAttSet.Name!];
                     if (dstAttSet == null)
                     {
                         dstAttSet = new AttributeSetAction();
@@ -193,7 +211,10 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        private void CheckAttributeSets_RecurceInContainer(Hashtable markTable, ContainerAction container)
+        private void CheckAttributeSets_RecurceInContainer(
+            Hashtable markTable,
+            ContainerAction container
+        )
         {
             if (container.containedActions == null)
             {
@@ -203,7 +224,10 @@ namespace System.Xml.Xsl.XsltOld
             {
                 if (action is UseAttributeSetsAction)
                 {
-                    CheckAttributeSets_RecurceInList(markTable, ((UseAttributeSetsAction)action).UsedSets!);
+                    CheckAttributeSets_RecurceInList(
+                        markTable,
+                        ((UseAttributeSetsAction)action).UsedSets!
+                    );
                 }
                 else if (action is ContainerAction)
                 {
@@ -219,16 +243,17 @@ namespace System.Xml.Xsl.XsltOld
             {
                 NumberFormatInfo info = exist.info;
                 NumberFormatInfo newinfo = formatinfo.info;
-                if (info.NumberDecimalSeparator != newinfo.NumberDecimalSeparator ||
-                    info.NumberGroupSeparator != newinfo.NumberGroupSeparator ||
-                    info.PositiveInfinitySymbol != newinfo.PositiveInfinitySymbol ||
-                    info.NegativeSign != newinfo.NegativeSign ||
-                    info.NaNSymbol != newinfo.NaNSymbol ||
-                    info.PercentSymbol != newinfo.PercentSymbol ||
-                    info.PerMilleSymbol != newinfo.PerMilleSymbol ||
-                    exist.zeroDigit != formatinfo.zeroDigit ||
-                    exist.digit != formatinfo.digit ||
-                    exist.patternSeparator != formatinfo.patternSeparator
+                if (
+                    info.NumberDecimalSeparator != newinfo.NumberDecimalSeparator
+                    || info.NumberGroupSeparator != newinfo.NumberGroupSeparator
+                    || info.PositiveInfinitySymbol != newinfo.PositiveInfinitySymbol
+                    || info.NegativeSign != newinfo.NegativeSign
+                    || info.NaNSymbol != newinfo.NaNSymbol
+                    || info.PercentSymbol != newinfo.PercentSymbol
+                    || info.PerMilleSymbol != newinfo.PerMilleSymbol
+                    || exist.zeroDigit != formatinfo.zeroDigit
+                    || exist.digit != formatinfo.digit
+                    || exist.patternSeparator != formatinfo.patternSeparator
                 )
                 {
                     throw XsltException.Create(SR.Xslt_DupDecimalFormat, name.ToString());
@@ -275,7 +300,11 @@ namespace System.Xml.Xsl.XsltOld
                         // Pop the stack, otherwise last instruction will be on it.
                         processor.PopDebuggerStack();
                     }
-                    processor.PushTemplateLookup(frame.NodeSet, /*mode:*/null, /*importsOf:*/null);
+                    processor.PushTemplateLookup(
+                        frame.NodeSet, /*mode:*/
+                        null, /*importsOf:*/
+                        null
+                    );
 
                     frame.State = RootProcessed;
                     break;

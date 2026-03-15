@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
             bool highPriorityForActiveFile,
 #endif
-            params string[] workspaceKinds)
+            params string[] workspaceKinds
+        )
             : base(workspaceKinds)
         {
 #if false // Not used in unit testing crawling

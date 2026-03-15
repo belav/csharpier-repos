@@ -62,17 +62,25 @@ namespace System.Web.Http.Services
     ///         an <see cref="ArgumentException"/> to be thrown.
     ///     </para>
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1063:ImplementIDisposableCorrectly",
+        Justification = "Although this class is not sealed, end users cannot set instances of it so in practice it is sealed."
+    )]
     public class DefaultServices : ServicesContainer
     {
-        private ConcurrentDictionary<Type, object[]> _cacheMulti = new ConcurrentDictionary<Type, object[]>();
-        private ConcurrentDictionary<Type, object> _cacheSingle = new ConcurrentDictionary<Type, object>();
+        private ConcurrentDictionary<Type, object[]> _cacheMulti =
+            new ConcurrentDictionary<Type, object[]>();
+        private ConcurrentDictionary<Type, object> _cacheSingle =
+            new ConcurrentDictionary<Type, object>();
         private readonly HttpConfiguration _configuration;
 
         // Mutation operations delegate (throw if applied to wrong set)
-        private readonly Dictionary<Type, object> _defaultServicesSingle = new Dictionary<Type, object>();
+        private readonly Dictionary<Type, object> _defaultServicesSingle =
+            new Dictionary<Type, object>();
 
-        private readonly Dictionary<Type, List<object>> _defaultServicesMulti = new Dictionary<Type, List<object>>();
+        private readonly Dictionary<Type, List<object>> _defaultServicesMulti =
+            new Dictionary<Type, List<object>>();
         private IDependencyResolver _lastKnownDependencyResolver;
         private readonly HashSet<Type> _serviceTypesSingle;
         private readonly HashSet<Type> _serviceTypesMulti;
@@ -80,21 +88,26 @@ namespace System.Web.Http.Services
         /// <summary>
         /// This constructor is for unit testing purposes only.
         /// </summary>
-        protected DefaultServices()
-        {
-        }
+        protected DefaultServices() { }
 
-        private void SetSingle<T>(T instance) where T : class
+        private void SetSingle<T>(T instance)
+            where T : class
         {
             _defaultServicesSingle[typeof(T)] = instance;
         }
-        private void SetMultiple<T>(params T[] instances) where T : class
+
+        private void SetMultiple<T>(params T[] instances)
+            where T : class
         {
             var x = (IEnumerable<object>)instances;
             _defaultServicesMulti[typeof(T)] = new List<object>(x);
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Class needs references to large number of types.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1506:AvoidExcessiveClassCoupling",
+            Justification = "Class needs references to large number of types."
+        )]
         public DefaultServices(HttpConfiguration configuration)
         {
             if (configuration == null)
@@ -114,8 +127,10 @@ namespace System.Web.Http.Services
             SetSingle<IContentNegotiator>(new DefaultContentNegotiator());
             SetSingle<IDocumentationProvider>(null); // Missing
 
-            SetMultiple<IFilterProvider>(new ConfigurationFilterProvider(),
-                                      new ActionDescriptorFilterProvider());
+            SetMultiple<IFilterProvider>(
+                new ConfigurationFilterProvider(),
+                new ActionDescriptorFilterProvider()
+            );
 
             SetSingle<IHostBufferPolicySelector>(null);
             SetSingle<IHttpActionInvoker>(new ApiControllerActionInvoker());
@@ -126,24 +141,34 @@ namespace System.Web.Http.Services
             SetSingle<ITraceManager>(new TraceManager());
             SetSingle<ITraceWriter>(null);
 
-            // This is a priority list. So put the most common binders at the top. 
-            SetMultiple<ModelBinderProvider>(new TypeConverterModelBinderProvider(),
-                                        new TypeMatchModelBinderProvider(),
-                                        new KeyValuePairModelBinderProvider(),
-                                        new ComplexModelDtoModelBinderProvider(),
-                                        new ArrayModelBinderProvider(),
-                                        new DictionaryModelBinderProvider(),
-                                        new CollectionModelBinderProvider(),
-                                        new MutableObjectModelBinderProvider());
+            // This is a priority list. So put the most common binders at the top.
+            SetMultiple<ModelBinderProvider>(
+                new TypeConverterModelBinderProvider(),
+                new TypeMatchModelBinderProvider(),
+                new KeyValuePairModelBinderProvider(),
+                new ComplexModelDtoModelBinderProvider(),
+                new ArrayModelBinderProvider(),
+                new DictionaryModelBinderProvider(),
+                new CollectionModelBinderProvider(),
+                new MutableObjectModelBinderProvider()
+            );
             SetSingle<ModelMetadataProvider>(new DataAnnotationsModelMetadataProvider());
-            SetMultiple<ModelValidatorProvider>(new DataAnnotationsModelValidatorProvider(),
-                                        new DataMemberModelValidatorProvider());
+            SetMultiple<ModelValidatorProvider>(
+                new DataAnnotationsModelValidatorProvider(),
+                new DataMemberModelValidatorProvider()
+            );
 
-            // This is an ordered list,so put the most common providers at the top. 
-            SetMultiple<ValueProviderFactory>(new QueryStringValueProviderFactory(),
-                                           new RouteDataValueProviderFactory());
+            // This is an ordered list,so put the most common providers at the top.
+            SetMultiple<ValueProviderFactory>(
+                new QueryStringValueProviderFactory(),
+                new RouteDataValueProviderFactory()
+            );
 
-            ModelValidatorCache validatorCache = new ModelValidatorCache(new Lazy<IEnumerable<ModelValidatorProvider>>(() => this.GetModelValidatorProviders()));
+            ModelValidatorCache validatorCache = new ModelValidatorCache(
+                new Lazy<IEnumerable<ModelValidatorProvider>>(() =>
+                    this.GetModelValidatorProviders()
+                )
+            );
             SetSingle<IModelValidatorCache>(validatorCache);
 
             SetSingle<IExceptionHandler>(new DefaultExceptionHandler());
@@ -194,7 +219,11 @@ namespace System.Web.Http.Services
             // Check input after initial read attempt for performance.
             if (!_serviceTypesSingle.Contains(serviceType))
             {
-                throw Error.Argument("serviceType", SRResources.DefaultServices_InvalidServiceType, serviceType.Name);
+                throw Error.Argument(
+                    "serviceType",
+                    SRResources.DefaultServices_InvalidServiceType,
+                    serviceType.Name
+                );
             }
 
             // Get the service from DI. If we're coming up hot, this might
@@ -240,18 +269,25 @@ namespace System.Web.Http.Services
             // Check input after initial read attempt for performance.
             if (!_serviceTypesMulti.Contains(serviceType))
             {
-                throw Error.Argument("serviceType", SRResources.DefaultServices_InvalidServiceType, serviceType.Name);
+                throw Error.Argument(
+                    "serviceType",
+                    SRResources.DefaultServices_InvalidServiceType,
+                    serviceType.Name
+                );
             }
 
             // Get the service from DI. If we're coming up hot, this might
             // mean we end up creating the service more than once.
-            IEnumerable<object> dependencyServices = _lastKnownDependencyResolver.GetServices(serviceType);
+            IEnumerable<object> dependencyServices = _lastKnownDependencyResolver.GetServices(
+                serviceType
+            );
 
             if (!_cacheMulti.TryGetValue(serviceType, out result))
             {
-                result = dependencyServices.Where(s => s != null)
-                                            .Concat(_defaultServicesMulti[serviceType])
-                                            .ToArray();
+                result = dependencyServices
+                    .Where(s => s != null)
+                    .Concat(_defaultServicesMulti[serviceType])
+                    .ToArray();
                 _cacheMulti.TryAdd(serviceType, result);
             }
 
@@ -259,7 +295,11 @@ namespace System.Web.Http.Services
         }
 
         // Returns the List<object> for the given service type. Also validates serviceType is in the known service type list.
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "inherits from base")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1002:DoNotExposeGenericLists",
+            Justification = "inherits from base"
+        )]
         protected override List<object> GetServiceInstances(Type serviceType)
         {
             Contract.Assert(serviceType != null);
@@ -267,7 +307,11 @@ namespace System.Web.Http.Services
             List<object> result;
             if (!_defaultServicesMulti.TryGetValue(serviceType, out result))
             {
-                throw Error.Argument("serviceType", SRResources.DefaultServices_InvalidServiceType, serviceType.Name);
+                throw Error.Argument(
+                    "serviceType",
+                    SRResources.DefaultServices_InvalidServiceType,
+                    serviceType.Name
+                );
             }
 
             return result;

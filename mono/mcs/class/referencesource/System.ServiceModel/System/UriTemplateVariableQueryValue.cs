@@ -19,7 +19,13 @@ namespace System
             Fx.Assert(!string.IsNullOrEmpty(varName), "bad variable segment");
             this.varName = varName;
         }
-        public override void Bind(string keyName, string[] values, ref int valueIndex, StringBuilder query)
+
+        public override void Bind(
+            string keyName,
+            string[] values,
+            ref int valueIndex,
+            StringBuilder query
+        )
         {
             Fx.Assert(valueIndex < values.Length, "Not enough values to bind");
             if (values[valueIndex] == null)
@@ -28,7 +34,11 @@ namespace System
             }
             else
             {
-                query.AppendFormat("&{0}={1}", UrlUtility.UrlEncode(keyName, Encoding.UTF8), UrlUtility.UrlEncode(values[valueIndex++], Encoding.UTF8));
+                query.AppendFormat(
+                    "&{0}={1}",
+                    UrlUtility.UrlEncode(keyName, Encoding.UTF8),
+                    UrlUtility.UrlEncode(values[valueIndex++], Encoding.UTF8)
+                );
             }
         }
 
@@ -41,6 +51,7 @@ namespace System
             }
             return (other.Nature == UriTemplatePartType.Variable);
         }
+
         public override void Lookup(string value, NameValueCollection boundParameters)
         {
             boundParameters.Add(this.varName, value);

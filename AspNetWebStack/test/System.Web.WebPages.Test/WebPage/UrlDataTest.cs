@@ -20,14 +20,26 @@ namespace System.Web.WebPages.Test
         {
             var d = new UrlDataList(null);
             var item = "!!@#$#$";
-            Assert.Throws<NotSupportedException>(() => { d.Add(item); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    d.Add(item);
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]
         public void ClearTest()
         {
             var d = new UrlDataList(null);
-            Assert.Throws<NotSupportedException>(() => { d.Clear(); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    d.Clear();
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]
@@ -44,7 +56,13 @@ namespace System.Web.WebPages.Test
         public void InsertAtTest()
         {
             var d = new UrlDataList("x/y/z");
-            Assert.Throws<NotSupportedException>(() => { d.Insert(1, "a"); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    d.Insert(1, "a");
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]
@@ -78,14 +96,26 @@ namespace System.Web.WebPages.Test
         public void RemoveTest()
         {
             var d = new UrlDataList("x");
-            Assert.Throws<NotSupportedException>(() => { d.Remove("x"); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    d.Remove("x");
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]
         public void RemoveAtTest()
         {
             var d = new UrlDataList("x/y");
-            Assert.Throws<NotSupportedException>(() => { d.RemoveAt(0); }, "The UrlData collection is read-only.");
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    d.RemoveAt(0);
+                },
+                "The UrlData collection is read-only."
+            );
         }
 
         [Fact]

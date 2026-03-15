@@ -33,7 +33,10 @@ public ref struct Utf8JsonReaderManager
     ///     Logger for logging events that happen when reading/writing JSON values, or <see langword="null" /> if logging is
     ///     not available.
     /// </param>
-    public Utf8JsonReaderManager(JsonReaderData data, IDiagnosticsLogger<DbLoggerCategory.Query>? queryLogger)
+    public Utf8JsonReaderManager(
+        JsonReaderData data,
+        IDiagnosticsLogger<DbLoggerCategory.Query>? queryLogger
+    )
     {
         QueryLogger = queryLogger;
         Data = data;
@@ -49,7 +52,10 @@ public ref struct Utf8JsonReaderManager
     {
         while (!CurrentReader.Read())
         {
-            CurrentReader = Data.ReadBytes((int)CurrentReader.BytesConsumed, CurrentReader.CurrentState);
+            CurrentReader = Data.ReadBytes(
+                (int)CurrentReader.BytesConsumed,
+                CurrentReader.CurrentState
+            );
         }
 
         return CurrentReader.TokenType;
@@ -63,7 +69,10 @@ public ref struct Utf8JsonReaderManager
     {
         while (!CurrentReader.TrySkip())
         {
-            CurrentReader = Data.ReadBytes((int)CurrentReader.BytesConsumed, CurrentReader.CurrentState);
+            CurrentReader = Data.ReadBytes(
+                (int)CurrentReader.BytesConsumed,
+                CurrentReader.CurrentState
+            );
         }
     }
 
@@ -71,8 +80,7 @@ public ref struct Utf8JsonReaderManager
     ///     Called to capture the state of this <see cref="Utf8JsonReaderManager" /> into the associated <see cref="JsonReaderData" /> so
     ///     that a new <see cref="Utf8JsonReaderManager" /> can later be created to pick up at the same position in the JSON document.
     /// </summary>
-    public void CaptureState()
-        => Data.CaptureState(ref this);
+    public void CaptureState() => Data.CaptureState(ref this);
 
     /// <summary>
     ///     Logger for logging events that happen when reading/writing JSON values, or <see langword="null" /> if logging is not available.

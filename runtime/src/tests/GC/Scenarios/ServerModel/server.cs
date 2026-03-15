@@ -26,7 +26,6 @@ namespace ServerSimulator
                 static_data[i] = new byte[alloc_surv];
                 volume += alloc_surv / 1000;
             }
-
         }
 
         // creates requests until we reach the steady state with a full cache
@@ -79,9 +78,15 @@ namespace ServerSimulator
                     if (nreqs_to_steady == 0)
                     {
                         nreqs_to_steady = total_reqs;
-                        Console.WriteLine("took {0} iteration to reach steady state", nreqs_to_steady);
+                        Console.WriteLine(
+                            "took {0} iteration to reach steady state",
+                            nreqs_to_steady
+                        );
                     }
-                    else if (total_reqs == ServerSimulator.Params.SteadyStateFactor * nreqs_to_steady)
+                    else if (
+                        total_reqs
+                        == ServerSimulator.Params.SteadyStateFactor * nreqs_to_steady
+                    )
                     {
                         break;
                     }
@@ -102,7 +107,6 @@ namespace ServerSimulator
             //cleanup
             static_data = null;
             cache.Clear();
-
         }
     }
 }

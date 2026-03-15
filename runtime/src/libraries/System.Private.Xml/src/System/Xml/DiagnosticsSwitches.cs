@@ -11,9 +11,15 @@ namespace System.Xml
         private static volatile BooleanSwitch? s_nonRecursiveTypeLoading;
 
         public static BooleanSwitch KeepTempFiles =>
-            s_keepTempFiles ??= new BooleanSwitch("XmlSerialization.Compilation", "Keep XmlSerialization generated (temp) files.");
+            s_keepTempFiles ??= new BooleanSwitch(
+                "XmlSerialization.Compilation",
+                "Keep XmlSerialization generated (temp) files."
+            );
 
         public static BooleanSwitch NonRecursiveTypeLoading =>
-            s_nonRecursiveTypeLoading ??= new BooleanSwitch("XmlSerialization.NonRecursiveTypeLoading", "Turn on non-recursive algorithm generating XmlMappings for CLR types.");
+            s_nonRecursiveTypeLoading ??= new BooleanSwitch(
+                "XmlSerialization.NonRecursiveTypeLoading",
+                "Turn on non-recursive algorithm generating XmlMappings for CLR types."
+            );
     }
 }

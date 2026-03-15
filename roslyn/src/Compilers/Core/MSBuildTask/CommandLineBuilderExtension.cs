@@ -20,12 +20,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Set a boolean switch iff its value exists and its value is 'true'.
         /// </summary>
-        internal void AppendWhenTrue
-            (
+        internal void AppendWhenTrue(
             string switchName,
             PropertyDictionary bag,
             string parameterName
-            )
+        )
         {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
@@ -43,12 +42,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Set a boolean switch only if its value exists.
         /// </summary>
-        internal void AppendPlusOrMinusSwitch
-            (
+        internal void AppendPlusOrMinusSwitch(
             string switchName,
             PropertyDictionary bag,
             string parameterName
-            )
+        )
         {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
@@ -63,14 +61,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Set a switch if its value exists by choosing from the input choices
         /// </summary>
-        internal void AppendByChoiceSwitch
-            (
+        internal void AppendByChoiceSwitch(
             string switchName,
             PropertyDictionary bag,
             string parameterName,
             string choice1,
             string choice2
-            )
+        )
         {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
@@ -84,12 +81,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Set an integer switch only if its value exists.
         /// </summary>
-        internal void AppendSwitchWithInteger
-            (
+        internal void AppendSwitchWithInteger(
             string switchName,
             PropertyDictionary bag,
             string parameterName
-            )
+        )
         {
             object? obj = bag[parameterName];
             // If the switch isn't set, don't add it to the command line.
@@ -114,7 +110,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Adds a nested switch, used by SGen.exe.  For example:
         ///     /compiler:"/keyfile:\"c:\some folder\myfile.snk\""
         /// </summary>
-        internal void AppendNestedSwitch(string outerSwitchName, string innerSwitchName, string parameter)
+        internal void AppendNestedSwitch(
+            string outerSwitchName,
+            string innerSwitchName,
+            string parameter
+        )
         {
             string quotedParameter = GetQuotedText(parameter);
             AppendSwitchIfNotNull(outerSwitchName, innerSwitchName + quotedParameter);
@@ -139,8 +139,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Appends a command-line switch that takes a compound string parameter. The parameter is built up from the item-spec and
         /// the specified attributes. The switch is appended as many times as there are parameters given.
         /// </summary>
-        internal void AppendSwitchIfNotNull
-        (
+        internal void AppendSwitchIfNotNull(
             string switchName,
             ITaskItem[]? parameters,
             string[] attributes
@@ -153,11 +152,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Append a switch if 'parameter' is not null.
         /// Split on the characters provided.
         /// </summary>
-        internal void AppendSwitchWithSplitting(string switchName, string? parameter, string delimiter, params char[] splitOn)
+        internal void AppendSwitchWithSplitting(
+            string switchName,
+            string? parameter,
+            string delimiter,
+            params char[] splitOn
+        )
         {
             if (parameter != null)
             {
-                string[] splits = parameter.Split(splitOn, /* omitEmptyEntries */ StringSplitOptions.RemoveEmptyEntries);
+                string[] splits = parameter.Split(
+                    splitOn, /* omitEmptyEntries */
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 string[] splitAndTrimmed = new string[splits.Length];
                 for (int i = 0; i < splits.Length; ++i)
                 {
@@ -168,15 +175,21 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Returns true if the parameter is empty in spirits, 
+        /// Returns true if the parameter is empty in spirits,
         /// even if it contains the separators and white space only
         /// Split on the characters provided.
         /// </summary>
-        internal static bool IsParameterEmpty([NotNullWhen(false)] string? parameter, params char[] splitOn)
+        internal static bool IsParameterEmpty(
+            [NotNullWhen(false)] string? parameter,
+            params char[] splitOn
+        )
         {
             if (parameter != null)
             {
-                string[] splits = parameter.Split(splitOn, /* omitEmptyEntries */ StringSplitOptions.RemoveEmptyEntries);
+                string[] splits = parameter.Split(
+                    splitOn, /* omitEmptyEntries */
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 for (int i = 0; i < splits.Length; ++i)
                 {
                     if (!String.IsNullOrEmpty(splits[i].Trim()))
@@ -187,26 +200,27 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
             return true;
         }
+
         /// <summary>
         /// Designed to handle the /link and /embed switches:
         ///
         ///      /resource:&lt;filename>[,&lt;name>[,Private]]
         ///      /linkresource:&lt;filename>[,&lt;name>[,Private]]
-        /// 
+        ///
         /// Where the last flag--Private--is either present or not present
         /// depending on whether the ITaskItem has a Private="True" attribute.
         /// </summary>
-        internal void AppendSwitchIfNotNull
-        (
+        internal void AppendSwitchIfNotNull(
             string switchName,
             ITaskItem[]? parameters,
             string[]? metadataNames,
-            bool[]? treatAsFlags       // May be null. In this case no metadata are treated as flags.
-            )
+            bool[]? treatAsFlags // May be null. In this case no metadata are treated as flags.
+        )
         {
-            Debug.Assert(treatAsFlags == null
-                         || (metadataNames?.Length == treatAsFlags.Length),
-                         "metadataNames and treatAsFlags should have the same length.");
+            Debug.Assert(
+                treatAsFlags == null || (metadataNames?.Length == treatAsFlags.Length),
+                "metadataNames and treatAsFlags should have the same length."
+            );
 
             if (parameters != null)
             {
@@ -232,7 +246,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                                 else
                                 {
                                     // A boolean flag.
-                                    bool flagSet = Utilities.TryConvertItemMetadataToBool(parameter, metadataNames[i]);
+                                    bool flagSet = Utilities.TryConvertItemMetadataToBool(
+                                        parameter,
+                                        metadataNames[i]
+                                    );
 
                                     if (flagSet)
                                     {

@@ -36,14 +36,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string TypeName
         {
-            get
-            {
-                return m_TypeName;
-            }
-            set
-            {
-                m_TypeName = value;
-            }
+            get { return m_TypeName; }
+            set { m_TypeName = value; }
         }
 
         /// <summary>
@@ -56,16 +50,9 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public CollectionCategory Category
         {
-            get
-            {
-                return m_Category;
-            }
-            set
-            {
-                m_Category = value;
-            }
+            get { return m_Category; }
+            set { m_Category = value; }
         }
-
 
         /// <summary>
         /// Which combobox in the UI this collection type should go into
@@ -84,7 +71,5 @@ namespace Microsoft.VSDesigner.WCFModel
             [XmlSerialization.XmlEnum(Name = "Dictionary")]
             Dictionary = 2,
         }
-
     }
 }
-

@@ -24,10 +24,9 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     public ReferenceReferenceBuilder(
         IMutableEntityType declaringEntityType,
         IMutableEntityType relatedEntityType,
-        IMutableForeignKey foreignKey)
-        : base(declaringEntityType, relatedEntityType, foreignKey)
-    {
-    }
+        IMutableForeignKey foreignKey
+    )
+        : base(declaringEntityType, relatedEntityType, foreignKey) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,10 +41,9 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         bool inverted = false,
         bool foreignKeySet = false,
         bool principalKeySet = false,
-        bool requiredSet = false)
-        : base(builder, oldBuilder, inverted, foreignKeySet, principalKeySet, requiredSet)
-    {
-    }
+        bool requiredSet = false
+    )
+        : base(builder, oldBuilder, inverted, foreignKeySet, principalKeySet, requiredSet) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the relationship. If an annotation with the key specified in
@@ -91,15 +89,21 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ReferenceReferenceBuilder HasForeignKey(
         string dependentEntityTypeName,
-        params string[] foreignKeyPropertyNames)
-        => new(
+        params string[] foreignKeyPropertyNames
+    ) =>
+        new(
             HasForeignKeyBuilder(
-                ResolveEntityType(Check.NotNull(dependentEntityTypeName, nameof(dependentEntityTypeName)))!,
+                ResolveEntityType(
+                    Check.NotNull(dependentEntityTypeName, nameof(dependentEntityTypeName))
+                )!,
                 dependentEntityTypeName,
-                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))),
+                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))
+            ),
             this,
-            Builder.Metadata.DeclaringEntityType.Name != ResolveEntityType(dependentEntityTypeName)!.Name,
-            foreignKeySet: foreignKeyPropertyNames.Length > 0);
+            Builder.Metadata.DeclaringEntityType.Name
+                != ResolveEntityType(dependentEntityTypeName)!.Name,
+            foreignKeySet: foreignKeyPropertyNames.Length > 0
+        );
 
     /// <summary>
     ///     Configures the property(s) to use as the foreign key for this relationship.
@@ -129,15 +133,18 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ReferenceReferenceBuilder HasForeignKey(
         Type dependentEntityType,
-        params string[] foreignKeyPropertyNames)
-        => new(
+        params string[] foreignKeyPropertyNames
+    ) =>
+        new(
             HasForeignKeyBuilder(
                 ResolveEntityType(Check.NotNull(dependentEntityType, nameof(dependentEntityType)))!,
                 dependentEntityType.ShortDisplayName(),
-                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))),
+                Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))
+            ),
             this,
             Builder.Metadata.DeclaringEntityType.ClrType != dependentEntityType,
-            foreignKeySet: foreignKeyPropertyNames.Length > 0);
+            foreignKeySet: foreignKeyPropertyNames.Length > 0
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,10 +156,13 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
         EntityType dependentEntityType,
         string dependentEntityTypeName,
-        IReadOnlyList<string> foreignKeyPropertyNames)
-        => HasForeignKeyBuilder(
-            dependentEntityType, dependentEntityTypeName,
-            (b, d) => b.HasForeignKey(foreignKeyPropertyNames, d, ConfigurationSource.Explicit)!);
+        IReadOnlyList<string> foreignKeyPropertyNames
+    ) =>
+        HasForeignKeyBuilder(
+            dependentEntityType,
+            dependentEntityTypeName,
+            (b, d) => b.HasForeignKey(foreignKeyPropertyNames, d, ConfigurationSource.Explicit)!
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -164,15 +174,19 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
         EntityType dependentEntityType,
         string dependentEntityTypeName,
-        IReadOnlyList<MemberInfo> foreignKeyMembers)
-        => HasForeignKeyBuilder(
-            dependentEntityType, dependentEntityTypeName,
-            (b, d) => b.HasForeignKey(foreignKeyMembers, d, ConfigurationSource.Explicit)!);
+        IReadOnlyList<MemberInfo> foreignKeyMembers
+    ) =>
+        HasForeignKeyBuilder(
+            dependentEntityType,
+            dependentEntityTypeName,
+            (b, d) => b.HasForeignKey(foreignKeyMembers, d, ConfigurationSource.Explicit)!
+        );
 
     private InternalForeignKeyBuilder HasForeignKeyBuilder(
         EntityType? dependentEntityType,
         string dependentEntityTypeName,
-        Func<InternalForeignKeyBuilder, EntityType, InternalForeignKeyBuilder> hasForeignKey)
+        Func<InternalForeignKeyBuilder, EntityType, InternalForeignKeyBuilder> hasForeignKey
+    )
     {
         if (dependentEntityType == null)
         {
@@ -180,12 +194,17 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
                 CoreStrings.DependentEntityTypeNotInRelationship(
                     DeclaringEntityType.DisplayName(),
                     RelatedEntityType.DisplayName(),
-                    dependentEntityTypeName));
+                    dependentEntityTypeName
+                )
+            );
         }
 
         using var batch = dependentEntityType.Model.DelayConventions();
         var builder = Builder.HasEntityTypes(
-            GetOtherEntityType(dependentEntityType), dependentEntityType, ConfigurationSource.Explicit)!;
+            GetOtherEntityType(dependentEntityType),
+            dependentEntityType,
+            ConfigurationSource.Explicit
+        )!;
         builder = hasForeignKey(builder, dependentEntityType);
 
         return batch.Run(builder)!;
@@ -210,15 +229,21 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ReferenceReferenceBuilder HasPrincipalKey(
         string principalEntityTypeName,
-        params string[] keyPropertyNames)
-        => new(
+        params string[] keyPropertyNames
+    ) =>
+        new(
             HasPrincipalKeyBuilder(
-                ResolveEntityType(Check.NotEmpty(principalEntityTypeName, nameof(principalEntityTypeName)))!,
+                ResolveEntityType(
+                    Check.NotEmpty(principalEntityTypeName, nameof(principalEntityTypeName))
+                )!,
                 principalEntityTypeName,
-                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))),
+                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))
+            ),
             this,
-            inverted: Builder.Metadata.PrincipalEntityType.Name != ResolveEntityType(principalEntityTypeName)!.Name,
-            principalKeySet: keyPropertyNames.Length > 0);
+            inverted: Builder.Metadata.PrincipalEntityType.Name
+                != ResolveEntityType(principalEntityTypeName)!.Name,
+            principalKeySet: keyPropertyNames.Length > 0
+        );
 
     /// <summary>
     ///     Configures the unique property(s) that this relationship targets. Typically you would only call this
@@ -239,15 +264,18 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ReferenceReferenceBuilder HasPrincipalKey(
         Type principalEntityType,
-        params string[] keyPropertyNames)
-        => new(
+        params string[] keyPropertyNames
+    ) =>
+        new(
             HasPrincipalKeyBuilder(
                 ResolveEntityType(Check.NotNull(principalEntityType, nameof(principalEntityType)))!,
                 principalEntityType.ShortDisplayName(),
-                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))),
+                Check.NotNull(keyPropertyNames, nameof(keyPropertyNames))
+            ),
             this,
             inverted: Builder.Metadata.PrincipalEntityType.ClrType != principalEntityType,
-            principalKeySet: keyPropertyNames.Length > 0);
+            principalKeySet: keyPropertyNames.Length > 0
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -259,10 +287,13 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
         EntityType principalEntityType,
         string principalEntityTypeName,
-        IReadOnlyList<string> foreignKeyPropertyNames)
-        => HasPrincipalKeyBuilder(
-            principalEntityType, principalEntityTypeName,
-            b => b.HasPrincipalKey(foreignKeyPropertyNames, ConfigurationSource.Explicit)!);
+        IReadOnlyList<string> foreignKeyPropertyNames
+    ) =>
+        HasPrincipalKeyBuilder(
+            principalEntityType,
+            principalEntityTypeName,
+            b => b.HasPrincipalKey(foreignKeyPropertyNames, ConfigurationSource.Explicit)!
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -274,15 +305,19 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
         EntityType principalEntityType,
         string principalEntityTypeName,
-        IReadOnlyList<MemberInfo> foreignKeyMembers)
-        => HasPrincipalKeyBuilder(
-            principalEntityType, principalEntityTypeName,
-            b => b.HasPrincipalKey(foreignKeyMembers, ConfigurationSource.Explicit)!);
+        IReadOnlyList<MemberInfo> foreignKeyMembers
+    ) =>
+        HasPrincipalKeyBuilder(
+            principalEntityType,
+            principalEntityTypeName,
+            b => b.HasPrincipalKey(foreignKeyMembers, ConfigurationSource.Explicit)!
+        );
 
     private InternalForeignKeyBuilder HasPrincipalKeyBuilder(
         EntityType? principalEntityType,
         string principalEntityTypeName,
-        Func<InternalForeignKeyBuilder, InternalForeignKeyBuilder> hasPrincipalKey)
+        Func<InternalForeignKeyBuilder, InternalForeignKeyBuilder> hasPrincipalKey
+    )
     {
         if (principalEntityType == null)
         {
@@ -290,12 +325,17 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
                 CoreStrings.PrincipalEntityTypeNotInRelationship(
                     DeclaringEntityType.DisplayName(),
                     RelatedEntityType.DisplayName(),
-                    principalEntityTypeName));
+                    principalEntityTypeName
+                )
+            );
         }
 
         using var batch = principalEntityType.Model.DelayConventions();
         var builder = Builder.HasEntityTypes(
-            principalEntityType, GetOtherEntityType(principalEntityType), ConfigurationSource.Explicit)!;
+            principalEntityType,
+            GetOtherEntityType(principalEntityType),
+            ConfigurationSource.Explicit
+        )!;
         builder = hasPrincipalKey(builder);
 
         return batch.Run(builder)!;
@@ -330,8 +370,10 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
             return (EntityType)RelatedEntityType;
         }
 
-        if (DeclaringEntityType.HasSharedClrType
-            && DeclaringEntityType.ShortName() == entityTypeName)
+        if (
+            DeclaringEntityType.HasSharedClrType
+            && DeclaringEntityType.ShortName() == entityTypeName
+        )
         {
             return (EntityType)DeclaringEntityType;
         }
@@ -358,8 +400,10 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         return RelatedEntityType.ClrType == entityType ? (EntityType)RelatedEntityType : null;
     }
 
-    private EntityType GetOtherEntityType(EntityType entityType)
-        => DeclaringEntityType == entityType ? (EntityType)RelatedEntityType : (EntityType)DeclaringEntityType;
+    private EntityType GetOtherEntityType(EntityType entityType) =>
+        DeclaringEntityType == entityType
+            ? (EntityType)RelatedEntityType
+            : (EntityType)DeclaringEntityType;
 
     /// <summary>
     ///     Configures whether this is a required relationship (i.e. whether the foreign key property(s) can
@@ -367,8 +411,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// </summary>
     /// <param name="required">A value indicating whether this is a required relationship.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ReferenceReferenceBuilder IsRequired(bool required = true)
-        => new(Builder.IsRequired(required, ConfigurationSource.Explicit)!, this, requiredSet: true);
+    public virtual ReferenceReferenceBuilder IsRequired(bool required = true) =>
+        new(Builder.IsRequired(required, ConfigurationSource.Explicit)!, this, requiredSet: true);
 
     /// <summary>
     ///     Configures the operation applied to dependent entities in the relationship when the
@@ -376,6 +420,6 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
     /// </summary>
     /// <param name="deleteBehavior">The action to perform.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ReferenceReferenceBuilder OnDelete(DeleteBehavior deleteBehavior)
-        => new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
+    public virtual ReferenceReferenceBuilder OnDelete(DeleteBehavior deleteBehavior) =>
+        new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
 }

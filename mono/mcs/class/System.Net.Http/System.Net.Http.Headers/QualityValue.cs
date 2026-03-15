@@ -26,38 +26,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace System.Net.Http.Headers
 {
-	static class QualityValue
-	{
-		public static double? GetValue (List<NameValueHeaderValue> parameters)
-		{
-			if (parameters == null)
-				return null;
+    static class QualityValue
+    {
+        public static double? GetValue(List<NameValueHeaderValue> parameters)
+        {
+            if (parameters == null)
+                return null;
 
-			var found = parameters.Find (l => string.Equals (l.Name, "q", StringComparison.OrdinalIgnoreCase));
-			if (found == null)
-				return null;
+            var found = parameters.Find(l =>
+                string.Equals(l.Name, "q", StringComparison.OrdinalIgnoreCase)
+            );
+            if (found == null)
+                return null;
 
-			double value;
-			if (!double.TryParse (found.Value, NumberStyles.Number, NumberFormatInfo.InvariantInfo, out value))
-				return null;
+            double value;
+            if (
+                !double.TryParse(
+                    found.Value,
+                    NumberStyles.Number,
+                    NumberFormatInfo.InvariantInfo,
+                    out value
+                )
+            )
+                return null;
 
-			return value;
-		}
+            return value;
+        }
 
-		public static void SetValue (ref List<NameValueHeaderValue> parameters, double? value)
-		{
-			if (value < 0 || value > 1)
-				throw new ArgumentOutOfRangeException ("Quality");
+        public static void SetValue(ref List<NameValueHeaderValue> parameters, double? value)
+        {
+            if (value < 0 || value > 1)
+                throw new ArgumentOutOfRangeException("Quality");
 
-			if (parameters == null)
-				parameters = new List<NameValueHeaderValue> ();
+            if (parameters == null)
+                parameters = new List<NameValueHeaderValue>();
 
-			parameters.SetValue ("q", value == null ? null : value.Value.ToString (NumberFormatInfo.InvariantInfo));
-		}
-	}
+            parameters.SetValue(
+                "q",
+                value == null ? null : value.Value.ToString(NumberFormatInfo.InvariantInfo)
+            );
+        }
+    }
 }

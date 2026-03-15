@@ -31,28 +31,52 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider
         public override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
         {
             return DefaultFixAllProviderHelpers.GetFixAsync(
-                fixAllContext.GetDefaultFixAllTitle(), fixAllContext, FixAllContextsHelperAsync);
+                fixAllContext.GetDefaultFixAllTitle(),
+                fixAllContext,
+                FixAllContextsHelperAsync
+            );
         }
 
-        private static async Task<Solution?> FixAllContextsHelperAsync(FixAllContext originalContext, ImmutableArray<FixAllContext> contexts)
+        private static async Task<Solution?> FixAllContextsHelperAsync(
+            FixAllContext originalContext,
+            ImmutableArray<FixAllContext> contexts
+        )
         {
             var cancellationToken = originalContext.CancellationToken;
-            var removeMembers = originalContext.CodeActionEquivalenceKey == nameof(CSharpCodeFixesResources.Use_primary_constructor_and_remove_members);
+            var removeMembers =
+                originalContext.CodeActionEquivalenceKey
+                == nameof(CSharpCodeFixesResources.Use_primary_constructor_and_remove_members);
 
             var solutionEditor = new SolutionEditor(originalContext.Solution);
 
             foreach (var currentContext in contexts)
             {
-                var documentToDiagnostics = await FixAllContextHelper.GetDocumentDiagnosticsToFixAsync(currentContext).ConfigureAwait(false);
+                var documentToDiagnostics = await FixAllContextHelper
+                    .GetDocumentDiagnosticsToFixAsync(currentContext)
+                    .ConfigureAwait(false);
                 foreach (var (document, diagnostics) in documentToDiagnostics)
                 {
-                    foreach (var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start))
+                    foreach (
+                        var diagnostic in diagnostics.OrderByDescending(d =>
+                            d.Location.SourceSpan.Start
+                        )
+                    )
                     {
-                        if (diagnostic.Location.FindNode(cancellationToken) is not ConstructorDeclarationSyntax constructorDeclaration)
+                        if (
+                            diagnostic.Location.FindNode(cancellationToken)
+                            is not ConstructorDeclarationSyntax constructorDeclaration
+                        )
                             continue;
 
                         await UsePrimaryConstructorAsync(
-                            solutionEditor, document, constructorDeclaration, diagnostic.Properties, removeMembers, cancellationToken).ConfigureAwait(false);
+                                solutionEditor,
+                                document,
+                                constructorDeclaration,
+                                diagnostic.Properties,
+                                removeMembers,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
             }

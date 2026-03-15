@@ -12,7 +12,8 @@ namespace System.Web.Mvc.Test
         public void PublicFetchOrCreateItemCreatesItemIfNotAlreadyInCache()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper =
+                new ReaderWriterCacheHelper<int, string>();
             Dictionary<int, string> cache = helper.PublicCache;
 
             // Act
@@ -27,7 +28,8 @@ namespace System.Web.Mvc.Test
         public void PublicFetchOrCreateItemReturnsExistingItemIfFound()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper =
+                new ReaderWriterCacheHelper<int, string>();
             Dictionary<int, string> cache = helper.PublicCache;
             helper.PublicCache[42] = "original";
 
@@ -43,7 +45,8 @@ namespace System.Web.Mvc.Test
         public void PublicFetchOrCreateItemReturnsFirstItemIfTwoThreadsUpdateCacheSimultaneously()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper =
+                new ReaderWriterCacheHelper<int, string>();
             Dictionary<int, string> cache = helper.PublicCache;
             Func<string> creator = delegate()
             {
@@ -67,7 +70,8 @@ namespace System.Web.Mvc.Test
         public void PublicFetchOrCreateItemPassesArgument()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper =
+                new ReaderWriterCacheHelper<int, string>();
             Dictionary<int, string> cache = helper.PublicCache;
 
             // Act
@@ -90,7 +94,11 @@ namespace System.Web.Mvc.Test
                 return FetchOrCreateItem(key, creator);
             }
 
-            public TValue PublicFetchOrCreateItem<TArgument>(TKey key, Func<TArgument, TValue> creator, TArgument state)
+            public TValue PublicFetchOrCreateItem<TArgument>(
+                TKey key,
+                Func<TArgument, TValue> creator,
+                TArgument state
+            )
             {
                 return FetchOrCreateItem(key, creator, state);
             }

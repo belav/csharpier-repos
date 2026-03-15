@@ -30,38 +30,39 @@ using System.Threading;
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
+namespace MonoTests.Microsoft.Build.Framework
+{
+    class TestClass : BuildEventArgs
+    {
+        public TestClass(string message, string helpKeyword, string senderName)
+            : base(message, helpKeyword, senderName) { }
+    }
 
-	class TestClass : BuildEventArgs {
-		public TestClass (string message, string helpKeyword, string senderName)
-			: base (message, helpKeyword, senderName)
-		{
-		}
-	}
-	
-	[TestFixture]
-	public class BuildEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			DateTime before, after;
-			
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			string senderName = "senderName";
-			
-			before = DateTime.Now;
-			
-			TestClass tc = new TestClass (message, helpKeyword, senderName);
-			
-			after = DateTime.Now;
-			
-			Assert.AreEqual (message, tc.Message, "A1");
-			Assert.AreEqual (helpKeyword, tc.HelpKeyword, "A2");
-			Assert.AreEqual (senderName, tc.SenderName, "A3");
-			Assert.AreEqual (Thread.CurrentThread.GetHashCode (), tc.ThreadId, "A4");
-			Assert.IsTrue (before <= tc.Timestamp, "A5");
-			Assert.IsTrue (after >= tc.Timestamp, "A6");
-		}
-	}
+    [TestFixture]
+    public class BuildEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            DateTime before,
+                after;
+
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+            string senderName = "senderName";
+
+            before = DateTime.Now;
+
+            TestClass tc = new TestClass(message, helpKeyword, senderName);
+
+            after = DateTime.Now;
+
+            Assert.AreEqual(message, tc.Message, "A1");
+            Assert.AreEqual(helpKeyword, tc.HelpKeyword, "A2");
+            Assert.AreEqual(senderName, tc.SenderName, "A3");
+            Assert.AreEqual(Thread.CurrentThread.GetHashCode(), tc.ThreadId, "A4");
+            Assert.IsTrue(before <= tc.Timestamp, "A5");
+            Assert.IsTrue(after >= tc.Timestamp, "A6");
+        }
+    }
 }

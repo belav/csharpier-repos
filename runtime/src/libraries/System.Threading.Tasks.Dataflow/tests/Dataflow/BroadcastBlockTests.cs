@@ -12,13 +12,31 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestCtor()
         {
-            var blocks = new[] {
+            var blocks = new[]
+            {
                 new BroadcastBlock<int>(i => i),
                 new BroadcastBlock<int>(null),
-                new BroadcastBlock<int>(i => i, new DataflowBlockOptions { MaxMessagesPerTask = 1 }),
+                new BroadcastBlock<int>(
+                    i => i,
+                    new DataflowBlockOptions { MaxMessagesPerTask = 1 }
+                ),
                 new BroadcastBlock<int>(null, new DataflowBlockOptions { MaxMessagesPerTask = 1 }),
-                new BroadcastBlock<int>(i => i, new DataflowBlockOptions { MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true) }),
-                new BroadcastBlock<int>(null, new DataflowBlockOptions { MaxMessagesPerTask = 1, CancellationToken = new CancellationToken(true) })
+                new BroadcastBlock<int>(
+                    i => i,
+                    new DataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                    }
+                ),
+                new BroadcastBlock<int>(
+                    null,
+                    new DataflowBlockOptions
+                    {
+                        MaxMessagesPerTask = 1,
+                        CancellationToken = new CancellationToken(true),
+                    }
+                ),
             };
             foreach (var block in blocks)
             {
@@ -32,20 +50,40 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestArgumentExceptions()
         {
             Assert.Throws<ArgumentNullException>(() => new BroadcastBlock<int>(i => i, null));
-            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
-                ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(default(DataflowMessageHeader), 0, null, consumeToAccept: false));
-            AssertExtensions.Throws<ArgumentException>("consumeToAccept", () =>
-                ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(new DataflowMessageHeader(1), 0, null, consumeToAccept: true));
+            AssertExtensions.Throws<ArgumentException>(
+                "messageHeader",
+                () =>
+                    ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
+                        default(DataflowMessageHeader),
+                        0,
+                        null,
+                        consumeToAccept: false
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "consumeToAccept",
+                () =>
+                    ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
+                        new DataflowMessageHeader(1),
+                        0,
+                        null,
+                        consumeToAccept: true
+                    )
+            );
             DataflowTestHelpers.TestArgumentsExceptions(new BroadcastBlock<int>(i => i));
         }
 
         [Fact]
         public void TestToString()
         {
-            DataflowTestHelpers.TestToString(
-                nameFormat => nameFormat != null ?
-                    new BroadcastBlock<int>(i => i, new DataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new BroadcastBlock<int>(i => i));
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new BroadcastBlock<int>(
+                        i => i,
+                        new DataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new BroadcastBlock<int>(i => i)
+            );
         }
 
         [Fact]
@@ -82,7 +120,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestBroadcasting()
         {
             var bb = new BroadcastBlock<int>(i => i + 1);
-            var targets = Enumerable.Range(0, 3).Select(_ => new TransformBlock<int, int>(i => i)).ToArray();
+            var targets = Enumerable
+                .Range(0, 3)
+                .Select(_ => new TransformBlock<int, int>(i => i))
+                .ToArray();
             foreach (var target in targets)
             {
                 bb.LinkTo(target);
@@ -165,7 +206,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 int result = 0;
-                var target = new ActionBlock<int>(i => {
+                var target = new ActionBlock<int>(i =>
+                {
                     Assert.Equal(expected: 0, actual: result);
                     result = i;
                     Assert.Equal(expected: -data, actual: i);
@@ -195,7 +237,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 result = null;
-                var target = new ActionBlock<object>(o => {
+                var target = new ActionBlock<object>(o =>
+                {
                     Assert.Null(result);
                     result = o;
                     Assert.Equal(expected: data, actual: o);
@@ -212,7 +255,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var b = new BroadcastBlock<int>(null, new DataflowBlockOptions { CancellationToken = cts.Token });
+            var b = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { CancellationToken = cts.Token }
+            );
 
             Assert.NotNull(b.LinkTo(DataflowBlock.NullTarget<int>()));
             Assert.False(b.Post(42));
@@ -244,7 +290,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestBounding()
         {
-            var bb = new BroadcastBlock<int>(null, new DataflowBlockOptions { BoundedCapacity = 1 });
+            var bb = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions { BoundedCapacity = 1 }
+            );
             var ab = new ActionBlock<int>(i => { });
             bb.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
 
@@ -261,7 +310,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool fault in DataflowTestHelpers.BooleanValues)
             {
                 var cts = new CancellationTokenSource();
-                var bb = new BroadcastBlock<int>(null, new GroupingDataflowBlockOptions { CancellationToken = cts.Token, BoundedCapacity = 2 });
+                var bb = new BroadcastBlock<int>(
+                    null,
+                    new GroupingDataflowBlockOptions
+                    {
+                        CancellationToken = cts.Token,
+                        BoundedCapacity = 2,
+                    }
+                );
                 Task<bool>[] sends = Enumerable.Range(0, 4).Select(i => bb.SendAsync(i)).ToArray();
 
                 if (fault)
@@ -283,13 +339,20 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestFaultyScheduler()
         {
-            var bb = new BroadcastBlock<int>(null, new DataflowBlockOptions {
-                BoundedCapacity = 1,
-                TaskScheduler = new DelegateTaskScheduler
+            var bb = new BroadcastBlock<int>(
+                null,
+                new DataflowBlockOptions
                 {
-                    QueueTaskDelegate = delegate { throw new FormatException(); }
+                    BoundedCapacity = 1,
+                    TaskScheduler = new DelegateTaskScheduler
+                    {
+                        QueueTaskDelegate = delegate
+                        {
+                            throw new FormatException();
+                        },
+                    },
                 }
-            });
+            );
             Task<bool> t1 = bb.SendAsync(1);
             Task<bool> t2 = bb.SendAsync(2);
             bb.LinkTo(DataflowBlock.NullTarget<int>());
@@ -297,6 +360,5 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.True(await t1);
             Assert.False(await t2);
         }
-
     }
 }

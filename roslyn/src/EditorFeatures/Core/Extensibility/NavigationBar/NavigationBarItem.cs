@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor
         ImmutableArray<NavigationBarItem> childItems = default,
         int indent = 0,
         bool bolded = false,
-        bool grayed = false) : IEquatable<NavigationBarItem>
+        bool grayed = false
+    ) : IEquatable<NavigationBarItem>
     {
         public string Text { get; } = text;
         public Glyph Glyph { get; } = glyph;
@@ -45,25 +46,33 @@ namespace Microsoft.CodeAnalysis.Editor
 
         public bool Equals(NavigationBarItem? other)
         {
-            return other != null &&
-                   Text == other.Text &&
-                   Glyph == other.Glyph &&
-                   Bolded == other.Bolded &&
-                   Grayed == other.Grayed &&
-                   Indent == other.Indent &&
-                   ChildItems.SequenceEqual(other.ChildItems) &&
-                   Spans.SequenceEqual(other.Spans);
+            return other != null
+                && Text == other.Text
+                && Glyph == other.Glyph
+                && Bolded == other.Bolded
+                && Grayed == other.Grayed
+                && Indent == other.Indent
+                && ChildItems.SequenceEqual(other.ChildItems)
+                && Spans.SequenceEqual(other.Spans);
         }
     }
 
     internal static class NavigationBarItemExtensions
     {
-        public static TextSpan GetCurrentItemSpan(this NavigationBarItem item, ITextVersion toVersion, TextSpan span)
+        public static TextSpan GetCurrentItemSpan(
+            this NavigationBarItem item,
+            ITextVersion toVersion,
+            TextSpan span
+        )
         {
-            Contract.ThrowIfNull(item.TextVersion, "This should only be called for locations the caller knows to be in the open file");
-            return item.TextVersion.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeExclusive)
-                                   .GetSpan(toVersion)
-                                   .ToTextSpan();
+            Contract.ThrowIfNull(
+                item.TextVersion,
+                "This should only be called for locations the caller knows to be in the open file"
+            );
+            return item
+                .TextVersion.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeExclusive)
+                .GetSpan(toVersion)
+                .ToTextSpan();
         }
     }
 }

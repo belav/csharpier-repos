@@ -10,17 +10,17 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal class InternalEncoderBestFitFallback : EncoderFallback
     {
         // Our variables
         internal Encoding encoding = null;
-        internal char[]   arrayBestFit = null;
+        internal char[] arrayBestFit = null;
 
         internal InternalEncoderBestFitFallback(Encoding encoding)
         {
@@ -37,10 +37,7 @@ namespace System.Text
         // Maximum number of characters that this instance of this fallback could return
         public override int MaxCharCount
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
         public override bool Equals(Object value)
@@ -62,10 +59,10 @@ namespace System.Text
     internal sealed class InternalEncoderBestFitFallbackBuffer : EncoderFallbackBuffer
     {
         // Our variables
-        private char                    cBestFit = '\0';
-        private InternalEncoderBestFitFallback  oFallback;
-        private int                     iCount = -1;
-        private int                     iSize;
+        private char cBestFit = '\0';
+        private InternalEncoderBestFitFallback oFallback;
+        private int iCount = -1;
+        private int iSize;
 
         // Private object for locking instead of locking on a public type for SQL reliability work.
         private static Object s_InternalSyncObject;
@@ -90,7 +87,7 @@ namespace System.Text
             if (oFallback.arrayBestFit == null)
             {
                 // Lock so we don't confuse ourselves.
-                lock(InternalSyncObject)
+                lock (InternalSyncObject)
                 {
                     // Double check before we do it again.
                     if (oFallback.arrayBestFit == null)
@@ -105,7 +102,12 @@ namespace System.Text
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
             // character in our array.
             // Shouldn't be able to get here for all of our code pages, table would have to be messed up.
-            Contract.Assert(iCount < 1, "[InternalEncoderBestFitFallbackBuffer.Fallback(non surrogate)] Fallback char " + ((int)cBestFit).ToString("X4", CultureInfo.InvariantCulture) + " caused recursive fallback");
+            Contract.Assert(
+                iCount < 1,
+                "[InternalEncoderBestFitFallbackBuffer.Fallback(non surrogate)] Fallback char "
+                    + ((int)cBestFit).ToString("X4", CultureInfo.InvariantCulture)
+                    + " caused recursive fallback"
+            );
 
             iCount = iSize = 1;
             cBestFit = TryBestFit(charUnknown);
@@ -119,20 +121,27 @@ namespace System.Text
         {
             // Double check input surrogate pair
             if (!Char.IsHighSurrogate(charUnknownHigh))
-                throw new ArgumentOutOfRangeException("charUnknownHigh",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownHigh",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xD800, 0xDBFF)
+                );
 
             if (!Char.IsLowSurrogate(charUnknownLow))
-                throw new ArgumentOutOfRangeException("charUnknownLow",
-                    Environment.GetResourceString("ArgumentOutOfRange_Range",
-                    0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    "charUnknownLow",
+                    Environment.GetResourceString("ArgumentOutOfRange_Range", 0xDC00, 0xDFFF)
+                );
             Contract.EndContractBlock();
 
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
             // character in our array.  0 is processing last character, < 0 is not falling back
             // Shouldn't be able to get here, table would have to be messed up.
-            Contract.Assert(iCount < 1, "[InternalEncoderBestFitFallbackBuffer.Fallback(surrogate)] Fallback char " + ((int)cBestFit).ToString("X4", CultureInfo.InvariantCulture) + " caused recursive fallback");
+            Contract.Assert(
+                iCount < 1,
+                "[InternalEncoderBestFitFallbackBuffer.Fallback(surrogate)] Fallback char "
+                    + ((int)cBestFit).ToString("X4", CultureInfo.InvariantCulture)
+                    + " caused recursive fallback"
+            );
 
             // Go ahead and get our fallback, surrogates don't have best fit
             cBestFit = '?';
@@ -147,7 +156,7 @@ namespace System.Text
             // We want it to get < 0 because == 0 means that the current/last character is a fallback
             // and we need to detect recursion.  We could have a flag but we already have this counter.
             iCount--;
-            
+
             // Do we have anything left? 0 is now last fallback char, negative is nothing left
             if (iCount < 0)
                 return '\0';
@@ -174,14 +183,10 @@ namespace System.Text
             return (iCount >= 0 && iCount <= iSize);
         }
 
-
         // How many characters left to output?
         public override int Remaining
         {
-            get
-            {
-                return (iCount > 0) ? iCount : 0;
-            }
+            get { return (iCount > 0) ? iCount : 0; }
         }
 
         // Clear the buffer
@@ -214,8 +219,10 @@ namespace System.Text
                 if (cTest == cUnknown)
                 {
                     // We found it
-                    Contract.Assert(index + 1 < oFallback.arrayBestFit.Length,
-                        "[InternalEncoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Contract.Assert(
+                        index + 1 < oFallback.arrayBestFit.Length,
+                        "[InternalEncoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return oFallback.arrayBestFit[index + 1];
                 }
                 else if (cTest < cUnknown)
@@ -235,8 +242,10 @@ namespace System.Text
                 if (oFallback.arrayBestFit[index] == cUnknown)
                 {
                     // We found it
-                    Contract.Assert(index + 1 < oFallback.arrayBestFit.Length,
-                        "[InternalEncoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Contract.Assert(
+                        index + 1 < oFallback.arrayBestFit.Length,
+                        "[InternalEncoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return oFallback.arrayBestFit[index + 1];
                 }
             }
@@ -246,4 +255,3 @@ namespace System.Text
         }
     }
 }
-

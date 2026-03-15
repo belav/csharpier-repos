@@ -6,14 +6,16 @@ namespace System.Net.Sockets.Tests
     // Utility type for calculating a running Fletcher-32 checksum.
     internal struct Fletcher32
     {
-        private ushort _sum1, _sum2;
+        private ushort _sum1,
+            _sum2;
         private byte? _leftover;
 
         public uint Sum
         {
             get
             {
-                ushort s1 = _sum1, s2 = _sum2;
+                ushort s1 = _sum1,
+                    s2 = _sum2;
                 if (_leftover != null)
                 {
                     Add((byte)_leftover, 0, ref s1, ref s2);

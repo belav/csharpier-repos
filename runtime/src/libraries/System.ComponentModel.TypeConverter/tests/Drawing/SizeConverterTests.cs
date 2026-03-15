@@ -22,16 +22,14 @@ namespace System.ComponentModel.TypeConverterTests
         {
             get
             {
-                yield return Tuple.Create(new Size(10, 20), new Dictionary<string, object>
-                {
-                    ["Width"] = 10,
-                    ["Height"] = 20,
-                });
-                yield return Tuple.Create(new Size(-2, 3), new Dictionary<string, object>
-                {
-                    ["Width"] = -2,
-                    ["Height"] = 3,
-                });
+                yield return Tuple.Create(
+                    new Size(10, 20),
+                    new Dictionary<string, object> { ["Width"] = 10, ["Height"] = 20 }
+                );
+                yield return Tuple.Create(
+                    new Size(-2, 3),
+                    new Dictionary<string, object> { ["Width"] = -2, ["Height"] = 3 }
+                );
             }
         }
 
@@ -82,15 +80,15 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> SizeData =>
             new[]
             {
-                new object[] {0, 0},
-                new object[] {1, 1},
-                new object[] {-1, 1},
-                new object[] {1, -1},
-                new object[] {-1, -1},
-                new object[] {int.MaxValue, int.MaxValue},
-                new object[] {int.MinValue, int.MaxValue},
-                new object[] {int.MaxValue, int.MinValue},
-                new object[] {int.MinValue, int.MinValue},
+                new object[] { 0, 0 },
+                new object[] { 1, 1 },
+                new object[] { -1, 1 },
+                new object[] { 1, -1 },
+                new object[] { -1, -1 },
+                new object[] { int.MaxValue, int.MaxValue },
+                new object[] { int.MinValue, int.MaxValue },
+                new object[] { int.MaxValue, int.MinValue },
+                new object[] { int.MinValue, int.MinValue },
             };
 
         [Theory]
@@ -117,11 +115,11 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> ConvertFrom_NotSupportedData =>
             new[]
             {
-                new object[] {new Point(1, 1)},
-                new object[] {new PointF(1, 1)},
-                new object[] {new Size(1, 1)},
-                new object[] {new SizeF(1, 1)},
-                new object[] {0x10},
+                new object[] { new Point(1, 1) },
+                new object[] { new PointF(1, 1) },
+                new object[] { new Size(1, 1) },
+                new object[] { new SizeF(1, 1) },
+                new object[] { 0x10 },
             };
 
         [Theory]
@@ -153,20 +151,25 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertTo_NullCulture()
         {
             string listSep = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-            Assert.Equal($"1{listSep} 1", Converter.ConvertTo(null, null, new Size(1, 1), typeof(string)));
+            Assert.Equal(
+                $"1{listSep} 1",
+                Converter.ConvertTo(null, null, new Size(1, 1), typeof(string))
+            );
         }
 
         [Fact]
         public void CreateInstance_CaseSensitive()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                Converter.CreateInstance(null, new Dictionary<string, object>
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
                 {
-                    ["width"] = 1,
-                    ["Height"] = 1,
-                });
-            });
+                    Converter.CreateInstance(
+                        null,
+                        new Dictionary<string, object> { ["width"] = 1, ["Height"] = 1 }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -196,7 +199,11 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal((object)false, props["IsEmpty"].GetValue(pt));
 
             // Pick an attribute that cannot be applied to properties to make sure everything gets filtered
-            props = Converter.GetProperties(null, new Size(1, 1), new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("")});
+            props = Converter.GetProperties(
+                null,
+                new Size(1, 1),
+                new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("") }
+            );
             Assert.Equal(0, props.Count);
         }
 
@@ -225,9 +232,15 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeData))]
         public void ConvertFromString(int width, int height)
         {
-            var point =
-                (Size)Converter.ConvertFromString(string.Format("{0}{2} {1}", width, height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator));
+            var point = (Size)
+                Converter.ConvertFromString(
+                    string.Format(
+                        "{0}{2} {1}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }
@@ -257,7 +270,15 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertToString(int width, int height)
         {
             var str = Converter.ConvertToString(new Size(width, height));
-            Assert.Equal(string.Format("{0}{2} {1}", width, height, CultureInfo.CurrentCulture.TextInfo.ListSeparator), str);
+            Assert.Equal(
+                string.Format(
+                    "{0}{2} {1}",
+                    width,
+                    height,
+                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                ),
+                str
+            );
         }
     }
 }

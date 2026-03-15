@@ -139,5 +139,5 @@ public enum DeleteBehavior
     ///         and examples.
     ///     </para>
     /// </remarks>
-    ClientNoAction
+    ClientNoAction,
 }

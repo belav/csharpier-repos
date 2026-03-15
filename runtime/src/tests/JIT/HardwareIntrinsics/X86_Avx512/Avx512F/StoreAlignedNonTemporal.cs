@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Avx512F
@@ -30,7 +30,10 @@ namespace IntelHardwareIntrinsicTest._Avx512F
 
                     for (var i = 0; i < 8; i++)
                     {
-                        if (BitConverter.DoubleToInt64Bits(inArray[i]) != BitConverter.DoubleToInt64Bits(outArray[i]))
+                        if (
+                            BitConverter.DoubleToInt64Bits(inArray[i])
+                            != BitConverter.DoubleToInt64Bits(outArray[i])
+                        )
                         {
                             Console.WriteLine("AVX512F StoreAlignedNonTemporal failed on double:");
                             for (var n = 0; n < 8; n++)
@@ -55,7 +58,10 @@ namespace IntelHardwareIntrinsicTest._Avx512F
 
                     for (var i = 0; i < 16; i++)
                     {
-                        if (BitConverter.SingleToInt32Bits(inArray[i]) != BitConverter.SingleToInt32Bits(outArray[i]))
+                        if (
+                            BitConverter.SingleToInt32Bits(inArray[i])
+                            != BitConverter.SingleToInt32Bits(outArray[i])
+                        )
                         {
                             Console.WriteLine("AVX512F StoreAlignedNonTemporal failed on float:");
                             for (var n = 0; n < 16; n++)

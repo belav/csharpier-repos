@@ -18,6 +18,7 @@ internal static partial class Interop
             HttpHeader[] initialHeaders,
             uint initialHeaderCount,
             out WEB_SOCKET_HTTP_HEADER* additionalHeadersPtr,
-            out uint additionalHeaderCount);
+            out uint additionalHeaderCount
+        );
     }
 }

@@ -12,7 +12,9 @@ namespace System.ComponentModel.Composition
 {
     internal static class MetadataViewProvider
     {
-        public static TMetadataView GetMetadataView<TMetadataView>(IDictionary<string, object?> metadata)
+        public static TMetadataView GetMetadataView<TMetadataView>(
+            IDictionary<string, object?> metadata
+        )
         {
             ArgumentNullException.ThrowIfNull(metadata);
 
@@ -34,32 +36,47 @@ namespace System.ComponentModel.Composition
                     {
                         try
                         {
-                            metadataViewFactory = MetadataViewGenerator.GetMetadataViewFactory(metadataViewType);
+                            metadataViewFactory = MetadataViewGenerator.GetMetadataViewFactory(
+                                metadataViewType
+                            );
                         }
                         catch (TypeLoadException ex)
                         {
-                            throw new NotSupportedException(SR.Format(SR.NotSupportedInterfaceMetadataView, metadataViewType.FullName), ex);
+                            throw new NotSupportedException(
+                                SR.Format(
+                                    SR.NotSupportedInterfaceMetadataView,
+                                    metadataViewType.FullName
+                                ),
+                                ex
+                            );
                         }
                     }
                     else
                     {
-                        var implementationAttribute = metadataViewType.GetFirstAttribute<MetadataViewImplementationAttribute>();
+                        var implementationAttribute =
+                            metadataViewType.GetFirstAttribute<MetadataViewImplementationAttribute>();
                         Debug.Assert(implementationAttribute != null);
                         proxyType = implementationAttribute.ImplementationType;
                         if (proxyType == null)
                         {
-                            throw new CompositionContractMismatchException(SR.Format(
-                                SR.ContractMismatch_MetadataViewImplementationCanNotBeNull,
-                                metadataViewType.FullName));
+                            throw new CompositionContractMismatchException(
+                                SR.Format(
+                                    SR.ContractMismatch_MetadataViewImplementationCanNotBeNull,
+                                    metadataViewType.FullName
+                                )
+                            );
                         }
                         else
                         {
                             if (!metadataViewType.IsAssignableFrom(proxyType))
                             {
-                                throw new CompositionContractMismatchException(SR.Format(
-                                    SR.ContractMismatch_MetadataViewImplementationDoesNotImplementViewInterface,
-                                    metadataViewType.FullName,
-                                    proxyType.FullName));
+                                throw new CompositionContractMismatchException(
+                                    SR.Format(
+                                        SR.ContractMismatch_MetadataViewImplementationDoesNotImplementViewInterface,
+                                        metadataViewType.FullName,
+                                        proxyType.FullName
+                                    )
+                                );
                             }
                         }
                     }
@@ -74,7 +91,10 @@ namespace System.ComponentModel.Composition
                 {
                     if (metadataViewFactory != null)
                     {
-                        return MetadataViewGenerator.CreateMetadataView<TMetadataView>(metadataViewFactory, metadata);
+                        return MetadataViewGenerator.CreateMetadataView<TMetadataView>(
+                            metadataViewFactory,
+                            metadata
+                        );
                     }
                     else
                     {
@@ -88,9 +108,13 @@ namespace System.ComponentModel.Composition
                 catch (MissingMethodException ex)
                 {
                     // Unable to create an Instance of the Metadata view '{0}' because a constructor could not be selected.  Ensure that the type implements a constructor which takes an argument of type IDictionary<string, object>.
-                    throw new CompositionContractMismatchException(SR.Format(
-                        SR.CompositionException_MetadataViewInvalidConstructor,
-                        proxyType!.AssemblyQualifiedName), ex);
+                    throw new CompositionContractMismatchException(
+                        SR.Format(
+                            SR.CompositionException_MetadataViewInvalidConstructor,
+                            proxyType!.AssemblyQualifiedName
+                        ),
+                        ex
+                    );
                 }
                 catch (TargetInvocationException ex)
                 {
@@ -100,22 +124,36 @@ namespace System.ComponentModel.Composition
                         if (ex.InnerException!.GetType() == typeof(InvalidCastException))
                         {
                             // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata for the item {1} with the value {2} as type {3} but the view imports it as type {4}.
-                            throw new CompositionContractMismatchException(SR.Format(
-                                SR.ContractMismatch_InvalidCastOnMetadataField,
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataViewType],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemKey],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemValue],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemSourceType],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemTargetType]), ex);
+                            throw new CompositionContractMismatchException(
+                                SR.Format(
+                                    SR.ContractMismatch_InvalidCastOnMetadataField,
+                                    ex.InnerException.Data[MetadataViewGenerator.MetadataViewType],
+                                    ex.InnerException.Data[MetadataViewGenerator.MetadataItemKey],
+                                    ex.InnerException.Data[MetadataViewGenerator.MetadataItemValue],
+                                    ex.InnerException.Data[
+                                        MetadataViewGenerator.MetadataItemSourceType
+                                    ],
+                                    ex.InnerException.Data[
+                                        MetadataViewGenerator.MetadataItemTargetType
+                                    ]
+                                ),
+                                ex
+                            );
                         }
                         else if (ex.InnerException.GetType() == typeof(NullReferenceException))
                         {
                             // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata for the item {1} with a null value and null is not a valid value for type {2}.
-                            throw new CompositionContractMismatchException(SR.Format(
-                                SR.ContractMismatch_NullReferenceOnMetadataField,
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataViewType],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemKey],
-                                ex.InnerException.Data[MetadataViewGenerator.MetadataItemTargetType]), ex);
+                            throw new CompositionContractMismatchException(
+                                SR.Format(
+                                    SR.ContractMismatch_NullReferenceOnMetadataField,
+                                    ex.InnerException.Data[MetadataViewGenerator.MetadataViewType],
+                                    ex.InnerException.Data[MetadataViewGenerator.MetadataItemKey],
+                                    ex.InnerException.Data[
+                                        MetadataViewGenerator.MetadataItemTargetType
+                                    ]
+                                ),
+                                ex
+                            );
                         }
                     }
                     throw;
@@ -128,9 +166,11 @@ namespace System.ComponentModel.Composition
             ArgumentNullException.ThrowIfNull(metadataViewType);
 
             // If the Metadata dictionary is cast compatible with the passed in type
-            if (ExportServices.IsDefaultMetadataViewType(metadataViewType) ||
-                metadataViewType.IsInterface ||
-                ExportServices.IsDictionaryConstructorViewType(metadataViewType))
+            if (
+                ExportServices.IsDefaultMetadataViewType(metadataViewType)
+                || metadataViewType.IsInterface
+                || ExportServices.IsDictionaryConstructorViewType(metadataViewType)
+            )
             {
                 return true;
             }

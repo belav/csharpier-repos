@@ -40,17 +40,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             for (int plaintextCert = 0; plaintextCert < 2; plaintextCert++)
                             {
                                 // Only toggle EncryptKey if SameContents isn't set.
-                                int encryptKeyLimit = keySplit == 1 ? 1: 2;
+                                int encryptKeyLimit = keySplit == 1 ? 1 : 2;
 
                                 for (int encryptKey = 0; encryptKey < encryptKeyLimit; encryptKey++)
                                 {
-                                    yield return new object[] {
+                                    yield return new object[]
+                                    {
                                         (SingleCertOptions)(
-                                            skipMac * (int)SingleCertOptions.SkipMac |
-                                            unshroudedKey * (int)SingleCertOptions.UnshroudedKey |
-                                            keySplit * (int)SingleCertOptions.KeyAndCertInSameContents |
-                                            plaintextCert * (int)SingleCertOptions.PlaintextCertContents |
-                                            encryptKey * (int)SingleCertOptions.EncryptKeyContents),
+                                            skipMac * (int)SingleCertOptions.SkipMac
+                                            | unshroudedKey * (int)SingleCertOptions.UnshroudedKey
+                                            | keySplit
+                                                * (int)SingleCertOptions.KeyAndCertInSameContents
+                                            | plaintextCert
+                                                * (int)SingleCertOptions.PlaintextCertContents
+                                            | encryptKey * (int)SingleCertOptions.EncryptKeyContents
+                                        ),
                                     };
                                 }
                             }
@@ -62,7 +66,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(AllSingleCertVariations))]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+            "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS"
+        )]
         public void OneCertWithOneKey(SingleCertOptions options)
         {
             bool sameContainer = (options & SingleCertOptions.KeyAndCertInSameContents) != 0;
@@ -73,7 +80,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             bool skipMac = (options & SingleCertOptions.SkipMac) != 0;
             string password = options.ToString();
 
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, s_exportableImportFlags))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    s_exportableImportFlags
+                )
+            )
             using (RSA key = cert.GetRSAPrivateKey())
             {
                 if (dontShroudKey && OperatingSystem.IsWindows())

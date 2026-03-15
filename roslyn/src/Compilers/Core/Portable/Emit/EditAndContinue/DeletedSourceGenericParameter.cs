@@ -10,11 +10,17 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedSourceGenericParameter : DeletedSourceDefinition<IGenericMethodParameter>, IGenericMethodParameter
+    internal sealed class DeletedSourceGenericParameter
+        : DeletedSourceDefinition<IGenericMethodParameter>,
+            IGenericMethodParameter
     {
         private readonly DeletedSourceMethodDefinition _method;
 
-        public DeletedSourceGenericParameter(IGenericMethodParameter oldParameter, DeletedSourceMethodDefinition method, Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers)
+        public DeletedSourceGenericParameter(
+            IGenericMethodParameter oldParameter,
+            DeletedSourceMethodDefinition method,
+            Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers
+        )
             : base(oldParameter, typesUsedByDeletedMembers)
         {
             _method = method;
@@ -30,9 +36,11 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public TypeParameterVariance Variance => OldDefinition.Variance;
 
-        public IGenericMethodParameter? AsGenericMethodParameter => OldDefinition.AsGenericMethodParameter;
+        public IGenericMethodParameter? AsGenericMethodParameter =>
+            OldDefinition.AsGenericMethodParameter;
 
-        public IGenericTypeParameter? AsGenericTypeParameter => OldDefinition.AsGenericTypeParameter;
+        public IGenericTypeParameter? AsGenericTypeParameter =>
+            OldDefinition.AsGenericTypeParameter;
 
         public bool IsEnum => OldDefinition.IsEnum;
 
@@ -42,23 +50,29 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public TypeDefinitionHandle TypeDef => OldDefinition.TypeDef;
 
-        public IGenericMethodParameterReference? AsGenericMethodParameterReference => OldDefinition.AsGenericMethodParameterReference;
+        public IGenericMethodParameterReference? AsGenericMethodParameterReference =>
+            OldDefinition.AsGenericMethodParameterReference;
 
-        public IGenericTypeInstanceReference? AsGenericTypeInstanceReference => OldDefinition.AsGenericTypeInstanceReference;
+        public IGenericTypeInstanceReference? AsGenericTypeInstanceReference =>
+            OldDefinition.AsGenericTypeInstanceReference;
 
-        public IGenericTypeParameterReference? AsGenericTypeParameterReference => OldDefinition.AsGenericTypeParameterReference;
+        public IGenericTypeParameterReference? AsGenericTypeParameterReference =>
+            OldDefinition.AsGenericTypeParameterReference;
 
-        public INamespaceTypeReference? AsNamespaceTypeReference => OldDefinition.AsNamespaceTypeReference;
+        public INamespaceTypeReference? AsNamespaceTypeReference =>
+            OldDefinition.AsNamespaceTypeReference;
 
         public INestedTypeReference? AsNestedTypeReference => OldDefinition.AsNestedTypeReference;
 
-        public ISpecializedNestedTypeReference? AsSpecializedNestedTypeReference => OldDefinition.AsSpecializedNestedTypeReference;
+        public ISpecializedNestedTypeReference? AsSpecializedNestedTypeReference =>
+            OldDefinition.AsSpecializedNestedTypeReference;
 
         public string? Name => OldDefinition.Name;
 
         public ushort Index => OldDefinition.Index;
 
-        IMethodReference IGenericMethodParameterReference.DefiningMethod => ((IGenericMethodParameterReference)OldDefinition).DefiningMethod;
+        IMethodReference IGenericMethodParameterReference.DefiningMethod =>
+            ((IGenericMethodParameterReference)OldDefinition).DefiningMethod;
 
         public INamespaceTypeDefinition? AsNamespaceTypeDefinition(EmitContext context)
         {
@@ -80,8 +94,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             OldDefinition.Dispatch(visitor);
         }
 
-        public IEnumerable<TypeReferenceWithAttributes> GetConstraints(EmitContext context)
-            => throw ExceptionUtilities.Unreachable();
+        public IEnumerable<TypeReferenceWithAttributes> GetConstraints(EmitContext context) =>
+            throw ExceptionUtilities.Unreachable();
 
         public ITypeDefinition? GetResolvedType(EmitContext context)
         {

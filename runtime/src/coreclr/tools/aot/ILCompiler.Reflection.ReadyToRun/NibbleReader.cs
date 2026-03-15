@@ -69,8 +69,7 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 nibble = ReadNibble();
                 value = (value << 3) + (nibble & 0x7);
-            }
-            while ((nibble & 0x8) != 0);
+            } while ((nibble & 0x8) != 0);
 
             return value;
         }

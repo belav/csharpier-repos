@@ -31,7 +31,5 @@ using System.Text;
 
 namespace Library2
 {
-	public class Class1
-	{
-	}
+    public class Class1 { }
 }

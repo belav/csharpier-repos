@@ -1,12 +1,12 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.TestCommon;
 #if ASPNETWEBAPI
 using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 #endif
-using Microsoft.TestCommon;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
@@ -110,9 +110,13 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_LengthRangeConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint("length(5, 10)");
+            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
+                "length(5, 10)"
+            );
 
-            LengthRouteConstraint lengthConstraint = Assert.IsType<LengthRouteConstraint>(constraint);
+            LengthRouteConstraint lengthConstraint = Assert.IsType<LengthRouteConstraint>(
+                constraint
+            );
             Assert.Equal(5, lengthConstraint.MinLength);
             Assert.Equal(10, lengthConstraint.MaxLength);
         }
@@ -137,7 +141,9 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_MaxLengthConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint("maxlength(10)");
+            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
+                "maxlength(10)"
+            );
 
             var maxLengthRouteConstraint = Assert.IsType<MaxLengthRouteConstraint>(constraint);
             Assert.Equal(10, maxLengthRouteConstraint.MaxLength);
@@ -155,7 +161,9 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_MinLengthConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint("minlength(3)");
+            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
+                "minlength(3)"
+            );
 
             var minLengthRouteConstraint = Assert.IsType<MinLengthRouteConstraint>(constraint);
             Assert.Equal(3, minLengthRouteConstraint.MinLength);
@@ -170,7 +178,9 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_RangeConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint("range(5, 10)");
+            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
+                "range(5, 10)"
+            );
 
             RangeRouteConstraint rangeConstraint = Assert.IsType<RangeRouteConstraint>(constraint);
             Assert.Equal(5, rangeConstraint.Min);
@@ -180,7 +190,9 @@ namespace System.Web.Mvc.Routing
         [Fact]
         public void ResolveConstraint_RegexConstraint()
         {
-            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint("regex(abc,defg)");
+            var constraint = new DefaultInlineConstraintResolver().ResolveConstraint(
+                "regex(abc,defg)"
+            );
 
             RegexRouteConstraint regexConstraint = Assert.IsType<RegexRouteConstraint>(constraint);
             Assert.Equal("abc,defg", regexConstraint.Pattern);
@@ -191,7 +203,8 @@ namespace System.Web.Mvc.Routing
         {
             Assert.Throws<InvalidOperationException>(
                 () => new DefaultInlineConstraintResolver().ResolveConstraint("int(5)"),
-               "Could not find a constructor for constraint type 'IntRouteConstraint' with the following number of parameters: 1.");
+                "Could not find a constructor for constraint type 'IntRouteConstraint' with the following number of parameters: 1."
+            );
         }
 
         [Fact]
@@ -214,9 +227,11 @@ namespace System.Web.Mvc.Routing
             Assert.Throws<InvalidOperationException>(
                 () => resolver.ResolveConstraint("custom"),
 #if ASPNETWEBAPI
-                "The constraint type 'String' which is mapped to constraint key 'custom' must implement the IHttpRouteConstraint interface.");
+                "The constraint type 'String' which is mapped to constraint key 'custom' must implement the IHttpRouteConstraint interface."
+            );
 #else
-                "The constraint type 'String' which is mapped to constraint key 'custom' must implement the IRouteConstraint interface.");
+                "The constraint type 'String' which is mapped to constraint key 'custom' must implement the IRouteConstraint interface."
+            );
 #endif
         }
     }

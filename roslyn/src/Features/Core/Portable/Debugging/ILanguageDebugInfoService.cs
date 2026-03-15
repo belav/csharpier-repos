@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Debugging
 {
     internal interface ILanguageDebugInfoService : ILanguageService
     {
-        Task<DebugLocationInfo> GetLocationInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<DebugLocationInfo> GetLocationInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Find an appropriate span to pass the debugger given a point in a snapshot.  Optionally
@@ -18,6 +22,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// example, if the user hovers on "var" then we actually want to pass the fully qualified
         /// name of the type that 'var' binds to, to the debugger.
         /// </summary>
-        Task<DebugDataTipInfo> GetDataTipInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<DebugDataTipInfo> GetDataTipInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

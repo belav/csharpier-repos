@@ -17,8 +17,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestDllImportPseudoCustomAttribute()
         {
-            TypeInfo runtimeType = typeof(DllImportHolders).GetTypeInfo();  // Intentionally not projected - using to get expected results.
-            MethodInfo[] runtimeMethods = runtimeType.DeclaredMethods.OrderBy(m => m.Name).ToArray();
+            TypeInfo runtimeType = typeof(DllImportHolders).GetTypeInfo(); // Intentionally not projected - using to get expected results.
+            MethodInfo[] runtimeMethods = runtimeType
+                .DeclaredMethods.OrderBy(m => m.Name)
+                .ToArray();
 
             TypeInfo ecmaType = runtimeType.Project().GetTypeInfo();
             MethodInfo[] ecmaMethods = ecmaType.DeclaredMethods.OrderBy(m => m.Name).ToArray();
@@ -26,8 +28,12 @@ namespace System.Reflection.Tests
             Assert.Equal(runtimeMethods.Length, ecmaMethods.Length);
             for (int i = 0; i < runtimeMethods.Length; i++)
             {
-                DllImportAttribute expected = runtimeMethods[i].GetCustomAttribute<DllImportAttribute>();
-                CustomAttributeData cad = ecmaMethods[i].CustomAttributes.Single(c => c.AttributeType.Name == nameof(DllImportAttribute));
+                DllImportAttribute expected = runtimeMethods[i]
+                    .GetCustomAttribute<DllImportAttribute>();
+                CustomAttributeData cad = ecmaMethods[i]
+                    .CustomAttributes.Single(c =>
+                        c.AttributeType.Name == nameof(DllImportAttribute)
+                    );
                 DllImportAttribute actual = cad.UnprojectAndInstantiate<DllImportAttribute>();
                 AssertEqual(expected, actual);
             }
@@ -49,12 +55,17 @@ namespace System.Reflection.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/15340", TestRuntimes.Mono)]
         [MemberData(nameof(MarshalAsTheoryData))]
-        public static void TestMarshalAsPseudoCustomAttribute(string fieldName, MarshalAsAttribute expected)
+        public static void TestMarshalAsPseudoCustomAttribute(
+            string fieldName,
+            MarshalAsAttribute expected
+        )
         {
             TypeInfo ecmaType = typeof(MarshalAsHolders).Project().GetTypeInfo();
             FieldInfo ecmaField = ecmaType.GetDeclaredField(fieldName);
             Assert.NotNull(ecmaField);
-            CustomAttributeData cad = ecmaField.CustomAttributes.Single(c => c.AttributeType.Name == nameof(MarshalAsAttribute));
+            CustomAttributeData cad = ecmaField.CustomAttributes.Single(c =>
+                c.AttributeType.Name == nameof(MarshalAsAttribute)
+            );
             MarshalAsAttribute actual = cad.UnprojectAndInstantiate<MarshalAsAttribute>();
             AssertEqual(expected, actual);
         }
@@ -65,52 +76,37 @@ namespace System.Reflection.Tests
             {
                 yield return new object[]
                 {
-                     "F1",
-                    new MarshalAsAttribute(UnmanagedType.BStr)
-                    {
-                    },
+                    "F1",
+                    new MarshalAsAttribute(UnmanagedType.BStr) { },
                 };
                 yield return new object[]
                 {
-                     "F2",
-                    new MarshalAsAttribute(UnmanagedType.Currency)
-                    {
-                    },
+                    "F2",
+                    new MarshalAsAttribute(UnmanagedType.Currency) { },
                 };
                 yield return new object[]
                 {
-                     "F3",
-                    new MarshalAsAttribute(UnmanagedType.IDispatch)
-                    {
-                    },
+                    "F3",
+                    new MarshalAsAttribute(UnmanagedType.IDispatch) { },
                 };
                 yield return new object[]
                 {
-                     "F4",
-                    new MarshalAsAttribute(UnmanagedType.IDispatch)
-                    {
-                        IidParameterIndex = 42,
-                    },
+                    "F4",
+                    new MarshalAsAttribute(UnmanagedType.IDispatch) { IidParameterIndex = 42 },
                 };
                 yield return new object[]
                 {
-                     "F5",
-                    new MarshalAsAttribute(UnmanagedType.ByValArray)
-                    {
-                        SizeConst = 1,
-                    },
+                    "F5",
+                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 1 },
                 };
                 yield return new object[]
                 {
-                     "F6",
-                    new MarshalAsAttribute(UnmanagedType.ByValArray)
-                    {
-                        SizeConst = 5,
-                    },
+                    "F6",
+                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 5 },
                 };
                 yield return new object[]
                 {
-                     "F7",
+                    "F7",
                     new MarshalAsAttribute(UnmanagedType.ByValArray)
                     {
                         ArraySubType = UnmanagedType.FunctionPtr,
@@ -119,7 +115,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F8",
+                    "F8",
                     new MarshalAsAttribute(UnmanagedType.ByValArray)
                     {
                         ArraySubType = UnmanagedType.FunctionPtr,
@@ -128,14 +124,12 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F9",
-                    new MarshalAsAttribute(UnmanagedType.SafeArray)
-                    {
-                    },
+                    "F9",
+                    new MarshalAsAttribute(UnmanagedType.SafeArray) { },
                 };
                 yield return new object[]
                 {
-                     "F10",
+                    "F10",
                     new MarshalAsAttribute(UnmanagedType.SafeArray)
                     {
                         SafeArraySubType = VarEnum.VT_BSTR,
@@ -143,7 +137,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F11",
+                    "F11",
                     new MarshalAsAttribute(UnmanagedType.SafeArray)
                     {
                         SafeArraySubType = VarEnum.VT_RECORD,
@@ -152,7 +146,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F12",
+                    "F12",
                     new MarshalAsAttribute(UnmanagedType.SafeArray)
                     {
                         SafeArraySubType = VarEnum.VT_RECORD,
@@ -161,7 +155,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F13",
+                    "F13",
                     new MarshalAsAttribute(UnmanagedType.LPArray)
                     {
                         ArraySubType = (UnmanagedType)80,
@@ -169,7 +163,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F14",
+                    "F14",
                     new MarshalAsAttribute(UnmanagedType.LPArray)
                     {
                         ArraySubType = UnmanagedType.LPWStr,
@@ -177,7 +171,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F15",
+                    "F15",
                     new MarshalAsAttribute(UnmanagedType.LPArray)
                     {
                         ArraySubType = UnmanagedType.LPStruct,
@@ -186,7 +180,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F16",
+                    "F16",
                     new MarshalAsAttribute(UnmanagedType.LPArray)
                     {
                         ArraySubType = UnmanagedType.LPStruct,
@@ -196,7 +190,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F17",
+                    "F17",
                     new MarshalAsAttribute(UnmanagedType.CustomMarshaler)
                     {
                         MarshalCookie = "",
@@ -206,17 +200,18 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F18",
+                    "F18",
                     new MarshalAsAttribute(UnmanagedType.CustomMarshaler)
                     {
                         MarshalCookie = "",
-                        MarshalType = "System.DateTime, System.Runtime, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                        MarshalType =
+                            "System.DateTime, System.Runtime, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
                         MarshalTypeRef = typeof(DateTime),
                     },
                 };
                 yield return new object[]
                 {
-                     "F19",
+                    "F19",
                     new MarshalAsAttribute(UnmanagedType.CustomMarshaler)
                     {
                         MarshalCookie = "",
@@ -225,7 +220,7 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F20",
+                    "F20",
                     new MarshalAsAttribute(UnmanagedType.CustomMarshaler)
                     {
                         MarshalCookie = "YumYum",
@@ -234,11 +229,8 @@ namespace System.Reflection.Tests
                 };
                 yield return new object[]
                 {
-                     "F21",
-                    new MarshalAsAttribute(UnmanagedType.ByValTStr)
-                    {
-                        SizeConst = 65
-                    },
+                    "F21",
+                    new MarshalAsAttribute(UnmanagedType.ByValTStr) { SizeConst = 65 },
                 };
             }
         }
@@ -249,7 +241,10 @@ namespace System.Reflection.Tests
             Assert.Equal(m1.IidParameterIndex, m2.IidParameterIndex);
             Assert.Equal(m1.MarshalCookie, m2.MarshalCookie);
             // The assembly identity of the serialized marshal type depends on which contracts the test assembly is built against.
-            Assert.Equal(m1.MarshalType.RemoveAssemblyQualification(), m2.MarshalType.RemoveAssemblyQualification());
+            Assert.Equal(
+                m1.MarshalType.RemoveAssemblyQualification(),
+                m2.MarshalType.RemoveAssemblyQualification()
+            );
             Assert.Equal(m1.MarshalTypeRef, m2.MarshalTypeRef);
             Assert.Equal(m1.SafeArraySubType, m2.SafeArraySubType);
             Assert.Equal(m1.SafeArrayUserDefinedSubType, m2.SafeArrayUserDefinedSubType);

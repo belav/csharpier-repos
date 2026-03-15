@@ -20,7 +20,11 @@ public class DesignTimeServicesTests
         new SqlServerHierarchyIdDesignTimeServices().ConfigureDesignTimeServices(serviceCollection);
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
-        Assert.IsType<SqlServerHierarchyIdTypeMappingSourcePlugin>(serviceProvider.GetService<IRelationalTypeMappingSourcePlugin>());
-        Assert.IsType<SqlServerHierarchyIdCodeGeneratorPlugin>(serviceProvider.GetService<IProviderCodeGeneratorPlugin>());
+        Assert.IsType<SqlServerHierarchyIdTypeMappingSourcePlugin>(
+            serviceProvider.GetService<IRelationalTypeMappingSourcePlugin>()
+        );
+        Assert.IsType<SqlServerHierarchyIdCodeGeneratorPlugin>(
+            serviceProvider.GetService<IProviderCodeGeneratorPlugin>()
+        );
     }
 }

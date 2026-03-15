@@ -11,28 +11,36 @@ namespace System.ServiceModel.Activities
 
     public sealed class SendMessageChannelCache : IDisposable, ICancelable
     {
-        static Func<SendMessageChannelCache> defaultExtensionProvider = new Func<SendMessageChannelCache>(CreateDefaultExtension);
+        static Func<SendMessageChannelCache> defaultExtensionProvider =
+            new Func<SendMessageChannelCache>(CreateDefaultExtension);
 
         ChannelCacheSettings channelCacheSettings;
         ChannelCacheSettings factoryCacheSettings;
         bool isReadOnly;
         bool allowUnsafeCaching;
         bool isDisposed;
-        ObjectCache<InternalSendMessage.FactoryCacheKey, InternalSendMessage.ChannelFactoryReference> factoryCache;
+        ObjectCache<
+            InternalSendMessage.FactoryCacheKey,
+            InternalSendMessage.ChannelFactoryReference
+        > factoryCache;
         object thisLock;
-        
-        public SendMessageChannelCache()
-            : this(null, null, ChannelCacheDefaults.DefaultAllowUnsafeSharing)
-        {
-        }
 
-        public SendMessageChannelCache(ChannelCacheSettings factorySettings, ChannelCacheSettings channelSettings) :
-            this(factorySettings, channelSettings, ChannelCacheDefaults.DefaultAllowUnsafeSharing)
-        {
-        }
+        public SendMessageChannelCache()
+            : this(null, null, ChannelCacheDefaults.DefaultAllowUnsafeSharing) { }
+
+        public SendMessageChannelCache(
+            ChannelCacheSettings factorySettings,
+            ChannelCacheSettings channelSettings
+        )
+            : this(factorySettings, channelSettings, ChannelCacheDefaults.DefaultAllowUnsafeSharing)
+        { }
 
         // use the default settings if null is specified for FactoryCacheSettings or ChannelCacheSettings
-        public SendMessageChannelCache(ChannelCacheSettings factorySettings, ChannelCacheSettings channelSettings, bool allowUnsafeCaching)
+        public SendMessageChannelCache(
+            ChannelCacheSettings factorySettings,
+            ChannelCacheSettings channelSettings,
+            bool allowUnsafeCaching
+        )
         {
             this.allowUnsafeCaching = allowUnsafeCaching;
             this.FactorySettings = factorySettings;
@@ -42,19 +50,13 @@ namespace System.ServiceModel.Activities
 
         internal static Func<SendMessageChannelCache> DefaultExtensionProvider
         {
-            get
-            {
-                return defaultExtensionProvider;
-            }
+            get { return defaultExtensionProvider; }
         }
 
         public bool AllowUnsafeCaching
         {
-            get 
-            {
-                return this.allowUnsafeCaching;
-            }
-            set 
+            get { return this.allowUnsafeCaching; }
+            set
             {
                 ThrowIfReadOnly();
                 this.allowUnsafeCaching = value;
@@ -63,17 +65,17 @@ namespace System.ServiceModel.Activities
 
         public ChannelCacheSettings ChannelSettings
         {
-            get
-            {
-                return this.channelCacheSettings;
-            }
+            get { return this.channelCacheSettings; }
             set
             {
                 ThrowIfReadOnly();
-                
+
                 if (value == null)
                 {
-                    this.channelCacheSettings = new ChannelCacheSettings { LeaseTimeout = ChannelCacheDefaults.DefaultChannelLeaseTimeout };
+                    this.channelCacheSettings = new ChannelCacheSettings
+                    {
+                        LeaseTimeout = ChannelCacheDefaults.DefaultChannelLeaseTimeout,
+                    };
                 }
                 else
                 {
@@ -84,16 +86,16 @@ namespace System.ServiceModel.Activities
 
         public ChannelCacheSettings FactorySettings
         {
-            get
-            {
-                return this.factoryCacheSettings;
-            }
+            get { return this.factoryCacheSettings; }
             set
             {
                 ThrowIfReadOnly();
                 if (value == null)
                 {
-                    this.factoryCacheSettings = new ChannelCacheSettings { LeaseTimeout = ChannelCacheDefaults.DefaultFactoryLeaseTimeout };
+                    this.factoryCacheSettings = new ChannelCacheSettings
+                    {
+                        LeaseTimeout = ChannelCacheDefaults.DefaultFactoryLeaseTimeout,
+                    };
                 }
                 else
                 {
@@ -105,13 +107,18 @@ namespace System.ServiceModel.Activities
         static SendMessageChannelCache CreateDefaultExtension()
         {
             SendMessageChannelCache defaultExtension = new SendMessageChannelCache();
-            defaultExtension.FactorySettings.LeaseTimeout = ChannelCacheDefaults.DefaultFactoryLeaseTimeout;
-            defaultExtension.ChannelSettings.LeaseTimeout = ChannelCacheDefaults.DefaultChannelLeaseTimeout;
+            defaultExtension.FactorySettings.LeaseTimeout =
+                ChannelCacheDefaults.DefaultFactoryLeaseTimeout;
+            defaultExtension.ChannelSettings.LeaseTimeout =
+                ChannelCacheDefaults.DefaultChannelLeaseTimeout;
             return defaultExtension;
         }
-               
+
         // factory cache will be created on first usage after which the settings are immutable
-        internal ObjectCache<InternalSendMessage.FactoryCacheKey, InternalSendMessage.ChannelFactoryReference> GetFactoryCache()
+        internal ObjectCache<
+            InternalSendMessage.FactoryCacheKey,
+            InternalSendMessage.ChannelFactoryReference
+        > GetFactoryCache()
         {
             if (this.factoryCache == null)
             {
@@ -119,7 +126,7 @@ namespace System.ServiceModel.Activities
                 lock (thisLock)
                 {
                     ThrowIfDisposed();
-           
+
                     if (this.factoryCache == null)
                     {
                         // we don't need to set DisposeItemCallback since InternalSendMessage.ChannelFactoryReference is IDisposable
@@ -127,9 +134,12 @@ namespace System.ServiceModel.Activities
                         {
                             CacheLimit = this.FactorySettings.MaxItemsInCache,
                             IdleTimeout = this.FactorySettings.IdleTimeout,
-                            LeaseTimeout = this.FactorySettings.LeaseTimeout
+                            LeaseTimeout = this.FactorySettings.LeaseTimeout,
                         };
-                        this.factoryCache = new ObjectCache<InternalSendMessage.FactoryCacheKey, InternalSendMessage.ChannelFactoryReference>(objectCacheSettings);
+                        this.factoryCache = new ObjectCache<
+                            InternalSendMessage.FactoryCacheKey,
+                            InternalSendMessage.ChannelFactoryReference
+                        >(objectCacheSettings);
                     }
                 }
             }
@@ -141,7 +151,9 @@ namespace System.ServiceModel.Activities
             if (this.isReadOnly)
             {
                 // cache has already been created, settings cannot be changed now
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CacheSettingsLocked));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CacheSettingsLocked)
+                );
             }
         }
 
@@ -158,7 +170,6 @@ namespace System.ServiceModel.Activities
                         if (this.factoryCache != null)
                         {
                             this.factoryCache.Dispose();
-
                         }
                         this.isDisposed = true;
                     }
@@ -175,8 +186,10 @@ namespace System.ServiceModel.Activities
         {
             if (this.isDisposed == true)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException(typeof(SendMessageChannelCache).ToString()));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException(typeof(SendMessageChannelCache).ToString())
+                );
             }
         }
-   }
+    }
 }

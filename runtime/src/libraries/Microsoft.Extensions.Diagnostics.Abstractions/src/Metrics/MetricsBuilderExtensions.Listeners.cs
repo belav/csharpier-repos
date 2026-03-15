@@ -19,7 +19,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// <typeparam name="T">The implementation type of the listener.</typeparam>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
         /// <returns>Returns the original <see cref="IMetricsBuilder"/> for chaining.</returns>
-        public static IMetricsBuilder AddListener<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(this IMetricsBuilder builder) where T : class, IMetricsListener
+        public static IMetricsBuilder AddListener<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+        >(this IMetricsBuilder builder)
+            where T : class, IMetricsListener
         {
             ThrowHelper.ThrowIfNull(builder);
             builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IMetricsListener, T>());
@@ -32,7 +35,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// <param name="listener">The implementation type of the listener.</param>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
         /// <returns>Returns the original <see cref="IMetricsBuilder"/> for chaining.</returns>
-        public static IMetricsBuilder AddListener(this IMetricsBuilder builder, IMetricsListener listener)
+        public static IMetricsBuilder AddListener(
+            this IMetricsBuilder builder,
+            IMetricsListener listener
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton(listener));

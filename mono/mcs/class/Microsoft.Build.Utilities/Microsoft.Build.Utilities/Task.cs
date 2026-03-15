@@ -25,85 +25,66 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Resources;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities
 {
-	public abstract class Task : ITask
-	{
-		IBuildEngine		buildEngine;
-		string			helpKeywordPrefix;
-		ITaskHost		hostObject;
-		TaskLoggingHelper	log;
-		
-		protected Task()
-			: this (null, null)
-		{
-		}
+    public abstract class Task : ITask
+    {
+        IBuildEngine buildEngine;
+        string helpKeywordPrefix;
+        ITaskHost hostObject;
+        TaskLoggingHelper log;
 
-		protected Task(ResourceManager taskResources)
-			: this (taskResources, null)
-		{
-		}
+        protected Task()
+            : this(null, null) { }
 
-		protected Task(ResourceManager taskResources,
-			       string helpKeywordPrefix)
-		{
-			log = new TaskLoggingHelper (this);
-			log.TaskResources = taskResources;
-			this.helpKeywordPrefix = helpKeywordPrefix;
-		}
+        protected Task(ResourceManager taskResources)
+            : this(taskResources, null) { }
 
-		public abstract bool Execute();
+        protected Task(ResourceManager taskResources, string helpKeywordPrefix)
+        {
+            log = new TaskLoggingHelper(this);
+            log.TaskResources = taskResources;
+            this.helpKeywordPrefix = helpKeywordPrefix;
+        }
 
-		public IBuildEngine BuildEngine	{
-			get {
-				return buildEngine;
-			}
-			set {
-				buildEngine = value;
-			}
-		}
+        public abstract bool Execute();
 
-		public IBuildEngine2 BuildEngine2 {
-			get { return buildEngine as IBuildEngine2; }
-		}
+        public IBuildEngine BuildEngine
+        {
+            get { return buildEngine; }
+            set { buildEngine = value; }
+        }
 
-		protected string HelpKeywordPrefix {
-			get {
-				return helpKeywordPrefix;
-			}
-			set {
-				helpKeywordPrefix = value;
-			}
-		}
+        public IBuildEngine2 BuildEngine2
+        {
+            get { return buildEngine as IBuildEngine2; }
+        }
 
-		public ITaskHost HostObject {
-			get {
-				return hostObject;
-			}
-			set {
-				hostObject = value;
-			}
-		}
+        protected string HelpKeywordPrefix
+        {
+            get { return helpKeywordPrefix; }
+            set { helpKeywordPrefix = value; }
+        }
 
-		public TaskLoggingHelper Log {
-			get {
-				return log;
-			}
-		}
+        public ITaskHost HostObject
+        {
+            get { return hostObject; }
+            set { hostObject = value; }
+        }
 
-		protected ResourceManager TaskResources	{
-			get {
-				return log.TaskResources;
-			}
-			set {
-				log.TaskResources = value;
-			}
-		}
-	}
+        public TaskLoggingHelper Log
+        {
+            get { return log; }
+        }
+
+        protected ResourceManager TaskResources
+        {
+            get { return log.TaskResources; }
+            set { log.TaskResources = value; }
+        }
+    }
 }
-

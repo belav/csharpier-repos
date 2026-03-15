@@ -20,9 +20,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
     public abstract class AbstractNewDocumentFormattingServiceTests
     {
         protected abstract string Language { get; }
-        protected abstract TestWorkspace CreateTestWorkspace(string testCode, ParseOptions? parseOptions);
+        protected abstract TestWorkspace CreateTestWorkspace(
+            string testCode,
+            ParseOptions? parseOptions
+        );
 
-        internal async Task TestAsync(string testCode, string expected, OptionsCollection? options = null, ParseOptions? parseOptions = null)
+        internal async Task TestAsync(
+            string testCode,
+            string expected,
+            OptionsCollection? options = null,
+            ParseOptions? parseOptions = null
+        )
         {
             using var workspace = CreateTestWorkspace(testCode, parseOptions);
             options?.SetGlobalOptions(workspace.GlobalOptions);
@@ -33,11 +41,20 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Formatting
             var languageServices = document.Project.Services;
 
             var cleanupOptions =
-                options?.GetCodeCleanupOptions(languageServices, allowImportsInHiddenRegions: false, fallbackOptions: null) ??
-                CodeCleanupOptions.GetDefault(languageServices);
+                options?.GetCodeCleanupOptions(
+                    languageServices,
+                    allowImportsInHiddenRegions: false,
+                    fallbackOptions: null
+                ) ?? CodeCleanupOptions.GetDefault(languageServices);
 
-            var formattingService = document.GetRequiredLanguageService<INewDocumentFormattingService>();
-            var formattedDocument = await formattingService.FormatNewDocumentAsync(document, hintDocument: null, cleanupOptions, CancellationToken.None);
+            var formattingService =
+                document.GetRequiredLanguageService<INewDocumentFormattingService>();
+            var formattedDocument = await formattingService.FormatNewDocumentAsync(
+                document,
+                hintDocument: null,
+                cleanupOptions,
+                CancellationToken.None
+            );
 
             var actual = await formattedDocument.GetTextAsync();
             AssertEx.EqualOrDiff(expected, actual.ToString());

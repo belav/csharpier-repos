@@ -1,6 +1,7 @@
-﻿namespace System.Web.Mvc {
-
-    public interface IActionInvoker {
+﻿namespace System.Web.Mvc
+{
+    public interface IActionInvoker
+    {
         bool InvokeAction(ControllerContext controllerContext, string actionName);
     }
 }

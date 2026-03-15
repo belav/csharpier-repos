@@ -29,48 +29,68 @@ namespace System.ServiceModel.Routing
             this.configuration = routingConfiguration;
         }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             RoutingExtension routingExtension = new RoutingExtension(this.configuration);
             serviceHostBase.Extensions.Add(routingExtension);
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                     {
-                        if (!endpointDispatcher.IsSystemEndpoint &&
-                            RoutingUtilities.IsRoutingServiceNamespace(endpointDispatcher.ContractNamespace))
+                        if (
+                            !endpointDispatcher.IsSystemEndpoint
+                            && RoutingUtilities.IsRoutingServiceNamespace(
+                                endpointDispatcher.ContractNamespace
+                            )
+                        )
                         {
                             DispatchRuntime dispatchRuntime = endpointDispatcher.DispatchRuntime;
                             //Since we use PerSession instancing this concurrency only applies to messages
                             //in the same session, also needed to maintain order.
                             dispatchRuntime.ConcurrencyMode = ConcurrencyMode.Single;
-                            dispatchRuntime.EnsureOrderedDispatch = this.configuration.EnsureOrderedDispatch;
+                            dispatchRuntime.EnsureOrderedDispatch =
+                                this.configuration.EnsureOrderedDispatch;
                         }
                     }
                 }
             }
         }
 
-        void IServiceBehavior.Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             HashSet<string> endpoints = new HashSet<string>();
             foreach (ServiceEndpoint endpoint in serviceDescription.Endpoints)
             {
-                if (!endpoint.IsSystemEndpoint && 
-                    RoutingUtilities.IsRoutingServiceNamespace(endpoint.Contract.Namespace))
+                if (
+                    !endpoint.IsSystemEndpoint
+                    && RoutingUtilities.IsRoutingServiceNamespace(endpoint.Contract.Namespace)
+                )
                 {
                     endpoint.Behaviors.Add(new RoutingEndpointBehavior(endpoint));
                     endpoints.Add(endpoint.Name);
                 }
             }
-            EndpointNameMessageFilter.Validate(this.configuration.InternalFilterTable.Keys, endpoints);
+            EndpointNameMessageFilter.Validate(
+                this.configuration.InternalFilterTable.Keys,
+                endpoints
+            );
         }
 
         public static Type GetContractForDescription(ContractDescription description)
@@ -112,7 +132,10 @@ namespace System.ServiceModel.Routing
             }
         }
 
-        internal class RoutingEndpointBehavior : IEndpointBehavior, IChannelInitializer, IInputSessionShutdown
+        internal class RoutingEndpointBehavior
+            : IEndpointBehavior,
+                IChannelInitializer,
+                IInputSessionShutdown
         {
             public RoutingEndpointBehavior(ServiceEndpoint endpoint)
             {
@@ -120,57 +143,41 @@ namespace System.ServiceModel.Routing
                 this.EndpointName = endpoint.Name;
             }
 
-            internal ChannelDispatcher ChannelDispatcher
-            {
-                get;
-                private set;
-            }
+            internal ChannelDispatcher ChannelDispatcher { get; private set; }
 
-            internal ServiceEndpoint Endpoint
-            {
-                get;
-                private set;
-            }
+            internal ServiceEndpoint Endpoint { get; private set; }
 
-            internal string EndpointName
-            {
-                get;
-                private set;
-            }
+            internal string EndpointName { get; private set; }
 
-            internal bool ImpersonationRequired
-            {
-                get;
-                private set;
-            }
+            internal bool ImpersonationRequired { get; private set; }
 
-            internal bool ReceiveContextEnabled
-            {
-                get;
-                private set;
-            }
+            internal bool ReceiveContextEnabled { get; private set; }
 
-            internal bool TransactedReceiveEnabled
-            {
-                get;
-                private set;
-            }
+            internal bool TransactedReceiveEnabled { get; private set; }
 
-            public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+            public void AddBindingParameters(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection bindingParameters
+            )
             {
                 //Turn on ReceiveContext here if supported
-                IReceiveContextSettings receiveContextSettings = endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParameters);
+                IReceiveContextSettings receiveContextSettings =
+                    endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParameters);
                 if (receiveContextSettings != null)
                 {
                     receiveContextSettings.Enabled = true;
                 }
             }
 
-            public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-            {
-            }
+            public void ApplyClientBehavior(
+                ServiceEndpoint endpoint,
+                ClientRuntime clientRuntime
+            ) { }
 
-            public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+            public void ApplyDispatchBehavior(
+                ServiceEndpoint endpoint,
+                EndpointDispatcher endpointDispatcher
+            )
             {
                 this.ChannelDispatcher = endpointDispatcher.ChannelDispatcher;
                 this.ChannelDispatcher.ChannelInitializers.Add(this);
@@ -201,12 +208,14 @@ namespace System.ServiceModel.Routing
                     this.TransactedReceiveEnabled = true;
                 }
 
-                IReceiveContextSettings rcSettings = endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParams);
+                IReceiveContextSettings rcSettings =
+                    endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParams);
                 if (rcSettings != null && rcSettings.Enabled)
-                {                   
+                {
                     foreach (OperationDescription operation in endpoint.Contract.Operations)
                     {
-                        ReceiveContextEnabledAttribute rcEnabled = new ReceiveContextEnabledAttribute();
+                        ReceiveContextEnabledAttribute rcEnabled =
+                            new ReceiveContextEnabledAttribute();
                         rcEnabled.ManualControl = true;
                         operation.Behaviors.Add(rcEnabled);
                     }
@@ -214,13 +223,12 @@ namespace System.ServiceModel.Routing
 
                     //Switch TransactedReceive off, because we don't want the Dispatcher creating any Transaction
                     endpointDispatcher.ChannelDispatcher.IsTransactedReceive = false;
-                    endpointDispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose = false;
+                    endpointDispatcher.DispatchRuntime.TransactionAutoCompleteOnSessionClose =
+                        false;
                 }
             }
 
-            public void Validate(ServiceEndpoint endpoint)
-            {
-            }
+            public void Validate(ServiceEndpoint endpoint) { }
 
             void IChannelInitializer.Initialize(IClientChannel channel)
             {
@@ -230,7 +238,8 @@ namespace System.ServiceModel.Routing
 
             void IInputSessionShutdown.ChannelFaulted(IDuplexContextChannel channel)
             {
-                RoutingChannelExtension channelExtension = channel.Extensions.Find<RoutingChannelExtension>();
+                RoutingChannelExtension channelExtension =
+                    channel.Extensions.Find<RoutingChannelExtension>();
                 if (channelExtension != null)
                 {
                     channelExtension.Fault(new CommunicationObjectFaultedException());
@@ -243,22 +252,28 @@ namespace System.ServiceModel.Routing
 
             void IInputSessionShutdown.DoneReceiving(IDuplexContextChannel channel)
             {
-                RoutingChannelExtension channelExtension = channel.Extensions.Find<RoutingChannelExtension>();
+                RoutingChannelExtension channelExtension =
+                    channel.Extensions.Find<RoutingChannelExtension>();
                 channelExtension.DoneReceiving(this.Endpoint.Binding.CloseTimeout);
             }
         }
 
         class TransactedReceiveOperationBehavior : IOperationBehavior
         {
-            public void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-            {
-            }
+            public void AddBindingParameters(
+                OperationDescription operationDescription,
+                BindingParameterCollection bindingParameters
+            ) { }
 
-            public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-            {
-            }
+            public void ApplyClientBehavior(
+                OperationDescription operationDescription,
+                ClientOperation clientOperation
+            ) { }
 
-            public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+            public void ApplyDispatchBehavior(
+                OperationDescription operationDescription,
+                DispatchOperation dispatchOperation
+            )
             {
                 if (operationDescription.Behaviors.Find<ReceiveContextEnabledAttribute>() == null)
                 {
@@ -274,9 +289,7 @@ namespace System.ServiceModel.Routing
                 }
             }
 
-            public void Validate(OperationDescription operationDescription)
-            {
-            }
+            public void Validate(OperationDescription operationDescription) { }
         }
     }
 }

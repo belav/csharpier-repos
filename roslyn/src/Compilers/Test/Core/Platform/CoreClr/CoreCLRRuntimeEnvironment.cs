@@ -37,13 +37,21 @@ namespace Roslyn.Test.Utilities.CoreClr
             Compilation mainCompilation,
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions,
-            bool usePdbForDebugging = false)
+            bool usePdbForDebugging = false
+        )
         {
             _testData.Methods.Clear();
 
             var diagnostics = DiagnosticBag.GetInstance();
             var dependencies = new List<ModuleData>();
-            var mainOutput = EmitCompilation(mainCompilation, manifestResources, dependencies, diagnostics, _testData, emitOptions);
+            var mainOutput = EmitCompilation(
+                mainCompilation,
+                manifestResources,
+                dependencies,
+                diagnostics,
+                _testData,
+                emitOptions
+            );
 
             _emitData = new EmitData();
             _emitData.Diagnostics = diagnostics.ToReadOnlyAndFree();
@@ -52,7 +60,9 @@ namespace Roslyn.Test.Utilities.CoreClr
             {
                 var mainImage = mainOutput.Value.Assembly;
                 var mainPdb = mainOutput.Value.Pdb;
-                var corLibIdentity = mainCompilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity;
+                var corLibIdentity = mainCompilation
+                    .GetSpecialType(SpecialType.System_Object)
+                    .ContainingAssembly.Identity;
                 var identity = mainCompilation.Assembly.Identity;
                 _emitData.MainModule = new ModuleData(
                     identity,
@@ -60,7 +70,8 @@ namespace Roslyn.Test.Utilities.CoreClr
                     mainImage,
                     pdb: usePdbForDebugging ? mainPdb : default(ImmutableArray<byte>),
                     inMemoryModule: true,
-                    isCorLib: corLibIdentity == identity);
+                    isCorLib: corLibIdentity == identity
+                );
                 _emitData.MainModulePdb = mainPdb;
                 _emitData.AllModuleData = dependencies;
 
@@ -80,22 +91,37 @@ namespace Roslyn.Test.Utilities.CoreClr
             }
         }
 
-        public int Execute(string moduleName, string[] args, string expectedOutput, bool trimOutput = true)
+        public int Execute(
+            string moduleName,
+            string[] args,
+            string expectedOutput,
+            bool trimOutput = true
+        )
         {
             var emitData = GetEmitData();
             emitData.RuntimeData.ExecuteRequested = true;
-            var (exitCode, output) = emitData.LoadContext.Execute(GetMainImage(), args, expectedOutput?.Length);
+            var (exitCode, output) = emitData.LoadContext.Execute(
+                GetMainImage(),
+                args,
+                expectedOutput?.Length
+            );
 
             if (expectedOutput != null)
             {
-                if (trimOutput ? (expectedOutput.Trim() != output.Trim()) : (expectedOutput != output))
+                if (
+                    trimOutput
+                        ? (expectedOutput.Trim() != output.Trim())
+                        : (expectedOutput != output)
+                )
                     throw new ExecutionException(expectedOutput, output, moduleName);
             }
 
             return exitCode;
         }
 
-        private EmitData GetEmitData() => _emitData ?? throw new InvalidOperationException("Must call Emit before calling this method");
+        private EmitData GetEmitData() =>
+            _emitData
+            ?? throw new InvalidOperationException("Must call Emit before calling this method");
 
         public IList<ModuleData> GetAllModuleData() => GetEmitData().AllModuleData;
 
@@ -105,12 +131,12 @@ namespace Roslyn.Test.Utilities.CoreClr
 
         public ImmutableArray<byte> GetMainPdb() => GetEmitData().MainModulePdb;
 
-        public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName) =>
-            GetEmitData().GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
+        public SortedSet<string> GetMemberSignaturesFromMetadata(
+            string fullyQualifiedTypeName,
+            string memberName
+        ) => GetEmitData().GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
 
-        public void Verify(Verification verification)
-        {
-        }
+        public void Verify(Verification verification) { }
 
         public string[] VerifyModules(string[] modulesToVerify)
         {
@@ -125,12 +151,16 @@ namespace Roslyn.Test.Utilities.CoreClr
 
         public void Dispose()
         {
-            // We need Dispose to satisfy the IRuntimeEnvironment interface, but 
+            // We need Dispose to satisfy the IRuntimeEnvironment interface, but
             // we don't really need it.
         }
 
-        public void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput)
-            => SharedConsole.CaptureOutput(action, expectedLength, out output, out errorOutput);
+        public void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        ) => SharedConsole.CaptureOutput(action, expectedLength, out output, out errorOutput);
 
         private sealed class RuntimeData
         {
@@ -161,9 +191,16 @@ namespace Roslyn.Test.Utilities.CoreClr
 
             internal ImmutableArray<Diagnostic> Diagnostics;
 
-            public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName)
+            public SortedSet<string> GetMemberSignaturesFromMetadata(
+                string fullyQualifiedTypeName,
+                string memberName
+            )
             {
-                return LoadContext.GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName, AllModuleData.Select(x => x.Id));
+                return LoadContext.GetMemberSignaturesFromMetadata(
+                    fullyQualifiedTypeName,
+                    memberName,
+                    AllModuleData.Select(x => x.Id)
+                );
             }
         }
     }

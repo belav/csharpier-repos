@@ -18,20 +18,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportStatelessXamlLspService(typeof(OnAutoInsertHandler)), Shared]
     [Method(VSInternalMethods.OnAutoInsertName)]
-    internal class OnAutoInsertHandler : ILspServiceRequestHandler<VSInternalDocumentOnAutoInsertParams, VSInternalDocumentOnAutoInsertResponseItem?>
+    internal class OnAutoInsertHandler
+        : ILspServiceRequestHandler<
+            VSInternalDocumentOnAutoInsertParams,
+            VSInternalDocumentOnAutoInsertResponseItem?
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OnAutoInsertHandler()
-        {
-        }
+        public OnAutoInsertHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(VSInternalDocumentOnAutoInsertParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            VSInternalDocumentOnAutoInsertParams request
+        ) => request.TextDocument;
 
-        public async Task<VSInternalDocumentOnAutoInsertResponseItem?> HandleRequestAsync(VSInternalDocumentOnAutoInsertParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<VSInternalDocumentOnAutoInsertResponseItem?> HandleRequestAsync(
+            VSInternalDocumentOnAutoInsertParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -46,8 +54,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
-            var result = await insertService.GetAutoInsertAsync(document, request.Character[0], offset, cancellationToken).ConfigureAwait(false);
+            var offset = text.Lines.GetPosition(
+                ProtocolConversions.PositionToLinePosition(request.Position)
+            );
+            var result = await insertService
+                .GetAutoInsertAsync(document, request.Character[0], offset, cancellationToken)
+                .ConfigureAwait(false);
             if (result == null)
             {
                 return null;
@@ -68,8 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 TextEdit = new TextEdit
                 {
                     NewText = insertText,
-                    Range = ProtocolConversions.TextSpanToRange(result.TextChange.Span, text)
-                }
+                    Range = ProtocolConversions.TextSpanToRange(result.TextChange.Span, text),
+                },
             };
         }
     }

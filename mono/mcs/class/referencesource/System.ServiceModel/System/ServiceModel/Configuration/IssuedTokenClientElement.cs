@@ -15,14 +15,16 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class IssuedTokenClientElement : ConfigurationElement
     {
-        public IssuedTokenClientElement()
-        {
-        }
+        public IssuedTokenClientElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.LocalIssuer)]
         public IssuedTokenParametersEndpointAddressElement LocalIssuer
         {
-            get { return (IssuedTokenParametersEndpointAddressElement)base[ConfigurationStrings.LocalIssuer]; }
+            get
+            {
+                return (IssuedTokenParametersEndpointAddressElement)
+                    base[ConfigurationStrings.LocalIssuer];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.LocalIssuerChannelBehaviors, DefaultValue = "")]
@@ -43,17 +45,27 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.IssuerChannelBehaviors)]
         public IssuedTokenClientBehaviorsElementCollection IssuerChannelBehaviors
         {
-            get { return (IssuedTokenClientBehaviorsElementCollection)base[ConfigurationStrings.IssuerChannelBehaviors]; }
+            get
+            {
+                return (IssuedTokenClientBehaviorsElementCollection)
+                    base[ConfigurationStrings.IssuerChannelBehaviors];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.CacheIssuedTokens, DefaultValue = SpnegoTokenProvider.defaultClientCacheTokens)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CacheIssuedTokens,
+            DefaultValue = SpnegoTokenProvider.defaultClientCacheTokens
+        )]
         public bool CacheIssuedTokens
         {
             get { return (bool)base[ConfigurationStrings.CacheIssuedTokens]; }
             set { base[ConfigurationStrings.CacheIssuedTokens] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxIssuedTokenCachingTime, DefaultValue = SpnegoTokenProvider.defaultClientMaxTokenCachingTimeString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxIssuedTokenCachingTime,
+            DefaultValue = SpnegoTokenProvider.defaultClientMaxTokenCachingTimeString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan MaxIssuedTokenCachingTime
@@ -62,7 +74,14 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxIssuedTokenCachingTime] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultKeyEntropyMode, DefaultValue = System.ServiceModel.Security.AcceleratedTokenProvider.defaultKeyEntropyMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultKeyEntropyMode,
+            DefaultValue = System
+                .ServiceModel
+                .Security
+                .AcceleratedTokenProvider
+                .defaultKeyEntropyMode
+        )]
         [ServiceModelEnumValidator(typeof(SecurityKeyEntropyModeHelper))]
         public SecurityKeyEntropyMode DefaultKeyEntropyMode
         {
@@ -70,7 +89,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.DefaultKeyEntropyMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IssuedTokenRenewalThresholdPercentage, DefaultValue = SpnegoTokenProvider.defaultServiceTokenValidityThresholdPercentage)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IssuedTokenRenewalThresholdPercentage,
+            DefaultValue = SpnegoTokenProvider.defaultServiceTokenValidityThresholdPercentage
+        )]
         [IntegerValidator(MinValue = 0, MaxValue = 100)]
         public int IssuedTokenRenewalThresholdPercentage
         {
@@ -82,7 +104,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -95,17 +119,30 @@ namespace System.ServiceModel.Configuration
             this.IssuedTokenRenewalThresholdPercentage = from.IssuedTokenRenewalThresholdPercentage;
 
 #pragma warning suppress 56506 //Microsoft; from.ElementInformation.Properties[ConfigurationStrings.LocalIssuerIssuedTokenParameters] can never be null (underlying configuration system guarantees)
-            if (PropertyValueOrigin.Default != from.ElementInformation.Properties[ConfigurationStrings.LocalIssuer].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != from.ElementInformation.Properties[ConfigurationStrings.LocalIssuer].ValueOrigin
+            )
             {
                 this.LocalIssuer.Copy(from.LocalIssuer);
             }
 #pragma warning suppress 56506 //Microsoft; from.ElementInformation.Properties[ConfigurationStrings.LocalIssuerChannelBehaviors] can never be null (underlying configuration system guarantees)
-            if (PropertyValueOrigin.Default != from.ElementInformation.Properties[ConfigurationStrings.LocalIssuerChannelBehaviors].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != from.ElementInformation
+                    .Properties[ConfigurationStrings.LocalIssuerChannelBehaviors]
+                    .ValueOrigin
+            )
             {
                 this.LocalIssuerChannelBehaviors = from.LocalIssuerChannelBehaviors;
             }
 #pragma warning suppress 56506 //Microsoft; from.ElementInformation.Properties[ConfigurationStrings.IssuerChannelBehaviors] can never be null (underlying configuration system guarantees)
-            if (PropertyValueOrigin.Default != from.ElementInformation.Properties[ConfigurationStrings.IssuerChannelBehaviors].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != from.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerChannelBehaviors]
+                    .ValueOrigin
+            )
             {
                 foreach (IssuedTokenClientBehaviorsElement element in from.IssuerChannelBehaviors)
                 {
@@ -123,29 +160,56 @@ namespace System.ServiceModel.Configuration
             issuedToken.CacheIssuedTokens = this.CacheIssuedTokens;
             issuedToken.DefaultKeyEntropyMode = this.DefaultKeyEntropyMode;
             issuedToken.MaxIssuedTokenCachingTime = this.MaxIssuedTokenCachingTime;
-            issuedToken.IssuedTokenRenewalThresholdPercentage = this.IssuedTokenRenewalThresholdPercentage;
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.LocalIssuer].ValueOrigin)
+            issuedToken.IssuedTokenRenewalThresholdPercentage =
+                this.IssuedTokenRenewalThresholdPercentage;
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation.Properties[ConfigurationStrings.LocalIssuer].ValueOrigin
+            )
             {
                 this.LocalIssuer.Validate();
                 issuedToken.LocalIssuerAddress = ConfigLoader.LoadEndpointAddress(this.LocalIssuer);
                 if (!string.IsNullOrEmpty(this.LocalIssuer.Binding))
                 {
-                    issuedToken.LocalIssuerBinding = ConfigLoader.LookupBinding(this.LocalIssuer.Binding, this.LocalIssuer.BindingConfiguration, this.EvaluationContext);
+                    issuedToken.LocalIssuerBinding = ConfigLoader.LookupBinding(
+                        this.LocalIssuer.Binding,
+                        this.LocalIssuer.BindingConfiguration,
+                        this.EvaluationContext
+                    );
                 }
             }
             if (!string.IsNullOrEmpty(this.LocalIssuerChannelBehaviors))
             {
-                ConfigLoader.LoadChannelBehaviors(this.LocalIssuerChannelBehaviors, this.EvaluationContext, issuedToken.LocalIssuerChannelBehaviors);
+                ConfigLoader.LoadChannelBehaviors(
+                    this.LocalIssuerChannelBehaviors,
+                    this.EvaluationContext,
+                    issuedToken.LocalIssuerChannelBehaviors
+                );
             }
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.IssuerChannelBehaviors].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerChannelBehaviors]
+                    .ValueOrigin
+            )
             {
-                foreach (IssuedTokenClientBehaviorsElement issuerBehaviorElement in this.IssuerChannelBehaviors)
+                foreach (
+                    IssuedTokenClientBehaviorsElement issuerBehaviorElement in this.IssuerChannelBehaviors
+                )
                 {
                     if (!string.IsNullOrEmpty(issuerBehaviorElement.BehaviorConfiguration))
                     {
-                        KeyedByTypeCollection<IEndpointBehavior> issuerBehaviors = new KeyedByTypeCollection<IEndpointBehavior>();
-                        ConfigLoader.LoadChannelBehaviors(issuerBehaviorElement.BehaviorConfiguration, this.EvaluationContext, issuerBehaviors);
-                        issuedToken.IssuerChannelBehaviors.Add(new Uri(issuerBehaviorElement.IssuerAddress), issuerBehaviors);
+                        KeyedByTypeCollection<IEndpointBehavior> issuerBehaviors =
+                            new KeyedByTypeCollection<IEndpointBehavior>();
+                        ConfigLoader.LoadChannelBehaviors(
+                            issuerBehaviorElement.BehaviorConfiguration,
+                            this.EvaluationContext,
+                            issuerBehaviors
+                        );
+                        issuedToken.IssuerChannelBehaviors.Add(
+                            new Uri(issuerBehaviorElement.IssuerAddress),
+                            issuerBehaviors
+                        );
                     }
                 }
             }

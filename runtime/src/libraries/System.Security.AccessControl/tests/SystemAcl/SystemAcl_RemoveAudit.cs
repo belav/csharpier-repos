@@ -12,38 +12,373 @@ namespace System.Security.AccessControl.Tests
     {
         public static IEnumerable<object[]> SystemAcl_RemoveAudit_TestData()
         {
-            yield return new object[] { true, false, 1, "BA", 1, 0, 0, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 0, 1, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 0, 2, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 0, 3, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 1, 0, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 1, 1, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 1, 2, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 1, 3, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 0, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 1, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 2, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 3, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 3, 0, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 3, 1, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 3, 2, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 3, 3, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BO", 1, 3, 3, "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0", "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:2:BO:false:0#135:2:1:BO:false:0#64:2:1:BO:false:0", true };
-            yield return new object[] { true, false, 1, "BG", 1, 3, 3, "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0", "199:2:3:BA:false:0#199:2:2:BG:false:0#135:2:1:BG:false:0#64:2:1:BG:false:0#199:2:3:BO:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 3, 3, "199:2:3:BA:false:0#199:2:3:BA:false:0#199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0#199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 5, 3, 3, "199:2:3:BA:false:0", "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BO", 1, 2, 3, "199:2:3:BA:false:0", "199:2:3:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 3, "215:2:3:BA:false:0", "215:2:3:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 4, 2, 3, "199:2:3:BA:false:0", "199:2:3:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 2, 3, "135:2:3:BA:false:0", "135:2:3:BA:false:0", true };
-            yield return new object[] { true, false, 3, "BA", 1, 0, 0, "199:2:3:BA:false:0", "199:2:2:BA:false:0#207:2:1:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 3, 0, 0, "199:2:3:BA:false:0", "135:2:3:BA:false:0#79:2:3:BA:false:0", true };
-            yield return new object[] { true, false, 1, "BA", 1, 1, 3, "202:2:3:BA:false:0", "202:2:3:BA:false:0", false };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                0,
+                0,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                0,
+                1,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                0,
+                2,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                0,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                1,
+                0,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                1,
+                1,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                1,
+                2,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                1,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                0,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                1,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                2,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                3,
+                0,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                3,
+                1,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                3,
+                2,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                3,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BO",
+                1,
+                3,
+                3,
+                "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0",
+                "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:2:BO:false:0#135:2:1:BO:false:0#64:2:1:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BG",
+                1,
+                3,
+                3,
+                "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0",
+                "199:2:3:BA:false:0#199:2:2:BG:false:0#135:2:1:BG:false:0#64:2:1:BG:false:0#199:2:3:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                3,
+                3,
+                "199:2:3:BA:false:0#199:2:3:BA:false:0#199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0#199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                5,
+                3,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BO",
+                1,
+                2,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:3:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                3,
+                "215:2:3:BA:false:0",
+                "215:2:3:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                4,
+                2,
+                3,
+                "199:2:3:BA:false:0",
+                "199:2:3:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                2,
+                3,
+                "135:2:3:BA:false:0",
+                "135:2:3:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                3,
+                "BA",
+                1,
+                0,
+                0,
+                "199:2:3:BA:false:0",
+                "199:2:2:BA:false:0#207:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                3,
+                0,
+                0,
+                "199:2:3:BA:false:0",
+                "135:2:3:BA:false:0#79:2:3:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                1,
+                "BA",
+                1,
+                1,
+                3,
+                "202:2:3:BA:false:0",
+                "202:2:3:BA:false:0",
+                false,
+            };
         }
 
         [Theory]
         [MemberData(nameof(SystemAcl_RemoveAudit_TestData))]
-        public static void BasicValidationTestCases(bool isContainer, bool isDS, int auditFlags, string sid, int accessMask, int inheritanceFlags, int propagationFlags, string initialRawAclStr, string verifierRawAclStr, bool removePossible)
+        public static void BasicValidationTestCases(
+            bool isContainer,
+            bool isDS,
+            int auditFlags,
+            string sid,
+            int accessMask,
+            int inheritanceFlags,
+            int propagationFlags,
+            string initialRawAclStr,
+            string verifierRawAclStr,
+            bool removePossible
+        )
         {
             RawAcl rawAcl = null;
             SystemAcl systemAcl = null;
@@ -53,19 +388,49 @@ namespace System.Security.AccessControl.Tests
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             rawAcl = Utils.CreateRawAclFromString(verifierRawAclStr);
 
-            Assert.True(TestRemoveAudit(systemAcl, rawAcl, (AuditFlags)auditFlags, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), accessMask, (InheritanceFlags)inheritanceFlags, (PropagationFlags)propagationFlags, removePossible));
+            Assert.True(
+                TestRemoveAudit(
+                    systemAcl,
+                    rawAcl,
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags,
+                    removePossible
+                )
+            );
         }
 
-        private static bool TestRemoveAudit(SystemAcl systemAcl, RawAcl rawAcl, AuditFlags auditFlag, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, bool removePossible)
+        private static bool TestRemoveAudit(
+            SystemAcl systemAcl,
+            RawAcl rawAcl,
+            AuditFlags auditFlag,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            bool removePossible
+        )
         {
             bool result = true;
             bool isRemoved = false;
             byte[] sAclBinaryForm = null;
             byte[] rAclBinaryForm = null;
-            isRemoved = systemAcl.RemoveAudit(auditFlag, sid, accessMask, inheritanceFlags, propagationFlags);
-            if ((isRemoved == removePossible) &&
-                (systemAcl.Count == rawAcl.Count) &&
-                (systemAcl.BinaryLength == rawAcl.BinaryLength))
+            isRemoved = systemAcl.RemoveAudit(
+                auditFlag,
+                sid,
+                accessMask,
+                inheritanceFlags,
+                propagationFlags
+            );
+            if (
+                (isRemoved == removePossible)
+                && (systemAcl.Count == rawAcl.Count)
+                && (systemAcl.BinaryLength == rawAcl.BinaryLength)
+            )
             {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
@@ -113,32 +478,56 @@ namespace System.Security.AccessControl.Tests
                 isDS = false;
                 rawAcl = new RawAcl(0, 1);
                 systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                systemAcl.RemoveAudit(AuditFlags.Success, null, 1, InheritanceFlags.None, PropagationFlags.None);
+                systemAcl.RemoveAudit(
+                    AuditFlags.Success,
+                    null,
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
             });
 
             //Case 2, SystemAudit Ace but non AuditFlags
-            AssertExtensions.Throws<ArgumentException>("auditFlags", () =>
-            {
-                isContainer = false;
-                isDS = false;
-                rawAcl = new RawAcl(0, 1);
-                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                systemAcl.RemoveAudit(AuditFlags.None,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), 1, InheritanceFlags.None, PropagationFlags.None);
-
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "auditFlags",
+                () =>
+                {
+                    isContainer = false;
+                    isDS = false;
+                    rawAcl = new RawAcl(0, 1);
+                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                    systemAcl.RemoveAudit(
+                        AuditFlags.None,
+                        new SecurityIdentifier(
+                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                        ),
+                        1,
+                        InheritanceFlags.None,
+                        PropagationFlags.None
+                    );
+                }
+            );
 
             //Case 3, 0 accessMask
-            AssertExtensions.Throws<ArgumentException>("accessMask", () =>
-            {
-                isContainer = false;
-                isDS = false;
-                rawAcl = new RawAcl(0, 1);
-                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                systemAcl.RemoveAudit(AuditFlags.Success,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), 0, InheritanceFlags.None, PropagationFlags.None);
-
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "accessMask",
+                () =>
+                {
+                    isContainer = false;
+                    isDS = false;
+                    rawAcl = new RawAcl(0, 1);
+                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                    systemAcl.RemoveAudit(
+                        AuditFlags.Success,
+                        new SecurityIdentifier(
+                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                        ),
+                        0,
+                        InheritanceFlags.None,
+                        PropagationFlags.None
+                    );
+                }
+            );
 
             //Case 4, remove one audit ACE from the SystemAcl with no ACE
             isContainer = true;
@@ -151,8 +540,20 @@ namespace System.Security.AccessControl.Tests
             removePossible = true;
             rawAcl = new RawAcl(0, 1);
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-            Assert.True(TestRemoveAudit(systemAcl, rawAcl, (AuditFlags)auditFlags,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), accessMask, (InheritanceFlags)inheritanceFlags, (PropagationFlags)propagationFlags, removePossible));
+            Assert.True(
+                TestRemoveAudit(
+                    systemAcl,
+                    rawAcl,
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags,
+                    removePossible
+                )
+            );
 
             //Case 5, remove the last one ACE from the SystemAcl
             isContainer = true;
@@ -165,21 +566,39 @@ namespace System.Security.AccessControl.Tests
             removePossible = true;
             rawAcl = new RawAcl(0, 1);
             //79 = AceFlags.SuccessfulAccess | AceFlags.ObjectInherit |AceFlags.ContainerInherit | AceFlags.NoPropagateInherit | AceFlags.InheritOnly
-            gAce = new CommonAce((AceFlags)79, AceQualifier.SystemAudit, accessMask,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                (AceFlags)79,
+                AceQualifier.SystemAudit,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             //remove the ace to create the validation rawAcl
             rawAcl.RemoveAce(rawAcl.Count - 1);
-            Assert.True(TestRemoveAudit(systemAcl, rawAcl, (AuditFlags)auditFlags,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), accessMask, (InheritanceFlags)inheritanceFlags, (PropagationFlags)propagationFlags, removePossible));
+            Assert.True(
+                TestRemoveAudit(
+                    systemAcl,
+                    rawAcl,
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags,
+                    removePossible
+                )
+            );
 
             //Case 6, all the ACEs in the Sacl are non-qualified ACE, no remove
             Assert.Throws<InvalidOperationException>(() =>
             {
                 isContainer = true;
                 isDS = false;
-                inheritanceFlags = 1;//InheritanceFlags.ContainerInherit
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
                 propagationFlags = 2; //PropagationFlags.InheritOnly
 
                 auditFlags = 3;
@@ -187,13 +606,27 @@ namespace System.Security.AccessControl.Tests
                 accessMask = 1;
                 rawAcl = new RawAcl(0, 1);
                 opaque = new byte[4];
-                gAce = new CustomAce(AceType.MaxDefinedAceType + 1, AceFlags.InheritanceFlags | AceFlags.AuditFlags, opaque);
+                gAce = new CustomAce(
+                    AceType.MaxDefinedAceType + 1,
+                    AceFlags.InheritanceFlags | AceFlags.AuditFlags,
+                    opaque
+                );
                 rawAcl.InsertAce(0, gAce);
                 systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
                 //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
                 //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-                TestRemoveAudit(systemAcl, rawAcl, (AuditFlags)auditFlags,
-    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), accessMask, (InheritanceFlags)inheritanceFlags, (PropagationFlags)propagationFlags, true);
+                TestRemoveAudit(
+                    systemAcl,
+                    rawAcl,
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags,
+                    true
+                );
             });
             //Case 7, remove split cause overflow
             // Test case no longer relevant in CoreCLR

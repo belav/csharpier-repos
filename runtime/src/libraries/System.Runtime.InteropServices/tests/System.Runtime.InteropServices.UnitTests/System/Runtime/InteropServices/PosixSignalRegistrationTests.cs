@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using Xunit;
 
 namespace System.Tests
@@ -15,14 +15,19 @@ namespace System.Tests
         [Fact]
         public void Create_NullHandler_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("handler", () => PosixSignalRegistration.Create(PosixSignal.SIGCONT, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "handler",
+                () => PosixSignalRegistration.Create(PosixSignal.SIGCONT, null)
+            );
         }
 
         [Theory]
         [MemberData(nameof(UnsupportedSignals))]
         public void Create_InvalidSignal_Throws(PosixSignal signal)
         {
-            Assert.Throws<PlatformNotSupportedException>(() => PosixSignalRegistration.Create(signal, ctx => { }));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                PosixSignalRegistration.Create(signal, ctx => { })
+            );
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]
@@ -43,7 +48,10 @@ namespace System.Tests
         [MemberData(nameof(SupportedSignals))]
         public void Dispose_Idempotent(PosixSignal signal)
         {
-            PosixSignalRegistration registration = PosixSignalRegistration.Create(signal, ctx => { });
+            PosixSignalRegistration registration = PosixSignalRegistration.Create(
+                signal,
+                ctx => { }
+            );
             registration.Dispose();
             registration.Dispose();
         }
@@ -58,7 +66,9 @@ namespace System.Tests
                 {
                     foreach (object[] signal in SupportedSignals())
                     {
-                        registrations.Add(PosixSignalRegistration.Create((PosixSignal)signal[0], _ => { }));
+                        registrations.Add(
+                            PosixSignalRegistration.Create((PosixSignal)signal[0], _ => { })
+                        );
                     }
                 }
 

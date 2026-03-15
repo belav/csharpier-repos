@@ -19,15 +19,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseThrowExpression)]
-    public partial class UseThrowExpressionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseThrowExpressionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseThrowExpressionTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseThrowExpressionDiagnosticAnalyzer(), new UseThrowExpressionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseThrowExpressionDiagnosticAnalyzer(),
+                new UseThrowExpressionCodeFixProvider()
+            );
 
         [Fact]
         public async Task WithoutBraces()
@@ -56,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/pull/38136")]
@@ -75,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -108,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -127,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = [|s|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -147,7 +155,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+            );
         }
 
         [Fact]
@@ -190,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -212,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -234,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -264,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -296,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s ?? throw new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -317,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -336,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                             [|throw|] new ArgumentNullException(nameof(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16234")]
@@ -362,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems?id=404142")]
@@ -397,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                 public interface ISyntax
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18670")]
@@ -425,7 +446,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _x = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19377")]
@@ -447,7 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19377")]
@@ -469,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21612")]
@@ -494,7 +518,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         map[a.Id] = a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24628")]
@@ -518,7 +543,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                     object MakeKey(object x) => null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22926")]
@@ -536,7 +562,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         x = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22926")]
@@ -565,7 +592,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         x = t ?? throw new ArgumentNullException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22926")]
@@ -594,7 +622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         x = t ?? throw new ArgumentNullException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44454")]
@@ -614,7 +643,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                 string x = null;
 
                 x = s ?? throw new ArgumentNullException();
-                """, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38102")]
@@ -650,7 +681,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // Oh no!
                     }
                 }
-                """, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38102")]
@@ -687,7 +720,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                         _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // oh yes!
                     }
                 }
-                """, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
     }
 }

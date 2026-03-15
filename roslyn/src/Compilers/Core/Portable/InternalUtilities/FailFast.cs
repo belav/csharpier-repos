@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// A pre-created delegate to assign to <see cref="FatalError.ErrorReporterHandler" /> if needed.
         /// </summary>
-        internal static readonly FatalError.ErrorReporterHandler Handler = static (e, _, _) => OnFatalException(e);
+        internal static readonly FatalError.ErrorReporterHandler Handler = static (e, _, _) =>
+            OnFatalException(e);
 
         [DebuggerHidden]
         [DoesNotReturn]
@@ -69,7 +70,11 @@ namespace Microsoft.CodeAnalysis
             if (exception is object)
             {
                 Console.WriteLine("Exception info");
-                for (Exception? current = exception; current is object; current = current.InnerException)
+                for (
+                    Exception? current = exception;
+                    current is object;
+                    current = current.InnerException
+                )
                 {
                     Console.WriteLine(current.Message);
                     Console.WriteLine(current.StackTrace);
@@ -84,9 +89,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Checks for the given <paramref name="condition"/>; if the <paramref name="condition"/> is <c>true</c>, 
+        /// Checks for the given <paramref name="condition"/>; if the <paramref name="condition"/> is <c>true</c>,
         /// immediately terminates the process without running any pending <c>finally</c> blocks or finalizers
-        /// and causes a crash dump to be collected (if the system is configured to do so). 
+        /// and causes a crash dump to be collected (if the system is configured to do so).
         /// Otherwise, the process continues normally.
         /// </summary>
         /// <param name="condition">The conditional expression to evaluate.</param>

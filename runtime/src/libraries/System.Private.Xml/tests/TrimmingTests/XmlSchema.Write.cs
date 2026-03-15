@@ -11,22 +11,29 @@ class XMLSchemaExamples
 {
     public static int Main()
     {
-
         XmlSchema schema = new XmlSchema();
         string BOMString = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
-        string expectedSchema = BOMString + @"<?xml version=""1.0"" encoding=""utf-8""?><xs:schema xmlns:xs=""http://www.w3.org/2001/XMLSchema""><xs:element name=""cat"" type=""xs:string"" /><xs:element name=""dog"" type=""xs:string"" /><xs:element name=""redDog"" substitutionGroup=""dog"" /><xs:element name=""brownDog"" substitutionGroup=""dog"" /><xs:element name=""pets"" /></xs:schema>";
+        string expectedSchema =
+            BOMString
+            + @"<?xml version=""1.0"" encoding=""utf-8""?><xs:schema xmlns:xs=""http://www.w3.org/2001/XMLSchema""><xs:element name=""cat"" type=""xs:string"" /><xs:element name=""dog"" type=""xs:string"" /><xs:element name=""redDog"" substitutionGroup=""dog"" /><xs:element name=""brownDog"" substitutionGroup=""dog"" /><xs:element name=""pets"" /></xs:schema>";
 
         // <xs:element name="cat" type="xs:string"/>
         XmlSchemaElement elementCat = new XmlSchemaElement();
         schema.Items.Add(elementCat);
         elementCat.Name = "cat";
-        elementCat.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+        elementCat.SchemaTypeName = new XmlQualifiedName(
+            "string",
+            "http://www.w3.org/2001/XMLSchema"
+        );
 
         // <xs:element name="dog" type="xs:string"/>
         XmlSchemaElement elementDog = new XmlSchemaElement();
         schema.Items.Add(elementDog);
         elementDog.Name = "dog";
-        elementDog.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+        elementDog.SchemaTypeName = new XmlQualifiedName(
+            "string",
+            "http://www.w3.org/2001/XMLSchema"
+        );
 
         // <xs:element name="redDog" substitutionGroup="dog" />
         XmlSchemaElement elementRedDog = new XmlSchemaElement();

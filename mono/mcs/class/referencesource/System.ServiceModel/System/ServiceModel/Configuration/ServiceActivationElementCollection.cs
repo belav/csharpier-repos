@@ -10,12 +10,12 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ServiceActivationElement))]
-    public sealed class ServiceActivationElementCollection : ServiceModelConfigurationElementCollection<ServiceActivationElement>
+    public sealed class ServiceActivationElementCollection
+        : ServiceModelConfigurationElementCollection<ServiceActivationElement>
     {
         public ServiceActivationElementCollection()
             : base(ConfigurationElementCollectionType.AddRemoveClearMap, ConfigurationStrings.Add)
-        { 
-        }        
+        { }
 
         protected override ConfigurationElement CreateNewElement()
         {
@@ -36,6 +36,6 @@ namespace System.ServiceModel.Configuration
         protected override bool ThrowOnDuplicate
         {
             get { return true; }
-        }        
+        }
     }
 }

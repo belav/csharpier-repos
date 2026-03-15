@@ -1,10 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Reflection;
-using System.Collections;
 using Xunit;
+
 /// <summary>
 ///GetTypeCode
 /// </summary>
@@ -39,6 +40,7 @@ public class TypeGetTypeFromHandle
         retVal = PosTest3() && retVal;
         return retVal;
     }
+
     // Returns true if the expected result is right
     // Returns false if the expected result is wrong
     public bool PosTest1()
@@ -48,10 +50,9 @@ public class TypeGetTypeFromHandle
         TestLibrary.TestFramework.BeginScenario("PosTest1:  The type is user define type ");
         try
         {
-           
             TestClass myClass = new TestClass();
             Type myClassType = Type.GetTypeFromHandle(myClass.GetType().TypeHandle);
-            if(!myClassType.Equals(typeof(TestClass)))
+            if (!myClassType.Equals(typeof(TestClass)))
             {
                 TestLibrary.TestFramework.LogError("001", "GetTypeFromHandle error");
                 retVal = false;
@@ -64,7 +65,7 @@ public class TypeGetTypeFromHandle
         }
         return retVal;
     }
-  
+
     // Returns true if the expected result is right
     // Returns false if the expected result is wrong
     public bool PosTest2()
@@ -89,6 +90,7 @@ public class TypeGetTypeFromHandle
         }
         return retVal;
     }
+
     // Returns true if the expected result is right
     // Returns false if the expected result is wrong
     public bool PosTest3()
@@ -113,29 +115,18 @@ public class TypeGetTypeFromHandle
         }
         return retVal;
     }
-   
-   
-   
 }
+
 public class BaseClass
 {
-   
-    public BaseClass(string param, string s, int i)
-    {
-
-    }
+    public BaseClass(string param, string s, int i) { }
 }
+
 public class TestClass : BaseClass
 {
-     public TestClass(string param, string s)
-        : base(param, s,1)
-    {
+    public TestClass(string param, string s)
+        : base(param, s, 1) { }
 
-    }
-    public  TestClass()
-        : base("", "", 1)
-    {
-
-    }
-
+    public TestClass()
+        : base("", "", 1) { }
 }

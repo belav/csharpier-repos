@@ -118,14 +118,17 @@ namespace System.Diagnostics
 
         private static SystemDiagnosticsSection GetConfigSection()
         {
-            return s_configSection ??= (SystemDiagnosticsSection)PrivilegedConfigurationManager.GetSection("system.diagnostics");
+            return s_configSection ??= (SystemDiagnosticsSection)
+                PrivilegedConfigurationManager.GetSection("system.diagnostics");
         }
 
         internal static bool IsInitializing() => s_initState == InitState.Initializing;
+
         internal static bool IsInitialized() => s_initState == InitState.Initialized;
 
-        internal static bool CanInitialize() => (s_initState != InitState.Initializing) &&
-            !ConfigurationManagerInternalFactory.Instance.SetConfigurationSystemInProgress;
+        internal static bool CanInitialize() =>
+            (s_initState != InitState.Initializing)
+            && !ConfigurationManagerInternalFactory.Instance.SetConfigurationSystemInProgress;
 
         internal static void Initialize()
         {
@@ -136,8 +139,10 @@ namespace System.Diagnostics
             // Because some of the code used to load config also uses diagnostics
             // we can't block them while we initialize from config. Therefore we just
             // return immediately and they just use the default values.
-            if (s_initState != InitState.NotInitialized ||
-                ConfigurationManagerInternalFactory.Instance.SetConfigurationSystemInProgress)
+            if (
+                s_initState != InitState.NotInitialized
+                || ConfigurationManagerInternalFactory.Instance.SetConfigurationSystemInProgress
+            )
             {
                 return;
             }
@@ -207,7 +212,7 @@ namespace System.Diagnostics
         {
             NotInitialized,
             Initializing,
-            Initialized
+            Initialized,
         }
     }
 }

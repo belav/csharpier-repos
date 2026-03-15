@@ -17,19 +17,19 @@ namespace System.Data.Objects.Internal
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using System.Data.Objects.ELinq;
     using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
-    using System.Data.Objects.ELinq;
     using System.Runtime.CompilerServices;
 
     /// <summary>
     ///   An instance of a class derived from ObjectQueryState is used to model every instance of <see cref="ObjectQuery&lt;TResultType&gt;"/>.
-    ///   A different ObjectQueryState-derived class is used depending on whether the ObjectQuery is an Entity SQL, 
+    ///   A different ObjectQueryState-derived class is used depending on whether the ObjectQuery is an Entity SQL,
     ///   Linq to Entities, or compiled Linq to Entities query.
     /// </summary>
     internal abstract class ObjectQueryState
-    {       
+    {
         /// <summary>
         ///   The <see cref="MergeOption"/> that should be used in the absence of an explicitly specified
         ///   or user-specified merge option or a merge option inferred from the query definition itself.
@@ -50,14 +50,14 @@ namespace System.Data.Objects.Internal
         ///   The collection of parameters associated with the ObjectQuery
         /// </summary>
         private ObjectParameterCollection _parameters;
-                
+
         /// <summary>
         ///   The full-span specification
         /// </summary>
         private Span _span;
 
         /// <summary>
-        ///   The user-specified default merge option 
+        ///   The user-specified default merge option
         /// </summary>
         private MergeOption? _userMergeOption;
 
@@ -70,22 +70,26 @@ namespace System.Data.Objects.Internal
         ///   Optionally used by derived classes to record the most recently used <see cref="ObjectQueryExecutionPlan"/>.
         /// </summary>
         protected ObjectQueryExecutionPlan _cachedPlan;
-        
-               
+
         /// <summary>
         ///   Constructs a new <see cref="ObjectQueryState"/> instance that uses the specified context and parameters collection.
         /// </summary>
         /// <param name="context">
         ///   The ObjectContext to which the implemented ObjectQuery belongs
         /// </param>
-        protected ObjectQueryState(Type elementType, ObjectContext context, ObjectParameterCollection parameters, Span span)
+        protected ObjectQueryState(
+            Type elementType,
+            ObjectContext context,
+            ObjectParameterCollection parameters,
+            Span span
+        )
         {
             // Validate the element type
             EntityUtil.CheckArgumentNull(elementType, "elementType");
 
             // Validate the context
             EntityUtil.CheckArgumentNull(context, "context");
-            
+
             // Parameters and Span are specifically allowed to be null
 
             this._elementType = elementType;
@@ -109,12 +113,18 @@ namespace System.Data.Objects.Internal
         /// <summary>
         ///   Gets the element type - the type of each result item - for this query as a CLR type instance.
         /// </summary>
-        internal Type ElementType { get { return _elementType; } }
+        internal Type ElementType
+        {
+            get { return _elementType; }
+        }
 
         /// <summary>
         ///   Gets the ObjectContext with which the implemented ObjectQuery is associated
         /// </summary>
-        internal ObjectContext ObjectContext { get { return _context; } }
+        internal ObjectContext ObjectContext
+        {
+            get { return _context; }
+        }
 
         /// <summary>
         ///   Gets the collection of parameters associated with the implemented ObjectQuery. May be null.
@@ -138,7 +148,7 @@ namespace System.Data.Objects.Internal
 
             return _parameters;
         }
-                
+
         /// <summary>
         ///   Gets the Span specification associated with the implemented ObjectQuery. May be null.
         /// </summary>
@@ -218,11 +228,11 @@ namespace System.Data.Objects.Internal
         {
             other.PlanCachingEnabled = this.PlanCachingEnabled;
             other.UserSpecifiedMergeOption = this.UserSpecifiedMergeOption;
-                                    
+
             // _cachedPlan is intentionally not copied over - since the parameters of 'other' would have to be locked as
-            // soon as its execution plan was set, and that may not be appropriate at the time ApplySettingsTo is called. 
+            // soon as its execution plan was set, and that may not be appropriate at the time ApplySettingsTo is called.
         }
-                
+
         /// <summary>
         ///   Must return <c>true</c> and set <paramref name="commandText"/> to a valid value
         ///   if command text is available for this query; must return <c>false</c> otherwise.
@@ -256,7 +266,10 @@ namespace System.Data.Objects.Internal
         /// <param name="sourceQuery">The source query on which Include was called</param>
         /// <param name="includePath">The new Include path to add</param>
         /// <returns>Must returns an ObjectQueryState that is a duplicate of this instance and additionally contains the specified Include path</returns>
-        internal abstract ObjectQueryState Include<TElementType>(ObjectQuery<TElementType> sourceQuery, string includePath);
+        internal abstract ObjectQueryState Include<TElementType>(
+            ObjectQuery<TElementType> sourceQuery,
+            string includePath
+        );
 
         /// <summary>
         ///   Retrieves the result type of the query in terms of C-Space metadata. This method is called once, on-demand, if a call
@@ -311,11 +324,17 @@ namespace System.Data.Objects.Internal
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         internal ObjectQuery CreateQuery()
         {
-            MethodInfo createMethod = typeof(ObjectQueryState).GetMethod("CreateObjectQuery", BindingFlags.Static | BindingFlags.Public);
-            Debug.Assert(createMethod != null, "Unable to retrieve ObjectQueryState.CreateObjectQuery<> method?");
+            MethodInfo createMethod = typeof(ObjectQueryState).GetMethod(
+                "CreateObjectQuery",
+                BindingFlags.Static | BindingFlags.Public
+            );
+            Debug.Assert(
+                createMethod != null,
+                "Unable to retrieve ObjectQueryState.CreateObjectQuery<> method?"
+            );
 
             createMethod = createMethod.MakeGenericMethod(this._elementType);
-            return (ObjectQuery)createMethod.Invoke(null, new object[] { this } );
+            return (ObjectQuery)createMethod.Invoke(null, new object[] { this });
         }
 
         /// <summary>
@@ -325,12 +344,14 @@ namespace System.Data.Objects.Internal
         /// <typeparam name="TResultType">The required element type of the new ObjectQuery</typeparam>
         /// <param name="queryState">The underlying ObjectQueryState instance that should back the returned ObjectQuery</param>
         /// <returns>A new ObjectQuery based on the specified query state, with the specified element type</returns>
-        public static ObjectQuery<TResultType> CreateObjectQuery<TResultType>(ObjectQueryState queryState)
+        public static ObjectQuery<TResultType> CreateObjectQuery<TResultType>(
+            ObjectQueryState queryState
+        )
         {
             Debug.Assert(queryState != null, "Query state is required");
             Debug.Assert(typeof(TResultType) == queryState.ElementType, "Element type mismatch");
 
             return new ObjectQuery<TResultType>(queryState);
         }
-    }    
+    }
 }

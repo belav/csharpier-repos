@@ -2,10 +2,9 @@
 
 extern alias FULL;
 using System;
-using NameValueCollection =
-FULL::System.Collections.Specialized.NameValueCollection;
+using NameValueCollection = FULL::System.Collections.Specialized.NameValueCollection;
 
 public class test
 {
-	public static void Main () { }
+    public static void Main() { }
 }

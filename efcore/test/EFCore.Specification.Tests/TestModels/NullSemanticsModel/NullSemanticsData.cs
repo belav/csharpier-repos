@@ -16,11 +16,11 @@ public class NullSemanticsData : ISetSource
     public IReadOnlyList<NullSemanticsEntity1> Entities1 { get; }
     public IReadOnlyList<NullSemanticsEntity2> Entities2 { get; }
 
-    public static IReadOnlyList<NullSemanticsEntity1> CreateEntities1()
-        => CreateNullSemanticsEntityBases<NullSemanticsEntity1>();
+    public static IReadOnlyList<NullSemanticsEntity1> CreateEntities1() =>
+        CreateNullSemanticsEntityBases<NullSemanticsEntity1>();
 
-    public static IReadOnlyList<NullSemanticsEntity2> CreateEntities2()
-        => CreateNullSemanticsEntityBases<NullSemanticsEntity2>();
+    public static IReadOnlyList<NullSemanticsEntity2> CreateEntities2() =>
+        CreateNullSemanticsEntityBases<NullSemanticsEntity2>();
 
     public IQueryable<TEntity> Set<TEntity>()
         where TEntity : class
@@ -80,7 +80,7 @@ public class NullSemanticsData : ISetSource
                         IntC = intValues[k],
                         NullableIntA = nullableIntValues[i],
                         NullableIntB = nullableIntValues[j],
-                        NullableIntC = nullableIntValues[k]
+                        NullableIntC = nullableIntValues[k],
                     };
 
                     entities.Add(entity);

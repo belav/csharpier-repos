@@ -39,17 +39,30 @@ namespace Roslyn.Test.Utilities
         /// <param name="getSyntaxKind">Delegate to turn a marker into a syntax kind</param>
         /// <param name="removeTags">Whether to remove tags from the source, as distinct from replacing them with whitespace. Note that if this
         /// value is true then any marked node other than the first, will have an incorrect offset.</param>
-        public SourceWithMarkedNodes(string markedSource, Func<string, SyntaxTree> parser, Func<string, int> getSyntaxKind, bool removeTags = false)
+        public SourceWithMarkedNodes(
+            string markedSource,
+            Func<string, SyntaxTree> parser,
+            Func<string, int> getSyntaxKind,
+            bool removeTags = false
+        )
         {
             Source = removeTags ? RemoveTags(markedSource) : ClearTags(markedSource);
             Input = markedSource;
             Tree = parser(Source);
 
-            MarkedSpans = ImmutableArray.CreateRange(GetSpansRecursive(markedSource, 0, getSyntaxKind));
-            SpansAndKindsAndIds = ImmutableArray.CreateRange(MarkedSpans.Select(s => (s.MarkedSyntax, s.SyntaxKind, s.Id)));
+            MarkedSpans = ImmutableArray.CreateRange(
+                GetSpansRecursive(markedSource, 0, getSyntaxKind)
+            );
+            SpansAndKindsAndIds = ImmutableArray.CreateRange(
+                MarkedSpans.Select(s => (s.MarkedSyntax, s.SyntaxKind, s.Id))
+            );
         }
 
-        private static IEnumerable<MarkedSpan> GetSpansRecursive(string markedSource, int offset, Func<string, int> getSyntaxKind)
+        private static IEnumerable<MarkedSpan> GetSpansRecursive(
+            string markedSource,
+            int offset,
+            Func<string, int> getSyntaxKind
+        )
         {
             foreach (var match in s_markerPattern.Matches(markedSource).ToEnumerable())
             {
@@ -60,12 +73,27 @@ namespace Roslyn.Test.Utilities
                 var id = string.IsNullOrEmpty(idOpt) ? 0 : int.Parse(idOpt);
                 var parentIdOpt = match.Groups["ParentId"].Value;
                 var parentId = string.IsNullOrEmpty(parentIdOpt) ? 0 : int.Parse(parentIdOpt);
-                var parsedKind = string.IsNullOrEmpty(syntaxKindOpt) ? 0 : getSyntaxKind(syntaxKindOpt);
+                var parsedKind = string.IsNullOrEmpty(syntaxKindOpt)
+                    ? 0
+                    : getSyntaxKind(syntaxKindOpt);
                 int absoluteOffset = offset + markedSyntax.Index;
 
-                yield return new MarkedSpan(new TextSpan(absoluteOffset, markedSyntax.Length), new TextSpan(match.Index, match.Length), tagName.Value, parsedKind, id, parentId);
+                yield return new MarkedSpan(
+                    new TextSpan(absoluteOffset, markedSyntax.Length),
+                    new TextSpan(match.Index, match.Length),
+                    tagName.Value,
+                    parsedKind,
+                    id,
+                    parentId
+                );
 
-                foreach (var nestedSpan in GetSpansRecursive(markedSyntax.Value, absoluteOffset, getSyntaxKind))
+                foreach (
+                    var nestedSpan in GetSpansRecursive(
+                        markedSyntax.Value,
+                        absoluteOffset,
+                        getSyntaxKind
+                    )
+                )
                 {
                     yield return nestedSpan;
                 }
@@ -84,7 +112,8 @@ namespace Roslyn.Test.Utilities
 
         private static readonly Regex s_tags = new Regex(
             @"[<][/]?[NMCL][:][:\.A-Za-z0-9]*[>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         private static readonly Regex s_markerPattern = new Regex(
             @"[<]                                # Open tag
@@ -102,7 +131,8 @@ namespace Roslyn.Test.Utilities
                 (?<MarkedSyntax>.*)              # This matches the source within the tags
                 [<][/][NMCL][:]?(\k<Id>)* [>]    # The closing tag with its optional Id
               )?                                 # End of the group for the closing tag",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         public ImmutableDictionary<SyntaxNode, int> MapSyntaxNodesToMarks()
         {
@@ -125,7 +155,9 @@ namespace Roslyn.Test.Utilities
                 return node;
             }
 
-            var nodeOfKind = node.FirstAncestorOrSelf<SyntaxNode>(n => n.RawKind == spanAndKindAndId.Item2);
+            var nodeOfKind = node.FirstAncestorOrSelf<SyntaxNode>(n =>
+                n.RawKind == spanAndKindAndId.Item2
+            );
             Assert.NotNull(nodeOfKind);
             return nodeOfKind;
         }
@@ -142,7 +174,11 @@ namespace Roslyn.Test.Utilities
             return builder.ToImmutableDictionary();
         }
 
-        public static Func<SyntaxNode, SyntaxNode> GetSyntaxMap(SourceWithMarkedNodes source0, SourceWithMarkedNodes source1, List<SyntaxNode> unmappedNodes = null)
+        public static Func<SyntaxNode, SyntaxNode> GetSyntaxMap(
+            SourceWithMarkedNodes source0,
+            SourceWithMarkedNodes source1,
+            List<SyntaxNode> unmappedNodes = null
+        )
         {
             var map0 = source0.MapMarksToSyntaxNodes();
             var map1 = source1.MapSyntaxNodesToMarks();

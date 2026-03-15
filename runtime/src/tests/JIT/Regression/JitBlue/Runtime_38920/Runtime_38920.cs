@@ -45,19 +45,22 @@ public class TestStructs
         public int f; // Overlaps with c in CastFromStruct
     }
 
-
     // our src local var has to be an implicit byref, otherwise we won't try to recover struct handle from it.
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void UnsafeCastFromAPrimitiveStructFieldToStruct(CastFromStruct20 impByRefStruct20, int b, int c)
+    static void UnsafeCastFromAPrimitiveStructFieldToStruct(
+        CastFromStruct20 impByRefStruct20,
+        int b,
+        int c
+    )
     {
-        CastToStruct8  to8  = new CastToStruct8();
+        CastToStruct8 to8 = new CastToStruct8();
         CastToStruct12 to12 = new CastToStruct12();
 
         // possible incorrect CSE def of impByRefStruct20.structField
         //
         to8 = Unsafe.As<StructA, CastToStruct8>(ref impByRefStruct20.structField);
 
-        for (int i =0; i<10; i++)
+        for (int i = 0; i < 10; i++)
         {
             // possible incorrect CSE use of impByRefStruct20.structField
             //
@@ -98,14 +101,14 @@ public class TestStructs
         s.c = c;
         UnsafeCastFromAPrimitiveStructFieldToStruct(s, b, c);
 
-        s.b = ++b;  // 2
-        s.c = ++c;  // 3
+        s.b = ++b; // 2
+        s.c = ++c; // 3
         UnsafeCastFromAPrimitiveStructFieldToStruct(s, b, c);
 
         b = b * b;
         c = c * c;
-        s.b = b;    // 4
-        s.c = c;    // 9
+        s.b = b; // 4
+        s.c = c; // 9
         UnsafeCastFromAPrimitiveStructFieldToStruct(s, b, c);
 
         if (exitStatus == 100)

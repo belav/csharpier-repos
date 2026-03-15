@@ -31,25 +31,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.SqlClient
 {
-        [TestFixture]
-        public class SqlClientMetaDataCollectionNamesTest
+    [TestFixture]
+    public class SqlClientMetaDataCollectionNamesTest
+    {
+        [Test]
+        public void ValuesTest()
         {
-                [Test]
-                public void ValuesTest ()
-                {
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Columns, "Columns");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Databases, "Databases");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.ForeignKeys, "ForeignKeys");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.IndexColumns, "IndexColumns");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Indexes, "Indexes");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Parameters, "Parameters");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Procedures, "Procedures");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Tables, "Tables");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.UserDefinedTypes, "UserDefinedTypes");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Users, "Users");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.ViewColumns, "ViewColumns");
-                        Assert.AreEqual (SqlClientMetaDataCollectionNames.Views, "Views");
-                }
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Columns, "Columns");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Databases, "Databases");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.ForeignKeys, "ForeignKeys");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.IndexColumns, "IndexColumns");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Indexes, "Indexes");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Parameters, "Parameters");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Procedures, "Procedures");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Tables, "Tables");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.UserDefinedTypes, "UserDefinedTypes");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Users, "Users");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.ViewColumns, "ViewColumns");
+            Assert.AreEqual(SqlClientMetaDataCollectionNames.Views, "Views");
         }
+    }
 }

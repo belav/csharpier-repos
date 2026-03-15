@@ -25,154 +25,166 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public abstract class Manifest {
-	
-		AssemblyIdentity		assemblyIdentity;
-		AssemblyReferenceCollection	assemblyReferences;
-		string				description;
-		AssemblyReference		entryPoint;
-		FileReferenceCollection	fileReferences;
-		Stream				inputStream;
-		OutputMessageCollection		outputMessages;
-		bool				readOnly;
-		string				sourcePath;
-		AssemblyIdentity		xmlAssemblyIdentity;
-		AssemblyReference[]		xmlAssemblyReferences;
-		string				xmlDescription;
-		FileReference[]			xmlFileReferences;
-		string				xmlSchema;
-		
-		[MonoTODO]
-		protected internal Manifest ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void ResolveFiles ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void ResolveFiles (string[] searchPaths)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void UpdateFileInfo ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public virtual void Validate ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected void ValidatePlatform ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity AssemblyIdentity {
-			get { return assemblyIdentity; }
-			set { assemblyIdentity = value; }
-		}
-		
-		[MonoTODO]
-		public AssemblyReferenceCollection AssemblyReferences {
-			get { return assemblyReferences; }
-		}
-		
-		[MonoTODO]
-		public string Description {
-			get { return description; }
-			set { description = value; }
-		}
-		
-		[MonoTODO]
-		public virtual AssemblyReference EntryPoint {
-			get { return entryPoint; }
-			set { entryPoint = value; }
-		}
-		
-		[MonoTODO]
-		public FileReferenceCollection FileReferences {
-			get { return fileReferences; }
-		}
-		
-		[MonoTODO]
-		public Stream InputStream {
-			get { return inputStream; }
-			set { inputStream = value; }
-		}
-		
-		[MonoTODO]
-		public OutputMessageCollection OutputMessages {
-			get { return outputMessages; }
-		}
-		
-		[MonoTODO]
-		public bool ReadOnly {
-			get { return readOnly; }
-			set { readOnly = value; }
-		}
-		
-		[MonoTODO]
-		public string SourcePath {
-			get { return sourcePath; }
-			set { sourcePath = value; }
-		}
-		
-		[MonoTODO]
-		public AssemblyIdentity XmlAssemblyIdentity {
-			get { return xmlAssemblyIdentity; }
-			set { xmlAssemblyIdentity = value; }
-		}
-		
-		[MonoTODO]
-		public AssemblyReference[] XmlAssemblyReferences {
-			get { return xmlAssemblyReferences; }
-			set { xmlAssemblyReferences = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlDescription {
-			get { return xmlDescription; }
-			set { xmlDescription = value; }
-		}
-		
-		[MonoTODO]
-		public FileReference[] XmlFileReferences {
-			get { return xmlFileReferences; }
-			set { xmlFileReferences = value; }
-		}
-		
-		[MonoTODO]
-		public string XmlSchema {
-			get { return xmlSchema; }
-			set { xmlSchema = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public abstract class Manifest
+    {
+        AssemblyIdentity assemblyIdentity;
+        AssemblyReferenceCollection assemblyReferences;
+        string description;
+        AssemblyReference entryPoint;
+        FileReferenceCollection fileReferences;
+        Stream inputStream;
+        OutputMessageCollection outputMessages;
+        bool readOnly;
+        string sourcePath;
+        AssemblyIdentity xmlAssemblyIdentity;
+        AssemblyReference[] xmlAssemblyReferences;
+        string xmlDescription;
+        FileReference[] xmlFileReferences;
+        string xmlSchema;
 
+        [MonoTODO]
+        protected internal Manifest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void ResolveFiles()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void ResolveFiles(string[] searchPaths)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void UpdateFileInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public virtual void Validate()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected void ValidatePlatform()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity AssemblyIdentity
+        {
+            get { return assemblyIdentity; }
+            set { assemblyIdentity = value; }
+        }
+
+        [MonoTODO]
+        public AssemblyReferenceCollection AssemblyReferences
+        {
+            get { return assemblyReferences; }
+        }
+
+        [MonoTODO]
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        [MonoTODO]
+        public virtual AssemblyReference EntryPoint
+        {
+            get { return entryPoint; }
+            set { entryPoint = value; }
+        }
+
+        [MonoTODO]
+        public FileReferenceCollection FileReferences
+        {
+            get { return fileReferences; }
+        }
+
+        [MonoTODO]
+        public Stream InputStream
+        {
+            get { return inputStream; }
+            set { inputStream = value; }
+        }
+
+        [MonoTODO]
+        public OutputMessageCollection OutputMessages
+        {
+            get { return outputMessages; }
+        }
+
+        [MonoTODO]
+        public bool ReadOnly
+        {
+            get { return readOnly; }
+            set { readOnly = value; }
+        }
+
+        [MonoTODO]
+        public string SourcePath
+        {
+            get { return sourcePath; }
+            set { sourcePath = value; }
+        }
+
+        [MonoTODO]
+        public AssemblyIdentity XmlAssemblyIdentity
+        {
+            get { return xmlAssemblyIdentity; }
+            set { xmlAssemblyIdentity = value; }
+        }
+
+        [MonoTODO]
+        public AssemblyReference[] XmlAssemblyReferences
+        {
+            get { return xmlAssemblyReferences; }
+            set { xmlAssemblyReferences = value; }
+        }
+
+        [MonoTODO]
+        public string XmlDescription
+        {
+            get { return xmlDescription; }
+            set { xmlDescription = value; }
+        }
+
+        [MonoTODO]
+        public FileReference[] XmlFileReferences
+        {
+            get { return xmlFileReferences; }
+            set { xmlFileReferences = value; }
+        }
+
+        [MonoTODO]
+        public string XmlSchema
+        {
+            get { return xmlSchema; }
+            set { xmlSchema = value; }
+        }
+    }
+}

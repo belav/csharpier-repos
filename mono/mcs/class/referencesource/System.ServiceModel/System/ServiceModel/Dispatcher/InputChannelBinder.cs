@@ -51,7 +51,9 @@ namespace System.ServiceModel.Dispatcher
             get
             {
 #pragma warning suppress 56503 // Microsoft, the property is really not implemented, cannot lie, API not public
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException()); 
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -90,14 +92,21 @@ namespace System.ServiceModel.Dispatcher
             return this.WrapMessage(message);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw TraceUtility.ThrowHelperError(new NotImplementedException(), message);
         }
 
         public void EndSend(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public void Send(Message message, TimeSpan timeout)
@@ -120,14 +129,21 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw TraceUtility.ThrowHelperError(new NotImplementedException(), message);
         }
 
         public Message EndRequest(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public Message Request(Message message, TimeSpan timeout)
@@ -140,7 +156,11 @@ namespace System.ServiceModel.Dispatcher
             return this.channel.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channel.BeginWaitForMessage(timeout, callback, state);
         }
@@ -172,19 +192,18 @@ namespace System.ServiceModel.Dispatcher
                 this.binder = binder;
             }
 
-            protected override void OnAbort()
-            {
-            }
+            protected override void OnAbort() { }
 
-            protected override void OnClose(TimeSpan timeout)
-            {
-            }
+            protected override void OnClose(TimeSpan timeout) { }
 
-            protected override void OnReply(Message message, TimeSpan timeout)
-            {
-            }
+            protected override void OnReply(Message message, TimeSpan timeout) { }
 
-            protected override IAsyncResult OnBeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginReply(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }

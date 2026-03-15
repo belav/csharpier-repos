@@ -598,8 +598,8 @@ public partial class HubConnectionTests
                 var handlerTask = handlerCalled.Task;
 
                 // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
-                var ex = Assert.ThrowsAsync<TimeoutException>(
-                    async () => await handlerTask.DefaultTimeout(2000)
+                var ex = Assert.ThrowsAsync<TimeoutException>(async () =>
+                    await handlerTask.DefaultTimeout(2000)
                 );
 
                 // Ensure that the task from the WhenAny is not the handler task
@@ -647,8 +647,8 @@ public partial class HubConnectionTests
                 subscription.Dispose();
 
                 // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
-                var ex = Assert.ThrowsAsync<TimeoutException>(
-                    async () => await handlerTask.DefaultTimeout(2000)
+                var ex = Assert.ThrowsAsync<TimeoutException>(async () =>
+                    await handlerTask.DefaultTimeout(2000)
                 );
 
                 // Ensure that the task from the WhenAny is not the handler task
@@ -892,8 +892,8 @@ public partial class HubConnectionTests
                 await hubConnection.StartAsync().DefaultTimeout();
 
                 hubConnection.On("Result", () => 10);
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => hubConnection.On("Result", () => 11)
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    hubConnection.On("Result", () => 11)
                 );
                 Assert.Equal(
                     "'Result' already has a value returning handler. Multiple return values are not supported.",

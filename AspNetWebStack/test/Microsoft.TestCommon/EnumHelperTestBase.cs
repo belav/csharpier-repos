@@ -5,7 +5,8 @@ using System;
 
 namespace Microsoft.TestCommon
 {
-    public abstract class EnumHelperTestBase<TEnum> where TEnum : IComparable, IFormattable, IConvertible
+    public abstract class EnumHelperTestBase<TEnum>
+        where TEnum : IComparable, IFormattable, IConvertible
     {
         private Func<TEnum, bool> _isDefined;
         private Action<TEnum, string> _validate;
@@ -17,7 +18,11 @@ namespace Microsoft.TestCommon
         /// <param name="isDefined">A Func used to validate that a value is defined.</param>
         /// <param name="validate">A Func used to validate that a value is definded of throw an exception.</param>
         /// <param name="undefined">An undefined value.</param>
-        protected EnumHelperTestBase(Func<TEnum, bool> isDefined, Action<TEnum, string> validate, TEnum undefined)
+        protected EnumHelperTestBase(
+            Func<TEnum, bool> isDefined,
+            Action<TEnum, string> validate,
+            TEnum undefined
+        )
         {
             _isDefined = isDefined;
             _validate = validate;
@@ -68,7 +73,8 @@ namespace Microsoft.TestCommon
                 "parameter",
                 (int)Convert.ChangeType(_undefined, typeof(int)),
                 typeof(TEnum),
-                allowDerivedExceptions: false);
+                allowDerivedExceptions: false
+            );
         }
 
         /// <summary>
@@ -79,14 +85,21 @@ namespace Microsoft.TestCommon
         /// <param name="invalidValue">The expected invalid value that should appear in the message</param>
         /// <param name="enumType">The type of the enumeration</param>
         /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
-        protected virtual void AssertForUndefinedValue(Action testCode, string parameterName, int invalidValue, Type enumType, bool allowDerivedExceptions = false)
+        protected virtual void AssertForUndefinedValue(
+            Action testCode,
+            string parameterName,
+            int invalidValue,
+            Type enumType,
+            bool allowDerivedExceptions = false
+        )
         {
             Assert.ThrowsInvalidEnumArgument(
                 testCode,
                 parameterName,
                 invalidValue,
                 enumType,
-                allowDerivedExceptions);
+                allowDerivedExceptions
+            );
         }
 
         /// <summary>

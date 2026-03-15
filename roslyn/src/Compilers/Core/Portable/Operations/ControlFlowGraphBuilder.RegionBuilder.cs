@@ -26,11 +26,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public readonly bool IsStackSpillRegion;
 #if DEBUG
             private bool _aboutToFree = false;
-#endif 
+#endif
 
-            public RegionBuilder(ControlFlowRegionKind kind, ITypeSymbol? exceptionType = null, ImmutableArray<ILocalSymbol> locals = default, bool isStackSpillRegion = false)
+            public RegionBuilder(
+                ControlFlowRegionKind kind,
+                ITypeSymbol? exceptionType = null,
+                ImmutableArray<ILocalSymbol> locals = default,
+                bool isStackSpillRegion = false
+            )
             {
-                Debug.Assert(!isStackSpillRegion || (kind == ControlFlowRegionKind.LocalLifetime && locals.IsDefaultOrEmpty));
+                Debug.Assert(
+                    !isStackSpillRegion
+                        || (kind == ControlFlowRegionKind.LocalLifetime && locals.IsDefaultOrEmpty)
+                );
                 Kind = kind;
                 ExceptionType = exceptionType;
                 Locals = locals.NullToEmpty();
@@ -51,8 +59,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             [MemberNotNullWhen(true, nameof(Regions))]
             public bool HasRegions => Regions?.Count > 0;
+
             [MemberNotNullWhen(true, nameof(LocalFunctions))]
             public bool HasLocalFunctions => LocalFunctions?.Count > 0;
+
             [MemberNotNullWhen(true, nameof(CaptureIds))]
             public bool HasCaptureIds => CaptureIds?.Count > 0;
 
@@ -99,7 +109,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 if (LocalFunctions == null)
                 {
-                    LocalFunctions = ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>.GetInstance();
+                    LocalFunctions = ArrayBuilder<(
+                        IMethodSymbol,
+                        ILocalFunctionOperation
+                    )>.GetInstance();
                 }
 
                 LocalFunctions.Add((symbol, operation));
@@ -114,11 +127,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     return;
                 }
 
-                Debug.Assert(others.All(((IMethodSymbol m, ILocalFunctionOperation _) tuple) => tuple.m.MethodKind == MethodKind.LocalFunction));
+                Debug.Assert(
+                    others.All(
+                        ((IMethodSymbol m, ILocalFunctionOperation _) tuple) =>
+                            tuple.m.MethodKind == MethodKind.LocalFunction
+                    )
+                );
 
                 if (LocalFunctions == null)
                 {
-                    LocalFunctions = ArrayBuilder<(IMethodSymbol, ILocalFunctionOperation)>.GetInstance();
+                    LocalFunctions = ArrayBuilder<(
+                        IMethodSymbol,
+                        ILocalFunctionOperation
+                    )>.GetInstance();
                 }
 
                 LocalFunctions.AddRange(others);
@@ -133,8 +154,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
 
 #if DEBUG
-                Debug.Assert(region.Enclosing == null || (region.Enclosing._aboutToFree && region.Enclosing.Enclosing == this));
-#endif 
+                Debug.Assert(
+                    region.Enclosing == null
+                        || (region.Enclosing._aboutToFree && region.Enclosing.Enclosing == this)
+                );
+#endif
                 region.Enclosing = this;
                 Regions.Add(region);
 
@@ -144,7 +168,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     case ControlFlowRegionKind.FilterAndHandler:
                         Debug.Assert(Regions.Count <= 2);
-                        Debug.Assert(lastKind == (Regions.Count < 2 ? ControlFlowRegionKind.Filter : ControlFlowRegionKind.Catch));
+                        Debug.Assert(
+                            lastKind
+                                == (
+                                    Regions.Count < 2
+                                        ? ControlFlowRegionKind.Filter
+                                        : ControlFlowRegionKind.Catch
+                                )
+                        );
                         break;
 
                     case ControlFlowRegionKind.TryAndCatch:
@@ -154,7 +185,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         }
                         else
                         {
-                            Debug.Assert(lastKind == ControlFlowRegionKind.Catch || lastKind == ControlFlowRegionKind.FilterAndHandler);
+                            Debug.Assert(
+                                lastKind == ControlFlowRegionKind.Catch
+                                    || lastKind == ControlFlowRegionKind.FilterAndHandler
+                            );
                         }
                         break;
 
@@ -198,10 +232,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 region.Enclosing = null;
             }
 
-            public void ReplaceRegion(RegionBuilder toReplace, ArrayBuilder<RegionBuilder> replaceWith)
+            public void ReplaceRegion(
+                RegionBuilder toReplace,
+                ArrayBuilder<RegionBuilder> replaceWith
+            )
             {
                 Debug.Assert(toReplace.Enclosing == this);
-                Debug.Assert(toReplace.FirstBlock!.Ordinal <= replaceWith.First().FirstBlock!.Ordinal);
+                Debug.Assert(
+                    toReplace.FirstBlock!.Ordinal <= replaceWith.First().FirstBlock!.Ordinal
+                );
                 Debug.Assert(toReplace.LastBlock!.Ordinal >= replaceWith.Last().LastBlock!.Ordinal);
                 Debug.Assert(Regions != null);
 
@@ -248,10 +287,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public void ExtendToInclude(BasicBlockBuilder block)
             {
                 Debug.Assert(block != null);
-                Debug.Assert((Kind != ControlFlowRegionKind.FilterAndHandler &&
-                              Kind != ControlFlowRegionKind.TryAndCatch &&
-                              Kind != ControlFlowRegionKind.TryAndFinally) ||
-                              Regions!.Last().LastBlock == block);
+                Debug.Assert(
+                    (
+                        Kind != ControlFlowRegionKind.FilterAndHandler
+                        && Kind != ControlFlowRegionKind.TryAndCatch
+                        && Kind != ControlFlowRegionKind.TryAndFinally
+                    )
+                        || Regions!.Last().LastBlock == block
+                );
 
                 if (FirstBlock == null)
                 {
@@ -281,7 +324,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
 #if DEBUG
                 Debug.Assert(_aboutToFree);
-#endif 
+#endif
                 Enclosing = null;
                 FirstBlock = null;
                 LastBlock = null;
@@ -293,15 +336,23 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 CaptureIds = null;
             }
 
-            public ControlFlowRegion ToImmutableRegionAndFree(ArrayBuilder<BasicBlockBuilder> blocks,
-                                                              ArrayBuilder<IMethodSymbol> localFunctions,
-                                                              ImmutableDictionary<IMethodSymbol, (ControlFlowRegion region, ILocalFunctionOperation operation, int ordinal)>.Builder localFunctionsMap,
-                                                              ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder? anonymousFunctionsMapOpt,
-                                                              ControlFlowRegion? enclosing)
+            public ControlFlowRegion ToImmutableRegionAndFree(
+                ArrayBuilder<BasicBlockBuilder> blocks,
+                ArrayBuilder<IMethodSymbol> localFunctions,
+                ImmutableDictionary<
+                    IMethodSymbol,
+                    (ControlFlowRegion region, ILocalFunctionOperation operation, int ordinal)
+                >.Builder localFunctionsMap,
+                ImmutableDictionary<
+                    IFlowAnonymousFunctionOperation,
+                    (ControlFlowRegion region, int ordinal)
+                >.Builder? anonymousFunctionsMapOpt,
+                ControlFlowRegion? enclosing
+            )
             {
 #if DEBUG
                 Debug.Assert(!_aboutToFree);
-#endif 
+#endif
                 Debug.Assert(!IsEmpty);
 
                 int localFunctionsBefore = localFunctions.Count;
@@ -322,7 +373,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                     foreach (RegionBuilder region in Regions)
                     {
-                        builder.Add(region.ToImmutableRegionAndFree(blocks, localFunctions, localFunctionsMap, anonymousFunctionsMapOpt, enclosing: null));
+                        builder.Add(
+                            region.ToImmutableRegionAndFree(
+                                blocks,
+                                localFunctions,
+                                localFunctionsMap,
+                                anonymousFunctionsMapOpt,
+                                enclosing: null
+                            )
+                        );
                     }
 
                     subRegions = builder.ToImmutableAndFree();
@@ -334,16 +393,25 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 CaptureIds?.Sort((x, y) => x.Value.CompareTo(y.Value));
 
-                var result = new ControlFlowRegion(Kind, FirstBlock.Ordinal, LastBlock.Ordinal, subRegions,
-                                                   Locals,
-                                                   LocalFunctions?.SelectAsArray(((IMethodSymbol, ILocalFunctionOperation) tuple) => tuple.Item1) ?? default,
-                                                   CaptureIds?.ToImmutable() ?? default,
-                                                   ExceptionType,
-                                                   enclosing);
+                var result = new ControlFlowRegion(
+                    Kind,
+                    FirstBlock.Ordinal,
+                    LastBlock.Ordinal,
+                    subRegions,
+                    Locals,
+                    LocalFunctions?.SelectAsArray(
+                        ((IMethodSymbol, ILocalFunctionOperation) tuple) => tuple.Item1
+                    ) ?? default,
+                    CaptureIds?.ToImmutable() ?? default,
+                    ExceptionType,
+                    enclosing
+                );
 
                 if (HasLocalFunctions)
                 {
-                    foreach ((IMethodSymbol method, ILocalFunctionOperation operation) in LocalFunctions)
+                    foreach (
+                        (IMethodSymbol method, ILocalFunctionOperation operation) in LocalFunctions
+                    )
                     {
                         localFunctionsMap.Add(method, (result, operation, localFunctionsBefore++));
                     }
@@ -368,7 +436,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
 #if DEBUG
                 AboutToFree();
-#endif 
+#endif
                 Free();
                 return result;
 
@@ -380,7 +448,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     // Populate the map of IFlowAnonymousFunctionOperation nodes, if we have any
                     if (anonymousFunctionsMapOpt != null)
                     {
-                        (ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder map, ControlFlowRegion region) argument = (anonymousFunctionsMapOpt, result);
+                        (
+                            ImmutableDictionary<
+                                IFlowAnonymousFunctionOperation,
+                                (ControlFlowRegion region, int ordinal)
+                            >.Builder map,
+                            ControlFlowRegion region
+                        ) argument = (anonymousFunctionsMapOpt, result);
 
                         if (block.HasStatements)
                         {
@@ -395,27 +469,60 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
             }
 
-            private sealed class AnonymousFunctionsMapBuilder :
-                OperationVisitor<(ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder map, ControlFlowRegion region), IOperation>
+            private sealed class AnonymousFunctionsMapBuilder
+                : OperationVisitor<
+                    (
+                        ImmutableDictionary<
+                            IFlowAnonymousFunctionOperation,
+                            (ControlFlowRegion region, int ordinal)
+                        >.Builder map,
+                        ControlFlowRegion region
+                    ),
+                    IOperation
+                >
             {
-                public static readonly AnonymousFunctionsMapBuilder Instance = new AnonymousFunctionsMapBuilder();
+                public static readonly AnonymousFunctionsMapBuilder Instance =
+                    new AnonymousFunctionsMapBuilder();
 
                 public override IOperation? VisitFlowAnonymousFunction(
                     IFlowAnonymousFunctionOperation operation,
-                    (ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder map, ControlFlowRegion region) argument)
+                    (
+                        ImmutableDictionary<
+                            IFlowAnonymousFunctionOperation,
+                            (ControlFlowRegion region, int ordinal)
+                        >.Builder map,
+                        ControlFlowRegion region
+                    ) argument
+                )
                 {
                     argument.map.Add(operation, (argument.region, argument.map.Count));
                     return base.VisitFlowAnonymousFunction(operation, argument);
                 }
 
-                internal override IOperation? VisitNoneOperation(IOperation operation, (ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder map, ControlFlowRegion region) argument)
+                internal override IOperation? VisitNoneOperation(
+                    IOperation operation,
+                    (
+                        ImmutableDictionary<
+                            IFlowAnonymousFunctionOperation,
+                            (ControlFlowRegion region, int ordinal)
+                        >.Builder map,
+                        ControlFlowRegion region
+                    ) argument
+                )
                 {
                     return DefaultVisit(operation, argument);
                 }
 
                 public override IOperation? DefaultVisit(
                     IOperation operation,
-                    (ImmutableDictionary<IFlowAnonymousFunctionOperation, (ControlFlowRegion region, int ordinal)>.Builder map, ControlFlowRegion region) argument)
+                    (
+                        ImmutableDictionary<
+                            IFlowAnonymousFunctionOperation,
+                            (ControlFlowRegion region, int ordinal)
+                        >.Builder map,
+                        ControlFlowRegion region
+                    ) argument
+                )
                 {
                     foreach (IOperation child in ((Operation)operation).ChildOperations)
                     {

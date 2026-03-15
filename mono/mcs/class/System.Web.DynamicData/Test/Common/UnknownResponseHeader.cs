@@ -10,7 +10,7 @@ namespace MonoTests.Common
         private string name;
         private string value;
 
-        public UnknownResponseHeader (string name, string value)
+        public UnknownResponseHeader(string name, string value)
         {
             this.name = name;
             this.value = value;

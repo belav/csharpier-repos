@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -17,24 +17,25 @@ namespace System.ComponentModel {
 #if !FEATURE_NETCORE
     [HostProtection(SharedState = true)]
 #endif
-    public class DataErrorsChangedEventArgs : EventArgs {
+    public class DataErrorsChangedEventArgs : EventArgs
+    {
         private readonly string propertyName;
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.ComponentModel.DataErrorsChangedEventArgs'/>
         /// class.</para>
         /// </devdoc>
-        public DataErrorsChangedEventArgs(string propertyName) {
+        public DataErrorsChangedEventArgs(string propertyName)
+        {
             this.propertyName = propertyName;
         }
 
         /// <devdoc>
         ///    <para>Indicates the name of the property whose errors changed.</para>
         /// </devdoc>
-        public virtual string PropertyName {
-            get {
-                return propertyName;
-            }
+        public virtual string PropertyName
+        {
+            get { return propertyName; }
         }
     }
 }

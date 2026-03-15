@@ -7,17 +7,18 @@ namespace System.Web.Services.Configuration
     using System;
     using System.Configuration;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Security.Permissions;
     using System.Threading;
     using System.Web.Configuration;
     using System.Web.Hosting;
     using System.Xml;
-    using System.Runtime.CompilerServices;
 
     public sealed class WsdlHelpGeneratorElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
-        public WsdlHelpGeneratorElement() : base()
+        // These three constructors are used by the configuration system.
+        public WsdlHelpGeneratorElement()
+            : base()
         {
             this.properties.Add(this.href);
         }
@@ -43,9 +44,9 @@ namespace System.Web.Services.Configuration
         public string Href
         {
             get { return (string)base[this.href]; }
-            set 
+            set
             {
-                if (value == null) 
+                if (value == null)
                 {
                     value = string.Empty;
                 }
@@ -67,17 +68,19 @@ namespace System.Web.Services.Configuration
             PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
             base.DeserializeElement(reader, serializeCollectionKey);
-            
 
             // Update paths
             // If we're not running in the context of a web application then skip this setting.
 #if MONO_BROKEN_CONFIGURATION_DLL
-			try {
-				var hack = this.EvaluationContext;
-			} catch (ConfigurationErrorsException) {
-				this.actualPath = GetConfigurationDirectory();
-				return;
-			}
+            try
+            {
+                var hack = this.EvaluationContext;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                this.actualPath = GetConfigurationDirectory();
+                return;
+            }
 #endif
             ContextInformation context = this.EvaluationContext;
             WebContext webContext = context.HostingContext as WebContext;
@@ -92,9 +95,9 @@ namespace System.Web.Services.Configuration
             string tempVirtualPath = webContext.Path;
             string path = null;
 
-            // If the help page is not in the web app directory hierarchy (the case 
+            // If the help page is not in the web app directory hierarchy (the case
             // for those specified in machine.config like DefaultWsdlHelpGenerator.aspx)
-            // then we can't construct a true virtual path. This means that certain web 
+            // then we can't construct a true virtual path. This means that certain web
             // form features that rely on relative paths won't work.
 
             if (tempVirtualPath == null)
@@ -124,13 +127,16 @@ namespace System.Web.Services.Configuration
 
             WsdlHelpGeneratorElement parent = (WsdlHelpGeneratorElement)parentElement;
 #if MONO_BROKEN_CONFIGURATION_DLL
-			try {
-				var hack = this.EvaluationContext;
-			} catch (ConfigurationErrorsException) {
-				base.Reset(parentElement);
-				this.actualPath = GetConfigurationDirectory();
-				return;
-			}
+            try
+            {
+                var hack = this.EvaluationContext;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                base.Reset(parentElement);
+                this.actualPath = GetConfigurationDirectory();
+                return;
+            }
 #endif
             ContextInformation context = this.EvaluationContext;
             WebContext webContext = context.HostingContext as WebContext;
@@ -145,7 +151,10 @@ namespace System.Web.Services.Configuration
                     tempVirtualPath = HostingEnvironment.ApplicationVirtualPath;
                 }
 
-                if ((tempVirtualPath != null) && !tempVirtualPath.EndsWith("/", StringComparison.Ordinal))
+                if (
+                    (tempVirtualPath != null)
+                    && !tempVirtualPath.EndsWith("/", StringComparison.Ordinal)
+                )
                 {
                     tempVirtualPath += "/";
                 }
@@ -173,11 +182,17 @@ namespace System.Web.Services.Configuration
                 this.virtualPath = HostingEnvironment.ApplicationVirtualPath;
             }
             this.actualPath = this.GetConfigurationDirectory();
-            if ((this.virtualPath != null) && (!this.virtualPath.EndsWith("/", StringComparison.Ordinal)))
+            if (
+                (this.virtualPath != null)
+                && (!this.virtualPath.EndsWith("/", StringComparison.Ordinal))
+            )
             {
                 this.virtualPath += "/";
             }
-            if ((this.actualPath != null) && (!this.actualPath.EndsWith(@"\", StringComparison.Ordinal)))
+            if (
+                (this.actualPath != null)
+                && (!this.actualPath.EndsWith(@"\", StringComparison.Ordinal))
+            )
             {
                 this.actualPath += "\\";
             }
@@ -186,7 +201,7 @@ namespace System.Web.Services.Configuration
             this.needToValidateHref = true;
         }
 
-        static void CheckIOReadPermission(string path, string file) 
+        static void CheckIOReadPermission(string path, string file)
         {
             if (path == null)
                 return;
@@ -195,12 +210,14 @@ namespace System.Web.Services.Configuration
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-        readonly ConfigurationProperty href = new ConfigurationProperty("href", typeof(string), null, ConfigurationPropertyOptions.IsRequired);
+        readonly ConfigurationProperty href = new ConfigurationProperty(
+            "href",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsRequired
+        );
         string virtualPath = null;
         string actualPath = null;
         bool needToValidateHref = false;
     }
 }
-
-
-

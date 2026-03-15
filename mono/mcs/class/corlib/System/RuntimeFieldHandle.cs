@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,100 +32,123 @@
 //
 
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace System
 {
-	[ComVisible (true)]
-	[Serializable]
-	public struct RuntimeFieldHandle : ISerializable
-	{
-		IntPtr value;
+    [ComVisible(true)]
+    [Serializable]
+    public struct RuntimeFieldHandle : ISerializable
+    {
+        IntPtr value;
 
-		internal RuntimeFieldHandle (IntPtr v)
-		{
-			value = v;
-		}
+        internal RuntimeFieldHandle(IntPtr v)
+        {
+            value = v;
+        }
 
-		RuntimeFieldHandle (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
+        RuntimeFieldHandle(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
 
-			RuntimeFieldInfo mf = ((RuntimeFieldInfo) info.GetValue ("FieldObj", typeof (RuntimeFieldInfo)));
-			value = mf.FieldHandle.Value;
-			if (value == IntPtr.Zero)
-				throw new SerializationException ("Insufficient state.");
-		}
+            RuntimeFieldInfo mf = (
+                (RuntimeFieldInfo)info.GetValue("FieldObj", typeof(RuntimeFieldInfo))
+            );
+            value = mf.FieldHandle.Value;
+            if (value == IntPtr.Zero)
+                throw new SerializationException("Insufficient state.");
+        }
 
-		public IntPtr Value {
-			get {
-				return value;
-			}
-		}
+        public IntPtr Value
+        {
+            get { return value; }
+        }
 
-		internal bool IsNullHandle ()
-		{
-			return value == IntPtr.Zero;
-		}
+        internal bool IsNullHandle()
+        {
+            return value == IntPtr.Zero;
+        }
 
-		public void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
 
-			if (value == IntPtr.Zero)
-				throw new SerializationException ("Object fields may not be properly initialized");
+            if (value == IntPtr.Zero)
+                throw new SerializationException("Object fields may not be properly initialized");
 
-			info.AddValue ("FieldObj", (RuntimeFieldInfo) FieldInfo.GetFieldFromHandle (this), typeof (RuntimeFieldInfo));
-		}
+            info.AddValue(
+                "FieldObj",
+                (RuntimeFieldInfo)FieldInfo.GetFieldFromHandle(this),
+                typeof(RuntimeFieldInfo)
+            );
+        }
 
-		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-		public override bool Equals (object obj)
-		{
-			if (obj == null || GetType () != obj.GetType ())
-				return false;
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
 
-			return value == ((RuntimeFieldHandle)obj).Value;
-		}
+            return value == ((RuntimeFieldHandle)obj).Value;
+        }
 
-		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-		public bool Equals (RuntimeFieldHandle handle)
-		{
-			return value == handle.Value;
-		}
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        public bool Equals(RuntimeFieldHandle handle)
+        {
+            return value == handle.Value;
+        }
 
-		public override int GetHashCode ()
-		{
-			return value.GetHashCode ();
-		}
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
 
-		public static bool operator == (RuntimeFieldHandle left, RuntimeFieldHandle right)
-		{
-			return left.Equals (right);
-		}
+        public static bool operator ==(RuntimeFieldHandle left, RuntimeFieldHandle right)
+        {
+            return left.Equals(right);
+        }
 
-		public static bool operator != (RuntimeFieldHandle left, RuntimeFieldHandle right)
-		{
-			return !left.Equals (right);
-		}
+        public static bool operator !=(RuntimeFieldHandle left, RuntimeFieldHandle right)
+        {
+            return !left.Equals(right);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		static extern void SetValueInternal (FieldInfo fi, object obj, object value);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void SetValueInternal(FieldInfo fi, object obj, object value);
 
-		internal static void SetValue (RuntimeFieldInfo field, Object obj, Object value, RuntimeType fieldType, FieldAttributes fieldAttr, RuntimeType declaringType, ref bool domainInitialized)
-		{
-			SetValueInternal (field, obj, value);
-		}
+        internal static void SetValue(
+            RuntimeFieldInfo field,
+            Object obj,
+            Object value,
+            RuntimeType fieldType,
+            FieldAttributes fieldAttr,
+            RuntimeType declaringType,
+            ref bool domainInitialized
+        )
+        {
+            SetValueInternal(field, obj, value);
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		static unsafe extern internal Object GetValueDirect (RuntimeFieldInfo field, RuntimeType fieldType, void *pTypedRef, RuntimeType contextType);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe Object GetValueDirect(
+            RuntimeFieldInfo field,
+            RuntimeType fieldType,
+            void* pTypedRef,
+            RuntimeType contextType
+        );
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		static unsafe extern internal void SetValueDirect (RuntimeFieldInfo field, RuntimeType fieldType, void* pTypedRef, Object value, RuntimeType contextType);
-	}
-
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern unsafe void SetValueDirect(
+            RuntimeFieldInfo field,
+            RuntimeType fieldType,
+            void* pTypedRef,
+            Object value,
+            RuntimeType contextType
+        );
+    }
 }

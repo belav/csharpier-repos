@@ -6,17 +6,17 @@ namespace System.ServiceModel.MsmqIntegration
     public enum MsmqIntegrationSecurityMode
     {
         None,
-        Transport
+        Transport,
     }
 
     static class MsmqIntegrationSecurityModeHelper
     {
         internal static bool IsDefined(MsmqIntegrationSecurityMode value)
         {
-            return (value == MsmqIntegrationSecurityMode.Transport 
-                || value == MsmqIntegrationSecurityMode.None);
+            return (
+                value == MsmqIntegrationSecurityMode.Transport
+                || value == MsmqIntegrationSecurityMode.None
+            );
         }
     }
 }
-
-

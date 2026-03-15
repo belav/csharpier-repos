@@ -7,7 +7,11 @@ using Microsoft.Web.Mvc.Properties;
 
 namespace Microsoft.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class ContentTypeAttribute : ActionFilterAttribute
     {
         public ContentTypeAttribute(string contentType)

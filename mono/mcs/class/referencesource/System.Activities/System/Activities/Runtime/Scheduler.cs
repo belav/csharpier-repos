@@ -7,10 +7,10 @@ namespace System.Activities.Runtime
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Threading;
-    using System.Runtime.Diagnostics;
 
     [DataContract(Name = XD.Runtime.Scheduler, Namespace = XD.Runtime.Namespace)]
     class Scheduler
@@ -21,7 +21,9 @@ namespace System.Activities.Runtime
 
         WorkItem firstWorkItem;
 
-        static SendOrPostCallback onScheduledWorkCallback = Fx.ThunkCallback(new SendOrPostCallback(OnScheduledWork));
+        static SendOrPostCallback onScheduledWorkCallback = Fx.ThunkCallback(
+            new SendOrPostCallback(OnScheduledWork)
+        );
 
         SynchronizationContext synchronizationContext;
 
@@ -41,42 +43,27 @@ namespace System.Activities.Runtime
 
         public static RequestedAction Continue
         {
-            get
-            {
-                return continueAction;
-            }
+            get { return continueAction; }
         }
 
         public static RequestedAction YieldSilently
         {
-            get
-            {
-                return yieldSilentlyAction;
-            }
+            get { return yieldSilentlyAction; }
         }
 
         public static RequestedAction Abort
         {
-            get
-            {
-                return abortAction;
-            }
+            get { return abortAction; }
         }
 
         public bool IsRunning
         {
-            get
-            {
-                return this.isRunning;
-            }
+            get { return this.isRunning; }
         }
 
         public bool IsIdle
         {
-            get
-            {
-                return this.firstWorkItem == null;
-            }
+            get { return this.firstWorkItem == null; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "firstWorkItem")]
@@ -114,7 +101,8 @@ namespace System.Activities.Runtime
         {
             if (this.firstWorkItem != null)
             {
-                ActivityInstanceMap.IActivityReference activityReference = this.firstWorkItem as ActivityInstanceMap.IActivityReference;
+                ActivityInstanceMap.IActivityReference activityReference =
+                    this.firstWorkItem as ActivityInstanceMap.IActivityReference;
                 if (activityReference != null)
                 {
                     instanceMap.AddEntry(activityReference, true);
@@ -124,7 +112,8 @@ namespace System.Activities.Runtime
                 {
                     for (int i = 0; i < this.workItemQueue.Count; i++)
                     {
-                        activityReference = this.workItemQueue[i] as ActivityInstanceMap.IActivityReference;
+                        activityReference =
+                            this.workItemQueue[i] as ActivityInstanceMap.IActivityReference;
                         if (activityReference != null)
                         {
                             instanceMap.AddEntry(activityReference, true);
@@ -134,7 +123,10 @@ namespace System.Activities.Runtime
             }
         }
 
-        public static RequestedAction CreateNotifyUnhandledExceptionAction(Exception exception, ActivityInstance sourceInstance)
+        public static RequestedAction CreateNotifyUnhandledExceptionAction(
+            Exception exception,
+            ActivityInstance sourceInstance
+        )
         {
             return new NotifyUnhandledExceptionAction(exception, sourceInstance);
         }
@@ -156,7 +148,10 @@ namespace System.Activities.Runtime
                 }
             }
 
-            Fx.Assert(this.workItemQueue == null || this.workItemQueue.Count == 0, "We either didn't have a first work item and therefore don't have anything in the queue, or we drained the queue.");
+            Fx.Assert(
+                this.workItemQueue == null || this.workItemQueue.Count == 0,
+                "We either didn't have a first work item and therefore don't have anything in the queue, or we drained the queue."
+            );
 
             // For consistency we set this to null even if it is empty
             this.workItemQueue = null;
@@ -165,14 +160,20 @@ namespace System.Activities.Runtime
         public void OnDeserialized(Callbacks callbacks)
         {
             Initialize(callbacks);
-            Fx.Assert(this.firstWorkItem != null || this.workItemQueue == null, "cannot have items in the queue unless we also have a firstWorkItem set");
+            Fx.Assert(
+                this.firstWorkItem != null || this.workItemQueue == null,
+                "cannot have items in the queue unless we also have a firstWorkItem set"
+            );
         }
 
         // This method should only be called when we relinquished the thread but did not
         // complete the operation (silent yield is the current example)
         public void InternalResume(RequestedAction action)
         {
-            Fx.Assert(this.isRunning, "We should still be processing work - we just don't have a thread");
+            Fx.Assert(
+                this.isRunning,
+                "We should still be processing work - we just don't have a thread"
+            );
 
             bool isTracingEnabled = FxTrace.ShouldTraceInformation;
             bool notifiedCompletion = false;
@@ -202,9 +203,13 @@ namespace System.Activities.Runtime
             }
             else
             {
-                Fx.Assert(action is NotifyUnhandledExceptionAction, "This is the only other choice because we should never have YieldSilently here");
+                Fx.Assert(
+                    action is NotifyUnhandledExceptionAction,
+                    "This is the only other choice because we should never have YieldSilently here"
+                );
 
-                NotifyUnhandledExceptionAction notifyAction = (NotifyUnhandledExceptionAction)action;
+                NotifyUnhandledExceptionAction notifyAction =
+                    (NotifyUnhandledExceptionAction)action;
 
                 // We only set isRunning back to false so that the host doesn't
                 // have to treat this like a pause notification.  As an example,
@@ -223,7 +228,10 @@ namespace System.Activities.Runtime
                     isInstanceComplete = this.callbacks.IsCompleted;
                 }
 
-                this.callbacks.NotifyUnhandledException(notifyAction.Exception, notifyAction.Source);
+                this.callbacks.NotifyUnhandledException(
+                    notifyAction.Exception,
+                    notifyAction.Source
+                );
             }
 
             if (isTracingEnabled)
@@ -272,21 +280,30 @@ namespace System.Activities.Runtime
 
         public void Open(SynchronizationContext synchronizationContext)
         {
-            Fx.Assert(this.synchronizationContext == null, "can only open when in the created state");
+            Fx.Assert(
+                this.synchronizationContext == null,
+                "can only open when in the created state"
+            );
             if (synchronizationContext != null)
             {
                 this.synchronizationContext = synchronizationContext;
             }
             else
             {
-                this.synchronizationContext = SynchronizationContextHelper.GetDefaultSynchronizationContext();
+                this.synchronizationContext =
+                    SynchronizationContextHelper.GetDefaultSynchronizationContext();
             }
         }
 
         internal void Open(Scheduler oldScheduler)
         {
-            Fx.Assert(this.synchronizationContext == null, "can only open when in the created state");
-            this.synchronizationContext = SynchronizationContextHelper.CloneSynchronizationContext(oldScheduler.synchronizationContext);
+            Fx.Assert(
+                this.synchronizationContext == null,
+                "can only open when in the created state"
+            );
+            this.synchronizationContext = SynchronizationContextHelper.CloneSynchronizationContext(
+                oldScheduler.synchronizationContext
+            );
         }
 
         void ScheduleWork(bool notifyStart)
@@ -324,7 +341,10 @@ namespace System.Activities.Runtime
 
         public void Resume()
         {
-            Fx.Assert(this.isRunning, "This should only be called after we've been set to process work.");
+            Fx.Assert(
+                this.isRunning,
+                "This should only be called after we've been set to process work."
+            );
 
             if (this.IsIdle || this.isPausing || this.callbacks.IsAbortPending)
             {
@@ -392,7 +412,9 @@ namespace System.Activities.Runtime
 
             // We snapshot these values here so that we can
             // use them after calling OnSchedulerIdle.
-            bool isTracingEnabled = FxTrace.Trace.ShouldTraceToTraceSource(TraceEventLevel.Informational);
+            bool isTracingEnabled = FxTrace.Trace.ShouldTraceToTraceSource(
+                TraceEventLevel.Informational
+            );
             Guid oldActivityId = Guid.Empty;
             Guid workflowInstanceId = Guid.Empty;
 
@@ -473,9 +495,13 @@ namespace System.Activities.Runtime
             }
             else if (!object.ReferenceEquals(nextAction, yieldSilentlyAction))
             {
-                Fx.Assert(nextAction is NotifyUnhandledExceptionAction, "This is the only other option");
+                Fx.Assert(
+                    nextAction is NotifyUnhandledExceptionAction,
+                    "This is the only other option"
+                );
 
-                NotifyUnhandledExceptionAction notifyAction = (NotifyUnhandledExceptionAction)nextAction;
+                NotifyUnhandledExceptionAction notifyAction =
+                    (NotifyUnhandledExceptionAction)nextAction;
 
                 // We only set isRunning back to false so that the host doesn't
                 // have to treat this like a pause notification.  As an example,
@@ -494,7 +520,10 @@ namespace System.Activities.Runtime
                     isInstanceComplete = thisPtr.callbacks.IsCompleted;
                 }
 
-                thisPtr.callbacks.NotifyUnhandledException(notifyAction.Exception, notifyAction.Source);
+                thisPtr.callbacks.NotifyUnhandledException(
+                    notifyAction.Exception,
+                    notifyAction.Source
+                );
             }
 
             if (isTracingEnabled)
@@ -532,33 +561,31 @@ namespace System.Activities.Runtime
 
             public Guid WorkflowInstanceId
             {
-                get
-                {
-                    return this.activityExecutor.WorkflowInstanceId;
-                }
+                get { return this.activityExecutor.WorkflowInstanceId; }
             }
 
             public bool IsAbortPending
             {
                 get
                 {
-                    return this.activityExecutor.IsAbortPending || this.activityExecutor.IsTerminatePending;
+                    return this.activityExecutor.IsAbortPending
+                        || this.activityExecutor.IsTerminatePending;
                 }
             }
 
             public bool IsCompleted
             {
-                get
-                {
-                    return ActivityUtilities.IsCompletedState(this.activityExecutor.State);
-                }
+                get { return ActivityUtilities.IsCompletedState(this.activityExecutor.State); }
             }
 
             public RequestedAction ExecuteWorkItem(WorkItem workItem)
             {
-                Fx.Assert(this.activityExecutor != null, "ActivityExecutor null in ExecuteWorkItem.");
+                Fx.Assert(
+                    this.activityExecutor != null,
+                    "ActivityExecutor null in ExecuteWorkItem."
+                );
 
-                // We check the Verbose flag to avoid the 
+                // We check the Verbose flag to avoid the
                 // virt call if possible
                 if (FxTrace.ShouldTraceVerboseToTraceSource)
                 {
@@ -569,14 +596,17 @@ namespace System.Activities.Runtime
 
                 if (!object.ReferenceEquals(action, Scheduler.YieldSilently))
                 {
-                    if (this.activityExecutor.IsAbortPending || this.activityExecutor.IsTerminatePending)
+                    if (
+                        this.activityExecutor.IsAbortPending
+                        || this.activityExecutor.IsTerminatePending
+                    )
                     {
                         action = Scheduler.Abort;
                     }
 
                     // if the caller yields, then the work item is still active and the callback
-                    // is responsible for releasing it back to the pool                    
-                    workItem.Dispose(this.activityExecutor);                    
+                    // is responsible for releasing it back to the pool
+                    workItem.Dispose(this.activityExecutor);
                 }
 
                 return action;
@@ -590,43 +620,41 @@ namespace System.Activities.Runtime
 
             public void ThreadAcquired()
             {
-                Fx.Assert(this.activityExecutor != null, "ActivityExecutor null in ThreadAcquired.");
+                Fx.Assert(
+                    this.activityExecutor != null,
+                    "ActivityExecutor null in ThreadAcquired."
+                );
                 this.activityExecutor.OnSchedulerThreadAcquired();
             }
 
             public void NotifyUnhandledException(Exception exception, ActivityInstance source)
             {
-                Fx.Assert(this.activityExecutor != null, "ActivityExecutor null in NotifyUnhandledException.");
+                Fx.Assert(
+                    this.activityExecutor != null,
+                    "ActivityExecutor null in NotifyUnhandledException."
+                );
                 this.activityExecutor.NotifyUnhandledException(exception, source);
             }
         }
 
         internal abstract class RequestedAction
         {
-            protected RequestedAction()
-            {
-            }
+            protected RequestedAction() { }
         }
 
         class ContinueAction : RequestedAction
         {
-            public ContinueAction()
-            {
-            }
+            public ContinueAction() { }
         }
 
         class YieldSilentlyAction : RequestedAction
         {
-            public YieldSilentlyAction()
-            {
-            }
+            public YieldSilentlyAction() { }
         }
 
         class AbortAction : RequestedAction
         {
-            public AbortAction()
-            {
-            }
+            public AbortAction() { }
         }
 
         class NotifyUnhandledExceptionAction : RequestedAction
@@ -637,18 +665,9 @@ namespace System.Activities.Runtime
                 this.Source = source;
             }
 
-            public Exception Exception
-            {
-                get;
-                private set;
-            }
+            public Exception Exception { get; private set; }
 
-            public ActivityInstance Source
-            {
-                get;
-                private set;
-            }
+            public ActivityInstance Source { get; private set; }
         }
     }
 }
-

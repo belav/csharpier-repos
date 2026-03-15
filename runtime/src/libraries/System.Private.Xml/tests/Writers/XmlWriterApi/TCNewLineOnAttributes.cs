@@ -18,7 +18,11 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.NewLineOnAttributes = true;
 
             XmlWriter w = utils.CreateWriter(wSettings);
-            CError.Compare(w.Settings.NewLineOnAttributes, false, "Mismatch in NewLineOnAttributes");
+            CError.Compare(
+                w.Settings.NewLineOnAttributes,
+                false,
+                "Mismatch in NewLineOnAttributes"
+            );
 
             w.WriteStartElement("root");
             w.WriteAttributeString("attr1", "value1");
@@ -47,7 +51,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root" + wSettings.NewLineChars + "  attr1=\"value1\"" + wSettings.NewLineChars + "  attr2=\"value2\" />"));
+            Assert.True(
+                utils.CompareString(
+                    "<root"
+                        + wSettings.NewLineChars
+                        + "  attr1=\"value1\""
+                        + wSettings.NewLineChars
+                        + "  attr2=\"value2\" />"
+                )
+            );
         }
 
         [Theory]

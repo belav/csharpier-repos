@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SemanticDocument document,
             SyntaxAnnotation firstTokenAnnotation,
             SyntaxAnnotation lastTokenAnnotation,
-            bool selectionChanged)
+            bool selectionChanged
+        )
         {
             OriginalSpan = originalSpan;
             FinalSpan = finalSpan;
@@ -45,7 +46,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         }
 
         protected abstract ISyntaxFacts SyntaxFacts { get; }
-        protected abstract bool UnderAnonymousOrLocalMethod(SyntaxToken token, SyntaxToken firstToken, SyntaxToken lastToken);
+        protected abstract bool UnderAnonymousOrLocalMethod(
+            SyntaxToken token,
+            SyntaxToken firstToken,
+            SyntaxToken lastToken
+        );
 
         public abstract TStatementSyntax GetFirstStatementUnderContainer();
         public abstract TStatementSyntax GetLastStatementUnderContainer();
@@ -53,7 +58,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public abstract bool ContainingScopeHasAsyncKeyword();
 
         public abstract SyntaxNode GetContainingScope();
-        public abstract SyntaxNode GetOutermostCallSiteContainerToProcess(CancellationToken cancellationToken);
+        public abstract SyntaxNode GetOutermostCallSiteContainerToProcess(
+            CancellationToken cancellationToken
+        );
 
         public abstract (ITypeSymbol returnType, bool returnsByRef) GetReturnType();
 
@@ -87,13 +94,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             return clone;
         }
 
-        public SyntaxToken GetFirstTokenInSelection()
-            => SemanticDocument.GetTokenWithAnnotation(FirstTokenAnnotation);
+        public SyntaxToken GetFirstTokenInSelection() =>
+            SemanticDocument.GetTokenWithAnnotation(FirstTokenAnnotation);
 
-        public SyntaxToken GetLastTokenInSelection()
-            => SemanticDocument.GetTokenWithAnnotation(LastTokenAnnotation);
+        public SyntaxToken GetLastTokenInSelection() =>
+            SemanticDocument.GetTokenWithAnnotation(LastTokenAnnotation);
 
-        public TNode GetContainingScopeOf<TNode>() where TNode : SyntaxNode
+        public TNode GetContainingScopeOf<TNode>()
+            where TNode : SyntaxNode
         {
             var containingScope = GetContainingScope();
             return containingScope.GetAncestorOrThis<TNode>();
@@ -104,7 +112,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var firstStatement = this.GetFirstStatement();
             var lastStatement = this.GetLastStatement();
 
-            return firstStatement == lastStatement || firstStatement.Span.Contains(lastStatement.Span);
+            return firstStatement == lastStatement
+                || firstStatement.Span.Contains(lastStatement.Span);
         }
 
         public bool IsExtractMethodOnMultipleStatements()
@@ -116,7 +125,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 var firstUnderContainer = this.GetFirstStatementUnderContainer();
                 var lastUnderContainer = this.GetLastStatementUnderContainer();
-                Contract.ThrowIfFalse(this.SyntaxFacts.AreStatementsInSameContainer(firstUnderContainer, lastUnderContainer));
+                Contract.ThrowIfFalse(
+                    this.SyntaxFacts.AreStatementsInSameContainer(
+                        firstUnderContainer,
+                        lastUnderContainer
+                    )
+                );
                 return true;
             }
 
@@ -145,9 +159,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var lastToken = GetLastTokenInSelection();
             var syntaxFacts = SemanticDocument.Project.Services.GetService<ISyntaxFactsService>();
 
-            for (var currentToken = firstToken;
+            for (
+                var currentToken = firstToken;
                 currentToken.Span.End < lastToken.SpanStart;
-                currentToken = currentToken.GetNextToken())
+                currentToken = currentToken.GetNextToken()
+            )
             {
                 // [|
                 //     async () => await ....
@@ -155,8 +171,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 //
                 // for the case above, even if the selection contains "await", it doesn't belong to the enclosing block
                 // which extract method is applied to
-                if (syntaxFacts.IsAwaitKeyword(currentToken)
-                    && !UnderAnonymousOrLocalMethod(currentToken, firstToken, lastToken))
+                if (
+                    syntaxFacts.IsAwaitKeyword(currentToken)
+                    && !UnderAnonymousOrLocalMethod(currentToken, firstToken, lastToken)
+                )
                 {
                     return true;
                 }
@@ -179,7 +197,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (!node.Span.OverlapsWith(span))
                     continue;
 
-                if (IsConfigureAwaitFalse(node) && !UnderAnonymousOrLocalMethod(node.GetFirstToken(), firstToken, lastToken))
+                if (
+                    IsConfigureAwaitFalse(node)
+                    && !UnderAnonymousOrLocalMethod(node.GetFirstToken(), firstToken, lastToken)
+                )
                     return true;
             }
 
@@ -196,7 +217,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 var name = syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression);
                 var identifier = syntaxFacts.GetIdentifierOfSimpleName(name);
-                if (!syntaxFacts.StringComparer.Equals(identifier.ValueText, nameof(Task.ConfigureAwait)))
+                if (
+                    !syntaxFacts.StringComparer.Equals(
+                        identifier.ValueText,
+                        nameof(Task.ConfigureAwait)
+                    )
+                )
                     return false;
 
                 var arguments = syntaxFacts.GetArgumentsOfInvocationExpression(node);
@@ -210,28 +236,44 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         /// <summary>
         /// create a new root node from the given root after adding annotations to the tokens
-        /// 
+        ///
         /// tokens should belong to the given root
         /// </summary>
-        protected static SyntaxNode AddAnnotations(SyntaxNode root, IEnumerable<(SyntaxToken, SyntaxAnnotation)> pairs)
+        protected static SyntaxNode AddAnnotations(
+            SyntaxNode root,
+            IEnumerable<(SyntaxToken, SyntaxAnnotation)> pairs
+        )
         {
             Contract.ThrowIfNull(root);
 
-            var tokenMap = pairs.GroupBy(p => p.Item1, p => p.Item2).ToDictionary(g => g.Key, g => g.ToArray());
-            return root.ReplaceTokens(tokenMap.Keys, (o, n) => o.WithAdditionalAnnotations(tokenMap[o]));
+            var tokenMap = pairs
+                .GroupBy(p => p.Item1, p => p.Item2)
+                .ToDictionary(g => g.Key, g => g.ToArray());
+            return root.ReplaceTokens(
+                tokenMap.Keys,
+                (o, n) => o.WithAdditionalAnnotations(tokenMap[o])
+            );
         }
 
         /// <summary>
         /// create a new root node from the given root after adding annotations to the nodes
-        /// 
+        ///
         /// nodes should belong to the given root
         /// </summary>
-        protected static SyntaxNode AddAnnotations(SyntaxNode root, IEnumerable<(SyntaxNode, SyntaxAnnotation)> pairs)
+        protected static SyntaxNode AddAnnotations(
+            SyntaxNode root,
+            IEnumerable<(SyntaxNode, SyntaxAnnotation)> pairs
+        )
         {
             Contract.ThrowIfNull(root);
 
-            var tokenMap = pairs.GroupBy(p => p.Item1, p => p.Item2).ToDictionary(g => g.Key, g => g.ToArray());
-            return root.ReplaceNodes(tokenMap.Keys, (o, n) => o.WithAdditionalAnnotations(tokenMap[o]));
+            var tokenMap = pairs
+                .GroupBy(p => p.Item1, p => p.Item2)
+                .ToDictionary(g => g.Key, g => g.ToArray());
+            return root.ReplaceNodes(
+                tokenMap.Keys,
+                (o, n) => o.WithAdditionalAnnotations(tokenMap[o])
+            );
         }
     }
 }

@@ -8,19 +8,17 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
-    
+
     class DllHostedComPlusServiceHost : ComPlusServiceHost
     {
-        public DllHostedComPlusServiceHost (Guid clsid,
-                                            ServiceElement service,
-                                            ComCatalogObject applicationObject,
-                                            ComCatalogObject classObject)
+        public DllHostedComPlusServiceHost(
+            Guid clsid,
+            ServiceElement service,
+            ComCatalogObject applicationObject,
+            ComCatalogObject classObject
+        )
         {
-            Initialize (clsid,
-                        service,
-                        applicationObject,
-                        classObject,
-                        HostingMode.ComPlus);
+            Initialize(clsid, service, applicationObject, classObject, HostingMode.ComPlus);
         }
     }
 }

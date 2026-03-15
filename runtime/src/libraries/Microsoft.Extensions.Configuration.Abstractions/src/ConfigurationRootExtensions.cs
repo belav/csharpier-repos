@@ -33,22 +33,35 @@ namespace Microsoft.Extensions.Configuration
         ///   returns: A string value is used to assign as the Value of the configuration section
         /// </param>
         /// <returns> The debug view. </returns>
-        public static string GetDebugView(this IConfigurationRoot root, Func<ConfigurationDebugViewContext, string>? processValue)
+        public static string GetDebugView(
+            this IConfigurationRoot root,
+            Func<ConfigurationDebugViewContext, string>? processValue
+        )
         {
             void RecurseChildren(
                 StringBuilder stringBuilder,
                 IEnumerable<IConfigurationSection> children,
-                string indent)
+                string indent
+            )
             {
                 foreach (IConfigurationSection child in children)
                 {
-                    (string? Value, IConfigurationProvider? Provider) valueAndProvider = GetValueAndProvider(root, child.Path);
+                    (string? Value, IConfigurationProvider? Provider) valueAndProvider =
+                        GetValueAndProvider(root, child.Path);
 
                     if (valueAndProvider.Provider != null)
                     {
-                        string? value = processValue != null
-                            ? processValue(new ConfigurationDebugViewContext(child.Path, child.Key, valueAndProvider.Value, valueAndProvider.Provider))
-                            : valueAndProvider.Value;
+                        string? value =
+                            processValue != null
+                                ? processValue(
+                                    new ConfigurationDebugViewContext(
+                                        child.Path,
+                                        child.Key,
+                                        valueAndProvider.Value,
+                                        valueAndProvider.Provider
+                                    )
+                                )
+                                : valueAndProvider.Value;
 
                         stringBuilder
                             .Append(indent)
@@ -61,10 +74,7 @@ namespace Microsoft.Extensions.Configuration
                     }
                     else
                     {
-                        stringBuilder
-                            .Append(indent)
-                            .Append(child.Key)
-                            .AppendLine(":");
+                        stringBuilder.Append(indent).Append(child.Key).AppendLine(":");
                     }
 
                     RecurseChildren(stringBuilder, child.GetChildren(), indent + "  ");
@@ -80,7 +90,8 @@ namespace Microsoft.Extensions.Configuration
 
         private static (string? Value, IConfigurationProvider? Provider) GetValueAndProvider(
             IConfigurationRoot root,
-            string key)
+            string key
+        )
         {
             foreach (IConfigurationProvider provider in root.Providers.Reverse())
             {

@@ -36,12 +36,18 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// A command tree produced during parsing.
         /// </summary>
-        public DbCommandTree CommandTree { get { return _commandTree; } }
+        public DbCommandTree CommandTree
+        {
+            get { return _commandTree; }
+        }
 
         /// <summary>
         /// List of <see cref="FunctionDefinition"/> objects describing query inline function definitions.
         /// </summary>
-        public System.Collections.ObjectModel.ReadOnlyCollection<FunctionDefinition> FunctionDefinitions { get { return this._functionDefs; } }
+        public System.Collections.ObjectModel.ReadOnlyCollection<FunctionDefinition> FunctionDefinitions
+        {
+            get { return this._functionDefs; }
+        }
     }
 
     /// <summary>
@@ -54,7 +60,12 @@ namespace System.Data.Common.EntitySql
         private readonly int _startPosition;
         private readonly int _endPosition;
 
-        internal FunctionDefinition(string name, DbLambda lambda, int startPosition, int endPosition)
+        internal FunctionDefinition(
+            string name,
+            DbLambda lambda,
+            int startPosition,
+            int endPosition
+        )
         {
             Debug.Assert(name != null, "name can not be null");
             Debug.Assert(lambda != null, "lambda cannot be null");
@@ -68,21 +79,33 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Function name.
         /// </summary>
-        public string Name { get { return this._name; } }
+        public string Name
+        {
+            get { return this._name; }
+        }
 
         /// <summary>
         /// Function body and parameters.
         /// </summary>
-        public DbLambda Lambda { get { return this._lambda; } }
+        public DbLambda Lambda
+        {
+            get { return this._lambda; }
+        }
 
         /// <summary>
         /// Start position of the function definition in the eSQL query text.
         /// </summary>
-        public int StartPosition { get { return this._startPosition; } }
+        public int StartPosition
+        {
+            get { return this._startPosition; }
+        }
 
         /// <summary>
         /// End position of the function definition in the eSQL query text.
         /// </summary>
-        public int EndPosition { get { return this._endPosition; } }
+        public int EndPosition
+        {
+            get { return this._endPosition; }
+        }
     }
 }

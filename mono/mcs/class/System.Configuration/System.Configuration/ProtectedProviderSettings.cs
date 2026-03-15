@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,29 +28,35 @@
 
 namespace System.Configuration
 {
-	public class ProtectedProviderSettings : ConfigurationElement
-	{
-		static ConfigurationProperty providersProp;
-		static ConfigurationPropertyCollection properties;
+    public class ProtectedProviderSettings : ConfigurationElement
+    {
+        static ConfigurationProperty providersProp;
+        static ConfigurationPropertyCollection properties;
 
-		static ProtectedProviderSettings ()
-		{
-			providersProp = new ConfigurationProperty ("", typeof (ProviderSettingsCollection), null,
-								   null, null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static ProtectedProviderSettings()
+        {
+            providersProp = new ConfigurationProperty(
+                "",
+                typeof(ProviderSettingsCollection),
+                null,
+                null,
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (providersProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(providersProp);
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public ProviderSettingsCollection Providers {
-			get { return (ProviderSettingsCollection) base[providersProp]; }
-		}
-	}
-
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[providersProp]; }
+        }
+    }
 }
-

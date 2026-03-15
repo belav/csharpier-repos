@@ -1,4 +1,3 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -30,22 +29,28 @@ internal abstract class WasmHostProvider : IDisposable
         _logger = logger;
     }
 
-    protected ProcessStartInfo GetProcessStartInfo(string browserPath, string arguments, string url)
-        => new()
+    protected ProcessStartInfo GetProcessStartInfo(
+        string browserPath,
+        string arguments,
+        string url
+    ) =>
+        new()
         {
             Arguments = $"{arguments} {url}",
             UseShellExecute = false,
             FileName = browserPath,
             RedirectStandardError = true,
-            RedirectStandardOutput = true
+            RedirectStandardOutput = true,
         };
 
-    protected async Task<string?> LaunchHostAsync(ProcessStartInfo psi,
-                                        HttpContext context,
-                                        Func<string?, string?> checkBrowserReady,
-                                        string messagePrefix,
-                                        int hostReadyTimeoutMs,
-                                        CancellationToken token)
+    protected async Task<string?> LaunchHostAsync(
+        ProcessStartInfo psi,
+        HttpContext context,
+        Func<string?, string?> checkBrowserReady,
+        string messagePrefix,
+        int hostReadyTimeoutMs,
+        CancellationToken token
+    )
     {
         ArgumentNullException.ThrowIfNull(psi);
         ArgumentNullException.ThrowIfNull(context);
@@ -65,16 +70,24 @@ internal abstract class WasmHostProvider : IDisposable
             return null;
 
         Task waitForExitTask = _process.WaitForExitAsync(token);
-        _process.ErrorDataReceived += (sender, e) => ProcessOutput($"{messagePrefix} browser-stderr ", e?.Data);
-        _process.OutputDataReceived += (sender, e) => ProcessOutput($"{messagePrefix} browser-stdout ", e?.Data);
+        _process.ErrorDataReceived += (sender, e) =>
+            ProcessOutput($"{messagePrefix} browser-stderr ", e?.Data);
+        _process.OutputDataReceived += (sender, e) =>
+            ProcessOutput($"{messagePrefix} browser-stdout ", e?.Data);
 
         _process.BeginErrorReadLine();
         _process.BeginOutputReadLine();
 
-        Task completedTask = await Task.WhenAny(browserReadyTCS.Task, waitForExitTask, Task.Delay(hostReadyTimeoutMs))
-                                        .ConfigureAwait(false);
+        Task completedTask = await Task.WhenAny(
+                browserReadyTCS.Task,
+                waitForExitTask,
+                Task.Delay(hostReadyTimeoutMs)
+            )
+            .ConfigureAwait(false);
         if (_process.HasExited)
-            throw new IOException($"Process for {psi.FileName} unexpectedly exited with {_process.ExitCode} during startup.");
+            throw new IOException(
+                $"Process for {psi.FileName} unexpectedly exited with {_process.ExitCode} during startup."
+            );
 
         if (completedTask == browserReadyTCS.Task)
         {
@@ -90,7 +103,9 @@ internal abstract class WasmHostProvider : IDisposable
         // FIXME: use custom exception types
         // Note: this message string is used in eng/test-configuration.json for triggering
         //       test retries
-        throw new IOException($"{messagePrefix} Timed out after {hostReadyTimeoutMs/1000}s waiting for the browser to be ready: {psi.FileName}");
+        throw new IOException(
+            $"{messagePrefix} Timed out after {hostReadyTimeoutMs / 1000}s waiting for the browser to be ready: {psi.FileName}"
+        );
 
         void ProcessOutput(string prefix, string? msg)
         {
@@ -123,5 +138,4 @@ internal abstract class WasmHostProvider : IDisposable
             _process = null;
         }
     }
-
 }

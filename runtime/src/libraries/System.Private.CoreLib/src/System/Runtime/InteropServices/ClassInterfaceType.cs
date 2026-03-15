@@ -7,6 +7,6 @@ namespace System.Runtime.InteropServices
     {
         None = 0,
         AutoDispatch = 1,
-        AutoDual = 2
+        AutoDual = 2,
     }
 }

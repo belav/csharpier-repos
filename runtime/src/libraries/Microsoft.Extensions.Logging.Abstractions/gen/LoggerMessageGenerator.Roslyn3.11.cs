@@ -23,13 +23,20 @@ namespace Microsoft.Extensions.Logging.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.SyntaxContextReceiver is not SyntaxContextReceiver receiver || receiver.ClassDeclarations.Count == 0)
+            if (
+                context.SyntaxContextReceiver is not SyntaxContextReceiver receiver
+                || receiver.ClassDeclarations.Count == 0
+            )
             {
                 // nothing to do yet
                 return;
             }
 
-            var p = new Parser(context.Compilation, context.ReportDiagnostic, context.CancellationToken);
+            var p = new Parser(
+                context.Compilation,
+                context.ReportDiagnostic,
+                context.CancellationToken
+            );
             IReadOnlyList<LoggerClass> logClasses = p.GetLogClasses(receiver.ClassDeclarations);
             if (logClasses.Count > 0)
             {
@@ -64,21 +71,28 @@ namespace Microsoft.Extensions.Logging.Generators
             private static bool IsSyntaxTargetForGeneration(SyntaxNode node) =>
                 node is MethodDeclarationSyntax m && m.AttributeLists.Count > 0;
 
-            private static ClassDeclarationSyntax? GetSemanticTargetForGeneration(GeneratorSyntaxContext context)
+            private static ClassDeclarationSyntax? GetSemanticTargetForGeneration(
+                GeneratorSyntaxContext context
+            )
             {
                 var methodDeclarationSyntax = (MethodDeclarationSyntax)context.Node;
 
-                foreach (AttributeListSyntax attributeListSyntax in methodDeclarationSyntax.AttributeLists)
+                foreach (
+                    AttributeListSyntax attributeListSyntax in methodDeclarationSyntax.AttributeLists
+                )
                 {
                     foreach (AttributeSyntax attributeSyntax in attributeListSyntax.Attributes)
                     {
-                        IMethodSymbol attributeSymbol = context.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol as IMethodSymbol;
+                        IMethodSymbol attributeSymbol =
+                            context.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol
+                            as IMethodSymbol;
                         if (attributeSymbol == null)
                         {
                             continue;
                         }
 
-                        INamedTypeSymbol attributeContainingTypeSymbol = attributeSymbol.ContainingType;
+                        INamedTypeSymbol attributeContainingTypeSymbol =
+                            attributeSymbol.ContainingType;
                         string fullName = attributeContainingTypeSymbol.ToDisplayString();
 
                         if (fullName == Parser.LoggerMessageAttribute)

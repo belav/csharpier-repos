@@ -1,39 +1,39 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogReader
 **
-** Purpose: 
-** This public class is used for reading event records from event log. 
+** Purpose:
+** This public class is used for reading event records from event log.
 **
 ============================================================*/
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Threading;
+using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 using Microsoft.Win32;
 
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
-    /// This public class is used for reading event records from event log.  
+    /// This public class is used for reading event records from event log.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public class EventLogReader : IDisposable {
-
+    public class EventLogReader : IDisposable
+    {
         private EventLogQuery eventQuery;
 
         private int batchSize;
 
         //
-        // access to the data member reference is safe, while 
+        // access to the data member reference is safe, while
         // invoking methods on it is marked SecurityCritical as appropriate.
         //
         private EventLogHandle handle;
@@ -42,10 +42,12 @@ namespace System.Diagnostics.Eventing.Reader {
         /// events buffer holds batched event (handles).
         /// </summary>
         private IntPtr[] eventsBuffer;
+
         /// <summary>
         /// The current index where the function GetNextEvent is (inside the eventsBuffer).
         /// </summary>
         private int currentIndex;
+
         /// <summary>
         /// The number of events read from the batch into the eventsBuffer
         /// </summary>
@@ -58,26 +60,23 @@ namespace System.Diagnostics.Eventing.Reader {
         bool isEof;
 
         /// <summary>
-        /// Maintains cached display / metadata information returned from 
+        /// Maintains cached display / metadata information returned from
         /// EventRecords that were obtained from this reader.
         /// </summary>
-        ProviderMetadataCachedInformation cachedMetadataInformation;  
+        ProviderMetadataCachedInformation cachedMetadataInformation;
 
         public EventLogReader(string path)
-            : this(new EventLogQuery(path, PathType.LogName), null) {
-        }
+            : this(new EventLogQuery(path, PathType.LogName), null) { }
 
         public EventLogReader(string path, PathType pathType)
-            : this(new EventLogQuery(path, pathType), null) {
-        }
+            : this(new EventLogQuery(path, pathType), null) { }
 
         public EventLogReader(EventLogQuery eventQuery)
-            : this(eventQuery, null) {
-        }
+            : this(eventQuery, null) { }
 
         [System.Security.SecurityCritical]
-        public EventLogReader(EventLogQuery eventQuery, EventBookmark bookmark) {
-
+        public EventLogReader(EventLogQuery eventQuery, EventBookmark bookmark)
+        {
             if (eventQuery == null)
                 throw new ArgumentNullException("eventQuery");
 
@@ -85,7 +84,11 @@ namespace System.Diagnostics.Eventing.Reader {
             if (eventQuery.ThePathType == PathType.FilePath)
                 logfile = eventQuery.Path;
 
-            this.cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, logfile, 50 );
+            this.cachedMetadataInformation = new ProviderMetadataCachedInformation(
+                eventQuery.Session,
+                logfile,
+                50
+            );
 
             //explicit data
             this.eventQuery = eventQuery;
@@ -112,24 +115,35 @@ namespace System.Diagnostics.Eventing.Reader {
 
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
-            handle = NativeWrapper.EvtQuery(this.eventQuery.Session.Handle,
-                this.eventQuery.Path, this.eventQuery.Query,
-                flag);
+            handle = NativeWrapper.EvtQuery(
+                this.eventQuery.Session.Handle,
+                this.eventQuery.Path,
+                this.eventQuery.Query,
+                flag
+            );
 
             EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark);
 
-            if (!bookmarkHandle.IsInvalid) {
-                using (bookmarkHandle) {
-                    NativeWrapper.EvtSeek(handle, 1, bookmarkHandle, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
+            if (!bookmarkHandle.IsInvalid)
+            {
+                using (bookmarkHandle)
+                {
+                    NativeWrapper.EvtSeek(
+                        handle,
+                        1,
+                        bookmarkHandle,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark
+                    );
                 }
             }
         }
 
-        public int BatchSize {
-            get {
-                return batchSize;
-            }
-            set {
+        public int BatchSize
+        {
+            get { return batchSize; }
+            set
+            {
                 if (value < 1)
                     throw new ArgumentOutOfRangeException("value");
                 batchSize = value;
@@ -137,8 +151,8 @@ namespace System.Diagnostics.Eventing.Reader {
         }
 
         [System.Security.SecurityCritical]
-        private bool GetNextBatch(TimeSpan ts) {
-
+        private bool GetNextBatch(TimeSpan ts)
+        {
             int timeout;
             if (ts == TimeSpan.MaxValue)
                 timeout = -1;
@@ -146,12 +160,21 @@ namespace System.Diagnostics.Eventing.Reader {
                 timeout = (int)ts.TotalMilliseconds;
 
             // batchSize was changed by user, reallocate buffer.
-            if (batchSize != eventsBuffer.Length) eventsBuffer = new IntPtr[batchSize];
+            if (batchSize != eventsBuffer.Length)
+                eventsBuffer = new IntPtr[batchSize];
 
             int newEventCount = 0;
-            bool results = NativeWrapper.EvtNext(handle, batchSize, eventsBuffer, timeout, 0, ref newEventCount);
+            bool results = NativeWrapper.EvtNext(
+                handle,
+                batchSize,
+                eventsBuffer,
+                timeout,
+                0,
+                ref newEventCount
+            );
 
-            if (!results) {
+            if (!results)
+            {
                 this.eventCount = 0;
                 this.currentIndex = 0;
                 return false; //no more events in the result set
@@ -162,62 +185,74 @@ namespace System.Diagnostics.Eventing.Reader {
             return true;
         }
 
-        public EventRecord ReadEvent() {
+        public EventRecord ReadEvent()
+        {
             return ReadEvent(TimeSpan.MaxValue);
         }
 
         // security critical because allocates SafeHandle.
         // marked as safe because performs Demand check.
         [System.Security.SecurityCritical]
-        public EventRecord ReadEvent(TimeSpan timeout) {
-
+        public EventRecord ReadEvent(TimeSpan timeout)
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             if (this.isEof)
                 throw new InvalidOperationException();
 
-            if (this.currentIndex >= this.eventCount) {
+            if (this.currentIndex >= this.eventCount)
+            {
                 // buffer is empty, get next batch.
                 GetNextBatch(timeout);
 
-                if (this.currentIndex >= this.eventCount) {
+                if (this.currentIndex >= this.eventCount)
+                {
                     this.isEof = true;
                     return null;
                 }
             }
 
-            EventLogRecord eventInstance = new EventLogRecord(new EventLogHandle(this.eventsBuffer[currentIndex], true), this.eventQuery.Session, this.cachedMetadataInformation);
+            EventLogRecord eventInstance = new EventLogRecord(
+                new EventLogHandle(this.eventsBuffer[currentIndex], true),
+                this.eventQuery.Session,
+                this.cachedMetadataInformation
+            );
             currentIndex++;
             return eventInstance;
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         [System.Security.SecuritySafeCritical]
-        protected virtual void Dispose(bool disposing) {
-
-            if (disposing) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
                 EventLogPermissionHolder.GetEventLogPermission().Demand();
             }
 
-            while (this.currentIndex < this.eventCount) {
+            while (this.currentIndex < this.eventCount)
+            {
                 NativeWrapper.EvtClose(eventsBuffer[this.currentIndex]);
                 this.currentIndex++;
             }
 
-            if (handle != null && !handle.IsInvalid)   
+            if (handle != null && !handle.IsInvalid)
                 handle.Dispose();
         }
 
         [System.Security.SecurityCritical]
-        internal void SeekReset() {
+        internal void SeekReset()
+        {
             //
             //close all unread event handles in the buffer
             //
-            while (this.currentIndex < this.eventCount) {
+            while (this.currentIndex < this.eventCount)
+            {
                 NativeWrapper.EvtClose(eventsBuffer[this.currentIndex]);
                 this.currentIndex++;
             }
@@ -230,65 +265,101 @@ namespace System.Diagnostics.Eventing.Reader {
 
         // marked as SecurityCritical because it allocates SafeHandle.
         [System.Security.SecurityCritical]
-        internal void SeekCommon(long offset) {
-
+        internal void SeekCommon(long offset)
+        {
             //
             // modify offset that we're going to send to service to account for the
             // fact that we've already read some events in our buffer that the user
             // hasn't seen yet.
-            //  
+            //
             offset = offset - (this.eventCount - this.currentIndex);
 
             SeekReset();
 
-            NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent);
+            NativeWrapper.EvtSeek(
+                this.handle,
+                offset,
+                EventLogHandle.Zero,
+                0,
+                UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToCurrent
+            );
         }
 
-        public void Seek(EventBookmark bookmark) {
+        public void Seek(EventBookmark bookmark)
+        {
             Seek(bookmark, 0);
         }
 
         [System.Security.SecurityCritical]
-        public void Seek(EventBookmark bookmark, long offset) {
+        public void Seek(EventBookmark bookmark, long offset)
+        {
             if (bookmark == null)
                 throw new ArgumentNullException("bookmark");
 
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             SeekReset();
-            using (EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(bookmark)) {
-                NativeWrapper.EvtSeek(this.handle, offset, bookmarkHandle, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark);
+            using (
+                EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(
+                    bookmark
+                )
+            )
+            {
+                NativeWrapper.EvtSeek(
+                    this.handle,
+                    offset,
+                    bookmarkHandle,
+                    0,
+                    UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToBookmark
+                );
             }
         }
 
         [System.Security.SecurityCritical]
-        public void Seek(SeekOrigin origin, long offset) {
+        public void Seek(SeekOrigin origin, long offset)
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
-            switch (origin) {
+            switch (origin)
+            {
                 case SeekOrigin.Begin:
 
                     SeekReset();
-                    NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst);
+                    NativeWrapper.EvtSeek(
+                        this.handle,
+                        offset,
+                        EventLogHandle.Zero,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToFirst
+                    );
                     return;
 
                 case SeekOrigin.End:
 
                     SeekReset();
-                    NativeWrapper.EvtSeek(this.handle, offset, EventLogHandle.Zero, 0, UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast);
+                    NativeWrapper.EvtSeek(
+                        this.handle,
+                        offset,
+                        EventLogHandle.Zero,
+                        0,
+                        UnsafeNativeMethods.EvtSeekFlags.EvtSeekRelativeToLast
+                    );
                     return;
 
                 case SeekOrigin.Current:
-                    if (offset >= 0) {
+                    if (offset >= 0)
+                    {
                         //we can reuse elements in the batch.
-                        if (this.currentIndex + offset < this.eventCount) {
-                            // 
+                        if (this.currentIndex + offset < this.eventCount)
+                        {
+                            //
                             // We don't call Seek here, we can reposition within the batch.
                             //
 
                             // close all event handles between [currentIndex, currentIndex + offset)
                             int index = this.currentIndex;
-                            while (index < this.currentIndex + offset) {
+                            while (index < this.currentIndex + offset)
+                            {
                                 NativeWrapper.EvtClose(eventsBuffer[index]);
                                 index++;
                             }
@@ -297,17 +368,20 @@ namespace System.Diagnostics.Eventing.Reader {
                             //leave the eventCount unchanged
                             //leave the same Eof
                         }
-                        else {
+                        else
+                        {
                             SeekCommon(offset);
                         }
                     }
-                    else {
+                    else
+                    {
                         //if inside the current buffer, we still cannot read the events, as the handles.
                         //may have already been closed.
-                        if (currentIndex + offset >= 0) {
+                        if (currentIndex + offset >= 0)
+                        {
                             SeekCommon(offset);
                         }
-                        else  //outside the current buffer
+                        else //outside the current buffer
                         {
                             SeekCommon(offset);
                         }
@@ -316,14 +390,16 @@ namespace System.Diagnostics.Eventing.Reader {
             }
         }
 
-        public void CancelReading() {
-
+        public void CancelReading()
+        {
             NativeWrapper.EvtCancel(handle);
         }
-    
-        public IList<EventLogStatus> LogStatus {
+
+        public IList<EventLogStatus> LogStatus
+        {
             [System.Security.SecurityCritical]
-            get {
+            get
+            {
                 EventLogPermissionHolder.GetEventLogPermission().Demand();
 
                 List<EventLogStatus> list = null;
@@ -334,19 +410,28 @@ namespace System.Diagnostics.Eventing.Reader {
                 if (queryHandle.IsInvalid)
                     throw new InvalidOperationException();
 
-                channelNames = (string[])NativeWrapper.EvtGetQueryInfo(queryHandle, UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames);
-                errorStatuses = (int[])NativeWrapper.EvtGetQueryInfo(queryHandle, UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses);
+                channelNames = (string[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryNames
+                    );
+                errorStatuses = (int[])
+                    NativeWrapper.EvtGetQueryInfo(
+                        queryHandle,
+                        UnsafeNativeMethods.EvtQueryPropertyId.EvtQueryStatuses
+                    );
 
                 if (channelNames.Length != errorStatuses.Length)
                     throw new InvalidOperationException();
 
                 list = new List<EventLogStatus>(channelNames.Length);
-                for (int i = 0; i < channelNames.Length; i++) {
+                for (int i = 0; i < channelNames.Length; i++)
+                {
                     EventLogStatus cs = new EventLogStatus(channelNames[i], errorStatuses[i]);
                     list.Add(cs);
                 }
                 return list.AsReadOnly();
             }
-        } 
+        }
     }
 }

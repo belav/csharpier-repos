@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Options
         private SolutionOptionSet(
             ILegacyGlobalOptionService globalOptions,
             ImmutableDictionary<OptionKey, object?> values,
-            ImmutableHashSet<OptionKey> changedOptionKeys)
+            ImmutableHashSet<OptionKey> changedOptionKeys
+        )
         {
             _legacyGlobalOptions = globalOptions;
             _values = values;
@@ -40,9 +41,11 @@ namespace Microsoft.CodeAnalysis.Options
         }
 
         internal SolutionOptionSet(ILegacyGlobalOptionService globalOptions)
-            : this(globalOptions, values: ImmutableDictionary<OptionKey, object?>.Empty, changedOptionKeys: ImmutableHashSet<OptionKey>.Empty)
-        {
-        }
+            : this(
+                globalOptions,
+                values: ImmutableDictionary<OptionKey, object?>.Empty,
+                changedOptionKeys: ImmutableHashSet<OptionKey>.Empty
+            ) { }
 
         [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/30819", AllowLocks = false)]
         internal override object? GetInternalOptionValue(OptionKey optionKey)
@@ -52,14 +55,20 @@ namespace Microsoft.CodeAnalysis.Options
                 return value;
             }
 
-            value = (optionKey.Option is IOption2 internallyDefinedOption)
-                ? _legacyGlobalOptions.GlobalOptions.GetOption<object?>(new OptionKey2(internallyDefinedOption, optionKey.Language))
-                : _legacyGlobalOptions.GetExternallyDefinedOption(optionKey);
+            value =
+                (optionKey.Option is IOption2 internallyDefinedOption)
+                    ? _legacyGlobalOptions.GlobalOptions.GetOption<object?>(
+                        new OptionKey2(internallyDefinedOption, optionKey.Language)
+                    )
+                    : _legacyGlobalOptions.GetExternallyDefinedOption(optionKey);
 
             return ImmutableInterlocked.GetOrAdd(ref _values, optionKey, value);
         }
 
-        internal override OptionSet WithChangedOptionInternal(OptionKey optionKey, object? internalValue)
+        internal override OptionSet WithChangedOptionInternal(
+            OptionKey optionKey,
+            object? internalValue
+        )
         {
             // Make sure we first load this in current optionset
             var currentInternalValue = GetInternalOptionValue(optionKey);
@@ -74,13 +83,26 @@ namespace Microsoft.CodeAnalysis.Options
             return new SolutionOptionSet(
                 _legacyGlobalOptions,
                 _values.SetItem(optionKey, internalValue),
-                _changedOptionKeys.Add(optionKey));
+                _changedOptionKeys.Add(optionKey)
+            );
         }
 
-        internal (ImmutableArray<KeyValuePair<OptionKey2, object?>> internallyDefined, ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefined) GetChangedOptions()
+        internal (
+            ImmutableArray<KeyValuePair<OptionKey2, object?>> internallyDefined,
+            ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefined
+        ) GetChangedOptions()
         {
-            var internallyDefined = _changedOptionKeys.Where(key => key.Option is IOption2).SelectAsArray(key => KeyValuePairUtil.Create(new OptionKey2((IOption2)key.Option, key.Language), _values[key]));
-            var externallyDefined = _changedOptionKeys.Where(key => key.Option is not IOption2).SelectAsArray(key => KeyValuePairUtil.Create(key, _values[key]));
+            var internallyDefined = _changedOptionKeys
+                .Where(key => key.Option is IOption2)
+                .SelectAsArray(key =>
+                    KeyValuePairUtil.Create(
+                        new OptionKey2((IOption2)key.Option, key.Language),
+                        _values[key]
+                    )
+                );
+            var externallyDefined = _changedOptionKeys
+                .Where(key => key.Option is not IOption2)
+                .SelectAsArray(key => KeyValuePairUtil.Create(key, _values[key]));
             return (internallyDefined, externallyDefined);
         }
     }

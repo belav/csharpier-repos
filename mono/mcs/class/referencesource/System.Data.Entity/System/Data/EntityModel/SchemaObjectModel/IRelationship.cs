@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Data.Objects.DataClasses;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
@@ -29,7 +29,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// The list of ends defined in the Relationship.
         /// </summary>
         IList<IRelationshipEnd> Ends { get; }
-        
+
         /// <summary>
         /// Returns the list of constraints on this relation
         /// </summary>
@@ -41,7 +41,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <param name="roleName">The role name of the end you want to find</param>
         /// <param name="end">The relationship end reference to set if the end is found</param>
         /// <returns>True if the end was found, and the passed in reference was set, False otherwise.</returns>
-        bool TryGetEnd( string roleName, out IRelationshipEnd end );
+        bool TryGetEnd(string roleName, out IRelationshipEnd end);
 
         /// <summary>
         /// Is this an Association, or ...

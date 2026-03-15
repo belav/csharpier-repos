@@ -218,14 +218,20 @@ namespace System.Security.Permissions.Tests
         public void AddAttribute_Name_Invalid()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(null, () => elem.AddAttribute("<invalid>", "valid"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => elem.AddAttribute("<invalid>", "valid")
+            );
         }
 
         [Fact]
         public void AddAttribute_Value_Invalid()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(null, () => elem.AddAttribute("valid", "invalid\""));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => elem.AddAttribute("valid", "invalid\"")
+            );
         }
 
         [Fact]
@@ -241,7 +247,10 @@ namespace System.Security.Permissions.Tests
         public void AddAttribute_InvalidValue3()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(null, () => elem.AddAttribute("valid", "<invalid>"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => elem.AddAttribute("valid", "<invalid>")
+            );
         }
 
         [Fact]
@@ -249,7 +258,10 @@ namespace System.Security.Permissions.Tests
         {
             SecurityElement elem = CreateElement();
             elem.AddAttribute("valid", "first time");
-            AssertExtensions.Throws<ArgumentException>(null, () => elem.AddAttribute("valid", "second time"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => elem.AddAttribute("valid", "second time")
+            );
         }
 
         [Fact]
@@ -347,8 +359,10 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public void Escape()
         {
-            Assert.Equal("foo&lt;&gt;&quot;&apos;&amp; bar",
-                SecurityElement.Escape("foo<>\"'& bar"));
+            Assert.Equal(
+                "foo&lt;&gt;&quot;&apos;&amp; bar",
+                SecurityElement.Escape("foo<>\"'& bar")
+            );
             Assert.Null(SecurityElement.Escape(null));
         }
 
@@ -470,24 +484,32 @@ namespace System.Security.Permissions.Tests
         {
             SecurityElement se = new SecurityElement("Values");
             Assert.Equal("Values", se.Tag);
-            Assert.Equal(string.Format(CultureInfo.InvariantCulture,
-                "<Values/>{0}", Environment.NewLine),
-                se.ToString());
+            Assert.Equal(
+                string.Format(CultureInfo.InvariantCulture, "<Values/>{0}", Environment.NewLine),
+                se.ToString()
+            );
             se.Tag = "abc:Name";
             Assert.Equal("abc:Name", se.Tag);
-            Assert.Equal(string.Format(CultureInfo.InvariantCulture,
-                "<abc:Name/>{0}", Environment.NewLine),
-                se.ToString());
+            Assert.Equal(
+                string.Format(CultureInfo.InvariantCulture, "<abc:Name/>{0}", Environment.NewLine),
+                se.ToString()
+            );
             se.Tag = "Name&Address";
             Assert.Equal("Name&Address", se.Tag);
-            Assert.Equal(string.Format(CultureInfo.InvariantCulture,
-                "<Name&Address/>{0}", Environment.NewLine),
-                se.ToString());
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "<Name&Address/>{0}",
+                    Environment.NewLine
+                ),
+                se.ToString()
+            );
             se.Tag = string.Empty;
             Assert.Equal(string.Empty, se.Tag);
-            Assert.Equal(string.Format(CultureInfo.InvariantCulture,
-                "</>{0}", Environment.NewLine),
-                se.ToString());
+            Assert.Equal(
+                string.Format(CultureInfo.InvariantCulture, "</>{0}", Environment.NewLine),
+                se.ToString()
+            );
         }
 
         [Theory]
@@ -572,7 +594,10 @@ namespace System.Security.Permissions.Tests
             se.AddAttribute("Attribute1", "One");
             se.AddAttribute("Attribute2", "Two");
 
-            string expected = string.Format("<Multiple Attribute1=\"One\"{0}Attribute2=\"Two\"/>{0}", Environment.NewLine);
+            string expected = string.Format(
+                "<Multiple Attribute1=\"One\"{0}Attribute2=\"Two\"/>{0}",
+                Environment.NewLine
+            );
             Assert.Equal(expected, se.ToString());
         }
 

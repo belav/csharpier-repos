@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,82 +30,95 @@
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
+    [ComVisible(true)]
+    public sealed class CspKeyContainerInfo
+    {
+        private CspParameters _params;
+        internal bool _random;
 
-	[ComVisible (true)]
-	public sealed class CspKeyContainerInfo {
+        // constructors
 
-		private CspParameters _params;
-		internal bool _random;
+        public CspKeyContainerInfo(CspParameters parameters)
+        {
+            _params = parameters;
+            _random = true; // by default we always generate a key
+        }
 
-		// constructors
+        // properties
 
-		public CspKeyContainerInfo (CspParameters parameters) 
-		{
-			_params = parameters;
-			_random = true; // by default we always generate a key
-		}
+        // always true for Mono
+        public bool Accessible
+        {
+            get { return true; }
+        }
 
-		// properties
+        // always null for Mono
+        public CryptoKeySecurity CryptoKeySecurity
+        {
+            get { return null; }
+        }
 
-		// always true for Mono
-		public bool Accessible {
-			get { return true; }
-		}
+        // always true for Mono
+        public bool Exportable
+        {
+            get { return true; }
+        }
 
-		// always null for Mono
-		public CryptoKeySecurity CryptoKeySecurity {
-			get { return null; }
-		}
+        // always false for Mono
+        public bool HardwareDevice
+        {
+            get { return false; }
+        }
 
-		// always true for Mono
-		public bool Exportable {
-			get { return true; }
-		}
-		
-		// always false for Mono
-		public bool HardwareDevice {
-			get { return false; }
-		}
-		
-		public string KeyContainerName { 
-			get { return _params.KeyContainerName; }
-		}
-		
-		public KeyNumber KeyNumber { 
-			get { return (KeyNumber)_params.KeyNumber; }
-		}
-		
-		// always false for Mono
-		public bool MachineKeyStore {
-			get { return false; }
-		}
-		
-		// always false for Mono
-		public bool Protected {
-			get { return false; }
-		}
-		
-		public string ProviderName {
-			get { return _params.ProviderName; }
-		}
-		
-		public int ProviderType { 
-			get { return _params.ProviderType; }
-		}
-		
-		// true if generated, false if imported
-		public bool RandomlyGenerated {
-			get { return _random; }
-		}
-		
-		// always false for Mono
-		public bool Removable {
-			get { return false; }
-		}
-		
-		public string UniqueKeyContainerName {
-			get { return _params.ProviderName + "\\" + _params.KeyContainerName; }
-		}
-	}
+        public string KeyContainerName
+        {
+            get { return _params.KeyContainerName; }
+        }
+
+        public KeyNumber KeyNumber
+        {
+            get { return (KeyNumber)_params.KeyNumber; }
+        }
+
+        // always false for Mono
+        public bool MachineKeyStore
+        {
+            get { return false; }
+        }
+
+        // always false for Mono
+        public bool Protected
+        {
+            get { return false; }
+        }
+
+        public string ProviderName
+        {
+            get { return _params.ProviderName; }
+        }
+
+        public int ProviderType
+        {
+            get { return _params.ProviderType; }
+        }
+
+        // true if generated, false if imported
+        public bool RandomlyGenerated
+        {
+            get { return _random; }
+        }
+
+        // always false for Mono
+        public bool Removable
+        {
+            get { return false; }
+        }
+
+        public string UniqueKeyContainerName
+        {
+            get { return _params.ProviderName + "\\" + _params.KeyContainerName; }
+        }
+    }
 }

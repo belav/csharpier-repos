@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tracing;
 using Tracing.Tests.Common;
-using Microsoft.Diagnostics.NETCore.Client;
 using Xunit;
 
 namespace Tracing.Tests.SimpleRuntimeEventValidation
@@ -23,29 +23,68 @@ namespace Tracing.Tests.SimpleRuntimeEventValidation
             // This test validates GC and Exception events in the runtime
             var ret = IpcTraceTest.RunAndValidateEventCounts(
                 // Validation is done with _DoesTraceContainEvents
-                new Dictionary<string, ExpectedEventCount>(){{ "Microsoft-Windows-DotNETRuntime", -1 }},
-                _eventGeneratingActionForGC, 
+                new Dictionary<string, ExpectedEventCount>()
+                {
+                    { "Microsoft-Windows-DotNETRuntime", -1 },
+                },
+                _eventGeneratingActionForGC,
                 //GCKeyword (0x1): 0b1
-                new List<EventPipeProvider>(){new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Informational, 0b1)}, 
-                1024, _DoesTraceContainGCEvents, enableRundownProvider:false);
+                new List<EventPipeProvider>()
+                {
+                    new EventPipeProvider(
+                        "Microsoft-Windows-DotNETRuntime",
+                        EventLevel.Informational,
+                        0b1
+                    ),
+                },
+                1024,
+                _DoesTraceContainGCEvents,
+                enableRundownProvider: false
+            );
 
             // Run the 2nd test scenario only if the first one passes
-            if(ret== 100)
+            if (ret == 100)
             {
                 ret = IpcTraceTest.RunAndValidateEventCounts(
-                    new Dictionary<string, ExpectedEventCount>(){{ "Microsoft-DotNETCore-EventPipe", 1 }}, 
-                    _eventGeneratingActionForExceptions, 
+                    new Dictionary<string, ExpectedEventCount>()
+                    {
+                        { "Microsoft-DotNETCore-EventPipe", 1 },
+                    },
+                    _eventGeneratingActionForExceptions,
                     //ExceptionKeyword (0x8000): 0b1000_0000_0000_0000
-                    new List<EventPipeProvider>(){new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Warning, 0b1000_0000_0000_0000)}, 
-                    1024, _DoesTraceContainExceptionEvents, enableRundownProvider:false);
+                    new List<EventPipeProvider>()
+                    {
+                        new EventPipeProvider(
+                            "Microsoft-Windows-DotNETRuntime",
+                            EventLevel.Warning,
+                            0b1000_0000_0000_0000
+                        ),
+                    },
+                    1024,
+                    _DoesTraceContainExceptionEvents,
+                    enableRundownProvider: false
+                );
 
-                if(ret == 100)
+                if (ret == 100)
                 {
-                ret = IpcTraceTest.RunAndValidateEventCounts(
-                    new Dictionary<string, ExpectedEventCount>(){{ "Microsoft-Windows-DotNETRuntime", -1}}, 
-                    _eventGeneratingActionForFinalizers, 
-                    new List<EventPipeProvider>(){new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Informational, 0b1)}, 
-                    1024, _DoesTraceContainFinalizerEvents, enableRundownProvider:false);
+                    ret = IpcTraceTest.RunAndValidateEventCounts(
+                        new Dictionary<string, ExpectedEventCount>()
+                        {
+                            { "Microsoft-Windows-DotNETRuntime", -1 },
+                        },
+                        _eventGeneratingActionForFinalizers,
+                        new List<EventPipeProvider>()
+                        {
+                            new EventPipeProvider(
+                                "Microsoft-Windows-DotNETRuntime",
+                                EventLevel.Informational,
+                                0b1
+                            ),
+                        },
+                        1024,
+                        _DoesTraceContainFinalizerEvents,
+                        enableRundownProvider: false
+                    );
                 }
             }
 
@@ -55,7 +94,7 @@ namespace Tracing.Tests.SimpleRuntimeEventValidation
                 return 100;
         }
 
-        private static Action _eventGeneratingActionForGC = () => 
+        private static Action _eventGeneratingActionForGC = () =>
         {
             for (int i = 0; i < 50; i++)
             {
@@ -67,7 +106,7 @@ namespace Tracing.Tests.SimpleRuntimeEventValidation
             }
         };
 
-        private static Action _eventGeneratingActionForExceptions = () => 
+        private static Action _eventGeneratingActionForExceptions = () =>
         {
             for (int i = 0; i < 10; i++)
             {
@@ -107,45 +146,60 @@ namespace Tracing.Tests.SimpleRuntimeEventValidation
             int GCRestartEEStartEvents = 0;
             int GCRestartEEStopEvents = 0;
             source.Clr.GCRestartEEStart += (eventData) => GCRestartEEStartEvents += 1;
-            source.Clr.GCRestartEEStop += (eventData) => GCRestartEEStopEvents += 1;            
+            source.Clr.GCRestartEEStop += (eventData) => GCRestartEEStopEvents += 1;
 
             int GCSuspendEEEvents = 0;
             int GCSuspendEEEndEvents = 0;
             source.Clr.GCSuspendEEStart += (eventData) => GCSuspendEEEvents += 1;
             source.Clr.GCSuspendEEStop += (eventData) => GCSuspendEEEndEvents += 1;
 
-            return () => {
+            return () =>
+            {
                 Logger.logger.Log("Event counts validation");
 
                 Logger.logger.Log("GCStartEvents: " + GCStartEvents);
                 Logger.logger.Log("GCEndEvents: " + GCEndEvents);
-                bool GCStartStopResult = GCStartEvents >= 50 && GCEndEvents >= 50 && Math.Abs(GCStartEvents - GCEndEvents) <=2;
+                bool GCStartStopResult =
+                    GCStartEvents >= 50
+                    && GCEndEvents >= 50
+                    && Math.Abs(GCStartEvents - GCEndEvents) <= 2;
                 Logger.logger.Log("GCStartStopResult check: " + GCStartStopResult);
 
                 Logger.logger.Log("GCRestartEEStartEvents: " + GCRestartEEStartEvents);
                 Logger.logger.Log("GCRestartEEStopEvents: " + GCRestartEEStopEvents);
-                bool GCRestartEEStartStopResult = GCRestartEEStartEvents >= 50 && GCRestartEEStopEvents >= 50;
-                Logger.logger.Log("GCRestartEEStartStopResult check: " + GCRestartEEStartStopResult);
+                bool GCRestartEEStartStopResult =
+                    GCRestartEEStartEvents >= 50 && GCRestartEEStopEvents >= 50;
+                Logger.logger.Log(
+                    "GCRestartEEStartStopResult check: " + GCRestartEEStartStopResult
+                );
 
                 Logger.logger.Log("GCSuspendEEEvents: " + GCSuspendEEEvents);
                 Logger.logger.Log("GCSuspendEEEndEvents: " + GCSuspendEEEndEvents);
-                bool GCSuspendEEStartStopResult = GCSuspendEEEvents >= 50 && GCSuspendEEEndEvents >= 50;
-                Logger.logger.Log("GCSuspendEEStartStopResult check: " + GCSuspendEEStartStopResult);
+                bool GCSuspendEEStartStopResult =
+                    GCSuspendEEEvents >= 50 && GCSuspendEEEndEvents >= 50;
+                Logger.logger.Log(
+                    "GCSuspendEEStartStopResult check: " + GCSuspendEEStartStopResult
+                );
 
-                return GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult ? 100 : -1;
+                return GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult
+                    ? 100
+                    : -1;
             };
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesTraceContainExceptionEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesTraceContainExceptionEvents = (
+            source
+        ) =>
         {
             int ExStartEvents = 0;
-            source.Clr.ExceptionStart += (eventData) => 
+            source.Clr.ExceptionStart += (eventData) =>
             {
-                if(eventData.ToString().IndexOf("System.ArgumentNullException")>=0)
+                if (eventData.ToString().IndexOf("System.ArgumentNullException") >= 0)
                     ExStartEvents += 1;
             };
 
-            return () => {
+            return () =>
+            {
                 Logger.logger.Log("Exception Event counts validation");
                 Logger.logger.Log("ExStartEvents: " + ExStartEvents);
                 bool ExStartResult = ExStartEvents >= 10;
@@ -154,13 +208,16 @@ namespace Tracing.Tests.SimpleRuntimeEventValidation
             };
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesTraceContainFinalizerEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesTraceContainFinalizerEvents = (
+            source
+        ) =>
         {
             int GCFinalizersEndEvents = 0;
             source.Clr.GCFinalizersStop += (eventData) => GCFinalizersEndEvents += 1;
             int GCFinalizersStartEvents = 0;
             source.Clr.GCFinalizersStart += (eventData) => GCFinalizersStartEvents += 1;
-            return () => {
+            return () =>
+            {
                 Logger.logger.Log("Event counts validation");
                 Logger.logger.Log("GCFinalizersEndEvents: " + GCFinalizersEndEvents);
                 Logger.logger.Log("GCFinalizersStartEvents: " + GCFinalizersStartEvents);

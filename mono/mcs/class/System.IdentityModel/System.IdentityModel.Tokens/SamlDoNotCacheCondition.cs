@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,50 +27,52 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SamlDoNotCacheCondition : SamlCondition
-	{
-		public SamlDoNotCacheCondition ()
-		{
-		}
+    public class SamlDoNotCacheCondition : SamlCondition
+    {
+        public SamlDoNotCacheCondition() { }
 
-		bool is_readonly;
+        bool is_readonly;
 
-		public override bool IsReadOnly {
-			get { return is_readonly; }
-		}
+        public override bool IsReadOnly
+        {
+            get { return is_readonly; }
+        }
 
-		public override void MakeReadOnly ()
-		{
-			is_readonly = true;
-		}
+        public override void MakeReadOnly()
+        {
+            is_readonly = true;
+        }
 
-		[MonoTODO]
-		public override void ReadXml (XmlDictionaryReader reader,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer,
-			SecurityTokenResolver outOfBandTokenResolver)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override void ReadXml(
+            XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void WriteXml (
-			XmlDictionaryWriter writer,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer)
-		{
-			if (writer == null)
-				throw new ArgumentNullException ("writer");
-			if (samlSerializer == null)
-				throw new ArgumentNullException ("samlSerializer");
-			writer.WriteStartElement ("saml", "DoNotCacheCondition", SamlConstants.Namespace);
-			writer.WriteEndElement ();
-		}
-	}
+        public override void WriteXml(
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        )
+        {
+            if (writer == null)
+                throw new ArgumentNullException("writer");
+            if (samlSerializer == null)
+                throw new ArgumentNullException("samlSerializer");
+            writer.WriteStartElement("saml", "DoNotCacheCondition", SamlConstants.Namespace);
+            writer.WriteEndElement();
+        }
+    }
 }

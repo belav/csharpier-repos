@@ -21,19 +21,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     /// </summary>
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     [Export(typeof(PdbMatchingSourceTextProvider))]
-    internal sealed class PdbMatchingSourceTextProvider : IEventListener<object>, IEventListenerStoppable, IPdbMatchingSourceTextProvider
+    internal sealed class PdbMatchingSourceTextProvider
+        : IEventListener<object>,
+            IEventListenerStoppable,
+            IPdbMatchingSourceTextProvider
     {
         private readonly object _guard = new();
 
         private bool _isActive;
         private int _baselineSolutionVersion;
-        private readonly Dictionary<string, (DocumentState state, int solutionVersion)> _documentsWithChangedLoaderByPath = new();
+        private readonly Dictionary<
+            string,
+            (DocumentState state, int solutionVersion)
+        > _documentsWithChangedLoaderByPath = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PdbMatchingSourceTextProvider()
-        {
-        }
+        public PdbMatchingSourceTextProvider() { }
 
         public void StartListening(Workspace workspace, object serviceOpt)
         {
@@ -81,16 +85,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // When a document is open its loader transitions from file-based loader to text buffer based.
             // The file checksum is no longer available from the latter, so capture it at this moment.
-            if (oldDocument.State.TextAndVersionSource.CanReloadText && !newDocument.State.TextAndVersionSource.CanReloadText)
+            if (
+                oldDocument.State.TextAndVersionSource.CanReloadText
+                && !newDocument.State.TextAndVersionSource.CanReloadText
+            )
             {
                 var oldSolutionVersion = oldDocument.Project.Solution.WorkspaceVersion;
 
                 lock (_guard)
                 {
                     // ignore updates to a document that we have already seen this session:
-                    if (_isActive && oldSolutionVersion >= _baselineSolutionVersion && !_documentsWithChangedLoaderByPath.ContainsKey(oldDocument.FilePath))
+                    if (
+                        _isActive
+                        && oldSolutionVersion >= _baselineSolutionVersion
+                        && !_documentsWithChangedLoaderByPath.ContainsKey(oldDocument.FilePath)
+                    )
                     {
-                        _documentsWithChangedLoaderByPath.Add(oldDocument.FilePath, (oldDocument.DocumentState, oldSolutionVersion));
+                        _documentsWithChangedLoaderByPath.Add(
+                            oldDocument.FilePath,
+                            (oldDocument.DocumentState, oldSolutionVersion)
+                        );
                     }
                 }
             }
@@ -124,12 +138,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public async ValueTask<string?> TryGetMatchingSourceTextAsync(string filePath, ImmutableArray<byte> requiredChecksum, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
+        public async ValueTask<string?> TryGetMatchingSourceTextAsync(
+            string filePath,
+            ImmutableArray<byte> requiredChecksum,
+            SourceHashAlgorithm checksumAlgorithm,
+            CancellationToken cancellationToken
+        )
         {
             DocumentState? state;
             lock (_guard)
             {
-                if (!_documentsWithChangedLoaderByPath.TryGetValue(filePath, out var stateAndVersion))
+                if (
+                    !_documentsWithChangedLoaderByPath.TryGetValue(
+                        filePath,
+                        out var stateAndVersion
+                    )
+                )
                 {
                     return null;
                 }
@@ -151,17 +175,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return text.ToString();
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly PdbMatchingSourceTextProvider _instance;
 
-            internal TestAccessor(PdbMatchingSourceTextProvider instance)
-                => _instance = instance;
+            internal TestAccessor(PdbMatchingSourceTextProvider instance) => _instance = instance;
 
-            public ImmutableDictionary<string, (DocumentState state, int solutionVersion)> GetDocumentsWithChangedLoaderByPath()
+            public ImmutableDictionary<
+                string,
+                (DocumentState state, int solutionVersion)
+            > GetDocumentsWithChangedLoaderByPath()
             {
                 lock (_instance._guard)
                 {

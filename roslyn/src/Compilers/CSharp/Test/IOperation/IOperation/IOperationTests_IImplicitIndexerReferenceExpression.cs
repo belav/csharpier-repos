@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ImplicitIndexIndexer_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string args, System.Index x)
@@ -27,7 +28,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type: System.Char) (Syntax: 'args[x]')
   Instance:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String) (Syntax: 'args')
@@ -39,14 +41,19 @@ IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_NoControlFlow_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, System.Index i1, char result1)
@@ -55,7 +62,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -83,14 +91,19 @@ Block[B2] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInInstance_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, string a2, System.Index i1, char result)
@@ -99,7 +112,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -172,14 +186,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInArgument_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a, System.Index? i1, System.Index i2, char result)
@@ -188,7 +207,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -267,14 +287,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInInstanceAndArgument_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, string a2, System.Index? i1, System.Index i2, char result)
@@ -283,7 +308,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -392,14 +418,19 @@ Block[B9] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitRangeIndexer_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public void F(string args, System.Range x)
@@ -409,7 +440,8 @@ class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type: System.String) (Syntax: 'args[x]')
   Instance:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: System.String) (Syntax: 'args')
@@ -421,14 +453,19 @@ IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_NoControlFlow_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, System.Range i1, string result1)
@@ -437,7 +474,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -465,14 +503,19 @@ Block[B2] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInInstance_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, string a2, System.Range i1, string result)
@@ -481,7 +524,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -554,14 +598,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInArgument_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a, System.Range? i1, System.Range i2, string result)
@@ -570,7 +619,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -649,14 +699,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInInstanceAndArgument_String()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string a1, string a2, System.Range? i1, System.Range i2, string result)
@@ -665,7 +720,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -774,10 +830,15 @@ Block[B9] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(source);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
-        private string IndexableAndSliceable => @"
+        private string IndexableAndSliceable =>
+            @"
 partial class C
 {
     public int Length => 0;
@@ -790,7 +851,8 @@ partial class C
         [Fact]
         public void ImplicitIndexIndexer()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     public void F(C args, System.Index x)
@@ -800,7 +862,8 @@ partial class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type: System.Int32) (Syntax: 'args[x]')
   Instance:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: C) (Syntax: 'args')
@@ -812,14 +875,19 @@ IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, System.Index i1, int result1)
@@ -828,7 +896,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -856,14 +925,19 @@ Block[B2] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInInstance()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, C a2, System.Index i1, int result)
@@ -872,7 +946,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -945,14 +1020,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInArgument()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a, System.Index? i1, System.Index i2, int result)
@@ -961,7 +1041,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1040,14 +1121,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitIndexIndexer_ControlFlowInInstanceAndArgument()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, C a2, System.Index? i1, System.Index i2, int result)
@@ -1056,7 +1142,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1165,14 +1252,19 @@ Block[B9] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ImplicitRangeIndexer()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     public void F(C args, System.Range x)
@@ -1182,7 +1274,8 @@ partial class C
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type: C) (Syntax: 'args[x]')
   Instance:
     IParameterReferenceOperation: args (OperationKind.ParameterReference, Type: C) (Syntax: 'args')
@@ -1194,14 +1287,19 @@ IImplicitIndexerReferenceOperation (OperationKind.ImplicitIndexerReference, Type
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, System.Range i1, C result1)
@@ -1210,7 +1308,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1238,14 +1337,19 @@ Block[B2] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInInstance()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, C a2, System.Range i1, C result)
@@ -1254,7 +1358,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1327,14 +1432,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInArgument()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a, System.Range? i1, System.Range i2, C result)
@@ -1343,7 +1453,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1422,14 +1533,19 @@ Block[B6] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ImplicitRangeIndexer_ControlFlowInInstanceAndArgument()
         {
-            string source = @"
+            string source =
+                @"
 partial class C
 {
     void M(C a1, C a2, System.Range? i1, System.Range i2, C result)
@@ -1438,7 +1554,8 @@ partial class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1547,7 +1664,11 @@ Block[B9] - Exit
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithIndexAndRange(new[] { source, IndexableAndSliceable });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

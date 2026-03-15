@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
-using System.Diagnostics;
-using System.Text;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
@@ -33,16 +33,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return value.EvalFlags.Includes(DkmEvaluationResultFlags.ExceptionThrown);
         }
 
-        internal static string GetExceptionMessage(this DkmClrValue value, DkmInspectionContext inspectionContext, string fullNameWithoutFormatSpecifiers)
+        internal static string GetExceptionMessage(
+            this DkmClrValue value,
+            DkmInspectionContext inspectionContext,
+            string fullNameWithoutFormatSpecifiers
+        )
         {
-            var typeName = inspectionContext.GetTypeName(value.Type, null, Formatter.NoFormatSpecifiers);
-            return string.Format(Resources.ExceptionThrown, fullNameWithoutFormatSpecifiers, typeName);
+            var typeName = inspectionContext.GetTypeName(
+                value.Type,
+                null,
+                Formatter.NoFormatSpecifiers
+            );
+            return string.Format(
+                Resources.ExceptionThrown,
+                fullNameWithoutFormatSpecifiers,
+                typeName
+            );
         }
 
-        internal static DkmClrValue GetMemberValue(this DkmClrValue value, MemberAndDeclarationInfo member, DkmInspectionContext inspectionContext)
+        internal static DkmClrValue GetMemberValue(
+            this DkmClrValue value,
+            MemberAndDeclarationInfo member,
+            DkmInspectionContext inspectionContext
+        )
         {
             // Note: GetMemberValue() may return special value when func-eval of properties is disabled.
-            return value.GetMemberValue(member.Name, (int)member.MemberType, member.DeclaringType.FullName, inspectionContext);
+            return value.GetMemberValue(
+                member.Name,
+                (int)member.MemberType,
+                member.DeclaringType.FullName,
+                inspectionContext
+            );
         }
 
         internal static string Parenthesize(this string expr)
@@ -50,7 +71,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return $"({expr})";
         }
 
-        internal static string ToCommaSeparatedString(this string[] values, char openParen, char closeParen)
+        internal static string ToCommaSeparatedString(
+            this string[] values,
+            char openParen,
+            char closeParen
+        )
         {
             Debug.Assert(values != null);
 

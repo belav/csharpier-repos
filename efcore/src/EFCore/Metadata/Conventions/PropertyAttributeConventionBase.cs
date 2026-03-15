@@ -19,9 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TAttribute">The attribute type to look for.</typeparam>
-public abstract class PropertyAttributeConventionBase<TAttribute> :
-    IPropertyAddedConvention,
-    IPropertyFieldChangedConvention
+public abstract class PropertyAttributeConventionBase<TAttribute>
+    : IPropertyAddedConvention,
+        IPropertyFieldChangedConvention
     where TAttribute : Attribute
 {
     /// <summary>
@@ -41,7 +41,8 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
     /// <inheritdoc />
     public virtual void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context)
+        IConventionContext<IConventionPropertyBuilder> context
+    )
     {
         Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
@@ -59,16 +60,20 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
         IConventionPropertyBuilder propertyBuilder,
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo,
-        IConventionContext<FieldInfo> context)
+        IConventionContext<FieldInfo> context
+    )
     {
-        if (newFieldInfo != null
-            && propertyBuilder.Metadata.PropertyInfo == null)
+        if (newFieldInfo != null && propertyBuilder.Metadata.PropertyInfo == null)
         {
             Process(propertyBuilder, newFieldInfo, (IReadableConventionContext)context);
         }
     }
 
-    private void Process(IConventionPropertyBuilder propertyBuilder, MemberInfo memberInfo, IReadableConventionContext context)
+    private void Process(
+        IConventionPropertyBuilder propertyBuilder,
+        MemberInfo memberInfo,
+        IReadableConventionContext context
+    )
     {
         if (!Attribute.IsDefined(memberInfo, typeof(TAttribute), inherit: true))
         {
@@ -94,7 +99,8 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    )
     {
         Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
@@ -118,16 +124,20 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
         IConventionComplexPropertyBuilder propertyBuilder,
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo,
-        IConventionContext<FieldInfo> context)
+        IConventionContext<FieldInfo> context
+    )
     {
-        if (newFieldInfo != null
-            && propertyBuilder.Metadata.PropertyInfo == null)
+        if (newFieldInfo != null && propertyBuilder.Metadata.PropertyInfo == null)
         {
             Process(propertyBuilder, newFieldInfo, (IReadableConventionContext)context);
         }
     }
 
-    private void Process(IConventionComplexPropertyBuilder propertyBuilder, MemberInfo memberInfo, IReadableConventionContext context)
+    private void Process(
+        IConventionComplexPropertyBuilder propertyBuilder,
+        MemberInfo memberInfo,
+        IReadableConventionContext context
+    )
     {
         if (!Attribute.IsDefined(memberInfo, typeof(TAttribute), inherit: true))
         {
@@ -157,7 +167,8 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
         IConventionPropertyBuilder propertyBuilder,
         TAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context);
+        IConventionContext context
+    );
 
     /// <summary>
     ///     Called after a complex property is added to a type with an attribute on the associated CLR property or field.
@@ -170,6 +181,6 @@ public abstract class PropertyAttributeConventionBase<TAttribute> :
         IConventionComplexPropertyBuilder propertyBuilder,
         TAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
-        => throw new NotSupportedException();
+        IConventionContext context
+    ) => throw new NotSupportedException();
 }

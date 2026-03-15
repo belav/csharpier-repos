@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,53 +49,52 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class SecureConversationServiceElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty security_state_encoder_type;
+    [MonoTODO]
+    public sealed partial class SecureConversationServiceElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty security_state_encoder_type;
 
-		static SecureConversationServiceElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			security_state_encoder_type = new ConfigurationProperty ("securityStateEncoderType",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static SecureConversationServiceElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            security_state_encoder_type = new ConfigurationProperty(
+                "securityStateEncoderType",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (security_state_encoder_type);
-		}
+            properties.Add(security_state_encoder_type);
+        }
 
-		public SecureConversationServiceElement ()
-		{
-		}
+        public SecureConversationServiceElement() { }
 
+        // Properties
 
-		// Properties
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("securityStateEncoderType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		public string SecurityStateEncoderType {
-			get { return (string) base [security_state_encoder_type]; }
-			set { base [security_state_encoder_type] = value; }
-		}
-
-
-	}
-
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "securityStateEncoderType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        public string SecurityStateEncoderType
+        {
+            get { return (string)base[security_state_encoder_type]; }
+            set { base[security_state_encoder_type] = value; }
+        }
+    }
 }

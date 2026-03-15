@@ -16,7 +16,7 @@ namespace System.Data.SqlClient.SqlGen
     /// </summary>
     internal class BoolWrapper
     {
-        internal bool Value {get; set;}
+        internal bool Value { get; set; }
 
         internal BoolWrapper()
         {
@@ -25,14 +25,15 @@ namespace System.Data.SqlClient.SqlGen
     }
 
     /// <summary>
-    /// Tracks the usage of symbols. 
+    /// Tracks the usage of symbols.
     /// When registering a symbol with the usage manager if an input symbol is specified,
-    /// than the usage of the two is 'connected' - if one ever gets marked as used, 
-    /// the other one becomes 'used' too. 
+    /// than the usage of the two is 'connected' - if one ever gets marked as used,
+    /// the other one becomes 'used' too.
     /// </summary>
     internal class SymbolUsageManager
     {
-        private readonly Dictionary<Symbol, BoolWrapper> optionalColumnUsage = new Dictionary<Symbol, BoolWrapper>();
+        private readonly Dictionary<Symbol, BoolWrapper> optionalColumnUsage =
+            new Dictionary<Symbol, BoolWrapper>();
 
         internal bool ContainsKey(Symbol key)
         {
@@ -55,7 +56,10 @@ namespace System.Data.SqlClient.SqlGen
         internal void Add(Symbol sourceSymbol, Symbol symbolToAdd)
         {
             BoolWrapper wrapper;
-            if (sourceSymbol == null || !this.optionalColumnUsage.TryGetValue(sourceSymbol, out wrapper))
+            if (
+                sourceSymbol == null
+                || !this.optionalColumnUsage.TryGetValue(sourceSymbol, out wrapper)
+            )
             {
                 wrapper = new BoolWrapper();
             }

@@ -25,7 +25,8 @@ public class StateChangedEventData : EntityEntryEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         EntityEntry entityEntry,
         EntityState oldState,
-        EntityState newState)
+        EntityState newState
+    )
         : base(eventDefinition, messageGenerator, entityEntry)
     {
         OldState = oldState;

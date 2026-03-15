@@ -22,7 +22,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Indexer_Set_GetReturnsExpected()
         {
             var attribute = new DirectoryAttributeModification { "value" };
-            var collection = new DirectoryAttributeModificationCollection { new DirectoryAttributeModification() };
+            var collection = new DirectoryAttributeModificationCollection
+            {
+                new DirectoryAttributeModification(),
+            };
             collection[0] = attribute;
             Assert.Equal(attribute, collection[0]);
         }
@@ -39,9 +42,16 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var attribute1 = new DirectoryAttributeModification { "value1" };
             var attribute2 = new DirectoryAttributeModification { "value2" };
-            var collection = new DirectoryAttributeModificationCollection { attribute1, attribute2 };
+            var collection = new DirectoryAttributeModificationCollection
+            {
+                attribute1,
+                attribute2,
+            };
             Assert.Equal(2, collection.Count);
-            Assert.Equal(new DirectoryAttributeModification[] { attribute1, attribute2 }, collection.Cast<DirectoryAttributeModification>());
+            Assert.Equal(
+                new DirectoryAttributeModification[] { attribute1, attribute2 },
+                collection.Cast<DirectoryAttributeModification>()
+            );
         }
 
         [Fact]
@@ -54,7 +64,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void AddRange_ValidAttributes_AddsToCollection()
         {
-            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[] { new DirectoryAttributeModification(), new DirectoryAttributeModification() };
+            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[]
+            {
+                new DirectoryAttributeModification(),
+                new DirectoryAttributeModification(),
+            };
 
             var collection = new DirectoryAttributeModificationCollection();
             collection.AddRange(attributes);
@@ -66,13 +80,21 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributes_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeModificationCollection();
-            AssertExtensions.Throws<ArgumentNullException>("attributes", () => collection.AddRange((DirectoryAttributeModification[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "attributes",
+                () => collection.AddRange((DirectoryAttributeModification[])null)
+            );
         }
 
         [Fact]
         public void AddRange_NullObjectInValues_ThrowsArgumentException()
         {
-            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[] { new DirectoryAttributeModification(), null, new DirectoryAttributeModification() };
+            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[]
+            {
+                new DirectoryAttributeModification(),
+                null,
+                new DirectoryAttributeModification(),
+            };
             var collection = new DirectoryAttributeModificationCollection();
 
             AssertExtensions.Throws<ArgumentException>(null, () => collection.AddRange(attributes));
@@ -82,7 +104,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void AddRange_ValidAttributeCollection_AddsToCollection()
         {
-            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[] { new DirectoryAttributeModification(), new DirectoryAttributeModification() };
+            DirectoryAttributeModification[] attributes = new DirectoryAttributeModification[]
+            {
+                new DirectoryAttributeModification(),
+                new DirectoryAttributeModification(),
+            };
             var attributeCollection = new DirectoryAttributeModificationCollection();
             attributeCollection.AddRange(attributes);
 
@@ -96,7 +122,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributeCollection_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeModificationCollection();
-            AssertExtensions.Throws<ArgumentNullException>("attributeCollection", () => collection.AddRange((DirectoryAttributeModificationCollection)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "attributeCollection",
+                () => collection.AddRange((DirectoryAttributeModificationCollection)null)
+            );
         }
 
         [Fact]
@@ -129,7 +158,10 @@ namespace System.DirectoryServices.Protocols.Tests
             collection.Insert(0, attribute1);
             collection.Insert(1, attribute2);
 
-            Assert.Equal(new DirectoryAttributeModification[] { attribute1, attribute2 }, collection.Cast<DirectoryAttributeModification>());
+            Assert.Equal(
+                new DirectoryAttributeModification[] { attribute1, attribute2 },
+                collection.Cast<DirectoryAttributeModification>()
+            );
         }
 
         [Fact]
@@ -169,7 +201,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [MemberData(nameof(Remove_InvalidValue_TestData))]
         public void Remove_InvalidValue_ThrowsArgumentException(object value, string paramName)
         {
-            IList collection = new DirectoryAttributeModificationCollection { new DirectoryAttributeModification() };
+            IList collection = new DirectoryAttributeModificationCollection
+            {
+                new DirectoryAttributeModification(),
+            };
             AssertExtensions.Throws<ArgumentException>(paramName, () => collection.Remove(value));
         }
     }

@@ -9,7 +9,7 @@ namespace JitCrashPOC
 {
     public class Program
     {
-        static public int s_res;
+        public static int s_res;
 
         [Fact]
         public static int TestEntryPoint()
@@ -17,7 +17,7 @@ namespace JitCrashPOC
             var map = new ItemRunner();
 
             s_res = 0;
-            map.UpdateItem(0,10);
+            map.UpdateItem(0, 10);
 
             if (s_res == 300)
             {
@@ -41,7 +41,10 @@ namespace JitCrashPOC
     {
         public ItemRunner()
         {
-            for (int i = 0; i < _Pool.Length; ++i) { _Pool[i] = new Item(); }
+            for (int i = 0; i < _Pool.Length; ++i)
+            {
+                _Pool[i] = new Item();
+            }
         }
 
         private const float _LengthZ = 1000.0f;
@@ -52,7 +55,6 @@ namespace JitCrashPOC
         private Item[] _Pool = new Item[30];
 
         private Item _LastGenerated;
-
 
         // This method qualifies for the optimization:
         // fgMorphRecursiveFastTailCallIntoLoop : Transform a recursive fast tail call into a loop.
@@ -73,14 +75,16 @@ namespace JitCrashPOC
             {
                 vDelta = _Slope * fDelta;
 
-                if (_LastGenerated != null) _Pool[i]._Position = _LastGenerated._Position - _Slope * _LengthZ;
-                else _Pool[i]._Position = _Start - vDelta;
+                if (_LastGenerated != null)
+                    _Pool[i]._Position = _LastGenerated._Position - _Slope * _LengthZ;
+                else
+                    _Pool[i]._Position = _Start - vDelta;
 
                 _LastGenerated = _Pool[i];
                 Program.s_res++;
             }
 
-            UpdateItem(0, depth-1);
+            UpdateItem(0, depth - 1);
         }
     }
 }

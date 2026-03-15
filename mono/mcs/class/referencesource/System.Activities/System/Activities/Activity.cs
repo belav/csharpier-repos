@@ -34,7 +34,8 @@ namespace System.Activities
         static readonly IList<RuntimeArgument> emptyArguments = new List<RuntimeArgument>(0);
         static readonly IList<ActivityDelegate> emptyDelegates = new List<ActivityDelegate>(0);
 
-        internal static readonly ReadOnlyCollection<Constraint> EmptyConstraints = new ReadOnlyCollection<Constraint>(new Constraint[0]);
+        internal static readonly ReadOnlyCollection<Constraint> EmptyConstraints =
+            new ReadOnlyCollection<Constraint>(new Constraint[0]);
 
         string displayName;
         bool isDisplayNameSet;
@@ -82,22 +83,14 @@ namespace System.Activities
 
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
-        protected virtual internal Version ImplementationVersion
-        {
-            get;
-            set;
-        }
+        protected internal virtual Version ImplementationVersion { get; set; }
 
         [XamlDeferLoad(typeof(FuncDeferringLoader), typeof(Activity))]
-        [DefaultValue(null)] 
+        [DefaultValue(null)]
         [Browsable(false)]
         [Ambient]
-        protected virtual Func<Activity> Implementation
-        {
-            get;
-            set;
-        }        
-                
+        protected virtual Func<Activity> Implementation { get; set; }
+
         protected Collection<Constraint> Constraints
         {
             get
@@ -112,18 +105,12 @@ namespace System.Activities
 
         protected internal int CacheId
         {
-            get
-            {
-                return this.cacheId;
-            }
+            get { return this.cacheId; }
         }
 
         internal RelationshipType RelationshipToParent
         {
-            get
-            {
-                return this.relationshipToParent;
-            }
+            get { return this.relationshipToParent; }
         }
 
         internal bool HasNonEmptySubtree
@@ -136,10 +123,17 @@ namespace System.Activities
                 }
                 else
                 {
-                    if (this.Children.Count > 0 || this.ImplementationChildren.Count > 0 || this.ImportedChildren.Count > 0 ||
-                        this.Delegates.Count > 0 || this.ImplementationDelegates.Count > 0 || this.ImportedDelegates.Count > 0 ||
-                        this.RuntimeVariables.Count > 0 || this.ImplementationVariables.Count > 0 ||
-                        this.RuntimeArguments.Count > 0)
+                    if (
+                        this.Children.Count > 0
+                        || this.ImplementationChildren.Count > 0
+                        || this.ImportedChildren.Count > 0
+                        || this.Delegates.Count > 0
+                        || this.ImplementationDelegates.Count > 0
+                        || this.ImportedDelegates.Count > 0
+                        || this.RuntimeVariables.Count > 0
+                        || this.ImplementationVariables.Count > 0
+                        || this.RuntimeArguments.Count > 0
+                    )
                     {
                         this.isSubtreeEmpty = false;
                     }
@@ -154,23 +148,12 @@ namespace System.Activities
 
         internal int SymbolCount
         {
-            get
-            {
-                return this.symbolCount;
-            }
+            get { return this.symbolCount; }
         }
 
-        internal IdSpace MemberOf
-        {
-            get;
-            set;
-        }
+        internal IdSpace MemberOf { get; set; }
 
-        internal IdSpace ParentOf
-        {
-            get;
-            set;
-        }
+        internal IdSpace ParentOf { get; set; }
 
         internal QualifiedId QualifiedId
         {
@@ -187,39 +170,21 @@ namespace System.Activities
 
         // This flag governs special behavior that we need to keep for back-compat on activities
         // that implemented TryGetValue in 4.0.
-        internal bool UseOldFastPath
-        {
-            get;
-            set;
-        }
+        internal bool UseOldFastPath { get; set; }
 
-        internal bool SkipArgumentResolution
-        {
-            get;
-            set;
-        }
+        internal bool SkipArgumentResolution { get; set; }
 
         internal bool IsFastPath
         {
-            get
-            {
-                return this.SkipArgumentResolution && IsActivityWithResult;
-            }
+            get { return this.SkipArgumentResolution && IsActivityWithResult; }
         }
 
         internal virtual bool IsActivityWithResult
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        internal object Origin
-        {
-            get;
-            set;
-        }
+        internal object Origin { get; set; }
 
         public string DisplayName
         {
@@ -263,58 +228,41 @@ namespace System.Activities
 
         internal bool IsExpressionRoot
         {
-            get
-            {
-                return this.relationshipToParent == RelationshipType.ArgumentExpression;
-            }
+            get { return this.relationshipToParent == RelationshipType.ArgumentExpression; }
         }
 
         internal bool HasStartedCachingMetadata
         {
-            get
-            {
-                return this.isMetadataCached != CacheStates.Uncached;
-            }
+            get { return this.isMetadataCached != CacheStates.Uncached; }
         }
 
         internal bool IsMetadataCached
         {
-            get
-            {
-                return this.isMetadataCached != CacheStates.Uncached;
-            }
+            get { return this.isMetadataCached != CacheStates.Uncached; }
         }
 
         internal bool IsMetadataFullyCached
         {
-            get
-            {
-                return (this.isMetadataCached & CacheStates.Full) == CacheStates.Full;
-            }
+            get { return (this.isMetadataCached & CacheStates.Full) == CacheStates.Full; }
         }
 
         internal bool IsRuntimeReady
         {
             get
             {
-                return (this.isMetadataCached & CacheStates.RuntimeReady) == CacheStates.RuntimeReady;
+                return (this.isMetadataCached & CacheStates.RuntimeReady)
+                    == CacheStates.RuntimeReady;
             }
         }
 
         internal Activity RootActivity
         {
-            get
-            {
-                return this.rootActivity;
-            }
+            get { return this.rootActivity; }
         }
 
         internal int InternalId
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
             set
             {
                 Fx.Assert(value != 0, "0 is an invalid ID");
@@ -323,17 +271,9 @@ namespace System.Activities
             }
         }
 
-        internal ActivityDelegate HandlerOf
-        {
-            get;
-            private set;
-        }
+        internal ActivityDelegate HandlerOf { get; private set; }
 
-        internal Activity Parent
-        {
-            get;
-            private set;
-        }
+        internal Activity Parent { get; private set; }
 
         internal LocationReferenceEnvironment HostEnvironment
         {
@@ -350,58 +290,37 @@ namespace System.Activities
 
         internal IList<RuntimeArgument> RuntimeArguments
         {
-            get
-            {
-                return this.arguments;
-            }
+            get { return this.arguments; }
         }
 
         internal IList<Activity> Children
         {
-            get
-            {
-                return this.children;
-            }
+            get { return this.children; }
         }
 
         internal IList<Activity> ImplementationChildren
         {
-            get
-            {
-                return this.implementationChildren;
-            }
+            get { return this.implementationChildren; }
         }
 
         internal IList<Activity> ImportedChildren
         {
-            get
-            {
-                return this.importedChildren;
-            }
+            get { return this.importedChildren; }
         }
 
         internal IList<ActivityDelegate> Delegates
         {
-            get
-            {
-                return this.delegates;
-            }
+            get { return this.delegates; }
         }
 
         internal IList<ActivityDelegate> ImplementationDelegates
         {
-            get
-            {
-                return this.implementationDelegates;
-            }
+            get { return this.implementationDelegates; }
         }
 
         internal IList<ActivityDelegate> ImportedDelegates
         {
-            get
-            {
-                return this.importedDelegates;
-            }
+            get { return this.importedDelegates; }
         }
 
         internal bool HasBeenAssociatedWithAnInstance
@@ -412,7 +331,11 @@ namespace System.Activities
                 {
                     return this.rootProperties.HasBeenAssociatedWithAnInstance;
                 }
-                else if (this.IsMetadataCached && this.RootActivity != null && this.RootActivity.rootProperties != null)
+                else if (
+                    this.IsMetadataCached
+                    && this.RootActivity != null
+                    && this.RootActivity.rootProperties != null
+                )
                 {
                     return this.RootActivity.rootProperties.HasBeenAssociatedWithAnInstance;
                 }
@@ -423,7 +346,10 @@ namespace System.Activities
             }
             set
             {
-                Fx.Assert(this.rootProperties != null, "This should only be called on the root and we should already be cached.");
+                Fx.Assert(
+                    this.rootProperties != null,
+                    "This should only be called on the root and we should already be cached."
+                );
                 Fx.Assert(value, "We really only let you set this to true.");
 
                 this.rootProperties.HasBeenAssociatedWithAnInstance = value;
@@ -434,7 +360,10 @@ namespace System.Activities
         {
             get
             {
-                Fx.Assert(this.rootProperties != null || System.Diagnostics.Debugger.IsAttached, "This should only be called on the root.");
+                Fx.Assert(
+                    this.rootProperties != null || System.Diagnostics.Debugger.IsAttached,
+                    "This should only be called on the root."
+                );
                 return this.rootProperties.OverloadGroups;
             }
             set
@@ -448,7 +377,10 @@ namespace System.Activities
         {
             get
             {
-                Fx.Assert(this.rootProperties != null || System.Diagnostics.Debugger.IsAttached, "This should only be called on the root.");
+                Fx.Assert(
+                    this.rootProperties != null || System.Diagnostics.Debugger.IsAttached,
+                    "This should only be called on the root."
+                );
                 return this.rootProperties.RequiredArgumentsNotInOverloadGroups;
             }
             set
@@ -462,7 +394,10 @@ namespace System.Activities
         {
             get
             {
-                Fx.Assert(this.rootProperties != null || System.Diagnostics.Debugger.IsAttached, "This should only be called on the root.");
+                Fx.Assert(
+                    this.rootProperties != null || System.Diagnostics.Debugger.IsAttached,
+                    "This should only be called on the root."
+                );
                 return this.rootProperties.EquivalenceInfo;
             }
             set
@@ -474,46 +409,26 @@ namespace System.Activities
 
         internal IList<Variable> RuntimeVariables
         {
-            get
-            {
-                return this.variables;
-            }
+            get { return this.variables; }
         }
 
         internal IList<Variable> ImplementationVariables
         {
-            get
-            {
-                return this.implementationVariables;
-            }
+            get { return this.implementationVariables; }
         }
 
         internal IList<Constraint> RuntimeConstraints
         {
-            get
-            {
-                return InternalGetConstraints();
-            }
+            get { return InternalGetConstraints(); }
         }
 
-        internal LocationReferenceEnvironment PublicEnvironment
-        {
-            get;
-            set;
-        }
+        internal LocationReferenceEnvironment PublicEnvironment { get; set; }
 
-        internal LocationReferenceEnvironment ImplementationEnvironment
-        {
-            get;
-            set;
-        }
+        internal LocationReferenceEnvironment ImplementationEnvironment { get; set; }
 
         internal virtual bool InternalCanInduceIdle
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal bool HasTempViolations
@@ -526,17 +441,17 @@ namespace System.Activities
 
         internal object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         internal int RequiredExtensionTypesCount
         {
             get
             {
-                Fx.Assert(this.rootProperties != null || System.Diagnostics.Debugger.IsAttached, "only callable on the root");
+                Fx.Assert(
+                    this.rootProperties != null || System.Diagnostics.Debugger.IsAttached,
+                    "only callable on the root"
+                );
                 return this.rootProperties.RequiredExtensionTypesCount;
             }
         }
@@ -545,15 +460,24 @@ namespace System.Activities
         {
             get
             {
-                Fx.Assert(this.rootProperties != null || System.Diagnostics.Debugger.IsAttached, "only callable on the root");
+                Fx.Assert(
+                    this.rootProperties != null || System.Diagnostics.Debugger.IsAttached,
+                    "only callable on the root"
+                );
                 return this.rootProperties.DefaultExtensionsCount;
             }
         }
 
-        internal bool GetActivityExtensionInformation(out Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders, out HashSet<Type> requiredActivityExtensionTypes)
+        internal bool GetActivityExtensionInformation(
+            out Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders,
+            out HashSet<Type> requiredActivityExtensionTypes
+        )
         {
             Fx.Assert(this.rootProperties != null, "only callable on the root");
-            return this.rootProperties.GetActivityExtensionInformation(out activityExtensionProviders, out requiredActivityExtensionTypes);
+            return this.rootProperties.GetActivityExtensionInformation(
+                out activityExtensionProviders,
+                out requiredActivityExtensionTypes
+            );
         }
 
         internal virtual bool IsResultArgument(RuntimeArgument argument)
@@ -566,11 +490,13 @@ namespace System.Activities
             // fast path if we're the sole (or first) child
             if (object.ReferenceEquals(parent, this.Parent))
             {
-                return this.relationshipToParent == RelationshipType.ImplementationChild || this.relationshipToParent == RelationshipType.Child;
+                return this.relationshipToParent == RelationshipType.ImplementationChild
+                    || this.relationshipToParent == RelationshipType.Child;
             }
             else
             {
-                return parent.Children.Contains(this) || parent.ImplementationChildren.Contains(this);
+                return parent.Children.Contains(this)
+                    || parent.ImplementationChildren.Contains(this);
             }
         }
 
@@ -605,7 +531,9 @@ namespace System.Activities
             this.children.Add(child);
         }
 
-        internal void SetImplementationChildrenCollection(Collection<Activity> implementationChildren)
+        internal void SetImplementationChildrenCollection(
+            Collection<Activity> implementationChildren
+        )
         {
             this.implementationChildren = implementationChildren;
         }
@@ -650,7 +578,9 @@ namespace System.Activities
             this.delegates.Add(activityDelegate);
         }
 
-        internal void SetImplementationDelegatesCollection(Collection<ActivityDelegate> implementationDelegates)
+        internal void SetImplementationDelegatesCollection(
+            Collection<ActivityDelegate> implementationDelegates
+        )
         {
             this.implementationDelegates = implementationDelegates;
         }
@@ -695,7 +625,9 @@ namespace System.Activities
             this.variables.Add(variable);
         }
 
-        internal void SetImplementationVariablesCollection(Collection<Variable> implementationVariables)
+        internal void SetImplementationVariablesCollection(
+            Collection<Variable> implementationVariables
+        )
         {
             this.implementationVariables = implementationVariables;
         }
@@ -710,7 +642,10 @@ namespace System.Activities
             this.implementationVariables.Add(implementationVariable);
         }
 
-        internal void SetArgumentsCollection(Collection<RuntimeArgument> arguments, bool createEmptyBindings)
+        internal void SetArgumentsCollection(
+            Collection<RuntimeArgument> arguments,
+            bool createEmptyBindings
+        )
         {
             this.arguments = arguments;
 
@@ -736,8 +671,11 @@ namespace System.Activities
             }
 
             argument.SetupBinding(this, createEmptyBindings);
-            
-            int insertionIndex = this.arguments.BinarySearch(argument, RuntimeArgument.EvaluationOrderComparer);
+
+            int insertionIndex = this.arguments.BinarySearch(
+                argument,
+                RuntimeArgument.EvaluationOrderComparer
+            );
             if (insertionIndex < 0)
             {
                 this.arguments.Insert(~insertionIndex, argument);
@@ -763,7 +701,6 @@ namespace System.Activities
                 }
             }
             this.tempValidationErrors = null;
-
         }
 
         internal void AddTempValidationError(ValidationError validationError)
@@ -776,14 +713,19 @@ namespace System.Activities
             this.tempValidationErrors.Add(validationError);
         }
 
-        internal RuntimeArgument AddTempAutoGeneratedArgument(Type argumentType, ArgumentDirection direction)
+        internal RuntimeArgument AddTempAutoGeneratedArgument(
+            Type argumentType,
+            ArgumentDirection direction
+        )
         {
             if (this.tempAutoGeneratedArguments == null)
             {
                 this.tempAutoGeneratedArguments = new Collection<RuntimeArgument>();
             }
 
-            string name = generatedArgumentPrefix + this.tempAutoGeneratedArguments.Count.ToString(CultureInfo.InvariantCulture);
+            string name =
+                generatedArgumentPrefix
+                + this.tempAutoGeneratedArguments.Count.ToString(CultureInfo.InvariantCulture);
             RuntimeArgument argument = new RuntimeArgument(name, argumentType, direction);
             this.tempAutoGeneratedArguments.Add(argument);
             return argument;
@@ -823,12 +765,18 @@ namespace System.Activities
         }
 
         // subclasses are responsible for creating/disposing the necessary contexts
-        internal virtual void InternalAbort(ActivityInstance instance, ActivityExecutor executor, Exception terminationReason)
-        {
-        }
+        internal virtual void InternalAbort(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception terminationReason
+        ) { }
 
         // subclasses are responsible for creating/disposing the necessary contexts
-        internal virtual void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal virtual void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             if (this.runtimeImplementation != null)
             {
@@ -838,7 +786,11 @@ namespace System.Activities
 
         // subclasses are responsible for creating/disposing the necessary contexts. This implementation
         // covers Activity, Activity<T>, DynamicActivity, DynamicActivity<T>
-        internal virtual void InternalCancel(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal virtual void InternalCancel(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
             try
@@ -882,7 +834,7 @@ namespace System.Activities
 
             return null;
         }
-        
+
         internal void ClearCachedInformation()
         {
             ClearCachedMetadata();
@@ -914,7 +866,12 @@ namespace System.Activities
             {
                 Fx.Assert(this.rootProperties != null, "Root properties must be available now.");
 
-                parentEnvironment = new ActivityLocationReferenceEnvironment(this.rootProperties.HostEnvironment) { InternalRoot = this };
+                parentEnvironment = new ActivityLocationReferenceEnvironment(
+                    this.rootProperties.HostEnvironment
+                )
+                {
+                    InternalRoot = this,
+                };
             }
             else
             {
@@ -947,19 +904,41 @@ namespace System.Activities
             return parentEnvironment;
         }
 
-        internal bool InitializeRelationship(ActivityDelegate activityDelegate, ActivityCollectionType collectionType, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            ActivityDelegate activityDelegate,
+            ActivityCollectionType collectionType,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (this.cacheId == activityDelegate.Owner.CacheId)
             {
                 // This means that we already have a parent and a delegate is trying to initialize
                 // a relationship.  Delegate handlers MUST be declared.
 
-                ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityDelegateHandlersMustBeDeclarations(this.DisplayName, activityDelegate.Owner.DisplayName, this.Parent.DisplayName), false, activityDelegate.Owner));
+                ActivityUtilities.Add(
+                    ref validationErrors,
+                    new ValidationError(
+                        SR.ActivityDelegateHandlersMustBeDeclarations(
+                            this.DisplayName,
+                            activityDelegate.Owner.DisplayName,
+                            this.Parent.DisplayName
+                        ),
+                        false,
+                        activityDelegate.Owner
+                    )
+                );
 
                 return false;
             }
 
-            if (InitializeRelationship(activityDelegate.Owner, collectionType != ActivityCollectionType.Implementation, RelationshipType.DelegateHandler, ref validationErrors))
+            if (
+                InitializeRelationship(
+                    activityDelegate.Owner,
+                    collectionType != ActivityCollectionType.Implementation,
+                    RelationshipType.DelegateHandler,
+                    ref validationErrors
+                )
+            )
             {
                 this.HandlerOf = activityDelegate;
 
@@ -969,17 +948,38 @@ namespace System.Activities
             return false;
         }
 
-        internal bool InitializeRelationship(RuntimeArgument argument, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            RuntimeArgument argument,
+            ref IList<ValidationError> validationErrors
+        )
         {
-            return InitializeRelationship(argument.Owner, true, RelationshipType.ArgumentExpression, ref validationErrors);
+            return InitializeRelationship(
+                argument.Owner,
+                true,
+                RelationshipType.ArgumentExpression,
+                ref validationErrors
+            );
         }
 
-        internal bool InitializeRelationship(Variable variable, bool isPublic, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            Variable variable,
+            bool isPublic,
+            ref IList<ValidationError> validationErrors
+        )
         {
-            return InitializeRelationship(variable.Owner, isPublic, RelationshipType.VariableDefault, ref validationErrors);
+            return InitializeRelationship(
+                variable.Owner,
+                isPublic,
+                RelationshipType.VariableDefault,
+                ref validationErrors
+            );
         }
 
-        internal bool InitializeRelationship(Activity parent, ActivityCollectionType collectionType, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            Activity parent,
+            ActivityCollectionType collectionType,
+            ref IList<ValidationError> validationErrors
+        )
         {
             RelationshipType relationshipType = RelationshipType.Child;
             if (collectionType == ActivityCollectionType.Imports)
@@ -991,10 +991,20 @@ namespace System.Activities
                 relationshipType = RelationshipType.ImplementationChild;
             }
 
-            return InitializeRelationship(parent, collectionType != ActivityCollectionType.Implementation, relationshipType, ref validationErrors);
+            return InitializeRelationship(
+                parent,
+                collectionType != ActivityCollectionType.Implementation,
+                relationshipType,
+                ref validationErrors
+            );
         }
 
-        bool InitializeRelationship(Activity parent, bool isPublic, RelationshipType relationship, ref IList<ValidationError> validationErrors)
+        bool InitializeRelationship(
+            Activity parent,
+            bool isPublic,
+            RelationshipType relationship,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (this.cacheId == parent.cacheId)
             {
@@ -1009,25 +1019,62 @@ namespace System.Activities
 
                 if (object.ReferenceEquals(this, parent))
                 {
-                    ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityCannotReferenceItself(this.DisplayName), parent));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        new ValidationError(
+                            SR.ActivityCannotReferenceItself(this.DisplayName),
+                            parent
+                        )
+                    );
 
                     return false;
                 }
                 else if (this.Parent == null)
                 {
-                    ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.RootActivityCannotBeReferenced(this.DisplayName, parent.DisplayName), parent));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        new ValidationError(
+                            SR.RootActivityCannotBeReferenced(this.DisplayName, parent.DisplayName),
+                            parent
+                        )
+                    );
 
                     return false;
                 }
                 else if (referenceTarget == null)
                 {
-                    ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityCannotBeReferencedWithoutTarget(this.DisplayName, parent.DisplayName, this.Parent.DisplayName), parent));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        new ValidationError(
+                            SR.ActivityCannotBeReferencedWithoutTarget(
+                                this.DisplayName,
+                                parent.DisplayName,
+                                this.Parent.DisplayName
+                            ),
+                            parent
+                        )
+                    );
 
                     return false;
                 }
-                else if (!referenceTarget.Children.Contains(this) && !referenceTarget.ImportedChildren.Contains(this))
+                else if (
+                    !referenceTarget.Children.Contains(this)
+                    && !referenceTarget.ImportedChildren.Contains(this)
+                )
                 {
-                    ActivityUtilities.Add(ref validationErrors, new ValidationError(SR.ActivityCannotBeReferenced(this.DisplayName, parent.DisplayName, referenceTarget.DisplayName, this.Parent.DisplayName), false, parent));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        new ValidationError(
+                            SR.ActivityCannotBeReferenced(
+                                this.DisplayName,
+                                parent.DisplayName,
+                                referenceTarget.DisplayName,
+                                this.Parent.DisplayName
+                            ),
+                            false,
+                            parent
+                        )
+                    );
 
                     return false;
                 }
@@ -1041,7 +1088,7 @@ namespace System.Activities
             this.HandlerOf = null;
             this.rootActivity = parent.RootActivity;
             this.cacheId = parent.cacheId;
-            this.isMetadataCached = CacheStates.Uncached;            
+            this.isMetadataCached = CacheStates.Uncached;
             ClearCachedMetadata();
             this.relationshipToParent = relationship;
 
@@ -1080,17 +1127,31 @@ namespace System.Activities
             this.implementationVariables = null;
         }
 
-        internal void InternalCacheMetadata(bool createEmptyBindings, ref IList<ValidationError> validationErrors)
+        internal void InternalCacheMetadata(
+            bool createEmptyBindings,
+            ref IList<ValidationError> validationErrors
+        )
         {
             OnInternalCacheMetadata(createEmptyBindings);
 
             if (this.tempAutoGeneratedArguments != null)
             {
-                Fx.Assert(this.tempAutoGeneratedArguments.Count > 0, "We should only have a non-null value here if we generated an argument");
+                Fx.Assert(
+                    this.tempAutoGeneratedArguments.Count > 0,
+                    "We should only have a non-null value here if we generated an argument"
+                );
                 if (!this.SkipArgumentResolution)
                 {
-                    ActivityUtilities.Add(ref validationErrors, new ValidationError(
-                        SR.PublicReferencesOnActivityRequiringArgumentResolution(this.DisplayName), false, this));
+                    ActivityUtilities.Add(
+                        ref validationErrors,
+                        new ValidationError(
+                            SR.PublicReferencesOnActivityRequiringArgumentResolution(
+                                this.DisplayName
+                            ),
+                            false,
+                            this
+                        )
+                    );
                 }
 
                 if (this.arguments == null)
@@ -1110,7 +1171,11 @@ namespace System.Activities
 
             if (this.arguments != null && this.arguments.Count > 1)
             {
-                ActivityValidationServices.ValidateEvaluationOrder(this.arguments, this, ref this.tempValidationErrors);
+                ActivityValidationServices.ValidateEvaluationOrder(
+                    this.arguments,
+                    this,
+                    ref this.tempValidationErrors
+                );
             }
 
             if (this.tempValidationErrors != null)
@@ -1202,7 +1267,7 @@ namespace System.Activities
             {
                 this.isMetadataCached = CacheStates.Partial;
             }
-            else 
+            else
             {
                 this.isMetadataCached = CacheStates.Full;
             }
@@ -1217,7 +1282,11 @@ namespace System.Activities
         {
             // By running CacheMetadata first we allow the user
             // to set their Implementation during CacheMetadata.
-            ActivityMetadata metadata = new ActivityMetadata(this, GetParentEnvironment(), createEmptyBindings);
+            ActivityMetadata metadata = new ActivityMetadata(
+                this,
+                GetParentEnvironment(),
+                createEmptyBindings
+            );
             CacheMetadata(metadata);
             metadata.Dispose();
 
@@ -1232,10 +1301,9 @@ namespace System.Activities
 
             if (this.runtimeImplementation != null)
             {
-                SetImplementationChildrenCollection(new Collection<Activity>
-                {
-                    this.runtimeImplementation
-                });
+                SetImplementationChildrenCollection(
+                    new Collection<Activity> { this.runtimeImplementation }
+                );
             }
         }
 
@@ -1249,8 +1317,11 @@ namespace System.Activities
             SetArgumentsCollection(information.GetArguments(), metadata.CreateEmptyBindings);
         }
 
-        internal virtual void OnInternalCreateDynamicUpdateMap(DynamicUpdateMapBuilder.Finalizer finalizer,
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity originalActivity)
+        internal virtual void OnInternalCreateDynamicUpdateMap(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity originalActivity
+        )
         {
             UpdateMapMetadata metadata = new UpdateMapMetadata(finalizer, matcher, this);
             try
@@ -1263,22 +1334,32 @@ namespace System.Activities
             }
         }
 
-        protected virtual void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
-        {
-        }
+        protected virtual void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        ) { }
 
         internal void AddDefaultExtensionProvider<T>(Func<T> extensionProvider)
             where T : class
         {
             Fx.Assert(extensionProvider != null, "caller must verify");
-            Fx.Assert(this.rootActivity != null && this.rootActivity.rootProperties != null, "need a valid root");
+            Fx.Assert(
+                this.rootActivity != null && this.rootActivity.rootProperties != null,
+                "need a valid root"
+            );
             this.rootActivity.rootProperties.AddDefaultExtensionProvider(extensionProvider);
         }
 
         internal void RequireExtension(Type extensionType)
         {
-            Fx.Assert(extensionType != null && !extensionType.IsValueType, "caller should verify we have a valid reference type");
-            Fx.Assert(this.rootActivity != null && this.rootActivity.rootProperties != null, "need a valid root");
+            Fx.Assert(
+                extensionType != null && !extensionType.IsValueType,
+                "caller should verify we have a valid reference type"
+            );
+            Fx.Assert(
+                this.rootActivity != null && this.rootActivity.rootProperties != null,
+                "need a valid root"
+            );
             this.rootActivity.rootProperties.RequireExtension(extensionType);
         }
 
@@ -1289,39 +1370,17 @@ namespace System.Activities
             Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders;
             HashSet<Type> requiredExtensionTypes;
 
-            public RootProperties()
-            {
-            }
+            public RootProperties() { }
 
-            public bool HasBeenAssociatedWithAnInstance
-            {
-                get;
-                set;
-            }
+            public bool HasBeenAssociatedWithAnInstance { get; set; }
 
-            public LocationReferenceEnvironment HostEnvironment
-            {
-                get;
-                set;
-            }
+            public LocationReferenceEnvironment HostEnvironment { get; set; }
 
-            public Dictionary<string, List<RuntimeArgument>> OverloadGroups
-            {
-                get;
-                set;
-            }
+            public Dictionary<string, List<RuntimeArgument>> OverloadGroups { get; set; }
 
-            public List<RuntimeArgument> RequiredArgumentsNotInOverloadGroups
-            {
-                get;
-                set;
-            }
+            public List<RuntimeArgument> RequiredArgumentsNotInOverloadGroups { get; set; }
 
-            public ValidationHelper.OverloadGroupEquivalenceInfo EquivalenceInfo
-            {
-                get;
-                set;
-            }
+            public ValidationHelper.OverloadGroupEquivalenceInfo EquivalenceInfo { get; set; }
 
             public int DefaultExtensionsCount
             {
@@ -1353,11 +1412,15 @@ namespace System.Activities
                 }
             }
 
-            public bool GetActivityExtensionInformation(out Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders, out HashSet<Type> requiredActivityExtensionTypes)
+            public bool GetActivityExtensionInformation(
+                out Dictionary<Type, WorkflowInstanceExtensionProvider> activityExtensionProviders,
+                out HashSet<Type> requiredActivityExtensionTypes
+            )
             {
                 activityExtensionProviders = this.activityExtensionProviders;
                 requiredActivityExtensionTypes = this.requiredExtensionTypes;
-                return activityExtensionProviders != null || (requiredExtensionTypes != null && requiredExtensionTypes.Count > 0);
+                return activityExtensionProviders != null
+                    || (requiredExtensionTypes != null && requiredExtensionTypes.Count > 0);
             }
 
             public void AddDefaultExtensionProvider<T>(Func<T> extensionProvider)
@@ -1366,7 +1429,8 @@ namespace System.Activities
                 Type key = typeof(T);
                 if (this.activityExtensionProviders == null)
                 {
-                    this.activityExtensionProviders = new Dictionary<Type, WorkflowInstanceExtensionProvider>();
+                    this.activityExtensionProviders =
+                        new Dictionary<Type, WorkflowInstanceExtensionProvider>();
                 }
                 else
                 {
@@ -1376,7 +1440,10 @@ namespace System.Activities
                     }
                 }
 
-                this.activityExtensionProviders.Add(key, new WorkflowInstanceExtensionProvider<T>(extensionProvider));
+                this.activityExtensionProviders.Add(
+                    key,
+                    new WorkflowInstanceExtensionProvider<T>(extensionProvider)
+                );
 
                 // if we're providing an extension that exactly matches a required type, simplify further bookkeeping
                 if (this.requiredExtensionTypes != null)
@@ -1388,7 +1455,10 @@ namespace System.Activities
             public void RequireExtension(Type extensionType)
             {
                 // if we're providing an extension that exactly matches a required type, don't bother with further bookkeeping
-                if (this.activityExtensionProviders != null && this.activityExtensionProviders.ContainsKey(extensionType))
+                if (
+                    this.activityExtensionProviders != null
+                    && this.activityExtensionProviders.ContainsKey(extensionType)
+                )
                 {
                     return;
                 }
@@ -1447,9 +1517,7 @@ namespace System.Activities
             static Type OverloadGroupAttributeType = typeof(OverloadGroupAttribute);
 
             public ReflectedInformation(Activity owner)
-                : this(owner, ReflectedType.All)
-            {
-            }
+                : this(owner, ReflectedType.All) { }
 
             ReflectedInformation(Activity activity, ReflectedType reflectType)
             {
@@ -1458,12 +1526,20 @@ namespace System.Activities
                 // reflect over our activity and gather relevant pieces of the system so that the developer
                 // doesn't need to worry about "zipping up" his model to the constructs necessary for the
                 // runtime to function correctly
-                foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(activity))
+                foreach (
+                    PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(activity)
+                )
                 {
                     ArgumentDirection direction;
                     Type argumentType;
-                    if ((reflectType & ReflectedType.Argument) == ReflectedType.Argument &&
-                        ActivityUtilities.TryGetArgumentDirectionAndType(propertyDescriptor.PropertyType, out direction, out argumentType))
+                    if (
+                        (reflectType & ReflectedType.Argument) == ReflectedType.Argument
+                        && ActivityUtilities.TryGetArgumentDirectionAndType(
+                            propertyDescriptor.PropertyType,
+                            out direction,
+                            out argumentType
+                        )
+                    )
                     {
                         // We only do our magic for generic argument types.  If the property is a non-generic
                         // argument type then that means the type of the RuntimeArgument should be based on
@@ -1472,13 +1548,25 @@ namespace System.Activities
                         if (propertyDescriptor.PropertyType.IsGenericType)
                         {
                             bool isRequired = GetIsArgumentRequired(propertyDescriptor);
-                            List<string> overloadGroupNames = GetOverloadGroupNames(propertyDescriptor);
-                            RuntimeArgument argument = new RuntimeArgument(propertyDescriptor.Name, argumentType, direction, isRequired, overloadGroupNames, propertyDescriptor, activity);
+                            List<string> overloadGroupNames = GetOverloadGroupNames(
+                                propertyDescriptor
+                            );
+                            RuntimeArgument argument = new RuntimeArgument(
+                                propertyDescriptor.Name,
+                                argumentType,
+                                direction,
+                                isRequired,
+                                overloadGroupNames,
+                                propertyDescriptor,
+                                activity
+                            );
                             Add<RuntimeArgument>(ref this.arguments, argument);
                         }
                     }
-                    else if ((reflectType & ReflectedType.Variable) == ReflectedType.Variable &&
-                        ActivityUtilities.IsVariableType(propertyDescriptor.PropertyType))
+                    else if (
+                        (reflectType & ReflectedType.Variable) == ReflectedType.Variable
+                        && ActivityUtilities.IsVariableType(propertyDescriptor.PropertyType)
+                    )
                     {
                         Variable variable = propertyDescriptor.GetValue(activity) as Variable;
                         if (variable != null)
@@ -1486,16 +1574,23 @@ namespace System.Activities
                             Add<Variable>(ref this.variables, variable);
                         }
                     }
-                    else if ((reflectType & ReflectedType.Child) == ReflectedType.Child &&
-                        ActivityUtilities.IsActivityType(propertyDescriptor.PropertyType))
+                    else if (
+                        (reflectType & ReflectedType.Child) == ReflectedType.Child
+                        && ActivityUtilities.IsActivityType(propertyDescriptor.PropertyType)
+                    )
                     {
-                        Activity workflowElement = propertyDescriptor.GetValue(activity) as Activity;
+                        Activity workflowElement =
+                            propertyDescriptor.GetValue(activity) as Activity;
                         Add<Activity>(ref this.children, workflowElement);
                     }
-                    else if ((reflectType & ReflectedType.ActivityDelegate) == ReflectedType.ActivityDelegate &&
-                        ActivityUtilities.IsActivityDelegateType(propertyDescriptor.PropertyType))
+                    else if (
+                        (reflectType & ReflectedType.ActivityDelegate)
+                            == ReflectedType.ActivityDelegate
+                        && ActivityUtilities.IsActivityDelegateType(propertyDescriptor.PropertyType)
+                    )
                     {
-                        ActivityDelegate activityDelegate = propertyDescriptor.GetValue(activity) as ActivityDelegate;
+                        ActivityDelegate activityDelegate =
+                            propertyDescriptor.GetValue(activity) as ActivityDelegate;
                         Add<ActivityDelegate>(ref this.delegates, activityDelegate);
                     }
                     else
@@ -1507,42 +1602,72 @@ namespace System.Activities
                             object property = propertyDescriptor.GetValue(activity);
                             if (property != null)
                             {
-                                IList<RuntimeArgument> runtimeArguments = DictionaryArgumentHelper.TryGetRuntimeArguments(property, propertyDescriptor.Name);
+                                IList<RuntimeArgument> runtimeArguments =
+                                    DictionaryArgumentHelper.TryGetRuntimeArguments(
+                                        property,
+                                        propertyDescriptor.Name
+                                    );
                                 if (runtimeArguments != null)
                                 {
                                     this.AddCollection(ref this.arguments, runtimeArguments);
                                     foundMatch = true;
                                 }
-                                else if (ActivityUtilities.IsArgumentDictionaryType(propertyDescriptor.PropertyType, out innerType))
+                                else if (
+                                    ActivityUtilities.IsArgumentDictionaryType(
+                                        propertyDescriptor.PropertyType,
+                                        out innerType
+                                    )
+                                )
                                 {
-                                    Type concreteHelperType = DictionaryArgumentHelperType.MakeGenericType(innerType);
-                                    DictionaryArgumentHelper helper = Activator.CreateInstance(concreteHelperType, new object[] { property, propertyDescriptor.Name }) as DictionaryArgumentHelper;
+                                    Type concreteHelperType =
+                                        DictionaryArgumentHelperType.MakeGenericType(innerType);
+                                    DictionaryArgumentHelper helper =
+                                        Activator.CreateInstance(
+                                            concreteHelperType,
+                                            new object[] { property, propertyDescriptor.Name }
+                                        ) as DictionaryArgumentHelper;
                                     this.AddCollection(ref this.arguments, helper.RuntimeArguments);
                                     foundMatch = true;
                                 }
                             }
                         }
 
-                        if (!foundMatch && ActivityUtilities.IsKnownCollectionType(propertyDescriptor.PropertyType, out innerType))
+                        if (
+                            !foundMatch
+                            && ActivityUtilities.IsKnownCollectionType(
+                                propertyDescriptor.PropertyType,
+                                out innerType
+                            )
+                        )
                         {
-                            if ((reflectType & ReflectedType.Variable) == ReflectedType.Variable &&
-                                ActivityUtilities.IsVariableType(innerType))
+                            if (
+                                (reflectType & ReflectedType.Variable) == ReflectedType.Variable
+                                && ActivityUtilities.IsVariableType(innerType)
+                            )
                             {
-                                IEnumerable enumerable = propertyDescriptor.GetValue(activity) as IEnumerable;
+                                IEnumerable enumerable =
+                                    propertyDescriptor.GetValue(activity) as IEnumerable;
 
                                 AddCollection(ref this.variables, enumerable);
                             }
-                            else if ((reflectType & ReflectedType.Child) == ReflectedType.Child &&
-                                ActivityUtilities.IsActivityType(innerType, false))
+                            else if (
+                                (reflectType & ReflectedType.Child) == ReflectedType.Child
+                                && ActivityUtilities.IsActivityType(innerType, false)
+                            )
                             {
-                                IEnumerable enumerable = propertyDescriptor.GetValue(activity) as IEnumerable;
+                                IEnumerable enumerable =
+                                    propertyDescriptor.GetValue(activity) as IEnumerable;
 
                                 AddCollection(ref this.children, enumerable);
                             }
-                            else if ((reflectType & ReflectedType.ActivityDelegate) == ReflectedType.ActivityDelegate &&
-                                ActivityUtilities.IsActivityDelegateType(innerType))
+                            else if (
+                                (reflectType & ReflectedType.ActivityDelegate)
+                                    == ReflectedType.ActivityDelegate
+                                && ActivityUtilities.IsActivityDelegateType(innerType)
+                            )
                             {
-                                IEnumerable enumerable = propertyDescriptor.GetValue(activity) as IEnumerable;
+                                IEnumerable enumerable =
+                                    propertyDescriptor.GetValue(activity) as IEnumerable;
 
                                 AddCollection(ref this.delegates, enumerable);
                             }
@@ -1557,7 +1682,10 @@ namespace System.Activities
 
                 if (parent != null)
                 {
-                    arguments = new ReflectedInformation(parent, ReflectedType.Argument).GetArguments();
+                    arguments = new ReflectedInformation(
+                        parent,
+                        ReflectedType.Argument
+                    ).GetArguments();
                 }
 
                 if (arguments == null)
@@ -1574,7 +1702,10 @@ namespace System.Activities
 
                 if (parent != null)
                 {
-                    variables = new ReflectedInformation(parent, ReflectedType.Variable).GetVariables();
+                    variables = new ReflectedInformation(
+                        parent,
+                        ReflectedType.Variable
+                    ).GetVariables();
                 }
 
                 if (variables == null)
@@ -1608,7 +1739,10 @@ namespace System.Activities
 
                 if (parent != null)
                 {
-                    delegates = new ReflectedInformation(parent, ReflectedType.ActivityDelegate).GetDelegates();
+                    delegates = new ReflectedInformation(
+                        parent,
+                        ReflectedType.ActivityDelegate
+                    ).GetDelegates();
                 }
 
                 if (delegates == null)
@@ -1678,7 +1812,11 @@ namespace System.Activities
                 for (int i = 0; i < propertyAttributes.Count; i++)
                 {
                     Attribute attribute = propertyAttributes[i];
-                    if (ReflectedInformation.OverloadGroupAttributeType.IsAssignableFrom(attribute.GetType()))
+                    if (
+                        ReflectedInformation.OverloadGroupAttributeType.IsAssignableFrom(
+                            attribute.GetType()
+                        )
+                    )
                     {
                         overloadGroupNames.Add(((OverloadGroupAttribute)attribute).GroupName);
                     }
@@ -1693,44 +1831,45 @@ namespace System.Activities
                 Variable = 0X2,
                 Child = 0X4,
                 ActivityDelegate = 0X8,
-                All = 0XF
+                All = 0XF,
             }
 
             class DictionaryArgumentHelper
             {
-                protected DictionaryArgumentHelper()
-                {
-                }
+                protected DictionaryArgumentHelper() { }
 
-                public IList<RuntimeArgument> RuntimeArguments
-                {
-                    get;
-                    protected set;
-                }
+                public IList<RuntimeArgument> RuntimeArguments { get; protected set; }
 
-                public static IList<RuntimeArgument> TryGetRuntimeArguments(object propertyValue, string propertyName)
+                public static IList<RuntimeArgument> TryGetRuntimeArguments(
+                    object propertyValue,
+                    string propertyName
+                )
                 {
                     // special case each of the non-generic argument types to avoid reflection costs
 
-                    IEnumerable<KeyValuePair<string, Argument>> argumentEnumerable = propertyValue as IEnumerable<KeyValuePair<string, Argument>>;
+                    IEnumerable<KeyValuePair<string, Argument>> argumentEnumerable =
+                        propertyValue as IEnumerable<KeyValuePair<string, Argument>>;
                     if (argumentEnumerable != null)
                     {
                         return GetRuntimeArguments(argumentEnumerable, propertyName);
                     }
 
-                    IEnumerable<KeyValuePair<string, InArgument>> inArgumentEnumerable = propertyValue as IEnumerable<KeyValuePair<string, InArgument>>;
+                    IEnumerable<KeyValuePair<string, InArgument>> inArgumentEnumerable =
+                        propertyValue as IEnumerable<KeyValuePair<string, InArgument>>;
                     if (inArgumentEnumerable != null)
                     {
                         return GetRuntimeArguments(inArgumentEnumerable, propertyName);
                     }
 
-                    IEnumerable<KeyValuePair<string, OutArgument>> outArgumentEnumerable = propertyValue as IEnumerable<KeyValuePair<string, OutArgument>>;
+                    IEnumerable<KeyValuePair<string, OutArgument>> outArgumentEnumerable =
+                        propertyValue as IEnumerable<KeyValuePair<string, OutArgument>>;
                     if (outArgumentEnumerable != null)
                     {
                         return GetRuntimeArguments(outArgumentEnumerable, propertyName);
                     }
 
-                    IEnumerable<KeyValuePair<string, InOutArgument>> inOutArgumentEnumerable = propertyValue as IEnumerable<KeyValuePair<string, InOutArgument>>;
+                    IEnumerable<KeyValuePair<string, InOutArgument>> inOutArgumentEnumerable =
+                        propertyValue as IEnumerable<KeyValuePair<string, InOutArgument>>;
                     if (inOutArgumentEnumerable != null)
                     {
                         return GetRuntimeArguments(inOutArgumentEnumerable, propertyName);
@@ -1739,7 +1878,11 @@ namespace System.Activities
                     return null;
                 }
 
-                protected static IList<RuntimeArgument> GetRuntimeArguments<T>(IEnumerable<KeyValuePair<string, T>> argumentDictionary, string propertyName) where T : Argument
+                protected static IList<RuntimeArgument> GetRuntimeArguments<T>(
+                    IEnumerable<KeyValuePair<string, T>> argumentDictionary,
+                    string propertyName
+                )
+                    where T : Argument
                 {
                     IList<RuntimeArgument> runtimeArguments = new List<RuntimeArgument>();
 
@@ -1751,14 +1894,25 @@ namespace System.Activities
                         if (value == null)
                         {
                             string argName = (key == null) ? "<null>" : key;
-                            throw FxTrace.Exception.AsError(new ValidationException(SR.MissingArgument(argName, propertyName)));
+                            throw FxTrace.Exception.AsError(
+                                new ValidationException(SR.MissingArgument(argName, propertyName))
+                            );
                         }
                         if (string.IsNullOrEmpty(key))
                         {
-                            throw FxTrace.Exception.AsError(new ValidationException(SR.MissingNameProperty(value.ArgumentType)));
+                            throw FxTrace.Exception.AsError(
+                                new ValidationException(SR.MissingNameProperty(value.ArgumentType))
+                            );
                         }
 
-                        RuntimeArgument runtimeArgument = new RuntimeArgument(key, value.ArgumentType, value.Direction, false, null, value);
+                        RuntimeArgument runtimeArgument = new RuntimeArgument(
+                            key,
+                            value.ArgumentType,
+                            value.Direction,
+                            false,
+                            null,
+                            value
+                        );
                         runtimeArguments.Add(runtimeArgument);
                     }
 
@@ -1766,17 +1920,18 @@ namespace System.Activities
                 }
             }
 
-            class DictionaryArgumentHelper<T> : DictionaryArgumentHelper where T : Argument
+            class DictionaryArgumentHelper<T> : DictionaryArgumentHelper
+                where T : Argument
             {
                 public DictionaryArgumentHelper(object propertyValue, string propertyName)
                     : base()
                 {
-                    IEnumerable<KeyValuePair<string, T>> argumentDictionary = propertyValue as IEnumerable<KeyValuePair<string, T>>;
+                    IEnumerable<KeyValuePair<string, T>> argumentDictionary =
+                        propertyValue as IEnumerable<KeyValuePair<string, T>>;
 
                     this.RuntimeArguments = GetRuntimeArguments(argumentDictionary, propertyName);
                 }
             }
-
         }
 
         internal enum RelationshipType : byte
@@ -1786,7 +1941,7 @@ namespace System.Activities
             ImplementationChild = 0x02,
             DelegateHandler = 0x03,
             ArgumentExpression = 0x04,
-            VariableDefault = 0x05
+            VariableDefault = 0x05,
         }
 
         enum CacheStates : byte
@@ -1807,7 +1962,7 @@ namespace System.Activities
             // The next state can be ORed with the last two:
 
             // The cached data is ready for runtime use
-            RuntimeReady = 0x04
+            RuntimeReady = 0x04,
         }
     }
 
@@ -1817,38 +1972,29 @@ namespace System.Activities
     {
         // alternatives are extended through DynamicActivity<TResult>, CodeActivity<TResult>, and NativeActivity<TResult>
         protected Activity()
-            : base()
-        {
-        }
+            : base() { }
 
         [DefaultValue(null)]
-        public new OutArgument<TResult> Result
-        {
-            get;
-            set;
-        }
+        public new OutArgument<TResult> Result { get; set; }
 
         internal override Type InternalResultType
         {
-            get
-            {
-                return typeof(TResult);
-            }
+            get { return typeof(TResult); }
         }
 
         internal override OutArgument ResultCore
         {
-            get
-            {
-                return this.Result;
-            }
+            get { return this.Result; }
             set
             {
                 this.Result = value as OutArgument<TResult>;
 
                 if (this.Result == null && value != null)
                 {
-                    throw FxTrace.Exception.Argument("value", SR.ResultArgumentMustBeSpecificType(typeof(TResult)));
+                    throw FxTrace.Exception.Argument(
+                        "value",
+                        SR.ResultArgumentMustBeSpecificType(typeof(TResult))
+                    );
                 }
             }
         }
@@ -1887,20 +2033,35 @@ namespace System.Activities
             else
             {
                 Type locationGenericType;
-                if (ActivityUtilities.IsLocationGenericType(typeof(TResult), out locationGenericType))
+                if (
+                    ActivityUtilities.IsLocationGenericType(
+                        typeof(TResult),
+                        out locationGenericType
+                    )
+                )
                 {
                     if (locationGenericType == variable.Type)
                     {
-                        return (Activity<TResult>)ActivityUtilities.CreateVariableReference(variable);
+                        return (Activity<TResult>)
+                            ActivityUtilities.CreateVariableReference(variable);
                     }
                 }
             }
 
-            throw FxTrace.Exception.Argument("variable", SR.ConvertVariableToValueExpressionFailed(variable.GetType().FullName, typeof(Activity<TResult>).FullName));
+            throw FxTrace.Exception.Argument(
+                "variable",
+                SR.ConvertVariableToValueExpressionFailed(
+                    variable.GetType().FullName,
+                    typeof(Activity<TResult>).FullName
+                )
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public static Activity<TResult> FromVariable(Variable<TResult> variable)
         {
             if (variable == null)
@@ -1939,17 +2100,30 @@ namespace System.Activities
                     {
                         foundResult = true;
 
-                        if (argument.Type != typeof(TResult) || argument.Direction != ArgumentDirection.Out)
+                        if (
+                            argument.Type != typeof(TResult)
+                            || argument.Direction != ArgumentDirection.Out
+                        )
                         {
                             // The user supplied "Result" is incorrect so we
                             // log a violation.
-                            AddTempValidationError(new ValidationError(SR.ResultArgumentHasRequiredTypeAndDirection(typeof(TResult), argument.Direction, argument.Type)));
+                            AddTempValidationError(
+                                new ValidationError(
+                                    SR.ResultArgumentHasRequiredTypeAndDirection(
+                                        typeof(TResult),
+                                        argument.Direction,
+                                        argument.Type
+                                    )
+                                )
+                            );
                         }
                         else if (!IsBoundArgumentCorrect(argument, createEmptyBindings))
                         {
                             // The user supplied "Result" is not bound to the correct
                             // argument object.
-                            AddTempValidationError(new ValidationError(SR.ResultArgumentMustBeBoundToResultProperty));
+                            AddTempValidationError(
+                                new ValidationError(SR.ResultArgumentMustBeBoundToResultProperty)
+                            );
                         }
                         else
                         {
@@ -1965,7 +2139,11 @@ namespace System.Activities
 
             if (!foundResult)
             {
-                this.ResultRuntimeArgument = new RuntimeArgument("Result", typeof(TResult), ArgumentDirection.Out);
+                this.ResultRuntimeArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(TResult),
+                    ArgumentDirection.Out
+                );
 
                 if (this.Result == null)
                 {
@@ -1984,7 +2162,6 @@ namespace System.Activities
                 {
                     Argument.Bind(this.Result, this.ResultRuntimeArgument);
                 }
-
 
                 AddArgument(this.ResultRuntimeArgument, createEmptyBindings);
             }
@@ -2005,7 +2182,8 @@ namespace System.Activities
                 // SetupBinding has created a default
                 // BoundArgument which is fine.  If it
                 // is non-null then it had better match.
-                return this.Result == null || object.ReferenceEquals(argument.BoundArgument, this.Result);
+                return this.Result == null
+                    || object.ReferenceEquals(argument.BoundArgument, this.Result);
             }
         }
 
@@ -2015,16 +2193,18 @@ namespace System.Activities
             base.OnInternalCacheMetadata(createEmptyBindings);
         }
 
-        internal override object InternalExecuteInResolutionContextUntyped(CodeActivityContext resolutionContext)
+        internal override object InternalExecuteInResolutionContextUntyped(
+            CodeActivityContext resolutionContext
+        )
         {
             return InternalExecuteInResolutionContext(resolutionContext);
         }
 
-        internal virtual TResult InternalExecuteInResolutionContext(CodeActivityContext resolutionContext)
+        internal virtual TResult InternalExecuteInResolutionContext(
+            CodeActivityContext resolutionContext
+        )
         {
             throw Fx.AssertAndThrow("This should only be called on CodeActivity<T>");
         }
     }
 }
-
-

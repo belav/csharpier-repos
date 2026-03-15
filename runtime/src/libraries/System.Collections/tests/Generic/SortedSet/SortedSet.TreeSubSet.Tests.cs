@@ -35,7 +35,12 @@ namespace System.Collections.Tests
 
         public override void ICollection_Generic_Remove_DefaultValueContainedInCollection(int count)
         {
-            if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported && DefaultValueAllowed && !Enumerable.Contains(InvalidValues, default(string)))
+            if (
+                !IsReadOnly
+                && !AddRemoveClear_ThrowsNotSupported
+                && DefaultValueAllowed
+                && !Enumerable.Contains(InvalidValues, default(string))
+            )
             {
                 int seed = count * 21;
                 ICollection<string> collection = GenericICollectionFactory(count);
@@ -43,12 +48,18 @@ namespace System.Collections.Tests
             }
         }
 
-        public override void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(int count)
+        public override void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(
+            int count
+        )
         {
             if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<string> collection = GenericICollectionFactory(count);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("item", null, () => collection.Add(default(string)));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "item",
+                    null,
+                    () => collection.Add(default(string))
+                );
             }
         }
     }
@@ -70,7 +81,12 @@ namespace System.Collections.Tests
         public override void ICollection_Generic_Add_DefaultValue(int count)
         {
             // Adding an item to a TreeSubset does nothing - it updates the parent.
-            if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported && CanAddDefaultValue)
+            if (
+                DefaultValueAllowed
+                && !IsReadOnly
+                && !AddRemoveClear_ThrowsNotSupported
+                && CanAddDefaultValue
+            )
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
                 collection.Add(default(T));

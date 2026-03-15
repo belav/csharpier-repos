@@ -23,89 +23,87 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections.Concurrent;
+using System.Threading;
 using Mono.Collections.Concurrent;
-
 using NUnit;
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Collections.Concurrent
 {
-	[TestFixtureAttribute]
-	public class ConcurrentSkipListTests
-	{
-		ConcurrentSkipList<int> skiplist;
+    [TestFixtureAttribute]
+    public class ConcurrentSkipListTests
+    {
+        ConcurrentSkipList<int> skiplist;
 
-		[SetUpAttribute]
-		public void Setup()
-		{
-			skiplist = new ConcurrentSkipList<int>();
-		}
+        [SetUpAttribute]
+        public void Setup()
+        {
+            skiplist = new ConcurrentSkipList<int>();
+        }
 
-		void AddStuff()
-		{
-			skiplist.TryAdd(1);
-			skiplist.TryAdd(2);
-			skiplist.TryAdd(3);
-			skiplist.TryAdd(4);
-		}
+        void AddStuff()
+        {
+            skiplist.TryAdd(1);
+            skiplist.TryAdd(2);
+            skiplist.TryAdd(3);
+            skiplist.TryAdd(4);
+        }
 
-		[TestAttribute]
-		public void AddTestCase()
-		{
-			Assert.IsTrue(skiplist.TryAdd(1), "#1");
-			Assert.AreEqual(1, skiplist.Count, "#2");
-		}
+        [TestAttribute]
+        public void AddTestCase()
+        {
+            Assert.IsTrue(skiplist.TryAdd(1), "#1");
+            Assert.AreEqual(1, skiplist.Count, "#2");
+        }
 
-		[TestAttribute]
-		public void RemoveTestCase()
-		{
-			Assert.IsFalse(skiplist.Remove(2), "#1");
-			Assert.IsFalse(skiplist.Remove(3), "#2");
-			
-			AddStuff();
-			int count = skiplist.Count;
-			Assert.IsTrue(skiplist.Remove(1), "#3");
-			Assert.IsFalse(skiplist.Remove(1), "#4");
-			Assert.IsTrue(skiplist.Remove(4), "#5");
-			Assert.AreEqual(count - 2, skiplist.Count, "#6");
-		}
-		
-		[Test]
-		public void ContainsTestCase()
-		{
-			AddStuff();
-			Assert.IsTrue(skiplist.Contains(1), "#1");
-			Assert.IsTrue(skiplist.Contains(2), "#2");
-			Assert.IsTrue(skiplist.Contains(3), "#3");
-			Assert.IsTrue(skiplist.Contains(4), "#4");
-		}
+        [TestAttribute]
+        public void RemoveTestCase()
+        {
+            Assert.IsFalse(skiplist.Remove(2), "#1");
+            Assert.IsFalse(skiplist.Remove(3), "#2");
 
-		[TestAttribute]
-		public void EnumerateTestCase()
-		{
-			AddStuff();
-			
-			string s = string.Empty;
-			foreach (int i in skiplist)
-				s += i.ToString();
+            AddStuff();
+            int count = skiplist.Count;
+            Assert.IsTrue(skiplist.Remove(1), "#3");
+            Assert.IsFalse(skiplist.Remove(1), "#4");
+            Assert.IsTrue(skiplist.Remove(4), "#5");
+            Assert.AreEqual(count - 2, skiplist.Count, "#6");
+        }
 
-			Assert.AreEqual("1234", s);
-		}
+        [Test]
+        public void ContainsTestCase()
+        {
+            AddStuff();
+            Assert.IsTrue(skiplist.Contains(1), "#1");
+            Assert.IsTrue(skiplist.Contains(2), "#2");
+            Assert.IsTrue(skiplist.Contains(3), "#3");
+            Assert.IsTrue(skiplist.Contains(4), "#4");
+        }
 
-		[TestAttribute]
-		public void ToArrayTestCase()
-		{
-			int[] expected = new int[] { 1, 2, 3, 4 };
-			AddStuff();
-			int[] array = skiplist.ToArray();
-			CollectionAssert.AreEqual(expected, array, "#1");
+        [TestAttribute]
+        public void EnumerateTestCase()
+        {
+            AddStuff();
 
-			Array.Clear(array, 0, array.Length);
-			skiplist.CopyTo(array, 0);
-			CollectionAssert.AreEqual(expected, array, "#2");
-		}
-		 
-	}
+            string s = string.Empty;
+            foreach (int i in skiplist)
+                s += i.ToString();
+
+            Assert.AreEqual("1234", s);
+        }
+
+        [TestAttribute]
+        public void ToArrayTestCase()
+        {
+            int[] expected = new int[] { 1, 2, 3, 4 };
+            AddStuff();
+            int[] array = skiplist.ToArray();
+            CollectionAssert.AreEqual(expected, array, "#1");
+
+            Array.Clear(array, 0, array.Length);
+            skiplist.CopyTo(array, 0);
+            CollectionAssert.AreEqual(expected, array, "#2");
+        }
+    }
 }

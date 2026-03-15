@@ -19,10 +19,9 @@ public class DatabaseOperationsTest
             "RootNamespace",
             "C#",
             nullable: false,
-            args: null);
+            args: null
+        );
     }
 
-    private class TestContext : DbContext
-    {
-    }
+    private class TestContext : DbContext { }
 }

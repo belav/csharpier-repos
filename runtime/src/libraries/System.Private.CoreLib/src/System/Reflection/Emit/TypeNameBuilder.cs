@@ -20,9 +20,7 @@ namespace System.Reflection.Emit
         private readonly List<int> _stack = new List<int>();
         private int _stackIdx;
 
-        private TypeNameBuilder()
-        {
-        }
+        private TypeNameBuilder() { }
 
         private void OpenGenericArguments()
         {
@@ -302,14 +300,18 @@ namespace System.Reflection.Emit
             }
 
             // Append generic arguments
-            if (rootType.IsGenericType && (!rootType.IsGenericTypeDefinition || format == Format.ToString))
+            if (
+                rootType.IsGenericType
+                && (!rootType.IsGenericTypeDefinition || format == Format.ToString)
+            )
             {
                 Type[] genericArguments = rootType.GetGenericArguments();
 
                 OpenGenericArguments();
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
-                    Format genericArgumentsFormat = format == Format.FullName ? Format.AssemblyQualifiedName : format;
+                    Format genericArgumentsFormat =
+                        format == Format.FullName ? Format.AssemblyQualifiedName : format;
 
                     OpenGenericArgument();
                     AddAssemblyQualifiedName(genericArguments[i], genericArgumentsFormat);

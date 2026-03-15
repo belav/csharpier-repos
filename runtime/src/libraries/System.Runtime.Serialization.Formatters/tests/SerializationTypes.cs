@@ -24,10 +24,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             var o = obj as SealedObjectWithIntStringFields;
             if (o == null)
                 return false;
-            return
-                EqualityComparer<int>.Default.Equals(Member1, o.Member1) &&
-                EqualityComparer<string>.Default.Equals(Member2, o.Member2) &&
-                EqualityComparer<string>.Default.Equals(Member3, o.Member3);
+            return EqualityComparer<int>.Default.Equals(Member1, o.Member1)
+                && EqualityComparer<string>.Default.Equals(Member2, o.Member2)
+                && EqualityComparer<string>.Default.Equals(Member3, o.Member3);
         }
 
         public override int GetHashCode() => 1;
@@ -57,24 +56,33 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (o == null)
                 return false;
 
-            return
-                EqualityComparer<int>.Default.Equals(Member1, o.Member1) &&
-                EqualityComparer<string>.Default.Equals(Member2, o.Member2) &&
-                EqualityComparer<string>.Default.Equals(_member3, o._member3) &&
-                EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(Member4, o.Member4) &&
-                EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(Member4shared, o.Member4shared) &&
-                EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(Member5, o.Member5) &&
-                EqualityComparer<string>.Default.Equals(Member6, o.Member6) &&
-                EqualityComparer<string>.Default.Equals(str1, o.str1) &&
-                EqualityComparer<string>.Default.Equals(str2, o.str2) &&
-                EqualityComparer<string>.Default.Equals(str3, o.str3) &&
-                EqualityComparer<string>.Default.Equals(str4, o.str4) &&
-                EqualityComparer<ushort>.Default.Equals(u16, o.u16) &&
-                EqualityComparer<uint>.Default.Equals(u16, o.u16) &&
-                EqualityComparer<ulong>.Default.Equals(u64, o.u64) &&
+            return EqualityComparer<int>.Default.Equals(Member1, o.Member1)
+                && EqualityComparer<string>.Default.Equals(Member2, o.Member2)
+                && EqualityComparer<string>.Default.Equals(_member3, o._member3)
+                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
+                    Member4,
+                    o.Member4
+                )
+                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
+                    Member4shared,
+                    o.Member4shared
+                )
+                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
+                    Member5,
+                    o.Member5
+                )
+                && EqualityComparer<string>.Default.Equals(Member6, o.Member6)
+                && EqualityComparer<string>.Default.Equals(str1, o.str1)
+                && EqualityComparer<string>.Default.Equals(str2, o.str2)
+                && EqualityComparer<string>.Default.Equals(str3, o.str3)
+                && EqualityComparer<string>.Default.Equals(str4, o.str4)
+                && EqualityComparer<ushort>.Default.Equals(u16, o.u16)
+                && EqualityComparer<uint>.Default.Equals(u16, o.u16)
+                && EqualityComparer<ulong>.Default.Equals(u64, o.u64)
+                &&
                 // make sure shared members are the same object
-                ReferenceEquals(Member4, Member4shared) &&
-                ReferenceEquals(o.Member4, o.Member4shared);
+                ReferenceEquals(Member4, Member4shared)
+                && ReferenceEquals(o.Member4, o.Member4shared);
         }
 
         public override int GetHashCode() => 1;
@@ -106,9 +114,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         public bool Equals(Point other)
         {
-            return other != null &&
-                X == other.X &&
-                Y == other.Y;
+            return other != null && X == other.X && Y == other.Y;
         }
 
         public override int GetHashCode() => 1;
@@ -134,13 +140,13 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (o == null)
                 return false;
 
-            return
-                EqualityComparer<T>.Default.Equals(Value, o.Value) &&
-                EqualityComparer<Tree<T>>.Default.Equals(Left, o.Left) &&
-                EqualityComparer<Tree<T>>.Default.Equals(Right, o.Right) &&
+            return EqualityComparer<T>.Default.Equals(Value, o.Value)
+                && EqualityComparer<Tree<T>>.Default.Equals(Left, o.Left)
+                && EqualityComparer<Tree<T>>.Default.Equals(Right, o.Right)
+                &&
                 // make sure the branches aren't actually the exact same object
-                (Left == null || !ReferenceEquals(Left, o.Left)) &&
-                (Right == null || !ReferenceEquals(Right, o.Right));
+                (Left == null || !ReferenceEquals(Left, o.Left))
+                && (Right == null || !ReferenceEquals(Right, o.Right));
         }
 
         public override int GetHashCode() => 1;
@@ -214,13 +220,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (o == null)
                 return false;
 
-            return
-                EqualityHelpers.ArraysAreEqual(IntArray, o.IntArray) &&
-                EqualityHelpers.ArraysAreEqual(StringArray, o.StringArray) &&
-                EqualityHelpers.ArraysAreEqual(TreeArray, o.TreeArray) &&
-                EqualityHelpers.ArraysAreEqual(ByteArray, o.ByteArray) &&
-                EqualityHelpers.ArraysAreEqual(JaggedArray, o.JaggedArray) &&
-                EqualityHelpers.ArraysAreEqual(MultiDimensionalArray, o.MultiDimensionalArray);
+            return EqualityHelpers.ArraysAreEqual(IntArray, o.IntArray)
+                && EqualityHelpers.ArraysAreEqual(StringArray, o.StringArray)
+                && EqualityHelpers.ArraysAreEqual(TreeArray, o.TreeArray)
+                && EqualityHelpers.ArraysAreEqual(ByteArray, o.ByteArray)
+                && EqualityHelpers.ArraysAreEqual(JaggedArray, o.JaggedArray)
+                && EqualityHelpers.ArraysAreEqual(MultiDimensionalArray, o.MultiDimensionalArray);
         }
 
         public override int GetHashCode() => 1;
@@ -234,17 +239,32 @@ namespace System.Runtime.Serialization.Formatters.Tests
         Yellow,
         Green,
         Blue,
-        Purple
+        Purple,
     }
 
-    [Serializable] public enum ByteEnum : byte { }
-    [Serializable] public enum SByteEnum : sbyte { }
-    [Serializable] public enum Int16Enum : short { }
-    [Serializable] public enum UInt16Enum : ushort { }
-    [Serializable] public enum Int32Enum : int { }
-    [Serializable] public enum UInt32Enum : uint { }
-    [Serializable] public enum Int64Enum : long { }
-    [Serializable] public enum UInt64Enum : ulong { }
+    [Serializable]
+    public enum ByteEnum : byte { }
+
+    [Serializable]
+    public enum SByteEnum : sbyte { }
+
+    [Serializable]
+    public enum Int16Enum : short { }
+
+    [Serializable]
+    public enum UInt16Enum : ushort { }
+
+    [Serializable]
+    public enum Int32Enum : int { }
+
+    [Serializable]
+    public enum UInt32Enum : uint { }
+
+    [Serializable]
+    public enum Int64Enum : long { }
+
+    [Serializable]
+    public enum UInt64Enum : ulong { }
 
     public struct NonSerializableStruct
     {
@@ -300,7 +320,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             if (!(obj is StructContainingArraysOfOtherStructs))
                 return false;
-            return EqualityHelpers.ArraysAreEqual(Nested, ((StructContainingArraysOfOtherStructs)obj).Nested);
+            return EqualityHelpers.ArraysAreEqual(
+                Nested,
+                ((StructContainingArraysOfOtherStructs)obj).Nested
+            );
         }
 
         public override int GetHashCode() => 1;
@@ -318,7 +341,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         public BasicISerializableObject(SerializationInfo info, StreamingContext context)
         {
-            _data = new NonSerializablePair<int, string> { Value1 = info.GetInt32("Value1"), Value2 = info.GetString("Value2") };
+            _data = new NonSerializablePair<int, string>
+            {
+                Value1 = info.GetInt32("Value1"),
+                Value2 = info.GetString("Value2"),
+            };
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -341,10 +368,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
     }
 
     [Serializable]
-    public sealed class DerivedISerializableWithNonPublicDeserializationCtor : BasicISerializableObject
+    public sealed class DerivedISerializableWithNonPublicDeserializationCtor
+        : BasicISerializableObject
     {
-        public DerivedISerializableWithNonPublicDeserializationCtor(int value1, string value2) : base(value1, value2) { }
-        private DerivedISerializableWithNonPublicDeserializationCtor(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public DerivedISerializableWithNonPublicDeserializationCtor(int value1, string value2)
+            : base(value1, value2) { }
+
+        private DerivedISerializableWithNonPublicDeserializationCtor(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 
     [Serializable]
@@ -352,22 +386,28 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         public int IncrementedDuringOnSerializingMethod;
         public int IncrementedDuringOnSerializedMethod;
-        [NonSerialized] public int IncrementedDuringOnDeserializingMethod;
+
+        [NonSerialized]
+        public int IncrementedDuringOnDeserializingMethod;
         public int IncrementedDuringOnDeserializedMethod;
 
         public IncrementCountsDuringRoundtrip(string ignored) { } // non-default ctor so that we can observe changes from OnDeserializing
 
         [OnSerializing]
-        private void OnSerializingMethod(StreamingContext context) => IncrementedDuringOnSerializingMethod++;
+        private void OnSerializingMethod(StreamingContext context) =>
+            IncrementedDuringOnSerializingMethod++;
 
         [OnSerialized]
-        private void OnSerializedMethod(StreamingContext context) => IncrementedDuringOnSerializedMethod++;
+        private void OnSerializedMethod(StreamingContext context) =>
+            IncrementedDuringOnSerializedMethod++;
 
         [OnDeserializing]
-        private void OnDeserializingMethod(StreamingContext context) => IncrementedDuringOnDeserializingMethod++;
+        private void OnDeserializingMethod(StreamingContext context) =>
+            IncrementedDuringOnDeserializingMethod++;
 
         [OnDeserialized]
-        private void OnDeserializedMethod(StreamingContext context) => IncrementedDuringOnDeserializedMethod++;
+        private void OnDeserializedMethod(StreamingContext context) =>
+            IncrementedDuringOnDeserializedMethod++;
     }
 
     [Serializable]
@@ -375,28 +415,36 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         internal int DerivedIncrementedDuringOnSerializingMethod;
         internal int DerivedIncrementedDuringOnSerializedMethod;
-        [NonSerialized] internal int DerivedIncrementedDuringOnDeserializingMethod;
+
+        [NonSerialized]
+        internal int DerivedIncrementedDuringOnDeserializingMethod;
         internal int DerivedIncrementedDuringOnDeserializedMethod;
 
-        public DerivedIncrementCountsDuringRoundtrip(string ignored) : base(ignored) { }
+        public DerivedIncrementCountsDuringRoundtrip(string ignored)
+            : base(ignored) { }
 
         [OnSerializing]
-        private void OnSerializingMethod(StreamingContext context) => DerivedIncrementedDuringOnSerializingMethod++;
+        private void OnSerializingMethod(StreamingContext context) =>
+            DerivedIncrementedDuringOnSerializingMethod++;
 
         [OnSerialized]
-        private void OnSerializedMethod(StreamingContext context) => DerivedIncrementedDuringOnSerializedMethod++;
+        private void OnSerializedMethod(StreamingContext context) =>
+            DerivedIncrementedDuringOnSerializedMethod++;
 
         [OnDeserializing]
-        private void OnDeserializingMethod(StreamingContext context) => DerivedIncrementedDuringOnDeserializingMethod++;
+        private void OnDeserializingMethod(StreamingContext context) =>
+            DerivedIncrementedDuringOnDeserializingMethod++;
 
         [OnDeserialized]
-        private void OnDeserializedMethod(StreamingContext context) => DerivedIncrementedDuringOnDeserializedMethod++;
+        private void OnDeserializedMethod(StreamingContext context) =>
+            DerivedIncrementedDuringOnDeserializedMethod++;
     }
 
     [Serializable]
     public sealed class ObjRefReturnsObj : IObjectReference
     {
         public object Real;
+
         public object GetRealObject(StreamingContext context) => Real;
     }
 
@@ -415,7 +463,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
             info.AddValue("Value2", pair.Value2);
         }
 
-        public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+        public object SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             var pair = (NonSerializablePair<int, string>)obj;
             pair.Value1 = info.GetInt32("Value1");
@@ -425,9 +478,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     }
 
     [Serializable]
-    public class Version1ClassWithoutField
-    {
-    }
+    public class Version1ClassWithoutField { }
 
     [Serializable]
     public class Version2ClassWithoutOptionalField
@@ -446,6 +497,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     public class ObjectWithStateAndMethod
     {
         public int State;
+
         public int GetState() => State;
     }
 
@@ -560,7 +612,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 return false;
             for (int i = 0; i < array1.Length; i++)
             {
-                T[] sub1 = array1[i], sub2 = array2[i];
+                T[] sub1 = array1[i],
+                    sub2 = array2[i];
                 if (sub1 == null || (sub2 == null && (sub1 != sub2)))
                     return false;
                 if (sub1.Length != sub2.Length)

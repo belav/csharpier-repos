@@ -27,8 +27,8 @@ public static class SqliteDbFunctionsExtensions
     /// <param name="matchExpression">The string that is to be matched.</param>
     /// <param name="pattern">The pattern which may involve wildcards <c>*,?,[,^,-,]</c>.</param>
     /// <returns><see langword="true" /> if there is a match.</returns>
-    public static bool Glob(this DbFunctions _, string matchExpression, string pattern)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Glob)));
+    public static bool Glob(this DbFunctions _, string matchExpression, string pattern) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Glob)));
 
     /// <summary>
     ///     Maps to the SQLite <c>hex</c> function which returns a hexadecimal string representing the specified value.
@@ -40,8 +40,8 @@ public static class SqliteDbFunctionsExtensions
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
     /// <param name="bytes">The binary value.</param>
     /// <returns>A hexadecimal string.</returns>
-    public static string Hex(this DbFunctions _, byte[] bytes)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Hex)));
+    public static string Hex(this DbFunctions _, byte[] bytes) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Hex)));
 
     /// <summary>
     ///     Maps to the SQLite <c>unhex</c> function which returns a BLOB representing decoding of the hexadecimal string.
@@ -53,8 +53,8 @@ public static class SqliteDbFunctionsExtensions
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
     /// <param name="value">The hexadecimal string.</param>
     /// <returns>Decoded hexadecimal string as binary value.</returns>
-    public static byte[] Unhex(this DbFunctions _, string value)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Unhex)));
+    public static byte[] Unhex(this DbFunctions _, string value) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Unhex)));
 
     /// <summary>
     ///     Maps to the SQLite <c>unhex</c> function which returns a BLOB representing decoding of the hexadecimal string.
@@ -67,8 +67,8 @@ public static class SqliteDbFunctionsExtensions
     /// <param name="value">The hexadecimal string.</param>
     /// <param name="ignoreChars">Characters that are ignored in <paramref name="value" />.</param>
     /// <returns>Decoded hexadecimal string as binary value.</returns>
-    public static byte[] Unhex(this DbFunctions _, string value, string ignoreChars)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Unhex)));
+    public static byte[] Unhex(this DbFunctions _, string value, string ignoreChars) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Unhex)));
 
     /// <summary>
     ///     Maps to the SQLite <c>substr</c> function which returns a subarray of the specified value. The subarray starts
@@ -85,8 +85,8 @@ public static class SqliteDbFunctionsExtensions
     /// <remarks>
     ///     Use <see cref="string.Substring(int)" /> for string values.
     /// </remarks>
-    public static byte[] Substr(this DbFunctions _, byte[] bytes, int startIndex)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Substr)));
+    public static byte[] Substr(this DbFunctions _, byte[] bytes, int startIndex) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Substr)));
 
     /// <summary>
     ///     Maps to the SQLite substr function which returns a subarray of the specified value. The subarray starts
@@ -106,6 +106,6 @@ public static class SqliteDbFunctionsExtensions
     /// <remarks>
     ///     Use <see cref="string.Substring(int, int)" /> for string values.
     /// </remarks>
-    public static byte[] Substr(this DbFunctions _, byte[] bytes, int startIndex, int length)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Substr)));
+    public static byte[] Substr(this DbFunctions _, byte[] bytes, int startIndex, int length) =>
+        throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Substr)));
 }

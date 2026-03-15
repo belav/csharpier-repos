@@ -1,5 +1,5 @@
 //
-// FileNotFoundExceptionCas.cs - CAS unit tests for 
+// FileNotFoundExceptionCas.cs - CAS unit tests for
 //	System.IO.FileNotFoundException
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,147 +27,174 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.IO {
+namespace MonoCasTests.System.IO
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class FileNotFoundExceptionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class FileNotFoundExceptionCas {
+        [Test]
+        public void NoRestriction()
+        {
+            FileNotFoundException fle = new FileNotFoundException(
+                "message",
+                "filename",
+                new FileNotFoundException("inner message", "inner filename")
+            );
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            Assert.IsNotNull(fle.ToString(), "ToString");
+        }
 
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void FullRestriction()
+        {
+            FileNotFoundException fle = new FileNotFoundException(
+                "message",
+                "filename",
+                new FileNotFoundException("inner message", "inner filename")
+            );
 
-		[Test]
-		public void NoRestriction ()
-		{
-			FileNotFoundException fle = new FileNotFoundException ("message", "filename",
-				new FileNotFoundException ("inner message", "inner filename"));
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // ToString doesn't work in this case and strangely throws a FileNotFoundException
+            Assert.IsNotNull(fle.ToString(), "ToString");
+        }
 
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			Assert.IsNotNull (fle.ToString (), "ToString");
-		}
+        [Test]
+        [SecurityPermission(
+            SecurityAction.PermitOnly,
+            ControlEvidence = true,
+            ControlPolicy = true
+        )]
+        public void GetFusionLog_Pass()
+        {
+            FileNotFoundException fle = new FileNotFoundException("message", "filename");
+            Assert.AreEqual("message", fle.Message, "Message");
+            Assert.AreEqual("filename", fle.FileName, "FileName");
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // note: ToString doesn't work in this case
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void FullRestriction ()
-		{
-			FileNotFoundException fle = new FileNotFoundException ("message", "filename",
-				new FileNotFoundException ("inner message", "inner filename"));
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlEvidence = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetFusionLog_Fail_ControlEvidence()
+        {
+            FileNotFoundException fle = new FileNotFoundException();
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+        }
 
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// ToString doesn't work in this case and strangely throws a FileNotFoundException
-			Assert.IsNotNull (fle.ToString (), "ToString");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetFusionLog_Fail_ControlPolicy()
+        {
+            FileNotFoundException fle = new FileNotFoundException();
+            Assert.IsNull(fle.FusionLog, "FusionLog");
+            // we don't have to throw the exception to have FusionLog
+            // informations restricted (even if there could be no
+            // data in this state).
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlEvidence = true, ControlPolicy = true)]
-		public void GetFusionLog_Pass ()
-		{
-			FileNotFoundException fle = new FileNotFoundException ("message", "filename");
-			Assert.AreEqual ("message", fle.Message, "Message");
-			Assert.AreEqual ("filename", fle.FileName, "FileName");
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// note: ToString doesn't work in this case
-		}
+        [Test]
+        public void Throw_NoRestriction()
+        {
+            try
+            {
+                throw new FileNotFoundException(
+                    "message",
+                    "filename",
+                    new FileNotFoundException("inner message", "inner filename")
+                );
+            }
+            catch (FileNotFoundException fle)
+            {
+                Assert.AreEqual("message", fle.Message, "Message");
+                Assert.AreEqual("filename", fle.FileName, "FileName");
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+                Assert.IsNotNull(fle.ToString(), "ToString");
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetFusionLog_Fail_ControlEvidence ()
-		{
-			FileNotFoundException fle = new FileNotFoundException ();
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_FullRestriction()
+        {
+            try
+            {
+                throw new FileNotFoundException(
+                    "message",
+                    "filename",
+                    new FileNotFoundException("inner message", "inner filename")
+                );
+            }
+            catch (FileNotFoundException fle)
+            {
+                Assert.AreEqual("message", fle.Message, "Message");
+                Assert.AreEqual("filename", fle.FileName, "FileName");
+                // both FusionLog and ToString doesn't work in this case
+                // but strangely we get a FileNotFoundException
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+                Assert.IsNotNull(fle.ToString(), "ToString");
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetFusionLog_Fail_ControlPolicy ()
-		{
-			FileNotFoundException fle = new FileNotFoundException ();
-			Assert.IsNull (fle.FusionLog, "FusionLog");
-			// we don't have to throw the exception to have FusionLog
-			// informations restricted (even if there could be no
-			// data in this state).
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlEvidence = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_GetFusionLog_Fail_ControlEvidence()
+        {
+            try
+            {
+                throw new FileNotFoundException(
+                    "message",
+                    "filename",
+                    new FileNotFoundException("inner message", "inner filename")
+                );
+            }
+            catch (FileNotFoundException fle)
+            {
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+            }
+        }
 
-
-		[Test]
-		public void Throw_NoRestriction ()
-		{
-			try {
-				throw new FileNotFoundException ("message", "filename",
-					new FileNotFoundException ("inner message", "inner filename"));
-			}
-			catch (FileNotFoundException fle) {
-				Assert.AreEqual ("message", fle.Message, "Message");
-				Assert.AreEqual ("filename", fle.FileName, "FileName");
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-				Assert.IsNotNull (fle.ToString (), "ToString");
-			}
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_FullRestriction ()
-		{
-			try {
-				throw new FileNotFoundException ("message", "filename",
-					new FileNotFoundException ("inner message", "inner filename"));
-			}
-			catch (FileNotFoundException fle) {
-				Assert.AreEqual ("message", fle.Message, "Message");
-				Assert.AreEqual ("filename", fle.FileName, "FileName");
-				// both FusionLog and ToString doesn't work in this case
-				// but strangely we get a FileNotFoundException
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-				Assert.IsNotNull (fle.ToString (), "ToString");
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlEvidence = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_GetFusionLog_Fail_ControlEvidence ()
-		{
-			try {
-				throw new FileNotFoundException ("message", "filename",
-					new FileNotFoundException ("inner message", "inner filename"));
-			}
-			catch (FileNotFoundException fle) {
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPolicy = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Throw_GetFusionLog_Fail_ControlPolicy ()
-		{
-			try {
-				throw new FileNotFoundException ("message", "filename",
-					new FileNotFoundException ("inner message", "inner filename"));
-			}
-			catch (FileNotFoundException fle) {
-				Assert.IsNull (fle.FusionLog, "FusionLog");
-			}
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPolicy = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Throw_GetFusionLog_Fail_ControlPolicy()
+        {
+            try
+            {
+                throw new FileNotFoundException(
+                    "message",
+                    "filename",
+                    new FileNotFoundException("inner message", "inner filename")
+                );
+            }
+            catch (FileNotFoundException fle)
+            {
+                Assert.IsNull(fle.FusionLog, "FusionLog");
+            }
+        }
+    }
 }

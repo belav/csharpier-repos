@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using ILCompiler.DependencyAnalysis.X86;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
@@ -14,7 +12,11 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public partial class ReadyToRunHelperNode
     {
-        protected override void EmitCode(NodeFactory factory, ref X86Emitter encoder, bool relocsOnly)
+        protected override void EmitCode(
+            NodeFactory factory,
+            ref X86Emitter encoder,
+            bool relocsOnly
+        )
         {
             switch (Id)
             {
@@ -27,8 +29,12 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.GetNonGCStaticBase:
                     {
                         MetadataType target = (MetadataType)Target;
-                        bool hasLazyStaticConstructor = factory.PreinitializationManager.HasLazyStaticConstructor(target);
-                        encoder.EmitMOV(encoder.TargetRegister.Result, factory.TypeNonGCStaticsSymbol(target));
+                        bool hasLazyStaticConstructor =
+                            factory.PreinitializationManager.HasLazyStaticConstructor(target);
+                        encoder.EmitMOV(
+                            encoder.TargetRegister.Result,
+                            factory.TypeNonGCStaticsSymbol(target)
+                        );
 
                         if (!hasLazyStaticConstructor)
                         {
@@ -37,14 +43,31 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            encoder.EmitMOV(encoder.TargetRegister.Arg0, factory.TypeNonGCStaticsSymbol(target), -NonGCStaticsNode.GetClassConstructorContextSize(factory.Target));
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg0,
+                                factory.TypeNonGCStaticsSymbol(target),
+                                -NonGCStaticsNode.GetClassConstructorContextSize(factory.Target)
+                            );
 
-                            AddrMode initialized = new AddrMode(encoder.TargetRegister.Arg0, null, 0, 0, AddrModeSize.Int32);
+                            AddrMode initialized = new AddrMode(
+                                encoder.TargetRegister.Arg0,
+                                null,
+                                0,
+                                0,
+                                AddrModeSize.Int32
+                            );
                             encoder.EmitCMP(ref initialized, 0);
                             encoder.EmitRETIfEqual();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Result);
-                            encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase));
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Result
+                            );
+                            encoder.EmitJMP(
+                                factory.HelperEntrypoint(
+                                    HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase
+                                )
+                            );
                         }
                     }
                     break;

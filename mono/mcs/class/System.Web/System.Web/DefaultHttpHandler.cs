@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,96 +32,119 @@ using System.Threading;
 
 namespace System.Web
 {
-	public class DefaultHttpHandler : IHttpAsyncHandler
-	{
-		sealed class DefaultHandlerAsyncResult : IAsyncResult
-		{
-			public object AsyncState {
-				get;
-				private set;
-			}
+    public class DefaultHttpHandler : IHttpAsyncHandler
+    {
+        sealed class DefaultHandlerAsyncResult : IAsyncResult
+        {
+            public object AsyncState { get; private set; }
 
-			public WaitHandle AsyncWaitHandle {
-				get { return null; }
-			}
-			
-			public bool CompletedSynchronously {
-				get { return true; }
-			}
+            public WaitHandle AsyncWaitHandle
+            {
+                get { return null; }
+            }
 
-			public bool IsCompleted {
-				get { return true; }
-			}
-			
-			public DefaultHandlerAsyncResult (AsyncCallback callback, object state)
-			{
-				this.AsyncState = state;
+            public bool CompletedSynchronously
+            {
+                get { return true; }
+            }
 
-				if (callback != null)
-					callback (this);
-			}
-		}
+            public bool IsCompleted
+            {
+                get { return true; }
+            }
 
-		NameValueCollection executeUrlHeaders;
-		
-		protected HttpContext Context {
-			get;
-			private set;
-		}
+            public DefaultHandlerAsyncResult(AsyncCallback callback, object state)
+            {
+                this.AsyncState = state;
 
-		public virtual bool IsReusable {
-			get { return false; }
-		}
-		
-		protected NameValueCollection ExecuteUrlHeaders {
-			get {
-				HttpContext context = Context;
-				HttpRequest req = context != null ? context.Request : null;
-				if (req != null && executeUrlHeaders != null)	
-					executeUrlHeaders = new NameValueCollection (req.Headers);
-				
-				return executeUrlHeaders;
-			}
-		}
+                if (callback != null)
+                    callback(this);
+            }
+        }
 
-		public virtual IAsyncResult BeginProcessRequest (HttpContext context, AsyncCallback callback, object state)
-		{
-			this.Context = context;
+        NameValueCollection executeUrlHeaders;
 
-			HttpRequest req = context != null ? context.Request : null;
-			string filePath = req != null ? req.FilePath : null;
+        protected HttpContext Context { get; private set; }
 
-			if (!String.IsNullOrEmpty (filePath) && String.Compare (".asp", VirtualPathUtility.GetExtension (filePath), StringComparison.OrdinalIgnoreCase) == 0)
-				throw new HttpException (String.Format ("Access to file '{0}' is forbidden.", filePath));
+        public virtual bool IsReusable
+        {
+            get { return false; }
+        }
 
-			if (req != null && String.Compare ("POST", req.HttpMethod, StringComparison.OrdinalIgnoreCase) == 0)
-				throw new HttpException (String.Format ("Method '{0}' is not allowed when accessing file '{1}'", req.HttpMethod, filePath));
+        protected NameValueCollection ExecuteUrlHeaders
+        {
+            get
+            {
+                HttpContext context = Context;
+                HttpRequest req = context != null ? context.Request : null;
+                if (req != null && executeUrlHeaders != null)
+                    executeUrlHeaders = new NameValueCollection(req.Headers);
 
-			var sfh = new StaticFileHandler ();
-			sfh.ProcessRequest (context);
-			
-			return new DefaultHandlerAsyncResult (callback, state);
-		}
+                return executeUrlHeaders;
+            }
+        }
 
-		public virtual void EndProcessRequest (IAsyncResult result)
-		{
-			// nothing to do
-		}
-		
-		public virtual void ProcessRequest (HttpContext context)
-		{
-			throw new InvalidOperationException ("The ProcessRequest cannot be called synchronously.");
-		}
+        public virtual IAsyncResult BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            this.Context = context;
 
-		public virtual void OnExecuteUrlPreconditionFailure ()
-		{
-			// nothing to do
-		}
+            HttpRequest req = context != null ? context.Request : null;
+            string filePath = req != null ? req.FilePath : null;
 
-		public virtual string OverrideExecuteUrlPath ()
-		{
-			return null;
-		}
-	}
+            if (
+                !String.IsNullOrEmpty(filePath)
+                && String.Compare(
+                    ".asp",
+                    VirtualPathUtility.GetExtension(filePath),
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
+                throw new HttpException(
+                    String.Format("Access to file '{0}' is forbidden.", filePath)
+                );
+
+            if (
+                req != null
+                && String.Compare("POST", req.HttpMethod, StringComparison.OrdinalIgnoreCase) == 0
+            )
+                throw new HttpException(
+                    String.Format(
+                        "Method '{0}' is not allowed when accessing file '{1}'",
+                        req.HttpMethod,
+                        filePath
+                    )
+                );
+
+            var sfh = new StaticFileHandler();
+            sfh.ProcessRequest(context);
+
+            return new DefaultHandlerAsyncResult(callback, state);
+        }
+
+        public virtual void EndProcessRequest(IAsyncResult result)
+        {
+            // nothing to do
+        }
+
+        public virtual void ProcessRequest(HttpContext context)
+        {
+            throw new InvalidOperationException(
+                "The ProcessRequest cannot be called synchronously."
+            );
+        }
+
+        public virtual void OnExecuteUrlPreconditionFailure()
+        {
+            // nothing to do
+        }
+
+        public virtual string OverrideExecuteUrlPath()
+        {
+            return null;
+        }
+    }
 }
-

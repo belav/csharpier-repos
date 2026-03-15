@@ -10,8 +10,7 @@ namespace System.Runtime.InteropServices.Tests
 {
     public class PrelinkAllTests
     {
-
-        public  static IEnumerable<object[]> PrelinkAll_TestData()
+        public static IEnumerable<object[]> PrelinkAll_TestData()
         {
             yield return new object[] { typeof(int) };
             yield return new object[] { typeof(Math) };
@@ -28,7 +27,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<string>) };
 
             yield return new object[] { typeof(GenericClass<>) };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+            };
         }
 
         [Theory]

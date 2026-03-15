@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 class StripHeaderAndFooter
 {
@@ -16,7 +16,11 @@ class StripHeaderAndFooter
 
         var outputStream = new MemoryStream();
 
-        bool fText, fCRC, fextra, fname, fComment;
+        bool fText,
+            fCRC,
+            fextra,
+            fname,
+            fComment;
         byte flag;
         int len;
         int value;
@@ -104,6 +108,7 @@ class StripHeaderAndFooter
 
     static void ReadUntilZero(Stream inputStream)
     {
-        while (inputStream.ReadByte() != 0) ;
+        while (inputStream.ReadByte() != 0)
+            ;
     }
 }

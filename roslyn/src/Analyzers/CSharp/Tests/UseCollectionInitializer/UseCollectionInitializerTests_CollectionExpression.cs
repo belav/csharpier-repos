@@ -14,12 +14,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionInitializerDiagnosticAnalyzer,
-    CSharpUseCollectionInitializerCodeFixProvider>;
+    CSharpUseCollectionInitializerCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionInitializer)]
 public partial class UseCollectionInitializerTests_CollectionExpression
 {
-    private static async Task TestInRegularAndScriptAsync(string testCode, string fixedCode, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    private static async Task TestInRegularAndScriptAsync(
+        string testCode,
+        string fixedCode,
+        OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+    )
     {
         await new VerifyCS.Test
         {
@@ -27,12 +32,12 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             TestCode = testCode,
             FixedCode = fixedCode,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState = { OutputKind = outputKind }
+            TestState = { OutputKind = outputKind },
         }.RunAsync();
     }
 
-    private static Task TestMissingInRegularAndScriptAsync(string testCode)
-        => TestInRegularAndScriptAsync(testCode, testCode);
+    private static Task TestMissingInRegularAndScriptAsync(string testCode) =>
+        TestInRegularAndScriptAsync(testCode, testCode);
 
     [Fact]
     public async Task TestNotOnVarVariableDeclarator()
@@ -63,7 +68,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -80,7 +86,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     var c = new List<int>(new[] { 1, 2, 3 });
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -112,7 +119,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -134,7 +142,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             {
                 List<int> c = [];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -156,7 +165,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             {
                 List<int> c = [1, 2, 3];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -188,7 +198,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     3
                 ];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -202,7 +213,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             {
                 List<int> c = new List<int>(new[] { 1, 2, 3 });
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -224,7 +236,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             {
                 List<int> c = [];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -246,7 +259,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             {
                 List<int> c = [1, 2, 3];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -278,7 +292,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     3
                 ];
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -300,17 +315,18 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             """,
             """
             using System.Collections.Generic;
-            
+
             class C
             {
                 void M()
                 {
                     X([]);
                 }
-            
+
                 void X(List<int> list) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -329,7 +345,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
 
                 void X(IEnumerable<int> list) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -358,10 +375,14 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1];
                 }
             }
-            """);
+            """
+        );
     }
 
-    [Fact(Skip = "https://github.com/dotnet/roslyn/issues/70172"), WorkItem("https://github.com/dotnet/roslyn/issues/69277")]
+    [
+        Fact(Skip = "https://github.com/dotnet/roslyn/issues/70172"),
+        WorkItem("https://github.com/dotnet/roslyn/issues/69277")
+    ]
     public async Task TestOnVariableDeclarator_If1()
     {
         await TestInRegularAndScriptAsync(
@@ -389,7 +410,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -422,10 +444,14 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, b ? 2 : 3];
                 }
             }
-            """);
+            """
+        );
     }
 
-    [Fact(Skip = "https://github.com/dotnet/roslyn/issues/70172"), WorkItem("https://github.com/dotnet/roslyn/issues/69277")]
+    [
+        Fact(Skip = "https://github.com/dotnet/roslyn/issues/70172"),
+        WorkItem("https://github.com/dotnet/roslyn/issues/69277")
+    ]
     public async Task TestOnVariableDeclarator_If3()
     {
         await TestInRegularAndScriptAsync(
@@ -455,7 +481,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. {|CS0173:b ? [2] : []|}];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -492,7 +519,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, b ? 2 : 3];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -531,7 +559,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -578,7 +607,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -613,7 +643,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -656,7 +687,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -688,7 +720,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -719,7 +752,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -752,7 +786,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -789,7 +824,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -826,7 +862,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -859,7 +896,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x, .. y];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -892,7 +930,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [.. x, 1, .. y];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -925,7 +964,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [.. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70388")]
@@ -958,7 +998,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         c.Add(v);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -988,7 +1029,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1020,7 +1062,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x, .. y];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1050,7 +1093,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1084,7 +1128,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         c.Add(v);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1136,7 +1181,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1168,7 +1214,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1222,7 +1269,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                 public IEnumerator GetEnumerator() => null;
                 public void Add(int i) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1254,7 +1302,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(0);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1283,7 +1332,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c[1] = 2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1319,7 +1369,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(4);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1339,7 +1390,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
 
                 void Add(int i) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1361,7 +1413,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1390,7 +1443,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1421,7 +1475,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c = [1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1447,7 +1502,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                 {
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1477,7 +1533,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     array[0] = [1, 2];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1507,7 +1564,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(item: 1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -1542,7 +1600,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -1577,7 +1636,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -1612,7 +1672,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39146")]
@@ -1648,7 +1709,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1682,7 +1744,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     array[1] = [3, 4];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1740,7 +1803,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                 public IEnumerator GetEnumerator() => null;
                 public void Add(int i) { }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1748,59 +1812,56 @@ public partial class UseCollectionInitializerTests_CollectionExpression
     {
         await new VerifyCS.Test
         {
-            TestCode =
-            """
-            using System;
-            using System.Collections.Generic;
+            TestCode = """
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 = [|new|] List<Action>();
-                    [|list1.Add(|]() => {
-                        List<int> list2 = [|new|] List<int>();
-                        [|list2.Add(|]2);
-                    });
+                    void M()
+                    {
+                        List<Action> list1 = [|new|] List<Action>();
+                        [|list1.Add(|]() => {
+                            List<int> list2 = [|new|] List<int>();
+                            [|list2.Add(|]2);
+                        });
+                    }
                 }
-            }
-            """,
-            FixedCode =
-            """
-            using System;
-            using System.Collections.Generic;
+                """,
+            FixedCode = """
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 =
-                    [
-                        () => {
-                            List<int> list2 = [2];
-                        },
-                    ];
+                    void M()
+                    {
+                        List<Action> list1 =
+                        [
+                            () => {
+                                List<int> list2 = [2];
+                            },
+                        ];
+                    }
                 }
-            }
-            """,
-            BatchFixedCode =
-            """
-            using System;
-            using System.Collections.Generic;
+                """,
+            BatchFixedCode = """
+                using System;
+                using System.Collections.Generic;
 
-            class C
-            {
-                void M()
+                class C
                 {
-                    List<Action> list1 =
-                    [
-                        () => {
-                            List<int> list2 = [2];
-                        },
-                    ];
+                    void M()
+                    {
+                        List<Action> list1 =
+                        [
+                            () => {
+                                List<int> list2 = [2];
+                            },
+                        ];
+                    }
                 }
-            }
-            """,
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1834,7 +1895,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1873,7 +1935,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1916,7 +1979,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1963,7 +2027,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1983,7 +2048,7 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         c.Add(0);
                     else
                         c.Add(1);
-            
+
                     // Baz
                     // Quux
                     if (b2)
@@ -2014,7 +2079,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -2053,7 +2119,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2087,7 +2154,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16158")]
@@ -2124,7 +2192,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     values.Remove(item);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16241")]
@@ -2158,7 +2227,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     myStringList.Add("Done");
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -2188,7 +2258,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     items[0] = items[0];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -2222,7 +2293,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     items[1] = items[0];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17823")]
@@ -2241,7 +2313,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     t.Add(t.Min() - 1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -2277,7 +2350,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     items[1] = items[0];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -2297,7 +2371,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     t.Add(t.Min() - 1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18260")]
@@ -2329,7 +2404,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     myField.Add(this.myField.Count);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17853")]
@@ -2347,7 +2423,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     body[0] = new ExpandoObject();
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -2367,7 +2444,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             #endif
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17953")]
@@ -2400,7 +2478,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             #endif
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18242")]
@@ -2431,7 +2510,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> list = [lastItem = 5];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18242")]
@@ -2462,7 +2542,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> list = [lastItem += 5];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19253")]
@@ -2495,7 +2576,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     int horse = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23672")]
@@ -2516,7 +2598,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     obj.Add(" object", new { X = 1, Y = 2 });
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -2550,7 +2633,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     items[items.Count - 1] = 2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -2584,7 +2668,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     items[^1] = 2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47632")]
@@ -2616,7 +2701,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -2635,7 +2721,9 @@ public partial class UseCollectionInitializerTests_CollectionExpression
 
             List<int> list = [1];
 
-            """, OutputKind.ConsoleApplication);
+            """,
+            OutputKind.ConsoleApplication
+        );
     }
 
     [Fact]
@@ -2663,7 +2751,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2697,7 +2786,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2731,7 +2821,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2767,7 +2858,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2803,7 +2895,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2831,7 +2924,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2860,7 +2954,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2889,7 +2984,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2919,7 +3015,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2950,7 +3047,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2982,7 +3080,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3012,7 +3111,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3041,7 +3141,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3069,7 +3170,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, 2];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3098,7 +3200,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, 2];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3132,7 +3235,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3162,7 +3266,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [1, 2];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3193,7 +3298,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [1, 2];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3230,7 +3336,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3266,7 +3373,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3300,7 +3408,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3335,7 +3444,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3370,7 +3480,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3399,7 +3510,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, 2, 3];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3429,7 +3541,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, 2, 3];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3465,7 +3578,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3496,7 +3610,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [1, 2, 3];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3528,7 +3643,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         [1, 2, 3];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3567,7 +3683,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3605,7 +3722,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3641,7 +3759,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3676,7 +3795,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3711,7 +3831,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3746,7 +3867,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3782,7 +3904,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3820,7 +3943,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3856,7 +3980,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3893,7 +4018,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3934,7 +4060,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -3974,7 +4101,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4012,7 +4140,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4048,7 +4177,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4084,7 +4214,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                         ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4118,7 +4249,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4156,7 +4288,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     ];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4195,14 +4328,14 @@ public partial class UseCollectionInitializerTests_CollectionExpression
             FixedCode = """
                 using System;
                 using System.Collections.Generic;
-                
+
                 namespace N
                 {
                     class WellKnownDiagnosticTags
                     {
                         public static string Telemetry, EditAndContinue, Unnecessary, NotConfigurable;
                     }
-                
+
                     class C
                     {
                         private static readonly string s_enforceOnBuildNeverTag;
@@ -4249,7 +4382,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4266,7 +4400,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = new List<int>(1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4295,7 +4430,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4327,7 +4463,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4357,7 +4494,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4387,7 +4525,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4418,7 +4557,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4450,7 +4590,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4482,7 +4623,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4514,7 +4656,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4548,7 +4691,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4580,7 +4724,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, 1, .. x, .. y];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4611,7 +4756,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [1, .. x];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4645,7 +4791,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. y, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4685,7 +4832,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4719,7 +4867,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.AddRange(x);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4753,7 +4902,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.AddRange(x);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4787,7 +4937,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.AddRange(x);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4821,7 +4972,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.AddRange(y);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4854,7 +5006,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, 1, .. x, .. y];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4890,7 +5043,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.AddRange(x);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4922,7 +5076,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     List<int> c = [0, .. x, .. x, 1];
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4960,7 +5115,8 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(1);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -4998,6 +5154,7 @@ public partial class UseCollectionInitializerTests_CollectionExpression
                     c.Add(1);
                 }
             }
-            """);
+            """
+        );
     }
 }

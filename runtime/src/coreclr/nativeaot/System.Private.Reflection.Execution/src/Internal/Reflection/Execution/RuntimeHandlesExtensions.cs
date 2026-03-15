@@ -3,14 +3,13 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Execution
 {
     internal static class RuntimeHandlesExtensions
     {
-        public static bool IsNull(this RuntimeTypeHandle rtth)
-            => RuntimeTypeHandle.ToIntPtr(rtth) == 0;
+        public static bool IsNull(this RuntimeTypeHandle rtth) =>
+            RuntimeTypeHandle.ToIntPtr(rtth) == 0;
     }
 }

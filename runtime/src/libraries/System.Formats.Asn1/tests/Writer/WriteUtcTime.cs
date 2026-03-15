@@ -8,24 +8,25 @@ namespace System.Formats.Asn1.Tests.Writer
 {
     public class WriteUtcTime : Asn1WriterTests
     {
-        public static IEnumerable<object[]> TestCases { get; } = new object[][]
-        {
-            new object[]
+        public static IEnumerable<object[]> TestCases { get; } =
+            new object[][]
             {
-                new DateTimeOffset(2017, 10, 16, 8, 24, 3, TimeSpan.FromHours(-7)),
-                "0D3137313031363135323430335A",
-            },
-            new object[]
-            {
-                new DateTimeOffset(1817, 10, 16, 21, 24, 3, TimeSpan.FromHours(6)),
-                "0D3137313031363135323430335A",
-            },
-            new object[]
-            {
-                new DateTimeOffset(3000, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                "0D3030303130313030303030305A",
-            },
-        };
+                new object[]
+                {
+                    new DateTimeOffset(2017, 10, 16, 8, 24, 3, TimeSpan.FromHours(-7)),
+                    "0D3137313031363135323430335A",
+                },
+                new object[]
+                {
+                    new DateTimeOffset(1817, 10, 16, 21, 24, 3, TimeSpan.FromHours(6)),
+                    "0D3137313031363135323430335A",
+                },
+                new object[]
+                {
+                    new DateTimeOffset(3000, 1, 1, 0, 0, 0, TimeSpan.Zero),
+                    "0D3030303130313030303030305A",
+                },
+            };
 
         [Theory]
         [MemberData(nameof(TestCases))]
@@ -39,7 +40,10 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(TestCases))]
-        public void VerifyWriteUtcTime_BER_CustomTag(DateTimeOffset input, string expectedHexPayload)
+        public void VerifyWriteUtcTime_BER_CustomTag(
+            DateTimeOffset input,
+            string expectedHexPayload
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 11);
@@ -60,7 +64,10 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(TestCases))]
-        public void VerifyWriteUtcTime_CER_CustomTag(DateTimeOffset input, string expectedHexPayload)
+        public void VerifyWriteUtcTime_CER_CustomTag(
+            DateTimeOffset input,
+            string expectedHexPayload
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             Asn1Tag tag = new Asn1Tag(TagClass.Private, 95);
@@ -81,7 +88,10 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(TestCases))]
-        public void VerifyWriteUtcTime_DER_CustomTag(DateTimeOffset input, string expectedHexPayload)
+        public void VerifyWriteUtcTime_DER_CustomTag(
+            DateTimeOffset input,
+            string expectedHexPayload
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 3);
@@ -100,7 +110,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteUtcTime(DateTimeOffset.Now, Asn1Tag.Null));
+                () => writer.WriteUtcTime(DateTimeOffset.Now, Asn1Tag.Null)
+            );
         }
 
         [Theory]
@@ -119,14 +130,18 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [MemberData(nameof(TestCases))]
-        public void VerifyWriteUtcTime_RespectsYearMax_DER(DateTimeOffset input, string expectedHexPayload)
+        public void VerifyWriteUtcTime_RespectsYearMax_DER(
+            DateTimeOffset input,
+            string expectedHexPayload
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Assert.Equal(0, writer.GetEncodedLength());
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
-                () => writer.WriteUtcTime(input, input.Year - 1));
+                () => writer.WriteUtcTime(input, input.Year - 1)
+            );
 
             Assert.Equal(0, writer.GetEncodedLength());
 
@@ -141,7 +156,8 @@ namespace System.Formats.Asn1.Tests.Writer
             _ = expectedHexPayload;
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "value",
-                () => writer.WriteUtcTime(input, input.Year + 100));
+                () => writer.WriteUtcTime(input, input.Year + 100)
+            );
 
             Assert.Equal(0, writer.GetEncodedLength());
         }
@@ -156,7 +172,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.WriteUtcTime(
                 new DateTimeOffset(1949, 12, 31, 23, 11, 19, TimeSpan.FromHours(-8)),
                 2049,
-                tag);
+                tag
+            );
 
             Assert.Equal(15, writer.GetEncodedLength());
 
@@ -167,7 +184,9 @@ namespace System.Formats.Asn1.Tests.Writer
                     writer.WriteUtcTime(
                         new DateTimeOffset(1950, 1, 1, 3, 11, 19, TimeSpan.FromHours(8)),
                         2049,
-                        tag));
+                        tag
+                    )
+            );
 
             Assert.Equal(15, writer.GetEncodedLength());
 
@@ -178,7 +197,9 @@ namespace System.Formats.Asn1.Tests.Writer
                     writer.WriteUtcTime(
                         new DateTimeOffset(2049, 12, 31, 23, 11, 19, TimeSpan.FromHours(-8)),
                         2049,
-                        tag));
+                        tag
+                    )
+            );
 
             Assert.Equal(15, writer.GetEncodedLength());
 
@@ -186,13 +207,16 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.WriteUtcTime(
                 new DateTimeOffset(2050, 1, 1, 3, 11, 19, TimeSpan.FromHours(8)),
                 2049,
-                tag);
+                tag
+            );
 
             Assert.Equal(30, writer.GetEncodedLength());
 
             string hex =
-                Stringify(tag) + "0D3530303130313037313131395A" +
-                Stringify(tag) + "0D3439313233313139313131395A";
+                Stringify(tag)
+                + "0D3530303130313037313131395A"
+                + Stringify(tag)
+                + "0D3439313233313139313131395A";
 
             Verify(writer, hex);
         }

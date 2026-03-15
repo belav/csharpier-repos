@@ -9,10 +9,12 @@ namespace System.Net.WebSockets
     {
         private const string SupportedVersion = "13";
 
-        internal static async Task<HttpListenerWebSocketContext> AcceptWebSocketAsyncCore(HttpListenerContext context,
+        internal static async Task<HttpListenerWebSocketContext> AcceptWebSocketAsyncCore(
+            HttpListenerContext context,
             string? subProtocol,
             int receiveBufferSize,
-            TimeSpan keepAliveInterval)
+            TimeSpan keepAliveInterval
+        )
         {
             ValidateOptions(subProtocol, receiveBufferSize, MinSendBufferSize, keepAliveInterval);
 
@@ -28,16 +30,19 @@ namespace System.Net.WebSockets
 
             string[]? secWebSocketProtocols = null;
             string outgoingSecWebSocketProtocolString;
-            bool shouldSendSecWebSocketProtocolHeader =
-                ProcessWebSocketProtocolHeader(
-                    request.Headers[HttpKnownHeaderNames.SecWebSocketProtocol],
-                    subProtocol,
-                    out outgoingSecWebSocketProtocolString);
+            bool shouldSendSecWebSocketProtocolHeader = ProcessWebSocketProtocolHeader(
+                request.Headers[HttpKnownHeaderNames.SecWebSocketProtocol],
+                subProtocol,
+                out outgoingSecWebSocketProtocolString
+            );
 
             if (shouldSendSecWebSocketProtocolHeader)
             {
                 secWebSocketProtocols = new string[] { outgoingSecWebSocketProtocolString };
-                response.Headers.Add(HttpKnownHeaderNames.SecWebSocketProtocol, outgoingSecWebSocketProtocolString);
+                response.Headers.Add(
+                    HttpKnownHeaderNames.SecWebSocketProtocol,
+                    outgoingSecWebSocketProtocolString
+                );
             }
 
             // negotiate the websocket key return value
@@ -49,28 +54,36 @@ namespace System.Net.WebSockets
             response.Headers.Add(HttpKnownHeaderNames.SecWebSocketAccept, secWebSocketAccept);
 
             response.StatusCode = (int)HttpStatusCode.SwitchingProtocols; // HTTP 101
-            response.StatusDescription = HttpStatusDescription.Get(HttpStatusCode.SwitchingProtocols)!;
+            response.StatusDescription = HttpStatusDescription.Get(
+                HttpStatusCode.SwitchingProtocols
+            )!;
 
             HttpResponseStream responseStream = (response.OutputStream as HttpResponseStream)!;
 
             // Send websocket handshake headers
             await responseStream.WriteWebSocketHandshakeHeadersAsync().ConfigureAwait(false);
 
-            WebSocket webSocket = WebSocket.CreateFromStream(context.Connection.ConnectedStream, isServer:true, subProtocol, keepAliveInterval);
+            WebSocket webSocket = WebSocket.CreateFromStream(
+                context.Connection.ConnectedStream,
+                isServer: true,
+                subProtocol,
+                keepAliveInterval
+            );
 
             HttpListenerWebSocketContext webSocketContext = new HttpListenerWebSocketContext(
-                                                                request.Url!,
-                                                                request.Headers,
-                                                                request.Cookies,
-                                                                context.User!,
-                                                                request.IsAuthenticated,
-                                                                request.IsLocal,
-                                                                request.IsSecureConnection,
-                                                                origin!,
-                                                                secWebSocketProtocols ?? Array.Empty<string>(),
-                                                                secWebSocketVersion!,
-                                                                secWebSocketKey!,
-                                                                webSocket);
+                request.Url!,
+                request.Headers,
+                request.Cookies,
+                context.User!,
+                request.IsAuthenticated,
+                request.IsLocal,
+                request.IsSecureConnection,
+                origin!,
+                secWebSocketProtocols ?? Array.Empty<string>(),
+                secWebSocketVersion!,
+                secWebSocketKey!,
+                webSocket
+            );
 
             return webSocketContext;
         }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,286 +29,284 @@
 
 using System;
 using System.IO;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.IO {
-	[TestFixture]
-	public class FileNotFoundExceptionTest {
-		[Test]
-		public void Constructor1 ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ();
+namespace MonoTests.System.IO
+{
+    [TestFixture]
+    public class FileNotFoundExceptionTest
+    {
+        [Test]
+        public void Constructor1()
+        {
+            FileNotFoundException fnf = new FileNotFoundException();
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNotNull (fnf.Message, "#4"); // Unable to find the specified file
-			Assert.IsNull (fnf.FusionLog, "#5");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType().FullName), "#6");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNotNull(fnf.Message, "#4"); // Unable to find the specified file
+            Assert.IsNull(fnf.FusionLog, "#5");
+            Assert.IsTrue(fnf.ToString().StartsWith(fnf.GetType().FullName), "#6");
+        }
 
-		[Test]
-		public void Constructor2 ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ("message");
+        [Test]
+        public void Constructor2()
+        {
+            FileNotFoundException fnf = new FileNotFoundException("message");
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNotNull (fnf.Message, "#4");
-			Assert.AreEqual ("message", fnf.Message, "#5");
-			Assert.IsNull (fnf.FusionLog, "#6");
-			Assert.AreEqual (fnf.GetType ().FullName + ": message",
-				fnf.ToString (), "#7");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNotNull(fnf.Message, "#4");
+            Assert.AreEqual("message", fnf.Message, "#5");
+            Assert.IsNull(fnf.FusionLog, "#6");
+            Assert.AreEqual(fnf.GetType().FullName + ": message", fnf.ToString(), "#7");
+        }
 
-		[Test]
-		public void Constructor2_Message_Empty ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException (string.Empty);
+        [Test]
+        public void Constructor2_Message_Empty()
+        {
+            FileNotFoundException fnf = new FileNotFoundException(string.Empty);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNotNull (fnf.Message, "#4");
-			Assert.AreEqual (string.Empty, fnf.Message, "#5");
-			Assert.IsNull (fnf.FusionLog, "#6");
-			Assert.AreEqual (fnf.GetType ().FullName + ": ",
-				fnf.ToString (), "#7");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNotNull(fnf.Message, "#4");
+            Assert.AreEqual(string.Empty, fnf.Message, "#5");
+            Assert.IsNull(fnf.FusionLog, "#6");
+            Assert.AreEqual(fnf.GetType().FullName + ": ", fnf.ToString(), "#7");
+        }
 
-		[Test]
-		public void Constructor2_Message_Null ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ((string) null);
+        [Test]
+        public void Constructor2_Message_Null()
+        {
+            FileNotFoundException fnf = new FileNotFoundException((string)null);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNull (fnf.Message, "#4");
-			Assert.IsNull (fnf.FusionLog, "#5");
-			Assert.AreEqual (fnf.GetType ().FullName + ": ",
-				fnf.ToString (), "#6");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNull(fnf.Message, "#4");
+            Assert.IsNull(fnf.FusionLog, "#5");
+            Assert.AreEqual(fnf.GetType().FullName + ": ", fnf.ToString(), "#6");
+        }
 
-		[Test]
-		public void Constructor3 ()
-		{
-			ArithmeticException ame = new ArithmeticException ("something");
-			FileNotFoundException fnf = new FileNotFoundException ("message",
-				ame);
+        [Test]
+        public void Constructor3()
+        {
+            ArithmeticException ame = new ArithmeticException("something");
+            FileNotFoundException fnf = new FileNotFoundException("message", ame);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNotNull (fnf.InnerException, "#3");
-			Assert.AreSame (ame, fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual ("message", fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.AreEqual (fnf.GetType ().FullName + ": message ---> "
-				+ ame.GetType ().FullName + ": something", fnf.ToString (), "#8");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNotNull(fnf.InnerException, "#3");
+            Assert.AreSame(ame, fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual("message", fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.AreEqual(
+                fnf.GetType().FullName + ": message ---> " + ame.GetType().FullName + ": something",
+                fnf.ToString(),
+                "#8"
+            );
+        }
 
-		[Test]
-		public void Constructor3_Message_Empty ()
-		{
-			ArithmeticException ame = new ArithmeticException ("something");
-			FileNotFoundException fnf = new FileNotFoundException (string.Empty, ame);
+        [Test]
+        public void Constructor3_Message_Empty()
+        {
+            ArithmeticException ame = new ArithmeticException("something");
+            FileNotFoundException fnf = new FileNotFoundException(string.Empty, ame);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNotNull (fnf.InnerException, "#3");
-			Assert.AreSame (ame, fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual (string.Empty, fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.AreEqual (fnf.GetType ().FullName + ":  ---> "
-				+ ame.GetType ().FullName + ": something", fnf.ToString (), "#8");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNotNull(fnf.InnerException, "#3");
+            Assert.AreSame(ame, fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual(string.Empty, fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.AreEqual(
+                fnf.GetType().FullName + ":  ---> " + ame.GetType().FullName + ": something",
+                fnf.ToString(),
+                "#8"
+            );
+        }
 
-		[Test]
-		public void Constructor3_Message_Null ()
-		{
-			ArithmeticException ame = new ArithmeticException ("something");
-			FileNotFoundException fnf = new FileNotFoundException ((string) null, ame);
+        [Test]
+        public void Constructor3_Message_Null()
+        {
+            ArithmeticException ame = new ArithmeticException("something");
+            FileNotFoundException fnf = new FileNotFoundException((string)null, ame);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNotNull (fnf.InnerException, "#3");
-			Assert.AreSame (ame, fnf.InnerException, "#4");
-			Assert.IsNull (fnf.Message, "#5");
-			Assert.IsNull (fnf.FusionLog, "#6");
-			Assert.AreEqual (fnf.GetType ().FullName + ":  ---> "
-				+ ame.GetType ().FullName + ": something", fnf.ToString (), "#7");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNotNull(fnf.InnerException, "#3");
+            Assert.AreSame(ame, fnf.InnerException, "#4");
+            Assert.IsNull(fnf.Message, "#5");
+            Assert.IsNull(fnf.FusionLog, "#6");
+            Assert.AreEqual(
+                fnf.GetType().FullName + ":  ---> " + ame.GetType().FullName + ": something",
+                fnf.ToString(),
+                "#7"
+            );
+        }
 
-		[Test]
-		public void Constructor3_InnerException_Null ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ("message",
-				(Exception) null);
+        [Test]
+        public void Constructor3_InnerException_Null()
+        {
+            FileNotFoundException fnf = new FileNotFoundException("message", (Exception)null);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNotNull (fnf.Message, "#4");
-			Assert.AreEqual ("message", fnf.Message, "#5");
-			Assert.IsNull (fnf.FusionLog, "#6");
-			Assert.AreEqual (fnf.GetType ().FullName + ": message",
-				fnf.ToString (), "#7");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNotNull(fnf.Message, "#4");
+            Assert.AreEqual("message", fnf.Message, "#5");
+            Assert.IsNull(fnf.FusionLog, "#6");
+            Assert.AreEqual(fnf.GetType().FullName + ": message", fnf.ToString(), "#7");
+        }
 
-		[Test]
-		public void Constructor4 ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ("message",
-				"file.txt");
+        [Test]
+        public void Constructor4()
+        {
+            FileNotFoundException fnf = new FileNotFoundException("message", "file.txt");
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNotNull (fnf.FileName, "#2");
-			Assert.AreEqual ("file.txt", fnf.FileName, "#3");
-			Assert.IsNull (fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual ("message", fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType ().FullName
-				+ ": message" + Environment.NewLine), "#8");
-			Assert.IsTrue (fnf.ToString ().IndexOf ("'file.txt'") != -1, "#9");
-			Assert.IsFalse (fnf.ToString ().IndexOf ("\"file.txt\"") != -1, "#9");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNotNull(fnf.FileName, "#2");
+            Assert.AreEqual("file.txt", fnf.FileName, "#3");
+            Assert.IsNull(fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual("message", fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.IsTrue(
+                fnf.ToString()
+                    .StartsWith(fnf.GetType().FullName + ": message" + Environment.NewLine),
+                "#8"
+            );
+            Assert.IsTrue(fnf.ToString().IndexOf("'file.txt'") != -1, "#9");
+            Assert.IsFalse(fnf.ToString().IndexOf("\"file.txt\"") != -1, "#9");
+        }
 
-		[Test]
-		public void Constructor4_FileName_Empty ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ("message",
-				string.Empty);
+        [Test]
+        public void Constructor4_FileName_Empty()
+        {
+            FileNotFoundException fnf = new FileNotFoundException("message", string.Empty);
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNotNull (fnf.FileName, "#2");
-			Assert.AreEqual (string.Empty, fnf.FileName, "#3");
-			Assert.IsNull (fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual ("message", fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.AreEqual (fnf.GetType ().FullName + ": message",
-				fnf.ToString (), "#8");
-		}
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNotNull(fnf.FileName, "#2");
+            Assert.AreEqual(string.Empty, fnf.FileName, "#3");
+            Assert.IsNull(fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual("message", fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.AreEqual(fnf.GetType().FullName + ": message", fnf.ToString(), "#8");
+        }
 
-		[Test]
-		public void Constructor4_FileName_Null ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ("message",
-				(string) null);
+        [Test]
+        public void Constructor4_FileName_Null()
+        {
+            FileNotFoundException fnf = new FileNotFoundException("message", (string)null);
 
-			Assert.IsNotNull (fnf.Data, "#A1");
-			Assert.IsNull (fnf.FileName, "#A2");
-			Assert.IsNull (fnf.InnerException, "#A3");
-			Assert.IsNotNull (fnf.Message, "#A4");
-			Assert.AreEqual ("message", fnf.Message, "#A5");
-			Assert.IsNull (fnf.FusionLog, "#A6");
-		
-			Assert.AreEqual (fnf.GetType ().FullName + ": message",
-				fnf.ToString (), "#A7");
+            Assert.IsNotNull(fnf.Data, "#A1");
+            Assert.IsNull(fnf.FileName, "#A2");
+            Assert.IsNull(fnf.InnerException, "#A3");
+            Assert.IsNotNull(fnf.Message, "#A4");
+            Assert.AreEqual("message", fnf.Message, "#A5");
+            Assert.IsNull(fnf.FusionLog, "#A6");
 
-			fnf = new FileNotFoundException (string.Empty, (string) null);
+            Assert.AreEqual(fnf.GetType().FullName + ": message", fnf.ToString(), "#A7");
 
-			Assert.IsNotNull (fnf.Data, "#B1");
-			Assert.IsNull (fnf.FileName, "#B2");
-			Assert.IsNull (fnf.InnerException, "#B3");
-			Assert.IsNotNull (fnf.Message, "#B4");
-			Assert.AreEqual (string.Empty, fnf.Message, "#B5");
-			Assert.IsNull (fnf.FusionLog, "#B6");
-			Assert.AreEqual (fnf.GetType ().FullName + ": ",
-				fnf.ToString (), "#B7");
-		}
+            fnf = new FileNotFoundException(string.Empty, (string)null);
 
-		[Test]
-		public void Constructor4_FileNameAndMessage_Empty ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException (string.Empty,
-				string.Empty);
+            Assert.IsNotNull(fnf.Data, "#B1");
+            Assert.IsNull(fnf.FileName, "#B2");
+            Assert.IsNull(fnf.InnerException, "#B3");
+            Assert.IsNotNull(fnf.Message, "#B4");
+            Assert.AreEqual(string.Empty, fnf.Message, "#B5");
+            Assert.IsNull(fnf.FusionLog, "#B6");
+            Assert.AreEqual(fnf.GetType().FullName + ": ", fnf.ToString(), "#B7");
+        }
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNotNull (fnf.FileName, "#2");
-			Assert.AreEqual (string.Empty, fnf.FileName, "#3");
-			Assert.IsNull (fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual (string.Empty, fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.AreEqual (fnf.GetType ().FullName + ": ", fnf.ToString (), "#8");
-		}
+        [Test]
+        public void Constructor4_FileNameAndMessage_Empty()
+        {
+            FileNotFoundException fnf = new FileNotFoundException(string.Empty, string.Empty);
 
-		[Test]
-		public void Constructor4_FileNameAndMessage_Null ()
-		{
-			FileNotFoundException fnf = new FileNotFoundException ((string) null,
-				(string) null);
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNotNull(fnf.FileName, "#2");
+            Assert.AreEqual(string.Empty, fnf.FileName, "#3");
+            Assert.IsNull(fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual(string.Empty, fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.AreEqual(fnf.GetType().FullName + ": ", fnf.ToString(), "#8");
+        }
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNull (fnf.FileName, "#2");
-			Assert.IsNull (fnf.InnerException, "#3");
-			Assert.IsNull (fnf.Message, "#4");
-			Assert.IsNull (fnf.FusionLog, "#5");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType ().FullName
-				+ ": "), "#6");
-			Assert.IsFalse (fnf.ToString ().IndexOf (Environment.NewLine) != -1, "#7");
-			Assert.IsFalse (fnf.ToString ().IndexOf ("''") != -1, "#8");
-		}
+        [Test]
+        public void Constructor4_FileNameAndMessage_Null()
+        {
+            FileNotFoundException fnf = new FileNotFoundException((string)null, (string)null);
 
-		[Test]
-		public void Constructor4_Message_Empty ()
-		{
-			FileNotFoundException fnf = null;
-			
-			fnf = new FileNotFoundException (string.Empty, "file.txt");
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNull(fnf.FileName, "#2");
+            Assert.IsNull(fnf.InnerException, "#3");
+            Assert.IsNull(fnf.Message, "#4");
+            Assert.IsNull(fnf.FusionLog, "#5");
+            Assert.IsTrue(fnf.ToString().StartsWith(fnf.GetType().FullName + ": "), "#6");
+            Assert.IsFalse(fnf.ToString().IndexOf(Environment.NewLine) != -1, "#7");
+            Assert.IsFalse(fnf.ToString().IndexOf("''") != -1, "#8");
+        }
 
-			Assert.IsNotNull (fnf.Data, "#1");
-			Assert.IsNotNull (fnf.FileName, "#2");
-			Assert.AreEqual ("file.txt", fnf.FileName, "#3");
-			Assert.IsNull (fnf.InnerException, "#4");
-			Assert.IsNotNull (fnf.Message, "#5");
-			Assert.AreEqual (string.Empty, fnf.Message, "#6");
-			Assert.IsNull (fnf.FusionLog, "#7");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType ().FullName
-				+ ": " + Environment.NewLine), "#8");
-			Assert.IsTrue (fnf.ToString ().IndexOf ("'file.txt'") != -1, "#9");
-			Assert.IsFalse (fnf.ToString ().IndexOf ("\"file.txt\"") != -1, "#10");
-		}
+        [Test]
+        public void Constructor4_Message_Empty()
+        {
+            FileNotFoundException fnf = null;
 
-		[Test]
-		public void Constructor4_Message_Null ()
-		{
-			FileNotFoundException fnf = null;
-			
-			fnf = new FileNotFoundException ((string) null, "file.txt");
+            fnf = new FileNotFoundException(string.Empty, "file.txt");
 
-			Assert.IsNotNull (fnf.Data, "#A1");
-			Assert.IsNotNull (fnf.FileName, "#A2");
-			Assert.AreEqual ("file.txt", fnf.FileName, "#A3");
-			Assert.IsNull (fnf.InnerException, "#A4");
-			Assert.IsNotNull (fnf.Message, "#A5");
-			Assert.IsNull (fnf.FusionLog, "#A6");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType ().FullName
-				+ ": "), "#A7");
-			Assert.IsTrue (fnf.ToString ().IndexOf (Environment.NewLine) != -1, "#A8");
-			Assert.IsTrue (fnf.ToString ().IndexOf ("'file.txt'") != -1, "#A9");
-			Assert.IsFalse (fnf.ToString ().IndexOf ("\"file.txt\"") != -1, "#A10");
+            Assert.IsNotNull(fnf.Data, "#1");
+            Assert.IsNotNull(fnf.FileName, "#2");
+            Assert.AreEqual("file.txt", fnf.FileName, "#3");
+            Assert.IsNull(fnf.InnerException, "#4");
+            Assert.IsNotNull(fnf.Message, "#5");
+            Assert.AreEqual(string.Empty, fnf.Message, "#6");
+            Assert.IsNull(fnf.FusionLog, "#7");
+            Assert.IsTrue(
+                fnf.ToString().StartsWith(fnf.GetType().FullName + ": " + Environment.NewLine),
+                "#8"
+            );
+            Assert.IsTrue(fnf.ToString().IndexOf("'file.txt'") != -1, "#9");
+            Assert.IsFalse(fnf.ToString().IndexOf("\"file.txt\"") != -1, "#10");
+        }
 
-			fnf = new FileNotFoundException ((string) null, string.Empty);
+        [Test]
+        public void Constructor4_Message_Null()
+        {
+            FileNotFoundException fnf = null;
 
-			Assert.IsNotNull (fnf.Data, "#B1");
-			Assert.IsNotNull (fnf.FileName, "#B2");
-			Assert.AreEqual (string.Empty, fnf.FileName, "#B3");
-			Assert.IsNull (fnf.InnerException, "#B4");
-			// .NET 1.1: File or assembly name , or one of its dependencies ...
-			// .NET 2.0: Could not load file or assembly '' or one of its ...
-			Assert.IsNotNull (fnf.Message, "#B5");
-			Assert.IsNull (fnf.FusionLog, "#B6");
-			Assert.IsTrue (fnf.ToString ().StartsWith (fnf.GetType ().FullName
-				+ ": "), "#B7");
-			Assert.IsFalse (fnf.ToString ().IndexOf (Environment.NewLine) != -1, "#B8");
-			Assert.IsTrue (fnf.ToString ().IndexOf ("''") != -1, "#B9");
-		}
-	}
+            fnf = new FileNotFoundException((string)null, "file.txt");
+
+            Assert.IsNotNull(fnf.Data, "#A1");
+            Assert.IsNotNull(fnf.FileName, "#A2");
+            Assert.AreEqual("file.txt", fnf.FileName, "#A3");
+            Assert.IsNull(fnf.InnerException, "#A4");
+            Assert.IsNotNull(fnf.Message, "#A5");
+            Assert.IsNull(fnf.FusionLog, "#A6");
+            Assert.IsTrue(fnf.ToString().StartsWith(fnf.GetType().FullName + ": "), "#A7");
+            Assert.IsTrue(fnf.ToString().IndexOf(Environment.NewLine) != -1, "#A8");
+            Assert.IsTrue(fnf.ToString().IndexOf("'file.txt'") != -1, "#A9");
+            Assert.IsFalse(fnf.ToString().IndexOf("\"file.txt\"") != -1, "#A10");
+
+            fnf = new FileNotFoundException((string)null, string.Empty);
+
+            Assert.IsNotNull(fnf.Data, "#B1");
+            Assert.IsNotNull(fnf.FileName, "#B2");
+            Assert.AreEqual(string.Empty, fnf.FileName, "#B3");
+            Assert.IsNull(fnf.InnerException, "#B4");
+            // .NET 1.1: File or assembly name , or one of its dependencies ...
+            // .NET 2.0: Could not load file or assembly '' or one of its ...
+            Assert.IsNotNull(fnf.Message, "#B5");
+            Assert.IsNull(fnf.FusionLog, "#B6");
+            Assert.IsTrue(fnf.ToString().StartsWith(fnf.GetType().FullName + ": "), "#B7");
+            Assert.IsFalse(fnf.ToString().IndexOf(Environment.NewLine) != -1, "#B8");
+            Assert.IsTrue(fnf.ToString().IndexOf("''") != -1, "#B9");
+        }
+    }
 }

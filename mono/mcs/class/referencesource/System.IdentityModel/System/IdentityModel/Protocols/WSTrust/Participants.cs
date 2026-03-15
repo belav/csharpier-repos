@@ -10,7 +10,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 
     /// <summary>
     /// Defines the &lt;wst:Participants> elements. This element is an extension to
-    /// the &lt;wst:RequestSecurityToken element for passing information about which 
+    /// the &lt;wst:RequestSecurityToken element for passing information about which
     /// parties are authorized to participate in the use of the token.
     /// </summary>
     public class Participants
@@ -23,14 +23,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public EndpointReference Primary
         {
-            get
-            {
-                return _primary;
-            }
-            set
-            {
-                _primary = value;
-            }
+            get { return _primary; }
+            set { _primary = value; }
         }
 
         /// <summary>
@@ -39,10 +33,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public List<EndpointReference> Participant
         {
-            get
-            {
-                return _participant;
-            }
+            get { return _participant; }
         }
     }
 }

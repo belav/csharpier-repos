@@ -20,7 +20,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal sealed class AliasResolver
     {
         #region Fields
-        private Dictionary<string, string> _aliasToNamespaceMap = new Dictionary<string, string>(StringComparer.Ordinal);
+        private Dictionary<string, string> _aliasToNamespaceMap = new Dictionary<string, string>(
+            StringComparer.Ordinal
+        );
         private List<UsingElement> _usingElementCollection = new List<UsingElement>();
         private Schema _definingSchema;
         #endregion
@@ -68,7 +70,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (newAlias != null && _aliasToNamespaceMap.ContainsKey(newAlias))
             {
                 // it has, issue an error and make sure we don't try to add it
-                usingElement.AddError(ErrorCode.AlreadyDefined, EdmSchemaErrorSeverity.Error, System.Data.Entity.Strings.AliasNameIsAlreadyDefined(newAlias)); 
+                usingElement.AddError(
+                    ErrorCode.AlreadyDefined,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.AliasNameIsAlreadyDefined(newAlias)
+                );
                 newAlias = null;
             }
 
@@ -102,8 +108,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (!_definingSchema.SchemaManager.IsValidNamespaceName(usingElement.NamespaceName))
                 {
-                    usingElement.AddError(ErrorCode.InvalidNamespaceInUsing, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidNamespaceInUsing(usingElement.NamespaceName));
+                    usingElement.AddError(
+                        ErrorCode.InvalidNamespaceInUsing,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidNamespaceInUsing(
+                            usingElement.NamespaceName
+                        )
+                    );
                 }
             }
         }
@@ -121,20 +132,29 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <returns></returns>
         private bool CheckForSystemNamespace(UsingElement refSchema, string name, NameKind nameKind)
         {
-            Debug.Assert(_definingSchema.ProviderManifest != null, "Since we don't allow using elements in provider manifest, provider manifest can never be null");
+            Debug.Assert(
+                _definingSchema.ProviderManifest != null,
+                "Since we don't allow using elements in provider manifest, provider manifest can never be null"
+            );
 
             // We need to check for system namespace
             if (EdmItemCollection.IsSystemNamespace(_definingSchema.ProviderManifest, name))
             {
                 if (nameKind == NameKind.Alias)
                 {
-                    refSchema.AddError(ErrorCode.CannotUseSystemNamespaceAsAlias, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.CannotUseSystemNamespaceAsAlias(name));
+                    refSchema.AddError(
+                        ErrorCode.CannotUseSystemNamespaceAsAlias,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.CannotUseSystemNamespaceAsAlias(name)
+                    );
                 }
                 else
                 {
-                    refSchema.AddError(ErrorCode.NeedNotUseSystemNamespaceInUsing, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.NeedNotUseSystemNamespaceInUsing(name));
+                    refSchema.AddError(
+                        ErrorCode.NeedNotUseSystemNamespaceInUsing,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.NeedNotUseSystemNamespaceInUsing(name)
+                    );
                 }
                 return true;
             }
@@ -150,6 +170,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             /// <summary>It's an Alias</summary>
             Alias,
+
             /// <summary>It's a namespace</summary>
             Namespace,
         }

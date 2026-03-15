@@ -20,9 +20,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InternalComplexTypeBuilder(ComplexType metadata, InternalModelBuilder modelBuilder)
-        : base(metadata, modelBuilder)
-    {
-    }
+        : base(metadata, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -30,8 +28,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual ComplexType Metadata
-        => (ComplexType)base.Metadata;
+    public new virtual ComplexType Metadata => (ComplexType)base.Metadata;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,18 +41,29 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
         string propertyName,
         ConfigurationSource configurationSource,
         bool checkClrProperty,
-        bool skipTypeCheck)
-        => !IsIgnored(propertyName, configurationSource)
-            && (propertyType == null
-                || skipTypeCheck
-                || Metadata.Model.Builder.CanBeConfigured(propertyType, TypeConfigurationType.Property, configurationSource))
-            && (!checkClrProperty
-                || propertyType != null
-                || Metadata.GetRuntimeProperties().ContainsKey(propertyName))
-            && Metadata.FindComplexPropertiesInHierarchy(propertyName)
-                .All(
-                    m => configurationSource.Overrides(m.GetConfigurationSource())
-                        && m.GetConfigurationSource() != ConfigurationSource.Explicit);
+        bool skipTypeCheck
+    ) =>
+        !IsIgnored(propertyName, configurationSource)
+        && (
+            propertyType == null
+            || skipTypeCheck
+            || Metadata.Model.Builder.CanBeConfigured(
+                propertyType,
+                TypeConfigurationType.Property,
+                configurationSource
+            )
+        )
+        && (
+            !checkClrProperty
+            || propertyType != null
+            || Metadata.GetRuntimeProperties().ContainsKey(propertyName)
+        )
+        && Metadata
+            .FindComplexPropertiesInHierarchy(propertyName)
+            .All(m =>
+                configurationSource.Overrides(m.GetConfigurationSource())
+                && m.GetConfigurationSource() != ConfigurationSource.Explicit
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,16 +77,21 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type? targetType,
         bool? collection,
         ConfigurationSource configurationSource,
-        bool checkClrProperty = false)
-        => !IsIgnored(propertyName, configurationSource)
-            && (targetType == null || !ModelBuilder.IsIgnored(targetType, configurationSource))
-            && (!checkClrProperty
-                || propertyType != null
-                || Metadata.GetRuntimeProperties().ContainsKey(propertyName))
-            && Metadata.FindPropertiesInHierarchy(propertyName)
-                .All(
-                    m => configurationSource.Overrides(m.GetConfigurationSource())
-                        && m.GetConfigurationSource() != ConfigurationSource.Explicit);
+        bool checkClrProperty = false
+    ) =>
+        !IsIgnored(propertyName, configurationSource)
+        && (targetType == null || !ModelBuilder.IsIgnored(targetType, configurationSource))
+        && (
+            !checkClrProperty
+            || propertyType != null
+            || Metadata.GetRuntimeProperties().ContainsKey(propertyName)
+        )
+        && Metadata
+            .FindPropertiesInHierarchy(propertyName)
+            .All(m =>
+                configurationSource.Overrides(m.GetConfigurationSource())
+                && m.GetConfigurationSource() != ConfigurationSource.Explicit
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,7 +99,10 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override InternalComplexTypeBuilder? Ignore(string name, ConfigurationSource configurationSource)
+    public override InternalComplexTypeBuilder? Ignore(
+        string name,
+        ConfigurationSource configurationSource
+    )
     {
         var ignoredConfigurationSource = Metadata.FindIgnoredConfigurationSource(name);
         if (ignoredConfigurationSource.HasValue)
@@ -108,11 +124,16 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             var property = Metadata.FindProperty(name);
             if (property != null)
             {
-                Check.DebugAssert(property.DeclaringType == Metadata, "property.DeclaringComplexType != ComplexType");
+                Check.DebugAssert(
+                    property.DeclaringType == Metadata,
+                    "property.DeclaringComplexType != ComplexType"
+                );
 
                 if (property.GetConfigurationSource() == ConfigurationSource.Explicit)
                 {
-                    ModelBuilder.Metadata.ScopedModelDependencies?.Logger.MappedPropertyIgnoredWarning(property);
+                    ModelBuilder.Metadata.ScopedModelDependencies?.Logger.MappedPropertyIgnoredWarning(
+                        property
+                    );
                 }
 
                 var removedProperty = RemoveProperty(property, configurationSource);
@@ -124,11 +145,16 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                 var complexProperty = Metadata.FindComplexProperty(name);
                 if (complexProperty != null)
                 {
-                    Check.DebugAssert(complexProperty.DeclaringType == Metadata, "property.DeclaringType != ComplexType");
+                    Check.DebugAssert(
+                        complexProperty.DeclaringType == Metadata,
+                        "property.DeclaringType != ComplexType"
+                    );
 
                     if (complexProperty.GetConfigurationSource() == ConfigurationSource.Explicit)
                     {
-                        ModelBuilder.Metadata.ScopedModelDependencies?.Logger.MappedComplexPropertyIgnoredWarning(complexProperty);
+                        ModelBuilder.Metadata.ScopedModelDependencies?.Logger.MappedComplexPropertyIgnoredWarning(
+                            complexProperty
+                        );
                     }
 
                     var removedComplexProperty = Metadata.RemoveComplexProperty(complexProperty);
@@ -154,16 +180,23 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                 if (derivedProperty != null)
                 {
                     derivedType.Builder.RemoveProperty(
-                        derivedProperty, configurationSource,
-                        canOverrideSameSource: configurationSource != ConfigurationSource.Explicit);
+                        derivedProperty,
+                        configurationSource,
+                        canOverrideSameSource: configurationSource != ConfigurationSource.Explicit
+                    );
                 }
                 else
                 {
                     var declaredComplexProperty = derivedType.FindDeclaredComplexProperty(name);
                     if (declaredComplexProperty != null)
                     {
-                        if (configurationSource.Overrides(declaredComplexProperty.GetConfigurationSource())
-                            && declaredComplexProperty.GetConfigurationSource() != ConfigurationSource.Explicit)
+                        if (
+                            configurationSource.Overrides(
+                                declaredComplexProperty.GetConfigurationSource()
+                            )
+                            && declaredComplexProperty.GetConfigurationSource()
+                                != ConfigurationSource.Explicit
+                        )
                         {
                             derivedType.RemoveComplexProperty(declaredComplexProperty);
                         }
@@ -181,7 +214,11 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool CanIgnore(string name, ConfigurationSource configurationSource, bool shouldThrow)
+    protected override bool CanIgnore(
+        string name,
+        ConfigurationSource configurationSource,
+        bool shouldThrow
+    )
     {
         var ignoredConfigurationSource = Metadata.FindIgnoredConfigurationSource(name);
         if (ignoredConfigurationSource.HasValue)
@@ -198,14 +235,23 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                 {
                     throw new InvalidOperationException(
                         CoreStrings.InheritedPropertyCannotBeIgnored(
-                            name, Metadata.DisplayName(), property.DeclaringType.DisplayName()));
+                            name,
+                            Metadata.DisplayName(),
+                            property.DeclaringType.DisplayName()
+                        )
+                    );
                 }
 
                 return false;
             }
 
-            if (!property.DeclaringType.Builder.CanRemoveProperty(
-                    property, configurationSource, canOverrideSameSource: true))
+            if (
+                !property.DeclaringType.Builder.CanRemoveProperty(
+                    property,
+                    configurationSource,
+                    canOverrideSameSource: true
+                )
+            )
             {
                 return false;
             }
@@ -221,7 +267,11 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                     {
                         throw new InvalidOperationException(
                             CoreStrings.InheritedPropertyCannotBeIgnored(
-                                name, Metadata.DisplayName(), complexProperty.DeclaringType.DisplayName()));
+                                name,
+                                Metadata.DisplayName(),
+                                complexProperty.DeclaringType.DisplayName()
+                            )
+                        );
                     }
 
                     return false;
@@ -245,7 +295,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     /// </summary>
     public virtual InternalComplexTypeBuilder? HasBaseType(
         ComplexType? baseComplexType,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (Metadata.BaseType == baseComplexType)
         {
@@ -265,44 +316,61 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             // We use at least DataAnnotation as ConfigurationSource while removing to allow us
             // to remove metadata object which were defined in derived type
             // while corresponding annotations were present on properties in base type.
-            var configurationSourceForRemoval = ConfigurationSource.DataAnnotation.Max(configurationSource);
+            var configurationSourceForRemoval = ConfigurationSource.DataAnnotation.Max(
+                configurationSource
+            );
             if (baseComplexType != null)
             {
-                var baseMemberNames = baseComplexType.GetMembers()
-                    .ToDictionary(m => m.Name, m => (ConfigurationSource?)m.GetConfigurationSource());
+                var baseMemberNames = baseComplexType
+                    .GetMembers()
+                    .ToDictionary(
+                        m => m.Name,
+                        m => (ConfigurationSource?)m.GetConfigurationSource()
+                    );
 
-                var propertiesToDetach =
-                    FindConflictingMembers(
-                        Metadata.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredProperties()),
-                        baseMemberNames,
-                        p => baseComplexType.FindProperty(p.Name) != null,
-                        p => p.DeclaringType.Builder.RemoveProperty(p, ConfigurationSource.Explicit));
+                var propertiesToDetach = FindConflictingMembers(
+                    Metadata
+                        .GetDerivedTypesInclusive()
+                        .SelectMany(et => et.GetDeclaredProperties()),
+                    baseMemberNames,
+                    p => baseComplexType.FindProperty(p.Name) != null,
+                    p => p.DeclaringType.Builder.RemoveProperty(p, ConfigurationSource.Explicit)
+                );
 
                 if (propertiesToDetach != null)
                 {
                     detachedProperties = DetachProperties(propertiesToDetach);
                 }
 
-                var complexPropertiesToDetach =
-                    FindConflictingMembers(
-                        Metadata.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredComplexProperties()),
-                        baseMemberNames,
-                        p => baseComplexType.FindComplexProperty(p.Name) != null,
-                        p => p.DeclaringType.RemoveComplexProperty(p));
+                var complexPropertiesToDetach = FindConflictingMembers(
+                    Metadata
+                        .GetDerivedTypesInclusive()
+                        .SelectMany(et => et.GetDeclaredComplexProperties()),
+                    baseMemberNames,
+                    p => baseComplexType.FindComplexProperty(p.Name) != null,
+                    p => p.DeclaringType.RemoveComplexProperty(p)
+                );
 
                 if (complexPropertiesToDetach != null)
                 {
                     detachedComplexProperties = new List<ComplexPropertySnapshot>();
                     foreach (var complexPropertyToDetach in complexPropertiesToDetach)
                     {
-                        detachedComplexProperties.Add(InternalComplexPropertyBuilder.Detach(complexPropertyToDetach)!);
+                        detachedComplexProperties.Add(
+                            InternalComplexPropertyBuilder.Detach(complexPropertyToDetach)!
+                        );
                     }
                 }
 
                 foreach (var ignoredMember in Metadata.GetIgnoredMembers().ToList())
                 {
-                    if (baseComplexType.FindIgnoredConfigurationSource(ignoredMember)
-                        .Overrides(Metadata.FindDeclaredIgnoredConfigurationSource(ignoredMember)))
+                    if (
+                        baseComplexType
+                            .FindIgnoredConfigurationSource(ignoredMember)
+                            .Overrides(
+                                Metadata.FindDeclaredIgnoredConfigurationSource(ignoredMember)
+                            )
+                    )
                     {
                         Metadata.RemoveIgnored(ignoredMember);
                     }
@@ -318,7 +386,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                 foreach (var detachedComplexProperty in detachedComplexProperties)
                 {
                     detachedComplexProperty.Attach(
-                        detachedComplexProperty.ComplexProperty.DeclaringType.Builder);
+                        detachedComplexProperty.ComplexProperty.DeclaringType.Builder
+                    );
                 }
             }
 
@@ -331,7 +400,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             IEnumerable<T> derivedMembers,
             Dictionary<string, ConfigurationSource?> baseMemberNames,
             Func<T, bool> compatibleWithBaseMember,
-            Action<T> removeMember)
+            Action<T> removeMember
+        )
             where T : PropertyBase
         {
             List<T>? membersToBeDetached = null;
@@ -339,16 +409,27 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             foreach (var member in derivedMembers)
             {
                 ConfigurationSource? baseConfigurationSource = null;
-                if ((!member.GetConfigurationSource().OverridesStrictly(
-                            baseComplexType.FindIgnoredConfigurationSource(member.Name))
-                        && member.GetConfigurationSource() != ConfigurationSource.Explicit)
-                    || (baseMemberNames.TryGetValue(member.Name, out baseConfigurationSource)
+                if (
+                    (
+                        !member
+                            .GetConfigurationSource()
+                            .OverridesStrictly(
+                                baseComplexType.FindIgnoredConfigurationSource(member.Name)
+                            )
+                        && member.GetConfigurationSource() != ConfigurationSource.Explicit
+                    )
+                    || (
+                        baseMemberNames.TryGetValue(member.Name, out baseConfigurationSource)
                         && baseConfigurationSource.Overrides(member.GetConfigurationSource())
-                        && !compatibleWithBaseMember(member)))
+                        && !compatibleWithBaseMember(member)
+                    )
+                )
                 {
-                    if (baseConfigurationSource == ConfigurationSource.Explicit
+                    if (
+                        baseConfigurationSource == ConfigurationSource.Explicit
                         && configurationSource == ConfigurationSource.Explicit
-                        && member.GetConfigurationSource() == ConfigurationSource.Explicit)
+                        && member.GetConfigurationSource() == ConfigurationSource.Explicit
+                    )
                     {
                         throw new InvalidOperationException(
                             CoreStrings.DuplicatePropertiesOnBase(
@@ -357,7 +438,9 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                                 ((IReadOnlyTypeBase)member.DeclaringType).DisplayName(),
                                 member.Name,
                                 baseComplexType.DisplayName(),
-                                member.Name));
+                                member.Name
+                            )
+                        );
                     }
 
                     membersToBeRemoved ??= new List<T>();
@@ -392,10 +475,15 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetBaseType(ComplexType? baseComplexType, ConfigurationSource configurationSource)
+    public virtual bool CanSetBaseType(
+        ComplexType? baseComplexType,
+        ConfigurationSource configurationSource
+    )
     {
-        if (Metadata.BaseType == baseComplexType
-            || configurationSource == ConfigurationSource.Explicit)
+        if (
+            Metadata.BaseType == baseComplexType
+            || configurationSource == ConfigurationSource.Explicit
+        )
         {
             return true;
         }
@@ -410,14 +498,21 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             return true;
         }
 
-        var baseMembers = baseComplexType.GetMembers()
+        var baseMembers = baseComplexType
+            .GetMembers()
             .Where(m => m.GetConfigurationSource() == ConfigurationSource.Explicit)
             .ToDictionary(m => m.Name);
 
-        foreach (var derivedMember in Metadata.GetDerivedTypesInclusive().SelectMany(et => et.GetDeclaredMembers()))
+        foreach (
+            var derivedMember in Metadata
+                .GetDerivedTypesInclusive()
+                .SelectMany(et => et.GetDeclaredMembers())
+        )
         {
-            if (derivedMember.GetConfigurationSource() == ConfigurationSource.Explicit
-                && baseMembers.TryGetValue(derivedMember.Name, out var baseMember))
+            if (
+                derivedMember.GetConfigurationSource() == ConfigurationSource.Explicit
+                && baseMembers.TryGetValue(derivedMember.Name, out var baseMember)
+            )
             {
                 switch (derivedMember)
                 {
@@ -425,14 +520,16 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                         return baseMember is IReadOnlyProperty;
                     case IReadOnlyNavigation derivedNavigation:
                         return baseMember is IReadOnlyNavigation baseNavigation
-                            && derivedNavigation.TargetEntityType == baseNavigation.TargetEntityType;
+                            && derivedNavigation.TargetEntityType
+                                == baseNavigation.TargetEntityType;
                     case IReadOnlyComplexProperty:
                         return baseMember is IReadOnlyComplexProperty;
                     case IReadOnlyServiceProperty:
                         return baseMember is IReadOnlyServiceProperty;
                     case IReadOnlySkipNavigation derivedSkipNavigation:
                         return baseMember is IReadOnlySkipNavigation baseSkipNavigation
-                            && derivedSkipNavigation.TargetEntityType == baseSkipNavigation.TargetEntityType;
+                            && derivedSkipNavigation.TargetEntityType
+                                == baseSkipNavigation.TargetEntityType;
                 }
             }
         }
@@ -448,7 +545,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     /// </summary>
     public virtual InternalComplexTypeBuilder? HasConstructorBinding(
         InstantiationBinding? constructorBinding,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (CanSetConstructorBinding(constructorBinding, configurationSource))
         {
@@ -466,9 +564,12 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetConstructorBinding(InstantiationBinding? constructorBinding, ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetConstructorBindingConfigurationSource())
-            || Metadata.ConstructorBinding == constructorBinding;
+    public virtual bool CanSetConstructorBinding(
+        InstantiationBinding? constructorBinding,
+        ConfigurationSource configurationSource
+    ) =>
+        configurationSource.Overrides(Metadata.GetConstructorBindingConfigurationSource())
+        || Metadata.ConstructorBinding == constructorBinding;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -478,7 +579,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     /// </summary>
     public virtual InternalComplexTypeBuilder? HasServiceOnlyConstructorBinding(
         InstantiationBinding? constructorBinding,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (CanSetServiceOnlyConstructorBinding(constructorBinding, configurationSource))
         {
@@ -498,9 +600,12 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     /// </summary>
     public virtual bool CanSetServiceOnlyConstructorBinding(
         InstantiationBinding? constructorBinding,
-        ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetServiceOnlyConstructorBindingConfigurationSource())
-            || Metadata.ServiceOnlyConstructorBinding == constructorBinding;
+        ConfigurationSource configurationSource
+    ) =>
+        configurationSource.Overrides(
+            Metadata.GetServiceOnlyConstructorBindingConfigurationSource()
+        )
+        || Metadata.ServiceOnlyConstructorBinding == constructorBinding;
 
     IConventionComplexType IConventionComplexTypeBuilder.Metadata
     {
@@ -515,9 +620,19 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasAnnotation(string name, object? value, bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)base.HasAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)
+            base.HasAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -526,9 +641,19 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNonNullAnnotation(string name, object? value, bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)base.HasNonNullAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNonNullAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)
+            base.HasNonNullAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -537,9 +662,17 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNoAnnotation(string name, bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)base.HasNoAnnotation(
-            name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)
+            base.HasNoAnnotation(
+                name,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -549,8 +682,8 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     /// </summary>
     [DebuggerStepThrough]
     IConventionComplexTypeBuilder IConventionComplexTypeBuilder.RemoveUnusedImplicitProperties(
-        IReadOnlyList<IConventionProperty> properties)
-        => (IConventionComplexTypeBuilder)RemoveUnusedImplicitProperties(properties);
+        IReadOnlyList<IConventionProperty> properties
+    ) => (IConventionComplexTypeBuilder)RemoveUnusedImplicitProperties(properties);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -559,13 +692,16 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNoProperty(IConventionProperty property, bool fromDataAnnotation)
-        => RemoveProperty(
-                (Property)property,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-            == null
-                ? null
-                : this;
+    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNoProperty(
+        IConventionProperty property,
+        bool fromDataAnnotation
+    ) =>
+        RemoveProperty(
+            (Property)property,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        ) == null
+            ? null
+            : this;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -576,10 +712,12 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     [DebuggerStepThrough]
     IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasNoComplexProperty(
         IConventionComplexProperty complexProperty,
-        bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)HasNoComplexProperty(
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)HasNoComplexProperty(
             (ComplexProperty)complexProperty,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -588,8 +726,14 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.Ignore(string name, bool fromDataAnnotation)
-        => Ignore(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.Ignore(
+        string name,
+        bool fromDataAnnotation
+    ) =>
+        Ignore(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -600,9 +744,12 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     [DebuggerStepThrough]
     IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.HasChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)HasChangeTrackingStrategy(
-            changeTrackingStrategy, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)HasChangeTrackingStrategy(
+            changeTrackingStrategy,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -613,7 +760,10 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
     [DebuggerStepThrough]
     IConventionComplexTypeBuilder? IConventionComplexTypeBuilder.UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation)
-        => (IConventionComplexTypeBuilder?)UsePropertyAccessMode(
-            propertyAccessMode, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionComplexTypeBuilder?)UsePropertyAccessMode(
+            propertyAccessMode,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

@@ -33,7 +33,12 @@ public sealed class QuicListenerOptions
     /// <summary>
     /// Selection callback to choose inbound connection options dynamically.
     /// </summary>
-    public Func<QuicConnection, SslClientHelloInfo, CancellationToken, ValueTask<QuicServerConnectionOptions>> ConnectionOptionsCallback { get; set; } = null!;
+    public Func<
+        QuicConnection,
+        SslClientHelloInfo,
+        CancellationToken,
+        ValueTask<QuicServerConnectionOptions>
+    > ConnectionOptionsCallback { get; set; } = null!;
 
     /// <summary>
     /// Validates the options and potentially sets platform specific defaults.
@@ -43,11 +48,23 @@ public sealed class QuicListenerOptions
     {
         if (ListenEndPoint is null)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_listener, nameof(QuicListenerOptions.ListenEndPoint)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_listener,
+                    nameof(QuicListenerOptions.ListenEndPoint)
+                ),
+                argumentName
+            );
         }
         if (ApplicationProtocols is null || ApplicationProtocols.Count <= 0)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_not_empty_listener, nameof(QuicListenerOptions.ApplicationProtocols)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_not_empty_listener,
+                    nameof(QuicListenerOptions.ApplicationProtocols)
+                ),
+                argumentName
+            );
         }
         if (ListenBacklog == 0)
         {
@@ -55,7 +72,13 @@ public sealed class QuicListenerOptions
         }
         if (ConnectionOptionsCallback is null)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_listener, nameof(QuicListenerOptions.ConnectionOptionsCallback)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_listener,
+                    nameof(QuicListenerOptions.ConnectionOptionsCallback)
+                ),
+                argumentName
+            );
         }
     }
 }

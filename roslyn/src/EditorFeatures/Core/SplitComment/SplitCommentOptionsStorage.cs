@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
 {
     internal sealed class SplitCommentOptionsStorage
     {
-        public static PerLanguageOption2<bool> Enabled =
-           new PerLanguageOption2<bool>("dotnet_split_comments", defaultValue: true);
+        public static PerLanguageOption2<bool> Enabled = new PerLanguageOption2<bool>(
+            "dotnet_split_comments",
+            defaultValue: true
+        );
     }
 }

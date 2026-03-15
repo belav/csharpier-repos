@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -44,7 +43,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -87,7 +90,11 @@ namespace System.Net.Http.Functional.Tests
         {
             string sourceString = "\u00C4\u00E4\u00FC\u00DC";
             Encoding defaultStringEncoding = Encoding.GetEncoding("utf-8");
-            var content = new StringContent(sourceString, defaultStringEncoding, ((Headers.MediaTypeHeaderValue)null)!);
+            var content = new StringContent(
+                sourceString,
+                defaultStringEncoding,
+                ((Headers.MediaTypeHeaderValue)null)!
+            );
 
             // If no media header value is passed-in, there is none
             Assert.Null(content.Headers.ContentType);
@@ -99,7 +106,10 @@ namespace System.Net.Http.Functional.Tests
             // Use UTF-8 encoding to serialize a chinese string.
             string sourceString = "\u4f1a\u5458\u670d\u52a1";
 
-            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue("application/custom", Encoding.UTF8.WebName);
+            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue(
+                "application/custom",
+                Encoding.UTF8.WebName
+            );
 
             var content = new StringContent(sourceString, Encoding.UTF8, mediaTypeHeaderValue);
 
@@ -109,7 +119,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -120,7 +134,10 @@ namespace System.Net.Http.Functional.Tests
             // Use UTF-8 encoding to serialize a chinese string.
             string sourceString = "\u4f1a\u5458\u670d\u52a1";
 
-            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue("application/custom", Encoding.UTF8.WebName);
+            var mediaTypeHeaderValue = new Headers.MediaTypeHeaderValue(
+                "application/custom",
+                Encoding.UTF8.WebName
+            );
 
             var content = new StringContent(sourceString, mediaTypeHeaderValue);
 
@@ -130,7 +147,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }
@@ -150,7 +171,11 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream(12);
             await content.CopyToAsync(destination);
 
-            string destinationString = Encoding.UTF8.GetString(destination.ToArray(), 0, (int)destination.Length);
+            string destinationString = Encoding.UTF8.GetString(
+                destination.ToArray(),
+                0,
+                (int)destination.Length
+            );
 
             Assert.Equal(sourceString, destinationString);
         }

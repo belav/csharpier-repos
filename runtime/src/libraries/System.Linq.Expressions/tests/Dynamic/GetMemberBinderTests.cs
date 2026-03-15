@@ -13,11 +13,12 @@ namespace System.Dynamic.Tests
         private class MinimumOverrideGetMemberBinder : GetMemberBinder
         {
             public MinimumOverrideGetMemberBinder(string name, bool ignoreCase)
-                : base(name, ignoreCase)
-            {
-            }
+                : base(name, ignoreCase) { }
 
-            public override DynamicMetaObject FallbackGetMember(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+            public override DynamicMetaObject FallbackGetMember(
+                DynamicMetaObject target,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -35,11 +36,17 @@ namespace System.Dynamic.Tests
 
         private static readonly string[] Names =
         {
-            "arg", "ARG", "Arg", "Argument name that isn\u2019t a valid C\u266F name \uD83D\uDC7F\uD83E\uDD22",
-            "horrid name with" + (char)0xD800 + "a half surrogate", "new", "break"
+            "arg",
+            "ARG",
+            "Arg",
+            "Argument name that isn\u2019t a valid C\u266F name \uD83D\uDC7F\uD83E\uDD22",
+            "horrid name with" + (char)0xD800 + "a half surrogate",
+            "new",
+            "break",
         };
 
-        public static IEnumerable<object[]> NamesAndBools() => Names.Select((n, i) => new object[] {n, i % 2 == 0});
+        public static IEnumerable<object[]> NamesAndBools() =>
+            Names.Select((n, i) => new object[] { n, i % 2 == 0 });
 
         [Fact]
         public void InvokeInstanceProperty()
@@ -51,7 +58,7 @@ namespace System.Dynamic.Tests
         [Fact]
         public void InvokeGenericClassInstanceProperty()
         {
-            dynamic d = new List<int> {1, 2, 3, 4};
+            dynamic d = new List<int> { 1, 2, 3, 4 };
             Assert.Equal(4, d.Count);
         }
 
@@ -72,8 +79,14 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullName()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new MinimumOverrideGetMemberBinder(null, false));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new MinimumOverrideGetMemberBinder(null, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new MinimumOverrideGetMemberBinder(null, false)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new MinimumOverrideGetMemberBinder(null, true)
+            );
         }
 
         [Theory, MemberData(nameof(NamesAndBools))]
@@ -86,6 +99,9 @@ namespace System.Dynamic.Tests
 
         [Theory, MemberData(nameof(NamesAndBools))]
         public void ReturnTypeObject(string name, bool ignoreCase) =>
-            Assert.Equal(typeof(object), new MinimumOverrideGetMemberBinder(name, ignoreCase).ReturnType);
+            Assert.Equal(
+                typeof(object),
+                new MinimumOverrideGetMemberBinder(name, ignoreCase).ReturnType
+            );
     }
 }

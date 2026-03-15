@@ -12,9 +12,7 @@ namespace System.Activities.Expressions
     public sealed class DelegateArgumentReference<T> : EnvironmentLocationReference<T>
     {
         public DelegateArgumentReference()
-            : base()
-        {
-        }
+            : base() { }
 
         public DelegateArgumentReference(DelegateArgument delegateArgument)
             : this()
@@ -22,11 +20,7 @@ namespace System.Activities.Expressions
             this.DelegateArgument = delegateArgument;
         }
 
-        public DelegateArgument DelegateArgument
-        {
-            get;
-            set;
-        }
+        public DelegateArgument DelegateArgument { get; set; }
 
         public override LocationReference LocationReference
         {
@@ -43,17 +37,30 @@ namespace System.Activities.Expressions
             {
                 if (!this.DelegateArgument.IsInTree)
                 {
-                    metadata.AddValidationError(SR.DelegateArgumentMustBeReferenced(this.DelegateArgument.Name));
+                    metadata.AddValidationError(
+                        SR.DelegateArgumentMustBeReferenced(this.DelegateArgument.Name)
+                    );
                 }
 
                 if (!metadata.Environment.IsVisible(this.DelegateArgument))
                 {
-                    metadata.AddValidationError(SR.DelegateArgumentNotVisible(this.DelegateArgument.Name));
+                    metadata.AddValidationError(
+                        SR.DelegateArgumentNotVisible(this.DelegateArgument.Name)
+                    );
                 }
 
-                if (!(this.DelegateArgument is DelegateOutArgument<T>) && !(this.DelegateArgument is DelegateInArgument<T>))
+                if (
+                    !(this.DelegateArgument is DelegateOutArgument<T>)
+                    && !(this.DelegateArgument is DelegateInArgument<T>)
+                )
                 {
-                    metadata.AddValidationError(SR.DelegateArgumentTypeInvalid(this.DelegateArgument, typeof(T), this.DelegateArgument.Type));
+                    metadata.AddValidationError(
+                        SR.DelegateArgumentTypeInvalid(
+                            this.DelegateArgument,
+                            typeof(T),
+                            this.DelegateArgument.Type
+                        )
+                    );
                 }
             }
         }

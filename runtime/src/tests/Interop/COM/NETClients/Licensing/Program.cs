@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace NetClient
 {
     using System;
@@ -9,15 +10,15 @@ namespace NetClient
     using System.ComponentModel;
     using System.Reflection;
     using System.Runtime.InteropServices;
-
-    using TestLibrary;
-    using Xunit;
     using Server.Contract;
     using Server.Contract.Servers;
+    using TestLibrary;
+    using Xunit;
 
     public class Program
     {
         static readonly string DefaultLicKey = "__MOCK_LICENSE_KEY__";
+
         static void ActivateLicensedObject()
         {
             Console.WriteLine($"Calling {nameof(ActivateLicensedObject)}...");
@@ -83,8 +84,14 @@ namespace NetClient
             try
             {
                 string licKey = "__TEST__";
-                LicenseManager.CurrentContext = new MockLicenseContext(typeof(LicenseTestingClass), LicenseUsageMode.Designtime);
-                LicenseManager.CurrentContext.SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
+                LicenseManager.CurrentContext = new MockLicenseContext(
+                    typeof(LicenseTestingClass),
+                    LicenseUsageMode.Designtime
+                );
+                LicenseManager.CurrentContext.SetSavedLicenseKey(
+                    typeof(LicenseTestingClass),
+                    licKey
+                );
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();
 
@@ -92,7 +99,13 @@ namespace NetClient
                 Assert.Null(licenseTesting.GetLicense());
 
                 // Verify the value retrieved from the IClassFactory2::RequestLicKey was what was set
-                Assert.Equal(DefaultLicKey, LicenseManager.CurrentContext.GetSavedLicenseKey(typeof(LicenseTestingClass), resourceAssembly: null));
+                Assert.Equal(
+                    DefaultLicKey,
+                    LicenseManager.CurrentContext.GetSavedLicenseKey(
+                        typeof(LicenseTestingClass),
+                        resourceAssembly: null
+                    )
+                );
             }
             finally
             {
@@ -108,8 +121,14 @@ namespace NetClient
             try
             {
                 string licKey = "__TEST__";
-                LicenseManager.CurrentContext = new MockLicenseContext(typeof(LicenseTestingClass), LicenseUsageMode.Runtime);
-                LicenseManager.CurrentContext.SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
+                LicenseManager.CurrentContext = new MockLicenseContext(
+                    typeof(LicenseTestingClass),
+                    LicenseUsageMode.Runtime
+                );
+                LicenseManager.CurrentContext.SetSavedLicenseKey(
+                    typeof(LicenseTestingClass),
+                    licKey
+                );
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();
 

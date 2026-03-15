@@ -27,9 +27,7 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public PropertyChangingInterceptor(
-        IEntityType entityType,
-        bool checkEquality)
+    public PropertyChangingInterceptor(IEntityType entityType, bool checkEquality)
         : base(entityType)
     {
         _checkEquality = checkEquality;
@@ -49,13 +47,13 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
         {
             if (methodName == $"add_{nameof(INotifyPropertyChanging.PropertyChanging)}")
             {
-                _handler = (PropertyChangingEventHandler)Delegate.Combine(
-                    _handler, (Delegate)invocation.Arguments[0]);
+                _handler = (PropertyChangingEventHandler)
+                    Delegate.Combine(_handler, (Delegate)invocation.Arguments[0]);
             }
             else if (methodName == $"remove_{nameof(INotifyPropertyChanging.PropertyChanging)}")
             {
-                _handler = (PropertyChangingEventHandler?)Delegate.Remove(
-                    _handler, (Delegate)invocation.Arguments[0]);
+                _handler = (PropertyChangingEventHandler?)
+                    Delegate.Remove(_handler, (Delegate)invocation.Arguments[0]);
             }
         }
         else if (methodName.StartsWith("set_", StringComparison.Ordinal))
@@ -69,7 +67,8 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
             }
             else
             {
-                var navigation = EntityType.FindNavigation(propertyName)
+                var navigation =
+                    EntityType.FindNavigation(propertyName)
                     ?? (INavigationBase?)EntityType.FindSkipNavigation(propertyName);
 
                 if (navigation != null)
@@ -88,7 +87,11 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
         }
     }
 
-    private void HandleChanging(IInvocation invocation, IPropertyBase property, IEqualityComparer? comparer)
+    private void HandleChanging(
+        IInvocation invocation,
+        IPropertyBase property,
+        IEqualityComparer? comparer
+    )
     {
         if (_checkEquality)
         {
@@ -108,6 +111,6 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
         invocation.Proceed();
     }
 
-    private void NotifyPropertyChanging(string propertyName, object proxy)
-        => _handler?.Invoke(proxy, new PropertyChangingEventArgs(propertyName));
+    private void NotifyPropertyChanging(string propertyName, object proxy) =>
+        _handler?.Invoke(proxy, new PropertyChangingEventArgs(propertyName));
 }

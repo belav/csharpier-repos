@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis
                         break;
                     case INamespaceSymbol parentNamespace:
                         visitor.WriteInteger(1);
-                        visitor.WriteStringArray(GetContainingNamespaceNamesInReverse(parentNamespace));
+                        visitor.WriteStringArray(
+                            GetContainingNamespaceNamesInReverse(parentNamespace)
+                        );
                         break;
                     default:
                         visitor.WriteInteger(2);
@@ -50,7 +52,9 @@ namespace Microsoft.CodeAnalysis
             /// For a symbol like <c>System.Collections.Generic.IEnumerable</c>, this would produce <c>"Generic",
             /// "Collections", "System"</c>
             /// </summary>
-            private static ImmutableArray<string> GetContainingNamespaceNamesInReverse(INamespaceSymbol namespaceSymbol)
+            private static ImmutableArray<string> GetContainingNamespaceNamesInReverse(
+                INamespaceSymbol namespaceSymbol
+            )
             {
                 using var _ = ArrayBuilder<string>.GetInstance(out var builder);
                 while (namespaceSymbol != null && namespaceSymbol.Name != "")
@@ -63,28 +67,39 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualType, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualType,
+                out string? failureReason
+            )
             {
                 var name = reader.ReadRequiredString();
-                var containingSymbolResolution = ResolveContainer(reader, contextualType, out var containingSymbolFailureReason);
+                var containingSymbolResolution = ResolveContainer(
+                    reader,
+                    contextualType,
+                    out var containingSymbolFailureReason
+                );
                 var arity = reader.ReadInteger();
                 var isConstructed = reader.ReadBoolean();
 
                 using var typeArguments = reader.ReadSymbolKeyArray<INamedTypeSymbol, ITypeSymbol>(
                     contextualType,
-                    getContextualSymbol: static (contextualType, i) => SafeGet(contextualType.TypeArguments, i),
-                    out var typeArgumentsFailureReason);
+                    getContextualSymbol: static (contextualType, i) =>
+                        SafeGet(contextualType.TypeArguments, i),
+                    out var typeArgumentsFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(ErrorTypeSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(ErrorTypeSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
                 if (typeArgumentsFailureReason != null)
                 {
                     Contract.ThrowIfFalse(typeArguments.IsDefault);
-                    failureReason = $"({nameof(ErrorTypeSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
+                    failureReason =
+                        $"({nameof(ErrorTypeSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
                     return default;
                 }
 
@@ -93,22 +108,40 @@ namespace Microsoft.CodeAnalysis
                 using var result = PooledArrayBuilder<INamedTypeSymbol>.GetInstance();
 
                 var typeArgumentsArray = isConstructed ? typeArguments.Builder.ToArray() : null;
-                foreach (var container in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>())
+                foreach (
+                    var container in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>()
+                )
                 {
-                    var originalType = reader.Compilation.CreateErrorTypeSymbol(container, name, arity);
-                    var errorType = typeArgumentsArray != null ? originalType.Construct(typeArgumentsArray) : originalType;
+                    var originalType = reader.Compilation.CreateErrorTypeSymbol(
+                        container,
+                        name,
+                        arity
+                    );
+                    var errorType =
+                        typeArgumentsArray != null
+                            ? originalType.Construct(typeArgumentsArray)
+                            : originalType;
                     result.AddIfNotNull(errorType);
                 }
 
                 // Always ensure at least one error type was created.
                 if (result.Count == 0)
-                    result.AddIfNotNull(reader.Compilation.CreateErrorTypeSymbol(container: null, name, arity));
+                    result.AddIfNotNull(
+                        reader.Compilation.CreateErrorTypeSymbol(container: null, name, arity)
+                    );
 
-                return CreateResolution(result, $"({nameof(ErrorTypeSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ErrorTypeSymbolKey)} failed)",
+                    out failureReason
+                );
             }
 
             private static SymbolKeyResolution ResolveContainer(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualType, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualType,
+                out string? failureReason
+            )
             {
                 var type = reader.ReadInteger();
 
@@ -124,7 +157,10 @@ namespace Microsoft.CodeAnalysis
 
                     // have to walk the namespaces in reverse because that's how we encoded them.
                     for (var i = namespaceNames.Count - 1; i >= 0; i--)
-                        currentNamespace = reader.Compilation.CreateErrorNamespaceSymbol(currentNamespace, namespaceNames[i]);
+                        currentNamespace = reader.Compilation.CreateErrorNamespaceSymbol(
+                            currentNamespace,
+                            namespaceNames[i]
+                        );
 
                     failureReason = null;
                     return new SymbolKeyResolution(currentNamespace);

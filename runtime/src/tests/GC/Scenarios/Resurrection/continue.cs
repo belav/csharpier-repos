@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
     using System.Runtime.CompilerServices;
-   
 
     internal class Continue
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         internal static Object StObj;
 
@@ -22,13 +22,13 @@ namespace DefaultNamespace {
             {
                 Continue mv_Obj = new Continue();
 
-                for( int i=1; i< 1000; i++)
+                for (int i = 1; i < 1000; i++)
                 {
                     obj = new BNode(i); //create new one and delete the last one.
-                    mv_Obj.CreateNode( i ); //create locate objects in createNode().
+                    mv_Obj.CreateNode(i); //create locate objects in createNode().
                 }
 
-                Console.Write(BNode.icCreateNode); 
+                Console.Write(BNode.icCreateNode);
                 Console.WriteLine(" Nodes were created.");
             }
 
@@ -38,19 +38,18 @@ namespace DefaultNamespace {
                 obj = null;
             }
 
-
             [MethodImplAttribute(MethodImplOptions.NoInlining)]
             public void ResurrectNodes()
             {
                 for (int i = 0; i < BNode.rlNodeCount; i++)
                 {
                     BNode oldNode = (BNode)BNode.rlNode[i];
-                    if ( oldNode.mem[0] != 99 )
+                    if (oldNode.mem[0] != 99)
                     {
-                        Console.WriteLine( "One Node is not resurrected correctly.");
+                        Console.WriteLine("One Node is not resurrected correctly.");
                     }
                     oldNode = null;
-                    BNode.rlNode[ i ] = null;
+                    BNode.rlNode[i] = null;
                 }
             }
 
@@ -62,7 +61,7 @@ namespace DefaultNamespace {
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                Console.Write(BNode.icFinalNode); 
+                Console.Write(BNode.icFinalNode);
                 Console.WriteLine(" Nodes were finalized and resurrected.");
 
                 ResurrectNodes();
@@ -71,18 +70,16 @@ namespace DefaultNamespace {
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                return ( BNode.icCreateNode == BNode.icFinalNode );
+                return (BNode.icCreateNode == BNode.icFinalNode);
             }
         }
 
-
         public static int Main()
         {
-
             Console.WriteLine("Test should return with ExitCode 100 ...");
             CreateObj temp = new CreateObj();
 
-            if(temp.RunTest())
+            if (temp.RunTest())
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -91,20 +88,17 @@ namespace DefaultNamespace {
             return 1;
         }
 
-
         ~Continue()
         {
-            Continue.StObj = ( this );
-            Console.WriteLine( "Main class Finalize().");
-
+            Continue.StObj = (this);
+            Console.WriteLine("Main class Finalize().");
         }
 
-        public void CreateNode( int i )
+        public void CreateNode(int i)
         {
-            BNode rgobj = new BNode( i );
+            BNode rgobj = new BNode(i);
         }
     }
-
 
     internal class BNode
     {
@@ -113,22 +107,19 @@ namespace DefaultNamespace {
         public static int rlNodeCapacity = 2000;
         public static int rlNodeCount = 0;
         internal static BNode[] rlNode = new BNode[rlNodeCapacity];
-        public int [] mem;
-        public BNode( int i )
-        {
+        public int[] mem;
 
+        public BNode(int i)
+        {
             icCreateNode++;
 
             mem = new int[i];
             mem[0] = 99;
-            if(i > 1 )
+            if (i > 1)
             {
-                mem[mem.Length-1] = mem.Length-1;
+                mem[mem.Length - 1] = mem.Length - 1;
             }
-
-
         }
-
 
         ~BNode()
         {
@@ -138,7 +129,7 @@ namespace DefaultNamespace {
             if (rlNodeCount == rlNodeCapacity)
             {
                 rlNodeCapacity = rlNodeCapacity * 2;
-                BNode[] newrlNode = new BNode[rlNodeCapacity*2];
+                BNode[] newrlNode = new BNode[rlNodeCapacity * 2];
 
                 for (int i = 0; i < rlNodeCount; i++)
                 {

@@ -1,11 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using ILCompiler.DependencyAnalysis;
 using Internal.IL;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
-
 using ReflectionMapBlob = Internal.Runtime.ReflectionMapBlob;
 
 namespace ILCompiler
@@ -18,7 +16,10 @@ namespace ILCompiler
         private readonly PInvokeILEmitterConfiguration _pInvokeILEmitterConfiguration;
         internal readonly InteropStateManager _interopStateManager;
 
-        public CompilerGeneratedInteropStubManager(InteropStateManager interopStateManager, PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration)
+        public CompilerGeneratedInteropStubManager(
+            InteropStateManager interopStateManager,
+            PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration
+        )
         {
             _interopStateManager = interopStateManager;
             _pInvokeILEmitterConfiguration = pInvokeILEmitterConfiguration;
@@ -29,13 +30,33 @@ namespace ILCompiler
             return new PInvokeILProvider(_pInvokeILEmitterConfiguration, _interopStateManager);
         }
 
-        public sealed override void AddToReadyToRunHeader(ReadyToRunHeaderNode header, NodeFactory nodeFactory, ExternalReferencesTableNode commonFixupsTableNode)
+        public sealed override void AddToReadyToRunHeader(
+            ReadyToRunHeaderNode header,
+            NodeFactory nodeFactory,
+            ExternalReferencesTableNode commonFixupsTableNode
+        )
         {
-            var delegateMapNode = new DelegateMarshallingStubMapNode(commonFixupsTableNode, _interopStateManager);
-            header.Add(MetadataManager.BlobIdToReadyToRunSection(ReflectionMapBlob.DelegateMarshallingStubMap), delegateMapNode);
+            var delegateMapNode = new DelegateMarshallingStubMapNode(
+                commonFixupsTableNode,
+                _interopStateManager
+            );
+            header.Add(
+                MetadataManager.BlobIdToReadyToRunSection(
+                    ReflectionMapBlob.DelegateMarshallingStubMap
+                ),
+                delegateMapNode
+            );
 
-            var structMapNode = new StructMarshallingStubMapNode(commonFixupsTableNode, _interopStateManager);
-            header.Add(MetadataManager.BlobIdToReadyToRunSection(ReflectionMapBlob.StructMarshallingStubMap), structMapNode);
+            var structMapNode = new StructMarshallingStubMapNode(
+                commonFixupsTableNode,
+                _interopStateManager
+            );
+            header.Add(
+                MetadataManager.BlobIdToReadyToRunSection(
+                    ReflectionMapBlob.StructMarshallingStubMap
+                ),
+                structMapNode
+            );
         }
     }
 }

@@ -22,17 +22,25 @@ internal readonly record struct SourceGeneratorIdentity(
     [property: DataMember(Order = 0)] string AssemblyName,
     [property: DataMember(Order = 1)] string? AssemblyPath,
     [property: DataMember(Order = 2)] Version AssemblyVersion,
-    [property: DataMember(Order = 3)] string TypeName)
+    [property: DataMember(Order = 3)] string TypeName
+)
 {
-    public static SourceGeneratorIdentity Create(ISourceGenerator generator, AnalyzerReference analyzerReference)
+    public static SourceGeneratorIdentity Create(
+        ISourceGenerator generator,
+        AnalyzerReference analyzerReference
+    )
     {
         var generatorType = generator.GetGeneratorType();
         var assembly = generatorType.Assembly;
         var assemblyName = assembly.GetName();
         return new SourceGeneratorIdentity(
-            assemblyName.Name!, analyzerReference.FullPath, assemblyName.Version!, generatorType.FullName!);
+            assemblyName.Name!,
+            analyzerReference.FullPath,
+            assemblyName.Version!,
+            generatorType.FullName!
+        );
     }
 
-    public static string GetGeneratorTypeName(ISourceGenerator generator)
-        => generator.GetGeneratorType().FullName!;
+    public static string GetGeneratorTypeName(ISourceGenerator generator) =>
+        generator.GetGeneratorType().FullName!;
 }

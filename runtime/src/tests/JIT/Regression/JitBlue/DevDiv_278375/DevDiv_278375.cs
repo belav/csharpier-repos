@@ -69,7 +69,6 @@ struct MyStruct3
 
 public class Program
 {
-
     static int Pass = 100;
     static int Fail = -1;
 

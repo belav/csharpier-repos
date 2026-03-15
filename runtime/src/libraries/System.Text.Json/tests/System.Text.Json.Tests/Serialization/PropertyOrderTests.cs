@@ -22,7 +22,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void BeforeAndAfterDefaultOrder()
         {
-            string json = JsonSerializer.Serialize<MyPoco_BeforeAndAfter>(new MyPoco_BeforeAndAfter());
+            string json = JsonSerializer.Serialize<MyPoco_BeforeAndAfter>(
+                new MyPoco_BeforeAndAfter()
+            );
             Assert.Equal("{\"C\":0,\"B\":0,\"A\":0}", json);
         }
 

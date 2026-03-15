@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,7 +11,9 @@ namespace Test
     public class BB
     {
         static int Static1(long arg1, ref int[] arg2, int[] arg3, int arg4)
-        { return 0; }
+        {
+            return 0;
+        }
 
         static void Static2(ref int[] arg)
         {

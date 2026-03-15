@@ -25,87 +25,83 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Initializes a new instance of the <see cref="ComposablePartException"/> class.
         /// </summary>
         public ComposablePartException()
-            : this((string)null, (ICompositionElement)null, (Exception)null)
-        {
-        }
+            : this((string)null, (ICompositionElement)null, (Exception)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class 
+        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
         ///     with the specified error message.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         /// <param name="element">
         ///     The <see cref="ICompositionElement"/> that is the cause of the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
-        ///     the <see cref="ComposablePartException.Element"/> property to 
+        ///     the <see cref="ComposablePartException.Element"/> property to
         ///     <see langword="null"/>.
         /// </param>
         public ComposablePartException(string message)
-            : this(message, (ICompositionElement)null, (Exception)null)
-        {
-        }
+            : this(message, (ICompositionElement)null, (Exception)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class 
+        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
         ///     with the specified error message and composition element that is the cause of
         ///     the exception.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         public ComposablePartException(string message, ICompositionElement element)
-            : this(message, element, (Exception)null)
-        {
-        }
+            : this(message, element, (Exception)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class 
-        ///     with the specified error message and exception that is the cause of the  
+        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
+        ///     with the specified error message and exception that is the cause of the
         ///     exception.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         /// <param name="innerException">
-        ///     The <see cref="Exception"/> that is the underlying cause of the 
+        ///     The <see cref="Exception"/> that is the underlying cause of the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public ComposablePartException(string message, Exception innerException)
-            : this(message, (ICompositionElement)null, innerException)
-        {
-        }
+            : this(message, (ICompositionElement)null, innerException) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class 
-        ///     with the specified error message, and composition element and exception that 
+        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
+        ///     with the specified error message, and composition element and exception that
         ///     are the cause of the exception.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         /// <param name="element">
         ///     The <see cref="ICompositionElement"/> that is the cause of the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
-        ///     the <see cref="ComposablePartException.Element"/> property to 
+        ///     the <see cref="ComposablePartException.Element"/> property to
         ///     <see langword="null"/>.
         /// </param>
         /// <param name="innerException">
-        ///     The <see cref="Exception"/> that is the underlying cause of the 
+        ///     The <see cref="Exception"/> that is the underlying cause of the
         ///     <see cref="ComposablePartException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
-        public ComposablePartException(string message, ICompositionElement element, Exception innerException)
+        public ComposablePartException(
+            string message,
+            ICompositionElement element,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             _element = element;
@@ -113,15 +109,15 @@ namespace System.ComponentModel.Composition.Primitives
 
 #if FEATURE_SERIALIZATION
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class 
+        ///     Initializes a new instance of the <see cref="ComposablePartException"/> class
         ///     with the specified serialization data.
         /// </summary>
         /// <param name="info">
-        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the 
+        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the
         ///     <see cref="ComposablePartException"/>.
         /// </param>
         /// <param name="context">
-        ///     The <see cref="StreamingContext"/> that contains contextual information about the 
+        ///     The <see cref="StreamingContext"/> that contains contextual information about the
         ///     source or destination.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -139,7 +135,6 @@ namespace System.ComponentModel.Composition.Primitives
         {
             _element = info.GetValue<ICompositionElement>("Element");
         }
-
 #endif //FEATURE_SERIALIZATION
 
         /// <summary>
@@ -159,11 +154,11 @@ namespace System.ComponentModel.Composition.Primitives
         ///     Gets the serialization data of the exception.
         /// </summary>
         /// <param name="info">
-        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the 
+        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the
         ///     <see cref="ComposablePartException"/>.
         /// </param>
         /// <param name="context">
-        ///     The <see cref="StreamingContext"/> that contains contextual information about the 
+        ///     The <see cref="StreamingContext"/> that contains contextual information about the
         ///     source or destination.
         /// </param>
         /// <exception cref="ArgumentNullException">

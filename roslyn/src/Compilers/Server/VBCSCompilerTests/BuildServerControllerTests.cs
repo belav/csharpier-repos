@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
             public GetKeepAliveTimeoutTests(ITestOutputHelper testOutputHelper)
             {
-                _controller = new BuildServerController(_appSettings, new XunitCompilerServerLogger(testOutputHelper));
+                _controller = new BuildServerController(
+                    _appSettings,
+                    new XunitCompilerServerLogger(testOutputHelper)
+                );
             }
 
             [Fact]
@@ -39,13 +42,19 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             public void InvalidNumber()
             {
                 _appSettings[BuildServerController.KeepAliveSettingName] = "dog";
-                Assert.Equal(ServerDispatcher.DefaultServerKeepAlive, _controller.GetKeepAliveTimeout());
+                Assert.Equal(
+                    ServerDispatcher.DefaultServerKeepAlive,
+                    _controller.GetKeepAliveTimeout()
+                );
             }
 
             [Fact]
             public void NoSetting()
             {
-                Assert.Equal(ServerDispatcher.DefaultServerKeepAlive, _controller.GetKeepAliveTimeout());
+                Assert.Equal(
+                    ServerDispatcher.DefaultServerKeepAlive,
+                    _controller.GetKeepAliveTimeout()
+                );
             }
         }
     }

@@ -21,6 +21,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         public bool Equals(T? x, T? y) => _equal(x, y);
 
-        public int GetHashCode([DisallowNull] T obj) => _hashCode.HasValue ? _hashCode.Value : EqualityComparer<T>.Default.GetHashCode(obj);
+        public int GetHashCode([DisallowNull] T obj) =>
+            _hashCode.HasValue ? _hashCode.Value : EqualityComparer<T>.Default.GetHashCode(obj);
     }
 }

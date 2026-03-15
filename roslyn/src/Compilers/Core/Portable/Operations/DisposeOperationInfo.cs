@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.Operations
 
         public readonly ImmutableArray<IArgumentOperation> DisposeArguments;
 
-        public DisposeOperationInfo(IMethodSymbol? disposeMethod, ImmutableArray<IArgumentOperation> disposeArguments)
+        public DisposeOperationInfo(
+            IMethodSymbol? disposeMethod,
+            ImmutableArray<IArgumentOperation> disposeArguments
+        )
         {
             DisposeMethod = disposeMethod;
             DisposeArguments = disposeArguments;

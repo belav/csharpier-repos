@@ -31,66 +31,72 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.PkgConfig
 {
-	[TestFixture]
-	public class PcFileCacheTest
-	{
-		static readonly string cacheDir = "testcache";
-		static readonly string pcCacheFileName = "pkgconfig-cache-2.xml";
-		static readonly string pcCacheFilePath = Path.Combine (cacheDir, pcCacheFileName);
-		static readonly string pkgConfigDir = "testpkgconfig";
+    [TestFixture]
+    public class PcFileCacheTest
+    {
+        static readonly string cacheDir = "testcache";
+        static readonly string pcCacheFileName = "pkgconfig-cache-2.xml";
+        static readonly string pcCacheFilePath = Path.Combine(cacheDir, pcCacheFileName);
+        static readonly string pkgConfigDir = "testpkgconfig";
 
-		[SetUp]
-		public void Setup ()
-		{
-			Directory.CreateDirectory (cacheDir);
-			Directory.CreateDirectory (pkgConfigDir);
-		}
+        [SetUp]
+        public void Setup()
+        {
+            Directory.CreateDirectory(cacheDir);
+            Directory.CreateDirectory(pkgConfigDir);
+        }
 
-		[TearDown]
-		public void Teardown ()
-		{
-			if (Directory.Exists (cacheDir))
-				Directory.Delete (cacheDir, true);
-			if (Directory.Exists (pkgConfigDir))
-				Directory.Delete (pkgConfigDir, true);
-		}
+        [TearDown]
+        public void Teardown()
+        {
+            if (Directory.Exists(cacheDir))
+                Directory.Delete(cacheDir, true);
+            if (Directory.Exists(pkgConfigDir))
+                Directory.Delete(pkgConfigDir, true);
+        }
 
-		[Test]
-		public void CreatePcFileCache ()
-		{
-			PcFileCacheStub.Create (cacheDir);
+        [Test]
+        public void CreatePcFileCache()
+        {
+            PcFileCacheStub.Create(cacheDir);
 
-			// cache dir should exist
-			Assert.IsTrue (Directory.Exists (cacheDir), "A1");
+            // cache dir should exist
+            Assert.IsTrue(Directory.Exists(cacheDir), "A1");
 
-			// cache file should not exist
-			Assert.IsFalse (File.Exists (pcCacheFilePath), "A2");
-		}
+            // cache file should not exist
+            Assert.IsFalse(File.Exists(pcCacheFilePath), "A2");
+        }
 
-		[Test]
-		public void CreatePcFileCacheWithExistingEmptyCacheFile ()
-		{
-			// Create pc cache file
-			WritePcCacheFileContent ("");
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
+        [Test]
+        public void CreatePcFileCacheWithExistingEmptyCacheFile()
+        {
+            // Create pc cache file
+            WritePcCacheFileContent("");
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
 
-			// cache should be empty
-			string[] pkgConfigDirs = { pkgConfigDir };
-			CollectionAssert.IsEmpty (cache.GetPackages (pkgConfigDirs), "A1");
-		}
+            // cache should be empty
+            string[] pkgConfigDirs = { pkgConfigDir };
+            CollectionAssert.IsEmpty(cache.GetPackages(pkgConfigDirs), "A1");
+        }
 
-		[Test]
-		public void CreatePcFileCacheWithCacheFileContaining1EntryForAnExistingPcFile ()
-		{
-			// Create pc cache file with an entry and corresponding pc file
-			string pkgConfigFileName = "gtk-sharp-2.0.pc";
-			string pkgConfigFullFilePath = Path.GetFullPath (Path.Combine (pkgConfigDir, pkgConfigFileName));
-			string pcCacheFileContent = @"<PcFileCache>
-  <File path=""" + pkgConfigFullFilePath + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" />
+        [Test]
+        public void CreatePcFileCacheWithCacheFileContaining1EntryForAnExistingPcFile()
+        {
+            // Create pc cache file with an entry and corresponding pc file
+            string pkgConfigFileName = "gtk-sharp-2.0.pc";
+            string pkgConfigFullFilePath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir, pkgConfigFileName)
+            );
+            string pcCacheFileContent =
+                @"<PcFileCache>
+  <File path="""
+                + pkgConfigFullFilePath
+                + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" />
 </PcFileCache>
 ";
 
-			string pkgConfigFileContent = @"prefix=${pcfiledir}/../..
+            string pkgConfigFileContent =
+                @"prefix=${pcfiledir}/../..
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 gapidir=${prefix}/share/gapi-2.0
@@ -104,37 +110,43 @@ Libs: -r:${libdir}/cli/pango-sharp-2.0/pango-sharp.dll -r:${libdir}/cli/atk-shar
 Requires: glib-sharp-2.0
 ";
 
-			AddPkgConfigFile (pkgConfigFileName, pkgConfigFileContent);
-			WritePcCacheFileContent (pcCacheFileContent);
+            AddPkgConfigFile(pkgConfigFileName, pkgConfigFileContent);
+            WritePcCacheFileContent(pcCacheFileContent);
 
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
 
-			// cache should contain entry of pc file
-			Assert.IsNotNull (cache.GetPackageInfo (pkgConfigFullFilePath), "A1");
-		}
+            // cache should contain entry of pc file
+            Assert.IsNotNull(cache.GetPackageInfo(pkgConfigFullFilePath), "A1");
+        }
 
-		[Test]
-		public void CreatePcFileCacheWithCacheFileContainingOneOrphanedEntry ()
-		{
-			string pkgConfigFileName = "gtk-sharp-2.0.pc";
-			string pkgConfigFullFilePath = Path.GetFullPath (Path.Combine (pkgConfigDir, pkgConfigFileName));
-			string pcCacheFileContent = @"<PcFileCache>
-  <File path=""" + pkgConfigFullFilePath + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" />
+        [Test]
+        public void CreatePcFileCacheWithCacheFileContainingOneOrphanedEntry()
+        {
+            string pkgConfigFileName = "gtk-sharp-2.0.pc";
+            string pkgConfigFullFilePath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir, pkgConfigFileName)
+            );
+            string pcCacheFileContent =
+                @"<PcFileCache>
+  <File path="""
+                + pkgConfigFullFilePath
+                + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" />
 </PcFileCache>
 ";
-			WritePcCacheFileContent (pcCacheFileContent);
+            WritePcCacheFileContent(pcCacheFileContent);
 
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
 
-			// cache should contain orphaned entry
-			Assert.IsNotNull (cache.GetPackageInfo (pkgConfigFullFilePath), "A1");
-		}
+            // cache should contain orphaned entry
+            Assert.IsNotNull(cache.GetPackageInfo(pkgConfigFullFilePath), "A1");
+        }
 
-		[Test]
-		public void CreatePcFileCacheWithoutCacheFileButWithPcFile ()
-		{
-			string pkgConfigFileName = "gtk-sharp-2.0.pc";
-			string pkgConfigFileContent = @"prefix=${pcfiledir}/../..
+        [Test]
+        public void CreatePcFileCacheWithoutCacheFileButWithPcFile()
+        {
+            string pkgConfigFileName = "gtk-sharp-2.0.pc";
+            string pkgConfigFileContent =
+                @"prefix=${pcfiledir}/../..
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 gapidir=${prefix}/share/gapi-2.0
@@ -147,139 +159,166 @@ Cflags: -I:${gapidir}/pango-api.xml -I:${gapidir}/atk-api.xml -I:${gapidir}/gdk-
 Libs: -r:${libdir}/cli/pango-sharp-2.0/pango-sharp.dll -r:${libdir}/cli/atk-sharp-2.0/atk-sharp.dll -r:${libdir}/cli/gdk-sharp-2.0/gdk-sharp.dll -r:${libdir}/cli/gtk-sharp-2.0/gtk-sharp.dll
 Requires: glib-sharp-2.0
 ";
-			AddPkgConfigFile (pkgConfigFileName, pkgConfigFileContent);
+            AddPkgConfigFile(pkgConfigFileName, pkgConfigFileContent);
 
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
 
-			// cache file should exist
-			Assert.IsFalse (File.Exists (pcCacheFilePath), "A1");
+            // cache file should exist
+            Assert.IsFalse(File.Exists(pcCacheFilePath), "A1");
 
-			// cache should be empty
-			string[] pkgConfigDirs = { pkgConfigDir };
-			CollectionAssert.IsEmpty (cache.GetPackages (pkgConfigDirs), "A2");
-		}
+            // cache should be empty
+            string[] pkgConfigDirs = { pkgConfigDir };
+            CollectionAssert.IsEmpty(cache.GetPackages(pkgConfigDirs), "A2");
+        }
 
-		[Test]
-		public void GetPackagesOrderedByFolder ()
-		{
-			string pkgConfigDir1 = "testpkgconfigdir1";
-			string pkgConfigDir2 = "testpkgconfigdir2";
-			Directory.CreateDirectory (pkgConfigDir1);
-			Directory.CreateDirectory (pkgConfigDir2);
+        [Test]
+        public void GetPackagesOrderedByFolder()
+        {
+            string pkgConfigDir1 = "testpkgconfigdir1";
+            string pkgConfigDir2 = "testpkgconfigdir2";
+            Directory.CreateDirectory(pkgConfigDir1);
+            Directory.CreateDirectory(pkgConfigDir2);
 
-			string pkgConfigFile11NameAttr = "gtk-sharp-2.0";
-			string pkgConfigFile11FullPath = Path.GetFullPath (Path.Combine (pkgConfigDir1, "gtk-sharp-2.0.pc"));
+            string pkgConfigFile11NameAttr = "gtk-sharp-2.0";
+            string pkgConfigFile11FullPath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir1, "gtk-sharp-2.0.pc")
+            );
 
-			string pkgConfigFile21NameAttr = "art-sharp-2.0";
-			string pkgConfigFile21FullPath = Path.GetFullPath (Path.Combine (pkgConfigDir2, "art-sharp-2.0.pc"));
+            string pkgConfigFile21NameAttr = "art-sharp-2.0";
+            string pkgConfigFile21FullPath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir2, "art-sharp-2.0.pc")
+            );
 
-			string pkgConfigFile12NameAttr = "cecil";
-			string pkgConfigFile12FullPath = Path.GetFullPath (Path.Combine (pkgConfigDir1, "cecil.pc"));
+            string pkgConfigFile12NameAttr = "cecil";
+            string pkgConfigFile12FullPath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir1, "cecil.pc")
+            );
 
-			string pcCacheFileContent = @"<PcFileCache>
-  <File path=""" + pkgConfigFile11FullPath + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" name=""" + pkgConfigFile11NameAttr + @""" />
-  <File path=""" + pkgConfigFile21FullPath + @""" lastWriteTime=""2011-07-12T12:04:53+02:00"" name=""" + pkgConfigFile21NameAttr + @""" />
-  <File path=""" + pkgConfigFile12FullPath + @""" lastWriteTime=""2012-07-24T22:28:30+02:00"" name=""" + pkgConfigFile12NameAttr + @""" />
+            string pcCacheFileContent =
+                @"<PcFileCache>
+  <File path="""
+                + pkgConfigFile11FullPath
+                + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" name="""
+                + pkgConfigFile11NameAttr
+                + @""" />
+  <File path="""
+                + pkgConfigFile21FullPath
+                + @""" lastWriteTime=""2011-07-12T12:04:53+02:00"" name="""
+                + pkgConfigFile21NameAttr
+                + @""" />
+  <File path="""
+                + pkgConfigFile12FullPath
+                + @""" lastWriteTime=""2012-07-24T22:28:30+02:00"" name="""
+                + pkgConfigFile12NameAttr
+                + @""" />
 </PcFileCache>
 ";
 
-			WritePcCacheFileContent (pcCacheFileContent);
+            WritePcCacheFileContent(pcCacheFileContent);
 
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
-			string[] pkgConfigDirs = { pkgConfigDir1, pkgConfigDir2 };
-			IEnumerable<PackageInfo> packages = cache.GetPackages (pkgConfigDirs);
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
+            string[] pkgConfigDirs = { pkgConfigDir1, pkgConfigDir2 };
+            IEnumerable<PackageInfo> packages = cache.GetPackages(pkgConfigDirs);
 
-			PackageInfo[] packageArray = new PackageInfo [3];
-			int i = 0;
-			foreach (PackageInfo package in packages)
-				packageArray [i++] = package;
+            PackageInfo[] packageArray = new PackageInfo[3];
+            int i = 0;
+            foreach (PackageInfo package in packages)
+                packageArray[i++] = package;
 
-			Assert.AreEqual (pkgConfigFile11NameAttr, packageArray [0].Name, "A1");
-			Assert.AreEqual (pkgConfigFile12NameAttr, packageArray [1].Name, "A2");
-			Assert.AreEqual (pkgConfigFile21NameAttr, packageArray [2].Name, "A3");
+            Assert.AreEqual(pkgConfigFile11NameAttr, packageArray[0].Name, "A1");
+            Assert.AreEqual(pkgConfigFile12NameAttr, packageArray[1].Name, "A2");
+            Assert.AreEqual(pkgConfigFile21NameAttr, packageArray[2].Name, "A3");
 
-			Directory.Delete (pkgConfigDir1, true);
-			Directory.Delete (pkgConfigDir2, true);
-		}
+            Directory.Delete(pkgConfigDir1, true);
+            Directory.Delete(pkgConfigDir2, true);
+        }
 
-		[Test]
-		public void UpdatePcFileCacheWithOrphanedEntry ()
-		{
-			string pkgConfigFileNameAttr = "gtk-sharp-2.0";
-			string pkgConfigFileName = "gtk-sharp-2.0.pc";
-			string pkgConfigFullFilePath = Path.GetFullPath (Path.Combine (pkgConfigDir, pkgConfigFileName));
-			string pcCacheFileContent = @"<PcFileCache>
-  <File path=""" + pkgConfigFullFilePath + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" name=""" + pkgConfigFileNameAttr + @""" />
+        [Test]
+        public void UpdatePcFileCacheWithOrphanedEntry()
+        {
+            string pkgConfigFileNameAttr = "gtk-sharp-2.0";
+            string pkgConfigFileName = "gtk-sharp-2.0.pc";
+            string pkgConfigFullFilePath = Path.GetFullPath(
+                Path.Combine(pkgConfigDir, pkgConfigFileName)
+            );
+            string pcCacheFileContent =
+                @"<PcFileCache>
+  <File path="""
+                + pkgConfigFullFilePath
+                + @""" lastWriteTime=""2013-11-23T21:18:31+01:00"" name="""
+                + pkgConfigFileNameAttr
+                + @""" />
 </PcFileCache>
 ";
 
-			WritePcCacheFileContent (pcCacheFileContent);
+            WritePcCacheFileContent(pcCacheFileContent);
 
-			PcFileCache cache = PcFileCacheStub.Create (cacheDir);
+            PcFileCache cache = PcFileCacheStub.Create(cacheDir);
 
-			// precondition
-			string[] pkgConfigDirs = { pkgConfigDir };
-			Assert.IsNotNull (cache.GetPackageInfoByName (pkgConfigFileNameAttr, pkgConfigDirs), "A1");
+            // precondition
+            string[] pkgConfigDirs = { pkgConfigDir };
+            Assert.IsNotNull(
+                cache.GetPackageInfoByName(pkgConfigFileNameAttr, pkgConfigDirs),
+                "A1"
+            );
 
-			cache.Update (pkgConfigDirs);
-			Assert.IsNull (cache.GetPackageInfoByName (pkgConfigFileNameAttr, pkgConfigDirs), "A2");
-		}
+            cache.Update(pkgConfigDirs);
+            Assert.IsNull(cache.GetPackageInfoByName(pkgConfigFileNameAttr, pkgConfigDirs), "A2");
+        }
 
-		static void WritePcCacheFileContent (string content)
-		{
-			File.WriteAllText (pcCacheFilePath, content);
-		}
+        static void WritePcCacheFileContent(string content)
+        {
+            File.WriteAllText(pcCacheFilePath, content);
+        }
 
-		static void AddPkgConfigFile (string fileName, string content)
-		{
-			AddPkgConfigFile (fileName, content, pkgConfigDir);
-		}
+        static void AddPkgConfigFile(string fileName, string content)
+        {
+            AddPkgConfigFile(fileName, content, pkgConfigDir);
+        }
 
-		static void AddPkgConfigFile (string fileName, string content, string pkgConfigDir)
-		{
-			string path = Path.Combine (pkgConfigDir, fileName);
-			File.WriteAllText (path, content);
-		}
+        static void AddPkgConfigFile(string fileName, string content, string pkgConfigDir)
+        {
+            string path = Path.Combine(pkgConfigDir, fileName);
+            File.WriteAllText(path, content);
+        }
 
-		class PcFileCacheContextStub : IPcFileCacheContext
-		{
-			public void StoreCustomData (PcFile pcfile, PackageInfo pkg)
-			{
-			}
+        class PcFileCacheContextStub : IPcFileCacheContext
+        {
+            public void StoreCustomData(PcFile pcfile, PackageInfo pkg) { }
 
-			public bool IsCustomDataComplete (string pcfile, PackageInfo pkg)
-			{
-				return false;
-			}
+            public bool IsCustomDataComplete(string pcfile, PackageInfo pkg)
+            {
+                return false;
+            }
 
-			public void ReportError (string message, Exception ex)
-			{
-			}
-		}
+            public void ReportError(string message, Exception ex) { }
+        }
 
-		class PcFileCacheStub : PcFileCache
-		{
-			static string initCacheDirectory;
-			readonly string cacheDirectory;
+        class PcFileCacheStub : PcFileCache
+        {
+            static string initCacheDirectory;
+            readonly string cacheDirectory;
 
-			PcFileCacheStub (string cacheDirectory) : base (new PcFileCacheContextStub ())
-			{
-				if (cacheDirectory == null)
-					throw new ArgumentNullException ("cacheDirectory");
-				this.cacheDirectory = cacheDirectory;
-			}
+            PcFileCacheStub(string cacheDirectory)
+                : base(new PcFileCacheContextStub())
+            {
+                if (cacheDirectory == null)
+                    throw new ArgumentNullException("cacheDirectory");
+                this.cacheDirectory = cacheDirectory;
+            }
 
-			protected override string CacheDirectory {
-				get { return initCacheDirectory == null ? cacheDirectory : initCacheDirectory; }
-			}
+            protected override string CacheDirectory
+            {
+                get { return initCacheDirectory == null ? cacheDirectory : initCacheDirectory; }
+            }
 
-			public static PcFileCache Create (string cacheDirectory)
-			{
-				initCacheDirectory = cacheDirectory;
-				PcFileCache cache = new PcFileCacheStub (cacheDirectory);
-				initCacheDirectory = null;
-				return cache;
-			}
-		}
-	}
+            public static PcFileCache Create(string cacheDirectory)
+            {
+                initCacheDirectory = cacheDirectory;
+                PcFileCache cache = new PcFileCacheStub(cacheDirectory);
+                initCacheDirectory = null;
+                return cache;
+            }
+        }
+    }
 }

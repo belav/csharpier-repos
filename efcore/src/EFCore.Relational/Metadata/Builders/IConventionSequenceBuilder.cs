@@ -26,7 +26,11 @@ public interface IConventionSequenceBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionSequenceBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionSequenceBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionSequenceBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -43,7 +47,8 @@ public interface IConventionSequenceBuilder : IConventionAnnotatableBuilder
     new IConventionSequenceBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.

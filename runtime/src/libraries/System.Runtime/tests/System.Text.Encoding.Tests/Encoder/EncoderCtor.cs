@@ -12,7 +12,14 @@ namespace System.Text.Tests
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex, bool flush)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush
+        )
         {
             throw new Exception("The method or operation is not implemented.");
         }

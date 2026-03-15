@@ -7,11 +7,12 @@ namespace AutoMapper.UnitTests.Bug
             private Stuff _source;
             private StuffView _dest;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.RecognizeDestinationPostfixes("CodeKey", "Key");
-                cfg.CreateMap<Stuff, StuffView>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.RecognizeDestinationPostfixes("CodeKey", "Key");
+                    cfg.CreateMap<Stuff, StuffView>();
+                });
 
             protected override void Because_of()
             {
@@ -19,7 +20,7 @@ namespace AutoMapper.UnitTests.Bug
                 {
                     Id = 4,
                     Name = "Foo",
-                    RankCode = "Bar"
+                    RankCode = "Bar",
                 };
                 _dest = Mapper.Map<Stuff, StuffView>(_source);
             }

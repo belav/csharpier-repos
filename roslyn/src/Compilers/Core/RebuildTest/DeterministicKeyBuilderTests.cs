@@ -25,7 +25,11 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public abstract partial class DeterministicKeyBuilderTests<TCompilation, TCompilationOptions, TParseOptions>
+    public abstract partial class DeterministicKeyBuilderTests<
+        TCompilation,
+        TCompilationOptions,
+        TParseOptions
+    >
         where TCompilation : Compilation
         where TCompilationOptions : CompilationOptions
         where TParseOptions : ParseOptions
@@ -34,26 +38,22 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
         public static EmitOptions EmitOptions { get; } = new();
         public static SourceHashAlgorithm HashAlgorithm { get; } = SourceHashAlgorithm.Sha256;
-        public static SourceHashAlgorithm[] HashAlgorithms { get; } = new[]
-        {
-            SourceHashAlgorithm.Sha1,
-            SourceHashAlgorithm.Sha256
-        };
+        public static SourceHashAlgorithm[] HashAlgorithms { get; } =
+            new[] { SourceHashAlgorithm.Sha1, SourceHashAlgorithm.Sha256 };
 
-        protected static void AssertJson(
-            string expected,
-            string actual) => AssertJson(expected, actual, "references", "extensions");
+        protected static void AssertJson(string expected, string actual) =>
+            AssertJson(expected, actual, "references", "extensions");
 
         protected static void AssertJson(
             string expected,
             string actual,
-            params string[] ignoreSections)
+            params string[] ignoreSections
+        )
         {
             var json = JObject.Parse(actual);
             if (ignoreSections.Length > 0)
             {
-                json
-                    .Descendants()
+                json.Descendants()
                     .OfType<JProperty>()
                     .Where(x => ignoreSections.Contains(x.Name))
                     .ToList()
@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             string expected,
             string actual,
             string sectionName,
-            params string[] ignoreProperties)
+            params string[] ignoreProperties
+        )
         {
             var property = GetJsonProperty(actual, sectionName, ignoreProperties);
             AssertJsonCore(expected, property.ToString(Formatting.Indented));
@@ -82,7 +83,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        private protected static void AssertSyntaxTreePathMap(string? expected, CommonCompiler compiler)
+        private protected static void AssertSyntaxTreePathMap(
+            string? expected,
+            CommonCompiler compiler
+        )
         {
             Assert.Empty(compiler.Arguments.Errors);
 
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 touchedFilesLogger: null,
                 errorLoggerOpt: null,
                 analyzerConfigOptions: default,
-                globalConfigOptions: default);
+                globalConfigOptions: default
+            );
             AssertEx.NotNull(compilation);
             Assert.Empty(writer.GetStringBuilder().ToString());
             var obj = GetSyntaxTreeValues(compilation, compiler.Arguments.PathMap);
@@ -102,10 +107,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         protected static JProperty GetJsonProperty(
             string json,
             string sectionName,
-            params string[] ignoreProperties)
+            params string[] ignoreProperties
+        )
         {
             var lastName = sectionName.Split('.').Last();
-            var property = JObject.Parse(json)
+            var property = JObject
+                .Parse(json)
                 .Descendants()
                 .OfType<JProperty>()
                 .Where(x => x.Name == lastName && getFullName(x) == sectionName)
@@ -167,8 +174,14 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
         protected JObject GetCompilationOptionsValue(CompilationOptions options)
         {
-            var compilation = CreateCompilation(syntaxTrees: new SyntaxTree[] { }, options: (TCompilationOptions)options);
-            var property = GetJsonProperty(compilation.GetDeterministicKey(), "compilation.options");
+            var compilation = CreateCompilation(
+                syntaxTrees: new SyntaxTree[] { },
+                options: (TCompilationOptions)options
+            );
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(),
+                "compilation.options"
+            );
             return (JObject)property.Value;
         }
 
@@ -180,9 +193,17 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
         protected JObject GetParseOptionsValue(ParseOptions parseOptions)
         {
-            var syntaxTree = ParseSyntaxTree("", fileName: "test", SourceHashAlgorithm.Sha256, (TParseOptions)parseOptions);
+            var syntaxTree = ParseSyntaxTree(
+                "",
+                fileName: "test",
+                SourceHashAlgorithm.Sha256,
+                (TParseOptions)parseOptions
+            );
             var compilation = CreateCompilation(syntaxTrees: new SyntaxTree[] { syntaxTree });
-            var property = GetJsonProperty(compilation.GetDeterministicKey(), "compilation.syntaxTrees");
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(),
+                "compilation.syntaxTrees"
+            );
             var trees = (JArray)property.Value;
             var obj = (JObject)trees[0];
             return (JObject)(obj.Property("parseOptions")?.Value!);
@@ -190,14 +211,20 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
         protected JArray GetReferenceValues(Compilation compilation)
         {
-            var property = GetJsonProperty(compilation.GetDeterministicKey(), "compilation.references");
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(),
+                "compilation.references"
+            );
             return (JArray)property.Value;
         }
 
         protected JObject GetReferenceValue(MetadataReference reference)
         {
             var expectedMvid = DeterministicKeyBuilder.GetGuidValue(reference.GetModuleVersionId());
-            var compilation = CreateCompilation(syntaxTrees: new SyntaxTree[] { }, references: new[] { reference });
+            var compilation = CreateCompilation(
+                syntaxTrees: new SyntaxTree[] { },
+                references: new[] { reference }
+            );
             var array = GetReferenceValues(compilation);
 
             foreach (var item in array!.Values<JObject>())
@@ -212,40 +239,68 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             throw null!;
         }
 
-        protected static JArray GetSyntaxTreeValues(Compilation compilation, ImmutableArray<KeyValuePair<string, string>> pathMap = default)
+        protected static JArray GetSyntaxTreeValues(
+            Compilation compilation,
+            ImmutableArray<KeyValuePair<string, string>> pathMap = default
+        )
         {
-            var property = GetJsonProperty(compilation.GetDeterministicKey(pathMap: pathMap), "compilation.syntaxTrees");
-            return (JArray)property.Value; ;
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(pathMap: pathMap),
+                "compilation.syntaxTrees"
+            );
+            return (JArray)property.Value;
+            ;
         }
 
-        protected static JArray GetAdditionalTextValues(Compilation compilation, ImmutableArray<AdditionalText> additionalTexts, ImmutableArray<KeyValuePair<string, string>> pathMap = default)
+        protected static JArray GetAdditionalTextValues(
+            Compilation compilation,
+            ImmutableArray<AdditionalText> additionalTexts,
+            ImmutableArray<KeyValuePair<string, string>> pathMap = default
+        )
         {
-            var property = GetJsonProperty(compilation.GetDeterministicKey(additionalTexts: additionalTexts, pathMap: pathMap), "additionalTexts");
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(additionalTexts: additionalTexts, pathMap: pathMap),
+                "additionalTexts"
+            );
             return (JArray)property.Value;
         }
 
-        protected static JArray GetAnalyzerValues(Compilation compilation, params DiagnosticAnalyzer[] analyzers)
+        protected static JArray GetAnalyzerValues(
+            Compilation compilation,
+            params DiagnosticAnalyzer[] analyzers
+        )
         {
-            var property = GetJsonProperty(compilation.GetDeterministicKey(analyzers: analyzers.ToImmutableArray()), "analyzers");
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(analyzers: analyzers.ToImmutableArray()),
+                "analyzers"
+            );
             return (JArray)property.Value;
         }
 
-        protected static JArray GetGeneratorValues(Compilation compilation, params ISourceGenerator[] generators)
+        protected static JArray GetGeneratorValues(
+            Compilation compilation,
+            params ISourceGenerator[] generators
+        )
         {
-            var property = GetJsonProperty(compilation.GetDeterministicKey(generators: generators.ToImmutableArray()), "generators");
+            var property = GetJsonProperty(
+                compilation.GetDeterministicKey(generators: generators.ToImmutableArray()),
+                "generators"
+            );
             return (JArray)property.Value;
         }
 
         private protected JObject GetEmitOptionsValue(
             EmitOptions emitOptions,
             ImmutableArray<KeyValuePair<string, string>> pathMap = default,
-            DeterministicKeyOptions options = default)
+            DeterministicKeyOptions options = default
+        )
         {
             var compilation = CreateCompilation(new SyntaxTree[] { });
             var key = compilation.GetDeterministicKey(
                 emitOptions: emitOptions,
                 pathMap: pathMap,
-                options: options);
+                options: options
+            );
             var property = GetJsonProperty(key, "emitOptions");
             return (JObject)property.Value;
         }
@@ -258,12 +313,18 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             return builder.ToStringAndFree();
         }
 
-        protected abstract SyntaxTree ParseSyntaxTree(string content, string fileName, SourceHashAlgorithm hashAlgorithm, TParseOptions? parseOptions = null);
+        protected abstract SyntaxTree ParseSyntaxTree(
+            string content,
+            string fileName,
+            SourceHashAlgorithm hashAlgorithm,
+            TParseOptions? parseOptions = null
+        );
 
         protected abstract TCompilation CreateCompilation(
             SyntaxTree[] syntaxTrees,
             MetadataReference[]? references = null,
-            TCompilationOptions? options = null);
+            TCompilationOptions? options = null
+        );
 
         protected abstract TCompilationOptions GetCompilationOptions();
 
@@ -283,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 var contentChecksum = GetChecksum(syntaxTree.GetText());
                 var compilation = CreateCompilation(new[] { syntaxTree });
                 var key = compilation.GetDeterministicKey();
-                var expected = @$"
+                var expected =
+                    @$"
 ""syntaxTrees"": [
   {{
     ""fileName"": ""file.cs"",
@@ -304,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             OutputKind outputKind,
             bool delaySign,
             bool publicSign,
-            bool deterministic)
+            bool deterministic
+        )
         {
             var options = GetCompilationOptions()
                 .WithOutputKind(outputKind)
@@ -334,8 +397,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             JObject getValue(bool deterministic)
             {
-                var options = GetCompilationOptions()
-                    .WithDeterministic(deterministic);
+                var options = GetCompilationOptions().WithDeterministic(deterministic);
 
                 return GetCompilationOptionsValue(options);
             }
@@ -348,7 +410,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public void CompilationOptionsDeterministicOff()
         {
             var options = GetCompilationOptions();
-            var compilation = CreateCompilation(syntaxTrees: new SyntaxTree[] { }, options: options);
+            var compilation = CreateCompilation(
+                syntaxTrees: new SyntaxTree[] { },
+                options: options
+            );
             var key = compilation.GetDeterministicKey();
 
             Assert.Equal(key, compilation.GetDeterministicKey());
@@ -364,7 +429,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         /// </summary>
         [Theory]
         [CombinatorialData]
-        public void CompilationOptionsExcluded(bool concurrentBuild, MetadataImportOptions metaImportOptions)
+        public void CompilationOptionsExcluded(
+            bool concurrentBuild,
+            MetadataImportOptions metaImportOptions
+        )
         {
             var options = GetCompilationOptions();
             var other = options
@@ -380,14 +448,18 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public void CompilationOptionsSpecificDiagnosticOptions()
         {
             assert(@"[]");
-            assert(@"
+            assert(
+                @"
 [
   {
     ""CA109"": ""Error""
   }
-]", ("CA109", ReportDiagnostic.Error));
+]",
+                ("CA109", ReportDiagnostic.Error)
+            );
 
-            assert(@"
+            assert(
+                @"
 [
   {
     ""CA109"": ""Error""
@@ -395,16 +467,19 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
   {
     ""CA200"": ""Warn""
   }
-]", ("CA109", ReportDiagnostic.Error), ("CA200", ReportDiagnostic.Warn));
+]",
+                ("CA109", ReportDiagnostic.Error),
+                ("CA200", ReportDiagnostic.Warn)
+            );
 
-            void assert(string expected, params (string Diagnostic, ReportDiagnostic ReportDiagnostic)[] values)
+            void assert(
+                string expected,
+                params (string Diagnostic, ReportDiagnostic ReportDiagnostic)[] values
+            )
             {
-                var map = values.ToImmutableDictionary(
-                    x => x.Diagnostic,
-                    x => x.ReportDiagnostic);
+                var map = values.ToImmutableDictionary(x => x.Diagnostic, x => x.ReportDiagnostic);
 
-                var options = GetCompilationOptions()
-                    .WithSpecificDiagnosticOptions(map);
+                var options = GetCompilationOptions().WithSpecificDiagnosticOptions(map);
                 var value = GetCompilationOptionsValue(options);
                 var actual = value["specificDiagnosticOptions"]?.ToString(Formatting.Indented);
                 AssertJsonCore(expected, actual);
@@ -415,7 +490,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         [CombinatorialData]
         public void ParseOptionsCombination(
             SourceCodeKind sourceCodeKind,
-            DocumentationMode documentationMode)
+            DocumentationMode documentationMode
+        )
         {
             var parseOptions = GetParseOptions()
                 .WithKind(sourceCodeKind)
@@ -440,34 +516,50 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var parseOptions = GetParseOptions();
 
             assert("{}");
-            assert(@"
+            assert(
+                @"
 {
   ""key"": ""value""
-}", ("key", "value"));
+}",
+                ("key", "value")
+            );
 
-            assert(@"
+            assert(
+                @"
 {
   ""k1"": ""v1"",
   ""k2"": ""v2""
-}", ("k1", "v1"), ("k2", "v2"));
+}",
+                ("k1", "v1"),
+                ("k2", "v2")
+            );
 
             // Same case but reverse the order the keys are added. That should not change the key
-            assert(@"
+            assert(
+                @"
 {
   ""k1"": ""v1"",
   ""k2"": ""v2""
-}", ("k2", "v2"), ("k1", "v1"));
+}",
+                ("k2", "v2"),
+                ("k1", "v1")
+            );
 
             // Make sure that the keys are escaped properly
-            assert(@"
+            assert(
+                @"
 {
   ""\\\""strange"": ""value""
-}", (@"\""strange", "value"));
+}",
+                (@"\""strange", "value")
+            );
 
             void assert(string? expected, params (string Key, string Value)[] features)
             {
                 var parseOptions = GetParseOptions()
-                    .WithFeatures(features.Select(x => new KeyValuePair<string, string>(x.Key, x.Value)));
+                    .WithFeatures(
+                        features.Select(x => new KeyValuePair<string, string>(x.Key, x.Value))
+                    );
 
                 var obj = GetParseOptionsValue(parseOptions);
                 var value = obj.Value<JObject>("features");
@@ -479,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public void EmitOptionsDefault()
         {
             var obj = GetEmitOptionsValue(EmitOptions);
-            AssertJson(@"
+            AssertJson(
+                @"
 {
   ""emitMetadataOnly"": false,
   ""tolerateErrors"": false,
@@ -501,22 +594,25 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
   ""defaultSourceFileEncoding"": null,
   ""fallbackSourceFileEncoding"": null
 }
-", obj.ToString(Formatting.Indented));
+",
+                obj.ToString(Formatting.Indented)
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void EmitOptionsCombo(
             DebugInformationFormat debugInformationFormat,
-            InstrumentationKind kind)
+            InstrumentationKind kind
+        )
         {
             var emitOptions = EmitOptions
-                .Default
-                .WithDebugInformationFormat(debugInformationFormat)
+                .Default.WithDebugInformationFormat(debugInformationFormat)
                 .WithInstrumentationKinds(ImmutableArray.Create(kind));
 
             var obj = GetEmitOptionsValue(emitOptions);
-            AssertJson(@$"
+            AssertJson(
+                @$"
 {{
   ""emitMetadataOnly"": false,
   ""tolerateErrors"": false,
@@ -539,7 +635,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
   ""defaultSourceFileEncoding"": null,
   ""fallbackSourceFileEncoding"": null
 }}
-", obj.ToString(Formatting.Indented));
+",
+                obj.ToString(Formatting.Indented)
+            );
         }
 
         [Theory]
@@ -547,9 +645,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         [InlineData(3, 4)]
         public void EmitOptionsSubsystemVersion(int major, int minor)
         {
-            var emitOptions = EmitOptions.WithSubsystemVersion(SubsystemVersion.Create(major, minor));
+            var emitOptions = EmitOptions.WithSubsystemVersion(
+                SubsystemVersion.Create(major, minor)
+            );
             var obj = GetEmitOptionsValue(emitOptions);
-            var expected = @$"
+            var expected =
+                @$"
 ""subsystemVersion"": {{
   ""major"": {major},
   ""minor"": {minor}
@@ -564,7 +665,10 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 ? @"c:\temp\util.pdb"
                 : "/temp/util.pdb";
             var emitOptions = EmitOptions.WithPdbFilePath(path);
-            var obj = GetEmitOptionsValue(emitOptions, options: DeterministicKeyOptions.IgnorePaths);
+            var obj = GetEmitOptionsValue(
+                emitOptions,
+                options: DeterministicKeyOptions.IgnorePaths
+            );
             Assert.Equal(@"util.pdb", obj.Value<string>("pdbFilePath"));
         }
 
@@ -572,12 +676,18 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         [InlineData(@"c:\src\util.pdb", null, null)]
         [InlineData(@"d:\src\util.pdb", @"d:\", @"c:\")]
         [InlineData(@"d:\long\src\util.pdb", @"d:\long\", @"c:\")]
-        public void EmitOptionsPdbFilePathRespectsPathMap(string filePath, string? pathMapFrom, string? pathMapTo)
+        public void EmitOptionsPdbFilePathRespectsPathMap(
+            string filePath,
+            string? pathMapFrom,
+            string? pathMapTo
+        )
         {
             var pathMap = (pathMapFrom, pathMapTo) switch
             {
                 (null, null) => ImmutableArray<KeyValuePair<string, string>>.Empty,
-                (string, string) => ImmutableArray.Create(KeyValuePairUtil.Create(pathMapFrom, pathMapTo)),
+                (string, string) => ImmutableArray.Create(
+                    KeyValuePairUtil.Create(pathMapFrom, pathMapTo)
+                ),
                 _ => throw new InvalidOperationException(),
             };
             var emitOptions = EmitOptions.WithPdbFilePath(filePath);
@@ -592,7 +702,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var obj = GetReferenceValue(mscorlib);
 
             var mvid = DeterministicKeyBuilder.GetGuidValue(mscorlib.GetModuleVersionId());
-            var expected = $@"
+            var expected =
+                $@"
 {{
   ""name"": ""mscorlib"",
   ""version"": {{
@@ -622,7 +733,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var obj = GetReferenceValue(mscorlib);
 
             var mvid = DeterministicKeyBuilder.GetGuidValue(mscorlib.GetModuleVersionId());
-            var expected = $@"
+            var expected =
+                $@"
 {{
   ""name"": ""mscorlib"",
   ""version"": {{
@@ -656,7 +768,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var obj = GetReferenceValue(mscorlib);
 
             var mvid = DeterministicKeyBuilder.GetGuidValue(mscorlib.GetModuleVersionId());
-            var expected = $@"
+            var expected =
+                $@"
 {{
   ""name"": ""mscorlib"",
   ""version"": {{
@@ -685,7 +798,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var reference = TestReferences.SymbolsTests.MultiModule.Assembly;
             var obj = GetReferenceValue(reference);
 
-            var expected = @"
+            var expected =
+                @"
 {
   ""name"": ""MultiModule"",
   ""version"": {
@@ -725,7 +839,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var pathMap = (pathMapFrom, pathMapTo) switch
             {
                 (null, null) => ImmutableArray<KeyValuePair<string, string>>.Empty,
-                (string, string) => ImmutableArray.Create(KeyValuePairUtil.Create(pathMapFrom, pathMapTo)),
+                (string, string) => ImmutableArray.Create(
+                    KeyValuePairUtil.Create(pathMapFrom, pathMapTo)
+                ),
                 _ => throw new InvalidOperationException(),
             };
 
@@ -733,9 +849,11 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var array = GetAdditionalTextValues(
                 CreateCompilation(new SyntaxTree[] { }),
                 ImmutableArray.Create<AdditionalText>(additionalText),
-                pathMap);
+                pathMap
+            );
 
-            var expected = @"
+            var expected =
+                @"
 [
   {
     ""fileName"": ""c:\\src\\data.txt"",
@@ -757,9 +875,11 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var additionalText = new TestAdditionalText(path: @"test.txt", text: null);
             var array = GetAdditionalTextValues(
                 CreateCompilation(new SyntaxTree[] { }),
-                ImmutableArray.Create<AdditionalText>(additionalText));
+                ImmutableArray.Create<AdditionalText>(additionalText)
+            );
 
-            var expected = @"
+            var expected =
+                @"
 [
   {
     ""fileName"": ""test.txt"",
@@ -777,10 +897,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var array = GetAnalyzerValues(
                 CreateCompilation(Array.Empty<SyntaxTree>()),
                 new Analyzer(),
-                new Analyzer2());
+                new Analyzer2()
+            );
 
             var assembly = typeof(Analyzer).Assembly;
-            var expected = @$"
+            var expected =
+                @$"
 [
   {{
     ""fullName"": ""{typeof(Analyzer).FullName}"",
@@ -803,10 +925,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var array = GetGeneratorValues(
                 CreateCompilation(Array.Empty<SyntaxTree>()),
                 new Generator(),
-                new Generator2());
+                new Generator2()
+            );
 
             var assembly = typeof(Generator).Assembly;
-            var expected = @$"
+            var expected =
+                @$"
 [
   {{
     ""fullName"": ""{typeof(Generator).FullName}"",

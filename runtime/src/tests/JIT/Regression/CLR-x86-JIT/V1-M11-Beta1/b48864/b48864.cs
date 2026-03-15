@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -28,9 +29,7 @@ namespace Test
                 do
                 {
                     long local4 = 32L;
-                    do
-                    {
-                    } while (checked(38L >= local4));
+                    do { } while (checked(38L >= local4));
                 } while (b);
             } while (b);
             return -1;

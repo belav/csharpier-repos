@@ -5,7 +5,9 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System.Activities.Presentation;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Windows;
@@ -13,62 +15,71 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Windows.Input;
     using System.Windows.Threading;
     using System.Xml;
-    using System.Linq;
-    using System.Collections;
     using System.Xml.Linq;
 
     partial class ContentCorrelationTypeExpander
     {
-        static readonly DependencyPropertyKey IsSelectionValidPropertyKey = DependencyProperty.RegisterReadOnly(
-            "IsSelectionValid",
-            typeof(bool),
-            typeof(ContentCorrelationTypeExpander),
-            new UIPropertyMetadata(false, OnIsSelectionValidChanged));
+        static readonly DependencyPropertyKey IsSelectionValidPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "IsSelectionValid",
+                typeof(bool),
+                typeof(ContentCorrelationTypeExpander),
+                new UIPropertyMetadata(false, OnIsSelectionValidChanged)
+            );
 
-        public static readonly DependencyProperty IsSelectionValidProperty = IsSelectionValidPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsSelectionValidProperty =
+            IsSelectionValidPropertyKey.DependencyProperty;
 
-        public static readonly RoutedEvent IsSelectionValidChangedEvent = EventManager.RegisterRoutedEvent(
-            "IsSelectionValidChanged",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(ContentCorrelationTypeExpander));
+        public static readonly RoutedEvent IsSelectionValidChangedEvent =
+            EventManager.RegisterRoutedEvent(
+                "IsSelectionValidChanged",
+                RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler),
+                typeof(ContentCorrelationTypeExpander)
+            );
 
         public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
             "SelectionChanged",
             RoutingStrategy.Bubble,
             typeof(RoutedEventHandler),
-            typeof(ContentCorrelationTypeExpander));
+            typeof(ContentCorrelationTypeExpander)
+        );
 
-        public static readonly DependencyProperty TypesToExpandProperty = DependencyProperty.Register(
-            "TypesToExpand",
-            typeof(IList<ExpanderTypeEntry>),
-            typeof(ContentCorrelationTypeExpander),
-            new UIPropertyMetadata(null, OnTypesToExpandChanged));
+        public static readonly DependencyProperty TypesToExpandProperty =
+            DependencyProperty.Register(
+                "TypesToExpand",
+                typeof(IList<ExpanderTypeEntry>),
+                typeof(ContentCorrelationTypeExpander),
+                new UIPropertyMetadata(null, OnTypesToExpandChanged)
+            );
 
-        static readonly DependencyPropertyKey SelectedTypeEntryPropertyKey = DependencyProperty.RegisterReadOnly(
-            "SelectedTypeEntry", 
-            typeof(ExpanderTypeEntry), 
-            typeof(ContentCorrelationTypeExpander), 
-            new UIPropertyMetadata(null));
+        static readonly DependencyPropertyKey SelectedTypeEntryPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                "SelectedTypeEntry",
+                typeof(ExpanderTypeEntry),
+                typeof(ContentCorrelationTypeExpander),
+                new UIPropertyMetadata(null)
+            );
 
-        public static readonly DependencyProperty SelectedTypeEntryProperty = SelectedTypeEntryPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty SelectedTypeEntryProperty =
+            SelectedTypeEntryPropertyKey.DependencyProperty;
 
         static readonly Type[] PrimitiveTypesInXPath = new Type[]
-            {
-                typeof(DateTime),
-                typeof(TimeSpan),
-                typeof(XmlQualifiedName),                
-                typeof(Uri),                
-                typeof(Guid),
-                typeof(XmlElement),
-                typeof(string),
-                typeof(object),
-                typeof(Decimal),
-                typeof(XElement),
-            };
+        {
+            typeof(DateTime),
+            typeof(TimeSpan),
+            typeof(XmlQualifiedName),
+            typeof(Uri),
+            typeof(Guid),
+            typeof(XmlElement),
+            typeof(string),
+            typeof(object),
+            typeof(Decimal),
+            typeof(XElement),
+        };
 
         MemberInfo[] path = null;
-        Type selectedType = null;       
+        Type selectedType = null;
 
         public ContentCorrelationTypeExpander()
         {
@@ -77,26 +88,14 @@ namespace System.ServiceModel.Activities.Presentation
 
         public event RoutedEventHandler IsSelectionValidChanged
         {
-            add
-            {
-                AddHandler(IsSelectionValidChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(IsSelectionValidChangedEvent, value);
-            }
+            add { AddHandler(IsSelectionValidChangedEvent, value); }
+            remove { RemoveHandler(IsSelectionValidChangedEvent, value); }
         }
 
         public event RoutedEventHandler SelectionChanged
         {
-            add
-            {
-                AddHandler(SelectionChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(SelectionChangedEvent, value);
-            }
+            add { AddHandler(SelectionChangedEvent, value); }
+            remove { RemoveHandler(SelectionChangedEvent, value); }
         }
         public bool IsSelectionValid
         {
@@ -134,7 +133,10 @@ namespace System.ServiceModel.Activities.Presentation
         void OnTypesToExpandChanged()
         {
             this.typeExpander.ItemsSource = this.TypesToExpand;
-            this.emptyContent.Visibility = null == this.TypesToExpand || 0 == this.TypesToExpand.Count ? Visibility.Visible : Visibility.Collapsed;
+            this.emptyContent.Visibility =
+                null == this.TypesToExpand || 0 == this.TypesToExpand.Count
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
         }
 
         void OnTypeExpanderLoaded(object sender, RoutedEventArgs e)
@@ -180,7 +182,13 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 this.SelectedTypeEntry = (ExpanderTypeEntry)item.Header;
             }
-            if (null != item && item.IsSelected && item.IsSelectionActive && Key.Enter == e.Key && Keyboard.Modifiers == ModifierKeys.None)
+            if (
+                null != item
+                && item.IsSelected
+                && item.IsSelectionActive
+                && Key.Enter == e.Key
+                && Keyboard.Modifiers == ModifierKeys.None
+            )
             {
                 this.Accept(item);
                 e.Handled = true;
@@ -190,7 +198,7 @@ namespace System.ServiceModel.Activities.Presentation
         void Accept(TreeViewItem item)
         {
             bool isType = item.Header is ExpanderTypeEntry;
-            bool isMember  = item.Header is MemberInfo;
+            bool isMember = item.Header is MemberInfo;
             if (isMember)
             {
                 var members = new List<MemberInfo>(1);
@@ -229,27 +237,48 @@ namespace System.ServiceModel.Activities.Presentation
         }
 
         //The following types are considered as primitives as far as XPath generation is concerned and shouldn't be expanded any more
-        // 1. CLR built-in types 
-        // 2. Byte array, DateTime, TimeSpan, GUID, Uri, XmlQualifiedName, XmlElement and XmlNode array [This includes XElement and XNode array from .NET 3.5] 
-        // 3. Enums 
+        // 1. CLR built-in types
+        // 2. Byte array, DateTime, TimeSpan, GUID, Uri, XmlQualifiedName, XmlElement and XmlNode array [This includes XElement and XNode array from .NET 3.5]
+        // 3. Enums
         // 4. Arrays and Collection classes including List<T>, Dictionary<K,V> and Hashtable (Anything that implements IEnumerable or IDictionary or is an array is treated as a collection).
         // 5. Type has [CollectionDataContract] attribute
         internal static bool IsPrimitiveTypeInXPath(Type type)
         {
-            return ((type.IsPrimitive) || type.IsEnum || PrimitiveTypesInXPath.Any((item => item == type))
-                || (typeof(IEnumerable).IsAssignableFrom(type)) || typeof(IDictionary).IsAssignableFrom(type) || type.IsArray
-                || (type.GetCustomAttributes(typeof(CollectionDataContractAttribute), false).Length > 0));
+            return (
+                (type.IsPrimitive)
+                || type.IsEnum
+                || PrimitiveTypesInXPath.Any((item => item == type))
+                || (typeof(IEnumerable).IsAssignableFrom(type))
+                || typeof(IDictionary).IsAssignableFrom(type)
+                || type.IsArray
+                || (
+                    type.GetCustomAttributes(typeof(CollectionDataContractAttribute), false).Length
+                    > 0
+                )
+            );
         }
 
-        static void OnIsSelectionValidChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        static void OnIsSelectionValidChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             ((ContentCorrelationTypeExpander)sender).RaiseSelectionValidChanged();
         }
 
-        static void OnTypesToExpandChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        static void OnTypesToExpandChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             var control = (ContentCorrelationTypeExpander)sender;
-            control.Dispatcher.BeginInvoke(new Action(() => { control.OnTypesToExpandChanged(); }), DispatcherPriority.Render);
+            control.Dispatcher.BeginInvoke(
+                new Action(() =>
+                {
+                    control.OnTypesToExpandChanged();
+                }),
+                DispatcherPriority.Render
+            );
         }
     }
 
@@ -270,19 +299,23 @@ namespace System.ServiceModel.Activities.Presentation
             "Name",
             typeof(string),
             typeof(ExpanderTypeEntry),
-            new UIPropertyMetadata(string.Empty));
+            new UIPropertyMetadata(string.Empty)
+        );
 
-        public static readonly DependencyProperty TypeToExpandProperty = DependencyProperty.Register(
-            "TypeToExpand",
-            typeof(Type),
-            typeof(ExpanderTypeEntry),
-            new UIPropertyMetadata(null));
+        public static readonly DependencyProperty TypeToExpandProperty =
+            DependencyProperty.Register(
+                "TypeToExpand",
+                typeof(Type),
+                typeof(ExpanderTypeEntry),
+                new UIPropertyMetadata(null)
+            );
 
         public static readonly DependencyProperty TagProperty = DependencyProperty.Register(
             "Tag",
             typeof(object),
             typeof(ExpanderTypeEntry),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
         public string Name
         {

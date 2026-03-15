@@ -11,8 +11,10 @@ namespace System.IdentityModel.Configuration
     /// <summary>
     /// Manages the configuration of the audienceUris section.
     /// </summary>
-    [ConfigurationCollection(typeof(AudienceUriElement),
-        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(AudienceUriElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed partial class AudienceUriElementCollection : ConfigurationElementCollection
     {
         const AudienceUriMode DefaultAudienceUriMode = AudienceUriMode.Always;
@@ -35,7 +37,11 @@ namespace System.IdentityModel.Configuration
         /// <summary>
         /// Audience restriction mode. Optional, default is Always.
         /// </summary>
-        [ConfigurationProperty(ConfigurationStrings.Mode, IsRequired = false, DefaultValue = DefaultAudienceUriMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            IsRequired = false,
+            DefaultValue = DefaultAudienceUriMode
+        )]
         [StandardRuntimeEnumValidator(typeof(AudienceUriMode))]
         public AudienceUriMode Mode
         {
@@ -50,7 +56,12 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return ((ElementInformation.Properties[ConfigurationStrings.Mode].ValueOrigin != PropertyValueOrigin.Default) || (Count > 0));
+                return (
+                    (
+                        ElementInformation.Properties[ConfigurationStrings.Mode].ValueOrigin
+                        != PropertyValueOrigin.Default
+                    ) || (Count > 0)
+                );
             }
         }
     }

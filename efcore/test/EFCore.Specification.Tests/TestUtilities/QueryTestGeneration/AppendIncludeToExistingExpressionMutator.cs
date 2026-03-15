@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
 {
     public AppendIncludeToExistingExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     private ExpressionFinder _expressionFinder;
 
@@ -30,9 +28,11 @@ public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
 
         var entityType = expr.Type.GetGenericArguments()[0];
         var propertyType = expr.Type.GetGenericArguments()[1];
-        var propertyElementType = IsEnumerableType(propertyType) || propertyType.GetInterfaces().Any(ii => IsEnumerableType(ii))
-            ? propertyType.GetGenericArguments()[0]
-            : propertyType;
+        var propertyElementType =
+            IsEnumerableType(propertyType)
+            || propertyType.GetInterfaces().Any(ii => IsEnumerableType(ii))
+                ? propertyType.GetGenericArguments()[0]
+                : propertyType;
 
         var navigations = thenInclude
             ? Context.Model.FindEntityType(propertyElementType)?.GetNavigations().ToList()
@@ -42,37 +42,55 @@ public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
             ? Expression.Parameter(propertyElementType, "prm")
             : Expression.Parameter(entityType, "prm");
 
-        if (navigations != null
-            && navigations.Any())
+        if (navigations != null && navigations.Any())
         {
             var j = random.Next(navigations.Count);
             var navigation = navigations[j];
 
             if (thenInclude)
             {
-                var thenIncludeMethod = IsEnumerableType(propertyType) || propertyType.GetInterfaces().Any(ii => IsEnumerableType(ii))
-                    ? ThenIncludeCollectionMethodInfo.MakeGenericMethod(entityType, propertyElementType, navigation.ClrType)
-                    : ThenIncludeReferenceMethodInfo.MakeGenericMethod(entityType, propertyElementType, navigation.ClrType);
+                var thenIncludeMethod =
+                    IsEnumerableType(propertyType)
+                    || propertyType.GetInterfaces().Any(ii => IsEnumerableType(ii))
+                        ? ThenIncludeCollectionMethodInfo.MakeGenericMethod(
+                            entityType,
+                            propertyElementType,
+                            navigation.ClrType
+                        )
+                        : ThenIncludeReferenceMethodInfo.MakeGenericMethod(
+                            entityType,
+                            propertyElementType,
+                            navigation.ClrType
+                        );
 
                 var injector = new ExpressionInjector(
                     _expressionFinder.FoundExpressions[i],
-                    e => Expression.Call(
-                        thenIncludeMethod,
-                        e,
-                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)));
+                    e =>
+                        Expression.Call(
+                            thenIncludeMethod,
+                            e,
+                            Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                        )
+                );
 
                 return injector.Visit(expression);
             }
             else
             {
-                var includeMethod = IncludeMethodInfo.MakeGenericMethod(entityType, navigation.ClrType);
+                var includeMethod = IncludeMethodInfo.MakeGenericMethod(
+                    entityType,
+                    navigation.ClrType
+                );
 
                 var injector = new ExpressionInjector(
                     _expressionFinder.FoundExpressions[i],
-                    e => Expression.Call(
-                        includeMethod,
-                        e,
-                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)));
+                    e =>
+                        Expression.Call(
+                            includeMethod,
+                            e,
+                            Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                        )
+                );
 
                 return injector.Visit(expression);
             }
@@ -88,10 +106,14 @@ public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
             // can't handle string overloads = need type information to construct Expression calls.
-            if (node != null
-                && (node.Method.MethodIsClosedFormOf(IncludeMethodInfo)
+            if (
+                node != null
+                && (
+                    node.Method.MethodIsClosedFormOf(IncludeMethodInfo)
                     || node.Method.MethodIsClosedFormOf(ThenIncludeReferenceMethodInfo)
-                    || node.Method.MethodIsClosedFormOf(ThenIncludeCollectionMethodInfo)))
+                    || node.Method.MethodIsClosedFormOf(ThenIncludeCollectionMethodInfo)
+                )
+            )
             {
                 FoundExpressions.Add(node);
 

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,28 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the System.ServiceModel assembly
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 
-[assembly: AssemblyTitle ("Mono.ServiceModel.IdentitySelectors.dll")]
-[assembly: AssemblyDescription ("Mono.ServiceModel.IdentitySelectors.dll")]
-[assembly: AssemblyConfiguration ("Development version")]
-[assembly: AssemblyCompany ("MONO development team")]
-[assembly: AssemblyProduct ("MONO CLI")]
-[assembly: AssemblyCopyright ("(c) 2003 Various Authors")]
-[assembly: AssemblyTrademark ("")]
+[assembly: AssemblyTitle("Mono.ServiceModel.IdentitySelectors.dll")]
+[assembly: AssemblyDescription("Mono.ServiceModel.IdentitySelectors.dll")]
+[assembly: AssemblyConfiguration("Development version")]
+[assembly: AssemblyCompany("MONO development team")]
+[assembly: AssemblyProduct("MONO CLI")]
+[assembly: AssemblyCopyright("(c) 2003 Various Authors")]
+[assembly: AssemblyTrademark("")]
 
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDefaultAlias ("Mono.ServiceModel.IdentitySelectors.dll")]
-[assembly: AssemblyInformationalVersion ("0.0.0.1")]
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDefaultAlias("Mono.ServiceModel.IdentitySelectors.dll")]
+[assembly: AssemblyInformationalVersion("0.0.0.1")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]

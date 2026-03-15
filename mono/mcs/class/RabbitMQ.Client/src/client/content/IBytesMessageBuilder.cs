@@ -56,10 +56,12 @@
 //---------------------------------------------------------------------------
 using System;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Interface for constructing messages binary-compatible
     ///with QPid's "BytesMessage" wire encoding.</summary>
-    public interface IBytesMessageBuilder: IMessageBuilder {
+    public interface IBytesMessageBuilder : IMessageBuilder
+    {
         ///<summary>Writes an int value into the message body being assembled.</summary>
         IBytesMessageBuilder WriteInt32(int value);
 

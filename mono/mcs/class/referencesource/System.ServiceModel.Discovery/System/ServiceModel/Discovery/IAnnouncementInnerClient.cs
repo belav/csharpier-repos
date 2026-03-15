@@ -19,16 +19,30 @@ namespace System.ServiceModel.Discovery
         ServiceEndpoint Endpoint { get; }
         ICommunicationObject InnerCommunicationObject { get; }
 
-        IAsyncResult BeginHelloOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata, AsyncCallback callback, object state);
+        IAsyncResult BeginHelloOperation(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            AsyncCallback callback,
+            object state
+        );
         void EndHelloOperation(IAsyncResult result);
 
-        IAsyncResult BeginByeOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata, AsyncCallback callback, object state);
+        IAsyncResult BeginByeOperation(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            AsyncCallback callback,
+            object state
+        );
         void EndByeOperation(IAsyncResult result);
 
         void HelloOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata);
         void ByeOperation(EndpointDiscoveryMetadata endpointDiscoveryMetadata);
 
-        void HelloOperationAsync(EndpointDiscoveryMetadata endpointDiscoveryMetadata, object userState);
-        void ByeOperationAsync(EndpointDiscoveryMetadata endpointDiscoveryMetadata, object userState);
+        void HelloOperationAsync(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            object userState
+        );
+        void ByeOperationAsync(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            object userState
+        );
     }
 }

@@ -20,7 +20,5 @@ internal class MockHostWorkspaceProvider : IHostWorkspaceProvider
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public MockHostWorkspaceProvider()
-    {
-    }
+    public MockHostWorkspaceProvider() { }
 }

@@ -4,12 +4,12 @@
 
 #nullable disable
 
+using System;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// we are in the original tree as we're incrementally parsing.  When it is at a node or
         /// token, it can either move forward to that entity's next sibling.  It can also move down
         /// to a node's first child or first token.
-        /// 
+        ///
         /// Once the cursor hits the end of file, it's done.  Note: the cursor will skip any other
         /// zero length nodes in the tree.
         /// </summary>
@@ -44,9 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 get
                 {
-                    return
-                        this.CurrentNodeOrToken.Kind() == SyntaxKind.None ||
-                        this.CurrentNodeOrToken.Kind() == SyntaxKind.EndOfFileToken;
+                    return this.CurrentNodeOrToken.Kind() == SyntaxKind.None
+                        || this.CurrentNodeOrToken.Kind() == SyntaxKind.EndOfFileToken;
                 }
             }
 
@@ -94,7 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
 
                 var children = node.Parent.ChildNodesAndTokens();
-                var index = SyntaxNodeOrToken.GetFirstChildIndexSpanningPosition(children, ((CSharp.CSharpSyntaxNode)node).Position);
+                var index = SyntaxNodeOrToken.GetFirstChildIndexSpanningPosition(
+                    children,
+                    ((CSharp.CSharpSyntaxNode)node).Position
+                );
                 for (int i = index, n = children.Count; i < n; i++)
                 {
                     var child = children[i];
@@ -125,8 +127,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // interpolated string token.
                 if (node.Kind() == SyntaxKind.InterpolatedStringExpression)
                 {
-                    var greenToken = Lexer.RescanInterpolatedString((InterpolatedStringExpressionSyntax)node.Green);
-                    var redToken = new CodeAnalysis.SyntaxToken(node.Parent, greenToken, node.Position, _indexInParent);
+                    var greenToken = Lexer.RescanInterpolatedString(
+                        (InterpolatedStringExpressionSyntax)node.Green
+                    );
+                    var redToken = new CodeAnalysis.SyntaxToken(
+                        node.Parent,
+                        greenToken,
+                        node.Position,
+                        _indexInParent
+                    );
                     return new Cursor(redToken, _indexInParent);
                 }
 
@@ -159,7 +168,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var cursor = this;
                 if (!cursor.IsFinished)
                 {
-                    for (var node = cursor.CurrentNodeOrToken; node.Kind() != SyntaxKind.None && !SyntaxFacts.IsAnyToken(node.Kind()); node = cursor.CurrentNodeOrToken)
+                    for (
+                        var node = cursor.CurrentNodeOrToken;
+                        node.Kind() != SyntaxKind.None && !SyntaxFacts.IsAnyToken(node.Kind());
+                        node = cursor.CurrentNodeOrToken
+                    )
                     {
                         cursor = cursor.MoveToFirstChild();
                     }

@@ -41,13 +41,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private class FooImplWithConstructors
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
 
         private class FooImplWithConstructorsAmbiguous
         {
             public FooImplWithConstructorsAmbiguous(string name, int id) { }
+
             public FooImplWithConstructorsAmbiguous(int id, string name) { }
         }
 
@@ -144,8 +147,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportProperty_ShouldGenerateExportForPropertySelected()
         {
             var builder = InternalCalls.PartBuilder(t => true);
-            builder.Export<IFoo>().
-                ExportProperties(p => p.Name == "P1");
+            builder.Export<IFoo>().ExportProperties(p => p.Name == "P1");
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
@@ -169,8 +171,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ImportProperty_ShouldGenerateImportForPropertySelected()
         {
             var builder = InternalCalls.PartBuilder(t => true);
-            builder.Export<IFoo>().
-                ImportProperties(p => p.Name == "P2"); // P3 is string
+            builder.Export<IFoo>().ImportProperties(p => p.Name == "P2"); // P3 is string
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
@@ -195,8 +196,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ImportProperties_ShouldGenerateImportForPropertySelected_And_ApplyImportMany()
         {
             var builder = InternalCalls.PartBuilder(t => true);
-            builder.Export<IFoo>().
-                ImportProperties(p => p.Name == "P3"); // P3 is IEnumerable<IFoo>
+            builder.Export<IFoo>().ImportProperties(p => p.Name == "P3"); // P3 is IEnumerable<IFoo>
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
@@ -221,8 +221,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportPropertyWithConfiguration_ShouldGenerateExportForPropertySelected()
         {
             var builder = InternalCalls.PartBuilder(t => true);
-            builder.Export<IFoo>().
-                ExportProperties(p => p.Name == "P1", (p, c) => c.AsContractName("hey"));
+            builder
+                .Export<IFoo>()
+                .ExportProperties(p => p.Name == "P1", (p, c) => c.AsContractName("hey"));
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
@@ -246,8 +247,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExportPropertyOfT_ShouldGenerateExportForPropertySelectedWithTAsContractType()
         {
             var builder = InternalCalls.PartBuilder(t => true);
-            builder.Export<IFoo>().
-                ExportProperties<string>(p => p.Name == "P1");
+            builder.Export<IFoo>().ExportProperties<string>(p => p.Name == "P1");
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
@@ -292,7 +292,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
-            GetConfiguredMembers(builder, out configuredMembers, out typeAtts, typeof(FooImplWithConstructors));
+            GetConfiguredMembers(
+                builder,
+                out configuredMembers,
+                out typeAtts,
+                typeof(FooImplWithConstructors)
+            );
 
             Assert.Equal(1, typeAtts.Count());
             Assert.Equal(3, configuredMembers.Count);
@@ -325,7 +330,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
-            GetConfiguredMembers(builder, out configuredMembers, out typeAtts, typeof(FooImplWithConstructors));
+            GetConfiguredMembers(
+                builder,
+                out configuredMembers,
+                out typeAtts,
+                typeof(FooImplWithConstructors)
+            );
 
             Assert.Equal(1, typeAtts.Count());
             Assert.Equal(2, configuredMembers.Count);
@@ -351,7 +361,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             IEnumerable<Attribute> typeAtts;
             List<Tuple<object, List<Attribute>>> configuredMembers;
-            GetConfiguredMembers(builder, out configuredMembers, out typeAtts, typeof(FooImplWithConstructors));
+            GetConfiguredMembers(
+                builder,
+                out configuredMembers,
+                out typeAtts,
+                typeof(FooImplWithConstructors)
+            );
 
             Assert.Equal(1, typeAtts.Count());
             Assert.Equal(2, configuredMembers.Count);
@@ -365,9 +380,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.Equal(typeof(ImportManyAttribute), tuple.Item2[0].GetType());
         }
 
-        private static void GetConfiguredMembers(PartBuilder builder,
-            out List<Tuple<object, List<Attribute>>> configuredMembers, out IEnumerable<Attribute> typeAtts,
-            Type targetType = null)
+        private static void GetConfiguredMembers(
+            PartBuilder builder,
+            out List<Tuple<object, List<Attribute>>> configuredMembers,
+            out IEnumerable<Attribute> typeAtts,
+            Type targetType = null
+        )
         {
             if (targetType == null)
             {
@@ -378,7 +396,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
             typeAtts = builder.BuildTypeAttributes(targetType);
             if (!builder.BuildConstructorAttributes(targetType, ref configuredMembers))
             {
-                InternalCalls.PartBuilder_BuildDefaultConstructorAttributes(targetType, ref configuredMembers);
+                InternalCalls.PartBuilder_BuildDefaultConstructorAttributes(
+                    targetType,
+                    ref configuredMembers
+                );
             }
             builder.BuildPropertyAttributes(targetType, ref configuredMembers);
         }
@@ -388,8 +409,14 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>("interfaceFilter", () => builder.ForTypesMatching((t) => true).ExportInterfaces(null));
-            Assert.Throws<ArgumentNullException>("interfaceFilter", () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null));
+            Assert.Throws<ArgumentNullException>(
+                "interfaceFilter",
+                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "interfaceFilter",
+                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
+            );
         }
 
         [Fact]
@@ -397,10 +424,22 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties(null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties(null, null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null));
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties(null, null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null)
+            );
         }
 
         [Fact]
@@ -408,10 +447,22 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties(null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties(null, null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null));
-            Assert.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null));
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties(null, null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null)
+            );
         }
 
         [Fact]
@@ -419,7 +470,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            builder.ForTypesMatching((t) => !t.IsDefined(typeof(MyDoNotIncludeAttribute), false)).Export();
+            builder
+                .ForTypesMatching((t) => !t.IsDefined(typeof(MyDoNotIncludeAttribute), false))
+                .Export();
 
             var types = new Type[] { typeof(MyNotToBeIncludedClass), typeof(MyToBeIncludedClass) };
             var catalog = new TypeCatalog(types, builder);

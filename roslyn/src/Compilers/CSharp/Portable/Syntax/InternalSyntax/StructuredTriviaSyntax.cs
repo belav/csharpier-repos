@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     internal abstract partial class StructuredTriviaSyntax : CSharpSyntaxNode
     {
-        internal StructuredTriviaSyntax(SyntaxKind kind, DiagnosticInfo[] diagnostics = null, SyntaxAnnotation[] annotations = null)
+        internal StructuredTriviaSyntax(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics = null,
+            SyntaxAnnotation[] annotations = null
+        )
             : base(kind, diagnostics, annotations)
         {
             this.flags |= NodeFlags.ContainsStructuredTrivia;

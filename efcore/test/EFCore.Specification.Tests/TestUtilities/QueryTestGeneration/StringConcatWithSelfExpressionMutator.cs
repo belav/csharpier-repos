@@ -8,9 +8,7 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
     private readonly ExpressionFinder _expressionFinder = new();
 
     public StringConcatWithSelfExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {
@@ -23,12 +21,15 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
     {
         var i = random.Next(_expressionFinder.FoundExpressions.Count);
 
-        var stringConcatMethodInfo
-            = typeof(string).GetRuntimeMethod(
-                nameof(string.Concat),
-                new[] { typeof(string), typeof(string) });
+        var stringConcatMethodInfo = typeof(string).GetRuntimeMethod(
+            nameof(string.Concat),
+            new[] { typeof(string), typeof(string) }
+        );
 
-        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e => Expression.Add(e, e, stringConcatMethodInfo));
+        var injector = new ExpressionInjector(
+            _expressionFinder.FoundExpressions[i],
+            e => Expression.Add(e, e, stringConcatMethodInfo)
+        );
 
         return injector.Visit(expression);
     }
@@ -41,9 +42,11 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
 
         public override Expression Visit(Expression node)
         {
-            if (_insideLambda
+            if (
+                _insideLambda
                 && node?.Type == typeof(string)
-                && node.NodeType != ExpressionType.Parameter)
+                && node.NodeType != ExpressionType.Parameter
+            )
             {
                 FoundExpressions.Add(node);
             }
@@ -65,8 +68,7 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node != null
-                && node.Method.IsEFPropertyMethod())
+            if (node != null && node.Method.IsEFPropertyMethod())
             {
                 return node;
             }

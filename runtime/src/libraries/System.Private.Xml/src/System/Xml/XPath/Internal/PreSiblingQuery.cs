@@ -22,8 +22,11 @@ namespace MS.Internal.Xml.XPath
 
     internal sealed class PreSiblingQuery : CacheAxisQuery
     {
-        public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest) : base(qyInput, name, prefix, typeTest) { }
-        private PreSiblingQuery(PreSiblingQuery other) : base(other) { }
+        public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest) { }
+
+        private PreSiblingQuery(PreSiblingQuery other)
+            : base(other) { }
 
         private static bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk)
         {
@@ -54,7 +57,10 @@ namespace MS.Internal.Xml.XPath
             while (inputStk.Count != 0)
             {
                 XPathNavigator input = inputStk.Pop();
-                if (input.NodeType == XPathNodeType.Attribute || input.NodeType == XPathNodeType.Namespace)
+                if (
+                    input.NodeType == XPathNodeType.Attribute
+                    || input.NodeType == XPathNodeType.Namespace
+                )
                 {
                     continue;
                 }
@@ -64,7 +70,10 @@ namespace MS.Internal.Xml.XPath
                     if (prev.MoveToParent())
                     {
                         bool test = prev.MoveToFirstChild();
-                        Debug.Assert(test, "We just moved to parent, how we can not have first child?");
+                        Debug.Assert(
+                            test,
+                            "We just moved to parent, how we can not have first child?"
+                        );
                         while (!prev.IsSamePosition(input))
                         {
                             if (matches(prev))
@@ -83,7 +92,14 @@ namespace MS.Internal.Xml.XPath
             return this;
         }
 
-        public override XPathNodeIterator Clone() { return new PreSiblingQuery(this); }
-        public override QueryProps Properties { get { return base.Properties | QueryProps.Reverse; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new PreSiblingQuery(this);
+        }
+
+        public override QueryProps Properties
+        {
+            get { return base.Properties | QueryProps.Reverse; }
+        }
     }
 }

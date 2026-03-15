@@ -19,7 +19,10 @@ public class VisualStudioOptionStorageTests
     {
         get
         {
-            return OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location))
+            return OptionsTestInfo
+                .CollectOptions(
+                    Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+                )
                 .Select(pair => new object[] { pair.Key });
         }
     }
@@ -28,7 +31,10 @@ public class VisualStudioOptionStorageTests
     {
         get
         {
-            return OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location))
+            return OptionsTestInfo
+                .CollectOptions(
+                    Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+                )
                 .Where(pair => pair.Value.Option.IsPerLanguage)
                 .Select(pair => new object[] { pair.Key });
         }
@@ -38,7 +44,10 @@ public class VisualStudioOptionStorageTests
     {
         get
         {
-            return OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location))
+            return OptionsTestInfo
+                .CollectOptions(
+                    Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+                )
                 .Where(pair => pair.Value.Accessors.Any(a => a.option.PublicOption is not null))
                 .Select(pair => new object[] { pair.Key });
         }
@@ -48,19 +57,21 @@ public class VisualStudioOptionStorageTests
     {
         get
         {
-            return OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location))
-                .Where(pair => VisualStudioOptionStorage.Storages.TryGetValue(pair.Key, out var storage) && storage is VisualStudioOptionStorage.RoamingProfileStorage)
+            return OptionsTestInfo
+                .CollectOptions(
+                    Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+                )
+                .Where(pair =>
+                    VisualStudioOptionStorage.Storages.TryGetValue(pair.Key, out var storage)
+                    && storage is VisualStudioOptionStorage.RoamingProfileStorage
+                )
                 .Select(pair => new object[] { pair.Key });
         }
     }
 
     public static IEnumerable<object[]> StorageNames
     {
-        get
-        {
-            return VisualStudioOptionStorage.Storages
-                .Select(pair => new object[] { pair.Key });
-        }
+        get { return VisualStudioOptionStorage.Storages.Select(pair => new object[] { pair.Key }); }
     }
 
     /// <summary>
@@ -71,16 +82,22 @@ public class VisualStudioOptionStorageTests
     [MemberData(nameof(PerLanguageConfigNames), DisableDiscoveryEnumeration = true)]
     public void PerLanguageOptionDefinedInCorrectAssembly(string configName)
     {
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
         var info = infos[configName];
 
         // This test should only be operating on per-language options
         Assert.True(info.Option.IsPerLanguage);
 
         var anyInCSharpNamespace = info.Accessors.Any(a => a.namespaceName.Contains("CSharp"));
-        var anyInVisualBasicNamespace = info.Accessors.Any(a => a.namespaceName.Contains("VisualBasic"));
+        var anyInVisualBasicNamespace = info.Accessors.Any(a =>
+            a.namespaceName.Contains("VisualBasic")
+        );
         var allInCSharpNamespace = info.Accessors.All(a => a.namespaceName.Contains("CSharp"));
-        var allInVisualBasicNamespace = info.Accessors.All(a => a.namespaceName.Contains("VisualBasic"));
+        var allInVisualBasicNamespace = info.Accessors.All(a =>
+            a.namespaceName.Contains("VisualBasic")
+        );
         if (anyInCSharpNamespace == allInCSharpNamespace)
             return;
 
@@ -98,7 +115,9 @@ public class VisualStudioOptionStorageTests
     [MemberData(nameof(ConfigNames), DisableDiscoveryEnumeration = true)]
     public void LanguageSpecificOptionsHaveCorrectPrefix(string configName)
     {
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
         var info = infos[configName];
 
         if (info.Option is IPublicOption)
@@ -123,8 +142,18 @@ public class VisualStudioOptionStorageTests
         }
         else
         {
-            Assert.False(configName.StartsWith(OptionDefinition.CSharpConfigNamePrefix, StringComparison.OrdinalIgnoreCase));
-            Assert.False(configName.StartsWith(OptionDefinition.VisualBasicConfigNamePrefix, StringComparison.OrdinalIgnoreCase));
+            Assert.False(
+                configName.StartsWith(
+                    OptionDefinition.CSharpConfigNamePrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
+            Assert.False(
+                configName.StartsWith(
+                    OptionDefinition.VisualBasicConfigNamePrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
     }
 
@@ -137,7 +166,9 @@ public class VisualStudioOptionStorageTests
     public void PublicOptionHasPublicAccessor(string configName)
     {
         var storages = VisualStudioOptionStorage.Storages;
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
         var info = infos[configName];
 
         // This method should only be validating public options
@@ -154,10 +185,13 @@ public class VisualStudioOptionStorageTests
     [MemberData(nameof(ConfigNamesWithRoamingProfileStorage), DisableDiscoveryEnumeration = true)]
     public void OptionHasCorrectLanguageSubstitution(string configName)
     {
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
         var info = infos[configName];
         var option = info.Option;
-        var storage = (VisualStudioOptionStorage.RoamingProfileStorage)VisualStudioOptionStorage.Storages[configName];
+        var storage = (VisualStudioOptionStorage.RoamingProfileStorage)
+            VisualStudioOptionStorage.Storages[configName];
 
         Assert.Equal(option.IsPerLanguage, storage.IsPerLanguage);
     }
@@ -166,13 +200,18 @@ public class VisualStudioOptionStorageTests
     public void StorageMappingsAreUnique()
     {
         var storages = VisualStudioOptionStorage.Storages;
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
 
         // no two option names map to the same storage (however, there may be multiple option definitions that share the same option name and storage):
 
         var duplicateRoamingProfileStorages =
             from storage in storages
-            let roamingStorageKey = storage.Value is VisualStudioOptionStorage.RoamingProfileStorage { Key: var key } ? key : null
+            let roamingStorageKey = storage.Value
+                is VisualStudioOptionStorage.RoamingProfileStorage { Key: var key }
+                ? key
+                : null
             where roamingStorageKey is not null
             group storage.Key by roamingStorageKey into g
             where g.Count() > 1
@@ -188,7 +227,9 @@ public class VisualStudioOptionStorageTests
     [MemberData(nameof(StorageNames), DisableDiscoveryEnumeration = true)]
     public void StorageMapsToOption(string storageName)
     {
-        var infos = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location));
+        var infos = OptionsTestInfo.CollectOptions(
+            Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+        );
 
         Assert.True(infos.ContainsKey(storageName));
     }
@@ -209,57 +250,57 @@ public class VisualStudioOptionStorageTests
 
         var optionsWithoutStorage = new[]
         {
-            "CompletionOptions_ForceExpandedCompletionIndexCreation",                       // test-only option
-            "CSharpFormattingOptions_NewLinesForBracesInAccessors",                         // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInAnonymousMethods",                  // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInAnonymousTypes",                    // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInControlBlocks",                     // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInLambdaExpressionBody",              // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInMethods",                           // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CompletionOptions_ForceExpandedCompletionIndexCreation", // test-only option
+            "CSharpFormattingOptions_NewLinesForBracesInAccessors", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInAnonymousMethods", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInAnonymousTypes", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInControlBlocks", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInLambdaExpressionBody", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInMethods", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
             "CSharpFormattingOptions_NewLinesForBracesInObjectCollectionArrayInitializers", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInProperties",                        // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_NewLinesForBracesInTypes",                             // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_SpaceWithinCastParentheses",                           // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_SpaceWithinExpressionParentheses",                     // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "CSharpFormattingOptions_SpaceWithinOtherParentheses",                          // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
-            "dotnet_remove_unnecessary_suppression_exclusions",                             // Doesn't have VS UI. TODO: https://github.com/dotnet/roslyn/issues/66062
-            "dotnet_style_operator_placement_when_wrapping",                                // Doesn't have VS UI. TODO: https://github.com/dotnet/roslyn/issues/66062
-            "dotnet_style_prefer_foreach_explicit_cast_in_source",                          // For a small customer segment, doesn't warrant VS UI.
-            "dotnet_binary_log_path",                                                       // VSCode only option for the VS Code project system; does not apply to VS
-            "dotnet_lsp_using_devkit",                                                      // VSCode internal only option.  Does not need any UI.
-            "dotnet_enable_references_code_lens",                                           // VSCode only option.  Does not apply to VS.
-            "dotnet_enable_tests_code_lens",                                                // VSCode only option.  Does not apply to VS.
-            "end_of_line",                                                                  // persisted by the editor
-            "ExtensionManagerOptions_DisableCrashingExtensions",                            // TODO: remove? https://github.com/dotnet/roslyn/issues/66063
-            "FeatureOnOffOptions_RefactoringVerification",                                  // TODO: remove? https://github.com/dotnet/roslyn/issues/66063 
-            "FeatureOnOffOptions_RenameTracking",                                           // TODO: remove? https://github.com/dotnet/roslyn/issues/66063
-            "file_header_template",                                                         // repository specific
-            "FormattingOptions_WrappingColumn",                                             // TODO: https://github.com/dotnet/roslyn/issues/66062
-            "insert_final_newline",                                                         // TODO: https://github.com/dotnet/roslyn/issues/66062
-            "InternalDiagnosticsOptions_LiveShareDiagnosticMode",                           // TODO: remove once switched to LSP diagnostics
-            "InternalDiagnosticsOptions_RazorDiagnosticMode",                               // TODO: remove once switched to LSP diagnostics
-            "RazorDesignTimeDocumentFormattingOptions_TabSize",                             // TODO: remove once Razor removes design-time documents
-            "RazorDesignTimeDocumentFormattingOptions_UseTabs",                             // TODO: remove once Razor removes design-time documents
-            "RecommendationOptions_FilterOutOfScopeLocals",                                 // public option not stored in VS storage
-            "RecommendationOptions_HideAdvancedMembers",                                    // public option not stored in VS storage
-            "RenameOptions_PreviewChanges",                                                 // public option, deprecated
-            "RenameOptions_RenameInComments",                                               // public option, deprecated
-            "RenameOptions_RenameInStrings",                                                // public option, deprecated
-            "RenameOptions_RenameOverloads",                                                // public option, deprecated
-            "SimplificationOptions_AllowSimplificationToBaseType",                          // public option, deprecated
-            "SimplificationOptions_AllowSimplificationToGenericType",                       // public option, deprecated
-            "SimplificationOptions_PreferAliasToQualification",                             // public option, deprecated
-            "SimplificationOptions_PreferImplicitTypeInference",                            // public option, deprecated
-            "SimplificationOptions_PreferImplicitTypeInLocalDeclaration",                   // public option, deprecated
-            "SimplificationOptions_PreferIntrinsicPredefinedTypeKeywordInDeclaration",      // public option, deprecated
-            "SimplificationOptions_PreferIntrinsicPredefinedTypeKeywordInMemberAccess",     // public option, deprecated
-            "SimplificationOptions_PreferOmittingModuleNamesInQualification",               // public option, deprecated
-            "SimplificationOptions_QualifyEventAccess",                                     // public option, deprecated
-            "SimplificationOptions_QualifyFieldAccess",                                     // public option, deprecated
-            "SimplificationOptions_QualifyMemberAccessWithThisOrMe",                        // public option, deprecated
-            "SimplificationOptions_QualifyMethodAccess",                                    // public option, deprecated
-            "SimplificationOptions_QualifyPropertyAccess",                                  // public option, deprecated
-            "SolutionCrawlerOptionsStorage_SolutionBackgroundAnalysisScopeOption",          // handled by PackageSettingsPersister
+            "CSharpFormattingOptions_NewLinesForBracesInProperties", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_NewLinesForBracesInTypes", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_SpaceWithinCastParentheses", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_SpaceWithinExpressionParentheses", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "CSharpFormattingOptions_SpaceWithinOtherParentheses", // public option deserialized via CSharpVisualStudioOptionStorageReadFallbacks
+            "dotnet_remove_unnecessary_suppression_exclusions", // Doesn't have VS UI. TODO: https://github.com/dotnet/roslyn/issues/66062
+            "dotnet_style_operator_placement_when_wrapping", // Doesn't have VS UI. TODO: https://github.com/dotnet/roslyn/issues/66062
+            "dotnet_style_prefer_foreach_explicit_cast_in_source", // For a small customer segment, doesn't warrant VS UI.
+            "dotnet_binary_log_path", // VSCode only option for the VS Code project system; does not apply to VS
+            "dotnet_lsp_using_devkit", // VSCode internal only option.  Does not need any UI.
+            "dotnet_enable_references_code_lens", // VSCode only option.  Does not apply to VS.
+            "dotnet_enable_tests_code_lens", // VSCode only option.  Does not apply to VS.
+            "end_of_line", // persisted by the editor
+            "ExtensionManagerOptions_DisableCrashingExtensions", // TODO: remove? https://github.com/dotnet/roslyn/issues/66063
+            "FeatureOnOffOptions_RefactoringVerification", // TODO: remove? https://github.com/dotnet/roslyn/issues/66063
+            "FeatureOnOffOptions_RenameTracking", // TODO: remove? https://github.com/dotnet/roslyn/issues/66063
+            "file_header_template", // repository specific
+            "FormattingOptions_WrappingColumn", // TODO: https://github.com/dotnet/roslyn/issues/66062
+            "insert_final_newline", // TODO: https://github.com/dotnet/roslyn/issues/66062
+            "InternalDiagnosticsOptions_LiveShareDiagnosticMode", // TODO: remove once switched to LSP diagnostics
+            "InternalDiagnosticsOptions_RazorDiagnosticMode", // TODO: remove once switched to LSP diagnostics
+            "RazorDesignTimeDocumentFormattingOptions_TabSize", // TODO: remove once Razor removes design-time documents
+            "RazorDesignTimeDocumentFormattingOptions_UseTabs", // TODO: remove once Razor removes design-time documents
+            "RecommendationOptions_FilterOutOfScopeLocals", // public option not stored in VS storage
+            "RecommendationOptions_HideAdvancedMembers", // public option not stored in VS storage
+            "RenameOptions_PreviewChanges", // public option, deprecated
+            "RenameOptions_RenameInComments", // public option, deprecated
+            "RenameOptions_RenameInStrings", // public option, deprecated
+            "RenameOptions_RenameOverloads", // public option, deprecated
+            "SimplificationOptions_AllowSimplificationToBaseType", // public option, deprecated
+            "SimplificationOptions_AllowSimplificationToGenericType", // public option, deprecated
+            "SimplificationOptions_PreferAliasToQualification", // public option, deprecated
+            "SimplificationOptions_PreferImplicitTypeInference", // public option, deprecated
+            "SimplificationOptions_PreferImplicitTypeInLocalDeclaration", // public option, deprecated
+            "SimplificationOptions_PreferIntrinsicPredefinedTypeKeywordInDeclaration", // public option, deprecated
+            "SimplificationOptions_PreferIntrinsicPredefinedTypeKeywordInMemberAccess", // public option, deprecated
+            "SimplificationOptions_PreferOmittingModuleNamesInQualification", // public option, deprecated
+            "SimplificationOptions_QualifyEventAccess", // public option, deprecated
+            "SimplificationOptions_QualifyFieldAccess", // public option, deprecated
+            "SimplificationOptions_QualifyMemberAccessWithThisOrMe", // public option, deprecated
+            "SimplificationOptions_QualifyMethodAccess", // public option, deprecated
+            "SimplificationOptions_QualifyPropertyAccess", // public option, deprecated
+            "SolutionCrawlerOptionsStorage_SolutionBackgroundAnalysisScopeOption", // handled by PackageSettingsPersister
         };
 
         Assert.Contains(configName, optionsWithoutStorage);
@@ -268,9 +309,11 @@ public class VisualStudioOptionStorageTests
     [Fact]
     public void VerifyOptionGroupUnique()
     {
-        var allOptionGroups = OptionsTestInfo.CollectOptions(Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location))
-            .Values
-            .Select(optionTestInfo => optionTestInfo.Option.Definition.Group)
+        var allOptionGroups = OptionsTestInfo
+            .CollectOptions(
+                Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
+            )
+            .Values.Select(optionTestInfo => optionTestInfo.Option.Definition.Group)
             .Distinct();
 
         var allGroupNames = allOptionGroups.Select(GetFullOptionGroupName);
@@ -290,7 +333,8 @@ public class VisualStudioOptionStorageTests
             var currentGroup = group;
             while (currentGroup != null)
             {
-                var stringToInsert = builder.Length == 0 ? currentGroup.Name : currentGroup.Name + ".";
+                var stringToInsert =
+                    builder.Length == 0 ? currentGroup.Name : currentGroup.Name + ".";
                 builder.Insert(0, stringToInsert);
                 currentGroup = currentGroup.Parent;
             }

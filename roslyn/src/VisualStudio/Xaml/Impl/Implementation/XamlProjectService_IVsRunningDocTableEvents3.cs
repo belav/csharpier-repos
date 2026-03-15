@@ -15,11 +15,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             return VSConstants.E_NOTIMPL;
         }
 
-        public int OnAfterAttributeChangeEx(uint docCookie, uint grfAttribs, IVsHierarchy pHierOld, uint itemidOld, string pszMkDocumentOld, IVsHierarchy pHierNew, uint itemidNew, string pszMkDocumentNew)
+        public int OnAfterAttributeChangeEx(
+            uint docCookie,
+            uint grfAttribs,
+            IVsHierarchy pHierOld,
+            uint itemidOld,
+            string pszMkDocumentOld,
+            IVsHierarchy pHierNew,
+            uint itemidNew,
+            string pszMkDocumentNew
+        )
         {
             if ((grfAttribs & (uint)__VSRDTATTRIB.RDTA_MkDocument) != 0)
             {
-                this.OnDocumentMonikerChanged(docCookie, pHierOld, pszMkDocumentOld, pszMkDocumentNew);
+                this.OnDocumentMonikerChanged(
+                    docCookie,
+                    pHierOld,
+                    pszMkDocumentOld,
+                    pszMkDocumentNew
+                );
             }
 
             return VSConstants.S_OK;
@@ -30,7 +44,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             return VSConstants.E_NOTIMPL;
         }
 
-        public int OnAfterFirstDocumentLock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
+        public int OnAfterFirstDocumentLock(
+            uint docCookie,
+            uint dwRDTLockType,
+            uint dwReadLocksRemaining,
+            uint dwEditLocksRemaining
+        )
         {
             return VSConstants.E_NOTIMPL;
         }
@@ -45,7 +64,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             return VSConstants.E_NOTIMPL;
         }
 
-        public int OnBeforeLastDocumentUnlock(uint docCookie, uint dwRDTLockType, uint dwReadLocksRemaining, uint dwEditLocksRemaining)
+        public int OnBeforeLastDocumentUnlock(
+            uint docCookie,
+            uint dwRDTLockType,
+            uint dwReadLocksRemaining,
+            uint dwEditLocksRemaining
+        )
         {
             return VSConstants.E_NOTIMPL;
         }

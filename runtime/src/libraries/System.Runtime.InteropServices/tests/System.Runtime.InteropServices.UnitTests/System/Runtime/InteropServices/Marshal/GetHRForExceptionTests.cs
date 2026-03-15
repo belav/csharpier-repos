@@ -38,7 +38,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class CustomHRException : Exception
         {
-            public CustomHRException() : base()
+            public CustomHRException()
+                : base()
             {
                 HResult = 10;
             }

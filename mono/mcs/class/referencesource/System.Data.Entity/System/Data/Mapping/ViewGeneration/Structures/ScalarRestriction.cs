@@ -18,7 +18,10 @@ using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using DomainBoolExpr    = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
+    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
 
     /// <summary>
     /// A class that denotes the boolean expression: "scalarVar in values".
@@ -34,50 +37,76 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal ScalarRestriction(MemberPath member, Constant value)
             : base(new MemberProjectedSlot(member), value)
         {
-            Debug.Assert(value is ScalarConstant || value.IsNull() || value.IsNotNull(), "value is expected to be ScalarConstant, NULL, or NOT_NULL.");
+            Debug.Assert(
+                value is ScalarConstant || value.IsNull() || value.IsNotNull(),
+                "value is expected to be ScalarConstant, NULL, or NOT_NULL."
+            );
         }
 
         /// <summary>
         /// Creates a scalar member restriction with the meaning "<paramref name="member"/> in <paramref name="values"/>".
         /// </summary>
-        internal ScalarRestriction(MemberPath member, IEnumerable<Constant> values, IEnumerable<Constant> possibleValues)
-            : base(new MemberProjectedSlot(member), values, possibleValues)
-        { }
+        internal ScalarRestriction(
+            MemberPath member,
+            IEnumerable<Constant> values,
+            IEnumerable<Constant> possibleValues
+        )
+            : base(new MemberProjectedSlot(member), values, possibleValues) { }
 
         /// <summary>
         /// Creates a scalar member restriction with the meaning "<paramref name="slot"/> in <paramref name="domain"/>".
         /// </summary>
         internal ScalarRestriction(MemberProjectedSlot slot, Domain domain)
-            : base(slot, domain)
-        { }
+            : base(slot, domain) { }
         #endregion
 
         #region Methods
         /// <summary>
         /// Fixes the range of the restriction in accordance with <paramref name="range"/>.
-        /// Member restriction must be complete for this operation. 
+        /// Member restriction must be complete for this operation.
         /// </summary>
-        internal override DomainBoolExpr FixRange(Set<Constant> range, MemberDomainMap memberDomainMap)
+        internal override DomainBoolExpr FixRange(
+            Set<Constant> range,
+            MemberDomainMap memberDomainMap
+        )
         {
             Debug.Assert(IsComplete, "Ranges are fixed only for complete scalar restrictions.");
-            IEnumerable<Constant> newPossibleValues = memberDomainMap.GetDomain(RestrictedMemberSlot.MemberPath);
-            BoolLiteral newLiteral = new ScalarRestriction(RestrictedMemberSlot, new Domain(range, newPossibleValues));
+            IEnumerable<Constant> newPossibleValues = memberDomainMap.GetDomain(
+                RestrictedMemberSlot.MemberPath
+            );
+            BoolLiteral newLiteral = new ScalarRestriction(
+                RestrictedMemberSlot,
+                new Domain(range, newPossibleValues)
+            );
             return newLiteral.GetDomainBoolExpression(memberDomainMap);
         }
 
         internal override BoolLiteral RemapBool(Dictionary<MemberPath, MemberPath> remap)
         {
-            MemberProjectedSlot newVar = (MemberProjectedSlot)this.RestrictedMemberSlot.RemapSlot(remap);
+            MemberProjectedSlot newVar = (MemberProjectedSlot)
+                this.RestrictedMemberSlot.RemapSlot(remap);
             return new ScalarRestriction(newVar, this.Domain);
         }
 
-        internal override MemberRestriction CreateCompleteMemberRestriction(IEnumerable<Constant> possibleValues)
+        internal override MemberRestriction CreateCompleteMemberRestriction(
+            IEnumerable<Constant> possibleValues
+        )
         {
-            Debug.Assert(!this.IsComplete, "CreateCompleteMemberRestriction must be called only for incomplete restrictions.");
-            return new ScalarRestriction(this.RestrictedMemberSlot, new Domain(this.Domain.Values, possibleValues));
+            Debug.Assert(
+                !this.IsComplete,
+                "CreateCompleteMemberRestriction must be called only for incomplete restrictions."
+            );
+            return new ScalarRestriction(
+                this.RestrictedMemberSlot,
+                new Domain(this.Domain.Values, possibleValues)
+            );
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             return ToStringHelper(builder, blockAlias, skipIsNotNull, false);
         }
@@ -91,7 +120,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 (negated, domainValues) =>
                 {
                     Debug.Assert(cqt == null, "unexpected construction order - cqt must be null");
-                    cqt = negated.AsCqt(row, domainValues, this.RestrictedMemberSlot.MemberPath, skipIsNotNull);
+                    cqt = negated.AsCqt(
+                        row,
+                        domainValues,
+                        this.RestrictedMemberSlot.MemberPath,
+                        skipIsNotNull
+                    );
                 },
                 // varInDomain action
                 (domainValues) =>
@@ -102,35 +136,55 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     if (domainValues.Count == 1)
                     {
                         // Single value
-                        cqt = cqt.Equal(domainValues.Single().AsCqt(row, this.RestrictedMemberSlot.MemberPath));
+                        cqt = cqt.Equal(
+                            domainValues.Single().AsCqt(row, this.RestrictedMemberSlot.MemberPath)
+                        );
                     }
                     else
                     {
                         // Multiple values: build list of var = c1, var = c2, ..., then OR them all.
-                        List<DbExpression> operands = domainValues.Select(c => (DbExpression)cqt.Equal(c.AsCqt(row, this.RestrictedMemberSlot.MemberPath))).ToList();
-                        cqt = Helpers.BuildBalancedTreeInPlace(operands, (prev, next) => prev.Or(next));
+                        List<DbExpression> operands = domainValues
+                            .Select(c =>
+                                (DbExpression)
+                                    cqt.Equal(c.AsCqt(row, this.RestrictedMemberSlot.MemberPath))
+                            )
+                            .ToList();
+                        cqt = Helpers.BuildBalancedTreeInPlace(
+                            operands,
+                            (prev, next) => prev.Or(next)
+                        );
                     }
                 },
                 // varIsNotNull action
                 () =>
                 {
                     // ( ... AND var IS NOT NULL)
-                    DbExpression varIsNotNull = this.RestrictedMemberSlot.MemberPath.AsCqt(row).IsNull().Not();
+                    DbExpression varIsNotNull = this
+                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
+                        .IsNull()
+                        .Not();
                     cqt = cqt != null ? cqt.And(varIsNotNull) : varIsNotNull;
                 },
                 // varIsNull action
                 () =>
                 {
                     // (var IS NULL OR ...)
-                    DbExpression varIsNull = this.RestrictedMemberSlot.MemberPath.AsCqt(row).IsNull();
+                    DbExpression varIsNull = this
+                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
+                        .IsNull();
                     cqt = cqt != null ? varIsNull.Or(cqt) : varIsNull;
                 },
-                skipIsNotNull);
+                skipIsNotNull
+            );
 
             return cqt;
         }
 
-        internal override StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             return ToStringHelper(builder, blockAlias, skipIsNotNull, true);
         }
@@ -138,7 +192,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Common code for <see cref="AsEsql"/> and <see cref="AsUserString"/> methods.
         /// </summary>
-        private StringBuilder ToStringHelper(StringBuilder inputBuilder, string blockAlias, bool skipIsNotNull, bool userString)
+        private StringBuilder ToStringHelper(
+            StringBuilder inputBuilder,
+            string blockAlias,
+            bool skipIsNotNull,
+            bool userString
+        )
         {
             // Due to the varIsNotNull and varIsNull actions, we cannot build incrementally.
             // So we use a local StringBuilder - it should not be that inefficient (one extra copy).
@@ -150,11 +209,23 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     if (userString)
                     {
-                        negated.AsUserString(builder, blockAlias, domainValues, RestrictedMemberSlot.MemberPath, skipIsNotNull);
+                        negated.AsUserString(
+                            builder,
+                            blockAlias,
+                            domainValues,
+                            RestrictedMemberSlot.MemberPath,
+                            skipIsNotNull
+                        );
                     }
                     else
                     {
-                        negated.AsEsql(builder, blockAlias, domainValues, RestrictedMemberSlot.MemberPath, skipIsNotNull);
+                        negated.AsEsql(
+                            builder,
+                            blockAlias,
+                            domainValues,
+                            RestrictedMemberSlot.MemberPath,
+                            skipIsNotNull
+                        );
                     }
                 },
                 // varInDomain action
@@ -172,7 +243,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         }
                         else
                         {
-                            domainValues.Single().AsEsql(builder, RestrictedMemberSlot.MemberPath, blockAlias);
+                            domainValues
+                                .Single()
+                                .AsEsql(builder, RestrictedMemberSlot.MemberPath, blockAlias);
                         }
                     }
                     else
@@ -192,7 +265,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                             }
                             else
                             {
-                                constant.AsEsql(builder, RestrictedMemberSlot.MemberPath, blockAlias);
+                                constant.AsEsql(
+                                    builder,
+                                    RestrictedMemberSlot.MemberPath,
+                                    blockAlias
+                                );
                             }
                             first = false;
                         }
@@ -211,7 +288,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     }
                     if (userString)
                     {
-                        this.RestrictedMemberSlot.MemberPath.ToCompactString(builder, Strings.ViewGen_EntityInstanceToken);
+                        this.RestrictedMemberSlot.MemberPath.ToCompactString(
+                            builder,
+                            Strings.ViewGen_EntityInstanceToken
+                        );
                         builder.Append(" is not NULL)"); // plus the closing bracket
                     }
                     else
@@ -232,7 +312,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     }
                     if (userString)
                     {
-                        this.RestrictedMemberSlot.MemberPath.ToCompactString(varIsNullBuilder, blockAlias);
+                        this.RestrictedMemberSlot.MemberPath.ToCompactString(
+                            varIsNullBuilder,
+                            blockAlias
+                        );
                         varIsNullBuilder.Append(" is NULL");
                     }
                     else
@@ -250,7 +333,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         builder.Append(')');
                     }
                 },
-                skipIsNotNull);
+                skipIsNotNull
+            );
 
             inputBuilder.Append(builder.ToString());
             return inputBuilder;
@@ -261,13 +345,18 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             Action<Set<Constant>> varInDomain,
             Action varIsNotNull,
             Action varIsNull,
-            bool skipIsNotNull)
+            bool skipIsNotNull
+        )
         {
             Debug.Assert(this.RestrictedMemberSlot.MemberPath.IsScalarType(), "Expected scalar.");
 
             // If domain values contain a negated constant, delegate Cql generation into that constant.
-            Debug.Assert(this.Domain.Values.Count(c => c is NegatedConstant) <= 1, "Multiple negated constants?");
-            NegatedConstant negated = (NegatedConstant)this.Domain.Values.FirstOrDefault(c => c is NegatedConstant);
+            Debug.Assert(
+                this.Domain.Values.Count(c => c is NegatedConstant) <= 1,
+                "Multiple negated constants?"
+            );
+            NegatedConstant negated = (NegatedConstant)
+                this.Domain.Values.FirstOrDefault(c => c is NegatedConstant);
             if (negated != null)
             {
                 negatedConstantAsCql(negated, this.Domain.Values);
@@ -275,7 +364,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             else // We have only positive constants.
             {
                 // 1. Generate "var in domain"
-                // 2. If var is not nullable, append "... and var is not null". 
+                // 2. If var is not nullable, append "... and var is not null".
                 //    This is needed for boolean _from variables that must never evaluate to null because view generation assumes 2-valued boolean logic.
                 // 3. If domain contains null, prepend "var is null or ...".
                 //
@@ -285,7 +374,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 //      generated by #3    generated by #1     generated by #2
 
                 // Copy the domain values for simplification changes.
-                Set<Constant> domainValues = new Set<Constant>(this.Domain.Values, Constant.EqualityComparer);
+                Set<Constant> domainValues = new Set<Constant>(
+                    this.Domain.Values,
+                    Constant.EqualityComparer
+                );
 
                 bool includeNull = false;
                 if (domainValues.Contains(Constant.Null))
@@ -302,9 +394,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     domainValues.Remove(Constant.Undefined);
                 }
 
-                bool excludeNull = !skipIsNotNull && this.RestrictedMemberSlot.MemberPath.IsNullable;
+                bool excludeNull =
+                    !skipIsNotNull && this.RestrictedMemberSlot.MemberPath.IsNullable;
 
-                Debug.Assert(!includeNull || !excludeNull, "includeNull and excludeNull can't be true at the same time.");
+                Debug.Assert(
+                    !includeNull || !excludeNull,
+                    "includeNull and excludeNull can't be true at the same time."
+                );
 
                 // #1: Generate "var in domain"
                 if (domainValues.Count > 0)

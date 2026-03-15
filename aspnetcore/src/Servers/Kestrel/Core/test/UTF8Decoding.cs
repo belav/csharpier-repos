@@ -41,14 +41,13 @@ public class UTF8DecodingTests
                 var byteRange = Enumerable.Range(1, length).Select(x => (byte)x).ToArray();
                 Array.Copy(bytes, 0, byteRange, position, bytes.Length);
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        HttpUtilities.GetRequestHeaderString(
-                            byteRange.AsSpan(),
-                            HeaderNames.Accept,
-                            KestrelServerOptions.DefaultHeaderEncodingSelector,
-                            checkForNewlineChars: false
-                        )
+                Assert.Throws<InvalidOperationException>(() =>
+                    HttpUtilities.GetRequestHeaderString(
+                        byteRange.AsSpan(),
+                        HeaderNames.Accept,
+                        KestrelServerOptions.DefaultHeaderEncodingSelector,
+                        checkForNewlineChars: false
+                    )
                 );
             }
         }

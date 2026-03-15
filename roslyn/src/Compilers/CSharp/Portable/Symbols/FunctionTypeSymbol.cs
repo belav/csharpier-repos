@@ -42,14 +42,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private BoundExpression? _expression;
         private NamedTypeSymbol? _lazyDelegateType;
 
-        internal static FunctionTypeSymbol? CreateIfFeatureEnabled(SyntaxNode syntax, Binder binder, Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate)
+        internal static FunctionTypeSymbol? CreateIfFeatureEnabled(
+            SyntaxNode syntax,
+            Binder binder,
+            Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate
+        )
         {
-            return syntax.IsFeatureEnabled(MessageID.IDS_FeatureInferredDelegateType) ?
-                new FunctionTypeSymbol(binder, calculateDelegate) :
-                null;
+            return syntax.IsFeatureEnabled(MessageID.IDS_FeatureInferredDelegateType)
+                ? new FunctionTypeSymbol(binder, calculateDelegate)
+                : null;
         }
 
-        private FunctionTypeSymbol(Binder binder, Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate)
+        private FunctionTypeSymbol(
+            Binder binder,
+            Func<Binder, BoundExpression, NamedTypeSymbol?> calculateDelegate
+        )
         {
             _binder = binder;
             _calculateDelegate = calculateDelegate;
@@ -83,10 +90,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Debug.Assert(_expression is { });
 
                 var delegateType = _calculateDelegate(_binder, _expression);
-                var result = Interlocked.CompareExchange(ref _lazyDelegateType, delegateType, Uninitialized);
+                var result = Interlocked.CompareExchange(
+                    ref _lazyDelegateType,
+                    delegateType,
+                    Uninitialized
+                );
 
-                if (_binder.Compilation.TestOnlyCompilationData is InferredDelegateTypeData data &&
-                    (object?)result == Uninitialized)
+                if (
+                    _binder.Compilation.TestOnlyCompilationData is InferredDelegateTypeData data
+                    && (object?)result == Uninitialized
+                )
                 {
                     Interlocked.Increment(ref data.InferredDelegateCount);
                 }
@@ -109,11 +122,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol? ContainingSymbol => null;
 
-        public override ImmutableArray<Location> Locations => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<Location> Locations =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override Accessibility DeclaredAccessibility => throw ExceptionUtilities.Unreachable();
+        public override Accessibility DeclaredAccessibility =>
+            throw ExceptionUtilities.Unreachable();
 
         public override bool IsStatic => false;
 
@@ -127,39 +143,71 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsRecordStruct => throw ExceptionUtilities.Unreachable();
 
-        internal override ObsoleteAttributeData ObsoleteAttributeData => throw ExceptionUtilities.Unreachable();
+        internal override ObsoleteAttributeData ObsoleteAttributeData =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override void Accept(CSharpSymbolVisitor visitor) => throw ExceptionUtilities.Unreachable();
+        public override void Accept(CSharpSymbolVisitor visitor) =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override TResult Accept<TResult>(CSharpSymbolVisitor<TResult> visitor) => throw ExceptionUtilities.Unreachable();
+        public override TResult Accept<TResult>(CSharpSymbolVisitor<TResult> visitor) =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override ImmutableArray<Symbol> GetMembers() => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<Symbol> GetMembers() =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override ImmutableArray<Symbol> GetMembers(string name) => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<Symbol> GetMembers(string name) =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() =>
+            throw ExceptionUtilities.Unreachable();
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) => throw ExceptionUtilities.Unreachable();
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) =>
+            throw ExceptionUtilities.Unreachable();
 
         protected override ISymbol CreateISymbol() => throw ExceptionUtilities.Unreachable();
 
-        protected override ITypeSymbol CreateITypeSymbol(CodeAnalysis.NullableAnnotation nullableAnnotation) => throw ExceptionUtilities.Unreachable();
+        protected override ITypeSymbol CreateITypeSymbol(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        ) => throw ExceptionUtilities.Unreachable();
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument a) => throw ExceptionUtilities.Unreachable();
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument a
+        ) => throw ExceptionUtilities.Unreachable();
 
-        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms) => throw ExceptionUtilities.Unreachable();
+        internal override void AddNullableTransforms(ArrayBuilder<byte> transforms) =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override bool ApplyNullableTransforms(byte defaultTransformFlag, ImmutableArray<byte> transforms, ref int position, out TypeSymbol result) => throw ExceptionUtilities.Unreachable();
+        internal override bool ApplyNullableTransforms(
+            byte defaultTransformFlag,
+            ImmutableArray<byte> transforms,
+            ref int position,
+            out TypeSymbol result
+        ) => throw ExceptionUtilities.Unreachable();
 
-        internal override ManagedKind GetManagedKind(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo) => throw ExceptionUtilities.Unreachable();
+        internal override ManagedKind GetManagedKind(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) => throw ExceptionUtilities.Unreachable();
 
-        internal override bool GetUnificationUseSiteDiagnosticRecursive(ref DiagnosticInfo result, Symbol owner, ref HashSet<TypeSymbol> checkedTypes) => throw ExceptionUtilities.Unreachable();
+        internal override bool GetUnificationUseSiteDiagnosticRecursive(
+            ref DiagnosticInfo result,
+            Symbol owner,
+            ref HashSet<TypeSymbol> checkedTypes
+        ) => throw ExceptionUtilities.Unreachable();
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol>? basesBeingResolved = null) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol>? basesBeingResolved = null
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
         internal override TypeSymbol MergeEquivalentTypes(TypeSymbol other, VarianceKind variance)
         {
-            Debug.Assert(this.Equals(other, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            Debug.Assert(
+                this.Equals(
+                    other,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
 
             var thisDelegateType = GetInternalDelegateType();
             var otherType = (FunctionTypeSymbol)other;
@@ -170,31 +218,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return this;
             }
 
-            var mergedDelegateType = (NamedTypeSymbol)thisDelegateType.MergeEquivalentTypes(otherDelegateType, variance);
-            return (object)thisDelegateType == mergedDelegateType ?
-                this :
-                otherType.WithDelegateType(mergedDelegateType);
+            var mergedDelegateType = (NamedTypeSymbol)
+                thisDelegateType.MergeEquivalentTypes(otherDelegateType, variance);
+            return (object)thisDelegateType == mergedDelegateType
+                ? this
+                : otherType.WithDelegateType(mergedDelegateType);
         }
 
-        internal override TypeSymbol SetNullabilityForReferenceTypes(Func<TypeWithAnnotations, TypeWithAnnotations> transform)
+        internal override TypeSymbol SetNullabilityForReferenceTypes(
+            Func<TypeWithAnnotations, TypeWithAnnotations> transform
+        )
         {
             var thisDelegateType = GetInternalDelegateType();
             if (thisDelegateType is null)
             {
                 return this;
             }
-            return WithDelegateType((NamedTypeSymbol)thisDelegateType.SetNullabilityForReferenceTypes(transform));
+            return WithDelegateType(
+                (NamedTypeSymbol)thisDelegateType.SetNullabilityForReferenceTypes(transform)
+            );
         }
 
         private FunctionTypeSymbol WithDelegateType(NamedTypeSymbol delegateType)
         {
             var thisDelegateType = GetInternalDelegateType();
-            return (object?)thisDelegateType == delegateType ?
-                this :
-                new FunctionTypeSymbol(delegateType);
+            return (object?)thisDelegateType == delegateType
+                ? this
+                : new FunctionTypeSymbol(delegateType);
         }
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls() => throw ExceptionUtilities.Unreachable();
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls() => throw ExceptionUtilities.Unreachable();
 
         internal override bool HasInlineArrayAttribute(out int length)
         {

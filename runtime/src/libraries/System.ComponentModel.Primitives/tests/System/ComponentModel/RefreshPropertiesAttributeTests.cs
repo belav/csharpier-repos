@@ -22,9 +22,24 @@ namespace System.ComponentModel.Primitives.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { RefreshPropertiesAttribute.All, RefreshPropertiesAttribute.All, true };
-            yield return new object[] { RefreshPropertiesAttribute.All, new RefreshPropertiesAttribute(RefreshProperties.All), true };
-            yield return new object[] { RefreshPropertiesAttribute.All, RefreshPropertiesAttribute.Repaint, false };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.All,
+                RefreshPropertiesAttribute.All,
+                true,
+            };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.All,
+                new RefreshPropertiesAttribute(RefreshProperties.All),
+                true,
+            };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.All,
+                RefreshPropertiesAttribute.Repaint,
+                false,
+            };
 
             yield return new object[] { RefreshPropertiesAttribute.All, new object(), false };
             yield return new object[] { RefreshPropertiesAttribute.All, null, false };
@@ -32,7 +47,11 @@ namespace System.ComponentModel.Primitives.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(RefreshPropertiesAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            RefreshPropertiesAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is RefreshPropertiesAttribute)
@@ -43,14 +62,33 @@ namespace System.ComponentModel.Primitives.Tests
 
         public static IEnumerable<object[]> DefaultProperties_TestData()
         {
-            yield return new object[] { RefreshPropertiesAttribute.Default, RefreshProperties.None, true };
-            yield return new object[] { RefreshPropertiesAttribute.All, RefreshProperties.All, false };
-            yield return new object[] { RefreshPropertiesAttribute.Repaint, RefreshProperties.Repaint, false };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.Default,
+                RefreshProperties.None,
+                true,
+            };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.All,
+                RefreshProperties.All,
+                false,
+            };
+            yield return new object[]
+            {
+                RefreshPropertiesAttribute.Repaint,
+                RefreshProperties.Repaint,
+                false,
+            };
         }
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetRefreshProperties_ReturnsExpected(RefreshPropertiesAttribute attribute, RefreshProperties expectedRefreshProperties, bool expectedIsDefaultAttribute)
+        public void DefaultProperties_GetRefreshProperties_ReturnsExpected(
+            RefreshPropertiesAttribute attribute,
+            RefreshProperties expectedRefreshProperties,
+            bool expectedIsDefaultAttribute
+        )
         {
             Assert.Equal(expectedRefreshProperties, attribute.RefreshProperties);
             Assert.Equal(expectedIsDefaultAttribute, attribute.IsDefaultAttribute());

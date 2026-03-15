@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SecurityCallContext.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,78 +30,82 @@
 
 using System;
 
-namespace System.EnterpriseServices {
-	public sealed class SecurityCallContext {
+namespace System.EnterpriseServices
+{
+    public sealed class SecurityCallContext
+    {
+        #region Fields
 
-		#region Fields
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        internal SecurityCallContext() { }
 
-		internal SecurityCallContext ()
-		{
-		}
+        internal SecurityCallContext(ISecurityCallContext context) { }
 
-		internal SecurityCallContext (ISecurityCallContext context)
-		{
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public SecurityCallers Callers
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public SecurityCallers Callers {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public static SecurityCallContext CurrentCall
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public static SecurityCallContext CurrentCall {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public SecurityIdentity DirectCaller
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public SecurityIdentity DirectCaller {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public bool IsSecurityEnabled
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool IsSecurityEnabled {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public int MinAuthenticationLevel
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public int MinAuthenticationLevel {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public int NumCallers
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public int NumCallers {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        public SecurityIdentity OriginalCaller
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public SecurityIdentity OriginalCaller {
-			[MonoTODO]
-			get { throw new NotImplementedException (); }
-		}
+        #endregion // Properties
 
-		#endregion // Properties
+        #region Methods
 
-		#region Methods
+        [MonoTODO]
+        public bool IsCallerInRole(string role)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool IsCallerInRole (string role)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool IsUserInRole(string user, string role)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool IsUserInRole (string user, string role)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion
-	}
+        #endregion
+    }
 }

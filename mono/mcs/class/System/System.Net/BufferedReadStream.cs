@@ -30,57 +30,66 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-	class BufferedReadStream : WebReadStream
-	{
-		readonly BufferOffsetSize readBuffer;
+    class BufferedReadStream : WebReadStream
+    {
+        readonly BufferOffsetSize readBuffer;
 
-		public BufferedReadStream (WebOperation operation, Stream innerStream,
-		                           BufferOffsetSize readBuffer)
-			: base (operation, innerStream)
-		{
-			this.readBuffer = readBuffer;
-		}
+        public BufferedReadStream(
+            WebOperation operation,
+            Stream innerStream,
+            BufferOffsetSize readBuffer
+        )
+            : base(operation, innerStream)
+        {
+            this.readBuffer = readBuffer;
+        }
 
-		protected override async Task<int> ProcessReadAsync (
-			byte[] buffer, int offset, int size,
-			CancellationToken cancellationToken)
-		{
-			cancellationToken.ThrowIfCancellationRequested ();
+        protected override async Task<int> ProcessReadAsync(
+            byte[] buffer,
+            int offset,
+            int size,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
 
-			var remaining = readBuffer?.Size ?? 0;
-			if (remaining > 0) {
-				int copy = (remaining > size) ? size : remaining;
-				Buffer.BlockCopy (readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
-				readBuffer.Offset += copy;
-				readBuffer.Size -= copy;
-				offset += copy;
-				size -= copy;
-				return copy;
-			}
+            var remaining = readBuffer?.Size ?? 0;
+            if (remaining > 0)
+            {
+                int copy = (remaining > size) ? size : remaining;
+                Buffer.BlockCopy(readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
+                readBuffer.Offset += copy;
+                readBuffer.Size -= copy;
+                offset += copy;
+                size -= copy;
+                return copy;
+            }
 
-			if (InnerStream == null)
-				return 0;
+            if (InnerStream == null)
+                return 0;
 
-			return await InnerStream.ReadAsync (
-				buffer, offset, size, cancellationToken).ConfigureAwait (false);
-		}
+            return await InnerStream
+                .ReadAsync(buffer, offset, size, cancellationToken)
+                .ConfigureAwait(false);
+        }
 
-		internal bool TryReadFromBuffer (byte[] buffer, int offset, int size, out int result)
-		{
-			var remaining = readBuffer?.Size ?? 0;
-			if (remaining <= 0) {
-				result = 0;
-				return InnerStream == null;
-			}
+        internal bool TryReadFromBuffer(byte[] buffer, int offset, int size, out int result)
+        {
+            var remaining = readBuffer?.Size ?? 0;
+            if (remaining <= 0)
+            {
+                result = 0;
+                return InnerStream == null;
+            }
 
-			int copy = (remaining > size) ? size : remaining;
-			Buffer.BlockCopy (readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
-			readBuffer.Offset += copy;
-			readBuffer.Size -= copy;
-			offset += copy;
-			size -= copy;
-			result = copy;
-			return true;
-		}
-	}
+            int copy = (remaining > size) ? size : remaining;
+            Buffer.BlockCopy(readBuffer.Buffer, readBuffer.Offset, buffer, offset, copy);
+            readBuffer.Offset += copy;
+            readBuffer.Size -= copy;
+            offset += copy;
+            size -= copy;
+            result = copy;
+            return true;
+        }
+    }
 }

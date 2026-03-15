@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-
 #if SILVERLIGHT
 using System.Reflection;
 #endif
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Describes the context in which a validation is being performed.
     /// </summary>
@@ -23,7 +23,11 @@ namespace System.ComponentModel.DataAnnotations {
     /// will be available to validation methods that use this <see cref="ValidationContext"/>
     /// </para>
     /// </remarks>
-    [SuppressMessage("Microsoft.Usage", "CA2302:FlagServiceProviders", Justification = "The actual IServiceProvider implementation lies with the underlying service provider.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2302:FlagServiceProviders",
+        Justification = "The actual IServiceProvider implementation lies with the underlying service provider."
+    )]
     public sealed class ValidationContext : IServiceProvider
     {
         #region Member Fields
@@ -44,8 +48,7 @@ namespace System.ComponentModel.DataAnnotations {
         /// <param name="instance">The object instance being validated.  It cannot be <c>null</c>.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is <c>null</c></exception>
         public ValidationContext(object instance)
-            : this(instance, null, null) {
-        }
+            : this(instance, null, null) { }
 
         /// <summary>
         /// Construct a <see cref="ValidationContext"/> for a given object instance and an optional
@@ -58,8 +61,7 @@ namespace System.ComponentModel.DataAnnotations {
         /// </param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is <c>null</c></exception>
         public ValidationContext(object instance, IDictionary<object, object> items)
-            : this(instance, null, items) {
-        }
+            : this(instance, null, items) { }
 
 #if SILVERLIGHT
         /// <summary>
@@ -96,28 +98,43 @@ namespace System.ComponentModel.DataAnnotations {
         /// </param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is <c>null</c></exception>
 #endif
-        public ValidationContext(object instance, IServiceProvider serviceProvider, IDictionary<object, object> items) {
-            if (instance == null) {
+        public ValidationContext(
+            object instance,
+            IServiceProvider serviceProvider,
+            IDictionary<object, object> items
+        )
+        {
+            if (instance == null)
+            {
                 throw new ArgumentNullException("instance");
             }
 
-            if (serviceProvider != null) {
-                this.InitializeServiceProvider(serviceType => serviceProvider.GetService(serviceType));
+            if (serviceProvider != null)
+            {
+                this.InitializeServiceProvider(serviceType =>
+                    serviceProvider.GetService(serviceType)
+                );
             }
 
 #if !SILVERLIGHT
             Design.IServiceContainer container = serviceProvider as Design.IServiceContainer;
 
-            if (container != null) {
+            if (container != null)
+            {
                 this._serviceContainer = new ValidationContextServiceContainer(container);
-            } else {
+            }
+            else
+            {
                 this._serviceContainer = new ValidationContextServiceContainer();
             }
 #endif
 
-            if (items != null) {
+            if (items != null)
+            {
                 this._items = new Dictionary<object, object>(items);
-            } else {
+            }
+            else
+            {
                 this._items = new Dictionary<object, object>();
             }
 
@@ -138,17 +155,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// For example, the property being validated, as well as other properties on the instance might not have been
         /// updated to their new values.
         /// </remarks>
-        public object ObjectInstance {
-            get {
-                return this._objectInstance;
-            }
+        public object ObjectInstance
+        {
+            get { return this._objectInstance; }
         }
 
         /// <summary>
         /// Gets the type of the object being validated.  It will not be null.
         /// </summary>
-        public Type ObjectType {
-            get {
+        public Type ObjectType
+        {
+            get
+            {
 #if SILVERLIGHT
                 return this.ObjectInstance.GetCustomOrCLRType();
 #else
@@ -164,23 +182,30 @@ namespace System.ComponentModel.DataAnnotations {
         /// to see if can use that instead.  Lacking that, it returns <see cref="MemberName"/>.  The <see cref="ObjectInstance"/>
         /// type name will be used if MemberName has not been set.
         /// </value>
-        public string DisplayName {
-            get {
-                if (string.IsNullOrEmpty(this._displayName)) {
+        public string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this._displayName))
+                {
                     this._displayName = this.GetDisplayName();
 
-                    if (string.IsNullOrEmpty(this._displayName)) {
+                    if (string.IsNullOrEmpty(this._displayName))
+                    {
                         this._displayName = this.MemberName;
 
-                        if (string.IsNullOrEmpty(this._displayName)) {
+                        if (string.IsNullOrEmpty(this._displayName))
+                        {
                             this._displayName = this.ObjectType.Name;
                         }
                     }
                 }
                 return this._displayName;
             }
-            set {
-                if (string.IsNullOrEmpty(value)) {
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
                     throw new ArgumentNullException("value");
                 }
                 this._displayName = value;
@@ -192,13 +217,10 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <value>This name reflects the API name of the member being validated, not a localized name.  It should be set
         /// only for property or parameter contexts.</value>
-        public string MemberName {
-            get {
-                return this._memberName;
-            }
-            set {
-                this._memberName = value;
-            }
+        public string MemberName
+        {
+            get { return this._memberName; }
+            set { this._memberName = value; }
         }
 
         /// <summary>
@@ -206,10 +228,9 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <value>This property will never be null, but the dictionary may be empty.  Changes made
         /// to items in this dictionary will never affect the original dictionary specified in the constructor.</value>
-        public IDictionary<object, object> Items {
-            get {
-                return this._items;
-            }
+        public IDictionary<object, object> Items
+        {
+            get { return this._items; }
         }
 
         #endregion
@@ -220,18 +241,23 @@ namespace System.ComponentModel.DataAnnotations {
         /// Looks up the display name using the DisplayAttribute attached to the respective type or property.
         /// </summary>
         /// <returns>A display-friendly name of the member represented by the <see cref="MemberName"/>.</returns>
-        private string GetDisplayName() {
+        private string GetDisplayName()
+        {
             string displayName = null;
             ValidationAttributeStore store = ValidationAttributeStore.Instance;
             DisplayAttribute displayAttribute = null;
 
-            if (string.IsNullOrEmpty(this._memberName)) {
+            if (string.IsNullOrEmpty(this._memberName))
+            {
                 displayAttribute = store.GetTypeDisplayAttribute(this);
-            } else if (store.IsPropertyContext(this)) {
+            }
+            else if (store.IsPropertyContext(this))
+            {
                 displayAttribute = store.GetPropertyDisplayAttribute(this);
             }
 
-            if (displayAttribute != null) {
+            if (displayAttribute != null)
+            {
                 displayName = displayAttribute.GetName();
             }
 
@@ -247,7 +273,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// desired <see cref="Type"/> when <see cref="GetService"/> is called.
         /// If it is <c>null</c>, <see cref="GetService"/> will always return <c>null</c>.
         /// </param>
-        public void InitializeServiceProvider(Func<Type, object> serviceProvider) {
+        public void InitializeServiceProvider(Func<Type, object> serviceProvider)
+        {
             this._serviceProvider = serviceProvider;
         }
 
@@ -273,16 +300,19 @@ namespace System.ComponentModel.DataAnnotations {
         /// <param name="serviceType">The type of the service needed.</param>
         /// <returns>An instance of that service or null if it is not available.</returns>
 #endif
-        public object GetService(Type serviceType) {
+        public object GetService(Type serviceType)
+        {
             object service = null;
 
 #if !SILVERLIGHT
-            if (this._serviceContainer != null) {
+            if (this._serviceContainer != null)
+            {
                 service = this._serviceContainer.GetService(serviceType);
             }
 #endif
 
-            if (service == null && this._serviceProvider != null) {
+            if (service == null && this._serviceProvider != null)
+            {
                 service = this._serviceProvider(serviceType);
             }
 
@@ -307,9 +337,12 @@ namespace System.ComponentModel.DataAnnotations {
         /// <see cref="Design.IServiceContainer"/>, then it will be used as the
         /// <see cref="ServiceContainer"/>, otherwise an empty container will be initialized.
         /// </remarks>
-        public Design.IServiceContainer ServiceContainer {
-            get {
-                if (this._serviceContainer == null) {
+        public Design.IServiceContainer ServiceContainer
+        {
+            get
+            {
+                if (this._serviceContainer == null)
+                {
                     this._serviceContainer = new ValidationContextServiceContainer();
                 }
 
@@ -321,7 +354,11 @@ namespace System.ComponentModel.DataAnnotations {
         /// Private implementation of <see cref="Design.IServiceContainer"/> to act
         /// as a default service container on <see cref="ValidationContext"/>.
         /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2302:FlagServiceProviders", Justification = "ValidationContext does not need to work with COM interop types. So this is fine.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2302:FlagServiceProviders",
+            Justification = "ValidationContext does not need to work with COM interop types. So this is fine."
+        )]
         private class ValidationContextServiceContainer : Design.IServiceContainer
         {
         #region Member Fields
@@ -337,8 +374,7 @@ namespace System.ComponentModel.DataAnnotations {
             /// <summary>
             /// Constructs a new service container that does not have a parent container
             /// </summary>
-            internal ValidationContextServiceContainer() {
-            }
+            internal ValidationContextServiceContainer() { }
 
             /// <summary>
             /// Contstructs a new service container that has a parent container, making this container
@@ -347,7 +383,8 @@ namespace System.ComponentModel.DataAnnotations {
             /// specified as <c>false</c> on those calls.
             /// </summary>
             /// <param name="parentContainer">The parent container to wrap into this container.</param>
-            internal ValidationContextServiceContainer(Design.IServiceContainer parentContainer) {
+            internal ValidationContextServiceContainer(Design.IServiceContainer parentContainer)
+            {
                 this._parentContainer = parentContainer;
             }
 
@@ -355,15 +392,38 @@ namespace System.ComponentModel.DataAnnotations {
 
         #region IServiceContainer Members
 
-            [SuppressMessage("Microsoft.Usage", "CA2301:EmbeddableTypesInContainersRule", MessageId = "_services", Justification = "ValidationContext does not need to work with COM interop types. So this is fine.")]
-            public void AddService(Type serviceType, Design.ServiceCreatorCallback callback, bool promote)
+            [SuppressMessage(
+                "Microsoft.Usage",
+                "CA2301:EmbeddableTypesInContainersRule",
+                MessageId = "_services",
+                Justification = "ValidationContext does not need to work with COM interop types. So this is fine."
+            )]
+            public void AddService(
+                Type serviceType,
+                Design.ServiceCreatorCallback callback,
+                bool promote
+            )
             {
-                if (promote && this._parentContainer != null) {
+                if (promote && this._parentContainer != null)
+                {
                     this._parentContainer.AddService(serviceType, callback, promote);
-                } else {
-                    lock (this._lock) {
-                        if (this._services.ContainsKey(serviceType)) {
-                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.DataAnnotationsResources.ValidationContextServiceContainer_ItemAlreadyExists, serviceType), "serviceType");
+                }
+                else
+                {
+                    lock (this._lock)
+                    {
+                        if (this._services.ContainsKey(serviceType))
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources
+                                        .DataAnnotationsResources
+                                        .ValidationContextServiceContainer_ItemAlreadyExists,
+                                    serviceType
+                                ),
+                                "serviceType"
+                            );
                         }
 
                         this._services.Add(serviceType, callback);
@@ -371,19 +431,39 @@ namespace System.ComponentModel.DataAnnotations {
                 }
             }
 
-            public void AddService(Type serviceType, Design.ServiceCreatorCallback callback) {
+            public void AddService(Type serviceType, Design.ServiceCreatorCallback callback)
+            {
                 this.AddService(serviceType, callback, true);
             }
 
-            [SuppressMessage("Microsoft.Usage", "CA2301:EmbeddableTypesInContainersRule", MessageId = "_services", Justification = "ValidationContext does not need to work with COM interop types. So this is fine.")]
+            [SuppressMessage(
+                "Microsoft.Usage",
+                "CA2301:EmbeddableTypesInContainersRule",
+                MessageId = "_services",
+                Justification = "ValidationContext does not need to work with COM interop types. So this is fine."
+            )]
             public void AddService(Type serviceType, object serviceInstance, bool promote)
             {
-                if (promote && this._parentContainer != null) {
+                if (promote && this._parentContainer != null)
+                {
                     this._parentContainer.AddService(serviceType, serviceInstance, promote);
-                } else {
-                    lock (this._lock) {
-                        if (this._services.ContainsKey(serviceType)) {
-                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.DataAnnotationsResources.ValidationContextServiceContainer_ItemAlreadyExists, serviceType), "serviceType");
+                }
+                else
+                {
+                    lock (this._lock)
+                    {
+                        if (this._services.ContainsKey(serviceType))
+                        {
+                            throw new ArgumentException(
+                                string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    Resources
+                                        .DataAnnotationsResources
+                                        .ValidationContextServiceContainer_ItemAlreadyExists,
+                                    serviceType
+                                ),
+                                "serviceType"
+                            );
                         }
 
                         this._services.Add(serviceType, serviceInstance);
@@ -391,23 +471,29 @@ namespace System.ComponentModel.DataAnnotations {
                 }
             }
 
-            public void AddService(Type serviceType, object serviceInstance) {
+            public void AddService(Type serviceType, object serviceInstance)
+            {
                 this.AddService(serviceType, serviceInstance, true);
             }
 
-            public void RemoveService(Type serviceType, bool promote) {
-                lock (this._lock) {
-                    if (this._services.ContainsKey(serviceType)) {
+            public void RemoveService(Type serviceType, bool promote)
+            {
+                lock (this._lock)
+                {
+                    if (this._services.ContainsKey(serviceType))
+                    {
                         this._services.Remove(serviceType);
                     }
                 }
 
-                if (promote && this._parentContainer != null) {
+                if (promote && this._parentContainer != null)
+                {
                     this._parentContainer.RemoveService(serviceType);
                 }
             }
 
-            public void RemoveService(Type serviceType) {
+            public void RemoveService(Type serviceType)
+            {
                 this.RemoveService(serviceType, true);
             }
 
@@ -415,21 +501,25 @@ namespace System.ComponentModel.DataAnnotations {
 
         #region IServiceProvider Members
 
-            public object GetService(Type serviceType) {
-                if (serviceType == null) {
+            public object GetService(Type serviceType)
+            {
+                if (serviceType == null)
+                {
                     throw new ArgumentNullException("serviceType");
                 }
 
                 object service = null;
                 this._services.TryGetValue(serviceType, out service);
 
-                if (service == null && this._parentContainer != null) {
+                if (service == null && this._parentContainer != null)
+                {
                     service = this._parentContainer.GetService(serviceType);
                 }
 
                 Design.ServiceCreatorCallback callback = service as Design.ServiceCreatorCallback;
 
-                if (callback != null) {
+                if (callback != null)
+                {
                     service = callback(this, serviceType);
                 }
 

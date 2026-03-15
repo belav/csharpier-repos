@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,81 +30,80 @@ using System.ComponentModel;
 
 namespace System.Management
 {
-	[ToolboxItem (false)]
-	public class ManagementObjectSearcher : Component
-	{
-		ObjectQuery mQueryObject;
+    [ToolboxItem(false)]
+    public class ManagementObjectSearcher : Component
+    {
+        ObjectQuery mQueryObject;
 
-		public ManagementObjectSearcher ()
-		{
-			mQueryObject = new ObjectQuery ();
-		}
+        public ManagementObjectSearcher()
+        {
+            mQueryObject = new ObjectQuery();
+        }
 
-		public ManagementObjectSearcher (ObjectQuery query)
-		{
-			mQueryObject = (ObjectQuery)query.Clone ();
-		}
+        public ManagementObjectSearcher(ObjectQuery query)
+        {
+            mQueryObject = (ObjectQuery)query.Clone();
+        }
 
-		public ManagementObjectSearcher (string queryString)
-		{
-			mQueryObject = new ObjectQuery (queryString);
-		}
+        public ManagementObjectSearcher(string queryString)
+        {
+            mQueryObject = new ObjectQuery(queryString);
+        }
 
-		public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher(ManagementScope scope, ObjectQuery query)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ManagementObjectSearcher (string scope, string queryString)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher(string scope, string queryString)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ManagementObjectSearcher (ManagementScope scope, ObjectQuery query, EnumerationOptions options)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher(
+            ManagementScope scope,
+            ObjectQuery query,
+            EnumerationOptions options
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public ManagementObjectSearcher (string scope, string queryString, EnumerationOptions options)
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectSearcher(
+            string scope,
+            string queryString,
+            EnumerationOptions options
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public EnumerationOptions Options {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public EnumerationOptions Options
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public ObjectQuery Query {
-			get {
-				return mQueryObject;
-			}
-			set {
-				mQueryObject = value;
-			}
-		}
+        public ObjectQuery Query
+        {
+            get { return mQueryObject; }
+            set { mQueryObject = value; }
+        }
 
-		public ManagementScope Scope {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public ManagementScope Scope
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public ManagementObjectCollection Get ()
-		{
-			throw new NotImplementedException ();
-		}
+        public ManagementObjectCollection Get()
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Get (ManagementOperationObserver watcher)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public void Get(ManagementOperationObserver watcher)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

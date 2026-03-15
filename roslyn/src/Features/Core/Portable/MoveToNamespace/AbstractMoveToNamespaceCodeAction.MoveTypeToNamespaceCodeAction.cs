@@ -8,8 +8,16 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
 {
     internal abstract partial class AbstractMoveToNamespaceCodeAction
     {
-        private class MoveTypeToNamespaceCodeAction(IMoveToNamespaceService changeNamespaceService, MoveToNamespaceAnalysisResult analysisResult, CodeCleanupOptionsProvider cleanupOptions)
-            : AbstractMoveToNamespaceCodeAction(changeNamespaceService, analysisResult, cleanupOptions)
+        private class MoveTypeToNamespaceCodeAction(
+            IMoveToNamespaceService changeNamespaceService,
+            MoveToNamespaceAnalysisResult analysisResult,
+            CodeCleanupOptionsProvider cleanupOptions
+        )
+            : AbstractMoveToNamespaceCodeAction(
+                changeNamespaceService,
+                analysisResult,
+                cleanupOptions
+            )
         {
             public override string Title => FeaturesResources.Move_to_namespace;
         }

@@ -33,16 +33,19 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class Build {
-		[Test]
-		public void TestBuild1 ()
-		{
-			Engine engine;
-			Project project;
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class Build
+    {
+        [Test]
+        public void TestBuild1()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='1' DependsOnTargets='2'>
 					</Target>
@@ -51,40 +54,42 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsFalse (project.Build ("1"), "A1");
-		}
+            Assert.IsFalse(project.Build("1"), "A1");
+        }
 
-		[Test]
-		public void TestBuild2 ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestBuild2()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='1' DependsOnTargets='2'>
 					</Target>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsFalse (project.Build ("1"));
-		}
+            Assert.IsFalse(project.Build("1"));
+        }
 
-		[Test]
-		public void TestBuild3 ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestBuild3()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='A'>
 						<Error Text='text' />
@@ -98,21 +103,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsFalse (project.Build ("A"), "A1");
-			Assert.IsNotNull (project.EvaluatedProperties ["B"], "A2");
-		}
+            Assert.IsFalse(project.Build("A"), "A1");
+            Assert.IsNotNull(project.EvaluatedProperties["B"], "A2");
+        }
 
-		[Test]
-		public void TestBuild4 ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestBuild4()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='A'>
 						<Error ContinueOnError='true' Text='text' />
@@ -129,22 +135,23 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("A"), "A1");
-			Assert.IsNotNull (project.EvaluatedProperties ["A"], "A2");
-			Assert.IsNull (project.EvaluatedProperties ["B"], "A3");
-		}
+            Assert.IsTrue(project.Build("A"), "A1");
+            Assert.IsNotNull(project.EvaluatedProperties["A"], "A2");
+            Assert.IsNull(project.EvaluatedProperties["B"], "A3");
+        }
 
-		[Test]
-		public void TestBuildContinueOnError ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestBuildContinueOnError()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='A'>
 						<Error ContinueOnError='true' Text='text' />
@@ -156,21 +163,22 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("A"), "A1");
-			Assert.IsNotNull (project.EvaluatedProperties["A"], "A2");
-		}
+            Assert.IsTrue(project.Build("A"), "A1");
+            Assert.IsNotNull(project.EvaluatedProperties["A"], "A2");
+        }
 
-		[Test]
-		public void TestBuildContinueOnErrorFalse ()
-		{
-			Engine engine;
-			Project project;
+        [Test]
+        public void TestBuildContinueOnErrorFalse()
+        {
+            Engine engine;
+            Project project;
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
 					<Target Name='A'>
 						<Error ContinueOnError='false' Text='text' />
@@ -181,13 +189,12 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsFalse (project.Build ("A"), "A1");
-			Assert.IsNull (project.EvaluatedProperties["A"], "A2");
-		}
-
-	}
+            Assert.IsFalse(project.Build("A"), "A1");
+            Assert.IsNull(project.EvaluatedProperties["A"], "A2");
+        }
+    }
 }

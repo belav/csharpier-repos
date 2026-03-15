@@ -16,45 +16,44 @@ public class CustomValueGeneratorTest
         var entities = new List<SomeEntity>();
         for (var i = 0; i < CustomGuidValueGenerator.SpecialGuids.Length; i++)
         {
-            entities.Add(
-                context.Add(
-                    new SomeEntity { Name = _names[i] }).Entity);
+            entities.Add(context.Add(new SomeEntity { Name = _names[i] }).Entity);
         }
 
-        Assert.Equal(entities.Select(e => e.Id), entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id));
+        Assert.Equal(
+            entities.Select(e => e.Id),
+            entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id)
+        );
 
         Assert.Equal(CustomGuidValueGenerator.SpecialGuids, entities.Select(e => e.SpecialId));
 
-        Assert.Equal(_names.Select((n, i) => n + " - " + (i + 1)), entities.Select(e => e.SpecialString));
+        Assert.Equal(
+            _names.Select((n, i) => n + " - " + (i + 1)),
+            entities.Select(e => e.SpecialString)
+        );
     }
 
     private class CustomValueGeneratorContext : DbContext
     {
-        private static readonly IServiceProvider _serviceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
-                .AddScoped<IValueGeneratorSelector, CustomInMemoryValueGeneratorSelector>()
-                .BuildServiceProvider(validateScopes: true);
+        private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .AddScoped<IValueGeneratorSelector, CustomInMemoryValueGeneratorSelector>()
+            .BuildServiceProvider(validateScopes: true);
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(CustomValueGeneratorContext));
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder
-                .Entity<SomeEntity>(
-                    b =>
-                    {
-                        b.HasAlternateKey(
-                            e => new { e.SpecialId, e.SpecialString });
-                        b.Property(e => e.SpecialId)
-                            .HasAnnotation("SpecialGuid", true)
-                            .ValueGeneratedOnAdd();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<SomeEntity>(b =>
+            {
+                b.HasAlternateKey(e => new { e.SpecialId, e.SpecialString });
+                b.Property(e => e.SpecialId)
+                    .HasAnnotation("SpecialGuid", true)
+                    .ValueGeneratedOnAdd();
 
-                        b.Property(e => e.SpecialString)
-                            .ValueGeneratedOnAdd();
-                    });
+                b.Property(e => e.SpecialString).ValueGeneratedOnAdd();
+            });
     }
 
     [ConditionalFact]
@@ -64,39 +63,41 @@ public class CustomValueGeneratorTest
         var entities = new List<SomeEntity>();
         for (var i = 0; i < CustomGuidValueGenerator.SpecialGuids.Length; i++)
         {
-            entities.Add(
-                context.Add(
-                    new SomeEntity { Name = _names[i] }).Entity);
+            entities.Add(context.Add(new SomeEntity { Name = _names[i] }).Entity);
         }
 
-        Assert.Equal(entities.Select(e => e.Id), entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id));
+        Assert.Equal(
+            entities.Select(e => e.Id),
+            entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id)
+        );
 
         Assert.Equal(CustomGuidValueGenerator.SpecialGuids, entities.Select(e => e.SpecialId));
 
-        Assert.Equal(_names.Select((n, i) => n + " - " + (i + 1)), entities.Select(e => e.SpecialString));
+        Assert.Equal(
+            _names.Select((n, i) => n + " - " + (i + 1)),
+            entities.Select(e => e.SpecialString)
+        );
     }
 
     private class CustomValueGeneratorContextAnnotateType : DbContext
     {
-        private static readonly IServiceProvider _serviceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider(validateScopes: true);
+        private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(CustomValueGeneratorContextAnnotateType));
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder
-                .Entity<SomeEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).HasValueGenerator<SequentialGuidValueGenerator>();
-                        b.Property(e => e.SpecialId).HasValueGenerator(typeof(CustomGuidValueGenerator));
-                        b.Property(e => e.SpecialString).HasValueGenerator<SomeEntityStringValueGenerator>();
-                    });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<SomeEntity>(b =>
+            {
+                b.Property(e => e.Id).HasValueGenerator<SequentialGuidValueGenerator>();
+                b.Property(e => e.SpecialId).HasValueGenerator(typeof(CustomGuidValueGenerator));
+                b.Property(e => e.SpecialString)
+                    .HasValueGenerator<SomeEntityStringValueGenerator>();
+            });
     }
 
     [ConditionalFact]
@@ -106,48 +107,48 @@ public class CustomValueGeneratorTest
         var entities = new List<SomeEntity>();
         for (var i = 0; i < CustomGuidValueGenerator.SpecialGuids.Length; i++)
         {
-            entities.Add(
-                context.Add(
-                    new SomeEntity { Name = _names[i] }).Entity);
+            entities.Add(context.Add(new SomeEntity { Name = _names[i] }).Entity);
         }
 
-        Assert.Equal(entities.Select(e => e.Id), entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id));
+        Assert.Equal(
+            entities.Select(e => e.Id),
+            entities.OrderBy(e => ToCounter(e.Id)).Select(e => e.Id)
+        );
 
         Assert.Equal(CustomGuidValueGenerator.SpecialGuids, entities.Select(e => e.SpecialId));
 
-        Assert.Equal(_names.Select((n, i) => n + " - " + (i + 1)), entities.Select(e => e.SpecialString));
+        Assert.Equal(
+            _names.Select((n, i) => n + " - " + (i + 1)),
+            entities.Select(e => e.SpecialString)
+        );
     }
 
     private class CustomValueGeneratorContextAnnotateFactory : DbContext
     {
-        private static readonly IServiceProvider _serviceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
-                .BuildServiceProvider(validateScopes: true);
+        private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(CustomValueGeneratorContextAnnotateFactory));
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder
-                .Entity<SomeEntity>(
-                    b =>
-                    {
-                        var factory = new CustomValueGeneratorFactory();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<SomeEntity>(b =>
+            {
+                var factory = new CustomValueGeneratorFactory();
 
-                        b.Property(e => e.Id).HasValueGenerator(factory.Create);
+                b.Property(e => e.Id).HasValueGenerator(factory.Create);
 
-                        b.Property(e => e.SpecialId)
-                            .Metadata.SetValueGeneratorFactory(factory.Create);
+                b.Property(e => e.SpecialId).Metadata.SetValueGeneratorFactory(factory.Create);
 
-                        b.Property(e => e.SpecialId)
-                            .HasAnnotation("SpecialGuid", true)
-                            .ValueGeneratedOnAdd();
+                b.Property(e => e.SpecialId)
+                    .HasAnnotation("SpecialGuid", true)
+                    .ValueGeneratedOnAdd();
 
-                        b.Property(e => e.SpecialString).HasValueGenerator(factory.Create);
-                    });
+                b.Property(e => e.SpecialString).HasValueGenerator(factory.Create);
+            });
     }
 
     private class SomeEntity
@@ -167,7 +168,7 @@ public class CustomValueGeneratorTest
         "Kasper Schmeichel",
         "Wes Morgan",
         "Robert Huth",
-        "Leonardo Ulloa"
+        "Leonardo Ulloa",
     };
 
     private static long ToCounter(Guid guid)
@@ -198,47 +199,44 @@ public class CustomValueGeneratorTest
 
         public CustomInMemoryValueGeneratorSelector(
             ValueGeneratorSelectorDependencies dependencies,
-            IInMemoryDatabase inMemoryDatabase)
-            : base(dependencies, inMemoryDatabase)
-        {
-        }
+            IInMemoryDatabase inMemoryDatabase
+        )
+            : base(dependencies, inMemoryDatabase) { }
 
-        public override ValueGenerator Create(IProperty property, ITypeBase typeBase)
-            => _factory.Create(property, typeBase);
+        public override ValueGenerator Create(IProperty property, ITypeBase typeBase) =>
+            _factory.Create(property, typeBase);
     }
 
     private class CustomGuidValueGenerator : ValueGenerator<Guid>
     {
         public static Guid[] SpecialGuids { get; } =
-        {
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid(),
-            Guid.NewGuid()
-        };
+            {
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+            };
 
         private int _counter = -1;
 
-        public override Guid Next(EntityEntry entry)
-            => SpecialGuids[Interlocked.Increment(ref _counter)];
+        public override Guid Next(EntityEntry entry) =>
+            SpecialGuids[Interlocked.Increment(ref _counter)];
 
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 
     private class SomeEntityStringValueGenerator : ValueGenerator<string>
     {
         private int _counter;
 
-        public override string Next(EntityEntry entry)
-            => ((SomeEntity)entry.Entity).Name + " - " + Interlocked.Increment(ref _counter);
+        public override string Next(EntityEntry entry) =>
+            ((SomeEntity)entry.Entity).Name + " - " + Interlocked.Increment(ref _counter);
 
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 
     private class CustomValueGeneratorFactory : ValueGeneratorFactory
@@ -252,10 +250,11 @@ public class CustomValueGeneratorTest
                     : new SequentialGuidValueGenerator();
             }
 
-            return property.ClrType == typeof(string)
+            return
+                property.ClrType == typeof(string)
                 && property.DeclaringType.ClrType == typeof(SomeEntity)
-                    ? new SomeEntityStringValueGenerator()
-                    : null;
+                ? new SomeEntityStringValueGenerator()
+                : null;
         }
     }
 }

@@ -31,23 +31,25 @@ using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class ConsoleLoggerTest {
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestAssignment ()
-		{
-			ConsoleLogger cl = new ConsoleLogger ();
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class ConsoleLoggerTest
+    {
+        [Test]
+        [Category("NotDotNet")]
+        public void TestAssignment()
+        {
+            ConsoleLogger cl = new ConsoleLogger();
 
-			Assert.IsNull (cl.Parameters, "A1");
-			Assert.IsTrue (cl.ShowSummary, "A2");
-			Assert.IsFalse (cl.SkipProjectStartedText, "A3");
-			Assert.AreEqual (LoggerVerbosity.Normal, cl.Verbosity, "A4");
+            Assert.IsNull(cl.Parameters, "A1");
+            Assert.IsTrue(cl.ShowSummary, "A2");
+            Assert.IsFalse(cl.SkipProjectStartedText, "A3");
+            Assert.AreEqual(LoggerVerbosity.Normal, cl.Verbosity, "A4");
 
-			cl.ApplyParameter ("name", "value");
-			
-			Assert.IsNull (cl.Parameters);
-		}
-	}
+            cl.ApplyParameter("name", "value");
+
+            Assert.IsNull(cl.Parameters);
+        }
+    }
 }

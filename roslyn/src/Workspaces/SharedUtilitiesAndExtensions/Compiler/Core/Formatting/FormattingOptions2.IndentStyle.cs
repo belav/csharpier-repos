@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             None = 0,
             Block = 1,
-            Smart = 2
+            Smart = 2,
         }
     }
 }

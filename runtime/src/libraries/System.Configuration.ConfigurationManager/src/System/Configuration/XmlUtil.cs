@@ -27,26 +27,26 @@ namespace System.Configuration
         // Offset from where the reader reports the LinePosition of an Xml Node to
         // the start of that representation in text.
         private static ReadOnlySpan<int> PositionOffset =>
-        [
-            0,  // None,
-            1,  // Element,                 <elem
-            -1, // Attribute,               N/A
-            0,  // Text,
-            9,  // CDATA,                   <![CDATA[
-            1,  // EntityReference,         &lt
-            -1, // Entity,                  N/A
-            2,  // ProcessingInstruction,   <?pi
-            4,  // Comment,                 <!--
-            -1, // Document,                N/A
-            10, // DocumentType,            <!DOCTYPE
-            -1, // DocumentFragment,        N/A
-            -1, // Notation,                N/A
-            0,  // Whitespace,
-            0,  // SignificantWhitespace,
-            2,  // EndElement,              />
-            -1, // EndEntity,               N/A
-            2,  // XmlDeclaration           <?xml
-        ];
+            [
+                0, // None,
+                1, // Element,                 <elem
+                -1, // Attribute,               N/A
+                0, // Text,
+                9, // CDATA,                   <![CDATA[
+                1, // EntityReference,         &lt
+                -1, // Entity,                  N/A
+                2, // ProcessingInstruction,   <?pi
+                4, // Comment,                 <!--
+                -1, // Document,                N/A
+                10, // DocumentType,            <!DOCTYPE
+                -1, // DocumentFragment,        N/A
+                -1, // Notation,                N/A
+                0, // Whitespace,
+                0, // SignificantWhitespace,
+                2, // EndElement,              />
+                -1, // EndEntity,               N/A
+                2, // XmlDeclaration           <?xml
+            ];
 
         private StringWriter _cachedStringWriter;
         private int _lastLineNumber;
@@ -54,11 +54,15 @@ namespace System.Configuration
 
         private Stream _stream;
 
-        internal XmlUtil(Stream stream, string name, bool readToFirstElement) :
-            this(stream, name, readToFirstElement, new ConfigurationSchemaErrors())
-        { }
+        internal XmlUtil(Stream stream, string name, bool readToFirstElement)
+            : this(stream, name, readToFirstElement, new ConfigurationSchemaErrors()) { }
 
-        internal XmlUtil(Stream stream, string name, bool readToFirstElement, ConfigurationSchemaErrors schemaErrors)
+        internal XmlUtil(
+            Stream stream,
+            string name,
+            bool readToFirstElement,
+            ConfigurationSchemaErrors schemaErrors
+        )
         {
             try
             {
@@ -74,7 +78,8 @@ namespace System.Configuration
 
                 // When parsing config that we don't intend to copy, skip all content
                 // before the first element.
-                if (!readToFirstElement) return;
+                if (!readToFirstElement)
+                    return;
                 Reader.WhitespaceHandling = WhitespaceHandling.None;
 
                 bool done = false;
@@ -89,7 +94,10 @@ namespace System.Configuration
                             done = true;
                             break;
                         default:
-                            throw new ConfigurationErrorsException(SR.Config_base_unrecognized_element, this);
+                            throw new ConfigurationErrorsException(
+                                SR.Config_base_unrecognized_element,
+                                this
+                            );
                     }
             }
             catch
@@ -186,7 +194,8 @@ namespace System.Configuration
             while (Reader.Read())
             {
                 // optimize for the common case
-                if (Reader.NodeType == XmlNodeType.Element) return;
+                if (Reader.NodeType == XmlNodeType.Element)
+                    return;
 
                 VerifyIgnorableNodeType(action);
             }
@@ -216,7 +225,8 @@ namespace System.Configuration
             int currentDepth = Reader.Depth;
 
             // Skip everything at out current level
-            while (Reader.Depth >= currentDepth) Reader.Skip();
+            while (Reader.Depth >= currentDepth)
+                Reader.Skip();
 
             while (!Reader.EOF && (Reader.NodeType != XmlNodeType.EndElement))
             {
@@ -236,7 +246,8 @@ namespace System.Configuration
             {
                 ConfigurationException ex = new ConfigurationErrorsException(
                     SR.Config_base_unrecognized_element,
-                    this);
+                    this
+                );
 
                 SchemaErrors.AddError(ex, action);
             }
@@ -254,7 +265,11 @@ namespace System.Configuration
         /// <summary>
         /// Add an error if the retrieved attribute is null, and therefore not present.
         /// </summary>
-        internal bool VerifyRequiredAttribute(object requiredAttribute, string attrName, ExceptionAction action)
+        internal bool VerifyRequiredAttribute(
+            object requiredAttribute,
+            string attrName,
+            ExceptionAction action
+        )
         {
             if (requiredAttribute == null)
             {
@@ -271,7 +286,8 @@ namespace System.Configuration
         {
             ConfigurationErrorsException ex = new ConfigurationErrorsException(
                 SR.Format(SR.Config_base_unrecognized_attribute, Reader.Name),
-                this);
+                this
+            );
 
             SchemaErrors.AddError(ex, action);
         }
@@ -280,7 +296,8 @@ namespace System.Configuration
         {
             ConfigurationErrorsException ex = new ConfigurationErrorsException(
                 SR.Format(SR.Config_missing_required_attribute, attrib, Reader.Name),
-                this);
+                this
+            );
 
             SchemaErrors.AddError(ex, action);
         }
@@ -289,7 +306,8 @@ namespace System.Configuration
         {
             ConfigurationErrorsException ex = new ConfigurationErrorsException(
                 SR.Format(SR.Config_reserved_attribute, Reader.Name),
-                this);
+                this
+            );
 
             SchemaErrors.AddError(ex, action);
         }
@@ -298,21 +316,27 @@ namespace System.Configuration
         {
             ConfigurationErrorsException ex = new ConfigurationErrorsException(
                 SR.Config_base_unrecognized_element,
-                this);
+                this
+            );
 
             SchemaErrors.AddError(ex, action);
         }
 
-        internal void VerifyAndGetNonEmptyStringAttribute(ExceptionAction action, out string newValue)
+        internal void VerifyAndGetNonEmptyStringAttribute(
+            ExceptionAction action,
+            out string newValue
+        )
         {
-            if (!string.IsNullOrEmpty(Reader.Value)) newValue = Reader.Value;
+            if (!string.IsNullOrEmpty(Reader.Value))
+                newValue = Reader.Value;
             else
             {
                 newValue = null;
 
                 ConfigurationException ex = new ConfigurationErrorsException(
                     SR.Format(SR.Empty_attribute, Reader.Name),
-                    this);
+                    this
+                );
 
                 SchemaErrors.AddError(ex, action);
             }
@@ -323,7 +347,10 @@ namespace System.Configuration
         /// a valid value then log an error and set the value to a given default.
         /// </summary>
         internal void VerifyAndGetBooleanAttribute(
-            ExceptionAction action, bool defaultValue, out bool newValue)
+            ExceptionAction action,
+            bool defaultValue,
+            out bool newValue
+        )
         {
             switch (Reader.Value)
             {
@@ -336,8 +363,12 @@ namespace System.Configuration
                 default:
                     newValue = defaultValue;
                     SchemaErrors.AddError(
-                        new ConfigurationErrorsException(SR.Format(SR.Config_invalid_boolean_attribute, Reader.Name), this),
-                        action);
+                        new ConfigurationErrorsException(
+                            SR.Format(SR.Config_invalid_boolean_attribute, Reader.Name),
+                            this
+                        ),
+                        action
+                    );
                     break;
             }
         }
@@ -361,7 +392,10 @@ namespace System.Configuration
             int depth = Reader.Depth;
 #endif
 
-            Debug.Assert(Reader.NodeType == XmlNodeType.Element, "Reader.NodeType == XmlNodeType.Element");
+            Debug.Assert(
+                Reader.NodeType == XmlNodeType.Element,
+                "Reader.NodeType == XmlNodeType.Element"
+            );
 
             CopyXmlNode(utilWriter);
 
@@ -378,7 +412,8 @@ namespace System.Configuration
                         //   as part of the element.
                         // - If the whitespace contains /r/n, not skipping them will result
                         //   in a redundant empty line being copied.
-                        if (Reader.NodeType == XmlNodeType.Whitespace) Reader.Skip();
+                        if (Reader.NodeType == XmlNodeType.Whitespace)
+                            Reader.Skip();
                     }
                     else
                     {
@@ -394,7 +429,10 @@ namespace System.Configuration
                 }
 
 #if DEBUG
-                Debug.Assert(Reader.Depth == depth, "We should be at the same depth as the opening Element");
+                Debug.Assert(
+                    Reader.Depth == depth,
+                    "We should be at the same depth as the opening Element"
+                );
 #endif
 
                 // Copy the end element.
@@ -419,7 +457,8 @@ namespace System.Configuration
 
                 depth = Reader.Depth;
             }
-            else depth = 0;
+            else
+                depth = 0;
 
             // Copy nodes until we've reached the desired depth, or until we hit an element.
             do
@@ -427,7 +466,8 @@ namespace System.Configuration
                 if (Reader.NodeType == XmlNodeType.Element)
                     break;
 
-                if (Reader.Depth < depth) break;
+                if (Reader.Depth < depth)
+                    break;
 
                 moreToRead = CopyXmlNode(utilWriter);
             } while (moreToRead);
@@ -449,7 +489,10 @@ namespace System.Configuration
         //      <nextConfigSection />
         internal bool SkipAndCopyReaderToNextElement(XmlUtilWriter utilWriter, bool limitDepth)
         {
-            Debug.Assert(Reader.NodeType == XmlNodeType.Element, "_reader.NodeType == XmlNodeType.Element");
+            Debug.Assert(
+                Reader.NodeType == XmlNodeType.Element,
+                "_reader.NodeType == XmlNodeType.Element"
+            );
 
             // If the last line before the element is not blank, then we do not have to
             // remove the blank line.
@@ -478,7 +521,12 @@ namespace System.Configuration
                     if (Reader.LineNumber > lineNumberOfEndElement)
                     {
                         utilWriter.SeekToLineStart();
-                        utilWriter.AppendWhiteSpace(lineNumberOfEndElement + 1, 1, LineNumber, TrueLinePosition);
+                        utilWriter.AppendWhiteSpace(
+                            lineNumberOfEndElement + 1,
+                            1,
+                            LineNumber,
+                            TrueLinePosition
+                        );
                     }
 
                     break;
@@ -493,7 +541,8 @@ namespace System.Configuration
                 if (Reader.NodeType == XmlNodeType.Element)
                     break;
 
-                if (Reader.Depth < depth) break;
+                if (Reader.Depth < depth)
+                    break;
 
                 CopyXmlNode(utilWriter);
             }
@@ -504,7 +553,10 @@ namespace System.Configuration
         // Copy an XML element and its children, up to and including the end element.
         private void CopyElement(XmlUtilWriter utilWriter)
         {
-            Debug.Assert(Reader.NodeType == XmlNodeType.Element, "_reader.NodeType== XmlNodeType.Element");
+            Debug.Assert(
+                Reader.NodeType == XmlNodeType.Element,
+                "_reader.NodeType== XmlNodeType.Element"
+            );
 
             int depth = Reader.Depth;
             bool isEmptyElement = Reader.IsEmptyElement;
@@ -513,10 +565,12 @@ namespace System.Configuration
             CopyXmlNode(utilWriter);
 
             // Copy nodes while the depth is greater than the current depth.
-            while (Reader.Depth > depth) CopyXmlNode(utilWriter);
+            while (Reader.Depth > depth)
+                CopyXmlNode(utilWriter);
 
             // Copy the end element.
-            if (!isEmptyElement) CopyXmlNode(utilWriter);
+            if (!isEmptyElement)
+                CopyXmlNode(utilWriter);
         }
 
         // Copy a single XML node, attempting to preserve whitespace.
@@ -559,7 +613,8 @@ namespace System.Configuration
 
             // We test the node type in the likely order of decreasing occurrence.
             XmlNodeType nodeType = Reader.NodeType;
-            if (nodeType == XmlNodeType.Whitespace) utilWriter.Write(Reader.Value);
+            if (nodeType == XmlNodeType.Whitespace)
+                utilWriter.Write(Reader.Value);
             else
             {
                 if (nodeType == XmlNodeType.Element)
@@ -596,7 +651,12 @@ namespace System.Configuration
                         int attrLinePosition = Reader.LinePosition;
 
                         // Write the whitespace before the attribute
-                        utilWriter.AppendRequiredWhiteSpace(lineNumber, linePosition, attrLineNumber, attrLinePosition);
+                        utilWriter.AppendRequiredWhiteSpace(
+                            lineNumber,
+                            linePosition,
+                            attrLineNumber,
+                            attrLinePosition
+                        );
 
                         // Write the attribute and value
                         int charactersWritten = utilWriter.Write(Reader.Name);
@@ -626,10 +686,12 @@ namespace System.Configuration
                     }
                     else
                     {
-                        if (nodeType == XmlNodeType.Comment) utilWriter.AppendComment(Reader.Value);
+                        if (nodeType == XmlNodeType.Comment)
+                            utilWriter.AppendComment(Reader.Value);
                         else
                         {
-                            if (nodeType == XmlNodeType.Text) utilWriter.AppendEscapeTextString(Reader.Value);
+                            if (nodeType == XmlNodeType.Text)
+                                utilWriter.AppendEscapeTextString(Reader.Value);
                             else
                             {
                                 if (nodeType == XmlNodeType.XmlDeclaration)
@@ -665,13 +727,19 @@ namespace System.Configuration
                                         int attrLinePosition = Reader.LinePosition;
 
                                         // Write the whitespace before the attribute
-                                        utilWriter.AppendRequiredWhiteSpace(lineNumber, linePosition, attrLineNumber,
-                                            attrLinePosition);
+                                        utilWriter.AppendRequiredWhiteSpace(
+                                            lineNumber,
+                                            linePosition,
+                                            attrLineNumber,
+                                            attrLinePosition
+                                        );
 
                                         // Write the attribute and value
                                         int charactersWritten = utilWriter.Write(Reader.Name);
                                         charactersWritten += utilWriter.Write('=');
-                                        charactersWritten += utilWriter.AppendAttributeValue(Reader);
+                                        charactersWritten += utilWriter.AppendAttributeValue(
+                                            Reader
+                                        );
 
                                         // Update position. Note that the attribute value is escaped to always be on a single line.
                                         lineNumber = attrLineNumber;
@@ -683,7 +751,8 @@ namespace System.Configuration
                                 }
                                 else
                                 {
-                                    if (nodeType == XmlNodeType.SignificantWhitespace) utilWriter.Write(Reader.Value);
+                                    if (nodeType == XmlNodeType.SignificantWhitespace)
+                                        utilWriter.Write(Reader.Value);
                                     else
                                     {
                                         if (nodeType == XmlNodeType.ProcessingInstruction)
@@ -698,7 +767,10 @@ namespace System.Configuration
                                             //          <?pi    "value" ?>
                                             //
                                             // The first example has one space between 'pi' and "value", the second has multiple spaces.
-                                            utilWriter.AppendProcessingInstruction(Reader.Name, Reader.Value);
+                                            utilWriter.AppendProcessingInstruction(
+                                                Reader.Name,
+                                                Reader.Value
+                                            );
                                         }
                                         else
                                         {
@@ -719,35 +791,47 @@ namespace System.Configuration
                                                         // The reader only gives us the position of 'rootElementName', so we must track what was
                                                         // written before "<!DOCTYPE" in order to correctly determine the position of the
                                                         // <!DOCTYPE tag
-                                                        Debug.Assert(utilWriter.TrackPosition,
-                                                            "utilWriter.TrackPosition");
+                                                        Debug.Assert(
+                                                            utilWriter.TrackPosition,
+                                                            "utilWriter.TrackPosition"
+                                                        );
                                                         int c = utilWriter.Write("<!DOCTYPE");
 
                                                         // Write the space between <!DOCTYPE and the rootElementName
-                                                        utilWriter.AppendRequiredWhiteSpace(_lastLineNumber,
-                                                            _lastLinePosition + c, Reader.LineNumber,
-                                                            Reader.LinePosition);
+                                                        utilWriter.AppendRequiredWhiteSpace(
+                                                            _lastLineNumber,
+                                                            _lastLinePosition + c,
+                                                            Reader.LineNumber,
+                                                            Reader.LinePosition
+                                                        );
 
                                                         // Write the rootElementName
                                                         utilWriter.Write(Reader.Name);
 
                                                         // Get the dtd declarations, if any
                                                         string dtdValue = null;
-                                                        if (Reader.HasValue) dtdValue = Reader.Value;
+                                                        if (Reader.HasValue)
+                                                            dtdValue = Reader.Value;
 
                                                         // get line position after the !DOCTYPE declaration:
                                                         //      <!DOCTYPE  rootElement     SYSTEM rootElementDtdUri >
                                                         //                            ^
                                                         //                            linePosition
                                                         lineNumber = Reader.LineNumber;
-                                                        linePosition = Reader.LinePosition + Reader.Name.Length;
+                                                        linePosition =
+                                                            Reader.LinePosition
+                                                            + Reader.Name.Length;
 
                                                         // Note that there is no way to get the spacing after PUBLIC or SYSTEM attributes and their values
                                                         if (Reader.MoveToFirstAttribute())
                                                         {
                                                             // Write the space before SYSTEM or PUBLIC
-                                                            utilWriter.AppendRequiredWhiteSpace(lineNumber, linePosition,
-                                                                Reader.LineNumber, Reader.LinePosition);
+                                                            utilWriter.AppendRequiredWhiteSpace(
+                                                                lineNumber,
+                                                                linePosition,
+                                                                Reader.LineNumber,
+                                                                Reader.LinePosition
+                                                            );
 
                                                             // Write SYSTEM or PUBLIC and the 1st value of the attribute
                                                             string attrName = Reader.Name;
@@ -761,7 +845,9 @@ namespace System.Configuration
                                                             {
                                                                 Reader.MoveToAttribute(1);
                                                                 utilWriter.AppendSpace();
-                                                                utilWriter.AppendAttributeValue(Reader);
+                                                                utilWriter.AppendAttributeValue(
+                                                                    Reader
+                                                                );
                                                                 Reader.MoveToAttribute(1);
                                                             }
                                                         }
@@ -803,7 +889,12 @@ namespace System.Configuration
                 int closeLinePosition = Reader.LinePosition - startOffset - close.Length;
 
                 // Add whitespace up to the position of the close string
-                utilWriter.AppendWhiteSpace(lineNumber, linePosition, closeLineNumber, closeLinePosition);
+                utilWriter.AppendWhiteSpace(
+                    lineNumber,
+                    linePosition,
+                    closeLineNumber,
+                    closeLinePosition
+                );
 
                 // Write the close string
                 utilWriter.Write(close);
@@ -817,8 +908,10 @@ namespace System.Configuration
                 _lastLineNumber = readerLineNumber - writerLineNumber + utilWriter.LineNumber;
 
                 if (writerLineNumber == utilWriter.LineNumber)
-                    _lastLinePosition = readerLinePosition - writerLinePosition + utilWriter.LinePosition;
-                else _lastLinePosition = utilWriter.LinePosition;
+                    _lastLinePosition =
+                        readerLinePosition - writerLinePosition + utilWriter.LinePosition;
+                else
+                    _lastLinePosition = utilWriter.LinePosition;
             }
 
             return moreToRead;
@@ -828,8 +921,10 @@ namespace System.Configuration
         // and attributes that can be serialized to an xml file.
         private string RetrieveFullOpenElementTag()
         {
-            Debug.Assert(Reader.NodeType == XmlNodeType.Element,
-                "_reader.NodeType == NodeType.Element");
+            Debug.Assert(
+                Reader.NodeType == XmlNodeType.Element,
+                "_reader.NodeType == NodeType.Element"
+            );
 
             // Start with element tag name
             StringBuilder element = new StringBuilder(64);
@@ -860,10 +955,18 @@ namespace System.Configuration
         //
         // If the element is empty and is replaced with a start/end element pair, return a
         // end element string with whitespace formatting; otherwise return null.
-        internal string UpdateStartElement(XmlUtilWriter utilWriter, string updatedStartElement, bool needsChildren,
-            int linePosition, int indent)
+        internal string UpdateStartElement(
+            XmlUtilWriter utilWriter,
+            string updatedStartElement,
+            bool needsChildren,
+            int linePosition,
+            int indent
+        )
         {
-            Debug.Assert(Reader.NodeType == XmlNodeType.Element, "_reader.NodeType == NodeType.Element");
+            Debug.Assert(
+                Reader.NodeType == XmlNodeType.Element,
+                "_reader.NodeType == NodeType.Element"
+            );
 
             string endElement = null;
             bool needsEndElement = false;
@@ -873,7 +976,8 @@ namespace System.Configuration
             // If the element is empty, determine if a new end element is needed.
             if (Reader.IsEmptyElement)
             {
-                if ((updatedStartElement == null) && needsChildren) updatedStartElement = RetrieveFullOpenElementTag();
+                if ((updatedStartElement == null) && needsChildren)
+                    updatedStartElement = RetrieveFullOpenElementTag();
 
                 needsEndElement = updatedStartElement != null;
             }
@@ -888,7 +992,12 @@ namespace System.Configuration
                 // Format a new start element/end element pair
                 string updatedEndElement = "</" + elementName + ">";
                 string updatedElement = updatedStartElement + updatedEndElement;
-                string formattedElement = FormatXmlElement(updatedElement, linePosition, indent, true);
+                string formattedElement = FormatXmlElement(
+                    updatedElement,
+                    linePosition,
+                    indent,
+                    true
+                );
 
                 // Get the start and end element strings from the formatted element.
                 int iEndElement = formattedElement.LastIndexOf('\n') + 1;
@@ -922,7 +1031,10 @@ namespace System.Configuration
         {
             if (_cachedStringWriter == null)
             {
-                _cachedStringWriter = new StringWriter(new StringBuilder(64), CultureInfo.InvariantCulture);
+                _cachedStringWriter = new StringWriter(
+                    new StringBuilder(64),
+                    CultureInfo.InvariantCulture
+                );
             }
             else
             {
@@ -948,8 +1060,10 @@ namespace System.Configuration
             // Reset whitespace handling
             Reader.WhitespaceHandling = originalHandling;
 
-            if ((originalHandling == WhitespaceHandling.None) &&
-                (Reader.NodeType == XmlNodeType.Whitespace))
+            if (
+                (originalHandling == WhitespaceHandling.None)
+                && (Reader.NodeType == XmlNodeType.Whitespace)
+            )
             {
                 // If we were previously suppose to skip whitespace, and now we
                 // are at it, then lets jump to the next item
@@ -969,12 +1083,26 @@ namespace System.Configuration
         /// <param name="indent">indent for each depth</param>
         /// <param name="skipFirstIndent">skip indent for the first element?</param>
         /// <returns></returns>
-        internal static string FormatXmlElement(string xmlElement, int linePosition, int indent, bool skipFirstIndent)
+        internal static string FormatXmlElement(
+            string xmlElement,
+            int linePosition,
+            int indent,
+            bool skipFirstIndent
+        )
         {
-            XmlParserContext context = new XmlParserContext(null, null, null, XmlSpace.Default, Encoding.Unicode);
+            XmlParserContext context = new XmlParserContext(
+                null,
+                null,
+                null,
+                XmlSpace.Default,
+                Encoding.Unicode
+            );
             XmlTextReader reader = new XmlTextReader(xmlElement, XmlNodeType.Element, context);
 
-            StringWriter stringWriter = new StringWriter(new StringBuilder(64), CultureInfo.InvariantCulture);
+            StringWriter stringWriter = new StringWriter(
+                new StringBuilder(64),
+                CultureInfo.InvariantCulture
+            );
             XmlUtilWriter utilWriter = new XmlUtilWriter(stringWriter, false);
 
             // append newline before indent?
@@ -994,9 +1122,12 @@ namespace System.Configuration
                 if (lastWasText)
                 {
                     utilWriter.Flush();
-                    lineWidth = sbLengthLastNewLine - ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                    lineWidth =
+                        sbLengthLastNewLine
+                        - ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
                 }
-                else lineWidth = 0;
+                else
+                    lineWidth = 0;
 
                 switch (nodeType)
                 {
@@ -1013,7 +1144,9 @@ namespace System.Configuration
                             if (newLine)
                             {
                                 utilWriter.Flush();
-                                sbLengthLastNewLine = ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                                sbLengthLastNewLine = ((StringWriter)utilWriter.Writer)
+                                    .GetStringBuilder()
+                                    .Length;
                             }
                         }
                         break;
@@ -1055,25 +1188,38 @@ namespace System.Configuration
                                 bool writeSpace;
                                 if (lineWidth > MaxLineWidth)
                                 {
-                                    utilWriter.AppendIndent(linePosition, indent, reader.Depth - 1, true);
+                                    utilWriter.AppendIndent(
+                                        linePosition,
+                                        indent,
+                                        reader.Depth - 1,
+                                        true
+                                    );
                                     lineWidth = indent;
                                     writeSpace = false;
                                     utilWriter.Flush();
-                                    sbLengthLastNewLine = ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
+                                    sbLengthLastNewLine = ((StringWriter)utilWriter.Writer)
+                                        .GetStringBuilder()
+                                        .Length;
                                 }
-                                else writeSpace = true;
+                                else
+                                    writeSpace = true;
 
                                 // Write the attribute
                                 reader.MoveToNextAttribute();
                                 utilWriter.Flush();
-                                int startLength = ((StringWriter)utilWriter.Writer).GetStringBuilder().Length;
-                                if (writeSpace) utilWriter.AppendSpace();
+                                int startLength = ((StringWriter)utilWriter.Writer)
+                                    .GetStringBuilder()
+                                    .Length;
+                                if (writeSpace)
+                                    utilWriter.AppendSpace();
 
                                 utilWriter.Write(reader.Name);
                                 utilWriter.Write('=');
                                 utilWriter.AppendAttributeValue(reader);
                                 utilWriter.Flush();
-                                lineWidth += ((StringWriter)utilWriter.Writer).GetStringBuilder().Length - startLength;
+                                lineWidth +=
+                                    ((StringWriter)utilWriter.Writer).GetStringBuilder().Length
+                                    - startLength;
                             }
                         }
 
@@ -1081,8 +1227,10 @@ namespace System.Configuration
                         reader.MoveToElement();
 
                         // write closing tag
-                        if (reader.IsEmptyElement) utilWriter.Write(" />");
-                        else utilWriter.Write('>');
+                        if (reader.IsEmptyElement)
+                            utilWriter.Write(" />");
+                        else
+                            utilWriter.Write('>');
 
                         break;
                     case XmlNodeType.EndElement:

@@ -5,8 +5,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => InMemoryTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -16,9 +15,7 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
 
         using var context = contextFactory.CreateContext();
         var query = context.Set<Foo>().Include(c => c.Bar);
-        var foo = async
-            ? await query.FirstOrDefaultAsync()
-            : query.FirstOrDefault();
+        var foo = async ? await query.FirstOrDefaultAsync() : query.FirstOrDefault();
 
         Assert.NotNull(foo);
     }
@@ -26,9 +23,7 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
     protected class MyContext : DbContext
     {
         public MyContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
@@ -42,7 +37,9 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Bar>().OwnsOne(t => t.Baz, e => { });
-            modelBuilder.Entity<Foo>().HasOne(t => t.Bar)
+            modelBuilder
+                .Entity<Foo>()
+                .HasOne(t => t.Bar)
                 .WithOne(t => t.Foo)
                 .HasForeignKey<Bar>(t => t.FooId);
         }
@@ -59,42 +56,49 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
         public virtual Baz Baz { get; set; } = new();
     }
 
-    protected class Baz
-    {
-    }
+    protected class Baz { }
 
     protected class Foo
     {
         public long Id { get; set; }
         public virtual Bar? Bar { get; set; }
     }
+
 #nullable disable
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Owned_references_on_same_level_expanded_at_different_times_around_take(bool async)
+    public virtual async Task Owned_references_on_same_level_expanded_at_different_times_around_take(
+        bool async
+    )
     {
         var contextFactory = await InitializeAsync<MyContext26592>(seed: c => c.Seed());
         using var context = contextFactory.CreateContext();
 
-        await base.Owned_references_on_same_level_expanded_at_different_times_around_take_helper(context, async);
+        await base.Owned_references_on_same_level_expanded_at_different_times_around_take_helper(
+            context,
+            async
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Owned_references_on_same_level_nested_expanded_at_different_times_around_take(bool async)
+    public virtual async Task Owned_references_on_same_level_nested_expanded_at_different_times_around_take(
+        bool async
+    )
     {
         var contextFactory = await InitializeAsync<MyContext26592>(seed: c => c.Seed());
         using var context = contextFactory.CreateContext();
 
-        await base.Owned_references_on_same_level_nested_expanded_at_different_times_around_take_helper(context, async);
+        await base.Owned_references_on_same_level_nested_expanded_at_different_times_around_take_helper(
+            context,
+            async
+        );
     }
 
     protected class MyContext26592 : MyContext26592Base
     {
         public MyContext26592(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 }

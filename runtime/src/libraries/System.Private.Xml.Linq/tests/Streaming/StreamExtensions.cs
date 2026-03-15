@@ -27,10 +27,21 @@ namespace System.Xml.Linq
 
             public IEnumerator<XElement> GetEnumerator()
             {
-                if (_loader._index != _index - 1 || (_index - 1 >= 0 && _loader._iterators[_index - 1] != null && _loader._iterators[_index - 1].source != source)) yield break;
+                if (
+                    _loader._index != _index - 1
+                    || (
+                        _index - 1 >= 0
+                        && _loader._iterators[_index - 1] != null
+                        && _loader._iterators[_index - 1].source != source
+                    )
+                )
+                    yield break;
                 int depth = _loader._baseDepth + _index + 1;
                 XName name = _loader._streamNames[_index];
-                XName streamName = _loader._streamNames.Length > _index + 1 ? _loader._streamNames[_index + 1] : null;
+                XName streamName =
+                    _loader._streamNames.Length > _index + 1
+                        ? _loader._streamNames[_index + 1]
+                        : null;
                 if (_loader.SkipContentUntil(depth, name))
                 {
                     _loader._iterators[_index] = this;
@@ -44,7 +55,8 @@ namespace System.Xml.Linq
                             source.AddAnnotation(_loader);
                         }
                         yield return source;
-                        if (_loader._iterators[_index] != this) yield break;
+                        if (_loader._iterators[_index] != this)
+                            yield break;
                         if (_loader._index != _index)
                         {
                             for (int i = _index + 1; i <= _loader._index; i++)
@@ -83,19 +95,30 @@ namespace System.Xml.Linq
 
         public IEnumerable<XElement> Stream(XElement e)
         {
-            if (_index >= 0 && _iterators[_index].source != e) return XElement.EmptySequence;
+            if (_index >= 0 && _iterators[_index].source != e)
+                return XElement.EmptySequence;
             return new StreamIterator(this, _index + 1, e);
         }
 
         public void ReadElementUntil(XElement source, XName match)
         {
-            if (_reader.ReadState != ReadState.Interactive) throw new InvalidOperationException("The reader state should be Interactive.");
-            if (source.Name != XNamespace.Get(_reader.NamespaceURI).GetName(_reader.LocalName)) throw new InvalidOperationException(string.Format("The reader should be on an element with the name '{0}'.", source.Name));
+            if (_reader.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException("The reader state should be Interactive.");
+            if (source.Name != XNamespace.Get(_reader.NamespaceURI).GetName(_reader.LocalName))
+                throw new InvalidOperationException(
+                    string.Format(
+                        "The reader should be on an element with the name '{0}'.",
+                        source.Name
+                    )
+                );
             if (_reader.MoveToFirstAttribute())
             {
                 do
                 {
-                    XNamespace ns = _reader.Prefix.Length == 0 ? XNamespace.None : XNamespace.Get(_reader.NamespaceURI);
+                    XNamespace ns =
+                        _reader.Prefix.Length == 0
+                            ? XNamespace.None
+                            : XNamespace.Get(_reader.NamespaceURI);
                     source.Add(new XAttribute(ns.GetName(_reader.LocalName), _reader.Value));
                 } while (_reader.MoveToNextAttribute());
                 _reader.MoveToElement();
@@ -105,7 +128,8 @@ namespace System.Xml.Linq
                 _reader.Read();
                 if (match != null)
                 {
-                    if (ReadPrologUntil(source, match)) return;
+                    if (ReadPrologUntil(source, match))
+                        return;
                 }
                 else
                 {
@@ -117,7 +141,8 @@ namespace System.Xml.Linq
 
         void ReadContent(XElement source)
         {
-            if (_reader.ReadState != ReadState.Interactive) throw new InvalidOperationException("The reader state should be Interactive.");
+            if (_reader.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException("The reader state should be Interactive.");
             if (_reader.NodeType != XmlNodeType.EndElement)
             {
                 do
@@ -133,20 +158,27 @@ namespace System.Xml.Linq
 
         bool ReadPrologUntil(XElement source, XName match)
         {
-            if (_reader.ReadState != ReadState.Interactive) throw new InvalidOperationException("The reader state should be Interactive.");
+            if (_reader.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException("The reader state should be Interactive.");
             do
             {
                 switch (_reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        XName name = XNamespace.Get(_reader.NamespaceURI).GetName(_reader.LocalName);
-                        if (name == match) return true;
+                        XName name = XNamespace
+                            .Get(_reader.NamespaceURI)
+                            .GetName(_reader.LocalName);
+                        if (name == match)
+                            return true;
                         XElement e = new XElement(name);
                         if (_reader.MoveToFirstAttribute())
                         {
                             do
                             {
-                                XNamespace ns = _reader.Prefix.Length == 0 ? XNamespace.None : XNamespace.Get(_reader.NamespaceURI);
+                                XNamespace ns =
+                                    _reader.Prefix.Length == 0
+                                        ? XNamespace.None
+                                        : XNamespace.Get(_reader.NamespaceURI);
                                 e.Add(new XAttribute(ns.GetName(_reader.LocalName), _reader.Value));
                             } while (_reader.MoveToNextAttribute());
                             _reader.MoveToElement();
@@ -169,13 +201,21 @@ namespace System.Xml.Linq
                     case XmlNodeType.DocumentType:
                         break;
                     case XmlNodeType.EntityReference:
-                        if (!_reader.CanResolveEntity) throw new InvalidOperationException("The reader cannot resolve entity references.");
+                        if (!_reader.CanResolveEntity)
+                            throw new InvalidOperationException(
+                                "The reader cannot resolve entity references."
+                            );
                         _reader.ResolveEntity();
                         break;
                     case XmlNodeType.EndEntity:
                         break;
                     default:
-                        throw new InvalidOperationException(string.Format("The reader should not be on a node of type '{0}'.", _reader.NodeType));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "The reader should not be on a node of type '{0}'.",
+                                _reader.NodeType
+                            )
+                        );
                 }
             } while (_reader.Read());
             return false;
@@ -183,7 +223,8 @@ namespace System.Xml.Linq
 
         bool SkipContentUntil(int depth, XName match)
         {
-            if (_reader.ReadState != ReadState.Interactive) return false;
+            if (_reader.ReadState != ReadState.Interactive)
+                return false;
             do
             {
                 int d = _reader.Depth;
@@ -191,8 +232,11 @@ namespace System.Xml.Linq
                 {
                     if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        XName name = XNamespace.Get(_reader.NamespaceURI).GetName(_reader.LocalName);
-                        if (name == match) return true;
+                        XName name = XNamespace
+                            .Get(_reader.NamespaceURI)
+                            .GetName(_reader.LocalName);
+                        if (name == match)
+                            return true;
                     }
                 }
                 else if (d < depth)
@@ -211,12 +255,24 @@ namespace System.Xml.Linq
             return LoadStream(XmlReader.Create(uri, GetXmlReaderSettings()), rootName, streamNames);
         }
 
-        public static XElement LoadStream(TextReader textReader, XName rootName, params XName[] streamNames)
+        public static XElement LoadStream(
+            TextReader textReader,
+            XName rootName,
+            params XName[] streamNames
+        )
         {
-            return LoadStream(XmlReader.Create(textReader, GetXmlReaderSettings()), rootName, streamNames);
+            return LoadStream(
+                XmlReader.Create(textReader, GetXmlReaderSettings()),
+                rootName,
+                streamNames
+            );
         }
 
-        public static XElement LoadStream(XmlReader reader, XName rootName, params XName[] streamNames)
+        public static XElement LoadStream(
+            XmlReader reader,
+            XName rootName,
+            params XName[] streamNames
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
             ArgumentNullException.ThrowIfNull(rootName);
@@ -224,9 +280,16 @@ namespace System.Xml.Linq
 
             for (int i = 0; i < streamNames.Length; i++)
             {
-                if (streamNames[i] == null) throw new ArgumentNullException("streamNames[" + i + "]");
+                if (streamNames[i] == null)
+                    throw new ArgumentNullException("streamNames[" + i + "]");
             }
-            if (reader.MoveToContent() != XmlNodeType.Element) throw new InvalidOperationException(string.Format("The reader should be on a node of type '{0}'.", XmlNodeType.Element));
+            if (reader.MoveToContent() != XmlNodeType.Element)
+                throw new InvalidOperationException(
+                    string.Format(
+                        "The reader should be on a node of type '{0}'.",
+                        XmlNodeType.Element
+                    )
+                );
             XElement source = new XElement(rootName);
             StreamLoader loader = new StreamLoader(reader, streamNames);
             XName streamName = streamNames.Length > 0 ? streamNames[0] : null;
@@ -243,7 +306,8 @@ namespace System.Xml.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             StreamLoader loader = source.Annotation<StreamLoader>();
-            if (loader == null) throw new InvalidOperationException("No stream associated with the element.");
+            if (loader == null)
+                throw new InvalidOperationException("No stream associated with the element.");
             return loader.Stream(source);
         }
 

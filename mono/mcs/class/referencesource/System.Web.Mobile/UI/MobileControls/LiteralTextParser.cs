@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="LiteralTextParser.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -16,21 +16,23 @@ namespace System.Web.UI.MobileControls
     /*
      * LiteralTextParser class.
      *
-     * The LiteralTextParser class parses a string of literal text, 
+     * The LiteralTextParser class parses a string of literal text,
      * containing certain recognizable tags, and creates a set of controls
      * from them. Any unrecognized tags are ignored.
      *
-     * This is an abstract base class. RuntimeLiteralTextParser and 
+     * This is an abstract base class. RuntimeLiteralTextParser and
      * CompileTimeLiteralTextParser inherit from this class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal abstract class LiteralTextParser
     {
-        // The parsing methods (Parse, ParseTag, ParseTagAttributes, ParseText) 
-        // build up LiteralElement objects, which can either be text or tags. 
+        // The parsing methods (Parse, ParseTag, ParseTagAttributes, ParseText)
+        // build up LiteralElement objects, which can either be text or tags.
         // ProcessElementInternal is then called. It combines some other data
         // and calls ProcessElement, a method which is overridable by inherited
         // classes.
@@ -48,7 +50,7 @@ namespace System.Web.UI.MobileControls
             Anchor,
         }
 
-        // Available formatting options for literal elements. This enum can 
+        // Available formatting options for literal elements. This enum can
         // be combined with the | operator.
 
         protected enum LiteralFormat
@@ -85,18 +87,12 @@ namespace System.Web.UI.MobileControls
 
             public bool IsText
             {
-                get
-                {
-                    return Type == LiteralElementType.Text;
-                }
+                get { return Type == LiteralElementType.Text; }
             }
 
             public bool IsEmptyText
             {
-                get
-                {
-                    return IsText && !LiteralTextParser.IsValidText(Text);
-                }
+                get { return IsText && !LiteralTextParser.IsValidText(Text); }
             }
 
             public String GetAttribute(String attributeName)
@@ -111,16 +107,17 @@ namespace System.Web.UI.MobileControls
         protected abstract void ProcessElement(LiteralElement element);
         protected abstract void ProcessTagInnerText(String text);
 
-        private bool           _isBreakingReset   = true;
+        private bool _isBreakingReset = true;
         private LiteralElement _lastQueuedElement = null;
-        private LiteralElement _currentTag        = null;
-        private bool           _beginNewParagraph = true;
-        private FormatStack    _formatStack       = new FormatStack();
-        private bool           _elementsProcessed = false;
+        private LiteralElement _currentTag = null;
+        private bool _beginNewParagraph = true;
+        private FormatStack _formatStack = new FormatStack();
+        private bool _elementsProcessed = false;
 
         // Static constructor that builds a lookup table of recognized tags.
 
         private static IDictionary _recognizedTags = new Hashtable();
+
         static LiteralTextParser()
         {
             // PERF: Add both lowercase and uppercase.
@@ -155,9 +152,10 @@ namespace System.Web.UI.MobileControls
 
         // Returns true if any valid controls could be generated from the given text.
 
-        internal /*public*/ static bool IsValidText(String validText)
+        internal /*public*/
+        static bool IsValidText(String validText)
         {
-            // 
+            //
 
             if (validText.Length == 0)
             {
@@ -166,10 +164,7 @@ namespace System.Web.UI.MobileControls
 
             foreach (char c in validText)
             {
-                if (!Char.IsWhiteSpace(c) &&
-                        c != '\t' &&
-                        c != '\r' && 
-                        c != '\n')
+                if (!Char.IsWhiteSpace(c) && c != '\t' && c != '\r' && c != '\n')
                 {
                     return true;
                 }
@@ -180,7 +175,8 @@ namespace System.Web.UI.MobileControls
 
         // Main parse routine. Called with a block of text to parse.
 
-        internal /*public*/ void Parse(String literalText)
+        internal /*public*/
+        void Parse(String literalText)
         {
             int length = literalText.Length;
             int currentPosition = 0;
@@ -230,7 +226,7 @@ namespace System.Web.UI.MobileControls
 
                 if (endOfTag == length)
                 {
-                    // 
+                    //
                     break;
                 }
 
@@ -241,33 +237,29 @@ namespace System.Web.UI.MobileControls
             Flush();
         }
 
-        internal /*public*/ void ResetBreaking()
+        internal /*public*/
+        void ResetBreaking()
         {
             _isBreakingReset = true;
             ElementsProcessed = false;
         }
 
-        internal /*public*/ void ResetNewParagraph()
+        internal /*public*/
+        void ResetNewParagraph()
         {
             _beginNewParagraph = false;
         }
 
-        internal /*public*/ void UnResetBreaking()
+        internal /*public*/
+        void UnResetBreaking()
         {
             _isBreakingReset = false;
         }
 
         protected bool ElementsProcessed
         {
-            get
-            {
-                return _elementsProcessed;
-            }
-
-            set
-            {
-                _elementsProcessed = value;
-            }
+            get { return _elementsProcessed; }
+            set { _elementsProcessed = value; }
         }
 
         protected void OnAfterDataBoundLiteral()
@@ -281,7 +273,7 @@ namespace System.Web.UI.MobileControls
         private void ParseTag(String literalText, int tagStart, int tagFinish)
         {
             bool isClosingTag = (literalText[tagStart] == '/');
-            if (isClosingTag) 
+            if (isClosingTag)
             {
                 tagStart++;
             }
@@ -296,8 +288,11 @@ namespace System.Web.UI.MobileControls
             // Look for end of tag name.
 
             int tagNameFinish = tagStart;
-            while (tagNameFinish < tagFinish && 
-                   !Char.IsWhiteSpace(literalText[tagNameFinish]) && literalText[tagNameFinish] != '/')
+            while (
+                tagNameFinish < tagFinish
+                && !Char.IsWhiteSpace(literalText[tagNameFinish])
+                && literalText[tagNameFinish] != '/'
+            )
             {
                 tagNameFinish++;
             }
@@ -324,7 +319,7 @@ namespace System.Web.UI.MobileControls
                 }
                 else
                 {
-                    // 
+                    //
                 }
                 return;
             }
@@ -332,7 +327,7 @@ namespace System.Web.UI.MobileControls
             switch (tagType)
             {
                 case LiteralElementType.Paragraph:
-                    
+
                     // Do not create two breaks for </p><p> pairs.
 
                     if (!_isBreakingReset)
@@ -351,8 +346,7 @@ namespace System.Web.UI.MobileControls
                     {
                         ParseText(String.Empty);
                     }
-                    if (_lastQueuedElement != null && 
-                        _lastQueuedElement.Text.Length == 0)
+                    if (_lastQueuedElement != null && _lastQueuedElement.Text.Length == 0)
                     {
                         _lastQueuedElement.ForceBreakTag = true;
                     }
@@ -387,7 +381,12 @@ namespace System.Web.UI.MobileControls
                 {
                     if (!isClosingTag)
                     {
-                        IDictionary attribs = ParseTagAttributes(literalText, tagNameFinish, tagFinish, tagName);
+                        IDictionary attribs = ParseTagAttributes(
+                            literalText,
+                            tagNameFinish,
+                            tagFinish,
+                            tagName
+                        );
                         _currentTag = new LiteralElement(tagType, attribs);
                     }
                     break;
@@ -402,18 +401,12 @@ namespace System.Web.UI.MobileControls
 
         protected bool IsInTag
         {
-            get
-            {
-                return _currentTag != null;
-            }
+            get { return _currentTag != null; }
         }
 
         protected LiteralFormat CurrentFormat
         {
-            get
-            {
-                return _formatStack.CurrentFormat;
-            }
+            get { return _formatStack.CurrentFormat; }
         }
 
         // Parse attributes of a tag.
@@ -428,7 +421,12 @@ namespace System.Web.UI.MobileControls
             Error,
         }
 
-        private IDictionary ParseTagAttributes(String literalText, int attrStart, int attrFinish, String tagName)
+        private IDictionary ParseTagAttributes(
+            String literalText,
+            int attrStart,
+            int attrFinish,
+            String tagName
+        )
         {
             if (attrFinish > attrStart && literalText[attrFinish - 1] == '/')
             {
@@ -439,7 +437,7 @@ namespace System.Web.UI.MobileControls
             int attrPos = attrStart;
             bool skipWhiteSpaces = true;
             int attrNameStart = 0;
-            int attrNameFinish = 0; 
+            int attrNameFinish = 0;
             int attrValueStart = 0;
             char quoteChar = '\0';
             AttributeParseState state = AttributeParseState.StartingAttributeName;
@@ -511,7 +509,7 @@ namespace System.Web.UI.MobileControls
                         {
                             state = AttributeParseState.Error;
                             break;
-                        } 
+                        }
                         else if (c == '\"' || c == '\'')
                         {
                             quoteChar = c;
@@ -526,8 +524,10 @@ namespace System.Web.UI.MobileControls
                         break;
 
                     case AttributeParseState.ReadingAttributeValue:
-                        if (c == quoteChar || 
-                            ((Char.IsWhiteSpace(c) || c == '\0') && quoteChar == '\0'))
+                        if (
+                            c == quoteChar
+                            || ((Char.IsWhiteSpace(c) || c == '\0') && quoteChar == '\0')
+                        )
                         {
                             if (attrNameFinish == attrNameStart)
                             {
@@ -541,8 +541,12 @@ namespace System.Web.UI.MobileControls
                             }
 
                             dictionary.Add(
-                                literalText.Substring(attrNameStart, attrNameFinish - attrNameStart),
-                                literalText.Substring(attrValueStart, attrPos - attrValueStart));
+                                literalText.Substring(
+                                    attrNameStart,
+                                    attrNameFinish - attrNameStart
+                                ),
+                                literalText.Substring(attrValueStart, attrPos - attrValueStart)
+                            );
 
                             skipWhiteSpaces = true;
                             state = AttributeParseState.StartingAttributeName;
@@ -598,20 +602,25 @@ namespace System.Web.UI.MobileControls
 
             if (_lastQueuedElement != null)
             {
-                // If both the last and current element are text elements, and 
+                // If both the last and current element are text elements, and
                 // the formatting hasn't changed, then just combine the two into
                 // a single element.
 
-                if (_lastQueuedElement.IsText && element.IsText && 
-                        (_lastQueuedElement.Format == currentFormat) && 
-                        !_beginNewParagraph)
+                if (
+                    _lastQueuedElement.IsText
+                    && element.IsText
+                    && (_lastQueuedElement.Format == currentFormat)
+                    && !_beginNewParagraph
+                )
                 {
                     _lastQueuedElement.Text += element.Text;
                     return;
                 }
-                else if (_lastQueuedElement.IsEmptyText && 
-                         !_beginNewParagraph &&
-                         IgnoreWhiteSpaceElement(_lastQueuedElement))
+                else if (
+                    _lastQueuedElement.IsEmptyText
+                    && !_beginNewParagraph
+                    && IgnoreWhiteSpaceElement(_lastQueuedElement)
+                )
                 {
                     // Empty text element with no breaks - so just ignore.
                 }
@@ -651,7 +660,7 @@ namespace System.Web.UI.MobileControls
             }
 
             // Ignore orphaned whitespace.
-                    
+
             if (!_lastQueuedElement.ForceBreakTag && _lastQueuedElement.IsEmptyText)
             {
                 if (!ElementsProcessed)
@@ -679,7 +688,7 @@ namespace System.Web.UI.MobileControls
         /*
          * FormatStack private class
          *
-         * This class maintains a simple stack of formatting directives. As tags and 
+         * This class maintains a simple stack of formatting directives. As tags and
          * closing tags are processed, they are pushed on and popped off this stack.
          * The CurrentFormat property returns the current state.
          */
@@ -688,7 +697,7 @@ namespace System.Web.UI.MobileControls
         {
             internal const char Bold = 'b';
             internal const char Italic = 'i';
-            
+
             private StringBuilder _stringBuilder = new StringBuilder(16);
 
             public void Push(char option)
@@ -728,8 +737,5 @@ namespace System.Web.UI.MobileControls
                 }
             }
         }
-
     }
-
 }
-

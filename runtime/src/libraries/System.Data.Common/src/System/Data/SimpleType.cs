@@ -12,15 +12,15 @@ namespace System.Data
 {
     internal sealed class SimpleType : ISerializable
     {
-        private string? _baseType;                 // base type name
+        private string? _baseType; // base type name
         private SimpleType? _baseSimpleType;
-        private XmlQualifiedName? _xmlBaseType;    // Qualified name of Basetype
+        private XmlQualifiedName? _xmlBaseType; // Qualified name of Basetype
         private string? _name = string.Empty;
         private int _length = -1;
         private int _minLength = -1;
         private int _maxLength = -1;
         private string? _pattern = string.Empty;
-        private string _ns = string.Empty;                  // my ns
+        private string _ns = string.Empty; // my ns
 
         private string? _maxExclusive = string.Empty;
         private string? _maxInclusive = string.Empty;
@@ -49,8 +49,10 @@ namespace System.Data
 
         internal void LoadTypeValues(XmlSchemaSimpleType node)
         {
-            if ((node.Content is XmlSchemaSimpleTypeList) ||
-                (node.Content is XmlSchemaSimpleTypeUnion))
+            if (
+                (node.Content is XmlSchemaSimpleTypeList)
+                || (node.Content is XmlSchemaSimpleTypeUnion)
+            )
                 throw ExceptionBuilder.SimpleTypeNotSupported();
 
             if (node.Content is XmlSchemaSimpleTypeRestriction content)
@@ -68,8 +70,11 @@ namespace System.Data
                 else
                     _baseType = content.BaseTypeName.ToString();
 
-
-                if (_baseSimpleType != null && _baseSimpleType.Name != null && _baseSimpleType.Name.Length > 0)
+                if (
+                    _baseSimpleType != null
+                    && _baseSimpleType.Name != null
+                    && _baseSimpleType.Name.Length > 0
+                )
                 {
                     _xmlBaseType = _baseSimpleType.XmlBaseType; //  SimpleTypeQualifiedName;
                 }
@@ -87,7 +92,6 @@ namespace System.Data
                 if (_baseType == "NOTATION")
                     _baseType = "string";
 
-
                 foreach (XmlSchemaFacet facet in content.Facets)
                 {
                     if (facet is XmlSchemaLengthFacet)
@@ -103,7 +107,9 @@ namespace System.Data
                         _pattern = facet.Value;
 
                     if (facet is XmlSchemaEnumerationFacet)
-                        _enumeration = !string.IsNullOrEmpty(_enumeration) ? _enumeration + " " + facet.Value : facet.Value;
+                        _enumeration = !string.IsNullOrEmpty(_enumeration)
+                            ? _enumeration + " " + facet.Value
+                            : facet.Value;
 
                     if (facet is XmlSchemaMinExclusiveFacet)
                         _minExclusive = facet.Value;
@@ -127,79 +133,56 @@ namespace System.Data
         internal bool IsPlainString()
         {
             return (
-                XSDSchema.QualifiedName(_baseType!) == XSDSchema.QualifiedName("string") &&
-                string.IsNullOrEmpty(_name) &&
-                _length == -1 &&
-                _minLength == -1 &&
-                _maxLength == -1 &&
-                string.IsNullOrEmpty(_pattern) &&
-                string.IsNullOrEmpty(_maxExclusive) &&
-                string.IsNullOrEmpty(_maxInclusive) &&
-                string.IsNullOrEmpty(_minExclusive) &&
-                string.IsNullOrEmpty(_minInclusive) &&
-                string.IsNullOrEmpty(_enumeration)
+                XSDSchema.QualifiedName(_baseType!) == XSDSchema.QualifiedName("string")
+                && string.IsNullOrEmpty(_name)
+                && _length == -1
+                && _minLength == -1
+                && _maxLength == -1
+                && string.IsNullOrEmpty(_pattern)
+                && string.IsNullOrEmpty(_maxExclusive)
+                && string.IsNullOrEmpty(_maxInclusive)
+                && string.IsNullOrEmpty(_minExclusive)
+                && string.IsNullOrEmpty(_minInclusive)
+                && string.IsNullOrEmpty(_enumeration)
             );
         }
 
         internal string? BaseType
         {
-            get
-            {
-                return _baseType;
-            }
+            get { return _baseType; }
         }
 
         internal XmlQualifiedName? XmlBaseType
         {
-            get
-            {
-                return _xmlBaseType;
-            }
+            get { return _xmlBaseType; }
         }
 
         internal string? Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal string Namespace
         {
-            get
-            {
-                return _ns;
-            }
+            get { return _ns; }
         }
 
         internal int Length
         {
-            get
-            {
-                return _length;
-            }
+            get { return _length; }
         }
 
         internal int MaxLength
         {
-            get
-            {
-                return _maxLength;
-            }
-            set
-            {
-                _maxLength = value;
-            }
+            get { return _maxLength; }
+            set { _maxLength = value; }
         }
 
         internal SimpleType? BaseSimpleType
         {
-            get
-            {
-                return _baseSimpleType;
-            }
+            get { return _baseSimpleType; }
         }
+
         // return  qualified name of this simple type
         public string? SimpleTypeQualifiedName
         {
@@ -227,7 +210,11 @@ namespace System.Data
 
         internal XmlNode ToNode(XmlDocument dc, Hashtable prefixes, bool inRemoting)
         {
-            XmlElement typeNode = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_SIMPLETYPE, Keywords.XSDNS);
+            XmlElement typeNode = dc.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_SIMPLETYPE,
+                Keywords.XSDNS
+            );
 
             if (!string.IsNullOrEmpty(_name))
             {
@@ -238,7 +225,11 @@ namespace System.Data
                     typeNode.SetAttribute(Keywords.TARGETNAMESPACE, Keywords.MSDNS, Namespace);
                 }
             }
-            XmlElement type = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_RESTRICTION, Keywords.XSDNS);
+            XmlElement type = dc.CreateElement(
+                Keywords.XSD_PREFIX,
+                Keywords.XSD_RESTRICTION,
+                Keywords.XSDNS
+            );
 
             if (!inRemoting)
             {
@@ -246,7 +237,10 @@ namespace System.Data
                 {
                     if (_baseSimpleType.Namespace != null && _baseSimpleType.Namespace.Length > 0)
                     {
-                        string? prefix = (prefixes != null) ? (string?)prefixes[_baseSimpleType.Namespace] : null;
+                        string? prefix =
+                            (prefixes != null)
+                                ? (string?)prefixes[_baseSimpleType.Namespace]
+                                : null;
                         if (prefix != null)
                         {
                             type.SetAttribute(Keywords.BASE, (prefix + ":" + _baseSimpleType.Name));
@@ -268,20 +262,37 @@ namespace System.Data
             }
             else
             {
-                type.SetAttribute(Keywords.BASE, (_baseSimpleType != null) ? _baseSimpleType.Name : QualifiedName(_baseType!));
+                type.SetAttribute(
+                    Keywords.BASE,
+                    (_baseSimpleType != null) ? _baseSimpleType.Name : QualifiedName(_baseType!)
+                );
             }
 
             XmlElement constraint;
             if (_length >= 0)
             {
-                constraint = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_LENGTH, Keywords.XSDNS);
-                constraint.SetAttribute(Keywords.VALUE, _length.ToString(CultureInfo.InvariantCulture));
+                constraint = dc.CreateElement(
+                    Keywords.XSD_PREFIX,
+                    Keywords.XSD_LENGTH,
+                    Keywords.XSDNS
+                );
+                constraint.SetAttribute(
+                    Keywords.VALUE,
+                    _length.ToString(CultureInfo.InvariantCulture)
+                );
                 type.AppendChild(constraint);
             }
             if (_maxLength >= 0)
             {
-                constraint = dc.CreateElement(Keywords.XSD_PREFIX, Keywords.XSD_MAXLENGTH, Keywords.XSDNS);
-                constraint.SetAttribute(Keywords.VALUE, _maxLength.ToString(CultureInfo.InvariantCulture));
+                constraint = dc.CreateElement(
+                    Keywords.XSD_PREFIX,
+                    Keywords.XSD_MAXLENGTH,
+                    Keywords.XSDNS
+                );
+                constraint.SetAttribute(
+                    Keywords.VALUE,
+                    _maxLength.ToString(CultureInfo.InvariantCulture)
+                );
                 type.AppendChild(constraint);
             }
 
@@ -329,8 +340,11 @@ namespace System.Data
 
             if (!string.Equals(BaseType, otherSimpleType.BaseType, StringComparison.Ordinal))
                 return ("BaseType");
-            if ((BaseSimpleType != null && otherSimpleType.BaseSimpleType != null) &&
-                (BaseSimpleType.HasConflictingDefinition(otherSimpleType.BaseSimpleType)).Length != 0)
+            if (
+                (BaseSimpleType != null && otherSimpleType.BaseSimpleType != null)
+                && (BaseSimpleType.HasConflictingDefinition(otherSimpleType.BaseSimpleType)).Length
+                    != 0
+            )
                 return ("BaseSimpleType");
             return string.Empty;
         }

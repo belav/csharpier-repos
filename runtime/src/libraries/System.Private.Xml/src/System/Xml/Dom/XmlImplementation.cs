@@ -10,9 +10,8 @@ namespace System.Xml
         private readonly XmlNameTable _nameTable;
 
         // Initializes a new instance of the XmlImplementation class.
-        public XmlImplementation() : this(new NameTable())
-        {
-        }
+        public XmlImplementation()
+            : this(new NameTable()) { }
 
         public XmlImplementation(XmlNameTable nt)
         {

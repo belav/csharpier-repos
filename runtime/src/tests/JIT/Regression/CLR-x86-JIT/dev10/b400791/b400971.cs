@@ -12,6 +12,7 @@ using Xunit;
 public class ByRef_GCHole
 {
     static volatile int returnCode = 0;
+
     ~ByRef_GCHole()
     {
         if (returnCode == 0)
@@ -43,8 +44,8 @@ public class ByRef_GCHole
     {
         ByRef_GCHole h;
 
-        // NOTE: After talking to Grant, the if else below is necessary, because a if/else is 
-        // required for the problem to occur and the jit should not know which branch 
+        // NOTE: After talking to Grant, the if else below is necessary, because a if/else is
+        // required for the problem to occur and the jit should not know which branch
         // is going to be executed. That's where the volatile static int comes into play.
         if (returnCode == 0)
         {

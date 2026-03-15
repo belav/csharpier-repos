@@ -36,14 +36,16 @@ namespace System.Workflow.Activities
             if (string.IsNullOrEmpty(name))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name", SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                    "name",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             this.fullName = name;
 
             this.name = this.fullName;
 
-            // detect first bracket, any name seperators after it are part of a generic parameter...  
+            // detect first bracket, any name seperators after it are part of a generic parameter...
             int idx = name.IndexOf('[');
 
             // Get the name after the last dot
@@ -61,10 +63,11 @@ namespace System.Workflow.Activities
                 this.name = this.fullName.Substring(idx + 1);
             }
 
-            this.typeAttributes = TypeAttributes.Interface |
-                TypeAttributes.Sealed |
-                TypeAttributes.Public |
-                TypeAttributes.Abstract;
+            this.typeAttributes =
+                TypeAttributes.Interface
+                | TypeAttributes.Sealed
+                | TypeAttributes.Public
+                | TypeAttributes.Abstract;
 
             this.attributes = new Attribute[] { new ServiceContractAttribute() };
             this.methods = new MethodInfo[0];
@@ -72,42 +75,27 @@ namespace System.Workflow.Activities
 
         public override Assembly Assembly
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override string AssemblyQualifiedName
         {
-            get
-            {
-                return this.FullName;
-            }
+            get { return this.FullName; }
         }
 
         public override Type BaseType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override string FullName
         {
-            get
-            {
-                return this.fullName;
-            }
+            get { return this.fullName; }
         }
 
         public override Guid GUID
@@ -125,18 +113,12 @@ namespace System.Workflow.Activities
 
         public override Module Module
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         public override string Namespace
@@ -158,16 +140,14 @@ namespace System.Workflow.Activities
             {
 #pragma warning suppress 56503
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported)));
+                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+                );
             }
         }
 
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public object Clone()
@@ -188,17 +168,27 @@ namespace System.Workflow.Activities
                 return false;
             }
 
-            if (string.Compare(this.AssemblyQualifiedName, contract.AssemblyQualifiedName, StringComparison.Ordinal) != 0 ||
-                this.methods.Length != contract.methods.Length)
+            if (
+                string.Compare(
+                    this.AssemblyQualifiedName,
+                    contract.AssemblyQualifiedName,
+                    StringComparison.Ordinal
+                ) != 0
+                || this.methods.Length != contract.methods.Length
+            )
             {
                 return false;
             }
 
             foreach (MethodInfo methodInfo in this.methods)
             {
-                if (this.GetMemberHelper<MethodInfo>(BindingFlags.Public | BindingFlags.Instance,
-                    new MemberSignature(methodInfo),
-                    ref contract.methods) == null)
+                if (
+                    this.GetMemberHelper<MethodInfo>(
+                        BindingFlags.Public | BindingFlags.Instance,
+                        new MemberSignature(methodInfo),
+                        ref contract.methods
+                    ) == null
+                )
                 {
                     return false;
                 }
@@ -210,7 +200,8 @@ namespace System.Workflow.Activities
         public override int GetArrayRank()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                SR2.GetString(SR2.Error_CurrentTypeNotAnArray));
+                SR2.GetString(SR2.Error_CurrentTypeNotAnArray)
+            );
         }
 
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
@@ -273,7 +264,11 @@ namespace System.Workflow.Activities
 
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
-            return GetMemberHelper<EventInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.events);
+            return GetMemberHelper<EventInfo>(
+                bindingAttr,
+                new MemberSignature(name, null, null),
+                ref this.events
+            );
         }
 
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
@@ -283,7 +278,11 @@ namespace System.Workflow.Activities
 
         public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
-            return GetMemberHelper<FieldInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.fields);
+            return GetMemberHelper<FieldInfo>(
+                bindingAttr,
+                new MemberSignature(name, null, null),
+                ref this.fields
+            );
         }
 
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
@@ -301,7 +300,9 @@ namespace System.Workflow.Activities
             if (string.IsNullOrEmpty(name))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name", SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                    "name",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             if (string.Compare(this.name, name, StringComparison.Ordinal) == 0)
@@ -316,44 +317,84 @@ namespace System.Workflow.Activities
             return Type.EmptyTypes;
         }
 
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             List<MemberInfo> members = new List<MemberInfo>();
 
             // Methods
             if ((type & MemberTypes.Method) != 0)
             {
-                members.AddRange(GetMembersHelper<MethodInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.methods));
+                members.AddRange(
+                    GetMembersHelper<MethodInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.methods
+                    )
+                );
             }
 
             // Constructors
             if ((type & MemberTypes.Constructor) != 0)
             {
-                members.AddRange(GetMembersHelper<ConstructorInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.constructors));
+                members.AddRange(
+                    GetMembersHelper<ConstructorInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.constructors
+                    )
+                );
             }
 
             // Properties
             if ((type & MemberTypes.Property) != 0)
             {
-                members.AddRange(GetMembersHelper<PropertyInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.properties));
+                members.AddRange(
+                    GetMembersHelper<PropertyInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.properties
+                    )
+                );
             }
 
             // Events
             if ((type & MemberTypes.Event) != 0)
             {
-                members.AddRange(GetMembersHelper<EventInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.events));
+                members.AddRange(
+                    GetMembersHelper<EventInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.events
+                    )
+                );
             }
 
             // Fields
             if ((type & MemberTypes.Field) != 0)
             {
-                members.AddRange(GetMembersHelper<FieldInfo>(bindingAttr, new MemberSignature(name, null, null), ref this.fields));
+                members.AddRange(
+                    GetMembersHelper<FieldInfo>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.fields
+                    )
+                );
             }
 
             // Nested types
             if ((type & MemberTypes.NestedType) != 0)
             {
-                members.AddRange(GetMembersHelper<Type>(bindingAttr, new MemberSignature(name, null, null), ref this.nestedTypes));
+                members.AddRange(
+                    GetMembersHelper<Type>(
+                        bindingAttr,
+                        new MemberSignature(name, null, null),
+                        ref this.nestedTypes
+                    )
+                );
             }
 
             return members.ToArray();
@@ -392,10 +433,20 @@ namespace System.Workflow.Activities
             return GetMembersHelper<PropertyInfo>(bindingAttr, ref this.properties, true);
         }
 
-        public override object InvokeMember(string name, BindingFlags bindingFlags, Binder binder, object target, object[] providedArgs, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParams)
+        public override object InvokeMember(
+            string name,
+            BindingFlags bindingFlags,
+            Binder binder,
+            object target,
+            object[] providedArgs,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParams
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported)));
+                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+            );
         }
 
         public override bool IsAssignableFrom(Type type)
@@ -443,9 +494,13 @@ namespace System.Workflow.Activities
             }
 
             MemberSignature signature = new MemberSignature(methodInfo);
-            if (this.GetMemberHelper<MethodInfo>(BindingFlags.Public | BindingFlags.Instance,
-                signature,
-                ref this.methods) != null)
+            if (
+                this.GetMemberHelper<MethodInfo>(
+                    BindingFlags.Public | BindingFlags.Instance,
+                    signature,
+                    ref this.methods
+                ) != null
+            )
             {
                 return;
             }
@@ -467,24 +522,55 @@ namespace System.Workflow.Activities
             return typeAttributes;
         }
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<ConstructorInfo>(bindingAttr, new MemberSignature(null, types, null), ref this.constructors);
+            return GetMemberHelper<ConstructorInfo>(
+                bindingAttr,
+                new MemberSignature(null, types, null),
+                ref this.constructors
+            );
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<MethodInfo>(bindingAttr, new MemberSignature(name, types, null), ref this.methods);
+            return GetMemberHelper<MethodInfo>(
+                bindingAttr,
+                new MemberSignature(name, types, null),
+                ref this.methods
+            );
         }
 
-        protected override PropertyInfo GetPropertyImpl(String name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            String name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            return GetMemberHelper<PropertyInfo>(bindingAttr, new MemberSignature(name, types, null), ref this.properties);
+            return GetMemberHelper<PropertyInfo>(
+                bindingAttr,
+                new MemberSignature(name, types, null),
+                ref this.properties
+            );
         }
 
         protected override bool HasElementTypeImpl()
         {
-
             int elementCharPosition = Name.LastIndexOfAny(elementDecorators);
             return (elementCharPosition != -1);
         }
@@ -498,14 +584,12 @@ namespace System.Workflow.Activities
             }
 
             return false;
-
         }
 
         protected override bool IsByRefImpl()
         {
             return false;
         }
-
 
         protected override bool IsCOMObjectImpl()
         {
@@ -554,7 +638,7 @@ namespace System.Workflow.Activities
             }
             else if (memberInfo is PropertyInfo)
             {
-                // Property public\static attributes can be fetched using the accessors 
+                // Property public\static attributes can be fetched using the accessors
                 PropertyInfo propertyInfo = memberInfo as PropertyInfo;
                 MethodInfo accessorMethod = null;
                 if (propertyInfo.CanRead)
@@ -575,10 +659,24 @@ namespace System.Workflow.Activities
             {
                 isPublic = (memberInfo as Type).IsPublic || (memberInfo as Type).IsNestedPublic;
                 // No static check.
-                return ((((isPublic) && ((bindingFlags & BindingFlags.Public) != 0)) || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))));
+                return (
+                    (
+                        ((isPublic) && ((bindingFlags & BindingFlags.Public) != 0))
+                        || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))
+                    )
+                );
             }
 
-            return ((((isPublic) && ((bindingFlags & BindingFlags.Public) != 0)) || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))) && (((isStatic) && ((bindingFlags & BindingFlags.Static) != 0)) || ((!isStatic) && ((bindingFlags & BindingFlags.Instance) != 0))));
+            return (
+                (
+                    ((isPublic) && ((bindingFlags & BindingFlags.Public) != 0))
+                    || ((!isPublic) && ((bindingFlags & BindingFlags.NonPublic) != 0))
+                )
+                && (
+                    ((isStatic) && ((bindingFlags & BindingFlags.Static) != 0))
+                    || ((!isStatic) && ((bindingFlags & BindingFlags.Instance) != 0))
+                )
+            );
         }
 
         //private MemberInfo[] GetBaseMembers(Type type, Type baseType, BindingFlags bindingAttr)
@@ -613,7 +711,11 @@ namespace System.Workflow.Activities
         //}
 
         // generic method that implements all GetXXX methods
-        private T GetMemberHelper<T>(BindingFlags bindingAttr, MemberSignature memberSignature, ref T[] members)
+        private T GetMemberHelper<T>(
+            BindingFlags bindingAttr,
+            MemberSignature memberSignature,
+            ref T[] members
+        )
             where T : MemberInfo
         {
             if (members != null)
@@ -622,7 +724,10 @@ namespace System.Workflow.Activities
                 foreach (T memberInfo in members)
                 {
                     MemberSignature candididateMemberSignature = new MemberSignature(memberInfo);
-                    if (candididateMemberSignature.FilterSignature(memberSignature) && FilterMember(memberInfo, bindingAttr))
+                    if (
+                        candididateMemberSignature.FilterSignature(memberSignature)
+                        && FilterMember(memberInfo, bindingAttr)
+                    )
                     {
                         return memberInfo;
                     }
@@ -645,7 +750,10 @@ namespace System.Workflow.Activities
                 {
                     MemberSignature memberSignature = new MemberSignature(memberInfo);
 
-                    if ((FilterMember(memberInfo, bindingAttr)) && (!membersDictionary.ContainsKey(memberSignature)))
+                    if (
+                        (FilterMember(memberInfo, bindingAttr))
+                        && (!membersDictionary.ContainsKey(memberSignature))
+                    )
                     {
                         membersDictionary.Add(new MemberSignature(memberInfo), memberInfo);
                     }
@@ -688,7 +796,11 @@ namespace System.Workflow.Activities
             return memberCollection.ToArray();
         }
 
-        private T[] GetMembersHelper<T>(BindingFlags bindingAttr, MemberSignature memberSignature, ref T[] members)
+        private T[] GetMembersHelper<T>(
+            BindingFlags bindingAttr,
+            MemberSignature memberSignature,
+            ref T[] members
+        )
             where T : MemberInfo
         {
             List<T> memberCandidates = new List<T>();
@@ -718,7 +830,9 @@ namespace System.Workflow.Activities
                     List<Type> typeCollection = new List<Type>();
 
                     // method/constructor arguments
-                    foreach (ParameterInfo parameterInfo in (memberInfo as MethodBase).GetParameters())
+                    foreach (
+                        ParameterInfo parameterInfo in (memberInfo as MethodBase).GetParameters()
+                    )
                     {
                         typeCollection.Add(parameterInfo.ParameterType);
                     }
@@ -746,7 +860,6 @@ namespace System.Workflow.Activities
                     // return type for property
                     this.returnType = propertyInfo.PropertyType;
                 }
-
             }
 
             internal MemberSignature(string name, Type[] parameters, Type returnType)
@@ -761,10 +874,7 @@ namespace System.Workflow.Activities
 
             public string Name
             {
-                get
-                {
-                    return name;
-                }
+                get { return name; }
             }
 
             public Type[] Parameters
@@ -782,25 +892,26 @@ namespace System.Workflow.Activities
 
             public Type ReturnType
             {
-                get
-                {
-                    return returnType;
-                }
+                get { return returnType; }
             }
 
             public override bool Equals(object obj)
             {
                 MemberSignature memberSignature = obj as MemberSignature;
 
-                if ((memberSignature == null) ||
-                    (this.name != memberSignature.Name) ||
-                    (this.returnType != memberSignature.ReturnType))
+                if (
+                    (memberSignature == null)
+                    || (this.name != memberSignature.Name)
+                    || (this.returnType != memberSignature.ReturnType)
+                )
                 {
                     return false;
                 }
 
-                if ((this.Parameters == null) && (memberSignature.Parameters != null) ||
-                    (this.Parameters != null) && (memberSignature.Parameters == null))
+                if (
+                    (this.Parameters == null) && (memberSignature.Parameters != null)
+                    || (this.Parameters != null) && (memberSignature.Parameters == null)
+                )
                 {
                     return false;
                 }
@@ -824,17 +935,24 @@ namespace System.Workflow.Activities
                 return true;
             }
 
-            // this method will filter using a mask signautre. only non-null mask members are used to filter 
+            // this method will filter using a mask signautre. only non-null mask members are used to filter
             // the signature, the rest are ignored
             public bool FilterSignature(MemberSignature maskSignature)
             {
                 if (maskSignature == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("maskSignature");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "maskSignature"
+                    );
                 }
 
-                if (((maskSignature.Name != null) && (this.name != maskSignature.name)) ||
-                    ((maskSignature.returnType != null) && (this.returnType != maskSignature.returnType)))
+                if (
+                    ((maskSignature.Name != null) && (this.name != maskSignature.name))
+                    || (
+                        (maskSignature.returnType != null)
+                        && (this.returnType != maskSignature.returnType)
+                    )
+                )
                 {
                     return false;
                 }

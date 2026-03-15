@@ -10,11 +10,18 @@ namespace System.Runtime.InteropServices.ObjectiveC
 {
     public static unsafe partial class ObjectiveCMarshal
     {
-        private static readonly IntPtr[] s_ObjcMessageSendFunctions = new IntPtr[(int)MessageSendFunction.MsgSendSuperStret + 1];
+        private static readonly IntPtr[] s_ObjcMessageSendFunctions = new IntPtr[
+            (int)MessageSendFunction.MsgSendSuperStret + 1
+        ];
         private static bool s_initialized;
-        private static readonly ConditionalWeakTable<object, ObjcTrackingInformation> s_objects = new();
-        private static delegate* unmanaged[SuppressGCTransition]<void*, int> s_IsTrackedReferenceCallback;
-        private static delegate* unmanaged[SuppressGCTransition]<void*, void> s_OnEnteredFinalizerQueueCallback;
+        private static readonly ConditionalWeakTable<object, ObjcTrackingInformation> s_objects =
+            new();
+        private static delegate* unmanaged[SuppressGCTransition]<
+            void*,
+            int> s_IsTrackedReferenceCallback;
+        private static delegate* unmanaged[SuppressGCTransition]<
+            void*,
+            void> s_OnEnteredFinalizerQueueCallback;
 
         [ThreadStatic]
         private static Exception? t_pendingExceptionObject;
@@ -33,9 +40,14 @@ namespace System.Runtime.InteropServices.ObjectiveC
 
         private static bool TrySetGlobalMessageSendCallback(
             MessageSendFunction msgSendFunction,
-            IntPtr func)
+            IntPtr func
+        )
         {
-            return Interlocked.CompareExchange(ref s_ObjcMessageSendFunctions[(int)msgSendFunction], func, IntPtr.Zero) == IntPtr.Zero;
+            return Interlocked.CompareExchange(
+                    ref s_ObjcMessageSendFunctions[(int)msgSendFunction],
+                    func,
+                    IntPtr.Zero
+                ) == IntPtr.Zero;
         }
 
         internal static bool TryGetGlobalMessageSendCallback(int msgSendFunction, out IntPtr func)
@@ -77,14 +89,20 @@ namespace System.Runtime.InteropServices.ObjectiveC
         }
 
         [RuntimeExport("ObjectiveCMarshalGetOnEnteredFinalizerQueueCallback")]
-        static delegate* unmanaged[SuppressGCTransition]<void*, void> GetOnEnteredFinalizerQueueCallback()
+        static delegate* unmanaged[SuppressGCTransition]<
+            void*,
+            void> GetOnEnteredFinalizerQueueCallback()
         {
             return s_OnEnteredFinalizerQueueCallback;
         }
 
         [RuntimeExport("ObjectiveCMarshalGetUnhandledExceptionPropagationHandler")]
 #pragma warning disable IDE0060
-        static IntPtr ObjectiveCMarshalGetUnhandledExceptionPropagationHandler(object exceptionObj, IntPtr ip, out IntPtr context)
+        static IntPtr ObjectiveCMarshalGetUnhandledExceptionPropagationHandler(
+            object exceptionObj,
+            IntPtr ip,
+            out IntPtr context
+        )
 #pragma warning restore IDE0060
         {
             if (s_unhandledExceptionPropagationHandler == null)
@@ -107,15 +125,24 @@ namespace System.Runtime.InteropServices.ObjectiveC
         private static bool TryInitializeReferenceTracker(
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
-            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization)
+            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization
+        )
         {
-            if (!RuntimeImports.RhRegisterObjectiveCMarshalBeginEndCallback((IntPtr)beginEndCallback))
+            if (
+                !RuntimeImports.RhRegisterObjectiveCMarshalBeginEndCallback(
+                    (IntPtr)beginEndCallback
+                )
+            )
             {
                 return false;
             }
 
-            s_IsTrackedReferenceCallback = (delegate* unmanaged[SuppressGCTransition]<void*, int>)isReferencedCallback;
-            s_OnEnteredFinalizerQueueCallback = (delegate* unmanaged[SuppressGCTransition]<void*, void>)trackedObjectEnteredFinalization;
+            s_IsTrackedReferenceCallback = (delegate* unmanaged[SuppressGCTransition]<
+                void*,
+                int>)isReferencedCallback;
+            s_OnEnteredFinalizerQueueCallback = (delegate* unmanaged[SuppressGCTransition]<
+                void*,
+                void>)trackedObjectEnteredFinalization;
             s_initialized = true;
 
             return true;
@@ -124,11 +151,14 @@ namespace System.Runtime.InteropServices.ObjectiveC
         private static IntPtr CreateReferenceTrackingHandleInternal(
             object obj,
             out int memInSizeT,
-            out IntPtr mem)
+            out IntPtr mem
+        )
         {
             if (!s_initialized)
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ObjectiveCMarshalNotInitialized);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ObjectiveCMarshalNotInitialized
+                );
             }
 
             if (!obj.GetEETypePtr().IsTrackedReferenceWithFinalizer)
@@ -153,7 +183,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
 
             public ObjcTrackingInformation()
             {
-                _memory = (IntPtr)NativeMemory.AllocZeroed(TAGGED_MEMORY_SIZE_IN_POINTERS * (nuint)IntPtr.Size);
+                _memory = (IntPtr)
+                    NativeMemory.AllocZeroed(TAGGED_MEMORY_SIZE_IN_POINTERS * (nuint)IntPtr.Size);
             }
 
             public void GetTaggedMemory(out int memInSizeT, out IntPtr mem)
@@ -169,8 +200,14 @@ namespace System.Runtime.InteropServices.ObjectiveC
                     return;
                 }
 
-                IntPtr newHandle = RuntimeImports.RhHandleAlloc(o, GCHandleType.WeakTrackResurrection);
-                if (Interlocked.CompareExchange(ref _longWeakHandle, newHandle, IntPtr.Zero) != IntPtr.Zero)
+                IntPtr newHandle = RuntimeImports.RhHandleAlloc(
+                    o,
+                    GCHandleType.WeakTrackResurrection
+                );
+                if (
+                    Interlocked.CompareExchange(ref _longWeakHandle, newHandle, IntPtr.Zero)
+                    != IntPtr.Zero
+                )
                 {
                     RuntimeImports.RhHandleFree(newHandle);
                 }
@@ -178,7 +215,10 @@ namespace System.Runtime.InteropServices.ObjectiveC
 
             ~ObjcTrackingInformation()
             {
-                if (_longWeakHandle != IntPtr.Zero && RuntimeImports.RhHandleGet(_longWeakHandle) != null)
+                if (
+                    _longWeakHandle != IntPtr.Zero
+                    && RuntimeImports.RhHandleGet(_longWeakHandle) != null
+                )
                 {
                     GC.ReRegisterForFinalize(this);
                     return;

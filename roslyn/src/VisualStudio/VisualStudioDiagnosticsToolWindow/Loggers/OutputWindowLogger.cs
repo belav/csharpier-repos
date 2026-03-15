@@ -28,28 +28,65 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             _isEnabledPredicate = isEnabledPredicate;
         }
 
-        public bool IsEnabled(FunctionId functionId)
-            => _isEnabledPredicate(functionId);
+        public bool IsEnabled(FunctionId functionId) => _isEnabledPredicate(functionId);
 
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
-            OutputPane.WriteLine(string.Format("[{0}] {1} - {2}", Environment.CurrentManagedThreadId, functionId.ToString(), logMessage.GetMessage()));
+            OutputPane.WriteLine(
+                string.Format(
+                    "[{0}] {1} - {2}",
+                    Environment.CurrentManagedThreadId,
+                    functionId.ToString(),
+                    logMessage.GetMessage()
+                )
+            );
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            CancellationToken cancellationToken
+        )
         {
-            OutputPane.WriteLine(string.Format("[{0}] Start({1}) : {2} - {3}", Environment.CurrentManagedThreadId, uniquePairId, functionId.ToString(), logMessage.GetMessage()));
+            OutputPane.WriteLine(
+                string.Format(
+                    "[{0}] Start({1}) : {2} - {3}",
+                    Environment.CurrentManagedThreadId,
+                    uniquePairId,
+                    functionId.ToString(),
+                    logMessage.GetMessage()
+                )
+            );
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            int delta,
+            CancellationToken cancellationToken
+        )
         {
-            var functionString = functionId.ToString() + (cancellationToken.IsCancellationRequested ? " Canceled" : string.Empty);
-            OutputPane.WriteLine(string.Format("[{0}] End({1}) : [{2}ms] {3}", Environment.CurrentManagedThreadId, uniquePairId, delta, functionString));
+            var functionString =
+                functionId.ToString()
+                + (cancellationToken.IsCancellationRequested ? " Canceled" : string.Empty);
+            OutputPane.WriteLine(
+                string.Format(
+                    "[{0}] End({1}) : [{2}ms] {3}",
+                    Environment.CurrentManagedThreadId,
+                    uniquePairId,
+                    delta,
+                    functionString
+                )
+            );
         }
 
         private class OutputPane
         {
-            private static readonly Guid s_outputPaneGuid = new Guid("BBAFF416-4AF5-41F2-9F93-91F283E43C3B");
+            private static readonly Guid s_outputPaneGuid = new Guid(
+                "BBAFF416-4AF5-41F2-9F93-91F283E43C3B"
+            );
 
             public static readonly OutputPane s_instance = new OutputPane();
 
@@ -65,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             {
                 _serviceProvider = ServiceProvider.GlobalProvider;
 
-                var componentModel = (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel));
+                var componentModel = (IComponentModel)
+                    _serviceProvider.GetService(typeof(SComponentModel));
                 _threadingContext = componentModel.GetService<IThreadingContext>();
             }
 
@@ -87,22 +125,23 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 if (_doNotAccessDirectlyOutputPane == null)
                 {
                     _threadingContext.JoinableTaskFactory.Run(async () =>
-                   {
-                       await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                       if (_doNotAccessDirectlyOutputPane != null)
-                       {
-                           // check whether other one already initialized output window.
-                           // the output API already handle double initialization, so this is just quick bail
-                           // rather than any functional issue
-                           return;
-                       }
+                        if (_doNotAccessDirectlyOutputPane != null)
+                        {
+                            // check whether other one already initialized output window.
+                            // the output API already handle double initialization, so this is just quick bail
+                            // rather than any functional issue
+                            return;
+                        }
 
-                       var outputWindow = (IVsOutputWindow)_serviceProvider.GetService(typeof(SVsOutputWindow));
+                        var outputWindow = (IVsOutputWindow)
+                            _serviceProvider.GetService(typeof(SVsOutputWindow));
 
-                       // this should bring outout window to the front
-                       _doNotAccessDirectlyOutputPane = CreateOutputPane(outputWindow);
-                   });
+                        // this should bring outout window to the front
+                        _doNotAccessDirectlyOutputPane = CreateOutputPane(outputWindow);
+                    });
                 }
 
                 return _doNotAccessDirectlyOutputPane;
@@ -116,8 +155,19 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 var workspacePaneGuid = s_outputPaneGuid;
 
                 // If the pane has already been created, CreatePane returns it
-                if (ErrorHandler.Succeeded(outputWindow.CreatePane(ref workspacePaneGuid, "Roslyn Logger Output", fInitVisible: 1, fClearWithSolution: 1)) &&
-                    ErrorHandler.Succeeded(outputWindow.GetPane(ref workspacePaneGuid, out var pane)))
+                if (
+                    ErrorHandler.Succeeded(
+                        outputWindow.CreatePane(
+                            ref workspacePaneGuid,
+                            "Roslyn Logger Output",
+                            fInitVisible: 1,
+                            fClearWithSolution: 1
+                        )
+                    )
+                    && ErrorHandler.Succeeded(
+                        outputWindow.GetPane(ref workspacePaneGuid, out var pane)
+                    )
+                )
                 {
                     return pane;
                 }

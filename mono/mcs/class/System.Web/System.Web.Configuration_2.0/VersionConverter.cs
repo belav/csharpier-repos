@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,58 +26,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 
 namespace System.Web.Configuration
 {
-	sealed class VersionConverter : ConfigurationConverterBase
-	{
-		Version minVersion;
-		string exceptionText;
+    sealed class VersionConverter : ConfigurationConverterBase
+    {
+        Version minVersion;
+        string exceptionText;
 
-		public VersionConverter ()
-		{
-		}
-		
-		public VersionConverter (int minMajor, int minMinor, string exceptionText = null)
-		{
-			minVersion = new Version (minMajor, minMinor);
-			this.exceptionText = exceptionText;
-		}
-		
-		public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
-                {
-			string input = data as string;
+        public VersionConverter() { }
 
-			if (String.IsNullOrEmpty (input))
-				throw new ConfigurationErrorsException ("The input string is too short or null.");
+        public VersionConverter(int minMajor, int minMinor, string exceptionText = null)
+        {
+            minVersion = new Version(minMajor, minMinor);
+            this.exceptionText = exceptionText;
+        }
 
-			Version result;
-			if (!Version.TryParse (input, out result))
-				throw new ConfigurationErrorsException ("The input string wasn't in correct format.");
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
+            string input = data as string;
 
-			if (minVersion != null && result < minVersion)
-				throw new ConfigurationErrorsException (String.Format (exceptionText, result, minVersion));
-			
-			return result;
-                }
+            if (String.IsNullOrEmpty(input))
+                throw new ConfigurationErrorsException("The input string is too short or null.");
 
-                public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-                {
-			Version ver = value as Version;
+            Version result;
+            if (!Version.TryParse(input, out result))
+                throw new ConfigurationErrorsException(
+                    "The input string wasn't in correct format."
+                );
 
-			if (ver == null)
-				throw new ArgumentException ("Is not an instance of the Version type", "value");
-			
-                        if (type == typeof (string))
-				return ver.ToString ();
+            if (minVersion != null && result < minVersion)
+                throw new ConfigurationErrorsException(
+                    String.Format(exceptionText, result, minVersion)
+                );
 
-			if (type == typeof (Version))
-				return ver.Clone ();
+            return result;
+        }
 
-                        throw new ConfigurationErrorsException ("Conversion to type '" + type + "' is not supported.");
-                }
-	}
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
+            Version ver = value as Version;
+
+            if (ver == null)
+                throw new ArgumentException("Is not an instance of the Version type", "value");
+
+            if (type == typeof(string))
+                return ver.ToString();
+
+            if (type == typeof(Version))
+                return ver.Clone();
+
+            throw new ConfigurationErrorsException(
+                "Conversion to type '" + type + "' is not supported."
+            );
+        }
+    }
 }

@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using System.CodeDom;
-    using System.ServiceModel.Security;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net.Security;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     [DebuggerDisplay("Name={name}, Action={action}, DetailType={detailType}")]
     public class FaultDescription
@@ -26,11 +26,13 @@ namespace System.ServiceModel.Description
         public FaultDescription(string action)
         {
             if (action == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("action"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("action")
+                );
 
             this.action = action;
         }
-        
+
         public string Action
         {
             get { return action; }
@@ -54,7 +56,15 @@ namespace System.ServiceModel.Description
         public string Name
         {
             get { return name.EncodedName; }
-            set { SetNameAndElement(new XmlName(value, true /*isEncoded*/)); }
+            set
+            {
+                SetNameAndElement(
+                    new XmlName(
+                        value,
+                        true /*isEncoded*/
+                    )
+                );
+            }
         }
 
         public string Namespace
@@ -75,7 +85,9 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }

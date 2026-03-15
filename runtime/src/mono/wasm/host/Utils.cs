@@ -18,11 +18,14 @@ public class Utils
         Action<string?>? logStdOut = null,
         Action<string?>? logStdErr = null,
         bool silent = false,
-        string? label = null)
+        string? label = null
+    )
     {
         string msgPrefix = label == null ? string.Empty : $"[{label}] ";
         if (!silent)
-            logger.LogInformation($"{msgPrefix}Running: {psi.FileName} {string.Join(" ", psi.ArgumentList)}");
+            logger.LogInformation(
+                $"{msgPrefix}Running: {psi.FileName} {string.Join(" ", psi.ArgumentList)}"
+            );
 
         psi.UseShellExecute = false;
         psi.CreateNoWindow = true;
@@ -32,17 +35,22 @@ public class Utils
             psi.RedirectStandardError = true;
 
         if (!silent)
-            logger.LogDebug($"{msgPrefix}Using working directory: {psi.WorkingDirectory ?? Environment.CurrentDirectory}", msgPrefix);
+            logger.LogDebug(
+                $"{msgPrefix}Using working directory: {psi.WorkingDirectory ?? Environment.CurrentDirectory}",
+                msgPrefix
+            );
 
         // if (psi.EnvironmentVariables.Count > 0)
-            // logger.LogDebug($"{msgPrefix}Setting environment variables for execution:", msgPrefix);
+        // logger.LogDebug($"{msgPrefix}Setting environment variables for execution:", msgPrefix);
 
         // foreach (string key in psi.EnvironmentVariables.Keys)
-            // logger.LogDebug($"{msgPrefix}\t{key} = {psi.EnvironmentVariables[key]}");
+        // logger.LogDebug($"{msgPrefix}\t{key} = {psi.EnvironmentVariables[key]}");
 
         Process? process = Process.Start(psi);
         if (process == null)
-            throw new ArgumentException($"{msgPrefix}Process.Start({psi.FileName} {string.Join(" ", psi.ArgumentList)}) returned null process");
+            throw new ArgumentException(
+                $"{msgPrefix}Process.Start({psi.FileName} {string.Join(" ", psi.ArgumentList)}) returned null process"
+            );
 
         if (logStdErr != null)
             process.ErrorDataReceived += (sender, e) => logStdErr!.Invoke(e.Data);

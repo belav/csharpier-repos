@@ -7,13 +7,16 @@ using System.Diagnostics;
 
 namespace ILCompiler.DependencyAnalysisFramework
 {
-    public abstract class ComputedStaticDependencyNode<DependencyContextType> : DependencyNodeCore<DependencyContextType>
+    public abstract class ComputedStaticDependencyNode<DependencyContextType>
+        : DependencyNodeCore<DependencyContextType>
     {
         private IEnumerable<DependencyListEntry> _dependencies;
         private IEnumerable<CombinedDependencyListEntry> _conditionalDependencies;
 
-        public void SetStaticDependencies(IEnumerable<DependencyListEntry> dependencies,
-                                          IEnumerable<CombinedDependencyListEntry> conditionalDependencies)
+        public void SetStaticDependencies(
+            IEnumerable<DependencyListEntry> dependencies,
+            IEnumerable<CombinedDependencyListEntry> conditionalDependencies
+        )
         {
             Debug.Assert(_dependencies == null);
             Debug.Assert(_conditionalDependencies == null);
@@ -25,47 +28,43 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public override bool HasConditionalStaticDependencies
         {
-            get
-            {
-                return _conditionalDependencies != null;
-            }
+            get { return _conditionalDependencies != null; }
         }
 
         public override bool HasDynamicDependencies
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool InterestingForDynamicDependencyAnalysis
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool StaticDependenciesAreComputed
         {
-            get
-            {
-                return _dependencies != null;
-            }
+            get { return _dependencies != null; }
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(DependencyContextType context)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            DependencyContextType context
+        )
         {
             return _conditionalDependencies;
         }
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(DependencyContextType context)
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            DependencyContextType context
+        )
         {
             return _dependencies;
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<DependencyContextType>> markedNodes, int firstNode, DependencyContextType context)
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<DependencyContextType>> markedNodes,
+            int firstNode,
+            DependencyContextType context
+        )
         {
             return Array.Empty<CombinedDependencyListEntry>();
         }

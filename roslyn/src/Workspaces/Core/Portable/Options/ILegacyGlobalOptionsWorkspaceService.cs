@@ -19,12 +19,21 @@ namespace Microsoft.CodeAnalysis.Options
         public bool GenerateOverrides { get; set; }
 
         public bool GetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language);
-        public void SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(string language, bool value);
+        public void SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(
+            string language,
+            bool value
+        );
 
         public bool GetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(string language);
-        public void SetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(string language, bool value);
+        public void SetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
+            string language,
+            bool value
+        );
 
         public bool GetGenerateConstructorFromMembersOptionsAddNullChecks(string language);
-        public void SetGenerateConstructorFromMembersOptionsAddNullChecks(string language, bool value);
+        public void SetGenerateConstructorFromMembersOptionsAddNullChecks(
+            string language,
+            bool value
+        );
     }
 }

@@ -25,9 +25,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         private readonly NotificationOptionViewModel[] _notifications =
         [
             new NotificationOptionViewModel(NotificationOption2.Silent, KnownMonikers.None),
-            new NotificationOptionViewModel(NotificationOption2.Suggestion, KnownMonikers.StatusInformation),
-            new NotificationOptionViewModel(NotificationOption2.Warning, KnownMonikers.StatusWarning),
-            new NotificationOptionViewModel(NotificationOption2.Error, KnownMonikers.StatusError)
+            new NotificationOptionViewModel(
+                NotificationOption2.Suggestion,
+                KnownMonikers.StatusInformation
+            ),
+            new NotificationOptionViewModel(
+                NotificationOption2.Warning,
+                KnownMonikers.StatusWarning
+            ),
+            new NotificationOptionViewModel(NotificationOption2.Error, KnownMonikers.StatusError),
         ];
 
         public string CodeStyleMembersAutomationText => ServicesVSResources.Naming_rules;
@@ -43,21 +49,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
             {
                 var viewModel = new NamingRuleViewModel()
                 {
-                    NamingStyles = new ObservableCollection<MutableNamingStyle>(info.NamingStyles.Select(n => new MutableNamingStyle(n))),
-                    Specifications = new ObservableCollection<SymbolSpecification>(info.SymbolSpecifications),
-                    NotificationPreferences = new List<NotificationOptionViewModel>(_notifications)
+                    NamingStyles = new ObservableCollection<MutableNamingStyle>(
+                        info.NamingStyles.Select(n => new MutableNamingStyle(n))
+                    ),
+                    Specifications = new ObservableCollection<SymbolSpecification>(
+                        info.SymbolSpecifications
+                    ),
+                    NotificationPreferences = new List<NotificationOptionViewModel>(_notifications),
                 };
 
-                viewModel.SelectedSpecification = viewModel.Specifications.Single(s => s.ID == namingRule.SymbolSpecificationID);
-                viewModel.SelectedStyle = viewModel.NamingStyles.Single(s => s.ID == namingRule.NamingStyleID);
-                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences.Single(n => n.Notification.Severity == namingRule.EnforcementLevel);
+                viewModel.SelectedSpecification = viewModel.Specifications.Single(s =>
+                    s.ID == namingRule.SymbolSpecificationID
+                );
+                viewModel.SelectedStyle = viewModel.NamingStyles.Single(s =>
+                    s.ID == namingRule.NamingStyleID
+                );
+                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences.Single(
+                    n => n.Notification.Severity == namingRule.EnforcementLevel
+                );
 
                 viewModels.Add(viewModel);
             }
 
             CodeStyleItems = new ObservableCollection<NamingRuleViewModel>(viewModels);
-            Specifications = new ObservableCollection<SymbolSpecification>(info.SymbolSpecifications);
-            NamingStyles = new ObservableCollection<MutableNamingStyle>(info.NamingStyles.Select(n => new MutableNamingStyle(n)));
+            Specifications = new ObservableCollection<SymbolSpecification>(
+                info.SymbolSpecifications
+            );
+            NamingStyles = new ObservableCollection<MutableNamingStyle>(
+                info.NamingStyles.Select(n => new MutableNamingStyle(n))
+            );
 
             SetMoveArrowStatuses();
         }
@@ -65,11 +85,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get
-            {
-                return _selectedIndex;
-            }
-
+            get { return _selectedIndex; }
             set
             {
                 if (value == _selectedIndex)
@@ -95,12 +111,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateSpecificationList(ManageSymbolSpecificationsDialogViewModel viewModel)
         {
-            var symbolSpecifications = viewModel.Items.Cast<SymbolSpecificationViewModel>().Select(n => new SymbolSpecification(
-                n.ID,
-                n.ItemName,
-                n.SymbolKindList.Where(s => s.IsChecked).Select(k => k.CreateSymbolOrTypeOrMethodKind()).ToImmutableArray(),
-                n.AccessibilityList.Where(s => s.IsChecked).Select(a => a._accessibility).ToImmutableArray(),
-                n.ModifierList.Where(s => s.IsChecked).Select(m => new SymbolSpecification.ModifierKind(m._modifier)).ToImmutableArray()));
+            var symbolSpecifications = viewModel
+                .Items.Cast<SymbolSpecificationViewModel>()
+                .Select(n => new SymbolSpecification(
+                    n.ID,
+                    n.ItemName,
+                    n.SymbolKindList.Where(s => s.IsChecked)
+                        .Select(k => k.CreateSymbolOrTypeOrMethodKind())
+                        .ToImmutableArray(),
+                    n.AccessibilityList.Where(s => s.IsChecked)
+                        .Select(a => a._accessibility)
+                        .ToImmutableArray(),
+                    n.ModifierList.Where(s => s.IsChecked)
+                        .Select(m => new SymbolSpecification.ModifierKind(m._modifier))
+                        .ToImmutableArray()
+                ));
 
             Specifications.Clear();
             foreach (var specification in symbolSpecifications)
@@ -121,14 +146,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     rule.Specifications.Add(specification);
                 }
 
-                // Set the SelectedSpecification to null and then back to the actual selected 
+                // Set the SelectedSpecification to null and then back to the actual selected
                 // specification to trigger the INotifyPropertyChanged event.
 
                 rule.SelectedSpecification = null;
 
                 if (selectedSpecification != null)
                 {
-                    rule.SelectedSpecification = rule.Specifications.Single(s => s.ID == selectedSpecification.ID);
+                    rule.SelectedSpecification = rule.Specifications.Single(s =>
+                        s.ID == selectedSpecification.ID
+                    );
                 }
             }
         }
@@ -160,14 +187,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateStyleList(ManageNamingStylesDialogViewModel viewModel)
         {
-            var namingStyles = viewModel.Items.Cast<NamingStyleViewModel>().Select(n => new MutableNamingStyle(
-                new NamingStyle(
-                    id: n.ID,
-                    name: n.ItemName,
-                    prefix: n.RequiredPrefix,
-                    suffix: n.RequiredSuffix,
-                    wordSeparator: n.WordSeparator,
-                    capitalizationScheme: n.CapitalizationSchemes[n.CapitalizationSchemeIndex].Capitalization)));
+            var namingStyles = viewModel
+                .Items.Cast<NamingStyleViewModel>()
+                .Select(n => new MutableNamingStyle(
+                    new NamingStyle(
+                        id: n.ID,
+                        name: n.ItemName,
+                        prefix: n.RequiredPrefix,
+                        suffix: n.RequiredSuffix,
+                        wordSeparator: n.WordSeparator,
+                        capitalizationScheme: n.CapitalizationSchemes[
+                            n.CapitalizationSchemeIndex
+                        ].Capitalization
+                    )
+                ));
 
             NamingStyles.Clear();
             foreach (var style in namingStyles)
@@ -188,7 +221,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     rule.NamingStyles.Add(style);
                 }
 
-                // Set the SelectedStyle to null and then back to the actual selected 
+                // Set the SelectedStyle to null and then back to the actual selected
                 // style to trigger the INotifyPropertyChanged event.
 
                 rule.SelectedStyle = null;
@@ -219,66 +252,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
             public SymbolSpecification SelectedSpecification
             {
-                get
-                {
-                    return _selectedSpecification;
-                }
-                set
-                {
-                    SetProperty(ref _selectedSpecification, value);
-                }
+                get { return _selectedSpecification; }
+                set { SetProperty(ref _selectedSpecification, value); }
             }
 
             public MutableNamingStyle SelectedStyle
             {
-                get
-                {
-                    return _selectedNamingStyle;
-                }
-                set
-                {
-                    SetProperty(ref _selectedNamingStyle, value);
-                }
+                get { return _selectedNamingStyle; }
+                set { SetProperty(ref _selectedNamingStyle, value); }
             }
             public NotificationOptionViewModel SelectedNotificationPreference
             {
-                get
-                {
-                    return _selectedNotification;
-                }
-
-                set
-                {
-                    SetProperty(ref _selectedNotification, value);
-                }
+                get { return _selectedNotification; }
+                set { SetProperty(ref _selectedNotification, value); }
             }
 
             private bool _canMoveUp;
             public bool CanMoveUp
             {
-                get
-                {
-                    return _canMoveUp;
-                }
-
-                set
-                {
-                    SetProperty(ref _canMoveUp, value);
-                }
+                get { return _canMoveUp; }
+                set { SetProperty(ref _canMoveUp, value); }
             }
 
             private bool _canMoveDown;
             public bool CanMoveDown
             {
-                get
-                {
-                    return _canMoveDown;
-                }
-
-                set
-                {
-                    SetProperty(ref _canMoveDown, value);
-                }
+                get { return _canMoveDown; }
+                set { SetProperty(ref _canMoveDown, value); }
             }
 
             public string MoveUpAutomationText => ServicesVSResources.Move_up;
@@ -286,8 +286,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
             public string RemoveAutomationText => ServicesVSResources.Remove;
 
-            public bool IsComplete()
-                => SelectedSpecification != null && SelectedStyle != null && SelectedNotificationPreference != null;
+            public bool IsComplete() =>
+                SelectedSpecification != null
+                && SelectedStyle != null
+                && SelectedNotificationPreference != null;
 
             // For screen readers
             public override string ToString() => ServicesVSResources.Naming_Rule;

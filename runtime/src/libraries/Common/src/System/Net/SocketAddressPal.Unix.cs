@@ -122,14 +122,24 @@ namespace System.Net
             return ipAddress;
         }
 
-        public static unsafe void GetIPv6Address(ReadOnlySpan<byte> buffer, Span<byte> address, out uint scope)
+        public static unsafe void GetIPv6Address(
+            ReadOnlySpan<byte> buffer,
+            Span<byte> address,
+            out uint scope
+        )
         {
             uint localScope;
             Interop.Error err;
             fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))
             fixed (byte* ipAddress = &MemoryMarshal.GetReference(address))
             {
-                err = Interop.Sys.GetIPv6Address(rawAddress, buffer.Length, ipAddress, address.Length, &localScope);
+                err = Interop.Sys.GetIPv6Address(
+                    rawAddress,
+                    buffer.Length,
+                    ipAddress,
+                    address.Length,
+                    &localScope
+                );
             }
 
             ThrowOnFailure(err);
@@ -155,19 +165,29 @@ namespace System.Net
 
         public static unsafe void SetIPv6Address(Span<byte> buffer, Span<byte> address, uint scope)
         {
-
             fixed (byte* rawInput = &MemoryMarshal.GetReference(address))
             {
                 SetIPv6Address(buffer, rawInput, address.Length, scope);
             }
         }
 
-        public static unsafe void SetIPv6Address(Span<byte> buffer, byte* address, int addressLength, uint scope)
+        public static unsafe void SetIPv6Address(
+            Span<byte> buffer,
+            byte* address,
+            int addressLength,
+            uint scope
+        )
         {
             Interop.Error err;
             fixed (byte* rawAddress = buffer)
             {
-                err = Interop.Sys.SetIPv6Address(rawAddress, buffer.Length, address, addressLength, scope);
+                err = Interop.Sys.SetIPv6Address(
+                    rawAddress,
+                    buffer.Length,
+                    address,
+                    addressLength,
+                    scope
+                );
             }
 
             ThrowOnFailure(err);

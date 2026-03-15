@@ -13,24 +13,38 @@ namespace System.IdentityModel.Tokens
         SecurityKey signingKey;
         SecurityKeyIdentifier signingKeyIdentifier;
 
-        public SigningCredentials(SecurityKey signingKey, string signatureAlgorithm, string digestAlgorithm) :
-            this(signingKey, signatureAlgorithm, digestAlgorithm, null)
-        { }
+        public SigningCredentials(
+            SecurityKey signingKey,
+            string signatureAlgorithm,
+            string digestAlgorithm
+        )
+            : this(signingKey, signatureAlgorithm, digestAlgorithm, null) { }
 
-        public SigningCredentials(SecurityKey signingKey, string signatureAlgorithm, string digestAlgorithm, SecurityKeyIdentifier signingKeyIdentifier)
+        public SigningCredentials(
+            SecurityKey signingKey,
+            string signatureAlgorithm,
+            string digestAlgorithm,
+            SecurityKeyIdentifier signingKeyIdentifier
+        )
         {
             if (signingKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("signingKey"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("signingKey")
+                );
             }
 
             if (signatureAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("signatureAlgorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("signatureAlgorithm")
+                );
             }
             if (digestAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("digestAlgorithm"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("digestAlgorithm")
+                );
             }
             this.signingKey = signingKey;
             this.signatureAlgorithm = signatureAlgorithm;

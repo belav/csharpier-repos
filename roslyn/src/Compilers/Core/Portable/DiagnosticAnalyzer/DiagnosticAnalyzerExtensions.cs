@@ -14,7 +14,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <inheritdoc cref="WithAnalyzers(Compilation, ImmutableArray{DiagnosticAnalyzer}, AnalyzerOptions?)"/>
         [Obsolete("Use WithAnalyzers overload without a cancellation token", error: false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static CompilationWithAnalyzers WithAnalyzers(this Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions? options, CancellationToken cancellationToken)
+        public static CompilationWithAnalyzers WithAnalyzers(
+            this Compilation compilation,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            AnalyzerOptions? options,
+            CancellationToken cancellationToken
+        )
         {
             return new CompilationWithAnalyzers(compilation, analyzers, options, cancellationToken);
         }
@@ -26,7 +31,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="analyzers">The set of analyzers to include in future analyses.</param>
         /// <param name="options">Options that are passed to analyzers.</param>
 #pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-        public static CompilationWithAnalyzers WithAnalyzers(this Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions? options = null)
+        public static CompilationWithAnalyzers WithAnalyzers(
+            this Compilation compilation,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            AnalyzerOptions? options = null
+        )
 #pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
         {
             return new CompilationWithAnalyzers(compilation, analyzers, options);
@@ -38,7 +47,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="compilation">Compilation to which analyzers are to be added.</param>
         /// <param name="analyzers">The set of analyzers to include in future analyses.</param>
         /// <param name="analysisOptions">Options to configure analyzer execution within <see cref="CompilationWithAnalyzers"/>.</param>
-        public static CompilationWithAnalyzers WithAnalyzers(this Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, CompilationWithAnalyzersOptions analysisOptions)
+        public static CompilationWithAnalyzers WithAnalyzers(
+            this Compilation compilation,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            CompilationWithAnalyzersOptions analysisOptions
+        )
         {
             return new CompilationWithAnalyzers(compilation, analyzers, analysisOptions);
         }

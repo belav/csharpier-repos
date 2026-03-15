@@ -26,14 +26,25 @@ namespace System.Threading
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class?
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class?
         {
-            return Unsafe.As<T>(RuntimeImports.InterlockedCompareExchange(ref Unsafe.As<T, object?>(ref location1), value, comparand));
+            return Unsafe.As<T>(
+                RuntimeImports.InterlockedCompareExchange(
+                    ref Unsafe.As<T, object?>(ref location1),
+                    value,
+                    comparand
+                )
+            );
         }
 
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static object? CompareExchange(ref object? location1, object? value, object? comparand)
+        public static object? CompareExchange(
+            ref object? location1,
+            object? value,
+            object? comparand
+        )
         {
             return RuntimeImports.InterlockedCompareExchange(ref location1, value, comparand);
         }
@@ -71,14 +82,20 @@ namespace System.Threading
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value) where T : class?
+        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value)
+            where T : class?
         {
-            return Unsafe.As<T>(RuntimeImports.InterlockedExchange(ref Unsafe.As<T, object?>(ref location1), value));
+            return Unsafe.As<T>(
+                RuntimeImports.InterlockedExchange(ref Unsafe.As<T, object?>(ref location1), value)
+            );
         }
 
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static object? Exchange([NotNullIfNotNull(nameof(value))] ref object? location1, object? value)
+        public static object? Exchange(
+            [NotNullIfNotNull(nameof(value))] ref object? location1,
+            object? value
+        )
         {
             return RuntimeImports.InterlockedExchange(ref location1, value);
         }

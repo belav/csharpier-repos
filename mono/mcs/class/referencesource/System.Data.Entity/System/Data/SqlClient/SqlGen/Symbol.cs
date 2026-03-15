@@ -9,12 +9,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Data.SqlClient;
-using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
 
 namespace System.Data.SqlClient.SqlGen
 {
@@ -66,7 +66,9 @@ namespace System.Data.SqlClient.SqlGen
             {
                 if (null == outputColumns)
                 {
-                    outputColumns = new Dictionary<string, Symbol>(StringComparer.OrdinalIgnoreCase);
+                    outputColumns = new Dictionary<string, Symbol>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
                 return outputColumns;
             }
@@ -120,7 +122,12 @@ namespace System.Data.SqlClient.SqlGen
         /// <param name="type"></param>
         /// <param name="outputColumns"></param>
         /// <param name="outputColumnsRenamed"></param>
-        public Symbol(string name, TypeUsage type, Dictionary<string, Symbol> outputColumns, bool outputColumnsRenamed)
+        public Symbol(
+            string name,
+            TypeUsage type,
+            Dictionary<string, Symbol> outputColumns,
+            bool outputColumnsRenamed
+        )
         {
             this.name = name;
             this.newName = name;
@@ -151,7 +158,9 @@ namespace System.Data.SqlClient.SqlGen
                     do
                     {
                         ++i;
-                        newNameCandidate = this.NewName + i.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        newNameCandidate =
+                            this.NewName
+                            + i.ToString(System.Globalization.CultureInfo.InvariantCulture);
                     } while (sqlGenerator.AllColumnNames.ContainsKey(newNameCandidate));
 
                     sqlGenerator.AllColumnNames[this.NewName] = i;

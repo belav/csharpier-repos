@@ -1,19 +1,19 @@
 public class Test
 {
-	Test x;
+    Test x;
 
-	void Foo ()
-	{
-		{
-			string x = "dd";
-		}
+    void Foo()
+    {
+        {
+            string x = "dd";
+        }
 
-		{
-			x = null;
-		}
+        {
+            x = null;
+        }
 
-		x = new Test ();
-	}
+        x = new Test();
+    }
 
-	public static void Main () { }
+    public static void Main() { }
 }

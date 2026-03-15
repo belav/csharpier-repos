@@ -20,13 +20,14 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             return GetLanguageServerProviderServiceName(GetContentTypesName(contentTypes));
         }
 
-        public static string GetLanguageServerProviderServiceName(string lspServiceName)
-            => LanguageServerProviderServiceName + "-" + lspServiceName;
+        public static string GetLanguageServerProviderServiceName(string lspServiceName) =>
+            LanguageServerProviderServiceName + "-" + lspServiceName;
 
-        public static string GetContentTypesName(string[] contentTypes) => string.Join("-", contentTypes.OrderBy(c => c).ToArray());
+        public static string GetContentTypesName(string[] contentTypes) =>
+            string.Join("-", contentTypes.OrderBy(c => c).ToArray());
 
-        public static bool IsContentTypeRemote(string contentType)
-            => contentType.EndsWith("-remote");
+        public static bool IsContentTypeRemote(string contentType) =>
+            contentType.EndsWith("-remote");
 
         public static bool TryParseJson<T>(object json, out T t)
         {

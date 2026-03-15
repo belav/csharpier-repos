@@ -9,7 +9,10 @@ namespace System.Web.Http.Cors
 {
     internal static class HttpRequestMessageExtensions
     {
-        public static void SetActionDescriptor(this HttpRequestMessage request, HttpActionDescriptor actionDescriptor)
+        public static void SetActionDescriptor(
+            this HttpRequestMessage request,
+            HttpActionDescriptor actionDescriptor
+        )
         {
             if (request == null)
             {

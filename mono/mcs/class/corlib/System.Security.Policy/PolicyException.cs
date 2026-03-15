@@ -1,4 +1,4 @@
-//	
+//
 // System.Security.Policy.PolicyException.cs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,30 +31,23 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public class PolicyException : SystemException
+    {
+        // Constructors
+        public PolicyException()
+            : base(Locale.GetText("Cannot run because of policy.")) { }
 
-	[Serializable]
-	[ComVisible (true)]
-	public class PolicyException : SystemException {
-		// Constructors
-		public PolicyException ()
-			: base (Locale.GetText ("Cannot run because of policy."))
-		{
-		}
+        public PolicyException(string message)
+            : base(message) { }
 
-		public PolicyException (string message)
-			: base (message)
-		{
-		}
-			 
-		protected PolicyException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected PolicyException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public PolicyException (string message, Exception exception)
-			:base (message, exception)
-		{
-		}
-	}
+        public PolicyException(string message, Exception exception)
+            : base(message, exception) { }
+    }
 }

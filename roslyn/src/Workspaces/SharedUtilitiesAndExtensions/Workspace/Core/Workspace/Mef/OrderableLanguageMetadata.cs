@@ -19,7 +19,12 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             this.Language = (string)data.GetValueOrDefault("Language");
         }
 
-        public OrderableLanguageMetadata(string name, string language, IEnumerable<string> after, IEnumerable<string> before)
+        public OrderableLanguageMetadata(
+            string name,
+            string language,
+            IEnumerable<string> after,
+            IEnumerable<string> before
+        )
             : base(name, after, before)
         {
             this.Language = language;

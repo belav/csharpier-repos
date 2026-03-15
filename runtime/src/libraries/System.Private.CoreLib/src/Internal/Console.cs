@@ -12,16 +12,13 @@ namespace Internal
 
     public static partial class Console
     {
-        public static void WriteLine(string? s) =>
-            Write(s + Environment.NewLineConst);
+        public static void WriteLine(string? s) => Write(s + Environment.NewLineConst);
 
-        public static void WriteLine() =>
-            Write(Environment.NewLineConst);
+        public static void WriteLine() => Write(Environment.NewLineConst);
 
         public static partial class Error
         {
-            public static void WriteLine() =>
-                Write(Environment.NewLineConst);
+            public static void WriteLine() => Write(Environment.NewLineConst);
         }
     }
 }

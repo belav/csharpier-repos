@@ -13,9 +13,9 @@ using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Tracing.Tests.Common;
+using Xunit;
 using DebugInfoMethodsD = tests_d::DebugInfoMethods;
 using DebugInfoMethodsR = tests_r::DebugInfoMethods;
-using Xunit;
 
 public unsafe class DebugInfoTest
 {
@@ -23,20 +23,25 @@ public unsafe class DebugInfoTest
     public static unsafe int TestEntryPoint()
     {
         var keywords =
-            ClrTraceEventParser.Keywords.Jit | ClrTraceEventParser.Keywords.JittedMethodILToNativeMap;
+            ClrTraceEventParser.Keywords.Jit
+            | ClrTraceEventParser.Keywords.JittedMethodILToNativeMap;
 
         var dotnetRuntimeProvider = new List<EventPipeProvider>
         {
-            new EventPipeProvider("Microsoft-Windows-DotNETRuntime", eventLevel: EventLevel.Verbose, keywords: (long)keywords)
+            new EventPipeProvider(
+                "Microsoft-Windows-DotNETRuntime",
+                eventLevel: EventLevel.Verbose,
+                keywords: (long)keywords
+            ),
         };
 
-        return
-            IpcTraceTest.RunAndValidateEventCounts(
-                new Dictionary<string, ExpectedEventCount>(),
-                JitMethods,
-                dotnetRuntimeProvider,
-                1024,
-                ValidateMappings);
+        return IpcTraceTest.RunAndValidateEventCounts(
+            new Dictionary<string, ExpectedEventCount>(),
+            JitMethods,
+            dotnetRuntimeProvider,
+            1024,
+            ValidateMappings
+        );
     }
 
     private static void JitMethods()
@@ -58,7 +63,11 @@ public unsafe class DebugInfoTest
 
     private static Func<int> ValidateMappings(EventPipeEventSource source)
     {
-        List<(long MethodID, OptimizationTier Tier, (int ILOffset, int NativeOffset)[] Mappings)> methodsWithMappings = new();
+        List<(
+            long MethodID,
+            OptimizationTier Tier,
+            (int ILOffset, int NativeOffset)[] Mappings
+        )> methodsWithMappings = new();
         Dictionary<long, OptimizationTier> methodTier = new();
 
         source.Clr.MethodLoad += e => methodTier[e.MethodID] = e.OptimizationTier;
@@ -81,7 +90,13 @@ public unsafe class DebugInfoTest
         return () =>
         {
             int result = 100;
-            foreach ((long methodID, OptimizationTier tier, (int ILOffset, int NativeOffset)[] mappings) in methodsWithMappings)
+            foreach (
+                (
+                    long methodID,
+                    OptimizationTier tier,
+                    (int ILOffset, int NativeOffset)[] mappings
+                ) in methodsWithMappings
+            )
             {
                 MethodBase meth = s_getMethodBaseByHandle(null, (IntPtr)(void*)methodID);
                 ExpectedILMappings attrib = meth.GetCustomAttribute<ExpectedILMappings>();
@@ -90,7 +105,8 @@ public unsafe class DebugInfoTest
                     continue;
                 }
 
-                string name = $"[{meth.DeclaringType.Assembly.GetName().Name}]{meth.DeclaringType.FullName}.{meth.Name}";
+                string name =
+                    $"[{meth.DeclaringType.Assembly.GetName().Name}]{meth.DeclaringType.FullName}.{meth.Name}";
 
                 // If DebuggableAttribute is saying that the assembly must be debuggable, then verify debug mappings.
                 // Otherwise verify release mappings.
@@ -98,10 +114,17 @@ public unsafe class DebugInfoTest
                 // to never tier and in release, we expect the release mappings to be the "least common denominator",
                 // i.e. tier0 and tier1 mappings should both be a superset.
                 // Note that tier0 and MinOptJitted differs in mappings generated exactly due to DebuggableAttribute.
-                DebuggableAttribute debuggableAttrib = meth.DeclaringType.Assembly.GetCustomAttribute<DebuggableAttribute>();
-                bool debuggableMappings = debuggableAttrib != null && debuggableAttrib.IsJITOptimizerDisabled;
+                DebuggableAttribute debuggableAttrib =
+                    meth.DeclaringType.Assembly.GetCustomAttribute<DebuggableAttribute>();
+                bool debuggableMappings =
+                    debuggableAttrib != null && debuggableAttrib.IsJITOptimizerDisabled;
 
-                Console.WriteLine("{0}: Validate mappings for {1} codegen (tier: {2})", name, debuggableMappings ? "debuggable" : "optimized", tier);
+                Console.WriteLine(
+                    "{0}: Validate mappings for {1} codegen (tier: {2})",
+                    name,
+                    debuggableMappings ? "debuggable" : "optimized",
+                    tier
+                );
 
                 int[] expected = debuggableMappings ? attrib.Debug : attrib.Opts;
                 if (expected == null)
@@ -111,11 +134,16 @@ public unsafe class DebugInfoTest
 
                 if (!ValidateSingle(expected, mappings))
                 {
-                    Console.WriteLine("  Validation failed: expected mappings at IL offsets {0}", string.Join(", ", expected.Select(il => $"{il:x3}")));
+                    Console.WriteLine(
+                        "  Validation failed: expected mappings at IL offsets {0}",
+                        string.Join(", ", expected.Select(il => $"{il:x3}"))
+                    );
                     Console.WriteLine("  Actual (IL <-> native):");
                     foreach ((int ilOffset, int nativeOffset) in mappings)
                     {
-                        string ilOffsetName = Enum.IsDefined((SpecialILOffset)ilOffset) ? ((SpecialILOffset)ilOffset).ToString() : $"{ilOffset:x3}";
+                        string ilOffsetName = Enum.IsDefined((SpecialILOffset)ilOffset)
+                            ? ((SpecialILOffset)ilOffset).ToString()
+                            : $"{ilOffset:x3}";
                         Console.WriteLine("    {0:x3} <-> {1:x3}", ilOffsetName, nativeOffset);
                     }
 
@@ -142,12 +170,19 @@ public unsafe class DebugInfoTest
 
     static DebugInfoTest()
     {
-        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle).Assembly.GetType("System.RuntimeMethodHandleInternal");
+        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle).Assembly.GetType(
+            "System.RuntimeMethodHandleInternal"
+        );
         Type runtimeTypeType = typeof(RuntimeMethodHandle).Assembly.GetType("System.RuntimeType");
-        MethodInfo getMethodBaseMethod = runtimeTypeType.GetMethod("GetMethodBase", BindingFlags.NonPublic | BindingFlags.Static, new[] { runtimeTypeType, runtimeMethodHandleInternalType });
-        s_getMethodBaseByHandle = (delegate*<object, IntPtr, MethodBase>)getMethodBaseMethod.MethodHandle .GetFunctionPointer();
+        MethodInfo getMethodBaseMethod = runtimeTypeType.GetMethod(
+            "GetMethodBase",
+            BindingFlags.NonPublic | BindingFlags.Static,
+            new[] { runtimeTypeType, runtimeMethodHandleInternalType }
+        );
+        s_getMethodBaseByHandle = (delegate* <object, IntPtr, MethodBase>)
+            getMethodBaseMethod.MethodHandle.GetFunctionPointer();
     }
 
     // Needed to go from MethodID -> MethodBase
-    private static readonly delegate*<object, IntPtr, MethodBase> s_getMethodBaseByHandle;
+    private static readonly delegate* <object, IntPtr, MethodBase> s_getMethodBaseByHandle;
 }

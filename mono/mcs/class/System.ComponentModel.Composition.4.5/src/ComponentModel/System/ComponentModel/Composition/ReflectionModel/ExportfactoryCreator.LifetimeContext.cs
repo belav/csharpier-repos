@@ -22,8 +22,22 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 Assumes.NotNull(instance);
 
-                var methodInfo = instance.GetType().GetMethod("IncludeInScopedCatalog", BindingFlags.NonPublic | BindingFlags.Instance, null, types, null);
-                CatalogFilter = (Func<ComposablePartDefinition, bool>)Delegate.CreateDelegate(typeof(Func<ComposablePartDefinition, bool>), instance, methodInfo);
+                var methodInfo = instance
+                    .GetType()
+                    .GetMethod(
+                        "IncludeInScopedCatalog",
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        types,
+                        null
+                    );
+                CatalogFilter =
+                    (Func<ComposablePartDefinition, bool>)
+                        Delegate.CreateDelegate(
+                            typeof(Func<ComposablePartDefinition, bool>),
+                            instance,
+                            methodInfo
+                        );
             }
 
             public Tuple<T, Action> GetExportLifetimeContextFromExport<T>(Export export)
@@ -32,7 +46,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 Action disposeAction;
                 IDisposable disposable = null;
 
-                CatalogExportProvider.ScopeFactoryExport scopeFactoryExport = export as CatalogExportProvider.ScopeFactoryExport;
+                CatalogExportProvider.ScopeFactoryExport scopeFactoryExport =
+                    export as CatalogExportProvider.ScopeFactoryExport;
 
                 if (scopeFactoryExport != null)
                 {
@@ -43,7 +58,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 }
                 else
                 {
-                    CatalogExportProvider.FactoryExport factoryExport = export as CatalogExportProvider.FactoryExport;
+                    CatalogExportProvider.FactoryExport factoryExport =
+                        export as CatalogExportProvider.FactoryExport;
 
                     if (factoryExport != null)
                     {
@@ -55,11 +71,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     else
                     {
                         // If it comes from somewhere else we walk through the ComposablePartDefinition
-                        var factoryPartDefinition = ExportServices.GetCastedExportedValue<ComposablePartDefinition>(export);
+                        var factoryPartDefinition =
+                            ExportServices.GetCastedExportedValue<ComposablePartDefinition>(export);
                         var part = factoryPartDefinition.CreatePart();
                         var exportDef = factoryPartDefinition.ExportDefinitions.Single();
 
-                        exportedValue = ExportServices.CastExportedValue<T>(part.ToElement(), part.GetExportedValue(exportDef));
+                        exportedValue = ExportServices.CastExportedValue<T>(
+                            part.ToElement(),
+                            part.GetExportedValue(exportDef)
+                        );
                         disposable = part as IDisposable;
                     }
                 }

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -48,6 +48,7 @@ namespace DbLinq.Schema.Dbml
         [Browsable(false)]
         [XmlIgnore]
         public ISimpleList<Table> Tables;
+
         /// <summary>
         /// Wraps all stored procedures
         /// </summary>
@@ -128,6 +129,7 @@ namespace DbLinq.Schema.Dbml
         [Browsable(false)]
         [XmlIgnore]
         public ISimpleList<Parameter> Parameters;
+
         [Browsable(false)]
         [XmlIgnore]
         public Return Return
@@ -186,6 +188,7 @@ namespace DbLinq.Schema.Dbml
         /// </summary>
         [XmlIgnore]
         public ISimpleList<string> TheseKeys;
+
         /// <summary>
         /// OtherKey, provided as an array of strings (each string being a key)
         /// </summary>
@@ -211,6 +214,7 @@ namespace DbLinq.Schema.Dbml
     partial class Column
     {
         private INamedType extendedType;
+
         /// <summary>
         /// Extended type, for handling enum types, for example.
         /// </summary>
@@ -237,10 +241,7 @@ namespace DbLinq.Schema.Dbml
 
         private MemberInfo TypeMemberInfo
         {
-            get
-            {
-                return GetType().GetMember("Type")[0];
-            }
+            get { return GetType().GetMember("Type")[0]; }
         }
 
         public Column()
@@ -271,6 +272,7 @@ namespace DbLinq.Schema.Dbml
         {
             SpecifiedPropertyUpdater.Register(this);
         }
+
         /// <summary>
         /// Gets a value indicating whether [direction in].
         /// </summary>
@@ -279,7 +281,10 @@ namespace DbLinq.Schema.Dbml
         [XmlIgnore]
         public bool DirectionIn
         {
-            get { return Direction == ParameterDirection.In || Direction == ParameterDirection.InOut; }
+            get
+            {
+                return Direction == ParameterDirection.In || Direction == ParameterDirection.InOut;
+            }
         }
 
         /// <summary>
@@ -290,7 +295,10 @@ namespace DbLinq.Schema.Dbml
         [XmlIgnore]
         public bool DirectionOut
         {
-            get { return Direction == ParameterDirection.Out || Direction == ParameterDirection.InOut; }
+            get
+            {
+                return Direction == ParameterDirection.Out || Direction == ParameterDirection.InOut;
+            }
         }
     }
 

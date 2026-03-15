@@ -24,7 +24,10 @@ namespace Roslyn.Test.Utilities
             this.Diagnostics = diagnostics;
         }
 
-        protected EmitException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected EmitException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new NotImplementedException();
         }
@@ -39,7 +42,10 @@ namespace Roslyn.Test.Utilities
         public ExecutionException(Exception innerException, string exePath)
             : base(GetMessageFromException(innerException, exePath), innerException) { }
 
-        protected ExecutionException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected ExecutionException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new NotImplementedException();
         }

@@ -3,21 +3,14 @@ using System;
 
 namespace Testing
 {
-	public class Test
-	{
-		public static void Main ()
-		{
-		}
+    public class Test
+    {
+        public static void Main() { }
 
-		/// comment for internal class
-		public class InternalClass
-		{
-		}
+        /// comment for internal class
+        public class InternalClass { }
 
-		/// comment for internal struct
-		public struct InternalStruct
-		{
-		}
-	}
+        /// comment for internal struct
+        public struct InternalStruct { }
+    }
 }
-

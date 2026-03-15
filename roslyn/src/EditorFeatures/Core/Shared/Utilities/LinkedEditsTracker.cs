@@ -29,16 +29,21 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             _subjectBuffer = subjectBuffer;
         }
 
-        public IList<SnapshotSpan> GetActiveSpansForSnapshot(ITextSnapshot snapshot)
-            => _trackingSpans.Select(ts => ts.GetSpan(snapshot)).ToList();
+        public IList<SnapshotSpan> GetActiveSpansForSnapshot(ITextSnapshot snapshot) =>
+            _trackingSpans.Select(ts => ts.GetSpan(snapshot)).ToList();
 
         public void AddSpans(IEnumerable<ITrackingSpan> spans)
         {
-            var currentActiveSpans = GetActiveSpansForSnapshot(_subjectBuffer.CurrentSnapshot).ToSet();
+            var currentActiveSpans = GetActiveSpansForSnapshot(_subjectBuffer.CurrentSnapshot)
+                .ToSet();
 
             foreach (var newTrackingSpan in spans)
             {
-                if (!currentActiveSpans.Contains(newTrackingSpan.GetSpan(_subjectBuffer.CurrentSnapshot)))
+                if (
+                    !currentActiveSpans.Contains(
+                        newTrackingSpan.GetSpan(_subjectBuffer.CurrentSnapshot)
+                    )
+                )
                 {
                     _trackingSpans.Add(newTrackingSpan);
                 }
@@ -48,14 +53,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         public void AddSpans(NormalizedSnapshotSpanCollection snapshotSpanCollection)
         {
             // TODO: custom tracking spans!
-            var newTrackingSpans = snapshotSpanCollection.Select(ss => ss.Snapshot.CreateTrackingSpan(ss, SpanTrackingMode.EdgeInclusive, TrackingFidelityMode.Forward));
+            var newTrackingSpans = snapshotSpanCollection.Select(ss =>
+                ss.Snapshot.CreateTrackingSpan(
+                    ss,
+                    SpanTrackingMode.EdgeInclusive,
+                    TrackingFidelityMode.Forward
+                )
+            );
             AddSpans(newTrackingSpans);
         }
 
-        public static bool MyOwnChanges(TextContentChangedEventArgs args)
-            => args.EditTag == s_propagateSpansEditTag;
+        public static bool MyOwnChanges(TextContentChangedEventArgs args) =>
+            args.EditTag == s_propagateSpansEditTag;
 
-        public bool TryGetTextChanged(TextContentChangedEventArgs args, [NotNullWhen(true)] out string? replacementText)
+        public bool TryGetTextChanged(
+            TextContentChangedEventArgs args,
+            [NotNullWhen(true)] out string? replacementText
+        )
         {
             // make sure I am not called with my own changes
             Contract.ThrowIfTrue(MyOwnChanges(args));
@@ -63,8 +77,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             // initialize out parameter
             replacementText = null;
 
-            var trackingSpansAfterEdit = GetActiveSpansForSnapshot(args.After).Select(ss => (Span)ss).ToList();
-            var normalizedTrackingSpansAfterEdit = new NormalizedSpanCollection(trackingSpansAfterEdit);
+            var trackingSpansAfterEdit = GetActiveSpansForSnapshot(args.After)
+                .Select(ss => (Span)ss)
+                .ToList();
+            var normalizedTrackingSpansAfterEdit = new NormalizedSpanCollection(
+                trackingSpansAfterEdit
+            );
 
             if (trackingSpansAfterEdit.Count != normalizedTrackingSpansAfterEdit.Count)
             {
@@ -72,22 +90,31 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 return false;
             }
 
-            // We want to find the single tracking span that encompasses all the edits made.  If there 
+            // We want to find the single tracking span that encompasses all the edits made.  If there
             // is no such tracking span (or there are multiple), then we consider the change invalid
             // and we don't return any changed text.  If there is only one, then we find the text in
             // the new document.
             //
-            // Note there may be multiple intersecting spans in the case where user typing causes 
+            // Note there may be multiple intersecting spans in the case where user typing causes
             // multiple edits to happen.  For example, if the user has "Sub" and replaces it with "fu<tab>"
             // Then there will be multiple edits due to the text change and then the case correction.
             // However, both edits will be encompassed in one tracking span.
-            var spansTouchedInEdit = new NormalizedSpanCollection(args.Changes.Select(c => c.NewSpan));
-            var intersection = NormalizedSpanCollection.Intersection(normalizedTrackingSpansAfterEdit, spansTouchedInEdit);
+            var spansTouchedInEdit = new NormalizedSpanCollection(
+                args.Changes.Select(c => c.NewSpan)
+            );
+            var intersection = NormalizedSpanCollection.Intersection(
+                normalizedTrackingSpansAfterEdit,
+                spansTouchedInEdit
+            );
 
-            var query = from trackingSpan in _trackingSpans
-                        let mappedSpan = trackingSpan.GetSpan(args.After)
-                        where intersection.All(intersectionSpan => mappedSpan.IntersectsWith(intersectionSpan))
-                        select trackingSpan;
+            var query =
+                from trackingSpan in _trackingSpans
+                let mappedSpan = trackingSpan.GetSpan(args.After)
+                where
+                    intersection.All(intersectionSpan =>
+                        mappedSpan.IntersectsWith(intersectionSpan)
+                    )
+                select trackingSpan;
 
             var trackingSpansThatIntersect = query.ToList();
             if (trackingSpansThatIntersect.Count != 1)
@@ -102,7 +129,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public void ApplyReplacementText(string replacementText)
         {
-            using var edit = _subjectBuffer.CreateEdit(new EditOptions(), null, s_propagateSpansEditTag);
+            using var edit = _subjectBuffer.CreateEdit(
+                new EditOptions(),
+                null,
+                s_propagateSpansEditTag
+            );
 
             foreach (var span in _trackingSpans)
             {

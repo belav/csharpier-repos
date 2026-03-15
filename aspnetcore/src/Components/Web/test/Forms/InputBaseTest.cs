@@ -40,8 +40,8 @@ public class InputBaseTest
         };
 
         // Act/Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => InputRenderer.RenderAndGetComponent(rootComponent)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            InputRenderer.RenderAndGetComponent(rootComponent)
         );
         Assert.Contains(
             $"{typeof(TestInputComponent<string>)} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.",

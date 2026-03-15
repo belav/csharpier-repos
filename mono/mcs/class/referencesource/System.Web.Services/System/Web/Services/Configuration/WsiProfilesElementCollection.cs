@@ -53,7 +53,7 @@ namespace System.Web.Services.Configuration
             ((ICollection)this).CopyTo(array, index);
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
             {
@@ -73,8 +73,8 @@ namespace System.Web.Services.Configuration
 
             return BaseIndexOf(element);
         }
-         
-        public void Remove(WsiProfilesElement element) 
+
+        public void Remove(WsiProfilesElement element)
         {
             if (element == null)
             {
@@ -84,7 +84,7 @@ namespace System.Web.Services.Configuration
             BaseRemove(GetElementKey(element));
         }
 
-        public void RemoveAt(object key) 
+        public void RemoveAt(object key)
         {
             if (key == null)
             {
@@ -117,9 +117,12 @@ namespace System.Web.Services.Configuration
                 if (retval == null)
                 {
                     throw new System.Collections.Generic.KeyNotFoundException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        Res.GetString(Res.ConfigKeyNotFoundInElementCollection),
-                        key.ToString()));
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            Res.GetString(Res.ConfigKeyNotFoundInElementCollection),
+                            key.ToString()
+                        )
+                    );
                 }
                 return retval;
             }
@@ -146,19 +149,21 @@ namespace System.Web.Services.Configuration
                 }
                 else
                 {
-                    throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
-                        Res.GetString(Res.ConfigKeysDoNotMatch), this.GetElementKey(value).ToString(),
-                        key.ToString()));
+                    throw new ArgumentException(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            Res.GetString(Res.ConfigKeysDoNotMatch),
+                            this.GetElementKey(value).ToString(),
+                            key.ToString()
+                        )
+                    );
                 }
             }
         }
 
         public WsiProfilesElement this[int index]
         {
-            get
-            {
-                return (WsiProfilesElement)BaseGet(index);
-            }
+            get { return (WsiProfilesElement)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
@@ -170,5 +175,3 @@ namespace System.Web.Services.Configuration
         }
     }
 }
-
-

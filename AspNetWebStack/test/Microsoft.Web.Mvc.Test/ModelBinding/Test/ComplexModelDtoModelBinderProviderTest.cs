@@ -28,7 +28,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ComplexModelDtoModelBinderProvider provider = new ComplexModelDtoModelBinderProvider();
-            ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(ComplexModelDto));
+            ExtensibleModelBindingContext bindingContext = GetBindingContext(
+                typeof(ComplexModelDto)
+            );
 
             // Act
             IExtensibleModelBinder binder = provider.GetBinder(null, bindingContext);
@@ -41,7 +43,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => null, modelType)
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => null,
+                    modelType
+                ),
             };
         }
     }

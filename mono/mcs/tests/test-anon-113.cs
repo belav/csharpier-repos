@@ -1,18 +1,18 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 class X
 {
-	public delegate T ModuleBinder<T> (object o);
+    public delegate T ModuleBinder<T>(object o);
 
-	public ModuleBinder<TDelegate> CreateMethodUnscoped<TDelegate> ()
-	{
-		return delegate (object o) {
-			return (TDelegate)(object)null;
-		};
-	}
+    public ModuleBinder<TDelegate> CreateMethodUnscoped<TDelegate>()
+    {
+        return delegate(object o)
+        {
+            return (TDelegate)(object)null;
+        };
+    }
 
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

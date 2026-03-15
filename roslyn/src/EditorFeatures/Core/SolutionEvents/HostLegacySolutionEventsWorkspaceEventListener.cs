@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LegacySolutionEvents
 {
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal sealed partial class HostLegacySolutionEventsWorkspaceEventListener : IEventListener<object>
+    internal sealed partial class HostLegacySolutionEventsWorkspaceEventListener
+        : IEventListener<object>
     {
         private readonly IGlobalOptionService _globalOptions;
         private readonly IThreadingContext _threadingContext;
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
         public HostLegacySolutionEventsWorkspaceEventListener(
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _globalOptions = globalOptions;
             _threadingContext = threadingContext;
@@ -39,7 +41,8 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
                 DelayTimeSpan.Short,
                 ProcessWorkspaceChangeEventsAsync,
                 listenerProvider.GetListener(FeatureAttribute.SolutionCrawlerUnitTesting),
-                _threadingContext.DisposalToken);
+                _threadingContext.DisposalToken
+            );
         }
 
         public void StartListening(Workspace workspace, object? serviceOpt)
@@ -58,13 +61,14 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
         {
             // Legacy workspace events exist solely to let unit testing continue to work using their own fork of solution
             // crawler.  As such, they only need events for the project types they care about.  Specifically, that is only
-            // for VB and C#.  This is relevant as well as we don't sync any other project types to OOP.  So sending 
+            // for VB and C#.  This is relevant as well as we don't sync any other project types to OOP.  So sending
             // notifications about other projects that don't even exist on the other side isn't helpful.
 
             var projectId = e.ProjectId ?? e.DocumentId?.ProjectId;
             if (projectId != null)
             {
-                var project = e.OldSolution.GetProject(projectId) ?? e.NewSolution.GetProject(projectId);
+                var project =
+                    e.OldSolution.GetProject(projectId) ?? e.NewSolution.GetProject(projectId);
                 if (project != null && !RemoteSupportedLanguages.IsSupported(project.Language))
                     return;
             }
@@ -72,25 +76,39 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
             _eventQueue.AddWork(e);
         }
 
-        private async ValueTask ProcessWorkspaceChangeEventsAsync(ImmutableSegmentedList<WorkspaceChangeEventArgs> events, CancellationToken cancellationToken)
+        private async ValueTask ProcessWorkspaceChangeEventsAsync(
+            ImmutableSegmentedList<WorkspaceChangeEventArgs> events,
+            CancellationToken cancellationToken
+        )
         {
             if (events.IsEmpty)
                 return;
 
             var workspace = events[0].OldSolution.Workspace;
-            Contract.ThrowIfTrue(events.Any(e => e.OldSolution.Workspace != workspace || e.NewSolution.Workspace != workspace));
+            Contract.ThrowIfTrue(
+                events.Any(e =>
+                    e.OldSolution.Workspace != workspace || e.NewSolution.Workspace != workspace
+                )
+            );
 
-            var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(workspace, cancellationToken)
+                .ConfigureAwait(false);
 
             if (client is null)
             {
-                var aggregationService = workspace.Services.GetRequiredService<ILegacySolutionEventsAggregationService>();
-                var shouldReport = aggregationService.ShouldReportChanges(workspace.Services.SolutionServices);
+                var aggregationService =
+                    workspace.Services.GetRequiredService<ILegacySolutionEventsAggregationService>();
+                var shouldReport = aggregationService.ShouldReportChanges(
+                    workspace.Services.SolutionServices
+                );
                 if (!shouldReport)
                     return;
 
                 foreach (var args in events)
-                    await aggregationService.OnWorkspaceChangedAsync(args, cancellationToken).ConfigureAwait(false);
+                    await aggregationService
+                        .OnWorkspaceChangedAsync(args, cancellationToken)
+                        .ConfigureAwait(false);
             }
             else
             {
@@ -99,19 +117,39 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
                 // that it's not interested in the events.  This will happen, for example, when the unittesting
                 // Test-Explorer window has not been shown yet, and so the unit testing system will not have registered
                 // an incremental analyzer with us.
-                var shouldReport = await client.TryInvokeAsync<IRemoteLegacySolutionEventsAggregationService, bool>(
-                    (service, cancellationToken) => service.ShouldReportChangesAsync(cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var shouldReport = await client
+                    .TryInvokeAsync<IRemoteLegacySolutionEventsAggregationService, bool>(
+                        (service, cancellationToken) =>
+                            service.ShouldReportChangesAsync(cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (!shouldReport.HasValue || !shouldReport.Value)
                     return;
 
                 foreach (var args in events)
                 {
-                    await client.TryInvokeAsync<IRemoteLegacySolutionEventsAggregationService>(
-                        args.OldSolution, args.NewSolution,
-                        (service, oldSolutionChecksum, newSolutionChecksum, cancellationToken) =>
-                            service.OnWorkspaceChangedAsync(oldSolutionChecksum, newSolutionChecksum, args.Kind, args.ProjectId, args.DocumentId, cancellationToken),
-                        cancellationToken).ConfigureAwait(false);
+                    await client
+                        .TryInvokeAsync<IRemoteLegacySolutionEventsAggregationService>(
+                            args.OldSolution,
+                            args.NewSolution,
+                            (
+                                service,
+                                oldSolutionChecksum,
+                                newSolutionChecksum,
+                                cancellationToken
+                            ) =>
+                                service.OnWorkspaceChangedAsync(
+                                    oldSolutionChecksum,
+                                    newSolutionChecksum,
+                                    args.Kind,
+                                    args.ProjectId,
+                                    args.DocumentId,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }

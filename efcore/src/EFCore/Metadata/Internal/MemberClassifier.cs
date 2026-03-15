@@ -27,7 +27,8 @@ public class MemberClassifier : IMemberClassifier
     /// </summary>
     public MemberClassifier(
         ITypeMappingSource typeMappingSource,
-        IParameterBindingFactories parameterBindingFactories)
+        IParameterBindingFactories parameterBindingFactories
+    )
     {
         _typeMappingSource = typeMappingSource;
         _parameterBindingFactories = parameterBindingFactories;
@@ -39,9 +40,10 @@ public class MemberClassifier : IMemberClassifier
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyDictionary<PropertyInfo, (Type Type, bool? ShouldBeOwned)> GetNavigationCandidates(
-        IConventionEntityType entityType,
-        bool useAttributes)
+    public virtual IReadOnlyDictionary<
+        PropertyInfo,
+        (Type Type, bool? ShouldBeOwned)
+    > GetNavigationCandidates(IConventionEntityType entityType, bool useAttributes)
     {
         var candidatesAnnotationName = useAttributes
             ? CoreAnnotationNames.NavigationCandidates
@@ -49,8 +51,13 @@ public class MemberClassifier : IMemberClassifier
         var inverseAnnotationName = useAttributes
             ? CoreAnnotationNames.InverseNavigations
             : CoreAnnotationNames.InverseNavigationsNoAttribute;
-        if (entityType.FindAnnotation(candidatesAnnotationName)?.Value
-            is OrderedDictionary<PropertyInfo, (Type Type, bool? ShouldBeOwned)> navigationCandidates)
+        if (
+            entityType.FindAnnotation(candidatesAnnotationName)?.Value
+            is OrderedDictionary<
+                PropertyInfo,
+                (Type Type, bool? ShouldBeOwned)
+            > navigationCandidates
+        )
         {
             return navigationCandidates;
         }
@@ -58,8 +65,10 @@ public class MemberClassifier : IMemberClassifier
         navigationCandidates = new();
 
         var model = entityType.Model;
-        if (model.FindAnnotation(inverseAnnotationName)?.Value
-            is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup)
+        if (
+            model.FindAnnotation(inverseAnnotationName)?.Value
+            is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup
+        )
         {
             inverseCandidatesLookup = new Dictionary<Type, SortedSet<Type>>();
             model.SetAnnotation(inverseAnnotationName, inverseCandidatesLookup);
@@ -67,13 +76,22 @@ public class MemberClassifier : IMemberClassifier
 
         foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
         {
-            var targetType = FindCandidateNavigationPropertyType(propertyInfo, entityType.Model, useAttributes, out var shouldBeOwned);
+            var targetType = FindCandidateNavigationPropertyType(
+                propertyInfo,
+                entityType.Model,
+                useAttributes,
+                out var shouldBeOwned
+            );
             if (targetType == null)
             {
                 continue;
             }
 
-            navigationCandidates.Insert(propertyInfo, (targetType, shouldBeOwned), MemberInfoNameComparer.Instance);
+            navigationCandidates.Insert(
+                propertyInfo,
+                (targetType, shouldBeOwned),
+                MemberInfoNameComparer.Instance
+            );
 
             if (!inverseCandidatesLookup.TryGetValue(targetType, out var inverseCandidates))
             {
@@ -84,8 +102,7 @@ public class MemberClassifier : IMemberClassifier
             inverseCandidates.Add(entityType.ClrType);
         }
 
-        if (!((Annotatable)entityType).IsReadOnly
-            && entityType.IsInModel)
+        if (!((Annotatable)entityType).IsReadOnly && entityType.IsInModel)
         {
             entityType.Builder.HasAnnotation(candidatesAnnotationName, navigationCandidates);
         }
@@ -101,14 +118,17 @@ public class MemberClassifier : IMemberClassifier
     /// </summary>
     public virtual IReadOnlyCollection<Type> GetInverseCandidateTypes(
         IConventionEntityType entityType,
-        bool useAttributes)
+        bool useAttributes
+    )
     {
         var annotationName = useAttributes
             ? CoreAnnotationNames.InverseNavigations
             : CoreAnnotationNames.InverseNavigationsNoAttribute;
-        if (entityType.Model.FindAnnotation(annotationName)?.Value
+        if (
+            entityType.Model.FindAnnotation(annotationName)?.Value
                 is not Dictionary<Type, SortedSet<Type>> inverseCandidatesLookup
-            || !inverseCandidatesLookup.TryGetValue(entityType.ClrType, out var inverseCandidates))
+            || !inverseCandidatesLookup.TryGetValue(entityType.ClrType, out var inverseCandidates)
+        )
         {
             return Type.EmptyTypes;
         }
@@ -126,22 +146,33 @@ public class MemberClassifier : IMemberClassifier
         MemberInfo memberInfo,
         IConventionModel model,
         bool useAttributes,
-        out bool? shouldBeOwned)
+        out bool? shouldBeOwned
+    )
     {
         shouldBeOwned = null;
         var propertyInfo = memberInfo as PropertyInfo;
         var targetType = memberInfo.GetMemberType();
         var targetSequenceType = targetType.TryGetSequenceType();
         return targetSequenceType != null
-            && (propertyInfo == null
-                || propertyInfo.IsCandidateProperty(needsWrite: false))
-            && IsCandidateNavigationPropertyType(targetSequenceType, memberInfo, (Model)model, useAttributes, out shouldBeOwned)
+            && (propertyInfo == null || propertyInfo.IsCandidateProperty(needsWrite: false))
+            && IsCandidateNavigationPropertyType(
+                targetSequenceType,
+                memberInfo,
+                (Model)model,
+                useAttributes,
+                out shouldBeOwned
+            )
                 ? targetSequenceType
-                : (propertyInfo == null
-                    || propertyInfo.IsCandidateProperty(needsWrite: true))
-                && IsCandidateNavigationPropertyType(targetType, memberInfo, (Model)model, useAttributes, out shouldBeOwned)
-                    ? targetType
-                    : null;
+            : (propertyInfo == null || propertyInfo.IsCandidateProperty(needsWrite: true))
+            && IsCandidateNavigationPropertyType(
+                targetType,
+                memberInfo,
+                (Model)model,
+                useAttributes,
+                out shouldBeOwned
+            )
+                ? targetType
+            : null;
     }
 
     private bool IsCandidateNavigationPropertyType(
@@ -149,14 +180,14 @@ public class MemberClassifier : IMemberClassifier
         MemberInfo memberInfo,
         Model model,
         bool useAttributes,
-        out bool? shouldBeOwned)
+        out bool? shouldBeOwned
+    )
     {
         shouldBeOwned = null;
         var configuration = model.Configuration;
         var configurationType = configuration?.GetConfigurationType(targetType);
         var isConfiguredAsEntityType = configurationType.IsEntityType();
-        if (isConfiguredAsEntityType == false
-            || !targetType.IsValidEntityType())
+        if (isConfiguredAsEntityType == false || !targetType.IsValidEntityType())
         {
             return false;
         }
@@ -169,9 +200,16 @@ public class MemberClassifier : IMemberClassifier
         var memberType = memberInfo.GetMemberType();
         return isConfiguredAsEntityType == true
             || targetType != typeof(object)
-                && (memberType != targetType
-                    || (_parameterBindingFactories.FindFactory(memberType, memberInfo.GetSimpleMemberName()) == null
-                        && _typeMappingSource.FindMapping(memberInfo, model, useAttributes) == null));
+                && (
+                    memberType != targetType
+                    || (
+                        _parameterBindingFactories.FindFactory(
+                            memberType,
+                            memberInfo.GetSimpleMemberName()
+                        ) == null
+                        && _typeMappingSource.FindMapping(memberInfo, model, useAttributes) == null
+                    )
+                );
     }
 
     /// <summary>
@@ -181,7 +219,11 @@ public class MemberClassifier : IMemberClassifier
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual bool IsCandidatePrimitiveProperty(
-        MemberInfo memberInfo, IConventionModel model, bool useAttributes, out CoreTypeMapping? typeMapping)
+        MemberInfo memberInfo,
+        IConventionModel model,
+        bool useAttributes,
+        out CoreTypeMapping? typeMapping
+    )
     {
         typeMapping = null;
         if (!memberInfo.IsCandidateProperty())
@@ -189,10 +231,20 @@ public class MemberClassifier : IMemberClassifier
             return false;
         }
 
-        var configurationType = ((Model)model).Configuration?.GetConfigurationType(memberInfo.GetMemberType());
+        var configurationType = ((Model)model).Configuration?.GetConfigurationType(
+            memberInfo.GetMemberType()
+        );
         return configurationType == TypeConfigurationType.Property
-            || (configurationType == null
-                && (typeMapping = _typeMappingSource.FindMapping(memberInfo, (IModel)model, useAttributes)) != null);
+            || (
+                configurationType == null
+                && (
+                    typeMapping = _typeMappingSource.FindMapping(
+                        memberInfo,
+                        (IModel)model,
+                        useAttributes
+                    )
+                ) != null
+            );
     }
 
     /// <summary>
@@ -206,7 +258,8 @@ public class MemberClassifier : IMemberClassifier
         IConventionModel model,
         bool useAttributes,
         out Type? elementType,
-        out bool explicitlyConfigured)
+        out bool explicitlyConfigured
+    )
     {
         explicitlyConfigured = false;
         elementType = null;
@@ -216,8 +269,10 @@ public class MemberClassifier : IMemberClassifier
         }
 
         var targetType = memberInfo.GetMemberType();
-        if (targetType.TryGetSequenceType() is Type sequenceType
-            && IsCandidateComplexType(sequenceType, model, out explicitlyConfigured))
+        if (
+            targetType.TryGetSequenceType() is Type sequenceType
+            && IsCandidateComplexType(sequenceType, model, out explicitlyConfigured)
+        )
         {
             elementType = sequenceType;
             return true;
@@ -226,10 +281,16 @@ public class MemberClassifier : IMemberClassifier
         return IsCandidateComplexType(targetType, model, out explicitlyConfigured);
     }
 
-    private static bool IsCandidateComplexType(Type targetType, IConventionModel model, out bool explicitlyConfigured)
+    private static bool IsCandidateComplexType(
+        Type targetType,
+        IConventionModel model,
+        out bool explicitlyConfigured
+    )
     {
-        if (targetType.IsGenericType
-            && targetType.GetGenericTypeDefinition() == typeof(Dictionary<,>))
+        if (
+            targetType.IsGenericType
+            && targetType.GetGenericTypeDefinition() == typeof(Dictionary<,>)
+        )
         {
             explicitlyConfigured = false;
             return false;
@@ -237,8 +298,7 @@ public class MemberClassifier : IMemberClassifier
 
         var configurationType = ((Model)model).Configuration?.GetConfigurationType(targetType);
         explicitlyConfigured = configurationType != null;
-        return configurationType == TypeConfigurationType.ComplexType
-            || configurationType == null;
+        return configurationType == TypeConfigurationType.ComplexType || configurationType == null;
     }
 
     /// <summary>
@@ -250,7 +310,8 @@ public class MemberClassifier : IMemberClassifier
     public virtual IParameterBindingFactory? FindServicePropertyCandidateBindingFactory(
         MemberInfo memberInfo,
         IConventionModel model,
-        bool useAttributes)
+        bool useAttributes
+    )
     {
         if (!memberInfo.IsCandidateProperty(publicOnly: false))
         {
@@ -266,8 +327,10 @@ public class MemberClassifier : IMemberClassifier
                 return null;
             }
 
-            if (memberInfo.IsCandidateProperty()
-                && _typeMappingSource.FindMapping(memberInfo, (IModel)model, useAttributes) != null)
+            if (
+                memberInfo.IsCandidateProperty()
+                && _typeMappingSource.FindMapping(memberInfo, (IModel)model, useAttributes) != null
+            )
             {
                 return null;
             }

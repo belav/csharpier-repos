@@ -26,7 +26,8 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
         Table principalTable,
         IReadOnlyList<Column> columns,
         UniqueConstraint principalUniqueConstraint,
-        ReferentialAction onDeleteAction)
+        ReferentialAction onDeleteAction
+    )
     {
         Name = name;
         Table = table;
@@ -45,7 +46,8 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SortedSet<IForeignKey> MappedForeignKeys { get; } = new(ForeignKeyComparer.Instance);
+    public virtual SortedSet<IForeignKey> MappedForeignKeys { get; } =
+        new(ForeignKeyComparer.Instance);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,8 +79,7 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<Column> PrincipalColumns
-        => PrincipalUniqueConstraint.Columns;
+    public virtual IReadOnlyList<Column> PrincipalColumns => PrincipalUniqueConstraint.Columns;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -94,8 +95,7 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Table.Model.IsReadOnly;
+    public override bool IsReadOnly => Table.Model.IsReadOnly;
 
     /// <inheritdoc />
     public virtual ReferentialAction OnDeleteAction { get; set; }
@@ -108,11 +108,15 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowForeignKeyValueFactory GetRowForeignKeyValueFactory()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _foreignKeyRowValueFactory, this,
-            static constraint
-                => constraint.Table.Model.Model.GetRelationalDependencies().RowForeignKeyValueFactoryFactory.Create(constraint));
+    public virtual IRowForeignKeyValueFactory GetRowForeignKeyValueFactory() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _foreignKeyRowValueFactory,
+            this,
+            static constraint =>
+                constraint
+                    .Table.Model.Model.GetRelationalDependencies()
+                    .RowForeignKeyValueFactoryFactory.Create(constraint)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,30 +124,24 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IForeignKeyConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IForeignKeyConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
-    IEnumerable<IForeignKey> IForeignKeyConstraint.MappedForeignKeys
-        => MappedForeignKeys;
+    IEnumerable<IForeignKey> IForeignKeyConstraint.MappedForeignKeys => MappedForeignKeys;
 
     /// <inheritdoc />
-    ITable IForeignKeyConstraint.Table
-        => Table;
+    ITable IForeignKeyConstraint.Table => Table;
 
     /// <inheritdoc />
-    ITable IForeignKeyConstraint.PrincipalTable
-        => PrincipalTable;
+    ITable IForeignKeyConstraint.PrincipalTable => PrincipalTable;
 
     /// <inheritdoc />
-    IReadOnlyList<IColumn> IForeignKeyConstraint.Columns
-        => Columns;
+    IReadOnlyList<IColumn> IForeignKeyConstraint.Columns => Columns;
 
     /// <inheritdoc />
-    IReadOnlyList<IColumn> IForeignKeyConstraint.PrincipalColumns
-        => PrincipalColumns;
+    IReadOnlyList<IColumn> IForeignKeyConstraint.PrincipalColumns => PrincipalColumns;
 
     /// <inheritdoc />
-    IUniqueConstraint IForeignKeyConstraint.PrincipalUniqueConstraint
-        => PrincipalUniqueConstraint;
+    IUniqueConstraint IForeignKeyConstraint.PrincipalUniqueConstraint => PrincipalUniqueConstraint;
 }

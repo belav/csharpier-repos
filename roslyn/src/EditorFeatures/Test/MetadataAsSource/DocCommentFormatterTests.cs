@@ -17,18 +17,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
     [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
     public class DocCommentFormatterTests
     {
-        private readonly CSharpDocumentationCommentFormattingService _csharpService = new CSharpDocumentationCommentFormattingService();
-        private readonly VisualBasicDocumentationCommentFormattingService _vbService = new VisualBasicDocumentationCommentFormattingService();
+        private readonly CSharpDocumentationCommentFormattingService _csharpService =
+            new CSharpDocumentationCommentFormattingService();
+        private readonly VisualBasicDocumentationCommentFormattingService _vbService =
+            new VisualBasicDocumentationCommentFormattingService();
 
-        private void TestFormat(string docCommentXmlFragment, string expected)
-            => TestFormat(docCommentXmlFragment, expected, expected);
+        private void TestFormat(string docCommentXmlFragment, string expected) =>
+            TestFormat(docCommentXmlFragment, expected, expected);
 
-        private void TestFormat(string docCommentXmlFragment, string expectedCSharp, string expectedVB)
+        private void TestFormat(
+            string docCommentXmlFragment,
+            string expectedCSharp,
+            string expectedVB
+        )
         {
             var docComment = DocumentationComment.FromXmlFragment(docCommentXmlFragment);
 
-            var csharpFormattedComment = string.Join("\r\n", AbstractMetadataAsSourceService.DocCommentFormatter.Format(_csharpService, docComment));
-            var vbFormattedComment = string.Join("\r\n", AbstractMetadataAsSourceService.DocCommentFormatter.Format(_vbService, docComment));
+            var csharpFormattedComment = string.Join(
+                "\r\n",
+                AbstractMetadataAsSourceService.DocCommentFormatter.Format(
+                    _csharpService,
+                    docComment
+                )
+            );
+            var vbFormattedComment = string.Join(
+                "\r\n",
+                AbstractMetadataAsSourceService.DocCommentFormatter.Format(_vbService, docComment)
+            );
 
             Assert.Equal(expectedCSharp, csharpFormattedComment);
             Assert.Equal(expectedVB, vbFormattedComment);
@@ -40,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             var comment = "<summary>This is a summary.</summary>";
 
             var expected =
-$@"{FeaturesResources.Summary_colon}
+                $@"{FeaturesResources.Summary_colon}
     This is a summary.";
 
             TestFormat(comment, expected);
@@ -49,10 +64,11 @@ $@"{FeaturesResources.Summary_colon}
         [Fact]
         public void Wrapping1()
         {
-            var comment = "<summary>I am the very model of a modern major general. This is a very long comment. And getting longer by the minute.</summary>";
+            var comment =
+                "<summary>I am the very model of a modern major general. This is a very long comment. And getting longer by the minute.</summary>";
 
             var expected =
-$@"{FeaturesResources.Summary_colon}
+                $@"{FeaturesResources.Summary_colon}
     I am the very model of a modern major general. This is a very long comment. And
     getting longer by the minute.";
 
@@ -62,9 +78,10 @@ $@"{FeaturesResources.Summary_colon}
         [Fact]
         public void Wrapping2()
         {
-            var comment = "<summary>I amtheverymodelofamodernmajorgeneral.Thisisaverylongcomment.Andgettinglongerbythe minute.</summary>";
+            var comment =
+                "<summary>I amtheverymodelofamodernmajorgeneral.Thisisaverylongcomment.Andgettinglongerbythe minute.</summary>";
             var expected =
-$@"{FeaturesResources.Summary_colon}
+                $@"{FeaturesResources.Summary_colon}
     I amtheverymodelofamodernmajorgeneral.Thisisaverylongcomment.Andgettinglongerbythe
     minute.";
 
@@ -74,10 +91,11 @@ $@"{FeaturesResources.Summary_colon}
         [Fact]
         public void Exception()
         {
-            var comment = @"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException</exception>";
+            var comment =
+                @"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException</exception>";
 
             var expected =
-$@"{FeaturesResources.Exceptions_colon}
+                $@"{FeaturesResources.Exceptions_colon}
   T:System.NotImplementedException:
     throws NotImplementedException";
 
@@ -88,11 +106,11 @@ $@"{FeaturesResources.Exceptions_colon}
         public void MultipleExceptionTags()
         {
             var comment =
-@"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException</exception>
+                @"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException</exception>
 <exception cref=""T:System.InvalidOperationException"">throws InvalidOperationException</exception>";
 
             var expected =
-$@"{FeaturesResources.Exceptions_colon}
+                $@"{FeaturesResources.Exceptions_colon}
   T:System.NotImplementedException:
     throws NotImplementedException
 
@@ -106,12 +124,12 @@ $@"{FeaturesResources.Exceptions_colon}
         public void MultipleExceptionTagsWithSameType()
         {
             var comment =
-@"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException for reason X</exception>
+                @"<exception cref=""T:System.NotImplementedException"">throws NotImplementedException for reason X</exception>
 <exception cref=""T:System.InvalidOperationException"">throws InvalidOperationException</exception>
 <exception cref=""T:System.NotImplementedException"">also throws NotImplementedException for reason Y</exception>";
 
             var expected =
-$@"{FeaturesResources.Exceptions_colon}
+                $@"{FeaturesResources.Exceptions_colon}
   T:System.NotImplementedException:
     throws NotImplementedException for reason X
 
@@ -130,7 +148,7 @@ $@"{FeaturesResources.Exceptions_colon}
             var comment = @"<returns>A string is returned</returns>";
 
             var expected =
-$@"{FeaturesResources.Returns_colon}
+                $@"{FeaturesResources.Returns_colon}
     A string is returned";
 
             TestFormat(comment, expected);
@@ -142,7 +160,7 @@ $@"{FeaturesResources.Returns_colon}
             var comment = @"<value>A string value</value>";
 
             var expected =
-$@"{FeaturesResources.Value_colon}
+                $@"{FeaturesResources.Value_colon}
     A string value";
 
             TestFormat(comment, expected);
@@ -152,12 +170,12 @@ $@"{FeaturesResources.Value_colon}
         public void SummaryAndParams()
         {
             var comment =
-@"<summary>This is the summary.</summary>
+                @"<summary>This is the summary.</summary>
 <param name=""a"">The param named 'a'</param>
 <param name=""b"">The param named 'b'</param>";
 
             var expected =
-$@"{FeaturesResources.Summary_colon}
+                $@"{FeaturesResources.Summary_colon}
     This is the summary.
 
 {FeaturesResources.Parameters_colon}
@@ -174,11 +192,11 @@ $@"{FeaturesResources.Summary_colon}
         public void TypeParameters()
         {
             var comment =
-@"<typeparam name=""T"">The type param named 'T'</typeparam>
+                @"<typeparam name=""T"">The type param named 'T'</typeparam>
 <typeparam name=""U"">The type param named 'U'</typeparam>";
 
             var expected =
-$@"{FeaturesResources.Type_parameters_colon}
+                $@"{FeaturesResources.Type_parameters_colon}
   T:
     The type param named 'T'
 
@@ -192,7 +210,7 @@ $@"{FeaturesResources.Type_parameters_colon}
         public void FormatEverything()
         {
             var comment =
-@"<summary>
+                @"<summary>
 This is a summary of something.
 </summary>
 <param name=""a"">The param named 'a'.</param>
@@ -209,7 +227,7 @@ This is a summary of something.
 <remarks>This doc comment is really not very remarkable.</remarks>";
 
             var expected =
-$@"{FeaturesResources.Summary_colon}
+                $@"{FeaturesResources.Summary_colon}
     This is a summary of something.
 
 {FeaturesResources.Parameters_colon}

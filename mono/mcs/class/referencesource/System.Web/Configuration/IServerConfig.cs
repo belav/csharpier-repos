@@ -4,25 +4,30 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    using System.Configuration;
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Configuration;
     using System.Globalization;
     using System.Text;
-    using System.Web.Util;
-    using System.Web.Hosting;
     using System.Web.Caching;
+    using System.Web.Hosting;
+    using System.Web.Util;
     using Microsoft.Win32;
 
     // Config functions used by ASP.NET.
-    interface IServerConfig {
+    interface IServerConfig
+    {
         // if appHost is null, the site for the current application will be used to map the path -- this is probably what you want
-        string     MapPath(IApplicationHost appHost, VirtualPath path);
-        string     GetSiteNameFromSiteID(string siteID);
-        bool       GetUncUser(IApplicationHost appHost, VirtualPath path, out string username, out string password);
-        string[]   GetVirtualSubdirs(VirtualPath path, bool inApp);
-        long       GetW3WPMemoryLimitInKB();
+        string MapPath(IApplicationHost appHost, VirtualPath path);
+        string GetSiteNameFromSiteID(string siteID);
+        bool GetUncUser(
+            IApplicationHost appHost,
+            VirtualPath path,
+            out string username,
+            out string password
+        );
+        string[] GetVirtualSubdirs(VirtualPath path, bool inApp);
+        long GetW3WPMemoryLimitInKB();
     }
 }
-

@@ -54,29 +54,31 @@ namespace System.Net.Mime
         internal static readonly string[] s_validDateTimeFormats = new string[]
         {
             "ddd, dd MMM yyyy HH:mm:ss", // with day of week
-            "dd MMM yyyy HH:mm:ss",      // without day of week
-            "ddd, dd MMM yyyy HH:mm",    // with day of week and without seconds
-            "dd MMM yyyy HH:mm"          // without day of week and without seconds
+            "dd MMM yyyy HH:mm:ss", // without day of week
+            "ddd, dd MMM yyyy HH:mm", // with day of week and without seconds
+            "dd MMM yyyy HH:mm", // without day of week and without seconds
         };
 
-        internal static readonly Dictionary<string, TimeSpan> s_timeZoneOffsetLookup = new Dictionary<string, TimeSpan>()
-        {
-            // all well-known short hand time zone values and their semantic equivalents
-            { "UT", TimeSpan.Zero },           // +0000
-            { "GMT", TimeSpan.Zero },          // +0000
-            { "EDT", new TimeSpan(-4, 0, 0) }, // -0400
-            { "EST", new TimeSpan(-5, 0, 0) }, // -0500
-            { "CDT", new TimeSpan(-5, 0, 0) }, // -0500
-            { "CST", new TimeSpan(-6, 0, 0) }, // -0600
-            { "MDT", new TimeSpan(-6, 0, 0) }, // -0600
-            { "MST", new TimeSpan(-7, 0, 0) }, // -0700
-            { "PDT", new TimeSpan(-7, 0, 0) }, // -0700
-            { "PST", new TimeSpan(-8, 0, 0) }, // -0800
-        };
+        internal static readonly Dictionary<string, TimeSpan> s_timeZoneOffsetLookup =
+            new Dictionary<string, TimeSpan>()
+            {
+                // all well-known short hand time zone values and their semantic equivalents
+                { "UT", TimeSpan.Zero }, // +0000
+                { "GMT", TimeSpan.Zero }, // +0000
+                { "EDT", new TimeSpan(-4, 0, 0) }, // -0400
+                { "EST", new TimeSpan(-5, 0, 0) }, // -0500
+                { "CDT", new TimeSpan(-5, 0, 0) }, // -0500
+                { "CST", new TimeSpan(-6, 0, 0) }, // -0600
+                { "MDT", new TimeSpan(-6, 0, 0) }, // -0600
+                { "MST", new TimeSpan(-7, 0, 0) }, // -0700
+                { "PDT", new TimeSpan(-7, 0, 0) }, // -0700
+                { "PST", new TimeSpan(-8, 0, 0) }, // -0800
+            };
 
         // a TimeSpan must be between these two values in order for it to be within the range allowed
         // by RFC 2822
-        internal const long TimeSpanMaxTicks = TimeSpan.TicksPerHour * 99 + TimeSpan.TicksPerMinute * 59;
+        internal const long TimeSpanMaxTicks =
+            TimeSpan.TicksPerHour * 99 + TimeSpan.TicksPerMinute * 59;
 
         // allowed max values for each digit.  min value is always 0
         internal const int OffsetMaxValue = 9959;
@@ -163,18 +165,38 @@ namespace System.Net.Mime
             Debug.Assert(timeZone.Seconds == 0, "Span had seconds value");
             Debug.Assert(timeZone.Milliseconds == 0, "Span had milliseconds value");
 
-            return _unknownTimeZone || timeZone.Ticks == 0 ?
-                string.Create(CultureInfo.InvariantCulture, $"{_date:ddd, dd MMM yyyy HH:mm:ss} {(_unknownTimeZone ? UnknownTimeZoneDefaultOffset : UtcDefaultTimeZoneOffset)}") :
-                string.Create(CultureInfo.InvariantCulture, $"{_date:ddd, dd MMM yyyy HH:mm:ss} {(timeZone.Ticks > 0 ? '+' : '-')}{timeZone:hhmm}");
+            return _unknownTimeZone || timeZone.Ticks == 0
+                ? string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"{_date:ddd, dd MMM yyyy HH:mm:ss} {(_unknownTimeZone ? UnknownTimeZoneDefaultOffset : UtcDefaultTimeZoneOffset)}"
+                )
+                : string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"{_date:ddd, dd MMM yyyy HH:mm:ss} {(timeZone.Ticks > 0 ? '+' : '-')}{timeZone:hhmm}"
+                );
         }
 
         // returns true if the offset is of the form [+|-]dddd and
         // within the range 0000 to 9959
-        internal static void ValidateAndGetTimeZoneOffsetValues(string offset, out bool positive, out int hours, out int minutes)
+        internal static void ValidateAndGetTimeZoneOffsetValues(
+            string offset,
+            out bool positive,
+            out int hours,
+            out int minutes
+        )
         {
-            Debug.Assert(!string.IsNullOrEmpty(offset), "violation of precondition: offset must not be null or empty");
-            Debug.Assert(offset != UnknownTimeZoneDefaultOffset, "Violation of precondition: do not pass an unknown offset");
-            Debug.Assert(offset.StartsWith('-') || offset.StartsWith('+'), "offset initial character was not a + or -");
+            Debug.Assert(
+                !string.IsNullOrEmpty(offset),
+                "violation of precondition: offset must not be null or empty"
+            );
+            Debug.Assert(
+                offset != UnknownTimeZoneDefaultOffset,
+                "Violation of precondition: do not pass an unknown offset"
+            );
+            Debug.Assert(
+                offset.StartsWith('-') || offset.StartsWith('+'),
+                "offset initial character was not a + or -"
+            );
 
             if (offset.Length != OffsetLength)
             {
@@ -185,12 +207,26 @@ namespace System.Net.Mime
 
             // TryParse will parse in base 10 by default.  do not allow any styles of input beyond the default
             // which is numeric values only
-            if (!int.TryParse(offset.AsSpan(1, 2), NumberStyles.None, CultureInfo.InvariantCulture, out hours))
+            if (
+                !int.TryParse(
+                    offset.AsSpan(1, 2),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out hours
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
 
-            if (!int.TryParse(offset.AsSpan(3, 2), NumberStyles.None, CultureInfo.InvariantCulture, out minutes))
+            if (
+                !int.TryParse(
+                    offset.AsSpan(3, 2),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out minutes
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
@@ -208,7 +244,10 @@ namespace System.Net.Mime
         internal static void ValidateTimeZoneShortHandValue(string value)
         {
             // time zones can't be empty
-            Debug.Assert(!string.IsNullOrEmpty(value), "violation of precondition: offset must not be null or empty");
+            Debug.Assert(
+                !string.IsNullOrEmpty(value),
+                "violation of precondition: offset must not be null or empty"
+            );
 
             // time zones must all be alphabetical characters
             for (int i = 0; i < value.Length; i++)
@@ -259,7 +298,15 @@ namespace System.Net.Mime
 
             // attempt to parse the DateTime component.
             DateTime dateValue;
-            if (!DateTime.TryParseExact(date, s_validDateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out dateValue))
+            if (
+                !DateTime.TryParseExact(
+                    date,
+                    s_validDateTimeFormats,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AllowWhiteSpaces,
+                    out dateValue
+                )
+            )
             {
                 throw new FormatException(SR.MailDateInvalidFormat);
             }
@@ -306,7 +353,12 @@ namespace System.Net.Mime
                 int hours;
                 int minutes;
 
-                ValidateAndGetTimeZoneOffsetValues(timeZoneString, out positive, out hours, out minutes);
+                ValidateAndGetTimeZoneOffsetValues(
+                    timeZoneString,
+                    out positive,
+                    out hours,
+                    out minutes
+                );
 
                 // Apply the negative sign, if applicable, to whichever of hours or minutes is NOT 0.
                 if (!positive)
