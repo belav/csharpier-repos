@@ -2611,7 +2611,8 @@ public class QueryExpressionTest
             var unknownAccessorDecls = tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .OfType<AccessorDeclarationSyntax>();
-            var symbols = unknownAccessorDecls.Select(decl => semanticModel.GetDeclaredSymbol(decl)
+            var symbols = unknownAccessorDecls.Select(decl =>
+                semanticModel.GetDeclaredSymbol(decl)
             );
 
             Assert.True(symbols.All(s => ReferenceEquals(s, null)));
@@ -2647,13 +2648,15 @@ class Test
             var fromClause1 =
                 tree.GetCompilationUnitRoot()
                     .DescendantNodes()
-                    .Where(n => (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num1"))
+                    .Where(n =>
+                        (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num1"))
                     )
                     .Single() as FromClauseSyntax;
             var fromClause2 =
                 tree.GetCompilationUnitRoot()
                     .DescendantNodes()
-                    .Where(n => (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num2"))
+                    .Where(n =>
+                        (n.IsKind(SyntaxKind.FromClause)) && (n.ToString().Contains("num2"))
                     )
                     .Single() as FromClauseSyntax;
 

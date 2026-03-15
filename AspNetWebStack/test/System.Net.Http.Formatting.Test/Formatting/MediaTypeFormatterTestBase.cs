@@ -70,7 +70,8 @@ namespace System.Net.Http.Formatting
 
             foreach (Encoding mediaType1 in formatter1.SupportedEncodings)
             {
-                Encoding mediaType2 = formatter2.SupportedEncodings.Single(m => m.Equals(mediaType1)
+                Encoding mediaType2 = formatter2.SupportedEncodings.Single(m =>
+                    m.Equals(mediaType1)
                 );
                 Assert.NotSame(mediaType1, mediaType2);
             }

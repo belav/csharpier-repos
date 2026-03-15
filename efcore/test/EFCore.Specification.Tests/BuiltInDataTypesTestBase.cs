@@ -1667,7 +1667,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                     entity,
                     context
                         .Set<BuiltInNullableDataTypes>()
-                        .Where(e => e.Id == 12 && e.TestNullableDateOnly == new DateOnly(2020, 3, 1)
+                        .Where(e =>
+                            e.Id == 12 && e.TestNullableDateOnly == new DateOnly(2020, 3, 1)
                         )
                         .ToList()
                         .Single()

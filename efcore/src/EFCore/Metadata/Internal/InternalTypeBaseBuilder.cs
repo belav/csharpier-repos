@@ -625,7 +625,8 @@ public abstract class InternalTypeBaseBuilder
                     break;
                 }
 
-                var currentProperty = currentProperties?.SingleOrDefault(p => p.Name == propertyName
+                var currentProperty = currentProperties?.SingleOrDefault(p =>
+                    p.Name == propertyName
                 );
                 if (currentProperty != null)
                 {

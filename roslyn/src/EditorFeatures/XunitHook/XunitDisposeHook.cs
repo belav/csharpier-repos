@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             var xunitUtilities = AppDomain
                 .CurrentDomain.GetAssemblies()
-                .Where(static assembly => assembly.GetName().Name.StartsWith("xunit.runner.utility")
+                .Where(static assembly =>
+                    assembly.GetName().Name.StartsWith("xunit.runner.utility")
                 )
                 .ToArray();
             foreach (var xunitUtility in xunitUtilities)

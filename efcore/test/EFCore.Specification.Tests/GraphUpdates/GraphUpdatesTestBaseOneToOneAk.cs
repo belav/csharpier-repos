@@ -1450,7 +1450,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(
                         context
                             .Set<Root>()
-                            .Any(r => r.RequiredSingleAk != null && r.RequiredSingleAk.Id == old1.Id
+                            .Any(r =>
+                                r.RequiredSingleAk != null && r.RequiredSingleAk.Id == old1.Id
                             )
                     );
 
@@ -1950,7 +1951,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(
                         context
                             .Set<Root>()
-                            .Any(r => r.RequiredSingleAk != null && r.RequiredSingleAk.Id == old1.Id
+                            .Any(r =>
+                                r.RequiredSingleAk != null && r.RequiredSingleAk.Id == old1.Id
                             )
                     );
 

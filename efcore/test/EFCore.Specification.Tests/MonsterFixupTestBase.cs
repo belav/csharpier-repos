@@ -1111,7 +1111,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var productWebFeature1 = context.ProductWebFeatures.Single(e =>
             e.Heading.StartsWith("Waffle")
         );
-        var productWebFeature2 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("What")
+        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("What")
         );
 
         Assert.Equal(product1.ProductId, productWebFeature1.ProductId);
@@ -1136,7 +1137,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var supplierInfo2 = context.SupplierInformation.Single(e =>
             e.Information.StartsWith("Orange")
         );
-        var supplierInfo3 = context.SupplierInformation.Single(e => e.Information.StartsWith("Very")
+        var supplierInfo3 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Very")
         );
 
         Assert.Equal(supplier1.SupplierId, supplierInfo1.SupplierId);
@@ -1146,7 +1148,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var customerInfo1 = context.CustomerInformation.Single(e =>
             e.Information.StartsWith("Really")
         );
-        var customerInfo2 = context.CustomerInformation.Single(e => e.Information.StartsWith("Mrs")
+        var customerInfo2 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Mrs")
         );
 
         Assert.Equal(customer1.CustomerId, customerInfo1.CustomerInfoId);
@@ -1155,7 +1158,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e => e.Specifications == "It's a Dell!"
+        var computerDetail1 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's a Dell!"
         );
         var computerDetail2 = context.ComputerDetails.Single(e =>
             e.Specifications == "It's not a Dell!"
@@ -1407,7 +1411,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var productWebFeature1 = context.ProductWebFeatures.Single(e =>
             e.Heading.StartsWith("Waffle")
         );
-        var productWebFeature2 = context.ProductWebFeatures.Single(e => e.Heading.StartsWith("What")
+        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
+            e.Heading.StartsWith("What")
         );
 
         Assert.Same(productPhoto1, productWebFeature1.Photo);
@@ -1440,7 +1445,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var supplierInfo2 = context.SupplierInformation.Single(e =>
             e.Information.StartsWith("Orange")
         );
-        var supplierInfo3 = context.SupplierInformation.Single(e => e.Information.StartsWith("Very")
+        var supplierInfo3 = context.SupplierInformation.Single(e =>
+            e.Information.StartsWith("Very")
         );
 
         Assert.Same(supplier1, supplierInfo1.Supplier);
@@ -1450,7 +1456,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var customerInfo1 = context.CustomerInformation.Single(e =>
             e.Information.StartsWith("Really")
         );
-        var customerInfo2 = context.CustomerInformation.Single(e => e.Information.StartsWith("Mrs")
+        var customerInfo2 = context.CustomerInformation.Single(e =>
+            e.Information.StartsWith("Mrs")
         );
 
         Assert.Same(customerInfo1, customer1.Info);
@@ -1459,7 +1466,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e => e.Specifications == "It's a Dell!"
+        var computerDetail1 = context.ComputerDetails.Single(e =>
+            e.Specifications == "It's a Dell!"
         );
         var computerDetail2 = context.ComputerDetails.Single(e =>
             e.Specifications == "It's not a Dell!"

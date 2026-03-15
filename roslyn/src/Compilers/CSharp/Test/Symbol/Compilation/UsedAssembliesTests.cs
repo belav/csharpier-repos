@@ -137,7 +137,8 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module
+                            comp.References.Where(r =>
+                                r.Properties.Kind == MetadataImageKind.Module
                             )
                         )
                     );
@@ -543,7 +544,8 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module
+                            comp.References.Where(r =>
+                                r.Properties.Kind == MetadataImageKind.Module
                             )
                         )
                     );

@@ -1592,7 +1592,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.NotNull(fieldInfo);
             Assert.Same(fieldInfo, fieldPropInfo.AttributeProvider);
 
-            JsonPropertyInfo propertyPropInfo = jti.Properties.First(prop => prop.Name == "Property"
+            JsonPropertyInfo propertyPropInfo = jti.Properties.First(prop =>
+                prop.Name == "Property"
             );
             PropertyInfo propInfo = typeof(ClassWithFieldsAndProperties).GetProperty("Property");
             Assert.NotNull(propInfo);

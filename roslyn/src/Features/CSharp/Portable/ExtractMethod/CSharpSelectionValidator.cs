@@ -587,7 +587,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 .With(s =>
                     s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
                 )
-                .With(s => s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
+                .With(s =>
+                    s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
                 );
         }
 

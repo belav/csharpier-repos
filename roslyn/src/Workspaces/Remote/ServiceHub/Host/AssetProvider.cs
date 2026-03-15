@@ -118,7 +118,8 @@ internal sealed partial class AssetProvider(
         {
             Logger.Log(
                 FunctionId.AssetService_Perf,
-                KeyValueLogMessage.Create(map => map["SolutionSyncTime"] = timer.ElapsedMilliseconds
+                KeyValueLogMessage.Create(map =>
+                    map["SolutionSyncTime"] = timer.ElapsedMilliseconds
                 )
             );
         }

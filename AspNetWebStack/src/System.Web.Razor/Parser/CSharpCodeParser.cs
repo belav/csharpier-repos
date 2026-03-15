@@ -505,7 +505,8 @@ namespace System.Web.Razor.Parser
 
         private void CaptureWhitespaceAtEndOfCodeOnlyLine()
         {
-            IEnumerable<CSharpSymbol> ws = ReadWhile(sym => sym.Type == CSharpSymbolType.WhiteSpace
+            IEnumerable<CSharpSymbol> ws = ReadWhile(sym =>
+                sym.Type == CSharpSymbolType.WhiteSpace
             );
             if (At(CSharpSymbolType.NewLine))
             {

@@ -185,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 CancellationToken cancellationToken
             ) =>
                 _invocationExpression
-                    .ArgumentList.Arguments.Select(a => DetermineParameterType(a, cancellationToken)
+                    .ArgumentList.Arguments.Select(a =>
+                        DetermineParameterType(a, cancellationToken)
                     )
                     .ToImmutableArray();
 

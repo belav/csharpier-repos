@@ -1019,7 +1019,8 @@ public class AuthorizationMiddlewareTests
                     var res = AuthenticateResult.Success(
                         new AuthenticationTicket(
                             new ClaimsPrincipal(
-                                c.User.Identities.FirstOrDefault(i => i.AuthenticationType == scheme
+                                c.User.Identities.FirstOrDefault(i =>
+                                    i.AuthenticationType == scheme
                                 )
                             ),
                             scheme
@@ -1037,7 +1038,8 @@ public class AuthorizationMiddlewareTests
                     var res = AuthenticateResult.Success(
                         new AuthenticationTicket(
                             new ClaimsPrincipal(
-                                c.User.Identities.FirstOrDefault(i => i.AuthenticationType == scheme
+                                c.User.Identities.FirstOrDefault(i =>
+                                    i.AuthenticationType == scheme
                                 )
                             ),
                             scheme
@@ -1150,7 +1152,8 @@ public class AuthorizationMiddlewareTests
                     var res = AuthenticateResult.Success(
                         new AuthenticationTicket(
                             new ClaimsPrincipal(
-                                c.User.Identities.FirstOrDefault(i => i.AuthenticationType == scheme
+                                c.User.Identities.FirstOrDefault(i =>
+                                    i.AuthenticationType == scheme
                                 )
                             ),
                             scheme

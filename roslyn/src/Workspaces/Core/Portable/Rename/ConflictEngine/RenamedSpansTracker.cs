@@ -286,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     // Now process the rest of the renamed spans
                     var annotationAndTokens = renameAnnotations
                         .GetAnnotatedNodesAndTokens<RenameTokenSimplificationAnnotation>(root)
-                        .Where(x => !modifiedTokensInComplexifiedStatements.Contains((SyntaxToken)x)
+                        .Where(x =>
+                            !modifiedTokensInComplexifiedStatements.Contains((SyntaxToken)x)
                         )
                         .Select(x =>
                             Tuple.Create(

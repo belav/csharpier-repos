@@ -2107,7 +2107,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticAnalyzer,
                 ImmutableArray<ImmutableArray<SymbolAnalyzerAction>>
             )>.GetInstance();
-            var actionsByAnalyzers = analyzerActions.SymbolActions.GroupBy(action => action.Analyzer
+            var actionsByAnalyzers = analyzerActions.SymbolActions.GroupBy(action =>
+                action.Analyzer
             );
             var actionsByKindBuilder = ArrayBuilder<
                 ArrayBuilder<SymbolAnalyzerAction>

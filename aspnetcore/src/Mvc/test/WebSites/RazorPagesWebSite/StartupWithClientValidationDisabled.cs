@@ -19,7 +19,8 @@ public class StartupWithClientValidationDisabled
             options.Conventions.AuthorizeFolder("/Admin");
         });
 
-        services.Configure<MvcViewOptions>(o => o.HtmlHelperOptions.ClientValidationEnabled = false
+        services.Configure<MvcViewOptions>(o =>
+            o.HtmlHelperOptions.ClientValidationEnabled = false
         );
     }
 

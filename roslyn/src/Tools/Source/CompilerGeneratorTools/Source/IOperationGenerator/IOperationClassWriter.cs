@@ -1257,7 +1257,8 @@ namespace IOperationGenerator
                 if (@base is null)
                     break;
                 properties.AddRange(
-                    @base.Properties.Where(p => !p.SkipGeneration || includeSkipGenerationProperties
+                    @base.Properties.Where(p =>
+                        !p.SkipGeneration || includeSkipGenerationProperties
                     )
                 );
             }

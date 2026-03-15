@@ -45,7 +45,8 @@ internal sealed class AcceptsMatcherPolicy
 
     private static bool AppliesToEndpointsCore(IReadOnlyList<Endpoint> endpoints)
     {
-        return endpoints.Any(e => e.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes.Count > 0
+        return endpoints.Any(e =>
+            e.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes.Count > 0
         );
     }
 

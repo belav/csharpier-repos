@@ -2740,7 +2740,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 from a in context.Addresses.ToList()
                 from r in context
                     .Orders.ToList()
-                    .Where(x => x.CustomerId == 1 && (a.City != a.State || x.OrderDate.Year == 2000)
+                    .Where(x =>
+                        x.CustomerId == 1 && (a.City != a.State || x.OrderDate.Year == 2000)
                     )
                     .GroupBy(x => new { x.CustomerId, x.OrderDate.Year })
                     .Select(x => new OrderByYear

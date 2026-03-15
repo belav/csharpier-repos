@@ -435,7 +435,8 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>()
+            services.AddSingleton<ILoggerProvider>(sp =>
+                sp.GetRequiredService<TestLoggerProvider>()
             );
             services
                 .AddHttpClient("TestLoggerProvider")
@@ -485,7 +486,8 @@ namespace Microsoft.Extensions.Http.Logging
             services.AddSingleton<TestLoggerProvider>();
 
             services.AddLogging(b => b.SetMinimumLevel(LogLevel.Trace));
-            services.AddSingleton<ILoggerProvider>(sp => sp.GetRequiredService<TestLoggerProvider>()
+            services.AddSingleton<ILoggerProvider>(sp =>
+                sp.GetRequiredService<TestLoggerProvider>()
             );
             services
                 .AddHttpClient("TestLoggerProvider")

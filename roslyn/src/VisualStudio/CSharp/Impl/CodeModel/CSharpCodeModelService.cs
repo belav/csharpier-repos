@@ -1650,7 +1650,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             if (documentationComment != null)
             {
                 // In this case, we're going to replace the existing XML doc comment.
-                var index = leadingTriviaList.FindIndex(t => t == documentationComment.ParentTrivia
+                var index = leadingTriviaList.FindIndex(t =>
+                    t == documentationComment.ParentTrivia
                 );
                 leadingTriviaList.RemoveAt(index);
 

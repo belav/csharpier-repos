@@ -58,7 +58,8 @@ public class SignInResultTests
         var principal = new ClaimsPrincipal();
         var authProperties = new AuthenticationProperties();
         var auth = new Mock<IAuthenticationService>();
-        auth.Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), "Scheme1", principal, authProperties)
+        auth.Setup(c =>
+                c.SignInAsync(It.IsAny<HttpContext>(), "Scheme1", principal, authProperties)
             )
             .Returns(Task.CompletedTask)
             .Verifiable();

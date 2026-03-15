@@ -3478,7 +3478,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     var newTypeDeclaration = GetSymbolDeclarationSyntax(
                                         newSymbol,
                                         refs =>
-                                            refs.First(r => r.SyntaxTree == edit.NewNode!.SyntaxTree
+                                            refs.First(r =>
+                                                r.SyntaxTree == edit.NewNode!.SyntaxTree
                                             ),
                                         cancellationToken
                                     );

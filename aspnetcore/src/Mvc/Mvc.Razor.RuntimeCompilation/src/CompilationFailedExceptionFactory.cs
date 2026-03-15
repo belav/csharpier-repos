@@ -40,7 +40,8 @@ internal static class CompilationFailedExceptionFactory
                 filePath,
                 fileContent,
                 compiledContent: string.Empty,
-                messages: group.Select(parserError => CreateDiagnosticMessage(parserError, filePath)
+                messages: group.Select(parserError =>
+                    CreateDiagnosticMessage(parserError, filePath)
                 )
             );
             failures.Add(compilationFailure);

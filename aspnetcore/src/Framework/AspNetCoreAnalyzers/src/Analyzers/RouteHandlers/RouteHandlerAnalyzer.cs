@@ -305,7 +305,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             IOperation? builder = null;
 
-            var builderArgument = operation.Arguments.SingleOrDefault(a => a.Parameter?.Ordinal == 0
+            var builderArgument = operation.Arguments.SingleOrDefault(a =>
+                a.Parameter?.Ordinal == 0
             );
             if (builderArgument != null)
             {

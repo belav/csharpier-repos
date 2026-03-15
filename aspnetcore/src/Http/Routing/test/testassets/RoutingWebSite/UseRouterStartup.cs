@@ -38,7 +38,8 @@ public class UseRouterStartup
                 .MapMiddlewareRoute(
                     "api/middleware",
                     (appBuilder) =>
-                        appBuilder.Run(httpContext => httpContext.Response.WriteAsync("Middleware!")
+                        appBuilder.Run(httpContext =>
+                            httpContext.Response.WriteAsync("Middleware!")
                         )
                 )
                 .MapRoute(

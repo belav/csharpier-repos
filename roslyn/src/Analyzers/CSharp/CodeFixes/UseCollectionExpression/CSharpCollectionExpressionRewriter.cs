@@ -839,7 +839,8 @@ internal static class CSharpCollectionExpressionRewriter
             var firstLeadingComment = leadingTrivia.FirstOrDefault(t =>
                 t.IsSingleOrMultiLineComment()
             );
-            var lastLeadingComment = leadingTrivia.LastOrDefault(t => t.IsSingleOrMultiLineComment()
+            var lastLeadingComment = leadingTrivia.LastOrDefault(t =>
+                t.IsSingleOrMultiLineComment()
             );
             if (firstLeadingComment != default)
             {

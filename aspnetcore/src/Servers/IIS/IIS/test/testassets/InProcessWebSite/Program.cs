@@ -93,7 +93,8 @@ public static class Program
                 {
                     var host = new WebHostBuilder()
                         .UseIIS()
-                        .ConfigureServices(services => services.AddSingleton<IServer, DummyServer>()
+                        .ConfigureServices(services =>
+                            services.AddSingleton<IServer, DummyServer>()
                         )
                         .Configure(builder =>
                             builder.Run(async context =>

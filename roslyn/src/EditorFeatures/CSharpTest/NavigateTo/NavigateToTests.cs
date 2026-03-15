@@ -498,7 +498,8 @@ struct Bar
 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("B")).Single(x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("B")).Single(x =>
+                        x.Kind != "Method"
                     );
                     VerifyNavigateToResultItem(
                         item,
@@ -1786,7 +1787,8 @@ public class Goo
                 """,
                 async w =>
                 {
-                    var item = (await _aggregator.GetItemsAsync("G")).Single(x => x.Kind != "Method"
+                    var item = (await _aggregator.GetItemsAsync("G")).Single(x =>
+                        x.Kind != "Method"
                     );
                     var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
 

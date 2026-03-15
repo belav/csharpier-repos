@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Highlighting
             using (s_listPool.GetPooledObject(out var tempHighlights))
             {
                 foreach (
-                    var highlighter in _highlighters.Where(h => h.Metadata.Language == root.Language
+                    var highlighter in _highlighters.Where(h =>
+                        h.Metadata.Language == root.Language
                     )
                 )
                 {

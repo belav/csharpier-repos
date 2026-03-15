@@ -566,7 +566,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await TestServices.Workspace.WaitForRenameAsync(cancellationToken);
             var tags = await GetTagsAsync<ITextMarkerTag>(cancellationToken);
-            return tags.WhereAsArray(tag => tag.Tag.Type == RenameFieldBackgroundAndBorderTag.TagId
+            return tags.WhereAsArray(tag =>
+                tag.Tag.Type == RenameFieldBackgroundAndBorderTag.TagId
             );
         }
 

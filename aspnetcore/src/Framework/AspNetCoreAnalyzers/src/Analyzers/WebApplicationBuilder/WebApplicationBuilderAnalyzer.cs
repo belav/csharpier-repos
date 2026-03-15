@@ -395,7 +395,8 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
                         var methodName = operation
                             .Syntax.DescendantNodes()
                             .OfType<SimpleNameSyntax>()
-                            .Where(node => node is IdentifierNameSyntax || node is GenericNameSyntax
+                            .Where(node =>
+                                node is IdentifierNameSyntax || node is GenericNameSyntax
                             )
                             .Where(node =>
                                 string.Equals(

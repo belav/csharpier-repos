@@ -721,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return CreateResult(type);
                 }
 
-                var constructors = type.InstanceConstructors.Where(m => m.Parameters.Length > index
+                var constructors = type.InstanceConstructors.Where(m =>
+                    m.Parameters.Length > index
                 );
                 return InferTypeInArgument(
                     index,
@@ -989,7 +990,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var typeArguments = method
-                    .ConstructedFrom.TypeParameters.Select(tp => bestMap.GetValueOrDefault(tp) ?? tp
+                    .ConstructedFrom.TypeParameters.Select(tp =>
+                        bestMap.GetValueOrDefault(tp) ?? tp
                     )
                     .ToArray();
                 return method.ConstructedFrom.Construct(typeArguments);
@@ -1463,7 +1465,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // https://github.com/dotnet/roslyn/issues/14492
                     if (binop is not AssignmentExpressionSyntax)
                     {
-                        otherSideTypes = otherSideTypes.Where(t => !t.InferredType.IsDelegateType()
+                        otherSideTypes = otherSideTypes.Where(t =>
+                            !t.InferredType.IsDelegateType()
                         );
                     }
 

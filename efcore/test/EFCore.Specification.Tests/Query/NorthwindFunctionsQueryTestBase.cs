@@ -1354,7 +1354,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 ss.Set<OrderDetail>()
                     .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Min(od.OrderID, Math.Min(od.ProductID, 99999)) == od.ProductID
+                    .Where(od =>
+                        Math.Min(od.OrderID, Math.Min(od.ProductID, 99999)) == od.ProductID
                     )
         );
 

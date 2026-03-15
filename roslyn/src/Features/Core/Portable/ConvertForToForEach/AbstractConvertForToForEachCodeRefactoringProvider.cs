@@ -689,7 +689,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             {
                 var interfaces = collectionType.GetAllInterfacesIncludingThis();
                 indexer = interfaces
-                    .SelectMany(i => i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer)
+                    .SelectMany(i =>
+                        i.GetMembers().OfType<IPropertySymbol>().Where(IsViableIndexer)
                     )
                     .FirstOrDefault();
 

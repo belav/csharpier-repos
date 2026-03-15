@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result.Options.FirstOrDefault(o => o.Id == AddNullChecksId
+                var addNullChecksOption = result.Options.FirstOrDefault(o =>
+                    o.Id == AddNullChecksId
                 );
                 if (addNullChecksOption != null)
                 {

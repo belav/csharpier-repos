@@ -791,7 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (node)
                     {
                         case BoundWhenDecisionDagNode n:
-                            return n.Bindings.Any(static b => b.TempContainingValue.IsOriginalInput
+                            return n.Bindings.Any(static b =>
+                                b.TempContainingValue.IsOriginalInput
                             );
                         case BoundTestDecisionDagNode t:
                             return t.Test.Input.IsOriginalInput;

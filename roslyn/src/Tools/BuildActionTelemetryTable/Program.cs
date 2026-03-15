@@ -1658,7 +1658,8 @@ namespace BuildActionTelemetryTable
             var types = assemblies.SelectMany(assembly =>
                 assembly
                     .GetTypes()
-                    .Where(type => !type.GetTypeInfo().IsInterface && !type.GetTypeInfo().IsAbstract
+                    .Where(type =>
+                        !type.GetTypeInfo().IsInterface && !type.GetTypeInfo().IsAbstract
                     )
             );
 

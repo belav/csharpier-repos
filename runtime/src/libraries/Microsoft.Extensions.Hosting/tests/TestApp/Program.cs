@@ -23,7 +23,8 @@ namespace ServerComparison.TestSites
                     (_, factory) =>
                     {
                         factory.AddConsole();
-                        factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning
+                        factory.AddFilter<ConsoleLoggerProvider>(level =>
+                            level >= LogLevel.Warning
                         );
                     }
                 );

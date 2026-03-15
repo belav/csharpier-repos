@@ -1102,7 +1102,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
             async,
             ss =>
                 ss.Set<NullSemanticsEntity1>()
-                    .Where(e => (e.NullableStringA ?? e.NullableStringB) == (e.StringA ?? e.StringB)
+                    .Where(e =>
+                        (e.NullableStringA ?? e.NullableStringB) == (e.StringA ?? e.StringB)
                     )
                     .Select(e => e.Id)
         );
@@ -3024,7 +3025,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
             async,
             ss =>
                 ss.Set<NullSemanticsEntity1>()
-                    .Where(e => e.NullableIntA != 1 && e.NullableIntA != null && e.NullableIntA != 2
+                    .Where(e =>
+                        e.NullableIntA != 1 && e.NullableIntA != null && e.NullableIntA != 2
                     )
         );
 

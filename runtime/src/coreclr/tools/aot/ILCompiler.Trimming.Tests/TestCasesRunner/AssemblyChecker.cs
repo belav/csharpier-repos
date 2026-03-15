@@ -1921,7 +1921,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             );
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType.Properties.FirstOrDefault(m => m.Name == memberName
+                var linkedProperty = linkedType.Properties.FirstOrDefault(m =>
+                    m.Name == memberName
                 );
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -2252,7 +2253,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             );
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType.Properties.FirstOrDefault(m => m.Name == memberName
+                var linkedProperty = linkedType.Properties.FirstOrDefault(m =>
+                    m.Name == memberName
                 );
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -2288,11 +2290,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
             out MethodDefinition? linkedMethod
         )
         {
-            originalMethod = originalType.Methods.FirstOrDefault(m => m.GetSignature() == memberName
+            originalMethod = originalType.Methods.FirstOrDefault(m =>
+                m.GetSignature() == memberName
             );
             if (originalMethod != null)
             {
-                linkedMethod = linkedType.Methods.FirstOrDefault(m => m.GetSignature() == memberName
+                linkedMethod = linkedType.Methods.FirstOrDefault(m =>
+                    m.GetSignature() == memberName
                 );
                 if (linkedMethod == null)
                     Assert.Fail(

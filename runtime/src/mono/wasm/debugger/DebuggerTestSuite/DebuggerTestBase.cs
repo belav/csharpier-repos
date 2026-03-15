@@ -1216,7 +1216,8 @@ namespace DebuggerTests
                 var exp_name = kvp.Key;
                 var exp_val = kvp.Value;
 
-                var actual_obj = actual.FirstOrDefault(jt => jt["name"]?.Value<string>() == exp_name
+                var actual_obj = actual.FirstOrDefault(jt =>
+                    jt["name"]?.Value<string>() == exp_name
                 );
                 if (actual_obj == null)
                 {

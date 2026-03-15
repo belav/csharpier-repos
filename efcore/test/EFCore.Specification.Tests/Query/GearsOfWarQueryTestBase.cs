@@ -1582,7 +1582,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .OrderBy(g => g.Nickname)
-                    .Where(g => !g.Weapons.Distinct().OrderBy(w => w.Id).LastOrDefault().IsAutomatic
+                    .Where(g =>
+                        !g.Weapons.Distinct().OrderBy(w => w.Id).LastOrDefault().IsAutomatic
                     ),
             assertOrder: true
         );
@@ -8895,7 +8896,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<LocustLeader>()
-                    .Where(ll => ll is LocustCommander && (ll as LocustCommander).HighCommandId != 0
+                    .Where(ll =>
+                        ll is LocustCommander && (ll as LocustCommander).HighCommandId != 0
                     )
         );
     }
@@ -10654,7 +10656,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<Gear>()
-                    .Where(x => weapons.Contains(x.Weapons.OrderBy(w => w.Id).FirstOrDefault().Name)
+                    .Where(x =>
+                        weapons.Contains(x.Weapons.OrderBy(w => w.Id).FirstOrDefault().Name)
                     )
         );
     }

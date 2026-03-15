@@ -45,7 +45,8 @@ public class Startup
 
         services
             .AddHttpClient("another")
-            .AddHeaderPropagation(options => options.Headers.Add("X-BetaFeatures", "X-Experiments")
+            .AddHeaderPropagation(options =>
+                options.Headers.Add("X-BetaFeatures", "X-Experiments")
             );
     }
 

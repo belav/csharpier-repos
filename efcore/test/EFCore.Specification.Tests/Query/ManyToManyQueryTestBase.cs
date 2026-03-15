@@ -166,7 +166,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             async,
             ss =>
                 ss.Set<EntityOne>()
-                    .Select(e => e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault()
+                    .Select(e =>
+                        e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault()
                     )
         );
 

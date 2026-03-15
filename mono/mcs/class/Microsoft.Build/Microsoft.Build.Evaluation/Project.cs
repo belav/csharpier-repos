@@ -487,7 +487,8 @@ namespace Microsoft.Build.Evaluation
         public ICollection<ProjectItem> GetItemsIgnoringCondition(string itemType)
         {
             return new CollectionFromEnumerable<ProjectItem>(
-                raw_items.Where(p => p.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
+                raw_items.Where(p =>
+                    p.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
                 )
             );
         }

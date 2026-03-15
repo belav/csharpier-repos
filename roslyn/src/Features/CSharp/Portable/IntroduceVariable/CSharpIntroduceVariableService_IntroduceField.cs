@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             }
             else
             {
-                var firstFieldIndex = oldMembers.IndexOf(member => member is FieldDeclarationSyntax
+                var firstFieldIndex = oldMembers.IndexOf(member =>
+                    member is FieldDeclarationSyntax
                 );
                 if (firstFieldIndex >= 0)
                 {

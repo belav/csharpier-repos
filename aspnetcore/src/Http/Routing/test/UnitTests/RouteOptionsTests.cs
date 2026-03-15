@@ -17,7 +17,8 @@ public class RouteOptionsTests
         services.AddOptions();
 
         // Act
-        services.AddRouting(options => options.ConstraintMap.Add("foo", typeof(TestRouteConstraint))
+        services.AddRouting(options =>
+            options.ConstraintMap.Add("foo", typeof(TestRouteConstraint))
         );
         var serviceProvider = services.BuildServiceProvider();
 

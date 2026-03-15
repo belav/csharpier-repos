@@ -1083,7 +1083,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
                         );
                         Assert.True(
-                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged
+                            cascadeRemovedC.All(e =>
+                                context.Entry(e).State == EntityState.Unchanged
                             )
                         );
                     }

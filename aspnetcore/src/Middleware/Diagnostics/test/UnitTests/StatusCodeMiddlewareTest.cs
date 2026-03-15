@@ -442,7 +442,8 @@ public class StatusCodeMiddlewareTest
                             );
                         });
 
-                        app.Run(_ => throw new InvalidOperationException("Invalid input provided.")
+                        app.Run(_ =>
+                            throw new InvalidOperationException("Invalid input provided.")
                         );
                     });
             })
@@ -489,7 +490,8 @@ public class StatusCodeMiddlewareTest
                             );
                         });
 
-                        app.Run(_ => throw new InvalidOperationException("Invalid input provided.")
+                        app.Run(_ =>
+                            throw new InvalidOperationException("Invalid input provided.")
                         );
                     });
             })

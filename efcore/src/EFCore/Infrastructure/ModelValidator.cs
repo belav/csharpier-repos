@@ -339,7 +339,8 @@ public class ModelValidator : IModelValidator
                             .GetDerivedTypes()
                             .All(dt =>
                                 dt.GetDeclaredNavigations()
-                                    .FirstOrDefault(n => n.Name == clrProperty.GetSimpleMemberName()
+                                    .FirstOrDefault(n =>
+                                        n.Name == clrProperty.GetSimpleMemberName()
                                     ) == null
                             )
                         && (

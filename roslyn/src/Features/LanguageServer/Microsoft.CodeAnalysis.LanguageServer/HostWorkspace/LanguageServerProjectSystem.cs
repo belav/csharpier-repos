@@ -436,7 +436,8 @@ internal sealed class LanguageServerProjectSystem
                 );
             }
 
-            return diagnosticLogItems.Any(logItem => logItem.Kind is WorkspaceDiagnosticKind.Failure
+            return diagnosticLogItems.Any(logItem =>
+                logItem.Kind is WorkspaceDiagnosticKind.Failure
             )
                 ? LSP.MessageType.Error
                 : LSP.MessageType.Warning;

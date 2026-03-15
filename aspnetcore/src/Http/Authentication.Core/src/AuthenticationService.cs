@@ -309,7 +309,8 @@ public class AuthenticationService : IAuthenticationService
         return string.Join(
             ", ",
             (await Schemes.GetAllSchemesAsync())
-                .Where(sch => typeof(IAuthenticationSignInHandler).IsAssignableFrom(sch.HandlerType)
+                .Where(sch =>
+                    typeof(IAuthenticationSignInHandler).IsAssignableFrom(sch.HandlerType)
                 )
                 .Select(sch => sch.Name)
         );

@@ -57,7 +57,8 @@ namespace System.CommandLine
                 throw new ArgumentNullException(nameof(completions));
             }
 
-            completionSources.Add(context => completions.Select(value => new CompletionItem(value))
+            completionSources.Add(context =>
+                completions.Select(value => new CompletionItem(value))
             );
         }
     }

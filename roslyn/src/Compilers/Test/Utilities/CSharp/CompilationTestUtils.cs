@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal(descriptions.Length, symbols.Length);
             AssertEx.SetEqual(
-                symbols.Select(s => s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                symbols.Select(s =>
+                    s.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
                 ),
                 descriptions
             );

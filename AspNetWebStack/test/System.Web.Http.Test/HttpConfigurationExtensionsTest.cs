@@ -296,7 +296,8 @@ namespace System.Net.Http
                 new Collection<RouteAttribute>() { new RouteAttribute("PerController") }
             );
             ActionSelectorConfigurationAttribute
-                .PerControllerActionSelectorMock.Setup(a => a.GetActionMapping(controllerDescriptor)
+                .PerControllerActionSelectorMock.Setup(a =>
+                    a.GetActionMapping(controllerDescriptor)
                 )
                 .Returns(
                     new HttpActionDescriptor[] { perControllerAction }.ToLookup(ad => ad.ActionName)

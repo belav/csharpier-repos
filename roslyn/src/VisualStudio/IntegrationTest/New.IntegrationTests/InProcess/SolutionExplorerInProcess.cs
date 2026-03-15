@@ -932,7 +932,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var fullFilePath = Path.Combine(projectPath, relativeFilePath);
 
             var projectItems = project.ProjectItems.Cast<EnvDTE.ProjectItem>();
-            var document = projectItems.FirstOrDefault(d => d.get_FileNames(1).Equals(fullFilePath)
+            var document = projectItems.FirstOrDefault(d =>
+                d.get_FileNames(1).Equals(fullFilePath)
             );
 
             if (document == null)

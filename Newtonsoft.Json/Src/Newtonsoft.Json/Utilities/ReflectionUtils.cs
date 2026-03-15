@@ -783,7 +783,8 @@ namespace Newtonsoft.Json.Utilities
                             // two members with the same name were declared on a type
                             // this can be done via IL emit, e.g. Moq
                             if (
-                                resolvedMembers.Any(m => m.DeclaringType == memberInfo.DeclaringType
+                                resolvedMembers.Any(m =>
+                                    m.DeclaringType == memberInfo.DeclaringType
                                 )
                             )
                             {

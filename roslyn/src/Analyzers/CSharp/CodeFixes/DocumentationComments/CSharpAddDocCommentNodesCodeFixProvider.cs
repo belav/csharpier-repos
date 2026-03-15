@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                     .OfType<XmlElementSyntax>();
 
                 if (
-                    descendentXmlElements.Any(element => GetXmlElementLocalName(element) == NodeName
+                    descendentXmlElements.Any(element =>
+                        GetXmlElementLocalName(element) == NodeName
                     )
                 )
                     return nodeStructure;

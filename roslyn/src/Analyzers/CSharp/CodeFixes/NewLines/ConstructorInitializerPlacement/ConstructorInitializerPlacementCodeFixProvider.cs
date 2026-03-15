@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             {
                 var allColonTrivia = colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia);
 
-                return previousToken.TrailingTrivia.All(t => t.Kind() == SyntaxKind.WhitespaceTrivia
+                return previousToken.TrailingTrivia.All(t =>
+                    t.Kind() == SyntaxKind.WhitespaceTrivia
                 )
                     ? previousToken.WithTrailingTrivia(allColonTrivia)
                     : previousToken.WithAppendedTrailingTrivia(allColonTrivia);

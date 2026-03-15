@@ -99,7 +99,8 @@ public static class SqlServerServiceCollectionExtensions
         new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<LoggingDefinitions, SqlServerLoggingDefinitions>()
             .TryAdd<IDatabaseProvider, DatabaseProvider<SqlServerOptionsExtension>>()
-            .TryAdd<IValueGeneratorCache>(p => p.GetRequiredService<ISqlServerValueGeneratorCache>()
+            .TryAdd<IValueGeneratorCache>(p =>
+                p.GetRequiredService<ISqlServerValueGeneratorCache>()
             )
             .TryAdd<IRelationalTypeMappingSource, SqlServerTypeMappingSource>()
             .TryAdd<ISqlGenerationHelper, SqlServerSqlGenerationHelper>()

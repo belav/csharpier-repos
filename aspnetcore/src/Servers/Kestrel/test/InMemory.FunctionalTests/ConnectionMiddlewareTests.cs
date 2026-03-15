@@ -73,7 +73,8 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
                 listenOptions =>
                 {
                     listenOptions.UseConnectionLogging();
-                    listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync
+                    listenOptions.Use(next =>
+                        new AsyncConnectionMiddleware(next).OnConnectionAsync
                     );
                     listenOptions.UseConnectionLogging();
                 }

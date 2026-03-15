@@ -10,7 +10,8 @@ public class BenchmarkDriverStartup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddCors(c =>
-            c.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+            c.AddDefaultPolicy(builder =>
+                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
             )
         );
     }

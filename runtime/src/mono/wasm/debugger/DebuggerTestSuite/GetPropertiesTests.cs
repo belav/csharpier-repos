@@ -1202,7 +1202,8 @@ namespace DebuggerTests
                     );
 
                     // indexer properties shouldn't show up here
-                    var item = this_props.FirstOrDefault(jt => jt["name"]?.Value<string>() == "Item"
+                    var item = this_props.FirstOrDefault(jt =>
+                        jt["name"]?.Value<string>() == "Item"
                     );
                     Assert.Null(item);
                 }

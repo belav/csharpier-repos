@@ -713,7 +713,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 );
 
             if (caProvider is TypeDefinition type)
-                return type.CustomAttributes.Where(attr => attr!.AttributeType.Name == attributeName
+                return type.CustomAttributes.Where(attr =>
+                    attr!.AttributeType.Name == attributeName
                 );
 
             return Enumerable.Empty<CustomAttribute>();

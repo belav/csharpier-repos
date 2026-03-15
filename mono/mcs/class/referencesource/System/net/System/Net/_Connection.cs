@@ -3666,7 +3666,8 @@ namespace System.Net
 
                     if (m_WaitList.Count > 0)
                     {
-                        foundItem = m_WaitList.Find(o => object.ReferenceEquals(o.Request, request)
+                        foundItem = m_WaitList.Find(o =>
+                            object.ReferenceEquals(o.Request, request)
                         );
                     }
 

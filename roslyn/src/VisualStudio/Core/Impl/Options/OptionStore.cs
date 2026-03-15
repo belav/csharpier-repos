@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             object? oldValue,
             object? newValue
         )> GetChangedOptions() =>
-            _updatedValues.SelectAsArray(entry => (entry.Key, _globalValues[entry.Key], entry.Value)
+            _updatedValues.SelectAsArray(entry =>
+                (entry.Key, _globalValues[entry.Key], entry.Value)
             );
 
         bool IOptionsReader.TryGetOption<T>(OptionKey2 optionKey, out T value)

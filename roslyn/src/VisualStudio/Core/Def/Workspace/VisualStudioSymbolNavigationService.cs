@@ -73,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // Prefer visible source locations if possible.
             var sourceLocations = symbol.Locations.Where(loc => loc.IsInSource);
-            var visibleSourceLocations = sourceLocations.Where(loc => loc.IsVisibleSourceLocation()
+            var visibleSourceLocations = sourceLocations.Where(loc =>
+                loc.IsVisibleSourceLocation()
             );
             var sourceLocation =
                 visibleSourceLocations.FirstOrDefault() ?? sourceLocations.FirstOrDefault();

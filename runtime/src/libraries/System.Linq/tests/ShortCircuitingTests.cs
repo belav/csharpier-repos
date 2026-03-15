@@ -152,7 +152,8 @@ namespace System.Linq.Tests
         public void MinNullableSingleDoesntCheckAllLeadingWithNaN()
         {
             var tracker = new TrackingEnumerable(10);
-            IEnumerable<float?> source = tracker.Select(i => (float?)(i == 1 ? float.NaN : (float)i)
+            IEnumerable<float?> source = tracker.Select(i =>
+                (float?)(i == 1 ? float.NaN : (float)i)
             );
 
             Assert.True(float.IsNaN(source.Min().GetValueOrDefault()));
@@ -195,7 +196,8 @@ namespace System.Linq.Tests
         public void MinNullableSingleSelectorDoesntCheckAllLeadingWithNaN()
         {
             var tracker = new TrackingEnumerable(10);
-            IEnumerable<float?> source = tracker.Select(i => (float?)(i == 1 ? float.NaN : (float)i)
+            IEnumerable<float?> source = tracker.Select(i =>
+                (float?)(i == 1 ? float.NaN : (float)i)
             );
 
             Assert.True(float.IsNaN(source.Min(x => x + 1f).GetValueOrDefault()));

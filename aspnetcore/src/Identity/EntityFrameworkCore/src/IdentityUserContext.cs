@@ -199,7 +199,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
                 converter = new PersonalDataConverter(this.GetService<IPersonalDataProtector>());
                 var personalDataProps = typeof(TUser)
                     .GetProperties()
-                    .Where(prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
                     );
                 foreach (var p in personalDataProps)
                 {
@@ -254,7 +255,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
             {
                 var tokenProps = typeof(TUserToken)
                     .GetProperties()
-                    .Where(prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
                     );
                 foreach (var p in tokenProps)
                 {
@@ -301,7 +303,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
                 converter = new PersonalDataConverter(this.GetService<IPersonalDataProtector>());
                 var personalDataProps = typeof(TUser)
                     .GetProperties()
-                    .Where(prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
                     );
                 foreach (var p in personalDataProps)
                 {
@@ -356,7 +359,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
             {
                 var tokenProps = typeof(TUserToken)
                     .GetProperties()
-                    .Where(prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
+                    .Where(prop =>
+                        Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute))
                     );
                 foreach (var p in tokenProps)
                 {

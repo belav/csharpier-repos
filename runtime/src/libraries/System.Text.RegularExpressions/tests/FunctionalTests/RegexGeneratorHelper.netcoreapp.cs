@@ -152,7 +152,8 @@ namespace System.Text.RegularExpressions.Tests
             comp = comp.AddSyntaxTrees(generatorResults.GeneratedTrees.ToArray());
             EmitResult results = comp.Emit(Stream.Null, cancellationToken: cancellationToken);
             ImmutableArray<Diagnostic> generatorDiagnostics =
-                generatorResults.Diagnostics.RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden
+                generatorResults.Diagnostics.RemoveAll(d =>
+                    d.Severity <= DiagnosticSeverity.Hidden
                 );
             ImmutableArray<Diagnostic> resultsDiagnostics = results.Diagnostics.RemoveAll(d =>
                 d.Severity <= DiagnosticSeverity.Hidden
@@ -343,7 +344,8 @@ namespace System.Text.RegularExpressions.Tests
                 .RunGenerators(comp!, cancellationToken)
                 .GetRunResult();
             ImmutableArray<Diagnostic> generatorDiagnostics =
-                generatorResults.Diagnostics.RemoveAll(d => d.Severity <= DiagnosticSeverity.Hidden
+                generatorResults.Diagnostics.RemoveAll(d =>
+                    d.Severity <= DiagnosticSeverity.Hidden
                 );
             if (generatorDiagnostics.Length != 0)
             {

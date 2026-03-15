@@ -350,9 +350,11 @@ public class OutputCachePolicyBuilderTests
         // Each predicate should override the duration from the first base policy
         var options = new OutputCacheOptions();
         options.AddBasePolicy(build => build.Expire(TimeSpan.FromSeconds(1)));
-        options.AddBasePolicy(build => build.With(c => source == 1).Expire(TimeSpan.FromSeconds(2))
+        options.AddBasePolicy(build =>
+            build.With(c => source == 1).Expire(TimeSpan.FromSeconds(2))
         );
-        options.AddBasePolicy(build => build.With(c => source == 2).Expire(TimeSpan.FromSeconds(3))
+        options.AddBasePolicy(build =>
+            build.With(c => source == 2).Expire(TimeSpan.FromSeconds(3))
         );
 
         var context = TestUtils.CreateUninitializedContext(options: options);

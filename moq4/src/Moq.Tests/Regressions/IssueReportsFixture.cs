@@ -4116,7 +4116,8 @@ namespace Moq.Tests.Regressions
 
                 DoWork(hwMock.Object, new byte[] { 1, 2, 3 });
 
-                hwMock.Verify(m => m.Transmit((IntPtr)1, new byte[] { 1, 2, 3 }, It.IsAny<byte[]>())
+                hwMock.Verify(m =>
+                    m.Transmit((IntPtr)1, new byte[] { 1, 2, 3 }, It.IsAny<byte[]>())
                 );
             }
 
@@ -4658,7 +4659,8 @@ namespace Moq.Tests.Regressions
             public void Test()
             {
                 var target = new Mock<IFoo>();
-                target.Setup(t => t.Submit(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())
+                target.Setup(t =>
+                    t.Submit(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())
                 );
 
                 var e = Assert.Throws<MockException>(() => target.VerifyAll());

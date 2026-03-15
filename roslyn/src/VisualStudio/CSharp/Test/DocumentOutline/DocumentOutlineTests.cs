@@ -140,7 +140,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                         static x => x.Data.Name,
                         StringComparer.OrdinalIgnoreCase
                     ),
-                    SortOption.Location => sortedSymbols.OrderBy(static x => x.Data.RangeSpan.Start
+                    SortOption.Location => sortedSymbols.OrderBy(static x =>
+                        x.Data.RangeSpan.Start
                     ),
                     SortOption.Type => sortedSymbols
                         .OrderBy(static x => x.Data.SymbolKind)

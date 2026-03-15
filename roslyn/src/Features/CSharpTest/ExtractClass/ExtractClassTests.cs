@@ -2751,7 +2751,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                     if (selectedMembers.IsEmpty)
                     {
                         Assert.True(_isClassDeclarationSelection);
-                        selections = availableMembers.Select(member => (member, makeAbstract: false)
+                        selections = availableMembers.Select(member =>
+                            (member, makeAbstract: false)
                         );
                     }
                     else
@@ -2764,7 +2765,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 {
                     selections = _dialogSelection.Select(selection =>
                         (
-                            member: availableMembers.Single(symbol => symbol.Name == selection.name
+                            member: availableMembers.Single(symbol =>
+                                symbol.Name == selection.name
                             ),
                             selection.makeAbstract
                         )

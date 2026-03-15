@@ -252,7 +252,8 @@ namespace System.Reflection.Tests
             }
             Console.WriteLine(si + "Named Arguments.........:");
             foreach (
-                CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(can => can.MemberName
+                CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(can =>
+                    can.MemberName
                 )
             )
             {

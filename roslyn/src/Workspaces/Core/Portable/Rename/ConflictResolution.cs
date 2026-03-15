@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Rename
 
             if (_documentToComplexifiedSpansMap.TryGetValue(documentId, out var complexifiedSpans))
             {
-                var first = complexifiedSpans.FirstOrNull(c => c.OriginalSpan.Contains(originalSpan)
+                var first = complexifiedSpans.FirstOrNull(c =>
+                    c.OriginalSpan.Contains(originalSpan)
                 );
                 if (first.HasValue)
                     return first.Value.NewSpan;

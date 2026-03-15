@@ -1814,7 +1814,8 @@ class B
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("B")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method =>
+                    method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
             Assert.Equal(expectedOriginalDefinitionSymbol, actualSymbol.OriginalDefinition);
@@ -2000,7 +2001,8 @@ class U { }
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method =>
+                    method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 
@@ -2034,7 +2036,8 @@ class A<T>
                 .GlobalNamespace.GetMember<NamedTypeSymbol>("A")
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
-                .Single(method => method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
+                .Single(method =>
+                    method.Parameters.Single().Type.TypeKind == TypeKind.TypeParameter
                 );
             var actualSymbol = GetReferencedSymbol(crefSyntax, compilation);
 

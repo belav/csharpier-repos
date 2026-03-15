@@ -16,7 +16,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext32310>(seed: Seed32310);
         await using var context = contextFactory.CreateContext();
 
-        var query = context.Pubs.Where(u => u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1))
+        var query = context.Pubs.Where(u =>
+            u.Visits.DaysVisited.Contains(new DateOnly(2023, 1, 1))
         );
 
         var result = async ? await query.FirstOrDefaultAsync()! : query.FirstOrDefault()!;

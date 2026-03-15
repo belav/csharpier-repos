@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
         public static bool PartOfConstantInitializerExpression(this SyntaxNode node)
         {
-            return node.PartOfConstantInitializerExpression<FieldDeclarationSyntax>(n => n.Modifiers
+            return node.PartOfConstantInitializerExpression<FieldDeclarationSyntax>(n =>
+                    n.Modifiers
                 )
                 || node.PartOfConstantInitializerExpression<LocalDeclarationStatementSyntax>(n =>
                     n.Modifiers

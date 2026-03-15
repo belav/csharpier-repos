@@ -1609,7 +1609,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture> : IClassFixture<T
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.EntityOnes.Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
+        var queryable = context.EntityOnes.Include(e =>
+            e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
         );
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)

@@ -81,7 +81,8 @@ namespace System.Text.Encodings.Web.Tests
                 0x50,
             }; // UTF-8 subsequences of varying length
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
             );
 
             // Act & assert
@@ -144,7 +145,8 @@ namespace System.Text.Encodings.Web.Tests
                 new { utf8Bytes = new byte[] { 0xF0, 0x90, 0x82, 0x83 }, output = "[10083]" }, // U+10083 LINEAR B IDEOGRAM B105 EQUID (encoded since not on allow list)
             };
 
-            var encoder = new ConfigurableScalarTextEncoder(scalarValue => (scalarValue % 2) == 0 /* allow only even-valued scalars to be represented unescaped */
+            var encoder = new ConfigurableScalarTextEncoder(scalarValue =>
+                (scalarValue % 2) == 0 /* allow only even-valued scalars to be represented unescaped */
             );
 
             // Act & assert
@@ -307,7 +309,8 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => false /* disallow everything */
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                false /* disallow everything */
             );
 
             // Act & assert
@@ -344,7 +347,8 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => false /* disallow everything */
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                false /* disallow everything */
             );
 
             // Act
@@ -364,7 +368,8 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
 
             byte[] inputBytes = "\U00000040\U00000400\U00004000\U00040000"u8.ToArray(); // code units of different lengths
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
             );
 
             // Act
@@ -382,7 +387,8 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
 
             byte[] inputBytes = "\U00000040\U00000400\U00004000\U00040000"u8.ToArray(); // code units of different lengths
-            var encoder = new ConfigurableScalarTextEncoder(codePoint => codePoint != 0x4000 /* disallow U+4000, allow all else */
+            var encoder = new ConfigurableScalarTextEncoder(codePoint =>
+                codePoint != 0x4000 /* disallow U+4000, allow all else */
             );
 
             // Act
@@ -407,7 +413,8 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
             );
 
             // Act

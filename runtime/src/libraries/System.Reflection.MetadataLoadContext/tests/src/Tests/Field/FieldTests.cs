@@ -149,7 +149,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitBool1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitBool1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is bool);
@@ -157,7 +158,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitBool2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitBool2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is bool);
@@ -165,7 +167,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
@@ -173,7 +176,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
@@ -181,7 +185,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar3)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar3)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
@@ -189,7 +194,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
@@ -197,7 +203,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
@@ -205,7 +212,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte3)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte3)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
@@ -294,7 +302,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
@@ -302,7 +311,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
@@ -310,7 +320,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt3)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt3)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
@@ -318,7 +329,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
@@ -326,7 +338,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
@@ -334,7 +347,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt3)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt3)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
@@ -342,7 +356,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong1)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong1)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);
@@ -350,7 +365,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong2)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong2)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);
@@ -358,7 +374,8 @@ namespace System.Reflection.Tests
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong3)
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong3)
                 );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);

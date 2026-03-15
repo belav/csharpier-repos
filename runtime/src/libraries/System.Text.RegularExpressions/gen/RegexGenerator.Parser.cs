@@ -62,7 +62,8 @@ namespace System.Text.RegularExpressions.Generator
             AttributeData generatedRegexAttr = boundAttributes[0];
 
             if (
-                generatedRegexAttr.ConstructorArguments.Any(ca => ca.Kind == TypedConstantKind.Error
+                generatedRegexAttr.ConstructorArguments.Any(ca =>
+                    ca.Kind == TypedConstantKind.Error
                 )
             )
             {

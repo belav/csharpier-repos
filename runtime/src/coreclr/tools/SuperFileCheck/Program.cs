@@ -310,7 +310,8 @@ namespace SuperFileCheck
                     // used to find 'trivia1'.
                     return !x
                         .Token.Parent.Ancestors()
-                        .Any(p => p.IsKind(SyntaxKind.MethodDeclaration) && p.Span.Contains(x.Span)
+                        .Any(p =>
+                            p.IsKind(SyntaxKind.MethodDeclaration) && p.Span.Contains(x.Span)
                         );
                 })
                 .Where(x => ContainsCheckPrefixes(x.ToString(), checkPrefixes))

@@ -126,7 +126,8 @@ namespace ILCompiler.PEWriter
                     unresolvedCallCount,
                     unresolvedCallCount * percentFactor
                 );
-                int nearPairCount = _callInfo.Sum(info => info.CallType == CrossPageCall.No ? 1 : 0
+                int nearPairCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.No ? 1 : 0
                 );
                 int nearCallCount = _callInfo.Sum(info =>
                     info.CallType == CrossPageCall.No ? info.CallCount : 0
@@ -137,7 +138,8 @@ namespace ILCompiler.PEWriter
                     nearCallCount,
                     nearCallCount * percentFactor
                 );
-                int farPairCount = _callInfo.Sum(info => info.CallType == CrossPageCall.Yes ? 1 : 0
+                int farPairCount = _callInfo.Sum(info =>
+                    info.CallType == CrossPageCall.Yes ? 1 : 0
                 );
                 int farCallCount = _callInfo.Sum(info =>
                     info.CallType == CrossPageCall.Yes ? info.CallCount : 0

@@ -300,7 +300,8 @@ namespace System.Data.Mapping
             IEnumerable<StorageAssociationSetMapping> associationSetMappings =
                 m_associationSetMappings
                     .Values.Cast<StorageAssociationSetMapping>()
-                    .Where(w => ((w.StoreEntitySet != null) && (w.StoreEntitySet == storeEntitySet))
+                    .Where(w =>
+                        ((w.StoreEntitySet != null) && (w.StoreEntitySet == storeEntitySet))
                     );
             //From this again filter the ones that have the specified EntitySet on atleast one end
             associationSetMappings = associationSetMappings.Where(associationSetMap =>

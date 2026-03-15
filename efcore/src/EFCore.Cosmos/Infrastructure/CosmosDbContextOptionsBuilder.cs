@@ -125,7 +125,8 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
     /// </remarks>
     /// <param name="connectionMode">Azure Cosmos DB connection mode.</param>
     public virtual CosmosDbContextOptionsBuilder ConnectionMode(ConnectionMode connectionMode) =>
-        WithOption(e => e.WithConnectionMode(Check.NotNull(connectionMode, nameof(connectionMode)))
+        WithOption(e =>
+            e.WithConnectionMode(Check.NotNull(connectionMode, nameof(connectionMode)))
         );
 
     /// <summary>

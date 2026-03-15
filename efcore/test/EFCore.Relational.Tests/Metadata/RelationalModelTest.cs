@@ -4476,7 +4476,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal(expected.IsShared, actual.IsShared);
 
             foreach (
-                IEntityType expectedEntityType in expected.EntityTypeMappings.Select(m => m.TypeBase
+                IEntityType expectedEntityType in expected.EntityTypeMappings.Select(m =>
+                    m.TypeBase
                 )
             )
             {

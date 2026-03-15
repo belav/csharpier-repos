@@ -280,7 +280,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // service.  No point examining them or adding progress items for them.
             foreach (var group in GetOrderedProjectsToProcessWorker())
             {
-                var groupCopy = group.WhereAsArray(p => _host.GetNavigateToSearchService(p) != null
+                var groupCopy = group.WhereAsArray(p =>
+                    _host.GetNavigateToSearchService(p) != null
                 );
                 if (!groupCopy.IsEmpty)
                     result.Add(groupCopy);
