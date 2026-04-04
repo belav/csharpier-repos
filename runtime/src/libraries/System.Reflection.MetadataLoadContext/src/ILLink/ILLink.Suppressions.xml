@@ -246,7 +246,8 @@
       <argument>IL2075</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Reflection.TypeLoading.Ecma.EcmaCustomAttributeData.ComputeConstructor</property>
+        >M:System.Reflection.TypeLoading.Ecma.EcmaCustomAttributeData.ComputeConstructor</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>

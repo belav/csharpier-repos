@@ -23,8 +23,7 @@
       >
         <TextBlock Margin="0,0,10,0">
           <Run Text="{Binding Name, Mode=OneWay}" /> (<Run Text="{Binding Type, Mode=OneWay}" />)
-        </TextBlock
-        >
+        </TextBlock>
       </HierarchicalDataTemplate>
 
       <!--<HierarchicalDataTemplate DataType="{x:Type as:CollectionChangedActionItem}">

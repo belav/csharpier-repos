@@ -262,10 +262,8 @@ class RandomTest {
       <Docs>
         <remarks>
           <para>
-            <block subset="none" type="behaviors"
-              >As described
-      above.</block
-            >
+            <block subset="none" type="behaviors">As described
+      above.</block>
           </para>
           <para>
             <block subset="none" type="overrides"

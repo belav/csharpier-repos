@@ -75,8 +75,8 @@
       <para
         >If you load and retrieve resources by using the wrt <see
           cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
-          >Windows.ApplicationModel.Resources.ResourceLoader</see> class or the types in the <see
-          cref="http://go.microsoft.com/fwlink/p/?LinkId=238194"
+          >Windows.ApplicationModel.Resources.ResourceLoader</see
+        > class or the types in the <see cref="http://go.microsoft.com/fwlink/p/?LinkId=238194"
           >Windows.ApplicationModel.Resources.Core</see
         > namespace, the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" /> attribute is ignored.</para
       >

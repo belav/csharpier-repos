@@ -4,7 +4,8 @@
     <note
       >[Note: Much of the C# language enables the programmer to specify declarative information about the entities defined in the program. For example, the accessibility of a method in a class is specified by decorating it with the <non_terminal
         where="17.5"
-        >method-modifier</non_terminal>s public, protected, internal, and private. end note]</note
+        >method-modifier</non_terminal
+      >s public, protected, internal, and private. end note]</note
     >
   </paragraph>
   <paragraph

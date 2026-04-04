@@ -57,7 +57,8 @@
         <non_terminal where="9.4.4.5">single-regular-string-literal-character</non_terminal>
       </name> :: <rhs
         >Any character except &quot; (U+0022), \ (U+005C), and <non_terminal where="9.3.2"
-          >new-line-character</non_terminal>
+          >new-line-character</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
@@ -107,7 +108,8 @@
   <paragraph>
     <note
       >[Note: A character that follows a backslash character (\) in a <non_terminal where="9.4.4.5"
-        >regular-string-literal-character</non_terminal> must be one of the following characters: ', &quot;, \, 0, a, b, f, n, r, t, u, U, x, v. Otherwise, a compile-time error occurs. end note]</note
+        >regular-string-literal-character</non_terminal
+      > must be one of the following characters: ', &quot;, \, 0, a, b, f, n, r, t, u, U, x, v. Otherwise, a compile-time error occurs. end note]</note
     >
   </paragraph>
   <paragraph>

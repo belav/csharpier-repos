@@ -124,7 +124,8 @@
   <PropertyGroup>
     <MonoEnvOptions
       Condition="'$(MonoEnvOptions)' == '' and '$(TargetsMobile)' != 'true' and '$(MonoForceInterpreter)' == 'true'"
-      >--interpreter</MonoEnvOptions>
+      >--interpreter</MonoEnvOptions
+    >
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetsMobile)' == 'true'">

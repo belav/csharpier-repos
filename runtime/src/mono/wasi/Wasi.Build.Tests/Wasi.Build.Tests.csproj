@@ -217,7 +217,8 @@
       >
 
       <RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-        >$(RunScriptCommand) -nocolor</RunScriptCommand>
+        >$(RunScriptCommand) -nocolor</RunScriptCommand
+      >
       <RunScriptCommand
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' == 'Windows_NT'"
         >$(RunScriptCommand) -parallel none</RunScriptCommand

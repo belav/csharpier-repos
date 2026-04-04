@@ -2,7 +2,8 @@
 <clause number="17.4.5" title="Variable initializers">
   <paragraph
     >Field declarations may include <non_terminal where="19.6"
-      >variable-initializer</non_terminal>s. For static fields, variable initializers correspond to assignment statements that are executed during class initialization. For instance fields, variable initializers correspond to assignment statements that are executed when an instance of the class is created. </paragraph
+      >variable-initializer</non_terminal
+    >s. For static fields, variable initializers correspond to assignment statements that are executed during class initialization. For instance fields, variable initializers correspond to assignment statements that are executed when an instance of the class is created. </paragraph
   >
   <paragraph>
     <example

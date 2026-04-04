@@ -1314,10 +1314,8 @@ public class UriTest {
             >
           </block>
           <para>
-            <block subset="none" type="default"
-              >As described
-   above.</block
-            >
+            <block subset="none" type="default">As described
+   above.</block>
           </para>
           <para>
             <block subset="none" type="overrides"
@@ -2928,8 +2926,7 @@ public class UriTest {
             </item>
           </list>
           <para>
-            <block subset="none" type="behaviors"
-              > As described above. 
+            <block subset="none" type="behaviors"> As described above. 
    </block>
           </para>
           <para>

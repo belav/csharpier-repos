@@ -134,10 +134,9 @@
     <Image Source="{StaticResource CrashReportImage}" />
 
     <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="10,0,0,0">
-          Unfortunately, <Run Text="{Binding ApplicationName, Mode=OneWay}" /> has crashed.
+      Unfortunately, <Run Text="{Binding ApplicationName, Mode=OneWay}" /> has crashed.
           Please help us improve Stride by sending information about this crash through Github Issues.
-        </TextBlock
-    >
+    </TextBlock>
 
     <StackPanel
       Grid.Row="1"

@@ -15120,10 +15120,8 @@ public abstract class ReflectedTypeTest {
         <remarks>
           <para>This property is read-only.</para>
           <para>
-            <block subset="none" type="behaviors"
-              >As described 
-      above.</block
-            >
+            <block subset="none" type="behaviors">As described 
+      above.</block>
           </para>
         </remarks>
         <summary>

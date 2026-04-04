@@ -271,7 +271,8 @@
     <PropertyGroup>
       <_MultiTargetRoslynComponentTargetPrefix>$(PackageId.Replace('.', '_'))</_MultiTargetRoslynComponentTargetPrefix>
       <DisableSourceGeneratorPropertyName Condition="'$(DisableSourceGeneratorPropertyName)' == ''"
-        >Disable$(PackageId.Replace('.', ''))SourceGenerator</DisableSourceGeneratorPropertyName>
+        >Disable$(PackageId.Replace('.', ''))SourceGenerator</DisableSourceGeneratorPropertyName
+      >
     </PropertyGroup>
 
     <WriteLinesToFile

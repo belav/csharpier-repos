@@ -49,8 +49,8 @@
       <para
         >If you reference the System.IO.Compression.FileSystem assembly in your project, you can access three extension methods (from the <see cref="T:System.IO.Compression.ZipFileExtensions" /> class) for the <see cref="T:System.IO.Compression.ZipArchive" /> class: <see cref="M:System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(System.IO.Compression.ZipArchive,System.String,System.String)" />, <see cref="M:System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)" />, and <see cref="M:System.IO.Compression.ZipFileExtensions.ExtractToDirectory(System.IO.Compression.ZipArchive,System.String)" />. These extension methods enable you to compress and decompress the contents of the entry to a file. The System.IO.Compression.FileSystem assembly is not available for win8_appname_long apps. In win8_appname_long apps, you can compress and decompress files by using the <see cref="T:System.IO.Compression.DeflateStream" /> or <see cref="T:System.IO.Compression.GZipStream" /> class, or you can use the wrt types <see
           cref="http://go.microsoft.com/fwlink/p/?LinkID=246357"
-          >Compressor</see> and <see cref="http://go.microsoft.com/fwlink/p/?LinkID=246358"
-          >Decompressor</see>.</para
+          >Compressor</see
+        > and <see cref="http://go.microsoft.com/fwlink/p/?LinkID=246358">Decompressor</see>.</para
       >
     </remarks>
     <summary>

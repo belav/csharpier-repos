@@ -142,7 +142,8 @@
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:Microsoft.AspNetCore.Mvc.JsonOptions.CreateDefaultTypeResolver</property>
+        >M:Microsoft.AspNetCore.Mvc.JsonOptions.CreateDefaultTypeResolver</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
@@ -213,7 +214,8 @@
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinder.#cctor</property>
+        >M:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinder.#cctor</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>

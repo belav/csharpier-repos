@@ -361,7 +361,8 @@
       </Parameters>
       <Docs>
         <param name="parameterOrdinal"
-          >The index of the parameter to provide a placeholder for</param>
+          >The index of the parameter to provide a placeholder for</param
+        >
         <summary>
             Returns a placeholder character for the specified parameter i.
             </summary>

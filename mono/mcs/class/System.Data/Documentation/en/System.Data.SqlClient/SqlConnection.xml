@@ -1342,7 +1342,8 @@ End Using
           <para
             >The following list contains the valid names for connection pooling values within the <see cref="P:System.Data.SqlClient.SqlConnection.ConnectionString" />. For more information, see <format type="text/html">
               <a href="7e51d44e-7c4e-4040-9332-f0190fe36f07"
-                >Connection Pooling for the .NET Framework Data Provider for SQL Server</a>
+                >Connection Pooling for the .NET Framework Data Provider for SQL Server</a
+              >
             </format>.</para
           >
           <list type="bullet">

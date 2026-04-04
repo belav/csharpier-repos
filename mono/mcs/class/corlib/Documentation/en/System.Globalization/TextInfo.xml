@@ -350,7 +350,8 @@
           <para
             >Certain predefined culture names and identifiers are accepted and used by this and other classes in the <see cref="N:System.Globalization" /> namespace, as well as the Windows API. The detailed culture information is defined in the <see
               cref="../../../../Users/a-bewilk/Documents/~tmp/NLS%20information%20page%20at%20the%20Go%20Global%20Developer%20Center"
-              >NLS information page at the Go Global Developer Center</see>
+              >NLS information page at the Go Global Developer Center</see
+            >
             <see cref=""> (</see>
             <see cref="http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx"
               >http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx</see

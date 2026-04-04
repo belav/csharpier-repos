@@ -31,7 +31,8 @@
             cref="http://go.microsoft.com/fwlink/?LinkId=178101"
             >Windows Software Restriction Policies (SRP)</see
           > or <see cref="http://go.microsoft.com/fwlink/?LinkId=178102"
-            >AppLocker</see> as a replacement for CLR security policy. The information in this topic applies to the .NET Framework version 3.5 and earlier; it does not apply to the net_v40_short and later. For more information about this and other changes, see <format type="text/html">
+            >AppLocker</see
+          > as a replacement for CLR security policy. The information in this topic applies to the .NET Framework version 3.5 and earlier; it does not apply to the net_v40_short and later. For more information about this and other changes, see <format type="text/html">
             <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
               >Security Changes in the .NET Framework Version 4.0</a
             >

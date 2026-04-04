@@ -64,7 +64,8 @@
   <paragraph
     >When no <symbol>#line</symbol> directives are present, the compiler reports true line numbers and source file names in its output. When processing a <symbol>#line</symbol> directive that includes a <non_terminal
       where="9.5.7"
-      >line-indicator</non_terminal> that is not default, the compiler treats the line after the directive as having the given line number (and file name, if specified). </paragraph
+      >line-indicator</non_terminal
+    > that is not default, the compiler treats the line after the directive as having the given line number (and file name, if specified). </paragraph
   >
   <paragraph
     >A <symbol>#line</symbol> default directive reverses the effect of all preceding <symbol>#line</symbol> directives. The compiler reports true line information for subsequent lines, precisely as if no <symbol>#line</symbol> directives had been processed. </paragraph

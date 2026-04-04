@@ -41,7 +41,8 @@
       <para
         >Note that the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> can specify the path to the directory in which the DLL resides. If a path is not specified, Windows uses the search order described in <see
           cref="http://go.microsoft.com/fwlink/?LinkId=122531"
-          >Dynamic-Link Library Search Order</see>. </para
+          >Dynamic-Link Library Search Order</see
+        >. </para
       >
     </remarks>
     <summary>

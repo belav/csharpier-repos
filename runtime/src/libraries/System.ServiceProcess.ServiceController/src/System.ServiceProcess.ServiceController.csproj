@@ -26,7 +26,8 @@ System.ServiceProcess.ServiceType</PackageDescription>
     <OmitResources Condition="'$(IsPartialFacadeAssembly)' == 'true'">true</OmitResources>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_ServiceController</GeneratePlatformNotSupportedAssemblyMessage>
+      >SR.PlatformNotSupported_ServiceController</GeneratePlatformNotSupportedAssemblyMessage
+    >
     <!-- we cannot add API on .NETStandard since it would be absent on .NETFramework, suppress warnings that require API changes -->
     <NoWarn
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETStandard'"

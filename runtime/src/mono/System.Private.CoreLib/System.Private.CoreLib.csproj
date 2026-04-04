@@ -406,7 +406,8 @@
     <PropertyGroup>
       <_PythonWarningParameter>-Wall</_PythonWarningParameter>
       <_PythonWarningParameter Condition="'$(MSBuildTreatWarningsAsErrors)' == 'true'"
-        >$(_PythonWarningParameter) -Werror</_PythonWarningParameter>
+        >$(_PythonWarningParameter) -Werror</_PythonWarningParameter
+      >
       <_EventingSourceFileDirectory>%(EventingSourceFile.RootDir)%(EventingSourceFile.Directory)</_EventingSourceFileDirectory>
       <_EventingSourceFileDirectory Condition="HasTrailingSlash('$(_EventingSourceFileDirectory)')"
         >$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory

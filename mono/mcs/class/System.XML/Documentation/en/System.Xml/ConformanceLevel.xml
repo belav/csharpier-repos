@@ -24,7 +24,8 @@
       <para
         >For more information, see <format type="text/html">
           <a href="64F382A0-4649-45A9-9635-89165D4182D6"
-            >Data Conformance Checking with XmlReader</a>
+            >Data Conformance Checking with XmlReader</a
+          >
         </format> and <format type="text/html">
           <a href="f84d078c-bcc3-460b-8763-ebb889794ca7">Data Conformance and the XmlWriter</a>
         </format>.</para

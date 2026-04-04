@@ -643,7 +643,8 @@
             <para
               >Should additional eras be added in the future, applications may encounter more than the expected four eras for the Japanese calendar. Applications should be tested to ensure that they continue to work in such an event; see <see
                 cref="http://go.microsoft.com/fwlink/p/?LinkId=239618"
-                >Era Handling for the Japanese Calendar</see>.</para
+                >Era Handling for the Japanese Calendar</see
+              >.</para
             >
           </block>
         </remarks>

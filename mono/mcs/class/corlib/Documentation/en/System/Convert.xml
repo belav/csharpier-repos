@@ -3671,10 +3671,8 @@ class ConvertByteTest {
       <Docs>
         <remarks>
           <para>
-            <block subset="none" type="note"
-              > This method is 
- provided for completeness.</block
-            >
+            <block subset="none" type="note"> This method is 
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -4551,10 +4549,8 @@ class ConvertByteTest {
       <Docs>
         <remarks>
           <para>
-            <block subset="none" type="note"
-              > This method is 
- provided for completeness.</block
-            >
+            <block subset="none" type="note"> This method is 
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -5418,10 +5414,8 @@ class ConvertByteTest {
       <Docs>
         <remarks>
           <para>
-            <block subset="none" type="note"
-              > This method is 
- provided for completeness.</block
-            >
+            <block subset="none" type="note"> This method is 
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>
@@ -12554,10 +12548,8 @@ class ConvertByteTest {
       <Docs>
         <remarks>
           <para>
-            <block subset="none" type="note"
-              > This method is 
- provided for completeness.</block
-            >
+            <block subset="none" type="note"> This method is 
+ provided for completeness.</block>
           </para>
         </remarks>
         <summary>

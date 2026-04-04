@@ -251,7 +251,8 @@
           <a href="9a9621d7-8883-4a4f-a874-65e8e09e20a6">.NET Framework security system</a>
         </format>. The following sections discuss security issues that are specific to XML technologies. For details, see the specific classes and members mentioned, and visit the <see
           cref="http://go.microsoft.com/fwlink/?linkid=42458"
-          >XML Developer Center</see> for technical information, downloads, newsgroups, and other resources for XML developers.</para
+          >XML Developer Center</see
+        > for technical information, downloads, newsgroups, and other resources for XML developers.</para
       >
       <para
         >Also note that when you use the <see cref="N:System.Xml" /> types and members, if the XML contains data that has potential privacy implications, you need to implement your app in a way that respects your end users' privacy.</para

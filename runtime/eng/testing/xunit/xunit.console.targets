@@ -23,7 +23,8 @@
     <RunScriptCommand>$(RunScriptCommand) -xml $(TestResultsName)</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand) -nologo</RunScriptCommand>
     <RunScriptCommand Condition="'$(ArchiveTests)' == 'true'"
-      >$(RunScriptCommand) -nocolor</RunScriptCommand>
+      >$(RunScriptCommand) -nocolor</RunScriptCommand
+    >
     <RunScriptCommand
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(TestDisableAppDomain)' == 'true'"
       >$(RunScriptCommand) -noappdomain</RunScriptCommand

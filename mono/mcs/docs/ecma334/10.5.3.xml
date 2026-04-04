@@ -26,7 +26,8 @@
   <paragraph
     >In addition to these forms of access, a derived class can access a protected instance constructor of a base class in a <non_terminal
       where="17.10"
-      >constructor-initializer</non_terminal> (<hyperlink>17.10.1</hyperlink>). </paragraph
+      >constructor-initializer</non_terminal
+    > (<hyperlink>17.10.1</hyperlink>). </paragraph
   >
   <paragraph>
     <example
