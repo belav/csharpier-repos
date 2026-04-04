@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
@@ -16,13 +15,14 @@
     <Compile Include="System\Collections\SortedList.cs" />
     <Compile Include="System\Collections\Stack.cs" />
     <Compile Include="System\Collections\Specialized\CollectionsUtil.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\DebugViewDictionaryItem.cs"
-             Link="Common\System\Collections\Generic\DebugViewDictionaryItem.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\DebugViewDictionaryItem.cs"
+      Link="Common\System\Collections\Generic\DebugViewDictionaryItem.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

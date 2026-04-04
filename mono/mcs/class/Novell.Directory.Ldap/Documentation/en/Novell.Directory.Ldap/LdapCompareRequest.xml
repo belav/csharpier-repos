@@ -1,10 +1,12 @@
 <Type Name="LdapCompareRequest" FullName="Novell.Directory.Ldap.LdapCompareRequest">
-  <TypeSignature Language="C#" Value="public class LdapCompareRequest : Novell.Directory.Ldap.LdapMessage" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapCompareRequest : Novell.Directory.Ldap.LdapMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +49,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapCompareRequest(string dn, string name, sbyte[] value_Renamed, Novell.Directory.Ldap.LdapControl[] cont)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapCompareRequest(string dn, string name, sbyte[] value_Renamed, Novell.Directory.Ldap.LdapControl[] cont)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>

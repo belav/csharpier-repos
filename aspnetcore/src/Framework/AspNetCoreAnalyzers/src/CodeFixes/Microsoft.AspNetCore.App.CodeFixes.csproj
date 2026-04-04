@@ -21,5 +21,4 @@
     <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="All" />
     <ProjectReference Include="..\Analyzers\Microsoft.AspNetCore.App.Analyzers.csproj" />
   </ItemGroup>
-
 </Project>

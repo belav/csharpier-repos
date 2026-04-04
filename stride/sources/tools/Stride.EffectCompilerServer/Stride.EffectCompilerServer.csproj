@@ -1,0 +1,28 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(StrideEditorTargetFramework)</TargetFramework>
+    <StrideBuildTags>WindowsTools</StrideBuildTags>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mono.Options" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\engine\Stride.Assets\Stride.Assets.csproj" />
+    <ProjectReference Include="..\Stride.ConnectionRouter\Stride.ConnectionRouter.csproj" />
+  </ItemGroup>
+  <Import
+    Project="..\..\shared\Stride.NuGetResolver.Targets\Stride.NuGetResolver.Targets.projitems"
+    Label="Shared"
+  />
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

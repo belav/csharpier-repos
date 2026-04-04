@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -21,5 +20,4 @@
     <Compile Include="$(SharedSourceRoot)AntiforgeryMetadata.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)SizeLimitedStream.cs" LinkBase="Shared" />
   </ItemGroup>
-
 </Project>

@@ -1,0 +1,39 @@
+<Project>
+  <PropertyGroup>
+    <StrideRuntime>true</StrideRuntime>
+    <StrideExplicitWindowsRuntime>true</StrideExplicitWindowsRuntime>
+    <StrideGraphicsApiDependent>true</StrideGraphicsApiDependent>
+    <UseWindowsForms Condition="$(StrideUI.Contains('WINFORMS')) OR $(StrideUI.Contains('WPF'))"
+      >true</UseWindowsForms
+    >
+  </PropertyGroup>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <UseWPF Condition="$(TargetFramework.Contains('-windows'))">true</UseWPF>
+    <UseWindowsForms Condition="$(TargetFramework.Contains('-windows'))">true</UseWindowsForms>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>--auto-module-initializer</StrideAssemblyProcessorOptions>
+    <StridePlatformDependent>true</StridePlatformDependent>
+    <StrideBuildTags>*</StrideBuildTags>
+    <StrideCodeAnalysis>true</StrideCodeAnalysis>
+  </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(TargetFramework)' == '$(StrideFrameworkAndroid)'">
+      <ItemGroup>
+        <AndroidResource Include="Platforms\Android\Resources\Layout\stride_popup_edittext.xml" />
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Stride.Graphics\OpenGL\OpenGLUtils.cs" Link="OpenGLUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stride.Graphics\Stride.Graphics.csproj" />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

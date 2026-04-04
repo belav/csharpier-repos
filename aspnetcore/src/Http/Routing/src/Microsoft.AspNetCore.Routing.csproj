@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>
       ASP.NET Core middleware for routing requests to application logic and for generating links.
@@ -21,13 +20,18 @@
       The ability to save compiled assemblies is for testing and debugging, not shipped in the product.
     -->
     <ILEmitSaveAssemblies Condition="'$(ILEmitSaveAssemblies)'==''">false</ILEmitSaveAssemblies>
-    <DefineConstants Condition="'$(ILEmitSaveAssemblies)'=='true'">IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants>
+    <DefineConstants Condition="'$(ILEmitSaveAssemblies)'=='true'"
+      >IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants
+    >
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)PropertyHelper\*.cs" />
     <Compile Include="$(SharedSourceRoot)RoslynUtils\TypeHelper.cs" />
-    <Compile Include="$(SharedSourceRoot)MediaType\ReadOnlyMediaTypeHeaderValue.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)MediaType\ReadOnlyMediaTypeHeaderValue.cs"
+      LinkBase="Shared"
+    />
     <Compile Include="$(SharedSourceRoot)ApiExplorerTypes\*.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)Json\JsonSerializerExtensions.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)RouteHandlers\ExecuteHandlerHelper.cs" LinkBase="Shared" />

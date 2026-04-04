@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);net472</TargetFrameworks>
   </PropertyGroup>
-
 </Project>

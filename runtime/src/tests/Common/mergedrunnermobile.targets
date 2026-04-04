@@ -1,5 +1,5 @@
 <Project>
-<!-- Build infrastructure support to enable running merged test runner assemblies like regular tests on mobile platforms. -->
+  <!-- Build infrastructure support to enable running merged test runner assemblies like regular tests on mobile platforms. -->
   <PropertyGroup>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <MainLibraryFileName>$(AssemblyName).dll</MainLibraryFileName>
@@ -7,7 +7,11 @@
     <TestFramework>GeneratedRunner</TestFramework>
   </PropertyGroup>
 
-  <Target Name="_AddRuntimeLibsToPublishAssets" BeforeTargets="PrepareForPublish" DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild;ResolveRuntimeFilesFromLocalBuild">
+  <Target
+    Name="_AddRuntimeLibsToPublishAssets"
+    BeforeTargets="PrepareForPublish"
+    DependsOnTargets="ResolveLibrariesRuntimeFilesFromLocalBuild;ResolveRuntimeFilesFromLocalBuild"
+  >
     <ItemGroup>
       <RuntimePackAsset Include="@(RuntimeFiles);@(LibrariesRuntimeFiles)" AssetType="runtime" />
     </ItemGroup>
@@ -31,17 +35,27 @@
   <Target Name="_AddDummyTestExclusionListToAssets" BeforeTargets="AssignTargetPaths">
     <ItemGroup>
       <_PlaceholderExclusionList Include="$(IntermediateOutputPath)/PlaceholderTestExclusionList.txt" />
-      <Content Include="@(_PlaceholderExclusionList)" TargetPath="TestExclusionList.txt" CopyToOutputDirectory="PreserveNewest"/>
+      <Content
+        Include="@(_PlaceholderExclusionList)"
+        TargetPath="TestExclusionList.txt"
+        CopyToOutputDirectory="PreserveNewest"
+      />
     </ItemGroup>
-    <WriteLinesToFile File="@(_PlaceholderExclusionList)"
-                      Lines=""
-                      Overwrite="true"
-                      WriteOnlyWhenDifferent="true" />
+    <WriteLinesToFile
+      File="@(_PlaceholderExclusionList)"
+      Lines=""
+      Overwrite="true"
+      WriteOnlyWhenDifferent="true"
+    />
   </Target>
 
   <!-- Don't use the usual script generation, the scripts it generates are not useful for these tests. -->
   <Target Name="GenerateExecutionScriptsInternal" />
-  <Target Name="GenerateLocalRunnerScript" DependsOnTargets="GenerateRunScript" AfterTargets="PublishTestAsSelfContained" />
+  <Target
+    Name="GenerateLocalRunnerScript"
+    DependsOnTargets="GenerateRunScript"
+    AfterTargets="PublishTestAsSelfContained"
+  />
 
   <Import Project="$(RepositoryEngineeringDir)testing\tests.targets" />
 </Project>

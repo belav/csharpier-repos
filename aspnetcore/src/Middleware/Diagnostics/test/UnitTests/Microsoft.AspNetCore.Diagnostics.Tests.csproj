@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <!-- EXTEXP0003: MetricCollector is experimental -->
@@ -27,5 +26,4 @@
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" />
   </ItemGroup>
-
 </Project>

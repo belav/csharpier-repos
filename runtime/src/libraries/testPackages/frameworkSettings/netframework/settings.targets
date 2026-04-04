@@ -93,15 +93,20 @@
   <!-- this target must run before ResolveLockFileReferences so
        that the SDK targets de-dup the References it adds against those
        that come from packages -->
-  <Target Name="ReferenceEntireFramework"
-          BeforeTargets="ResolveLockFileReferences"
-          DependsOnTargets="GetFrameworkPaths;GetReferenceAssemblyPaths">
+  <Target
+    Name="ReferenceEntireFramework"
+    BeforeTargets="ResolveLockFileReferences"
+    DependsOnTargets="GetFrameworkPaths;GetReferenceAssemblyPaths"
+  >
     <ItemGroup Condition="'$(TargetFrameworkDirectory)' != ''">
       <!-- TargetFrameworkDirectory may contain many paths -->
       <_frameworkDirectoriesToInclude Include="$(TargetFrameworkDirectory)" />
 
       <_allFrameworkReferences Include="%(_frameworkDirectoriesToInclude.Identity)\*.dll" />
-      <Reference Include="@(_allFrameworkReferences->'%(FileName)')" Exclude="@(ExcludeReference)" />
+      <Reference
+        Include="@(_allFrameworkReferences->'%(FileName)')"
+        Exclude="@(ExcludeReference)"
+      />
     </ItemGroup>
   </Target>
 </Project>

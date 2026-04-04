@@ -1,0 +1,28 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>$(StrideXplatEditorTargetFramework)</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>stride-bundle</ToolCommandName>
+    <OutputPath>./nupkg</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Stride.Core.Serialization\Stride.Core.Serialization.csproj" />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

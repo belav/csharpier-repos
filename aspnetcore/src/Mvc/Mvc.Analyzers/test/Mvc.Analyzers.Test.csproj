@@ -1,14 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <RootNamespace>Microsoft.AspNetCore.Mvc.Analyzers</RootNamespace>
-   </PropertyGroup>
+  </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(SharedSourceRoot)AnalyzerTesting\TestReferences.cs" LinkBase="AnalyzerTesting" />
-    <Compile Include="$(SharedSourceRoot)AnalyzerTesting\TestCompilation.cs" LinkBase="AnalyzerTesting" />
+    <Compile
+      Include="$(SharedSourceRoot)AnalyzerTesting\TestReferences.cs"
+      LinkBase="AnalyzerTesting"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)AnalyzerTesting\TestCompilation.cs"
+      LinkBase="AnalyzerTesting"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,5 +23,4 @@
     <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
     <Reference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
   </ItemGroup>
-
 </Project>

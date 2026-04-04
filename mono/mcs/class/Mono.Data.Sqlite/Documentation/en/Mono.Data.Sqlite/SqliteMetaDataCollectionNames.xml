@@ -1,6 +1,12 @@
-<Type Name="SqliteMetaDataCollectionNames" FullName="Mono.Data.Sqlite.SqliteMetaDataCollectionNames">
+<Type
+  Name="SqliteMetaDataCollectionNames"
+  FullName="Mono.Data.Sqlite.SqliteMetaDataCollectionNames"
+>
   <TypeSignature Language="C#" Value="public static class SqliteMetaDataCollectionNames" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit SqliteMetaDataCollectionNames extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract sealed beforefieldinit SqliteMetaDataCollectionNames extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

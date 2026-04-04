@@ -4,7 +4,11 @@
       <method signature="System.Boolean get_UseNls()" body="stub" value="false" />
     </type>
     <type fullname="System.Globalization.CultureData">
-      <method signature="System.Boolean get_ShouldUseUserOverrideNlsData()" body="stub" value="false" />
+      <method
+        signature="System.Boolean get_ShouldUseUserOverrideNlsData()"
+        body="stub"
+        value="false"
+      />
     </type>
   </assembly>
 </linker>

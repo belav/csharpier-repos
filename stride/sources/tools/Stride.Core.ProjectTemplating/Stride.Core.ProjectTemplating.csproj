@@ -1,0 +1,14 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <TargetFramework>$(StrideXplatEditorTargetFramework)</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Stride.Mono.TextTemplating" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Stride.Core.Design\Stride.Core.Design.csproj" />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

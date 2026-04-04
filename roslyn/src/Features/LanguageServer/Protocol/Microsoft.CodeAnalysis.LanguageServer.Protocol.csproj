@@ -20,9 +20,18 @@
 
   <ItemGroup>
     <PackageReference Include="ICSharpCode.Decompiler" Version="$(ICSharpCodeDecompilerVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol" Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol.Extensions" Version="$(MicrosoftVisualStudioLanguageServerProtocolExtensionsVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol.Internal" Version="$(MicrosoftVisualStudioLanguageServerProtocolInternalVersion)" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.LanguageServer.Protocol"
+      Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.LanguageServer.Protocol.Extensions"
+      Version="$(MicrosoftVisualStudioLanguageServerProtocolExtensionsVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.LanguageServer.Protocol.Internal"
+      Version="$(MicrosoftVisualStudioLanguageServerProtocolInternalVersion)"
+    />
     <PackageReference Include="StreamJsonRpc" Version="$(StreamJsonRpcVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
@@ -90,10 +99,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="LanguageServerResources.resx" GenerateSource="true" Namespace="Microsoft.CodeAnalysis.LanguageServer">
+    <EmbeddedResource
+      Update="LanguageServerResources.resx"
+      GenerateSource="true"
+      Namespace="Microsoft.CodeAnalysis.LanguageServer"
+    >
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageServerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

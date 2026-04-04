@@ -22,11 +22,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="testroot\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content
+      Include="testroot\**\*"
+      CopyToOutputDirectory="PreserveNewest"
+      CopyToPublishDirectory="PreserveNewest"
+    />
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
-    <ProjectReference Include="$(RepoRoot)src\Servers\HttpSys\test\testassets\DelegationSite\DelegationSite.csproj"
+    <ProjectReference
+      Include="$(RepoRoot)src\Servers\HttpSys\test\testassets\DelegationSite\DelegationSite.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
+      SkipGetTargetFrameworkProperties="true"
+    />
   </ItemGroup>
 </Project>

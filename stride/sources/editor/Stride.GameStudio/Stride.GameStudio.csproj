@@ -1,0 +1,169 @@
+﻿<Project>
+  <Import
+    Project="..\Stride.PrivacyPolicy\Stride.PrivacyPolicy.projitems"
+    Label="Shared"
+    Condition="Exists('..\Stride.PrivacyPolicy\Stride.PrivacyPolicy.projitems')"
+  />
+  <Import
+    Project="..\..\shared\Stride.Core.ShellHelper\Stride.Core.ShellHelper.projitems"
+    Label="Shared"
+  />
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFramework>$(StrideEditorTargetFramework)</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <RestorePackages>true</RestorePackages>
+    <AssemblyName>Stride.GameStudio</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>--auto-module-initializer</StrideAssemblyProcessorOptions>
+    <StrideLocalized>true</StrideLocalized>
+    <StrideNuGetResolverUI>true</StrideNuGetResolverUI>
+    <StrideSTAThreadOnMain>true</StrideSTAThreadOnMain>
+    <UseWPF>true</UseWPF>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Stride.GameStudio.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\GameStudio.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference
+      Include="Microsoft.NET.StringTools"
+      ExcludeAssets="runtime"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Framework"
+      ExcludeAssets="runtime"
+      PrivateAssets="all"
+    />
+    <PackageReference Include="Microsoft.Build" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="ServiceWire" />
+    <PackageReference Include="SharpDX" />
+    <PackageReference Include="Stride.Metrics" />
+    <PackageReference Include="Mono.Cecil" />
+    <Reference Include="Stride.Core.AssemblyProcessor">
+      <HintPath Condition="$(TargetFramework.StartsWith('net10'))"
+        >..\..\..\deps\AssemblyProcessor\netstandard2.0\Stride.Core.AssemblyProcessor.dll</HintPath
+      >
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" Exclude="App.xaml" />
+    <Compile Update="**\*.xaml.cs" SubType="Code" DependentUpon="%(Filename)" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\..\core\Stride.Core.IO\TemporaryFile.cs">
+      <Link>Debugging\TemporaryFile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile
+      Include="..\..\shared\LoaderToolLocator\LoaderToolLocator.cs"
+      Link="LoaderToolLocator.cs"
+    />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\engine\Stride.Debugger\Stride.Debugger.csproj" />
+    <ProjectReference Include="..\..\tools\Stride.ConnectionRouter\Stride.ConnectionRouter.csproj" />
+    <ProjectReference Include="..\..\tools\Stride.PackageInstall\Stride.PackageInstall.csproj">
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <GlobalPropertiesToRemove>TargetFramework</GlobalPropertiesToRemove>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+    <!-- Soft reference to BepuPhysics to make sure it is up to date on every editor build -->
+    <ProjectReference Include="..\..\engine\Stride.BepuPhysics\Stride.BepuPhysics\Stride.BepuPhysics.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\Stride.Assets.Presentation\Stride.Assets.Presentation.csproj" />
+    <ProjectReference
+      Include="..\..\tools\Stride.EffectCompilerServer\Stride.EffectCompilerServer.csproj"
+      IncludeAssets="Build"
+    />
+    <ProjectReference Include="..\Stride.Editor.CrashReport\Stride.Editor.CrashReport.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\BACKERS.md" Link="BACKERS.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\LICENSE.md" Link="LICENSE.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\THIRD PARTY.md" Link="THIRD PARTY.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <!-- Resources -->
+  <ItemGroup>
+    <Resource Include="Images\*.png" />
+    <Resource Include="Resources\**\*.png" />
+    <Resource Include="Resources\GameStudio.ico" />
+    <Compile Update="Resources\Strings\KeyGestures.Designer.cs">
+      <DependentUpon>KeyGestures.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Update="Resources\Strings\KeyGestures.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>KeyGestures.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import
+    Project="..\..\shared\Stride.NuGetResolver.Targets\Stride.NuGetResolver.Targets.projitems"
+    Label="Shared"
+  />
+  <Import Project="$(StrideSdkTargets)" />
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>_StrideIncludeExtraAssemblies;$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="_StrideIncludeExtraAssemblies">
+    <ItemGroup>
+      <!-- We need to manually include Microsoft.CodeAnalysis.Workspaces.MSBuild.dll, buildhost and analyzer dlls because it expects those to be side-by-side (which is not the case in the nuget folder with contentFiles folder) -->
+      <!-- As a future improvement, two possible fixes: (1) we might want to copy all dll and contents in a folder during NuGetResolver so that it behaves similar to a normal build, or (2) PR MSBuild to have this configurable -->
+      <BuildOutputInPackage Include="$(OutputPath)Microsoft.CodeAnalysis.dll" />
+      <BuildOutputInPackage Include="$(OutputPath)Microsoft.CodeAnalysis.CSharp.dll" />
+      <BuildOutputInPackage Include="$(OutputPath)Microsoft.CodeAnalysis.Features.dll" />
+      <BuildOutputInPackage Include="$(OutputPath)Microsoft.CodeAnalysis.CSharp.Features.dll" />
+      <BuildOutputInPackage Include="$(OutputPath)Microsoft.CodeAnalysis.Workspaces.MSBuild.dll" />
+      <BuildHostFiles Include="$(OutputPath)BuildHost-netcore\**\*.*" />
+      <BuildOutputInPackage Include="%(BuildHostFiles.Identity)">
+        <TargetPath>BuildHost-netcore\%(BuildHostFiles.RecursiveDir)%(BuildHostFiles.Filename)%(BuildHostFiles.Extension)</TargetPath>
+      </BuildOutputInPackage>
+
+      <BuildOutputInPackage Include="$(OutputPath)Stride.Core.AssemblyProcessor.*" />
+    </ItemGroup>
+  </Target>
+  <Target Name="_StrideGameStudioCopyPackageInstall" BeforeTargets="_GetPackageFiles">
+    <ItemGroup>
+      <None
+        Include="..\..\tools\Stride.PackageInstall\bin\$(Configuration)\*.*"
+        PackagePath="tools\"
+        Pack="true"
+      />
+    </ItemGroup>
+  </Target>
+</Project>

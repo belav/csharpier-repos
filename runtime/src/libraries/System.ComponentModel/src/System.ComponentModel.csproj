@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -17,5 +16,4 @@
   <ItemGroup>
     <Reference Include="System.Runtime" />
   </ItemGroup>
-
 </Project>

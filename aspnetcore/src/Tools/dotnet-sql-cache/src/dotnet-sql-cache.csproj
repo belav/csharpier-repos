@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>exe</OutputType>
@@ -18,5 +17,4 @@
     <Reference Include="Azure.Identity" />
     <Reference Include="System.Private.Uri" />
   </ItemGroup>
-
 </Project>

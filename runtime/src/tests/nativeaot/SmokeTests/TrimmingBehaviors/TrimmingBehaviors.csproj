@@ -6,7 +6,9 @@
     <NullabilityInfoContextSupport>false</NullabilityInfoContextSupport>
 
     <!-- We don't run the scanner in optimized builds -->
-    <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dataflow.cs" />
@@ -53,5 +55,4 @@
       <LogicalName>KeptResource</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

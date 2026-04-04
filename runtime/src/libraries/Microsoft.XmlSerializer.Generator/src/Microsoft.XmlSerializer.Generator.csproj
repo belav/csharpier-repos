@@ -24,18 +24,19 @@
 
   <ItemGroup>
     <!-- Set an empty PackagePath to place this file in the root of the package -->
-    <None Include="build\prefercliruntime"
-          PackagePath=""
-          Pack="true" />
-    <None Include="build\Microsoft.XmlSerializer.Generator.targets"
-          PackagePath="build"
-          Pack="true" />
-    <None Include="build\dotnet-Microsoft.XmlSerializer.Generator.runtimeconfig.json"
-          PackagePath="lib\netstandard2.0"
-          Pack="true" />
+    <None Include="build\prefercliruntime" PackagePath="" Pack="true" />
+    <None
+      Include="build\Microsoft.XmlSerializer.Generator.targets"
+      PackagePath="build"
+      Pack="true"
+    />
+    <None
+      Include="build\dotnet-Microsoft.XmlSerializer.Generator.runtimeconfig.json"
+      PackagePath="lib\netstandard2.0"
+      Pack="true"
+    />
   </ItemGroup>
 
   <Import Project="GenerateThisAssemblyCs.targets" />
   <Import Project="GenerateNupkgProps.targets" />
-
 </Project>

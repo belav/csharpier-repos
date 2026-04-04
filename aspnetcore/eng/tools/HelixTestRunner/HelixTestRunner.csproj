@@ -16,15 +16,26 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <!-- We don't need this unless building for tests. -->
-    <ExcludeFromBuild Condition=" '$(DotNetBuildFromSource)' == 'true' OR '$(SkipTestBuild)' == 'true' ">true</ExcludeFromBuild>
+    <ExcludeFromBuild
+      Condition=" '$(DotNetBuildFromSource)' == 'true' OR '$(SkipTestBuild)' == 'true' "
+      >true</ExcludeFromBuild
+    >
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.Playwright" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20158.1" AllowExplicitReference="true" />
+    <PackageReference
+      Include="System.CommandLine"
+      Version="2.0.0-beta1.20158.1"
+      AllowExplicitReference="true"
+    />
   </ItemGroup>
 
-  <Target Name="PublishThisProject" AfterTargets="Build" Condition=" '$(ExcludeFromBuild)' != 'true' " >
+  <Target
+    Name="PublishThisProject"
+    AfterTargets="Build"
+    Condition=" '$(ExcludeFromBuild)' != 'true' "
+  >
     <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish" />
   </Target>
 

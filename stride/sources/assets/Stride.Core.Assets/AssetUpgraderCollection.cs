@@ -1,0 +1,104 @@
+// Copyright (c) .NET Foundation and Contributors (https://dotnetfoundation.org/ & https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+
+namespace Stride.Core.Assets;
+
+public class AssetUpgraderCollection
+{
+    private readonly struct VersionRange : IComparable<VersionRange>
+    {
+        private readonly PackageVersion minimum;
+        public readonly PackageVersion Target;
+
+        public VersionRange(PackageVersion minimum, PackageVersion target)
+        {
+            this.minimum = minimum;
+            Target = target;
+        }
+
+        public readonly bool Contains(PackageVersion? value)
+        {
+            return minimum <= value && value < Target;
+        }
+
+        public readonly bool Overlap(VersionRange other)
+        {
+            return minimum < other.Target && other.minimum < Target;
+        }
+
+        public readonly int CompareTo(VersionRange other)
+        {
+            return minimum.CompareTo(other.minimum);
+        }
+    }
+
+    private readonly SortedList<VersionRange, Type> upgraders = [];
+    private readonly Dictionary<Type, IAssetUpgrader> instances = [];
+    private readonly PackageVersion currentVersion;
+
+    public AssetUpgraderCollection(Type assetType, PackageVersion currentVersion)
+    {
+        this.currentVersion = currentVersion;
+        AssetRegistry.IsAssetOrPackageType(assetType, true);
+        AssetType = assetType;
+    }
+
+    public Type AssetType { get; }
+
+    internal void RegisterUpgrader(Type upgraderType, PackageVersion startVersion, PackageVersion targetVersion)
+    {
+        lock (upgraders)
+        {
+            if (targetVersion > currentVersion)
+                throw new ArgumentException("The upgrader has a target version higher that the current version.");
+
+            var range = new VersionRange(startVersion, targetVersion);
+
+            if (upgraders.Any(x => x.Key.Overlap(range)))
+            {
+                throw new ArgumentException("The upgrader overlaps with another upgrader.");
+            }
+
+            upgraders.Add(new VersionRange(startVersion, targetVersion), upgraderType);
+        }
+    }
+
+    internal void Validate(PackageVersion minVersion)
+    {
+        lock (upgraders)
+        {
+            var version = minVersion;
+            foreach (var upgrader in upgraders)
+            {
+                if (!upgrader.Key.Contains(version))
+                    continue;
+
+                version = upgrader.Key.Target;
+                if (version == currentVersion)
+                    break;
+            }
+
+            if (version != currentVersion)
+                throw new InvalidOperationException("No upgrader for asset type [{0}] allow to reach version {1}".ToFormat(AssetType.Name, currentVersion));
+        }
+    }
+
+    public IAssetUpgrader GetUpgrader(PackageVersion initialVersion, out PackageVersion targetVersion)
+    {
+        lock (upgraders)
+        {
+            var upgrader = upgraders.FirstOrDefault(x => x.Key.Contains(initialVersion));
+            if (upgrader.Value == null)
+                throw new InvalidOperationException("No upgrader found for version {0} of asset type [{1}]".ToFormat(currentVersion, AssetType.Name));
+            targetVersion = upgrader.Key.Target;
+
+            if (!instances.TryGetValue(upgrader.Value, out var result))
+            {
+                // Cache the upgrader instances
+                result = (IAssetUpgrader)Activator.CreateInstance(upgrader.Value)!;
+                instances.Add(upgrader.Value, result);
+            }
+            return result;
+        }
+    }
+}

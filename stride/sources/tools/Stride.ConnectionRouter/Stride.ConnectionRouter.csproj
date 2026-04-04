@@ -1,0 +1,75 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>$(StrideEditorTargetFramework)</TargetFramework>
+    <StrideBuildTags>WindowsTools</StrideBuildTags>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>--auto-module-initializer</StrideAssemblyProcessorOptions>
+    <StrideNuGetResolverUI>true</StrideNuGetResolverUI>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+    <ApplicationIcon>Resources\ConnectionRouter.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mono.Options" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\shared\AttachedChildProcessJob.cs">
+      <Link>AttachedChildProcessJob.cs</Link>
+    </Compile>
+    <Compile Include="..\..\shared\Process\AndroidDeviceEnumerator.cs">
+      <Link>AndroidDeviceEnumerator.cs</Link>
+    </Compile>
+    <Compile
+      Include="..\..\shared\LoaderToolLocator\LoaderToolLocator.cs"
+      Link="LoaderToolLocator.cs"
+    />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\assets\Stride.Core.Assets\Stride.Core.Assets.csproj" />
+    <ProjectReference Include="..\..\engine\Stride.Engine\Stride.Engine.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectionRouter.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ios-tcprelay\stride-ios-relay.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ios-tcprelay\usbmux.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import
+    Project="..\..\shared\Stride.Core.ShellHelper\Stride.Core.ShellHelper.projitems"
+    Label="Shared"
+  />
+  <Import
+    Project="..\..\shared\Stride.NuGetResolver.Targets\Stride.NuGetResolver.Targets.projitems"
+    Label="Shared"
+  />
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

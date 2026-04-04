@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <StrideRuntime>true</StrideRuntime>
+  </PropertyGroup>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>--serialization --parameter-key</StrideAssemblyProcessorOptions>
+    <StrideBuildTags>*</StrideBuildTags>
+    <StrideBulletPlatform></StrideBulletPlatform>
+    <!--Empty by default, only iOS needs special care-->
+    <StrideBulletPlatform Condition="'$(TargetFramework)' == '$(StrideFrameworkiOS)'"
+      >iOS</StrideBulletPlatform
+    >
+    <StrideCodeAnalysis>true</StrideCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <StrideNativeLib Include="..\..\..\deps\BulletPhysics\$(StridePlatformDeps)\**\libbulletc.*">
+      <Link>runtimes\%(RecursiveDir)native\%(Filename)%(Extension)</Link>
+    </StrideNativeLib>
+    <Reference Include="BulletSharp">
+      <HintPath>..\..\..\deps\BulletPhysics\$(StrideBulletPlatform)\BulletSharp.NetStandard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stride.Engine\Stride.Engine.csproj" />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>_StrideIncludeExtraAssemblies;$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="_StrideIncludeExtraAssemblies">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)BulletSharp.NetStandard.dll" />
+    </ItemGroup>
+  </Target>
+</Project>

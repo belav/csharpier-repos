@@ -1,6 +1,10 @@
 <linker>
   <!-- The following attributes are only necessary when debugging is supported -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Debugger.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Debugger.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.DebuggableAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -30,13 +34,21 @@
     </type>
   </assembly>
 
-  <assembly fullname="System.Private.CoreLib" feature="System.Reflection.Metadata.MetadataUpdater.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Reflection.Metadata.MetadataUpdater.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Reflection.Metadata.MetadataUpdateHandlerAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
   </assembly>
 
-  <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Tracing.EventSource.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Diagnostics.Tracing.EventSource.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.Tracing.EventSourceAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -61,7 +73,11 @@
     The following attributes are necessary when NullabilityInfoContext is supported.
     Note these attributes are allowed to be in any assembly.
      -->
-  <assembly fullname="*" feature="System.Reflection.NullabilityInfoContext.IsSupported" featurevalue="false">
+  <assembly
+    fullname="*"
+    feature="System.Reflection.NullabilityInfoContext.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.CodeAnalysis.AllowNullAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -89,7 +105,11 @@
   </assembly>
 
   <!-- The following attributes are only necessary when COM is supported -->
-  <assembly fullname="System.Private.CoreLib" feature="System.Runtime.InteropServices.BuiltInComInterop.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Runtime.InteropServices.ClassInterfaceAttribute">
       <attribute internal="RemoveAttributeInstances" />
     </type>
@@ -121,7 +141,11 @@
     is only enabled by default on app models that need as much size savings as possible.
    -->
 
-  <assembly fullname="System.Private.CoreLib" feature="System.AggressiveAttributeTrimming" featurevalue="true">
+  <assembly
+    fullname="System.Private.CoreLib"
+    feature="System.AggressiveAttributeTrimming"
+    featurevalue="true"
+  >
     <!-- System -->
     <type fullname="System.CLSCompliantAttribute">
       <attribute internal="RemoveAttributeInstances" />

@@ -16,6 +16,9 @@
   <Import Project="ILVerification.projitems" />
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
   </ItemGroup>
 </Project>

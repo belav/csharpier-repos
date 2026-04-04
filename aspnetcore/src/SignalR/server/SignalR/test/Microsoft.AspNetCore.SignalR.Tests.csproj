@@ -1,12 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)SyncPoint\SyncPoint.cs" LinkBase="Shared" />
-    <Compile Include="$(SignalRSharedSourceRoot)EphemeralDataProtectionProvider.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SignalRSharedSourceRoot)EphemeralDataProtectionProvider.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +29,4 @@
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <Reference Include="System.Reactive.Linq" />
   </ItemGroup>
-
 </Project>

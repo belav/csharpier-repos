@@ -39,27 +39,57 @@
            subdirectories -->
 
       <!-- HACK: Setting SatelliteResourceLanguages still seems to be bringing satellite resources from other project references along,
-           so we'll filter this in the condition here. --> 
-      <TfmSpecificPackageFile Include="@(ReferenceCopyLocalPaths)"
-                              PackagePath="tools\$(TargetFramework)\any\%(ReferenceCopyLocalPaths.DestinationSubDirectory)"
-                              Condition="'%(ReferenceCopyLocalPaths.DestinationSubDirectory)' == '' and '%(Extension)' != '.pdb' and '%(Extension)' != '.xml'" />
+           so we'll filter this in the condition here. -->
+      <TfmSpecificPackageFile
+        Include="@(ReferenceCopyLocalPaths)"
+        PackagePath="tools\$(TargetFramework)\any\%(ReferenceCopyLocalPaths.DestinationSubDirectory)"
+        Condition="'%(ReferenceCopyLocalPaths.DestinationSubDirectory)' == '' and '%(Extension)' != '.pdb' and '%(Extension)' != '.xml'"
+      />
 
-      <TfmSpecificPackageFile Include="@(BuiltProjectOutputGroupOutput)" PackagePath="tools\$(TargetFramework)\any" />
-      <TfmSpecificPackageFile Include="$(ProjectDepsFilePath)" PackagePath="tools\$(TargetFramework)\any" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
+      <TfmSpecificPackageFile
+        Include="@(BuiltProjectOutputGroupOutput)"
+        PackagePath="tools\$(TargetFramework)\any"
+      />
+      <TfmSpecificPackageFile
+        Include="$(ProjectDepsFilePath)"
+        PackagePath="tools\$(TargetFramework)\any"
+        Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+      />
     </ItemGroup>
   </Target>
 
   <ItemGroup>
-    <Compile Include="..\..\..\Compilers\Core\Portable\InternalUtilities\IsExternalInit.cs" Link="Utilities\IsExternalInit.cs" />
-    <Compile Include="..\..\..\Workspaces\Remote\Core\VisualStudioMefHostServices.cs" Link="VisualStudioMefHostServices.cs" />
+    <Compile
+      Include="..\..\..\Compilers\Core\Portable\InternalUtilities\IsExternalInit.cs"
+      Link="Utilities\IsExternalInit.cs"
+    />
+    <Compile
+      Include="..\..\..\Workspaces\Remote\Core\VisualStudioMefHostServices.cs"
+      Link="VisualStudioMefHostServices.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="$(MicrosoftExtensionsLoggingVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(MicrosoftExtensionsLoggingAbstractionsVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Composition" Version="$(MicrosoftVisualStudioCompositionVersion)" />
-    <PackageReference Include="MSBuild.StructuredLogger" Version="$(MSBuildStructuredLoggerVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging"
+      Version="$(MicrosoftExtensionsLoggingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Abstractions"
+      Version="$(MicrosoftExtensionsLoggingAbstractionsVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Console"
+      Version="$(MicrosoftExtensionsLoggingConsoleVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Composition"
+      Version="$(MicrosoftVisualStudioCompositionVersion)"
+    />
+    <PackageReference
+      Include="MSBuild.StructuredLogger"
+      Version="$(MSBuildStructuredLoggerVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>

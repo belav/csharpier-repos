@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
@@ -17,5 +16,4 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime.InteropServices\tests\Ancillary.Interop\Ancillary.Interop.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime.InteropServices\tests\TestAssets\NativeExports\NativeExports.csproj" />
   </ItemGroup>
-
 </Project>

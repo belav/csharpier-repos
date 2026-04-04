@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="System.Diagnostics.CounterCreationData" />
     <ForwardedType Include="System.Diagnostics.CounterCreationDataCollection" />
@@ -22,5 +21,4 @@
     <ForwardedType Include="System.Diagnostics.PerformanceData.CounterSetInstanceType" />
     <ForwardedType Include="System.Diagnostics.PerformanceData.CounterType" />
   </ItemGroup>
-
 </Project>

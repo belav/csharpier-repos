@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
 
   <PropertyGroup>
@@ -14,5 +13,4 @@
   <PropertyGroup>
     <NetCurrent>net9.0</NetCurrent>
   </PropertyGroup>
-
 </Project>

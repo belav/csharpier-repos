@@ -4,8 +4,8 @@
   "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 
 <faces-config>
-	<application>
-		<state-manager>Mainsoft.Web.Hosting.ServletFacesStateManager</state-manager>
-		<view-handler>Mainsoft.Web.Hosting.ServletFacesViewHandler</view-handler>
-	</application>
+  <application>
+    <state-manager>Mainsoft.Web.Hosting.ServletFacesStateManager</state-manager>
+    <view-handler>Mainsoft.Web.Hosting.ServletFacesViewHandler</view-handler>
+  </application>
 </faces-config>

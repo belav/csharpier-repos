@@ -29,5 +29,4 @@
   </ItemGroup>
 
   <Target Name="RunSample" DependsOnTargets="RunSampleWithBrowserAndSimpleServer" />
-
 </Project>

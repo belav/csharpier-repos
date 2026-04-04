@@ -1,0 +1,22 @@
+// Copyright (c) .NET Foundation and Contributors (https://dotnetfoundation.org/ & https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+#if STRIDE_UI_SDL
+using Stride.Core;
+using Stride.Graphics.SDL;
+
+namespace Stride.Games
+{
+    /// <summary>
+    /// A <see cref="GameContext"/> to use for rendering to an existing SDL Window.
+    /// </summary>
+    public class GameContextSDL : GameContext<Window>
+    {
+        /// <inheritDoc/>
+        public GameContextSDL(Window control, int requestedWidth = 0, int requestedHeight = 0, bool isUserManagingRun = false)
+            : base(control ?? new GameFormSDL(), requestedWidth, requestedHeight, isUserManagingRun)
+        {
+            ContextType = AppContextType.DesktopSDL;
+        }
+    }
+}
+#endif

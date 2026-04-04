@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(AspNetCoreAppCurrent)</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -13,5 +12,4 @@
   </ItemGroup>
 
   <Target Name="GetFilesToPackage" />
-
 </Project>

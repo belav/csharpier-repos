@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>
       ASP.NET Core basic middleware for supporting HTTPS Redirection and HTTP Strict-Transport-Security.

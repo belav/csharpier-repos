@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -7,5 +6,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\shared\Mvc.Core.TestCommon\Microsoft.AspNetCore.Mvc.Core.TestCommon.csproj" />
   </ItemGroup>
-
 </Project>

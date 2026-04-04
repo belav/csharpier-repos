@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>exe</OutputType>
@@ -8,7 +7,9 @@
     <!-- WebDriver is not strong-named, so this test project cannot be strong named either. -->
     <SignAssembly>false</SignAssembly>
     <IsTestAssetProject>true</IsTestAssetProject>
-    <RuntimeIdentifier Condition=" '$(DotNetBuildFromSource)' != 'true' ">linux-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$(DotNetBuildFromSource)' != 'true' "
+      >linux-x64</RuntimeIdentifier
+    >
     <SelfContained Condition=" '$(DotNetBuildFromSource)' != 'true' ">true</SelfContained>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
@@ -28,12 +29,10 @@
 
   <Target Name="_AddTestProjectMetadataAttributes" BeforeTargets="BeforeCompile">
     <ItemGroup>
-      <AssemblyAttribute
-        Include="System.Reflection.AssemblyMetadataAttribute">
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
         <_Parameter1>TestAppLocatiion</_Parameter1>
         <_Parameter2>$(MSBuildThisFileDirectory)..\TestApp\</_Parameter2>
       </AssemblyAttribute>
-  </ItemGroup>
+    </ItemGroup>
   </Target>
-
 </Project>

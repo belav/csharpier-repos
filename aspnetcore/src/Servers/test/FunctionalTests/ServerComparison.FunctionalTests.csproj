@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
 
@@ -7,7 +6,6 @@
     <BuildHelixPayload>false</BuildHelixPayload>
     <BaseOutputPath />
     <OutputPath />
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,15 +14,16 @@
 
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)src\Servers\IIS\IntegrationTesting.IIS\src\Microsoft.AspNetCore.Server.IntegrationTesting.IIS.csproj" />
-    <ProjectReference Include="$(RepoRoot)src\Servers\testassets\ServerComparison.TestSites\ServerComparison.TestSites.csproj"
+    <ProjectReference
+      Include="$(RepoRoot)src\Servers\testassets\ServerComparison.TestSites\ServerComparison.TestSites.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
+      SkipGetTargetFrameworkProperties="true"
+    />
 
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="Microsoft.Net.Http.Headers" />
     <Reference Include="Serilog.Extensions.Logging" />
     <Reference Include="Serilog.Sinks.File" />
   </ItemGroup>
-
 </Project>

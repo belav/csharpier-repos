@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>
       ASP.NET Core middleware for logging HTTP requests and responses.

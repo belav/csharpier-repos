@@ -34,21 +34,30 @@
     </ProjectReference>
   </ItemGroup>
 
-  <Target Name="_CreateOpenApiReferenceItemsForOpenApiProjectReferences" DependsOnTargets="ResolveProjectReferences">
+  <Target
+    Name="_CreateOpenApiReferenceItemsForOpenApiProjectReferences"
+    DependsOnTargets="ResolveProjectReferences"
+  >
     <ItemGroup>
       <_Temporary Remove="@(_Temporary)" />
     </ItemGroup>
 
-    <MSBuild Targets="OpenApiGetDocuments"
-        BuildInParallel="$(BuildInParallel)"
-        Projects="@(OpenApiProjectReference)"
-        RebaseOutputs="true"
-        RemoveProperties="RuntimeIdentifier;TargetFrameworks;%(OpenApiProjectReference.GlobalPropertiesToRemove)">
+    <MSBuild
+      Targets="OpenApiGetDocuments"
+      BuildInParallel="$(BuildInParallel)"
+      Projects="@(OpenApiProjectReference)"
+      RebaseOutputs="true"
+      RemoveProperties="RuntimeIdentifier;TargetFrameworks;%(OpenApiProjectReference.GlobalPropertiesToRemove)"
+    >
       <Output TaskParameter="TargetOutputs" ItemName="_Temporary" />
     </MSBuild>
 
     <ItemGroup>
-      <OpenApiReference Include="@(_Temporary)" Exclude="@(OpenApiReference)" RemoveMetadata="FullConfiguration">
+      <OpenApiReference
+        Include="@(_Temporary)"
+        Exclude="@(OpenApiReference)"
+        RemoveMetadata="FullConfiguration"
+      >
         <SourceProject>%(_Temporary.OriginalItemSpec)</SourceProject>
       </OpenApiReference>
       <_Temporary Remove="@(_Temporary)" />
@@ -62,10 +71,12 @@
       <_Temporary Remove="@(_Temporary)" />
     </ItemGroup>
 
-    <GetOpenApiReferenceMetadata Inputs="@(OpenApiReference)"
-        Extension="$(DefaultLanguageSourceExtension)"
-        Namespace="$(RootNamespace)"
-        OutputDirectory="$(OpenApiCodeDirectory)">
+    <GetOpenApiReferenceMetadata
+      Inputs="@(OpenApiReference)"
+      Extension="$(DefaultLanguageSourceExtension)"
+      Namespace="$(RootNamespace)"
+      OutputDirectory="$(OpenApiCodeDirectory)"
+    >
       <Output TaskParameter="Outputs" ItemName="_Temporary" />
     </GetOpenApiReferenceMetadata>
 
@@ -82,29 +93,43 @@
     </GetCurrentOpenApiReference>
   </Target>
 
-  <Target Name="_InnerGenerateOpenApiCode" DependsOnTargets="_GetCurrentOpenApiReference;$(GeneratorTarget)" />
+  <Target
+    Name="_InnerGenerateOpenApiCode"
+    DependsOnTargets="_GetCurrentOpenApiReference;$(GeneratorTarget)"
+  />
 
   <!-- Note target will **always** execute when generator uses the OutputPath as a directory. -->
-  <Target Name="_GenerateOpenApiCode"
-      Condition="$(OpenApiGenerateCodeAtDesignTime) OR ('$(DesignTimeBuild)' != 'true' AND '$(BuildingProject)' == 'true')"
-      Inputs="@(OpenApiReference)"
-      Outputs="%(OutputPath)">
-    <Error Condition="!Exists('%(OpenApiReference.FullPath)')" Text="Input OpenAPI file %(Identity) does not exist." />
+  <Target
+    Name="_GenerateOpenApiCode"
+    Condition="$(OpenApiGenerateCodeAtDesignTime) OR ('$(DesignTimeBuild)' != 'true' AND '$(BuildingProject)' == 'true')"
+    Inputs="@(OpenApiReference)"
+    Outputs="%(OutputPath)"
+  >
+    <Error
+      Condition="!Exists('%(OpenApiReference.FullPath)')"
+      Text="Input OpenAPI file %(Identity) does not exist."
+    />
 
-    <MSBuild Projects="$(MSBuildProjectFullPath)"
-        BuildInParallel="$(BuildInParallel)"
-        Properties="GeneratorTargetPath=%(OpenApiReference.OutputPath);GeneratorTarget=Generate%(CodeGenerator);GeneratorMetadata=%(SerializedMetadata)"
-        Targets="_InnerGenerateOpenApiCode" />
+    <MSBuild
+      Projects="$(MSBuildProjectFullPath)"
+      BuildInParallel="$(BuildInParallel)"
+      Properties="GeneratorTargetPath=%(OpenApiReference.OutputPath);GeneratorTarget=Generate%(CodeGenerator);GeneratorMetadata=%(SerializedMetadata)"
+      Targets="_InnerGenerateOpenApiCode"
+    />
   </Target>
 
   <Target Name="_CreateCompileItemsForOpenApiReferences" Condition="'@(OpenApiReference)' != ''">
     <ItemGroup>
       <_Files Remove="@(_Files)" />
-      <_Files Include="@(OpenApiReference -> '%(OutputPath)')"
-          Condition="$([System.IO.File]::Exists('%(OpenApiReference.OutputPath)'))" />
+      <_Files
+        Include="@(OpenApiReference -> '%(OutputPath)')"
+        Condition="$([System.IO.File]::Exists('%(OpenApiReference.OutputPath)'))"
+      />
       <_Directories Remove="@(_Directories)" />
-      <_Directories Include="@(OpenApiReference -> '%(OutputPath)')"
-          Condition="Exists('%(OpenApiReference.OutputPath)') AND ! $([System.IO.File]::Exists('%(OpenApiReference.OutputPath)'))" />
+      <_Directories
+        Include="@(OpenApiReference -> '%(OutputPath)')"
+        Condition="Exists('%(OpenApiReference.OutputPath)') AND ! $([System.IO.File]::Exists('%(OpenApiReference.OutputPath)'))"
+      />
     </ItemGroup>
 
     <ItemGroup>
@@ -114,13 +139,17 @@
 
     <ItemGroup>
       <!-- If OutputPath is a file, add it directly to relevant items. -->
-      <TypeScriptCompile Include="@(_Files)"
-          Exclude="@(TypeScriptCompile)"
-          Condition="'%(_Files.Extension)' == '.ts' OR '%(_Files.Extension)' == '.tsx'" />
+      <TypeScriptCompile
+        Include="@(_Files)"
+        Exclude="@(TypeScriptCompile)"
+        Condition="'%(_Files.Extension)' == '.ts' OR '%(_Files.Extension)' == '.tsx'"
+      />
 
-      <Compile Include="@(_Files)"
-          Exclude="@(Compile)"
-          Condition="'$(DefaultLanguageSourceExtension)' != '.ts' AND '%(_Files.Extension)' == '$(DefaultLanguageSourceExtension)'" />
+      <Compile
+        Include="@(_Files)"
+        Exclude="@(Compile)"
+        Condition="'$(DefaultLanguageSourceExtension)' != '.ts' AND '%(_Files.Extension)' == '$(DefaultLanguageSourceExtension)'"
+      />
     </ItemGroup>
 
     <!--
@@ -135,14 +164,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <TypeScriptCompile Include="$(_TypeScriptCompileItemsFromDirectories)" Exclude="@(TypeScriptCompile)" />
+      <TypeScriptCompile
+        Include="$(_TypeScriptCompileItemsFromDirectories)"
+        Exclude="@(TypeScriptCompile)"
+      />
 
-      <Compile Include="$(_CompileItemsFromDirectories)"
-          Exclude="@(Compile)"
-          Condition="'$(DefaultLanguageSourceExtension)' != '.ts'" />
+      <Compile
+        Include="$(_CompileItemsFromDirectories)"
+        Exclude="@(Compile)"
+        Condition="'$(DefaultLanguageSourceExtension)' != '.ts'"
+      />
 
-      <FileWrites Include="@(_Files);$(_TypeScriptCompileItemsFromDirectories);$(_CompileItemsFromDirectories)"
-          Exclude="@(FileWrites)" />
+      <FileWrites
+        Include="@(_Files);$(_TypeScriptCompileItemsFromDirectories);$(_CompileItemsFromDirectories)"
+        Exclude="@(FileWrites)"
+      />
 
       <_Files Remove="@(_Files)" />
       <_Directories Remove="@(_Directories)" />
@@ -157,9 +193,18 @@
   <!-- Inform users of breaking changes in this file and Microsoft.Extensions.ApiDescription.Client.props. -->
 
   <Target Name="_GenerateErrorsForOldItems">
-    <Error Condition="'@(ServiceProjectReference)' != ''" Text="ServiceProjectReference items are no longer supported." />
-    <Error Condition="'@(ServiceUriReference)' != ''" Text="ServiceUriReference items are no longer supported." />
-    <Error Condition="'@(ServiceFileReference)' != ''" Text="ServiceFileReference items are no longer supported." />
+    <Error
+      Condition="'@(ServiceProjectReference)' != ''"
+      Text="ServiceProjectReference items are no longer supported."
+    />
+    <Error
+      Condition="'@(ServiceUriReference)' != ''"
+      Text="ServiceUriReference items are no longer supported."
+    />
+    <Error
+      Condition="'@(ServiceFileReference)' != ''"
+      Text="ServiceFileReference items are no longer supported."
+    />
   </Target>
 
   <!-- Main code generation entry point. -->
@@ -172,8 +217,10 @@
     when multi-targeting.
   -->
 
-  <Target Name="_TieInGenerateOpenApiCode"
-      BeforeTargets="BeforeCompile"
-      Condition=" '$(OpenApiGenerateCodeOnBuild)' == 'true' AND ('$(TargetFramework)' == '' OR '$(TargetFrameworks)' == '') "
-      DependsOnTargets="GenerateOpenApiCode" />
+  <Target
+    Name="_TieInGenerateOpenApiCode"
+    BeforeTargets="BeforeCompile"
+    Condition=" '$(OpenApiGenerateCodeOnBuild)' == 'true' AND ('$(TargetFramework)' == '' OR '$(TargetFrameworks)' == '') "
+    DependsOnTargets="GenerateOpenApiCode"
+  />
 </Project>

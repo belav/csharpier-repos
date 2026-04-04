@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="System.CodeDom.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.CodeDom.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+    <Compile
+      Include="System.CodeDom.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    />
+    <Compile
+      Include="System.CodeDom.netframework.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+    />
   </ItemGroup>
 </Project>

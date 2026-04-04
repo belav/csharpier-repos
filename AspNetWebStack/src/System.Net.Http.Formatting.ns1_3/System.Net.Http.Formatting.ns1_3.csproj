@@ -35,11 +35,13 @@
     <Compile Include="..\Common\TaskHelpers.cs" Link="Common\TaskHelpers.cs" />
     <Compile Include="..\Common\TaskHelpersExtensions.cs" Link="Common\TaskHelpersExtensions.cs" />
 
-    <Compile Include="..\System.Net.Http.Formatting\**\*.cs"
-        Exclude="..\System.Net.Http.Formatting\obj\**\*.cs;
+    <Compile
+      Include="..\System.Net.Http.Formatting\**\*.cs"
+      Exclude="..\System.Net.Http.Formatting\obj\**\*.cs;
                  ..\System.Net.Http.Formatting\Formatting\BufferedMediaTypeFormatter.cs;
                  ..\System.Net.Http.Formatting\Handlers\ProgressWriteAsyncResult.cs;
-                 ..\System.Net.Http.Formatting\Properties\Resources.Designer.cs">
+                 ..\System.Net.Http.Formatting\Properties\Resources.Designer.cs"
+    >
       <Link>%(RecursiveDir)\%(Filename).cs</Link>
     </Compile>
 
@@ -68,6 +70,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 
-    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" Link="CodeAnalysisDictionary.xml" />
+    <CodeAnalysisDictionary
+      Include="..\CodeAnalysisDictionary.xml"
+      Link="CodeAnalysisDictionary.xml"
+    />
   </ItemGroup>
 </Project>

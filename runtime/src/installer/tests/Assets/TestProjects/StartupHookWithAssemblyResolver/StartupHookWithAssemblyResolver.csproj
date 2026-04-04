@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <RuntimeFrameworkVersion>$(MNAVersion)</RuntimeFrameworkVersion>
@@ -15,5 +14,4 @@
   <ItemGroup>
     <ProjectReference Include="./SharedLibrary/SharedLibrary.csproj" />
   </ItemGroup>
-
 </Project>

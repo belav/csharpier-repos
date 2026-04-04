@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -10,7 +9,10 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="$(HostingStartupPackageName)" Version="$(HostingStartupVersion)" PrivateAssets="None" />
+    <PackageReference
+      Include="$(HostingStartupPackageName)"
+      Version="$(HostingStartupVersion)"
+      PrivateAssets="None"
+    />
   </ItemGroup>
-
 </Project>

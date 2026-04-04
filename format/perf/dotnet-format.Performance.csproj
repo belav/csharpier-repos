@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -21,5 +20,4 @@
   <ItemGroup>
     <ProjectReference Include="..\src\dotnet-format.csproj" />
   </ItemGroup>
-
 </Project>

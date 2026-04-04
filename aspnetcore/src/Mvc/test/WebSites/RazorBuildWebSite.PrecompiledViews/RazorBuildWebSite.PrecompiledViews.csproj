@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <DefineConstants>$(DefineConstants)</DefineConstants>
@@ -8,5 +7,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc" />
   </ItemGroup>
-
 </Project>

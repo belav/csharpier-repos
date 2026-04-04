@@ -1,0 +1,33 @@
+﻿<Project>
+  <Import Project="..\..\targets\Stride.props" />
+
+  <PropertyGroup>
+    <StridePackAssets>true</StridePackAssets>
+    <TargetFramework>$(StrideEditorTargetFramework)</TargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <!-- Extract PackageVersion from ThisPackageVersion.cs -->
+    <_StrideThisPackageVersionFile Condition="'$(StridePackageBuild)' == 'true'"
+      >$(MSBuildThisFileDirectory)ThisPackageVersion.PackageBuild.cs</_StrideThisPackageVersionFile
+    >
+    <_StrideThisPackageVersionFile Condition="'$(StridePackageBuild)' != 'true'"
+      >$(MSBuildThisFileDirectory)ThisPackageVersion.DevBuild.cs</_StrideThisPackageVersionFile
+    >
+    <_StrideThisPackageVersionLines>$([System.IO.File]::ReadAllText('$(_StrideThisPackageVersionFile)'))</_StrideThisPackageVersionLines>
+    <PackageVersion>$([System.Text.RegularExpressions.Regex]::Match($(_StrideThisPackageVersionLines), `.*Current = \"(.*)\";.*`).Groups[1].Value)</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Stride.Core.Tasks\Stride.Core.Tasks.csproj">
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <GlobalPropertiesToRemove>TargetFramework</GlobalPropertiesToRemove>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ThisPackageVersion.PackageBuild.cs" />
+    <Compile Include="ThisPackageVersion.DevBuild.cs" />
+  </ItemGroup>
+
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ApplicationIcon>Resources\GameIcon.ico</ApplicationIcon>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GravitySensor</RootNamespace>
+    <OutputPath>..\Bin\Windows\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DefineConstants>STRIDE_PLATFORM_DESKTOP</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StrideCurrentPackagePath>$(MSBuildThisFileDirectory)..\GravitySensor.sdpkg</StrideCurrentPackagePath>
+    <StrideProjectType>Executable</StrideProjectType>
+    <StridePlatform>Windows</StridePlatform>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GravitySensor.Game\GravitySensor.Game.csproj" />
+  </ItemGroup>
+</Project>

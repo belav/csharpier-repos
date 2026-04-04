@@ -1,0 +1,66 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TargetFramework>$(StrideXplatEditorTargetFramework)</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>--auto-module-initializer --serialization</StrideAssemblyProcessorOptions>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference
+      Include="Microsoft.NET.StringTools"
+      ExcludeAssets="runtime"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Framework"
+      ExcludeAssets="runtime"
+      PrivateAssets="all"
+    />
+    <PackageReference Include="Microsoft.Build" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Build.Locator" />
+    <PackageReference
+      Include="Microsoft.Build.Utilities.Core"
+      ExcludeAssets="runtime"
+      PrivateAssets="all"
+    />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\core\Stride.Core.AssemblyProcessor\Utilities.cs" Link="Utilities.cs" />
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Update="Diagnostics\AssetMessageStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssetMessageStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\buildengine\Stride.Core.BuildEngine.Common\Stride.Core.BuildEngine.Common.csproj" />
+    <ProjectReference Include="..\Stride.Core.Packages\Stride.Core.Packages.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Diagnostics\AssetMessageStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AssetMessageStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagrams\AssetsDiagram.cd" />
+    <None Include="Diagrams\BuildCommands.cd" />
+  </ItemGroup>
+  <Import
+    Project="..\..\shared\Stride.Core.ShellHelper\Stride.Core.ShellHelper.projitems"
+    Label="Shared"
+  />
+  <Import Project="..\Stride.Core.Assets.Yaml\Stride.Core.Assets.Yaml.projitems" Label="Shared" />
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

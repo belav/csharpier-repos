@@ -16,9 +16,15 @@
     <LinkerArg Include="-fsanitize=$(EnableNativeSanitizers)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetOS)' == 'osx'">
-    <SanitizerRuntimeToCopy Condition="$(EnableNativeSanitizers.Contains('address'))" Include="libclang_rt.asan_osx_dynamic.dylib" />
+    <SanitizerRuntimeToCopy
+      Condition="$(EnableNativeSanitizers.Contains('address'))"
+      Include="libclang_rt.asan_osx_dynamic.dylib"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
-    <SanitizerRuntimeToCopy Condition="$(EnableNativeSanitizers.Contains('address'))" Include="clang_rt.asan_dynamic-$(LLVMArchitectureSuffix).dll" />
+    <SanitizerRuntimeToCopy
+      Condition="$(EnableNativeSanitizers.Contains('address'))"
+      Include="clang_rt.asan_dynamic-$(LLVMArchitectureSuffix).dll"
+    />
   </ItemGroup>
 </Project>

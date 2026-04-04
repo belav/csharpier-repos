@@ -1,14 +1,17 @@
 <Project DefaultTargets="Build">
-
   <PropertyGroup>
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''">$(ArtifactsDir)\obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''"
+      >$(ArtifactsDir)\obj\</BaseIntermediateOutputPath
+    >
     <IntermediateOutputPath>$([MSBuild]::NormalizeDirectory('$(BaseIntermediateOutputPath)'))$(Configuration)\</IntermediateOutputPath>
     <BuildDependsOn>
       PrepareForBuild;
       ResolveProjectReferences;
       _Build;
     </BuildDependsOn>
-    <JavaBuildArgs Condition="'$(JavaBuildArgs)' == ''">../gradlew $(GradleOptions) compileJava</JavaBuildArgs>
+    <JavaBuildArgs Condition="'$(JavaBuildArgs)' == ''"
+      >../gradlew $(GradleOptions) compileJava</JavaBuildArgs
+    >
     <GradleOptions>$(GradleOptions) -PpackageVersion="$(PackageVersion)"</GradleOptions>
   </PropertyGroup>
 
@@ -23,12 +26,11 @@
   <Target Name="Restore" />
 
   <Target Name="PrepareForBuild">
-    <MakeDir Directories="$(IntermediateOutputPath);$(PackageOutputPath)"  />
+    <MakeDir Directories="$(IntermediateOutputPath);$(PackageOutputPath)" />
   </Target>
 
   <Target Name="ResolveProjectReferences">
-    <MSBuild Projects="@(ProjectReference)"
-             BuildInParallel="true" />
+    <MSBuild Projects="@(ProjectReference)" BuildInParallel="true" />
   </Target>
 
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
@@ -42,14 +44,17 @@
       Lines="$(_JavaFileHash)"
       File="$(BaseIntermediateOutputPath)javafiles.cache"
       Overwrite="True"
-      WriteOnlyWhenDifferent="True" />
+      WriteOnlyWhenDifferent="True"
+    />
   </Target>
 
-  <Target Name="_Build"
+  <Target
+    Name="_Build"
     Condition="'$(IsBuildable)' != 'false'"
     DependsOnTargets="GetBuildInputCacheFile"
     Inputs="@(JavaFiles);$(BaseIntermediateOutputPath)javafiles.cache"
-    Outputs="@(BuildOutputFiles)">
+    Outputs="@(BuildOutputFiles)"
+  >
     <Telemetry EventName="NETCORE_ENGINEERING_TELEMETRY" EventData="Category=Build" />
     <Exec Command="$(JavaBuildArgs)" />
     <WriteLinesToFile Overwrite="true" File="$(BaseIntermediateOutputPath)build-sentinel" />
@@ -66,12 +71,17 @@
     <Telemetry EventName="NETCORE_ENGINEERING_TELEMETRY" EventData="Category=Pack" />
     <Message Text="> gradlew $(GradleOptions) createPackage" Importance="high" />
     <Exec Command="../gradlew $(GradleOptions) createPackage" />
-    <Message Importance="high" Text="$(PackageId) -> $(PackageOutputPath)%(JavaBuildFiles.Identity)" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\build\libs\%(JavaBuildFiles.Identity)" DestinationFolder="$(PackageOutputPath)" />
+    <Message
+      Importance="high"
+      Text="$(PackageId) -> $(PackageOutputPath)%(JavaBuildFiles.Identity)"
+    />
+    <Copy
+      SourceFiles="$(MSBuildProjectDirectory)\build\libs\%(JavaBuildFiles.Identity)"
+      DestinationFolder="$(PackageOutputPath)"
+    />
   </Target>
 
   <Target Name="Test" />
 
   <Target Name="Publish" />
-
 </Project>

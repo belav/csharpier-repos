@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.CodeAnalysis.ExternalAccess.Apex</RootNamespace>
@@ -34,5 +33,4 @@
     <PublicAPI Include="InternalAPI.Shipped.txt" />
     <PublicAPI Include="InternalAPI.Unshipped.txt" />
   </ItemGroup>
-
 </Project>

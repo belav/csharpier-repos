@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>NetTopologySuite support for the Microsoft SQL Server database provider for Entity Framework Core.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -51,8 +50,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.SqlServer\EFCore.SqlServer.csproj" PrivateAssets="contentfiles;build" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="..\EFCore.SqlServer\EFCore.SqlServer.csproj"
+      PrivateAssets="contentfiles;build"
+    />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,5 +86,4 @@
       <DependentUpon>SqlServerNTSStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

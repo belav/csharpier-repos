@@ -1,12 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(SignalRSharedSourceRoot)MemoryBufferWriter.cs" Link="MemoryBufferWriter.cs" />
-    <Compile Include="$(SignalRSharedSourceRoot)TextMessageFormatter.cs" Link="TextMessageFormatter.cs" />
+    <Compile
+      Include="$(SignalRSharedSourceRoot)MemoryBufferWriter.cs"
+      Link="MemoryBufferWriter.cs"
+    />
+    <Compile
+      Include="$(SignalRSharedSourceRoot)TextMessageFormatter.cs"
+      Link="TextMessageFormatter.cs"
+    />
     <Compile Include="$(SignalRSharedSourceRoot)TextMessageParser.cs" Link="TextMessageParser.cs" />
     <Compile Include="$(SharedSourceRoot)SyncPoint\SyncPoint.cs" />
   </ItemGroup>
@@ -21,7 +26,10 @@
     <Reference Include="Microsoft.AspNetCore.TestHost" />
     <Reference Include="Microsoft.AspNetCore.SignalR" />
     <Reference Include="Microsoft.AspNetCore.SignalR.Client.Core" />
-    <Reference Include="Microsoft.AspNetCore.SignalR.Client.SourceGenerator" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <Reference
+      Include="Microsoft.AspNetCore.SignalR.Client.SourceGenerator"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
-
 </Project>

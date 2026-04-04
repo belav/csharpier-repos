@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Provides abstractions and attributes that are used to configure Entity Framework Core</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -43,5 +42,4 @@
       <DependentUpon>AbstractionsStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

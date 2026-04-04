@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core MVC Razor Pages.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

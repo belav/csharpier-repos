@@ -5,5 +5,4 @@
     <!-- HttpSys tests are Windows-only -->
     <IsWindowsOnlyTest>true</IsWindowsOnlyTest>
   </PropertyGroup>
-
 </Project>

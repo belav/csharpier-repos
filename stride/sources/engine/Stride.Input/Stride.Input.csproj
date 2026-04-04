@@ -1,0 +1,44 @@
+<Project>
+  <PropertyGroup>
+    <StrideRuntime>true</StrideRuntime>
+    <StrideExplicitWindowsRuntime>true</StrideExplicitWindowsRuntime>
+    <StrideGraphicsApiDependent>true</StrideGraphicsApiDependent>
+  </PropertyGroup>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <UseWPF Condition="$(TargetFramework.Contains('-windows'))">true</UseWPF>
+    <UseWindowsForms Condition="$(TargetFramework.Contains('-windows'))">true</UseWindowsForms>
+    <StridePlatformDependent>true</StridePlatformDependent>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideBuildTags>*</StrideBuildTags>
+    <StrideCodeAnalysis>true</StrideCodeAnalysis>
+    <DefineConstants Condition="$(TargetFramework.StartsWith('net4'))"
+      >$(DefineConstants);STRIDE_INPUT_RAWINPUT</DefineConstants
+    >
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stride.Games\Stride.Games.csproj" />
+    <PackageReference
+      Include="SharpDX.RawInput"
+      Condition="$(TargetFramework.StartsWith('net4'))"
+    />
+    <PackageReference
+      Include="SharpDX.DirectInput"
+      Condition="$(TargetFramework.Contains('-windows'))"
+    />
+    <PackageReference
+      Include="SharpDX.XInput"
+      Condition="$(TargetFramework.Contains('-windows'))"
+    />
+    <PackageReference
+      Include="Microsoft.Management.Infrastructure"
+      Condition="$(TargetFramework.Contains('-windows'))"
+    />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+</Project>

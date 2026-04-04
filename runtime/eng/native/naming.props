@@ -32,8 +32,13 @@
   </Choose>
 
   <ItemGroup>
-    <AdditionalLibPackageExcludes Condition="'$(SymbolsSuffix)' != ''" Include="%2A%2A\%2A$(SymbolsSuffix)" />
-    <AdditionalSymbolPackageExcludes Condition="'$(LibSuffix)' != ''" Include="%2A%2A\%2A.a;%2A%2A\%2A$(LibSuffix)" />
+    <AdditionalLibPackageExcludes
+      Condition="'$(SymbolsSuffix)' != ''"
+      Include="%2A%2A\%2A$(SymbolsSuffix)"
+    />
+    <AdditionalSymbolPackageExcludes
+      Condition="'$(LibSuffix)' != ''"
+      Include="%2A%2A\%2A.a;%2A%2A\%2A$(LibSuffix)"
+    />
   </ItemGroup>
-
 </Project>

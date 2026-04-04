@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="System.Media.SoundPlayer" />
     <ForwardedType Include="System.Media.SystemSound" />
@@ -7,5 +6,4 @@
     <ForwardedType Include="System.Security.Cryptography.X509Certificates.X509Certificate2UI" />
     <ForwardedType Include="System.Security.Cryptography.X509Certificates.X509SelectionFlag" />
   </ItemGroup>
-
 </Project>

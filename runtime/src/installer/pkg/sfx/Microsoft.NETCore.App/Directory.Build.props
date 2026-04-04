@@ -92,15 +92,42 @@
     <PlatformManifestFileEntry Include="libSystem.Net.Security.Native.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libSystem.Net.Security.Native.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="libSystem.Net.Security.Native.so" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Apple.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Apple.dylib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Android.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Android.so" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Android.dex" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.Android.jar" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.OpenSsl.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.OpenSsl.dylib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libSystem.Security.Cryptography.Native.OpenSsl.so" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Apple.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Apple.dylib"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Android.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Android.so"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Android.dex"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.Android.jar"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.OpenSsl.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.OpenSsl.dylib"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libSystem.Security.Cryptography.Native.OpenSsl.so"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="coreclr.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="libcoreclr.so" IsNative="true" />
     <PlatformManifestFileEntry Include="libcoreclr.dylib" IsNative="true" />
@@ -109,9 +136,21 @@
     <PlatformManifestFileEntry Include="libclrgc.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="clretwrc.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="clrjit.dll" IsNative="true" />
-    <PlatformManifestFileEntry Condition="'$(PgoInstrument)' != ''" Include="pgort140.dll" IsNative="true" />
-    <PlatformManifestFileEntry Condition="'$(PgoInstrument)' != ''" Include="coreclr.pgd" IsNative="true" />
-    <PlatformManifestFileEntry Condition="'$(PgoInstrument)' != ''" Include="clrjit.pgd" IsNative="true" />
+    <PlatformManifestFileEntry
+      Condition="'$(PgoInstrument)' != ''"
+      Include="pgort140.dll"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Condition="'$(PgoInstrument)' != ''"
+      Include="coreclr.pgd"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Condition="'$(PgoInstrument)' != ''"
+      Include="clrjit.pgd"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libclrjit.so" IsNative="true" />
     <PlatformManifestFileEntry Include="libclrjit.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="mscordaccore.dll" IsNative="true" />
@@ -122,18 +161,44 @@
     <PlatformManifestFileEntry Include="libmscordbi.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="mscorrc.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="ucrtbase.dll" IsNative="true" />
-    <PlatformManifestFileEntry Include="msquic.dll" IsNative="true" FallbackFileVersion="$(MsQuicFileVersion)" />
-    <PlatformManifestFileEntry Include="libmsquic.dylib" IsNative="true" FallbackFileVersion="$(MsQuicFileVersion)" Condition="'$(Configuration)' == 'Debug' or '$(LibrariesConfiguration)' == 'Debug'"/>
+    <PlatformManifestFileEntry
+      Include="msquic.dll"
+      IsNative="true"
+      FallbackFileVersion="$(MsQuicFileVersion)"
+    />
+    <PlatformManifestFileEntry
+      Include="libmsquic.dylib"
+      IsNative="true"
+      FallbackFileVersion="$(MsQuicFileVersion)"
+      Condition="'$(Configuration)' == 'Debug' or '$(LibrariesConfiguration)' == 'Debug'"
+    />
     <PlatformManifestFileEntry Include="System.IO.Compression.Native.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="createdump.exe" IsNative="true" />
     <PlatformManifestFileEntry Include="createdump" IsNative="true" />
     <PlatformManifestFileEntry Include="libcoreclrtraceptprovider.so" IsNative="true" />
-    <PlatformManifestFileEntry Include="Microsoft.DiaSymReader.Native.x86.dll" IsNative="true" FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)" />
-    <PlatformManifestFileEntry Include="Microsoft.DiaSymReader.Native.amd64.dll" IsNative="true" FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)" />
-    <PlatformManifestFileEntry Include="Microsoft.DiaSymReader.Native.arm.dll" IsNative="true" FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)" />
-    <PlatformManifestFileEntry Include="Microsoft.DiaSymReader.Native.arm64.dll" IsNative="true" FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)" />
+    <PlatformManifestFileEntry
+      Include="Microsoft.DiaSymReader.Native.x86.dll"
+      IsNative="true"
+      FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)"
+    />
+    <PlatformManifestFileEntry
+      Include="Microsoft.DiaSymReader.Native.amd64.dll"
+      IsNative="true"
+      FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)"
+    />
+    <PlatformManifestFileEntry
+      Include="Microsoft.DiaSymReader.Native.arm.dll"
+      IsNative="true"
+      FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)"
+    />
+    <PlatformManifestFileEntry
+      Include="Microsoft.DiaSymReader.Native.arm64.dll"
+      IsNative="true"
+      FallbackFileVersion="$(MicrosoftDiaSymReaderNativeFileVersion)"
+    />
     <!-- NativeAOT specific files -->
-    <PlatformManifestFileEntry Include="libbootstrapper.a" IsNative="true" /> <!-- The bootstrapper lib used to be a static library, now it's an object file. -->
+    <PlatformManifestFileEntry Include="libbootstrapper.a" IsNative="true" />
+    <!-- The bootstrapper lib used to be a static library, now it's an object file. -->
     <PlatformManifestFileEntry Include="libbootstrapperdll.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libbootstrapper.o" IsNative="true" />
     <PlatformManifestFileEntry Include="libbootstrapperdll.o" IsNative="true" />
@@ -161,34 +226,70 @@
     <PlatformManifestFileEntry Include="libc++.so.1" IsNative="true" />
     <PlatformManifestFileEntry Include="libc++abi.so.1" IsNative="true" />
     <!-- Mono components specific files -->
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing.dll" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing.dll"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing.so" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing.dylib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing-static.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing-stub-static.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing-static.lib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-diagnostics_tracing-stub-static.lib" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing.dylib"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing-static.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing-stub-static.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing-static.lib"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-diagnostics_tracing-stub-static.lib"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libmono-component-hot_reload.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-hot_reload.so" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-hot_reload.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-hot_reload-static.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-hot_reload-stub-static.a" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-hot_reload-stub-static.a"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libmono-component-hot_reload-static.lib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-hot_reload-stub-static.lib" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-hot_reload-stub-static.lib"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libmono-component-debugger.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-debugger.so" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-debugger.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-debugger-static.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-debugger-stub-static.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-debugger-static.lib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-debugger-stub-static.lib" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-debugger-stub-static.lib"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen.dll" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen.so" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen.dylib" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen-static.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen-stub-static.a" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen-static.lib" IsNative="true" />
-    <PlatformManifestFileEntry Include="libmono-component-marshal-ilgen-stub-static.lib" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="libmono-component-marshal-ilgen-stub-static.a"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-marshal-ilgen-static.lib"
+      IsNative="true"
+    />
+    <PlatformManifestFileEntry
+      Include="libmono-component-marshal-ilgen-stub-static.lib"
+      IsNative="true"
+    />
     <!-- Mono WASM-specific files -->
     <PlatformManifestFileEntry Include="libmono-ee-interp.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libmono-icall-table.a" IsNative="true" />
@@ -232,7 +333,10 @@
     <PlatformManifestFileEntry Include="wasi-default.rsp" IsNative="true" />
     <PlatformManifestFileEntry Include="wasi-link.rsp" IsNative="true" />
     <PlatformManifestFileEntry Include="ILLink.Substitutions.WasmIntrinsics.xml" IsNative="true" />
-    <PlatformManifestFileEntry Include="ILLink.Substitutions.NoWasmIntrinsics.xml" IsNative="true" />
+    <PlatformManifestFileEntry
+      Include="ILLink.Substitutions.NoWasmIntrinsics.xml"
+      IsNative="true"
+    />
     <PlatformManifestFileEntry Include="ILLink.Substitutions.LegacyJsInterop.xml" IsNative="true" />
     <!-- wasi specific -->
     <PlatformManifestFileEntry Include="main.c" IsNative="true" />
@@ -246,21 +350,22 @@
     <PlatformManifestFileEntry Include="libicuuc.a" IsNative="true" />
   </ItemGroup>
 
- <ItemGroup>
+  <ItemGroup>
     <!-- Exclude shims from the closure verification -->
     <ExcludeFromClosure Include="@(NetFxReference)" />
- </ItemGroup>
+  </ItemGroup>
 
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <!-- Add a reference to Microsoft.DiaSymReader.Native if one does not already exist. -->
-    <PackageReference Include="Microsoft.DiaSymReader.Native"
-                      Exclude="@(PackageReference)"
-                      Version="$(MicrosoftDiaSymReaderNativeVersion)"
-                      IsImplicitlyDefined="true"
-                      ExcludeAssets="all" />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.Native"
+      Exclude="@(PackageReference)"
+      Version="$(MicrosoftDiaSymReaderNativeVersion)"
+      IsImplicitlyDefined="true"
+      ExcludeAssets="all"
+    />
     <!-- Generate the PkgMicrosoft_DiaSymReader_Native property no matter who added the reference. -->
-    <PackageReference Update="Microsoft.DiaSymReader.Native"
-                      GeneratePathProperty="true" />
+    <PackageReference Update="Microsoft.DiaSymReader.Native" GeneratePathProperty="true" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -278,5 +383,4 @@
   <PropertyGroup Condition="'$(TargetArchitecture)' == 'arm64' AND '$(BuildArchitecture)' != 'arm64'">
     <_hostArch>amd64</_hostArch>
   </PropertyGroup>
-
 </Project>

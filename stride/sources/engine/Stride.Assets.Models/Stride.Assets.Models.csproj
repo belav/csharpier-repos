@@ -1,0 +1,43 @@
+<Project>
+  <Import Project="..\..\targets\Stride.props" />
+  <PropertyGroup>
+    <StrideAssemblyProcessor>true</StrideAssemblyProcessor>
+    <StrideAssemblyProcessorOptions>$(StrideAssemblyProcessorDefaultOptions)</StrideAssemblyProcessorOptions>
+    <TargetFramework>$(StrideXplatEditorTargetFramework)</TargetFramework>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\tools\Stride.Importer.Common\Stride.Importer.Common.csproj" />
+    <ProjectReference Include="..\..\tools\Stride.Importer.3D\Stride.Importer.3D.csproj" />
+    <ProjectReference Include="..\Stride.Assets\Stride.Assets.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Analysis\" />
+  </ItemGroup>
+  <Import Project="$(StrideSdkTargets)" />
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>_StrideIncludeExtraAssemblies;$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificBuildOutput>
+    <TargetsForTfmSpecificContentInPackage>_StrideIncludeNativeLibs;$(TargetsForTfmSpecificContentInPackage)</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="_StrideIncludeExtraAssemblies">
+    <ItemGroup>
+      <!-- Needed by .NET Core runtime to be able to load C++/CLI assemblies -->
+      <BuildOutputInPackage
+        Include="$(OutputPath)ijwhost.dll"
+        Condition="Exists('$(OutputPath)ijwhost.dll')"
+      />
+      <BuildOutputInPackage Include="$(OutputPath)Stride.Importer.Common.dll" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="_StrideIncludeNativeLibs">
+    <ItemGroup></ItemGroup>
+  </Target>
+</Project>

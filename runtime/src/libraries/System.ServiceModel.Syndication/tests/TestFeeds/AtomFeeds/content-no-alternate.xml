@@ -4,9 +4,8 @@ Expect:       !Error
 -->
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-
   <title>Example Feed</title>
-  <link href="http://contoso.com/"/>
+  <link href="http://contoso.com/" />
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Author Name</name>
@@ -20,5 +19,4 @@ Expect:       !Error
     <summary>Some text.</summary>
     <content>Danger, Will Robinson!</content>
   </entry>
-
 </feed>

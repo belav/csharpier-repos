@@ -1,0 +1,32 @@
+// Copyright (c) .NET Foundation and Contributors (https://dotnetfoundation.org/ & https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+using System.Linq;
+
+namespace Stride.Core.Presentation.Services
+{
+    /// <summary>
+    /// A structure representing a filter for a file dialog.
+    /// </summary>
+    public struct FileDialogFilter
+    {
+        /// <summary>
+        /// Gets the description of this filter.
+        /// </summary>
+        public string Description { get; }
+        /// <summary>
+        /// Gets the list of extensions for this filter, concatenated in a string.
+        /// </summary>
+        public string ExtensionList { get; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileDialogFilter"/> structure.
+        /// </summary>
+        /// <param name="description">The description of this filter.</param>
+        /// <param name="extensionList">The list of extensions for this filter, concatenated in a string.</param>
+        public FileDialogFilter(string description, string extensionList)
+        {
+            this.Description = description;
+            // Microsoft.WindowsAPICodePack.Shell doesn't seem to accept .ext anymore, only *.ext or ext
+            this.ExtensionList = string.Join(";", extensionList.Split(';').Select(x => x.TrimStart('.')));
+        }
+    }
+}

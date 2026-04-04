@@ -1,6 +1,9 @@
 <Type Name="CdeclFunction" FullName="Mono.Unix.Native.CdeclFunction">
   <TypeSignature Language="C#" Value="public sealed class CdeclFunction" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CdeclFunction extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit CdeclFunction extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -18,7 +21,9 @@
     <summary>Permits calling a varargs (cdecl) function from a library.</summary>
     <remarks>
       <para>This class represents a single unmanaged function with "cdecl" calling convention -- that is, it can accept a variable number of arguments which are passed on the runtime stack.</para>
-      <para>To use, create an instance, then call <see cref="M:Mono.Unix.Native.CdeclFunction.Invoke" /> with the appropriate number of arguments:</para>
+      <para
+        >To use, create an instance, then call <see cref="M:Mono.Unix.Native.CdeclFunction.Invoke" /> with the appropriate number of arguments:</para
+      >
       <example>
         <code lang="C#">
 CdeclFunction printf = new CdeclFunction (
@@ -37,8 +42,14 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CdeclFunction (string library, string method);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string library, string method) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CdeclFunction (string library, string method);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string library, string method) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -57,8 +68,14 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CdeclFunction (string library, string method, Type returnType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string library, string method, class System.Type returnType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CdeclFunction (string library, string method, Type returnType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string library, string method, class System.Type returnType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,14 +90,19 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
       <Docs>
         <param name="library">The library the cdecl function resides in.</param>
         <param name="method">The export to invoke from library.</param>
-        <param name="returnType">The return type of the function to invoke.  The default return type is <see cref="T:System.Void" />.</param>
+        <param name="returnType"
+          >The return type of the function to invoke.  The default return type is <see cref="T:System.Void" />.</param
+        >
         <summary>Create a stub object to invoke a cdecl function.</summary>
         <remarks />
       </Docs>
     </Member>
     <Member MemberName="Invoke">
       <MemberSignature Language="C#" Value="public object Invoke (object[] parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object Invoke(object[] parameters) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance object Invoke(object[] parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

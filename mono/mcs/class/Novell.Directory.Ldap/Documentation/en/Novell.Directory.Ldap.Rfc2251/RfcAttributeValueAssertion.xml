@@ -1,10 +1,15 @@
-<Type Name="RfcAttributeValueAssertion" FullName="Novell.Directory.Ldap.Rfc2251.RfcAttributeValueAssertion">
-  <TypeSignature Language="C#" Value="public class RfcAttributeValueAssertion : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable" />
+<Type
+  Name="RfcAttributeValueAssertion"
+  FullName="Novell.Directory.Ldap.Rfc2251.RfcAttributeValueAssertion"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcAttributeValueAssertion : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcAttributeValueAssertion(Novell.Directory.Ldap.Rfc2251.RfcAttributeDescription ad, Novell.Directory.Ldap.Rfc2251.RfcAssertionValue av)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcAttributeValueAssertion(Novell.Directory.Ldap.Rfc2251.RfcAttributeDescription ad, Novell.Directory.Ldap.Rfc2251.RfcAssertionValue av)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="ad" Type="Novell.Directory.Ldap.Rfc2251.RfcAttributeDescription" />

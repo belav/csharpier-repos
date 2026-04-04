@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -10,8 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Configuration\src\Microsoft.Extensions.Configuration.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Configuration.Abstractions\src\Microsoft.Extensions.Configuration.Abstractions.csproj" />
-    <Compile Include="$(CommonPath)System\ThrowHelper.cs"
-             Link="Common\System\ThrowHelper.cs" />
+    <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
-
 </Project>
