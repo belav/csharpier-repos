@@ -22,7 +22,8 @@
       <para
         >For more information about implementing the class, see <format type="text/html">
           <a href="f2d34e43-fa8b-46d2-91cf-d2960e13e16b"
-            >How To: Create a Custom Client Identity Verifier</a>
+            >How To: Create a Custom Client Identity Verifier</a
+          >
         </format>.</para
       >
     </remarks>

@@ -2093,10 +2093,8 @@ public static void PrintValues( IEnumerable myList ) {
             >
           </block>
           <para>
-            <block subset="none" type="behaviors"
-              >As described
-   above.</block
-            >
+            <block subset="none" type="behaviors">As described
+   above.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">

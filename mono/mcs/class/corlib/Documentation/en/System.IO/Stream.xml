@@ -1142,10 +1142,8 @@ seeking.</block
             >
           </para>
           <para>
-            <block subset="none" type="behaviors"
-              >This property is
-   read-only.</block
-            >
+            <block subset="none" type="behaviors">This property is
+   read-only.</block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException"

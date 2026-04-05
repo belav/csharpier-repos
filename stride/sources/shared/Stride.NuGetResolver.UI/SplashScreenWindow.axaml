@@ -55,8 +55,9 @@
         Foreground="#FFFFFF"
         Margin="10"
         x:Name="Message"
-        >Restoring NuGet packages...</TextBlock
       >
+        Restoring NuGet packages...
+      </TextBlock>
       <TextBox
         x:Name="Log"
         Width="424"

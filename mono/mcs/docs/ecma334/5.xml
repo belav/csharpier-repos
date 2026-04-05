@@ -29,7 +29,8 @@
         <keyword>sealed</keyword>
       </rhs>
     </grammar_production>defines the <non_terminal where="17.1.1"
-      >class-modifier</non_terminal> non-terminal as having seven productions. </paragraph
+      >class-modifier</non_terminal
+    > non-terminal as having seven productions. </paragraph
   >
   <paragraph
     >Alternatives are normally listed on separate lines, as shown above, though in cases where there are many alternatives, the phrase &quot;one of&quot; precedes a list of the options. This is simply shorthand for listing each of the alternatives on a separate line. For example: <grammar_production>

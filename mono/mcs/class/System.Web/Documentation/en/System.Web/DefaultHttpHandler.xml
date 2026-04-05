@@ -41,7 +41,8 @@
           <para
             >About creating asynchronous HTTP handlers, see <format type="text/html">
               <a href="1b5c4a27-599b-44d0-8a06-72edc6765aa9"
-                >How to: Create an Asynchronous HTTP Handler</a>
+                >How to: Create an Asynchronous HTTP Handler</a
+              >
             </format>. </para
           >
         </item>

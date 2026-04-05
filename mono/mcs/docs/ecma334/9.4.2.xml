@@ -158,7 +158,8 @@ class Class1
       >
       <list_item
         > Any <non_terminal where="9.4.2"
-          >formatting-character</non_terminal>s are removed. </list_item
+          >formatting-character</non_terminal
+        >s are removed. </list_item
       >
     </list>
   </paragraph>

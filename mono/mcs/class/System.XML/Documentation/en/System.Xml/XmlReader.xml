@@ -2413,6 +2413,8 @@ if the attribute is not found.</para
               
 
               
+
+              
          
          node, this method can be used to get the PUBLIC and
          SYSTEM literals.</para
@@ -2515,8 +2517,7 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
         </value>
         <remarks>
           <para>
-            <block subset="none" type="behaviors"
-              > As described
+            <block subset="none" type="behaviors"> As described
       above.
             </block>
           </para>
@@ -2993,6 +2994,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <para
               > The qualified name is equivalent to
          the <see cref="P:System.Xml.XmlReader.LocalName" />
+
+              
 
               
 

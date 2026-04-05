@@ -79,7 +79,7 @@
       >
         <DockPanel>
           <TextBlock x:Name="TextBlock" DockPanel.Dock="Left">
-              [<Run Text="{Binding LinkFromParent, Mode=OneWay}" />/<Run Text="{Binding ContentType, Mode=OneWay}" />]
+            [<Run Text="{Binding LinkFromParent, Mode=OneWay}" />/<Run Text="{Binding ContentType, Mode=OneWay}" />]
               <Run
               Text="{Binding Index, StringFormat=[{0}], Mode=OneWay}"
               x:Name="IndexRun"

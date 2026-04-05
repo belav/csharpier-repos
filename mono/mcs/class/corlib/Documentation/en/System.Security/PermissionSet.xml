@@ -1440,10 +1440,8 @@ public class PermissionSetToStringExample {
             >
           </para>
           <para>
-            <block subset="none" type="usage"
-              >This method is called by the
-      system.</block
-            >
+            <block subset="none" type="usage">This method is called by the
+      system.</block>
           </para>
         </remarks>
         <summary>

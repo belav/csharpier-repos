@@ -145,7 +145,8 @@
           <para
             >For more information about adapters, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-                >Architectural Overview of Adaptive Control Behavior</a>
+                >Architectural Overview of Adaptive Control Behavior</a
+              >
             </format>.</para
           >
         </remarks>
@@ -2388,7 +2389,8 @@
           <para
             >For more information about adapters, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-                >Architectural Overview of Adaptive Control Behavior</a>
+                >Architectural Overview of Adaptive Control Behavior</a
+              >
             </format>.</para
           >
           <para
@@ -2442,7 +2444,8 @@
           <para
             >For more information about adapters, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-                >Architectural Overview of Adaptive Control Behavior</a>
+                >Architectural Overview of Adaptive Control Behavior</a
+              >
             </format>.</para
           >
         </remarks>
@@ -2619,7 +2622,8 @@
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>. For information on implementing a custom session-state provider, see <format type="text/html">
               <a href="baadfec5-c881-468a-9681-7d8796b05a66"
-                >Implementing a Session-State Store Provider</a>
+                >Implementing a Session-State Store Provider</a
+              >
             </format>.</para
           >
         </remarks>

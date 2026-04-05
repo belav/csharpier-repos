@@ -16,7 +16,8 @@
         <para
           >For conceptual information about using this namespace when programming with the .NET Framework, see <format type="text/html">
             <a href="c18b1fb1-2af1-4de7-80a4-95e56fd976cb"
-              >Using the .NET Framework Data Provider for SQL Server</a>
+              >Using the .NET Framework Data Provider for SQL Server</a
+            >
           </format>.</para
         >
       </block>

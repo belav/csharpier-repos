@@ -2057,10 +2057,8 @@
             ColumnHidden="False"
             >The Big Cheese</ShipName
           >
-          <ShipAddress ColumnWidth="2475"
-            >89 Jefferson Way
-Suite 2</ShipAddress
-          >
+          <ShipAddress ColumnWidth="2475">89 Jefferson Way
+Suite 2</ShipAddress>
           <ShipCity DisplayControl="109" FilterLookup="1" Value="Portland">Portland</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode>97201</ShipPostalCode>
@@ -2503,7 +2501,8 @@ Crowther Way</ShipAddress
           <ShipVia Required="False">3</ShipVia>
           <Freight>87.03</Freight>
           <ShipName AllowZeroLength="False" FieldSize="Error"
-            >Furia Bacalhau e Frutos do Mar</ShipName>
+            >Furia Bacalhau e Frutos do Mar</ShipName
+          >
           <ShipAddress OriginalValue="Error">Jardim das rosas n. 32</ShipAddress>
           <ShipCity VisibleValue="Error" ColumnOrder="0" ColumnHidden="False">Lisboa</ShipCity>
           <ShipRegion></ShipRegion>
@@ -3650,10 +3649,8 @@ Stratford St. Mary</ShipAddress>
           <ShipVia Size="4">3</ShipVia>
           <Freight SourceField="Freight" SourceTable="Orders">30.34</Freight>
           <ShipName>Hungry Coyote Import Store</ShipName>
-          <ShipAddress ValidateOnSet="False"
-            >City Center Plaza
-516 Main St.</ShipAddress
-          >
+          <ShipAddress ValidateOnSet="False">City Center Plaza
+516 Main St.</ShipAddress>
           <ShipCity DataUpdatable="False" ForeignName="Error">Elgin</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode DefaultValue="" ValidationRule="">97827</ShipPostalCode>
@@ -3911,7 +3908,8 @@ Stratford St. Mary</ShipAddress>
           <ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Ave. 5 de Mayo Porlamar</ShipAddress>
+            >Ave. 5 de Mayo Porlamar</ShipAddress
+          >
           <ShipCity>I. de Margarita</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False" ColumnWidth="1410"
             >Nueva Esparta</ShipRegion

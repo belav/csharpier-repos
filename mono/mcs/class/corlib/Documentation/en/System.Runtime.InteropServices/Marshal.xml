@@ -3189,7 +3189,8 @@
           <para>
             <see cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" /> exposes the Win32 <see
               cref="http://go.microsoft.com/fwlink/?LinkId=148657"
-              >GetLastError</see> function from Kernel32.DLL. This method exists because it is not safe to make a direct platform invoke call to GetLastError to obtain this information. If you want to access this error code, you must call <see cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" /> instead of writing your own platform invoke definition for GetLastError and calling it. The common language runtime can make internal calls to APIs that overwrite the GetLastError maintained by the operating system.</para
+              >GetLastError</see
+            > function from Kernel32.DLL. This method exists because it is not safe to make a direct platform invoke call to GetLastError to obtain this information. If you want to access this error code, you must call <see cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" /> instead of writing your own platform invoke definition for GetLastError and calling it. The common language runtime can make internal calls to APIs that overwrite the GetLastError maintained by the operating system.</para
           >
           <para
             >You can use this method to obtain error codes only if you apply the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> to the method signature and set the <see cref="F:System.Runtime.InteropServices.DllImportAttribute.SetLastError" /> field to true. The process for this varies depending upon the source language used: C# and C++ are false by default, but the Declare statement in Visual Basic is true.</para
@@ -3206,7 +3207,8 @@
           <para
             >The last error code set by a call to the Win32 <see
               cref="http://go.microsoft.com/fwlink/?LinkId=148656"
-              >SetLastError</see> function.</para
+              >SetLastError</see
+            > function.</para
           >
         </returns>
       </Docs>

@@ -32,7 +32,8 @@
       <para
         >For more information about adaptive rendering in ASP.NET, see <format type="text/html">
           <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-            >Architectural Overview of Adaptive Control Behavior</a>
+            >Architectural Overview of Adaptive Control Behavior</a
+          >
         </format>.</para
       >
     </remarks>
@@ -155,7 +156,8 @@
           <para
             >Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" /> method to initialize settings in the control. During a postback, this is an important phase for managing interaction with existing view-state data. For more information, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-                >Architectural Overview of Adaptive Control Behavior</a>
+                >Architectural Overview of Adaptive Control Behavior</a
+              >
             </format>.</para
           >
         </remarks>
@@ -198,7 +200,8 @@
           <para
             >Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" /> method to finalize any settings in the control. Changes made to control properties in this phase will be saved to view state, but changes made in the <see cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" /> method are not saved. For more information, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
-                >Architectural Overview of Adaptive Control Behavior</a>
+                >Architectural Overview of Adaptive Control Behavior</a
+              >
             </format>.</para
           >
         </remarks>

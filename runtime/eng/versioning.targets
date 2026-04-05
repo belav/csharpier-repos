@@ -65,7 +65,8 @@
         >|</AssemblyAttributeOrOperator
       >
       <AssemblyAttributeOrOperator Condition="'$(MSBuildProjectExtension)' == '.vbproj'"
-        >Or</AssemblyAttributeOrOperator>
+        >Or</AssemblyAttributeOrOperator
+      >
     </PropertyGroup>
 
     <ItemGroup Condition="'$(IncludeDllSafeSearchPathAttribute)' == 'true'">

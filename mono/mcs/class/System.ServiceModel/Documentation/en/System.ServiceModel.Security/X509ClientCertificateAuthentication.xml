@@ -22,7 +22,8 @@
       <para
         >If the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" /> is set to <see cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />, then you must create a custom certificate validator that inherits from the <see cref="T:System.IdentityModel.Selectors.X509CertificateValidator" /> class. crdefault <format type="text/html">
           <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
-            >How To: Create a Service Employing a Custom Certificate Validator</a>
+            >How To: Create a Service Employing a Custom Certificate Validator</a
+          >
         </format>.</para
       >
     </remarks>
@@ -115,7 +116,8 @@
           <para
             >crdefault <format type="text/html">
               <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
-                >How To: Create a Service Employing a Custom Certificate Validator</a>
+                >How To: Create a Service Employing a Custom Certificate Validator</a
+              >
             </format>.</para
           >
         </remarks>

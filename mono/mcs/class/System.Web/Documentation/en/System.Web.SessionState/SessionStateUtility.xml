@@ -80,7 +80,8 @@
       <para
         >For information about implementing a session-state store provider, see <format type="text/html">
           <a href="baadfec5-c881-468a-9681-7d8796b05a66"
-            >Implementing a Session State Store Provider</a>
+            >Implementing a Session State Store Provider</a
+          >
         </format>.</para
       >
     </remarks>

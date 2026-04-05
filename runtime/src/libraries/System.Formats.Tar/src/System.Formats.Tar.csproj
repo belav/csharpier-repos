@@ -9,7 +9,8 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.PlatformNotSupported_SystemFormatsTar</GeneratePlatformNotSupportedAssemblyMessage>
+      >SR.PlatformNotSupported_SystemFormatsTar</GeneratePlatformNotSupportedAssemblyMessage
+    >
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

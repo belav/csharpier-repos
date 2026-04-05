@@ -70,9 +70,11 @@
   >
   <paragraph
     >A <non_terminal where="17.5.1"
-      >fixed-parameter</non_terminal> consists of an optional set of attributes (<hyperlink>24</hyperlink>), an optional ref or out modifier, a type, and an identifier. Each <non_terminal
+      >fixed-parameter</non_terminal
+    > consists of an optional set of attributes (<hyperlink>24</hyperlink>), an optional ref or out modifier, a type, and an identifier. Each <non_terminal
       where="17.5.1"
-      >fixed-parameter</non_terminal> declares a parameter of the given type with the given name. </paragraph
+      >fixed-parameter</non_terminal
+    > declares a parameter of the given type with the given name. </paragraph
   >
   <paragraph
     >A <non_terminal where="17.5.1"

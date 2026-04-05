@@ -115,7 +115,8 @@
           <para
             >For more information, see <format type="text/html">
               <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
-                >How To: Create a Service Employing a Custom Certificate Validator</a>
+                >How To: Create a Service Employing a Custom Certificate Validator</a
+              >
             </format>.</para
           >
         </remarks>

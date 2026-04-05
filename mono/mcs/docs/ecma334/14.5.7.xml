@@ -42,6 +42,7 @@
       >primary-expression</non_terminal
     > in a context other than the ones listed above is a compile-time error. In particular, it is not possible to refer to this in a static method, a static property accessor, or in a  <non_terminal
       where="19.6"
-      >variable-initializer</non_terminal> of a field declaration. </paragraph
+      >variable-initializer</non_terminal
+    > of a field declaration. </paragraph
   >
 </clause>
