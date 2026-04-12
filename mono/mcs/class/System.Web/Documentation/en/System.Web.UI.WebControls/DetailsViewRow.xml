@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class is used to represent an individual row in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. Each row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control has a designated row type. The following table lists the row types that are valid for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class is used to represent an individual row in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. Each row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control has a designated row type. The following table lists the row types that are valid for the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
       <list type="table">
         <listheader>
           <item>
@@ -38,8 +37,7 @@
           </term>
           <description>
             <para
-              >A data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-            >
+              >A data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           </description>
         </item>
         <item>
@@ -50,8 +48,7 @@
           </term>
           <description>
             <para
-              >The empty data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control when there are no records to display.</para
-            >
+              >The empty data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control when there are no records to display.</para>
           </description>
         </item>
         <item>
@@ -62,8 +59,7 @@
           </term>
           <description>
             <para
-              >The footer row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-            >
+              >The footer row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           </description>
         </item>
         <item>
@@ -74,8 +70,7 @@
           </term>
           <description>
             <para
-              >The header row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-            >
+              >The header row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           </description>
         </item>
         <item>
@@ -86,14 +81,12 @@
           </term>
           <description>
             <para
-              >A pager row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-            >
+              >A pager row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           </description>
         </item>
       </list>
       <para
-        >To determine the row type of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowType" /> property. A <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object also has a state associated with it. The state can be a bitwise combination of the values in the following table.</para
-      >
+        >To determine the row type of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowType" /> property. A <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object also has a state associated with it. The state can be a bitwise combination of the values in the following table.</para>
       <list type="table">
         <listheader>
           <item>
@@ -113,8 +106,7 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is an alternate row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is an alternate row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           </description>
         </item>
         <item>
@@ -125,8 +117,7 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in edit mode.</para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in edit mode.</para>
           </description>
         </item>
         <item>
@@ -137,8 +128,7 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in insert mode.</para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in insert mode.</para>
           </description>
         </item>
         <item>
@@ -149,37 +139,29 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in its normal (default) state.</para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in its normal (default) state.</para>
           </description>
         </item>
       </list>
       <para
-        >To determine the state of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowState" /> property.</para
-      >
+        >To determine the state of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowState" /> property.</para>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control stores all its data rows in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection. To determine the index of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowIndex" /> property.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DetailsView" /> control stores all its data rows in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection. To determine the index of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection, use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowIndex" /> property.</para>
       <para
-        >You can access the individual cells of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property. If a cell contains controls, you can retrieve a control from the cell by using the <see cref="P:System.Web.UI.Control.Controls" /> collection of the cell. You can also use the <see cref="M:System.Web.UI.Control.FindControl(System.String)" /> method of the cell to find the control, if the control has an <see cref="P:System.Web.UI.Control.ID" /> property specified.</para
-      >
+        >You can access the individual cells of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property. If a cell contains controls, you can retrieve a control from the cell by using the <see cref="P:System.Web.UI.Control.Controls" /> collection of the cell. You can also use the <see cref="M:System.Web.UI.Control.FindControl(System.String)" /> method of the cell to find the control, if the control has an <see cref="P:System.Web.UI.Control.ID" /> property specified.</para>
       <para
-        >To retrieve a field value from a <see cref="T:System.Web.UI.WebControls.BoundField" /> field column or an automatically generated field column, use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" /> property of the cell. To retrieve a field value from other field column types where the field value is bound to a control, first retrieve the control from the appropriate cell and then access the appropriate property of the control.</para
-      >
+        >To retrieve a field value from a <see cref="T:System.Web.UI.WebControls.BoundField" /> field column or an automatically generated field column, use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" /> property of the cell. To retrieve a field value from other field column types where the field value is bound to a control, first retrieve the control from the appropriate cell and then access the appropriate property of the control.</para>
       <block subset="none" type="note">
         <para
-          >It is possible to use a data-binding expression directly in a <see cref="T:System.Web.UI.WebControls.TemplateField" /> field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see cref="T:System.Web.UI.DataBoundLiteralControl" /> control. To retrieve the field value, you must first retrieve the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> control from the appropriate cell and then use its <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" /> property.</para
-        >
+          >It is possible to use a data-binding expression directly in a <see cref="T:System.Web.UI.WebControls.TemplateField" /> field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see cref="T:System.Web.UI.DataBoundLiteralControl" /> control. To retrieve the field value, you must first retrieve the <see cref="T:System.Web.UI.DataBoundLiteralControl" /> control from the appropriate cell and then use its <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" /> property.</para>
       </block>
       <para
-        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class, see the <see cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class, see the <see cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" /> constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a row within a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-      >
+        >Represents a row within a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -199,11 +181,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para
-          >
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para>
           <para
-            >The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para
-          >
+            >The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para>
           <list type="table">
             <listheader>
               <item>
@@ -250,30 +230,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> class.</para>
         </summary>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the row in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</param
-        >
+          />The index of the row in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</param>
         <param name="rowType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> enumeration values.</param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" /> enumeration values.</param>
         <param name="rowState">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" /> enumeration values.</param
-        >
+          />One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" /> enumeration values.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -308,15 +284,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -334,8 +308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowIndex" /> property to determine the index of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowIndex" /> property to determine the index of a <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
           <block subset="none" type="note">
             <para>This property applies only to data rows.</para>
           </block>
@@ -343,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-          >
+            >Gets the index of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -366,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowState" /> property to determine the state of the row. The state can be a bitwise combination of the values in the following table.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowState" /> property to determine the state of the row. The state can be a bitwise combination of the values in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -385,8 +356,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is an alternate row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is an alternate row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
               </description>
             </item>
             <item>
@@ -395,8 +365,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in edit mode.</para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in edit mode.</para>
               </description>
             </item>
             <item>
@@ -405,8 +374,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in insert mode.</para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in insert mode.</para>
               </description>
             </item>
             <item>
@@ -415,8 +383,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in its normal (default) state.</para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object is in its normal (default) state.</para>
               </description>
             </item>
           </list>
@@ -425,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the state of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object.</para
-          >
+            >Gets the state of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -448,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowType" /> property to determine the type of row that the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object represents. The following table lists the valid row type values.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewRow.RowType" /> property to determine the type of row that the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object represents. The following table lists the valid row type values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -467,8 +432,7 @@
               </term>
               <description>
                 <para
-                  >A data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-                >
+                  >A data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
               </description>
             </item>
             <item>
@@ -477,8 +441,7 @@
               </term>
               <description>
                 <para
-                  >The empty data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control when there are no records to display.</para
-                >
+                  >The empty data row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.DetailsView" /> control when there are no records to display.</para>
               </description>
             </item>
             <item>
@@ -487,8 +450,7 @@
               </term>
               <description>
                 <para
-                  >The footer row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-                >
+                  >The footer row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
               </description>
             </item>
             <item>
@@ -497,8 +459,7 @@
               </term>
               <description>
                 <para
-                  >The header row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-                >
+                  >The header row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
               </description>
             </item>
             <item>
@@ -507,8 +468,7 @@
               </term>
               <description>
                 <para
-                  >A pager row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para
-                >
+                  >A pager row in the <see cref="T:System.Web.UI.WebControls.DetailsView" /> control.</para>
               </description>
             </item>
           </list>
@@ -517,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the row type of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object.</para
-          >
+            >Gets the row type of the <see cref="T:System.Web.UI.WebControls.DetailsViewRow" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

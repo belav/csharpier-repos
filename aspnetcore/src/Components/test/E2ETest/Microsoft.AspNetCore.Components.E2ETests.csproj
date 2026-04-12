@@ -7,12 +7,10 @@
     <_BuildAndTest>false</_BuildAndTest>
     <_BuildAndTest
       Condition=" '$(ContinuousIntegrationBuild)' == 'true' AND '$(EXECUTE_COMPONENTS_E2E_TESTS)' == 'true' "
-      >true</_BuildAndTest
-    >
+      >true</_BuildAndTest>
     <_BuildAndTest
       Condition=" '$(ContinuousIntegrationBuild)' != 'true' AND '$(SkipTestBuild)' != 'true' "
-      >true</_BuildAndTest
-    >
+      >true</_BuildAndTest>
     <ExcludeFromBuild Condition=" !$(_BuildAndTest) ">true</ExcludeFromBuild>
     <SkipTests Condition=" !$(_BuildAndTest) ">true</SkipTests>
   </PropertyGroup>

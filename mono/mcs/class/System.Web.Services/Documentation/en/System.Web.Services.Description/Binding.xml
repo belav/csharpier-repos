@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Binding" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Binding" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string value containing the name of the <see cref="T:System.Web.Services.Description.Binding" />.</para
-          >
+            >Gets or sets a string value containing the name of the <see cref="T:System.Web.Services.Description.Binding" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -147,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" /> of which the <see cref="T:System.Web.Services.Description.Binding" /> is a member.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" /> of which the <see cref="T:System.Web.Services.Description.Binding" /> is a member.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -175,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value representing the namespace-qualified name of the <see cref="T:System.Web.Services.Description.PortType" /> with which the Binding is associated.</para
-          >
+            >Gets or sets a value representing the namespace-qualified name of the <see cref="T:System.Web.Services.Description.PortType" /> with which the Binding is associated.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -8,9 +8,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>This type represents an abstract datatype that is being used in "data" and "value" elements' validation.</summary>
     <remarks>To be added.</remarks>
@@ -36,17 +34,13 @@
       <Docs>
         <summary>Validates the value string and returns the validated typed object, being supplied context information by XmlReader as a context holder.</summary>
         <param name="text"
-          >a <see cref="T:System.String" /> that represents a value being parsed.</param
-        >
+          >a <see cref="T:System.String" /> that represents a value being parsed.</param>
         <param name="reader"
-          >a <see cref="T:System.Xml.XmlReader" /> that is used as a context holder.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that is used as a context holder.</param>
         <returns
-          >a <see cref="T:System.Object" /> that represents the validated value. This method <strong>must</strong> return null if the value was invalid. It is recommended that implementations return <see cref="P:System.DBNull.Value" /> for explicit NULL value.</returns
-        >
+          >a <see cref="T:System.Object" /> that represents the validated value. This method <strong>must</strong> return null if the value was invalid. It is recommended that implementations return <see cref="P:System.DBNull.Value" /> for explicit NULL value.</returns>
         <remarks
-          >The context represented by the XmlReader parameter is used for example to acquire namespace URI using <see cref="M:System.Xml.XmlREader.LookupNamespace" />.</remarks
-        >
+          >The context represented by the XmlReader parameter is used for example to acquire namespace URI using <see cref="M:System.Xml.XmlREader.LookupNamespace" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Compare">
@@ -106,11 +100,9 @@
       <Docs>
         <summary>Validates the argument string.</summary>
         <param name="text"
-          >a <see cref="T:System.String" /> that represents a value being parsed.</param
-        >
+          >a <see cref="T:System.String" /> that represents a value being parsed.</param>
         <param name="reader"
-          >a <see cref="T:System.Xml.XmlReader" /> that is used as a context holder.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that is used as a context holder.</param>
         <returns>True if valid. False if invalid.</returns>
         <remarks>The default implementation calls Parse() and checks if the return value is null or not.</remarks>
       </Docs>

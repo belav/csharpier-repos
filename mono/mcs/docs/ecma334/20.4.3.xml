@@ -29,8 +29,7 @@ t.Paint();    // invokes TextBox.Paint();
 ic.Paint();   // invokes Control.Paint();  
 it.Paint();   // invokes Control.Paint();  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >However, when an interface method is mapped onto a virtual method in a class, it is possible for derived classes to override the virtual method and alter the implementation of the interface. <example
@@ -60,8 +59,7 @@ t.Paint();    // invokes TextBox.Paint();
 ic.Paint();   // invokes Control.Paint();  
 it.Paint();   // invokes TextBox.Paint();  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >Since explicit interface member implementations cannot be declared virtual, it is not possible to override an explicit interface member implementation. However, it is perfectly valid for an explicit interface member implementation to call another method, and that other method can be declared virtual to allow derived classes to override it. <example

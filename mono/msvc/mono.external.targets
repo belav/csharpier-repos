@@ -118,33 +118,26 @@
     <_MonoSourceDir>$([System.IO.Path]::GetFullPath('$(MONO_DIR)').TrimEnd('\'))</_MonoSourceDir>
     <_MonoOutputDir>$([System.IO.Path]::GetFullPath('$(OutDir)'))</_MonoOutputDir>
     <_MonoExternalBuildForceMSBuild Condition="'$(MONO_EXTERNAL_BUILD_FORCE_MSBUILD)' == 'true'"
-      >true</_MonoExternalBuildForceMSBuild
-    >
+      >true</_MonoExternalBuildForceMSBuild>
     <_MonoExternalBuildForceMSBuild Condition="'$(MONO_EXTERNAL_BUILD_FORCE_MSBUILD)' != 'true'"
-      >false</_MonoExternalBuildForceMSBuild
-    >
+      >false</_MonoExternalBuildForceMSBuild>
   </PropertyGroup>
 
   <PropertyGroup>
     <_LLVMSourceDir Condition="'$(_LLVMSourceDir)' == ''"
-      >$(MONO_INTERNAL_LLVM_SOURCE_DIR)</_LLVMSourceDir
-    >
+      >$(MONO_INTERNAL_LLVM_SOURCE_DIR)</_LLVMSourceDir>
     <_LLVMSourceDir Condition="'$(_LLVMSourceDir)' == ''"
-      >$(_MonoSourceDir)\external\llvm-project</_LLVMSourceDir
-    >
+      >$(_MonoSourceDir)\external\llvm-project</_LLVMSourceDir>
     <_LLVMBuildDir Condition="'$(_LLVMBuildDir)' == ''"
-      >$([System.IO.Path]::GetFullPath('$(MONO_BUILD_DIR_PREFIX)$(Platform)\obj\external\llvm-build\$(Configuration)'))</_LLVMBuildDir
-    >
+      >$([System.IO.Path]::GetFullPath('$(MONO_BUILD_DIR_PREFIX)$(Platform)\obj\external\llvm-build\$(Configuration)'))</_LLVMBuildDir>
     <_LLVMInstallDir Condition="'$(_LLVMInstallDir)' == ''"
-      >$(_LLVMBuildDir)\install</_LLVMInstallDir
-    >
+      >$(_LLVMBuildDir)\install</_LLVMInstallDir>
     <_MonoLLVMConfig>$(_LLVMInstallDir)\bin\llvm-config.exe</_MonoLLVMConfig>
   </PropertyGroup>
 
   <PropertyGroup>
     <_BtlsSourceDir Condition="'$(_BtlsSourceDir)' == ''"
-      >$(_MonoSourceDir)\external\boringssl</_BtlsSourceDir
-    >
+      >$(_MonoSourceDir)\external\boringssl</_BtlsSourceDir>
     <_MonoBtlsSourceDir>$(_MonoSourceDir)\mono\btls</_MonoBtlsSourceDir>
     <_BtlsBuildDir>$([System.IO.Path]::GetFullPath('$(MONO_BUILD_DIR_PREFIX)$(Platform)\obj\external\btls-build-shared\$(Configuration)'))</_BtlsBuildDir>
   </PropertyGroup>
@@ -194,8 +187,7 @@
     </_CheckConfigurationProperty>
     <PropertyGroup>
       <_MonoLLVMConfig Condition="'$(_MonoEnableExternalLLVM)' == 'true'"
-        >$(_CheckExternalLLVMOutput)</_MonoLLVMConfig
-      >
+        >$(_CheckExternalLLVMOutput)</_MonoLLVMConfig>
     </PropertyGroup>
   </Target>
 

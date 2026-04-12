@@ -16,22 +16,17 @@
       <para
         >Implement the <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> interface to control the mapping between WSDL and <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> and <see cref="T:System.ServiceModel.Description.ContractDescription" /> objects, especially when reading custom WSDL extensions to modify your contract or endpoint information. Then attach your custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> object to a <see cref="T:System.ServiceModel.Description.WsdlImporter" /> either programmatically or by using an application configuration file. You can also attach your custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> object to the internal <see cref="T:System.ServiceModel.Description.WsdlImporter" /> used by the <format type="text/html">
           <a href="1abf3d9f-b420-46f1-b628-df238751f308"
-            >Service Model Metadata Utility Tool (Svcutil.exe)</a
-          >
-        </format> using an application configuration file.</para
-      >
+            >Service Model Metadata Utility Tool (Svcutil.exe)</a>
+        </format> using an application configuration file.</para>
       <para
-        >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called to import a contract. </para
-      >
+        >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called to import a contract. </para>
       <para
-        >Use the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" /> method to modify the metadata that is then imported into <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> and <see cref="T:System.ServiceModel.Description.ContractDescription" /> objects.</para
-      >
+        >Use the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" /> method to modify the metadata that is then imported into <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> and <see cref="T:System.ServiceModel.Description.ContractDescription" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement and attach to a <see cref="T:System.ServiceModel.Description.WsdlImporter" /> object to control how the importer maps Web Services Description Language (WSDL) parts to those of a <see cref="T:System.Web.Services.Description.ServiceDescription" /> object.</para
-      >
+        >Implement and attach to a <see cref="T:System.ServiceModel.Description.WsdlImporter" /> object to control how the importer maps Web Services Description Language (WSDL) parts to those of a <see cref="T:System.Web.Services.Description.ServiceDescription" /> object.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" /> methods of all registered <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> objects is called before anything is imported from the supplied metadata.</para
-          >
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" /> methods of all registered <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> objects is called before anything is imported from the supplied metadata.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,22 +72,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service descriptions to modify.</param
-        >
+          />The service descriptions to modify.</param>
         <param name="xmlSchemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The schema collection to be used when importing.</param
-        >
+          />The schema collection to be used when importing.</param>
         <param name="policy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy assertions used when importing.</param
-        >
+          />The policy assertions used when importing.</param>
       </Docs>
     </Member>
     <Member MemberName="ImportContract">
@@ -124,16 +115,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called when a contract is being imported. You can modify the contract or insert other exporting behaviors such as <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" /> and an <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" /> objects to modify the code that is generated for the contract.</para
-          >
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> method is called when a contract is being imported. You can modify the contract or insert other exporting behaviors such as <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" /> and an <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" /> objects to modify the code that is generated for the contract.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Called when importing a contract.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The importer.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The importer.</param>
       </Docs>
     </Member>
     <Member MemberName="ImportEndpoint">
@@ -164,16 +153,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method is called when importing an endpoint. Modify the context properties to customize the imported endpoint.</para
-          >
+            >The <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method is called when importing an endpoint. Modify the context properties to customize the imported endpoint.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Called when importing an endpoint.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The importer.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The importer.</param>
       </Docs>
     </Member>
   </Members>

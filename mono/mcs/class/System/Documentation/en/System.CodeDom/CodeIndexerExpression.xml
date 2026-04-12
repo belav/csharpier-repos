@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeIndexerExpression" /> can be used to represent a reference to a code indexer, or non-array indexer. Use <see cref="T:System.CodeDom.CodeArrayIndexerExpression" /> to represent a reference to array indexers.</para
-      >
+        <see cref="T:System.CodeDom.CodeIndexerExpression" /> can be used to represent a reference to a code indexer, or non-array indexer. Use <see cref="T:System.CodeDom.CodeArrayIndexerExpression" /> to represent a reference to array indexers.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIndexerExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIndexerExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -98,19 +96,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIndexerExpression" /> class using the specified target object and index.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIndexerExpression" /> class using the specified target object and index.</para>
         </summary>
         <param name="targetObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target object. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The target object. </param>
         <param name="indices">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index or indexes of the indexer expression. </param
-        >
+          />The index or indexes of the indexer expression. </param>
       </Docs>
     </Member>
     <Member MemberName="Indices">
@@ -136,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.CodeDom.CodeExpressionCollection" /> can contain a <see cref="T:System.CodeDom.CodeExpression" /> that specifies a single index within the target indexer, or multiple <see cref="T:System.CodeDom.CodeExpression" /> objects that together specify a specific intersection of indexes across the dimensions of the indexer.</para
-          >
+            >A <see cref="T:System.CodeDom.CodeExpressionCollection" /> can contain a <see cref="T:System.CodeDom.CodeExpression" /> that specifies a single index within the target indexer, or multiple <see cref="T:System.CodeDom.CodeExpression" /> objects that together specify a specific intersection of indexes across the dimensions of the indexer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

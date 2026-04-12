@@ -28,15 +28,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >TypeLibVarFlags is used in conjunction with the <see cref="T:System.Runtime.InteropServices.TypeLibVarAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para
-      >
+        >TypeLibVarFlags is used in conjunction with the <see cref="T:System.Runtime.InteropServices.TypeLibVarAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para>
       <para>For more information, see VARFLAGS in the MSDN library.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.VARFLAGS" /> in the COM type library from which the variable was imported.</para
-      >
+        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.VARFLAGS" /> in the COM type library from which the variable was imported.</para>
     </summary>
   </Docs>
   <Members>
@@ -133,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The variable is displayed as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibVarFlags.FBindable" /> must also be set.</para
-          >
+            >The variable is displayed as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibVarFlags.FBindable" /> must also be set.</para>
         </summary>
       </Docs>
     </Member>

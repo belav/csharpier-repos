@@ -5,12 +5,10 @@
     <IntellisensePackageXmlFilePathFromDotNetPlatExtFolder>$([MSBuild]::NormalizePath('$(IntellisensePackageXmlRootFolder)', 'dotnet-plat-ext', '1033', '$(AssemblyName).xml'))</IntellisensePackageXmlFilePathFromDotNetPlatExtFolder>
     <IntellisensePackageXmlFilePath
       Condition="'$(IntellisensePackageXmlFilePath)' == '' and Exists($(IntellisensePackageXmlFilePathFromNetFolder))"
-      >$(IntellisensePackageXmlFilePathFromNetFolder)</IntellisensePackageXmlFilePath
-    >
+      >$(IntellisensePackageXmlFilePathFromNetFolder)</IntellisensePackageXmlFilePath>
     <IntellisensePackageXmlFilePath
       Condition="'$(IntellisensePackageXmlFilePath)' == '' and Exists($(IntellisensePackageXmlFilePathFromDotNetPlatExtFolder))"
-      >$(IntellisensePackageXmlFilePathFromDotNetPlatExtFolder)</IntellisensePackageXmlFilePath
-    >
+      >$(IntellisensePackageXmlFilePathFromDotNetPlatExtFolder)</IntellisensePackageXmlFilePath>
 
     <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" compiler errors when the intellisense package xml file is used. -->
     <NoWarn Condition="'$(SkipIntellisenseNoWarnCS1591)' != 'true'">$(NoWarn);1591</NoWarn>
@@ -24,8 +22,7 @@
       <IsPartialFacadeAssembly>$(IsPartialFacadeAssembly)</IsPartialFacadeAssembly>
       <IsPlatformNotSupportedAssembly
         Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
-        >true</IsPlatformNotSupportedAssembly
-      >
+        >true</IsPlatformNotSupportedAssembly>
     </TargetPathWithTargetPlatformMoniker>
   </ItemDefinitionGroup>
 

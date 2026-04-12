@@ -12,8 +12,7 @@
       <para>
         <see cref="T:System.Web.Configuration.IConfigMapPath" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -43,8 +42,7 @@
           <para>
             <see cref="M:System.Web.Configuration.IConfigMapPath.GetAppPathForPath(System.String,System.String)" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,23 +51,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="siteID" /> must be unique. No two sites share the same id. The <paramref name="siteID" /> distinguishes sites that have the same name.</para
-          >
+            >The <paramref name="siteID" /> must be unique. No two sites share the same id. The <paramref name="siteID" /> distinguishes sites that have the same name.</para>
         </returns>
         <param name="siteID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique identifier for the site.</param
-        >
+          />A unique identifier for the site.</param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL associated with the site.</param
-        >
+          />The URL associated with the site.</param>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultSiteNameAndID">
@@ -111,8 +106,7 @@
           <para>
             <see cref="M:System.Web.Configuration.IConfigMapPath.GetMachineConfigFilename" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -167,8 +161,7 @@
           <para>
             <see cref="M:System.Web.Configuration.IConfigMapPath.GetRootWebConfigFilename" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -199,8 +192,7 @@
           <para>
             <see cref="M:System.Web.Configuration.IConfigMapPath.MapPath(System.String,System.String)" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -215,15 +207,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique identifier for the site.</param
-        >
+          />A unique identifier for the site.</param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL associated with the site.</param
-        >
+          />The URL associated with the site.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveSiteArgument">

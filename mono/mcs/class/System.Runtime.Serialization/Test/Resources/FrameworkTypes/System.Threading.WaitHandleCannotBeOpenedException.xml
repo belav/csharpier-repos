@@ -5,8 +5,7 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Threading"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Threading.WaitHandleCannotBeOpenedException</ClassName
-  >
+    >System.Threading.WaitHandleCannotBeOpenedException</ClassName>
   <Message i:type="x:string" xmlns="">No handle of the given name exists.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

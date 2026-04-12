@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The target objects for the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> attribute are methods that can be remotely invoked. Apply the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> to customize SOAP generation and processing. Properties of this attribute allow the programmer to customize the SOAPAction HTTP header field to indicate the intent of the SOAP HTTP request.</para
-      >
+        >The target objects for the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> attribute are methods that can be remotely invoked. Apply the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> to customize SOAP generation and processing. Properties of this attribute allow the programmer to customize the SOAPAction HTTP header field to indicate the intent of the SOAP HTTP request.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -177,8 +175,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" /> property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> attribute.</para
-          >
+            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" /> property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" /> attribute.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

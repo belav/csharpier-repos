@@ -134,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,8 +172,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to bind to the task.</param
-        >
+          />The exception to bind to the task.</param>
       </Docs>
     </Member>
     <Member MemberName="SetResult">
@@ -232,8 +230,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The state machine instance to associate with the builder.</param
-        >
+          />The state machine instance to associate with the builder.</param>
       </Docs>
     </Member>
     <Member MemberName="Start&lt;TStateMachine&gt;">

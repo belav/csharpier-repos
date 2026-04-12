@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeBinaryOperatorType" /> defines identifiers for the most common types of binary operators. These operator identifiers are used by <see cref="T:System.CodeDom.CodeBinaryOperatorExpression" /> to indicate the type of operator in each expression.</para
-      >
+        <see cref="T:System.CodeDom.CodeBinaryOperatorType" /> defines identifiers for the most common types of binary operators. These operator identifiers are used by <see cref="T:System.CodeDom.CodeBinaryOperatorExpression" /> to indicate the type of operator in each expression.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

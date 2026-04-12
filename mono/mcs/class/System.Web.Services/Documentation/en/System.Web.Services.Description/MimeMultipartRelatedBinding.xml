@@ -30,16 +30,13 @@
       <para
         >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
-            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
-          >
-        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
-      >
+            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a>
+        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" /> or an <see cref="T:System.Web.Services.Description.OutputBinding" />, specifying the individual MIME formats for the parts of the HTTP transmission. This class cannot be inherited.</para
-      >
+        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" /> or an <see cref="T:System.Web.Services.Description.OutputBinding" />, specifying the individual MIME formats for the parts of the HTTP transmission. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -77,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements added to the <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" /> to specify the MIME format for the parts of the MIME message.</para
-          >
+            >Gets the collection of extensibility elements added to the <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" /> to specify the MIME format for the parts of the MIME message.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

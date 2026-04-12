@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents any <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> content intended to be displayed to an end user.</para
-      >
+        >Represents any <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> content intended to be displayed to an end user.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,16 +52,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para>
         </summary>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -83,16 +80,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified text. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified text. </para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the content.</param
-        >
+          />The text of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -119,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" /> parameter may be set to one of the following values:</para
-          >
+            >The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" /> parameter may be set to one of the following values:</para>
           <list type="bullet">
             <item>
               <para>
@@ -142,23 +136,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified text and <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> with the specified text and <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />.</para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the content.</param
-        >
+          />The text of the content.</param>
         <param name="textKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" /> that describes the content.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" /> that describes the content.</param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -183,14 +174,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -210,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the text of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />.</para
-          >
+            >Gets the text of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -245,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />.</para
-          >
+            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -274,16 +261,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
   </Members>

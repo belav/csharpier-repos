@@ -5,8 +5,7 @@
     <_IsMicrosoftNETCoreApp20OrOlder
       Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' AND
       $([MSBuild]::VersionLessThanOrEquals('$(TargetFrameworkVersion)', '2.0')) "
-      >true</_IsMicrosoftNETCoreApp20OrOlder
-    >
+      >true</_IsMicrosoftNETCoreApp20OrOlder>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(OpenApiGenerateDocuments)' == '' ">
     <OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
@@ -72,17 +71,13 @@
       <_Command>$(_Command) --file-list "$(_OpenApiDocumentsCache)" --framework "$(TargetFrameworkMoniker)"</_Command>
       <_Command>$(_Command) --output "$(OpenApiDocumentsDirectory.TrimEnd('\'))" --project "$(MSBuildProjectName)"</_Command>
       <_Command Condition=" '$(ProjectAssetsFile)' != '' "
-        >$(_Command) --assets-file "$(ProjectAssetsFile)"</_Command
-      >
+        >$(_Command) --assets-file "$(ProjectAssetsFile)"</_Command>
       <_Command Condition=" '$(PlatformTarget)' != '' "
-        >$(_Command) --platform "$(PlatformTarget)"</_Command
-      >
+        >$(_Command) --platform "$(PlatformTarget)"</_Command>
       <_Command Condition=" '$(PlatformTarget)' == '' AND '$(Platform)' != '' "
-        >$(_Command) --platform "$(Platform)"</_Command
-      >
+        >$(_Command) --platform "$(Platform)"</_Command>
       <_Command Condition=" '$(RuntimeIdentifier)' != '' "
-        >$(_Command) --runtime "$(RuntimeIdentifier) --self-contained"</_Command
-      >
+        >$(_Command) --runtime "$(RuntimeIdentifier) --self-contained"</_Command>
       <_Command>$(_Command) $(OpenApiGenerateDocumentsOptions)</_Command>
     </PropertyGroup>
 

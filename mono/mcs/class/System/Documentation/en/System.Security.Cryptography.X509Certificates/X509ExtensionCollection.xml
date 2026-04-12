@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects associated with a certificate. These extensions can provide additional information about the certificate.</para
-      >
+        >This class represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects associated with a certificate. These extensions can provide additional information about the certificate.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,14 +88,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.Add(System.Security.Cryptography.X509Certificates.X509Extension)" /> method allows duplicate elements to be added to the collection.</para
-          >
+            >The <see cref="M:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.Add(System.Security.Cryptography.X509Certificates.X509Extension)" /> method allows duplicate elements to be added to the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> object to an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >Adds an <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> object to an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,8 +104,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />  object to add to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object. </param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />  object to add to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -149,15 +143,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the array at which copying starts. </param
-        >
+          />The location in the array at which copying starts. </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -178,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects in a <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >Gets the number of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects in a <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -210,14 +201,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >Returns an enumerator that can iterate through an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator" /> object to use to iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionEnumerator" /> object to use to iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -238,8 +227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see cref="T:System.Collections.ICollection" /> interface and is overridden to always return false. For more information about this property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This property is derived from the <see cref="T:System.Collections.ICollection" /> interface and is overridden to always return false. For more information about this property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -320,15 +308,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property implements the <see cref="T:System.Collections.ICollection" /> interface. The .NET Framework classes based on <see cref="T:System.Array" /> provide their own synchronized version of the collection using the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property. Classes that use arrays can also implement their own synchronization using the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property of the collection, not directly on the collection. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection. Note that some implementations of <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> might return the array itself.</para
-          >
+            >This property implements the <see cref="T:System.Collections.ICollection" /> interface. The .NET Framework classes based on <see cref="T:System.Array" /> provide their own synchronized version of the collection using the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property. Classes that use arrays can also implement their own synchronization using the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> property of the collection, not directly on the collection. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the collection. Note that some implementations of <see cref="P:System.Security.Cryptography.X509Certificates.X509ExtensionCollection.SyncRoot" /> might return the array itself.</para>
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads could still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that you can use to synchronize access to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >Gets an object that you can use to synchronize access to the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -361,15 +347,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" /> objects. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the array at which copying starts. </param
-        >
+          />The location in the array at which copying starts. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -398,14 +382,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >Returns an enumerator that can iterate through an <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> object to use to iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> object to use to iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection" /> object.</para>
         </returns>
       </Docs>
     </Member>

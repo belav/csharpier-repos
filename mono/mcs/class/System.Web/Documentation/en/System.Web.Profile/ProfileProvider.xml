@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET profiles offer persistent storage and retrieval of user-specific properties. Profile property values and information are stored in a data source in a manner determined by the <see cref="T:System.Web.Profile.ProfileProvider" /> implementation. You can use the profile providers that are included with the .NET Framework (represented by the classes that derive from the <see cref="T:System.Web.Profile.ProfileProvider" /> abstract class), or you can implement your own provider by creating a new class that derives from <see cref="T:System.Web.Profile.ProfileProvider" />.</para
-      >
+        >ASP.NET profiles offer persistent storage and retrieval of user-specific properties. Profile property values and information are stored in a data source in a manner determined by the <see cref="T:System.Web.Profile.ProfileProvider" /> implementation. You can use the profile providers that are included with the .NET Framework (represented by the classes that derive from the <see cref="T:System.Web.Profile.ProfileProvider" /> abstract class), or you can implement your own provider by creating a new class that derives from <see cref="T:System.Web.Profile.ProfileProvider" />.</para>
       <para>There are two primary reasons for creating a custom profile provider.</para>
       <list type="bullet">
         <item>
@@ -31,8 +30,7 @@
       <para
         >The <see cref="T:System.Web.Profile.ProfileProvider" /> abstract class inherits from the <see cref="T:System.Configuration.SettingsProvider" /> abstract class, which inherits from the <see cref="T:System.Configuration.Provider.ProviderBase" /> abstract class. Classes that implement <see cref="T:System.Web.Profile.ProfileProvider" /> must also implement the required members of the <see cref="T:System.Configuration.SettingsProvider" /> and <see cref="T:System.Configuration.Provider.ProviderBase" /> abstract classes. For more information about implementing a profile provider, see <format type="text/html">
           <a href="58de6e99-31a7-41b9-93ed-51b9b4a67e98">Implementing a Profile Provider</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,14 +47,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You are not required to implement a constructor for a class that inherits the <see cref="T:System.Web.Profile.ProfileProvider" /> abstract class. Initialization values for a <see cref="T:System.Web.Profile.ProfileProvider" /> implementation are passed to the <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" /> method implementation.</para
-          >
+            >You are not required to implement a constructor for a class that inherits the <see cref="T:System.Web.Profile.ProfileProvider" /> abstract class. Initialization values for a <see cref="T:System.Web.Profile.ProfileProvider" /> implementation are passed to the <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" /> method implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Profile.ProfileProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Profile.ProfileProvider" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -84,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" /> method is used to remove unused profile data from the data source. Only data for the applicationName specified in the configuration file is removed. The <paramref name="authenticationOption" /> parameter specifies whether only anonymous profiles, only authenticated profiles, or all profiles are searched. Profiles in which the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" /> occurs on or before the specified <paramref name="userInactiveSinceDate" /> parameter value are deleted.</para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" /> method is used to remove unused profile data from the data source. Only data for the applicationName specified in the configuration file is removed. The <paramref name="authenticationOption" /> parameter specifies whether only anonymous profiles, only authenticated profiles, or all profiles are searched. Profiles in which the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" /> occurs on or before the specified <paramref name="userInactiveSinceDate" /> parameter value are deleted.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,15 +95,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.Profile.ProfileAuthenticationOption" /> values, specifying whether anonymous, authenticated, or both types of profiles are deleted.</param
-        >
+          />One of the <see cref="T:System.Web.Profile.ProfileAuthenticationOption" /> values, specifying whether anonymous, authenticated, or both types of profiles are deleted.</param>
         <param name="userInactiveSinceDate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> that identifies which user profiles are considered inactive. If the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />  value of a user profile occurs on or before this date and time, the profile is considered inactive.</param
-        >
+          />A <see cref="T:System.DateTime" /> that identifies which user profiles are considered inactive. If the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />  value of a user profile occurs on or before this date and time, the profile is considered inactive.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -131,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" /> method deletes the profiles specified in the <paramref name="usernames" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.String[])" /> method deletes the profiles specified in the <paramref name="usernames" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -147,8 +139,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string array of user names for profiles to be deleted.</param
-        >
+          />A string array of user names for profiles to be deleted.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -171,11 +162,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" /> method deletes the profiles specified in the <paramref name="profiles" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" /> method deletes the profiles specified in the <paramref name="profiles" /> parameter. Only data for the applicationName specified in the configuration file is removed. </para>
           <para
-            >When implementing this method in a derived class, you can use the applicationName value and the <see cref="P:System.Web.Profile.ProfileInfo.UserName" /> property of each <see cref="T:System.Web.Profile.ProfileInfo" /> object in the supplied <see cref="T:System.Web.Profile.ProfileInfoCollection" /> to determine which profiles to delete from your data source.</para
-          >
+            >When implementing this method in a derived class, you can use the applicationName value and the <see cref="P:System.Web.Profile.ProfileInfo.UserName" /> property of each <see cref="T:System.Web.Profile.ProfileInfo" /> object in the supplied <see cref="T:System.Web.Profile.ProfileInfoCollection" /> to determine which profiles to delete from your data source.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,8 +179,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Profile.ProfileInfoCollection" />  of information about profiles that are to be deleted.</param
-        >
+          />A <see cref="T:System.Web.Profile.ProfileInfoCollection" />  of information about profiles that are to be deleted.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -354,8 +342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Profile.ProfileProvider.GetNumberOfInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" /> method is used to retrieve a count of all unused user profiles. Only data for the applicationName specified in the configuration file is returned. The <paramref name="authenticationOption" /> parameter specifies whether only anonymous profiles, only authenticated profiles, or all profiles are searched. Of the searched profiles, any profile with a <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" /> that occurs on or before the specified <paramref name="userInactiveSinceDate" /> parameter value is counted.</para
-          >
+            >The <see cref="M:System.Web.Profile.ProfileProvider.GetNumberOfInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime)" /> method is used to retrieve a count of all unused user profiles. Only data for the applicationName specified in the configuration file is returned. The <paramref name="authenticationOption" /> parameter specifies whether only anonymous profiles, only authenticated profiles, or all profiles are searched. Of the searched profiles, any profile with a <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" /> that occurs on or before the specified <paramref name="userInactiveSinceDate" /> parameter value is counted.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -370,15 +357,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.Profile.ProfileAuthenticationOption" /> values, specifying whether anonymous, authenticated, or both types of profiles are returned.</param
-        >
+          />One of the <see cref="T:System.Web.Profile.ProfileAuthenticationOption" /> values, specifying whether anonymous, authenticated, or both types of profiles are returned.</param>
         <param name="userInactiveSinceDate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> that identifies which user profiles are considered inactive. If the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />  of a user profile occurs on or before this date and time, the profile is considered inactive.</param
-        >
+          />A <see cref="T:System.DateTime" /> that identifies which user profiles are considered inactive. If the <see cref="P:System.Web.Profile.ProfileInfo.LastActivityDate" />  of a user profile occurs on or before this date and time, the profile is considered inactive.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The purpose of this class is to implement <see cref="T:System.Collections.IEqualityComparer" /> and <see cref="T:System.Collections.Generic.IEqualityComparer`1" />. Classes that require identity (such as <see cref="T:System.Collections.Generic.Dictionary`2" /> ) require an instance of a class that implements one of these interfaces. </para
-      >
+        >The purpose of this class is to implement <see cref="T:System.Collections.IEqualityComparer" /> and <see cref="T:System.Collections.Generic.IEqualityComparer`1" />. Classes that require identity (such as <see cref="T:System.Collections.Generic.Dictionary`2" /> ) require an instance of a class that implements one of these interfaces. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XNodeEqualityComparer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XNodeEqualityComparer" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -87,38 +85,31 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equal-length sequences of pairwise equal content nodes. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equal-length sequences of pairwise equal content nodes. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocumentType" /> nodes are equal if the have the same name, public ID, system ID, and internal subset.</para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocumentType" /> nodes are equal if the have the same name, public ID, system ID, and internal subset.</para>
             </item>
           </list>
         </remarks>
@@ -135,15 +126,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first <see cref="T:System.Xml.Linq.XNode" /> to compare.</param
-        >
+          />The first <see cref="T:System.Xml.Linq.XNode" /> to compare.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second <see cref="T:System.Xml.Linq.XNode" /> to compare.</param
-        >
+          />The second <see cref="T:System.Xml.Linq.XNode" /> to compare.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -166,8 +155,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Linq.XNode" /> implementation of <see cref="M:System.Object.GetHashCode" /> is based on the referential identity of the node. This method computes a deep hash code based on the value of the node and all descendants. The hash code reflects all attributes and all descendent nodes.</para
-          >
+            >The <see cref="T:System.Xml.Linq.XNode" /> implementation of <see cref="M:System.Object.GetHashCode" /> is based on the referential identity of the node. This method computes a deep hash code based on the value of the node and all descendants. The hash code reflects all attributes and all descendent nodes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,16 +164,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Int32" /> that contains a value-based hash code for the node.</para
-          >
+            >A <see cref="T:System.Int32" /> that contains a value-based hash code for the node.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XNode" /> to hash.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XNode" /> to hash.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEqualityComparer.Equals">
@@ -220,38 +206,31 @@
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XNode" /> objects of different types are never equal. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XText" /> nodes are equal if they contain the same text. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equa-length sequences of pairwise equal content nodes. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XElement" /> nodes are equal if they have the same tag name, the same set of attributes with the same values, and (ignoring comments and processing instructions), contain two equa-length sequences of pairwise equal content nodes. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocument" /> objects are equal if their root nodes are equal. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XComment" /> nodes are equal if they contain the same comment text. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para
-              >
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" /> nodes are equal if they have the same target and data. </para>
             </item>
             <item>
               <para
-                >Two <see cref="T:System.Xml.Linq.XDocumentType" /> nodes are equal if the have the same name, public ID, system ID, and internal subset.</para
-              >
+                >Two <see cref="T:System.Xml.Linq.XDocumentType" /> nodes are equal if the have the same name, public ID, system ID, and internal subset.</para>
             </item>
           </list>
         </remarks>
@@ -285,8 +264,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Linq.XNode" /> implementation of <see cref="T:System.Object.GetHashCode" /> is based on the referential identity of the node. This method computes a deep hash code based on the value of the node, its attributes, and its descendants.</para
-          >
+            >The <see cref="T:System.Xml.Linq.XNode" /> implementation of <see cref="T:System.Object.GetHashCode" /> is based on the referential identity of the node. This method computes a deep hash code based on the value of the node, its attributes, and its descendants.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -295,12 +273,10 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Int32" /> that contains a value-based hash code for the node.</para
-          >
+            >A <see cref="T:System.Int32" /> that contains a value-based hash code for the node.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The node to hash.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The node to hash.</param>
       </Docs>
     </Member>
   </Members>

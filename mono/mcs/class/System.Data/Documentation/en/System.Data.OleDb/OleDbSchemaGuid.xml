@@ -17,19 +17,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each field in the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class maps to an OLE DB schema rowset.</para
-      >
+        >Each field in the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class maps to an OLE DB schema rowset.</para>
       <block subset="none" type="note">
         <para
-          >Some members of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class, (such as <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema) may not be supported by your OLE DB provider. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para
-        >
+          >Some members of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class, (such as <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema) may not be supported by your OLE DB provider. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Returns the type of schema table specified by the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method.</para
-      >
+        >Returns the type of schema table specified by the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method.</para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -66,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Assertions" /> maps to the OLE DB ASSERTIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Assertions" /> maps to the OLE DB ASSERTIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -142,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Catalogs" /> maps to the OLE DB CATALOGS rowset and returns the following restriction column.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Catalogs" /> maps to the OLE DB CATALOGS rowset and returns the following restriction column.</para>
           <list type="table">
             <listheader>
               <item>
@@ -196,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Character_Sets" /> maps to the OLE DB CHARACTER_SETS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Character_Sets" /> maps to the OLE DB CHARACTER_SETS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -272,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -348,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Check_Constraints" /> maps to the OLE DB CHECK_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -424,8 +415,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Collations" /> maps to the OLE DB COLLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Collations" /> maps to the OLE DB COLLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -500,8 +490,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Domain_Usage" /> maps to the OLE DB COLUMN_DOMAIN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Domain_Usage" /> maps to the OLE DB COLUMN_DOMAIN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -587,8 +576,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Privileges" /> maps to the OLE DB COLUMN_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Column_Privileges" /> maps to the OLE DB COLUMN_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -696,8 +684,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Columns" /> maps to the OLE DB COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Columns" /> maps to the OLE DB COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -783,8 +770,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Column_Usage" /> maps to the OLE DB CONSTRAINT_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Column_Usage" /> maps to the OLE DB CONSTRAINT_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -903,8 +889,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Table_Usage" /> maps to the OLE DB CONSTRAINT_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Constraint_Table_Usage" /> maps to the OLE DB CONSTRAINT_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1012,11 +997,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> is equivalent to calling the OLE DB IDBInfo::GetLiteralInfo interface, or the ADO Connection.OpenSchema method with the adSchemaDBInfoLiterals constant.</para
-          >
+            >Using <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> is equivalent to calling the OLE DB IDBInfo::GetLiteralInfo interface, or the ADO Connection.OpenSchema method with the adSchemaDBInfoLiterals constant.</para>
           <para
-            >When using the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method, if the <paramref name="schema" /> parameter contains a value of <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> and the <paramref name="restrictions" /> parameter contains one or more restrictions, an <see cref="T:System.ArgumentException" /> is generated.</para
-          >
+            >When using the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" /> method, if the <paramref name="schema" /> parameter contains a value of <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" /> and the <paramref name="restrictions" /> parameter contains one or more restrictions, an <see cref="T:System.ArgumentException" /> is generated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1043,8 +1026,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Foreign_Keys" /> maps to the OLE DB FOREIGN_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Foreign_Keys" /> maps to the OLE DB FOREIGN_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1152,8 +1134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Indexes" /> maps to the OLE DB INDEXES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Indexes" /> maps to the OLE DB INDEXES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1254,8 +1235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Key_Column_Usage" /> maps to the OLE DB KEY_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Key_Column_Usage" /> maps to the OLE DB KEY_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1374,8 +1354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Primary_Keys" /> maps to the OLE DB PRIMARY_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Primary_Keys" /> maps to the OLE DB PRIMARY_KEYS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1450,8 +1429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> maps to the OLE DB PROCEDURE_COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> maps to the OLE DB PROCEDURE_COLUMNS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1513,8 +1491,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema is not supported by any OLE DB providers that ship in MDAC version 2.7. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para
-            >
+              >The <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" /> schema is not supported by any OLE DB providers that ship in MDAC version 2.7. Refer to your database documentation to determine whether you can retrieve this schema information by querying the system tables of your database.</para>
           </block>
         </remarks>
         <summary>
@@ -1542,8 +1519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Parameters" /> maps to the OLE DB PROCEDURE_PARAMETERS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Parameters" /> maps to the OLE DB PROCEDURE_PARAMETERS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1629,8 +1605,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedures" /> maps to the OLE DB PROCEDURES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedures" /> maps to the OLE DB PROCEDURES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1718,8 +1693,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Provider_Types" /> maps to the OLE DB PROVIDER_TYPES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Provider_Types" /> maps to the OLE DB PROVIDER_TYPES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1784,8 +1758,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Referential_Constraints" /> maps to the OLE DB REFERENTIAL_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Referential_Constraints" /> maps to the OLE DB REFERENTIAL_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1860,8 +1833,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Schemata" /> maps to the OLE DB SCHEMATAS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Schemata" /> maps to the OLE DB SCHEMATAS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1936,8 +1908,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Sql_Languages" /> maps to the OLE DB SQL_LANGUAGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Sql_Languages" /> maps to the OLE DB SQL_LANGUAGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2057,8 +2028,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Statistics" /> maps to the OLE DB STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Statistics" /> maps to the OLE DB STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2133,8 +2103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Constraints" /> maps to the OLE DB TABLE_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Constraints" /> maps to the OLE DB TABLE_CONSTRAINTS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2253,8 +2222,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Privileges" /> maps to the OLE DB TABLE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Privileges" /> maps to the OLE DB TABLE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2351,8 +2319,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Statistics" /> maps to the OLE DB TABLE_STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Table_Statistics" /> maps to the OLE DB TABLE_STATISTICS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2475,8 +2442,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables" /> maps to the OLE DB TABLES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables" /> maps to the OLE DB TABLES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2562,8 +2528,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables_Info" /> maps to the OLE DB TABLES_INFO rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Tables_Info" /> maps to the OLE DB TABLES_INFO rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2649,8 +2614,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Translations" /> maps to the OLE DB TRANSLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Translations" /> maps to the OLE DB TRANSLATIONS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2725,8 +2689,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Trustee" /> maps to the OLE DB TRUSTEE schema. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Trustee" /> maps to the OLE DB TRUSTEE schema. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2815,8 +2778,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Usage_Privileges" /> maps to the OLE DB USAGE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Usage_Privileges" /> maps to the OLE DB USAGE_PRIVILEGES rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -2924,8 +2886,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Column_Usage" /> maps to the OLE DB VIEW_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Column_Usage" /> maps to the OLE DB VIEW_COLUMN_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -3000,8 +2961,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Table_Usage" /> maps to the OLE DB VIEW_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.View_Table_Usage" /> maps to the OLE DB VIEW_TABLE_USAGE rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>
@@ -3076,8 +3036,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Views" /> maps to the OLE DB VIEWS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para
-          >
+            <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Views" /> maps to the OLE DB VIEWS rowset. Unless otherwise specified, restriction columns are returned in the following order.</para>
           <list type="table">
             <listheader>
               <item>

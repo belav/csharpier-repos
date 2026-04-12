@@ -31,14 +31,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
       <para
-        >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para
-      >
+        >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see cref="T:System.Security.Cryptography.SHA384" /> hash for the input data using the managed library. </para
-      >
+        >Computes the <see cref="T:System.Security.Cryptography.SHA384" /> hash for the input data using the managed library. </para>
     </summary>
   </Docs>
   <Members>
@@ -61,11 +59,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
           <para
-            >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para
-          >
+            >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para>
           <para
-            >Important   If you enable the following security setting either in the Local Security Policy or as part of Group Policy you will get an <see cref="T:System.InvalidOperationException" /> when you attempt to use this constructor: </para
-          >
+            >Important   If you enable the following security setting either in the Local Security Policy or as part of Group Policy you will get an <see cref="T:System.InvalidOperationException" /> when you attempt to use this constructor: </para>
           <para>
             <userInputLocalizable>System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing</userInputLocalizable>
           </para>
@@ -73,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA384Managed" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA384Managed" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -110,26 +105,22 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, routes data written to the object into the <see cref="T:System.Security.Cryptography.SHA384Managed" /> hash algorithm for computing the hash.</para
-          >
+            >When overridden in a derived class, routes data written to the object into the <see cref="T:System.Security.Cryptography.SHA384Managed" /> hash algorithm for computing the hash.</para>
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />The input data. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The input data. </param>
         <param name="ibStart">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the byte array from which to begin using data. </param
-        >
+          />The offset into the byte array from which to begin using data. </param>
         <param name="cbSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the array to use as data. </param
-        >
+          />The number of bytes in the array to use as data. </param>
       </Docs>
     </Member>
     <Member MemberName="HashFinal">
@@ -184,14 +175,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
           <para
-            >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para
-          >
+            >The hash size for the <see cref="T:System.Security.Cryptography.SHA384Managed" /> algorithm is 384 bits.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of <see cref="T:System.Security.Cryptography.SHA384Managed" />.</para
-          >
+            >Initializes an instance of <see cref="T:System.Security.Cryptography.SHA384Managed" />.</para>
         </summary>
       </Docs>
     </Member>

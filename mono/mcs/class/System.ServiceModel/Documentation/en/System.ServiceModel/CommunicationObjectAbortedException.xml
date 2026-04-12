@@ -23,14 +23,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> is a derived class of <see cref="T:System.ServiceModel.CommunicationException" /> and can occur in correct applications. Because typically the code that calls the <see cref="M:System.ServiceModel.ICommunicationObject.Abort" /> method reports the error condition that caused the call to <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />, this exception indicates that the call failed but the most useful error information is elsewhere.</para
-      >
+        <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> is a derived class of <see cref="T:System.ServiceModel.CommunicationException" /> and can occur in correct applications. Because typically the code that calls the <see cref="M:System.ServiceModel.ICommunicationObject.Abort" /> method reports the error condition that caused the call to <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />, this exception indicates that the call failed but the most useful error information is elsewhere.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when the call is to an <see cref="T:System.ServiceModel.ICommunicationObject" /> object that has aborted.</para
-      >
+        >The exception that is thrown when the call is to an <see cref="T:System.ServiceModel.ICommunicationObject" /> object that has aborted.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -76,14 +73,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> using the specified <paramref name="message" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> using the specified <paramref name="message" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class with the specified message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class with the specified message. </para>
         </summary>
       </Docs>
     </Member>
@@ -112,23 +107,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class used to deserialize data into a <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class used to deserialize data into a <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> object. </para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -154,14 +146,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> using the specified <paramref name="message" /> and <paramref name="innerException" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> using the specified <paramref name="message" /> and <paramref name="innerException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class using the specified message and inner exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" /> class using the specified message and inner exception. </para>
         </summary>
       </Docs>
     </Member>

@@ -39,37 +39,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SplitterCancelEventArgs" /> class with the specified coordinates of the mouse pointer and the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SplitterCancelEventArgs" /> class with the specified coordinates of the mouse pointer and the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" />.</para>
         </summary>
         <param name="mouseCursorX">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The X coordinate of the mouse pointer in client coordinates. </param
-        >
+          />The X coordinate of the mouse pointer in client coordinates. </param>
         <param name="mouseCursorY">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Y coordinate of the mouse pointer in client coordinates. </param
-        >
+          />The Y coordinate of the mouse pointer in client coordinates. </param>
         <param name="splitX">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The X coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates. </param
-        >
+          />The X coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates. </param>
         <param name="splitY">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Y coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates. </param
-        >
+          />The Y coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the X coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates.</para
-          >
+            >Gets or sets the X coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -147,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Y coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates.</para
-          >
+            >Gets or sets the Y coordinate of the upper left corner of the <see cref="T:System.Windows.Forms.SplitContainer" /> in client coordinates.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

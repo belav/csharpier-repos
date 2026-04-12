@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -70,23 +69,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class and initializes it with the specified title and collection.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class and initializes it with the specified title and collection.</para>
         </summary>
         <param name="title">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The title of the workspace.</param
-        >
+          />The title of the workspace.</param>
         <param name="collections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection the workspace contains.</param
-        >
+          />The collection the workspace contains.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -114,19 +110,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class and initializes it with the specified title and collection.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> class and initializes it with the specified title and collection.</para>
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The workspace title.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The workspace title.</param>
         <param name="collections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection the workspace contains.</param
-        >
+          />The collection the workspace contains.</param>
       </Docs>
     </Member>
     <Member MemberName="AttributeExtensions">
@@ -173,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para
-          >
+            >Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -225,15 +221,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> instance.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
-</para
-          >
+</para>
         </returns>
       </Docs>
     </Member>
@@ -259,8 +253,7 @@ Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element extensions contained within the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para
-          >
+            >Gets the element extensions contained within the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -286,8 +279,7 @@ Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The title of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para
-          >
+            >The title of the <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -323,37 +315,32 @@ Returns <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the element.</param
-        >
+          />The name of the element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element.</param
-        >
+          />The namespace of the element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to parse.</param
-        >
+          />The attribute to parse.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="TryParseElement">
@@ -386,23 +373,20 @@ Returns <see cref="T:System.Boolean" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeExtensions">
@@ -430,23 +414,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementExtensions">
@@ -474,23 +455,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
   </Members>

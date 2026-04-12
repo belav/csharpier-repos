@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies and retrieves metadata information from parameters and columns of <see cref="T:Microsoft.SqlServer.Server.SqlDataRecord" /> objects. This class cannot be inherited.</para
-      >
+        >Specifies and retrieves metadata information from parameters and columns of <see cref="T:Microsoft.SqlServer.Server.SqlDataRecord" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -36,11 +35,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Bit, BigInt, DateTime, Decimal, Float, Int, Money, Numeric, SmallDateTime, SmallInt, SmallMoney, TimeStamp, TinyInt, UniqueIdentifier, Xml.</para
-          >
+            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Bit, BigInt, DateTime, Decimal, Float, Int, Money, Numeric, SmallDateTime, SmallInt, SmallMoney, TimeStamp, TinyInt, UniqueIdentifier, Xml.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -369,16 +366,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name and type.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name and type.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column.</param
-        >
+          />The name of the column.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -401,17 +396,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Binary, Char, Image, NChar, Ntext, NVarChar, Text, VarBinary, VarChar.</para
-          >
+            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Binary, Char, Image, NChar, Ntext, NVarChar, Text, VarBinary, VarChar.</para>
           <para
-            >Only a <paramref name="maxLength" /> specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1 is allowed for a <paramref name="dbType" /> of Text, NText, or Image.</para
-          >
+            >Only a <paramref name="maxLength" /> specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1 is allowed for a <paramref name="dbType" /> of Text, NText, or Image.</para>
           <para
-            >For a <paramref name="dbType" /> of Varchar, Nvarchar, or VarBinary, a length specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, declares the metadata as varchar(max), nvarchar(max), or nvarbinary(max), respectively.</para
-          >
+            >For a <paramref name="dbType" /> of Varchar, Nvarchar, or VarBinary, a length specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, declares the metadata as varchar(max), nvarchar(max), or nvarbinary(max), respectively.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -590,23 +581,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, and maximum length.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, and maximum length.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column.</param
-        >
+          />The name of the column.</param>
         <param name="maxLength">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of the specified type.</param
-        >
+          />The maximum length of the specified type.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -631,11 +619,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: UDT.</para
-          >
+            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: UDT.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -684,23 +670,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, and user-defined type (UDT).</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, and user-defined type (UDT).</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column.</param
-        >
+          />The name of the column.</param>
         <param name="userDefinedType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> instance that points to the UDT.</param
-        >
+          />A <see cref="T:System.Type" /> instance that points to the UDT.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -721,11 +704,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: Decimal.</para
-          >
+            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: Decimal.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -774,30 +755,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, precision, and scale.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, precision, and scale.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter or column.</param
-        >
+          />The name of the parameter or column.</param>
         <param name="precision">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The precision of the parameter or column.</param
-        >
+          />The precision of the parameter or column.</param>
         <param name="scale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scale of the parameter or column.</param
-        >
+          />The scale of the parameter or column.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -822,17 +799,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Char, NChar, Ntext, NVarChar, Text, VarChar.</para
-          >
+            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: Char, NChar, Ntext, NVarChar, Text, VarChar.</para>
           <para
-            >Only a <paramref name="maxLength" /> specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, is allowed for a <paramref name="dbType" /> of Text or NText.</para
-          >
+            >Only a <paramref name="maxLength" /> specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, is allowed for a <paramref name="dbType" /> of Text or NText.</para>
           <para
-            >For a <paramref name="dbType" /> of Varchar or Nvarchar, a length specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, declares the metadata as varchar(max) and nvarchar(max), respectively.</para
-          >
+            >For a <paramref name="dbType" /> of Varchar or Nvarchar, a length specification of <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />, or -1, declares the metadata as varchar(max) and nvarchar(max), respectively.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -918,37 +891,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, maximum length, locale, and compare options.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, maximum length, locale, and compare options.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter or column.</param
-        >
+          />The name of the parameter or column.</param>
         <param name="maxLength">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of the specified type. </param
-        >
+          />The maximum length of the specified type. </param>
         <param name="locale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale ID of the parameter or column.</param
-        >
+          />The locale ID of the parameter or column.</param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The comparison rules of the parameter or column.</param
-        >
+          />The comparison rules of the parameter or column.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -975,11 +943,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: Xml.</para
-          >
+            >Only the following SqlDbType is allowed to be passed to the constructor as <paramref name="dbType" />: Xml.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType:</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType:</para>
           <list type="table">
             <listheader>
               <item>
@@ -1028,37 +994,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, database name, owning schema, and object name.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, database name, owning schema, and object name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column.</param
-        >
+          />The name of the column.</param>
         <param name="database">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The database name of the XML schema collection of a typed XML instance.</param
-        >
+          />The database name of the XML schema collection of a typed XML instance.</param>
         <param name="owningSchema">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The relational schema name of the XML schema collection of a typed XML instance.</param
-        >
+          />The relational schema name of the XML schema collection of a typed XML instance.</param>
         <param name="objectName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML schema collection of a typed XML instance.</param
-        >
+          />The name of the XML schema collection of a typed XML instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -1086,11 +1047,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: BigInt, Bit, BitInt, DateTime, Decimal, Float, Image, Int, Money, Ntext, Numeric, Real, SmallDateTime, SmallInt, SmallMoney, Text, TimeStamp, TinyInt, UniqueIdentifier, Variant, Xml.</para
-          >
+            >Only the following are allowed to be passed to the constructor as <paramref name="dbType" />: BigInt, Bit, BitInt, DateTime, Decimal, Float, Image, Int, Money, Ntext, Numeric, Real, SmallDateTime, SmallInt, SmallMoney, Text, TimeStamp, TinyInt, UniqueIdentifier, Variant, Xml.</para>
           <para
-            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para
-          >
+            >The following are the default values assigned to <paramref name="dbType" />, depending on the SqlDbType (the <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />, <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />, and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" /> properties are set to null):</para>
           <list type="table">
             <listheader>
               <item>
@@ -1539,51 +1498,44 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, maximum length, precision, scale, locale ID, compare options, and user-defined type (UDT).</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> class with the specified column name, type, maximum length, precision, scale, locale ID, compare options, and user-defined type (UDT).</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column.</param
-        >
+          />The name of the column.</param>
         <param name="maxLength">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of the specified type.</param
-        >
+          />The maximum length of the specified type.</param>
         <param name="precision">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The precision of the parameter or column.</param
-        >
+          />The precision of the parameter or column.</param>
         <param name="scale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scale of the parameter or column.</param
-        >
+          />The scale of the parameter or column.</param>
         <param name="compareOptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The comparison rules of the parameter or column.</param
-        >
+          />The comparison rules of the parameter or column.</param>
         <param name="userDefinedType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> instance that points to the UDT.</param
-        >
+          />A <see cref="T:System.Type" /> instance that points to the UDT.</param>
       </Docs>
     </Member>
     <Member MemberName="Adjust">
@@ -1601,8 +1553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Boolean" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Boolean" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1613,8 +1564,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1635,8 +1585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Byte" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Byte" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1647,8 +1596,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1669,8 +1617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified array of <see cref="T:System.Byte" /> values against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified array of <see cref="T:System.Byte" /> values against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1681,8 +1628,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1703,8 +1649,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Char" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Char" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1715,8 +1660,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1737,8 +1681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified array of <see cref="T:System.Char" /> values against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified array of <see cref="T:System.Char" /> values against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1749,8 +1692,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1774,8 +1716,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBinary" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBinary" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1786,8 +1727,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1811,8 +1751,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBoolean" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBoolean" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1823,8 +1762,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1848,8 +1786,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlByte" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlByte" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1860,8 +1797,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1885,8 +1821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBytes" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlBytes" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1897,8 +1832,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1922,8 +1856,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlChars" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlChars" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1934,8 +1867,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1959,8 +1891,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDateTime" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDateTime" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1971,8 +1902,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1996,8 +1926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDecimal" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDecimal" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2008,8 +1937,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2033,8 +1961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDouble" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlDouble" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2045,8 +1972,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2070,8 +1996,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlGuid" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlGuid" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2082,8 +2007,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2107,8 +2031,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt16" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt16" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2119,8 +2042,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2144,8 +2066,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt32" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt32" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2156,8 +2077,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2181,8 +2101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt64" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlInt64" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2193,8 +2112,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2218,8 +2136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlMoney" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlMoney" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2230,8 +2147,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2255,8 +2171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlSingle" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlSingle" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2267,8 +2182,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2292,8 +2206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlString" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Data.SqlTypes.SqlString" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2304,8 +2217,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2326,8 +2238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.DateTime" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.DateTime" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2338,8 +2249,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2360,8 +2270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Decimal" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Decimal" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2372,8 +2281,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2394,8 +2302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Double" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Double" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2406,8 +2313,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2428,8 +2334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Guid" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Guid" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2440,8 +2345,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2462,8 +2366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Int16" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Int16" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2474,8 +2377,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2496,8 +2398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Int32" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Int32" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2508,8 +2409,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2530,8 +2430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Int64" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Int64" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2542,8 +2441,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2564,8 +2462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Object" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Object" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2576,8 +2473,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2598,8 +2494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.Single" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.Single" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2610,8 +2505,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2632,8 +2526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates the specified <see cref="T:System.String" /> value against the metadata, and adjusts the value if necessary.</para
-          >
+            >Validates the specified <see cref="T:System.String" /> value against the metadata, and adjusts the value if necessary.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2644,8 +2537,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The value to validate against the <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2714,29 +2606,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Infers the metadata from the specified object and returns it as a <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</para
-          >
+            >Infers the metadata from the specified object and returns it as a <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The inferred metadata as a <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</para
-          >
+            >The inferred metadata as a <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object used from which the metadata is inferred.</param
-        >
+          />The object used from which the metadata is inferred.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name assigned to the returned <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param
-        >
+          />The name assigned to the returned <see cref="T:Microsoft.SqlServer.Server.SqlMetaData" /> instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2798,11 +2686,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The potential maximum length for values of the specified column. Returns 0 for types other than fixed and varying length character and binary types. For variable size columns or parameters declared with the <paramref name="Max" /> constructor parameter, it returns -1.</para
-          >
+            >The potential maximum length for values of the specified column. Returns 0 for types other than fixed and varying length character and binary types. For variable size columns or parameters declared with the <paramref name="Max" /> constructor parameter, it returns -1.</para>
           <para
-            >For <see cref="T:System.Data.DbType" />.Row this returns the number of columns in the row metadata instance.</para
-          >
+            >For <see cref="T:System.Data.DbType" />.Row this returns the number of columns in the row metadata instance.</para>
           <para>The default value is 0.</para>
         </remarks>
         <summary>
@@ -2936,8 +2822,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default value is null.</para>
           <para
-            >This property may be null if the collection is defined within the current database. It is also null if there is no schema collection, in which case <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" /> are also null.</para
-          >
+            >This property may be null if the collection is defined within the current database. It is also null if there is no schema collection, in which case <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" /> are also null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2960,8 +2845,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default value is null.</para>
           <para
-            >This value is null if there is no associated schema collection. If the value is null, then <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" /> are also null.</para
-          >
+            >This value is null if there is no associated schema collection. If the value is null, then <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" /> are also null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2987,8 +2871,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default value is null.</para>
           <para
-            >This value may be null if the collection is defined within the current database and default schema. It is also null if there is no schema collection, in which case <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" /> are also null.</para
-          >
+            >This value may be null if the collection is defined within the current database and default schema. It is also null if there is no schema collection, in which case <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" /> and <see cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" /> are also null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

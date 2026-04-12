@@ -33,8 +33,7 @@
     <param name="y">The second object to compare.</param>
     <returns>
       <para
-        >A <see cref="T:System.Int32" /> containing a value that reflects the sort order of the objects.</para
-      >
+        >A <see cref="T:System.Int32" /> containing a value that reflects the sort order of the objects.</para>
       <list type="table">
         <listheader>
           <term>Value</term>
@@ -57,8 +56,7 @@
     </returns>
     <returns>
       <para
-        >A <see cref="T:System.Int32" /> containing a value that reflects the sort order of the objects.</para
-      >
+        >A <see cref="T:System.Int32" /> containing a value that reflects the sort order of the objects.</para>
       <list type="table">
         <listheader>
           <term>Value</term>
@@ -84,8 +82,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This delegate is used by the <see cref="M:System.Array.Sort``1(``0[],System.Comparison{``0})" /> method overload of the <see cref="T:System.Array" /> class and the <see cref="M:System.Collections.Generic.List`1.Sort(System.Comparison{`0})" /> method overload of the <see cref="T:System.Collections.Generic.List`1" /> class to sort the elements of an array or list.</para
-      >
+        >This delegate is used by the <see cref="M:System.Array.Sort``1(``0[],System.Comparison{``0})" /> method overload of the <see cref="T:System.Array" /> class and the <see cref="M:System.Collections.Generic.List`1.Sort(System.Comparison{`0})" /> method overload of the <see cref="T:System.Collections.Generic.List`1" /> class to sort the elements of an array or list.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

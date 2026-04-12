@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.TableLayoutCellPaintEventArgs" /> class provides information about the row, column, and bounds of the cell to support painting of the cell in the table.</para
-      >
+        >The <see cref="T:System.Windows.Forms.TableLayoutCellPaintEventArgs" /> class provides information about the row, column, and bounds of the cell to support painting of the cell in the table.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.TableLayoutPanel.CellPaint" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.TableLayoutPanel.CellPaint" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,40 +48,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TableLayoutCellPaintEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TableLayoutCellPaintEventArgs" /> class.</para>
         </summary>
         <param name="g">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Graphics" /> used to paint the item.</param
-        >
+          />The <see cref="T:System.Drawing.Graphics" /> used to paint the item.</param>
         <param name="clipRectangle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Rectangle" /> that represents the rectangle in which to paint.</param
-        >
+          />The <see cref="T:System.Drawing.Rectangle" /> that represents the rectangle in which to paint.</param>
         <param name="cellBounds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The bounds of the cell.</param
-        >
+          />The bounds of the cell.</param>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column of the cell.</param
-        >
+          />The column of the cell.</param>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />The row of the cell.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The row of the cell.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

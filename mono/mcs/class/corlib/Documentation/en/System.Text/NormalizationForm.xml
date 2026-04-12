@@ -41,9 +41,7 @@
       <para
         >For more information about normalization, decompositions and equivalence, see <see
           cref="http://unicode.org/reports/tr15/"
-          >Unicode Standard Annex #15: Unicode Normalization Forms</see
-        > at unicode.org.</para
-      >
+          >Unicode Standard Annex #15: Unicode Normalization Forms</see> at unicode.org.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

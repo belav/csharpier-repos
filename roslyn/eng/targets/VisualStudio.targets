@@ -11,8 +11,7 @@
       command line length for Windows. These projects must manually specify references to avoid this overflow.
     -->
     <DisableTransitiveProjectReferences Condition="'$(IsVsixProject)' == 'true'"
-      >true</DisableTransitiveProjectReferences
-    >
+      >true</DisableTransitiveProjectReferences>
 
     <!-- Setting this to the same as CreateVsixContainer ensures that the VS SDK doesn't try to look for a source.extension.vsixmanifest
          when we don't have one. -->
@@ -46,8 +45,7 @@
         <VSIXSubPath Condition="'%(Content.Link)' == ''">%(Content.RelativeDir)</VSIXSubPath>
         <!-- Sets VSIXSubPath for content items that are linked files -->
         <VSIXSubPath Condition="'%(Content.Link)' != ''"
-          >$([System.IO.Path]::GetDirectoryName(%(Content.Link)))</VSIXSubPath
-        >
+          >$([System.IO.Path]::GetDirectoryName(%(Content.Link)))</VSIXSubPath>
       </VSIXSourceItemLocalOnly>
 
       <VSIXSourceItemLocalOnly
@@ -108,8 +106,7 @@
         <Private>true</Private>
         <Ngen Condition="'%(_AssetsWithMetadata.Optimization)' == 'true'">true</Ngen>
         <NgenArchitecture Condition="'%(_AssetsWithMetadata.Optimization)' == 'true'"
-          >All</NgenArchitecture
-        >
+          >All</NgenArchitecture>
         <NgenPriority Condition="'%(_AssetsWithMetadata.Optimization)' == 'true'">3</NgenPriority>
       </VSIXCopyLocalReferenceSourceItem>
 

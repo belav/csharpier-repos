@@ -64,16 +64,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with the specified access.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with the specified access.</para>
         </summary>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,16 +100,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with either restricted or unrestricted permission.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with either restricted or unrestricted permission.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -141,23 +137,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with the specified global access and specific key container access rights.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermission" /> class with the specified global access and specific key container access rights.</para>
         </summary>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. </param>
         <param name="accessList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects identifying specific key container access rights. </param
-        >
+          />An array of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects identifying specific key container access rights. </param>
       </Docs>
     </Member>
     <Member MemberName="AccessEntries">
@@ -183,14 +176,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object in the collection specifies the access rights for a specific key container.</para
-          >
+            >Each <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object in the collection specifies the access rights for a specific key container.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects associated with the current permission.</para
-          >
+            >Gets the collection of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> objects associated with the current permission.</para>
         </summary>
       </Docs>
     </Member>
@@ -248,8 +239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Permissions.KeyContainerPermission.Flags" /> property is set by the constructor.</para
-          >
+            >The <see cref="P:System.Security.Permissions.KeyContainerPermission.Flags" /> property is set by the constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Permissions.KeyContainerPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.KeyContainerPermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.KeyContainerPermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.KeyContainerPermission" />, including state information.</para
-          >
+            >The <see cref="M:System.Security.Permissions.KeyContainerPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.KeyContainerPermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.KeyContainerPermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.KeyContainerPermission" />, including state information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -294,8 +283,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding used to reconstruct the permission. </param
-        >
+          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding used to reconstruct the permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -337,8 +325,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -366,8 +353,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission. For example, a permission for <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Open" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" /> access.</para
-          >
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission. For example, a permission for <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Open" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" /> access.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -382,8 +368,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -462,8 +447,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Permissions.KeyContainerPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para
-          >
+            >Use the <see cref="M:System.Security.Permissions.KeyContainerPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -472,8 +456,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.SecurityElement" /> that contains an XML encoding of the permission, including state information.</para
-          >
+            >A <see cref="T:System.Security.SecurityElement" /> that contains an XML encoding of the permission, including state information.</para>
         </returns>
       </Docs>
     </Member>
@@ -502,8 +485,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.KeyContainerPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.KeyContainerPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -518,8 +500,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

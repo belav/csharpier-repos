@@ -27,33 +27,26 @@
   <PropertyGroup>
     <DefaultPrimaryRuntimeFlavor>CoreCLR</DefaultPrimaryRuntimeFlavor>
     <DefaultPrimaryRuntimeFlavor Condition="'$(TargetArchitecture)' == 'armv6'"
-      >Mono</DefaultPrimaryRuntimeFlavor
-    >
+      >Mono</DefaultPrimaryRuntimeFlavor>
     <DefaultPrimaryRuntimeFlavor Condition="'$(TargetArchitecture)' == 'ppc64le'"
-      >Mono</DefaultPrimaryRuntimeFlavor
-    >
+      >Mono</DefaultPrimaryRuntimeFlavor>
     <DefaultPrimaryRuntimeFlavor Condition="'$(TargetArchitecture)' == 's390x'"
-      >Mono</DefaultPrimaryRuntimeFlavor
-    >
+      >Mono</DefaultPrimaryRuntimeFlavor>
     <DefaultPrimaryRuntimeFlavor Condition="'$(TargetsLinuxBionic)' == 'true'"
-      >Mono</DefaultPrimaryRuntimeFlavor
-    >
+      >Mono</DefaultPrimaryRuntimeFlavor>
     <PrimaryRuntimeFlavor Condition="'$(PrimaryRuntimeFlavor)' == ''"
-      >$(DefaultPrimaryRuntimeFlavor)</PrimaryRuntimeFlavor
-    >
+      >$(DefaultPrimaryRuntimeFlavor)</PrimaryRuntimeFlavor>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefaultSubsets>clr+mono+libs+tools+host+packs</DefaultSubsets>
     <DefaultSubsets Condition="'$(TargetsMobile)' == 'true'">mono+libs+packs</DefaultSubsets>
     <DefaultSubsets Condition="'$(TargetsLinuxBionic)' == 'true'"
-      >mono+libs+host+packs</DefaultSubsets
-    >
+      >mono+libs+host+packs</DefaultSubsets>
     <!-- In source build, mono is only supported as primary runtime flavor. On Windows mono is supported for x86/x64 only. -->
     <DefaultSubsets
       Condition="('$(DotNetBuildFromSource)' == 'true' and '$(PrimaryRuntimeFlavor)' != 'Mono') or ('$(TargetOS)' == 'windows' and '$(TargetArchitecture)' != 'x86' and '$(TargetArchitecture)' != 'x64')"
-      >clr+libs+tools+host+packs</DefaultSubsets
-    >
+      >clr+libs+tools+host+packs</DefaultSubsets>
   </PropertyGroup>
 
   <!-- Init _subset here to allow RuntimeFlavor to be set as early as possible -->
@@ -65,95 +58,75 @@
   <PropertyGroup>
     <RuntimeFlavor
       Condition="'$(TargetsMobile)' == 'true' and !$(_subset.Contains('+clr.nativeaotlibs+'))"
-      >Mono</RuntimeFlavor
-    >
+      >Mono</RuntimeFlavor>
     <RuntimeFlavor
       Condition="('$(TargetsMobile)' == 'true' or '$(TargetsLinuxBionic)' == 'true') and $(_subset.Contains('+clr.nativeaotlibs+'))"
-      >CoreCLR</RuntimeFlavor
-    >
+      >CoreCLR</RuntimeFlavor>
     <RuntimeFlavor
       Condition="'$(RuntimeFlavor)' == '' and ($(_subset.Contains('+mono+')) or $(_subset.Contains('+mono.runtime+'))) and (!$(_subset.Contains('+clr+')) and !$(_subset.Contains('+clr.runtime+')))"
-      >Mono</RuntimeFlavor
-    >
+      >Mono</RuntimeFlavor>
     <RuntimeFlavor Condition="'$(RuntimeFlavor)' == ''">$(PrimaryRuntimeFlavor)</RuntimeFlavor>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefaultCoreClrSubsets>clr.native+linuxdac+clr.corelib+clr.tools+clr.nativecorelib+clr.packages+clr.nativeaotlibs+clr.crossarchtools+host.native</DefaultCoreClrSubsets>
     <DefaultCoreClrSubsets Condition="'$(PackageRID)' == 'linux-armel'"
-      >clr.native+linuxdac+clr.corelib+clr.tools+clr.nativecorelib+clr.packages+clr.nativeaotlibs+clr.crossarchtools</DefaultCoreClrSubsets
-    >
+      >clr.native+linuxdac+clr.corelib+clr.tools+clr.nativecorelib+clr.packages+clr.nativeaotlibs+clr.crossarchtools</DefaultCoreClrSubsets>
     <!-- Even on platforms that do not support the CoreCLR runtime, we still want to build ilasm/ildasm. -->
     <DefaultCoreClrSubsets Condition="'$(PrimaryRuntimeFlavor)' != 'CoreCLR'"
-      >clr.iltools+clr.packages</DefaultCoreClrSubsets
-    >
+      >clr.iltools+clr.packages</DefaultCoreClrSubsets>
 
     <DefaultNativeAotSubsets>clr.alljits+clr.tools+clr.nativeaotlibs+clr.nativeaotruntime</DefaultNativeAotSubsets>
 
     <DefaultMonoSubsets Condition="'$(MonoEnableLLVM)' == 'true' and '$(MonoLLVMDir)' == ''"
-      >mono.llvm+</DefaultMonoSubsets
-    >
+      >mono.llvm+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(MonoAOTEnableLLVM)' == 'true' and '$(MonoLLVMDir)' == ''"
-      >mono.llvm+</DefaultMonoSubsets
-    >
+      >mono.llvm+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(TargetOS)' == 'browser'"
-      >$(DefaultMonoSubsets)mono.wasmruntime+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.wasmruntime+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(TargetOS)' == 'wasi'"
-      >$(DefaultMonoSubsets)mono.wasiruntime+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.wasiruntime+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(MonoCrossAOTTargetOS)' != ''"
-      >$(DefaultMonoSubsets)mono.aotcross+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.aotcross+</DefaultMonoSubsets>
     <DefaultMonoSubsets>$(DefaultMonoSubsets)mono.runtime+mono.corelib+mono.packages+</DefaultMonoSubsets>
     <DefaultMonoSubsets
       Condition="'$(TargetsMobile)' == 'true' or '$(ForceBuildMobileManifests)' == 'true'"
-      >$(DefaultMonoSubsets)mono.manifests+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.manifests+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="$(_subset.Contains('+mono.wasmworkload+'))"
-      >$(DefaultMonoSubsets)mono.manifests+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.manifests+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(PrimaryRuntimeFlavor)' != 'Mono'"
-      >$(DefaultMonoSubsets)mono.tools+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)mono.tools+</DefaultMonoSubsets>
     <DefaultMonoSubsets Condition="'$(TargetsMobile)' != 'true'"
-      >$(DefaultMonoSubsets)host.native+</DefaultMonoSubsets
-    >
+      >$(DefaultMonoSubsets)host.native+</DefaultMonoSubsets>
 
     <DefaultLibrariesSubsets
       Condition="'$(BuildTargetFramework)' == '$(NetCoreAppCurrent)' or
                                         '$(BuildTargetFramework)' == '' or
                                         '$(BuildAllConfigurations)' == 'true'"
-      >libs.native+</DefaultLibrariesSubsets
-    >
+      >libs.native+</DefaultLibrariesSubsets>
     <DefaultLibrariesSubsets>$(DefaultLibrariesSubsets)libs.sfx+libs.oob+libs.pretest</DefaultLibrariesSubsets>
 
     <DefaultToolsSubsets>tools.illink</DefaultToolsSubsets>
 
     <DefaultHostSubsets>host.native+host.tools+host.pkg</DefaultHostSubsets>
     <DefaultHostSubsets Condition="'$(DotNetBuildFromSource)' != 'true'"
-      >$(DefaultHostSubsets)+host.pretest+host.tests</DefaultHostSubsets
-    >
+      >$(DefaultHostSubsets)+host.pretest+host.tests</DefaultHostSubsets>
     <DefaultHostSubsets
       Condition="'$(RuntimeFlavor)' != '$(PrimaryRuntimeFlavor)'"
     ></DefaultHostSubsets>
     <DefaultHostSubsets
       Condition="'$(RuntimeFlavor)' != '$(PrimaryRuntimeFlavor)' and '$(TargetsMobile)' != 'true'"
-      >host.native</DefaultHostSubsets
-    >
+      >host.native</DefaultHostSubsets>
 
     <DefaultPacksSubsets>packs.product</DefaultPacksSubsets>
     <DefaultPacksSubsets
       Condition="'$(BuildMonoAOTCrossCompilerOnly)' != 'true' and '$(DotNetBuildFromSource)' != 'true'"
-      >$(DefaultPacksSubsets)+packs.tests</DefaultPacksSubsets
-    >
+      >$(DefaultPacksSubsets)+packs.tests</DefaultPacksSubsets>
     <DefaultPacksSubsets Condition="'$(DotNetBuildFromSource)' == 'true'"
-      >$(DefaultPacksSubsets)+packs.installers</DefaultPacksSubsets
-    >
+      >$(DefaultPacksSubsets)+packs.installers</DefaultPacksSubsets>
     <DefaultPacksSubsets
       Condition="'$(RuntimeFlavor)' != 'Mono' and '$(ForceBuildMobileManifests)' == 'true'"
-      >$(DefaultPacksSubsets)+mono.manifests</DefaultPacksSubsets
-    >
+      >$(DefaultPacksSubsets)+mono.manifests</DefaultPacksSubsets>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -177,14 +150,12 @@
     <!-- CLR NativeAot only builds in a subset of the matrix -->
     <NativeAotSupported
       Condition="('$(TargetOS)' == 'windows' or '$(TargetOS)' == 'linux' or '$(TargetOS)' == 'osx' or '$(TargetOS)' == 'maccatalyst' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'freebsd') and ('$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'arm64')"
-      >true</NativeAotSupported
-    >
+      >true</NativeAotSupported>
 
     <!-- If we're building clr.nativeaotlibs and not building the CLR runtime, compile libraries against NativeAOT CoreLib -->
     <UseNativeAotCoreLib
       Condition="'$(TestNativeAot)' == 'true' or ($(_subset.Contains('+clr.nativeaotlibs+')) and !$(_subset.Contains('+clr.native+')) and !$(_subset.Contains('+clr.runtime+')))"
-      >true</UseNativeAotCoreLib
-    >
+      >true</UseNativeAotCoreLib>
   </PropertyGroup>
 
   <ItemGroup>
@@ -796,16 +767,14 @@
                                '$(BuildAllConfigurations)' == 'true'"
     >
       <AdditionalProperties Condition="$(_subset.Contains('+libs.ref+'))"
-        >%(AdditionalProperties);RefOnly=true</AdditionalProperties
-      >
+        >%(AdditionalProperties);RefOnly=true</AdditionalProperties>
     </ProjectToBuild>
   </ItemGroup>
 
   <ItemGroup Condition="$(_subset.Contains('+libs.ref+')) or $(_subset.Contains('+libs.src+')) or $(_subset.Contains('+libs.oob+'))">
     <ProjectToBuild Include="$(LibrariesProjectRoot)oob.proj" Category="libs">
       <AdditionalProperties Condition="$(_subset.Contains('+libs.ref+'))"
-        >%(AdditionalProperties);RefOnly=true</AdditionalProperties
-      >
+        >%(AdditionalProperties);RefOnly=true</AdditionalProperties>
     </ProjectToBuild>
   </ItemGroup>
 
@@ -962,23 +931,17 @@
   <ItemGroup>
     <ProjectToBuild Update="@(ProjectToBuild)">
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'clr'"
-        >%(AdditionalProperties);Configuration=$(CoreCLRConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(CoreCLRConfiguration)</AdditionalProperties>
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'mono'"
-        >%(AdditionalProperties);Configuration=$(MonoConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(MonoConfiguration)</AdditionalProperties>
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'libs'"
-        >%(AdditionalProperties);Configuration=$(LibrariesConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(LibrariesConfiguration)</AdditionalProperties>
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'host'"
-        >%(AdditionalProperties);Configuration=$(HostConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(HostConfiguration)</AdditionalProperties>
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'tasks'"
-        >%(AdditionalProperties);Configuration=$(TasksConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(TasksConfiguration)</AdditionalProperties>
       <AdditionalProperties Condition="'%(ProjectToBuild.Category)' == 'tools'"
-        >%(AdditionalProperties);Configuration=$(ToolsConfiguration)</AdditionalProperties
-      >
+        >%(AdditionalProperties);Configuration=$(ToolsConfiguration)</AdditionalProperties>
 
       <!-- Propagate configurations for cross-subset builds -->
       <AdditionalProperties>%(AdditionalProperties);LibrariesConfiguration=$(LibrariesConfiguration)</AdditionalProperties>

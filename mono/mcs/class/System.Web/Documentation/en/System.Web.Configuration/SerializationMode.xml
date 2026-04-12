@@ -13,14 +13,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.Web.Configuration.ProfilePropertySettings.SerializeAs" /> property of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object controls the serialization mode for a single profile property setting.</para
-      >
+        >The <see cref="P:System.Web.Configuration.ProfilePropertySettings.SerializeAs" /> property of the <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object controls the serialization mode for a single profile property setting.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines the serialization method used for a <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object.</para
-      >
+        >Determines the serialization method used for a <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object.</para>
     </summary>
   </Docs>
   <Members>
@@ -35,8 +33,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object is serialized using binary serialization.</para
-          >
+            >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object is serialized using binary serialization.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The provider has implicit knowledge of the type and is responsible for deciding how to serialize the <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object into the data store.</para
-          >
+            >The provider has implicit knowledge of the type and is responsible for deciding how to serialize the <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object into the data store.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object is serialized to a simple string.</para
-          >
+            >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> object is serialized to a simple string.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -92,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The profile <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> is serialized as XML using XML serialization.</para
-          >
+            >The profile <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> is serialized as XML using XML serialization.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

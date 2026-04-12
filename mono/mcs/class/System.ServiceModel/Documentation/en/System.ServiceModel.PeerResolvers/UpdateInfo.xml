@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class. </para
-          >
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -77,25 +76,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class with the supplied peer client ID, registration ID, peer mesh ID, and peer endpoint address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" /> class with the supplied peer client ID, registration ID, peer mesh ID, and peer endpoint address.</para>
         </summary>
         <param name="registrationId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Guid" /> that specifies the unique ID of the registration entry to update.</param
-        >
+          <see cref="T:System.Guid" /> that specifies the unique ID of the registration entry to update.</param>
         <param name="client">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Guid" /> that specifies the unique ID of the peer client that submitted the updated registration entry information.</param
-        >
+          <see cref="T:System.Guid" /> that specifies the unique ID of the peer client that submitted the updated registration entry information.</param>
         <param name="meshId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.String" /> that contains the mesh ID of the entry.</param
-        >
+          <see cref="T:System.String" /> that contains the mesh ID of the entry.</param>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.PeerNodeAddress" /> that contains the endpoint address to update for the registration entry.</param
-        >
+          <see cref="T:System.ServiceModel.PeerNodeAddress" /> that contains the endpoint address to update for the registration entry.</param>
       </Docs>
     </Member>
     <Member MemberName="ClientId">

@@ -22,8 +22,7 @@
                             '$(TargetFrameworkVersion)' == 'v$(NetCoreAppCurrentVersion)'"
   >
     <UseLocalTargetingRuntimePack Condition="'$(UseLocalTargetingRuntimePack)' == ''"
-      >true</UseLocalTargetingRuntimePack
-    >
+      >true</UseLocalTargetingRuntimePack>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseLocalTargetingRuntimePack)' == 'true'">
@@ -34,18 +33,14 @@
 
   <PropertyGroup>
     <UseLocalAppHostPack Condition="'$(UseLocalAppHostPack)' == ''"
-      >$(UseLocalTargetingRuntimePack)</UseLocalAppHostPack
-    >
+      >$(UseLocalTargetingRuntimePack)</UseLocalAppHostPack>
     <EnableAppHostPackDownload Condition="'$(UseLocalAppHostPack)' == 'true'"
-      >false</EnableAppHostPackDownload
-    >
+      >false</EnableAppHostPackDownload>
 
     <UseLocalILCompilerPack Condition="'$(UseLocalILCompilerPack)' == ''"
-      >$(UseLocalTargetingRuntimePack)</UseLocalILCompilerPack
-    >
+      >$(UseLocalTargetingRuntimePack)</UseLocalILCompilerPack>
     <UseLocalCrossgen2Pack Condition="'$(UseLocalCrossgen2Pack)' == ''"
-      >$(UseLocalTargetingRuntimePack)</UseLocalCrossgen2Pack
-    >
+      >$(UseLocalTargetingRuntimePack)</UseLocalCrossgen2Pack>
   </PropertyGroup>
 
   <!-- Add Known* items if the SDK doesn't support the TargetFramework yet. -->
@@ -175,8 +170,7 @@
         Condition="'%(Identity)' == '$(LocalFrameworkOverrideName)'"
       >
         <RuntimePackPath Condition="'$(MicrosoftNetCoreAppRuntimePackDir)' != ''"
-          >$(MicrosoftNetCoreAppRuntimePackDir)</RuntimePackPath
-        >
+          >$(MicrosoftNetCoreAppRuntimePackDir)</RuntimePackPath>
       </ResolvedFrameworkReference>
     </ItemGroup>
   </Target>

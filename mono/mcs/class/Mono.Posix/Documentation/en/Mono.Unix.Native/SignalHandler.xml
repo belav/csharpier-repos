@@ -147,8 +147,7 @@ When this delegate is invoked from signal context (that is, the operating system
 <see cref="M:Mono.Unix.Native.Syscall.wait" />, 
 <see cref="M:Mono.Unix.Native.Syscall.waitpid" />, 
 <see cref="M:Mono.Unix.Native.Syscall.write" />.
-</para
-      >
+</para>
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Stdlib.signal" />
   </Docs>

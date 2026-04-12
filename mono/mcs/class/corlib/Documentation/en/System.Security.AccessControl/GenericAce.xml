@@ -49,14 +49,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.AccessControl.AceFlags" /> object contains flags that specify information about the inheritance, inheritance propagation, and auditing conditions for an Access Control Entry (ACE).</para
-          >
+            >An <see cref="T:System.Security.AccessControl.AceFlags" /> object contains flags that specify information about the inheritance, inheritance propagation, and auditing conditions for an Access Control Entry (ACE).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Security.AccessControl.AceFlags" /> associated with this <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para
-          >
+            >Gets or sets the <see cref="T:System.Security.AccessControl.AceFlags" /> associated with this <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.GenericAce" /> object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.GenericAce.GetBinaryForm" /> method.</para
-          >
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.GenericAce" /> object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.GenericAce.GetBinaryForm" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -165,8 +162,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.AccessControl.GenericAce" /> object that this method creates.</para
-          >
+            >The <see cref="T:System.Security.AccessControl.GenericAce" /> object that this method creates.</para>
         </returns>
       </Docs>
     </Member>
@@ -197,29 +193,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Security.AccessControl.GenericAce" /> object from the specified binary data.</para
-          >
+            >Creates a <see cref="T:System.Security.AccessControl.GenericAce" /> object from the specified binary data.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.AccessControl.GenericAce" /> object this method creates.</para
-          >
+            >The <see cref="T:System.Security.AccessControl.GenericAce" /> object this method creates.</para>
         </returns>
         <param name="binaryForm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binary data from which to create the new <see cref="T:System.Security.AccessControl.GenericAce" /> object.</param
-        >
+          />The binary data from which to create the new <see cref="T:System.Security.AccessControl.GenericAce" /> object.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset at which to begin unmarshaling.</param
-        >
+          />The offset at which to begin unmarshaling.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -245,22 +237,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para
-          >
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see cref="T:System.Security.AccessControl.GenericAce" /> object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Security.AccessControl.GenericAce" /> object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object; otherwise, false.</para>
         </returns>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</param
-        >
+          />The <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare to the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetBinaryForm">
@@ -290,23 +279,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see cref="T:System.Security.AccessControl.GenericAce" /> object into the specified byte array beginning at the specified offset.</para
-          >
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.GenericAce" /> object into the specified byte array beginning at the specified offset.</para>
         </summary>
         <param name="binaryForm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array into which the contents of the <see cref="T:System.Security.AccessControl.GenericAce" /> is marshaled.</param
-        >
+          />The byte array into which the contents of the <see cref="T:System.Security.AccessControl.GenericAce" /> is marshaled.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset at which to start marshaling.</param
-        >
+          />The offset at which to start marshaling.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -330,14 +316,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the <see cref="T:System.Security.AccessControl.GenericAce" /> class. The  <see cref="M:System.Security.AccessControl.GenericAce.GetHashCode" /> method is suitable for use in hashing algorithms and data structures like a hash table.</para
-          >
+            >Serves as a hash function for the <see cref="T:System.Security.AccessControl.GenericAce" /> class. The  <see cref="M:System.Security.AccessControl.GenericAce.GetHashCode" /> method is suitable for use in hashing algorithms and data structures like a hash table.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para
-          >
+            >A hash code for the current <see cref="T:System.Security.AccessControl.GenericAce" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -416,29 +400,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> objects are considered equal.</para
-          >
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> objects are considered equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" /> objects are equal; otherwise, false.</para
-          >
+            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" /> objects are equal; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare.</param
-        >
+          />The first <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second <see cref="T:System.Security.AccessControl.GenericAce" /> to compare.</param
-        >
+          />The second <see cref="T:System.Security.AccessControl.GenericAce" /> to compare.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -468,29 +448,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> objects are considered unequal.</para
-          >
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" /> objects are considered unequal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" /> objects are unequal; otherwise, false.</para
-          >
+            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" /> objects are unequal; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare.</param
-        >
+          />The first <see cref="T:System.Security.AccessControl.GenericAce" /> object to compare.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second <see cref="T:System.Security.AccessControl.GenericAce" /> to compare.</param
-        >
+          />The second <see cref="T:System.Security.AccessControl.GenericAce" /> to compare.</param>
       </Docs>
     </Member>
     <Member MemberName="PropagationFlags">

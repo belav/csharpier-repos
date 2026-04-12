@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class represents a configuration element for a service name used in a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />.</para
-      >
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class represents a configuration element for a service name used in a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,17 +43,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this constructor is used to initialize a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class, the <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" /> property is set to null.</para
-          >
+            >When this constructor is used to initialize a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class, the <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" /> property is set to null.</para>
           <para
-            >The <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" /> property should be set to an appropriate value for the application before calling the <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" /> method to add the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> instance to the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" /> class.</para
-          >
+            >The <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement.Name" /> property should be set to an appropriate value for the application before calling the <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" /> method to add the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> instance to the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -79,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Service Provider Name (SPN) for this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> instance.</para
-          >
+            >Gets or sets the Service Provider Name (SPN) for this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" /> instance.</para>
         </summary>
       </Docs>
     </Member>

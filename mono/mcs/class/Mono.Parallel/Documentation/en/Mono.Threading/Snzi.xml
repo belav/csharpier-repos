@@ -50,8 +50,7 @@
       <Docs>
         <summary>Decrement the value of the Snzi object.</summary>
         <remarks
-          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Increment()" /> must be made on the same thread that initially called this method.</remarks
-        >
+          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Increment()" /> must be made on the same thread that initially called this method.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Increment">
@@ -71,8 +70,7 @@
       <Docs>
         <summary>Increment the value of the Snzi object.</summary>
         <remarks
-          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Decrement()" /> must be made on the same thread that initially called this method.</remarks
-        >
+          >To undo the action, a call to <see cref="M:Mono.Threading.Snzi.Decrement()" /> must be made on the same thread that initially called this method.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsSet">

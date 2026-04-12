@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> can be used to reference a particular data type.</para
-      >
+        <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> can be used to reference a particular data type.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeTypeReferenceExpression.Type" /> property specifies the data type to reference.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeTypeReferenceExpression.Type" /> property specifies the data type to reference.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +91,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified type.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type to reference. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type to reference. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,16 +122,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type name.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type to reference. </param
-        >
+          />The name of the data type to reference. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -160,16 +153,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the data type to reference. </param
-        >
+          />An instance of the data type to reference. </param>
       </Docs>
     </Member>
     <Member MemberName="Type">

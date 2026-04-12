@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with a specified error message.</para>
         </summary>
       </Docs>
     </Member>
@@ -88,23 +86,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" />  that contains contextual information about the source or destination.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" />  that contains contextual information about the source or destination.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -131,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with a specified error message and a reference to the inner exception that is the cause of the current exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PoisonMessageException" /> class with a specified error message and a reference to the inner exception that is the cause of the current exception.</para>
         </summary>
       </Docs>
     </Member>

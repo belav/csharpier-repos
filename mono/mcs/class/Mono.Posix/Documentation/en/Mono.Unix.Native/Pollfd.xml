@@ -28,8 +28,7 @@
   <Docs>
     <summary
       >Polling information for 
-    <see cref="M:Mono.Unix.Native.Syscall.poll" />.</summary
-    >
+    <see cref="M:Mono.Unix.Native.Syscall.poll" />.</summary>
     <remarks />
     <altmember cref="M:Mono.Unix.Native.Syscall.poll" />
   </Docs>
@@ -124,8 +123,7 @@
       <Docs>
         <summary>File descriptor.</summary>
         <remarks
-          >File descriptor to poll.  If fd is equal to -1 then <see cref="F:Mono.Unix.Native.Pollfd.revents" /> is cleared (set to zero), and that pollfd is not checked.</remarks
-        >
+          >File descriptor to poll.  If fd is equal to -1 then <see cref="F:Mono.Unix.Native.Pollfd.revents" /> is cleared (set to zero), and that pollfd is not checked.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

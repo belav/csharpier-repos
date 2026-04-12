@@ -28,8 +28,7 @@
       <para
         >Represents the complexContent element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class represents the complex content model for complex types. It contains extensions or restrictions on a complex type that has either only elements or mixed content.</para
-      >
+        </format>. This class represents the complex content model for complex types. It contains extensions or restrictions on a complex type that has either only elements or mixed content.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaComplexContent" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaComplexContent" /> class.</para>
         </summary>
       </Docs>
     </Member>

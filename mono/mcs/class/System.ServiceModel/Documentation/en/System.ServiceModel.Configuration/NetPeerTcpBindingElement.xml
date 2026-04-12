@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -66,13 +65,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" /> class.  </para>
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.String" /> that specifies the name to associate with this binding element.</param
-        >
+          <see cref="T:System.String" /> that specifies the name to associate with this binding element.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -211,8 +208,7 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.Binding" /> that contains a specific to networking binding from which this configuration element should obtain the new settings when a configuration application event is raised.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.Binding" /> that contains a specific to networking binding from which this configuration element should obtain the new settings when a configuration application event is raised.</param>
       </Docs>
     </Member>
     <Member MemberName="Port">

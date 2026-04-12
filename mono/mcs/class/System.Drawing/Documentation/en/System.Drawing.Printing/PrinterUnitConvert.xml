@@ -18,8 +18,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Typically, this class is not called directly.</para>
       <para
-        >For more information on printing, see the <see cref="N:System.Drawing.Printing" /> namespace overview.</para
-      >
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" /> namespace overview.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +44,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -95,36 +93,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a double-precision floating-point number from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a double-precision floating-point number from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A double-precision floating-point number that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A double-precision floating-point number that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Point" /> being converted. </param
-        >
+          />The <see cref="T:System.Drawing.Point" /> being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -149,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -199,36 +191,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see cref="T:System.Drawing.Point" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a <see cref="T:System.Drawing.Point" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Point" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A <see cref="T:System.Drawing.Point" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Point" /> being converted. </param
-        >
+          />The <see cref="T:System.Drawing.Point" /> being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -253,8 +240,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -303,36 +289,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see cref="T:System.Drawing.Printing.Margins" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a <see cref="T:System.Drawing.Printing.Margins" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Printing.Margins" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A <see cref="T:System.Drawing.Printing.Margins" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Printing.Margins" /> being converted. </param
-        >
+          />The <see cref="T:System.Drawing.Printing.Margins" /> being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -357,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -407,36 +387,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see cref="T:System.Drawing.Rectangle" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a <see cref="T:System.Drawing.Rectangle" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Rectangle" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A <see cref="T:System.Drawing.Rectangle" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Rectangle" /> being converted. </param
-        >
+          />The <see cref="T:System.Drawing.Rectangle" /> being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -461,8 +436,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -511,36 +485,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see cref="T:System.Drawing.Size" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a <see cref="T:System.Drawing.Size" /> from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Size" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A <see cref="T:System.Drawing.Size" /> that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Size" /> being converted. </param
-        >
+          />The <see cref="T:System.Drawing.Size" /> being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -565,8 +534,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para
-          >
+            >The following table shows the <see cref="T:System.Drawing.Printing.PrinterUnit" /> values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -615,36 +583,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a 32-bit signed integer from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para
-          >
+            >Converts a 32-bit signed integer from one <see cref="T:System.Drawing.Printing.PrinterUnit" /> type to another <see cref="T:System.Drawing.Printing.PrinterUnit" /> type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit signed integer that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para
-          >
+            >A 32-bit signed integer that represents the converted <see cref="T:System.Drawing.Printing.PrinterUnit" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value being converted. </param
-        >
+          />The value being converted. </param>
         <param name="fromUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert from. </param
-        >
+          />The unit to convert from. </param>
         <param name="toUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unit to convert to. </param
-        >
+          />The unit to convert to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

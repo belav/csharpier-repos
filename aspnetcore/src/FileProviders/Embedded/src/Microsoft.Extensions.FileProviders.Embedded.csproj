@@ -5,11 +5,9 @@
     <TargetFrameworks>$(DefaultNetFxTargetFramework);netstandard2.0;$(DefaultNetCoreTargetFramework)</TargetFrameworks>
     <NuspecFile>$(MSBuildProjectName).multitarget.nuspec</NuspecFile>
     <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'"
-      >$(DefaultNetCoreTargetFramework)</TargetFrameworks
-    >
+      >$(DefaultNetCoreTargetFramework)</TargetFrameworks>
     <NuspecFile Condition="'$(DotNetBuildFromSource)' == 'true'"
-      >$(MSBuildProjectName).netcoreapp.nuspec</NuspecFile
-    >
+      >$(MSBuildProjectName).netcoreapp.nuspec</NuspecFile>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>files;filesystem</PackageTags>

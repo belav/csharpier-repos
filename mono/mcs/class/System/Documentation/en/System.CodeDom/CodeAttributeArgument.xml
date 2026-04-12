@@ -30,17 +30,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeAttributeArgument" /> can be used to represent either the value for a single argument of an attribute constructor, or a value with which to initialize a property of the attribute.</para
-      >
+        <see cref="T:System.CodeDom.CodeAttributeArgument" /> can be used to represent either the value for a single argument of an attribute constructor, or a value with which to initialize a property of the attribute.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeAttributeArgument.Value" /> property indicates the value of the argument. The <see cref="P:System.CodeDom.CodeAttributeArgument.Name" /> property, when used, indicates the name of a property of the attribute to which to assign the value.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeAttributeArgument.Value" /> property indicates the value of the argument. The <see cref="P:System.CodeDom.CodeAttributeArgument.Name" /> property, when used, indicates the name of a property of the attribute to which to assign the value.</para>
       <para
-        >Attribute declarations are frequently initialized with a number of arguments that are passed into the constructor of the attribute at run time. To provide arguments to the constructor for an attribute, add a <see cref="T:System.CodeDom.CodeAttributeArgument" /> for each argument to the <see cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" /> collection of a <see cref="T:System.CodeDom.CodeAttributeDeclaration" />. Only the <see cref="P:System.CodeDom.CodeAttributeArgument.Value" /> property of each <see cref="T:System.CodeDom.CodeAttributeArgument" /> needs to be initialized. The order of arguments within the collection must correspond to the order of arguments in the method signature of the constructor for the attribute.</para
-      >
+        >Attribute declarations are frequently initialized with a number of arguments that are passed into the constructor of the attribute at run time. To provide arguments to the constructor for an attribute, add a <see cref="T:System.CodeDom.CodeAttributeArgument" /> for each argument to the <see cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" /> collection of a <see cref="T:System.CodeDom.CodeAttributeDeclaration" />. Only the <see cref="P:System.CodeDom.CodeAttributeArgument.Value" /> property of each <see cref="T:System.CodeDom.CodeAttributeArgument" /> needs to be initialized. The order of arguments within the collection must correspond to the order of arguments in the method signature of the constructor for the attribute.</para>
       <para
-        >You can also set properties of the attribute that are not available through the constructor by providing a <see cref="T:System.CodeDom.CodeAttributeArgument" /> that indicates the name of the property to set, along with the value to set.</para
-      >
+        >You can also set properties of the attribute that are not available through the constructor by providing a <see cref="T:System.CodeDom.CodeAttributeArgument" /> that indicates the name of the property to set, along with the value to set.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -96,16 +91,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class using the specified value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class using the specified value.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that represents the value of the argument. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that represents the value of the argument. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,23 +126,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class using the specified name and value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeArgument" /> class using the specified name and value.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute property the argument applies to. </param
-        >
+          />The name of the attribute property the argument applies to. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that represents the value of the argument. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that represents the value of the argument. </param>
       </Docs>
     </Member>
     <Member MemberName="Name">

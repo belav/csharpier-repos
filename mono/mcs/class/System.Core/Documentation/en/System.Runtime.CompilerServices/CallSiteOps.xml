@@ -75,22 +75,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the call site rule.</param
-        >
+          />An instance of the call site rule.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Bind&lt;T&gt;">
@@ -144,29 +141,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The call site binder.</param
-        >
+          />The call site binder.</param>
         <param name="site">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Arguments to the call site.</param
-        >
+          />Arguments to the call site.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ClearMatch">
@@ -207,8 +200,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMatchmaker&lt;T&gt;">
@@ -260,15 +252,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCachedRules&lt;T&gt;">
@@ -316,15 +306,13 @@
           <para>The collection of applicable rules.</para>
         </returns>
         <param name="cache">
-          <attribution license="cc4" from="Microsoft" modified="false" />The cache.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The cache.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetMatch">
@@ -369,8 +357,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
       </Docs>
     </Member>
     <Member MemberName="GetRuleCache&lt;T&gt;">
@@ -422,15 +409,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetRules&lt;T&gt;">
@@ -482,15 +467,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="MoveRule&lt;T&gt;">
@@ -540,29 +523,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The call site rule cache.</param
-        >
+          />The call site rule cache.</param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the call site rule.</param
-        >
+          />An instance of the call site rule.</param>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An index of the call site rule.</param
-        >
+          />An index of the call site rule.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />. </typeparam>
       </Docs>
     </Member>
     <Member MemberName="SetNotMatched">
@@ -607,8 +586,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
       </Docs>
     </Member>
     <Member MemberName="UpdateRules&lt;T&gt;">
@@ -657,22 +635,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the dynamic call site.</param
-        >
+          />An instance of the dynamic call site.</param>
         <param name="matched">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The matched rule index.</param
-        >
+          />The matched rule index.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam
-        >
+          />The type of the delegate of the <see cref="T:System.Runtime.CompilerServices.CallSite" />.</typeparam>
       </Docs>
     </Member>
   </Members>

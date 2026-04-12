@@ -52,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -77,22 +76,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance is created with <see cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" /> set to <paramref name="channel" />.</para
-          >
+            >An instance is created with <see cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" /> set to <paramref name="channel" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para>
         </summary>
         <param name="channel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel whose parameters are in this collection.</param
-        >
+          />The channel whose parameters are in this collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Channel">
@@ -116,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set to <paramref name="channel" /> when <see cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" /> is called.</para
-          >
+            >This property is set to <paramref name="channel" /> when <see cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" /> is called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -178,15 +173,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item in the collection.</param
-        >
+          />The index of the item in the collection.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to add to the collection.</param
-        >
+          />The item to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="PropagateChannelParameters">
@@ -213,16 +206,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the parameters in the current collection to a specified channel's <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para
-          >
+            >Adds the parameters in the current collection to a specified channel's <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para>
         </summary>
         <param name="innerChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel that receives the current collection's parameters.</param
-        >
+          />The channel that receives the current collection's parameters.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveItem">
@@ -252,8 +243,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Index of the parameter to remove.</param
-        >
+          />Index of the parameter to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="SetItem">
@@ -287,15 +277,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Index of the item to replace.</param
-        >
+          />Index of the item to replace.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Value of the replacement item.</param
-        >
+          />Value of the replacement item.</param>
       </Docs>
     </Member>
   </Members>

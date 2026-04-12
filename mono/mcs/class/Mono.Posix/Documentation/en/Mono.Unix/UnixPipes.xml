@@ -28,8 +28,7 @@
       <para>
         A Unix <i>pipe</i> is an object allowing bidirectional data flow
         through a pair of <see cref="T:Mono.Unix.UnixStream" />s.
-      </para
-      >
+      </para>
       <para>
         <see cref="F:Mono.Unix.UnixPipes.Reading" /> is the <i>read end</i> 
         of the pipe, while <see cref="F:Mono.Unix.UnixPipes.Writing" /> is the
@@ -40,14 +39,12 @@
         program: the source's standard output is set up to be the write
         end of the pipe, and the sink's standard input is set up to be the
         read end of the pipe.
-      </para
-      >
+      </para>
       <para>
         The pipe persists until 
         <see cref="F:Mono.Unix.UnixPipes.Reading" /> and
         <see cref="F:Mono.Unix.UnixPipes.Writing" /> are closed.
-      </para
-      >
+      </para>
       <para>
         A pipe that has had an end closed is considered widowed.  
         Writing on such a pipe causes the writing process to receive a 
@@ -55,8 +52,7 @@
         Widowing a pipe is the only way to deliver end-of-file to a reader: 
         after the reader consumes any buffered data, reading a widowed 
         pipe returns a zero count.
-      </para
-      >
+      </para>
     </remarks>
   </Docs>
   <Members>
@@ -84,20 +80,17 @@
           A <see cref="T:Mono.Unix.UnixStream" /> that permits reading.  
           Data written to <paramref name="writing" /> can be read from 
           <paramref name="reading" />.
-        </param
-        >
+        </param>
         <param name="writing">
           A <see cref="T:Mono.Unix.UnixStream" /> that permits writing.  
           Data written to <paramref name="writing" /> can be read from 
           <paramref name="reading" />.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixPipes" /> class using the specified
           <paramref name="reading" /> and <paramref name="writing" /> streams.
-        </summary
-        >
+        </summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -124,28 +117,24 @@
           end" (<see cref="F:Mono.Unix.UnixPipes.Reading" />)
           and the "write end" (<see cref="F:Mono.Unix.UnixPipes.Writing" />)
           of the pipe.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             This method creates a Unix pipe, an object which allows
             bidirectional data flow through a pair of 
             <see cref="T:Mono.Unix.UnixStream" /> instances.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             Too many descriptors are active.
             [<see cref="F:Mono.Unix.Native.Errno.EMFILE" />]
-          </para
-          >
+          </para>
           <para>-or-</para>
           <para>
             The system file table is full.
             [<see cref="F:Mono.Unix.Native.Errno.ENFILE" />]
-          </para
-          >
+          </para>
         </exception>
       </Docs>
     </Member>
@@ -171,8 +160,7 @@
         <param name="value">
           A <see cref="T:System.Object" /> to compare the current instance
           against.
-        </param
-        >
+        </param>
         <summary>
           Determines whether the current instance and the specified object
           have the same value.
@@ -184,8 +172,7 @@
           <see cref="F:Mono.Unix.UnixPipes.Reading" /> and
           <see cref="F:Mono.Unix.UnixPipes.Writing" /> match; otherwise, 
           <see langword="false" />.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -261,18 +248,15 @@
       <Docs>
         <param name="lhs">
           The first <see cref="T:Mono.Unix.UnixPipes" /> to compare.
-        </param
-        >
+        </param>
         <param name="rhs">
           The second <see cref="T:Mono.Unix.UnixPipes" /> to compare.
-        </param
-        >
+        </param>
         <summary>
           Returns a <see cref="T:System.Boolean" /> value indicating whether
           the two specified <see cref="T:Mono.Unix.UnixPipes" /> values are
           equal to each other.
-        </summary
-        >
+        </summary>
         <returns>
           <see langword="true" /> if <paramref name="lhs" /> and 
           <paramref name="rhs" /> represent the same 
@@ -308,18 +292,15 @@
       <Docs>
         <param name="lhs">
           The first <see cref="T:Mono.Unix.UnixPipes" /> to compare.
-        </param
-        >
+        </param>
         <param name="rhs">
           The second <see cref="T:Mono.Unix.UnixPipes" /> to compare.
-        </param
-        >
+        </param>
         <summary>
           Returns a <see cref="T:System.Boolean" /> value indicating whether
           the two specified <see cref="T:Mono.Unix.UnixPipes" /> values are
           not equal to each other.
-        </summary
-        >
+        </summary>
         <returns>
           <see langword="true" /> if <paramref name="lhs" /> and 
           <paramref name="rhs" /> do not represent the same 
@@ -346,8 +327,7 @@
         <summary>
           A <see cref="T:Mono.Unix.UnixStream" /> instance that reads any data
           written to the <see cref="F:Mono.Unix.UnixPipes.Writing" /> stream.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             A pipe that has had an end closed is considered widowed.  
@@ -356,8 +336,7 @@
             Widowing a pipe is the only way to deliver end-of-file to a reader: 
             after the reader consumes any buffered data, reading a widowed 
             pipe returns a zero count.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -378,8 +357,7 @@
           A <see cref="T:Mono.Unix.UnixStream" /> instance that, when written
           to, makes all data available for reading from the
           <see cref="F:Mono.Unix.UnixPipes.Reading" /> stream.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             A pipe that has had an end closed is considered widowed.  
@@ -388,8 +366,7 @@
             Widowing a pipe is the only way to deliver end-of-file to a reader: 
             after the reader consumes any buffered data, reading a widowed 
             pipe returns a zero count.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>

@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationSecurityElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationSecurityElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,14 +76,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" /> is an enumeration that contains the following values: <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.None" /> and <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />. The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />.</para
-          >
+            <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" /> is an enumeration that contains the following values: <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.None" /> and <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />. The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" /> that is associated with the Message Queuing integration channel.</para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" /> that is associated with the Message Queuing integration channel.</para>
         </summary>
       </Docs>
     </Member>
@@ -136,14 +133,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> encapsulates the security settings for the Message Queuing integration transport. The settings are the same for both the Message Queuing integration and queued transports. <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> allows you to set the Authentication Mode, Encryption Algorithm, Secure Hash Algorithm, and Protection Level.</para
-          >
+            <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> encapsulates the security settings for the Message Queuing integration transport. The settings are the same for both the Message Queuing integration and queued transports. <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> allows you to set the Authentication Mode, Encryption Algorithm, Secure Hash Algorithm, and Protection Level.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> that is associated with the Message Queuing (MSMQ) integration channel.</para
-          >
+            >Gets the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> that is associated with the Message Queuing (MSMQ) integration channel.</para>
         </summary>
       </Docs>
     </Member>

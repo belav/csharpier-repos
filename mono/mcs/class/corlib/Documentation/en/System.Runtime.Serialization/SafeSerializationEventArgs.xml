@@ -21,14 +21,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The event occurs when serializing an exception that contains custom data in  security-transparent code. </para>
       <para
-        >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para
-      >
+        >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="T:System.Exception.SerializeObjectState" /> event.</para
-      >
+        >Provides data for the <see cref="T:System.Exception.SerializeObjectState" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,11 +56,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The class or structure that implements the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> allows you to serialize custom data in security-transparent code. </para
-          >
+            >The class or structure that implements the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> allows you to serialize custom data in security-transparent code. </para>
           <para
-            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para
-          >
+            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +69,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A state object that is serialized with the instance.</param
-        >
+          />A state object that is serialized with the instance.</param>
       </Docs>
     </Member>
     <Member MemberName="StreamingContext">
@@ -98,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para
-          >
+            >For more information and an example, see the <see cref="T:System.Runtime.Serialization.ISafeSerializationData" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

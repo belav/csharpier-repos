@@ -199,8 +199,7 @@
         <param name="input">The expression to evaluate.</param>
         <param name="result">The result will be stored here.</param>
         <param name="result_set"
-          >If this value is true, the result was set and can be used, otherwise it was not set.</param
-        >
+          >If this value is true, the result was set and can be used, otherwise it was not set.</param>
         <summary>
             Evaluates and expression or statement and returns any result values.
             </summary>

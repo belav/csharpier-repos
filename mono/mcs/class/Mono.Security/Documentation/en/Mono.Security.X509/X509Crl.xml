@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -267,8 +265,7 @@
       <Docs>
         <summary>Returns when the next updated CRL should be available.</summary>
         <value
-          >a <see cref="T:System.DateTime" /> representing when the next CRL will be available.</value
-        >
+          >a <see cref="T:System.DateTime" /> representing when the next CRL will be available.</value>
         <remarks>The returned <see cref="T:System.DateTime" /> is local date/time.</remarks>
       </Docs>
       <AssemblyInfo>

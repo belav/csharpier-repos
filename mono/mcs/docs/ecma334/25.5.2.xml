@@ -3,8 +3,7 @@
   <paragraph
     >A <non_terminal where="25.5.2">pointer-member-access</non_terminal> consists of a <non_terminal
       where="14.5"
-      >primary-expression</non_terminal
-    >, followed by a &quot;-&gt;&quot; token, followed by an identifier. <grammar_production>
+      >primary-expression</non_terminal>, followed by a &quot;-&gt;&quot; token, followed by an identifier. <grammar_production>
       <name>
         <non_terminal where="25.5.2">pointer-member-access</non_terminal>
       </name> : <rhs>
@@ -16,8 +15,7 @@
   </paragraph>
   <paragraph>In a pointer member access of the form P-&gt;I, P must be an expression of a pointer type other than void*, and I must denote an accessible member of the type to which P points. </paragraph>
   <paragraph
-    >A pointer member access of the form P-&gt;I is evaluated exactly as (*P).I. For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the member access operator (.), see <hyperlink>14.5.4</hyperlink>. </paragraph
-  >
+    >A pointer member access of the form P-&gt;I is evaluated exactly as (*P).I. For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the member access operator (.), see <hyperlink>14.5.4</hyperlink>. </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -60,7 +58,6 @@ class Test
    }  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

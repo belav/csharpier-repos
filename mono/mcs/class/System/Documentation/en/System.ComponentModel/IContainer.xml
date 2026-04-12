@@ -64,22 +64,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see cref="T:System.ComponentModel.IComponent" /> is added at the end of the list.</para
-          >
+            >The new <see cref="T:System.ComponentModel.IComponent" /> is added at the end of the list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.ComponentModel.IComponent" /> to the <see cref="T:System.ComponentModel.IContainer" /> at the end of the list.</para
-          >
+            >Adds the specified <see cref="T:System.ComponentModel.IComponent" /> to the <see cref="T:System.ComponentModel.IContainer" /> at the end of the list.</para>
         </summary>
         <param name="component">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to add. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to add. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -108,29 +105,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see cref="T:System.ComponentModel.IComponent" /> is added at the end of the list.</para
-          >
+            >The new <see cref="T:System.ComponentModel.IComponent" /> is added at the end of the list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.ComponentModel.IComponent" /> to the <see cref="T:System.ComponentModel.IContainer" /> at the end of the list, and assigns a name to the component.</para
-          >
+            >Adds the specified <see cref="T:System.ComponentModel.IComponent" /> to the <see cref="T:System.ComponentModel.IContainer" /> at the end of the list, and assigns a name to the component.</para>
         </summary>
         <param name="component">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to add. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to add. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unique, case-insensitive name to assign to the component.</param
-        >
+          />The unique, case-insensitive name to assign to the component.</param>
       </Docs>
     </Member>
     <Member MemberName="Components">
@@ -157,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the components in the <see cref="T:System.ComponentModel.IContainer" />.</para
-          >
+            >Gets all the components in the <see cref="T:System.ComponentModel.IContainer" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -188,16 +180,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a component from the <see cref="T:System.ComponentModel.IContainer" />.</para
-          >
+            >Removes a component from the <see cref="T:System.ComponentModel.IContainer" />.</para>
         </summary>
         <param name="component">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to remove. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to remove. </param>
       </Docs>
     </Member>
   </Members>

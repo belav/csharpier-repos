@@ -34,8 +34,7 @@
 <see cref="M:System.Xml.XmlWriter.Close" /> method is called, the write state is set to 
 <see langword="Closed" />. The <see cref="M:System.Xml.XmlWriter.WriteEndDocument" /> method resets the write state back to 
 <see langword="Start" />, allowing 
-   the writer to write a new XML document.</para
-      >
+   the writer to write a new XML document.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -99,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="M:System.Xml.XmlWriter.Close" /> method has been called.</para
-          >
+            >Indicates that the <see cref="M:System.Xml.XmlWriter.Close" /> method has been called.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -190,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception has been thrown, which has left the <see cref="T:System.Xml.XmlWriter" /> in an invalid state. You can call the <see cref="M:System.Xml.XmlWriter.Close" /> method to put the <see cref="T:System.Xml.XmlWriter" /> in the <see cref="F:System.Xml.WriteState.Closed" /> state. Any other <see cref="T:System.Xml.XmlWriter" /> method calls results in an <see cref="T:System.InvalidOperationException" />.</para
-          >
+            >An exception has been thrown, which has left the <see cref="T:System.Xml.XmlWriter" /> in an invalid state. You can call the <see cref="M:System.Xml.XmlWriter.Close" /> method to put the <see cref="T:System.Xml.XmlWriter" /> in the <see cref="F:System.Xml.WriteState.Closed" /> state. Any other <see cref="T:System.Xml.XmlWriter" /> method calls results in an <see cref="T:System.InvalidOperationException" />.</para>
         </summary>
       </Docs>
     </Member>

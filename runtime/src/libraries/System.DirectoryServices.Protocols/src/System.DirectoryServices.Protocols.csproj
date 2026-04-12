@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-osx;$(NetCoreAppCurrent)-linux;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum)-osx;$(NetCoreAppMinimum)-linux;$(NetCoreAppMinimum);netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
-      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)-osx;$(NetCoreAppPrevious)-linux;$(NetCoreAppPrevious)</TargetFrameworks
-    >
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)-osx;$(NetCoreAppPrevious)-linux;$(NetCoreAppPrevious)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IncludeDllSafeSearchPathAttribute>true</IncludeDllSafeSearchPathAttribute>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
@@ -24,8 +23,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.DirectoryServicesProtocols_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.DirectoryServicesProtocols_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

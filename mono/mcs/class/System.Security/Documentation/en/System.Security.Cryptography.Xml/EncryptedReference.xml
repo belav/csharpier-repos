@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive.</para
-      >
+        >Represents the abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,15 +44,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a class that is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para
-          >
+            >This constructor initializes a class that is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para>
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xml-encryption-req.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -76,26 +73,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="uri" /> parameter provides information about the location of the data to be encrypted.</para
-          >
+            >The <paramref name="uri" /> parameter provides information about the location of the data to be encrypted.</para>
           <para
-            >This constructor initializes a class that is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para
-          >
+            >This constructor initializes a class that is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para>
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xml-encryption-req.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class using the specified Uniform Resource Identifier (URI).</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class using the specified Uniform Resource Identifier (URI).</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Uniform Resource Identifier (URI) that points to the data to encrypt.</param
-        >
+          />The Uniform Resource Identifier (URI) that points to the data to encrypt.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -122,23 +115,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This class is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para
-          >
+            >This class is an abstract base class used in XML encryption from which the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> classes derive. Unless you have a scenario where you need to create a custom reference section in XML, use one of the inherited classes.</para>
           <para>For more information about XML encryption standards, see http://www.w3.org/TR/xml-encryption-req.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class using the specified Uniform Resource Identifier (URI) and transform chain.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> class using the specified Uniform Resource Identifier (URI) and transform chain.</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Uniform Resource Identifier (URI) that points to the data to encrypt.</param
-        >
+          />The Uniform Resource Identifier (URI) that points to the data to encrypt.</param>
       </Docs>
     </Member>
     <Member MemberName="AddTransform">
@@ -167,16 +157,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to the current transform chain of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >Adds a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to the current transform chain of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </summary>
         <param name="transform">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to add to the transform chain.</param
-        >
+          />A <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to add to the transform chain.</param>
       </Docs>
     </Member>
     <Member MemberName="CacheValid">
@@ -222,20 +210,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to output the XML information contained in an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >You can use this method to output the XML information contained in an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >Returns the XML representation of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlElement" /> object that represents the values of the &lt;EncryptedReference&gt; element in XML encryption.</para
-          >
+            >An <see cref="T:System.Xml.XmlElement" /> object that represents the values of the &lt;EncryptedReference&gt; element in XML encryption.</para>
         </returns>
       </Docs>
     </Member>
@@ -265,16 +250,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an XML element into an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >Loads an XML element into an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlElement" /> object that represents an XML element.</param
-        >
+          />An <see cref="T:System.Xml.XmlElement" /> object that represents an XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReferenceType">
@@ -294,8 +277,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set when using the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> derived classes. For example, a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object sets this property value to <see cref="T:System.Security.Cryptography.Xml.CipherReference" />.</para
-          >
+            >This property is set when using the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />, <see cref="T:System.Security.Cryptography.Xml.KeyReference" />, and <see cref="T:System.Security.Cryptography.Xml.DataReference" /> derived classes. For example, a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object sets this property value to <see cref="T:System.Security.Cryptography.Xml.CipherReference" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the transform chain of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >Gets or sets the transform chain of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -353,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Uniform Resource Identifier (URI) of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para
-          >
+            >Gets or sets the Uniform Resource Identifier (URI) of an <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" /> object.</para>
         </summary>
       </Docs>
     </Member>

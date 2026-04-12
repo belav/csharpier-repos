@@ -29,11 +29,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class prevents calls made into a hosting object by OLE from entering threads other than the UI thread.</para
-      >
+        >The <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class prevents calls made into a hosting object by OLE from entering threads other than the UI thread.</para>
       <para
-        >You should derive your class from the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class to gain this functionality.</para
-      >
+        >You should derive your class from the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class to gain this functionality.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,14 +55,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should derive your class from the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class-.</para
-          >
+            >You should derive your class from the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class-.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" /> class. </para>
         </summary>
       </Docs>
     </Member>

@@ -30,8 +30,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -54,8 +53,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Behavior" /> property is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time.</para
-            >
+              >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Behavior" /> property is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time.</para>
           </block>
         </remarks>
         <summary>
@@ -106,14 +104,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DesignTimeElement" /> property is used by the designer to retrieve the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object on the design surface.</para
-          >
+            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DesignTimeElement" /> property is used by the designer to retrieve the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object on the design surface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object on the design surface.</para
-          >
+            >Gets the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object on the design surface.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -139,25 +135,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" /> object and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -181,11 +173,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The design host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" /> class to get the <see cref="T:System.Web.UI.Design.ExpressionEditor" /> class to get the <see cref="T:System.Web.UI.Design.ExpressionEditorSheet" /> to set expressions for control properties at design time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type.</para
-          >
+            >The design host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" /> class to get the <see cref="T:System.Web.UI.Design.ExpressionEditor" /> class to get the <see cref="T:System.Web.UI.Design.ExpressionEditorSheet" /> to set expressions for control properties at design time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type.</para>
           <para
-            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Expressions" /> collection contains an <see cref="T:System.Web.UI.ExpressionBinding" /> element for each control property that has an associated expression string. Each <see cref="P:System.Web.UI.ExpressionBinding.ExpressionPrefix" /> property for each element indicates the associated expression builder implementation. The expression string is parsed and evaluated by its associated <see cref="T:System.Web.Compilation.ExpressionBuilder" /> to determine the control property value at run time.</para
-          >
+            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Expressions" /> collection contains an <see cref="T:System.Web.UI.ExpressionBinding" /> element for each control property that has an associated expression string. Each <see cref="P:System.Web.UI.ExpressionBinding.ExpressionPrefix" /> property for each element indicates the associated expression builder implementation. The expression string is parsed and evaluated by its associated <see cref="T:System.Web.Compilation.ExpressionBuilder" /> to determine the control property value at run time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -212,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method should be called by the designer host to initialize the designer.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method should be called by the designer host to initialize the designer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -224,8 +213,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The control element for design. </param
-        >
+          />The control element for design. </param>
       </Docs>
     </Member>
     <Member MemberName="OnBehaviorAttached">
@@ -240,8 +228,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorAttached" /> method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time. Override the <see cref="M:System.Web.UI.Design.HtmlControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method to manipulate the initial styles for the control at design time.</para
-            >
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorAttached" /> method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time. Override the <see cref="M:System.Web.UI.Design.HtmlControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method to manipulate the initial styles for the control at design time.</para>
           </block>
         </remarks>
         <summary>
@@ -271,8 +258,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorDetaching" /> method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time. Override the <see cref="Overload:System.Web.UI.Design.HtmlControlDesigner.Dispose" /> method for the control designer to perform actions before the designer object is released.</para
-            >
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorDetaching" /> method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" /> and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" /> methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" /> property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" /> method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" /> class to set styles for the control at design time. Override the <see cref="Overload:System.Web.UI.Design.HtmlControlDesigner.Dispose" /> method for the control designer to perform actions before the designer object is released.</para>
           </block>
         </remarks>
         <summary>
@@ -306,12 +292,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" /> method should be called by a control designer after the control designer has made a change to the data bindings for the control.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" /> method should be called by a control designer after the control designer has made a change to the data bindings for the control.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" /> method is obsolete. Use the <see cref="E:System.Web.UI.DataBindingCollection.Changed" /> event on the <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" /> collection for equivalent control designer functionality.</para
-            >
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" /> method is obsolete. Use the <see cref="E:System.Web.UI.DataBindingCollection.Changed" /> event on the <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" /> collection for equivalent control designer functionality.</para>
           </block>
         </remarks>
         <summary>
@@ -323,8 +307,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property that has changed. </param
-        >
+          />The name of the property that has changed. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -371,25 +354,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterEvents(System.Collections.IDictionary)" /> method provides a way to add items to or remove items from the dictionary of events that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterEvents(System.Collections.IDictionary)" /> method provides a way to add items to or remove items from the dictionary of events that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object.</para>
           <para
-            >The keys in the dictionary of events are the names of the events. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />.</para
-          >
+            >The keys in the dictionary of events are the names of the events. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the list of events that are exposed at design-time for the <see cref="T:System.ComponentModel.TypeDescriptor" /> object for the component.</para
-          >
+            >Sets the list of events that are exposed at design-time for the <see cref="T:System.ComponentModel.TypeDescriptor" /> object for the component.</para>
         </summary>
         <param name="events">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> that contains the names of the events of the component to expose. </param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> that contains the names of the events of the component to expose. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -412,25 +391,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method provides a way to add items to or remove items from the dictionary of properties that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method provides a way to add items to or remove items from the dictionary of properties that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object.</para>
           <para
-            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />.</para
-          >
+            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows the designer to expose a specific set of properties through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object at design time.</para
-          >
+            >Allows the designer to expose a specific set of properties through a <see cref="T:System.ComponentModel.TypeDescriptor" /> object at design time.</para>
         </summary>
         <param name="properties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set of properties to filter for the component. </param
-        >
+          />The set of properties to filter for the component. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

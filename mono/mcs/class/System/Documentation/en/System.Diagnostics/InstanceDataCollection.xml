@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.InstanceDataCollection" /> class represents a collection containing all the instance data for a counter. This collection is contained in the <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> when using the <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" /> method.</para
-      >
+        >The <see cref="T:System.Diagnostics.InstanceDataCollection" /> class represents a collection containing all the instance data for a counter. This collection is contained in the <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> when using the <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.InstanceData" /> objects.</para
-      >
+        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.InstanceData" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -63,16 +61,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.InstanceDataCollection" /> class, using the specified performance counter (which defines a performance instance).</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.InstanceDataCollection" /> class, using the specified performance counter (which defines a performance instance).</para>
         </summary>
         <param name="counterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the counter, which often describes the quantity that is being counted. </param
-        >
+          />The name of the counter, which often describes the quantity that is being counted. </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -101,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a performance instance with a specified name (identified by one of the indexed <see cref="T:System.Diagnostics.InstanceData" /> objects) exists in the collection.</para
-          >
+            >Determines whether a performance instance with a specified name (identified by one of the indexed <see cref="T:System.Diagnostics.InstanceData" /> objects) exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -113,8 +108,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance to find in this collection. </param
-        >
+          />The name of the instance to find in this collection. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -150,15 +144,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index value at which to add the new instances. </param
-        >
+          />The zero-based index value at which to add the new instances. </param>
       </Docs>
     </Member>
     <Member MemberName="CounterName">

@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is specified at the class level. It can be inherited and does not allow multiple attributes on the same class. </para
-      >
+        >The <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is specified at the class level. It can be inherited and does not allow multiple attributes on the same class. </para>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,14 +57,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property to null.</para
-          >
+            >The default constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using no parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using no parameters. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,22 +87,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property to the value of the <paramref name="name" /> parameter.</para
-          >
+            >This constructor sets the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property to the value of the <paramref name="name" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using the specified property name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class using the specified property name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the default binding property.</param
-        >
+          />The name of the default binding property.</param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -130,14 +123,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.ComponentModel.DefaultBindingPropertyAttribute.Default" /> member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class initialized with the default constructor.</para
-          >
+            >The <see cref="F:System.ComponentModel.DefaultBindingPropertyAttribute.Default" /> member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class initialized with the default constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value for the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class.</para
-          >
+            >Represents the default value for the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -162,14 +153,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.DefaultBindingPropertyAttribute.Equals(System.Object)" /> method returns true if the value of the <paramref name="obj" /> parameter is of type <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> and the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> properties of the two objects are equal.</para
-          >
+            >The <see cref="M:System.ComponentModel.DefaultBindingPropertyAttribute.Equals(System.Object)" /> method returns true if the value of the <paramref name="obj" /> parameter is of type <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> and the <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> properties of the two objects are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance. </para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -180,8 +169,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance</param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> instance</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -221,14 +209,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property is set in the constructor.</para
-          >
+            >The <see cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" /> property is set in the constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the default binding property for the component to which the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is bound.</para
-          >
+            >Gets the name of the default binding property for the component to which the <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" /> is bound.</para>
         </summary>
       </Docs>
     </Member>

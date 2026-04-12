@@ -5,8 +5,7 @@
     <!-- During an official build, only build identity packages on windows x64 legs -->
     <BuildIdentityPackage
       Condition="'$(BuildingAnOfficialBuildLeg)' == 'true' AND ('$(OS)' != 'Windows_NT' OR '$(TargetArchitecture)' != 'x64')"
-      >false</BuildIdentityPackage
-    >
+      >false</BuildIdentityPackage>
   </PropertyGroup>
 
   <Target Name="FilterProjects" BeforeTargets="Build;Pack">

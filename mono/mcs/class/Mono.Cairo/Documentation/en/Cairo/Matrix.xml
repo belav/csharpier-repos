@@ -300,8 +300,7 @@ if (cs == Cairo.Status.Success) {
         <summary>Changes matrix to be the inverse of its original value. Not all transformation matrices have inverses; if the matrix collapses points together (it is degenerate), then it has no inverse and this function will fail.
 </summary>
         <returns
-          >If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see cref="T:Cairo.Status " />.Success. Otherwise, return <see cref="T:Cairo.Status" />.InvalidMatrix if the matrix is invalid.</returns
-        >
+          >If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see cref="T:Cairo.Status " />.Success. Otherwise, return <see cref="T:Cairo.Status" />.InvalidMatrix if the matrix is invalid.</returns>
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -508,8 +507,7 @@ if (cs == Cairo.Status.Success) {
           </list>
 
  Affine transformations are position invariant, so the same vector always transforms to the same vector. If (x1,y1) transforms to (x2,y2) then (x1+@x1,y1+dy1) will transform to (x1+dx2,y1+dy2) for all values of x1 and x2.
-</summary
-        >
+</summary>
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>

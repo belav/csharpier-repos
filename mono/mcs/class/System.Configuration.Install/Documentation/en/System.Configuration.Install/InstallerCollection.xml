@@ -17,35 +17,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.Install.InstallerCollection" /> provides the methods and properties that your application needs to manage a collection of <see cref="T:System.Configuration.Install.Installer" /> objects.</para
-      >
+        >The <see cref="T:System.Configuration.Install.InstallerCollection" /> provides the methods and properties that your application needs to manage a collection of <see cref="T:System.Configuration.Install.Installer" /> objects.</para>
       <para>Use any of the following three ways to add installers to the collection: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Configuration.Install.InstallerCollection.Add(System.Configuration.Install.Installer)" /> method adds a single installer to the collection.</para
-          >
+            >The <see cref="M:System.Configuration.Install.InstallerCollection.Add(System.Configuration.Install.Installer)" /> method adds a single installer to the collection.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Configuration.Install.InstallerCollection.AddRange(System.Configuration.Install.InstallerCollection)" /> methods add multiple installers to the collection.</para
-          >
+            >The <see cref="M:System.Configuration.Install.InstallerCollection.AddRange(System.Configuration.Install.InstallerCollection)" /> methods add multiple installers to the collection.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Configuration.Install.InstallerCollection.Insert(System.Int32,System.Configuration.Install.Installer)" /> method and the <see cref="P:System.Configuration.Install.InstallerCollection.Item(System.Int32)" /> property, which is the <see cref="T:System.Configuration.Install.InstallerCollection" /> indexer, each add a single installer to the collection at the specified index.</para
-          >
+            >The <see cref="M:System.Configuration.Install.InstallerCollection.Insert(System.Int32,System.Configuration.Install.Installer)" /> method and the <see cref="P:System.Configuration.Install.InstallerCollection.Item(System.Int32)" /> property, which is the <see cref="T:System.Configuration.Install.InstallerCollection" /> indexer, each add a single installer to the collection at the specified index.</para>
         </item>
       </list>
       <para
-        >Remove installers through the <see cref="M:System.Configuration.Install.InstallerCollection.Remove(System.Configuration.Install.Installer)" /> method. Check whether an installer is in the collection by using the <see cref="M:System.Configuration.Install.InstallerCollection.Contains(System.Configuration.Install.Installer)" /> method. Find where an installer is located in the collection by using the <see cref="M:System.Configuration.Install.InstallerCollection.IndexOf(System.Configuration.Install.Installer)" /> method.</para
-      >
+        >Remove installers through the <see cref="M:System.Configuration.Install.InstallerCollection.Remove(System.Configuration.Install.Installer)" /> method. Check whether an installer is in the collection by using the <see cref="M:System.Configuration.Install.InstallerCollection.Contains(System.Configuration.Install.Installer)" /> method. Find where an installer is located in the collection by using the <see cref="M:System.Configuration.Install.InstallerCollection.IndexOf(System.Configuration.Install.Installer)" /> method.</para>
       <para
-        >The installers in a collection are run when the installer containing the collection, as specified by the <see cref="P:System.Configuration.Install.Installer.Parent" /> property, calls their <see cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />, <see cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />, <see cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />, or <see cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" /> methods.</para
-      >
+        >The installers in a collection are run when the installer containing the collection, as specified by the <see cref="P:System.Configuration.Install.Installer.Parent" /> property, calls their <see cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />, <see cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />, <see cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />, or <see cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" /> methods.</para>
       <para
-        >For examples of the usage of an installer collection, see the <see cref="T:System.Configuration.Install.AssemblyInstaller" /> and <see cref="T:System.Configuration.Install.TransactedInstaller" /> classes.</para
-      >
+        >For examples of the usage of an installer collection, see the <see cref="T:System.Configuration.Install.AssemblyInstaller" /> and <see cref="T:System.Configuration.Install.TransactedInstaller" /> classes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of the added <see cref="T:System.Configuration.Install.Installer" /> is set to specify the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para
-          >
+            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of the added <see cref="T:System.Configuration.Install.Installer" /> is set to specify the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +77,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to add to the collection. </param
-        >
+          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to add to the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -109,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of each added <see cref="T:System.Configuration.Install.Installer" /> is set to the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para
-          >
+            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of each added <see cref="T:System.Configuration.Install.Installer" /> is set to the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,8 +111,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Configuration.Install.Installer" /> that represents the installers to add to this collection. </param
-        >
+          />An array of type <see cref="T:System.Configuration.Install.Installer" /> that represents the installers to add to this collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -145,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of each added <see cref="T:System.Configuration.Install.Installer" /> is set to the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para
-          >
+            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of each added <see cref="T:System.Configuration.Install.Installer" /> is set to the <see cref="T:System.Configuration.Install.Installer" /> containing this collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +145,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Configuration.Install.InstallerCollection" /> that represents the installers to add to this collection. </param
-        >
+          />An <see cref="T:System.Configuration.Install.InstallerCollection" /> that represents the installers to add to this collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,8 +179,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to look for. </param
-        >
+          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to look for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -224,15 +210,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy to. </param
-        >
+          />The array to copy to. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the array at which to paste the collection. </param
-        >
+          />The index of the array at which to paste the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -266,8 +250,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Configuration.Install.Installer" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.Configuration.Install.Installer" /> to locate in the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -298,15 +281,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert the installer. </param
-        >
+          />The zero-based index at which to insert the installer. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Configuration.Install.Installer" /> to insert. </param
-        >
+          />The <see cref="T:System.Configuration.Install.Installer" /> to insert. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -360,15 +341,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert <paramref name="value" />.</param
-        >
+          />The zero-based index at which to insert <paramref name="value" />.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the installer at <paramref name="index" />.</param
-        >
+          />The new value of the installer at <paramref name="index" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -399,15 +378,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> can be found.</param
-        >
+          />The zero-based index at which <paramref name="value" /> can be found.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The installer to be removed from <paramref name="index" />. </param
-        >
+          />The installer to be removed from <paramref name="index" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -439,8 +416,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to replace <paramref name="oldValue" />.</param
-        >
+          />The zero-based index at which to replace <paramref name="oldValue" />.</param>
         <param name="oldValue">
           <attribution
             license="cc4"
@@ -453,8 +429,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the installer at <paramref name="index" />.</param
-        >
+          />The new value of the installer at <paramref name="index" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -477,22 +452,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of the removed <see cref="T:System.Configuration.Install.Installer" /> is set to null.</para
-          >
+            >The <see cref="P:System.Configuration.Install.Installer.Parent" /> property of the removed <see cref="T:System.Configuration.Install.Installer" /> is set to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Configuration.Install.Installer" /> from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Configuration.Install.Installer" /> from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to remove. </param
-        >
+          />An <see cref="T:System.Configuration.Install.Installer" /> that represents the installer to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

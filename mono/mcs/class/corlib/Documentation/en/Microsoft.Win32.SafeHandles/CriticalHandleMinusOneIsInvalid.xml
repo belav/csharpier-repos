@@ -28,12 +28,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class derives from the <see cref="T:System.Runtime.InteropServices.CriticalHandle" /> class. It describes the format of an invalid handle that uses a value of -1. Further derivations of this class (for example, file or registry handles) can specialize this further.</para
-      >
+        >This class derives from the <see cref="T:System.Runtime.InteropServices.CriticalHandle" /> class. It describes the format of an invalid handle that uses a value of -1. Further derivations of this class (for example, file or registry handles) can specialize this further.</para>
       <block subset="none" type="note">
         <para
-          >See the <see cref="T:System.Runtime.InteropServices.CriticalHandle" /> class for important information on critical handle security and thread safety.</para
-        >
+          >See the <see cref="T:System.Runtime.InteropServices.CriticalHandle" /> class for important information on critical handle security and thread safety.</para>
       </block>
     </remarks>
     <summary>
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SafeHandles.CriticalHandleMinusOneIsInvalid" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SafeHandles.CriticalHandleMinusOneIsInvalid" /> class.</para>
         </summary>
       </Docs>
     </Member>

@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies what to render (image or text) for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para
-      >
+        >Specifies what to render (image or text) for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -30,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that only an image is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para
-          >
+            >Specifies that only an image is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that both an image and text are to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para
-          >
+            >Specifies that both an image and text are to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that neither image nor text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para
-          >
+            >Specifies that neither image nor text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that only text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para
-          >
+            >Specifies that only text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

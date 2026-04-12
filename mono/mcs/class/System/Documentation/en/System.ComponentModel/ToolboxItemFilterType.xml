@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines identifiers used to indicate the type of filter that a <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" /> uses.</para
-      >
+        >Defines identifiers used to indicate the type of filter that a <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" /> uses.</para>
     </summary>
   </Docs>
   <Members>
@@ -71,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This type of <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> is typically specified on a root designer class to indicate that the designer wishes to accept or reject a toolbox item through code. The designer must implement the <see cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" /> method of the <see cref="T:System.Drawing.Design.IToolboxUser" /> interface.</para
-          >
+            >This type of <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> is typically specified on a root designer class to indicate that the designer wishes to accept or reject a toolbox item through code. The designer must implement the <see cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" /> method of the <see cref="T:System.Drawing.Design.IToolboxUser" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a designer and a component class both have a filter string and one has a <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" />, the toolbox item will not be available.</para
-          >
+            >If a designer and a component class both have a filter string and one has a <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" />, the toolbox item will not be available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -129,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a toolbox item with a filter type of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Require" /> to be enabled, the designer and the component class must have a matching filter string. Additionally, neither the designer or component class can have a <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" /> for the toolbox item to be enabled.</para
-          >
+            >For a toolbox item with a filter type of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Require" /> to be enabled, the designer and the component class must have a matching filter string. Additionally, neither the designer or component class can have a <see cref="T:System.ComponentModel.ToolboxItemFilterType" /> of <see cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" /> for the toolbox item to be enabled.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

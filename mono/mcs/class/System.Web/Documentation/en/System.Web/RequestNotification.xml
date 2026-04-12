@@ -17,19 +17,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.RequestNotification" /> enumeration is used with the <see cref="P:System.Web.HttpContext.CurrentNotification" /> property of the <see cref="T:System.Web.HttpContext" /> class to determine what event in the pipeline is currently processing. To determine when all the handlers for a specific event of the <see cref="T:System.Web.HttpApplication" /> instance have finished processing, use the <see cref="P:System.Web.HttpContext.IsPostNotification" /> property.</para
-      >
+        >The <see cref="T:System.Web.RequestNotification" /> enumeration is used with the <see cref="P:System.Web.HttpContext.CurrentNotification" /> property of the <see cref="T:System.Web.HttpContext" /> class to determine what event in the pipeline is currently processing. To determine when all the handlers for a specific event of the <see cref="T:System.Web.HttpApplication" /> instance have finished processing, use the <see cref="P:System.Web.HttpContext.IsPostNotification" /> property.</para>
       <para
         >The <see cref="T:System.Web.RequestNotification" /> type is introduced in the net_v35_long. For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates when events and other life-cycle events occur while a <see cref="T:System.Web.HttpApplication" /> request is being processed.</para
-      >
+        >Indicates when events and other life-cycle events occur while a <see cref="T:System.Web.HttpApplication" /> request is being processed.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.AcquireRequestState" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AcquireRequestState" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.BeginRequest" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.BeginRequest" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -118,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.EndRequest" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.EndRequest" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -152,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.LogRequest" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.LogRequest" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -170,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.MapRequestHandler" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.MapRequestHandler" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -204,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -222,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>
@@ -256,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" /> event was raised for the request and is processing.</para
-          >
+            >Indicates that the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" /> event was raised for the request and is processing.</para>
         </summary>
       </Docs>
     </Member>

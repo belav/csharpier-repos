@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Threading.NativeOverlapped" />.NET Framework value type represents an unmanaged version of the Win32 OVERLAPPED structure. The layout of this structure must be identical to OVERLAPPED. Four additional DWORDs are reserved at the end.</para
-      >
+        >The <see cref="T:System.Threading.NativeOverlapped" />.NET Framework value type represents an unmanaged version of the Win32 OVERLAPPED structure. The layout of this structure must be identical to OVERLAPPED. Four additional DWORDs are reserved at the end.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

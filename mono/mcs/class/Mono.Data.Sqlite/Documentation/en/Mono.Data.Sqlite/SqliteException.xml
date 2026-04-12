@@ -111,8 +111,7 @@
             Various public constructors that just pass along to the base Exception
             <param
             name="message"
-            >Passed to Exception</param
-          >
+            >Passed to Exception</param>
           <param name="innerException">Passed to Exception</param>
         </summary>
         <remarks>To be added.</remarks>

@@ -13,8 +13,7 @@ interface IExample
 }  
 public delegate void EventHandler(object sender, EventArgs e);  
 ]]>
-    </code_example>shows an interface that contains an indexer, an event E, a method F, and a property P. </paragraph
-  >
+    </code_example>shows an interface that contains an indexer, an event E, a method F, and a property P. </paragraph>
   <paragraph
     >Interfaces may employ multiple inheritance. In the example <code_example>
       <![CDATA[
@@ -32,8 +31,7 @@ interface IListBox: IControl
 }  
 interface IComboBox: ITextBox, IListBox {}  
 ]]>
-    </code_example>the interface IComboBox inherits from both ITextBox and IListBox. </paragraph
-  >
+    </code_example>the interface IComboBox inherits from both ITextBox and IListBox. </paragraph>
   <paragraph
     >Classes and structs can implement multiple interfaces. In the example <code_example>
       <![CDATA[
@@ -47,8 +45,7 @@ public class EditBox: Control, IControl, IDataBound
    public void Bind(Binder b) {...}  
 }   
 ]]>
-    </code_example>the class EditBox derives from the class Control and implements both IControl and IDataBound. </paragraph
-  >
+    </code_example>the class EditBox derives from the class Control and implements both IControl and IDataBound. </paragraph>
   <paragraph
     >In the previous example, the Paint method from the IControl interface and the Bind method from IDataBound interface are implemented using public members on the EditBox class. C# provides an alternative way of implementing these methods that allows the implementing class to avoid having these members be public. Interface members can be implemented using a qualified name. For example, the EditBox class could instead be implemented by providing IControl.Paint and IDataBound.Bind methods. <code_example>
       <![CDATA[

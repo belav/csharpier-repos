@@ -36,14 +36,11 @@
     >An operation of the form x &amp;&amp; y or x || y is processed by applying overload resolution (<hyperlink>14.2.4</hyperlink>) as if the operation was written x &amp; y or x | y. Then, <list>
       <list_item> If overload resolution fails to find a single best operator, or if overload resolution selects one of the predefined integer logical operators, a compile-time error occurs. </list_item>
       <list_item
-        > Otherwise, if the selected operator is one of the predefined boolean logical operators (<hyperlink>14.10.2</hyperlink>), the operation is processed as described in <hyperlink>14.11.1</hyperlink>. </list_item
-      >
+        > Otherwise, if the selected operator is one of the predefined boolean logical operators (<hyperlink>14.10.2</hyperlink>), the operation is processed as described in <hyperlink>14.11.1</hyperlink>. </list_item>
       <list_item
-        > Otherwise, the selected operator is a user-defined operator, and the operation is processed as described in <hyperlink>14.11.2</hyperlink>. </list_item
-      >
+        > Otherwise, the selected operator is a user-defined operator, and the operation is processed as described in <hyperlink>14.11.2</hyperlink>. </list_item>
     </list>
   </paragraph>
   <paragraph
-    >It is not possible to directly overload the conditional logical operators. However, because the conditional logical operators are evaluated in terms of the regular logical operators, overloads of the regular logical operators are, with certain restrictions, also considered overloads of the conditional logical operators. This is described further in <hyperlink>14.11.2</hyperlink>. </paragraph
-  >
+    >It is not possible to directly overload the conditional logical operators. However, because the conditional logical operators are evaluated in terms of the regular logical operators, overloads of the regular logical operators are, with certain restrictions, also considered overloads of the conditional logical operators. This is described further in <hyperlink>14.11.2</hyperlink>. </paragraph>
 </clause>

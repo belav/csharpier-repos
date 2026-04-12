@@ -42,8 +42,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >An exceptional condition has occurred on the device or socket.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.</summary
-        >
+          >An exceptional condition has occurred on the device or socket.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.</summary>
       </Docs>
     </Member>
     <Member MemberName="POLLHUP">
@@ -63,8 +62,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The device or socket has been disconnected.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.  Note that POLLHUP and POLLOUT should never be present in the <see cref="F:Mono.Unix.Native.Pollfd.revents" /> bitmask at the same time.</summary
-        >
+          >The device or socket has been disconnected.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.  Note that POLLHUP and POLLOUT should never be present in the <see cref="F:Mono.Unix.Native.Pollfd.revents" /> bitmask at the same time.</summary>
       </Docs>
     </Member>
     <Member MemberName="POLLIN">
@@ -103,8 +101,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The file descriptor is not open.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.</summary
-        >
+          >The file descriptor is not open.  This flag is always checked, even if not present in the <see cref="F:Mono.Unix.Native.Pollfd.events" /> bitmask.</summary>
       </Docs>
     </Member>
     <Member MemberName="POLLOUT">

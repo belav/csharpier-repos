@@ -20,8 +20,7 @@ Expect:       !Error
     <summary type="xhtml">
       <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">
          This is <xhtml:b>XHTML</xhtml:b> content.
-      </xhtml:div
-      >
+      </xhtml:div>
     </summary>
   </entry>
 </feed>

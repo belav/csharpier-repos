@@ -19,8 +19,7 @@ public class HelpAttribute: Attribute
    public string Url { get {...} }  
 }  
 ]]>
-      </code_example>defines an attribute class named HelpAttribute that has one positional parameter (string url) and one named parameter (string Topic). Although it is non-static and public, the property Url does not define a named parameter, since it is not read-write. </example
-    >
+      </code_example>defines an attribute class named HelpAttribute that has one positional parameter (string url) and one named parameter (string Topic). Although it is non-static and public, the property Url does not define a named parameter, since it is not read-write. </example>
   </paragraph>
   <paragraph>
     <example
@@ -33,7 +32,6 @@ class Class1 {
 class Class2 {  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

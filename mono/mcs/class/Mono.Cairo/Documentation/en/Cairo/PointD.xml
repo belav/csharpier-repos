@@ -31,8 +31,7 @@ gr.Rectangle ( new PointD (0, 0), 1, 1);
         <param name="x">To be added.</param>
         <param name="y">To be added.</param>
         <summary
-          >Default constructor accepting a pair of coordinates in <see cref="T:System.Double" /> format.</summary
-        >
+          >Default constructor accepting a pair of coordinates in <see cref="T:System.Double" /> format.</summary>
         <remarks />
       </Docs>
       <AssemblyInfo>

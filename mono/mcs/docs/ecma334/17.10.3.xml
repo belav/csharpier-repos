@@ -38,15 +38,13 @@ x = 1, y = 0
   </paragraph>
   <paragraph>
     <example
-      >The value of x is 1 because the variable initializer is executed before the base class instance constructor is invoked. However, the value of y is 0 (the default value of an <keyword>int</keyword>) because the assignment to y is not executed until after the base class constructor returns. </example
-    >
+      >The value of x is 1 because the variable initializer is executed before the base class instance constructor is invoked. However, the value of y is 0 (the default value of an <keyword>int</keyword>) because the assignment to y is not executed until after the base class constructor returns. </example>
   </paragraph>
   <paragraph>
     <example
       >It is useful to think of instance variable initializers and constructor initializers as statements that are automatically inserted before the <non_terminal
         where="17.10"
-        >constructor-body</non_terminal
-      >. The example <code_example>
+        >constructor-body</non_terminal>. The example <code_example>
         <![CDATA[
 using System;  
 using System.Collections;  
@@ -109,7 +107,6 @@ class B: A
    }  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

@@ -24,14 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by types whose values can be ordered, primarily for sorting. For example, one number can be larger than a second number, and one string can appear in alphabetical order before another. A value type or class implements the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method to create a type-specific comparison method suitable for purposes such as sorting. </para
-      >
+        >This interface is implemented by types whose values can be ordered, primarily for sorting. For example, one number can be larger than a second number, and one string can appear in alphabetical order before another. A value type or class implements the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method to create a type-specific comparison method suitable for purposes such as sorting. </para>
       <para
-        >The <see cref="T:System.IComparable`1" /> interface defines the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method, which determines the sort order of instances of the implementing type. The <see cref="T:System.IEquatable`1" /> interface defines the <see cref="M:System.IEquatable`1.Equals(`0)" /> method, which determines the equality of instances of the implementing type.</para
-      >
+        >The <see cref="T:System.IComparable`1" /> interface defines the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method, which determines the sort order of instances of the implementing type. The <see cref="T:System.IEquatable`1" /> interface defines the <see cref="M:System.IEquatable`1.Equals(`0)" /> method, which determines the equality of instances of the implementing type.</para>
       <para
-        >The implementation of the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method must return an <see cref="T:System.Int32" /> that has one of three values, as shown in the following table.</para
-      >
+        >The implementation of the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method must return an <see cref="T:System.Int32" /> that has one of three values, as shown in the following table.</para>
       <list type="table">
         <listheader>
           <item>
@@ -49,8 +46,7 @@
           </term>
           <description>
             <para
-              >This object is less than the object specified by the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method. </para
-            >
+              >This object is less than the object specified by the <see cref="M:System.IComparable`1.CompareTo(`0)" /> method. </para>
           </description>
         </item>
         <item>
@@ -71,8 +67,7 @@
         </item>
       </list>
       <para
-        >The <see cref="T:System.IComparable`1" /> interface provides a strongly typed comparison method for ordering members of a generic collection object. Because of this, it is usually not called directly from developer code. Instead, it is called automatically by methods such as <see cref="M:System.Collections.Generic.List`1.Sort" /> and <see cref="M:System.Collections.Generic.SortedList`2.Add(`0,`1)" />.</para
-      >
+        >The <see cref="T:System.IComparable`1" /> interface provides a strongly typed comparison method for ordering members of a generic collection object. Because of this, it is usually not called directly from developer code. Instead, it is called automatically by methods such as <see cref="M:System.Collections.Generic.List`1.Sort" /> and <see cref="M:System.Collections.Generic.SortedList`2.Add(`0,`1)" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -104,8 +99,7 @@
         </summary>
         <returns>
           <para
-            >A value that reflects the sort order of the current instance as compared to <paramref name="obj" />. The following table defines the conditions under which the returned value is a negative number, zero, or a positive number.</para
-          >
+            >A value that reflects the sort order of the current instance as compared to <paramref name="obj" />. The following table defines the conditions under which the returned value is a negative number, zero, or a positive number.</para>
           <list type="table">
             <listheader>
               <term>Returned Value </term>
@@ -119,8 +113,7 @@
               <term> Zero </term>
               <description
                 >The current instance is ==
-   <paramref name="obj" />. </description
-              >
+   <paramref name="obj" />. </description>
             </item>
             <item>
               <term> A positive value </term>
@@ -145,8 +138,7 @@
       to zero, and B.CompareTo(C) returns a value <paramref name="y" /> of the same sign as
    <paramref name="other" />, then A.CompareTo(C) is required to a value of the same sign as 
    <paramref name="other" /> and <paramref name="y" /> 
-   .</para
-            >
+   .</para>
             <para>The exact behavior of this method is unspecified. The intent of this method is
    to provide a mechanism that orders instances of a class in a manner that is
    consistent with the mathematical definitions of the relational operators (&lt;,
@@ -156,8 +148,7 @@
           <para>
             <block subset="none" type="usage"
               >Use the <see cref="M:System.IComparable&lt;T&gt;.CompareTo" />
-              <see langword="(T)" /> method to determine the ordering of instances of a class.</block
-            >
+              <see langword="(T)" /> method to determine the ordering of instances of a class.</block>
           </para>
         </remarks>
         <since version=".NET 2.0" />

@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -42,23 +41,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" /> class. </para>
         </summary>
         <param name="g">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Graphics" /> representing the GDI+ drawing surface.</param
-        >
+          />A <see cref="T:System.Drawing.Graphics" /> representing the GDI+ drawing surface.</param>
         <param name="contentPanel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> to render.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> to render.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -118,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> affected by the click.</para
-          >
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> affected by the click.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

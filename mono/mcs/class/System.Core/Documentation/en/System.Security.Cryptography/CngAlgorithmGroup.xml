@@ -24,18 +24,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class is a utility class. It consists of static properties, comparison methods, and a private, internally maintained string that defines an algorithm group name.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class is a utility class. It consists of static properties, comparison methods, and a private, internally maintained string that defines an algorithm group name.</para>
       <para
-        >The static properties return <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects. Each object's internal string is initialized to the algorithm group name that corresponds to the name of the static property.</para
-      >
+        >The static properties return <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects. Each object's internal string is initialized to the algorithm group name that corresponds to the name of the static property.</para>
       <para>You can also use this class to create objects for algorithm groups that are not covered by the static properties.</para>
       <para
-        >Several Cryptography Next Generation (CNG) classes (such as <see cref="T:System.Security.Cryptography.CngKey" />) return <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects. Classes that receive <see cref="T:System.Security.Cryptography.CngAlgorithm" /> objects can retrieve the embedded algorithm group name by calling the object's <see cref="P:System.Security.Cryptography.CngKey.AlgorithmGroup" /> property.</para
-      >
+        >Several Cryptography Next Generation (CNG) classes (such as <see cref="T:System.Security.Cryptography.CngKey" />) return <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects. Classes that receive <see cref="T:System.Security.Cryptography.CngAlgorithm" /> objects can retrieve the embedded algorithm group name by calling the object's <see cref="P:System.Security.Cryptography.CngKey.AlgorithmGroup" /> property.</para>
       <para
-        >Therefore, <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> serves as an enumeration of well-known algorithm groups. It lets you specify an algorithm group name by using a strongly typed value instead of a string.</para
-      >
+        >Therefore, <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> serves as an enumeration of well-known algorithm groups. It lets you specify an algorithm group name by using a strongly typed value instead of a string.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,25 +56,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instances of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class internally maintain the algorithm group name that is specified by the <paramref name="algorithmGroup" /> parameter.</para
-          >
+            >Instances of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class internally maintain the algorithm group name that is specified by the <paramref name="algorithmGroup" /> parameter.</para>
           <para
-            >The primary purpose of this constructor is to provide a method for creating <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects for algorithm groups that are not represented by the static properties of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class. This capacity enables future dnprdnshort releases, service packs, and third-party developers to add new algorithm groups, which can be accessed just like the algorithm groups that are currently available.</para
-          >
+            >The primary purpose of this constructor is to provide a method for creating <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects for algorithm groups that are not represented by the static properties of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class. This capacity enables future dnprdnshort releases, service packs, and third-party developers to add new algorithm groups, which can be accessed just like the algorithm groups that are currently available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> class.</para>
         </summary>
         <param name="algorithmGroup">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the algorithm group to initialize.</param
-        >
+          />The name of the algorithm group to initialize.</param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmGroup">
@@ -97,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the algorithm group that the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object specifies.</para
-          >
+            >Gets the name of the algorithm group that the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object specifies.</para>
         </summary>
       </Docs>
     </Member>
@@ -124,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Diffie-Hellman family of algorithms.</para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Diffie-Hellman family of algorithms.</para>
         </summary>
       </Docs>
     </Member>
@@ -151,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Digital Signature Algorithm (DSA) family of algorithms.</para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Digital Signature Algorithm (DSA) family of algorithms.</para>
         </summary>
       </Docs>
     </Member>
@@ -178,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Elliptic Curve Diffie-Hellman (ECDH) family of algorithms.</para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Elliptic Curve Diffie-Hellman (ECDH) family of algorithms.</para>
         </summary>
       </Docs>
     </Member>
@@ -205,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Elliptic Curve Digital Signature Algorithm (ECDSA) family of algorithms.</para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Elliptic Curve Digital Signature Algorithm (ECDSA) family of algorithms.</para>
         </summary>
       </Docs>
     </Member>
@@ -231,22 +218,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the specified object to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para
-          >
+            >Compares the specified object to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref name="obj" /> parameter is a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> that specifies the same algorithm group as the current object; otherwise, false.</para
-          >
+            >true if the <paramref name="obj" /> parameter is a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> that specifies the same algorithm group as the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to be compared to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</param
-        >
+          />An object to be compared to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -273,22 +257,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the specified <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para
-          >
+            >Compares the specified <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref name="other" /> parameter specifies the same algorithm group as the current object; otherwise, false.</para
-          >
+            >true if the <paramref name="other" /> parameter specifies the same algorithm group as the current object; otherwise, false.</para>
         </returns>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to be compared to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</param
-        >
+          />An object to be compared to the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -310,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a hash value for the algorithm group name that is embedded in the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para
-          >
+            >Generates a hash value for the algorithm group name that is embedded in the current <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -344,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects specify the same algorithm group.</para
-          >
+            >Determines whether two <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects specify the same algorithm group.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -356,15 +335,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that specifies an algorithm group.</param
-        >
+          />An object that specifies an algorithm group.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A second object, to be compared to the object that is identified by the <paramref name="left" /> parameter.</param
-        >
+          />A second object, to be compared to the object that is identified by the <paramref name="left" /> parameter.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -392,8 +369,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects do not specify the same algorithm group.</para
-          >
+            >Determines whether two <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> objects do not specify the same algorithm group.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -404,15 +380,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that specifies an algorithm group.</param
-        >
+          />An object that specifies an algorithm group.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A second object, to be compared to the object that is identified by the <paramref name="left" /> parameter.</param
-        >
+          />A second object, to be compared to the object that is identified by the <paramref name="left" /> parameter.</param>
       </Docs>
     </Member>
     <Member MemberName="Rsa">
@@ -437,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Rivest-Shamir-Adleman (RSA) family of algorithms.</para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CngAlgorithmGroup" /> object that specifies the Rivest-Shamir-Adleman (RSA) family of algorithms.</para>
         </summary>
       </Docs>
     </Member>
@@ -461,8 +434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the algorithm group that the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object specifies.</para
-          >
+            >Gets the name of the algorithm group that the current <see cref="T:System.Security.Cryptography.CngAlgorithm" /> object specifies.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

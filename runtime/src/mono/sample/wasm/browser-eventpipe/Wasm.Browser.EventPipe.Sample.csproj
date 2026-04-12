@@ -8,8 +8,7 @@
     <!-- consider ConfigureAwait() -->
     <MonoDiagnosticsMock
       Condition="('$(MonoDiagnosticsMock)' == '') and ('$(Configuration)' == 'Debug' or '$(ArchiveTests)' == 'true')"
-      >true</MonoDiagnosticsMock
-    >
+      >true</MonoDiagnosticsMock>
   </PropertyGroup>
   <Import Project="..\DefaultBrowserSample.targets" />
 

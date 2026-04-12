@@ -13,14 +13,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> can be placed on the context stack to represent the object that is the root of the serialization hierarchy. In addition to this instance, the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> also contains an expression that can be used to reference the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />.</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> can be placed on the context stack to represent the object that is the root of the serialization hierarchy. In addition to this instance, the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> also contains an expression that can be used to reference the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> adds a root context to provide a definition of the root object. This class cannot be inherited</para
-      >
+        >A <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" /> adds a root context to provide a definition of the root object. This class cannot be inherited</para>
     </summary>
   </Docs>
   <Members>
@@ -43,16 +41,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootContext" /> class. </para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The root object of the object graph.</param
-        >
+          />The root object of the object graph.</param>
       </Docs>
     </Member>
     <Member MemberName="Expression">

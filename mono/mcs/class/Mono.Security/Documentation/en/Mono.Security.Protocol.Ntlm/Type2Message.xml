@@ -13,9 +13,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>Mono.Security.Protocol.Ntlm.MessageBase</BaseTypeName>
   </Base>
@@ -119,8 +117,7 @@
         <summary>A random value, choosed by the server, to by used as the challenge by the client.</summary>
         <value>an array of 8 random bytes.</value>
         <remarks
-          >The random data is generated using the default random number generator, <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />.</remarks
-        >
+          >The random data is generated using the default random number generator, <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

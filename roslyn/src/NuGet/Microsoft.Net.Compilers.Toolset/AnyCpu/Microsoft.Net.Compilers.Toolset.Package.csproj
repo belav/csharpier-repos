@@ -24,11 +24,9 @@
     <NoWarn>$(NoWarn);NU5100;NU5128</NoWarn>
 
     <_DependsOn Condition="'$(TargetFramework)' == 'net472'"
-      >InitializeDesktopCompilerArtifacts</_DependsOn
-    >
+      >InitializeDesktopCompilerArtifacts</_DependsOn>
     <_DependsOn Condition="'$(TargetFramework)' != 'net472'"
-      >InitializeCoreClrCompilerArtifacts</_DependsOn
-    >
+      >InitializeCoreClrCompilerArtifacts</_DependsOn>
   </PropertyGroup>
 
   <ItemGroup>

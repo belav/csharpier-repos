@@ -17,15 +17,13 @@
   <Interfaces />
   <Docs>
     <summary
-      >A wrapper to the <c>libintl</c> library providing message translation capabilities.</summary
-    >
+      >A wrapper to the <c>libintl</c> library providing message translation capabilities.</summary>
     <remarks>
       <example>
         <para
           >The following example demonstrates the use of the 
       <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-      http://www.mono-project.com/Internationalization.</para
-        >
+      http://www.mono-project.com/Internationalization.</para>
         <code lang="C#"
           >// File: i18n.cs
 using System;
@@ -48,12 +46,10 @@ public class i18n
         <para
           >Edit the translations in <c>es.po</c>, then compile the
       translations and copy the file so that <c>libintl</c> can find
-      it:</para
-        >
+      it:</para>
         <code lang="sh"
           >mkdir -p locale/es/LC_MESSAGES/
-msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
-        >
+msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code>
         <para>To run your example with the new translations:</para>
         <code lang="sh">LANGUAGE=es mono i18n.exe</code>
       </example>
@@ -85,30 +81,25 @@ msgfmt es.po -o locale/es/LC_MESSAGES/i18n.mo</code
       </Parameters>
       <Docs>
         <param name="s"
-          >A <see cref="T:System.String" /> containing the singular form of the string. It is also used as the key to search the catalog on.</param
-        >
+          >A <see cref="T:System.String" /> containing the singular form of the string. It is also used as the key to search the catalog on.</param>
         <param name="p"
-          >A <see cref="T:System.String" /> containing the plural form of the string.</param
-        >
+          >A <see cref="T:System.String" /> containing the plural form of the string.</param>
         <param name="n">
 	  An <see cref="T:System.Int32" /> containing a number that determines 
 	  which form of the string to return.  
 	  If <paramref name="n" /> is one, the translation for 
 	  <paramref name="s" /> is returned; otherwise, the translation for
 	  <paramref name="p" /> is returned.
-	</param
-        >
+	</param>
         <summary>Returns a native language translation of a text whose form depends on the number passed to the method.</summary>
         <returns
-          >The translated string. If no message catalog can be found, the method returns the singular form if <paramref name="n" /> == 1, the plural form otherwise.</returns
-        >
+          >The translated string. If no message catalog can be found, the method returns the singular form if <paramref name="n" /> == 1, the plural form otherwise.</returns>
         <remarks>
           <example>
             <para
               >The following example demonstrates the use of the 
               <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-              http://www.mono-project.com/Internationalization.</para
-            >
+              http://www.mono-project.com/Internationalization.</para>
             <code lang="C#"
               >// File: i18n.cs
 using System;
@@ -150,19 +141,16 @@ public class i18n
       </Parameters>
       <Docs>
         <param name="s"
-          >A <see cref="T:System.String" /> containing the text to be translated. It is used as the key to search the catalog on.</param
-        >
+          >A <see cref="T:System.String" /> containing the text to be translated. It is used as the key to search the catalog on.</param>
         <summary>Returns a native language translation of the text passed as the parameter.</summary>
         <returns
-          >The translated string, if found in the catalog, <paramref name="s" /> otherwise.</returns
-        >
+          >The translated string, if found in the catalog, <paramref name="s" /> otherwise.</returns>
         <remarks>
           <example>
             <para
               >The following example demonstrates the use of the 
               <see cref="T:Mono.Unix.Catalog" /> type.  See also: 
-              http://www.mono-project.com/Internationalization.</para
-            >
+              http://www.mono-project.com/Internationalization.</para>
             <code lang="C#"
               >// File: i18n.cs
 using System;
@@ -208,16 +196,13 @@ public class i18n
       </Parameters>
       <Docs>
         <param name="package"
-          >A <see cref="T:System.String" /> containing the name of the package (domain) that is to be accessed.</param
-        >
+          >A <see cref="T:System.String" /> containing the name of the package (domain) that is to be accessed.</param>
         <param name="localedir"
-          >A <see cref="T:System.String" /> containing the top level directory (folder) under which the message catalog(s) are stored.</param
-        >
+          >A <see cref="T:System.String" /> containing the top level directory (folder) under which the message catalog(s) are stored.</param>
         <summary>Initialize the object instance by providing information required to build the base directory where the message catalog is stored.</summary>
         <remarks
           >The path to the message catalogs is constructed as follows <c>localedir/locale/category/package</c>. In this notation <c>locale</c> and <c>category</c> are, respectively, the locale name and the message category name, such as <c>LC_MESSAGES</c>. The object is initialized so that it translates the strings retrieved from the on-disk catalog into the UTF-8 encoding.
-</remarks
-        >
+</remarks>
       </Docs>
     </Member>
   </Members>

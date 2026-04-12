@@ -34,16 +34,13 @@
       <para
         >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
-            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
-          >
-        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
-      >
+            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a>
+        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extension added to a <see cref="T:System.Web.Services.Description.Binding" /> within an XML Web service. This class cannot be inherited.</para
-      >
+        >Represents an extension added to a <see cref="T:System.Web.Services.Description.Binding" /> within an XML Web service. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Web.Services.Description.SoapBinding" /> class.</para
-          >
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.SoapBinding" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -103,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the URI for the XML namespace of the <see cref="T:System.Web.Services.Description.SoapBinding" /> class. This field is constant.</para
-          >
+            >Gets the URI for the XML namespace of the <see cref="T:System.Web.Services.Description.SoapBinding" /> class. This field is constant.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -149,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the type of SOAP binding used by the current <see cref="T:System.Web.Services.Description.SoapBinding" />.</para
-          >
+            >Specifies the type of SOAP binding used by the current <see cref="T:System.Web.Services.Description.SoapBinding" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -178,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This required property value will generally be the same as that of the <see cref="F:System.Web.Services.Description.SoapBinding.HttpTransport" /> field. However, this property value can be any URI for data-transmission specifications, for example, SMTP or FTP.</para
-          >
+            >This required property value will generally be the same as that of the <see cref="F:System.Web.Services.Description.SoapBinding.HttpTransport" /> field. However, this property value can be any URI for data-transmission specifications, for example, SMTP or FTP.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

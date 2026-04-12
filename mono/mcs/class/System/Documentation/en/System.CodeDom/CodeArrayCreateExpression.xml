@@ -34,14 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> can be used to represent a code expression that creates an array. Expressions that create an array should specify either a number of elements, or a list of expressions to use to initialize the array.</para
-      >
+        <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> can be used to represent a code expression that creates an array. Expressions that create an array should specify either a number of elements, or a list of expressions to use to initialize the array.</para>
       <para
-        >Most arrays can be initialized immediately following declaration. The <see cref="P:System.CodeDom.CodeArrayCreateExpression.Initializers" /> property can be set to the expression to use to initialize the array.</para
-      >
+        >Most arrays can be initialized immediately following declaration. The <see cref="P:System.CodeDom.CodeArrayCreateExpression.Initializers" /> property can be set to the expression to use to initialize the array.</para>
       <para
-        >A <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> only directly supports creating single-dimension arrays. If a language allows arrays of arrays, it is possible to create them by nesting a <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> within a <see cref="T:System.CodeDom.CodeArrayCreateExpression" />. Not all languages support arrays of arrays. You can check whether an <see cref="T:System.CodeDom.Compiler.ICodeGenerator" /> for a language declares support for nested arrays by calling <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" /> with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.ArraysOfArrays" /> flag.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> only directly supports creating single-dimension arrays. If a language allows arrays of arrays, it is possible to create them by nesting a <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> within a <see cref="T:System.CodeDom.CodeArrayCreateExpression" />. Not all languages support arrays of arrays. You can check whether an <see cref="T:System.CodeDom.Compiler.ICodeGenerator" /> for a language declares support for nested arrays by calling <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" /> with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.ArraysOfArrays" /> flag.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -98,23 +94,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and code expression indicating the number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and code expression indicating the number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -148,23 +141,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and initialization expressions.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and initialization expressions.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the array to create. </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -192,23 +182,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> indicating the data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -236,23 +223,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and code expression indicating the number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and code expression indicating the number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -286,23 +270,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and initializers.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and initializers.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create. </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -330,23 +311,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type name and number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of the array to create. </param
-        >
+          />The name of the data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -374,23 +352,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and code expression indicating the number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and code expression indicating the number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An expression that indicates the number of indexes of the array to create. </param
-        >
+          />An expression that indicates the number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -424,23 +399,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and initializers.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and initializers.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create. </param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of expressions to use to initialize the array. </param
-        >
+          />An array of expressions to use to initialize the array. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -468,23 +440,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and number of indexes for the array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeArrayCreateExpression" /> class using the specified array data type and number of indexes for the array.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the array to create. </param
-        >
+          />The data type of the array to create. </param>
         <param name="size">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of indexes of the array to create. </param
-        >
+          />The number of indexes of the array to create. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateType">
@@ -588,8 +557,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the array can be represented with a <see cref="T:System.CodeDom.CodeExpression" />.</para
-          >
+            >The size of the array can be represented with a <see cref="T:System.CodeDom.CodeExpression" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

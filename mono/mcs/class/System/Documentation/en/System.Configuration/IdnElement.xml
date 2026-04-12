@@ -20,24 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The existing <see cref="T:System.Uri" /> class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
-      >
+        >The existing <see cref="T:System.Uri" /> class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para>
       <para
-        >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" /> configuration setting that controls IRI processing in the <see cref="T:System.Uri" /> class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para
-      >
+        >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" /> configuration setting that controls IRI processing in the <see cref="T:System.Uri" /> class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para>
       <para>The Internationalized Domain Name (IDN) attribute only controls IDN processing. All other IRI processing (character normalization, for example) is performed by default.</para>
       <para
-        >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> will be read once when the first <see cref="T:System.Uri" /> class is constructed. Changes to configuration settings after that time are ignored.</para
-      >
+        >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> will be read once when the first <see cref="T:System.Uri" /> class is constructed. Changes to configuration settings after that time are ignored.</para>
       <para
-        >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" /> class.</para
-      >
+        >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the configuration setting for International Domain Name (IDN) processing in the <see cref="T:System.Uri" /> class.</para
-      >
+        >Provides the configuration setting for International Domain Name (IDN) processing in the <see cref="T:System.Uri" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,14 +51,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Configuration.IdnElement" /> instance</para
-          >
+            >This constructor creates a <see cref="T:System.Configuration.IdnElement" /> instance</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.IdnElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.IdnElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,20 +84,16 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The International Domain Name (IDN) attribute only controls IDN processing. All other International Resource Identifiers (IRI)  processing (character normalization, for example) is performed by default.</para>
           <para
-            >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" /> configuration setting that controls IRI processing in the <see cref="T:System.Uri" /> class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para
-          >
+            >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> is indirectly controlled by the <see cref="T:System.Configuration.IriParsingElement" /> configuration setting that controls IRI processing in the <see cref="T:System.Uri" /> class. IRI processing must be enabled for IDN processing to be possible. If IRI processing is disabled, then IDN processing will be set to the default setting where the .NET Framework 2.0 behavior is used for compatibility and IDN names are not used.</para>
           <para
-            >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> will be read once when the first <see cref="T:System.Uri" /> class is constructed. Changes to configuration settings after that time are ignored.</para
-          >
+            >The configuration setting for the <see cref="T:System.Configuration.IdnElement" /> will be read once when the first <see cref="T:System.Uri" /> class is constructed. Changes to configuration settings after that time are ignored.</para>
           <para
-            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" /> class.</para
-          >
+            >For more information on IRI support, see the Remarks section for the <see cref="T:System.Uri" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see cref="T:System.Configuration.IdnElement" /> configuration setting. </para
-          >
+            >Gets or sets the value of the <see cref="T:System.Configuration.IdnElement" /> configuration setting. </para>
         </summary>
       </Docs>
     </Member>

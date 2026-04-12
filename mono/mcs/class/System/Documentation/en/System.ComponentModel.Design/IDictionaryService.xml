@@ -59,8 +59,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to look up in the dictionary. </param
-        >
+          />The value to look up in the dictionary. </param>
       </Docs>
     </Member>
     <Member MemberName="GetValue">
@@ -96,8 +95,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to look up the value for. </param
-        >
+          />The key to look up the value for. </param>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
@@ -130,11 +128,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to use as the key to associate the value with. </param
-        >
+          />An object to use as the key to associate the value with. </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to store. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to store. </param>
       </Docs>
     </Member>
   </Members>

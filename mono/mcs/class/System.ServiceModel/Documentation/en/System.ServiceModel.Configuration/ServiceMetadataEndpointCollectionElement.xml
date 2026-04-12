@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardEndpointCollectionElement&lt;System.ServiceModel.Description.ServiceMetadataEndpoint,System.ServiceModel.Configuration.ServiceMetadataEndpointElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardEndpoint"
-        >System.ServiceModel.Description.ServiceMetadataEndpoint</BaseTypeArgument
-      >
+        >System.ServiceModel.Description.ServiceMetadataEndpoint</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TEndpointConfiguration"
-        >System.ServiceModel.Configuration.ServiceMetadataEndpointElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.ServiceMetadataEndpointElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection element in a service configuration file that contains <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> objects.</para
-      >
+        >Represents a collection element in a service configuration file that contains <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the<see cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointCollectionElement" /> class.</para
-          >
+            >Creates a new instance of the<see cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointCollectionElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

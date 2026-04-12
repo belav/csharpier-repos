@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceEndpointElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceEndpointElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -270,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the standard endpoint that is set by the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.Kind" /> property, which references to the additional configuration information of this standard endpoint. The same name must be defined in the <see cref="T:System.ServiceModel.Configuration.StandardEndpointsSection" />.</para
-          >
+            >Gets or sets the name of the standard endpoint that is set by the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.Kind" /> property, which references to the additional configuration information of this standard endpoint. The same name must be defined in the <see cref="T:System.ServiceModel.Configuration.StandardEndpointsSection" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -437,8 +435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies how the transport treats the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" /> provided for the service to listen on.</para
-          >
+            >Gets or sets a value that specifies how the transport treats the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" /> provided for the service to listen on.</para>
         </summary>
       </Docs>
     </Member>

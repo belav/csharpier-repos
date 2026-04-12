@@ -5,8 +5,7 @@
 
   <PropertyGroup>
     <UseAppHost Condition="'$(UseAppHost)' == '' and '$(SelfContained)' != 'true'"
-      >false</UseAppHost
-    >
+      >false</UseAppHost>
   </PropertyGroup>
 
   <!-- Override target from targetingpacks.targets. Use Version instead of ProductVersion (written into runtimeconfig.json).

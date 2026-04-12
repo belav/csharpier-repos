@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to the <see cref="T:System.Net.UploadValuesCompletedEventHandler" />.</para
-      >
+        >Instances of this class are passed to the <see cref="T:System.Net.UploadValuesCompletedEventHandler" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Net.WebClient.UploadValuesCompleted" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Net.WebClient.UploadValuesCompleted" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,14 +48,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> properties to determine whether the upload completed. If the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> property's value is an <see cref="T:System.Exception" /> object or the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> property's value is true, the asynchronous operation did not complete correctly and the <see cref="P:System.Net.UploadValuesCompletedEventArgs.Result" /> property's value will not be valid.</para
-          >
+            >You should check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> properties to determine whether the upload completed. If the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> property's value is an <see cref="T:System.Exception" /> object or the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> property's value is true, the asynchronous operation did not complete correctly and the <see cref="P:System.Net.UploadValuesCompletedEventArgs.Result" /> property's value will not be valid.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the server reply to a data upload operation started by calling an <see cref="Overload:System.Net.WebClient.UploadValuesAsync" /> method.</para
-          >
+            >Gets the server reply to a data upload operation started by calling an <see cref="Overload:System.Net.WebClient.UploadValuesAsync" /> method.</para>
         </summary>
       </Docs>
     </Member>

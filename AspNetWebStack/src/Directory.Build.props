@@ -6,7 +6,6 @@
     <IsTestProject>false</IsTestProject>
     <TargetFrameworkVersion
       Condition=" !$(MSBuildProjectName.StartsWith('System.Net.Http.Formatting.ns')) "
-      >v4.5</TargetFrameworkVersion
-    >
+      >v4.5</TargetFrameworkVersion>
   </PropertyGroup>
 </Project>

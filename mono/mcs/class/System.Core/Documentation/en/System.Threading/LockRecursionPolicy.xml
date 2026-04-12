@@ -16,14 +16,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default recursion policy depends on the type of lock. For the default policy and the precise behavior of lock recursion for any given lock type, see the documentation for the type. For example, the <see cref="T:System.Threading.ReaderWriterLockSlim" /> class does not allow a thread to enter the lock in write mode if it already entered the lock in read mode, regardless of the lock policy setting, in order to reduce the chance of deadlocks. </para
-      >
+        >The default recursion policy depends on the type of lock. For the default policy and the precise behavior of lock recursion for any given lock type, see the documentation for the type. For example, the <see cref="T:System.Threading.ReaderWriterLockSlim" /> class does not allow a thread to enter the lock in write mode if it already entered the lock in read mode, regardless of the lock policy setting, in order to reduce the chance of deadlocks. </para>
       <para>Currently only one lock uses this enumeration:</para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.Threading.ReaderWriterLockSlim" />. For more information, see the <see cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" /> property.</para
-          >
+            <see cref="T:System.Threading.ReaderWriterLockSlim" />. For more information, see the <see cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" /> property.</para>
         </item>
       </list>
     </remarks>

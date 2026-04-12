@@ -12,8 +12,7 @@
       <_IsSharedLibrary Condition="'$(NativeLib)' == 'shared'">true</_IsSharedLibrary>
       <_UsesCustomRuntimeInitCallback>false</_UsesCustomRuntimeInitCallback>
       <_UsesCustomRuntimeInitCallback Condition="$(CustomRuntimeInitCallback) != ''"
-        >true</_UsesCustomRuntimeInitCallback
-      >
+        >true</_UsesCustomRuntimeInitCallback>
       <_BundlesResources>$(BundlesResources)</_BundlesResources>
       <_BundlesResources Condition="'$(_BundlesResources)' == ''">true</_BundlesResources>
     </PropertyGroup>

@@ -13,8 +13,7 @@ interface ITextBox: IControl
    void SetText(string text);  
 }  
 ]]>
-      </code_example>the fully qualified name of Paint is IControl.Paint and the fully qualified name of SetText is ITextBox.SetText. In the example above, it is not possible to refer to Paint as ITextBox.Paint. end example]</example
-    >
+      </code_example>the fully qualified name of Paint is IControl.Paint and the fully qualified name of SetText is ITextBox.SetText. In the example above, it is not possible to refer to Paint as ITextBox.Paint. end example]</example>
   </paragraph>
   <paragraph
     >When an interface is part of a namespace, the fully qualified name of an interface member includes the namespace name. <example

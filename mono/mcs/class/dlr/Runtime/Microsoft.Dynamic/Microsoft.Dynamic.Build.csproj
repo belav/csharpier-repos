@@ -17,8 +17,7 @@
     <OutputPath>$(SolutionDir)..\Bin\40\</OutputPath>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Runtime\MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
     <SignAssembly Condition="'$(SignAssembly)' == '' And Exists('$(AssemblyOriginatorKeyFile)')"
-      >true</SignAssembly
-    >
+      >true</SignAssembly>
     <SignedSym Condition="'$(SignAssembly)' == 'true'">SIGNED</SignedSym>
     <DelaySign>true</DelaySign>
     <DefineConstants>CLR4;$(SignedSym)</DefineConstants>

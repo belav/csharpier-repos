@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> can be used to represent code that invokes an event. Invoking an event invokes all delegates that are registered with the event using the specified parameters.</para
-      >
+        <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> can be used to represent code that invokes an event. Invoking an event invokes all delegates that are registered with the event using the specified parameters.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeDelegateInvokeExpression.TargetObject" /> property specifies the event to invoke. The <see cref="P:System.CodeDom.CodeDelegateInvokeExpression.Parameters" /> property specifies the parameters to pass to the delegates for the event.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeDelegateInvokeExpression.TargetObject" /> property specifies the event to invoke. The <see cref="P:System.CodeDom.CodeDelegateInvokeExpression.Parameters" /> property specifies the parameters to pass to the delegates for the event.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +91,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class using the specified target object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class using the specified target object.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -137,23 +132,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class using the specified target object and parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateInvokeExpression" /> class using the specified target object and parameters.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the target object. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicate the parameters. </param>
       </Docs>
     </Member>
     <Member MemberName="Parameters">

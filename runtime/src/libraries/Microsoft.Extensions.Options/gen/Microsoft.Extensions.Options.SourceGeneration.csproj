@@ -11,8 +11,7 @@
     <AnalyzerRoslynVersion>4.4</AnalyzerRoslynVersion>
     <RoslynApiVersion>$(MicrosoftCodeAnalysisVersion_4_4)</RoslynApiVersion>
     <DefineConstants Condition="'$(LaunchDebugger)' == 'true'"
-      >$(DefineConstants);ROSLYN4_4_OR_GREATER</DefineConstants
-    >
+      >$(DefineConstants);ROSLYN4_4_OR_GREATER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

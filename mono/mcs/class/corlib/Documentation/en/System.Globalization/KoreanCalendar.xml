@@ -34,12 +34,10 @@
         <para
           >For information about using the <see cref="T:System.Globalization.KoreanCalendar" /> class and the other calendar classes in the .NET Framework, see <format type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
       <para
-        >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era.</para
-      >
+        >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era.</para>
       <para>Leap years in the Korean calendar correspond to the same leap years in the Gregorian calendar. A leap year in the Gregorian calendar is defined as a Gregorian year that is evenly divisible by four, except if it is divisible by 100. However, Gregorian years that are divisible by 400 are leap years. A common year has 365 days and a leap year has 366 days.</para>
       <para>The Korean calendar has 12 months with 28 to 31 days each: </para>
       <list type="table">
@@ -231,8 +229,7 @@
       <para>February has 29 days during leap years and 28 days during common years.</para>
       <para>The date January 1, 2001 A.D. in the Gregorian calendar is equivalent to the first day of January in the year 4334 of the current era in the Korean calendar.</para>
       <para
-        >Each <see cref="T:System.Globalization.CultureInfo" /> object supports a set of calendars. The <see cref="P:System.Globalization.CultureInfo.Calendar" /> property returns the default calendar for the culture, and the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" /> property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see cref="T:System.Globalization.CultureInfo" />, the application should set the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> to a new <see cref="T:System.Globalization.Calendar" />.</para
-      >
+        >Each <see cref="T:System.Globalization.CultureInfo" /> object supports a set of calendars. The <see cref="P:System.Globalization.CultureInfo.Calendar" /> property returns the default calendar for the culture, and the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" /> property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see cref="T:System.Globalization.CultureInfo" />, the application should set the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> to a new <see cref="T:System.Globalization.Calendar" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -259,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -290,45 +286,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The day part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />. This implementation supports only the current era. Therefore, <see cref="T:System.ArgumentException" /> is thrown if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />. The time-of-day part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />.</para
-          >
+            >The day part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The year part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting month is outside the year of the specified <see cref="T:System.DateTime" />. This implementation supports only the current era. Therefore, <see cref="T:System.ArgumentException" /> is thrown if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />. The time-of-day part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />.</para>
           <para
-            >For example, if the specified month is October, which has 31 days, the specified day is the 31st day of that month, and the value of the <paramref name="months" /> parameter is 6, the resulting year is one more than the specified year, the resulting month is April, and the resulting day is the 30th day, which is the last day in April.</para
-          >
+            >For example, if the specified month is October, which has 31 days, the specified day is the 31st day of that month, and the value of the <paramref name="months" /> parameter is 6, the resulting year is one more than the specified year, the resulting month is April, and the resulting day is the 30th day, which is the last day in April.</para>
           <para
-            >If the value of the <paramref name="months" /> parameter is negative, the resulting <see cref="T:System.DateTime" /> is earlier than the specified <see cref="T:System.DateTime" />.</para
-          >
+            >If the value of the <paramref name="months" /> parameter is negative, the resulting <see cref="T:System.DateTime" /> is earlier than the specified <see cref="T:System.DateTime" />.</para>
           <para
-            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> value always equals <see cref="F:System.DateTimeKind.Unspecified" />. You can preserve the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="time" /> parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" /> method, as the following example shows.</para
-          >
+            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> value always equals <see cref="F:System.DateTimeKind.Unspecified" />. You can preserve the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="time" /> parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" /> method, as the following example shows.</para>
           <para>code reference: System.Globalization.Calendar.AddMethods#5</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.DateTime" /> that is the specified number of months away from the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns a <see cref="T:System.DateTime" /> that is the specified number of months away from the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.DateTime" /> that results from adding the specified number of months to the specified <see cref="T:System.DateTime" />.</para
-          >
+            >The <see cref="T:System.DateTime" /> that results from adding the specified number of months to the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add months. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add months. </param>
         <param name="months">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of months to add. </param
-        >
+          />The number of months to add. </param>
       </Docs>
     </Member>
     <Member MemberName="AddYears">
@@ -357,45 +345,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The day part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />. This implementation supports only the current era. Therefore, <see cref="T:System.ArgumentException" /> is thrown if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />. The time-of-day part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />.</para
-          >
+            >The day part of the resulting <see cref="T:System.DateTime" /> is affected if the resulting day is not a valid day in the resulting month of the resulting year. It is changed to the last valid day in the resulting month of the resulting year. The month part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />. This implementation supports only the current era. Therefore, <see cref="T:System.ArgumentException" /> is thrown if the resulting year is outside the era of the specified <see cref="T:System.DateTime" />. The time-of-day part of the resulting <see cref="T:System.DateTime" /> remains the same as the specified <see cref="T:System.DateTime" />.</para>
           <para
-            >For example, February has 28 days, except during leap years when it has 29 days. If the specified date is the 29th day of February in a leap year and the value of <paramref name="years" /> is 1, the resulting date is the 28th day of February in the following year.</para
-          >
+            >For example, February has 28 days, except during leap years when it has 29 days. If the specified date is the 29th day of February in a leap year and the value of <paramref name="years" /> is 1, the resulting date is the 28th day of February in the following year.</para>
           <para
-            >If <paramref name="years" /> is negative, the resulting <see cref="T:System.DateTime" /> is earlier than the specified <see cref="T:System.DateTime" />.</para
-          >
+            >If <paramref name="years" /> is negative, the resulting <see cref="T:System.DateTime" /> is earlier than the specified <see cref="T:System.DateTime" />.</para>
           <para
-            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> value always equals <see cref="F:System.DateTimeKind.Unspecified" />. You can preserve the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="time" /> parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" /> method, as the following example shows.</para
-          >
+            >The <see cref="P:System.DateTime.Kind" /> property of the returned <see cref="T:System.DateTime" /> value always equals <see cref="F:System.DateTimeKind.Unspecified" />. You can preserve the <see cref="P:System.DateTime.Kind" /> property of the <paramref name="time" /> parameter by calling the <see cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" /> method, as the following example shows.</para>
           <para>code reference: System.Globalization.Calendar.AddMethods#8</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.DateTime" /> that is the specified number of years away from the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns a <see cref="T:System.DateTime" /> that is the specified number of years away from the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.DateTime" /> that results from adding the specified number of years to the specified <see cref="T:System.DateTime" />.</para
-          >
+            >The <see cref="T:System.DateTime" /> that results from adding the specified number of years to the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to which to add years. </param
-        >
+          />The <see cref="T:System.DateTime" /> to which to add years. </param>
         <param name="years">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of years to add. </param
-        >
+          />The number of years to add. </param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmType">
@@ -447,14 +427,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era. This property always returns an array with only one element.</para
-          >
+            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era. This property always returns an array with only one element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of eras in the <see cref="T:System.Globalization.KoreanCalendar" />.</para
-          >
+            >Gets the list of eras in the <see cref="T:System.Globalization.KoreanCalendar" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -481,22 +459,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the day of the month in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns the day of the month in the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 1 to 31 that represents the day of the month in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >An integer from 1 to 31 that represents the day of the month in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfWeek">
@@ -596,22 +571,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the day of the week in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns the day of the week in the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.DayOfWeek" /> value that represents the day of the week in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >A <see cref="T:System.DayOfWeek" /> value that represents the day of the week in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="GetDayOfYear">
@@ -636,28 +608,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The day of the year is defined as the number of days from the first day of the year. For example, <see cref="M:System.Globalization.KoreanCalendar.GetDayOfYear(System.DateTime)" /> for the first day of the first month returns 1, and <see cref="M:System.Globalization.KoreanCalendar.GetDayOfYear(System.DateTime)" /> for the last day of the last month returns the total number of days in that year. The total is the same value as that returned by <see cref="M:System.Globalization.KoreanCalendar.GetDaysInYear(System.Int32,System.Int32)" />.</para
-          >
+            >The day of the year is defined as the number of days from the first day of the year. For example, <see cref="M:System.Globalization.KoreanCalendar.GetDayOfYear(System.DateTime)" /> for the first day of the first month returns 1, and <see cref="M:System.Globalization.KoreanCalendar.GetDayOfYear(System.DateTime)" /> for the last day of the last month returns the total number of days in that year. The total is the same value as that returned by <see cref="M:System.Globalization.KoreanCalendar.GetDaysInYear(System.Int32,System.Int32)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the day of the year in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns the day of the year in the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 1 to 366 that represents the day of the year in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >An integer from 1 to 366 that represents the day of the year in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInMonth">
@@ -687,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, this method returns 28 or 29 for February (<paramref name="month" /> = 2), depending on whether <paramref name="year" /> is a leap year.</para
-          >
+            >For example, this method returns 28 or 29 for February (<paramref name="month" /> = 2), depending on whether <paramref name="year" /> is a leap year.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -703,22 +670,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="GetDaysInYear">
@@ -747,8 +711,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, this method returns 365 or 366, depending on whether <paramref name="year" /> is a leap year.</para
-          >
+            >For example, this method returns 365 or 366, depending on whether <paramref name="year" /> is a leap year.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -763,15 +726,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="GetEra">
@@ -796,8 +757,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era.</para
-          >
+            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -806,16 +766,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that represents the era in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >An integer that represents the era in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="GetLeapMonth">
@@ -848,8 +806,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" /> method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" /> method returns 8 for the eighth month, 9 for the leap eighth month, and 10 for the ninth month.</para
-          >
+            >In a calendar that supports the notion of a leap month, the leap month can occur either after a particular month or after any month in a year. For example, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" /> method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" /> method returns 8 for the eighth month, 9 for the leap eighth month, and 10 for the ninth month.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -858,15 +815,12 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value is always 0 because the <see cref="T:System.Globalization.KoreanCalendar" /> class does not support the notion of a leap month.</para
-          >
+            >The return value is always 0 because the <see cref="T:System.Globalization.KoreanCalendar" /> class does not support the notion of a leap month.</para>
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />A year.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A year.</param>
         <param name="era">
-          <attribution license="cc4" from="Microsoft" modified="false" />An era.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An era.</param>
       </Docs>
     </Member>
     <Member MemberName="GetMonth">
@@ -896,16 +850,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer from 1 to 12 that represents the month in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >An integer from 1 to 12 that represents the month in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="GetMonthsInYear">
@@ -945,15 +897,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="GetWeekOfYear">
@@ -987,54 +937,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to determine the number of weeks in the year by setting the <paramref name="time" /> parameter to the last day of the year.</para
-          >
+            >This method can be used to determine the number of weeks in the year by setting the <paramref name="time" /> parameter to the last day of the year.</para>
           <para>
-            <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains culture-specific values that can be used for the <paramref name="rule" /> and <paramref name="firstDayOfWeek" /> parameters.</para
-          >
+            <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains culture-specific values that can be used for the <paramref name="rule" /> and <paramref name="firstDayOfWeek" /> parameters.</para>
           <para
-            >The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains the default <see cref="T:System.DayOfWeek" /> value that represents the first day of the week for a specific culture, using the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />.</para
-          >
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.FirstDayOfWeek" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains the default <see cref="T:System.DayOfWeek" /> value that represents the first day of the week for a specific culture, using the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />.</para>
           <para
-            >The <see cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains the default <see cref="T:System.Globalization.CalendarWeekRule" /> value that defines a calendar week for a specific culture, using the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />.</para
-          >
+            >The <see cref="P:System.Globalization.DateTimeFormatInfo.CalendarWeekRule" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" /> contains the default <see cref="T:System.Globalization.CalendarWeekRule" /> value that defines a calendar week for a specific culture, using the calendar specified in the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" /> property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />.</para>
           <para
-            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />, <see cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" /> for January 1 returns 1.</para
-          >
+            >For example, in <see cref="T:System.Globalization.GregorianCalendar" />, <see cref="M:System.Globalization.Calendar.GetWeekOfYear(System.DateTime,System.Globalization.CalendarWeekRule,System.DayOfWeek)" /> for January 1 returns 1.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the week of the year that includes the date in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >Returns the week of the year that includes the date in the specified <see cref="T:System.DateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 1-based integer that represents the week of the year that includes the date in the <paramref name="time" /> parameter.</para
-          >
+            >A 1-based integer that represents the week of the year that includes the date in the <paramref name="time" /> parameter.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week. </param
-        >
+          />One of the <see cref="T:System.Globalization.CalendarWeekRule" /> values that defines a calendar week. </param>
         <param name="firstDayOfWeek">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week. </param
-        >
+          />One of the <see cref="T:System.DayOfWeek" /> values that represents the first day of the week. </param>
       </Docs>
     </Member>
     <Member MemberName="GetYear">
@@ -1064,16 +1004,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that represents the year in the specified <see cref="T:System.DateTime" />.</para
-          >
+            >An integer that represents the year in the specified <see cref="T:System.DateTime" />.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> to read. </param
-        >
+          />The <see cref="T:System.DateTime" /> to read. </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapDay">
@@ -1119,29 +1057,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month. </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapMonth">
@@ -1186,22 +1120,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="IsLeapYear">
@@ -1241,15 +1172,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="KoreanEra">
@@ -1273,8 +1202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era. This field always returns 1.</para
-          >
+            >The <see cref="T:System.Globalization.KoreanCalendar" /> class recognizes only the current era. This field always returns 1.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1311,8 +1239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the latest date and time supported by the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para
-          >
+            >Gets the latest date and time supported by the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -1345,8 +1272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the earliest date and time supported by the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para
-          >
+            >Gets the earliest date and time supported by the <see cref="T:System.Globalization.KoreanCalendar" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -1383,71 +1309,61 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.DateTime" /> that is set to the specified date and time in the specified era.</para
-          >
+            >Returns a <see cref="T:System.DateTime" /> that is set to the specified date and time in the specified era.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.DateTime" /> that is set to the specified date and time in the current era.</para
-          >
+            >The <see cref="T:System.DateTime" /> that is set to the specified date and time in the current era.</para>
         </returns>
         <param name="year">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the year. </param
-        >
+          />An integer that represents the year. </param>
         <param name="month">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 12 that represents the month. </param
-        >
+          />An integer from 1 to 12 that represents the month. </param>
         <param name="day">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 1 to 31 that represents the day. </param
-        >
+          />An integer from 1 to 31 that represents the day. </param>
         <param name="hour">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 23 that represents the hour. </param
-        >
+          />An integer from 0 to 23 that represents the hour. </param>
         <param name="minute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the minute. </param
-        >
+          />An integer from 0 to 59 that represents the minute. </param>
         <param name="second">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 59 that represents the second. </param
-        >
+          />An integer from 0 to 59 that represents the second. </param>
         <param name="millisecond">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer from 0 to 999 that represents the millisecond. </param
-        >
+          />An integer from 0 to 999 that represents the millisecond. </param>
         <param name="era">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that represents the era. </param
-        >
+          />An integer that represents the era. </param>
       </Docs>
     </Member>
     <Member MemberName="ToFourDigitYear">
@@ -1472,31 +1388,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> defines the last year in the 100-year range that can be represented by <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" />. The century is determined by finding the sole occurrence of the two-digit year within that 100-year range. For example, if <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> is set to 2029, the 100-year range is from 1930 to 2029. Therefore, a two-digit value of 30 is interpreted as 1930, while a two-digit value of 29 is interpreted as 2029.</para
-          >
+            <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> defines the last year in the 100-year range that can be represented by <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" />. The century is determined by finding the sole occurrence of the two-digit year within that 100-year range. For example, if <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> is set to 2029, the 100-year range is from 1930 to 2029. Therefore, a two-digit value of 30 is interpreted as 1930, while a two-digit value of 29 is interpreted as 2029.</para>
           <para>
-            <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" /> supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" />, the method returns the actual input value. If the application supplies a four-digit value that is outside the supported calendar range, or if it supplies a negative value, the method throws an exception.</para
-          >
+            <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" /> supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see cref="M:System.Globalization.KoreanCalendar.ToFourDigitYear(System.Int32)" />, the method returns the actual input value. If the application supplies a four-digit value that is outside the supported calendar range, or if it supplies a negative value, the method throws an exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified year to a four-digit year by using the <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> property to determine the appropriate century.</para
-          >
+            >Converts the specified year to a four-digit year by using the <see cref="P:System.Globalization.KoreanCalendar.TwoDigitYearMax" /> property to determine the appropriate century.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that contains the four-digit representation of <paramref name="year" />.</para
-          >
+            >An integer that contains the four-digit representation of <paramref name="year" />.</para>
         </returns>
         <param name="year">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A two-digit or four-digit integer that represents the year to convert. </param
-        >
+          />A two-digit or four-digit integer that represents the year to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="TwoDigitYearMax">
@@ -1517,8 +1428,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property allows a 2-digit year to be properly translated to a 4-digit year. For example, in the Gregorian calendar, if this property is set to 2029, the 100-year range is from 1930 to 2029. Therefore, a 2-digit value of 30 is interpreted as 1930, while a 2-digit value of 29 is interpreted as 2029.</para>
           <para
-            >The initial value of this property is derived from the settings in the regional and language options portion of Control Panel. However, that information can change during the life of the <see cref="T:System.AppDomain" />. The <see cref="T:System.Globalization.KoreanCalendar" /> class does not detect changes in the system settings automatically.</para
-          >
+            >The initial value of this property is derived from the settings in the regional and language options portion of Control Panel. However, that information can change during the life of the <see cref="T:System.AppDomain" />. The <see cref="T:System.Globalization.KoreanCalendar" /> class does not detect changes in the system settings automatically.</para>
           <para>The application should set this value to 99 to indicate that 2-digit years are to be taken literally. For example, if this property is set to 99, the 100-year range is from 0 (not a valid value for most calendars) to 99. Therefore, a 2-digit value of 30 is interpreted as 30.</para>
         </remarks>
         <summary>

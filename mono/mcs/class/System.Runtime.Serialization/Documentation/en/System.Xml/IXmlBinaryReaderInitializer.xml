@@ -53,23 +53,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="session">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Delegate to call when the reader is closed.</param
-        >
+          />Delegate to call when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="SetInput">
@@ -109,37 +105,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />Starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />Number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="session">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Delegate to call when the reader is closed.</param
-        >
+          />Delegate to call when the reader is closed.</param>
       </Docs>
     </Member>
   </Members>

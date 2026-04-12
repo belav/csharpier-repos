@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -133,8 +132,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element to be copied.</param
-        >
+          />The configuration element to be copied.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBehavior">

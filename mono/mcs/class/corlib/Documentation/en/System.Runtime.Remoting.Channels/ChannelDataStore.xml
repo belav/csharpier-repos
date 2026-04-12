@@ -38,10 +38,8 @@
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
         </format> and <format type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
-            >[&lt;topic://cpconInheritanceDemands&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpconInheritanceDemands&gt;]</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" /> class with the URIs that the current channel maps to.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" /> class with the URIs that the current channel maps to.</para>
         </summary>
         <param name="channelURIs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of channel URIs that the current channel maps to. </param
-        >
+          />An array of channel URIs that the current channel maps to. </param>
       </Docs>
     </Member>
     <Member MemberName="ChannelUris">

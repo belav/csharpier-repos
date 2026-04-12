@@ -19,26 +19,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class provides an efficient, high-performance mechanism to validate XML data against XML schemas in a push-based manner. For example, the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class allows you to validate an XML infoset in-place without having to serialize it as an XML document and then reparse the document using a validating XML reader. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class can also be used to build validation engines over custom XML data sources or as a way to build a validating XML writer.</para
-      >
+        >The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class provides an efficient, high-performance mechanism to validate XML data against XML schemas in a push-based manner. For example, the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class allows you to validate an XML infoset in-place without having to serialize it as an XML document and then reparse the document using a validating XML reader. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class can also be used to build validation engines over custom XML data sources or as a way to build a validating XML writer.</para>
       <para
         >For more information about the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class, see the <format type="text/html">
           <a href="911d4460-dd91-4958-85b2-2ca3299f9ec6"
-            >XmlSchemaValidator Push-Based Validation</a
-          >
-        </format> topic.</para
-      >
+            >XmlSchemaValidator Push-Based Validation</a>
+        </format> topic.</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para
-        >
+          >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an XML Schema Definition Language (XSD) Schema validation engine. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class cannot be inherited.</para
-      >
+        >Represents an XML Schema Definition Language (XSD) Schema validation engine. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -67,65 +62,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.#ctor(System.Xml.XmlNameTable,System.Xml.Schema.XmlSchemaSet,System.Xml.IXmlNamespaceResolver,System.Xml.Schema.XmlSchemaValidationFlags)" /> constructor.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.#ctor(System.Xml.XmlNameTable,System.Xml.Schema.XmlSchemaSet,System.Xml.IXmlNamespaceResolver,System.Xml.Schema.XmlSchemaValidationFlags)" /> constructor.</para>
           <list type="bullet">
             <item>
               <para
-                >The contents of the <see cref="T:System.Xml.Schema.XmlSchemaSet" /> parameter are copied into an internal <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object when the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> or the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation options are set. As a result, changes to the input <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object during validation do not affect the outcome of validation.</para
-              >
+                >The contents of the <see cref="T:System.Xml.Schema.XmlSchemaSet" /> parameter are copied into an internal <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object when the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> or the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation options are set. As a result, changes to the input <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object during validation do not affect the outcome of validation.</para>
             </item>
             <item>
               <para
-                >If the <see cref="T:System.Xml.Schema.XmlSchemaSet" /> parameter specified is not compiled, its <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method is called.</para
-              >
+                >If the <see cref="T:System.Xml.Schema.XmlSchemaSet" /> parameter specified is not compiled, its <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method is called.</para>
             </item>
             <item>
               <para
-                >The <see cref="T:System.Xml.IXmlNamespaceResolver" /> parameter is especially important for validating xs:QName types. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class does not copy the in-scope namespaces from the <see cref="T:System.Xml.IXmlNamespaceResolver" /> object but instead holds a reference to it. This allows new namespaces to be added to the <see cref="T:System.Xml.IXmlNamespaceResolver" /> object during the validation process.</para
-              >
+                >The <see cref="T:System.Xml.IXmlNamespaceResolver" /> parameter is especially important for validating xs:QName types. The <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class does not copy the in-scope namespaces from the <see cref="T:System.Xml.IXmlNamespaceResolver" /> object but instead holds a reference to it. This allows new namespaces to be added to the <see cref="T:System.Xml.IXmlNamespaceResolver" /> object during the validation process.</para>
             </item>
           </list>
           <block subset="none" type="note">
             <para
-              >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para
-            >
+              >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> class.</para>
         </summary>
         <param name="nameTable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlNameTable" /> object containing element and attribute names as atomized strings.</param
-        >
+          />An <see cref="T:System.Xml.XmlNameTable" /> object containing element and attribute names as atomized strings.</param>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object containing the XML Schema Definition Language (XSD) schemas used for validation.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> object containing the XML Schema Definition Language (XSD) schemas used for validation.</param>
         <param name="namespaceResolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.IXmlNamespaceResolver" /> object used for resolving namespaces encountered during validation.</param
-        >
+          />An <see cref="T:System.Xml.IXmlNamespaceResolver" /> object used for resolving namespaces encountered during validation.</param>
         <param name="validationFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaValidationFlags" /> value specifying schema validation options.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaValidationFlags" /> value specifying schema validation options.</param>
       </Docs>
     </Member>
     <Member MemberName="AddSchema">
@@ -153,23 +138,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method can be used to simulate the effect of encountering an inline XML schema in the XML document being validated.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method can be used to simulate the effect of encountering an inline XML schema in the XML document being validated.</para>
             </item>
             <item>
               <para
-                >The target namespace of the <see cref="T:System.Xml.Schema.XmlSchema" /> parameter cannot match that of any element or attribute already encountered by the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object.</para
-              >
+                >The target namespace of the <see cref="T:System.Xml.Schema.XmlSchema" /> parameter cannot match that of any element or attribute already encountered by the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object.</para>
             </item>
             <item>
               <para
-                >If the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> validation option is not set, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method does nothing.</para
-              >
+                >If the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> validation option is not set, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" /> method does nothing.</para>
             </item>
           </list>
         </remarks>
@@ -182,8 +163,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchema" /> object to add to the set of schemas used for validation.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchema" /> object to add to the set of schemas used for validation.</param>
       </Docs>
     </Member>
     <Member MemberName="EndValidation">
@@ -206,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.EndValidation" /> method ends validation and checks identity constraints for the entire XML document if the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> validation option is set.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.EndValidation" /> method ends validation and checks identity constraints for the entire XML document if the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> validation option is set.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -238,18 +217,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method is called immediately after the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateElement" /> method, all the attributes that could appear in the XML document are returned.</para
-              >
+                >If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method is called immediately after the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateElement" /> method, all the attributes that could appear in the XML document are returned.</para>
             </item>
             <item>
               <para
-                >If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method is called after one or more calls to the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method, the attributes that haven't yet been validated for the current element are returned.</para
-              >
+                >If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedAttributes" /> method is called after one or more calls to the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method, the attributes that haven't yet been validated for the current element are returned.</para>
             </item>
           </list>
         </remarks>
@@ -260,8 +236,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects or an empty array if there are no expected attributes.</para
-          >
+            >An array of <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects or an empty array if there are no expected attributes.</para>
         </returns>
       </Docs>
     </Member>
@@ -288,12 +263,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid particles that can be returned by the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method are instances of the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> and <see cref="T:System.Xml.Schema.XmlSchemaAny" /> classes.</para
-          >
+            >The valid particles that can be returned by the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method are instances of the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> and <see cref="T:System.Xml.Schema.XmlSchemaAny" /> classes.</para>
           <para>When the compositor for the content model is an xs:sequence, only the next particle in the sequence is returned. If the compositor for the content model is an xs:all or an xs:choice, then all valid particles that could follow in the current element context are returned.</para>
           <para
-            >For example, in the XML Schema Definition Language (XSD) schema and XML document that follow, after validating the book element, the book element is the current element context. The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object representing the title element. When the validation context is the title element, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method returns an empty array. If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method is called after the title element has been validated but before the description element has been validated, it returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object representing the description element. If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method is called after the description element has been validated then it returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaAny" /> object representing the wildcard.</para
-          >
+            >For example, in the XML Schema Definition Language (XSD) schema and XML document that follow, after validating the book element, the book element is the current element context. The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object representing the title element. When the validation context is the title element, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method returns an empty array. If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method is called after the title element has been validated but before the description element has been validated, it returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object representing the description element. If the <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" /> method is called after the description element has been validated then it returns an array containing a single <see cref="T:System.Xml.Schema.XmlSchemaAny" /> object representing the wildcard.</para>
           <code>Dim reader As XmlReader =  XmlReader.Create("input.xml") 
 
 Dim schemaSet As XmlSchemaSet =  New XmlSchemaSet() 
@@ -411,8 +384,7 @@ validator.ValidateEndElement(null);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Xml.Schema.XmlSchemaParticle" /> objects or an empty array if there are no expected particles.</para
-          >
+            >An array of <see cref="T:System.Xml.Schema.XmlSchemaParticle" /> objects or an empty array if there are no expected particles.</para>
         </returns>
       </Docs>
     </Member>
@@ -441,22 +413,19 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes(System.Collections.ArrayList)" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method. The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes(System.Collections.ArrayList)" /> method should be used to determine what default attributes are to be inserted into the XML document being validated.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes(System.Collections.ArrayList)" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method. The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes(System.Collections.ArrayList)" /> method should be used to determine what default attributes are to be inserted into the XML document being validated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates identity constraints on the default attributes and populates the <see cref="T:System.Collections.ArrayList" /> specified with <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects for any attributes with default values that have not been previously validated using the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method in the element context. </para
-          >
+            >Validates identity constraints on the default attributes and populates the <see cref="T:System.Collections.ArrayList" /> specified with <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects for any attributes with default values that have not been previously validated using the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method in the element context. </para>
         </summary>
         <param name="defaultAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.ArrayList" /> to populate with <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects for any attributes not yet encountered during validation in the element context.</param
-        >
+          />An <see cref="T:System.Collections.ArrayList" /> to populate with <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> objects for any attributes not yet encountered during validation in the element context.</param>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -479,14 +448,12 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize" /> method is only valid if called immediately after the construction of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object or after a call to <see cref="M:System.Xml.Schema.XmlSchemaValidator.EndValidation" />.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize" /> method is only valid if called immediately after the construction of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object or after a call to <see cref="M:System.Xml.Schema.XmlSchemaValidator.EndValidation" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the state of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object.</para
-          >
+            >Initializes the state of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -515,22 +482,19 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method that takes an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> as a parameter initializes an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to its starting state for partial validation.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method that takes an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> as a parameter initializes an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to its starting state for partial validation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the state of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object using the <see cref="T:System.Xml.Schema.XmlSchemaObject" /> specified for partial validation.</para
-          >
+            >Initializes the state of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object using the <see cref="T:System.Xml.Schema.XmlSchemaObject" /> specified for partial validation.</para>
         </summary>
         <param name="partialValidationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" />, <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />, or <see cref="T:System.Xml.Schema.XmlSchemaType" /> object used to initialize the validation context of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object for partial validation.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" />, <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />, or <see cref="T:System.Xml.Schema.XmlSchemaType" /> object used to initialize the validation context of the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object for partial validation.</param>
       </Docs>
     </Member>
     <Member MemberName="LineInfoProvider">
@@ -558,13 +522,11 @@ validator.ValidateEndElement(null);</code>
           <list type="bullet">
             <item>
               <para
-                >Line information is reported by any <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> thrown during the validation process.</para
-              >
+                >Line information is reported by any <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> thrown during the validation process.</para>
             </item>
             <item>
               <para
-                >The default <see cref="T:System.Xml.IXmlLineInfo" /> object returned by the <see cref="P:System.Xml.Schema.XmlSchemaValidator.LineInfoProvider" /> property returns 0 for the <see cref="P:System.Xml.IXmlLineInfo.LineNumber" /> and <see cref="P:System.Xml.IXmlLineInfo.LinePosition" /> properties.</para
-              >
+                >The default <see cref="T:System.Xml.IXmlLineInfo" /> object returned by the <see cref="P:System.Xml.Schema.XmlSchemaValidator.LineInfoProvider" /> property returns 0 for the <see cref="P:System.Xml.IXmlLineInfo.LineNumber" /> and <see cref="P:System.Xml.IXmlLineInfo.LinePosition" /> properties.</para>
             </item>
           </list>
         </remarks>
@@ -599,18 +561,15 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.SkipToEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.SkipToEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.SkipToEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method skips validation of the current element content and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate content in the parent element's context; it is equivalent to skipping validation for all the children of the current element and then calling the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.SkipToEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method skips validation of the current element content and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate content in the parent element's context; it is equivalent to skipping validation for all the children of the current element and then calling the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method.</para>
             </item>
             <item>
               <para
-                >If the current element content is successfully skipped, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para
-              >
+                >If the current element content is successfully skipped, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para>
             </item>
           </list>
           <block subset="none" type="note">
@@ -620,16 +579,14 @@ validator.ValidateEndElement(null);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Skips validation of the current element content and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate content in the parent element's context.</para
-          >
+            >Skips validation of the current element content and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate content in the parent element's context.</para>
         </summary>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set if the current element content is successfully skipped. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set if the current element content is successfully skipped. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="SourceUri">
@@ -651,13 +608,11 @@ validator.ValidateEndElement(null);</code>
           <list type="bullet">
             <item>
               <para
-                >The source URI is reported by any <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> thrown during the validation process.</para
-              >
+                >The source URI is reported by any <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> thrown during the validation process.</para>
             </item>
             <item>
               <para
-                >If the <see cref="P:System.Xml.Schema.XmlSchemaValidator.SourceUri" /> property is not set, the file name for the XML document is <see cref="F:System.String.Empty" /> in validation error messages.</para
-              >
+                >If the <see cref="P:System.Xml.Schema.XmlSchemaValidator.SourceUri" /> property is not set, the file name for the XML document is <see cref="F:System.String.Empty" /> in validation error messages.</para>
             </item>
           </list>
         </remarks>
@@ -695,23 +650,19 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method.</para>
             </item>
             <item>
               <para
-                >If an <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object was passed to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method validates the attribute against the <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object.</para
-              >
+                >If an <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object was passed to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method validates the attribute against the <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object.</para>
             </item>
             <item>
               <para
-                >If the attribute is successfully validated in the current element context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para
-              >
+                >If the attribute is successfully validated in the current element context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para>
             </item>
           </list>
         </remarks>
@@ -728,29 +679,25 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute to validate.</param
-        >
+          />The local name of the attribute to validate.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute to validate.</param
-        >
+          />The namespace URI of the attribute to validate.</param>
         <param name="attributeValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute to validate.</param
-        >
+          />The value of the attribute to validate.</param>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the attribute. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the attribute. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateAttribute">
@@ -781,23 +728,19 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method must be called after validating all the attributes for the current element with the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" /> method.</para>
             </item>
             <item>
               <para
-                >If an <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object was passed to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)" /> method validates the attribute against the <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object.</para
-              >
+                >If an <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object was passed to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" /> method, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute(System.String,System.String,System.Xml.Schema.XmlValueGetter,System.Xml.Schema.XmlSchemaInfo)" /> method validates the attribute against the <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object.</para>
             </item>
             <item>
               <para
-                >If the attribute is successfully validated in the current element context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para
-              >
+                >If the attribute is successfully validated in the current element context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para>
             </item>
           </list>
         </remarks>
@@ -814,29 +757,25 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute to validate.</param
-        >
+          />The local name of the attribute to validate.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute to validate.</param
-        >
+          />The namespace URI of the attribute to validate.</param>
         <param name="attributeValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the attribute's value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the attribute's value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the attribute. This parameter and can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the attribute. This parameter and can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateElement">
@@ -866,18 +805,15 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateElement(System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateElement(System.String,System.String,System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >If the element name is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation. </para
-              >
+                >If the element name is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation. </para>
             </item>
             <item>
               <para
-                >If the element name or any of its attributes are invalid the current context, the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />; otherwise the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para
-              >
+                >If the element name or any of its attributes are invalid the current context, the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />; otherwise the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para>
             </item>
           </list>
         </remarks>
@@ -890,22 +826,19 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element to validate.</param
-        >
+          />The local name of the element to validate.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element to validate.</param
-        >
+          />The namespace URI of the element to validate.</param>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element's name. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element's name. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateElement">
@@ -939,23 +872,19 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateElement(System.String,System.String,System.Xml.Schema.XmlSchemaInfo,System.String,System.String,System.String,System.String)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateElement(System.String,System.String,System.Xml.Schema.XmlSchemaInfo,System.String,System.String,System.String,System.String)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >If the element name is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para
-              >
+                >If the element name is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaType" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para>
             </item>
             <item>
               <para
-                >If the element name or any of its attributes are invalid in the current context, the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />; otherwise the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para
-              >
+                >If the element name or any of its attributes are invalid in the current context, the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />; otherwise the <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para>
             </item>
             <item>
               <para
-                >If the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> value was not passed as a parameter to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.#ctor(System.Xml.XmlNameTable,System.Xml.Schema.XmlSchemaSet,System.Xml.IXmlNamespaceResolver,System.Xml.Schema.XmlSchemaValidationFlags)" /> constructor, xsi:SchemaLocation  and xsi:NoNamespaceSchemaLocation attribute values are ignored.</para
-              >
+                >If the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> value was not passed as a parameter to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.#ctor(System.Xml.XmlNameTable,System.Xml.Schema.XmlSchemaSet,System.Xml.IXmlNamespaceResolver,System.Xml.Schema.XmlSchemaValidationFlags)" /> constructor, xsi:SchemaLocation  and xsi:NoNamespaceSchemaLocation attribute values are ignored.</para>
             </item>
           </list>
         </remarks>
@@ -968,50 +897,43 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element to validate.</param
-        >
+          />The local name of the element to validate.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element to validate.</param
-        >
+          />The namespace URI of the element to validate.</param>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element's name. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element's name. This parameter can be null.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:Type attribute value of the element. This parameter can be null.</param
-        >
+          />The xsi:Type attribute value of the element. This parameter can be null.</param>
         <param name="xsiNil">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:Nil attribute value of the element. This parameter can be null.</param
-        >
+          />The xsi:Nil attribute value of the element. This parameter can be null.</param>
         <param name="xsiSchemaLocation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:SchemaLocation attribute value of the element. This parameter can be null.</param
-        >
+          />The xsi:SchemaLocation attribute value of the element. This parameter can be null.</param>
         <param name="xsiNoNamespaceSchemaLocation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:NoNamespaceSchemaLocation attribute value of the element. This parameter can be null.</param
-        >
+          />The xsi:NoNamespaceSchemaLocation attribute value of the element. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateEndElement">
@@ -1039,33 +961,27 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >For elements with simple content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the results of previous calls to <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" />. </para
-              >
+                >For elements with simple content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the results of previous calls to <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" />. </para>
             </item>
             <item>
               <para
-                >For elements with complex content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method verifies if the content of the current element is complete.</para
-              >
+                >For elements with complex content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method verifies if the content of the current element is complete.</para>
             </item>
             <item>
               <para
-                >If the element has a default value, the value returned from the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method is the default value for the element.</para
-              >
+                >If the element has a default value, the value returned from the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method is the default value for the element.</para>
             </item>
             <item>
               <para
-                >If the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object was constructed with the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> value as a parameter, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method checks the identity constraint rules (if any) that apply to the element.</para
-              >
+                >If the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object was constructed with the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> value as a parameter, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method checks the identity constraint rules (if any) that apply to the element.</para>
             </item>
             <item>
               <para
-                >If the element is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para
-              >
+                >If the element is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para>
             </item>
           </list>
         </remarks>
@@ -1082,8 +998,7 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the element. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateEndElement">
@@ -1113,37 +1028,30 @@ validator.ValidateEndElement(null);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >If you are validating against the xs:key, xs:keyref, or xs:unique identity constraints, do not use the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method overload. Instead, call the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" /> method and pass it the value of the element. Then call the  <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method overload, which takes <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> as an argument, to verify that the text content of the element is valid according to its data type. </para
-            >
+              >If you are validating against the xs:key, xs:keyref, or xs:unique identity constraints, do not use the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method overload. Instead, call the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" /> method and pass it the value of the element. Then call the  <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" /> method overload, which takes <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> as an argument, to verify that the text content of the element is valid according to its data type. </para>
           </block>
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >For elements with simple content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the typed content passed as a parameter.</para
-              >
+                >For elements with simple content, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the typed content passed as a parameter.</para>
             </item>
             <item>
               <para
-                >If calls to the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" /> method have been previously made, an <see cref="T:System.InvalidOperationException" /> is thrown. </para
-              >
+                >If calls to the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" /> method have been previously made, an <see cref="T:System.InvalidOperationException" /> is thrown. </para>
             </item>
             <item>
               <para
-                >If the element has complex content an <see cref="T:System.InvalidOperationException" /> is thrown.</para
-              >
+                >If the element has complex content an <see cref="T:System.InvalidOperationException" /> is thrown.</para>
             </item>
             <item>
               <para
-                >If the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object was constructed with the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> value as a parameter, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method checks the identity constraint rules (if any) that apply to the element.</para
-              >
+                >If the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object was constructed with the <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" /> value as a parameter, the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" /> method checks the identity constraint rules (if any) that apply to the element.</para>
             </item>
             <item>
               <para
-                >If the element is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para
-              >
+                >If the element is successfully validated in the current context, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />, <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />, and <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> properties are set with the results of the validation.</para>
             </item>
           </list>
         </remarks>
@@ -1160,15 +1068,13 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the text content of the element. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful validation of the text content of the element. This parameter can be null.</param>
         <param name="typedValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The typed text content of the element.</param
-        >
+          />The typed text content of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateEndOfAttributes">
@@ -1196,39 +1102,33 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method should always be called before <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" />.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes" /> method should always be called before <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" />.</para>
             </item>
             <item>
               <para
-                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" /> method must be called before proceeding with validation of an element's content.</para
-              >
+                >The <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" /> method must be called before proceeding with validation of an element's content.</para>
             </item>
             <item>
               <para
-                >If all the required attributes in the element context are present, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />.</para
-              >
+                >If all the required attributes in the element context are present, the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object's (if specified) <see cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" /> property is set to <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether all the required attributes in the element context are present and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate the child content of the element.</para
-          >
+            >Verifies whether all the required attributes in the element context are present and prepares the <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object to validate the child content of the element.</para>
         </summary>
         <param name="schemaInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful verification that all the required attributes in the element context are present. This parameter can be null.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> object whose properties are set on successful verification that all the required attributes in the element context are present. This parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateText">
@@ -1253,13 +1153,11 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.String)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.String)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >If the element has simple content, the text string specified is concatenated on each call to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.String)" /> method until the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called. When the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called, all the text is validated.</para
-              >
+                >If the element has simple content, the text string specified is concatenated on each call to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.String)" /> method until the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called. When the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called, all the text is validated.</para>
             </item>
             <item>
               <para>If the element has complex content, no text concatenation occurs.</para>
@@ -1275,8 +1173,7 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A text string to validate in the current element context.</param
-        >
+          />A text string to validate in the current element context.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateText">
@@ -1304,13 +1201,11 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.Xml.Schema.XmlValueGetter)" /> method.</para
-          >
+            >The following are important notes to consider when using the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.Xml.Schema.XmlValueGetter)" /> method.</para>
           <list type="bullet">
             <item>
               <para
-                >If the element has simple content, the text string specified is concatenated on each call to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.Xml.Schema.XmlValueGetter)" /> method until the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called. When the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called, all the text is validated. </para
-              >
+                >If the element has simple content, the text string specified is concatenated on each call to the <see cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateText(System.Xml.Schema.XmlValueGetter)" /> method until the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called. When the <see cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" /> method is called, all the text is validated. </para>
             </item>
             <item>
               <para>If the element has complex content, no text concatenation occurs.</para>
@@ -1320,16 +1215,14 @@ validator.ValidateEndElement(null);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates whether the text returned by the <see cref="T:System.Xml.Schema.XmlValueGetter" /> object specified is allowed in the current element context, and accumulates the text for validation if the current element has simple content.</para
-          >
+            >Validates whether the text returned by the <see cref="T:System.Xml.Schema.XmlValueGetter" /> object specified is allowed in the current element context, and accumulates the text for validation if the current element has simple content.</para>
         </summary>
         <param name="elementValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the text value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the text value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateWhitespace">
@@ -1364,8 +1257,7 @@ validator.ValidateEndElement(null);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A white space string to validate in the current element context.</param
-        >
+          />A white space string to validate in the current element context.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidateWhitespace">
@@ -1394,16 +1286,14 @@ validator.ValidateEndElement(null);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates whether the white space returned by the <see cref="T:System.Xml.Schema.XmlValueGetter" /> object specified is allowed in the current element context, and accumulates the white space for validation if the current element has simple content.</para
-          >
+            >Validates whether the white space returned by the <see cref="T:System.Xml.Schema.XmlValueGetter" /> object specified is allowed in the current element context, and accumulates the white space for validation if the current element has simple content.</para>
         </summary>
         <param name="elementValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the white space value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlValueGetter" /> delegate used to pass the white space value as a Common Language Runtime (CLR) type compatible with the XML Schema Definition Language (XSD) type of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="ValidationEventHandler">
@@ -1428,14 +1318,12 @@ validator.ValidateEndElement(null);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see cref="T:System.Xml.Schema.ValidationEventHandler" /> is specified, an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown for all schema validation errors with an <see cref="T:System.Xml.Schema.XmlSeverityType" /> value of <see cref="F:System.Xml.Schema.XmlSeverityType.Error" />. An <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is not thrown for validation warnings with an <see cref="T:System.Xml.Schema.XmlSeverityType" /> value of <see cref="F:System.Xml.Schema.XmlSeverityType.Warning" />.</para
-          >
+            >If no <see cref="T:System.Xml.Schema.ValidationEventHandler" /> is specified, an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown for all schema validation errors with an <see cref="T:System.Xml.Schema.XmlSeverityType" /> value of <see cref="F:System.Xml.Schema.XmlSeverityType.Error" />. An <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is not thrown for validation warnings with an <see cref="T:System.Xml.Schema.XmlSeverityType" /> value of <see cref="F:System.Xml.Schema.XmlSeverityType.Warning" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.ValidationEventHandler" /> that receives schema validation warnings and errors encountered during schema validation.</para
-          >
+            >The <see cref="T:System.Xml.Schema.ValidationEventHandler" /> that receives schema validation warnings and errors encountered during schema validation.</para>
         </summary>
       </Docs>
     </Member>
@@ -1481,15 +1369,13 @@ validator.ValidateEndElement(null);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para
-            >
+              >The <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" /> and <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" /> validation flags of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object are not set be default. Additionally, the <see cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaValidator" /> object is null by default. As a result, external schemas referenced in include, imports, or redefine elements are not resolved by default.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Xml.XmlResolver" /> object used to resolve xs:import and xs:include elements as well as xsi:schemaLocation and xsi:noNamespaceSchemaLocation attributes.</para
-          >
+            >Sets the <see cref="T:System.Xml.XmlResolver" /> object used to resolve xs:import and xs:include elements as well as xsi:schemaLocation and xsi:noNamespaceSchemaLocation attributes.</para>
         </summary>
       </Docs>
     </Member>

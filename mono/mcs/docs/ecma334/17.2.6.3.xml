@@ -27,7 +27,6 @@ class Test
    }  
 }  
 ]]>
-      </code_example>shows a nested class M that hides the method M defined in Base. end example]</example
-    >
+      </code_example>shows a nested class M that hides the method M defined in Base. end example]</example>
   </paragraph>
 </clause>

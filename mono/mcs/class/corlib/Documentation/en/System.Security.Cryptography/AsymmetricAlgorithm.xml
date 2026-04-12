@@ -38,25 +38,20 @@
           <a href="f96284bc-7b73-44b5-ac59-fac613ad09f8">Cryptographic Services</a>
         </format>. For information about how to use the Srong Name tool (Sn.exe) to create key pairs, see <format type="text/html">
           <a href="05026813-f3bd-4d7c-9e0b-fc588eb3d114"
-            >How to: Create a Public/Private Key Pair</a
-          >
-        </format>. </para
-      >
+            >How to: Create a Public/Private Key Pair</a>
+        </format>. </para>
       <para>You can use public-key systems to form digital signatures. Digital signatures are used to help to protect the integrity of data. For example, to use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes matches the message digest received from the sender, the receiver can assume that the message was not altered while in transit. Note that anyone can verify a signature, because the sender's public key is common knowledge. This technique does not retain the secrecy of the message; for the message to be secret, it must also be encrypted. </para>
       <para
-        >The .NET Framework provides the following classes that implement digital signature algorithms: <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.ECDsa" /> (base class), and <see cref="T:System.Security.Cryptography.ECDsaCng" />. </para
-      >
+        >The .NET Framework provides the following classes that implement digital signature algorithms: <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" />, <see cref="T:System.Security.Cryptography.ECDsa" /> (base class), and <see cref="T:System.Security.Cryptography.ECDsaCng" />. </para>
       <para
-        >The <see cref="N:System.Security.Cryptography" /> namespace provides concrete classes for <see cref="T:System.Security.Cryptography.RSA" /> and <see cref="T:System.Security.Cryptography.DSA" /> only. </para
-      >
+        >The <see cref="N:System.Security.Cryptography" /> namespace provides concrete classes for <see cref="T:System.Security.Cryptography.RSA" /> and <see cref="T:System.Security.Cryptography.DSA" /> only. </para>
       <para>To learn how to use the RSA algorithm to encrypt and decrypt XML data, and create and verify XML digital signatures, see these articles:</para>
       <list type="bullet">
         <item>
           <para>
             <format type="text/html">
               <a href="a164ba4f-e596-4bbe-a9ca-f214fe89ed48"
-                >How to: Encrypt XML Elements with Asymmetric Keys</a
-              >
+                >How to: Encrypt XML Elements with Asymmetric Keys</a>
             </format>
           </para>
         </item>
@@ -64,8 +59,7 @@
           <para>
             <format type="text/html">
               <a href="dd5de491-dafe-4b94-966d-99714b2e754a"
-                >How to: Decrypt XML Elements with Asymmetric Keys</a
-              >
+                >How to: Decrypt XML Elements with Asymmetric Keys</a>
             </format>
           </para>
         </item>
@@ -73,8 +67,7 @@
           <para>
             <format type="text/html">
               <a href="99692ac1-d8c9-42d7-b1bf-2737b01037e4"
-                >How to: Sign XML Documents with Digital Signatures</a
-              >
+                >How to: Sign XML Documents with Digital Signatures</a>
             </format>
           </para>
         </item>
@@ -82,8 +75,7 @@
           <para>
             <format type="text/html">
               <a href="a4d5ceb1-b9f5-47e8-9e4a-a2b39110002f"
-                >How to: Verify the Digital Signatures of XML Documents</a
-              >
+                >How to: Verify the Digital Signatures of XML Documents</a>
             </format>
           </para>
         </item>
@@ -113,14 +105,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of an abstract class. Application code creates a new instance of a derived class. The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> and <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> classes are the only currently supported implementations.</para
-          >
+            >You cannot create an instance of an abstract class. Application code creates a new instance of a derived class. The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> and <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" /> classes are the only currently supported implementations.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -144,21 +134,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a simple call to the <see cref="M:System.IDisposable.Dispose" /> method.</para
-          >
+            >This method is a simple call to the <see cref="M:System.IDisposable.Dispose" /> method.</para>
           <para
             >Calling Dispose allows the resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
-                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para
-          >
+            >Releases all resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -192,8 +178,7 @@
           <para
             >A new <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> instance, unless the default settings have been changed with the <format type="text/html">
               <a href="03db52ef-010e-44ea-b6fd-b9c900ecad50">&lt;cryptoClass&gt; element</a>
-            </format>.</para
-          >
+            </format>.</para>
         </returns>
       </Docs>
     </Member>
@@ -233,8 +218,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The asymmetric algorithm implementation to use. The following table shows the valid values for the <paramref name="algName" /> parameter and the algorithms they map to.</param
-        >
+          />The asymmetric algorithm implementation to use. The following table shows the valid values for the <paramref name="algName" /> parameter and the algorithms they map to.</param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -255,26 +239,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />. The Dispose method leaves the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />. The Dispose method leaves the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -300,25 +280,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. Finalize invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. Finalize invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlString">
@@ -347,16 +323,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, reconstructs an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object from an XML string.</para
-          >
+            >When overridden in a derived class, reconstructs an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object from an XML string.</para>
         </summary>
         <param name="xmlString">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object. </param
-        >
+          />The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="KeyExchangeAlgorithm">
@@ -397,8 +371,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid key sizes are specified by the particular implementation of the asymmetric algorithm and are listed in the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para
-          >
+            >The valid key sizes are specified by the particular implementation of the asymmetric algorithm and are listed in the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -423,11 +396,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The valid key sizes are specified by the particular implementation of the asymmetric algorithm and are listed in the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para
-          >
+            >The valid key sizes are specified by the particular implementation of the asymmetric algorithm and are listed in the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para>
           <para
-            >This field is accessed through the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.KeySize" /> property.</para
-          >
+            >This field is accessed through the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.KeySize" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -489,8 +460,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The asymmetric algorithm supports only key sizes that match an entry in this array.</para>
           <para
-            >This field is accessed through the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para
-          >
+            >This field is accessed through the <see cref="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -530,14 +500,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> instance is cast to an <see cref="T:System.IDisposable" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> instance is cast to an <see cref="T:System.IDisposable" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IDisposable.Dispose" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.IDisposable.Dispose" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -571,22 +539,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates and returns an XML string representation of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</para
-          >
+            >When overridden in a derived class, creates and returns an XML string representation of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML string encoding of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</para
-          >
+            >An XML string encoding of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</para>
         </returns>
         <param name="includePrivateParameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false. </param>
       </Docs>
     </Member>
   </Members>

@@ -6,8 +6,7 @@
     <PackageVersion Condition="'$(PackageVersion)' == ''">$(ProductVersion)</PackageVersion>
     <StableVersion
       Condition="'$(StabilizePackageVersion)' == 'true' and '$(StableVersion)' == '' and '$(PreReleaseVersionLabel)' != 'servicing'"
-      >$(PackageVersion)</StableVersion
-    >
+      >$(PackageVersion)</StableVersion>
     <StableVersion
       Condition="'$(IsShippingPackage)' != 'true' and '$(MSBuildProjectExtension)' == '.pkgproj'"
     ></StableVersion>
@@ -70,8 +69,7 @@
     <PropertyGroup>
       <NeedsPlaceholderPdb
         Condition="'@(ExistingNonWindowsSymbolFile)'!='' AND '@(ExistingWindowsSymbolFile)'==''"
-        >true</NeedsPlaceholderPdb
-      >
+        >true</NeedsPlaceholderPdb>
     </PropertyGroup>
 
     <ItemGroup>

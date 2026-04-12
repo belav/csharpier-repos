@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> with a <see cref="P:System.ComponentModel.ParenthesizePropertyNameAttribute.NeedParenthesis" /> value of true indicates to the Properties window that the associated property should be displayed with parentheses around its name. The Properties window displays a property with parentheses around its name near the top of the list in alphabetical mode, or near the top of its category if the Properties window is in categorize mode.</para
-      >
+        >A <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> with a <see cref="P:System.ComponentModel.ParenthesizePropertyNameAttribute.NeedParenthesis" /> value of true indicates to the Properties window that the associated property should be displayed with parentheses around its name. The Properties window displays a property with parentheses around its name near the top of the list in alphabetical mode, or near the top of its category if the Properties window is in categorize mode.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class that indicates that the associated property should not be shown with parentheses.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class that indicates that the associated property should not be shown with parentheses.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class, using the specified value to indicate whether the attribute is displayed with parentheses.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class, using the specified value to indicate whether the attribute is displayed with parentheses.</para>
         </summary>
         <param name="needParenthesis">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the name should be enclosed in parentheses; otherwise, false. </param
-        >
+          />true if the name should be enclosed in parentheses; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -127,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class with a default value that indicates that the associated property should not be shown with parentheses. This field is read-only.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ParenthesizePropertyNameAttribute" /> class with a default value that indicates that the associated property should not be shown with parentheses. This field is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -165,8 +160,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be compared. </param
-        >
+          />The object to be compared. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -15,8 +15,8 @@
         <non_terminal where="9.4.2">available-identifier</non_terminal>
       </name> :: <rhs
         >An <non_terminal where="9.4.2"
-          >identifier-or-keyword</non_terminal
-        > that is not a <non_terminal where="9.4.3">keyword</non_terminal>
+          >identifier-or-keyword</non_terminal> that is not a <non_terminal where="9.4.3"
+          >keyword</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>
@@ -70,9 +70,7 @@
       </name> :: <rhs>A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs>
       <rhs
         >A <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs
-      >
+          >unicode-escape-sequence</non_terminal> representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -80,9 +78,7 @@
       </name> :: <rhs>A Unicode character of classes Mn or Mc </rhs>
       <rhs
         >A <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > representing a character of classes Mn or Mc </rhs
-      >
+          >unicode-escape-sequence</non_terminal> representing a character of classes Mn or Mc </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -90,9 +86,7 @@
       </name> :: <rhs>A Unicode character of the class Nd </rhs>
       <rhs
         >A <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > representing a character of the class Nd </rhs
-      >
+          >unicode-escape-sequence</non_terminal> representing a character of the class Nd </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -100,9 +94,7 @@
       </name> :: <rhs>A Unicode character of the class Pc </rhs>
       <rhs
         >A <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > representing a character of the class Pc </rhs
-      >
+          >unicode-escape-sequence</non_terminal> representing a character of the class Pc </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -110,9 +102,7 @@
       </name> :: <rhs>A Unicode character of the class Cf </rhs>
       <rhs
         >A <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > representing a character of the class Cf </rhs
-      >
+          >unicode-escape-sequence</non_terminal> representing a character of the class Cf </rhs>
     </grammar_production>
   </paragraph>
   <paragraph>
@@ -145,22 +135,17 @@ class Class1
    }  
 }  
 ]]>
-      </code_example>defines a class named &quot;class&quot; with a static method named &quot;static&quot; that takes a parameter named &quot;bool&quot;. Note that since Unicode escapes are not permitted in keywords, the token &quot;cl\u0061ss&quot; is an identifier, and is the same identifier as &quot;@class&quot;. end example]</example
-    >
+      </code_example>defines a class named &quot;class&quot; with a static method named &quot;static&quot; that takes a parameter named &quot;bool&quot;. Note that since Unicode escapes are not permitted in keywords, the token &quot;cl\u0061ss&quot; is an identifier, and is the same identifier as &quot;@class&quot;. end example]</example>
   </paragraph>
   <paragraph
     >Two identifiers are considered the same if they are identical after the following transformations are applied, in order: <list>
       <list_item> The prefix &quot;@&quot;, if used, is removed. </list_item>
       <list_item
         > Each <non_terminal where="9.4.1"
-          >unicode-escape-sequence</non_terminal
-        > is transformed into its corresponding Unicode character. </list_item
-      >
+          >unicode-escape-sequence</non_terminal> is transformed into its corresponding Unicode character. </list_item>
       <list_item
         > Any <non_terminal where="9.4.2"
-          >formatting-character</non_terminal
-        >s are removed. </list_item
-      >
+          >formatting-character</non_terminal>s are removed. </list_item>
     </list>
   </paragraph>
   <paragraph

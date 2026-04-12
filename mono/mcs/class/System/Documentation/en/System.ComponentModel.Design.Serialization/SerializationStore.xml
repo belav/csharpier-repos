@@ -25,14 +25,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class is an implementation-specific class that stores serialization data for the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />. The service adds state to this serialization store. Once the store is closed, it can be saved to a stream. A serialization store can be deserialized at a later time by the same type of serialization service. The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class implements the <see cref="T:System.IDisposable" /> interface so that <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.System#IDisposable#Dispose" /> simply calls the <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" /> method.</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class is an implementation-specific class that stores serialization data for the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />. The service adds state to this serialization store. Once the store is closed, it can be saved to a stream. A serialization store can be deserialized at a later time by the same type of serialization service. The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class implements the <see cref="T:System.IDisposable" /> interface so that <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.System#IDisposable#Dispose" /> simply calls the <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class for storing serialization data for the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />.</para
-      >
+        >Provides the base class for storing serialization data for the <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" /> method closes this store and prevents any objects from being serialized into it. Once closed, the serialization store may be saved.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Close" /> method closes this store and prevents any objects from being serialized into it. Once closed, the serialization store may be saved.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,25 +103,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="Errors">
@@ -175,8 +167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the store is open, the <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Save(System.IO.Stream)" /> method will automatically close it for you. You can call <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Save(System.IO.Stream)" /> as many times as you wish to save the store to different streams.</para
-          >
+            >If the store is open, the <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Save(System.IO.Stream)" /> method will automatically close it for you. You can call <see cref="M:System.ComponentModel.Design.Serialization.SerializationStore.Save(System.IO.Stream)" /> as many times as you wish to save the store to different streams.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -187,8 +178,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the store will be serialized.</param
-        >
+          />The stream to which the store will be serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -211,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />.</para
-          >
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />.</para>
         </summary>
       </Docs>
     </Member>

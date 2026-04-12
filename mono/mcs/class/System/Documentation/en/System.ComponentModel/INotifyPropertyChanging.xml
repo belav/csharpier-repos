@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.INotifyPropertyChanging" /> interface is used to notify clients, typically binding clients, that a property value is changing.</para
-      >
+        >The <see cref="T:System.ComponentModel.INotifyPropertyChanging" /> interface is used to notify clients, typically binding clients, that a property value is changing.</para>
       <para>
         <see cref="T:System.ComponentModel.INotifyPropertyChanging" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Security.Permissions.StorePermission" /> controls the access that code is granted to X.509 stores. The permission is based on flags representing the access levels that apply to every store.</para
-      >
+        <see cref="T:System.Security.Permissions.StorePermission" /> controls the access that code is granted to X.509 stores. The permission is based on flags representing the access levels that apply to every store.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,22 +56,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property can then be set to specify the type of access allowed.</para
-          >
+            >The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property can then be set to specify the type of access allowed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with either fully restricted or unrestricted permission state.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with either fully restricted or unrestricted permission state.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -98,14 +94,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="flag" /> parameter specifies the permitted access to X.509 stores. The specified permitted access applies to all stores. It is not possible to specify access to an individual store.</para
-          >
+            >The <paramref name="flag" /> parameter specifies the permitted access to X.509 stores. The specified permitted access applies to all stores. It is not possible to specify access to an individual store.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with the specified access.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" /> class with the specified access.</para>
         </summary>
       </Docs>
     </Member>
@@ -163,14 +157,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property specifies the permitted access to X.509 stores. X.509 stores are physical stores used to persist and manage X.509 certificates.</para
-          >
+            >The <see cref="P:System.Security.Permissions.StorePermission.Flags" /> property specifies the permitted access to X.509 stores. X.509 stores are physical stores used to persist and manage X.509 certificates.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> access allowed by the current permission.</para
-          >
+            >Gets or sets the type of <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> access allowed by the current permission.</para>
         </summary>
       </Docs>
     </Member>
@@ -200,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.StorePermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.StorePermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.StorePermission" />, including state information.</para
-          >
+            >The <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.StorePermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.StorePermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.StorePermission" />, including state information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -248,8 +239,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -291,8 +281,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -349,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para
-          >
+            >Use the <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -359,8 +347,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.SecurityElement" /> that contains an XML encoding of the permission, including any state information.</para
-          >
+            >A <see cref="T:System.Security.SecurityElement" /> that contains an XML encoding of the permission, including any state information.</para>
         </returns>
       </Docs>
     </Member>
@@ -389,8 +376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -405,8 +391,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

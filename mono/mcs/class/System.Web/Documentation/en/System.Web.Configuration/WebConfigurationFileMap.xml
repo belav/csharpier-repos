@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class is used to specify the Web configuration file hierarchy. By default, the configuration system uses the IIS metabase to determine the Web file hierarchy. If IIS is not installed, or if an application targets a version of the .NET Framework that is not the latest version that is installed on the server, the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class provides a means to define a custom hierarchy.</para
-      >
+        >The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class is used to specify the Web configuration file hierarchy. By default, the configuration system uses the IIS metabase to determine the Web file hierarchy. If IIS is not installed, or if an application targets a version of the .NET Framework that is not the latest version that is installed on the server, the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class provides a means to define a custom hierarchy.</para>
       <para
-        >The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class can specify a single path or multiple paths related to configuration files.</para
-      >
+        >The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class can specify a single path or multiple paths related to configuration files.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para
-          >
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,14 +57,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class with the same value as the existing instance.</para
-          >
+            >Creates a new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class with the same value as the existing instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para
-          >
+            >A new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -89,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The virtual directories of a Web application may not necessarily map to the physical directories on the server. The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> class is independent of IIS.</para
-          >
+            >The virtual directories of a Web application may not necessarily map to the physical directories on the server. The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> class is independent of IIS.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

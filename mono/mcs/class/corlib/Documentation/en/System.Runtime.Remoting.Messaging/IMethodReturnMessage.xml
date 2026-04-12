@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A method call return message represents the response to a method call on an object at the end of the message sink. An <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller.</para
-      >
+        >A method call return message represents the response to a method call on an object at the end of the message sink. An <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,8 +96,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument. </param
-        >
+          />The number of the requested argument. </param>
       </Docs>
     </Member>
     <Member MemberName="GetOutArgName">
@@ -134,8 +132,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument name. </param
-        >
+          />The number of the requested argument name. </param>
       </Docs>
     </Member>
     <Member MemberName="OutArgCount">
@@ -176,12 +173,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" /> property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgCount" /> field and <see cref="M:System.Runtime.Remoting.Messaging.IMethodReturnMessage.GetOutArg(System.Int32)" /> method, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para
-          >
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" /> property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgCount" /> field and <see cref="M:System.Runtime.Remoting.Messaging.IMethodReturnMessage.GetOutArg(System.Int32)" /> method, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para>
           <block subset="none" type="note">
             <para
-              >If <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.Exception" /> is not null, a <see cref="T:System.IndexOutOfRange" /> exception is thrown when <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" /> is accessed.</para
-            >
+              >If <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.Exception" /> is not null, a <see cref="T:System.IndexOutOfRange" /> exception is thrown when <see cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" /> is accessed.</para>
           </block>
         </remarks>
         <summary>

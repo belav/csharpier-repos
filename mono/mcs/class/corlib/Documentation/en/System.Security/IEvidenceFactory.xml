@@ -51,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets <see cref="T:System.Security.Policy.Evidence" /> that verifies the current object's identity.</para
-          >
+            >Gets <see cref="T:System.Security.Policy.Evidence" /> that verifies the current object's identity.</para>
         </summary>
       </Docs>
     </Member>

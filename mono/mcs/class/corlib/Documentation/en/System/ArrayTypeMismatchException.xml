@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      the system to throw a <see cref="T:System.ArrayTypeMismatchException" /> exception.</para
-      >
+      the system to throw a <see cref="T:System.ArrayTypeMismatchException" /> exception.</para>
       <code lang="C#"
         >using System;
 class ArrayTypeMisMatchExample {
@@ -67,11 +66,9 @@ class ArrayTypeMisMatchExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ArrayTypeMismatchException" /> is thrown when the system cannot convert the element to the type declared for the array. For example, an element of type <see cref="T:System.String" /> cannot be stored in an <see cref="T:System.Int32" /> array because conversion between these types is not supported. It is generally unnecessary for applications to throw this exception.</para
-      >
+        <see cref="T:System.ArrayTypeMismatchException" /> is thrown when the system cannot convert the element to the type declared for the array. For example, an element of type <see cref="T:System.String" /> cannot be stored in an <see cref="T:System.Int32" /> array because conversion between these types is not supported. It is generally unnecessary for applications to throw this exception.</para>
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.ArrayTypeMismatchException" /> : </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.ArrayTypeMismatchException" /> : </para>
       <list type="bullet">
         <item>
           <para>ldelem.&lt;type&gt; </para>
@@ -84,11 +81,9 @@ class ArrayTypeMisMatchExample {
         </item>
       </list>
       <para>
-        <see cref="T:System.ArrayTypeMismatchException" /> uses the HRESULT COR_E_ARRAYTYPEMISMATCH, which has the value 0x80131503.</para
-      >
+        <see cref="T:System.ArrayTypeMismatchException" /> uses the HRESULT COR_E_ARRAYTYPEMISMATCH, which has the value 0x80131503.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />, see the <see cref="T:System.ArrayTypeMismatchException" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />, see the <see cref="T:System.ArrayTypeMismatchException" /> constructors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,11 +113,9 @@ class ArrayTypeMisMatchExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Source array type cannot be assigned to destination array type." This message takes into account the current system culture.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Source array type cannot be assigned to destination array type." This message takes into account the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -159,8 +152,7 @@ class ArrayTypeMisMatchExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -189,11 +181,9 @@ class ArrayTypeMisMatchExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of the <paramref name="message" /> parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
-          >
+            >The content of the <paramref name="message" /> parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -230,16 +220,14 @@ class ArrayTypeMisMatchExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -268,31 +256,26 @@ class ArrayTypeMisMatchExample {
           <para
             >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
-                >[&lt;topic://cpconSerialization&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconSerialization&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -323,11 +306,9 @@ class ArrayTypeMisMatchExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArrayTypeMismatchException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -364,23 +345,20 @@ class ArrayTypeMisMatchExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArrayTypeMismatchException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

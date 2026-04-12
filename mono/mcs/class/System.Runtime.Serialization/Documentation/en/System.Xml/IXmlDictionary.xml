@@ -14,14 +14,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by <see cref="T:System.Xml.XmlDictionary" />, which is used in indigo1 to optimize the performance of serialization and deserialization of XML messages. Implement this interface to provide custom <see cref="T:System.Xml.XmlDictionaryString" /> management.</para
-      >
+        >This interface is implemented by <see cref="T:System.Xml.XmlDictionary" />, which is used in indigo1 to optimize the performance of serialization and deserialization of XML messages. Implement this interface to provide custom <see cref="T:System.Xml.XmlDictionaryString" /> management.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An interface that defines the contract that an Xml dictionary must implement to be used by <see cref="T:System.Xml.XmlDictionaryReader" /> and <see cref="T:System.Xml.XmlDictionaryWriter" /> implementations.</para
-      >
+        >An interface that defines the contract that an Xml dictionary must implement to be used by <see cref="T:System.Xml.XmlDictionaryReader" /> and <see cref="T:System.Xml.XmlDictionaryWriter" /> implementations.</para>
     </summary>
   </Docs>
   <Members>

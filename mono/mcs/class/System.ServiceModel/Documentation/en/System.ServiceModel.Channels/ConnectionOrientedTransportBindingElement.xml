@@ -30,14 +30,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is documented to give a more complete understanding of the transports hierarchy and is not expected to be directly called. The constructor is internal to avoid direct construction and invocation. The public properties of this binding element can be called from the derived classes <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> and <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />.</para
-      >
+        >This class is documented to give a more complete understanding of the transports hierarchy and is not expected to be directly called. The constructor is internal to avoid direct construction and invocation. The public properties of this binding element can be called from the derived classes <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> and <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class that supplements the base <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> with additional properties that are common to connection-oriented transports such as TCP and named pipes.  </para
-      >
+        >An abstract class that supplements the base <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> with additional properties that are common to connection-oriented transports such as TCP and named pipes.  </para>
     </summary>
   </Docs>
   <Members>
@@ -68,8 +66,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel factory.</para>
           <para
-            >If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> this method returns true only when in streaming mode.</para
-          >
+            >If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> this method returns true only when in streaming mode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,15 +81,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel to check.</typeparam
-        >
+          />The type of channel to check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
@@ -127,8 +122,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel listener.</para>
           <para
-            >If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IReplyChannel" /> this method returns true only when in streaming mode.</para
-          >
+            >If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IReplyChannel" /> this method returns true only when in streaming mode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,15 +137,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel to check.</typeparam
-        >
+          />The type of channel to check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ChannelInitializationTimeout">
@@ -179,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that determines the maximum time a channel can be in the initialization status before being disconnected.  </para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that determines the maximum time a channel can be in the initialization status before being disconnected.  </para>
         </summary>
       </Docs>
     </Member>
@@ -238,8 +229,7 @@
           <para>This method receives a binding context as an input parameter, which represents the stack of binding elements.</para>
           <para>Each binding element in the stack can handle the inquiry itself, delegate the inquiry, or a combination of the two. Each binding element can modify the context if it delegates the inquiry. However, a transport binding element handles the inquiry itself.</para>
           <para
-            >This method is implemented by binding elements as well as by the run-time objects such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />, <see cref="T:System.ServiceModel.Channels.IChannelListener" />, and <see cref="T:System.ServiceModel.Channels.IChannel" />.</para
-          >
+            >This method is implemented by binding elements as well as by the run-time objects such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />, <see cref="T:System.ServiceModel.Channels.IChannelListener" />, and <see cref="T:System.ServiceModel.Channels.IChannel" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -250,15 +240,17 @@
           <para>A <paramref name="T" /> object from the binding stack, if present.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding context.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The binding context.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Type of the property.</typeparam
-        >
+          />Type of the property.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
@@ -282,8 +274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see cref="T:System.ServiceModel.HostnameComparisonMode" /> enumeration for further values and their descriptions.</para
-          >
+            >See the <see cref="T:System.ServiceModel.HostnameComparisonMode" /> enumeration for further values and their descriptions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -307,11 +298,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For streamed messages this property only applies to the message headers; for buffered messages it applies to the entire message. </para>
           <para
-            >The value of this property must be less than or equal to <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> and must be larger than the size of the headers of the message or the channel throws an exception. </para
-          >
+            >The value of this property must be less than or equal to <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> and must be larger than the size of the headers of the message or the channel throws an exception. </para>
           <para
-            >If you receive more data than you can buffer the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains a <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.  </para
-          >
+            >If you receive more data than you can buffer the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains a <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -337,8 +326,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="P:System.ServiceModel.Channels.MessageProperties.AllowOutputBatching" /> is false then this property is ignored for that message.</para
-          >
+            >If <see cref="P:System.ServiceModel.Channels.MessageProperties.AllowOutputBatching" /> is false then this property is ignored for that message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -361,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" /> property to a larger number. </para
-          >
+            >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" /> property to a larger number. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -418,14 +405,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method writes binding-related statements into the WSDL information exposed by a particular contract and is used by indigo1 to communicate to clients the existence of this custom binding element in the binding stack.</para>
           <para
-            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" /> and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />, <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />, and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" /> methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para
-          >
+            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" /> and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />, <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />, and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" /> methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para>
           <para
-            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" /> property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" /> that indicate where security policy assertions should be added.</para
-          >
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" /> property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" /> that indicate where security policy assertions should be added.</para>
           <para
-            >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface.</para
-          >
+            >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -436,15 +420,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that you can use to insert your custom policy assertion.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that you can use to insert your custom policy assertion.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportContract">
@@ -481,15 +463,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Provides mappings from exported WSDL elements to the contract description.</param
-        >
+          />Provides mappings from exported WSDL elements to the contract description.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
@@ -527,8 +507,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
       </Docs>
     </Member>
     <Member MemberName="TransferMode">

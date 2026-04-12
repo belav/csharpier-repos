@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts a <see cref="T:System.String" /> type to a <see cref="T:System.Uri" /> type, and vice versa.</para
-      >
+        >Converts a <see cref="T:System.String" /> type to a <see cref="T:System.Uri" /> type, and vice versa.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.UriTypeConverter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.UriTypeConverter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,23 +80,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="sourceType" /> is a <see cref="T:System.String" /> type or a <see cref="T:System.Uri" /> type can be assigned from <paramref name="sourceType" />; otherwise, false.</para
-          >
+            >true if <paramref name="sourceType" /> is a <see cref="T:System.String" /> type or a <see cref="T:System.Uri" /> type can be assigned from <paramref name="sourceType" />; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type that you want to convert from.</param
-        >
+          />A <see cref="T:System.Type" /> that represents the type that you want to convert from.</param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
@@ -132,23 +127,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="destinationType" /> is of type <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />, <see cref="T:System.String" />, or <see cref="T:System.Uri" />; otherwise, false.</para
-          >
+            >true if <paramref name="destinationType" /> is of type <see cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />, <see cref="T:System.String" />, or <see cref="T:System.Uri" />; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type that you want to convert to.</param
-        >
+          />A <see cref="T:System.Type" /> that represents the type that you want to convert to.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -189,22 +181,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert.</param
-        >
+          />The <see cref="T:System.Object" /> to convert.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -246,29 +235,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" />. If null is passed, the current culture is assumed.</param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" />. If null is passed, the current culture is assumed.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert.</param
-        >
+          />The <see cref="T:System.Object" /> to convert.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to convert the <paramref name="value" /> parameter to.</param
-        >
+          />The <see cref="T:System.Type" /> to convert the <paramref name="value" /> parameter to.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -298,29 +283,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the given value object is a <see cref="T:System.Uri" /> or a <see cref="T:System.Uri" /> can be created from it.</para
-          >
+            >Returns whether the given value object is a <see cref="T:System.Uri" /> or a <see cref="T:System.Uri" /> can be created from it.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="value" /> is a <see cref="T:System.Uri" /> or a <see cref="T:System.String" /> from which a <see cref="T:System.Uri" /> can be created; otherwise, false.</para
-          >
+            >true if <paramref name="value" /> is a <see cref="T:System.Uri" /> or a <see cref="T:System.String" /> from which a <see cref="T:System.Uri" /> can be created; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to test for validity.</param
-        >
+          />The <see cref="T:System.Object" /> to test for validity.</param>
       </Docs>
     </Member>
   </Members>

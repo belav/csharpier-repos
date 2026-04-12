@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> can be added to a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> or <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />. When serialized to Atom 1.0 a <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> is written out as a &lt;link&gt; element, with the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> properties written out as attributes of the &lt;link&gt; element. When serialized to RSS 2.0, the first <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with a relationship value of ‘alternate’ is written out as a &lt;link&gt; element. Any additional links are written out as a &lt;a10:link&gt; elements.</para
-      >
+        <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> can be added to a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> or <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />. When serialized to Atom 1.0 a <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> is written out as a &lt;link&gt; element, with the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> properties written out as attributes of the &lt;link&gt; element. When serialized to RSS 2.0, the first <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with a relationship value of ‘alternate’ is written out as a &lt;link&gt; element. Any additional links are written out as a &lt;a10:link&gt; elements.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -76,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -100,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -155,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />, relation type, title, media type, and length.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> class with the specified <see cref="T:System.Uri" />, relation type, title, media type, and length.</para>
         </summary>
       </Docs>
     </Member>
@@ -181,8 +176,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.ServiceModel.Syndication.SyndicationLink.AttributeExtensions" /> allows you to add custom attributes to the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />. When serialized to Atom 1.0, the custom attributes appear within the &lt;link&gt; element. When serialized to RSS 2.0, the custom attributes appear in the &lt;a10:link&gt; element. Any valid XML attribute can be added.</para
-          >
+            <see cref="P:System.ServiceModel.Syndication.SyndicationLink.AttributeExtensions" /> allows you to add custom attributes to the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />. When serialized to Atom 1.0, the custom attributes appear within the &lt;link&gt; element. When serialized to RSS 2.0, the custom attributes appear in the &lt;a10:link&gt; element. Any valid XML attribute can be added.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -231,14 +225,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the current <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >Creates a copy of the current <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -267,14 +259,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -305,14 +295,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" /> and media type.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object with the specified <see cref="T:System.Uri" /> and media type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -344,8 +332,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object and sets <see cref="P:System.ServiceModel.Syndication.SyndicationLink.RelationshipType" /> to enclosure.</para
-          >
+            >This method creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> object and sets <see cref="P:System.ServiceModel.Syndication.SyndicationLink.RelationshipType" /> to enclosure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -354,8 +341,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -384,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI and relationship type set to self.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI and relationship type set to self.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -420,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI, media type, and relationship type set to self.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> with the specified URI, media type, and relationship type set to self.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -454,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element extensions for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para
-          >
+            >Gets the element extensions for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -478,14 +461,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the absolute URI for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para
-          >
+            >Gets the absolute URI for the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Uri" /> instance that contains the absolute URI of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para
-          >
+            >A <see cref="T:System.Uri" /> instance that contains the absolute URI of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -504,8 +485,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When serialized to Atom 1.0 the <see cref="P:System.ServiceModel.Syndication.SyndicationLink.Length" /> property is written as a length attribute in the &lt;link&gt; element.</para
-          >
+            >When serialized to Atom 1.0 the <see cref="P:System.ServiceModel.Syndication.SyndicationLink.Length" /> property is written as a length attribute in the &lt;link&gt; element.</para>
           <para>When serialized to RSS 2.0 this value is written as the length attribute of the &lt;a10:link&gt; element.</para>
         </remarks>
         <summary>
@@ -629,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para
-          >
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the deserialization of a custom attribute extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -668,8 +647,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para
-          >
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the deserialization of a custom element extension. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -730,14 +708,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para
-          >
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. They are serialized as an attribute of the &lt;link&gt; element. This method is an extension point that allows you to handle the serialization of custom attribute extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized attribute extensions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
       </Docs>
     </Member>
@@ -767,14 +743,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para
-          >
+            >Element extensions are valid XML elements that are not specified in either the Atom 1.0 or RSS 2.0 specifications. You can add any valid XML element as an extension, provided its namespace is different from the enclosing namespace. This method is an extension point that allows you to handle the serialization of custom element extensions. To do this, you must derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" /> and override this method. This method is called for all unrecognized element extensions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
       </Docs>
     </Member>

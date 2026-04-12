@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build an <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control.</para
-      >
+        >Interacts with the parser to build an <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -33,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlHeadBuilder" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlHeadBuilder" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,8 +51,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.AllowWhitespaceLiterals" /> method is overridden to always return false.</para
-          >
+            >This implementation of the <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.AllowWhitespaceLiterals" /> method is overridden to always return false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -87,14 +84,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" /> method returns the control type for child HTML elements represented by <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />, <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />, and <see cref="T:System.Web.UI.HtmlControls.HtmlMeta" /> controls. This method returns a null reference (Nothing in Visual Basic) for all other child controls.</para
-          >
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlHeadBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" /> method returns the control type for child HTML elements represented by <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />, <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />, and <see cref="T:System.Web.UI.HtmlControls.HtmlMeta" /> controls. This method returns a null reference (Nothing in Visual Basic) for all other child controls.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the <see cref="T:System.Type" /> for the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control's child controls. </para
-          >
+            >Obtains the <see cref="T:System.Type" /> for the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" /> control's child controls. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,15 +100,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag name of the child control.</param
-        >
+          />The tag name of the child control.</param>
         <param name="attribs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of attributes contained in the child control.</param
-        >
+          />An array of attributes contained in the child control.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -25,14 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute enables you to associate a class with a data-model partial class. In this associated class you provide additional metadata information that is not in the data model.</para
-      >
+        >The <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute enables you to associate a class with a data-model partial class. In this associated class you provide additional metadata information that is not in the data model.</para>
       <para
-        >For example, in the associated class you can apply the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" /> attribute to a data field. This enforces that a value is provided for the field even if this constraint is not required by the database schema.</para
-      >
+        >For example, in the associated class you can apply the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" /> attribute to a data field. This enforces that a value is provided for the field even if this constraint is not required by the database schema.</para>
       <para
-        >You use the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute as follows:</para
-      >
+        >You use the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute as follows:</para>
       <list type="bullet">
         <item>
           <para>In your application, create a file in which you create the data-model partial class that you want to modify. </para>
@@ -42,8 +39,7 @@
         </item>
         <item>
           <para
-            >Apply the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute to the partial entity class, specifying the associated class. </para
-          >
+            >Apply the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> attribute to the partial entity class, specifying the associated class. </para>
         </item>
       </list>
       <para>When you apply this attribute, you must adhere to the following usage constraints:</para>
@@ -86,16 +82,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MetadataTypeAttribute" /> class.</para>
         </summary>
         <param name="metadataClassType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The metadata class to reference.</param
-        >
+          />The metadata class to reference.</param>
       </Docs>
     </Member>
     <Member MemberName="MetadataClassType">

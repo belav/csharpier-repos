@@ -40,8 +40,7 @@
       <para>Isolated storage creates a unique storage area for use by an application or component. It provides true isolation in that the identity of an application uniquely determines the root of a virtual file system, which only that application can access. Thus, each application has its own file area automatically assigned to it. This file area is fully isolated from other applications, making it private to that application.</para>
       <block subset="none" type="note">
         <para
-          >There is no effect if you use <see cref="M:System.Security.CodeAccessPermission.Assert" />, <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />, or <see cref="M:System.Security.CodeAccessPermission.Deny" /> to add stack modifiers for usage or quota.  Usage and quota are determined from evidence and a stack walk is not performed for demands, making the above operations ineffective.</para
-        >
+          >There is no effect if you use <see cref="M:System.Security.CodeAccessPermission.Assert" />, <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />, or <see cref="M:System.Security.CodeAccessPermission.Deny" /> to add stack modifiers for usage or quota.  Usage and quota are determined from evidence and a stack walk is not performed for demands, making the above operations ineffective.</para>
       </block>
     </remarks>
     <summary>
@@ -77,16 +76,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" /> class with either fully restricted or unrestricted permission as specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" /> class with either fully restricted or unrestricted permission as specified.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -159,8 +156,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission object. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission object. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -202,8 +198,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Security.Permissions.IBuiltInPermission.GetTokenIndex">
@@ -256,8 +251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.ToXml" /> method enables the <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" /> to be XML-encoded for security purposes.</para
-          >
+            >The <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.ToXml" /> method enables the <see cref="T:System.Security.Permissions.IsolatedStorageFilePermission" /> to be XML-encoded for security purposes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -294,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. </para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.IsolatedStorageFilePermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -310,8 +303,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

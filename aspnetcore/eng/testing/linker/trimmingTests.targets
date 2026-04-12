@@ -32,8 +32,7 @@
         <TestRuntimeIdentifier>$(TargetRuntimeIdentifier)</TestRuntimeIdentifier>
         <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
         <TargetFramework Condition="'%(TestConsoleAppSourceFiles.TargetOS)' != ''"
-          >$(DefaultNetCoreTargetFramework)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework
-        >
+          >$(DefaultNetCoreTargetFramework)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework>
       </TestConsoleAppSourceFiles>
       <!-- We need to separate Item metadata declaration in two in order to be able to use ProjectDir and TestRuntimeIdentifier below -->
       <TestConsoleAppSourceFiles>

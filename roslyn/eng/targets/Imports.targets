@@ -28,8 +28,7 @@
       but gets included in lots of output items like VSIX.
     -->
     <GenerateRuntimeConfigurationFiles Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
-      >false</GenerateRuntimeConfigurationFiles
-    >
+      >false</GenerateRuntimeConfigurationFiles>
 
     <!--
       When building a .NET Core exe make sure to include the template runtimeconfig.json file 
@@ -37,8 +36,7 @@
     -->
     <UserRuntimeConfig
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' AND '$(OutputType)' == 'Exe'"
-      >$(RepositoryEngineeringDir)config\runtimeconfig.template.json</UserRuntimeConfig
-    >
+      >$(RepositoryEngineeringDir)config\runtimeconfig.template.json</UserRuntimeConfig>
 
     <!--
       Disable nullable warnings when targeting anything other than our supported .NET core version(s). 
@@ -49,8 +47,7 @@
     -->
     <DisableNullableWarnings
       Condition="'$(DisableNullableWarnings)' == '' AND  '$(TargetFrameworks)' != '' AND '$(TargetFramework)' != '' AND '$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
-      >true</DisableNullableWarnings
-    >
+      >true</DisableNullableWarnings>
 
     <!--
       Disable code style analyzers in "older" targets for a multi-targeted project. These analyzers don't
@@ -58,12 +55,10 @@
     -->
     <RoslynCheckCodeStyle
       Condition="'$(RoslynCheckCodeStyle)' == '' AND '$(DisableNullableWarnings)' == 'true'"
-      >false</RoslynCheckCodeStyle
-    >
+      >false</RoslynCheckCodeStyle>
     <RoslynCheckCodeStyle
       Condition="'$(RoslynCheckCodeStyle)' == '' AND ('$(ContinuousIntegrationBuild)' != 'true' OR '$(RoslynEnforceCodeStyle)' == 'true')"
-      >true</RoslynCheckCodeStyle
-    >
+      >true</RoslynCheckCodeStyle>
   </PropertyGroup>
 
   <!--
@@ -76,11 +71,9 @@
   <PropertyGroup Condition="'$(RunAnalyzersDuringBuild)' == ''">
     <RunAnalyzersDuringBuild
       Condition="'$(RoslynEnforceCodeStyle)' != 'true' AND '$(RunCodeAnalysis)' != 'true'"
-      >false</RunAnalyzersDuringBuild
-    >
+      >false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringBuild Condition="'$(RunAnalyzersDuringBuild)' == ''"
-      >true</RunAnalyzersDuringBuild
-    >
+      >true</RunAnalyzersDuringBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(DisableNullableWarnings)' == 'true'">
@@ -363,11 +356,9 @@
       <_InternalsVisibleToAttribute Include="System.Runtime.CompilerServices.RestrictedInternalsVisibleToAttribute">
         <_Parameter1>%(RestrictedInternalsVisibleTo.Identity)</_Parameter1>
         <_Parameter2 Condition="'%(RestrictedInternalsVisibleTo.Partner)' != ''"
-          >Microsoft.CodeAnalysis.ExternalAccess.%(RestrictedInternalsVisibleTo.Partner).Api</_Parameter2
-        >
+          >Microsoft.CodeAnalysis.ExternalAccess.%(RestrictedInternalsVisibleTo.Partner).Api</_Parameter2>
         <_Parameter2 Condition="'%(RestrictedInternalsVisibleTo.Namespace)' != ''"
-          >%(RestrictedInternalsVisibleTo.Namespace)</_Parameter2
-        >
+          >%(RestrictedInternalsVisibleTo.Namespace)</_Parameter2>
       </_InternalsVisibleToAttribute>
     </ItemGroup>
 

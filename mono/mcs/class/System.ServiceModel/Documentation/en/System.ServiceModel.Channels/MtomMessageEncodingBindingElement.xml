@@ -31,17 +31,13 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a message into a sequence of bytes. Decoding is the reverse process. indigo1 includes three types of encoding for SOAP messages: Text, Binary and Message Transmission Optimization Mechanism (MTOM). </para>
       <para
-        >The <see cref="T:System.ServiceModel.Channels.MTOMMessageEncodingBindingElement" /> represents the binding element that specifies the character encoding and message versioning and other settings used for messages using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo2 messages. The MTOM encoder attempts to create a balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to their base64 encoded format.</para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.MTOMMessageEncodingBindingElement" /> represents the binding element that specifies the character encoding and message versioning and other settings used for messages using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo2 messages. The MTOM encoder attempts to create a balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to their base64 encoded format.</para>
       <para
-        >crabout the binding element that specifies that messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies that messages are encoded using a textual representation of XML, see <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />. </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para>
       <para
-        >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class. </para
-      >
+        >To implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,14 +60,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8.</para
-          >
+            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -98,14 +92,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8. The character encodings supported by default are UTF-8, Unicode, and Big Endian Unicode.</para
-          >
+            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2. The default character encoding is UTF-8. The character encodings supported by default are UTF-8, Unicode, and Big Endian Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class with a specified message version and character encoding.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> class with a specified message version and character encoding.</para>
         </summary>
       </Docs>
     </Member>
@@ -140,23 +132,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <paramref name="TChannel" /> for the specified context.</para
-          >
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <paramref name="TChannel" /> for the specified context.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel factory produces.</typeparam
-        >
+          />The type of channel the channel factory produces.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -195,23 +184,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> of type <paramref name="TChannel" /> for the specified context.</para
-          >
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> of type <paramref name="TChannel" /> for the specified context.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel listener accepts.</typeparam
-        >
+          />The type of channel the channel listener accepts.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
@@ -256,15 +242,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel listener accepts.</typeparam
-        >
+          />The type of channel the channel listener accepts.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -292,14 +276,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> object initialized from the current one.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> object initialized from the current one.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> object with property values equal to those of the current element.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" /> object with property values equal to those of the current element.</para>
         </returns>
       </Docs>
     </Member>
@@ -329,8 +311,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> that encodes MTOM messages.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> that encodes MTOM messages.</para>
         </returns>
       </Docs>
     </Member>
@@ -399,23 +380,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref name="T " />requested if it is present or null if it is not.</para
-          >
+            >The typed object <paramref name="T " />requested if it is present or null if it is not.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the binding element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the binding element.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The typed object for which the method is querying.</typeparam
-        >
+          />The typed object for which the method is querying.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="MaxBufferSize">
@@ -433,8 +411,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Message Transmission Optimization Mechanism (MTOM) messages in indigo1 can consist of multiple MIME parts. The message always includes a Multipurpose Internet Mail Extensions (MIME) part that contains the infoset portion of the message. In addition, if the message contains binary data that is optimized, it may contain additional MIME parts that contain binary data. There are no requirements imposed about what order these MIME parts must appear in the message. The message reading process sometimes must buffer MIME parts if they appear out of order. The message reading process also may have to buffer relevant MIME header information in each part. This <see cref="P:System.ServiceModel.Channels.MtomMessageEncodingBindingElement.MaxBufferSize" /> quota is intended to cap the amount of memory that can be allocated when reading MTOM messages and so limit the excessive consumption of memory due to the buffering requirements.</para
-          >
+            >Message Transmission Optimization Mechanism (MTOM) messages in indigo1 can consist of multiple MIME parts. The message always includes a Multipurpose Internet Mail Extensions (MIME) part that contains the infoset portion of the message. In addition, if the message contains binary data that is optimized, it may contain additional MIME parts that contain binary data. There are no requirements imposed about what order these MIME parts must appear in the message. The message reading process sometimes must buffer MIME parts if they appear out of order. The message reading process also may have to buffer relevant MIME header information in each part. This <see cref="P:System.ServiceModel.Channels.MtomMessageEncodingBindingElement.MaxBufferSize" /> quota is intended to cap the amount of memory that can be allocated when reading MTOM messages and so limit the excessive consumption of memory due to the buffering requirements.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -507,8 +484,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2.</para
-          >
+            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> used consists of the version of WS-Addressing 1.0 and SOAP1.2.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -574,23 +550,19 @@
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" /> = 8192</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" /> = 8192</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" /> = 16384</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" /> = 16384</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" /> = 4096</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" /> = 4096</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" /> = 16384</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" /> = 16384</para>
             </item>
           </list>
           <para>crdefault <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />.</para>
@@ -628,8 +600,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Channels.MtomMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method puts the SOAP message version into the WSDL.</para
-          >
+            >The <see cref="M:System.ServiceModel.Channels.MtomMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method puts the SOAP message version into the WSDL.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -640,15 +611,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
@@ -688,15 +657,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the endpoint description.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the endpoint description.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEncoding">

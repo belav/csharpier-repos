@@ -100,8 +100,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The schema name to add to this collection.</param
-        >
+          />The schema name to add to this collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -139,8 +138,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the schema name to remove.</param
-        >
+          />The zero-based index of the schema name to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -284,8 +282,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="index" /> parameter equals the number of items in the collection, this method appends the value to the end of the collection.</para
-          >
+            >If the <paramref name="index" /> parameter equals the number of items in the collection, this method appends the value to the end of the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -323,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.DirectoryServices.SchemaNameCollection.Count" /> property gets the number of objects in this collection.          </para
-          >
+            >The <see cref="P:System.DirectoryServices.SchemaNameCollection.Count" /> property gets the number of objects in this collection.          </para>
         </summary>
       </Docs>
     </Member>
@@ -350,8 +346,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a list of the schema names that the <see cref="P:System.DirectoryServices.DirectoryEntries.SchemaFilter" /> property of a <see cref="T:System.DirectoryServices.DirectoryEntries" /> object can use.          </para
-      >
+        >Contains a list of the schema names that the <see cref="P:System.DirectoryServices.DirectoryEntries.SchemaFilter" /> property of a <see cref="T:System.DirectoryServices.DirectoryEntries" /> object can use.          </para>
     </summary>
   </Docs>
 </Type>

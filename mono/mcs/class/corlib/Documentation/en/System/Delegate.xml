@@ -118,25 +118,20 @@ class TestClass {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Delegate" /> class is the base class for delegate types. However, only the system and compilers can derive explicitly from the <see cref="T:System.Delegate" /> class or from the <see cref="T:System.MulticastDelegate" /> class. It is also not permissible to derive a new type from a delegate type. The <see cref="T:System.Delegate" /> class is not considered a delegate type; it is a class used to derive delegate types.</para
-      >
+        >The <see cref="T:System.Delegate" /> class is the base class for delegate types. However, only the system and compilers can derive explicitly from the <see cref="T:System.Delegate" /> class or from the <see cref="T:System.MulticastDelegate" /> class. It is also not permissible to derive a new type from a delegate type. The <see cref="T:System.Delegate" /> class is not considered a delegate type; it is a class used to derive delegate types.</para>
       <para
-        >Most languages implement a delegate keyword, and compilers for those languages are able to derive from the <see cref="T:System.MulticastDelegate" /> class; therefore, users should use the delegate keyword provided by the language.</para
-      >
+        >Most languages implement a delegate keyword, and compilers for those languages are able to derive from the <see cref="T:System.MulticastDelegate" /> class; therefore, users should use the delegate keyword provided by the language.</para>
       <block subset="none" type="note">
         <para
           >The common language runtime provides an Invoke method for each delegate type, with the same signature as the delegate. You do not have to call this method explicitly from C#, Visual Basic, or Visual C++, because the compilers call it automatically. The Invoke method is useful in <format type="text/html">
             <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">reflection</a>
-          </format> when you want to find the signature of the delegate type.</para
-        >
+          </format> when you want to find the signature of the delegate type.</para>
       </block>
       <para
         >The common language runtime provides each delegate type with BeginInvoke and EndInvoke methods, to enable asynchronous invocation of the delegate. For more information about these methods, see <format type="text/html">
           <a href="41972034-92ed-450a-9664-ab93fcc6f1fb"
-            >Calling Synchronous Methods Asynchronously</a
-          >
-        </format>.</para
-      >
+            >Calling Synchronous Methods Asynchronously</a>
+        </format>.</para>
       <para>The declaration of a delegate type establishes a contract that specifies the signature of one or more methods. A delegate is an instance of a delegate type that has references to: </para>
       <list type="bullet">
         <item>
@@ -144,8 +139,7 @@ class TestClass {
         </item>
         <item>
           <para
-            >An instance method of a type, with the hidden <paramref name="this" /> parameter exposed in the formal parameter list. The delegate is said to be an open instance delegate.</para
-          >
+            >An instance method of a type, with the hidden <paramref name="this" /> parameter exposed in the formal parameter list. The delegate is said to be an open instance delegate.</para>
         </item>
         <item>
           <para>A static method.</para>
@@ -155,32 +149,26 @@ class TestClass {
         </item>
       </list>
       <para
-        >For more information on delegate binding, see the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload. </para
-      >
+        >For more information on delegate binding, see the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload. </para>
       <block subset="none" type="note">
         <para>In the .NET Framework versions 1.0 and 1.1, a delegate can represent a method only if the signature of the method exactly matches the signature specified by the delegate type. Thus, only the first and third bullets in the preceding list are supported, and the first bullet requires an exact type match.</para>
       </block>
       <para
-        >When a delegate represents an instance method closed over its first argument (the most common case), the delegate stores a reference to the method's entry point and a reference to an object, called the target, which is of a type assignable to the type that defined the method. When a delegate represents an open instance method, it stores a reference to the method's entry point. The delegate signature must include the hidden <paramref name="this" /> parameter in its formal parameter list; in this case, the delegate does not have a reference to a target object, and a target object must be supplied when the delegate is invoked. </para
-      >
+        >When a delegate represents an instance method closed over its first argument (the most common case), the delegate stores a reference to the method's entry point and a reference to an object, called the target, which is of a type assignable to the type that defined the method. When a delegate represents an open instance method, it stores a reference to the method's entry point. The delegate signature must include the hidden <paramref name="this" /> parameter in its formal parameter list; in this case, the delegate does not have a reference to a target object, and a target object must be supplied when the delegate is invoked. </para>
       <para>When a delegate represents a static method, the delegate stores a reference to the method's entry point. When a delegate represents a static method closed over its first argument, the delegate stores a reference to the method's entry point and a reference to a target object assignable to the type of the method's first argument. When the delegate is invoked, the first argument of the static method receives the target object.</para>
       <para>The invocation list of a delegate is an ordered set of delegates in which each element of the list invokes exactly one of the methods represented by the delegate. An invocation list can contain duplicate methods. During an invocation, methods are invoked in the order in which they appear in the invocation list. A delegate attempts to invoke every method in its invocation list; duplicates are invoked once for each time they appear in the invocation list. Delegates are immutable; once created, the invocation list of a delegate does not change.</para>
       <para>Delegates are referred to as multicast, or combinable, because a delegate can invoke one or more methods and can be used in combining operations. </para>
       <para
-        >Combining operations, such as <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> and <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />, do not alter existing delegates. Instead, such an operation returns a new delegate that contains the results of the operation, an unchanged delegate, or null. A combining operation returns null when the result of the operation is a delegate that does not reference at least one method. A combining operation returns an unchanged delegate when the requested operation has no effect.</para
-      >
+        >Combining operations, such as <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> and <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />, do not alter existing delegates. Instead, such an operation returns a new delegate that contains the results of the operation, an unchanged delegate, or null. A combining operation returns null when the result of the operation is a delegate that does not reference at least one method. A combining operation returns an unchanged delegate when the requested operation has no effect.</para>
       <block subset="none" type="note">
         <para
-          >Managed languages use the <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> and <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" /> methods to implement delegate operations. Examples include the AddHandler and RemoveHandler statements in Visual Basic and the += and -= operators on delegate types in C#. </para
-        >
+          >Managed languages use the <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> and <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" /> methods to implement delegate operations. Examples include the AddHandler and RemoveHandler statements in Visual Basic and the += and -= operators on delegate types in C#. </para>
       </block>
       <para
         >Starting with the net_v40_long, generic delegate types can have variant type parameters. Contravariant type parameters can be used as parameter types of the delegate, and a covariant type parameter can be used as the return type. This feature allows generic delegate types that are constructed from the same generic type definition to be assignment-compatible if their type arguments are reference types with an inheritance relationship, as explained in <format type="text/html">
           <a href="2678dc63-c7f9-4590-9ddc-0a4df684d42e"
-            >Covariance and Contravariance in Generics</a
-          >
-        </format>.</para
-      >
+            >Covariance and Contravariance in Generics</a>
+        </format>.</para>
       <block subset="none" type="note">
         <para>Generic delegates that are assignment-compatible because of variance are not necessarily combinable. To be combinable, the types must match exactly. For example, suppose that a class named Derived is derived from a class named Base. A delegate of type Action&lt;Base&gt; (Action(Of Base) in Visual Basic) can be assigned to a variable of type Action&lt;Derived&gt;, but the two delegates cannot be combined because the types do not match exactly.</para>
       </block>
@@ -214,8 +202,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor cannot be used in application code. To create a delegate by specifying the name of an instance method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" /> method that specifies a method name and a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" /> method overload creates a delegate for an instance method with a specified name.</para
-          >
+            >This constructor cannot be used in application code. To create a delegate by specifying the name of an instance method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" /> method that specifies a method name and a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" /> method overload creates a delegate for an instance method with a specified name.</para>
           <para>This constructor creates delegates for instance methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
         </remarks>
         <summary>
@@ -227,15 +214,13 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class instance on which the delegate invokes <paramref name="method" />. </param
-        >
+          />The class instance on which the delegate invokes <paramref name="method" />. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance method that the delegate represents. </param
-        >
+          />The name of the instance method that the delegate represents. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -258,8 +243,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor cannot be used in application code. To create a delegate by specifying the name of a static method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" /> method that specifies a method name but does not specify a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" /> method overload creates a static delegate for a method with a specified name.</para
-          >
+            >This constructor cannot be used in application code. To create a delegate by specifying the name of a static method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" /> method that specifies a method name but does not specify a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" /> method overload creates a static delegate for a method with a specified name.</para>
           <para>This constructor creates delegates for static methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
         </remarks>
         <summary>
@@ -271,15 +255,13 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> representing the class that defines <paramref name="method" />. </param
-        >
+          />The <see cref="T:System.Type" /> representing the class that defines <paramref name="method" />. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the static method that the delegate represents. </param
-        >
+          />The name of the static method that the delegate represents. </param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -303,8 +285,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The clone has the same <see cref="T:System.Type" />, target, method, and invocation list as the original delegate.</para
-          >
+            >The clone has the same <see cref="T:System.Type" />, target, method, and invocation list as the original delegate.</para>
           <para>A shallow copy creates a new instance of the same type as the original object, and then copies the nonstatic fields of the original object. If the field is a value type, a bit-by-bit copy of the field is performed. If the field is a reference type, the reference is copied but the referred object is not; therefore, the reference in the original object and the reference in the clone point to the same object. In contrast, a deep copy of an object duplicates everything directly or indirectly referenced by the fields in the object.</para>
         </remarks>
         <summary>
@@ -357,27 +338,22 @@ class TestClass {
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >The non-<see langword="null" /> delegates in <paramref name="delegates" /> are not of the same type.</para
-          >
+            >The non-<see langword="null" /> delegates in <paramref name="delegates" /> are not of the same type.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="delegates" /> array contains entries that are null, those entries are ignored.</para
-          >
+            >If the <paramref name="delegates" /> array contains entries that are null, those entries are ignored.</para>
           <para>The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.</para>
           <block subset="none" type="note">
             <para
               >Generic delegates that are assignment-compatible because of variance are not necessarily combinable. To be combinable, the types must match exactly. For example, suppose that a class named Derived is derived from a class named Base. A delegate of type Action&lt;Base&gt; (Action(Of Base) in Visual Basic) can be assigned to a variable of type Action&lt;Derived&gt;, as explained in <format type="text/html">
                 <a href="2678dc63-c7f9-4590-9ddc-0a4df684d42e"
-                  >Covariance and Contravariance in Generics</a
-                >
-              </format>, but the two delegates cannot be combined because the types do not match exactly.</para
-            >
+                  >Covariance and Contravariance in Generics</a>
+              </format>, but the two delegates cannot be combined because the types do not match exactly.</para>
           </block>
           <para>
-            <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> is useful for creating event handlers that call multiple methods each time an event occurs.</para
-          >
+            <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> is useful for creating event handlers that call multiple methods each time an event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -386,16 +362,14 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new delegate with an invocation list that concatenates the invocation lists of the delegates in the <paramref name="delegates" /> array. Returns null if <paramref name="delegates" /> is null, if <paramref name="delegates" /> contains zero elements, or if every entry in <paramref name="delegates" /> is null.</para
-          >
+            >A new delegate with an invocation list that concatenates the invocation lists of the delegates in the <paramref name="delegates" /> array. Returns null if <paramref name="delegates" /> is null, if <paramref name="delegates" /> contains zero elements, or if every entry in <paramref name="delegates" /> is null.</para>
         </returns>
         <param name="delegates">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of delegates to combine. </param
-        >
+          />The array of delegates to combine. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -428,8 +402,7 @@ class TestClass {
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="a" /> and <paramref name="b" /> are not <see langword="null" /> and not of the same type.</para
-          >
+            <paramref name="a" /> and <paramref name="b" /> are not <see langword="null" /> and not of the same type.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -438,14 +411,11 @@ class TestClass {
             <para
               >Generic delegates that are assignment-compatible because of variance are not necessarily combinable. To be combinable, the types must match exactly. For example, suppose that a class named Derived is derived from a class named Base. A delegate of type Action&lt;Base&gt; (Action(Of Base) in Visual Basic) can be assigned to a variable of type Action&lt;Derived&gt;, as explained in <format type="text/html">
                 <a href="2678dc63-c7f9-4590-9ddc-0a4df684d42e"
-                  >Covariance and Contravariance in Generics</a
-                >
-              </format>, but the two delegates cannot be combined because the types do not match exactly.</para
-            >
+                  >Covariance and Contravariance in Generics</a>
+              </format>, but the two delegates cannot be combined because the types do not match exactly.</para>
           </block>
           <para>
-            <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> is useful for creating event handlers that call multiple methods each time an event occurs.</para
-          >
+            <see cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" /> is useful for creating event handlers that call multiple methods each time an event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -454,23 +424,20 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new delegate with an invocation list that concatenates the invocation lists of <paramref name="a" /> and <paramref name="b" /> in that order. Returns <paramref name="a" /> if <paramref name="b" /> is null, returns <paramref name="b" /> if <paramref name="a" /> is a null reference, and returns a null reference if both <paramref name="a" /> and <paramref name="b" /> are null references.</para
-          >
+            >A new delegate with an invocation list that concatenates the invocation lists of <paramref name="a" /> and <paramref name="b" /> in that order. Returns <paramref name="a" /> if <paramref name="b" /> is null, returns <paramref name="b" /> if <paramref name="a" /> is a null reference, and returns a null reference if both <paramref name="a" /> and <paramref name="b" /> are null references.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate whose invocation list comes first. </param
-        >
+          />The delegate whose invocation list comes first. </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate whose invocation list comes last. </param
-        >
+          />The delegate whose invocation list comes last. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -497,8 +464,7 @@ class TestClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method applies only if the current delegate is multicast (combinable).</para>
           <para
-            >The current implementation simply throws a <see cref="T:System.MulticastNotSupportedException" />.</para
-          >
+            >The current implementation simply throws a <see cref="T:System.MulticastNotSupportedException" />.</para>
           <para>The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.</para>
         </remarks>
         <summary>
@@ -508,16 +474,14 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new multicast (combinable) delegate with an invocation list that concatenates the invocation list of the current multicast (combinable) delegate and the invocation list of <paramref name="d" />, or the current multicast (combinable) delegate if <paramref name="d" /> is null.</para
-          >
+            >A new multicast (combinable) delegate with an invocation list that concatenates the invocation list of the current multicast (combinable) delegate and the invocation list of <paramref name="d" />, or the current multicast (combinable) delegate if <paramref name="d" /> is null.</para>
         </returns>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The multicast (combinable) delegate whose invocation list to append to the end of the invocation list of the current multicast (combinable) delegate. </param
-        >
+          />The multicast (combinable) delegate whose invocation list to append to the end of the invocation list of the current multicast (combinable) delegate. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -548,19 +512,16 @@ class TestClass {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="type" /> or <paramref name="method" /> is <see langword="null" />.</exception
-        >
+          <paramref name="type" /> or <paramref name="method" /> is <see langword="null" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para
-          >
+            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para>
           <para>-or-</para>
           <para><paramref name="method" /> does not reflect a static method.</para>
         </exception>
         <exception cref="T:System.ExecutionEngineException">
           <para
-            >The <see langword="Invoke" /> method of the <paramref name="type" /> delegate was not found.</para
-          >
+            >The <see langword="Invoke" /> method of the <paramref name="type" /> delegate was not found.</para>
         </exception>
         <exception cref="T:System.MethodAccessException">
           <para>The caller does not have the required permission.</para>
@@ -570,28 +531,23 @@ class TestClass {
         </permission>
         <exception cref="T:System.InvalidProgramException">
           <para
-            >The <see langword="Invoke" /> method of the <paramref name="type" /> delegate was not found.</para
-          >
+            >The <see langword="Invoke" /> method of the <paramref name="type" /> delegate was not found.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the .NET Framework version 1.0 and 1.1, this method overload creates delegates for static methods only. In the .NET Framework version 2.0, this method overload also can create open instance method delegates; that is, delegates that explicitly supply the hidden first argument of instance methods. For a detailed explanation, see the more general <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)" /> method overload, which allows you to create all combinations of open or closed delegates for instance or static methods, and optionally to specify a first argument. </para
-          >
+            >In the .NET Framework version 1.0 and 1.1, this method overload creates delegates for static methods only. In the .NET Framework version 2.0, this method overload also can create open instance method delegates; that is, delegates that explicitly supply the hidden first argument of instance methods. For a detailed explanation, see the more general <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)" /> method overload, which allows you to create all combinations of open or closed delegates for instance or static methods, and optionally to specify a first argument. </para>
           <block subset="none" type="note">
             <para>This method overload should be used when the delegate is not closed over its first argument, because it is somewhat faster in that case.</para>
           </block>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload and specifying true for <paramref name="throwOnBindFailure" />.</para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload and specifying true for <paramref name="throwOnBindFailure" />.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <format type="text/html">
@@ -601,8 +557,7 @@ class TestClass {
           <para>A parameter of a delegate is compatible with the corresponding parameter of a method if the type of the delegate parameter is more restrictive than the type of the method parameter, because this guarantees that an argument passed to the delegate can be passed safely to the method.</para>
           <para>Similarly, the return type of a delegate is compatible with the return type of a method if the return type of the method is more restrictive than the return type of the delegate, because this guarantees that the return value of the method can be cast safely to the return type of the delegate.</para>
           <para
-            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para
-          >
+            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -617,15 +572,13 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent. Only static methods are supported in the .NET Framework version 1.0 and 1.1.</param
-        >
+          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent. Only static methods are supported in the .NET Framework version 1.0 and 1.1.</param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>Reflection</ExcludedLibrary>
@@ -657,65 +610,51 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload and specifying true for <paramref name="throwOnBindFailure" />. These two overloads provide the most flexible way to create delegates. You can use them to create delegates for either static or instance methods, and optionally to specify the first argument.</para
-          >
+            >Calling this method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload and specifying true for <paramref name="throwOnBindFailure" />. These two overloads provide the most flexible way to create delegates. You can use them to create delegates for either static or instance methods, and optionally to specify the first argument.</para>
           <block subset="none" type="note">
             <para
-              >If you do not supply a first argument, use the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)" /> method overload for better performance.</para
-            >
+              >If you do not supply a first argument, use the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)" /> method overload for better performance.</para>
           </block>
           <para
-            >The delegate type and the method must have compatible return types. That is, the return type of <paramref name="method" /> must be assignable to the return type of <paramref name="type" />.</para
-          >
+            >The delegate type and the method must have compatible return types. That is, the return type of <paramref name="method" /> must be assignable to the return type of <paramref name="type" />.</para>
           <para
-            >If <paramref name="firstArgument" /> is supplied, it is passed to <paramref name="method" /> every time the delegate is invoked; <paramref name="firstArgument" /> is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref name="method" /> is static (Shared in Visual Basic), the argument list supplied when invoking the delegate includes all parameters except the first; if <paramref name="method" /> is an instance method, then <paramref name="firstArgument" /> is passed to the hidden instance parameter (represented by this in C#, or by Me in Visual Basic).</para
-          >
+            >If <paramref name="firstArgument" /> is supplied, it is passed to <paramref name="method" /> every time the delegate is invoked; <paramref name="firstArgument" /> is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref name="method" /> is static (Shared in Visual Basic), the argument list supplied when invoking the delegate includes all parameters except the first; if <paramref name="method" /> is an instance method, then <paramref name="firstArgument" /> is passed to the hidden instance parameter (represented by this in C#, or by Me in Visual Basic).</para>
           <para
-            >If <paramref name="firstArgument" /> is supplied, the first parameter of <paramref name="method" /> must be a reference type, and <paramref name="firstArgument" /> must be compatible with that type. </para
-          >
+            >If <paramref name="firstArgument" /> is supplied, the first parameter of <paramref name="method" /> must be a reference type, and <paramref name="firstArgument" /> must be compatible with that type. </para>
           <block subset="none" type="note">
             <para
-              >If <paramref name="method" /> is static (Shared in Visual Basic) and its first parameter is of type <see cref="T:System.Object" /> or <see cref="T:System.ValueType" />, then <paramref name="firstArgument" /> can be a value type. In this case <paramref name="firstArgument" /> is automatically boxed. Automatic boxing does not occur for any other arguments, as it would in a C# or Visual Basic function call. </para
-            >
+              >If <paramref name="method" /> is static (Shared in Visual Basic) and its first parameter is of type <see cref="T:System.Object" /> or <see cref="T:System.ValueType" />, then <paramref name="firstArgument" /> can be a value type. In this case <paramref name="firstArgument" /> is automatically boxed. Automatic boxing does not occur for any other arguments, as it would in a C# or Visual Basic function call. </para>
           </block>
           <para
-            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is an instance method, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para
-          >
+            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is an instance method, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para>
           <list type="bullet">
             <item>
               <para
-                >If the signature of <paramref name="type" /> explicitly includes the hidden first parameter of <paramref name="method" />, the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref name="method" />.</para
-              >
+                >If the signature of <paramref name="type" /> explicitly includes the hidden first parameter of <paramref name="method" />, the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref name="method" />.</para>
             </item>
             <item>
               <para
-                >If the signatures of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), then the delegate is said to be closed over a null reference. Invoking the delegate is like calling an instance method on a null instance, which is not a particularly useful thing to do. </para
-              >
+                >If the signatures of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), then the delegate is said to be closed over a null reference. Invoking the delegate is like calling an instance method on a null instance, which is not a particularly useful thing to do. </para>
             </item>
           </list>
           <para
-            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is static, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para
-          >
+            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is static, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para>
           <list type="bullet">
             <item>
               <para
-                >If the signature of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)" /> method overload.</para
-              >
+                >If the signature of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)" /> method overload.</para>
             </item>
             <item>
               <para
-                >If the signature of <paramref name="type" /> begins with the second parameter of <paramref name="method" /> and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref name="method" />. </para
-              >
+                >If the signature of <paramref name="type" /> begins with the second parameter of <paramref name="method" /> and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref name="method" />. </para>
             </item>
           </list>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <format type="text/html">
@@ -728,34 +667,28 @@ class TestClass {
           <para>A parameter of a delegate is compatible with the corresponding parameter of a method if the type of the delegate parameter is more restrictive than the type of the method parameter, because this guarantees that an argument passed to the delegate can be passed safely to the method.</para>
           <para>Similarly, the return type of a delegate is compatible with the return type of a method if the return type of the method is more restrictive than the return type of the delegate, because this guarantees that the return value of the method can be cast safely to the return type of the delegate.</para>
           <para
-            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para
-          >
+            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para>
           <format type="text/html">
             <h2>Determining the Methods a Delegate Can Represent</h2>
           </format>
           <para
-            >Another useful way to think of the flexibility provided by this overload of <see cref="Overload:System.Delegate.CreateDelegate" /> is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para
-          >
+            >Another useful way to think of the flexibility provided by this overload of <see cref="Overload:System.Delegate.CreateDelegate" /> is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para>
           <list type="bullet">
             <item>
               <para
-                >D can represent any instance method that has exactly one argument of type C, regardless of what type the instance method belongs to. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of the type <paramref name="method" /> belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref name="firstArgument" /> is a null reference.)</para
-              >
+                >D can represent any instance method that has exactly one argument of type C, regardless of what type the instance method belongs to. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of the type <paramref name="method" /> belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref name="firstArgument" /> is a null reference.)</para>
             </item>
             <item>
               <para
-                >D can represent an instance method of C that has no arguments. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open instance method, and an instance of C must be supplied each time it is invoked. </para
-              >
+                >D can represent an instance method of C that has no arguments. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open instance method, and an instance of C must be supplied each time it is invoked. </para>
             </item>
             <item>
               <para
-                >D can represent a static method that takes one argument of type C, and that method can belong to any type. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open static method, and an instance of C must be supplied each time it is invoked.</para
-              >
+                >D can represent a static method that takes one argument of type C, and that method can belong to any type. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open static method, and an instance of C must be supplied each time it is invoked.</para>
             </item>
             <item>
               <para
-                >D can represent a static method that belongs to type F and has two arguments, of type F and type C. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref name="firstArgument" /> is a null reference.)</para
-              >
+                >D can represent a static method that belongs to type F and has two arguments, of type F and type C. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref name="firstArgument" /> is a null reference.)</para>
             </item>
           </list>
         </remarks>
@@ -772,22 +705,19 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="firstArgument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to which the delegate is bound, or null to treat <paramref name="method" /> as static (Shared in Visual Basic). </param
-        >
+          />The object to which the delegate is bound, or null to treat <paramref name="method" /> as static (Shared in Visual Basic). </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param
-        >
+          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -823,8 +753,7 @@ class TestClass {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para
-          >
+            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para>
           <para>-or-</para>
           <para><paramref name="method" /> is not an instance method.</para>
           <para>-or-</para>
@@ -840,16 +769,13 @@ class TestClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method creates delegates for instance methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String,System.Boolean,System.Boolean)" /> method overload, specifying false for <paramref name="ignoreCase" /> and true for <paramref name="throwOnBindFailure" />.</para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String,System.Boolean,System.Boolean)" /> method overload, specifying false for <paramref name="ignoreCase" /> and true for <paramref name="throwOnBindFailure" />.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -866,22 +792,19 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class instance on which <paramref name="method" /> is invoked. </param
-        >
+          />The class instance on which <paramref name="method" /> is invoked. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance method that the delegate is to represent. </param
-        >
+          />The name of the instance method that the delegate is to represent. </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>Reflection</ExcludedLibrary>
@@ -913,8 +836,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload can create open static method delegates and open instance method delegates — that is, delegates that expose the hidden first argument of instance methods. For a detailed explanation, see the more general <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload, which allows you to create all combinations of open or closed delegates for instance or static methods. </para
-          >
+            >This method overload can create open static method delegates and open instance method delegates — that is, delegates that expose the hidden first argument of instance methods. For a detailed explanation, see the more general <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> method overload, which allows you to create all combinations of open or closed delegates for instance or static methods. </para>
           <block subset="none" type="note">
             <para>This method overload should be used when the delegate is not closed over its first argument, because it is somewhat faster in that case.</para>
           </block>
@@ -922,10 +844,8 @@ class TestClass {
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <format type="text/html">
@@ -938,8 +858,7 @@ class TestClass {
           <para>A parameter of a delegate is compatible with the corresponding parameter of a method if the type of the delegate parameter is more restrictive than the type of the method parameter, because this guarantees that an argument passed to the delegate can be passed safely to the method.</para>
           <para>Similarly, the return type of a delegate is compatible with the return type of a method if the return type of the method is more restrictive than the return type of the delegate, because this guarantees that the return value of the method can be cast safely to the return type of the delegate.</para>
           <para
-            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para
-          >
+            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -954,22 +873,19 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param
-        >
+          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param>
         <param name="throwOnBindFailure">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param
-        >
+          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1005,8 +921,7 @@ class TestClass {
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para
-          >
+            <paramref name="type" /> does not derive from <see cref="T:System.Delegate" />.</para>
           <para>-or-</para>
           <para><paramref name="method" /> is not a static method.</para>
           <para> -or-</para>
@@ -1022,16 +937,13 @@ class TestClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method creates delegates for static methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String,System.Boolean,System.Boolean)" /> method overload, specifying false for <paramref name="ignoreCase" /> and true for <paramref name="throwOnBindFailure" />.</para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String,System.Boolean,System.Boolean)" /> method overload, specifying false for <paramref name="ignoreCase" /> and true for <paramref name="throwOnBindFailure" />.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1048,22 +960,19 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param
-        >
+          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the static method that the delegate is to represent. </param
-        >
+          />The name of the static method that the delegate is to represent. </param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>Reflection</ExcludedLibrary>
@@ -1096,65 +1005,51 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload and the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)" /> method overload, which always throws on failure to bind, provide the most flexible way to create delegates. You can use them to create delegates for either static or instance methods, with or without a first argument.</para
-          >
+            >This method overload and the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)" /> method overload, which always throws on failure to bind, provide the most flexible way to create delegates. You can use them to create delegates for either static or instance methods, with or without a first argument.</para>
           <block subset="none" type="note">
             <para
-              >If you do not supply a first argument, use the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload for better performance.</para
-            >
+              >If you do not supply a first argument, use the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload for better performance.</para>
           </block>
           <para
-            >The delegate type and the method must have compatible return types. That is, the return type of <paramref name="method" /> must be assignable to the return type of <paramref name="type" />.</para
-          >
+            >The delegate type and the method must have compatible return types. That is, the return type of <paramref name="method" /> must be assignable to the return type of <paramref name="type" />.</para>
           <para
-            >If <paramref name="firstArgument" /> is supplied, it is passed to <paramref name="method" /> every time the delegate is invoked; <paramref name="firstArgument" /> is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref name="method" /> is static (Shared in Visual Basic), the argument list supplied when invoking the delegate includes all parameters except the first; if <paramref name="method" /> is an instance method, then <paramref name="firstArgument" /> is passed to the hidden instance parameter (represented by this in C#, or by Me in Visual Basic).</para
-          >
+            >If <paramref name="firstArgument" /> is supplied, it is passed to <paramref name="method" /> every time the delegate is invoked; <paramref name="firstArgument" /> is said to be bound to the delegate, and the delegate is said to be closed over its first argument. If <paramref name="method" /> is static (Shared in Visual Basic), the argument list supplied when invoking the delegate includes all parameters except the first; if <paramref name="method" /> is an instance method, then <paramref name="firstArgument" /> is passed to the hidden instance parameter (represented by this in C#, or by Me in Visual Basic).</para>
           <para
-            >If <paramref name="firstArgument" /> is supplied, the first parameter of <paramref name="method" /> must be a reference type, and <paramref name="firstArgument" /> must be compatible with that type. </para
-          >
+            >If <paramref name="firstArgument" /> is supplied, the first parameter of <paramref name="method" /> must be a reference type, and <paramref name="firstArgument" /> must be compatible with that type. </para>
           <block subset="none" type="note">
             <para
-              >If <paramref name="method" /> is static (Shared in Visual Basic) and its first parameter is of type <see cref="T:System.Object" /> or <see cref="T:System.ValueType" />, then <paramref name="firstArgument" /> can be a value type. In this case <paramref name="firstArgument" /> is automatically boxed. Automatic boxing does not occur for any other arguments, as it would in a C# or Visual Basic function call. </para
-            >
+              >If <paramref name="method" /> is static (Shared in Visual Basic) and its first parameter is of type <see cref="T:System.Object" /> or <see cref="T:System.ValueType" />, then <paramref name="firstArgument" /> can be a value type. In this case <paramref name="firstArgument" /> is automatically boxed. Automatic boxing does not occur for any other arguments, as it would in a C# or Visual Basic function call. </para>
           </block>
           <para
-            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is an instance method, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para
-          >
+            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is an instance method, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para>
           <list type="bullet">
             <item>
               <para
-                >If the signature of <paramref name="type" /> explicitly includes the hidden first parameter of <paramref name="method" />, the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref name="method" />.</para
-              >
+                >If the signature of <paramref name="type" /> explicitly includes the hidden first parameter of <paramref name="method" />, the delegate is said to represent an open instance method. When the delegate is invoked, the first argument in the argument list is passed to the hidden instance parameter of <paramref name="method" />.</para>
             </item>
             <item>
               <para
-                >If the signatures of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), then the delegate is said to be closed over a null reference. Invoking the delegate is like calling an instance method on a null instance, which is not a particularly useful thing to do. </para
-              >
+                >If the signatures of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), then the delegate is said to be closed over a null reference. Invoking the delegate is like calling an instance method on a null instance, which is not a particularly useful thing to do. </para>
             </item>
           </list>
           <para
-            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is static, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para
-          >
+            >If <paramref name="firstArgument" /> is a null reference and <paramref name="method" /> is static, the result depends on the signatures of the delegate type <paramref name="type" /> and of <paramref name="method" />:</para>
           <list type="bullet">
             <item>
               <para
-                >If the signature of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload.</para
-              >
+                >If the signature of <paramref name="method" /> and <paramref name="type" /> match (that is, all parameter types are compatible), the delegate is said to represent an open static method. This is the most common case for static methods. In this case, you can get slightly better performance by using the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Boolean)" /> method overload.</para>
             </item>
             <item>
               <para
-                >If the signature of <paramref name="type" /> begins with the second parameter of <paramref name="method" /> and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref name="method" />. </para
-              >
+                >If the signature of <paramref name="type" /> begins with the second parameter of <paramref name="method" /> and the rest of the parameter types are compatible, then the delegate is said to be closed over a null reference. When the delegate is invoked, a null reference is passed to the first parameter of <paramref name="method" />. </para>
             </item>
           </list>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
           <format type="text/html">
@@ -1167,34 +1062,28 @@ class TestClass {
           <para>A parameter of a delegate is compatible with the corresponding parameter of a method if the type of the delegate parameter is more restrictive than the type of the method parameter, because this guarantees that an argument passed to the delegate can be passed safely to the method.</para>
           <para>Similarly, the return type of a delegate is compatible with the return type of a method if the return type of the method is more restrictive than the return type of the delegate, because this guarantees that the return value of the method can be cast safely to the return type of the delegate.</para>
           <para
-            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para
-          >
+            >For example, a delegate with a parameter of type <see cref="T:System.Collections.Hashtable" /> and a return type of <see cref="T:System.Object" /> can represent a method with a parameter of type <see cref="T:System.Object" /> and a return value of type <see cref="T:System.Collections.Hashtable" />.</para>
           <format type="text/html">
             <h2>Determining the Methods a Delegate Can Represent</h2>
           </format>
           <para
-            >Another useful way to think of the flexibility provided by this overload of <see cref="Overload:System.Delegate.CreateDelegate" /> is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para
-          >
+            >Another useful way to think of the flexibility provided by this overload of <see cref="Overload:System.Delegate.CreateDelegate" /> is that any given delegate can represent four different combinations of method signature and method kind (static versus instance). Consider a delegate type D with one argument of type C. The following describes the methods D can represent, ignoring the return type since it must match in all cases:</para>
           <list type="bullet">
             <item>
               <para
-                >D can represent any instance method that has exactly one argument of type C, regardless of what type the instance method belongs to. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of the type <paramref name="method" /> belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref name="firstArgument" /> is null.)</para
-              >
+                >D can represent any instance method that has exactly one argument of type C, regardless of what type the instance method belongs to. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of the type <paramref name="method" /> belongs to, and the resulting delegate is said to be closed over that instance. (Trivially, D can also be closed over a null reference if <paramref name="firstArgument" /> is null.)</para>
             </item>
             <item>
               <para
-                >D can represent an instance method of C that has no arguments. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open instance method, and an instance of C must be supplied each time it is invoked. </para
-              >
+                >D can represent an instance method of C that has no arguments. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open instance method, and an instance of C must be supplied each time it is invoked. </para>
             </item>
             <item>
               <para
-                >D can represent a static method that takes one argument of type C, and that method can belong to any type. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open static method, and an instance of C must be supplied each time it is invoked.</para
-              >
+                >D can represent a static method that takes one argument of type C, and that method can belong to any type. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is a null reference. The resulting delegate represents an open static method, and an instance of C must be supplied each time it is invoked.</para>
             </item>
             <item>
               <para
-                >D can represent a static method that belongs to type F and has two arguments, of type F and type C. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref name="firstArgument" /> is null.)</para
-              >
+                >D can represent a static method that belongs to type F and has two arguments, of type F and type C. When <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo,System.Boolean)" /> is called, <paramref name="firstArgument" /> is an instance of F. The resulting delegate represents a static method that is closed over that instance of F. Note that in the case where F and C are the same type, the static method has two arguments of that type. (In this case, D is closed over a null reference if <paramref name="firstArgument" /> is null.)</para>
             </item>
           </list>
         </remarks>
@@ -1205,37 +1094,32 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A delegate of the specified type that represents the specified static or instance method, or null if <paramref name="throwOnBindFailure" /> is false and the delegate cannot be bound to <paramref name="method" />. </para
-          >
+            >A delegate of the specified type that represents the specified static or instance method, or null if <paramref name="throwOnBindFailure" /> is false and the delegate cannot be bound to <paramref name="method" />. </para>
         </returns>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> representing the type of delegate to create. </param
-        >
+          />A <see cref="T:System.Type" /> representing the type of delegate to create. </param>
         <param name="firstArgument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that is the first argument of the method the delegate represents. For instance methods, it must be compatible with the instance type. </param
-        >
+          />An <see cref="T:System.Object" /> that is the first argument of the method the delegate represents. For instance methods, it must be compatible with the instance type. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param
-        >
+          />The <see cref="T:System.Reflection.MethodInfo" /> describing the static or instance method the delegate is to represent.</param>
         <param name="throwOnBindFailure">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param
-        >
+          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1267,16 +1151,13 @@ class TestClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method creates delegates for instance methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String,System.Boolean,System.Boolean)" /> method overload, specifying true for <paramref name="throwOnBindFailure" />.</para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String,System.Boolean,System.Boolean)" /> method overload, specifying true for <paramref name="throwOnBindFailure" />.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1293,29 +1174,25 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class instance on which <paramref name="method" /> is invoked. </param
-        >
+          />The class instance on which <paramref name="method" /> is invoked. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance method that the delegate is to represent. </param
-        >
+          />The name of the instance method that the delegate is to represent. </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean indicating whether to ignore the case when comparing the name of the method. </param
-        >
+          />A Boolean indicating whether to ignore the case when comparing the name of the method. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1346,16 +1223,13 @@ class TestClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method creates delegates for static methods only. An instance method is a method that is associated with an instance of a class; a static method is a method that is associated with the class itself.</para>
           <para
-            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String,System.Boolean,System.Boolean)" /> method overload, specifying true for <paramref name="throwOnBindFailure" />.</para
-          >
+            >This method overload is equivalent to calling the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String,System.Boolean,System.Boolean)" /> method overload, specifying true for <paramref name="throwOnBindFailure" />.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1372,29 +1246,25 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param
-        >
+          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the static method that the delegate is to represent. </param
-        >
+          />The name of the static method that the delegate is to represent. </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean indicating whether to ignore the case when comparing the name of the method.</param
-        >
+          />A Boolean indicating whether to ignore the case when comparing the name of the method.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1430,10 +1300,8 @@ class TestClass {
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1450,36 +1318,31 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class instance on which <paramref name="method" /> is invoked. </param
-        >
+          />The class instance on which <paramref name="method" /> is invoked. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the instance method that the delegate is to represent. </param
-        >
+          />The name of the instance method that the delegate is to represent. </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean indicating whether to ignore the case when comparing the name of the method. </param
-        >
+          />A Boolean indicating whether to ignore the case when comparing the name of the method. </param>
         <param name="throwOnBindFailure">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param
-        >
+          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDelegate">
@@ -1514,10 +1377,8 @@ class TestClass {
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public methods if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public methods is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -1534,36 +1395,31 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of delegate to create. </param
-        >
+          />The <see cref="T:System.Type" /> of delegate to create. </param>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param
-        >
+          />The <see cref="T:System.Type" /> representing the class that implements <paramref name="method" />. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the static method that the delegate is to represent. </param
-        >
+          />The name of the static method that the delegate is to represent. </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean indicating whether to ignore the case when comparing the name of the method.</param
-        >
+          />A Boolean indicating whether to ignore the case when comparing the name of the method.</param>
         <param name="throwOnBindFailure">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param
-        >
+          />true to throw an exception if <paramref name="method" /> cannot be bound; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="DynamicInvoke">
@@ -1597,36 +1453,30 @@ class TestClass {
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >The type of one or more elements in <paramref name="args" /> is invalid as a parameter to the methods implemented by the current instance.</para
-          >
+            >The type of one or more elements in <paramref name="args" /> is invalid as a parameter to the methods implemented by the current instance.</para>
         </exception>
         <exception cref="T:System.MethodAccessException">
           <para>The caller does not have the required permissions.</para>
           <para>-or-</para>
           <para
-            >The number, order or type of parameters listed in <paramref name="args" /> is invalid.</para
-          >
+            >The number, order or type of parameters listed in <paramref name="args" /> is invalid.</para>
         </exception>
         <exception cref="T:System.Reflection.TargetException">
           <para
-            >A method in the invocation list of the current instance is an instance method and its target object is <see langword="null" />.</para
-          >
+            >A method in the invocation list of the current instance is an instance method and its target object is <see langword="null" />.</para>
           <para>-or-</para>
           <para>A method in the invocation list of the current instance was invoked on a target object or a class that does not implement it.</para>
         </exception>
         <exception cref="!:System.Reflection.TargetParamterCountException">
           <para
-            > The number of elements in <paramref name="args" /> is not equal to the number of parameters required by the methods invoked by the current instance.</para
-          >
+            > The number of elements in <paramref name="args" /> is not equal to the number of parameters required by the methods invoked by the current instance.</para>
         </exception>
         <exception cref="T:System.Reflection.TargetInvocationException"
-          >A method in the invocation list of the current instance threw an exception.</exception
-        >
+          >A method in the invocation list of the current instance threw an exception.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the <see cref="M:System.Delegate.DynamicInvokeImpl(System.Object[])" /> method.</para
-          >
+            >This method calls the <see cref="M:System.Delegate.DynamicInvokeImpl(System.Object[])" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1641,8 +1491,7 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects that are the arguments to pass to the method represented by the current delegate.</param
-        >
+          />An array of objects that are the arguments to pass to the method represented by the current delegate.</param>
       </Docs>
       <Excluded>1</Excluded>
       <ExcludedLibrary>Reflection</ExcludedLibrary>
@@ -1672,8 +1521,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see cref="M:System.Delegate.DynamicInvoke(System.Object[])" /> method.</para
-          >
+            >This method implements the <see cref="M:System.Delegate.DynamicInvoke(System.Object[])" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1688,8 +1536,7 @@ class TestClass {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of objects that are the arguments to pass to the method represented by the current delegate.</param
-        >
+          />An array of objects that are the arguments to pass to the method represented by the current delegate.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -1742,16 +1589,14 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> and the current delegate have the same targets, methods, and invocation list; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> and the current delegate have the same targets, methods, and invocation list; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current delegate. </param
-        >
+          />The object to compare with the current delegate. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1859,8 +1704,7 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.MethodInfo" /> describing the static method represented by the current delegate.</para
-          >
+            >A <see cref="T:System.Reflection.MethodInfo" /> describing the static method represented by the current delegate.</para>
         </returns>
       </Docs>
     </Member>
@@ -1893,11 +1737,9 @@ class TestClass {
           <para>Not supported.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not supported. </param>
       </Docs>
     </Member>
     <Member MemberName="Method">
@@ -1924,18 +1766,15 @@ class TestClass {
         <value>
           <para
             >A <see cref="T:System.Reflection.MethodInfo" />
-.</para
-          >
+.</para>
         </value>
         <remarks>
           <para>This property is read-only.</para>
         </remarks>
         <exception cref="T:System.MemberAccessException"
-          >The caller does not have the required permissions.</exception
-        >
+          >The caller does not have the required permissions.</exception>
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to access type information. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.</permission
-        >
+          >Requires permission to access type information. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.</permission>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Gets the method represented by the delegate.</para>
@@ -1999,23 +1838,20 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="d1" /> is equal to <paramref name="d2" />; otherwise, false.</para
-          >
+            >true if <paramref name="d1" /> is equal to <paramref name="d2" />; otherwise, false.</para>
         </returns>
         <param name="d1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first delegate to compare. </param
-        >
+          />The first delegate to compare. </param>
         <param name="d2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second delegate to compare. </param
-        >
+          />The second delegate to compare. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2074,23 +1910,20 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="d1" /> is not equal to <paramref name="d2" />; otherwise, false.</para
-          >
+            >true if <paramref name="d1" /> is not equal to <paramref name="d2" />; otherwise, false.</para>
         </returns>
         <param name="d1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first delegate to compare. </param
-        >
+          />The first delegate to compare. </param>
         <param name="d2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second delegate to compare. </param
-        >
+          />The second delegate to compare. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2123,8 +1956,7 @@ class TestClass {
       <Docs>
         <example>
           <para
-            >The following example demonstrates the <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" /> method.</para
-          >
+            >The following example demonstrates the <see cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" /> method.</para>
           <code lang="C#"
             >using System;
 class MyClass {
@@ -2267,8 +2099,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the invocation list of <paramref name="source" />, then the invocation list of <paramref name="value" /> is said to occur within the invocation list of <paramref name="source" />. If the invocation list of <paramref name="value" /> occurs more than once in the invocation list of <paramref name="source" />, the last occurrence is removed.</para
-          >
+            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the invocation list of <paramref name="source" />, then the invocation list of <paramref name="value" /> is said to occur within the invocation list of <paramref name="source" />. If the invocation list of <paramref name="value" /> occurs more than once in the invocation list of <paramref name="source" />, the last occurrence is removed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2277,23 +2108,20 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing the last occurrence of the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />. Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />. Returns a null reference if the invocation list of <paramref name="value" /> is equal to the invocation list of <paramref name="source" /> or if <paramref name="source" /> is a null reference.</para
-          >
+            >A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing the last occurrence of the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />. Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />. Returns a null reference if the invocation list of <paramref name="value" /> is equal to the invocation list of <paramref name="source" /> or if <paramref name="source" /> is a null reference.</para>
         </returns>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate from which to remove the invocation list of <paramref name="value" />. </param
-        >
+          />The delegate from which to remove the invocation list of <paramref name="value" />. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />. </param
-        >
+          />The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2327,8 +2155,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the invocation list of <paramref name="source" />, then the invocation list of <paramref name="value" /> is said to occur within the invocation list of <paramref name="source" />. If the invocation list of <paramref name="value" /> occurs more than once in the invocation list of <paramref name="source" />, all occurrences are removed.</para
-          >
+            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the invocation list of <paramref name="source" />, then the invocation list of <paramref name="value" /> is said to occur within the invocation list of <paramref name="source" />. If the invocation list of <paramref name="value" /> occurs more than once in the invocation list of <paramref name="source" />, all occurrences are removed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2337,23 +2164,20 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing all occurrences of the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />. Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />. Returns a null reference if the invocation list of <paramref name="value" /> is equal to the invocation list of <paramref name="source" />, if <paramref name="source" /> contains only a series of invocation lists that are equal to the invocation list of <paramref name="value" />, or if <paramref name="source" /> is a null reference.</para
-          >
+            >A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing all occurrences of the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />. Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />. Returns a null reference if the invocation list of <paramref name="value" /> is equal to the invocation list of <paramref name="source" />, if <paramref name="source" /> contains only a series of invocation lists that are equal to the invocation list of <paramref name="value" />, or if <paramref name="source" /> is a null reference.</para>
         </returns>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate from which to remove the invocation list of <paramref name="value" />. </param
-        >
+          />The delegate from which to remove the invocation list of <paramref name="value" />. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />. </param
-        >
+          />The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -2379,8 +2203,7 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the current delegate's invocation list, then the invocation list of <paramref name="value" /> is said to occur within the current delegate's invocation list. If the invocation list of <paramref name="value" /> occurs more than once in the current delegate's invocation list, the last occurrence is removed.</para
-          >
+            >If the invocation list of <paramref name="value" /> matches a contiguous set of elements in the current delegate's invocation list, then the invocation list of <paramref name="value" /> is said to occur within the current delegate's invocation list. If the invocation list of <paramref name="value" /> occurs more than once in the current delegate's invocation list, the last occurrence is removed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2389,16 +2212,14 @@ class TestClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new delegate with an invocation list formed by taking the invocation list of the current delegate and removing the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the current delegate's invocation list. Returns the current delegate if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the current delegate's invocation list. Returns null if the invocation list of <paramref name="value" /> is equal to the current delegate's invocation list.</para
-          >
+            >A new delegate with an invocation list formed by taking the invocation list of the current delegate and removing the invocation list of <paramref name="value" />, if the invocation list of <paramref name="value" /> is found within the current delegate's invocation list. Returns the current delegate if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the current delegate's invocation list. Returns null if the invocation list of <paramref name="value" /> is equal to the current delegate's invocation list.</para>
         </returns>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate that supplies the invocation list to remove from the invocation list of the current delegate. </param
-        >
+          />The delegate that supplies the invocation list to remove from the invocation list of the current delegate. </param>
       </Docs>
     </Member>
     <Member MemberName="Target">
@@ -2422,16 +2243,14 @@ class TestClass {
         <value>
           <para
             >A <see cref="T:System.Object" /> instance, or 
-<see langword="null" /> if the delegate invokes only static methods.</para
-          >
+<see langword="null" /> if the delegate invokes only static methods.</para>
         </value>
         <example>
           <para>Example 1:</para>
           <para
             >The following example gets the <see cref="P:System.Delegate.Target" /> property values
    for two delegates. The first delegate invokes a static method, and the second
-   invokes an instance method.</para
-          >
+   invokes an instance method.</para>
           <code lang="C#"
             >using System;
 public delegate string DelegatedMethod(string s);
@@ -2464,8 +2283,7 @@ class TestClass {
           <para>Example 2: </para>
           <para
             >The following example gets the <see cref="P:System.Delegate.Target" /> property value for three delegates
-created using instance methods, static methods, and a combination of the two. </para
-          >
+created using instance methods, static methods, and a combination of the two. </para>
           <code lang="C#"
             >using System;
 class MyClass {

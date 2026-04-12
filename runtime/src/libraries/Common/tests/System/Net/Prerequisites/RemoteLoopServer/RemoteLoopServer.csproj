@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFramework>$(_TargetFrameworkForXHarness)</TargetFramework>
     <TargetFramework Condition="'$(TargetFramework)' == ''"
-      >$(AspNetCoreAppCurrent)</TargetFramework
-    >
+      >$(AspNetCoreAppCurrent)</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <OutputType>Exe</OutputType>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>

@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.PrivacyNoticeElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.PrivacyNoticeElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Type" /> object that represents this custom binding element. </para
-          >
+            >Gets the <see cref="T:System.Type" /> object that represents this custom binding element. </para>
         </summary>
       </Docs>
     </Member>
@@ -95,8 +93,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom <see cref="T:System.ServiceModel.Channels.BindingElement" /> object whose properties are based on the setting of this configuration element.</para
-          >
+            >A custom <see cref="T:System.ServiceModel.Channels.BindingElement" /> object whose properties are based on the setting of this configuration element.</para>
         </returns>
       </Docs>
     </Member>
@@ -122,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>

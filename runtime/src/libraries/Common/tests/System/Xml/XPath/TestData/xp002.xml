@@ -6,8 +6,7 @@
         Attr1="value1"
         Attr2="value2"
         Attr3="value3"
-      /> End of first paragraph </Para
-    >
+      /> End of first paragraph </Para>
     <Para>Second paragraph </Para>
   </Chap>
 </Doc>

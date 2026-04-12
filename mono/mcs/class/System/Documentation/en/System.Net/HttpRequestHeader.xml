@@ -20,9 +20,7 @@
       <para
         >The appropriate contents of various headers are described in detail in the HTTP/1.1 specification, available at <see
           cref="http://www.w3.org/Protocols/rfc2616/rfc2616.html"
-          >rfc2616</see
-        >.</para
-      >
+          >rfc2616</see>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

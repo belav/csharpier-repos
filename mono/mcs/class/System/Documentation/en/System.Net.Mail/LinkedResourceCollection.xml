@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see cref="T:System.Net.Mail.LinkedResourceCollection" /> class is returned by the <see cref="P:System.Net.Mail.AlternateView.LinkedResources" /> property.</para
-      >
+        >An instance of the <see cref="T:System.Net.Mail.LinkedResourceCollection" /> class is returned by the <see cref="P:System.Net.Mail.AlternateView.LinkedResources" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -82,22 +81,18 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>. </para>
           <para
-            >This method invokes <see cref="M:System.Net.Mail.AlternateView.Dispose(System.Boolean)" /> on all views in this collection. This method is called by the <see cref="M:System.Net.Mail.MailMessage.Dispose" /> method. You do not need to call it in your application.</para
-          >
+            >This method invokes <see cref="M:System.Net.Mail.AlternateView.Dispose(System.Boolean)" /> on all views in this collection. This method is called by the <see cref="M:System.Net.Mail.MailMessage.Dispose" /> method. You do not need to call it in your application.</para>
           <block subset="none" type="note">
             <para
-              >Always call <see cref="M:System.Net.Mail.LinkedResourceCollection.Dispose" /> before you release your last reference to the <see cref="T:System.Net.Mail.LinkedResourceCollection" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.Net.Mail.LinkedResourceCollection" /> object's Finalize method.</para
-            >
+              >Always call <see cref="M:System.Net.Mail.LinkedResourceCollection.Dispose" /> before you release your last reference to the <see cref="T:System.Net.Mail.LinkedResourceCollection" />. Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.Net.Mail.LinkedResourceCollection" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Net.Mail.LinkedResourceCollection" />.</para
-          >
+            >Releases all resources used by the <see cref="T:System.Net.Mail.LinkedResourceCollection" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -127,23 +122,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see cref="T:System.Mail.LinkedResource" /> object into this collection, at the specified location.</para
-          >
+            >Inserts a <see cref="T:System.Mail.LinkedResource" /> object into this collection, at the specified location.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the location at which to insert the <see cref="T:System.Mail.LinkedResource" /> object.</param
-        >
+          />The index of the location at which to insert the <see cref="T:System.Mail.LinkedResource" /> object.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Mail.LinkedResource" /> object to be inserted into this collection.</param
-        >
+          />The <see cref="T:System.Mail.LinkedResource" /> object to be inserted into this collection.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveItem">
@@ -197,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the <see cref="T:System.Net.Mail.LinkedResource" /> element at the specified location in the collection with the new <see cref="T:System.Net.Mail.LinkedResource" /> object.</para
-          >
+            >Replaces the <see cref="T:System.Net.Mail.LinkedResource" /> element at the specified location in the collection with the new <see cref="T:System.Net.Mail.LinkedResource" /> object.</para>
         </summary>
       </Docs>
     </Member>

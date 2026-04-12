@@ -53,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -79,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The external authorization policies participate in the policy evaluation process resulting in a user <see cref="T:System.ServiceModel.ServiceSecurityContext" />.</para
-          >
+            >The external authorization policies participate in the policy evaluation process resulting in a user <see cref="T:System.ServiceModel.ServiceSecurityContext" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,28 +135,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains one of the members of the <see cref="T:System.ServiceModel.Description.PrincipalPermissionMode" /> enumeration. Valid values are:</para
-          >
+            >This property contains one of the members of the <see cref="T:System.ServiceModel.Description.PrincipalPermissionMode" /> enumeration. Valid values are:</para>
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />. A custom IAuthorizationPolicy implementation is used to populate Thread.CurrentPrincipal.</para
-              >
+                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />. A custom IAuthorizationPolicy implementation is used to populate Thread.CurrentPrincipal.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />. The Thread.CurrentPrincipal property is not set.</para
-              >
+                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.None" />. The Thread.CurrentPrincipal property is not set.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />. The Thread.CurrentPrincipal property is set to an IPrincipal based on ASP.NET role information.</para
-              >
+                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseAspNetRoles" />. The Thread.CurrentPrincipal property is set to an IPrincipal based on ASP.NET role information.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" />. The Thread.CurrentPrincipal property is set to a WindowsPrincipal based on the user credentials of the incoming message.</para
-              >
+                <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" />. The Thread.CurrentPrincipal property is set to a WindowsPrincipal based on the user credentials of the incoming message.</para>
             </item>
           </list>
         </remarks>
@@ -189,8 +182,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see cref="T:System.Web.Security.RoleProvider" /> object is an implementation of a custom role provider.</para
-          >
+            >The returned <see cref="T:System.Web.Security.RoleProvider" /> object is an implementation of a custom role provider.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -219,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.ServiceAuthorizationManager" /> class is responsible for evaluating all policies, chaining forward and backward, optionally connecting the resulting <see cref="T:System.IdentityModel.Policy.AuthorizationContext" /> to the <see cref="T:System.ServiceModel.ServiceSecurityContext" /> and returning the authorization decision of true or false to allow or deny access.</para
-          >
+            >The <see cref="T:System.ServiceModel.ServiceAuthorizationManager" /> class is responsible for evaluating all policies, chaining forward and backward, optionally connecting the resulting <see cref="T:System.IdentityModel.Policy.AuthorizationContext" /> to the <see cref="T:System.ServiceModel.ServiceSecurityContext" /> and returning the authorization decision of true or false to allow or deny access.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -260,8 +251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -272,29 +262,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service description of the service.</param
-        >
+          />The service description of the service.</param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host of the service.</param
-        >
+          />The host of the service.</param>
         <param name="endpoints">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service endpoints.</param
-        >
+          />The service endpoints.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom objects to which binding elements have access.</param
-        >
+          />The custom objects to which binding elements have access.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior">
@@ -321,8 +307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -333,15 +318,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service description.</param
-        >
+          />The service description.</param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host that is currently being built.</param
-        >
+          />The host that is currently being built.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.Validate">
@@ -368,8 +351,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" /> instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -380,15 +362,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service description.</param
-        >
+          />The service description.</param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service host that is currently being constructed.</param
-        >
+          />The service host that is currently being constructed.</param>
       </Docs>
     </Member>
   </Members>

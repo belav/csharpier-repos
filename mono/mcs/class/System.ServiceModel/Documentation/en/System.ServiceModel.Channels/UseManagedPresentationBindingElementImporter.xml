@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts WSDL-based policies for <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />s into descriptions of the binding elements that can implement these policies for the service.</para
-      >
+        >Converts WSDL-based policies for <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />s into descriptions of the binding elements that can implement these policies for the service.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElementImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElementImporter" /> class.  </para>
         </summary>
       </Docs>
     </Member>

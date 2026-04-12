@@ -52,19 +52,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityTokenSpecification" /> class using the specified token and token policies.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityTokenSpecification" /> class using the specified token and token policies.</para>
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />The security token.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The security token.</param>
         <param name="tokenPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of security token policies.</param
-        >
+          />The collection of security token policies.</param>
       </Docs>
     </Member>
     <Member MemberName="SecurityToken">
@@ -116,8 +113,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> contributes claims into an evaluation context.</para
-          >
+            >An <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> contributes claims into an evaluation context.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class encapsulates data for network interfaces, also known as adapters, on the local computer. You do not create instances of this class; the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces" /> method returns an array that contains one instance of this class for each network interface on the local computer.</para
-      >
+        >This class encapsulates data for network interfaces, also known as adapters, on the local computer. You do not create instances of this class; the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces" /> method returns an array that contains one instance of this class for each network interface on the local computer.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,14 +44,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para
-          >
+            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -111,8 +108,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> array that contains objects that describe the available network interfaces, or an empty array if no interfaces are detected.</para
-          >
+            >A <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> array that contains objects that describe the available network interfaces, or an empty array if no interfaces are detected.</para>
         </returns>
       </Docs>
     </Member>
@@ -147,8 +143,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> object that describes this network interface.</para
-          >
+            >An <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> object that describes this network interface.</para>
         </returns>
       </Docs>
     </Member>
@@ -176,14 +171,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the IPv4 statistics for this <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> instance.</para
-          >
+            >Gets the IPv4 statistics for this <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" /> object.</para
-          >
+            >An <see cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -254,8 +247,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.NetworkInformation.PhysicalAddress" /> object that contains the physical address.</para
-          >
+            >A <see cref="T:System.Net.NetworkInformation.PhysicalAddress" /> object that contains the physical address.</para>
         </returns>
       </Docs>
     </Member>
@@ -298,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is set to only receive data packets.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is set to only receive data packets.</para>
         </summary>
       </Docs>
     </Member>
@@ -325,11 +316,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the loopback interface is usually 1, but you cannot rely on this. Use the <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property to get the correct value.</para
-          >
+            >The index of the loopback interface is usually 1, but you cannot rely on this. Use the <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property to get the correct value.</para>
           <para
-            >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property only returns the IPv4 loopback interface. </para
-          >
+            >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property only returns the IPv4 loopback interface. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,11 +370,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The interface types are described in detail in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration documentation. </para
-          >
+            >The interface types are described in detail in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration documentation. </para>
           <para
-            >This property only returns a subset of the possible values defined in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration. The possible values include the following:</para
-          >
+            >This property only returns a subset of the possible values defined in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration. The possible values include the following:</para>
           <list type="bullet">
             <item>
               <para>
@@ -453,8 +440,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operational status values are described in detail in the <see cref="T:System.Net.NetworkInformation.OperationalStatus" /> enumeration documentation.</para
-          >
+            >The operational status values are described in detail in the <see cref="T:System.Net.NetworkInformation.OperationalStatus" /> enumeration documentation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -515,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the interface supports the specified protocol.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the interface supports the specified protocol.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -527,8 +512,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.NetworkInformation.NetworkInterfaceComponent" /> value.</param
-        >
+          />A <see cref="T:System.Net.NetworkInformation.NetworkInterfaceComponent" /> value.</param>
       </Docs>
     </Member>
     <Member MemberName="SupportsMulticast">
@@ -552,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is enabled to receive multicast packets.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is enabled to receive multicast packets.</para>
         </summary>
       </Docs>
     </Member>

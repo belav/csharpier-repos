@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> is a base class that provides implementations that support a Multipurpose Internet Mail Extensions (MIME) content type and message version, and defines the interface for the serialization and deserialization of messages according to that content type. Use it as a base class for writing your own custom encoder.</para
-      >
+        <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> is a base class that provides implementations that support a Multipurpose Internet Mail Extensions (MIME) content type and message version, and defines the interface for the serialization and deserialization of messages according to that content type. Use it as a base class for writing your own custom encoder.</para>
       <para>Use this class if you want to implement a custom message encoder. To implement your own custom message encoder, you must provide custom implementations of the following abstract base classes:</para>
       <list type="bullet">
         <item>
@@ -38,14 +37,11 @@
         </item>
       </list>
       <para
-        >Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" /> to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />. Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" /> method to return an instance of this factory.</para
-      >
+        >Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" /> to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />. Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" /> method to return an instance of this factory.</para>
       <para
-        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings. </para
-      >
+        >The task of converting between the in-memory representation of a message and an XML Information Set (Infoset) representation that can be written to a stream is encapsulated within the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings. </para>
       <para
-        >The key methods on <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> are <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> and <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />. <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> takes a <see cref="T:System.ServiceModel.Channels.Message" /> object and writes it into a <see cref="T:System.IO.Stream" /> object. <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" /> takes a <see cref="T:System.IO.Stream" /> object and a maximum header size and returns a <see cref="T:System.ServiceModel.Channels.Message" /> object.</para
-      >
+        >The key methods on <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> are <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> and <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />. <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage" /> takes a <see cref="T:System.ServiceModel.Channels.Message" /> object and writes it into a <see cref="T:System.IO.Stream" /> object. <see cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" /> takes a <see cref="T:System.IO.Stream" /> object and a maximum header size and returns a <see cref="T:System.ServiceModel.Channels.Message" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -92,11 +87,8 @@
           <para
             >A grammar that details the syntax of the content-type header is described in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=95945"
-              >RFC 2045</see
-            >, Section 5.1. <see cref="http://go.microsoft.com/fwlink/?LinkId=95944"
-              >RFC 2046</see
-            > provides detailed information on MIME media types and their parameters.</para
-          >
+              >RFC 2045</see>, Section 5.1. <see cref="http://go.microsoft.com/fwlink/?LinkId=95944"
+              >RFC 2046</see> provides detailed information on MIME media types and their parameters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -140,16 +132,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref name="T " />requested if it is present or null if it is not.</para
-          >
+            >The typed object <paramref name="T " />requested if it is present or null if it is not.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The typed object for which the method is querying.</typeparam
-        >
+          />The typed object for which the method is querying.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="IsContentTypeSupported">
@@ -175,16 +165,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to determine whether the message encoder can be used to read a particular style of message, based on its content-type. The information in the <see cref="T:System.Net.Mime.ContentType" /> class is used to describe the data that is contained in a message and is used to determine if there is a content-type match.</para
-          >
+            >This method is used to determine whether the message encoder can be used to read a particular style of message, based on its content-type. The information in the <see cref="T:System.Net.Mime.ContentType" /> class is used to describe the data that is contained in a message and is used to determine if there is a content-type match.</para>
           <para
             >A grammar that details the syntax of the content-type header is described in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=95945"
-              >RFC 2045</see
-            > Section 5.1. <see cref="http://go.microsoft.com/fwlink/?LinkId=95944"
-              >RFC 2046</see
-            > provides detailed information on Multipurpose Internet Mail Extensions (MIME) media types and their parameters. </para
-          >
+              >RFC 2045</see> Section 5.1. <see cref="http://go.microsoft.com/fwlink/?LinkId=95944"
+              >RFC 2046</see> provides detailed information on Multipurpose Internet Mail Extensions (MIME) media types and their parameters. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -199,8 +185,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message-level content-type being tested.</param
-        >
+          />The message-level content-type being tested.</param>
       </Docs>
     </Member>
     <Member MemberName="MediaType">
@@ -246,8 +231,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the versions of SOAP and WS-Addressing associated with a message and its exchange. If SOAP versions are not to be used, this property should be overridden to return <see cref="P:System.ServiceModel.Channels.MessageVersion.None" />.</para
-          >
+            >Specifies the versions of SOAP and WS-Addressing associated with a message and its exchange. If SOAP versions are not to be used, this property should be overridden to return <see cref="P:System.ServiceModel.Channels.MessageVersion.None" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,23 +268,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the buffer specified.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the buffer specified.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ArraySegment`1" /> of type <see cref="T:System.Byte" /> that provides the buffer from which the message is deserialized.</param
-        >
+          />A <see cref="T:System.ArraySegment`1" /> of type <see cref="T:System.Byte" /> that provides the buffer from which the message is deserialized.</param>
         <param name="bufferManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer from which the message is deserialized.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer from which the message is deserialized.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadMessage">
@@ -332,23 +313,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para>
         </returns>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> object from which the message is read.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> object from which the message is read.</param>
         <param name="maxSizeOfHeaders">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum size of the headers that can be read from the message.</param
-        >
+          />The maximum size of the headers that can be read from the message.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadMessage">
@@ -381,30 +359,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ArraySegment`1" /> of type <see cref="T:System.Byte" /> that provides the buffer from which the message is deserialized.</param
-        >
+          />A <see cref="T:System.ArraySegment`1" /> of type <see cref="T:System.Byte" /> that provides the buffer from which the message is deserialized.</param>
         <param name="bufferManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer from which the message is deserialized.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer from which the message is deserialized.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Multipurpose Internet Mail Extensions (MIME) message-level content-type.</param
-        >
+          />The Multipurpose Internet Mail Extensions (MIME) message-level content-type.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadMessage">
@@ -437,30 +411,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.Message" /> that is read from the stream specified.</para>
         </returns>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> object from which the message is read.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> object from which the message is read.</param>
         <param name="maxSizeOfHeaders">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum size of the headers that can be read from the message.</param
-        >
+          />The maximum size of the headers that can be read from the message.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Multipurpose Internet Mail Extensions (MIME) message-level content-type.</param
-        >
+          />The Multipurpose Internet Mail Extensions (MIME) message-level content-type.</param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -520,15 +490,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the <paramref name="stream" />.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the <paramref name="stream" />.</param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> object to which the <paramref name="message" /> is written.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> object to which the <paramref name="message" /> is written.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteMessage">
@@ -556,8 +524,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method calls the abstract method <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" /> with <paramref name="messageOffset" /> = 0.</para
-          >
+            >This method calls the abstract method <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" /> with <paramref name="messageOffset" /> = 0.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -566,30 +533,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ArraySegment`1" /> of type byte that provides the buffer to which the message is serialized.</para
-          >
+            >A <see cref="T:System.ArraySegment`1" /> of type byte that provides the buffer to which the message is serialized.</para>
         </returns>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the message buffer.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the message buffer.</param>
         <param name="maxMessageSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum message size that can be written.</param
-        >
+          />The maximum message size that can be written.</param>
         <param name="bufferManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer to which the message is written.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer to which the message is written.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteMessage">
@@ -618,8 +581,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />.</para
-          >
+            >This method is called by <see cref="M:System.ServiceModel.Channels.MessageEncoder.WriteMessage(System.ServiceModel.Channels.Message,System.Int32,System.ServiceModel.Channels.BufferManager,System.Int32)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -628,37 +590,32 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ArraySegment`1" /> of type byte that provides the buffer to which the message is serialized.</para
-          >
+            >A <see cref="T:System.ArraySegment`1" /> of type byte that provides the buffer to which the message is serialized.</para>
         </returns>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the message buffer.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Message" /> to write to the message buffer.</param>
         <param name="maxMessageSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum message size that can be written.</param
-        >
+          />The maximum message size that can be written.</param>
         <param name="bufferManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer to which the message is written.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BufferManager" /> that manages the buffer to which the message is written.</param>
         <param name="messageOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset of the segment that begins from the start of the byte array that provides the buffer.</param
-        >
+          />The offset of the segment that begins from the start of the byte array that provides the buffer.</param>
       </Docs>
     </Member>
   </Members>

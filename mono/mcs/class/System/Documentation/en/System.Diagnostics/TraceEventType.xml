@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Diagnostics.TraceEventType" /> is used to identify the event that caused a trace in calls to the <see cref="Overload:System.Diagnostics.TraceSource.TraceEvent" /> methods.</para
-      >
+        <see cref="T:System.Diagnostics.TraceEventType" /> is used to identify the event that caused a trace in calls to the <see cref="Overload:System.Diagnostics.TraceSource.TraceEvent" /> methods.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

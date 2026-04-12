@@ -26,14 +26,12 @@
       <para
         >For an example of adding known types to the collection using configuration, see <format type="text/html">
           <a href="f35184e4-9d9e-4d37-8fb4-d5b58220eb3e">&lt;declaredTypes&gt;</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to add known types that are used for serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para
-      >
+        >Handles the XML elements used to add known types that are used for serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -76,16 +73,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class with the specified type name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class with the specified type name.</para>
         </summary>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type that requires a collection of known types.</param
-        >
+          />The name of the type that requires a collection of known types.</param>
       </Docs>
     </Member>
     <Member MemberName="KnownTypes">

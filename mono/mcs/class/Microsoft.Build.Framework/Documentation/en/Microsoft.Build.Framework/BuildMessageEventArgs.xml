@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" /> event. </para
-      >
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -33,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,37 +57,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" /> class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.SenderName" />, and <see cref="P:Microsoft.Build.Framework.BuildMessageEventArgs.Importance" /> values.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" /> class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.SenderName" />, and <see cref="P:Microsoft.Build.Framework.BuildMessageEventArgs.Importance" /> values.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the event.</param
-        >
+          />The text of the event.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword associated with the event.</param
-        >
+          />The Help keyword associated with the event.</param>
         <param name="senderName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
         <param name="importance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value indicating the importance of the event.</param
-        >
+          />A <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value indicating the importance of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -409,8 +409,7 @@
       <Docs>
         <summary>The Favorites directory.  </summary>
         <remarks preserve-mono="true"
-          >On Windows, the system favorite directory.   On MacOS X this is ~/Library/Favorites, and is empty for other operating systems.</remarks
-        >
+          >On Windows, the system favorite directory.   On MacOS X this is ~/Library/Favorites, and is empty for other operating systems.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Fonts">
@@ -428,8 +427,7 @@
       </ReturnValue>
       <Docs>
         <summary preserve-mono="true"
-          >The fonts directory, on MacOS X this is ~/Library/Fonts, on other Unix operating systems it is ~/.fonts/</summary
-        >
+          >The fonts directory, on MacOS X this is ~/Library/Fonts, on other Unix operating systems it is ~/.fonts/</summary>
       </Docs>
     </Member>
     <Member MemberName="History">
@@ -472,8 +470,7 @@
       <Docs>
         <summary>The Internet cache directory.</summary>
         <remarks preserve-mono="true"
-          >The Internet cache directory on Windows.   On MacOS X this is the ~/Library/Caches directory, and not available on other operating systems.</remarks
-        >
+          >The Internet cache directory on Windows.   On MacOS X this is the ~/Library/Caches directory, and not available on other operating systems.</remarks>
       </Docs>
     </Member>
     <Member MemberName="LocalApplicationData">
@@ -572,8 +569,7 @@
       <MemberValue>MyMusic</MemberValue>
       <Docs>
         <summary preserve-mono="true"
-          >The music directory.  On MacOS X this is ~/Music.  On other Unix operating systems, this is either XDG_MUSIC_DIR from the environment, XDG_MUSIC_DIR as read from the "user-dirs.dirs" within the SpecialFolder.ApplicationData directory, or as a last resort, the directory named "Music" within the SpecialFolder.Personal directory (usually the home directory).</summary
-        >
+          >The music directory.  On MacOS X this is ~/Music.  On other Unix operating systems, this is either XDG_MUSIC_DIR from the environment, XDG_MUSIC_DIR as read from the "user-dirs.dirs" within the SpecialFolder.ApplicationData directory, or as a last resort, the directory named "Music" within the SpecialFolder.Personal directory (usually the home directory).</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -595,8 +591,7 @@
       <MemberValue>MyPictures</MemberValue>
       <Docs>
         <summary preserve-mono="true"
-          >The pictures directory.  On MacOS X this is ~/Pictures.   On other Unix operating systems, this is either XDG_PICTURES_DIR from the environment, XDG_PICTURES_DIR as read from the "user-dirs.dirs" within the SpecialFolder.ApplicationData directory, or as a last resort, the directory named "Pictures" within the SpecialFolder.Personal directory (usually the home directory).</summary
-        >
+          >The pictures directory.  On MacOS X this is ~/Pictures.   On other Unix operating systems, this is either XDG_PICTURES_DIR from the environment, XDG_PICTURES_DIR as read from the "user-dirs.dirs" within the SpecialFolder.ApplicationData directory, or as a last resort, the directory named "Pictures" within the SpecialFolder.Personal directory (usually the home directory).</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -691,8 +686,7 @@
       <Docs>
         <summary>Where program files are located.  </summary>
         <remarks preserve-mono="true"
-          >The ProgramFiles directory on Windows, /Application on MacOS X and the empty string for other operating systems.</remarks
-        >
+          >The ProgramFiles directory on Windows, /Application on MacOS X and the empty string for other operating systems.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ProgramFilesX86">

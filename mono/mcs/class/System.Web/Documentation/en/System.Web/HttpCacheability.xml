@@ -17,9 +17,7 @@
       <para
         >For more information, go to RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, on the <see
           cref="http://go.microsoft.com/fwlink/?linkid=37125"
-          >World Wide Web Consortium (W3C)</see
-        > Web site. In particular, for complete details, see Section 14.9 "Cache-Control" and Section 13, "Caching in HTTP."</para
-      >
+          >World Wide Web Consortium (W3C)</see> Web site. In particular, for complete details, see Section 14.9 "Cache-Control" and Section 13, "Caching in HTTP."</para>
       <block subset="none" type="note">
         <para>NoCache does not send the common HTTP 1.0 request directive Pragma: no-cache.</para>
       </block>
@@ -99,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the response is cached only at the origin server. Similar to the <see cref="F:System.Web.HttpCacheability.NoCache" /> option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />.</para
-          >
+            >Specifies that the response is cached only at the origin server. Similar to the <see cref="F:System.Web.HttpCacheability.NoCache" /> option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" /> and <see cref="F:System.Web.HttpCacheability.NoCache" /> to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response. </para
-          >
+            >Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" /> and <see cref="F:System.Web.HttpCacheability.NoCache" /> to indicate that the content is cached at the server but all others are explicitly denied the ability to cache the response. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

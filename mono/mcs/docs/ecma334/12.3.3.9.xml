@@ -19,10 +19,7 @@ for (for-initializer; for-condition; for-iterator) embedded-statement
   </paragraph>
   <paragraph
     >If the <non_terminal where="15.8.3"
-      >for-condition</non_terminal
-    > is omitted from the for statement, then evaluation of definite assignment proceeds as if <non_terminal
+      >for-condition</non_terminal> is omitted from the for statement, then evaluation of definite assignment proceeds as if <non_terminal
       where="15.8.3"
-      >for-condition</non_terminal
-    > were replaced with true in the above expansion. </paragraph
-  >
+      >for-condition</non_terminal> were replaced with true in the above expansion. </paragraph>
 </clause>

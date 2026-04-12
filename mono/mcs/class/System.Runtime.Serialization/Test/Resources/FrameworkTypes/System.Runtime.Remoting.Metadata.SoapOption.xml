@@ -1,4 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SoapOption xmlns="http://schemas.datacontract.org/2004/07/System.Runtime.Remoting.Metadata"
-  >None</SoapOption
->
+  >None</SoapOption>

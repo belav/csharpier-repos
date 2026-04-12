@@ -16,8 +16,7 @@
       Condition="'$(TargetOS)' == 'osx' or '$(TargetOS)' == 'maccatalyst' or
       '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'iossimulator' or
       '$(TargetOS)' == 'tvossimulator'"
-      >true</_TargetsAppleOS
-    >
+      >true</_TargetsAppleOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -109,19 +108,15 @@
   <Target Name="GetAppleBuildArgumentsForDNNE" Condition="'$(_TargetsAppleOS)' == 'true'">
     <PropertyGroup Condition=" '$(TargetOS)' == 'maccatalyst'">
       <TargetTriple Condition="'$(TargetArchitecture)' == 'arm64'"
-        >arm64-apple-ios14.2-macabi</TargetTriple
-      >
+        >arm64-apple-ios14.2-macabi</TargetTriple>
       <TargetTriple Condition="'$(TargetArchitecture)' == 'x64'"
-        >x86_64-apple-ios13.5-macabi</TargetTriple
-      >
+        >x86_64-apple-ios13.5-macabi</TargetTriple>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetOS)' == 'osx'">
       <TargetTriple Condition="'$(TargetArchitecture)' == 'arm64'"
-        >arm64-apple-macos11</TargetTriple
-      >
+        >arm64-apple-macos11</TargetTriple>
       <TargetTriple Condition="'$(TargetArchitecture)' == 'x64'"
-        >x86_64-apple-macos10.15</TargetTriple
-      >
+        >x86_64-apple-macos10.15</TargetTriple>
       <XCodeSdkName>macosx</XCodeSdkName>
     </PropertyGroup>
 

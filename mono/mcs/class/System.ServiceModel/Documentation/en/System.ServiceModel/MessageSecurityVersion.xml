@@ -19,8 +19,7 @@
       <para>This class is the extensibility point for customizing token serialization. </para>
       <para>This class is a singleton that provides information about the versions of the security specifications, (WS-Security, WS-Trust, WS-Secure Conversation and WS-Security Policy), that must be supported by a binding.</para>
       <para
-        >The class contains seven static properties, each of which returns an instance of this class. Each of these properties represents a different combination of security specification versions. The instances of this class are used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class. If you pass the <see cref="P:System.ServiceModel.MessageSecurityVersion.Default" /> property, you create a standard version of the binding element. To create a non-standard version, pass the property that matches your version.</para
-      >
+        >The class contains seven static properties, each of which returns an instance of this class. Each of these properties represents a different combination of security specification versions. The instances of this class are used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class. If you pass the <see cref="P:System.ServiceModel.MessageSecurityVersion.Default" /> property, you create a standard version of the binding element. To create a non-standard version, pass the property that matches your version.</para>
       <para>The class also contains abstract properties that are implemented by the previous instances.</para>
     </remarks>
     <summary>
@@ -79,8 +78,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default security specifications are WS-Security 1.1, WS-Trust of February 2005, WS-SecureConversation of February 2005 and WS-SecurityPolicy 1.1.</para>
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -166,8 +164,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is implemented by the instances of this class returned by the seven static properties. Each implementation represents a different combination of specification versions and so returns a different value for this property.</para>
           <para
-            >This property is used to query a token serializer factory interface defined in <see cref="T:System.IdentityModel.Selectors.SecurityTokenVersion" /> for a token serializer instance capable of serializing tokens.</para
-          >
+            >This property is used to query a token serializer factory interface defined in <see cref="T:System.IdentityModel.Selectors.SecurityTokenVersion" /> for a token serializer instance capable of serializing tokens.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -252,8 +249,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -312,8 +307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -342,8 +336,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -372,8 +365,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -402,8 +394,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para
-          >
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

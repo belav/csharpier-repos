@@ -29,19 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is used to specify the properties used with complex data binding, such as binding based on <see cref="T:System.Collections.IList" />.</para
-      >
+        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is used to specify the properties used with complex data binding, such as binding based on <see cref="T:System.Collections.IList" />.</para>
       <para
-        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> attribute is specified at the class level. It is inheritable and does not allow multiple attributes on the same class. </para
-      >
+        >The <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> attribute is specified at the class level. It is inheritable and does not allow multiple attributes on the same class. </para>
       <para
-        >A control can support both simple binding, with <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />, as well as complex binding.</para
-      >
+        >A control can support both simple binding, with <see cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />, as well as complex binding.</para>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,14 +61,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> and <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> properties to null.</para
-          >
+            >The default constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> and <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> properties to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using no parameters. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using no parameters. </para>
         </summary>
       </Docs>
     </Member>
@@ -97,22 +91,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property to <paramref name="dataSource" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property to null.</para
-          >
+            >This constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property to <paramref name="dataSource" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source. </para>
         </summary>
         <param name="dataSource">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to be used as the data source.</param
-        >
+          />The name of the property to be used as the data source.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -137,29 +128,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property to <paramref name="dataSource" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property to <paramref name="dataMember" />.</para
-          >
+            >This constructor sets the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property to <paramref name="dataSource" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property to <paramref name="dataMember" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source and data member. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class using the specified data source and data member. </para>
         </summary>
         <param name="dataSource">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to be used as the data source.</param
-        >
+          />The name of the property to be used as the data source.</param>
         <param name="dataMember">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to be used as the source for data.</param
-        >
+          />The name of the property to be used as the source for data.</param>
       </Docs>
     </Member>
     <Member MemberName="DataMember">
@@ -178,14 +165,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property is set in the constructors for this class.</para
-          >
+            >The <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> property is set in the constructors for this class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the data member property for the component to which the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is bound.</para
-          >
+            >Gets the name of the data member property for the component to which the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is bound.</para>
         </summary>
       </Docs>
     </Member>
@@ -205,14 +190,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property is set in the constructors for this class.</para
-          >
+            >The <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> property is set in the constructors for this class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the data source property for the component to which the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is bound.</para
-          >
+            >Gets the name of the data source property for the component to which the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> is bound.</para>
         </summary>
       </Docs>
     </Member>
@@ -237,14 +220,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.ComponentModel.ComplexBindingPropertiesAttribute.Default" /> member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class initialized with the default constructor.</para
-          >
+            >The <see cref="F:System.ComponentModel.ComplexBindingPropertiesAttribute.Default" /> member is a static, read-only field that defines an instance of the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class initialized with the default constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value for the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class.</para
-          >
+            >Represents the default value for the <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -269,14 +250,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.ComplexBindingPropertiesAttribute.Equals(System.Object)" /> method returns true if <paramref name="obj" /> is of type <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> and <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> properties of the two objects are equal.</para
-          >
+            >The <see cref="M:System.ComponentModel.ComplexBindingPropertiesAttribute.Equals(System.Object)" /> method returns true if <paramref name="obj" /> is of type <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> and the <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataSource" /> and <see cref="P:System.ComponentModel.ComplexBindingPropertiesAttribute.DataMember" /> properties of the two objects are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance. </para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -287,8 +266,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance </param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.ComponentModel.ComplexBindingPropertiesAttribute" /> instance </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -17,14 +17,11 @@
       <para
         >If you select the <see cref="F:System.Web.Configuration.FormsProtectionEnum.All" /> value, the system uses the configured data-validation algorithm, based on the <format type="text/html">
           <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
-        </format> tag. This is the default, and recommended, value.</para
-      >
+        </format> tag. This is the default, and recommended, value.</para>
       <para
-        >If you select <see cref="F:System.Web.Configuration.FormsProtectionEnum.None" />, cookies might be subject to plaintext attacks.</para
-      >
+        >If you select <see cref="F:System.Web.Configuration.FormsProtectionEnum.None" />, cookies might be subject to plaintext attacks.</para>
       <para
-        >If you select <see cref="F:System.Web.Configuration.FormsProtectionEnum.Validation" />, the cookie is created using cookie validation by concatenating a validation key with the cookie data, computing a Message Authentication Code (MAC), and appending the MAC to the outgoing cookie.</para
-      >
+        >If you select <see cref="F:System.Web.Configuration.FormsProtectionEnum.Validation" />, the cookie is created using cookie validation by concatenating a validation key with the cookie data, computing a Message Authentication Code (MAC), and appending the MAC to the outgoing cookie.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

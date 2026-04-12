@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables setting message-level security properties on the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para
-      >
+        >Enables setting message-level security properties on the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MessageSecurityOverMsmqElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MessageSecurityOverMsmqElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -79,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> defines a variety of algorithms, such as Canonicalization, Digest, KeyWrap, Signature, Encryption, and KeyDerivation. This property is most relevant when working with a platform that uses a set of algorithms different than the default. You should be aware of the strengths and weaknesses of the relevant algorithms when making modifications to this property.</para
-          >
+            <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> defines a variety of algorithms, such as Canonicalization, Digest, KeyWrap, Signature, Encryption, and KeyDerivation. This property is most relevant when working with a platform that uses a set of algorithms different than the default. You should be aware of the strengths and weaknesses of the relevant algorithms when making modifications to this property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -123,16 +120,14 @@
             </item>
             <item>
               <para
-                >UserName: This enables the service to require that the client be authenticated using a UserName credential. This credential needs to be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class. </para
-              >
+                >UserName: This enables the service to require that the client be authenticated using a UserName credential. This credential needs to be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class. </para>
               <block subset="none" type="note">
                 <para>indigo2 does not support sending a password digest or deriving keys using password and using such keys for message security. As such, indigo2 enforces that the exchange is secured when using UserName credentials. This mode requires that the service certificate be specified on the client side using ClientCredential behavior and serviceCertificate. </para>
               </block>
             </item>
             <item>
               <para
-                >Certificate: This enables the service to require that the client be authenticated using a certificate. The client credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior. The service credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior by specifying the serviceCertificate. </para
-              >
+                >Certificate: This enables the service to require that the client be authenticated using a certificate. The client credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior. The service credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" /> class or ClientCredentials behavior by specifying the serviceCertificate. </para>
             </item>
             <item>
               <para>CardSpace: This allows the service to require that the client be authenticated using a infocard1. The serviceCertiifcate must be provisioned in the ClientCredential behavior.</para>
@@ -143,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MessageCredentialType" /> security setting for messages sent over the MSMQ transport.</para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MessageCredentialType" /> security setting for messages sent over the MSMQ transport.</para>
         </summary>
       </Docs>
     </Member>

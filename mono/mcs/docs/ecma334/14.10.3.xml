@@ -12,6 +12,5 @@ bool operator ^(bool x, bool y);
   <paragraph>The result of x &amp; y is true if both x and y are true. Otherwise, the result is false. </paragraph>
   <paragraph>The result of x | y is true if either x or y is true. Otherwise, the result is false. </paragraph>
   <paragraph
-    >The result of x ^ y is true if x is true and y is false, or x is false and y is true. Otherwise, the result is false. When the operands are of type <keyword>bool</keyword>, the ^ operator computes the same result as the != operator. </paragraph
-  >
+    >The result of x ^ y is true if x is true and y is false, or x is false and y is true. Otherwise, the result is false. When the operands are of type <keyword>bool</keyword>, the ^ operator computes the same result as the != operator. </paragraph>
 </clause>

@@ -17,27 +17,21 @@ Copyright (c) .NET Foundation. All rights reserved.
   -->
   <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and '$(_TargetFrameworkVersionWithoutV)' >= '3.0'">
     <PublishReadyToRunUseCrossgen2 Condition="'$(_TargetFrameworkVersionWithoutV)' >= '6.0'"
-      >true</PublishReadyToRunUseCrossgen2
-    >
+      >true</PublishReadyToRunUseCrossgen2>
     <PublishReadyToRunComposite
       Condition="'$(PublishReadyToRunComposite)' == '' and '$(_TargetFrameworkVersionWithoutV)' >= '6.0'"
-      >false</PublishReadyToRunComposite
-    >
+      >false</PublishReadyToRunComposite>
     <PublishReadyToRunComposite Condition="'$(PublishReadyToRunComposite)' == ''"
-      >true</PublishReadyToRunComposite
-    >
+      >true</PublishReadyToRunComposite>
     <PublishReadyToRunComposite
       Condition="'$(PublishReadyToRunUseCrossgen2)' != 'true' or '$(SelfContained)' != 'true'"
-      >false</PublishReadyToRunComposite
-    >
+      >false</PublishReadyToRunComposite>
     <PublishReadyToRunUseRuntimePackOptimizationData
       Condition="'$(PublishReadyToRunUseRuntimePackOptimizationData)' == ''"
-      >true</PublishReadyToRunUseRuntimePackOptimizationData
-    >
+      >true</PublishReadyToRunUseRuntimePackOptimizationData>
     <PublishReadyToRunPerfmapFormatVersion
       Condition="'$(PublishReadyToRunPerfmapFormatVersion)' == ''"
-      >1</PublishReadyToRunPerfmapFormatVersion
-    >
+      >1</PublishReadyToRunPerfmapFormatVersion>
   </PropertyGroup>
 
   <!--
@@ -110,8 +104,7 @@ Copyright (c) .NET Foundation. All rights reserved.
       <!-- TODO override with rid specific tools path for x-arch -->
       <Crossgen>$([System.IO.Path]::Combine($(CrossgenDir),"crossgen"))</Crossgen>
       <Crossgen Condition="$([MSBuild]::IsOSPlatform(`Windows`))"
-        >$([System.IO.Path]::Combine($(CrossgenDir),"crossgen.exe"))</Crossgen
-      >
+        >$([System.IO.Path]::Combine($(CrossgenDir),"crossgen.exe"))</Crossgen>
     </PropertyGroup>
 
     <NETSdkError
@@ -193,11 +186,9 @@ Copyright (c) .NET Foundation. All rights reserved.
       <CrossgenSymbolsStagingDirectory>$([System.IO.Path]::GetDirectoryName($(StoreSymbolsStagingDir)\$(CrossgenSubOutputPath)))</CrossgenSymbolsStagingDirectory>
       <CrossgenCommandline>$(CrossgenExe) -nologo -readytorun -in "$(CrossgenInputAssembly)" -out "$(CrossgenOutputAssembly)" -jitpath "$(CrossgenJit)" -platform_assemblies_paths "$(CrossgenPlatformAssembliesPath)"</CrossgenCommandline>
       <CreateProfilingSymbolsOptionName Condition="$([MSBuild]::IsOSPlatform(`Windows`))"
-        >CreatePDB</CreateProfilingSymbolsOptionName
-      >
+        >CreatePDB</CreateProfilingSymbolsOptionName>
       <CreateProfilingSymbolsOptionName Condition="'$(CreateProfilingSymbolsOptionName)' == ''"
-        >CreatePerfMap</CreateProfilingSymbolsOptionName
-      >
+        >CreatePerfMap</CreateProfilingSymbolsOptionName>
     </PropertyGroup>
 
     <Message Text="CrossgenCommandline: $(CrossgenCommandline)" />
@@ -396,11 +387,9 @@ Copyright (c) .NET Foundation. All rights reserved.
 
   <PropertyGroup>
     <MicrosoftNETCrossgenBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'"
-      >$(MSBuildThisFileDirectory)..\tasks\net6.0\Microsoft.NET.Sdk.Crossgen.dll</MicrosoftNETCrossgenBuildTasksAssembly
-    >
+      >$(MSBuildThisFileDirectory)..\tasks\net6.0\Microsoft.NET.Sdk.Crossgen.dll</MicrosoftNETCrossgenBuildTasksAssembly>
     <MicrosoftNETCrossgenBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'"
-      >$(MSBuildThisFileDirectory)..\tasks\net472\Microsoft.NET.Sdk.Crossgen.dll</MicrosoftNETCrossgenBuildTasksAssembly
-    >
+      >$(MSBuildThisFileDirectory)..\tasks\net472\Microsoft.NET.Sdk.Crossgen.dll</MicrosoftNETCrossgenBuildTasksAssembly>
   </PropertyGroup>
 
   <!--
@@ -612,8 +601,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <!-- Use distinct property here as any of the invocations can set it -->
       <_ReadyToRunCompilerHasWarnings Condition="'$(_ReadyToRunWarningsDetected)' == 'true'"
-        >true</_ReadyToRunCompilerHasWarnings
-      >
+        >true</_ReadyToRunCompilerHasWarnings>
     </PropertyGroup>
 
     <ItemGroup>
@@ -654,8 +642,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <!-- Use distinct property here as any of the invocations can set it -->
       <_ReadyToRunCompilerHasWarnings Condition="'$(_ReadyToRunWarningsDetected)' == 'true'"
-        >true</_ReadyToRunCompilerHasWarnings
-      >
+        >true</_ReadyToRunCompilerHasWarnings>
     </PropertyGroup>
 
     <ItemGroup>

@@ -5,12 +5,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <InvariantGlobalization>true</InvariantGlobalization>
     <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <!-- Test infra issue on apple devices: https://github.com/dotnet/runtime/issues/89917 -->
     <CLRTestTargetUnsupported Condition="'$(TargetsAppleMobile)' == 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <DefineConstants>$(DefineConstants);STRIPPED</DefineConstants>
     <StackTraceSupport>false</StackTraceSupport>
   </PropertyGroup>

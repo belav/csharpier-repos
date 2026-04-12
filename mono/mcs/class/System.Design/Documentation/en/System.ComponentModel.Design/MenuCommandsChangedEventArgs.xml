@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,15 +44,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" /> class.</para>
         </summary>
         <param name="changeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of change.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type of change.</param>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />The menu command.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The menu command.</param>
       </Docs>
     </Member>
     <Member MemberName="ChangeType">
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of change that caused <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> to be raised.</para
-          >
+            >Gets the type of change that caused <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> to be raised.</para>
         </summary>
       </Docs>
     </Member>

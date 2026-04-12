@@ -37,15 +37,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />attribute.</para
-      >
+        >This enumeration is used with the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />attribute.</para>
       <para
-        >You can specify multiple <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> values by using the bitwise OR operator.</para
-      >
+        >You can specify multiple <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" /> values by using the bitwise OR operator.</para>
       <block subset="none" type="note">
         <para
-          >Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" /> flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems. </para
-        >
+          >Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" /> flag, is not recommended for public types, because code other than your own can take locks on public types and instances. This might cause deadlocks or other synchronization problems. </para>
       </block>
     </remarks>
     <summary>
@@ -184,8 +181,7 @@
           <para
             >The method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format type="text/html">
               <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Ngen.exe</a>
-            </format>) when debugging possible code generation problems.</para
-          >
+            </format>) when debugging possible code generation problems.</para>
         </summary>
       </Docs>
     </Member>

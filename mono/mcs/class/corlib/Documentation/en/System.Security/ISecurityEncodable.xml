@@ -58,8 +58,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" /> and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" /> methods to make the objects security-encodable.</para
-          >
+            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" /> and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" /> methods to make the objects security-encodable.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,8 +69,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the security object. </param
-        >
+          />The XML encoding to use to reconstruct the security object. </param>
       </Docs>
     </Member>
     <Member MemberName="ToXml">
@@ -94,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" /> and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" /> methods to make the objects security-encodable.</para
-          >
+            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" /> and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" /> methods to make the objects security-encodable.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

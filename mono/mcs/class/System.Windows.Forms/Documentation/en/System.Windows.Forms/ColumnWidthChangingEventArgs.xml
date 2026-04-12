@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event is a cancelable event.</para
-      >
+        >The <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event is a cancelable event.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -47,23 +45,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangingEventArgs" /> class with the specified column index and width.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangingEventArgs" /> class with the specified column index and width.</para>
         </summary>
         <param name="columnIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the column whose width is changing.</param
-        >
+          />The index of the column whose width is changing.</param>
         <param name="newWidth">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new width for the column.</param
-        >
+          />The new width for the column.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -85,36 +80,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Passing in true for the <paramref name="cancel" /> parameter will cause the width change to be canceled, and the column will return to its previous size.</para
-          >
+            >Passing in true for the <paramref name="cancel" /> parameter will cause the width change to be canceled, and the column will return to its previous size.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangingEventArgs" /> class, specifying the column index and width and whether to cancel the event.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnWidthChangingEventArgs" /> class, specifying the column index and width and whether to cancel the event.</para>
         </summary>
         <param name="columnIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the column whose width is changing.</param
-        >
+          />The index of the column whose width is changing.</param>
         <param name="newWidth">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new width of the column.</param
-        >
+          />The new width of the column.</param>
         <param name="cancel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to cancel the width change; otherwise, false.</param
-        >
+          />true to cancel the width change; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -151,8 +141,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When handing the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event, the <see cref="P:System.Windows.Forms.ColumnWidthChangingEventArgs.NewWidth" /> property enables you to verify whether the new width meets the requirements of your application and to either adjust the width or cancel the event if it does not.</para
-          >
+            >When handing the <see cref="E:System.Windows.Forms.ListView.ColumnWidthChanging" /> event, the <see cref="P:System.Windows.Forms.ColumnWidthChangingEventArgs.NewWidth" /> property enables you to verify whether the new width meets the requirements of your application and to either adjust the width or cancel the event if it does not.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

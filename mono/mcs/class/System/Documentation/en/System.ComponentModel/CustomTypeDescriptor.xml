@@ -25,14 +25,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Like <see cref="T:System.ComponentModel.TypeDescriptionProvider" />, the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class relies on a parent object of type <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> supplied during construction. This allows classes that derive from <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> to selectively override methods. </para
-      >
+        >Like <see cref="T:System.ComponentModel.TypeDescriptionProvider" />, the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class relies on a parent object of type <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> supplied during construction. This allows classes that derive from <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> to selectively override methods. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a simple default implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface.</para
-      >
+        >Provides a simple default implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,17 +50,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is equivalent to calling the other <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor with a parameter that is null. </para
-          >
+            >This constructor is equivalent to calling the other <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor with a parameter that is null. </para>
           <para
-            >All methods of a <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> created with this constructor will return default values. </para
-          >
+            >All methods of a <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> created with this constructor will return default values. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,11 +82,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="parent" /> parameter is null, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods will return default values. Otherwise, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods will delegate to the methods of <paramref name="parent" />.</para
-          >
+            >If the <paramref name="parent" /> parameter is null, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods will return default values. Otherwise, all <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods will delegate to the methods of <paramref name="parent" />.</para>
           <para
-            >Most <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods return null by default. The following table shows the return values for the methods that do not return null by default.</para
-          >
+            >Most <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> methods return null by default. The following table shows the return values for the methods that do not return null by default.</para>
           <list type="table">
             <listheader>
               <item>
@@ -111,8 +104,7 @@
               </term>
               <description>
                 <para
-                  >An empty attribute collection (<see cref="F:System.ComponentModel.AttributeCollection.Empty" />).</para
-                >
+                  >An empty attribute collection (<see cref="F:System.ComponentModel.AttributeCollection.Empty" />).</para>
               </description>
             </item>
             <item>
@@ -123,8 +115,7 @@
               </term>
               <description>
                 <para
-                  >The default <see cref="T:System.ComponentModel.TypeConverter" /> instance.</para
-                >
+                  >The default <see cref="T:System.ComponentModel.TypeConverter" /> instance.</para>
               </description>
             </item>
             <item>
@@ -135,8 +126,7 @@
               </term>
               <description>
                 <para
-                  >An empty events collection (<see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />).</para
-                >
+                  >An empty events collection (<see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />).</para>
               </description>
             </item>
             <item>
@@ -147,8 +137,7 @@
               </term>
               <description>
                 <para
-                  >An empty property collection (<see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />).</para
-                >
+                  >An empty property collection (<see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />).</para>
               </description>
             </item>
           </list>
@@ -156,16 +145,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class using a parent custom type descriptor.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class using a parent custom type descriptor.</para>
         </summary>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent custom type descriptor.</param
-        >
+          />The parent custom type descriptor.</param>
       </Docs>
     </Member>
     <Member MemberName="GetAttributes">
@@ -190,8 +177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetAttributes" /> method will call the parent's corresponding method. </para
-          >
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetAttributes" /> method will call the parent's corresponding method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -200,8 +186,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.AttributeCollection" /> containing the attributes for the type. The default is <see cref="F:System.ComponentModel.AttributeCollection.Empty" />.</para
-          >
+            >An <see cref="T:System.ComponentModel.AttributeCollection" /> containing the attributes for the type. The default is <see cref="F:System.ComponentModel.AttributeCollection.Empty" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -224,8 +209,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetClassName" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetClassName" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -234,8 +218,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> containing the fully qualified class name of the type this type descriptor is describing. The default is null.</para
-          >
+            >A <see cref="T:System.String" /> containing the fully qualified class name of the type this type descriptor is describing. The default is null.</para>
         </returns>
       </Docs>
     </Member>
@@ -258,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetComponentName" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed to the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetComponentName" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -268,8 +250,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> containing the name of the component instance this type descriptor is describing. The default is null.</para
-          >
+            >A <see cref="T:System.String" /> containing the name of the component instance this type descriptor is describing. The default is null.</para>
         </returns>
       </Docs>
     </Member>
@@ -295,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetConverter" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetConverter" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -305,8 +285,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.TypeConverter" /> for the type represented by this type descriptor. The default is a newly created <see cref="T:System.ComponentModel.TypeConverter" />.</para
-          >
+            >A <see cref="T:System.ComponentModel.TypeConverter" /> for the type represented by this type descriptor. The default is a newly created <see cref="T:System.ComponentModel.TypeConverter" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -332,8 +311,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultEvent" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultEvent" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -342,8 +320,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.EventDescriptor" /> for the default event on the object represented by this type descriptor. The default is null.</para
-          >
+            >The <see cref="T:System.ComponentModel.EventDescriptor" /> for the default event on the object represented by this type descriptor. The default is null.</para>
         </returns>
       </Docs>
     </Member>
@@ -369,8 +346,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultProperty" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultProperty" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -379,8 +355,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> for the default property on the object represented by this type descriptor. The default is null.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> for the default property on the object represented by this type descriptor. The default is null.</para>
         </returns>
       </Docs>
     </Member>
@@ -408,8 +383,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -424,8 +398,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base type of the editor to retrieve.</param
-        >
+          />The base type of the editor to retrieve.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -450,8 +423,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -460,8 +432,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> containing the event descriptors for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> containing the event descriptors for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -489,11 +460,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <paramref name="attributes" /> parameter to filter the collection that is returned.</para
-          >
+            >You can use the <paramref name="attributes" /> parameter to filter the collection that is returned.</para>
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents(System.Attribute[])" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents(System.Attribute[])" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -502,16 +471,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> containing the event descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> containing the event descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />.</para>
         </returns>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of attributes to use as a filter. This can be null.</param
-        >
+          />An array of attributes to use as a filter. This can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -536,8 +503,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -546,8 +512,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -575,11 +540,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <paramref name="attributes" /> parameter to filter the collection that is returned. For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para
-          >
+            >You can use the <paramref name="attributes" /> parameter to filter the collection that is returned. For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para>
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties(System.Attribute[])" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties(System.Attribute[])" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -588,16 +551,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> containing the property descriptions for the object represented by this type descriptor. The default is <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />.</para>
         </returns>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of attributes to use as a filter. This can be null.</param
-        >
+          />An array of attributes to use as a filter. This can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertyOwner">
@@ -624,8 +585,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" /> method will call the parent's corresponding method.</para
-          >
+            >If a parent custom type descriptor was passed into the <see cref="M:System.ComponentModel.CustomTypeDescriptor.#ctor(System.ComponentModel.ICustomTypeDescriptor)" /> constructor, the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" /> method will call the parent's corresponding method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -634,16 +594,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that owns the given property specified by the type descriptor. The default is null.</para
-          >
+            >An <see cref="T:System.Object" /> that owns the given property specified by the type descriptor. The default is null.</para>
         </returns>
         <param name="pd">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property descriptor for which to retrieve the owning object.</param
-        >
+          />The property descriptor for which to retrieve the owning object.</param>
       </Docs>
     </Member>
   </Members>

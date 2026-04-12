@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is an extensibility point that SecurityTokenManagers can implement to provide a default <see cref="T:System.ServiceModel.EndpointIdentity" /> for the service endpoint (for example, a DNS identity). This <see cref="T:System.ServiceModel.EndpointIdentity" /> is published as part of the WSDL for the service endpoint.</para
-      >
+        >This interface is an extensibility point that SecurityTokenManagers can implement to provide a default <see cref="T:System.ServiceModel.EndpointIdentity" /> for the service endpoint (for example, a DNS identity). This <see cref="T:System.ServiceModel.EndpointIdentity" /> is published as part of the WSDL for the service endpoint.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +51,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="tokenRequirement" /> parameter contains the binding information of the endpoint, which is typically used in determining the <see cref="T:System.ServiceModel.EndpointIdentity" /> for the endpoint. For example, if the binding is configured to do Kerberos-based authentication, the default identity returned will be a ServicePrincipalName (SPN) or UserPrincipalName (UPN).</para
-          >
+            >The <paramref name="tokenRequirement" /> parameter contains the binding information of the endpoint, which is typically used in determining the <see cref="T:System.ServiceModel.EndpointIdentity" /> for the endpoint. For example, if the binding is configured to do Kerberos-based authentication, the default identity returned will be a ServicePrincipalName (SPN) or UserPrincipalName (UPN).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,16 +60,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointIdentity" /> of the current endpoint.</para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointIdentity" /> of the current endpoint.</para>
         </returns>
         <param name="tokenRequirement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> that describes security token requirements.</param
-        >
+          />The <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> that describes security token requirements.</param>
       </Docs>
     </Member>
   </Members>

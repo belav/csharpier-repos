@@ -29,11 +29,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission is used to secure data returned by the classes in the <see cref="N:System.Net.NetworkInformation" /> namespace.</para
-      >
+        >This permission is used to secure data returned by the classes in the <see cref="N:System.Net.NetworkInformation" /> namespace.</para>
       <para
-        >For declarative security, use the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermissionAttribute" /> class.</para
-      >
+        >For declarative security, use the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermissionAttribute" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class using the specified <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class using the specified <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> value.</para>
         </summary>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param
-        >
+          />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -115,16 +111,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
       </Docs>
     </Member>
     <Member MemberName="Access">
@@ -155,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Ping" /> | <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Read" /> access. A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.None" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.None" /> access.</para
-          >
+            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Ping" /> | <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.Read" /> access. A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> created with <see cref="F:System.Security.Permissions.PermissionState.None" /> is given <see cref="F:System.Net.NetworkInformation.NetworkInformationAccess.None" /> access.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +197,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param
-        >
+          />One of the <see cref="T:System.Net.NetworkInformation.NetworkInformationAccess" /> values.</param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -241,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that is identical to the current permission</para
-          >
+            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that is identical to the current permission</para>
         </returns>
       </Docs>
     </Member>
@@ -286,8 +277,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to set the state of the current permission</param
-        >
+          />A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding to use to set the state of the current permission</param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -328,16 +318,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty or <paramref name="target" /> is null.</para
-          >
+            >A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" /> that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty or <paramref name="target" /> is null.</para>
         </returns>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.IPermission" /> to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />An <see cref="T:System.Security.IPermission" /> to intersect with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -384,8 +372,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.IPermission" /> that is to be tested for the subset relationship. This permission must be of the same type as the current permission</param
-        >
+          />An <see cref="T:System.Security.IPermission" /> that is to be tested for the subset relationship. This permission must be of the same type as the current permission</param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -413,8 +400,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unrestricted permission is created using the <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.#ctor(System.Security.Permissions.PermissionState)" /> constructor.</para
-          >
+            >An unrestricted permission is created using the <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.#ctor(System.Security.Permissions.PermissionState)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -462,8 +448,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding of the current permission.</para
-          >
+            >A <see cref="T:System.Security.SecurityElement" /> that contains the XML encoding of the current permission.</para>
         </returns>
       </Docs>
     </Member>
@@ -497,8 +482,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.Union(System.Security.IPermission)" /> method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The <see cref="M:System.Net.NetworkInformation.NetworkInformationPermission.Union(System.Security.IPermission)" /> method returns a permission that represents all the states represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -513,8 +497,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />  permission to combine with the current permission. </param
-        >
+          />A <see cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />  permission to combine with the current permission. </param>
       </Docs>
     </Member>
   </Members>

@@ -6,8 +6,7 @@
 
     <!-- This test always runs as multimodule. It's not supported if we don't have framework object files. -->
     <CLRTestTargetUnsupported Condition="'$(BuildNativeAotFrameworkObjects)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <IlcMultiModule>true</IlcMultiModule>
   </PropertyGroup>
   <ItemGroup>

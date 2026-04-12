@@ -82,8 +82,7 @@
     <PropertyGroup>
       <_SeleniumE2ETestsSupportedAttributeValue>false</_SeleniumE2ETestsSupportedAttributeValue>
       <_SeleniumE2ETestsSupportedAttributeValue Condition="'$(SeleniumE2ETestsSupported)' == 'true'"
-        >true</_SeleniumE2ETestsSupportedAttributeValue
-      >
+        >true</_SeleniumE2ETestsSupportedAttributeValue>
     </PropertyGroup>
     <ItemGroup>
       <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">

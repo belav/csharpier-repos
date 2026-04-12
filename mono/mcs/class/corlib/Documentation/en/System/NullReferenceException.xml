@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see cref="T:System.NullReferenceException" /> exception.</para
-      >
+      a <see cref="T:System.NullReferenceException" /> exception.</para>
       <code lang="C#"
         >using System;
 public class Ints {
@@ -64,29 +63,23 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.NullReferenceException" /> exception is thrown when you try to access a member on a type whose value is null. The following example illustrates one such scenario: </para
-      >
+        >A <see cref="T:System.NullReferenceException" /> exception is thrown when you try to access a member on a type whose value is null. The following example illustrates one such scenario: </para>
       <para>code reference: System.NullReferenceException.Class#1</para>
       <para>Some compilers issue a warning when they compile this code. Others issue an error, and the compilation fails. To address this problem, instantiate the object so that its value is no longer null. The following example does this by calling a type's class constructor.</para>
       <para>code reference: System.NullReferenceException.Class#2</para>
       <para
-        >More commonly, a <see cref="T:System.NullReferenceException" /> exception is thrown by a method that is passed null. Some methods validate the arguments that are passed to them. If they do and one of the arguments is null, the method throws an <see cref="T:System.ArgumentNullException" /> exception. Otherwise, it throws a <see cref="T:System.NullReferenceException" /> exception. The following example illustrates this scenario. </para
-      >
+        >More commonly, a <see cref="T:System.NullReferenceException" /> exception is thrown by a method that is passed null. Some methods validate the arguments that are passed to them. If they do and one of the arguments is null, the method throws an <see cref="T:System.ArgumentNullException" /> exception. Otherwise, it throws a <see cref="T:System.NullReferenceException" /> exception. The following example illustrates this scenario. </para>
       <para>code reference: System.NullReferenceException.Class#3</para>
       <para
         >To address this issue, make sure that the argument passed to the method is not null, or handle the thrown exception in a try…catch…finally block. For more information, see <format type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
-        </format>. </para
-      >
+        </format>. </para>
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.NullReferenceException" />: callvirt, cpblk, cpobj, initblk, ldelem.&lt;type&gt;, ldelema, ldfld, ldflda, ldind.&lt;type&gt;, ldlen, stelem.&lt;type&gt;, stfld, stind.&lt;type&gt;, throw, and unbox.  </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.NullReferenceException" />: callvirt, cpblk, cpobj, initblk, ldelem.&lt;type&gt;, ldelema, ldfld, ldflda, ldind.&lt;type&gt;, ldlen, stelem.&lt;type&gt;, stfld, stind.&lt;type&gt;, throw, and unbox.  </para>
       <para>
-        <see cref="T:System.NullReferenceException" /> uses the HRESULT COR_E_NULLREFERENCE, which has the value 0x80004003.</para
-      >
+        <see cref="T:System.NullReferenceException" /> uses the HRESULT COR_E_NULLREFERENCE, which has the value 0x80004003.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.NullReferenceException" />, see the <see cref="M:System.NullReferenceException.#ctor" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.NullReferenceException" />, see the <see cref="M:System.NullReferenceException.#ctor" /> constructors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -116,8 +109,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -154,8 +146,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class, setting the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The value 'null' was found where an instance of an object was required." This message takes into account the current system culture.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class, setting the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The value 'null' was found where an instance of an object was required." This message takes into account the current system culture.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -184,8 +175,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -222,16 +212,14 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -260,31 +248,26 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           <para
             >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
-                >[&lt;topic://cpconSerialization&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconSerialization&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -315,11 +298,9 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -356,23 +337,20 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

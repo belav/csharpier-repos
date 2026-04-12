@@ -37,14 +37,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.DBNull" /> class represents a nonexistent value. In a database, for example, a column in a row of a table might not contain any data whatsoever. That is, the column is considered to not exist at all instead of merely not having a value. A <see cref="T:System.DBNull" /> object represents the nonexistent column. Additionally, COM interop uses the <see cref="T:System.DBNull" /> class to distinguish between a VT_NULL variant, which indicates a nonexistent value, and a VT_EMPTY variant, which indicates an unspecified value.</para
-      >
+        >The <see cref="T:System.DBNull" /> class represents a nonexistent value. In a database, for example, a column in a row of a table might not contain any data whatsoever. That is, the column is considered to not exist at all instead of merely not having a value. A <see cref="T:System.DBNull" /> object represents the nonexistent column. Additionally, COM interop uses the <see cref="T:System.DBNull" /> class to distinguish between a VT_NULL variant, which indicates a nonexistent value, and a VT_EMPTY variant, which indicates an unspecified value.</para>
       <para
-        >The <see cref="T:System.DBNull" /> type is a singleton class, which means only one <see cref="T:System.DBNull" /> object exists. The <see cref="F:System.DBNull.Value" /> member represents the sole <see cref="T:System.DBNull" /> object. <see cref="F:System.DBNull.Value" /> can be used to explicitly assign a nonexistent value to a database field, although most ADO.NET data providers automatically assign values of <see cref="T:System.DBNull" /> when a field does not have a valid value. You can determine whether a value retrieved from a database field is a <see cref="T:System.DBNull" /> value by passing the value of that field to the DBNull.Value.Equals method. However, some languages and database objects supply methods that make it easier to determine whether the value of a database field is <see cref="F:System.DBNull.Value" />. These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" /> method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> method, and the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" /> method.</para
-      >
+        >The <see cref="T:System.DBNull" /> type is a singleton class, which means only one <see cref="T:System.DBNull" /> object exists. The <see cref="F:System.DBNull.Value" /> member represents the sole <see cref="T:System.DBNull" /> object. <see cref="F:System.DBNull.Value" /> can be used to explicitly assign a nonexistent value to a database field, although most ADO.NET data providers automatically assign values of <see cref="T:System.DBNull" /> when a field does not have a valid value. You can determine whether a value retrieved from a database field is a <see cref="T:System.DBNull" /> value by passing the value of that field to the DBNull.Value.Equals method. However, some languages and database objects supply methods that make it easier to determine whether the value of a database field is <see cref="F:System.DBNull.Value" />. These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" /> method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> method, and the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" /> method.</para>
       <para
-        >Do not confuse the notion of null in an object-oriented programming language with a <see cref="T:System.DBNull" /> object. In an object-oriented programming language, null means the absence of a reference to an object. <see cref="T:System.DBNull" /> represents an uninitialized variant or nonexistent database column.</para
-      >
+        >Do not confuse the notion of null in an object-oriented programming language with a <see cref="T:System.DBNull" /> object. In an object-oriented programming language, null means the absence of a reference to an object. <see cref="T:System.DBNull" /> represents an uninitialized variant or nonexistent database column.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,23 +76,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and returns the data needed to serialize the <see cref="T:System.DBNull" /> object.</para
-          >
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and returns the data needed to serialize the <see cref="T:System.DBNull" /> object.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing information required to serialize the <see cref="T:System.DBNull" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing information required to serialize the <see cref="T:System.DBNull" /> object. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.DBNull" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.DBNull" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetTypeCode">
@@ -119,14 +113,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.TypeCode" /> value for <see cref="T:System.DBNull" />.</para
-          >
+            >Gets the <see cref="T:System.TypeCode" /> value for <see cref="T:System.DBNull" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.TypeCode" /> value for <see cref="T:System.DBNull" />, which is <see cref="F:System.TypeCode.DBNull" />.</para
-          >
+            >The <see cref="T:System.TypeCode" /> value for <see cref="T:System.DBNull" />, which is <see cref="F:System.TypeCode.DBNull" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -156,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -168,8 +159,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToByte">
@@ -195,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -207,8 +196,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToChar">
@@ -234,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +233,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToDateTime">
@@ -276,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,8 +273,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToDecimal">
@@ -318,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -330,8 +313,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToDouble">
@@ -360,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -372,8 +353,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToInt16">
@@ -402,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -414,8 +393,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToInt32">
@@ -441,8 +419,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -453,8 +430,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToInt64">
@@ -483,8 +459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -495,8 +470,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToSByte">
@@ -525,8 +499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -537,8 +510,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToSingle">
@@ -567,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -579,8 +550,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToType">
@@ -610,28 +580,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Three conversions are supported: If the <paramref name="type" /> parameter specifies <see cref="T:System.Object" /> or <see cref="T:System.DBNull" />, the return value is the current <see cref="T:System.DBNull" /> object itself. If the <paramref name="type" /> parameter specifies <see cref="T:System.String" />, the return value is the string returned by the <see cref="M:System.DBNull.ToString" /> method.</para
-          >
+            >Three conversions are supported: If the <paramref name="type" /> parameter specifies <see cref="T:System.Object" /> or <see cref="T:System.DBNull" />, the return value is the current <see cref="T:System.DBNull" /> object itself. If the <paramref name="type" /> parameter specifies <see cref="T:System.String" />, the return value is the string returned by the <see cref="M:System.DBNull.ToString" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the current <see cref="T:System.DBNull" /> object to the specified type.</para
-          >
+            >Converts the current <see cref="T:System.DBNull" /> object to the specified type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The boxed equivalent of the current <see cref="T:System.DBNull" /> object, if that conversion is supported; otherwise, an exception is thrown and no value is returned. </para
-          >
+            >The boxed equivalent of the current <see cref="T:System.DBNull" /> object, if that conversion is supported; otherwise, an exception is thrown and no value is returned. </para>
         </returns>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface and is used to augment the conversion. If null is specified, format information is obtained from the current culture. </param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface and is used to augment the conversion. If null is specified, format information is obtained from the current culture. </param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToUInt16">
@@ -660,8 +626,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -672,8 +637,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToUInt32">
@@ -702,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -714,8 +677,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="System.IConvertible.ToUInt64">
@@ -744,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para
-          >
+            >This conversion is not supported. Attempting to make this conversion throws an <see cref="T:System.InvalidCastException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -756,8 +717,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param
-        >
+          />An object that implements the <see cref="T:System.IFormatProvider" /> interface. (This parameter is not used; specify null.)</param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -811,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an empty string using the specified <see cref="T:System.IFormatProvider" />.</para
-          >
+            >Returns an empty string using the specified <see cref="T:System.IFormatProvider" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -823,8 +782,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IFormatProvider" /> to be used to format the return value.</param
-        >
+          />The <see cref="T:System.IFormatProvider" /> to be used to format the return value.</param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -847,14 +805,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.DBNull" /> is a singleton class, which means only this instance of this class can exist.</para
-          >
+            <see cref="T:System.DBNull" /> is a singleton class, which means only this instance of this class can exist.</para>
           <para
-            >If a database field has missing data, you can use the <see cref="F:System.DBNull.Value" /> property to explicitly assign a <see cref="T:System.DBNull" /> object value to the field. However, most data providers do this automatically.</para
-          >
+            >If a database field has missing data, you can use the <see cref="F:System.DBNull.Value" /> property to explicitly assign a <see cref="T:System.DBNull" /> object value to the field. However, most data providers do this automatically.</para>
           <para
-            >To evaluate database fields to determine whether their values are <see cref="T:System.DBNull" />, you can pass the field value to the DBNull.Value.Equals method. However, this method is rarely used because there are a number of other ways to evaluate a database field for missing data. These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" /> method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> method, the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" /> method, and several other methods.</para
-          >
+            >To evaluate database fields to determine whether their values are <see cref="T:System.DBNull" />, you can pass the field value to the DBNull.Value.Equals method. However, this method is rarely used because there are a number of other ways to evaluate a database field for missing data. These include the Visual Basic IsDBNull function, the <see cref="M:System.Convert.IsDBNull(System.Object)" /> method, the <see cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" /> method, the <see cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" /> method, and several other methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

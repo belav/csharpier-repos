@@ -15,8 +15,7 @@ Copyright (c) .NET Foundation. All rights reserved.
   </PropertyGroup>
   <PropertyGroup Condition="'$(_WebAssemblyUserRunParameters)' == '' and '$(_UseBlazorDevServer)' == 'false'">
     <RunCommand Condition="'$(DOTNET_HOST_PATH)' != '' and Exists($(DOTNET_HOST_PATH))"
-      >$(DOTNET_HOST_PATH)</RunCommand
-    >
+      >$(DOTNET_HOST_PATH)</RunCommand>
     <RunCommand Condition="'$(RunCommand)' == ''">dotnet</RunCommand>
 
     <WasmAppHostDir>$([MSBuild]::NormalizeDirectory($(MSBuildThisFileDirectory), '..', 'WasmAppHost'))</WasmAppHostDir>
@@ -24,8 +23,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <_RunWorkingDirectory>$(OutputPath)</_RunWorkingDirectory>
     <_RunWorkingDirectory
       Condition="'$(_RunWorkingDirectory)' != '' and !$([System.IO.Path]::IsPathRooted($(_RunWorkingDirectory)))"
-      >$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(_RunWorkingDirectory)))</_RunWorkingDirectory
-    >
+      >$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(_RunWorkingDirectory)))</_RunWorkingDirectory>
     <_RuntimeConfigJsonPath>$([MSBuild]::NormalizePath($(_RunWorkingDirectory), '$(AssemblyName).runtimeconfig.json'))</_RuntimeConfigJsonPath>
 
     <RunArguments>exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; --use-staticwebassets --runtime-config &quot;$(_RuntimeConfigJsonPath)&quot; $(WasmHostArguments)</RunArguments>
@@ -34,15 +32,13 @@ Copyright (c) .NET Foundation. All rights reserved.
 
   <PropertyGroup>
     <EnableDefaultContentItems Condition=" '$(EnableDefaultContentItems)' == '' "
-      >true</EnableDefaultContentItems
-    >
+      >true</EnableDefaultContentItems>
 
     <!-- Trimmer defaults that depend on user-definable settings.
         This must be configured before it's initialized in the .NET SDK targets (which are imported by the Razor SDK). -->
     <SuppressTrimAnalysisWarnings
       Condition="'$(SuppressTrimAnalysisWarnings)' == '' And '$(TrimmerDefaultAction)' != 'link'"
-      >true</SuppressTrimAnalysisWarnings
-    >
+      >true</SuppressTrimAnalysisWarnings>
   </PropertyGroup>
 
   <!--
@@ -54,21 +50,17 @@ Copyright (c) .NET Foundation. All rights reserved.
   <PropertyGroup>
     <!-- Paths to tools, tasks, and extensions are calculated relative to the WebAssemblySdkDirectoryRoot. This can be modified to test a local build. -->
     <WebAssemblySdkDirectoryRoot Condition="'$(WebAssemblySdkDirectoryRoot)'==''"
-      >$(MSBuildThisFileDirectory)..\</WebAssemblySdkDirectoryRoot
-    >
+      >$(MSBuildThisFileDirectory)..\</WebAssemblySdkDirectoryRoot>
     <_WebAssemblySdkTasksTFM Condition=" '$(MSBuildRuntimeType)' == 'Core'"
-      >net8.0</_WebAssemblySdkTasksTFM
-    >
+      >net8.0</_WebAssemblySdkTasksTFM>
     <_WebAssemblySdkTasksTFM Condition=" '$(MSBuildRuntimeType)' != 'Core'"
-      >net472</_WebAssemblySdkTasksTFM
-    >
+      >net472</_WebAssemblySdkTasksTFM>
     <_WebAssemblySdkTasksAssembly>$(WebAssemblySdkDirectoryRoot)tools\$(_WebAssemblySdkTasksTFM)\Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll</_WebAssemblySdkTasksAssembly>
 
     <!-- Compression -->
     <CompressionIncludePatterns>$(CompressionIncludePatterns);_framework\**</CompressionIncludePatterns>
     <DisableBuildCompression Condition="'$(WasmBuildingForNestedPublish)' == 'true'"
-      >true</DisableBuildCompression
-    >
+      >true</DisableBuildCompression>
   </PropertyGroup>
 
   <UsingTask
@@ -93,14 +85,11 @@ Copyright (c) .NET Foundation. All rights reserved.
 
     <!-- Runtime feature defaults to trim unnecessary code -->
     <InvariantTimezone Condition="'$(BlazorEnableTimeZoneSupport)' == 'false'"
-      >true</InvariantTimezone
-    >
+      >true</InvariantTimezone>
     <BlazorCacheBootResources Condition="'$(BlazorCacheBootResources)' == ''"
-      >true</BlazorCacheBootResources
-    >
+      >true</BlazorCacheBootResources>
     <WasmFingerprintDotnetJs Condition="'$(WasmFingerprintDotnetJs)' == ''"
-      >false</WasmFingerprintDotnetJs
-    >
+      >false</WasmFingerprintDotnetJs>
 
     <!-- Turn off parts of the build that do not apply to WASM projects -->
     <GenerateDependencyFile>false</GenerateDependencyFile>
@@ -231,37 +220,29 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <_RuntimePackDir>$(MicrosoftNetCoreAppRuntimePackDir)</_RuntimePackDir>
       <_RuntimePackDir Condition="'$(_RuntimePackDir)' == ''"
-        >%(ResolvedRuntimePack.PackageDirectory)</_RuntimePackDir
-      >
+        >%(ResolvedRuntimePack.PackageDirectory)</_RuntimePackDir>
       <_RuntimePackNativeDir>$([MSBuild]::NormalizeDirectory($(_RuntimePackDir), 'runtimes', 'browser-wasm', 'native'))</_RuntimePackNativeDir>
       <_LoadCustomIcuData
         Condition="'$(InvariantGlobalization)' != 'true' AND '$(HybridGlobalization)' != 'true' AND '$(BlazorWebAssemblyLoadAllGlobalizationData)' != 'true' AND '$(BlazorIcuDataFileName)' != ''"
-        >true</_LoadCustomIcuData
-      >
+        >true</_LoadCustomIcuData>
       <_LoadCustomIcuData Condition="'$(_LoadCustomIcuData)' == ''">false</_LoadCustomIcuData>
       <_BlazorIcuDataFileName
         Condition="'$(_LoadCustomIcuData)' == 'true' AND Exists('$(BlazorIcuDataFileName)')"
-        >$(BlazorIcuDataFileName)</_BlazorIcuDataFileName
-      >
+        >$(BlazorIcuDataFileName)</_BlazorIcuDataFileName>
       <_BlazorIcuDataFileName
         Condition="'$(_LoadCustomIcuData)' == 'true' AND !Exists('$(BlazorIcuDataFileName)') AND !$([System.IO.Path]::IsPathRooted($(BlazorIcuDataFileName)))"
-        >$(_RuntimePackNativeDir)$(BlazorIcuDataFileName)</_BlazorIcuDataFileName
-      >
+        >$(_RuntimePackNativeDir)$(BlazorIcuDataFileName)</_BlazorIcuDataFileName>
       <_IsHybridGlobalization
         Condition="'$(InvariantGlobalization)' != 'true' AND '$(_LoadCustomIcuData)' != 'true'"
-        >$(HybridGlobalization)</_IsHybridGlobalization
-      >
+        >$(HybridGlobalization)</_IsHybridGlobalization>
       <_IsHybridGlobalization Condition="'$(_IsHybridGlobalization)' == ''"
-        >false</_IsHybridGlobalization
-      >
+        >false</_IsHybridGlobalization>
       <_BlazorWebAssemblyLoadAllGlobalizationData
         Condition="'$(InvariantGlobalization)' != 'true' AND '$(HybridGlobalization)' != 'true'"
-        >$(BlazorWebAssemblyLoadAllGlobalizationData)</_BlazorWebAssemblyLoadAllGlobalizationData
-      >
+        >$(BlazorWebAssemblyLoadAllGlobalizationData)</_BlazorWebAssemblyLoadAllGlobalizationData>
       <_BlazorWebAssemblyLoadAllGlobalizationData
         Condition="'$(_BlazorWebAssemblyLoadAllGlobalizationData)' == ''"
-        >false</_BlazorWebAssemblyLoadAllGlobalizationData
-      >
+        >false</_BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
     <ItemGroup Condition="'$(_LoadCustomIcuData)' == 'true' AND Exists('$(BlazorIcuDataFileName)')">
       <!-- if ICU comes from runtime pack then it is already included in ReferenceCopyLocalPaths -->
@@ -278,22 +259,18 @@ Copyright (c) .NET Foundation. All rights reserved.
       <_TargetingNET80OrLater>false</_TargetingNET80OrLater>
       <_TargetingNET80OrLater
         Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals('$(TargetFrameworkVersion)', '8.0'))"
-        >true</_TargetingNET80OrLater
-      >
+        >true</_TargetingNET80OrLater>
 
       <_BlazorEnableTimeZoneSupport>$(BlazorEnableTimeZoneSupport)</_BlazorEnableTimeZoneSupport>
       <_BlazorEnableTimeZoneSupport Condition="'$(_BlazorEnableTimeZoneSupport)' == ''"
-        >true</_BlazorEnableTimeZoneSupport
-      >
+        >true</_BlazorEnableTimeZoneSupport>
       <_WasmInvariantGlobalization>$(InvariantGlobalization)</_WasmInvariantGlobalization>
       <_WasmInvariantGlobalization Condition="'$(_WasmInvariantGlobalization)' == ''"
-        >true</_WasmInvariantGlobalization
-      >
+        >true</_WasmInvariantGlobalization>
       <_WasmCopyOutputSymbolsToOutputDirectory>$(CopyOutputSymbolsToOutputDirectory)</_WasmCopyOutputSymbolsToOutputDirectory>
       <_WasmCopyOutputSymbolsToOutputDirectory
         Condition="'$(_WasmCopyOutputSymbolsToOutputDirectory)'==''"
-        >true</_WasmCopyOutputSymbolsToOutputDirectory
-      >
+        >true</_WasmCopyOutputSymbolsToOutputDirectory>
       <_WasmEnableThreads>$(WasmEnableThreads)</_WasmEnableThreads>
       <_WasmEnableThreads Condition="'$(_WasmEnableThreads)' == ''">false</_WasmEnableThreads>
 
@@ -307,14 +284,12 @@ Copyright (c) .NET Foundation. All rights reserved.
       <_WasmDebugLevel Condition="'$(_WasmDebugLevel)' == ''">0</_WasmDebugLevel>
       <_WasmDebugLevel
         Condition="'$(_WasmDebugLevel)' == '0' and ('$(DebuggerSupport)' == 'true' or '$(Configuration)' == 'Debug')"
-        >-1</_WasmDebugLevel
-      >
+        >-1</_WasmDebugLevel>
 
       <!-- Workaround for https://github.com/dotnet/sdk/issues/12114-->
       <PublishDir
         Condition="'$(AppendRuntimeIdentifierToOutputPath)' != 'true' AND '$(PublishDir)' == '$(OutputPath)$(RuntimeIdentifier)\$(PublishDirName)\'"
-        >$(OutputPath)$(PublishDirName)\</PublishDir
-      >
+        >$(OutputPath)$(PublishDirName)\</PublishDir>
     </PropertyGroup>
   </Target>
 
@@ -352,8 +327,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <_WasmEmitSourceMapBuild>$(WasmEmitSourceMap)</_WasmEmitSourceMapBuild>
       <_WasmEmitSourceMapBuild Condition="'$(_WasmEmitSourceMapBuild)' == ''"
-        >true</_WasmEmitSourceMapBuild
-      >
+        >true</_WasmEmitSourceMapBuild>
     </PropertyGroup>
 
     <ComputeWasmBuildAssets
@@ -562,8 +536,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <_WasmEmitSourceMapPublish>$(WasmEmitSourceMap)</_WasmEmitSourceMapPublish>
       <_WasmEmitSourceMapPublish Condition="'$(_WasmEmitSourceMapPublish)' == ''"
-        >false</_WasmEmitSourceMapPublish
-      >
+        >false</_WasmEmitSourceMapPublish>
     </PropertyGroup>
 
     <ItemGroup Condition="@(WasmAssembliesFinal->Count()) == 0">

@@ -14,14 +14,12 @@ void F() {
    Console.WriteLine("reachable");  
 }  
 ]]>
-      </code_example>the second invocation of Console.WriteLine is unreachable because there is no possibility that the statement will be executed. end example]</example
-    >
+      </code_example>the second invocation of Console.WriteLine is unreachable because there is no possibility that the statement will be executed. end example]</example>
   </paragraph>
   <paragraph>A warning is reported if the compiler determines that a statement is unreachable. It is specifically not an error for a statement to be unreachable. </paragraph>
   <paragraph>
     <note
-      >[Note: To determine whether a particular statement or end point is reachable, the compiler performs flow analysis according to the reachability rules defined for each statement. The flow analysis takes into account the values of constant expressions (<hyperlink>14.15</hyperlink>) that control the behavior of statements, but the possible values of non-constant expressions are not considered. In other words, for purposes of control flow analysis, a  non-constant expression of a given type is considered to have any possible value of that type. </note
-    >
+      >[Note: To determine whether a particular statement or end point is reachable, the compiler performs flow analysis according to the reachability rules defined for each statement. The flow analysis takes into account the values of constant expressions (<hyperlink>14.15</hyperlink>) that control the behavior of statements, but the possible values of non-constant expressions are not considered. In other words, for purposes of control flow analysis, a  non-constant expression of a given type is considered to have any possible value of that type. </note>
   </paragraph>
   <paragraph>
     <note
@@ -39,8 +37,7 @@ void F() {
    if (i == 2) Console.WriteLine("reachable");  
 }  
 ]]>
-      </code_example>the Console.WriteLine invocation is considered reachable, even though, in reality, it will never be executed. end note]</note
-    >
+      </code_example>the Console.WriteLine invocation is considered reachable, even though, in reality, it will never be executed. end note]</note>
   </paragraph>
   <paragraph>The block of a function member is always considered reachable. By successively evaluating the reachability rules of each statement in a block, the reachability of any given statement can be determined. </paragraph>
   <paragraph>
@@ -54,14 +51,11 @@ void F(int x) {
 ]]>
       </code_example>the reachability of the second Console.WriteLine is determined as follows: <list>
         <list_item
-          > The first Console.WriteLine expression statement is reachable because the block of the F method is reachable (<hyperlink>15.2</hyperlink>). </list_item
-        >
+          > The first Console.WriteLine expression statement is reachable because the block of the F method is reachable (<hyperlink>15.2</hyperlink>). </list_item>
         <list_item
-          > The end point of the first Console.WriteLine expression statement is reachable15.2 because that statement is reachable (<hyperlink>15.6</hyperlink> and <hyperlink>15.2</hyperlink>). </list_item
-        >
+          > The end point of the first Console.WriteLine expression statement is reachable15.2 because that statement is reachable (<hyperlink>15.6</hyperlink> and <hyperlink>15.2</hyperlink>). </list_item>
         <list_item
-          > The if statement is reachable because the end point of the first Console.WriteLine expression statement is reachable (<hyperlink>15.6</hyperlink> and <hyperlink>15.2</hyperlink>). </list_item
-        >
+          > The if statement is reachable because the end point of the first Console.WriteLine expression statement is reachable (<hyperlink>15.6</hyperlink> and <hyperlink>15.2</hyperlink>). </list_item>
         <list_item> The second Console.WriteLine expression statement is reachable because the boolean expression of the if statement does not have the constant value false. end example]</list_item>
       </list>
     </example>

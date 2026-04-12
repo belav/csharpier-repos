@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.Threading.SynchronizationLockException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Object synchronization method was called from an unsynchronized block of code.</Message
-  >
+    >Object synchronization method was called from an unsynchronized block of code.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

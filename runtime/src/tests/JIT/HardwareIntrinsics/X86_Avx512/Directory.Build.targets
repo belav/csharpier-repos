@@ -4,11 +4,9 @@
 
   <PropertyGroup>
     <GeneratedHWIntrinsicTestDirectory Condition="'$(GeneratedHWIntrinsicTestDirectory)' == ''"
-      >$(IntermediateOutputPath)$(MSBuildProjectName)/gen/</GeneratedHWIntrinsicTestDirectory
-    >
+      >$(IntermediateOutputPath)$(MSBuildProjectName)/gen/</GeneratedHWIntrinsicTestDirectory>
     <GeneratedHWIntrinsicTestListFile Condition="'$(GeneratedHWIntrinsicTestListFile)' == ''"
-      >$(GeneratedHWIntrinsicTestDirectory)GeneratedHWIntrinsicTestList.txt</GeneratedHWIntrinsicTestListFile
-    >
+      >$(GeneratedHWIntrinsicTestDirectory)GeneratedHWIntrinsicTestList.txt</GeneratedHWIntrinsicTestListFile>
   </PropertyGroup>
 
   <Target

@@ -39,16 +39,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Boolean" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Boolean" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Boolean" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Boolean" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -69,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Byte" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Byte" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Byte" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Byte" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -99,16 +95,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Char" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Char" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Char" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Char" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -129,16 +123,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTime" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTime" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.DateTime" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -159,16 +151,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTimeOffset" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTimeOffset" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTimeOffset" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.DateTimeOffset" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -189,16 +179,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Decimal" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Decimal" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Decimal" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Decimal" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -219,16 +207,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Double" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Double" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Double" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Double" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -249,16 +235,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Guid" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Guid" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Guid" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Guid" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -279,16 +263,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int16" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int16" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Int16" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Int16" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -309,16 +291,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int32" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int32" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Int32" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Int32" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -339,16 +319,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int64" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int64" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Int64" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Int64" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -369,16 +347,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.SByte" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.SByte" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.SByte" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.SByte" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -399,16 +375,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Single" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Single" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Single" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Single" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -429,16 +403,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.String" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.String" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.String" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -478,16 +450,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt16" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt16" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.UInt16" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.UInt16" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -508,16 +478,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt32" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt32" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.UInt32" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.UInt32" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -538,16 +506,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt64" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt64" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.UInt64" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.UInt64" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -568,16 +534,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Uri" /> type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Uri" /> type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> object that initializes the new instance.</param
-        >
+          />The <see cref="T:System.Uri" /> object that initializes the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName="JsonType">
@@ -602,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the JsonType that is associated with this <see cref="T:System.Json.JsonPrimitive" /> object.</para
-          >
+            >Gets the JsonType that is associated with this <see cref="T:System.Json.JsonPrimitive" /> object.</para>
         </summary>
       </Docs>
     </Member>

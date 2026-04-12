@@ -27,14 +27,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object executes a compiled regular expression. A regular expression that is compiled to an assembly becomes a type in that assembly, and an object of that type is typically created using reflection. However, creating an object by reflection is an expensive operation. The <see cref="T:System.Text.RegularExpressions.RegexRunnerFactory" /> class improves the performance of the .NET Framework by providing the <see cref="M:System.Text.RegularExpressions.RegexRunnerFactory.CreateInstance" /> method, which creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object for a specific compiled regular expression.</para
-      >
+        >A <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object executes a compiled regular expression. A regular expression that is compiled to an assembly becomes a type in that assembly, and an object of that type is typically created using reflection. However, creating an object by reflection is an expensive operation. The <see cref="T:System.Text.RegularExpressions.RegexRunnerFactory" /> class improves the performance of the .NET Framework by providing the <see cref="M:System.Text.RegularExpressions.RegexRunnerFactory.CreateInstance" /> method, which creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object for a specific compiled regular expression.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> class for a compiled regular expression.</para
-      >
+        >Creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> class for a compiled regular expression.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexRunnerFactory" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.RegularExpressions.RegexRunnerFactory" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -86,14 +83,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object for a specific compiled regular expression.</para
-          >
+            >When overridden in a derived class, creates a <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object for a specific compiled regular expression.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object designed to execute a specific compiled regular expression. </para
-          >
+            >A <see cref="T:System.Text.RegularExpressions.RegexRunner" /> object designed to execute a specific compiled regular expression. </para>
         </returns>
       </Docs>
     </Member>

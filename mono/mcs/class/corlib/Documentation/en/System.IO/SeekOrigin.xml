@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.IO.SeekOrigin" /> is used by the Seek methods of <see cref="T:System.IO.Stream" />, <see cref="T:System.IO.BufferedStream" />, <see cref="T:System.IO.FileStream" />, <see cref="T:System.IO.MemoryStream" />, <see cref="T:System.IO.BinaryWriter" />, and other classes. The Seek methods take an offset parameter that is relative to the position specified by <see cref="T:System.IO.SeekOrigin" />.</para
-      >
+        <see cref="T:System.IO.SeekOrigin" /> is used by the Seek methods of <see cref="T:System.IO.Stream" />, <see cref="T:System.IO.BufferedStream" />, <see cref="T:System.IO.FileStream" />, <see cref="T:System.IO.MemoryStream" />, <see cref="T:System.IO.BinaryWriter" />, and other classes. The Seek methods take an offset parameter that is relative to the position specified by <see cref="T:System.IO.SeekOrigin" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

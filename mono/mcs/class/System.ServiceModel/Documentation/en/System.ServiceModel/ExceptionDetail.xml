@@ -22,15 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.ExceptionDetail" /> class is the type parameter used as the fault detail object when a <see cref="T:System.ServiceModel.FaultException" /> is sent by a service as a result of setting the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> or the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> property to true. </para
-      >
+        >The <see cref="T:System.ServiceModel.ExceptionDetail" /> class is the type parameter used as the fault detail object when a <see cref="T:System.ServiceModel.FaultException" /> is sent by a service as a result of setting the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" /> or the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" /> property to true. </para>
       <para
         >To send a <see cref="T:System.ServiceModel.ExceptionDetail" /> object the type must be serializable. For more information on serialization options, see <format type="text/html">
           <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
-            >Specifying Data Transfer in Service Contracts</a
-          >
-        </format>. </para
-      >
+            >Specifying Data Transfer in Service Contracts</a>
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,22 +52,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The help link, message, stack trace, and type name information is extracted and added to the equivalent properties in <see cref="T:System.ServiceModel.ExceptionDetail" />.</para
-          >
+            >The help link, message, stack trace, and type name information is extracted and added to the equivalent properties in <see cref="T:System.ServiceModel.ExceptionDetail" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ExceptionDetail" /> class from the exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ExceptionDetail" /> class from the exception. </para>
         </summary>
         <param name="exception">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to be serialized as an <see cref="T:System.ServiceModel.ExceptionDetail" /> object.</param
-        >
+          />The exception to be serialized as an <see cref="T:System.ServiceModel.ExceptionDetail" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="HelpLink">
@@ -126,14 +120,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.ExceptionDetail.InnerException" /> property to obtain the set of exceptions that led to the current exception.</para
-          >
+            >Use the <see cref="P:System.ServiceModel.ExceptionDetail.InnerException" /> property to obtain the set of exceptions that led to the current exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.ExceptionDetail" /> object that represents the inner exception.</para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.ExceptionDetail" /> object that represents the inner exception.</para>
         </summary>
       </Docs>
     </Member>
@@ -157,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text of <see cref="P:System.ServiceModel.ExceptionDetail.Message" /> should completely describe the error and should, when possible, explain how to correct it.</para
-          >
+            >The text of <see cref="P:System.ServiceModel.ExceptionDetail.Message" /> should completely describe the error and should, when possible, explain how to correct it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

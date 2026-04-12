@@ -65,8 +65,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> with which to try to read the token.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> with which to try to read the token.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteSessionTokenIdentifier">
@@ -99,8 +98,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> with which to try to write the token.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> with which to try to write the token.</param>
       </Docs>
     </Member>
   </Members>

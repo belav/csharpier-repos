@@ -53,39 +53,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para
-          >
+            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para>
         </summary>
         <param name="contextId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,42 +110,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para
-          >
+            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para>
         </summary>
         <param name="contextId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -178,49 +173,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para
-          >
+            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para>
         </summary>
         <param name="contextId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
         <param name="authorizationPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances that represents the party to whom the token is issued.</param
-        >
+          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances that represents the party to whom the token is issued.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -254,70 +245,63 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para
-          >
+            >The <paramref name="contextId" /> should be unique among all security context tokens issued by the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" /> class.</para>
         </summary>
         <param name="contextId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
         <param name="keyGeneration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the key generation.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the key generation.</param>
         <param name="keyEffectiveTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key effective start time.</param
-        >
+          />The key effective start time.</param>
         <param name="keyExpirationTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key expiration time.</param
-        >
+          />The key expiration time.</param>
         <param name="authorizationPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances that represents the party to whom the token is issued.</param
-        >
+          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances that represents the party to whom the token is issued.</param>
       </Docs>
     </Member>
     <Member MemberName="AuthorizationPolicies">
@@ -384,8 +368,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified key identifier clause type.</typeparam
-        >
+          />The specified key identifier clause type.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ContextId">
@@ -456,42 +439,39 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
         <param name="authorizationPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances.</param
-        >
+          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances.</param>
         <param name="securityStateEncoder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security state encoder.</param
-        >
+          />The security state encoder.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateCookieSecurityContextToken">
@@ -543,63 +523,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the context id.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token id.</param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the key.</param
-        >
+          />A byte array that represents the key.</param>
         <param name="validFrom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The effective start time.</param
-        >
+          />The effective start time.</param>
         <param name="validTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expiration time.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The expiration time.</param>
         <param name="keyGeneration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.UniqueId" /> that represents the key generation.</param
-        >
+          />A <see cref="T:System.Xml.UniqueId" /> that represents the key generation.</param>
         <param name="keyEffectiveTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key effective start time.</param
-        >
+          />The key effective start time.</param>
         <param name="keyExpirationTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key expiration time.</param
-        >
+          />The key expiration time.</param>
         <param name="authorizationPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances.</param
-        >
+          />A read-only collection of <see cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" /> instances.</param>
         <param name="securityStateEncoder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security state encoder.</param
-        >
+          />The security state encoder.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyIdentifierClause&lt;T&gt;">
@@ -635,16 +609,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" /> cast to type <paramref name="T" />.</para
-          >
+            >A <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" /> cast to type <paramref name="T" />.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified type.</typeparam
-        >
+          />The specified type.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Id">

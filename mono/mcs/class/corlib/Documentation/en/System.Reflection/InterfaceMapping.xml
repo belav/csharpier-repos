@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Reflection.InterfaceMapping" /> structure when a type implements interface methods that use method names other than those specified by the interface, or when a type implements multiple interfaces which have a method with the same name.</para
-      >
+        >Use the <see cref="T:System.Reflection.InterfaceMapping" /> structure when a type implements interface methods that use method names other than those specified by the interface, or when a type implements multiple interfaces which have a method with the same name.</para>
       <para
-        >To obtain an <see cref="T:System.Reflection.InterfaceMapping" /> structure, use the <see cref="M:System.Type.GetInterfaceMap(System.Type)" /> method.</para
-      >
+        >To obtain an <see cref="T:System.Reflection.InterfaceMapping" /> structure, use the <see cref="M:System.Type.GetInterfaceMap(System.Type)" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +64,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements returned in the InterfaceMethods array match their counterpart elements returned from the <see cref="F:System.Reflection.InterfaceMapping.TargetMethods" /> array. That is, the elements are in the same array indexing order.</para
-          >
+            >The elements returned in the InterfaceMethods array match their counterpart elements returned from the <see cref="F:System.Reflection.InterfaceMapping.TargetMethods" /> array. That is, the elements are in the same array indexing order.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,8 +123,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements returned in the <see cref="F:System.Reflection.InterfaceMapping.InterfaceMethods" /> array match their counterpart elements returned from the TargetMethods array. That is, the elements are in the same array indexing order.</para
-          >
+            >The elements returned in the <see cref="F:System.Reflection.InterfaceMapping.InterfaceMethods" /> array match their counterpart elements returned from the TargetMethods array. That is, the elements are in the same array indexing order.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +153,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="F:System.Reflection.InterfaceMapping.TargetType" /> field is the instance of <see cref="T:System.Type" /> whose <see cref="M:System.Type.GetInterfaceMap(System.Type)" /> method returned the current <see cref="T:System.Reflection.InterfaceMapping" /> structure. </para
-          >
+            >The value of the <see cref="F:System.Reflection.InterfaceMapping.TargetType" /> field is the instance of <see cref="T:System.Type" /> whose <see cref="M:System.Type.GetInterfaceMap(System.Type)" /> method returned the current <see cref="T:System.Reflection.InterfaceMapping" /> structure. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

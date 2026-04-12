@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Description.MessageDescription" /> contains the <see cref="P:System.ServiceModel.Description.MessageDescription.Headers" /> and <see cref="P:System.ServiceModel.Description.MessageDescription.Body" /> properties to provide get access to these parts of the message. Whether the message is incoming or outgoing is indicated by the <see cref="P:System.ServiceModel.Description.MessageDescription.Direction" /> property. It also provides an <see cref="P:System.ServiceModel.Description.MessageDescription.Action" /> property where the URI that indicates the intension of the message may be specified.</para
-      >
+        >The <see cref="T:System.ServiceModel.Description.MessageDescription" /> contains the <see cref="P:System.ServiceModel.Description.MessageDescription.Headers" /> and <see cref="P:System.ServiceModel.Description.MessageDescription.Body" /> properties to provide get access to these parts of the message. Whether the message is incoming or outgoing is indicated by the <see cref="P:System.ServiceModel.Description.MessageDescription.Direction" /> property. It also provides an <see cref="P:System.ServiceModel.Description.MessageDescription.Action" /> property where the URI that indicates the intension of the message may be specified.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageDescription" /> class with a specified action and direction.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageDescription" /> class with a specified action and direction.</para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Incoming means that the message is coming from the client to the server. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Input" /> direction. Outgoing means the message is coming from the server to the client. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Output" /> direction. These terms can be confusing from the client perspective where the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Input" /> are actually being sent and the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Output" /> are being received.</para
-          >
+            >Incoming means that the message is coming from the client to the server. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Input" /> direction. Outgoing means the message is coming from the server to the client. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Output" /> direction. These terms can be confusing from the client perspective where the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Input" /> are actually being sent and the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Output" /> are being received.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -159,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="P:System.ServiceModel.Description.MessageDescription.ProtectionLevel" /> has been set.</para
-          >
+            >Gets a value that indicates whether the <see cref="P:System.ServiceModel.Description.MessageDescription.ProtectionLevel" /> has been set.</para>
         </summary>
       </Docs>
     </Member>

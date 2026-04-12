@@ -31,17 +31,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if and only if the corresponding data also matches. Small changes to the data result in large unpredictable changes in the hash.</para>
       <para
-        >The hash size for the <see cref="T:System.Security.Cryptography.SHA512" /> algorithm is 512 bits.</para
-      >
+        >The hash size for the <see cref="T:System.Security.Cryptography.SHA512" /> algorithm is 512 bits.</para>
       <para
-        >This is an abstract class. The only implementation of this class is <see cref="T:System.Security.Cryptography.SHA512Managed" />.</para
-      >
+        >This is an abstract class. The only implementation of this class is <see cref="T:System.Security.Cryptography.SHA512Managed" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see cref="T:System.Security.Cryptography.SHA512" /> hash for the input data.  </para
-      >
+        >Computes the <see cref="T:System.Security.Cryptography.SHA512" /> hash for the input data.  </para>
     </summary>
   </Docs>
   <Members>
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.SHA512" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.SHA512" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the default implementation of <see cref="T:System.Security.Cryptography.SHA512" />.</para
-          >
+            >Creates an instance of the default implementation of <see cref="T:System.Security.Cryptography.SHA512" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -130,28 +125,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible values for <paramref name="hashName" /> are SHA512, System.Security.Cryptography.SHA51, System.Security.Cryptography.SHA512Managed, and System.Security.Cryptography.SHA512CryptoServiceProvider.</para
-          >
+            >Possible values for <paramref name="hashName" /> are SHA512, System.Security.Cryptography.SHA51, System.Security.Cryptography.SHA512Managed, and System.Security.Cryptography.SHA512CryptoServiceProvider.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a specified implementation of <see cref="T:System.Security.Cryptography.SHA512" />.</para
-          >
+            >Creates an instance of a specified implementation of <see cref="T:System.Security.Cryptography.SHA512" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see cref="T:System.Security.Cryptography.SHA512" /> using the specified implementation.</para
-          >
+            >A new instance of <see cref="T:System.Security.Cryptography.SHA512" /> using the specified implementation.</para>
         </returns>
         <param name="hashName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.SHA512" /> to be used. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.SHA512" /> to be used. </param>
       </Docs>
     </Member>
   </Members>

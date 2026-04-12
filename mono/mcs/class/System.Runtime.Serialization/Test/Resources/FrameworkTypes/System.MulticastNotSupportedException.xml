@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.MulticastNotSupportedException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Attempted to add multiple callbacks to a delegate that does not support multicast.</Message
-  >
+    >Attempted to add multiple callbacks to a delegate that does not support multicast.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

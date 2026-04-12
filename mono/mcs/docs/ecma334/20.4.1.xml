@@ -41,8 +41,7 @@ class MyFile: IDisposable {
    }  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph>It is not possible to access an explicit interface member implementation through its fully qualified name in a method invocation, property access, or indexer access. An explicit interface member implementation can only be accessed through an interface instance, and is in that case referenced simply by its member name. </paragraph>
   <paragraph>It is a compile-time error for an explicit interface member implementation to include access modifiers, and it is a compile-time error to include the modifiers abstract, virtual, override, or static. </paragraph>
@@ -74,8 +73,7 @@ class Ellipse: Shape
    object ICloneable.Clone() {...} // invalid  
 }  
 ]]>
-      </code_example>the declaration of ICloneable.Clone in Ellipse results in a compile-time error because ICloneable is not explicitly listed in the base class list of Ellipse. end example]</example
-    >
+      </code_example>the declaration of ICloneable.Clone in Ellipse results in a compile-time error because ICloneable is not explicitly listed in the base class list of Ellipse. end example]</example>
   </paragraph>
   <paragraph
     >The fully qualified name of an interface member must reference the interface in which the member was declared. <example
@@ -95,7 +93,6 @@ class TextBox: ITextBox
    void ITextBox.SetText(string text) {...}  
 }  
 ]]>
-      </code_example>the explicit interface member implementation of Paint must be written as IControl.Paint. end example]</example
-    >
+      </code_example>the explicit interface member implementation of Paint must be written as IControl.Paint. end example]</example>
   </paragraph>
 </clause>

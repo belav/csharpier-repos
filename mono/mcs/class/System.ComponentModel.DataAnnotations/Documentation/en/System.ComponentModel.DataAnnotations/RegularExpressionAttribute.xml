@@ -53,16 +53,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RegularExpressionAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RegularExpressionAttribute" /> class.</para>
         </summary>
         <param name="pattern">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The regular expression that is used to validate the data field value. </param
-        >
+          />The regular expression that is used to validate the data field value. </param>
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
@@ -88,8 +86,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.DataAnnotations.RegularExpressionAttribute.FormatErrorMessage(System.String)" /> creates the error message by using the name of the data field that caused the validation failure. You can override this method in custom validation attributes to customize how errors are created or to provide a more complex message that contains parameters that you evaluate at run time. </para
-          >
+            >The <see cref="M:System.ComponentModel.DataAnnotations.RegularExpressionAttribute.FormatErrorMessage(System.String)" /> creates the error message by using the name of the data field that caused the validation failure. You can override this method in custom validation attributes to customize how errors are created or to provide a more complex message that contains parameters that you evaluate at run time. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -104,8 +101,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field that caused the validation failure.</param
-        >
+          />The name of the field that caused the validation failure.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -139,8 +135,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data field value to validate.</param
-        >
+          />The data field value to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="Pattern">

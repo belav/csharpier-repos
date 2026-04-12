@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see cref="T:System.Runtime.ConstrainedExecution.PrePrepareMethodAttribute" /> attribute to a method or constructor to tell the native image generation service that the method (and its statically determinable call graph) is to be prepared for use in a CER. This attribute is useful if the method to which it is applied will be prepared explicitly at run time, and the author of the method knows this and wants to avoid the overhead of run-time preparation.</para
-      >
+        >Apply the <see cref="T:System.Runtime.ConstrainedExecution.PrePrepareMethodAttribute" /> attribute to a method or constructor to tell the native image generation service that the method (and its statically determinable call graph) is to be prepared for use in a CER. This attribute is useful if the method to which it is applied will be prepared explicitly at run time, and the author of the method knows this and wants to avoid the overhead of run-time preparation.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.ConstrainedExecution.PrePrepareMethodAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.ConstrainedExecution.PrePrepareMethodAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

@@ -3,11 +3,8 @@
   <paragraph
     >When an expression contains multiple operators, the precedence of the operators controls the order in which the individual operators are evaluated. <note>[Note: For example, the expression x + y * z is evaluated as x + (y * z) because the * operator has higher precedence than the binary + operator. end note]</note> The precedence of an operator is established by the definition of its associated grammar production. <note
       >[Note: For example, an <non_terminal where="14.7"
-        >additive-expression</non_terminal
-      > consists of a sequence of <non_terminal where="14.7"
-        >multiplicative-expression</non_terminal
-      >s separated by + or  -operators, thus giving the + and  -operators lower precedence than the *, /, and % operators. end note]</note
-    >
+        >additive-expression</non_terminal> consists of a sequence of <non_terminal where="14.7"
+        >multiplicative-expression</non_terminal>s separated by + or  -operators, thus giving the + and  -operators lower precedence than the *, /, and % operators. end note]</note>
   </paragraph>
   <paragraph
     >The following table summarizes all operators in order of precedence from highest to lowest: <table_line>Section Category Operators </table_line>

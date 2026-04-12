@@ -20,20 +20,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" /> property to true programmatically, you can enable the flow of managed exception information to the client for debugging purposes, as well as the publication of HTML information files for users browsing the service in Web browsers.</para
-      >
+        >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" /> property to true programmatically, you can enable the flow of managed exception information to the client for debugging purposes, as well as the publication of HTML information files for users browsing the service in Web browsers.</para>
       <block subset="none" type="note">
         <para>Returning managed exception information to services can be a security risk. This is because exception details expose information about the internal client implementation that could be used by unauthorized services.</para>
       </block>
       <para
-        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" /> and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" /> properties instruct the service to publish HTML help files when the service is viewed using an HTML browser.</para
-      >
+        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" /> and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" /> properties instruct the service to publish HTML help files when the service is viewed using an HTML browser.</para>
       <para
-        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> properties control the location of the HTML help page that is viewed.</para
-      >
+        >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> and <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> properties control the location of the HTML help page that is viewed.</para>
       <para
-        >To enable or disable one of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" /> features using a configuration file, you must:</para
-      >
+        >To enable or disable one of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" /> features using a configuration file, you must:</para>
       <list type="ordered">
         <item>
           <para
@@ -41,8 +37,7 @@
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format> element for your indigo2 service. (Endpoint behaviors are configured on &lt;endpoint&gt; elements; service behaviors on <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
-            </format> elements.)</para
-          >
+            </format> elements.)</para>
         </item>
         <item>
           <para
@@ -54,8 +49,7 @@
               <a href="fb851947-e8dd-4f8c-8323-26fae90b09c3">&lt;endpointBehaviors&gt;</a>
             </format> element; service behaviors are configured using a <format type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
-            </format> element.</para
-          >
+            </format> element.</para>
         </item>
         <item>
           <para
@@ -63,8 +57,7 @@
               <a href="6d7ea986-f232-49fe-842c-f934d9966889">&lt;serviceDebug&gt;</a>
             </format> element to the <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
-            </format> element from step 2 and enable or disable the various properties appropriate to your scenario.</para
-          >
+            </format> element from step 2 and enable or disable the various properties appropriate to your scenario.</para>
         </item>
       </list>
       <para>For a specific example, see the Example section.</para>
@@ -91,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceDebugElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -195,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageBinding" />.</para
-          >
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageBinding" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -221,27 +212,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property to false to disable the publication of an HTML help page visible to HTML browsers.</para>
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property, you must set this property to true. In addition, one of the following conditions must also be met:</para
-          >
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property, you must set this property to true. In addition, one of the following conditions must also be met:</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property is an absolute address that supports the HTTP protocol scheme.</para
-              >
+                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property is an absolute address that supports the HTTP protocol scheme.</para>
             </item>
             <item>
               <para>There is a base address for the service that supports the HTTP protocol scheme.</para>
             </item>
           </list>
           <para
-            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
-          >
+            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether indigo1 publishes an HTML help page at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property.</para
-          >
+            >Gets or sets a value that indicates whether indigo1 publishes an HTML help page at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -280,8 +267,7 @@
             </item>
           </list>
           <para
-            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" /> property is true.</para
-          >
+            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" /> property is true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -349,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageBinding" />.</para
-          >
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageBinding" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -375,29 +360,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can set this property to false to disable the publication of an HTML help page visible to HTML browsers.</para>
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property, you must set this property to true. In addition, one of the following conditions must also be met:</para
-          >
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property, you must set this property to true. In addition, one of the following conditions must also be met:</para>
           <list type="bullet">
             <item>
               <para
-                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTPS protocol scheme.</para
-              >
+                >The <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property is an absolute address that supports the HTTPS protocol scheme.</para>
             </item>
             <item>
               <para>There is a base address for the service that supports the HTTPS protocol scheme.</para>
             </item>
             <item>
               <para
-                >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
-              >
+                >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property.</para
-          >
+            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address specified by the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -436,8 +417,7 @@
             </item>
           </list>
           <para
-            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" /> property is true.</para
-          >
+            >This property is valid only when the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" /> property is true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -471,8 +451,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" /> property to true programmatically, you can enable the flow of managed exception information to the client for debugging purposes, as well as the publication of HTML information files for users browsing the service in Web browsers.</para
-          >
+            >If you set the <see cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" /> property to true programmatically, you can enable the flow of managed exception information to the client for debugging purposes, as well as the publication of HTML information files for users browsing the service in Web browsers.</para>
           <block subset="none" type="note">
             <para>Returning managed exception information to services can be a security risk. This is because exception details expose information about the internal client implementation that could be used by unauthorized services.</para>
           </block>

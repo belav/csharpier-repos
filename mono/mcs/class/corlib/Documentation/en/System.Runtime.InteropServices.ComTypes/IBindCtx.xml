@@ -24,8 +24,7 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -187,8 +186,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register for release. </param
-        >
+          />The object to register for release. </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObjectParam">
@@ -227,15 +225,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to register <paramref name="punk" /> with. </param
-        >
+          />The name to register <paramref name="punk" /> with. </param>
         <param name="punk">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register. </param
-        >
+          />The object to register. </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseBoundObjects">
@@ -262,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all the objects currently registered with the bind context by using the <see cref="M:System.Runtime.InteropServices.ComTypes.IBindCtx.RegisterObjectBound(System.Object)" /> method.</para
-          >
+            >Releases all the objects currently registered with the bind context by using the <see cref="M:System.Runtime.InteropServices.ComTypes.IBindCtx.RegisterObjectBound(System.Object)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -299,8 +294,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to unregister for release. </param
-        >
+          />The object to unregister for release. </param>
       </Docs>
     </Member>
     <Member MemberName="RevokeObjectParam">
@@ -339,8 +333,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to unregister. </param
-        >
+          />The key to unregister. </param>
       </Docs>
     </Member>
     <Member MemberName="SetBindOptions">

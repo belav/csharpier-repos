@@ -7,8 +7,7 @@
     <!-- Expected COR_E_EXECUTIONENGINE -->
     <CLRTestExitCode>134</CLRTestExitCode>
     <CLRTestExitCode Condition="'$(TestWrapperTargetsWindows)' == 'true'"
-      >-2146233082</CLRTestExitCode
-    >
+      >-2146233082</CLRTestExitCode>
     <CLRTestPriority>1</CLRTestPriority>
     <GCStressIncompatible>true</GCStressIncompatible>
   </PropertyGroup>

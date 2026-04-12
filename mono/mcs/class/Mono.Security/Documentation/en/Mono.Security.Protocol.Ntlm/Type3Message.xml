@@ -13,9 +13,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>Mono.Security.Protocol.Ntlm.MessageBase</BaseTypeName>
   </Base>
@@ -66,8 +64,7 @@
       <Docs>
         <summary>Set the challenge (random numbers) to calculate the response.</summary>
         <value
-          >a <see cref="T:System.Byte[]" /> containing the Nonce received from the server.</value
-        >
+          >a <see cref="T:System.Byte[]" /> containing the Nonce received from the server.</value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -104,11 +101,9 @@
       <Docs>
         <summary>The (NetBIOS) domain name of the current computer.</summary>
         <value
-          >a <see cref="T:System.String" /> representing the domain name of the current computer.</value
-        >
+          >a <see cref="T:System.String" /> representing the domain name of the current computer.</value>
         <remarks
-          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.UserDomainName" />.</remarks
-        >
+          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.UserDomainName" />.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -158,11 +153,9 @@
       <Docs>
         <summary>The (NetBIOS) host name of the computer.</summary>
         <value
-          >a <see cref="T:System.String" /> representing the current (NetBIOS) host name of the computer.</value
-        >
+          >a <see cref="T:System.String" /> representing the current (NetBIOS) host name of the computer.</value>
         <remarks
-          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.MachineName" />.</remarks
-        >
+          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.MachineName" />.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -180,8 +173,7 @@
         <summary>Return the LAN Manager (LM) part of the response.</summary>
         <value>a <see cref="T:System.Byte[]" /> containing the LAN Manager (LM) response.</value>
         <remarks
-          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />.<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.LM" /> for more details.</remarks
-        >
+          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />.<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.LM" /> for more details.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -199,8 +191,7 @@
         <summary>Return the NT part of the response.</summary>
         <value>a <see cref="T:System.Byte[]" /> containing the NT response.</value>
         <remarks
-          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />.<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.NT" /> for more details.</remarks
-        >
+          >See <see cref="T:Mono.Security.Protocol.Ntlm.ChallengeResponse" />.<see cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.NT" /> for more details.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -235,8 +226,7 @@
         <summary>The username for which the password is supplied.</summary>
         <value>a <see cref="T:System.String" /> representing the user name.</value>
         <remarks
-          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.UserName" />.</remarks
-        >
+          >Defaults to <see cref="T:System.Environment" />.<see cref="P:System.Environment.UserName" />.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

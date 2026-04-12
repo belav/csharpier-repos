@@ -27,15 +27,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> and <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attributes provide a way for assembly authors to annotate their binaries so that obfuscation tools can process them correctly with minimal external configuration. </para
-      >
+        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> and <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attributes provide a way for assembly authors to annotate their binaries so that obfuscation tools can process them correctly with minimal external configuration. </para>
       <para>Applying this attribute to an assembly tells the obfuscation tool to use its default rules for the assembly type.</para>
       <block subset="none" type="note">
         <para>Applying this attribute does not automatically obfuscate the assembly. Applying the attribute is an alternative to creating a configuration file for the obfuscation tool. That is, it merely provides instructions for an obfuscation tool. Microsoft recommends that vendors of obfuscation tools follow the semantics described here. However, there is no guarantee that a particular tool follows Microsoft recommendations.</para>
       </block>
       <para
-        >You can apply <see cref="T:System.Reflection.ObfuscationAttribute" /> to types within an assembly, and to members on those types. The innermost attribute controls the way an obfuscation tool treats any particular code entity. </para
-      >
+        >You can apply <see cref="T:System.Reflection.ObfuscationAttribute" /> to types within an assembly, and to members on those types. The innermost attribute controls the way an obfuscation tool treats any particular code entity. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> class, specifying whether the assembly to be obfuscated is public or private.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> class, specifying whether the assembly to be obfuscated is public or private.</para>
         </summary>
         <param name="assemblyIsPrivate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the assembly is used within the scope of one application; otherwise, false.</param
-        >
+          />true if the assembly is used within the scope of one application; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyIsPrivate">
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value indicating whether the assembly was marked private.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value indicating whether the assembly was marked private.</para>
         </summary>
       </Docs>
     </Member>
@@ -131,8 +126,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Attributes should not be stripped if your library will be included as part of another application, and obfuscated as part of that application. </para>
           <para
-            >Specifying that obfuscation tools should strip the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> does not affect instances of <see cref="T:System.Reflection.ObfuscationAttribute" /> that have been applied to types and members within the assembly. </para
-          >
+            >Specifying that obfuscation tools should strip the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> does not affect instances of <see cref="T:System.Reflection.ObfuscationAttribute" /> that have been applied to types and members within the assembly. </para>
           <block subset="none" type="note">
             <para>Applying this attribute does not automatically obfuscate the assembly. Applying the attribute is an alternative to creating a configuration file for the obfuscation tool. That is, it merely provides instructions for an obfuscation tool. Microsoft recommends that vendors of obfuscation tools follow the semantics described here. However, there is no guarantee that a particular tool follows Microsoft recommendations.</para>
           </block>
@@ -140,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should remove the attribute after processing.</para
-          >
+            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should remove the attribute after processing.</para>
         </summary>
       </Docs>
     </Member>

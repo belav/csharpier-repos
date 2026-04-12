@@ -24,16 +24,14 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >Provides the managed definition of the Component Automation <format type="text/html">
           <a href="f3356463-3373-4279-bae1-953378aa2680">ITypeInfo</a>
-        </format> interface.</para
-      >
+        </format> interface.</para>
     </summary>
   </Docs>
   <Members>
@@ -171,36 +169,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ID of the member function whose DLL entry description is to be returned. </param
-        >
+          />The ID of the member function whose DLL entry description is to be returned. </param>
         <param name="invKind">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" /> values that specifies the kind of member identified by <paramref name="memid" />. </param
-        >
+          />One of the <see cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" /> values that specifies the kind of member identified by <paramref name="memid" />. </param>
         <param name="pBstrDllName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, the function sets <paramref name="pBstrDllName" /> to a BSTR that contains the name of the DLL. </param
-        >
+          />If not null, the function sets <paramref name="pBstrDllName" /> to a BSTR that contains the name of the DLL. </param>
         <param name="pBstrName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, the function sets <paramref name="lpbstrName" /> to a BSTR that contains the name of the entry point. </param
-        >
+          />If not null, the function sets <paramref name="lpbstrName" /> to a BSTR that contains the name of the entry point. </param>
         <param name="pwOrdinal">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If not null, and the function is defined by an ordinal, then <paramref name="lpwOrdinal" /> is set to point to the ordinal. </param
-        >
+          />If not null, and the function is defined by an ordinal, then <paramref name="lpwOrdinal" /> is set to point to the ordinal. </param>
       </Docs>
     </Member>
     <Member MemberName="GetDocumentation">
@@ -304,22 +297,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of names to map. </param
-        >
+          />An array of names to map. </param>
         <param name="cNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The count of names to map. </param
-        >
+          />The count of names to map. </param>
         <param name="pMemId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains a reference to an array in which name mappings are placed. This parameter is passed uninitialized.</param
-        >
+          />When this method returns, contains a reference to an array in which name mappings are placed. This parameter is passed uninitialized.</param>
       </Docs>
     </Member>
     <Member MemberName="GetImplTypeFlags">
@@ -632,16 +622,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a <see cref="T:System.Runtime.InteropServices.FUNCDESC" /> structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" /> method.</para
-          >
+            >Releases a <see cref="T:System.Runtime.InteropServices.FUNCDESC" /> structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" /> method.</para>
         </summary>
         <param name="pFuncDesc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the FUNCDESC structure to release. </param
-        >
+          />A reference to the FUNCDESC structure to release. </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseTypeAttr">
@@ -670,16 +658,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a <see cref="T:System.Runtime.InteropServices.TYPEATTR" /> structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" /> method.</para
-          >
+            >Releases a <see cref="T:System.Runtime.InteropServices.TYPEATTR" /> structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" /> method.</para>
         </summary>
         <param name="pTypeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the TYPEATTR structure to release. </param
-        >
+          />A reference to the TYPEATTR structure to release. </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseVarDesc">
@@ -708,16 +694,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a VARDESC structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetVarDesc(System.Int32,System.IntPtr@)" /> method.</para
-          >
+            >Releases a VARDESC structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetVarDesc(System.Int32,System.IntPtr@)" /> method.</para>
         </summary>
         <param name="pVarDesc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the VARDESC structure to release. </param
-        >
+          />A reference to the VARDESC structure to release. </param>
       </Docs>
     </Member>
   </Members>

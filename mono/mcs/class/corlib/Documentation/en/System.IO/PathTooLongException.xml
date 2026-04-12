@@ -37,23 +37,18 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>PathTooLongException uses the HRESULT COR_E_PATHTOOLONG, which has the value 0x800700CE.</para>
       <para
-        >If your code does not have <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" /> permission, the error message for this exception may contain only file or directory names instead of full paths.</para
-      >
+        >If your code does not have <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" /> permission, the error message for this exception may contain only file or directory names instead of full paths.</para>
       <para
         >Full paths must not exceed 260 characters to maintain compatibility with Windows operating systems. For more information about this restriction, see the entry <see
           cref="http://go.microsoft.com/fwlink/?LinkID=163666"
-          >Long Paths in .NET</see
-        > in the BCL Team blog.</para
-      >
+          >Long Paths in .NET</see> in the BCL Team blog.</para>
       <block subset="none" type="note">
         <para
           >This exception is not included in the <see
             cref="http://go.microsoft.com/fwlink/?LinkID=247912"
-            >.NET for Windows Store apps</see
-          > or the <format type="text/html">
+            >.NET for Windows Store apps</see> or the <format type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
-          </format>, but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.IO.IOException" /> instead.</para
-        >
+          </format>, but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.IO.IOException" /> instead.</para>
       </block>
     </remarks>
     <summary>
@@ -84,14 +79,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The supplied path is too long." This message takes into account the current system culture.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "The supplied path is too long." This message takes into account the current system culture.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with its HRESULT set to COR_E_PATHTOOLONG.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with its HRESULT set to COR_E_PATHTOOLONG.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -120,22 +113,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance using <paramref name="message" />.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance using <paramref name="message" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with its message string set to <paramref name="message" /> and its HRESULT set to COR_E_PATHTOOLONG.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with its message string set to <paramref name="message" /> and its HRESULT set to COR_E_PATHTOOLONG.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -163,23 +153,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with the specified serialization and context information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with the specified serialization and context information.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -212,16 +199,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.IO.PathTooLongException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.PathTooLongException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -255,29 +239,25 @@
             </item>
           </list>
           <para
-            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />.</para
-          >
+            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PathTooLongException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
-        >
+          />A <see cref="T:System.String" /> that describes the error. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -17,11 +17,9 @@
   <Docs>
     <summary
       >When using Unix domain sockets (via <see cref="T:Mono.Unix.UnixEndPoint" /> or <see cref="T:Mono.Unix.UnixClient" />, for example) most operating systems support the passing of credentials through the socket.  Generally, the process id (PID) of the application on the other side of the connection as well as the group ID (GID) and user ID (UID) of the executing user are available.  This is done via the kernel and cannot be spoofed, so this can be used to reliably authenticate a Unix socket connection.
-</summary
-    >
+</summary>
     <remarks
-      >Not all operating systems support this and the values of <see cref="P:Mono.Unix.PeerCred.GroupID" />, <see cref="P:Mono.Unix.PeerCred.ProcessID" />, and <see cref="P:Mono.Unix.PeerCred.UserID" /> may all be zero.</remarks
-    >
+      >Not all operating systems support this and the values of <see cref="P:Mono.Unix.PeerCred.GroupID" />, <see cref="P:Mono.Unix.PeerCred.ProcessID" />, and <see cref="P:Mono.Unix.PeerCred.UserID" /> may all be zero.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -41,12 +39,10 @@
       </Parameters>
       <Docs>
         <param name="sock"
-          >A <see cref="T:System.Net.Sockets.Socket" />, but this must be a Unix domain socket.</param
-        >
+          >A <see cref="T:System.Net.Sockets.Socket" />, but this must be a Unix domain socket.</param>
         <summary>Reads the peer credentials from a Unix domain socket.</summary>
         <remarks
-          >If the <see cref="T:System.Net.Sockets.Socket" /> passed in is not a Unix domain socket, <see cref="T:System.ArgumentException" /> is thrown.</remarks
-        >
+          >If the <see cref="T:System.Net.Sockets.Socket" /> passed in is not a Unix domain socket, <see cref="T:System.ArgumentException" /> is thrown.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GroupID">

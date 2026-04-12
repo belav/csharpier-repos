@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" /> and <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" /> events are raised when a document is created or disposed of.</para
-      >
+        >The <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" /> and <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" /> events are raised when a document is created or disposed of.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" /> and <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" /> events.</para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerCreated" /> and <see cref="E:System.ComponentModel.Design.IDesignerEventService.DesignerDisposed" /> events.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,16 +59,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerEventArgs" /> class.</para>
         </summary>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> of the document. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> of the document. </param>
       </Docs>
     </Member>
     <Member MemberName="Designer">

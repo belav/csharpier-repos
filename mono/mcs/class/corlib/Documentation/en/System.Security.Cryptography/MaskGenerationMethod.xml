@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Derived classes of <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> compute masks that are used in key exchange algorithms such as Optimal Asymmetric Encryption Padding (OAEP).</para
-      >
+        >Derived classes of <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> compute masks that are used in key exchange algorithms such as Optimal Asymmetric Encryption Padding (OAEP).</para>
       <para>This class is used by implementations of key exchange algorithms only for mask generation. Application code does not use this class directly.</para>
     </remarks>
     <summary>
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.MaskGenerationMethod" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -100,23 +98,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A randomly generated mask whose length is equal to the <paramref name="cbReturn" /> parameter.</para
-          >
+            >A randomly generated mask whose length is equal to the <paramref name="cbReturn" /> parameter.</para>
         </returns>
         <param name="rgbSeed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The random seed to use to compute the mask. </param
-        >
+          />The random seed to use to compute the mask. </param>
         <param name="cbReturn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the generated mask in bytes. </param
-        >
+          />The length of the generated mask in bytes. </param>
       </Docs>
     </Member>
   </Members>

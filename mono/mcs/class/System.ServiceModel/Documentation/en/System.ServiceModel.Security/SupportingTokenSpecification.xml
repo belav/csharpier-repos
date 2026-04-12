@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supporting tokens augment the claims provided by the token associated with the message signature. There are 4 different kinds of supporting tokens, and the <see cref="P:System.ServiceModel.Security.SupportingTokenSpecification.SecurityTokenAttachmentMode" /> enumeration specifies which kind this instance is.</para
-      >
+        >Supporting tokens augment the claims provided by the token associated with the message signature. There are 4 different kinds of supporting tokens, and the <see cref="P:System.ServiceModel.Security.SupportingTokenSpecification.SecurityTokenAttachmentMode" /> enumeration specifies which kind this instance is.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,26 +60,22 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SupportingTokenSpecification" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SupportingTokenSpecification" /> class.</para>
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />The security token.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The security token.</param>
         <param name="tokenPolicies">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of security token policies.</param
-        >
+          />The collection of security token policies.</param>
         <param name="attachmentMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security token attachment mode.</param
-        >
+          />The security token attachment mode.</param>
       </Docs>
     </Member>
     <Member MemberName="SecurityTokenAttachmentMode">
@@ -104,8 +99,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> is an enumeration of the ways in which security tokens can be attached to messages. It includes the following members:</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> is an enumeration of the ways in which security tokens can be attached to messages. It includes the following members:</para>
           <list type="bullet">
             <item>
               <para>

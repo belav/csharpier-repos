@@ -38,10 +38,8 @@
       <para
         >The <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
-            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a
-          >
-        </format> applies this attribute to classes or interfaces.</para
-      >
+            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a>
+        </format> applies this attribute to classes or interfaces.</para>
       <para>Methods that use void pointer arguments cause this attribute to be applied to the containing class or interface.</para>
     </remarks>
     <summary>

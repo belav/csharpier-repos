@@ -15,18 +15,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.FontSize" /> enumeration represents the font sizes defined by HTML 4.0. The font size can be an absolute or relative size.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.FontSize" /> enumeration represents the font sizes defined by HTML 4.0. The font size can be an absolute or relative size.</para>
       <para
-        >An absolute font size represents a predefined font size determined by the browser. The possible values for an absolute font size are <see cref="F:System.Web.UI.WebControls.FontSize.XXSmall" />, <see cref="F:System.Web.UI.WebControls.FontSize.XSmall" />, <see cref="F:System.Web.UI.WebControls.FontSize.Small" />, <see cref="F:System.Web.UI.WebControls.FontSize.Medium" />, <see cref="F:System.Web.UI.WebControls.FontSize.Large" />, <see cref="F:System.Web.UI.WebControls.FontSize.XLarge" />, and <see cref="F:System.Web.UI.WebControls.FontSize.XXLarge" />.</para
-      >
+        >An absolute font size represents a predefined font size determined by the browser. The possible values for an absolute font size are <see cref="F:System.Web.UI.WebControls.FontSize.XXSmall" />, <see cref="F:System.Web.UI.WebControls.FontSize.XSmall" />, <see cref="F:System.Web.UI.WebControls.FontSize.Small" />, <see cref="F:System.Web.UI.WebControls.FontSize.Medium" />, <see cref="F:System.Web.UI.WebControls.FontSize.Large" />, <see cref="F:System.Web.UI.WebControls.FontSize.XLarge" />, and <see cref="F:System.Web.UI.WebControls.FontSize.XXLarge" />.</para>
       <para
-        >A relative font size represents a font size one size larger or smaller than a parent element's font size. The possible values for a relative font size are <see cref="F:System.Web.UI.WebControls.FontSize.Smaller" /> and <see cref="F:System.Web.UI.WebControls.FontSize.Larger" />.</para
-      >
+        >A relative font size represents a font size one size larger or smaller than a parent element's font size. The possible values for a relative font size are <see cref="F:System.Web.UI.WebControls.FontSize.Smaller" /> and <see cref="F:System.Web.UI.WebControls.FontSize.Larger" />.</para>
       <block subset="none" type="note">
         <para
-          >Some browers do not recognize <see cref="F:System.Web.UI.WebControls.FontSize.Smaller" /> and <see cref="F:System.Web.UI.WebControls.FontSize.Larger" /> font sizes. Check with your browser for compatibility.</para
-        >
+          >Some browers do not recognize <see cref="F:System.Web.UI.WebControls.FontSize.Smaller" /> and <see cref="F:System.Web.UI.WebControls.FontSize.Larger" /> font sizes. Check with your browser for compatibility.</para>
       </block>
     </remarks>
     <summary>

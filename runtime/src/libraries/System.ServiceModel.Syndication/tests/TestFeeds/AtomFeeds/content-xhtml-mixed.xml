@@ -20,8 +20,7 @@ Expect:       !NotInline{parent:entry,element:content}
     <summary>Some text.</summary>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        <b>Example:</b> Some &lt;b&gt;bold&lt;/b&gt; text.</div
-      >
+        <b>Example:</b> Some &lt;b&gt;bold&lt;/b&gt; text.</div>
     </content>
   </entry>
 </feed>

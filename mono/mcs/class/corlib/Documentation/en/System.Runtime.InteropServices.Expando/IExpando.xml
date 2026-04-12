@@ -35,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables modification of objects by adding and removing members, represented by <see cref="T:System.Reflection.MemberInfo" /> objects.</para
-      >
+        >Enables modification of objects by adding and removing members, represented by <see cref="T:System.Reflection.MemberInfo" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -70,16 +69,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.FieldInfo" /> object representing the added field.</para
-          >
+            >A <see cref="T:System.Reflection.FieldInfo" /> object representing the added field.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field. </param
-        >
+          />The name of the field. </param>
       </Docs>
     </Member>
     <Member MemberName="AddMethod">
@@ -119,15 +116,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the method. </param
-        >
+          />The name of the method. </param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to the method. </param
-        >
+          />The delegate to the method. </param>
       </Docs>
     </Member>
     <Member MemberName="AddProperty">
@@ -166,8 +161,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property. </param
-        >
+          />The name of the property. </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveMember">
@@ -202,8 +196,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to remove. </param
-        >
+          />The member to remove. </param>
       </Docs>
     </Member>
   </Members>

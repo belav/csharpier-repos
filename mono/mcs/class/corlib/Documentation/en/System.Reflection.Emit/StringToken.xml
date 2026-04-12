@@ -57,16 +57,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is an instance of StringToken and is equal to this object; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is an instance of StringToken and is equal to this object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with this StringToken. </param
-        >
+          />The object to compare with this StringToken. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -95,22 +93,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the current instance is equal to the specified <see cref="T:System.Reflection.Emit.StringToken" />.</para
-          >
+            >Indicates whether the current instance is equal to the specified <see cref="T:System.Reflection.Emit.StringToken" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref name="obj" /> is equal to the value of the current instance; otherwise, false.</para
-          >
+            >true if the value of <paramref name="obj" /> is equal to the value of the current instance; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to the current instance.</param
-        >
+          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to the current instance.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -167,29 +162,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see cref="T:System.Reflection.Emit.StringToken" /> structures are equal.</para
-          >
+            >Indicates whether two <see cref="T:System.Reflection.Emit.StringToken" /> structures are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> is equal to <paramref name="b" />; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> is equal to <paramref name="b" />; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="b" />.</param
-        >
+          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="b" />.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="a" />.</param
-        >
+          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="a" />.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -218,29 +209,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see cref="T:System.Reflection.Emit.StringToken" /> structures are not equal.</para
-          >
+            >Indicates whether two <see cref="T:System.Reflection.Emit.StringToken" /> structures are not equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> is not equal to <paramref name="b" />; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> is not equal to <paramref name="b" />; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="b" />.</param
-        >
+          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="b" />.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="a" />.</param
-        >
+          />The <see cref="T:System.Reflection.Emit.StringToken" /> to compare to <paramref name="a" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Token">

@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and instance of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" /> class.</para
-          >
+            >Initializes and instance of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and instance of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" /> class, using the specified <see cref="T:System.Web.Services.WsiProfiles" /> enumeration value.</para
-          >
+            >Initializes and instance of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" /> class, using the specified <see cref="T:System.Web.Services.WsiProfiles" /> enumeration value.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Services.WsiProfiles" /> object that specifies whether the Web service conforms to the WSI Basic Profile version 1.1.</param
-        >
+          />A <see cref="T:System.Web.Services.WsiProfiles" /> object that specifies whether the Web service conforms to the WSI Basic Profile version 1.1.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

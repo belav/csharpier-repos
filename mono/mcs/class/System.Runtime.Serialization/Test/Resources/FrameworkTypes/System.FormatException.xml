@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.FormatException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >One of the identified items was in an invalid format.</Message
-  >
+    >One of the identified items was in an invalid format.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

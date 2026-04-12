@@ -49,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.CollectionsUtil" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.CollectionsUtil" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -77,20 +76,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para
-          >
+            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the default initial capacity.</para
-          >
+            >Creates a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the default initial capacity.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the default initial capacity.</para
-          >
+            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the default initial capacity.</para>
         </returns>
       </Docs>
     </Member>
@@ -119,28 +115,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable(System.Collections.IDictionary)" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para
-          >
+            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable(System.Collections.IDictionary)" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entries from the specified dictionary to a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the same initial capacity as the number of entries copied.</para
-          >
+            >Copies the entries from the specified dictionary to a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the same initial capacity as the number of entries copied.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class containing the entries from the specified <see cref="T:System.Collections.IDictionary" />.</para
-          >
+            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class containing the entries from the specified <see cref="T:System.Collections.IDictionary" />.</para>
         </returns>
         <param name="d">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IDictionary" /> to copy to a new case-insensitive <see cref="T:System.Collections.Hashtable" />. </param
-        >
+          />The <see cref="T:System.Collections.IDictionary" /> to copy to a new case-insensitive <see cref="T:System.Collections.Hashtable" />. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCaseInsensitiveHashtable">
@@ -168,28 +160,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable(System.Int32)" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Int32,System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para
-          >
+            >Instead of using the <see cref="M:System.Collections.Specialized.CollectionsUtil.CreateCaseInsensitiveHashtable(System.Int32)" /> method, use the <see cref="M:System.Collections.Hashtable.#ctor(System.Int32,System.Collections.IEqualityComparer)" /> constructor to create a case-insensitive <see cref="T:System.Collections.Hashtable" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the specified initial capacity.</para
-          >
+            >Creates a new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the specified initial capacity.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the specified initial capacity.</para
-          >
+            >A new case-insensitive instance of the <see cref="T:System.Collections.Hashtable" /> class with the specified initial capacity.</para>
         </returns>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The approximate number of entries that the <see cref="T:System.Collections.Hashtable" /> can initially contain. </param
-        >
+          />The approximate number of entries that the <see cref="T:System.Collections.Hashtable" /> can initially contain. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateCaseInsensitiveSortedList">
@@ -215,20 +203,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see cref="T:System.Collections.SortedList" /> instance is sorted according to the <see cref="T:System.Collections.CaseInsensitiveComparer" />.</para
-          >
+            >The new <see cref="T:System.Collections.SortedList" /> instance is sorted according to the <see cref="T:System.Collections.CaseInsensitiveComparer" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Collections.SortedList" /> class that ignores the case of strings.</para
-          >
+            >Creates a new instance of the <see cref="T:System.Collections.SortedList" /> class that ignores the case of strings.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Collections.SortedList" /> class that ignores the case of strings.</para
-          >
+            >A new instance of the <see cref="T:System.Collections.SortedList" /> class that ignores the case of strings.</para>
         </returns>
       </Docs>
     </Member>

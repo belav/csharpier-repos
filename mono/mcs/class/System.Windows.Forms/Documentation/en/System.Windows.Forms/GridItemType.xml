@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the valid grid item types for a <see cref="T:System.Windows.Forms.PropertyGrid" />.</para
-      >
+        >Specifies the valid grid item types for a <see cref="T:System.Windows.Forms.PropertyGrid" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A grid entry that is a category name. A category is a descriptive grouping for groups of <see cref="T:System.Windows.Forms.GridItem" /> rows. Typical categories include the following Behavior, Layout, Data, and Appearance.</para
-          >
+            >A grid entry that is a category name. A category is a descriptive grouping for groups of <see cref="T:System.Windows.Forms.GridItem" /> rows. Typical categories include the following Behavior, Layout, Data, and Appearance.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

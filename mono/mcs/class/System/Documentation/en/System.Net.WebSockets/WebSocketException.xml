@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -63,16 +62,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -96,16 +93,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -126,16 +121,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -160,23 +153,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -201,23 +191,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -242,23 +229,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -283,23 +267,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -324,23 +305,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -365,23 +343,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -407,30 +382,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -456,30 +427,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -505,30 +472,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -555,37 +518,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" /> class.</para>
         </summary>
         <param name="error">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error from the WebSocketError enumeration.</param
-        >
+          />The error from the WebSocketError enumeration.</param>
         <param name="nativeError">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The native error code for the exception.</param
-        >
+          />The native error code for the exception.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error.</param
-        >
+          />The description of the error.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the previous exception that led to the current exception.</param
-        >
+          />Indicates the previous exception that led to the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName="WebSocketErrorCode">

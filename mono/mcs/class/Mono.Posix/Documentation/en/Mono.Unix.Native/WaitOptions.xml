@@ -20,8 +20,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Wait options for the <see cref="M:Mono.Unix.Native.Syscall.waitpid" /> syscall method.</summary
-    >
+      >Wait options for the <see cref="M:Mono.Unix.Native.Syscall.waitpid" /> syscall method.</summary>
     <remarks />
     <altmember cref="M:Mono.Unix.Native.Syscall.waitpid" />
   </Docs>

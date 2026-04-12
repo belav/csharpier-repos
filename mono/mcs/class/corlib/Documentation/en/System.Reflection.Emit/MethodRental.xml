@@ -134,36 +134,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class containing the method. </param
-        >
+          />The class containing the method. </param>
         <param name="methodtoken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The token for the method. </param
-        >
+          />The token for the method. </param>
         <param name="rgIL">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the method. This should include the method header. </param
-        >
+          />A pointer to the method. This should include the method header. </param>
         <param name="methodSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the new method body in bytes. </param
-        >
+          />The size of the new method body in bytes. </param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Flags that control the swapping. See the definitions of the constants. </param
-        >
+          />Flags that control the swapping. See the definitions of the constants. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._MethodRental.GetIDsOfNames">
@@ -228,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para
-          >
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,22 +234,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type information to return.</param
-        >
+          />The type information to return.</param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale identifier for the type information.</param
-        >
+          />The locale identifier for the type information.</param>
         <param name="ppTInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Receives a pointer to the requested type information object.</param
-        >
+          />Receives a pointer to the requested type information object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._MethodRental.GetTypeInfoCount">

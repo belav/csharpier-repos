@@ -19,14 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" /> methods, to give applications access to TCP traffic information.</para
-      >
+        >Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" /> methods, to give applications access to TCP traffic information.</para>
       <para
         >The information in this class correlates to the management information objects described in <see
           cref="http://www.ietf.org/rfc/rfc2012.txt"
-          >http://www.ietf.org/rfc/rfc2012.txt</see
-        >.</para
-      >
+          >http://www.ietf.org/rfc/rfc2012.txt</see>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,14 +48,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para
-          >
+            >This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -250,8 +245,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para
-          >
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para
-          >
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

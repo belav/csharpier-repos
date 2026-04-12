@@ -17,30 +17,24 @@
 
   <PropertyGroup>
     <IsStyleCopEnabled Condition="'$(IsStyleCopEnabled)' == ''"
-      >$(StyleCopEnabled)</IsStyleCopEnabled
-    >
+      >$(StyleCopEnabled)</IsStyleCopEnabled>
     <StyleCopForceFullAnalysis Condition="'$(StyleCopForceFullAnalysis)' == ''"
-      >false</StyleCopForceFullAnalysis
-    >
+      >false</StyleCopForceFullAnalysis>
     <StyleCopCacheResults Condition="'$(StyleCopCacheResults)' == ''">true</StyleCopCacheResults>
     <StyleCopTreatErrorsAsWarnings Condition="'$(StyleCopTreatErrorsAsWarnings)' == ''"
-      >true</StyleCopTreatErrorsAsWarnings
-    >
+      >true</StyleCopTreatErrorsAsWarnings>
     <StyleCopOverrideSettingsFile
       Condition="'$(StyleCopOverrideSettingsFile)' == ''"
     ></StyleCopOverrideSettingsFile>
     <StyleCopOutputFile Condition="'$(StyleCopOutputFile)' == ''"
-      >$(IntermediateOutputPath)StyleCopViolations.xml</StyleCopOutputFile
-    >
+      >$(IntermediateOutputPath)StyleCopViolations.xml</StyleCopOutputFile>
     <StyleCopSuccessMarkerFile Condition="'$(StyleCopSuccessMarkerFile)' == ''"
-      >$(IntermediateOutputPath)StyleCop.success</StyleCopSuccessMarkerFile
-    >
+      >$(IntermediateOutputPath)StyleCop.success</StyleCopSuccessMarkerFile>
     <!-- Specifying 0 will cause StyleCop to use the default violation count limit.
          Specifying any positive number will cause StyleCop to use that number as the violation count limit.
          Specifying any negative number will cause StyleCop to allow any number of violations without limit. -->
     <StyleCopMaxViolationCount Condition="'$(StyleCopMaxViolationCount)' == ''"
-      >0</StyleCopMaxViolationCount
-    >
+      >0</StyleCopMaxViolationCount>
   </PropertyGroup>
 
   <!-- Define target: StyleCop -->

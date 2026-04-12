@@ -5,8 +5,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Net.Security" /> namespace provides network streams for secure communications between hosts.</para
-      >
+        >The <see cref="N:System.Net.Security" /> namespace provides network streams for secure communications between hosts.</para>
     </summary>
   </Docs>
 </Namespace>

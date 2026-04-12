@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a collection of methods that can be used to invoke a compiler, typically from an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> implementation.</para
-      >
+        >This class provides a collection of methods that can be used to invoke a compiler, typically from an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> implementation.</para>
       <block subset="none" type="note">
         <para
           >This class contains a link demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" /> is thrown when the immediate caller does not have full-trust permission. For more information, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
     </remarks>
     <summary>
@@ -75,15 +73,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The command to execute. </param
-        >
+          />The command to execute. </param>
         <param name="tempFiles">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param>
       </Docs>
     </Member>
     <Member MemberName="ExecWaitWithCapture">

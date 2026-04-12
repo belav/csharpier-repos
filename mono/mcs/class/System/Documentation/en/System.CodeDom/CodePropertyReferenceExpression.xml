@@ -37,11 +37,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> can be used to represent a reference to the value of a property.</para
-      >
+        <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> can be used to represent a reference to the value of a property.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodePropertyReferenceExpression.TargetObject" /> property specifies the object that contains the property to reference. The <see cref="P:System.CodeDom.CodePropertyReferenceExpression.PropertyName" /> property specifies the name of the property to reference.</para
-      >
+        >The <see cref="P:System.CodeDom.CodePropertyReferenceExpression.TargetObject" /> property specifies the object that contains the property to reference. The <see cref="P:System.CodeDom.CodePropertyReferenceExpression.PropertyName" /> property specifies the name of the property to reference.</para>
       <para>This object does not have a property to indicate whether the reference is used in a get or set. If the property reference occurs on the left, assigned to, side of an assignment statement, then it is a set.</para>
     </remarks>
     <summary>
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,23 +96,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> class using the specified target object and property name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePropertyReferenceExpression" /> class using the specified target object and property name.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the property to reference. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the property to reference. </param>
         <param name="propertyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the property to reference. </param
-        >
+          />The name of the property to reference. </param>
       </Docs>
     </Member>
     <Member MemberName="PropertyName">

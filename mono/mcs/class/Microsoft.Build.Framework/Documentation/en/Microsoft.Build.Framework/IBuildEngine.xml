@@ -35,12 +35,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="targetNames" />, <paramref name="globalProperties" />, and <paramref name="targetOutputs" /> parameters can be null.</para
-          >
+            >The <paramref name="targetNames" />, <paramref name="globalProperties" />, and <paramref name="targetOutputs" /> parameters can be null.</para>
           <para>If no targets are specified, vstecmsbuild builds the default targets of the project.</para>
           <para
-            >Target outputs are returned as <see cref="T:Microsoft.Build.Framework.ITaskItem" /> arrays indexed by target name.</para
-          >
+            >Target outputs are returned as <see cref="T:Microsoft.Build.Framework.ITaskItem" /> arrays indexed by target name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,29 +53,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the project file to build.</param
-        >
+          />The name of the project file to build.</param>
         <param name="targetNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The names of the target in the project to build. Separate multiple targets with a semicolon (;).</param
-        >
+          />The names of the target in the project to build. Separate multiple targets with a semicolon (;).</param>
         <param name="globalProperties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IDictionary" /> of additional global properties to apply to the project. The key and value must be String data types.</param
-        >
+          />An <see cref="T:System.Collections.IDictionary" /> of additional global properties to apply to the project. The key and value must be String data types.</param>
         <param name="targetOutputs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The outputs of each specified target.</param
-        >
+          />The outputs of each specified target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -160,8 +154,7 @@
           <para>Raises a custom event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -187,8 +180,7 @@
           <para>Raises an error event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -214,8 +206,7 @@
           <para>Raises a message event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -241,8 +232,7 @@
           <para>Raises a warning event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -23,14 +23,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" /> class has properties for specifying how to address the queue, how to specify transfer assurances, whether messages must be durably stored, and how messages should be protected and authenticated.</para
-      >
+        >The <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" /> class has properties for specifying how to address the queue, how to specify transfer assurances, whether messages must be durably stored, and how messages should be protected and authenticated.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This binding element can be used to enable indigo1 applications to send messages to and receive messages from existing MSMQ applications that use either COM, MSMQ native APIs, or the APIs in <see cref="N:System.Messaging" />. Use this class to send and receive messages from MSMQ-based messaging applications. </para
-      >
+        >This binding element can be used to enable indigo1 applications to send messages to and receive messages from existing MSMQ applications that use either COM, MSMQ native APIs, or the APIs in <see cref="N:System.Messaging" />. Use this class to send and receive messages from MSMQ-based messaging applications. </para>
     </summary>
   </Docs>
   <Members>
@@ -50,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -107,8 +104,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding to which the settings are applied.</param
-        >
+          />The binding to which the settings are applied.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">
@@ -198,8 +194,7 @@
             </item>
             <item>
               <para
-                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize objects.</para
-              >
+                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize objects.</para>
             </item>
             <item>
               <para>ByteArray - The object is serialized to an array of bytes.</para>
@@ -209,8 +204,7 @@
             </item>
             <item>
               <para
-                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize objects.</para
-              >
+                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize objects.</para>
             </item>
           </list>
           <para>The default value is Xml.</para>
@@ -218,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" /> to be used when serializing MSMQ messages.</para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" /> to be used when serializing MSMQ messages.</para>
         </summary>
       </Docs>
     </Member>

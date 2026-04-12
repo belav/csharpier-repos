@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -52,12 +50,10 @@
       </Parameters>
       <Docs>
         <param name="blob"
-          >an array of bytes containing either a PUBLICKEYBLOB or a PRIVATEKEYBLOB structure.</param
-        >
+          >an array of bytes containing either a PUBLICKEYBLOB or a PRIVATEKEYBLOB structure.</param>
         <summary>Convert the key from either a CryptoAPI PUBLICKEYBLOB structure or PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -80,15 +76,12 @@
       </Parameters>
       <Docs>
         <param name="blob"
-          >an array of bytes containing either a PUBLICKEYBLOB or a PRIVATEKEYBLOB structure.</param
-        >
+          >an array of bytes containing either a PUBLICKEYBLOB or a PRIVATEKEYBLOB structure.</param>
         <param name="offset"
-          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param
-        >
+          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param>
         <summary>Convert the key from either a CryptoAPI PUBLICKEYBLOB structure or PRIVATEKEYBLOB structure to a RSA instance. </summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -160,8 +153,7 @@
         <param name="blob">an array of bytes containing a PRIVATEKEYBLOB structure. </param>
         <summary>Convert the key from the CryptoAPI PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -185,12 +177,10 @@
       <Docs>
         <param name="blob">an array of bytes containing a PRIVATEKEYBLOB structure. </param>
         <param name="offset"
-          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param
-        >
+          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param>
         <summary>Convert the key from the CryptoAPI PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -262,8 +252,7 @@
         <param name="blob">an array of bytes containing a PUBLICKEYBLOB structure. </param>
         <summary>Convert the public key from the CryptoAPI PUBLICKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -287,12 +276,10 @@
       <Docs>
         <param name="blob">an array of bytes containing a PUBLICKEYBLOB structure. </param>
         <param name="offset"
-          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param
-        >
+          >a <see cref="T:System.Int32" /> representing the offset where the key blob starts in the specified buffer.</param>
         <summary>Convert the public key from the CryptoAPI PUBLICKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns
-        >
+          >a <see cref="T:System.Security.Cryptography.RSA" /> instance containing the decoded key.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -359,8 +346,7 @@
       </Parameters>
       <Docs>
         <param name="hex"
-          >an hexadecimal <see cref="T:System.String" /> without any separator. The string length must be a multiple of 2.</param
-        >
+          >an hexadecimal <see cref="T:System.String" /> without any separator. The string length must be a multiple of 2.</param>
         <summary>Convert an hexadecimal string to an array of bytes.</summary>
         <returns>the converted data as an array of bytes.</returns>
         <remarks>
@@ -391,11 +377,9 @@
       </Parameters>
       <Docs>
         <param name="keypair"
-          >the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> instance to be converted.</param
-        >
+          >the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> instance to be converted.</param>
         <param name="includePrivateKey"
-          >True if the private key is to be converted, resulting in a PRIVATEKEYBLOB. False if only the public is to be converted, resulting in a PUBLICKEYBLOB.</param
-        >
+          >True if the private key is to be converted, resulting in a PRIVATEKEYBLOB. False if only the public is to be converted, resulting in a PUBLICKEYBLOB.</param>
         <summary>Convert an AsymmetricAlgorithm instance to a CryptoAPI blob structure.</summary>
         <returns>an array of bytes containing either a PRIVATEKEYBLOB or a PUBLICKEYBLOB structure.</returns>
         <remarks>
@@ -448,11 +432,9 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param
-        >
+          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param>
         <param name="includePrivateKey"
-          >True if the private key is to be converted, resulting in a PRIVATEKEYBLOB. False if only the public is to be converted, resulting in a PUBLICKEYBLOB.</param
-        >
+          >True if the private key is to be converted, resulting in a PRIVATEKEYBLOB. False if only the public is to be converted, resulting in a PUBLICKEYBLOB.</param>
         <summary>Convert an RSA instance to a CryptoAPI blob structure.</summary>
         <returns>an array of bytes containing either a PRIVATEKEYBLOB or a PUBLICKEYBLOB structure.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
@@ -499,8 +481,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param
-        >
+          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param>
         <summary>Convert an RSA instance to a CryptoAPI PRIVATEKEYBLOB structure.</summary>
         <returns>an array of bytes containing a PRIVATEKEYBLOB structure.</returns>
         <remarks>Many formats, like PVK (private key files) and SNK (strongname key files), uses CryptoAPI structures.</remarks>
@@ -547,8 +528,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param
-        >
+          >the <see cref="T:System.Security.Cryptography.RSA" /> instance to be converted.</param>
         <summary>Convert an RSA instance to a CryptoAPI PUBLICKEYBLOB structure.</summary>
         <returns>an array of bytes containing a PUBLICKEYBLOB structure.</returns>
         <remarks>
@@ -574,8 +554,7 @@
         <param name="input">an array of bytes to be converted.</param>
         <summary>Convert an array of bytes to an hexadecimal string.</summary>
         <returns
-          >a <see cref="T:System.String" /> representing the specified data in hexadecimal. No separator is used.</returns
-        >
+          >a <see cref="T:System.String" /> representing the specified data in hexadecimal. No separator is used.</returns>
         <remarks>
           <example>
             <code lang="C#">

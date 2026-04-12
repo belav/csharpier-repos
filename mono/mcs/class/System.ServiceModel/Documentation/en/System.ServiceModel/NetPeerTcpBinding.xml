@@ -24,11 +24,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> binding provides support for the creation of peer networking applications that use a TCP-level peer-to-peer mesh infrastructure. </para
-      >
+        >The <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> binding provides support for the creation of peer networking applications that use a TCP-level peer-to-peer mesh infrastructure. </para>
       <para
-        >Each <see cref="T:System.ServiceModel.PeerNode" /> instance can host multiple peer channels defined with this binding type. Channel factories produced using a configured instance of this type can be used to generate peer channels. A peer channel factory can produce peer channels that are input-only (implements <see cref="T:System.ServiceModel.Channels.IInputChannel" />), output-only (implements <see cref="T:System.ServiceModel.Channels.IOutputChannel" />), and duplex (implements <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />).</para
-      >
+        >Each <see cref="T:System.ServiceModel.PeerNode" /> instance can host multiple peer channels defined with this binding type. Channel factories produced using a configured instance of this type can be used to generate peer channels. A peer channel factory can produce peer channels that are input-only (implements <see cref="T:System.ServiceModel.Channels.IInputChannel" />), output-only (implements <see cref="T:System.ServiceModel.Channels.IOutputChannel" />), and duplex (implements <see cref="T:System.ServiceModel.Channels.IDuplexChannel" />).</para>
       <para>This is one of the standard bindings provided by the Windows Communication Framework (WCF). It can be used in imperative code or specified in the corresponding XML configuration file for the application. The recommended procedure is to define the binding using configuration values and not to use a code-based approach, except in certain advanced scenarios where configuration values must be set as a service is initialized.</para>
     </remarks>
     <summary>
@@ -53,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> class. </para
-          >
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -75,22 +72,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> with the supplied name. If a configuration for that name already exists, the settings in the configuration file that contains that name are used. If the name does not already exist, the default configuration settings are used.</para
-          >
+            >This constructor creates a new <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> with the supplied name. If a configuration for that name already exists, the settings in the configuration file that contains that name are used. If the name does not already exist, the default configuration settings are used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> class with a specified configuration name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetPeerTcpBinding" /> class with a specified configuration name. </para>
         </summary>
         <param name="configurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the configurationName attribute that identifies the binding element whose settings are used to initialize the binding.</param
-        >
+          />The value of the configurationName attribute that identifies the binding element whose settings are used to initialize the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElements">
@@ -119,8 +113,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Collections.Generic.ICollection`1" /> of type <see cref="T:System.ServiceModel.Channels.BindingElement" /> that makes up the binding.</para
-          >
+            >The <see cref="T:System.Collections.Generic.ICollection`1" /> of type <see cref="T:System.ServiceModel.Channels.BindingElement" /> that makes up the binding.</para>
         </returns>
       </Docs>
     </Member>
@@ -189,17 +182,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is not set, or is set to null or <see cref="F:System.String.Empty" />, the associated <see cref="T:System.ServiceModel.PeerNode" /> listens on all global addresses (both IPv4 and IPv6) configured for the local machine.</para
-          >
+            >If this property is not set, or is set to null or <see cref="F:System.String.Empty" />, the associated <see cref="T:System.ServiceModel.PeerNode" /> listens on all global addresses (both IPv4 and IPv6) configured for the local machine.</para>
           <para
-            >If a valid unicast IP address is specified for this property, then the associated <see cref="T:System.ServiceModel.PeerNode" /> object listens on that address. IPv4 and IPv6 wildcard addresses are not considered valid.</para
-          >
+            >If a valid unicast IP address is specified for this property, then the associated <see cref="T:System.ServiceModel.PeerNode" /> object listens on that address. IPv4 and IPv6 wildcard addresses are not considered valid.</para>
           <para
-            >If a non-null IP address string is specified for this property in conjunction with <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" />, then the IP address must be associated with a physical interface rather than a virtual one.</para
-          >
+            >If a non-null IP address string is specified for this property in conjunction with <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" />, then the IP address must be associated with a physical interface rather than a virtual one.</para>
           <para
-            >ListenIPAddress must be set for ad-hoc networks in order to register with the default peer resolver (PNRP). If this property is specified in conjunction with <see cref="T:System.ServiceModel.Configuration.PnrpPeerResolverElement" /> (the default peer resolver), then the IP address must belong to a physical network interface rather than a virtual one (such as a tunneling interface). This is because PNRP only publishes within clouds corresponding to physical interfaces. By setting this property to null, all global addresses are published in the global PNRP cloud.</para
-          >
+            >ListenIPAddress must be set for ad-hoc networks in order to register with the default peer resolver (PNRP). If this property is specified in conjunction with <see cref="T:System.ServiceModel.Configuration.PnrpPeerResolverElement" /> (the default peer resolver), then the IP address must belong to a physical network interface rather than a virtual one (such as a tunneling interface). This is because PNRP only publishes within clouds corresponding to physical interfaces. By setting this property to null, all global addresses are published in the global PNRP cloud.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -222,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxBufferPoolSize" /> cannot be less than <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" /> whose default value is 65536 bytes (64 KB). </para
-          >
+            >The value of <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxBufferPoolSize" /> cannot be less than <see cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" /> whose default value is 65536 bytes (64 KB). </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -265,8 +253,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the port value is invalid, <see cref="T:System.ArgumentException" /> is raised. The default value for this property is 0, which indicates that the listener port is randomly selected from all unreserved ports.</para
-          >
+            >If the port value is invalid, <see cref="T:System.ArgumentException" /> is raised. The default value for this property is 0, which indicates that the listener port is randomly selected from all unreserved ports.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> that is associated with this binding.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> that is associated with this binding.</para>
         </summary>
       </Docs>
     </Member>
@@ -323,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.ServiceModel.PeerResolver" /> used by this binding instance to resolve a peer mesh ID to the endpoint IP addresses of nodes within the peer mesh.</para
-          >
+            >Gets the <see cref="T:System.ServiceModel.PeerResolver" /> used by this binding instance to resolve a peer mesh ID to the endpoint IP addresses of nodes within the peer mesh.</para>
         </summary>
       </Docs>
     </Member>

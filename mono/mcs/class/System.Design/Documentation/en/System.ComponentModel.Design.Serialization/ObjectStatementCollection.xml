@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Holds a table of statements that is offered by the <see cref="T:System.ComponentModel.Design.Serialization.StatementContext" />. This class cannot be inherited.</para
-      >
+        >Holds a table of statements that is offered by the <see cref="T:System.ComponentModel.Design.Serialization.StatementContext" />. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,8 +55,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The owner of the statement collection.</param
-        >
+          />The owner of the statement collection.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -78,14 +76,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />.</para
-          >
+            >Returns an <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -130,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you are the creator of the statement context, you should call the <see cref="M:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate(System.Collections.ICollection)" /> method if you want statement tables to be used to store values for certain objects.</para
-          >
+            >If you are the creator of the statement context, you should call the <see cref="M:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate(System.Collections.ICollection)" /> method if you want statement tables to be used to store values for certain objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +137,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of statement owners to add to the table.</param
-        >
+          />A collection of statement owners to add to the table.</param>
       </Docs>
     </Member>
     <Member MemberName="Populate">
@@ -162,8 +156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you are the creator of the statement context, you should call the <see cref="M:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate(System.Object)" /> method if you want statement tables to be used to store values for certain objects.</para
-          >
+            >If you are the creator of the statement context, you should call the <see cref="M:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate(System.Object)" /> method if you want statement tables to be used to store values for certain objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -174,8 +167,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The statement owner to add to the table.</param
-        >
+          />The statement owner to add to the table.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -195,20 +187,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" /> instance is cast to an <see cref="T:System.Collections.IEnumerable" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.Serialization.ObjectStatementCollection" /> instance is cast to an <see cref="T:System.Collections.IEnumerable" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para
-          >
+            >For a description of this member, see the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>

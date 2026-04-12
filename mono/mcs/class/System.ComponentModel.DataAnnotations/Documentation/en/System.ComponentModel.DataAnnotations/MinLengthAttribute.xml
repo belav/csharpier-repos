@@ -63,16 +63,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MinLengthAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MinLengthAttribute" /> class.</para>
         </summary>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The length of the array or string data.</param
-        >
+          />The length of the array or string data.</param>
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
@@ -109,8 +107,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to include in the formatted string.</param
-        >
+          />The name to include in the formatted string.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -144,8 +141,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to validate.</param
-        >
+          />The object to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="Length">

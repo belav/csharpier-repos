@@ -23,8 +23,7 @@
   <Interfaces></Interfaces>
   <Docs>
     <remarks
-      >An instance of this class will be created to be thrown on an XSLT stylesheet compilation error. An input stylesheet in <see cref="M:System.Xml.Xsl.XslTransform.Load" /> method is compiled into internal compiled stylesheet (that contains, for example, all compiled XPath expressions in the stylesheet, via <see cref="M:System.Xml.XPath.XPathNavigator.Compile" /> method).</remarks
-    >
+      >An instance of this class will be created to be thrown on an XSLT stylesheet compilation error. An input stylesheet in <see cref="M:System.Xml.Xsl.XslTransform.Load" /> method is compiled into internal compiled stylesheet (that contains, for example, all compiled XPath expressions in the stylesheet, via <see cref="M:System.Xml.XPath.XPathNavigator.Compile" /> method).</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The exception that is thrown by the Load method when an error is found in the XSLT style sheet.</para>
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -74,16 +72,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error.</param
-        >
+          />The message that describes the error.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,23 +107,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XsltCompileException class using the information in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.</para
-          >
+            >Initializes a new instance of the XsltCompileException class using the information in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object containing all the properties of an XsltCompileException. </param
-        >
+          />The SerializationInfo object containing all the properties of an XsltCompileException. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object containing the context information. </param
-        >
+          />The StreamingContext object containing the context information. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -154,23 +147,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltCompileException" /> class specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error.</param
-        >
+          />The message that describes the error.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception, or null if no inner exception is specified. </param
-        >
+          />The exception that is the cause of the current exception, or null if no inner exception is specified. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,29 +196,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that threw the XsltCompileException. </param
-        >
+          />The <see cref="T:System.Exception" /> that threw the XsltCompileException. </param>
         <param name="sourceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location path of the style sheet. </param
-        >
+          />The location path of the style sheet. </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number indicating where the error occurred in the style sheet. </param
-        >
+          />The line number indicating where the error occurred in the style sheet. </param>
         <param name="linePosition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line position indicating where the error occurred in the style sheet. </param
-        >
+          />The line position indicating where the error occurred in the style sheet. </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -258,23 +244,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Streams all the XsltCompileException properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> class for the given <see cref="T:System.Runtime.Serialization.StreamingContext" />.</para
-          >
+            >Streams all the XsltCompileException properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> class for the given <see cref="T:System.Runtime.Serialization.StreamingContext" />.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SerializationInfo object. </param
-        >
+          />The SerializationInfo object. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StreamingContext object. </param
-        >
+          />The StreamingContext object. </param>
       </Docs>
     </Member>
     <Member MemberName="Message">

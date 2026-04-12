@@ -53,11 +53,9 @@
   </paragraph>
   <paragraph
     >The <non_terminal where="15"
-      >embedded-statement</non_terminal
-    > nonterminal is used for statements that appear within other statements. The use of <non_terminal
+      >embedded-statement</non_terminal> nonterminal is used for statements that appear within other statements. The use of <non_terminal
       where="15"
-      >embedded-statement</non_terminal
-    > rather than statement excludes the use of declaration statements and labeled statements in these contexts. <example
+      >embedded-statement</non_terminal> rather than statement excludes the use of declaration statements and labeled statements in these contexts. <example
       >[Example: The code <code_example>
         <![CDATA[
 void F(bool b) {  
@@ -67,8 +65,6 @@ void F(bool b) {
 ]]>
       </code_example>results in a compile-time error because an if statement requires an <non_terminal
         where="15"
-        >embedded-statement</non_terminal
-      > rather than a statement for its if branch. If this code were permitted, then the variable i would be declared, but it could never be used. (Note, however, that by placing i's declaration in a block, the example is valid.) end example]</example
-    >
+        >embedded-statement</non_terminal> rather than a statement for its if branch. If this code were permitted, then the variable i would be declared, but it could never be used. (Note, however, that by placing i's declaration in a block, the example is valid.) end example]</example>
   </paragraph>
 </clause>

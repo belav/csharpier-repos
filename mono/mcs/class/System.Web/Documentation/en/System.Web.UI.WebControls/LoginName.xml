@@ -58,24 +58,20 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >By default, the <see cref="T:System.Web.UI.WebControls.LoginName" /> control displays the name contained in the <see cref="P:System.Web.UI.Page.User" /> property of the <see cref="T:System.Web.UI.Page" /> class. If the System.Web.UI.Page.User.Identity.Name property is empty, the control is not rendered.</para
-      >
+        >By default, the <see cref="T:System.Web.UI.WebControls.LoginName" /> control displays the name contained in the <see cref="P:System.Web.UI.Page.User" /> property of the <see cref="T:System.Web.UI.Page" /> class. If the System.Web.UI.Page.User.Identity.Name property is empty, the control is not rendered.</para>
       <block subset="none" type="note">
         <para
           >If you are not familiar with the set of login controls available in ASP.NET, see <format type="text/html">
             <a href="ac032230-6469-4b03-b68d-03ef2643a24d">ASP.NET Login Controls Overview</a>
           </format> before continuing. For a list of other topics related to login controls and membership, see <format type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
       <para
-        >To change the text displayed by the <see cref="T:System.Web.UI.WebControls.LoginName" /> control, set the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property.</para
-      >
+        >To change the text displayed by the <see cref="T:System.Web.UI.WebControls.LoginName" /> control, set the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property.</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Web.UI.WebControls.LoginName" /> control cannot be used outside the &lt;form&gt; tag on a Web page. Specifically, the <see cref="T:System.Web.UI.WebControls.LoginName" /> cannot be used to put the user's name in the title of a page.</para
-        >
+          >The <see cref="T:System.Web.UI.WebControls.LoginName" /> control cannot be used outside the &lt;form&gt; tag on a Web page. Specifically, the <see cref="T:System.Web.UI.WebControls.LoginName" /> cannot be used to put the user's name in the title of a page.</para>
       </block>
       <format type="text/html">
         <a href="#accessibility" />
@@ -86,12 +82,10 @@
       <para
         >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
-            >Accessibility in Visual Studio 2010 and ASP.NET 4</a
-          >
+            >Accessibility in Visual Studio 2010 and ASP.NET 4</a>
         </format> and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
-        </format>.</para
-      >
+        </format>.</para>
       <format type="text/html">
         <a href="#declarative_syntax" />
       </format>
@@ -135,8 +129,7 @@
     ToolTip="string"
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
     Width="size"
-/&gt;</code
-      >
+/&gt;</code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -153,14 +146,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.LoginName" /> control.</para
-          >
+            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.LoginName" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to its default values.</para
-          >
+            >Initializes the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to its default values.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -187,8 +178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property contains a standard text format string that displays the user's name on the Web page. The string "{0}" indicates where in the string the user's name is inserted. The following table describes the available property settings.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property contains a standard text format string that displays the user's name on the Web page. The string "{0}" indicates where in the string the user's name is inserted. The following table describes the available property settings.</para>
           <list type="table">
             <listheader>
               <item>
@@ -216,8 +206,7 @@
               </term>
               <description>
                 <para
-                  >Same as default. To hide the control, set the <see cref="P:System.Web.UI.Control.Visible" /> property to false. </para
-                >
+                  >Same as default. To hide the control, set the <see cref="P:System.Web.UI.Control.Visible" /> property to false. </para>
               </description>
             </item>
             <item>
@@ -234,18 +223,15 @@
               </term>
               <description>
                 <para
-                  >When the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property is set to a string, the string is displayed when the user is logged in. Because the string does not contain "{0}", the user's name is not displayed. When the user is not logged in, nothing is displayed. </para
-                >
+                  >When the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" /> property is set to a string, the string is displayed when the user is logged in. Because the string does not contain "{0}", the user's name is not displayed. When the user is not logged in, nothing is displayed. </para>
               </description>
             </item>
           </list>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" /> and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
-                >ASP.NET Globalization and Localization</a
-              >
-            </format>.</para
-          >
+                >ASP.NET Globalization and Localization</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -276,16 +262,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> control. </para
-          >
+            >Renders the <see cref="T:System.Web.UI.WebControls.LoginName" /> control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" /> control. </para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that receives the rendered output.</param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriter" /> that receives the rendered output.</param>
       </Docs>
     </Member>
     <Member MemberName="RenderBeginTag">
@@ -312,8 +296,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param
-        >
+          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -345,8 +328,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param
-        >
+          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param>
       </Docs>
     </Member>
     <Member MemberName="RenderEndTag">
@@ -373,8 +355,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param
-        >
+          />A <see cref="T:System.Web.UI.HtmlTextWriter" /> object that represents the output stream that renders HTML content to the client.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

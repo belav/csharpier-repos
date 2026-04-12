@@ -17,8 +17,7 @@
       <para
         >Represents a single <format type="text/html">
           <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-        </format> element in an vstecmsbuild project.</para
-      >
+        </format> element in an vstecmsbuild project.</para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +36,7 @@
           <para
             >Gets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-            </format> element.</para
-          >
+            </format> element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,8 +58,7 @@
           <para
             >Gets the fully qualified path of the file specified in the <unmanagedCodeEntityReference>Name</unmanagedCodeEntityReference> attribute of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-            </format> element.</para
-          >
+            </format> element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,8 +80,7 @@
           <para
             >Gets a value indicating whether the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-            </format> element was imported into the project.</para
-          >
+            </format> element was imported into the project.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,8 +102,7 @@
           <para
             >Gets or sets the <unmanagedCodeEntityReference>Project</unmanagedCodeEntityReference> attribute value of the <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-            </format> element.</para
-          >
+            </format> element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -22,17 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If the input character cannot be converted to an output byte sequence, the encoding operation calls the <see cref="Overload:System.Text.EncoderExceptionFallbackBuffer.Fallback" /> method, which throws <see cref="T:System.Text.EncoderFallbackException" />.</para
-      >
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If the input character cannot be converted to an output byte sequence, the encoding operation calls the <see cref="Overload:System.Text.EncoderExceptionFallbackBuffer.Fallback" /> method, which throws <see cref="T:System.Text.EncoderFallbackException" />.</para>
       <para
-        >The <see cref="T:System.Text.EncoderFallbackBuffer" /> class, which represents a data buffer used in an encoding operation, is the base class for the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class. However, instead of a data buffer, the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class represents a standard behavior wherein an exception is thrown if an encoding operation fails. No actual data buffer exists, and the members designed to manipulate such a buffer do no significant work.</para
-      >
+        >The <see cref="T:System.Text.EncoderFallbackBuffer" /> class, which represents a data buffer used in an encoding operation, is the base class for the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class. However, instead of a data buffer, the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class represents a standard behavior wherein an exception is thrown if an encoding operation fails. No actual data buffer exists, and the members designed to manipulate such a buffer do no significant work.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Throws <see cref="T:System.Text.EncoderFallbackException" /> when an input character cannot be converted to an encoded output byte sequence. This class cannot be inherited.</para
-      >
+        >Throws <see cref="T:System.Text.EncoderFallbackException" /> when an input character cannot be converted to an encoded output byte sequence. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -85,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> if they encounter an unknown character in their input. In response, <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> always throws <see cref="T:System.Text.EncoderFallbackException" />. </para
-          >
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> if they encounter an unknown character in their input. In response, <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> always throws <see cref="T:System.Text.EncoderFallbackException" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,19 +90,16 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >None. No value is returned because the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> method always throws an exception. </para
-          >
+            >None. No value is returned because the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Int32)" /> method always throws an exception. </para>
         </returns>
         <param name="charUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />An input character.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An input character.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index position of the character in the input buffer.</param
-        >
+          />The index position of the character in the input buffer.</param>
       </Docs>
     </Member>
     <Member MemberName="Fallback">
@@ -137,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> if they encounter a surrogate pair in their input. In response, <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> always throws an exception. </para
-          >
+            >The <see cref="Overload:System.Text.Encoding.GetBytes" /> and <see cref="Overload:System.Text.Encoder.Convert" /> methods call <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> if they encounter a surrogate pair in their input. In response, <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> always throws an exception. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -147,30 +138,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >None. No value is returned because the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> method always throws an exception. </para
-          >
+            >None. No value is returned because the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.Fallback(System.Char,System.Char,System.Int32)" /> method always throws an exception. </para>
         </returns>
         <param name="charUnknownHigh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high surrogate of the input pair.</param
-        >
+          />The high surrogate of the input pair.</param>
         <param name="charUnknownLow">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low surrogate of the input pair.</param
-        >
+          />The low surrogate of the input pair.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index position of the surrogate pair in the input buffer.</param
-        >
+          />The index position of the surrogate pair in the input buffer.</param>
       </Docs>
     </Member>
     <Member MemberName="GetNextChar">
@@ -193,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.GetNextChar" /> method always returns the Unicode NULL character.</para
-          >
+            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.GetNextChar" /> method always returns the Unicode NULL character.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,14 +213,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.MovePrevious" /> method always returns false.</para
-          >
+            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.MovePrevious" /> method always returns false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the next call to the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.GetNextChar" /> method to access the exception data buffer character position that is prior to the current position.</para
-          >
+            >Causes the next call to the <see cref="M:System.Text.EncoderExceptionFallbackBuffer.GetNextChar" /> method to access the exception data buffer character position that is prior to the current position.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -260,14 +244,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="P:System.Text.EncoderExceptionFallbackBuffer.Remaining" /> property always returns zero.</para
-          >
+            >Because <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> has no actual exception data buffer, the <see cref="P:System.Text.EncoderExceptionFallbackBuffer.Remaining" /> property always returns zero.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of characters in the current <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> object that remain to be processed.</para
-          >
+            >Gets the number of characters in the current <see cref="T:System.Text.EncoderExceptionFallbackBuffer" /> object that remain to be processed.</para>
         </summary>
       </Docs>
     </Member>

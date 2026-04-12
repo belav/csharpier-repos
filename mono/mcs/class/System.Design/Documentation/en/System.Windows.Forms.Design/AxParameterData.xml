@@ -32,16 +32,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified parameter information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified parameter information.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.ParameterInfo" /> indicating the parameter information to use. </param
-        >
+          />A <see cref="T:System.Reflection.ParameterInfo" /> indicating the parameter information to use. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -63,23 +61,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified parameter information and whether to ignore by reference parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified parameter information and whether to ignore by reference parameters.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.ParameterInfo" /> indicating the parameter information to use. </param
-        >
+          />A <see cref="T:System.Reflection.ParameterInfo" /> indicating the parameter information to use. </param>
         <param name="ignoreByRefs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value indicating whether to ignore parameters passed by reference. </param
-        >
+          />A value indicating whether to ignore parameters passed by reference. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -101,23 +96,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified name and type name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified name and type name.</para>
         </summary>
         <param name="inname">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. </param
-        >
+          />The name of the parameter. </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type of the parameter. </param
-        >
+          />The name of the type of the parameter. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -136,23 +128,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified name and type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.AxParameterData" /> class using the specified name and type.</para>
         </summary>
         <param name="inname">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. </param
-        >
+          />The name of the parameter. </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the parameter. </param
-        >
+          />The type of the parameter. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -176,22 +165,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified parameter information to an <see cref="T:System.Windows.Forms.Design.AxParameterData" /> object.</para
-          >
+            >Converts the specified parameter information to an <see cref="T:System.Windows.Forms.Design.AxParameterData" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Windows.Forms.Design.AxParameterData" /> objects representing the specified array of <see cref="T:System.Reflection.ParameterInfo" /> objects.</para
-          >
+            >An array of <see cref="T:System.Windows.Forms.Design.AxParameterData" /> objects representing the specified array of <see cref="T:System.Reflection.ParameterInfo" /> objects.</para>
         </returns>
         <param name="infos">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Reflection.ParameterInfo" /> objects to convert. </param
-        >
+          />An array of <see cref="T:System.Reflection.ParameterInfo" /> objects to convert. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -216,29 +202,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified parameter information to an <see cref="T:System.Windows.Forms.Design.AxParameterData" /> object, according to the specified value indicating whether to ignore by reference parameters.</para
-          >
+            >Converts the specified parameter information to an <see cref="T:System.Windows.Forms.Design.AxParameterData" /> object, according to the specified value indicating whether to ignore by reference parameters.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Windows.Forms.Design.AxParameterData" /> objects representing the specified array of <see cref="T:System.Reflection.ParameterInfo" /> objects.</para
-          >
+            >An array of <see cref="T:System.Windows.Forms.Design.AxParameterData" /> objects representing the specified array of <see cref="T:System.Reflection.ParameterInfo" /> objects.</para>
         </returns>
         <param name="infos">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Reflection.ParameterInfo" /> objects to convert. </param
-        >
+          />An array of <see cref="T:System.Reflection.ParameterInfo" /> objects to convert. </param>
         <param name="ignoreByRefs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value indicating whether to ignore parameters passed by reference. </param
-        >
+          />A value indicating whether to ignore parameters passed by reference. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

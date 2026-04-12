@@ -18,8 +18,7 @@
     <!-- We don't need this unless building for tests. -->
     <ExcludeFromBuild
       Condition=" '$(DotNetBuildFromSource)' == 'true' OR '$(SkipTestBuild)' == 'true' "
-      >true</ExcludeFromBuild
-    >
+      >true</ExcludeFromBuild>
   </PropertyGroup>
 
   <ItemGroup>

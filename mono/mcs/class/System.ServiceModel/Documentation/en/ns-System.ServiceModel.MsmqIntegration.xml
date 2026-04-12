@@ -5,8 +5,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.ServiceModel.MsmqIntegration" /> namespace contains classes that relate to Microsoft Message Queuing Service (MSMQ) integration, which allows communication between MSMQ applications and indigo1 applications.</para
-      >
+        >The <see cref="N:System.ServiceModel.MsmqIntegration" /> namespace contains classes that relate to Microsoft Message Queuing Service (MSMQ) integration, which allows communication between MSMQ applications and indigo1 applications.</para>
     </summary>
   </Docs>
 </Namespace>

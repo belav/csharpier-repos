@@ -61,8 +61,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration key.</param
-        >
+          />The configuration key.</param>
       </Docs>
     </Member>
     <Member MemberName="Init">

@@ -39,25 +39,21 @@
       <block subset="none" type="note">
         <para>Starting with the net_v40_long, identity permissions are not used.</para>
         <para
-          >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para
-        >
+          >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para>
       </block>
       <para
-        >Use <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> to confirm that the calling code is in a particular strong-named code assembly. Full demands for <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> succeed only if all the assemblies in the stack have the correct evidence to satisfy the demand. Link demands that use the <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> attribute succeed only if the immediate caller has the correct evidence.</para
-      >
+        >Use <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> to confirm that the calling code is in a particular strong-named code assembly. Full demands for <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> succeed only if all the assemblies in the stack have the correct evidence to satisfy the demand. Link demands that use the <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> attribute succeed only if the immediate caller has the correct evidence.</para>
       <para>A strong name identity is based on a cryptographic public key called a binary large object (BLOB),  which is optionally combined with the name and version of a specific assembly. The key defines a unique namespace and provides strong verification that the name is genuine, because the definition of the name must be in an assembly that is signed by the corresponding private key.</para>
       <para>Note that the validity of the strong name key is not dependent on a trust relationship or on any certificate necessarily being issued for the key.</para>
       <para>In the .NET Framework versions 1.0 and 1.1, demands on the identity permissions are effective even when the calling assembly is fully trusted. That is, even if the calling assembly has full trust, a demand for an identity permission fails if the assembly does not meet the demanded criteria. In the .NET Framework version 2.0 and later, demands for identity permissions are ineffective if the calling assembly has full trust. This ensures consistency for all permissions and eliminates the treatment of identity permissions as a special case.</para>
       <para
         >For a complete description of strong names, see the <see cref="T:System.Security.Policy.StrongName" /> reference page. For more information about strong-named assemblies, see <format type="text/html">
           <a href="d4a80263-f3e0-4d81-9b61-f0cbeae3797b">Strong-Named Assemblies</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >The <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> class is used to define strong-name requirements for accessing the public members of a type. The <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> attribute can be used to define strong-name requirements at the assembly level. In the .NET Framework version 2.0 and later, you can also use the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" /> attribute to specify that all nonpublic types in that assembly are visible to another assembly. For more information, see <format type="text/html">
           <a href="df0c70ea-2c2a-4bdc-9526-df951ad2d055">Friend Assemblies (C# and Visual Basic)</a>
-        </format>.   </para
-      >
+        </format>.   </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -90,27 +86,23 @@
           <para>Creates either a fully restricted (None) or Unrestricted permission.</para>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para
-            >
+              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" /> permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" /> interface. That is, a demand for an identity always succeeds, regardless of the identity of the assembly, if the assembly has been granted full trust.</para>
           </block>
           <para>In the .NET Framework versions 1.0 and 1.1, demands on the identity permissions are effective, even when the calling assembly is fully trusted. That is, although the calling assembly has full trust, a demand for an identity permission fails if the assembly does not meet the demanded criteria. In the .NET Framework version 2.0 and later, demands for identity permissions are ineffective if the calling assembly has full trust. This assures consistency for all permissions, eliminating the treatment of identity permissions as a special case.</para>
           <para
-            >Use this constructor with a permission state value of <see cref="F:System.Security.Permissions.PermissionState.None" /> to create an identity permission that matches no strong names. If you subsequently set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> and <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Version" /> properties, a specific strong name identity can be represented by the permission.</para
-          >
+            >Use this constructor with a permission state value of <see cref="F:System.Security.Permissions.PermissionState.None" /> to create an identity permission that matches no strong names. If you subsequently set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> and <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Version" /> properties, a specific strong name identity can be represented by the permission.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -138,41 +130,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="name" /> and <paramref name="version" /> parameters can be null only when the public key is used to identify the assembly. An empty string ("") should not be used in place of null. If <paramref name="name" /> is an empty string, an <see cref="T:System.ArgumentException" /> is thrown.</para
-          >
+            >The <paramref name="name" /> and <paramref name="version" /> parameters can be null only when the public key is used to identify the assembly. An empty string ("") should not be used in place of null. If <paramref name="name" /> is an empty string, an <see cref="T:System.ArgumentException" /> is thrown.</para>
           <para
             >For more information on names and version numbers of assemblies, see <format type="text/html">
               <a href="d4a80263-f3e0-4d81-9b61-f0cbeae3797b">Strong-Named Assemblies</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> class for the specified strong name identity.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> class for the specified strong name identity.</para>
         </summary>
         <param name="blob">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The public key defining the strong name identity namespace. </param
-        >
+          />The public key defining the strong name identity namespace. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name part of the strong name identity. This corresponds to the name of the assembly. </param
-        >
+          />The simple name part of the strong name identity. This corresponds to the name of the assembly. </param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version number of the identity. </param
-        >
+          />The version number of the identity. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -241,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -285,8 +270,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -314,8 +298,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, the other properties being equal, an identity with the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property containing the wildcard expression MyCompany.MyDepartment.* is identified as a subset of an identity with the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property MyCompany.MyDepartment.MyFile.</para
-          >
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, the other properties being equal, an identity with the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property containing the wildcard expression MyCompany.MyDepartment.* is identified as a subset of an identity with the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property MyCompany.MyDepartment.MyFile.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -330,8 +313,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -351,8 +333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property can be an exact name or can be modified by a wildcard character in the final position; for example, both MyCompany.MyDepartment.MyFile and MyCompany.MyDepartment.* are valid names. If you attempt to set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property to an empty string (""), an <see cref="T:System.ArgumentException" /> is thrown.</para
-          >
+            >The value of the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property can be an exact name or can be modified by a wildcard character in the final position; for example, both MyCompany.MyDepartment.MyFile and MyCompany.MyDepartment.* are valid names. If you attempt to set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" /> property to an empty string (""), an <see cref="T:System.ArgumentException" /> is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -468,11 +449,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.StrongNameIdentityPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.StrongNameIdentityPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
           <para
-            >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the other. Any other combination results in an <see cref="T:System.ArgumentException" /> exception being thrown.</para
-          >
+            >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the other. Any other combination results in an <see cref="T:System.ArgumentException" /> exception being thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -487,8 +466,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Version">

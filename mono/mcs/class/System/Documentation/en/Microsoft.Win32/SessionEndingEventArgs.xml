@@ -19,17 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event is raised when the user is trying to log off or shut the system down.</para
-      >
+        >A <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event is raised when the user is trying to log off or shut the system down.</para>
       <para
-        >This <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event can sometimes be canceled. Setting the <see cref="P:Microsoft.Win32.SessionEndingEventArgs.Cancel" /> property of a <see cref="T:Microsoft.Win32.SessionEndingEventArgs" /> to false will request that the session continue instead of ending. Making such a request provides no guarantee that the session will not end.</para
-      >
+        >This <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event can sometimes be canceled. Setting the <see cref="P:Microsoft.Win32.SessionEndingEventArgs.Cancel" /> property of a <see cref="T:Microsoft.Win32.SessionEndingEventArgs" /> to false will request that the session continue instead of ending. Making such a request provides no guarantee that the session will not end.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event.</para
-      >
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnding" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,16 +53,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SessionEndingEventArgs" /> class using the specified value indicating the type of session close event that is occurring.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SessionEndingEventArgs" /> class using the specified value indicating the type of session close event that is occurring.</para>
         </summary>
         <param name="reason">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:Microsoft.Win32.SessionEndReasons" /> that specifies how the session ends. </param
-        >
+          />One of the <see cref="T:Microsoft.Win32.SessionEndReasons" /> that specifies how the session ends. </param>
       </Docs>
     </Member>
     <Member MemberName="Cancel">

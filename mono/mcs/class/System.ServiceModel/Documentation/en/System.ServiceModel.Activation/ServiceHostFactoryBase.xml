@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The managed hosting environments that support this interface are Internet Information Services (IIS) or Windows Process Activation Services (WAS). Implement a factory that derives from this class when you have implemented a custom derivative of <see cref="T:System.ServiceModel.ServiceHostBase" /> in these hosting environments. If you have implemented a custom derivative of <see cref="T:System.ServiceModel.ServiceHost" />, consider deriving from <see cref="T:System.ServiceModel.Activation.ServiceHostFactory" /> instead.</para
-      >
+        >The managed hosting environments that support this interface are Internet Information Services (IIS) or Windows Process Activation Services (WAS). Implement a factory that derives from this class when you have implemented a custom derivative of <see cref="T:System.ServiceModel.ServiceHostBase" /> in these hosting environments. If you have implemented a custom derivative of <see cref="T:System.ServiceModel.ServiceHost" />, consider deriving from <see cref="T:System.ServiceModel.Activation.ServiceHostFactory" /> instead.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.ServiceHostFactoryBase" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.ServiceHostFactoryBase" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -75,29 +73,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates a <see cref="T:System.ServiceModel.ServiceHostBase" /> with a specific base address using custom initiation data. </para
-          >
+            >When overridden in a derived class, creates a <see cref="T:System.ServiceModel.ServiceHostBase" /> with a specific base address using custom initiation data. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.ServiceHostBase" /> object with the specified base addresses and initialized with the custom initiation data.</para
-          >
+            >The <see cref="T:System.ServiceModel.ServiceHostBase" /> object with the specified base addresses and initialized with the custom initiation data.</para>
         </returns>
         <param name="constructorString">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initialization data that is passed to the <see cref="T:System.ServiceModel.ServiceHostBase" /> instance being constructed by the factory. </param
-        >
+          />The initialization data that is passed to the <see cref="T:System.ServiceModel.ServiceHostBase" /> instance being constructed by the factory. </param>
         <param name="baseAddresses">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Array" /> of type <see cref="T:System.Uri" /> that contains the base addresses of the host.</param
-        >
+          />An <see cref="T:System.Array" /> of type <see cref="T:System.Uri" /> that contains the base addresses of the host.</param>
       </Docs>
     </Member>
   </Members>

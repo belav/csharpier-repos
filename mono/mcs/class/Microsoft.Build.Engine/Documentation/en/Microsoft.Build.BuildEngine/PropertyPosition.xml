@@ -32,8 +32,7 @@
               <a href="69ab08ab-3e76-41dd-a01b-49aa1d2e0cac">Property</a>
             </format> element if it exists. Otherwise, create the <unmanagedCodeEntityReference>Property</unmanagedCodeEntityReference> after the last <format type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
-            </format> element in the project.</para
-          >
+            </format> element in the project.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -55,8 +54,7 @@
               <a href="69ab08ab-3e76-41dd-a01b-49aa1d2e0cac">Property</a>
             </format> element if it exists. Otherwise, if possible, create a new <unmanagedCodeEntityReference>Property</unmanagedCodeEntityReference> element as a child of an existing compatible <format type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
-            </format> element. If necessary, create a new compatible <unmanagedCodeEntityReference>PropertyGroup</unmanagedCodeEntityReference> element immediately following the last <unmanagedCodeEntityReference>PropertyGroup</unmanagedCodeEntityReference> in the project.</para
-          >
+            </format> element. If necessary, create a new compatible <unmanagedCodeEntityReference>PropertyGroup</unmanagedCodeEntityReference> element immediately following the last <unmanagedCodeEntityReference>PropertyGroup</unmanagedCodeEntityReference> in the project.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

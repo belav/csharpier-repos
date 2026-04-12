@@ -46,16 +46,13 @@ if (x) {
    }  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >An if statement is executed as follows: <list>
       <list_item
         > The <non_terminal where="15.7.1"
-          >boolean-expression</non_terminal
-        > (<hyperlink>14.16</hyperlink>) is evaluated. </list_item
-      >
+          >boolean-expression</non_terminal> (<hyperlink>14.16</hyperlink>) is evaluated. </list_item>
       <list_item> If the boolean expression yields true, control is transferred to the first embedded statement. When and if control reaches the end point of that statement, control is transferred to the end point of the if statement. </list_item>
       <list_item> If the boolean expression yields false and if an else part is present, control is transferred to the second embedded statement. When and if control reaches the end point of that statement, control is transferred to the end point of the if statement. </list_item>
       <list_item> If the boolean expression yields false and if an else part is not present, control is transferred to the end point of the if statement. </list_item>

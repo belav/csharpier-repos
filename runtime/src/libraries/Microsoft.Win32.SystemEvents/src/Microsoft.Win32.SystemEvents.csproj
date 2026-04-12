@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
-      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks
-    >
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
@@ -19,16 +18,13 @@ Microsoft.Win32.SystemEvents</PackageDescription>
     <!-- Constrained Execution Regions only apply to netstandard2.0 and net4* -->
     <DefineConstants
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'"
-      >$(DefineConstants);FEATURE_CER</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_CER</DefineConstants>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_SystemEvents</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_SystemEvents</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

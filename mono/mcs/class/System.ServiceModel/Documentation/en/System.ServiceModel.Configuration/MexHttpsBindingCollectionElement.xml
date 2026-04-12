@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.MexBindingBindingCollectionElement&lt;System.ServiceModel.WSHttpBinding,System.ServiceModel.Configuration.MexHttpsBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.WSHttpBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.WSHttpBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.MexHttpsBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.MexHttpsBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" /> instances.</para
-      >
+        >Represents a collection of <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" /> instances.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingCollectionElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingCollectionElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

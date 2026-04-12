@@ -16,9 +16,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -93,8 +91,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see cref="T:System.String" /> representing the filename under which the X.509 certificates and CRL will be loaded.</param
-        >
+          >a <see cref="T:System.String" /> representing the filename under which the X.509 certificates and CRL will be loaded.</param>
         <summary>Create a SoftwarePublisherCertificate object from the specified file.</summary>
         <returns
           >a <see cref="T:Mono.Security.Authenticode.SoftwarePublisherCertificate" />
@@ -116,8 +113,7 @@
       <Docs>
         <summary>Collection of X.509 CRL inside the PKCS#7 structure.</summary>
         <value
-          >a <see cref="T:System.Collections.ArrayList" /> of <see cref="T:Mono.Security.X509.X509Crl" /> objects.</value
-        >
+          >a <see cref="T:System.Collections.ArrayList" /> of <see cref="T:Mono.Security.X509.X509Crl" /> objects.</value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

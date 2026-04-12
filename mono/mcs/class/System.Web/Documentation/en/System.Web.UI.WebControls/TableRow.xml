@@ -60,20 +60,16 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.TableRow" /> class represents a row in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.TableRow" /> class represents a row in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para>
       <para
-        >This class allows you to control how the contents of the row are displayed. The alignment of the contents in the row are specified by setting the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" /> and <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" /> properties.</para
-      >
+        >This class allows you to control how the contents of the row are displayed. The alignment of the contents in the row are specified by setting the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" /> and <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" /> properties.</para>
       <para
-        >You can programmatically manage the cells in the row by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> collection. The <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> collection is a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells in the row.</para
-      >
+        >You can programmatically manage the cells in the row by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> collection. The <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> collection is a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells in the row.</para>
       <block subset="none" type="note">
         <para
           >The <see cref="T:System.Web.UI.WebControls.TableCell" /> control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="fa2aa14d-a461-492e-9a79-c990904613ef">Validation ASP.NET Controls</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
       <format type="text/html">
         <a href="#declarative_syntax" />
@@ -210,8 +206,7 @@
             Width="size"
             Wrap="<codeFeaturedElement>True</codeFeaturedElement>|False"
         /&gt;
-&lt;/asp:TableRow&gt;</code
-      >
+&lt;/asp:TableRow&gt;</code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,14 +223,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" /> class.</para
-          >
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -257,19 +250,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically control a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells from a row of the <see cref="T:System.Web.UI.WebControls.Table" /> control. You can programmatically add, insert, or remove a <see cref="T:System.Web.UI.WebControls.TableCell" /> object from the collection.</para
-          >
+            >Use this property to programmatically control a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells from a row of the <see cref="T:System.Web.UI.WebControls.Table" /> control. You can programmatically add, insert, or remove a <see cref="T:System.Web.UI.WebControls.TableCell" /> object from the collection.</para>
           <block subset="none" type="note">
             <para
-              >This property is only used when building <see cref="T:System.Web.UI.WebControls.Table" /> controls programmatically. At design time, this property is set by declaring <see cref="T:System.Web.UI.WebControls.TableCell" /> objects.</para
-            >
+              >This property is only used when building <see cref="T:System.Web.UI.WebControls.Table" /> controls programmatically. At design time, this property is set by declaring <see cref="T:System.Web.UI.WebControls.TableCell" /> objects.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells of a row in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para
-          >
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.TableCell" /> objects that represent the cells of a row in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -299,23 +289,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method creates a new <see cref="T:System.Web.UI.ControlCollection" /> object that holds the <see cref="T:System.Web.UI.WebControls.TableRow" /> cells.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method creates a new <see cref="T:System.Web.UI.ControlCollection" /> object that holds the <see cref="T:System.Web.UI.WebControls.TableRow" /> cells.</para>
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Web.UI.ControlCollection" /> object for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control. </para
-          >
+            >Creates a new <see cref="T:System.Web.UI.ControlCollection" /> object for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.ControlCollection" /> object that contains the <see cref="T:System.Web.UI.WebControls.TableRow" /> control's child server controls.</para
-          >
+            >A <see cref="T:System.Web.UI.ControlCollection" /> object that contains the <see cref="T:System.Web.UI.WebControls.TableRow" /> control's child server controls.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -338,17 +324,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Web.UI.WebControls.TableItemStyle" /> object for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para
-          >
+            >Creates a <see cref="T:System.Web.UI.WebControls.TableItemStyle" /> object for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.WebControls.Style" /> object that specifies the style properties for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para
-          >
+            >A <see cref="T:System.Web.UI.WebControls.Style" /> object that specifies the style properties for the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para>
           <para
-            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" /> method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" /> control.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -371,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" /> property to specify the horizontal alignment of the contents of the row. The following table lists the possible values.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" /> property to specify the horizontal alignment of the contents of the row. The following table lists the possible values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -473,8 +455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.TableSection" /> property to get or set where the <see cref="T:System.Web.UI.WebControls.TableRow" /> object is placed in a <see cref="T:System.Web.UI.WebControls.Table" /> control. For the available table locations, see <see cref="T:System.Web.UI.WebControls.TableRowSection" />. The following table lists the possible values.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.TableSection" /> property to get or set where the <see cref="T:System.Web.UI.WebControls.TableRow" /> object is placed in a <see cref="T:System.Web.UI.WebControls.Table" /> control. For the available table locations, see <see cref="T:System.Web.UI.WebControls.TableRowSection" />. The following table lists the possible values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -519,15 +500,13 @@
           </list>
           <para>When using the declarative syntax, the sections must be in the order of header, body, and then footer.</para>
           <para
-            >The <see cref="T:System.Web.UI.WebControls.TableRowSection" /> enumeration enables you to build accessible Web sites using the <see cref="T:System.Web.UI.WebControls.Table" /> control by adding the &lt;thead&gt;, &lt;tbody&gt;, and &lt;tfoot&gt; elements to the HTML that is rendered to the client. If all rows in a table are in the &lt;tbody&gt; element, the section information is not rendered. At least one row must be in a non-body element.</para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.TableRowSection" /> enumeration enables you to build accessible Web sites using the <see cref="T:System.Web.UI.WebControls.Table" /> control by adding the &lt;thead&gt;, &lt;tbody&gt;, and &lt;tfoot&gt; elements to the HTML that is rendered to the client. If all rows in a table are in the &lt;tbody&gt; element, the section information is not rendered. At least one row must be in a non-body element.</para>
           <para>The value of this property is stored in view state.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the location for a <see cref="T:System.Web.UI.WebControls.TableRow" /> object in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para
-          >
+            >Gets or sets the location for a <see cref="T:System.Web.UI.WebControls.TableRow" /> object in a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para>
         </summary>
       </Docs>
     </Member>
@@ -546,8 +525,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" /> property to specify the vertical alignment of the contents of the row. The following table lists the possible values.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" /> property to specify the vertical alignment of the contents of the row. The following table lists the possible values.</para>
           <list type="table">
             <listheader>
               <item>

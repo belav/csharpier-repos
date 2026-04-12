@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Aes" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Aes" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -102,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible <paramref name="algorithmName" /> values are: "AES", "AesCryptoServiceProvider", "System.Security.Cryptography.AesCryptoServiceProvider", "AesManaged", and "System.Security.Cryptography.AesManaged".</para
-          >
+            >Possible <paramref name="algorithmName" /> values are: "AES", "AesCryptoServiceProvider", "System.Security.Cryptography.AesCryptoServiceProvider", "AesManaged", and "System.Security.Cryptography.AesManaged".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,8 +116,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of AES to use.</param
-        >
+          />The name of the specific implementation of AES to use.</param>
       </Docs>
     </Member>
   </Members>

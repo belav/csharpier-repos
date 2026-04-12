@@ -33,7 +33,6 @@
   <PropertyGroup>
     <IgnoreYarnWarnings>false</IgnoreYarnWarnings>
     <IgnoreYarnWarnings Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-      >true</IgnoreYarnWarnings
-    >
+      >true</IgnoreYarnWarnings>
   </PropertyGroup>
 </Project>

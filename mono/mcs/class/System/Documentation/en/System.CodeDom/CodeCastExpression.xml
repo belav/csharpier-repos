@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeCastExpression" /> can be used to represent an expression cast to a different data type or interface.</para
-      >
+        <see cref="T:System.CodeDom.CodeCastExpression" /> can be used to represent an expression cast to a different data type or interface.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeCastExpression.Expression" /> property indicates the <see cref="T:System.CodeDom.CodeExpression" /> to cast. The <see cref="P:System.CodeDom.CodeCastExpression.TargetType" /> property indicates the type to cast to.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeCastExpression.Expression" /> property indicates the <see cref="T:System.CodeDom.CodeExpression" /> to cast. The <see cref="P:System.CodeDom.CodeCastExpression.TargetType" /> property indicates the type to cast to.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -95,23 +92,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para>
         </summary>
         <param name="targetType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the destination type of the cast. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the destination type of the cast. </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -139,23 +133,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para>
         </summary>
         <param name="targetType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination type of the cast. </param
-        >
+          />The name of the destination type of the cast. </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -183,23 +174,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" /> class using the specified destination type and expression.</para>
         </summary>
         <param name="targetType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination data type of the cast. </param
-        >
+          />The destination data type of the cast. </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> to cast. </param>
       </Docs>
     </Member>
     <Member MemberName="Expression">

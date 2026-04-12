@@ -20,12 +20,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default behavior is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />, which specifies the removal of the performance counter instance when no counters are using the process category.</para
-      >
+        >The default behavior is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />, which specifies the removal of the performance counter instance when no counters are using the process category.</para>
       <block subset="none" type="note">
         <para
-          >If the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" /> property is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />, the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" /> value for the performance counter must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />.</para
-        >
+          >If the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" /> property is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />, the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" /> value for the performance counter must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />.</para>
       </block>
     </remarks>
     <summary>

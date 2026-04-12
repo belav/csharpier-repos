@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Named pipes provide one-way or duplex pipes for communication between a pipe server and one or more pipe clients. Named pipes can be used for interprocess communication locally or over a network. A single pipe name can be shared by multiple <see cref="T:System.IO.Pipes.NamedPipeClientStream" /> objects.</para
-      >
+        >Named pipes provide one-way or duplex pipes for communication between a pipe server and one or more pipe clients. Named pipes can be used for interprocess communication locally or over a network. A single pipe name can be shared by multiple <see cref="T:System.IO.Pipes.NamedPipeClientStream" /> objects.</para>
       <para>Any process can act as either a named pipe server or client, or both.</para>
       <block subset="none" type="note">
         <para>For winxppro and win2kserver, a maximum of 10 pipes can simultaneously connect over the network.</para>
@@ -35,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes a <see cref="T:System.IO.Stream" /> around a named pipe, supporting both synchronous and asynchronous read and write operations.</para
-      >
+        >Exposes a <see cref="T:System.IO.Stream" /> around a named pipe, supporting both synchronous and asynchronous read and write operations.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,26 +55,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para
-                >A default pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />. </para
-              >
+                >A default pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />. </para>
             </item>
             <item>
               <para>The maximum number of server instances that share the same name set to 1. </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.</para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />.</para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -86,29 +80,25 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -132,18 +122,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -153,36 +140,31 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name and pipe direction.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name and pipe direction.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -207,21 +189,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para>A default value of 1 for the maximum number of server instances that share the same name. </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeTransmissionMode" /> value of <see cref="F:System.IO.Pipes.PipeTransmissionMode.Byte" />. </para>
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -231,43 +210,37 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, and maximum number of server instances.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, and maximum number of server instances.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -294,37 +267,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class from the specified pipe handle.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class from the specified pipe handle.</para>
         </summary>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="isAsync">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the handle was opened asynchronously; otherwise, false.</param
-        >
+          />true to indicate that the handle was opened asynchronously; otherwise, false.</param>
         <param name="isConnected">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the pipe is connected; otherwise, false.</param
-        >
+          />true to indicate that the pipe is connected; otherwise, false.</param>
         <param name="safePipeHandle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A safe handle for the pipe that this <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object will encapsulate.</param
-        >
+          />A safe handle for the pipe that this <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object will encapsulate.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -350,13 +318,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para
-              >
+                >A default <see cref="T:System.IO.Pipes.PipeOptions" /> value of <see cref="F:System.IO.Pipes.PipeOptions.None" />. </para>
             </item>
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -366,50 +332,43 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, and transmission mode.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, and transmission mode.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -436,8 +395,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para>Default input and output buffer sizes. </para>
@@ -447,57 +405,49 @@
             </item>
             <item>
               <para
-                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, and pipe options.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, and pipe options.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines how to open or create the pipe.</param
-        >
+          />One of the enumeration values that determines how to open or create the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -526,79 +476,68 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para>No additional pipe security. </para>
             </item>
             <item>
               <para
-                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, and recommended in and out buffer sizes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, and recommended in and out buffer sizes.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines how to open or create the pipe.</param
-        >
+          />One of the enumeration values that determines how to open or create the pipe.</param>
         <param name="inBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the input buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the input buffer size.</param>
         <param name="outBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the output buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the output buffer size.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -628,83 +567,71 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has the following characteristics:</para>
           <list type="bullet">
             <item>
               <para
-                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para
-              >
+                >A default <see cref="T:System.IO.HandleInheritability" /> value of <see cref="F:System.IO.HandleInheritability.None" />. </para>
             </item>
             <item>
               <para
-                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-              >
+                >No specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, and pipe security.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, and pipe security.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines how to open or create the pipe.</param
-        >
+          />One of the enumeration values that determines how to open or create the pipe.</param>
         <param name="inBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the input buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the input buffer size.</param>
         <param name="outBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the output buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the output buffer size.</param>
         <param name="pipeSecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that determines the access control and audit security for the pipe.</param
-        >
+          />An object that determines the access control and audit security for the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -735,78 +662,67 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has no specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para
-          >
+            >This constructor creates a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object that has no specified additional <see cref="T:System.IO.Pipes.PipeAccessRights" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, pipe security, and inheritability mode.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, pipe security, and inheritability mode.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines how to open or create the pipe.</param
-        >
+          />One of the enumeration values that determines how to open or create the pipe.</param>
         <param name="inBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the input buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the input buffer size.</param>
         <param name="outBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A positive value greater than 0 that indicates the output buffer size.</param
-        >
+          />A positive value greater than 0 that indicates the output buffer size.</param>
         <param name="pipeSecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that determines the access control and audit security for the pipe.</param
-        >
+          />An object that determines the access control and audit security for the pipe.</param>
         <param name="inheritability">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes.</param
-        >
+          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -844,79 +760,68 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, pipe security, inheritability mode, and pipe access rights.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> class with the specified pipe name, pipe direction, maximum number of server instances, transmission mode, pipe options, recommended in and out buffer sizes, pipe security, inheritability mode, and pipe access rights.</para>
         </summary>
         <param name="pipeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the pipe.</param
-        >
+          />The name of the pipe.</param>
         <param name="direction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the direction of the pipe.</param
-        >
+          />One of the enumeration values that determines the direction of the pipe.</param>
         <param name="maxNumberOfServerInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param
-        >
+          />The maximum number of server instances that share the same name. You can pass <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> for this value.</param>
         <param name="transmissionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines the transmission mode of the pipe.</param
-        >
+          />One of the enumeration values that determines the transmission mode of the pipe.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines how to open or create the pipe.</param
-        >
+          />One of the enumeration values that determines how to open or create the pipe.</param>
         <param name="inBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input buffer size.</param
-        >
+          />The input buffer size.</param>
         <param name="outBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output buffer size.</param
-        >
+          />The output buffer size.</param>
         <param name="pipeSecurity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that determines the access control and audit security for the pipe.</param
-        >
+          />An object that determines the access control and audit security for the pipe.</param>
         <param name="inheritability">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes.</param
-        >
+          />One of the enumeration values that determines whether the underlying handle can be inherited by child processes.</param>
         <param name="additionalAccessRights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the access rights of the pipe.</param
-        >
+          />One of the enumeration values that specifies the access rights of the pipe.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginWaitForConnection">
@@ -943,11 +848,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the asynchronous equivalent of <see cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />.</para
-          >
+            >This is the asynchronous equivalent of <see cref="M:System.IO.Pipes.NamedPipeServerStream.WaitForConnection" />.</para>
           <para>
-            <see cref="M:System.IO.Pipes.NamedPipeServerStream.EndWaitForConnection(System.IAsyncResult)" /> must be called exactly once for every call to <see cref="M:System.IO.Pipes.NamedPipeServerStream.BeginWaitForConnection(System.AsyncCallback,System.Object)" />.</para
-          >
+            <see cref="M:System.IO.Pipes.NamedPipeServerStream.EndWaitForConnection(System.IAsyncResult)" /> must be called exactly once for every call to <see cref="M:System.IO.Pipes.NamedPipeServerStream.BeginWaitForConnection(System.AsyncCallback,System.Object)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -962,15 +865,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The method to call when a client connects to the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object.</param
-        >
+          />The method to call when a client connects to the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A user-provided object that distinguishes this particular asynchronous request from other requests.</param
-        >
+          />A user-provided object that distinguishes this particular asynchronous request from other requests.</param>
       </Docs>
     </Member>
     <Member MemberName="Disconnect">
@@ -991,8 +892,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see cref="M:System.IO.Pipes.NamedPipeServerStream.Disconnect" /> method will block until all the sent characters have been read unless the transmission mode of the pipe is set to <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" /> and the buffer size is set in the constructor that created the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object. In this case, not all of the messages will be received. Calling <see cref="M:System.IO.Pipes.PipeStream.WaitForPipeDrain" /> causes the server to block until all the data has been read from the pipe.</para
-          >
+            >Calling the <see cref="M:System.IO.Pipes.NamedPipeServerStream.Disconnect" /> method will block until all the sent characters have been read unless the transmission mode of the pipe is set to <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" /> and the buffer size is set in the constructor that created the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object. In this case, not all of the messages will be received. Calling <see cref="M:System.IO.Pipes.PipeStream.WaitForPipeDrain" /> causes the server to block until all the data has been read from the pipe.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1023,8 +923,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.Pipes.NamedPipeServerStream.EndWaitForConnection(System.IAsyncResult)" /> must be called exactly once for every call to <see cref="M:System.IO.Pipes.NamedPipeServerStream.BeginWaitForConnection(System.AsyncCallback,System.Object)" />.</para
-          >
+            <see cref="M:System.IO.Pipes.NamedPipeServerStream.EndWaitForConnection(System.IAsyncResult)" /> must be called exactly once for every call to <see cref="M:System.IO.Pipes.NamedPipeServerStream.BeginWaitForConnection(System.AsyncCallback,System.Object)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1035,8 +934,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The pending asynchronous request.</param
-        >
+          />The pending asynchronous request.</param>
       </Docs>
     </Member>
     <Member MemberName="GetImpersonationUserName">
@@ -1062,8 +960,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.Pipes.NamedPipeServerStream.GetImpersonationUserName" /> method returns null if the client has not yet written to the pipe or if the connected client did not connect with a <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> of <see cref="F:System.Security.Principal.TokenImpersonationLevel.Impersonation" />.</para
-          >
+            >The <see cref="M:System.IO.Pipes.NamedPipeServerStream.GetImpersonationUserName" /> method returns null if the client has not yet written to the pipe or if the connected client did not connect with a <see cref="T:System.Security.Principal.TokenImpersonationLevel" /> of <see cref="F:System.Security.Principal.TokenImpersonationLevel.Impersonation" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1093,8 +990,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> when creating a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object to set the maximum number of server instances that the system resources allow.</para
-          >
+            >Use the <see cref="F:System.IO.Pipes.NamedPipeServerStream.MaxAllowedServerInstances" /> when creating a <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object to set the maximum number of server instances that the system resources allow.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1143,8 +1039,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate that specifies a method to call.</param
-        >
+          />The delegate that specifies a method to call.</param>
       </Docs>
     </Member>
     <Member MemberName="WaitForConnection">
@@ -1165,14 +1060,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method causes the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object to block until a client connects.</para
-          >
+            >Calling this method causes the <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object to block until a client connects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for a client to connect to this <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object.</para
-          >
+            >Waits for a client to connect to this <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> object.</para>
         </summary>
       </Docs>
     </Member>

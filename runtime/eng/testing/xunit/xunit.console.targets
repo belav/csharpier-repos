@@ -4,47 +4,37 @@
     <TestResultsName>testResults.xml</TestResultsName>
     <UseXunitExcludesTxtFile
       Condition="'$(TargetOS)' == 'android' or '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'"
-      >true</UseXunitExcludesTxtFile
-    >
+      >true</UseXunitExcludesTxtFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetsMobile)' != 'true' and '$(TestSingleFile)' != 'true'">
     <_depsFileArgument Condition="'$(GenerateDependencyFile)' == 'true'"
-      >--depsfile $(AssemblyName).deps.json</_depsFileArgument
-    >
+      >--depsfile $(AssemblyName).deps.json</_depsFileArgument>
     <RunScriptCommand Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
-      >"$(RunScriptHost)" exec --runtimeconfig $(AssemblyName).runtimeconfig.json $(_depsFileArgument) xunit.console.dll</RunScriptCommand
-    >
+      >"$(RunScriptHost)" exec --runtimeconfig $(AssemblyName).runtimeconfig.json $(_depsFileArgument) xunit.console.dll</RunScriptCommand>
     <RunScriptCommand Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
-      >xunit.console.exe</RunScriptCommand
-    >
+      >xunit.console.exe</RunScriptCommand>
 
     <RunScriptCommand>$(RunScriptCommand) $(TargetFileName)</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand) -xml $(TestResultsName)</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand) -nologo</RunScriptCommand>
     <RunScriptCommand Condition="'$(ArchiveTests)' == 'true'"
-      >$(RunScriptCommand) -nocolor</RunScriptCommand
-    >
+      >$(RunScriptCommand) -nocolor</RunScriptCommand>
     <RunScriptCommand
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and '$(TestDisableAppDomain)' == 'true'"
-      >$(RunScriptCommand) -noappdomain</RunScriptCommand
-    >
+      >$(RunScriptCommand) -noappdomain</RunScriptCommand>
     <RunScriptCommand Condition="'$(TestDisableParallelization)' == 'true'"
-      >$(RunScriptCommand) -maxthreads 1</RunScriptCommand
-    >
+      >$(RunScriptCommand) -maxthreads 1</RunScriptCommand>
     <RunScriptCommand Condition="'$(XUnitShowProgress)' == 'true'"
-      >$(RunScriptCommand) -verbose</RunScriptCommand
-    >
+      >$(RunScriptCommand) -verbose</RunScriptCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseXunitExcludesTxtFile)' != 'true'">
     <!-- Add local and global options to the argument stack. -->
     <RunScriptCommand Condition="'$(XUnitMethodName)' != ''"
-      >$(RunScriptCommand) -method $(XUnitMethodName)</RunScriptCommand
-    >
+      >$(RunScriptCommand) -method $(XUnitMethodName)</RunScriptCommand>
     <RunScriptCommand Condition="'$(XUnitClassName)' != ''"
-      >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand
-    >
+      >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand>
 
     <!-- Add to run argument string -->
     <RunScriptCommand>$(RunScriptCommand)$(_withCategories.Replace(';', ' -trait category='))</RunScriptCommand>
@@ -52,8 +42,7 @@
 
     <!-- User passed in options. -->
     <RunScriptCommand Condition="'$(XUnitOptions)' != ''"
-      >$(RunScriptCommand) $(XUnitOptions)</RunScriptCommand
-    >
+      >$(RunScriptCommand) $(XUnitOptions)</RunScriptCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseXunitExcludesTxtFile)' == 'true'">

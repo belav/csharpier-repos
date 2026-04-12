@@ -11,23 +11,17 @@
   <PropertyGroup>
     <FinalDefineConstants>CONFIG=&quot;$(Configuration)&quot;</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(DefineDebug)' == 'true' "
-      >$(FinalDefineConstants),DEBUG=-1</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),DEBUG=-1</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(DefineTrace)' == 'true' "
-      >$(FinalDefineConstants),TRACE=-1</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),TRACE=-1</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(MyType)' != '' "
-      >$(FinalDefineConstants),_MyType=&quot;$(MyType)&quot;</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),_MyType=&quot;$(MyType)&quot;</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(Platform)' != '' "
-      >$(FinalDefineConstants),PLATFORM=&quot;$(Platform)&quot;</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),PLATFORM=&quot;$(Platform)&quot;</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(Platform)' == '' "
-      >$(FinalDefineConstants),PLATFORM=&quot;AnyCPU&quot;</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),PLATFORM=&quot;AnyCPU&quot;</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(DefineConstants)' != '' "
-      >$(FinalDefineConstants),$(DefineConstants)</FinalDefineConstants
-    >
+      >$(FinalDefineConstants),$(DefineConstants)</FinalDefineConstants>
 
     <_NoWarnings Condition=" '$(WarningLevel)' == '0' ">true</_NoWarnings>
     <_NoWarnings Condition=" '$(WarningLevel)' == '1' ">false</_NoWarnings>

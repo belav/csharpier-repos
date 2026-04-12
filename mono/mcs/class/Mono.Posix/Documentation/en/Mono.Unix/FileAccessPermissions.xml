@@ -53,8 +53,7 @@
         <c>FileAccessPermissions.UserReadWriteExecute |
         FileAccessPermissions.GroupReadWriteExecute |
         FileAccessPermissions.OtherReadWriteExecute</c>
-        (the <c>777</c> permission).</summary
-        >
+        (the <c>777</c> permission).</summary>
       </Docs>
     </Member>
     <Member MemberName="DefaultPermissions">
@@ -78,8 +77,7 @@
         <c>FileAccessPermissions.UserRead | FileAccessPermissions.UserWrite | 
         FileAccessPermissions.GroupRead | FileAccessPermissions.GroupWrite | 
         FileAccessPermissions.OtherRead | FileAccessPermissions.OtherWrite</c> 
-        (the <c>666</c> permission).</summary
-        >
+        (the <c>666</c> permission).</summary>
       </Docs>
     </Member>
     <Member MemberName="GroupExecute">

@@ -31,8 +31,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <OutputPath Condition="'$(OutputPath)' == ''"
-      >$(WebStackRootPath)bin\$(Configuration)\</OutputPath
-    >
+      >$(WebStackRootPath)bin\$(Configuration)\</OutputPath>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <FileAlignment>512</FileAlignment>
     <ErrorReport>prompt</ErrorReport>
@@ -45,8 +44,7 @@
 
     <!-- StyleCop support -->
     <StyleCopTreatErrorsAsWarnings Condition=" '$(StyleCopTreatErrorsAsWarnings)' == '' "
-      >false</StyleCopTreatErrorsAsWarnings
-    >
+      >false</StyleCopTreatErrorsAsWarnings>
     <StyleCopEnabled Condition=" '$(StyleCopEnabled)' == '' ">false</StyleCopEnabled>
 
     <!-- Use latest C# compiler supported in Visual Studio 2019. -->

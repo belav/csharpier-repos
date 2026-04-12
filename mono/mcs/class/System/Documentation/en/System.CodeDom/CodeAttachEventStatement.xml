@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeAttachEventStatement" /> can be used to represent a statement that adds an event-handler delegate for an event. The <see cref="P:System.CodeDom.CodeAttachEventStatement.Event" /> property indicates the event to attach the event handler to. The <see cref="P:System.CodeDom.CodeAttachEventStatement.Listener" /> property indicates the event handler to attach.</para
-      >
+        <see cref="T:System.CodeDom.CodeAttachEventStatement" /> can be used to represent a statement that adds an event-handler delegate for an event. The <see cref="P:System.CodeDom.CodeAttachEventStatement.Event" /> property indicates the event to attach the event handler to. The <see cref="P:System.CodeDom.CodeAttachEventStatement.Listener" /> property indicates the event handler to attach.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -92,23 +90,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class using the specified event and delegate.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class using the specified event and delegate.</para>
         </summary>
         <param name="eventRef">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> that indicates the event to attach an event handler to. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> that indicates the event to attach an event handler to. </param>
         <param name="listener">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the new event handler. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the new event handler. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -137,30 +132,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class using the specified object containing the event, event name, and event-handler delegate.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttachEventStatement" /> class using the specified object containing the event, event name, and event-handler delegate.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event. </param>
         <param name="eventName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to attach an event handler to. </param
-        >
+          />The name of the event to attach an event handler to. </param>
         <param name="listener">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the new event handler. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the new event handler. </param>
       </Docs>
     </Member>
     <Member MemberName="Event">

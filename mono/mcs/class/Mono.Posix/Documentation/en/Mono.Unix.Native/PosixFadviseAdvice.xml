@@ -21,8 +21,7 @@
   <Docs>
     <summary
       >Possible <see cref="M:Mono.Unix.Native.Syscall.posix_fadvise" />
-      <paramref name="advice" /> values.</summary
-    >
+      <paramref name="advice" /> values.</summary>
     <remarks />
     <altmember cref="M:Mono.Unix.Native.Syscall.posix_fadvise" />
   </Docs>

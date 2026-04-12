@@ -24,8 +24,7 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -146,15 +145,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-terminated string containing the absolute path of the file to open. </param
-        >
+          />A zero-terminated string containing the absolute path of the file to open. </param>
         <param name="dwMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref name="pszFileName" />. </param
-        >
+          />A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref name="pszFileName" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -193,15 +190,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-terminated string containing the absolute path of the file to which the object is saved. </param
-        >
+          />A zero-terminated string containing the absolute path of the file to which the object is saved. </param>
         <param name="fRemember">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to used the <paramref name="pszFileName" /> parameter as the current working file; otherwise false. </param
-        >
+          />true to used the <paramref name="pszFileName" /> parameter as the current working file; otherwise false. </param>
       </Docs>
     </Member>
     <Member MemberName="SaveCompleted">
@@ -236,8 +231,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The absolute path of the file where the object was previously saved. </param
-        >
+          />The absolute path of the file where the object was previously saved. </param>
       </Docs>
     </Member>
   </Members>

@@ -11,8 +11,7 @@
                    '$(JENKINS_URL)' != '' or 
                    '$(TRAVIS)' == 'true' or 
                    '$(BUDDY)' == 'true'"
-      >true</CI
-    >
+      >true</CI>
   </PropertyGroup>
   <PropertyGroup>
     <!-- The Microsoft.Managed.Core.targets use this property to use deterministic source paths in CI builds -->
@@ -27,24 +26,20 @@
     <PackageIcon Condition="Exists('$(MSBuildThisFileDirectory)icon.png')">icon.png</PackageIcon>
     <PackageReadmeFile
       Condition="'$(PackReadme)' != 'false' and Exists('$(MSBuildThisFileDirectory)readme.md')"
-      >readme.md</PackageReadmeFile
-    >
+      >readme.md</PackageReadmeFile>
     <!-- Pick project-level readme+icon overrides automatically -->
     <PackageIcon Condition="Exists('$(MSBuildProjectDirectory)\icon.png')">icon.png</PackageIcon>
     <PackageReadmeFile
       Condition="'$(PackReadme)' != 'false' and Exists('$(MSBuildProjectDirectory)\readme.md')"
-      >readme.md</PackageReadmeFile
-    >
+      >readme.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <GenerateRepositoryUrlAttribute>true</GenerateRepositoryUrlAttribute>
     <PackageOutputPath Condition="'$(PackageOutputPath)' == ''"
-      >$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\bin'))</PackageOutputPath
-    >
+      >$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\bin'))</PackageOutputPath>
     <!-- Use Directory.Packages.props if possible. NOTE: other MSBuild SDKs (i.e. NoTargets/Traversal) do not support central packages -->
     <ManagePackageVersionsCentrally
       Condition="Exists('$(MSBuildThisFileDirectory)Directory.Packages.props') AND ('$(MSBuildProjectExtension)' == '.csproj' OR '$(MSBuildProjectExtension)' == '.vbproj')"
-      >true</ManagePackageVersionsCentrally
-    >
+      >true</ManagePackageVersionsCentrally>
     <!-- Ensure MSBuild tooling can access package artifacts always via PKG_[PackageId] -->
     <GeneratePathProperty>true</GeneratePathProperty>
   </PropertyGroup>
@@ -52,8 +47,7 @@
     <Configuration Condition="'$(Configuration)' == '' and $(CI)">Release</Configuration>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateDocumentationFile Condition="$(MSBuildProjectName.Contains('Tests'))"
-      >false</GenerateDocumentationFile
-    >
+      >false</GenerateDocumentationFile>
     <LangVersion>Latest</LangVersion>
     <!-- See https://docs.microsoft.com/en-us/dotnet/standard/assembly/reference-assemblies -->
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
@@ -67,8 +61,7 @@
     <RootNamespace>$(MSBuildProjectName)</RootNamespace>
     <RootNamespaceDot>$(MSBuildProjectName.IndexOf('.'))</RootNamespaceDot>
     <RootNamespace Condition="'$(RootNamespaceDot)' != '-1'"
-      >$(MSBuildProjectName.Substring(0, $(RootNamespaceDot)))</RootNamespace
-    >
+      >$(MSBuildProjectName.Substring(0, $(RootNamespaceDot)))</RootNamespace>
     <!-- We typically don't want these files shown in the solution explorer -->
     <DefaultItemExcludes>$(DefaultItemExcludes);*.binlog;*.zip;*.rsp;*.items;**/TestResults/**/*.*</DefaultItemExcludes>
     <EnableSourceLink>true</EnableSourceLink>
@@ -116,8 +109,7 @@
     <_VersionLabel>$(VersionLabel.Replace('refs/heads/', ''))</_VersionLabel>
     <!-- For PRs, we just need a fixed package version numbered after the PR # itself, so remove the commits # at the end -->
     <_VersionLabel Condition="$(_VersionLabel.Contains('refs/pull/'))"
-      >$(VersionLabel.TrimEnd('.0123456789'))</_VersionLabel
-    >
+      >$(VersionLabel.TrimEnd('.0123456789'))</_VersionLabel>
     <!-- Next replace the prefix for simply 'pr', so we end up with 'pr99/merge' by default -->
     <_VersionLabel>$(_VersionLabel.Replace('refs/pull/', 'pr'))</_VersionLabel>
     <!-- Remove the /merge now, if present -->

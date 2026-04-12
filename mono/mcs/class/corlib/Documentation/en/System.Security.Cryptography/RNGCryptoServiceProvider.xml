@@ -63,8 +63,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -88,22 +87,19 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" /> constructor and passing null.</para
-          >
+            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" /> constructor and passing null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para>
         </summary>
         <param name="rgb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array. This value is ignored.</param
-        >
+          />A byte array. This value is ignored.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -130,16 +126,14 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class with the specified parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class with the specified parameters.</para>
         </summary>
         <param name="cspParams">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters to pass to the cryptographic service provider (CSP). </param
-        >
+          />The parameters to pass to the cryptographic service provider (CSP). </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -162,22 +156,19 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" /> constructor and passing null.</para
-          >
+            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" /> constructor and passing null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" /> class.</para>
         </summary>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string input. This parameter is ignored.</param
-        >
+          />The string input. This parameter is ignored.</param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -256,8 +247,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with a cryptographically strong sequence of random values. </param
-        >
+          />The array to fill with a cryptographically strong sequence of random values. </param>
       </Docs>
     </Member>
     <Member MemberName="GetNonZeroBytes">
@@ -292,8 +282,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with a cryptographically strong sequence of random nonzero values. </param
-        >
+          />The array to fill with a cryptographically strong sequence of random nonzero values. </param>
       </Docs>
     </Member>
   </Members>

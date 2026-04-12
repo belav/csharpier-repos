@@ -8,8 +8,7 @@
   <PropertyGroup>
     <RpmPackageInstallRoot
       Condition="'$(RpmPackageInstallRoot)' != '' AND !HasTrailingSlash('$(RpmPackageInstallRoot)')"
-      >$(RpmPackageInstallRoot)/</RpmPackageInstallRoot
-    >
+      >$(RpmPackageInstallRoot)/</RpmPackageInstallRoot>
   </PropertyGroup>
 
   <ItemGroup>

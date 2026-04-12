@@ -26,8 +26,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The body block is protected by the try block.</para>
       <para
-        >The handlers consist of a set of <see cref="T:System.Linq.Expressions.CatchBlock" /> expressions that can be either catch statements or filters.</para
-      >
+        >The handlers consist of a set of <see cref="T:System.Linq.Expressions.CatchBlock" /> expressions that can be either catch statements or filters.</para>
       <para>The fault block runs if an exception is thrown.</para>
       <para>The finally block runs regardless of how control exits the body.</para>
       <para>Only one of fault or finally blocks can be supplied.</para>
@@ -87,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the body of the try block.</para
-          >
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the body of the try block.</para>
         </summary>
       </Docs>
     </Member>
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the fault block.</para
-          >
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the fault block.</para>
         </summary>
       </Docs>
     </Member>
@@ -141,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the finally block.</para
-          >
+            >Gets the <see cref="T:System.Linq.Expressions.Expression" /> representing the finally block.</para>
         </summary>
       </Docs>
     </Member>
@@ -168,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see cref="T:System.Linq.Expressions.CatchBlock" /> expressions associated with the try block.</para
-          >
+            >Gets the collection of <see cref="T:System.Linq.Expressions.CatchBlock" /> expressions associated with the try block.</para>
         </summary>
       </Docs>
     </Member>
@@ -195,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para
-          >
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para
-          >
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
         </summary>
       </Docs>
     </Member>
@@ -261,29 +254,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.TryExpression.Body" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.TryExpression.Body" /> property of the result.</param>
         <param name="handlers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.TryExpression.Handlers" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.TryExpression.Handlers" /> property of the result.</param>
         <param name="finally">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.TryExpression.Finally" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.TryExpression.Finally" /> property of the result.</param>
         <param name="fault">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.TryExpression.Fault" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.TryExpression.Fault" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

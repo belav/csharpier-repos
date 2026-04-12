@@ -9,12 +9,10 @@
     <IsTrimmable Condition="'$(IsTrimmable)' == ''">true</IsTrimmable>
     <PrepareResourcesDependsOn>_EmbedILLinkXmls;$(PrepareResourcesDependsOn)</PrepareResourcesDependsOn>
     <TargetsTriggeredByCompilation Condition="'$(DesignTimeBuild)' != 'true'"
-      >$(TargetsTriggeredByCompilation);ILLinkTrimAssembly</TargetsTriggeredByCompilation
-    >
+      >$(TargetsTriggeredByCompilation);ILLinkTrimAssembly</TargetsTriggeredByCompilation>
 
     <ILLinkDirectory Condition="'$(ILLinkDirectory)' == ''"
-      >$(MSBuildProjectDirectory)\ILLink\</ILLinkDirectory
-    >
+      >$(MSBuildProjectDirectory)\ILLink\</ILLinkDirectory>
     <ILLinkTrimAssemblyPath>$(IntermediateOutputPath)$(TargetName)$(TargetExt)</ILLinkTrimAssemblyPath>
     <ILLinkTrimAssemblySymbols>$(IntermediateOutputPath)$(TargetName).pdb</ILLinkTrimAssemblySymbols>
     <ILLinkTrimInputPath>$(IntermediateOutputPath)PreTrim/</ILLinkTrimInputPath>
@@ -24,13 +22,11 @@
 
     <ILLinkDescriptorsXml
       Condition="'$(ILLinkDescriptorsXml)' == '' and Exists('$(ILLinkDirectory)ILLink.Descriptors.xml')"
-      >$(ILLinkDirectory)ILLink.Descriptors.xml</ILLinkDescriptorsXml
-    >
+      >$(ILLinkDirectory)ILLink.Descriptors.xml</ILLinkDescriptorsXml>
     <!-- ILLink.Descriptors.LibraryBuild.xml files are only used during building the library, not an app. They shouldn't be embedded into the assembly. -->
     <ILLinkDescriptorsLibraryBuildXml
       Condition="'$(ILLinkDescriptorsLibraryBuildXml)' == '' and Exists('$(ILLinkDirectory)ILLink.Descriptors.LibraryBuild.xml')"
-      >$(ILLinkDirectory)ILLink.Descriptors.LibraryBuild.xml</ILLinkDescriptorsLibraryBuildXml
-    >
+      >$(ILLinkDirectory)ILLink.Descriptors.LibraryBuild.xml</ILLinkDescriptorsLibraryBuildXml>
     <ILLinkDescriptorsXmlIntermediatePath>$(IntermediateOutputPath)ILLink.Descriptors.xml</ILLinkDescriptorsXmlIntermediatePath>
 
     <ILLinkSubstitutionsXmlIntermediatePath>$(IntermediateOutputPath)ILLink.Substitutions.xml</ILLinkSubstitutionsXmlIntermediatePath>
@@ -43,19 +39,16 @@
     <!-- Only run the trim analyzer on libraries which have been annotated. -->
     <EnableTrimAnalyzer
       Condition="'$(EnableTrimAnalyzer)' == '' And (Exists('$(ILLinkSuppressionsXmlFile)') Or Exists('$(ILLinkSuppressionsConfigurationSpecificXmlFile)'))"
-      >false</EnableTrimAnalyzer
-    >
+      >false</EnableTrimAnalyzer>
 
     <!-- if building a PDB, tell illink to rewrite the symbols file -->
     <ILLinkRewritePDBs Condition="'$(ILLinkRewritePDBs)' == '' and '$(DebugSymbols)' != 'false'"
-      >true</ILLinkRewritePDBs
-    >
+      >true</ILLinkRewritePDBs>
 
     <ILLinkResourcesSubstitutionIntermediatePath>$(IntermediateOutputPath)ILLink.Resources.Substitutions.xml</ILLinkResourcesSubstitutionIntermediatePath>
     <GenerateResourcesSubstitutions
       Condition="'$(GenerateResourcesSubstitutions)' == '' and '$(StringResourcesPath)' != ''"
-      >true</GenerateResourcesSubstitutions
-    >
+      >true</GenerateResourcesSubstitutions>
   </PropertyGroup>
 
   <ItemGroup>
@@ -268,15 +261,12 @@
       <ILLinkArgs>$(ILLinkArgs) --action link $(TargetName)</ILLinkArgs>
       <ILLinkArgs
         Condition="'$(ILLinkRewritePDBs)' == 'true' and Exists('$(ILLinkTrimAssemblySymbols)')"
-        >$(ILLinkArgs) -b true</ILLinkArgs
-      >
+        >$(ILLinkArgs) -b true</ILLinkArgs>
       <!-- pass the non-embedded descriptors xml file on the command line -->
       <ILLinkArgs Condition="'$(ILLinkDescriptorsLibraryBuildXml)' != ''"
-        >$(ILLinkArgs) -x "$(ILLinkDescriptorsLibraryBuildXml)"</ILLinkArgs
-      >
+        >$(ILLinkArgs) -x "$(ILLinkDescriptorsLibraryBuildXml)"</ILLinkArgs>
       <ILLinkArgs Condition="'$(ILLinkSubstitutionsLibraryBuildXml)' != ''"
-        >$(ILLinkArgs) --substitutions "$(ILLinkSubstitutionsLibraryBuildXml)"</ILLinkArgs
-      >
+        >$(ILLinkArgs) --substitutions "$(ILLinkSubstitutionsLibraryBuildXml)"</ILLinkArgs>
       <!-- suppress warnings with the following codes:
            IL2008: Could not find type A specified in resource B
            IL2009: Could not find method A in type B specified in resource C
@@ -298,8 +288,7 @@
       <LinkerNoWarn>$(LinkerNoWarn);IL2121</LinkerNoWarn>
       <ILLinkArgs>$(ILLinkArgs) --nowarn $(LinkerNoWarn)</ILLinkArgs>
       <ILLinkArgs Condition="'$(ILLinkDisableIPConstProp)' == 'true'"
-        >$(ILLinkArgs) --disable-opt ipconstprop</ILLinkArgs
-      >
+        >$(ILLinkArgs) --disable-opt ipconstprop</ILLinkArgs>
     </PropertyGroup>
 
     <!-- Move the assembly into a subdirectory for ILLink -->
@@ -344,8 +333,7 @@
 
     <PropertyGroup>
       <ILLinkArgs Condition="@(_DependencyDirectories->Count()) > 0"
-        >$(ILLinkArgs) -d @(_DependencyDirectories->'"%(Identity)"', ' -d ')</ILLinkArgs
-      >
+        >$(ILLinkArgs) -d @(_DependencyDirectories->'"%(Identity)"', ' -d ')</ILLinkArgs>
     </PropertyGroup>
 
     <ILLink

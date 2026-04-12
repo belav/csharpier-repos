@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -72,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of this configuration element to the specified <see cref="T:System.ServiceModel.Channels.BindingElement" />.</para
-          >
+            >Applies the settings of this configuration element to the specified <see cref="T:System.ServiceModel.Channels.BindingElement" />.</para>
         </summary>
         <param name="bindingElement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding element to which the settings will be applied.</param
-        >
+          />The binding element to which the settings will be applied.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -133,16 +130,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the settings from the specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> to this configuration element.</para
-          >
+            >Copies the settings from the specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> to this configuration element.</para>
         </summary>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> whose settings are to be copied to this configuration element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> whose settings are to be copied to this configuration element.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">
@@ -247,8 +242,7 @@
             </item>
             <item>
               <para
-                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize objects.</para
-              >
+                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize objects.</para>
             </item>
             <item>
               <para>ByteArray - The object is serialized to an array of bytes.</para>
@@ -258,8 +252,7 @@
             </item>
             <item>
               <para
-                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize objects.</para
-              >
+                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize objects.</para>
             </item>
           </list>
           <para>The default value is Xml.</para>
@@ -267,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" /> to be used when serializing Message Queuing (MSMQ) messages.</para
-          >
+            >Gets or set the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" /> to be used when serializing Message Queuing (MSMQ) messages.</para>
         </summary>
       </Docs>
     </Member>

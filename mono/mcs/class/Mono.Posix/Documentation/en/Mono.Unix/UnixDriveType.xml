@@ -16,8 +16,7 @@
   <Docs>
     <summary
       >Possible <see cref="P:Mono.Unix.UnixDriveInfo.DriveType" />
-      values.</summary
-    >
+      values.</summary>
     <remarks></remarks>
   </Docs>
   <Members>

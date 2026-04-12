@@ -20,14 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object to examine and modify items that are to be converted to or from WSDL. </para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object to examine and modify items that are to be converted to or from WSDL. </para>
       <para
-        >When exporting metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> and <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify to alter the published WSDL.</para
-      >
+        >When exporting metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> and <see cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify to alter the published WSDL.</para>
       <para
-        >When importing metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> and <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify the imported metadata.</para
-      >
+        >When importing metadata a <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object is passed to the <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> and <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> methods. Use the various methods and properties to obtain metadata objects that you can use to examine and modify the imported metadata.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -56,14 +53,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.ServiceModel.Description.WsdlContractConversionContext.Contract" /> property to obtain the contract description on export or import.</para
-          >
+            >Use the <see cref="P:System.ServiceModel.Description.WsdlContractConversionContext.Contract" /> property to obtain the contract description on export or import.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.ServiceModel.Description.ContractDescription" /> being exported or imported.</para
-          >
+            >Gets the <see cref="T:System.ServiceModel.Description.ContractDescription" /> being exported or imported.</para>
         </summary>
       </Docs>
     </Member>
@@ -104,8 +99,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Description.OperationMessage" /> for the requested <see cref="T:System.ServiceModel.Description.MessageDescription" />.</param
-        >
+          />The <see cref="T:System.Web.Services.Description.OperationMessage" /> for the requested <see cref="T:System.ServiceModel.Description.MessageDescription" />.</param>
       </Docs>
     </Member>
     <Member MemberName="GetOperation">
@@ -142,8 +136,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> for the requested <see cref="T:System.Web.Services.Description.Operation" />.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> for the requested <see cref="T:System.Web.Services.Description.Operation" />.</param>
       </Docs>
     </Member>
     <Member MemberName="GetOperationDescription">
@@ -180,8 +173,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Description.Operation" /> for the requested <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param
-        >
+          />The <see cref="T:System.Web.Services.Description.Operation" /> for the requested <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param>
       </Docs>
     </Member>
     <Member MemberName="GetOperationMessage">
@@ -208,22 +200,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.Services.Description.OperationMessage" /> object for the specified <paramref name="message" /> that represents a message type passed by the action of an XML Web service.</para
-          >
+            >Gets a <see cref="T:System.Web.Services.Description.OperationMessage" /> object for the specified <paramref name="message" /> that represents a message type passed by the action of an XML Web service.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Services.Description.OperationMessage" /> object that represents a message type passed by the action of an XML Web service.</para
-          >
+            >A <see cref="T:System.Web.Services.Description.OperationMessage" /> object that represents a message type passed by the action of an XML Web service.</para>
         </returns>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MessageDescription" /> for the requested <see cref="T:System.Web.Services.Description.OperationMessage" />.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MessageDescription" /> for the requested <see cref="T:System.Web.Services.Description.OperationMessage" />.</param>
       </Docs>
     </Member>
     <Member MemberName="WsdlPortType">
@@ -248,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.PortType" /> that represents the contract.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.PortType" /> that represents the contract.</para>
         </summary>
       </Docs>
     </Member>

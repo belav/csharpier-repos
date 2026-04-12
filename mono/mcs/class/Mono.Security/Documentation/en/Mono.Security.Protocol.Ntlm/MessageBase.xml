@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -30,8 +28,7 @@
       </Parameters>
       <Docs>
         <param name="messageType"
-          >a <see cref="T:System.Int32" /> representing the message sequence number (1, 2 or 3).</param
-        >
+          >a <see cref="T:System.Int32" /> representing the message sequence number (1, 2 or 3).</param>
         <summary>Initialize the message structure using the specified message number.</summary>
         <remarks>To be added</remarks>
       </Docs>

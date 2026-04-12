@@ -30,8 +30,7 @@
     <BaseTypeName>Mono.DocTest.Generic.GenericBase&lt;System.Collections.Generic.Dictionary&lt;A,B&gt;&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="U"
-        >System.Collections.Generic.Dictionary&lt;A,B&gt;</BaseTypeArgument
-      >
+        >System.Collections.Generic.Dictionary&lt;A,B&gt;</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -243,8 +242,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>
-          <c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MoveNext">
@@ -317,8 +315,7 @@
         <param name="item">The item to add.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.ICollection&lt;A&gt;.Clear">
@@ -341,8 +338,7 @@
       <Docs>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks
-        >
+          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.ICollection&lt;A&gt;.Contains">
@@ -369,8 +365,7 @@
         <summary>To be added.</summary>
         <returns>A <see cref="T:System.Boolean" /> instance (<see langword="false" />).</returns>
         <remarks>
-          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.ICollection&lt;A&gt;.IsReadOnly">
@@ -396,8 +391,7 @@
         <summary>To be added.</summary>
         <value>A <see cref="T:System.Boolean" />.</value>
         <remarks>
-          <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks
-        >
+          <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.ICollection&lt;A&gt;.Remove">
@@ -424,8 +418,7 @@
         <summary>To be added.</summary>
         <returns>Whether the item was removed.</returns>
         <remarks>
-          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.IEnumerable&lt;A&gt;.GetEnumerator">
@@ -452,8 +445,7 @@
         <summary>To be added.</summary>
         <returns>A <see cref="T:System.Collections.Generic.IEnumerator{`0}" />.</returns>
         <remarks>
-          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks
-        >
+          <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.IEnumerator&lt;A&gt;.Current">

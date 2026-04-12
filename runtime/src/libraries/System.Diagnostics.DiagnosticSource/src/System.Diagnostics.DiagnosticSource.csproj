@@ -5,8 +5,7 @@
     <NoWarn>$(NoWarn);SA1205</NoWarn>
     <EnableTrimAnalyzer
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >false</EnableTrimAnalyzer
-    >
+      >false</EnableTrimAnalyzer>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
     <PackageDescription>Provides Classes that allow you to decouple code logging rich (unserializable) diagnostics/telemetry (e.g. framework) from code that consumes it (e.g. tools)
@@ -20,12 +19,10 @@ System.Diagnostics.DiagnosticSource</PackageDescription>
   <PropertyGroup>
     <DefineConstants
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >$(DefineConstants);ENABLE_HTTP_HANDLER</DefineConstants
-    >
+      >$(DefineConstants);ENABLE_HTTP_HANDLER</DefineConstants>
     <DefineConstants
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'"
-      >$(DefineConstants);W3C_DEFAULT_ID_FORMAT;MEMORYMARSHAL_SUPPORT;OS_ISBROWSER_SUPPORT</DefineConstants
-    >
+      >$(DefineConstants);W3C_DEFAULT_ID_FORMAT;MEMORYMARSHAL_SUPPORT;OS_ISBROWSER_SUPPORT</DefineConstants>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
   </PropertyGroup>
 

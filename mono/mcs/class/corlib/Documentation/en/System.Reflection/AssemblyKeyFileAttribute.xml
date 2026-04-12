@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When building a strong-named assembly, the author must supply either this attribute or <see cref="T:System.Reflection.AssemblyKeyNameAttribute" />. If <see cref="T:System.Reflection.AssemblyDelaySignAttribute" /> has also been specified, it is likely that this file will only contain the public key.</para
-      >
+        >When building a strong-named assembly, the author must supply either this attribute or <see cref="T:System.Reflection.AssemblyKeyNameAttribute" />. If <see cref="T:System.Reflection.AssemblyDelaySignAttribute" /> has also been specified, it is likely that this file will only contain the public key.</para>
       <para>An example of the syntax is [assembly:AssemblyKeyFileAttribute("myKey.snk")].</para>
       <block subset="none" type="note">
         <para>Since the path and file name persist, ensure that the string you use with AssemblyKeyFileAttribute does not contain sensitive information.</para>
@@ -66,13 +65,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There is no default path for the <see cref="T:System.Reflection.AssemblyKeyFileAttribute" /> constructor. The value set by the constructor is interpreted by the linker, or by vsprvsext, that invokes the linker. </para
-          >
+            >There is no default path for the <see cref="T:System.Reflection.AssemblyKeyFileAttribute" /> constructor. The value set by the constructor is interpreted by the linker, or by vsprvsext, that invokes the linker. </para>
           <para
             >The default setting for the <format type="text/html">
               <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (Al.exe)</a>
-            </format> tool assumes that the key file is in the current directory. In vsprvslong, the Visual Basic and Visual C# compilers build and link to subdirectories of the project directory, so if you put the key file in the project directory the relative path might be "..\..\keyfile.snk" or "..\keyfile.snk" in Visual Basic, or "..\\..\\keyfile.snk" or "..\\keyfile.snk" in C#. For C#, this attribute can be set in the project properties.</para
-          >
+            </format> tool assumes that the key file is in the current directory. In vsprvslong, the Visual Basic and Visual C# compilers build and link to subdirectories of the project directory, so if you put the key file in the project directory the relative path might be "..\..\keyfile.snk" or "..\keyfile.snk" in Visual Basic, or "..\\..\\keyfile.snk" or "..\\keyfile.snk" in C#. For C#, this attribute can be set in the project properties.</para>
           <block subset="none" type="note">
             <para>Because the path and file name persist, ensure that the string you use with AssemblyKeyFileAttribute does not contain sensitive information.</para>
           </block>
@@ -86,8 +83,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file containing the key pair. </param
-        >
+          />The name of the file containing the key pair. </param>
       </Docs>
     </Member>
     <Member MemberName="KeyFile">

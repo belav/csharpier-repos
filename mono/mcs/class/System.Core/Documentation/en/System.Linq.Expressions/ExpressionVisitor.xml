@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,8 +81,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expressions to visit.</param
-        >
+          />The expressions to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="Visit">
@@ -120,8 +118,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="Visit&lt;T&gt;">
@@ -158,22 +155,19 @@
           <para>The modified node list, if any of the elements were modified; otherwise, returns the original node list.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The nodes to visit.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The nodes to visit.</param>
         <param name="elementVisitor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate that visits a single element, optionally replacing it with a new element.</param
-        >
+          />A delegate that visits a single element, optionally replacing it with a new element.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the nodes.</typeparam
-        >
+          />The type of the nodes.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="VisitAndConvert&lt;T&gt;">
@@ -218,22 +212,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
         <param name="callerName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the calling method; used to report to report a better error message.</param
-        >
+          />The name of the calling method; used to report to report a better error message.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the expression.</typeparam
-        >
+          />The type of the expression.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="VisitAndConvert&lt;T&gt;">
@@ -296,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.BinaryExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.BinaryExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -308,8 +298,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitBlock">
@@ -336,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.BlockExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.BlockExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -348,8 +336,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitCatchBlock">
@@ -376,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.CatchBlock" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.CatchBlock" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -388,8 +374,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitConditional">
@@ -416,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.ConditionalExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ConditionalExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -428,8 +412,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitConstant">
@@ -466,8 +449,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitDebugInfo">
@@ -504,8 +486,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitDefault">
@@ -542,8 +523,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitDynamic">
@@ -570,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.DynamicExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.DynamicExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -582,8 +561,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitElementInit">
@@ -610,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.ElementInit" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ElementInit" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -622,8 +599,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitExtension">
@@ -650,8 +626,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This can be overridden to visit or rewrite specific extension nodes.</para>
           <para
-            > If it is not overridden, this method will call <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />, which gives the node a chance to walk its children. By default, <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" /> will try to reduce the node.</para
-          >
+            > If it is not overridden, this method will call <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />, which gives the node a chance to walk its children. By default, <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" /> will try to reduce the node.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -666,8 +641,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitGoto">
@@ -694,8 +668,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.GotoExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.GotoExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -706,8 +679,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitIndex">
@@ -734,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.IndexExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.IndexExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -746,8 +717,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitInvocation">
@@ -774,8 +744,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.InvocationExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.InvocationExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -786,8 +755,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitLabel">
@@ -814,8 +782,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.LabelExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.LabelExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -826,8 +793,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitLabelTarget">
@@ -864,8 +830,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitLambda&lt;T&gt;">
@@ -895,8 +860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.Expression`1" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.Expression`1" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -907,15 +871,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the delegate.</typeparam
-        >
+          />The type of the delegate.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="VisitListInit">
@@ -942,8 +904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.ListInitExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ListInitExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -954,8 +915,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitLoop">
@@ -982,8 +942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.LoopExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.LoopExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -994,8 +953,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMember">
@@ -1022,8 +980,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1034,8 +991,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMemberAssignment">
@@ -1062,8 +1018,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1074,8 +1029,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMemberBinding">
@@ -1102,8 +1056,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberBinding" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberBinding" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1114,8 +1067,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMemberInit">
@@ -1142,8 +1094,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberInitExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberInitExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1154,8 +1105,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMemberListBinding">
@@ -1182,8 +1132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberListBinding" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberListBinding" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1194,8 +1143,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMemberMemberBinding">
@@ -1222,8 +1170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberMemberBinding" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberMemberBinding" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1234,8 +1181,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitMethodCall">
@@ -1262,8 +1208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1274,8 +1219,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitNew">
@@ -1302,8 +1246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.NewExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.NewExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1314,8 +1257,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitNewArray">
@@ -1342,8 +1284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.NewArrayExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.NewArrayExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1354,8 +1295,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitParameter">
@@ -1392,8 +1332,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitRuntimeVariables">
@@ -1420,8 +1359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1432,8 +1370,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitSwitch">
@@ -1460,8 +1397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1472,8 +1408,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitSwitchCase">
@@ -1500,8 +1435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchCase" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchCase" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1512,8 +1446,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitTry">
@@ -1540,8 +1473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.TryExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.TryExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1552,8 +1484,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitTypeBinary">
@@ -1580,8 +1511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1592,8 +1522,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
     <Member MemberName="VisitUnary">
@@ -1620,8 +1549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see cref="T:System.Linq.Expressions.UnaryExpression" />.</para
-          >
+            >Visits the children of the <see cref="T:System.Linq.Expressions.UnaryExpression" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1632,8 +1560,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to visit.</param
-        >
+          />The expression to visit.</param>
       </Docs>
     </Member>
   </Members>

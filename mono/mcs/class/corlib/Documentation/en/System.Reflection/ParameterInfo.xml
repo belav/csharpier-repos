@@ -50,14 +50,12 @@
   </Attributes>
   <Docs>
     <permission cref="!:ReflectionPermission"
-      >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.</permission
-    >
+      >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />.</permission>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Use an instance of ParameterInfo to obtain information about the parameter's data type, default value, and so on.</para>
       <para>
-        <see cref="M:System.Reflection.MethodBase.GetParameters" /> returns an array of ParameterInfo objects representing the parameters of a method, in order.</para
-      >
+        <see cref="M:System.Reflection.MethodBase.GetParameters" /> returns an array of ParameterInfo objects representing the parameters of a method, in order.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -87,8 +85,7 @@
         <remarks>
           <para
             > This constructor is called only by classes that derive from
-   <see langword="ParameterInfo" /> .</para
-          >
+   <see langword="ParameterInfo" /> .</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -125,17 +122,14 @@
           <para
             >A <see cref="T:System.Reflection.ParameterAttributes" /> value representing the
    attributes for the
-   parameter reflected by the current instance.</para
-          >
+   parameter reflected by the current instance.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.AttrsImpl" /> method.</para
-          >
+            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.AttrsImpl" /> method.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -167,8 +161,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to parameter attributes is through <see cref="P:System.Reflection.ParameterInfo.Attributes" />.</para
-          >
+            >Typical access to parameter attributes is through <see cref="P:System.Reflection.ParameterInfo.Attributes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -193,8 +186,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to parameter types is through <see cref="P:System.Reflection.ParameterInfo.ParameterType" />.</para
-          >
+            >Typical access to parameter types is through <see cref="P:System.Reflection.ParameterInfo.ParameterType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -244,15 +236,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used only in the execution context. In the reflection-only context, use the <see cref="P:System.Reflection.ParameterInfo.RawDefaultValue" /> property instead.</para
-          >
+            >This property is used only in the execution context. In the reflection-only context, use the <see cref="P:System.Reflection.ParameterInfo.RawDefaultValue" /> property instead.</para>
           <para>The default value is used when an actual value is not specified in the method call. A parameter can have a default value that is null. This is distinct from the case where a default value is not defined.</para>
           <para
-            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.DefaultValueImpl" /> method.</para
-          >
+            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.DefaultValueImpl" /> method.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -277,8 +266,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to the default value of the parameter is through <see cref="P:System.Reflection.ParameterInfo.DefaultValue" />.</para
-          >
+            >Typical access to the default value of the parameter is through <see cref="P:System.Reflection.ParameterInfo.DefaultValue" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,8 +299,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,8 +314,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. See Remarks.</param
-        >
+          />This argument is ignored for objects of this type. See Remarks.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -357,8 +343,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -373,15 +358,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom attributes identified by type. </param
-        >
+          />The custom attributes identified by type. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. See Remarks.</param
-        >
+          />This argument is ignored for objects of this type. See Remarks.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributesData">
@@ -405,20 +388,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods such as <see cref="Overload:System.Attribute.GetCustomAttributes" /> and <see cref="Overload:System.Reflection.ParameterInfo.GetCustomAttributes" /> cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see cref="T:System.Reflection.CustomAttributeData" /> class.</para
-          >
+            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods such as <see cref="Overload:System.Attribute.GetCustomAttributes" /> and <see cref="Overload:System.Reflection.ParameterInfo.GetCustomAttributes" /> cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see cref="T:System.Reflection.CustomAttributeData" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of <see cref="T:System.Reflection.CustomAttributeData" /> objects for the current parameter, which can be used in the reflection-only context.</para
-          >
+            >Returns a list of <see cref="T:System.Reflection.CustomAttributeData" /> objects for the current parameter, which can be used in the reflection-only context.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic list of <see cref="T:System.Reflection.CustomAttributeData" /> objects representing data about the attributes that have been applied to the current parameter.</para
-          >
+            >A generic list of <see cref="T:System.Reflection.CustomAttributeData" /> objects representing data about the attributes that have been applied to the current parameter.</para>
         </returns>
       </Docs>
     </Member>
@@ -444,11 +424,9 @@
           <para
             >The <see cref="M:System.Reflection.ParameterInfo.GetOptionalCustomModifiers" /> and <see cref="M:System.Reflection.ParameterInfo.GetRequiredCustomModifiers" /> methods are provided for designers of managed compilers. For more information on custom modifiers, see <see cref="T:System.Runtime.CompilerServices.IsBoxed" /> and related classes in the <see cref="N:System.Runtime.CompilerServices" /> namespace, and the metadata specification in the ECMA Partition II documentation. The documentation is available online; see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-              >ECMA C# and Common Language Infrastructure Standards</see
-            > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-            > on the Ecma International Web site.</para
-          >
+              >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -457,8 +435,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Type" /> objects that identify the optional custom modifiers of the current parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />.</para
-          >
+            >An array of <see cref="T:System.Type" /> objects that identify the optional custom modifiers of the current parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -484,11 +461,9 @@
           <para
             >The <see cref="M:System.Reflection.ParameterInfo.GetOptionalCustomModifiers" /> and <see cref="M:System.Reflection.ParameterInfo.GetRequiredCustomModifiers" /> methods are provided for designers of managed compilers. For more information on custom modifiers, see <see cref="T:System.Runtime.CompilerServices.IsBoxed" /> and related classes in the <see cref="N:System.Runtime.CompilerServices" /> namespace, and the metadata specification in the ECMA Partition II documentation. The documentation is available online; see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-              >ECMA C# and Common Language Infrastructure Standards</see
-            > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-            > on the Ecma International Web site.</para
-          >
+              >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -497,8 +472,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Type" /> objects that identify the required custom modifiers of the current parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />.</para
-          >
+            >An array of <see cref="T:System.Type" /> objects that identify the required custom modifiers of the current parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" /> or <see cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -547,8 +521,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" /> method. </para
-          >
+            >This method ignores the <paramref name="inherit" /> parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -557,23 +530,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instances of <paramref name="attributeType" /> or its derived types are applied to this parameter; otherwise, false.</para
-          >
+            >true if one or more instances of <paramref name="attributeType" /> or its derived types are applied to this parameter; otherwise, false.</para>
         </returns>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to search for. </param
-        >
+          />The Type object to search for. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This argument is ignored for objects of this type. See Remarks.</param
-        >
+          />This argument is ignored for objects of this type. See Remarks.</param>
       </Docs>
     </Member>
     <Member MemberName="IsIn">
@@ -595,8 +565,7 @@
           <para>This method depends on an optional metadata flag. This flag can be inserted by compilers, but the compilers are not obligated to do so.</para>
           <para>This method utilizes the In flag of the ParameterAttributes enumerator.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -623,8 +592,7 @@
           <para>This method depends on an optional metadata flag. This flag can be inserted by compilers, but the compilers are not obligated to do so.</para>
           <para>This method utilizes the Lcid flag of the ParameterAttributes enumerator.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -651,8 +619,7 @@
           <para>This method depends on an optional metadata flag. This flag can be inserted by compilers, but the compilers are not obligated to do so.</para>
           <para>This method utilizes the Optional flag of the ParameterAttributes enumerator.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -679,8 +646,7 @@
           <para>This method depends on an optional metadata flag. This flag can be inserted by compilers, but the compilers are not obligated to do so.</para>
           <para>This method utilizes the Out flag of the ParameterAttributes enumerator.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -707,8 +673,7 @@
           <para>This method depends on an optional metadata flag. This flag can be inserted by compilers, but the compilers are not obligated to do so.</para>
           <para>This method utilizes the Retval flag of the ParameterAttributes enumerator.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -763,8 +728,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to the parameter name is through the <see cref="P:System.Reflection.ParameterInfo.Member" />.</para
-          >
+            >Typical access to the parameter name is through the <see cref="P:System.Reflection.ParameterInfo.Member" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -789,13 +753,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the module, use the <see cref="P:System.Reflection.MemberInfo.Module" /> property of the member that defines this parameter.</para
-          >
+            >To get the module, use the <see cref="P:System.Reflection.MemberInfo.Module" /> property of the member that defines this parameter.</para>
           <para
             >The tokens obtained using this property can be passed to the unmanaged Reflection API. For more information, please see <format type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -826,21 +788,17 @@
             >A <see cref="T:System.String" />
 that contains the name of
 the parameter reflected by the current
-instance.</para
-          >
+instance.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property utilizes the protected <see cref="F:System.Reflection.ParameterInfo.NameImpl" /> field, and depends on an optional metadata flag that might not be available in all compilers.</para
-          >
+            >This property utilizes the protected <see cref="F:System.Reflection.ParameterInfo.NameImpl" /> field, and depends on an optional metadata flag that might not be available in all compilers.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para>
           <block subset="none" type="note">
             <para
-              >If this <see cref="T:System.Reflection.ParameterInfo" /> represents a return value (that is, if it was obtained by using the <see cref="P:System.Reflection.MethodInfo.ReturnParameter" /> property), this property will be null.</para
-            >
+              >If this <see cref="T:System.Reflection.ParameterInfo" /> represents a return value (that is, if it was obtained by using the <see cref="P:System.Reflection.MethodInfo.ReturnParameter" /> property), this property will be null.</para>
           </block>
         </remarks>
         <summary>
@@ -867,8 +825,7 @@ instance.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to the parameter name is through the <see cref="P:System.Reflection.ParameterInfo.Name" />.</para
-          >
+            >Typical access to the parameter name is through the <see cref="P:System.Reflection.ParameterInfo.Name" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -902,15 +859,13 @@ instance.</para
             > The <see cref="T:System.Type" /> of the parameter
    reflected
    by
-   the current instance.</para
-          >
+   the current instance.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method depends on an optional metadata and might not be available in all compilers.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -937,11 +892,9 @@ instance.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Only parameters in the method signature (that is, in the formal parameter list) are considered when calculating the position. For instance methods, the hidden parameter that represents this (Me in Visual Basic) is not counted. </para>
           <para
-            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.PositionImpl" /> method.</para
-          >
+            >This method utilizes the <see cref="F:System.Reflection.ParameterInfo.PositionImpl" /> method.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call <see cref="M:System.Reflection.MethodBase.GetParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -966,8 +919,7 @@ instance.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is intended only for users who are deriving classes from ParameterInfo.</para>
           <para
-            >Typical access to the name of the parameter is through <see cref="P:System.Reflection.ParameterInfo.Position" />.</para
-          >
+            >Typical access to the name of the parameter is through <see cref="P:System.Reflection.ParameterInfo.Position" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -994,8 +946,7 @@ instance.</para
           <para>This property can be used in both the execution context and the reflection-only context.</para>
           <para>The default value is used when an actual value is not specified in the method call. A parameter can have a default value that is null. This is distinct from the case where a default value is not defined.</para>
           <para
-            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para
-          >
+            >To get the <see cref="T:System.Reflection.ParameterInfo" /> array, first get the method or the constructor and then call the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1065,8 +1016,7 @@ instance.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para
-          >
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1077,22 +1027,19 @@ instance.</para
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type information to return.</param
-        >
+          />The type information to return.</param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale identifier for the type information.</param
-        >
+          />The locale identifier for the type information.</param>
         <param name="ppTInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Receives a pointer to the requested type information object.</param
-        >
+          />Receives a pointer to the requested type information object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ParameterInfo.GetTypeInfoCount">

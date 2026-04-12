@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class provides access to the <see cref="T:System.Web.Mail.MailMessage" /> object that contains the e-mail message. Because the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class is derived from the <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" /> class, you can cancel sending an e-mail message in your event handler by setting the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" /> property to true.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class provides access to the <see cref="T:System.Web.Mail.MailMessage" /> object that contains the e-mail message. Because the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class is derived from the <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" /> class, you can cancel sending an e-mail message in your event handler by setting the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" /> property to true.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -40,22 +39,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Create a new instance of the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class when you want to pass a <see cref="T:System.Net.Mail.MailMessage" /> object to an event handler that might modify the message before sending it.</para
-          >
+            >Create a new instance of the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class when you want to pass a <see cref="T:System.Net.Mail.MailMessage" /> object to an event handler that might modify the message before sending it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class.</para
-          >
+            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.MailMessageEventArgs" /> class.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Mail.MailMessage" /> containing the message.</param
-        >
+          />The <see cref="T:System.Net.Mail.MailMessage" /> containing the message.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -73,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.MailMessageEventArgs.Message" /> property returns the <see cref="T:System.Web.Mail.MailMessage" /> object that contains the e-mail message data. The <see cref="P:System.Web.UI.WebControls.MailMessageEventArgs.Message" /> property is read-only; however, you can use the <see cref="T:System.Web.Mail.MailMessage" /> object that it returns to modify the properties of the e-mail message.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.MailMessageEventArgs.Message" /> property returns the <see cref="T:System.Web.Mail.MailMessage" /> object that contains the e-mail message data. The <see cref="P:System.Web.UI.WebControls.MailMessageEventArgs.Message" /> property is read-only; however, you can use the <see cref="T:System.Web.Mail.MailMessage" /> object that it returns to modify the properties of the e-mail message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

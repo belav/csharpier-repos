@@ -14,11 +14,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see cref="T:System.Web.SessionState.SessionStateModule" />.</para
-      >
+        >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see cref="T:System.Web.SessionState.SessionStateModule" />.</para>
       <para
-        >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used to represent session-state data for a session store to the <see cref="T:System.Web.SessionState.SessionStateModule" />. The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object contains the session-state variable names and values, static object references, and <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> information for the current session.</para
-      >
+        >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used to represent session-state data for a session store to the <see cref="T:System.Web.SessionState.SessionStateModule" />. The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object contains the session-state variable names and values, static object references, and <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> information for the current session.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,28 +44,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used to represent session-state data for a session store to the <see cref="T:System.Web.SessionState.SessionStateModule" />. The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object contains the session-state variable names and values, static object references, and <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> information for the current session.</para
-          >
+            >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used to represent session-state data for a session store to the <see cref="T:System.Web.SessionState.SessionStateModule" />. The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object contains the session-state variable names and values, static object references, and <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> information for the current session.</para>
           <para
-            >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see cref="T:System.Web.SessionState.SessionStateModule" />.</para
-          >
+            >The <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see cref="T:System.Web.SessionState.SessionStateModule" />.</para>
           <para
-            >Custom session-store implementers construct a <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object in implementations of the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />, <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />, and <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateNewStoreData(System.Web.HttpContext,System.Int32)" /> methods.</para
-          >
+            >Custom session-store implementers construct a <see cref="T:System.Web.SessionState.SessionStateStoreData" /> object in implementations of the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />, <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItemExclusive(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />, and <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateNewStoreData(System.Web.HttpContext,System.Int32)" /> methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class.</para
-          >
+            >Creates a new instance of the <see cref="T:System.Web.SessionState.SessionStateStoreData" /> class.</para>
         </summary>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> for the current session.</param
-        >
+          />The <see cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" /> for the current session.</param>
       </Docs>
     </Member>
     <Member MemberName="Items">
@@ -85,11 +78,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.SessionState.SessionStateStoreData.Items" /> property references the session-state variables that are exposed to ASP.NET application code using the <see cref="T:System.Web.SessionState.HttpSessionState" /> class, which is accessed using the <see cref="P:System.Web.HttpContext.Session" /> property of the current <see cref="T:System.Web.HttpContext" /> or the <see cref="T:System.Web.UI.Page" /> instance.</para
-          >
+            >The <see cref="P:System.Web.SessionState.SessionStateStoreData.Items" /> property references the session-state variables that are exposed to ASP.NET application code using the <see cref="T:System.Web.SessionState.HttpSessionState" /> class, which is accessed using the <see cref="P:System.Web.HttpContext.Session" /> property of the current <see cref="T:System.Web.HttpContext" /> or the <see cref="T:System.Web.UI.Page" /> instance.</para>
           <para
-            >By default, session-state variables are managed using the <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> object. Custom session-store implementers can supply their own implementation of the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface.</para
-          >
+            >By default, session-state variables are managed using the <see cref="T:System.Web.SessionState.SessionStateItemCollection" /> object. Custom session-store implementers can supply their own implementation of the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -116,17 +107,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The</para>
           <para>
-            <see cref="P:System.Web.SessionState.SessionStateStoreData.StaticObjects" /> property is provided for compatibility with earlier versions of ASP.</para
-          >
+            <see cref="P:System.Web.SessionState.SessionStateStoreData.StaticObjects" /> property is provided for compatibility with earlier versions of ASP.</para>
           <para
-            >Custom session-store implementers can obtain a reference to the <see cref="T:System.Web.HttpStaticObjectsCollection" /> class for the current <see cref="T:System.Web.HttpContext" /> instance using the <see cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" /> method.</para
-          >
+            >Custom session-store implementers can obtain a reference to the <see cref="T:System.Web.HttpStaticObjectsCollection" /> class for the current <see cref="T:System.Web.HttpContext" /> instance using the <see cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" /> method.</para>
           <block subset="none" type="note">
             <para
               >Custom objects stored in the <see cref="P:System.Web.SessionState.SessionStateStoreData.StaticObjects" /> collection must support binary serialization. For more information, see <format type="text/html">
                 <a href="2b1ea3be-1152-4032-b2b3-07794054c405">Binary Serialization</a>
-              </format>.</para
-            >
+              </format>.</para>
           </block>
         </remarks>
         <summary>

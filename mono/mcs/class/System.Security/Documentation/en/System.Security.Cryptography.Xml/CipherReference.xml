@@ -25,8 +25,7 @@
       <para>The actual encrypted data referenced by the &lt;CipherReference&gt; is obtained by the following process. The &lt;CipherReference&gt; URI property contains a Uniform Resource Identifier (URI) that is dereferenced. If the &lt;CipherReference&gt; element also contains a transform chain, the data resulting from dereferencing the URI is transformed as specified to produce the encrypted data. For example, if the encrypted data is base64-encoded within an XML document, the transforms would specify an XPath expression followed by a base64 decoding so the encrypted data can be extracted.</para>
       <para>The syntax of the URI and transforms is similar to that of XML digital signatures.  However, in XML digital signatures, both generation and validation processing start with the same source data and perform that transform in the same order. In XML encryption, the decrypting application has only the encrypted data and the specified transforms. The transforms are enumerated in the order necessary to obtain the encrypted data. </para>
       <para
-        >Note   By default, you cannot dereference cipher references from documents with unknown sources, such as files from a Web site, because the <see cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" /> property is null. For example, when you attempt to decrypt a file containing a &lt;CipherReference&gt; element that references a file on the Web, a <see cref="T:System.Security.SecurityException" /> is thrown, even if the request is made by a fully trusted assembly.</para
-      >
+        >Note   By default, you cannot dereference cipher references from documents with unknown sources, such as files from a Web site, because the <see cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" /> property is null. For example, when you attempt to decrypt a file containing a &lt;CipherReference&gt; element that references a file on the Web, a <see cref="T:System.Security.SecurityException" /> is thrown, even if the request is made by a fully trusted assembly.</para>
       <para>If you are sure the documents you are decrypting can be trusted, you can change this behavior for fully trusted applications by using the following code:</para>
       <code>        Evidence ev = new Evidence();
         ev.AddHost (new Zone(SecurityZone.MyComputer));
@@ -55,14 +54,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object that provides reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object that provides reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -85,8 +82,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object. </para>
           <para>You can use a URI to designate an XML file containing encrypted data. For example:</para>
           <para>String uri = "http://www.woodgrovebank.com/document.xml";</para>
           <para>You can also use a partial URI to designate that only a portion of an XML document is to be encrypted. For example, assume that an XML document named document.xml contains two MyForm elements as shown in the following XML code example:</para>
@@ -102,16 +98,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class using the specified Uniform Resource Identifier (URI).</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class using the specified Uniform Resource Identifier (URI).</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Uniform Resource Identifier (URI) pointing to the encrypted data.</param
-        >
+          />A Uniform Resource Identifier (URI) pointing to the encrypted data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -138,22 +132,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) and transform chain to indicate the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.</para
-          >
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object using a Uniform Resource Identifier (URI) and transform chain to indicate the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class using the specified Uniform Resource Identifier (URI) and transform chain information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> class using the specified Uniform Resource Identifier (URI) and transform chain information.</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Uniform Resource Identifier (URI) pointing to the encrypted data.</param
-        >
+          />A Uniform Resource Identifier (URI) pointing to the encrypted data.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -180,14 +171,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object.</para
-          >
+            >Returns the XML representation of a <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlElement" /> that represents the &lt;CipherReference&gt; element in XML encryption.</para
-          >
+            >An <see cref="T:System.Xml.XmlElement" /> that represents the &lt;CipherReference&gt; element in XML encryption.</para>
         </returns>
       </Docs>
     </Member>
@@ -216,8 +205,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to load an existing XML element into the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object.</para
-          >
+            >Use this method to load an existing XML element into the <see cref="T:System.Security.Cryptography.Xml.CipherReference" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,8 +216,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlElement" /> object that represents an XML element to use as the reference.</param
-        >
+          />An <see cref="T:System.Xml.XmlElement" /> object that represents an XML element to use as the reference.</param>
       </Docs>
     </Member>
   </Members>

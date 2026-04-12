@@ -56,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.DispatchWrapper" /> class with the object being wrapped.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.DispatchWrapper" /> class with the object being wrapped.</para>
         </summary>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be wrapped and converted to <see cref="F:System.Runtime.InteropServices.VarEnum.VT_DISPATCH" />. </param
-        >
+          />The object to be wrapped and converted to <see cref="F:System.Runtime.InteropServices.VarEnum.VT_DISPATCH" />. </param>
       </Docs>
     </Member>
     <Member MemberName="WrappedObject">
@@ -86,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object wrapped by the <see cref="T:System.Runtime.InteropServices.DispatchWrapper" />.</para
-          >
+            >Gets the object wrapped by the <see cref="T:System.Runtime.InteropServices.DispatchWrapper" />.</para>
         </summary>
       </Docs>
     </Member>

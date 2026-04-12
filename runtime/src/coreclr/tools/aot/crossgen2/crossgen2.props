@@ -9,8 +9,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendTargetFrameworkToOutputPath Condition="'$(BuildingInsideVisualStudio)' == 'true'"
-      >true</AppendTargetFrameworkToOutputPath
-    >
+      >true</AppendTargetFrameworkToOutputPath>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <Configurations>Debug;Release;Checked</Configurations>
@@ -43,15 +42,12 @@
 
   <PropertyGroup>
     <TargetArchitectureForSharedLibraries Condition="'$(CrossHostArch)' == ''"
-      >$(TargetArchitecture)</TargetArchitectureForSharedLibraries
-    >
+      >$(TargetArchitecture)</TargetArchitectureForSharedLibraries>
     <TargetArchitectureForSharedLibraries Condition="'$(CrossHostArch)' != ''"
-      >$(CrossHostArch)</TargetArchitectureForSharedLibraries
-    >
+      >$(CrossHostArch)</TargetArchitectureForSharedLibraries>
     <TargetArchitectureForSharedLibraries
       Condition="'$(TargetArchitectureForSharedLibraries)'=='armel'"
-      >arm</TargetArchitectureForSharedLibraries
-    >
+      >arm</TargetArchitectureForSharedLibraries>
 
     <JitInterfaceLibraryName>$(LibPrefix)jitinterface_$(TargetArchitectureForSharedLibraries)$(LibSuffix)</JitInterfaceLibraryName>
   </PropertyGroup>
@@ -93,16 +89,13 @@
   <PropertyGroup Condition="'$(TargetOS)' == 'windows'">
     <DiaSymReaderTargetArch>$(TargetArchitectureForSharedLibraries)</DiaSymReaderTargetArch>
     <DiaSymReaderTargetArch Condition="'$(DiaSymReaderTargetArch)' == 'x64'"
-      >amd64</DiaSymReaderTargetArch
-    >
+      >amd64</DiaSymReaderTargetArch>
     <DiaSymReaderTargetArchFileName>Microsoft.DiaSymReader.Native.$(DiaSymReaderTargetArch).dll</DiaSymReaderTargetArchFileName>
     <DiaSymReaderTargetArchPath Condition="'$(PkgMicrosoft_DiaSymReader_Native)' != ''"
-      >$(PkgMicrosoft_DiaSymReader_Native)\runtimes\win\native\$(DiaSymReaderTargetArchFileName)</DiaSymReaderTargetArchPath
-    >
+      >$(PkgMicrosoft_DiaSymReader_Native)\runtimes\win\native\$(DiaSymReaderTargetArchFileName)</DiaSymReaderTargetArchPath>
     <!-- When publishing we won't have the NuGet packages, so use the copy from the build artifacts directory. -->
     <DiaSymReaderTargetArchPath Condition="'$(PkgMicrosoft_DiaSymReader_Native)' == ''"
-      >$(CoreCLRArtifactsPath)crossgen2/$(DiaSymReaderTargetArchFileName)</DiaSymReaderTargetArchPath
-    >
+      >$(CoreCLRArtifactsPath)crossgen2/$(DiaSymReaderTargetArchFileName)</DiaSymReaderTargetArchPath>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">

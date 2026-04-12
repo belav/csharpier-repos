@@ -22,17 +22,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class specifies the access rights for a system directory and how access attempts are audited. This class represents access and audit rights as a set of rules. Each access rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" /> object, while each audit rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> object.</para
-      >
+        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class specifies the access rights for a system directory and how access attempts are audited. This class represents access and audit rights as a set of rules. Each access rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAccessRule" /> object, while each audit rule is represented by a <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> object.</para>
       <para
-        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class is an abstraction of the underlying Windows file security system. In this system, each directory has a discretionary access control list (DACL), which controls access to the directory, and a system access control list (SACL), which specifies the access control attempts that are audited. The <see cref="T:System.Security.AccessControl.FileSystemAccessRule" /> and <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> classes are abstractions of the access control entries (ACEs) that comprise DACLs and SACLs. </para
-      >
+        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class is an abstraction of the underlying Windows file security system. In this system, each directory has a discretionary access control list (DACL), which controls access to the directory, and a system access control list (SACL), which specifies the access control attempts that are audited. The <see cref="T:System.Security.AccessControl.FileSystemAccessRule" /> and <see cref="T:System.Security.AccessControl.FileSystemAuditRule" /> classes are abstractions of the access control entries (ACEs) that comprise DACLs and SACLs. </para>
       <para
-        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
-      >
+        >The <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para>
       <para
-        >Use the <see cref="T:System.Security.AccessControl.FileSecurity" /> class to retrieve, add, or change the access rules that represent the DACL and SACL of a file.</para
-      >
+        >Use the <see cref="T:System.Security.AccessControl.FileSecurity" /> class to retrieve, add, or change the access rules that represent the DACL and SACL of a file.</para>
       <para>The following tables lists the methods you can use to access and maintain directory security.</para>
       <list type="table">
         <listheader>
@@ -122,15 +118,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to create an empty <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object that is not based on an existing directory. You can then populate the object with access control information and apply it to a directory.</para
-          >
+            >Use this constructor when you want to create an empty <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object that is not based on an existing directory. You can then populate the object with access control information and apply it to a directory.</para>
           <para></para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -160,29 +154,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor retrieves the access control information for the specified directory and then creates a <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object that encapsulates that information. You can then inspect, add, or delete the access control information for the specified directory.</para
-          >
+            >This constructor retrieves the access control information for the specified directory and then creates a <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object that encapsulates that information. You can then inspect, add, or delete the access control information for the specified directory.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class from a specified directory using the specified values of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectorySecurity" /> class from a specified directory using the specified values of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location of a directory to create a <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object from.</param
-        >
+          />The location of a directory to create a <see cref="T:System.Security.AccessControl.DirectorySecurity" /> object from.</param>
         <param name="includeSections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies the type of access control list (ACL) information to retrieve. </param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> values that specifies the type of access control list (ACL) information to retrieve. </param>
       </Docs>
     </Member>
   </Members>

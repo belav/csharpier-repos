@@ -46,14 +46,11 @@ in the framework.</remarks>
       <Docs>
         <param name="configFile">Full path to the config file to process.</param>
         <param name="configSection"
-          >Path, inside the config file, to the config section to process.</param
-        >
+          >Path, inside the config file, to the config section to process.</param>
         <param name="containerName"
-          >Name of the container which holds the key to be used to decrypt the section.</param
-        >
+          >Name of the container which holds the key to be used to decrypt the section.</param>
         <param name="useMachineStore"
-          >If true, attempt to look up container in the global (machine) key store.</param
-        >
+          >If true, attempt to look up container in the global (machine) key store.</param>
         <exception cref="T:System.ArgumentNullException">
           <list type="bullet">
             <item>
@@ -69,8 +66,7 @@ in the framework.</remarks>
         </exception>
         <exception cref="T:System.InvalidOperationException">
 	    Specified section path doesn't refer to a valid configuration section.
-	</exception
-        >
+	</exception>
         <summary>Decrypts the specified section.</summary>
         <remarks>If a section exist but is not encrypted, no error is reported.</remarks>
       </Docs>
@@ -96,18 +92,14 @@ in the framework.</remarks>
       <Docs>
         <param name="configFile">Full path to the config file to process.</param>
         <param name="configSection"
-          >Path, inside the config file, to the config section to process.</param
-        >
+          >Path, inside the config file, to the config section to process.</param>
         <param name="containerName"
-          >Name of the container which holds the key to be used to decrypt the section.</param
-        >
+          >Name of the container which holds the key to be used to decrypt the section.</param>
         <param name="useMachineStore"
-          >If true, attempt to look up container in the global (machine) key store.</param
-        >
+          >If true, attempt to look up container in the global (machine) key store.</param>
         <exception cref="T:System.InvalidOperationException">
 	    Specified section path doesn't refer to a valid configuration section or code failed to encrypt the section.
-	</exception
-        >
+	</exception>
         <summary>Encrypts the specified section.</summary>
         <remarks>If section is already encrypted, no error is reported.</remarks>
       </Docs>

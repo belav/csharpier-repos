@@ -33,16 +33,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemEventArgs" /> class, specifying a <see cref="T:System.Windows.Forms.ToolStripItem" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemEventArgs" /> class, specifying a <see cref="T:System.Windows.Forms.ToolStripItem" />. </para>
         </summary>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to specify events.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to specify events.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to handle events.</para
-          >
+            >Gets a <see cref="T:System.Windows.Forms.ToolStripItem" /> for which to handle events.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -11,14 +11,10 @@
     >The default value of a variable depends on the type of the variable and is determined as follows: <list>
       <list_item
         > For a variable of a <non_terminal where="11.1"
-          >value-type</non_terminal
-        >, the default value is the same as the value computed by the value-type's default constructor (<hyperlink>11.1.1</hyperlink>). </list_item
-      >
+          >value-type</non_terminal>, the default value is the same as the value computed by the value-type's default constructor (<hyperlink>11.1.1</hyperlink>). </list_item>
       <list_item
         > For a variable of a <non_terminal where="11.2"
-          >reference-type</non_terminal
-        >, the default value is null. </list_item
-      >
+          >reference-type</non_terminal>, the default value is null. </list_item>
     </list>
   </paragraph>
   <paragraph>

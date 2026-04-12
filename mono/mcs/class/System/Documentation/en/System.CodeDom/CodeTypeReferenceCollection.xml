@@ -34,14 +34,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para
-      >
+        >The <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para
-      >
+        >Represents a collection of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -93,16 +90,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class containing the specified array of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class containing the specified array of <see cref="T:System.CodeDom.CodeTypeReference" /> objects.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeTypeReference" /> objects with which to initialize the collection. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeTypeReference" /> objects with which to initialize the collection. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -129,16 +124,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class containing the elements of the specified source collection.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> class containing the elements of the specified source collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> with which to initialize the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> with which to initialize the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -167,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection.</para
-          >
+            >Adds the specified <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -179,8 +171,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to add. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to add. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -206,16 +197,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection using the specified data type name.</para
-          >
+            >Adds a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection using the specified data type name.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a data type for which to add a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection. </param
-        >
+          />The name of a data type for which to add a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -241,16 +230,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection using the specified data type.</para
-          >
+            >Adds a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection using the specified data type.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type for which to add a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection. </param
-        >
+          />The data type for which to add a <see cref="T:System.CodeDom.CodeTypeReference" /> to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -279,16 +266,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeTypeReference" /> array to the end of the collection.</para
-          >
+            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeTypeReference" /> array to the end of the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeTypeReference" /> containing the objects to add to the collection. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeTypeReference" /> containing the objects to add to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -317,16 +302,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> to the end of the collection.</para
-          >
+            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> to the end of the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> containing the objects to add to the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReferenceCollection" /> containing the objects to add to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -355,22 +338,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the collection contains the specified <see cref="T:System.CodeDom.CodeTypeReference" />.</para
-          >
+            >Gets a value indicating whether the collection contains the specified <see cref="T:System.CodeDom.CodeTypeReference" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.CodeDom.CodeTypeReference" /> is contained in the collection; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.CodeDom.CodeTypeReference" /> is contained in the collection; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to search for in the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to search for in the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -400,23 +380,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items in the collection to the specified one-dimensional <see cref="T:System.Array" /> at the specified index.</para
-          >
+            >Copies the items in the collection to the specified one-dimensional <see cref="T:System.Array" /> at the specified index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the array at which to begin inserting. </param
-        >
+          />The index of the array at which to begin inserting. </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -445,22 +422,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeTypeReference" />, if it exists in the collection.</para
-          >
+            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeTypeReference" />, if it exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see cref="T:System.CodeDom.CodeTypeReference" /> in the collection if found; otherwise, -1.</para
-          >
+            >The index of the specified <see cref="T:System.CodeDom.CodeTypeReference" /> in the collection if found; otherwise, -1.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to locate in the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -490,23 +464,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see cref="T:System.CodeDom.CodeTypeReference" /> into the collection at the specified index.</para
-          >
+            >Inserts a <see cref="T:System.CodeDom.CodeTypeReference" /> into the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index where the item should be inserted. </param
-        >
+          />The zero-based index where the item should be inserted. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to insert. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to insert. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -563,16 +534,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.CodeDom.CodeTypeReference" /> from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.CodeDom.CodeTypeReference" /> from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> to remove from the collection. </param>
       </Docs>
     </Member>
   </Members>

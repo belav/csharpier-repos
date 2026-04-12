@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.TableSectionStyle" /> class is used to represent the style for a section of a <see cref="T:System.Web.UI.WebControls.Table" /> control. It encapsulates the properties that allow you to customize the appearance of a table. You can apply these properties to sections in multiple <see cref="T:System.Web.UI.WebControls.Table" /> controls to provide a common appearance.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.TableSectionStyle" /> class is used to represent the style for a section of a <see cref="T:System.Web.UI.WebControls.Table" /> control. It encapsulates the properties that allow you to customize the appearance of a table. You can apply these properties to sections in multiple <see cref="T:System.Web.UI.WebControls.Table" /> controls to provide a common appearance.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the style for a section of a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para
-      >
+        >Represents the style for a section of a <see cref="T:System.Web.UI.WebControls.Table" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableSectionStyle" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableSectionStyle" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

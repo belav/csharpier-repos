@@ -2,8 +2,7 @@
   <PropertyGroup>
     <SwapNativeForIL
       Condition="'$(SwapNativeForIL)' == '' and ('$(Configuration)' == 'Debug' or '$(Coverage)' == 'true') and '$(RuntimeFlavor)' != 'Mono'"
-      >true</SwapNativeForIL
-    >
+      >true</SwapNativeForIL>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <!-- Binplace properties -->
     <BinPlaceForTargetVertical>false</BinPlaceForTargetVertical>
@@ -16,17 +15,14 @@
     <GCStressDependsOnCoreDisTools>false</GCStressDependsOnCoreDisTools>
     <GCStressDependsOnCoreDisTools
       Condition="'$(TargetOS)' == 'windows' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'x86')"
-      >true</GCStressDependsOnCoreDisTools
-    >
+      >true</GCStressDependsOnCoreDisTools>
     <GCStressDependsOnCoreDisTools
       Condition="'$(TargetOS)' == 'linux' And '$(TargetArchitecture)' == 'x64'"
-      >true</GCStressDependsOnCoreDisTools
-    >
+      >true</GCStressDependsOnCoreDisTools>
     <CopyCoreDisToolsToCoreRoot>false</CopyCoreDisToolsToCoreRoot>
     <CopyCoreDisToolsToCoreRoot
       Condition="$(GCStressDependsOnCoreDisTools) And '$(DotNetBuildFromSource)' != 'true'"
-      >true</CopyCoreDisToolsToCoreRoot
-    >
+      >true</CopyCoreDisToolsToCoreRoot>
   </PropertyGroup>
 
   <Import

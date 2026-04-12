@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is used in conjunction with the <see cref="M:System.Array.Sort(System.Array)" /> and <see cref="M:System.Array.BinarySearch(System.Array,System.Object)" /> methods. It provides a way to customize the sort order of a collection. See the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" /> method for notes on parameters and return value.</para
-      >
+        >This interface is used in conjunction with the <see cref="M:System.Array.Sort(System.Array)" /> and <see cref="M:System.Array.BinarySearch(System.Array,System.Object)" /> methods. It provides a way to customize the sort order of a collection. See the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" /> method for notes on parameters and return value.</para>
       <para
-        >The default implementation of this interface is the <see cref="T:System.Collections.Comparer" /> class. For the generic version of this interface, see <see cref="T:System.Collections.Generic.IComparer`1" />.</para
-      >
+        >The default implementation of this interface is the <see cref="T:System.Collections.Comparer" /> class. For the generic version of this interface, see <see cref="T:System.Collections.Generic.IComparer`1" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,11 +63,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The preferred implementation is to use the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method of one of the parameters.</para
-          >
+            >The preferred implementation is to use the <see cref="M:System.IComparable.CompareTo(System.Object)" /> method of one of the parameters.</para>
           <para
-            >Comparing null with any type is allowed and does not generate an exception when using <see cref="T:System.IComparable" />. When sorting, null is considered to be less than any other object.</para
-          >
+            >Comparing null with any type is allowed and does not generate an exception when using <see cref="T:System.IComparable" />. When sorting, null is considered to be less than any other object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,8 +74,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative values of <paramref name="x" /> and <paramref name="y" />, as shown in the following table.</para
-          >
+            >A signed integer that indicates the relative values of <paramref name="x" /> and <paramref name="y" />, as shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -122,15 +117,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare. </param
-        >
+          />The first object to compare. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare. </param
-        >
+          />The second object to compare. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

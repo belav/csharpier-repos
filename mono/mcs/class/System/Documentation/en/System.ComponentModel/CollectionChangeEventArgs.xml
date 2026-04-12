@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event is raised when you change which items are in a collection, for example, by adding an element to a collection or removing an element from the collection. This event is not raised when an individual element changes its value.</para
-      >
+        >A <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event is raised when you change which items are in a collection, for example, by adding an element to a collection or removing an element from the collection. This event is not raised when an individual element changes its value.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,23 +60,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> class.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.ComponentModel.CollectionChangeAction" /> values that specifies how the collection changed. </param
-        >
+          />One of the <see cref="T:System.ComponentModel.CollectionChangeAction" /> values that specifies how the collection changed. </param>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that specifies the instance of the collection where the change occurred. </param
-        >
+          />An <see cref="T:System.Object" /> that specifies the instance of the collection where the change occurred. </param>
       </Docs>
     </Member>
     <Member MemberName="Action">

@@ -22,11 +22,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.TypeAccessException" /> is thrown when a method attempts to cast an object to a type that is not accessible from the method. For example, an anonymously hosted dynamic method cannot access a security-critical type because the method is transparent. If the method contains a <see cref="F:System.Reflection.Emit.OpCodes.Castclass" /> instruction that casts an object to a security-critical type, or to a generic type that has a security-critical type as one of its type parameters, <see cref="T:System.TypeAccessException" /> is thrown by the JIT compiler. </para
-      >
+        <see cref="T:System.TypeAccessException" /> is thrown when a method attempts to cast an object to a type that is not accessible from the method. For example, an anonymously hosted dynamic method cannot access a security-critical type because the method is transparent. If the method contains a <see cref="F:System.Reflection.Emit.OpCodes.Castclass" /> instruction that casts an object to a security-critical type, or to a generic type that has a security-critical type as one of its type parameters, <see cref="T:System.TypeAccessException" /> is thrown by the JIT compiler. </para>
       <para
-        >Similarly, <see cref="T:System.TypeAccessException" /> is thrown for a dynamic method that uses an internal type from another assembly. A method might not have access to its containing type, its return type, or one of its parameter types. </para
-      >
+        >Similarly, <see cref="T:System.TypeAccessException" /> is thrown for a dynamic method that uses an internal type from another assembly. A method might not have access to its containing type, its return type, or one of its parameter types. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,11 +47,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Attempt to access the type failed." This message takes the current system culture into account.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Attempt to access the type failed." This message takes the current system culture into account.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -90,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a system-supplied message that describes the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a system-supplied message that describes the error.</para>
         </summary>
       </Docs>
     </Member>
@@ -112,8 +107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -150,16 +144,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a specified message that describes the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a specified message that describes the error.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the exception. The caller of this constructor must ensure that this string has been localized for the current system culture.</param
-        >
+          />The message that describes the exception. The caller of this constructor must ensure that this string has been localized for the current system culture.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -185,29 +177,25 @@
           <para
             >This constructor is called during deserialization to reconstitute the exception object that was transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized data. </param
-        >
+          />The object that holds the serialized data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -231,11 +219,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -272,23 +258,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.TypeAccessException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the exception. The caller of this constructor must ensure that this string has been localized for the current system culture. </param
-        >
+          />The message that describes the exception. The caller of this constructor must ensure that this string has been localized for the current system culture. </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
     </Member>
   </Members>

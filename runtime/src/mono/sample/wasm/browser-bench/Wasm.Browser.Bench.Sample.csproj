@@ -6,21 +6,16 @@
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <EnableAggressiveTrimming Condition="'$(EnableAOTAndTrimming)' != ''"
-      >$(EnableAOTAndTrimming)</EnableAggressiveTrimming
-    >
+      >$(EnableAOTAndTrimming)</EnableAggressiveTrimming>
     <PublishTrimmed Condition="'$(EnableAOTAndTrimming)' != ''"
-      >$(EnableAOTAndTrimming)</PublishTrimmed
-    >
+      >$(EnableAOTAndTrimming)</PublishTrimmed>
     <RunAOTCompilation Condition="'$(EnableAOTAndTrimming)' != ''"
-      >$(EnableAOTAndTrimming)</RunAOTCompilation
-    >
+      >$(EnableAOTAndTrimming)</RunAOTCompilation>
     <RunSampleDependencies>RunSampleWithBrowserAndSimpleServer</RunSampleDependencies>
     <RunSampleDependencies Condition="'$(BlazorStartup)' == 'true'"
-      >BuildBlazorFrame;$(RunSampleDependencies)</RunSampleDependencies
-    >
+      >BuildBlazorFrame;$(RunSampleDependencies)</RunSampleDependencies>
     <RunSampleDependencies Condition="'$(BrowserStartup)' == 'true'"
-      >BuildBrowserFrame;$(RunSampleDependencies)</RunSampleDependencies
-    >
+      >BuildBrowserFrame;$(RunSampleDependencies)</RunSampleDependencies>
   </PropertyGroup>
 
   <ItemGroup>

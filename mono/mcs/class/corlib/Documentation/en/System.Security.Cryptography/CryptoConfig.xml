@@ -28,10 +28,8 @@
       <para
         >The following table shows the simple names recognized by this class and the default algorithm implementations to which they map. Alternatively, you can map other implementations to these names, as described in <format type="text/html">
           <a href="01327c69-c5e1-4ef6-b73f-0a58351f0492"
-            >Mapping Algorithm Names to Cryptography Classes</a
-          >
-        </format>.</para
-      >
+            >Mapping Algorithm Names to Cryptography Classes</a>
+        </format>.</para>
       <list type="table">
         <listheader>
           <item>
@@ -440,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -485,15 +482,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm to map to.</param
-        >
+          />The algorithm to map to.</param>
         <param name="names">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of names to map to the algorithm.</param
-        >
+          />An array of names to map to the algorithm.</param>
       </Docs>
     </Member>
     <Member MemberName="AddOID">
@@ -536,15 +531,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object identifier (OID) to map to.</param
-        >
+          />The object identifier (OID) to map to.</param>
         <param name="names">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of names to map to the OID.</param
-        >
+          />An array of names to map to the OID.</param>
       </Docs>
     </Member>
     <Member MemberName="AllowOnlyFipsAlgorithms">
@@ -591,8 +584,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para
-          >
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -607,8 +599,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the cryptographic object of which to create an instance. </param
-        >
+          />The simple name of the cryptographic object of which to create an instance. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateFromName">
@@ -643,8 +634,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para
-          >
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -659,15 +649,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the cryptographic object of which to create an instance. </param
-        >
+          />The simple name of the cryptographic object of which to create an instance. </param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments used to create the specified cryptographic object. </param
-        >
+          />The arguments used to create the specified cryptographic object. </param>
       </Docs>
     </Member>
     <Member MemberName="EncodeOID">
@@ -703,8 +691,7 @@ A <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationExce
           </para>
           <para>
 A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID is bigger than <see cref="T:System.Int32" />.<see cref="M:System.Int32.MaxValue" />.
-</para
-          >
+</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -715,8 +702,7 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
           <para>A byte array containing the encoded OID.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />The OID to encode. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The OID to encode. </param>
       </Docs>
     </Member>
     <Member MemberName="MapNameToOID">
@@ -741,8 +727,7 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para
-          >
+            >For a list of simple names recognized by this class, see <see cref="T:System.Security.Cryptography.CryptoConfig" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -757,8 +742,7 @@ A <see cref="T:System.OverflowException" /> will be thrown if a part of the OID 
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple name of the algorithm for which to get the OID. </param
-        >
+          />The simple name of the algorithm for which to get the OID. </param>
       </Docs>
     </Member>
   </Members>

@@ -34,15 +34,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> class with the specified name and value.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> class with the specified name and value.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The property name.</param>
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The property value.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -65,17 +62,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> references the same XML element as the original. Modifications to the name or value of a shallow copy will be reflected in both copies. However, depending on property evaluation, the two copies could have different <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.FinalValue" /> property values.</para
-          >
+            >A shallow copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> references the same XML element as the original. Modifications to the name or value of a shallow copy will be reflected in both copies. However, depending on property evaluation, the two copies could have different <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.FinalValue" /> property values.</para>
           <para
-            >A deep copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> creates a new XML element to reference so that both copies of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> can be independently modified.</para
-          >
+            >A deep copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> creates a new XML element to reference so that both copies of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" /> can be independently modified.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a deep or shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />.</para
-          >
+            >Creates a deep or shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,8 +80,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to create a deep copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />; otherwise, false.</param
-        >
+          />true to create a deep copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the property.</para
-          >
+            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the property.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -209,14 +201,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para
-          >
+            >Returns the string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para
-          >
+            >The string that represents the property <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />.</para>
         </returns>
       </Docs>
     </Member>

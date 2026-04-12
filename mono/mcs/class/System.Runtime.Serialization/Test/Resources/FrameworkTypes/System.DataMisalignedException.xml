@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.DataMisalignedException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >A datatype misalignment was detected in a load or store instruction.</Message
-  >
+    >A datatype misalignment was detected in a load or store instruction.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

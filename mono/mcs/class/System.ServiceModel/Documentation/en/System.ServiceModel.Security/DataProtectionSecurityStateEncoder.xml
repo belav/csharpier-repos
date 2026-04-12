@@ -23,12 +23,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used for encoding the security state as represented by a <newTerm>Stateful Security Context Token</newTerm> when the message is sent, and for decoding the security context when the message arrives at a recipient.</para
-      >
+        >This class is used for encoding the security state as represented by a <newTerm>Stateful Security Context Token</newTerm> when the message is sent, and for decoding the security context when the message arrives at a recipient.</para>
       <para>The encoding can either be in the current user scope (whereby only processes running as the user account can decode the security state) or it can be in the local machine scope (whereby all processes running on the machine can decode the security state). By default, the encoding is in the current user scope.</para>
       <para
-        >This class is used by the server when sending the security state in the <newTerm>Stateful Security Context Token</newTerm> issued to the client.</para
-      >
+        >This class is used by the server when sending the security state in the <newTerm>Stateful Security Context Token</newTerm> issued to the client.</para>
       <para>DataProtection based on the CurrentUser scope requires the current user to have a user profile. If the user has a roaming profile, then the security state encoded by the user process running on one machine can be decoded by a user process running on a different machine.</para>
     </remarks>
     <summary>
@@ -83,8 +81,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to use the current user protection scope.</param
-        >
+          />Indicates whether to use the current user protection scope.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -115,15 +112,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether to use the current user protection scope.</param
-        >
+          />Indicates whether to use the current user protection scope.</param>
         <param name="entropy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that specifies the entropy, which indicates additional randomness that the encoder could use to encode the security state.</param
-        >
+          />A byte array that specifies the entropy, which indicates additional randomness that the encoder could use to encode the security state.</param>
       </Docs>
     </Member>
     <Member MemberName="DecodeSecurityState">
@@ -160,8 +155,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents the encoded security state.</param
-        >
+          />A byte array that represents the encoded security state.</param>
       </Docs>
     </Member>
     <Member MemberName="EncodeSecurityState">
@@ -198,8 +192,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array representing the decoded security state.</param
-        >
+          />A byte array representing the decoded security state.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEntropy">
@@ -246,20 +239,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Information returned by this method includes the <see cref="P:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.UseCurrentUserProtectionScope" /> and <see cref="M:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.GetEntropy" /> values of the current instance.</para
-          >
+            >Information returned by this method includes the <see cref="P:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.UseCurrentUserProtectionScope" /> and <see cref="M:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.GetEntropy" /> values of the current instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" /> instance.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" /> instance.</para
-          >
+            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" /> instance.</para>
         </returns>
       </Docs>
     </Member>

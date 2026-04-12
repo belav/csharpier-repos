@@ -30,17 +30,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Channel sinks are connected to a server channel through implementations of the <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> interface. All the remoting server channels provide constructors that take a <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> as a parameter.</para
-      >
+        >Channel sinks are connected to a server channel through implementations of the <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> interface. All the remoting server channels provide constructors that take a <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> as a parameter.</para>
       <para
-        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> provides a property called <see cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" /> for this purpose.</para
-      >
+        >Channel sink providers are stored in a chain, and the user is responsible for chaining all channel sink providers together before passing the outer one to the channel constructor. <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" /> provides a property called <see cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" /> for this purpose.</para>
       <para
-        >When multiple channel sink providers are specified in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers are created at the same time as the channel, during a <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" /> call.</para
-      >
+        >When multiple channel sink providers are specified in a configuration file, the remoting infrastructure will chain them together in the order they are found in the configuration file. The channel sink providers are created at the same time as the channel, during a <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" /> call.</para>
       <para
-        >After the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is generated, .NET Framework searches through the list of registered channels to find one that can process the call. Once an appropriate channel has been found, the channel sink is retrieved from the channel, and the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is forwarded to the sink for processing.</para
-      >
+        >After the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is generated, .NET Framework searches through the list of registered channels to find one that can process the call. Once an appropriate channel has been found, the channel sink is retrieved from the channel, and the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is forwarded to the sink for processing.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,8 +80,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The channel for which to create the channel sink chain. </param
-        >
+          />The channel for which to create the channel sink chain. </param>
       </Docs>
     </Member>
     <Member MemberName="GetChannelData">
@@ -120,8 +115,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" /> object in which the channel data is to be returned. </param
-        >
+          />A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" /> object in which the channel data is to be returned. </param>
       </Docs>
     </Member>
     <Member MemberName="Next">

@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an <see cref="T:System.Collections.IEnumerable" /> as an <see cref="T:System.Linq.EnumerableQuery" /> data source. </para
-      >
+        >Represents an <see cref="T:System.Collections.IEnumerable" /> as an <see cref="T:System.Linq.EnumerableQuery" /> data source. </para>
     </summary>
   </Docs>
   <Members>
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Linq.EnumerableQuery" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Linq.EnumerableQuery" /> class.</para>
         </summary>
       </Docs>
     </Member>

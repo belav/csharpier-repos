@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.EndpointPermission" /> class defines a network endpoint, including host name, network port number, and transport type used to make the connection.</para
-      >
+        >The <see cref="T:System.Net.EndpointPermission" /> class defines a network endpoint, including host name, network port number, and transport type used to make the connection.</para>
       <block subset="none" type="note">
         <para>Avoid creating EndPoint permissions using host names because these names will have to be resolved to IP address, which could block the stack.</para>
       </block>
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines an endpoint that is authorized by a <see cref="T:System.Net.SocketPermission" /> instance.</para
-      >
+        >Defines an endpoint that is authorized by a <see cref="T:System.Net.SocketPermission" /> instance.</para>
     </summary>
   </Docs>
   <Members>
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.SocketPermission" /> instance.</para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.SocketPermission" /> instance.</para>
         </summary>
         <param name="obj">
           <attribution
@@ -94,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for a particular <see cref="T:System.Net.SocketPermission" /> instance. </para
-          >
+            >Serves as a hash function for a particular <see cref="T:System.Net.SocketPermission" /> instance. </para>
         </summary>
       </Docs>
     </Member>
@@ -161,20 +157,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.EndpointPermission.ToString" /> method returns a string that represents the contents for the <see cref="T:System.Net.EndpointPermission" /> instance. The string is in the form <see cref="P:System.Net.EndpointPermission.Hostname" /> # <see cref="P:System.Net.EndpointPermission.Port" /> # <see cref="P:System.Net.EndpointPermission.Transport" />.</para
-          >
+            >The <see cref="M:System.Net.EndpointPermission.ToString" /> method returns a string that represents the contents for the <see cref="T:System.Net.EndpointPermission" /> instance. The string is in the form <see cref="P:System.Net.EndpointPermission.Hostname" /> # <see cref="P:System.Net.EndpointPermission.Port" /> # <see cref="P:System.Net.EndpointPermission.Transport" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Net.EndpointPermission" /> instance.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Net.EndpointPermission" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see cref="T:System.Net.EndpointPermission" /> instance.</para
-          >
+            >A string that represents the current <see cref="T:System.Net.EndpointPermission" /> instance.</para>
         </returns>
       </Docs>
     </Member>

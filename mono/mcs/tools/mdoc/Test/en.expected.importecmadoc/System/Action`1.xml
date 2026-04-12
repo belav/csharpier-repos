@@ -30,8 +30,7 @@
       <block subset="none" type="note">
         <para
           >This delegate is used by the method <see cref="M:System.Array.ForEach" />
-          <see langword="(T[], Action&lt;T&gt;)" />, and in <see cref="T:System.Collections.Generic.List&lt;T&gt;" /> to perform an action on each element of the collection.</para
-        >
+          <see langword="(T[], Action&lt;T&gt;)" />, and in <see cref="T:System.Collections.Generic.List&lt;T&gt;" /> to perform an action on each element of the collection.</para>
       </block>
     </remarks>
   </Docs>

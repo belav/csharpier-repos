@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The C++ compiler applies the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" /> attribute to native enumeration types to indicate that they do not need to be qualified by the enumeration type name when referenced in C++ programs.  This attribute distinguishes native enumeration types from managed enumeration types.</para
-      >
+        >The C++ compiler applies the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" /> attribute to native enumeration types to indicate that they do not need to be qualified by the enumeration type name when referenced in C++ programs.  This attribute distinguishes native enumeration types from managed enumeration types.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

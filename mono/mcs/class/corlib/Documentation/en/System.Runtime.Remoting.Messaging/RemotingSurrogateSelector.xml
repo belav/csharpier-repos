@@ -37,28 +37,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A surrogate is an object that can handle the serialization requirements of an object. Remoting surrogates handle remoting serialization requirements of objects that derive from <see cref="T:System.MarshalByRefObject" />. The <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" /> manages registered surrogates for use by the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para
-      >
+        >A surrogate is an object that can handle the serialization requirements of an object. Remoting surrogates handle remoting serialization requirements of objects that derive from <see cref="T:System.MarshalByRefObject" />. The <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" /> manages registered surrogates for use by the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
       <para
-        >During serialization for remoting purposes of a <see cref="T:System.MarshalByRefObject" />, the remoting surrogate creates an <see cref="T:System.Runtime.Remoting.ObjRef" /> that contains all the relevant information required to activate and communicate with the remote object. The newly created <see cref="T:System.Runtime.Remoting.ObjRef" /> can then be sent to a remote location and used to create a proxy.</para
-      >
+        >During serialization for remoting purposes of a <see cref="T:System.MarshalByRefObject" />, the remoting surrogate creates an <see cref="T:System.Runtime.Remoting.ObjRef" /> that contains all the relevant information required to activate and communicate with the remote object. The newly created <see cref="T:System.Runtime.Remoting.ObjRef" /> can then be sent to a remote location and used to create a proxy.</para>
       <block subset="none" type="note">
         <para
           >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" /> is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format> and <format type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
-              >[&lt;topic://cpconInheritanceDemands&gt;]</a
-            >
-          </format>.</para
-        >
+              >[&lt;topic://cpconInheritanceDemands&gt;]</a>
+          </format>.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Selects the remoting surrogate that can be used to serialize an object that derives from a <see cref="T:System.MarshalByRefObject" />.</para
-      >
+        >Selects the remoting surrogate that can be used to serialize an object that derives from a <see cref="T:System.MarshalByRefObject" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -81,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -111,22 +105,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Remoting surrogates are arranged in chains that are attached to an instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />. Each chain contains the remoting surrogates that the surrogate selector checks to find a compatible surrogate for a given object type. The current method adds a new remoting surrogate selector to the surrogate chain that is examined for compatible surrogates.</para
-          >
+            >Remoting surrogates are arranged in chains that are attached to an instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />. Each chain contains the remoting surrogates that the surrogate selector checks to find a compatible surrogate for a given object type. The current method adds a new remoting surrogate selector to the surrogate chain that is examined for compatible surrogates.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to the surrogate selector chain.</para
-          >
+            >Adds the specified <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to the surrogate selector chain.</para>
         </summary>
         <param name="selector">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to examine. </param
-        >
+          />The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> to examine. </param>
       </Docs>
     </Member>
     <Member MemberName="Filter">
@@ -153,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" /> delegate for the current instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />.</para
-          >
+            >Gets or sets the <see cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" /> delegate for the current instance of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -182,14 +172,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> in the chain of surrogate selectors.</para
-          >
+            >Returns the next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> in the chain of surrogate selectors.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> in the chain of surrogate selectors.</para
-          >
+            >The next <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> in the chain of surrogate selectors.</para>
         </returns>
       </Docs>
     </Member>
@@ -251,11 +239,9 @@
       <Docs>
         <param name="type">To be added: an object of type 'Type'</param>
         <param name="context"
-          >To be added: an object of type 'Runtime.Serialization.StreamingContext'</param
-        >
+          >To be added: an object of type 'Runtime.Serialization.StreamingContext'</param>
         <param name="ssout"
-          >To be added: an object of type 'Runtime.Serialization.ISurrogateSelector&amp;'</param
-        >
+          >To be added: an object of type 'Runtime.Serialization.ISurrogateSelector&amp;'</param>
         <summary>To be added</summary>
         <returns>To be added: an object of type 'Runtime.Serialization.ISerializationSurrogate'</returns>
         <remarks>To be added</remarks>
@@ -290,8 +276,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the object graph. </param
-        >
+          />The object at the root of the object graph. </param>
       </Docs>
     </Member>
     <Member MemberName="UseSoapFormat">

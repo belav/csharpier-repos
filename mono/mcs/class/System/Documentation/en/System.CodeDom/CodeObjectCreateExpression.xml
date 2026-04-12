@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> can be used to represent an expression that creates an instance of a type.</para
-      >
+        <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> can be used to represent an expression that creates an instance of a type.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeObjectCreateExpression.CreateType" /> property specifies the data type to create a new instance of. The <see cref="P:System.CodeDom.CodeObjectCreateExpression.Parameters" /> property specifies the parameters to pass to the constructor of the type to create a new instance of.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeObjectCreateExpression.CreateType" /> property specifies the data type to create a new instance of. The <see cref="P:System.CodeDom.CodeObjectCreateExpression.Parameters" /> property specifies the parameters to pass to the constructor of the type to create a new instance of.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -101,23 +98,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the object to create. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the object to create. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -151,23 +145,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data type of object to create. </param
-        >
+          />The name of the data type of object to create. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -201,23 +192,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeObjectCreateExpression" /> class using the specified type and parameters.</para>
         </summary>
         <param name="createType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the object to create. </param
-        >
+          />The data type of the object to create. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeExpression" /> objects that indicates the parameters to use to create the object. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateType">

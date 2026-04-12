@@ -45,8 +45,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action to invoke when the operation completes.</param
-        >
+          />The action to invoke when the operation completes.</param>
       </Docs>
     </Member>
   </Members>

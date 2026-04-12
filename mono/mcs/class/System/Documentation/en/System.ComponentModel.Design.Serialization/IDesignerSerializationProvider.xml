@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface has only one method, <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider.GetSerializer(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Type,System.Type)" />, and no properties or events. This interface and this method exist so that the serialization manager and other objects can obtain a serializer for a given object type.</para
-      >
+        >This interface has only one method, <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider.GetSerializer(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Type,System.Type)" />, and no properties or events. This interface and this method exist so that the serialization manager and other objects can obtain a serializer for a given object type.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -80,29 +79,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager requesting the serializer. </param
-        >
+          />The serialization manager requesting the serializer. </param>
         <param name="currentSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists. </param
-        >
+          />An instance of the current serializer of the specified type. This can be null if no serializer of the specified type exists. </param>
         <param name="objectType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the object to serialize. </param
-        >
+          />The data type of the object to serialize. </param>
         <param name="serializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer to create. </param
-        >
+          />The data type of the serializer to create. </param>
       </Docs>
     </Member>
   </Members>

@@ -54,9 +54,7 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The attributes, type, and identifier of an interface property declaration have the same meaning as those of a property declaration in a class (<hyperlink>17.6</hyperlink>). </paragraph
-  >
+    >The attributes, type, and identifier of an interface property declaration have the same meaning as those of a property declaration in a class (<hyperlink>17.6</hyperlink>). </paragraph>
   <paragraph
-    >The accessors of an interface property declaration correspond to the accessors of a class property declaration (<hyperlink>17.6.2</hyperlink>), except that the accessor body must always be a semicolon. Thus, the accessors simply indicate whether the property is read-write, read-only, or write-only. </paragraph
-  >
+    >The accessors of an interface property declaration correspond to the accessors of a class property declaration (<hyperlink>17.6.2</hyperlink>), except that the accessor body must always be a semicolon. Thus, the accessors simply indicate whether the property is read-write, read-only, or write-only. </paragraph>
 </clause>

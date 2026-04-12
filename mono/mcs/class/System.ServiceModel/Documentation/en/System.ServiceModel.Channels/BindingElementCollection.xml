@@ -19,8 +19,7 @@
     <BaseTypeName>System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Channels.BindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="!0"
-        >System.ServiceModel.Channels.BindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Channels.BindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -78,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class from an enumerable set of binding elements.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class from an enumerable set of binding elements.</para>
         </summary>
       </Docs>
     </Member>
@@ -105,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class from an array of binding elements.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> class from an array of binding elements.</para>
         </summary>
       </Docs>
     </Member>
@@ -146,8 +142,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Array" /> of type <see cref="T:System.ServiceModel.Channels.BindingElement" /> to be added to the collection.</param
-        >
+          />The <see cref="T:System.Array" /> of type <see cref="T:System.ServiceModel.Channels.BindingElement" /> to be added to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -176,8 +171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />.</para
-          >
+            >A copy of the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -212,8 +206,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of binding element being tested for inclusion in the collection.</param
-        >
+          />The type of binding element being tested for inclusion in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Find&lt;T&gt;">
@@ -242,16 +235,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The item of type <see cref="T:System.Type" /> if found; if not found, 0 if <paramref name="T" /> is a value type and null if <paramref name="T" /> is a reference type.</para
-          >
+            >The item of type <see cref="T:System.Type" /> if found; if not found, 0 if <paramref name="T" /> is a value type and null if <paramref name="T" /> is a reference type.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of item to find.</typeparam
-        >
+          />The <see cref="T:System.Type" /> of item to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="FindAll&lt;T&gt;">
@@ -283,16 +274,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of all of the items of type <see cref="T:System.Type" /> if found; if none are found, 0 if <paramref name="T" /> is a value type and null if <paramref name="T" /> is a reference type.</para
-          >
+            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of all of the items of type <see cref="T:System.Type" /> if found; if none are found, 0 if <paramref name="T" /> is a value type and null if <paramref name="T" /> is a reference type.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of item to find.</typeparam
-        >
+          />The <see cref="T:System.Type" /> of item to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
@@ -326,15 +315,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location at which to insert the binding element in the collection.</param
-        >
+          />The location at which to insert the binding element in the collection.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> to be inserted.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> to be inserted.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove&lt;T&gt;">
@@ -369,8 +356,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of item to find.</typeparam
-        >
+          />The <see cref="T:System.Type" /> of item to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="RemoveAll&lt;T&gt;">
@@ -402,16 +388,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of all of the items of type <see cref="T:System.Type" /> found.</para
-          >
+            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of all of the items of type <see cref="T:System.Type" /> found.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of item to find.</typeparam
-        >
+          />The <see cref="T:System.Type" /> of item to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="SetItem">
@@ -445,15 +429,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to replace.</param
-        >
+          />The zero-based index of the element to replace.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value for <see cref="T:System.ServiceModel.Channels.BindingElement" /> item at the specified <paramref name="index" />.</param
-        >
+          />The new value for <see cref="T:System.ServiceModel.Channels.BindingElement" /> item at the specified <paramref name="index" />.</param>
       </Docs>
     </Member>
   </Members>

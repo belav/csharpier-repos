@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32)" />, <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32)" />, and <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32)" /> methods provide efficient resolution of metadata tokens to runtime handles for fields, methods, and types in the current module.</para
-      >
+        >The <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32)" />, <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32)" />, and <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32)" /> methods provide efficient resolution of metadata tokens to runtime handles for fields, methods, and types in the current module.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,22 +83,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Boolean" /> value indicating whether the specified <see cref="T:System.ModuleHandle" /> structure is equal to the current <see cref="T:System.ModuleHandle" />.</para
-          >
+            >Returns a <see cref="T:System.Boolean" /> value indicating whether the specified <see cref="T:System.ModuleHandle" /> structure is equal to the current <see cref="T:System.ModuleHandle" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="handle" /> is equal to the current <see cref="T:System.ModuleHandle" /> structure; otherwise false.</para
-          >
+            >true if <paramref name="handle" /> is equal to the current <see cref="T:System.ModuleHandle" /> structure; otherwise false.</para>
         </returns>
         <param name="handle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ModuleHandle" /> structure to be compared with the current <see cref="T:System.ModuleHandle" />.</param
-        >
+          />The <see cref="T:System.ModuleHandle" /> structure to be compared with the current <see cref="T:System.ModuleHandle" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -130,22 +126,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Boolean" /> value indicating whether the specified object is a <see cref="T:System.ModuleHandle" /> structure, and equal to the current <see cref="T:System.ModuleHandle" />.</para
-          >
+            >Returns a <see cref="T:System.Boolean" /> value indicating whether the specified object is a <see cref="T:System.ModuleHandle" /> structure, and equal to the current <see cref="T:System.ModuleHandle" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is a <see cref="T:System.ModuleHandle" /> structure, and is equal to the current <see cref="T:System.ModuleHandle" /> structure; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is a <see cref="T:System.ModuleHandle" /> structure, and is equal to the current <see cref="T:System.ModuleHandle" /> structure; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be compared with the current <see cref="T:System.ModuleHandle" /> structure.</param
-        >
+          />The object to be compared with the current <see cref="T:System.ModuleHandle" /> structure.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -200,16 +193,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para>
         </returns>
         <param name="fieldToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a field in the module.</param
-        >
+          />A metadata token that identifies a field in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeMethodHandleFromMetadataToken">
@@ -242,16 +233,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para>
         </returns>
         <param name="methodToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a method or constructor in the module.</param
-        >
+          />A metadata token that identifies a method or constructor in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="GetRuntimeTypeHandleFromMetadataToken">
@@ -284,16 +273,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para>
         </returns>
         <param name="typeToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a type in the module.</param
-        >
+          />A metadata token that identifies a type in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="MDStreamVersion">
@@ -315,11 +302,9 @@
             <para
               >For more information on the metadata header, see the Partition II: Metadata Definition and Semantics documentation. The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -358,23 +343,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.ModuleHandle" /> structures are equal; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.ModuleHandle" /> structures are equal; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ModuleHandle" /> structure to the left of the equality operator.</param
-        >
+          />The <see cref="T:System.ModuleHandle" /> structure to the left of the equality operator.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ModuleHandle" /> structure to the right of the equality operator.</param
-        >
+          />The <see cref="T:System.ModuleHandle" /> structure to the right of the equality operator.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -403,29 +385,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see cref="T:System.ModuleHandle" /> structures are unequal.</para
-          >
+            >Tests whether two <see cref="T:System.ModuleHandle" /> structures are unequal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.ModuleHandle" /> structures are unequal; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.ModuleHandle" /> structures are unequal; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ModuleHandle" /> structure to the left of the inequality operator.</param
-        >
+          />The <see cref="T:System.ModuleHandle" /> structure to the left of the inequality operator.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ModuleHandle" /> structure to the right of the inequality operator.</param
-        >
+          />The <see cref="T:System.ModuleHandle" /> structure to the right of the inequality operator.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveFieldHandle">
@@ -453,17 +431,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token that identifies a field whose parent TypeSpec has a signature containing element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveFieldHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -473,16 +448,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para>
         </returns>
         <param name="fieldToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a field in the module.</param
-        >
+          />A metadata token that identifies a field in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveFieldHandle">
@@ -514,11 +487,9 @@
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -528,30 +499,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeFieldHandle" /> for the field identified by <paramref name="fieldToken" />.</para>
         </returns>
         <param name="fieldToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a field in the module.</param
-        >
+          />A metadata token that identifies a field in the module.</param>
         <param name="typeInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMethodHandle">
@@ -579,17 +546,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a MethodSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token for a MethodSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -599,16 +563,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para>
         </returns>
         <param name="methodToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a method or constructor in the module.</param
-        >
+          />A metadata token that identifies a method or constructor in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveMethodHandle">
@@ -640,11 +602,9 @@
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -654,30 +614,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeMethodHandle" /> for the method or constructor identified by <paramref name="methodToken" />.</para>
         </returns>
         <param name="methodToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a method or constructor in the module.</param
-        >
+          />A metadata token that identifies a method or constructor in the module.</param>
         <param name="typeInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveTypeHandle">
@@ -705,17 +661,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To resolve a metadata token for a TypeSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para
-          >
+            >To resolve a metadata token for a TypeSpec whose signature contains element type var or mvar, use the <see cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32,System.RuntimeTypeHandle[],System.RuntimeTypeHandle[])" /> method overload, which allows you to supply the necessary context. </para>
           <block subset="none" type="note">
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -725,16 +678,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para>
         </returns>
         <param name="typeToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a type in the module.</param
-        >
+          />A metadata token that identifies a type in the module.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveTypeHandle">
@@ -766,11 +717,9 @@
             <para
               >Information about metadata tokens can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
                 cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-                >ECMA C# and Common Language Infrastructure Standards</see
-              > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-              > on the Ecma International Web site.</para
-            >
+                >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           </block>
         </remarks>
         <summary>
@@ -780,30 +729,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para
-          >
+            >A <see cref="T:System.RuntimeTypeHandle" /> for the type identified by <paramref name="typeToken" />.</para>
         </returns>
         <param name="typeToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A metadata token that identifies a type in the module.</param
-        >
+          />A metadata token that identifies a type in the module.</param>
         <param name="typeInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures representing the generic type arguments of the type where the token is in scope, or null if that type is not generic. </param>
         <param name="methodInstantiationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures objects representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param
-        >
+          />An array of <see cref="T:System.RuntimeTypeHandle" /> structures objects representing the generic type arguments of the method where the token is in scope, or null if that method is not generic.</param>
       </Docs>
     </Member>
   </Members>

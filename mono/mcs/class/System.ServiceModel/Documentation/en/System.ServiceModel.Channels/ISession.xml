@@ -11,8 +11,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is the base interface for all sessions. It contains a <see cref="P:System.ServiceModel.Channels.ISession.ID" /> property for identifying the session.</para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is the base interface for all sessions. It contains a <see cref="P:System.ServiceModel.Channels.ISession.ID" /> property for identifying the session.</para>
       <para>A session is a shared context among all participants in a communication exchange. This shared context is characterized by the following three properties: </para>
       <list type="bullet">
         <item>
@@ -23,8 +22,7 @@
         </item>
         <item>
           <para
-            >The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is not informed as to the number of participants in a session or the lifetime of a session.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is not informed as to the number of participants in a session or the lifetime of a session.</para>
         </item>
       </list>
       <para>These session properties are provided by associating an ID with a session. </para>
@@ -73,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the session is interrupted, it can be retrieved using the <see cref="P:System.ServiceModel.Channels.ISession.Id" />.</para
-          >
+            >If the session is interrupted, it can be retrieved using the <see cref="P:System.ServiceModel.Channels.ISession.Id" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

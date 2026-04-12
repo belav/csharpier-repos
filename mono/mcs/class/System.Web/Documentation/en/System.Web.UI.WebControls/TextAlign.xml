@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.TextAlign" /> enumeration represents the different text alignment options for check box and radio button controls.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.TextAlign" /> enumeration represents the different text alignment options for check box and radio button controls.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -10,8 +10,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.Design.IControlDesignerTag" /> interface is the contract between the control designer and a design host that enables the design host to manipulate the HTML tag at design time.</para
-      >
+        >The <see cref="T:System.Web.UI.Design.IControlDesignerTag" /> interface is the contract between the control designer and a design host that enables the design host to manipulate the HTML tag at design time.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,8 +45,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute.</param
-        >
+          />The name of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="GetContent">
@@ -135,8 +133,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute.</param
-        >
+          />The name of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="SetAttribute">
@@ -162,11 +159,13 @@
           <para>Sets the value of the specified attribute and creates the attribute, if necessary.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute name.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute value.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The attribute value.</param>
       </Docs>
     </Member>
     <Member MemberName="SetContent">
@@ -192,8 +191,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTML markup for the content of the tag.</param
-        >
+          />The HTML markup for the content of the tag.</param>
       </Docs>
     </Member>
     <Member MemberName="SetDirty">
@@ -213,16 +211,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property of the tag.</para
-          >
+            >Sets the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property of the tag.</para>
         </summary>
         <param name="dirty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value for the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property.</param
-        >
+          />The value for the <see cref="P:System.Web.UI.Design.IControlDesignerTag.IsDirty" /> property.</param>
       </Docs>
     </Member>
   </Members>

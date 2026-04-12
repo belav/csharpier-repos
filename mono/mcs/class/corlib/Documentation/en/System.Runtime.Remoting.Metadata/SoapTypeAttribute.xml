@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute is a custom attribute that can be applied to objects, value types, and interface objects. This attribute is used to specify information on an object type that controls how SOAP will generate the SOAP XML wire format.</para
-      >
+        >The <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute is a custom attribute that can be applied to objects, value types, and interface objects. This attribute is used to specify information on an object type that controls how SOAP will generate the SOAP XML wire format.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -89,19 +87,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> value indicates the SOAP configuration options that will be used with a <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para
-          >
+            >A <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> value indicates the SOAP configuration options that will be used with a <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" /> enumeration has no effect on serialization of objects with the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para
-            >
+              >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.SoapOptions" /> enumeration has no effect on serialization of objects with the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> configuration value.</para
-          >
+            >Gets or sets a <see cref="T:System.Runtime.Remoting.Metadata.SoapOption" /> configuration value.</para>
         </summary>
       </Docs>
     </Member>
@@ -122,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" /> property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para
-          >
+            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" /> property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" /> attribute.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -157,8 +157,7 @@
         <param name="fieldOffset">The zero-based index of where to begin reading the data</param>
         <param name="buffer">The buffer to write the bytes into</param>
         <param name="bufferoffset"
-          >The zero-based index of where to begin writing into the array</param
-        >
+          >The zero-based index of where to begin writing into the array</param>
         <param name="length">The number of bytes to retrieve</param>
         <summary>
             Retrieves a column as an array of bytes (blob)
@@ -222,8 +221,7 @@
         <param name="fieldoffset">The zero-based index of where to begin reading the data</param>
         <param name="buffer">The buffer to write the characters into</param>
         <param name="bufferoffset"
-          >The zero-based index of where to begin writing into the array</param
-        >
+          >The zero-based index of where to begin writing into the array</param>
         <param name="length">The number of bytes to retrieve</param>
         <summary>
             Retrieves a column as an array of chars (blob)
@@ -653,8 +651,7 @@
       </Parameters>
       <Docs>
         <param name="values"
-          >The array to fill with values from the columns in the current resultset</param
-        >
+          >The array to fill with values from the columns in the current resultset</param>
         <summary>
             Retreives the values of multiple columns, up to the size of the supplied array
             </summary>

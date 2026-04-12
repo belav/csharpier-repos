@@ -10,8 +10,7 @@
 
   <PropertyGroup>
     <SystemCommandLineDllPath Condition="'$(SystemCommandLineDllPath)'==''"
-      >..\..\..\System.CommandLine\bin\Release\$(TargetFrameworkForNETSDK)\System.CommandLine.dll</SystemCommandLineDllPath
-    >
+      >..\..\..\System.CommandLine\bin\Release\$(TargetFrameworkForNETSDK)\System.CommandLine.dll</SystemCommandLineDllPath>
   </PropertyGroup>
 
   <ItemGroup>

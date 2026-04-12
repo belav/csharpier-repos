@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,16 +54,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This must be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />.</param
-        >
+          />The action that caused the event. This must be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -92,23 +89,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param
-        >
+          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param>
         <param name="changedItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The items that are affected by the change.</param
-        >
+          />The items that are affected by the change.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -136,23 +130,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param
-        >
+          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param>
         <param name="changedItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item that is affected by the change.</param
-        >
+          />The item that is affected by the change.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -181,30 +172,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param
-        >
+          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param>
         <param name="newItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new items that are replacing the original items.</param
-        >
+          />The new items that are replacing the original items.</param>
         <param name="oldItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original items that are replaced.</param
-        >
+          />The original items that are replaced.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -233,30 +220,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item change or a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item change or a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param
-        >
+          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param>
         <param name="changedItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The items affected by the change.</param
-        >
+          />The items affected by the change.</param>
         <param name="startingIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index where the change occurred.</param
-        >
+          />The index where the change occurred.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -285,30 +268,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param
-        >
+          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Reset" />, <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Add" />, or <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Remove" />.</param>
         <param name="changedItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item that is affected by the change.</param
-        >
+          />The item that is affected by the change.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index where the change occurred.</param
-        >
+          />The index where the change occurred.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -337,30 +316,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param
-        >
+          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param>
         <param name="newItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new item that is replacing the original item.</param
-        >
+          />The new item that is replacing the original item.</param>
         <param name="oldItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original item that is replaced.</param
-        >
+          />The original item that is replaced.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -390,37 +365,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param
-        >
+          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param>
         <param name="newItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new items that are replacing the original items.</param
-        >
+          />The new items that are replacing the original items.</param>
         <param name="oldItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original items that are replaced.</param
-        >
+          />The original items that are replaced.</param>
         <param name="startingIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first item of the items that are being replaced.</param
-        >
+          />The index of the first item of the items that are being replaced.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -450,37 +420,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a multi-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />.</param
-        >
+          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />.</param>
         <param name="changedItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The items affected by the change.</param
-        >
+          />The items affected by the change.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new index for the changed items.</param
-        >
+          />The new index for the changed items.</param>
         <param name="oldIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old index for the changed items.</param
-        >
+          />The old index for the changed items.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -510,37 +475,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />.</param
-        >
+          />The action that caused the event. This can only be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />.</param>
         <param name="changedItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item affected by the change.</param
-        >
+          />The item affected by the change.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new index for the changed item.</param
-        >
+          />The new index for the changed item.</param>
         <param name="oldIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old index for the changed item.</param
-        >
+          />The old index for the changed item.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -570,37 +530,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" /> class that describes a one-item <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" /> change.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param
-        >
+          />The action that caused the event. This can be set to <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />.</param>
         <param name="newItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new item that is replacing the original item.</param
-        >
+          />The new item that is replacing the original item.</param>
         <param name="oldItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original item that is replaced.</param
-        >
+          />The original item that is replaced.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item being replaced.</param
-        >
+          />The index of the item being replaced.</param>
       </Docs>
     </Member>
     <Member MemberName="Action">
@@ -688,8 +643,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of items affected by a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />, Remove, or Move action.</para
-          >
+            >Gets the list of items affected by a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Replace" />, Remove, or Move action.</para>
         </summary>
       </Docs>
     </Member>
@@ -709,8 +663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index at which a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />, Remove, or Replace action occurred.</para
-          >
+            >Gets the index at which a <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move" />, Remove, or Replace action occurred.</para>
         </summary>
       </Docs>
     </Member>

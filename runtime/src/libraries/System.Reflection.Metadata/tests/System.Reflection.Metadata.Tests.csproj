@@ -7,8 +7,7 @@
     <NoWarn>$(NoWarn);436;SYSLIB0037</NoWarn>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <DefineConstants Condition="'$(TargetOS)' == 'browser'"
-      >$(DefineConstants);TARGET_BROWSER</DefineConstants
-    >
+      >$(DefineConstants);TARGET_BROWSER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

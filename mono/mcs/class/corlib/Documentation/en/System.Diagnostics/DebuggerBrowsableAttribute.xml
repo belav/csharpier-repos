@@ -28,33 +28,27 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In .NET Framework version 2.0, the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class is not supported by Visual Basic. Using C#, you can add expansions for custom data using the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" />, <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" />, and <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />. Visual Basic supports the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> attribute but not the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> attribute.</para
-        >
+          >In .NET Framework version 2.0, the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class is not supported by Visual Basic. Using C#, you can add expansions for custom data using the <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" />, <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" />, and <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />. Visual Basic supports the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> attribute but not the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> attribute.</para>
       </block>
       <para>This attribute can be applied only as a single instance to properties and fields. It cannot be applied to assemblies.</para>
       <para
-        >The constructor for this attribute takes one of the <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> enumeration values, which specifies one of the following states:</para
-      >
+        >The constructor for this attribute takes one of the <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> enumeration values, which specifies one of the following states:</para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="F:System.Diagnostics.DebuggerBrowsableState.Never" /> indicates that the member is not displayed in the data window.  For example, using this value for the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> on a field removes the field from the hierarchy; the field is not displayed when you expand the enclosing type by clicking the plus sign (+) for the type instance.</para
-          >
+            <see cref="F:System.Diagnostics.DebuggerBrowsableState.Never" /> indicates that the member is not displayed in the data window.  For example, using this value for the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> on a field removes the field from the hierarchy; the field is not displayed when you expand the enclosing type by clicking the plus sign (+) for the type instance.</para>
         </item>
         <item>
           <para>
-            <see cref="F:System.Diagnostics.DebuggerBrowsableState.Collapsed" /> indicates that the member is displayed but not expanded by default.  This is the default behavior.</para
-          >
+            <see cref="F:System.Diagnostics.DebuggerBrowsableState.Collapsed" /> indicates that the member is displayed but not expanded by default.  This is the default behavior.</para>
         </item>
         <item>
           <para>
-            <see cref="F:System.Diagnostics.DebuggerBrowsableState.RootHidden" /> indicates that the member itself is not shown, but its constituent objects are displayed if it is an array or collection.</para
-          >
+            <see cref="F:System.Diagnostics.DebuggerBrowsableState.RootHidden" /> indicates that the member itself is not shown, but its constituent objects are displayed if it is an array or collection.</para>
         </item>
       </list>
       <para
-        >For an example of the use of this attribute and the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> and <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> attributes, see the example provided for the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> class.</para
-      >
+        >For an example of the use of this attribute and the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> and <see cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" /> attributes, see the example provided for the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -88,16 +82,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class. </para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> values that specifies how to display the member.</param
-        >
+          />One of the <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> values that specifies how to display the member.</param>
       </Docs>
     </Member>
     <Member MemberName="State">
@@ -123,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Diagnostics.DebuggerBrowsableAttribute.#ctor(System.Diagnostics.DebuggerBrowsableState)" /> constructor uses the value of the <paramref name="state" /> parameter to set this value.</para
-          >
+            >The <see cref="M:System.Diagnostics.DebuggerBrowsableAttribute.#ctor(System.Diagnostics.DebuggerBrowsableState)" /> constructor uses the value of the <paramref name="state" /> parameter to set this value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

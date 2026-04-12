@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Management.EventNotificationType" /> enumeration provides four notification types that specify how the notification should take place. The four notification types are as follows:</para
-      >
+        >The <see cref="T:System.Web.Management.EventNotificationType" /> enumeration provides four notification types that specify how the notification should take place. The four notification types are as follows:</para>
       <list type="bullet">
         <item>
           <para>

@@ -27,20 +27,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> and <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attributes allow assembly authors to annotate their binaries so that obfuscation tools can process them correctly with minimal external configuration. </para
-      >
+        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> and <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attributes allow assembly authors to annotate their binaries so that obfuscation tools can process them correctly with minimal external configuration. </para>
       <block subset="none" type="note">
         <para>Applying this attribute does not automatically obfuscate the code entity to which you apply it. Applying the attribute is an alternative to creating a configuration file for the obfuscation tool. That is, it merely provides instructions for an obfuscation tool. Microsoft recommends that vendors of obfuscation tools follow the semantics described here. However, there is no guarantee that a particular tool follows Microsoft recommendations. </para>
       </block>
       <para
-        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> attribute has a string <see cref="P:System.Reflection.ObfuscationAttribute.Feature" /> property. Obfuscation tools can map the string values of this property to features they implement, preferably by using an XML configuration file that users can access. The <see cref="T:System.Reflection.ObfuscationAttribute" /> defines two feature strings, "default" and "all". The string "default" should map to the default obfuscation features of a tool, and "all" should map to the complete set of obfuscation features supported by a tool. The default value of the <see cref="P:System.Reflection.ObfuscationAttribute.Feature" /> property is "all", enabling the complete set of obfuscation features.</para
-      >
+        >The <see cref="T:System.Reflection.ObfuscationAttribute" /> attribute has a string <see cref="P:System.Reflection.ObfuscationAttribute.Feature" /> property. Obfuscation tools can map the string values of this property to features they implement, preferably by using an XML configuration file that users can access. The <see cref="T:System.Reflection.ObfuscationAttribute" /> defines two feature strings, "default" and "all". The string "default" should map to the default obfuscation features of a tool, and "all" should map to the complete set of obfuscation features supported by a tool. The default value of the <see cref="P:System.Reflection.ObfuscationAttribute.Feature" /> property is "all", enabling the complete set of obfuscation features.</para>
       <para
-        >When applied to an assembly, <see cref="T:System.Reflection.ObfuscationAttribute" /> also applies to all types within the assembly. If the <see cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" /> property is not specified, or is set to true, the attribute applies to all members as well. <see cref="T:System.Reflection.ObfuscationAttribute" /> does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attribute.</para
-      >
+        >When applied to an assembly, <see cref="T:System.Reflection.ObfuscationAttribute" /> also applies to all types within the assembly. If the <see cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" /> property is not specified, or is set to true, the attribute applies to all members as well. <see cref="T:System.Reflection.ObfuscationAttribute" /> does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use the <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" /> attribute.</para>
       <para
-        >When applied to classes and structures, <see cref="T:System.Reflection.ObfuscationAttribute" /> also applies to all members of the type if the <see cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" /> property is not specified, or is set to true.</para
-      >
+        >When applied to classes and structures, <see cref="T:System.Reflection.ObfuscationAttribute" /> also applies to all members of the type if the <see cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" /> property is not specified, or is set to true.</para>
       <para>When applied to methods, parameters, fields, and properties, the attribute affects only the entity to which it is applied. </para>
     </remarks>
     <summary>
@@ -66,14 +62,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Reflection.ObfuscationAttribute" /> does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" />.</para
-          >
+            <see cref="T:System.Reflection.ObfuscationAttribute" /> does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use <see cref="T:System.Reflection.ObfuscateAssemblyAttribute" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.ObfuscationAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.ObfuscationAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -101,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the attribute of a type is to apply to the members of the type.</para
-          >
+            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the attribute of a type is to apply to the members of the type.</para>
         </summary>
       </Docs>
     </Member>
@@ -129,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should exclude the type or member from obfuscation.</para
-          >
+            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should exclude the type or member from obfuscation.</para>
         </summary>
       </Docs>
     </Member>
@@ -185,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should remove this attribute after processing.</para
-          >
+            >Gets or sets a <see cref="T:System.Boolean" /> value indicating whether the obfuscation tool should remove this attribute after processing.</para>
         </summary>
       </Docs>
     </Member>

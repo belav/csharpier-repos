@@ -14,12 +14,10 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <DefineConstants
       Condition="'$(TargetPlatformIdentifier)' == 'unix' or '$(TargetPlatformIdentifier)' == 'android' or '$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >$(DefineConstants);Unix</DefineConstants
-    >
+      >$(DefineConstants);Unix</DefineConstants>
     <UseAppleCrypto
       Condition="'$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</UseAppleCrypto
-    >
+      >true</UseAppleCrypto>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetPlatformIdentifier)' == 'android'">
     <UseAndroidCrypto>true</UseAndroidCrypto>

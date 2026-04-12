@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This structure is used in conjunction with the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> property.</para
-      >
+        >This structure is used in conjunction with the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,14 +77,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is a localized string that provides a description of the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> enumeration.</para
-          >
+            >This property is a localized string that provides a description of the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> enumeration.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies a description of the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> value.</para
-          >
+            >Specifies a description of the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> value.</para>
         </summary>
       </Docs>
     </Member>

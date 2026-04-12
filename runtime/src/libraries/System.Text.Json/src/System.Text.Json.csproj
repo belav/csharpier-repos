@@ -17,8 +17,7 @@ The System.Text.Json library is built-in as part of the shared framework in .NET
   <PropertyGroup>
     <NoWarn
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'"
-      >$(NoWarn);nullable</NoWarn
-    >
+      >$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to the <see cref="T:System.Net.UploadProgressChangedEventHandler" />.</para
-      >
+        >Instances of this class are passed to the <see cref="T:System.Net.UploadProgressChangedEventHandler" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Net.WebClient.UploadProgressChanged" /> event of a <see cref="T:System.Net.WebClient" />.</para
-      >
+        >Provides data for the <see cref="E:System.Net.WebClient.UploadProgressChanged" /> event of a <see cref="T:System.Net.WebClient" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,11 +48,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para
-          >
+            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para>
           <para
-            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para
-          >
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,11 +75,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para
-          >
+            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para>
           <para
-            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para
-          >
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,20 +102,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine the number of bytes already received, use the <see cref="P:System.Net.DownloadProgressChangedEventArgs.BytesReceived" /> property.</para
-          >
+            >To determine the number of bytes already received, use the <see cref="P:System.Net.DownloadProgressChangedEventArgs.BytesReceived" /> property.</para>
           <para
-            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para
-          >
+            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para>
           <para
-            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para
-          >
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the total number of bytes in a <see cref="T:System.Net.WebClient" /> data upload operation.</para
-          >
+            >Gets the total number of bytes in a <see cref="T:System.Net.WebClient" /> data upload operation.</para>
         </summary>
       </Docs>
     </Member>
@@ -142,14 +132,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine the number of bytes already sent, use the <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesSent" /> property.</para
-          >
+            >To determine the number of bytes already sent, use the <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesSent" /> property.</para>
           <para
-            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para
-          >
+            >Uploading data to a server may result in a download from the server. For example, suppose your application uploads a POST request to a Web server. The resulting download will update <see cref="P:System.Net.UploadProgressChangedEventArgs.BytesReceived" /> and <see cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />.</para>
           <para
-            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para
-          >
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property. When the upload is complete, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 50%. When the download completes, <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> will be 100%.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

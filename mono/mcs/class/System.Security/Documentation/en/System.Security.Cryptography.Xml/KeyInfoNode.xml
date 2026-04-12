@@ -19,9 +19,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Security.Cryptography.Xml.KeyInfoClause</BaseTypeName>
   </Base>
@@ -30,15 +28,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements with specific implementations are <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />, <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />, and <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements with specific implementations are <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" />, <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />, and <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />.</para>
       <para>For more information about the &lt;KeyInfo&gt; element, see Section 4.4 of the XMLDSIG specification, which is available from the W3C at www.w3.org/TR/xmldsig-core/, or see the XML Encryption specification, which is available from the W3C at www.w3.org/TR/xmlenc-core/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements that do not have specific implementations or handlers registered on the machine.</para
-      >
+        >Handles <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements that do not have specific implementations or handlers registered on the machine.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,16 +82,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> class with content taken from the specified <see cref="T:System.Xml.XmlElement" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> class with content taken from the specified <see cref="T:System.Xml.XmlElement" />.</para>
         </summary>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML element from which to take the content used to create the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />. </param
-        >
+          />An XML element from which to take the content used to create the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />. </param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -119,20 +112,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlElement" /> returned by this method is suitable for use as a subelement of an XMLDSIG or an XML encryption &lt;KeyInfo&gt; element.</para
-          >
+            >The <see cref="T:System.Xml.XmlElement" /> returned by this method is suitable for use as a subelement of an XMLDSIG or an XML encryption &lt;KeyInfo&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para
-          >
+            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para
-          >
+            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -162,16 +152,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see cref="T:System.Xml.XmlElement" /> and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> to match.</para
-          >
+            >Parses the input <see cref="T:System.Xml.XmlElement" /> and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" /> to match.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -196,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the XML content of the current <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para
-          >
+            >Gets or sets the XML content of the current <see cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />.</para>
         </summary>
       </Docs>
     </Member>

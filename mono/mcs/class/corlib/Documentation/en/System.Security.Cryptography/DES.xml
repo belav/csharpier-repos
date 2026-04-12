@@ -32,15 +32,13 @@
       <para>This algorithm supports a key length of 64 bits.</para>
       <block subset="none" type="note">
         <para
-          >A newer asymmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see cref="T:System.Security.Cryptography.Aes" /> class instead of the <see cref="T:System.Security.Cryptography.DES" /> class. Use <see cref="T:System.Security.Cryptography.DES" /> only for compatibility with legacy applications and data.</para
-        >
+          >A newer asymmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see cref="T:System.Security.Cryptography.Aes" /> class instead of the <see cref="T:System.Security.Cryptography.DES" /> class. Use <see cref="T:System.Security.Cryptography.DES" /> only for compatibility with legacy applications and data.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the base class for the Data Encryption Standard (DES) algorithm from which all <see cref="T:System.Security.Cryptography.DES" /> implementations must derive.</para
-      >
+        >Represents the base class for the Data Encryption Standard (DES) algorithm from which all <see cref="T:System.Security.Cryptography.DES" /> implementations must derive.</para>
     </summary>
   </Docs>
   <Members>
@@ -63,8 +61,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >This method initializes the protected fields of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class to the default values shown in the following table.</para
-          >
+            >This method initializes the protected fields of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class to the default values shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -111,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DES" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DES" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -139,14 +135,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Security.Cryptography.DES" /> object that can be used for encrypting and decrypting data.</para
-          >
+            >Creates an instance of the <see cref="T:System.Security.Cryptography.DES" /> object that can be used for encrypting and decrypting data.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a cryptographic object to perform the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para
-          >
+            >Creates an instance of a cryptographic object to perform the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -180,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a cryptographic object to perform the specified implementation of the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para
-          >
+            >Creates an instance of a cryptographic object to perform the specified implementation of the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -192,8 +185,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DES" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.DES" /> to use. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSemiWeakKey">
@@ -218,11 +210,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Semi-weak keys are pairs of keys that result in ciphers that are easy to break. If text is encrypted with a semi-weak key, encrypting the resulting cipher with the partner of that semi-weak key returns the original text. There are six known semi-weak key pairs for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm; this method checks for those semi-weak keys.</para
-          >
+            >Semi-weak keys are pairs of keys that result in ciphers that are easy to break. If text is encrypted with a semi-weak key, encrypting the resulting cipher with the partner of that semi-weak key returns the original text. There are six known semi-weak key pairs for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm; this method checks for those semi-weak keys.</para>
           <para
-            >Attempting to set a semi-weak key results in a <see cref="T:System.Security.Cryptography.CryptographicException" />. When <see cref="M:System.Security.Cryptography.DESCryptoServiceProvider.GenerateKey" /> is called to create a random key, a semi-weak key will never be returned.</para
-          >
+            >Attempting to set a semi-weak key results in a <see cref="T:System.Security.Cryptography.CryptographicException" />. When <see cref="M:System.Security.Cryptography.DESCryptoServiceProvider.GenerateKey" /> is called to create a random key, a semi-weak key will never be returned.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -237,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to test for semi-weakness. </param
-        >
+          />The secret key to test for semi-weakness. </param>
       </Docs>
     </Member>
     <Member MemberName="IsWeakKey">
@@ -263,11 +252,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Weak keys are keys that result in ciphers that are easy to break. If text is encrypted with a weak key, encrypting the resulting cipher again with the same weak key returns the original text. There are four known weak keys for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm; this method checks for those weak keys.</para
-          >
+            >Weak keys are keys that result in ciphers that are easy to break. If text is encrypted with a weak key, encrypting the resulting cipher again with the same weak key returns the original text. There are four known weak keys for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm; this method checks for those weak keys.</para>
           <para
-            >Attempting to set a weak key results in a <see cref="T:System.Security.Cryptography.CryptographicException" />. When <see cref="M:System.Security.Cryptography.DESCryptoServiceProvider.GenerateKey" /> is called to create a random key, a weak key will never be returned.</para
-          >
+            >Attempting to set a weak key results in a <see cref="T:System.Security.Cryptography.CryptographicException" />. When <see cref="M:System.Security.Cryptography.DESCryptoServiceProvider.GenerateKey" /> is called to create a random key, a weak key will never be returned.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +269,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret key to test for weakness. </param
-        >
+          />The secret key to test for weakness. </param>
       </Docs>
     </Member>
     <Member MemberName="Key">
@@ -303,18 +289,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is null when it is used, <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateKey" /> is called to create a new random value.</para
-          >
+            >If this property is null when it is used, <see cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateKey" /> is called to create a new random value.</para>
           <para
-            >The length of the key must be equal to <see cref="F:System.Security.Cryptography.SymmetricAlgorithm.BlockSizeValue" />.</para
-          >
+            >The length of the key must be equal to <see cref="F:System.Security.Cryptography.SymmetricAlgorithm.BlockSizeValue" />.</para>
           <para>This algorithm supports a key length of 64 bits.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the secret key for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para
-          >
+            >Gets or sets the secret key for the Data Encryption Standard (<see cref="T:System.Security.Cryptography.DES" />) algorithm.</para>
         </summary>
       </Docs>
     </Member>

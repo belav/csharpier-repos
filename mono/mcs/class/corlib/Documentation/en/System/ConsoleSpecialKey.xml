@@ -18,11 +18,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.ConsoleCancelEventArgs.SpecialKey" /> property returns the <see cref="T:System.ConsoleSpecialKey" /> enumeration type.</para
-      >
+        >The <see cref="P:System.ConsoleCancelEventArgs.SpecialKey" /> property returns the <see cref="T:System.ConsoleSpecialKey" /> enumeration type.</para>
       <para
-        >Simultaneously pressing certain key combinations signals the operating system to interrupt the currently running process. The two valid key combinations are <see cref="F:System.ConsoleModifiers.Control" /> plus BREAK (CTRL+BREAK) and <see cref="F:System.ConsoleModifiers.Control" /> plus <see cref="F:System.ConsoleKey.C" /> (CTRL+C).</para
-      >
+        >Simultaneously pressing certain key combinations signals the operating system to interrupt the currently running process. The two valid key combinations are <see cref="F:System.ConsoleModifiers.Control" /> plus BREAK (CTRL+BREAK) and <see cref="F:System.ConsoleModifiers.Control" /> plus <see cref="F:System.ConsoleKey.C" /> (CTRL+C).</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.ConsoleModifiers.Control" /> modifier key plus the BREAK console key.</para
-          >
+            >The <see cref="F:System.ConsoleModifiers.Control" /> modifier key plus the BREAK console key.</para>
         </summary>
       </Docs>
     </Member>
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="F:System.ConsoleModifiers.Control" /> modifier key plus the <see cref="F:System.ConsoleKey.C" /> console key.</para
-          >
+            >The <see cref="F:System.ConsoleModifiers.Control" /> modifier key plus the <see cref="F:System.ConsoleKey.C" /> console key.</para>
         </summary>
       </Docs>
     </Member>

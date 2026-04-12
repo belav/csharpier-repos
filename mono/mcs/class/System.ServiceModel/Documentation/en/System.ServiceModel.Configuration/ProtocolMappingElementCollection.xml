@@ -19,8 +19,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection&lt;System.ServiceModel.Configuration.ProtocolMappingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TConfigurationElement"
-        >System.ServiceModel.Configuration.ProtocolMappingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.ProtocolMappingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElementCollection" /> class.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>

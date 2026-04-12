@@ -7,12 +7,10 @@
   <PropertyGroup>
     <DevTeamProvisioning
       Condition="'$(DevTeamProvisioning)' == '' and '$(TargetOS)' != 'maccatalyst'"
-      >-</DevTeamProvisioning
-    >
+      >-</DevTeamProvisioning>
     <DevTeamProvisioning
       Condition="'$(DevTeamProvisioning)' == '' and '$(TargetOS)' == 'maccatalyst'"
-      >adhoc</DevTeamProvisioning
-    >
+      >adhoc</DevTeamProvisioning>
   </PropertyGroup>
 
   <Import Project="..\..\common\LibraryBuilder.targets" />

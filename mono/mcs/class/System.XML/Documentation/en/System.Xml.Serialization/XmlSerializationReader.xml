@@ -25,17 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that is derived from the abstract <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> class. <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> is also implemented within the .NET Framework for deserialization of XML documents into <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> and <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects.</para
-      >
+        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that is derived from the abstract <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> class. <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> is also implemented within the .NET Framework for deserialization of XML documents into <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> and <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects.</para>
       <para
-        >You should not derive classes from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. Instead, call one of the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> methods.</para
-      >
+        >You should not derive classes from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. Instead, call one of the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> methods.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls deserialization by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class. </para
-      >
+        >Controls deserialization by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class. </para>
     </summary>
   </Docs>
   <Members>
@@ -58,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -89,8 +85,7 @@
       </Parameters>
       <Docs>
         <param name="fixup"
-          >To be added: an object of type 'XmlSerializationReader+CollectionFixup'</param
-        >
+          >To be added: an object of type 'XmlSerializationReader+CollectionFixup'</param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -150,49 +145,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that derives from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. During this process, the .NET Framework generates read methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized through SOAP-encoded XML and are not root elements. Next, as necessary, a read method is called during deserialization.</para
-          >
+            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that derives from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. During this process, the .NET Framework generates read methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized through SOAP-encoded XML and are not root elements. Next, as necessary, a read method is called during deserialization.</para>
           <para
-            >You should not directly create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> class.</para
-          >
+            >You should not directly create an instance of the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores an implementation of the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate and its input data for a later invocation. </para
-          >
+            >Stores an implementation of the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate and its input data for a later invocation. </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the .NET Framework type that is being deserialized.</param
-        >
+          />The name of the .NET Framework type that is being deserialized.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the .NET Framework type that is being deserialized.</param
-        >
+          />The namespace of the .NET Framework type that is being deserialized.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to be deserialized.</param
-        >
+          />The <see cref="T:System.Type" /> to be deserialized.</param>
         <param name="read">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate.</param
-        >
+          />An <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate.</param>
       </Docs>
     </Member>
     <Member MemberName="AddTarget">
@@ -218,31 +205,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times by ref attributes (or href attributes in SOAP 1.1) in substitute elements. </para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores an object that is being deserialized from a SOAP-encoded multiRef element for later access through the <see cref="M:System.Xml.Serialization.XmlSerializationReader.GetTarget(System.String)" /> method. </para
-          >
+            >Stores an object that is being deserialized from a SOAP-encoded multiRef element for later access through the <see cref="M:System.Xml.Serialization.XmlSerializationReader.GetTarget(System.String)" /> method. </para>
         </summary>
         <param name="id">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the id attribute of a multiRef element that identifies the element.</param
-        >
+          />The value of the id attribute of a multiRef element that identifies the element.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is deserialized from the XML element.</param
-        >
+          />The object that is deserialized from the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="CheckReaderCount">
@@ -296,8 +279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -312,8 +294,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string that will have its white space trimmed.</param
-        >
+          />The string that will have its white space trimmed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateAbstractTypeException">
@@ -342,14 +323,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended only for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended only for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized should be abstract. </para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized should be abstract. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -360,15 +339,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the abstract type.</param
-        >
+          />The name of the abstract type.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The .NET Framework namespace of the abstract type.</param
-        >
+          />The .NET Framework namespace of the abstract type.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBadDerivationException">
@@ -401,14 +378,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an object from its XML representation at the current location of the <see cref="T:System.Xml.XmlReader" />, with an option to read the inner element.</para
-          >
+            >Populates an object from its XML representation at the current location of the <see cref="T:System.Xml.XmlReader" />, with an option to read the inner element.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -419,43 +394,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the derived XML Schema data type.</param
-        >
+          />The local name of the derived XML Schema data type.</param>
         <param name="nsDerived">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the derived XML Schema data type.</param
-        >
+          />The namespace of the derived XML Schema data type.</param>
         <param name="xsdBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the base XML Schema data type.</param
-        >
+          />The local name of the base XML Schema data type.</param>
         <param name="nsBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the base XML Schema data type.</param
-        >
+          />The namespace of the base XML Schema data type.</param>
         <param name="clrDerived">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the derived .NET Framework type.</param
-        >
+          />The namespace of the derived .NET Framework type.</param>
         <param name="clrBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the base .NET Framework type.</param
-        >
+          />The name of the base .NET Framework type.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateCtorHasSecurityException">
@@ -483,14 +452,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized cannot be instantiated because the constructor throws a security exception.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized cannot be instantiated because the constructor throws a security exception.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -501,8 +468,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type.</param
-        >
+          />The name of the type.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInaccessibleConstructorException">
@@ -530,14 +496,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized cannot be instantiated because there is no constructor available.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an object being deserialized cannot be instantiated because there is no constructor available.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -548,8 +512,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type.</param
-        >
+          />The name of the type.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidCastException">
@@ -578,14 +541,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidCastException" /> that indicates that an explicit reference conversion failed.</para
-          >
+            >Creates an <see cref="T:System.InvalidCastException" /> that indicates that an explicit reference conversion failed.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -596,15 +557,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that an object cannot be cast to. This type is incorporated into the exception message.</param
-        >
+          />The <see cref="T:System.Type" /> that an object cannot be cast to. This type is incorporated into the exception message.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that cannot be cast. This object is incorporated into the exception message.</param
-        >
+          />The object that cannot be cast. This object is incorporated into the exception message.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidCastException">
@@ -634,14 +593,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidCastException" /> that indicates that an explicit reference conversion failed.</para
-          >
+            >Creates an <see cref="T:System.InvalidCastException" /> that indicates that an explicit reference conversion failed.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -652,18 +609,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that an object cannot be cast to. This type is incorporated into the exception message.</param
-        >
+          />The <see cref="T:System.Type" /> that an object cannot be cast to. This type is incorporated into the exception message.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that cannot be cast. This object is incorporated into the exception message.</param
-        >
+          />The object that cannot be cast. This object is incorporated into the exception message.</param>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string identifier.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A string identifier.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMissingIXmlSerializableType">
@@ -693,14 +651,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a derived type that is mapped to an XML Schema data type cannot be located.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a derived type that is mapped to an XML Schema data type cannot be located.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -711,22 +667,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML Schema data type that is mapped to the unavailable derived type.</param
-        >
+          />The local name of the XML Schema data type that is mapped to the unavailable derived type.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML Schema data type that is mapped to the unavailable derived type.</param
-        >
+          />The namespace of the XML Schema data type that is mapped to the unavailable derived type.</param>
         <param name="clrType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the .NET Framework base type for which a derived type cannot be located.</param
-        >
+          />The full name of the .NET Framework base type for which a derived type cannot be located.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateReadOnlyCollectionException">
@@ -754,14 +707,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a SOAP-encoded collection type cannot be modified and its values cannot be filled in. </para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a SOAP-encoded collection type cannot be modified and its values cannot be filled in. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -772,8 +723,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the .NET Framework type for which there is a mapping.</param
-        >
+          />The fully qualified name of the .NET Framework type for which there is a mapping.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUnknownConstantException">
@@ -802,14 +752,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an enumeration value is not valid. </para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an enumeration value is not valid. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -820,15 +768,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration value that is not valid.</param
-        >
+          />The enumeration value that is not valid.</param>
         <param name="enumType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration type.</param
-        >
+          />The enumeration type.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUnknownNodeException">
@@ -851,14 +797,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that the current position of <see cref="T:System.Xml.XmlReader" /> represents an unknown XML node. </para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that the current position of <see cref="T:System.Xml.XmlReader" /> represents an unknown XML node. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -891,14 +835,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type is unknown. </para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type is unknown. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -909,8 +851,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the name of the unknown type.</param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the name of the unknown type.</param>
       </Docs>
     </Member>
     <Member MemberName="DecodeName">
@@ -930,8 +871,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method writes valid XML from invalid sources. For example, the <see cref="P:System.Data.DataColumn.ColumnName" /> property of the <see cref="T:System.Data.DataColumn" /> class can contain spaces, which are invalid as XML. The <see cref="M:System.Xml.XmlConvert.DecodeName(System.String)" /> reads the encoded XML and restores it to the original value. However, the <see cref="Overload:System.Xml.Schema.XmlSchema.Read" /> method of the <see cref="T:System.Xml.Schema.XmlSchema" /> class cannot read such encoded XML. In that case, set the <see cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" /> property to false to disable the encoding of the XML.</para
-          >
+            >The <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method writes valid XML from invalid sources. For example, the <see cref="P:System.Data.DataColumn.ColumnName" /> property of the <see cref="T:System.Data.DataColumn" /> class can contain spaces, which are invalid as XML. The <see cref="M:System.Xml.XmlConvert.DecodeName(System.String)" /> reads the encoded XML and restores it to the original value. However, the <see cref="Overload:System.Xml.Schema.XmlSchema.Read" /> method of the <see cref="T:System.Xml.Schema.XmlSchema" /> class cannot read such encoded XML. In that case, set the <see cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" /> property to false to disable the encoding of the XML.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -959,8 +899,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -995,8 +934,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1005,26 +943,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The existing <see cref="T:System.Array" />, if it is already large enough; otherwise, a new, larger array that contains the original array's elements.</para
-          >
+            >The existing <see cref="T:System.Array" />, if it is already large enough; otherwise, a new, larger array that contains the original array's elements.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Array" /> that is being checked.</param
-        >
+          />The <see cref="T:System.Array" /> that is being checked.</param>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The required index.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The required index.</param>
         <param name="elementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the array's elements.</param
-        >
+          />The <see cref="T:System.Type" /> of the array's elements.</param>
       </Docs>
     </Member>
     <Member MemberName="FixupArrayRefs">
@@ -1049,14 +983,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.FixupArrayRefs(System.Object)" /> method implements the <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" /> delegate for deserialization of SOAP-encoded XML data.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.FixupArrayRefs(System.Object)" /> method implements the <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" /> delegate for deserialization of SOAP-encoded XML data.</para>
           <para
-            >While deserializing XML documents into .NET Framework objects, the .NET Framework XML serialization infrastructure dynamically creates an instance of the <see cref="M:System.Xml.Serialization.XmlSerializationReader.FixupArrayRefs(System.Object)" /> method for SOAP-encoded arrays whose data types map to .NET Framework reference types. The method then is called by <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" /> to fill in the objects in the array.</para
-          >
+            >While deserializing XML documents into .NET Framework objects, the .NET Framework XML serialization infrastructure dynamically creates an instance of the <see cref="M:System.Xml.Serialization.XmlSerializationReader.FixupArrayRefs(System.Object)" /> method for SOAP-encoded arrays whose data types map to .NET Framework reference types. The method then is called by <see cref="T:System.Xml.Serialization.XmlSerializationFixupCallback" /> to fill in the objects in the array.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
@@ -1068,8 +999,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the array whose values are filled in.</param
-        >
+          />An object that contains the array whose values are filled in.</param>
       </Docs>
     </Member>
     <Member MemberName="GetArrayLength">
@@ -1098,17 +1028,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.GetArrayLength(System.String,System.String)" /> method applies to the arrayType attribute that is used with SOAP encoding and specified with the namespace "http://schemas.xmlsoap.org/soap/encoding/".</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.GetArrayLength(System.String,System.String)" /> method applies to the arrayType attribute that is used with SOAP encoding and specified with the namespace "http://schemas.xmlsoap.org/soap/encoding/".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length of the SOAP-encoded array where the <see cref="T:System.Xml.XmlReader" /> is currently positioned.</para
-          >
+            >Gets the length of the SOAP-encoded array where the <see cref="T:System.Xml.XmlReader" /> is currently positioned.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1119,15 +1046,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name that the array should have.</param
-        >
+          />The local name that the array should have.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace that the array should have.</param
-        >
+          />The namespace that the array should have.</param>
       </Docs>
     </Member>
     <Member MemberName="GetNullAttr">
@@ -1150,20 +1075,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the XML element where the <see cref="T:System.Xml.XmlReader" /> is currently positioned has a null attribute set to the value true.</para
-          >
+            >Determines whether the XML element where the <see cref="T:System.Xml.XmlReader" /> is currently positioned has a null attribute set to the value true.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see cref="T:System.Xml.XmlReader" /> is currently positioned over a null attribute with the value true; otherwise, false.</para
-          >
+            >true if <see cref="T:System.Xml.XmlReader" /> is currently positioned over a null attribute with the value true; otherwise, false.</para>
         </returns>
       </Docs>
     </Member>
@@ -1189,15 +1111,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that is being deserialized from a SOAP-encoded multiRef element and that was stored earlier by <see cref="M:System.Xml.Serialization.XmlSerializationReader.AddTarget(System.String,System.Object)" />.  </para
-          >
+            >Gets an object that is being deserialized from a SOAP-encoded multiRef element and that was stored earlier by <see cref="M:System.Xml.Serialization.XmlSerializationReader.AddTarget(System.String,System.Object)" />.  </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1208,8 +1128,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the id attribute of a multiRef element that identifies the element.</param
-        >
+          />The value of the id attribute of a multiRef element that identifies the element.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXsiType">
@@ -1232,15 +1151,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>The type attribute from the instance of the XML Schema namespace explicitly specifies the data type of an XML element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the xsi:type attribute for the XML element at the current location of the <see cref="T:System.Xml.XmlReader" />. </para
-          >
+            >Gets the value of the xsi:type attribute for the XML element at the current location of the <see cref="T:System.Xml.XmlReader" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1268,17 +1185,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. During this process, the .NET Framework generates read methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized through SOAP-encoded XML and are not root elements. Next, as necessary, a read method is called during deserialization. </para
-          >
+            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for deserialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. During this process, the .NET Framework generates read methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized through SOAP-encoded XML and are not root elements. Next, as necessary, a read method is called during deserialization. </para>
           <para
-            >The abstract <see cref="M:System.Xml.Serialization.XmlSerializationReader.InitCallbacks" /> method is where the temporary derived class creates an instance of and initializes read callback methods.</para
-          >
+            >The abstract <see cref="M:System.Xml.Serialization.XmlSerializationReader.InitCallbacks" /> method is where the temporary derived class creates an instance of and initializes read callback methods.</para>
           <para
-            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />.</para
-          >
+            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
@@ -1307,17 +1220,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.InitIDs" /> method is abstract.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.InitIDs" /> method is abstract.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores element and attribute names in a <see cref="T:System.Xml.NameTable" /> object. </para
-          >
+            >Stores element and attribute names in a <see cref="T:System.Xml.NameTable" /> object. </para>
         </summary>
       </Docs>
     </Member>
@@ -1338,8 +1248,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1369,11 +1278,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >An attribute name indicates an XML namespace if it takes the form xmlns:<paramref name="key" />, where "key" is the namespace name.</para
-          >
+            >An attribute name indicates an XML namespace if it takes the form xmlns:<paramref name="key" />, where "key" is the namespace name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1388,8 +1295,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of an XML attribute.</param
-        >
+          />The name of an XML attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="ParseWsdlArrayType">
@@ -1417,8 +1323,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>WSDL uses the namespace "http://schemas.xmlsoap.org/wsdl/".</para>
         </remarks>
         <summary>
@@ -1430,8 +1335,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlAttribute" /> that may have the type wsdl:array.</param
-        >
+          />An <see cref="T:System.Xml.XmlAttribute" /> that may have the type wsdl:array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadElementQualifiedName">
@@ -1457,14 +1361,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the <see cref="T:System.Xml.XmlReader" /> read the fully qualified name of the element where it is currently positioned. </para
-          >
+            >Makes the <see cref="T:System.Xml.XmlReader" /> read the fully qualified name of the element where it is currently positioned. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1492,8 +1394,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para />
         </remarks>
         <summary>
@@ -1522,14 +1423,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.XmlReader" /> object that is being used by <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. </para
-          >
+            >Gets the <see cref="T:System.Xml.XmlReader" /> object that is being used by <see cref="T:System.Xml.Serialization.XmlSerializationReader" />. </para>
         </summary>
       </Docs>
     </Member>
@@ -1550,8 +1449,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The method is used by generated classes and should not be directly invoked.</para>
           <para
-            >The <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> uses an instance of the <see cref="T:System.Xml.XmlReader" /> class to count when a read operation occurs. The count is incremented each time the reader calls an appropriate method, for example the <see cref="M:System.Xml.XmlReader.Read" /> method or the <see cref="M:System.Xml.XmlReader.ReadElementString" /> method. </para
-          >
+            >The <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> uses an instance of the <see cref="T:System.Xml.XmlReader" /> class to count when a read operation occurs. The count is incremented each time the reader calls an appropriate method, for example the <see cref="M:System.Xml.XmlReader.Read" /> method or the <see cref="M:System.Xml.XmlReader.ReadElementString" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1579,14 +1477,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the current XML element if the element has a null attribute with the value true. </para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the current XML element if the element has a null attribute with the value true. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1617,20 +1513,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the fully qualified name of the element where it is currently positioned. </para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the fully qualified name of the element where it is currently positioned. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Xml.XmlQualifiedName" /> that represents the fully qualified name of the current XML element; otherwise, null if a null="true" attribute value is present.</para
-          >
+            >A <see cref="T:System.Xml.XmlQualifiedName" /> that represents the fully qualified name of the current XML element; otherwise, null if a null="true" attribute value is present.</para>
         </returns>
       </Docs>
     </Member>
@@ -1654,14 +1547,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read a simple, text-only XML element that could be null. </para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read a simple, text-only XML element that could be null. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1717,11 +1608,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" /> method obtains the XML Schema data type by reading the xsi:type attribute of the multiRef element. The prefix xsi refers to the instance of the XML Schema namespace.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" /> method obtains the XML Schema data type by reading the xsi:type attribute of the multiRef element. The prefix xsi refers to the instance of the XML Schema namespace.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. </para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -1761,11 +1650,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >This signature of the <see cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" /> method obtains the XML Schema data type of the multiRef element from the method parameters rather than by reading the xsi:type attribute. The prefix xsi refers to the instance of the XML Schema namespace.</para
-          >
+            >This signature of the <see cref="M:System.Xml.Serialization.XmlSerializationReader.ReadReferencedElement" /> method obtains the XML Schema data type of the multiRef element from the method parameters rather than by reading the xsi:type attribute. The prefix xsi refers to the instance of the XML Schema namespace.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. </para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -1782,15 +1669,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element's XML Schema data type.</param
-        >
+          />The local name of the element's XML Schema data type.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element's XML Schema data type.</param
-        >
+          />The namespace of the element's XML Schema data type.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadReferencedElements">
@@ -1813,8 +1698,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. </para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -1943,28 +1827,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates an object from its XML representation at the current location of the <see cref="T:System.Xml.XmlReader" />. </para
-          >
+            >Populates an object from its XML representation at the current location of the <see cref="T:System.Xml.XmlReader" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface with its members populated from the location of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface with its members populated from the location of the <see cref="T:System.Xml.XmlReader" />.</para>
         </returns>
         <param name="serializable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Serialization.IXmlSerializable" /> that corresponds to the current position of the <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />An <see cref="T:System.Xml.Serialization.IXmlSerializable" /> that corresponds to the current position of the <see cref="T:System.Xml.XmlReader" />.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadString">
@@ -1989,28 +1869,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Produces the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method appended to the input value. </para
-          >
+            >Produces the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method appended to the input value. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method appended to the input value.</para
-          >
+            >The result of call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method appended to the input value.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to prefix to the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method.</param
-        >
+          />A string to prefix to the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadString">
@@ -2040,8 +1916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method of the <see cref="T:System.Xml.XmlReader" /> class, trimmed of white space if needed, and appended to the input value.</para
-          >
+            >Returns the result of a call to the <see cref="M:System.Xml.XmlReader.ReadString" /> method of the <see cref="T:System.Xml.XmlReader" /> class, trimmed of white space if needed, and appended to the input value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2052,15 +1927,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that will be appended to.</param
-        >
+          />A string that will be appended to.</param>
         <param name="trim">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the result of the read operation should be trimmed; otherwise, false.</param
-        >
+          />true if the result of the read operation should be trimmed; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadTypedNull">
@@ -2089,22 +1962,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads an XML element that allows null values (xsi:nil = 'true') and returns a generic <see cref="T:System.Nullable`1" /> value. </para
-          >
+            >Reads an XML element that allows null values (xsi:nil = 'true') and returns a generic <see cref="T:System.Nullable`1" /> value. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic <see cref="T:System.Nullable`1" /> that represents a null XML value.</para
-          >
+            >A generic <see cref="T:System.Nullable`1" /> that represents a null XML value.</para>
         </returns>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the simple data type for the current location of the <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the simple data type for the current location of the <see cref="T:System.Xml.XmlReader" />.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadTypedPrimitive">
@@ -2132,14 +2002,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the XML node at which the <see cref="T:System.Xml.XmlReader" /> is currently positioned. </para
-          >
+            >Gets the value of the XML node at which the <see cref="T:System.Xml.XmlReader" /> is currently positioned. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2150,8 +2018,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the simple data type for the current location of the <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> that represents the simple data type for the current location of the <see cref="T:System.Xml.XmlReader" />.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlDocument">
@@ -2179,28 +2046,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read an XML document root element at its current position.</para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read an XML document root element at its current position.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlDocument" /> that contains the root element that has been read.</para
-          >
+            >An <see cref="T:System.Xml.XmlDocument" /> that contains the root element that has been read.</para>
         </returns>
         <param name="wrapped">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the method should read content only after reading the element's start element; otherwise, false.</param
-        >
+          />true if the method should read content only after reading the element's start element; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadXmlNode">
@@ -2228,28 +2091,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the XML node at its current position. </para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the XML node at its current position. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlNode" /> that represents the XML node that has been read.</para
-          >
+            >An <see cref="T:System.Xml.XmlNode" /> that represents the XML node that has been read.</para>
         </returns>
         <param name="wrapped">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to read content only after reading the element's start element; otherwise, false.</param
-        >
+          />true to read content only after reading the element's start element; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="Referenced">
@@ -2274,8 +2133,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements. </para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -2288,8 +2146,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be deserialized.</param
-        >
+          />The object to be deserialized.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveDynamicAssembly">
@@ -2317,11 +2174,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ResolveDynamicAssembly(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ResolveDynamicAssembly(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2336,8 +2191,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the assembly.</param
-        >
+          />The full name of the assembly.</param>
       </Docs>
     </Member>
     <Member MemberName="ShrinkArray">
@@ -2368,8 +2222,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2378,37 +2231,32 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The existing <see cref="T:System.Array" />, if it is already small enough; otherwise, a new, smaller array that contains the original array's elements up to the size of<paramref name=" length" />.</para
-          >
+            >The existing <see cref="T:System.Array" />, if it is already small enough; otherwise, a new, smaller array that contains the original array's elements up to the size of<paramref name=" length" />.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that is being checked.</param
-        >
+          />The array that is being checked.</param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of the array.</param
-        >
+          />The maximum length of the array.</param>
         <param name="elementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the array's elements.</param
-        >
+          />The <see cref="T:System.Type" /> of the array's elements.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if null for the array, if present for the input array, can be returned; otherwise, a new, smaller array.</param
-        >
+          />true if null for the array, if present for the input array, can be returned; otherwise, a new, smaller array.</param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArrayBase64">
@@ -2433,28 +2281,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the string value at its current position and return it as a base-64 byte array.</para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the string value at its current position and return it as a base-64 byte array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A base-64 byte array; otherwise, null if the value of the <paramref name="isNull" /> parameter is true.</para
-          >
+            >A base-64 byte array; otherwise, null if the value of the <paramref name="isNull" /> parameter is true.</para>
         </returns>
         <param name="isNull">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to return null; false to return a base-64 byte array.</param
-        >
+          />true to return null; false to return a base-64 byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArrayBase64">
@@ -2482,11 +2326,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayBase64(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayBase64(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2501,8 +2343,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a base-64 byte array.</param
-        >
+          />A string to translate into a base-64 byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArrayHex">
@@ -2527,28 +2368,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the string value at its current position and return it as a hexadecimal byte array.</para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlReader" /> to read the string value at its current position and return it as a hexadecimal byte array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hexadecimal byte array; otherwise, null if the value of the <paramref name="isNull" /> parameter is true. </para
-          >
+            >A hexadecimal byte array; otherwise, null if the value of the <paramref name="isNull" /> parameter is true. </para>
         </returns>
         <param name="isNull">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to return null; false to return a hexadecimal byte array.</param
-        >
+          />true to return null; false to return a hexadecimal byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArrayHex">
@@ -2576,11 +2413,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayHex(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToByteArrayHex(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2595,8 +2430,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a hexadecimal byte array.</param
-        >
+          />A string to translate into a hexadecimal byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="ToChar">
@@ -2621,11 +2455,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToChar(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToChar(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2640,8 +2472,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a <see cref="T:System.Char" /> object.</param
-        >
+          />A string to translate into a <see cref="T:System.Char" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="ToDate">
@@ -2666,11 +2497,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToDate(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToDate(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2685,8 +2514,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a <see cref="T:System.DateTime" /> class object.</param
-        >
+          />A string to translate into a <see cref="T:System.DateTime" /> class object.</param>
       </Docs>
     </Member>
     <Member MemberName="ToDateTime">
@@ -2711,11 +2539,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToDateTime(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToDateTime(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2730,8 +2556,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a <see cref="T:System.DateTime" /> object.</param
-        >
+          />A string to translate into a <see cref="T:System.DateTime" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="ToEnum">
@@ -2761,11 +2586,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToEnum(System.String,System.Collections.Hashtable,System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToEnum(System.String,System.Collections.Hashtable,System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2780,22 +2603,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that consists of delimited identifiers where each identifier represents a constant from the set enumerator list.</param
-        >
+          />A string that consists of delimited identifiers where each identifier represents a constant from the set enumerator list.</param>
         <param name="h">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Hashtable" /> that consists of the identifiers as keys and the constants as integral numbers.</param
-        >
+          />A <see cref="T:System.Collections.Hashtable" /> that consists of the identifiers as keys and the constants as integral numbers.</param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the enumeration type.</param
-        >
+          />The name of the enumeration type.</param>
       </Docs>
     </Member>
     <Member MemberName="ToTime">
@@ -2820,17 +2640,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToTime(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToTime(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Produces a <see cref="T:System.DateTime" /> from a string that represents the time. </para
-          >
+            >Produces a <see cref="T:System.DateTime" /> from a string that represents the time. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2841,8 +2658,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to translate into a <see cref="T:System.DateTime" /> object.</param
-        >
+          />A string to translate into a <see cref="T:System.DateTime" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlName">
@@ -2867,14 +2683,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlName(System.String)" /> method is static. </para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlName(System.String)" /> method is static. </para>
           <para>
-            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlName(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para
-          >
+            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlName(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2889,8 +2702,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML name to be decoded.</param
-        >
+          />An XML name to be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlNCName">
@@ -2915,14 +2727,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNCName(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNCName(System.String)" /> method is static.</para>
           <para>
-            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNCName(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para
-          >
+            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNCName(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2937,8 +2746,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML name to be decoded.</param
-        >
+          />An XML name to be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlNmToken">
@@ -2963,14 +2771,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are only intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are only intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmToken(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmToken(System.String)" /> method is static.</para>
           <para>
-            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmToken(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para
-          >
+            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmToken(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2985,8 +2790,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML name to be decoded.</param
-        >
+          />An XML name to be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlNmTokens">
@@ -3014,14 +2818,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmTokens(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmTokens(System.String)" /> method is static.</para>
           <para>
-            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmTokens(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para
-          >
+            <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlNmTokens(System.String)" /> converts 4-digit hexadecimal UCS-2 codes into Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3036,8 +2837,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML name to be decoded.</param
-        >
+          />An XML name to be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="ToXmlQualifiedName">
@@ -3065,31 +2865,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >If a prefix is present, the <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlQualifiedName(System.String)" /> method looks up the associated namespace for the current XML document and places the value in the <see cref="T:System.Xml.XmlQualifiedName" /> object.</para
-          >
+            >If a prefix is present, the <see cref="M:System.Xml.Serialization.XmlSerializationReader.ToXmlQualifiedName(System.String)" /> method looks up the associated namespace for the current XML document and places the value in the <see cref="T:System.Xml.XmlQualifiedName" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains an <see cref="T:System.Xml.XmlQualifiedName" /> from a name that may contain a prefix. </para
-          >
+            >Obtains an <see cref="T:System.Xml.XmlQualifiedName" /> from a name that may contain a prefix. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlQualifiedName" /> that represents a namespace-qualified XML name.</para
-          >
+            >An <see cref="T:System.Xml.XmlQualifiedName" /> that represents a namespace-qualified XML name.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A name that may contain a prefix.</param
-        >
+          />A name that may contain a prefix.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownAttribute">
@@ -3118,32 +2913,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >Add a handler method to the <see cref="M:System.Xml.Serialization.XmlSerializationReader.UnknownAttribute(System.Object,System.Xml.XmlAttribute)" /> method to handle unknown attributes while the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is executing its <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" /> method.</para
-          >
+            >Add a handler method to the <see cref="M:System.Xml.Serialization.XmlSerializationReader.UnknownAttribute(System.Object,System.Xml.XmlAttribute)" /> method to handle unknown attributes while the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is executing its <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param
-        >
+          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlAttribute" /> that represents the attribute in question.</param
-        >
+          />An <see cref="T:System.Xml.XmlAttribute" /> that represents the attribute in question.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownAttribute">
@@ -3174,30 +2964,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param
-        >
+          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param>
         <param name="attr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlAttribute" /> that represents the attribute in question.</param
-        >
+          />A <see cref="T:System.Xml.XmlAttribute" /> that represents the attribute in question.</param>
         <param name="qnames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma-delimited list of XML qualified names.</param
-        >
+          />A comma-delimited list of XML qualified names.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownElement">
@@ -3227,23 +3013,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> that is being deserialized.</param
-        >
+          />The <see cref="T:System.Object" /> that is being deserialized.</param>
         <param name="elem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> for which an event is raised.</param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> for which an event is raised.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownElement">
@@ -3274,30 +3057,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param
-        >
+          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.XmlAttributeEventArgs.ObjectBeingDeserialized" /> property.</param>
         <param name="elem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> for which an event is raised.</param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> for which an event is raised.</param>
         <param name="qnames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma-delimited list of XML qualified names.</param
-        >
+          />A comma-delimited list of XML qualified names.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownNode">
@@ -3323,16 +3102,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />. </para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />. </para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that is being deserialized.</param
-        >
+          />The object that is being deserialized.</param>
       </Docs>
     </Member>
     <Member MemberName="UnknownNode">
@@ -3362,23 +3139,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being deserialized.</param
-        >
+          />The object being deserialized.</param>
         <param name="qnames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma-delimited list of XML qualified names.</param
-        >
+          />A comma-delimited list of XML qualified names.</param>
       </Docs>
     </Member>
     <Member MemberName="UnreferencedObject">
@@ -3407,35 +3181,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationReader" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >SOAP encoding, as specified in Section 5 of the SOAP 1.1 specification, allows for elements referenced multiple times in a SOAP message (or optionally, just once) to be referred by an href attribute in the main message. An <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event occurs when such an element appears, but there is no href reference to it.</para
-          >
+            >SOAP encoding, as specified in Section 5 of the SOAP 1.1 specification, allows for elements referenced multiple times in a SOAP message (or optionally, just once) to be referred by an href attribute in the main message. An <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event occurs when such an element appears, but there is no href reference to it.</para>
           <para
-            >Add a handler method to <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> to provide custom handling for unreferenced objects while the <see cref="T:System.Xml.Serialization.XmlSerializer" /> executes its <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" /> method.</para
-          >
+            >Add a handler method to <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> to provide custom handling for unreferenced objects while the <see cref="T:System.Xml.Serialization.XmlSerializer" /> executes its <see cref="Overload:System.Xml.Serialization.XmlSerializer.Deserialize" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Raises an <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event for the current position of the <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="id">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique string that is used to identify the unreferenced object, subsequently accessible through the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property.</param
-        >
+          />A unique string that is used to identify the unreferenced object, subsequently accessible through the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> property.</param
-        >
+          />An object that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is attempting to deserialize, subsequently accessible through the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> property.</param>
       </Docs>
     </Member>
   </Members>

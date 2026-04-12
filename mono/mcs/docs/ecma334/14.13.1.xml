@@ -9,21 +9,17 @@
       <list>
         <list_item> x is evaluated to produce the variable. </list_item>
         <list_item
-          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item
-        >
+          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item>
         <list_item
           > If the variable given by x is an array element of a <non_terminal where="11.2"
-            >reference-type</non_terminal
-          >, a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink>13.1.4</hyperlink>) exists from the actual type of the instance referenced by y to the actual element type of the array instance containing x. Otherwise, a System.ArrayTypeMismatchException is thrown. </list_item
-        >
+            >reference-type</non_terminal>, a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink>13.1.4</hyperlink>) exists from the actual type of the instance referenced by y to the actual element type of the array instance containing x. Otherwise, a System.ArrayTypeMismatchException is thrown. </list_item>
         <list_item> The value resulting from the evaluation and conversion of y is stored into the location given by the evaluation of x. </list_item>
       </list>
       <list_item> If x is classified as a property or indexer access: </list_item>
       <list>
         <list_item> The instance expression (if x is not static) and the argument list (if x is an indexer access) associated with x are evaluated, and the results are used in the subsequent set accessor invocation. </list_item>
         <list_item
-          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item
-        >
+          > y is evaluated and, if required, converted to the type of x through an implicit conversion (<hyperlink>13.1</hyperlink>). </list_item>
         <list_item> The set accessor of x is invoked with the value computed for y as its value argument. </list_item>
       </list>
     </list>
@@ -32,8 +28,7 @@
     <note
       >[Note: The array covariance rules (<hyperlink>19.5</hyperlink>) permit a value of an array type A[] to be a reference to an instance of an array type B[], provided an implicit reference conversion exists from B to A. Because of these rules, assignment to an array element of a <non_terminal
         where="11.2"
-        >reference-type</non_terminal
-      > requires a run-time check to ensure that the value being assigned is compatible with the array instance. In the example <code_example>
+        >reference-type</non_terminal> requires a run-time check to ensure that the value being assigned is compatible with the array instance. In the example <code_example>
         <![CDATA[
 string[] sa = new string[10];  
 object[] oa = sa;  
@@ -41,15 +36,12 @@ oa[0] = null;      // Ok
 oa[1] = "Hello";     // Ok  
 oa[2] = new ArrayList();  // ArrayTypeMismatchException  
 ]]>
-      </code_example>the last assignment causes a System.ArrayTypeMismatchException to be thrown because an instance of ArrayList cannot be stored in an element of a string[]. end note]</note
-    >
+      </code_example>the last assignment causes a System.ArrayTypeMismatchException to be thrown because an instance of ArrayList cannot be stored in an element of a string[]. end note]</note>
   </paragraph>
   <paragraph
     >When a property or indexer declared in a <non_terminal where="11.1"
-      >struct-type</non_terminal
-    > is the target of an assignment, the instance expression associated with the property or indexer access must be classified as a variable. If the instance expression is classified as a value, a compile-time error occurs. <note
-      >[Note: Because of <hyperlink>14.5.4</hyperlink>, the same rule also applies to fields. end note]</note
-    >
+      >struct-type</non_terminal> is the target of an assignment, the instance expression associated with the property or indexer access must be classified as a variable. If the instance expression is classified as a value, a compile-time error occurs. <note
+      >[Note: Because of <hyperlink>14.5.4</hyperlink>, the same rule also applies to fields. end note]</note>
   </paragraph>
   <paragraph>
     <example
@@ -105,7 +97,6 @@ r.A.Y = 10;
 r.B.X = 100;  
 r.B.Y = 100;  
 ]]>
-      </code_example>the assignments are all invalid, since r.A and r.B are not variables. end example]</example
-    >
+      </code_example>the assignments are all invalid, since r.A and r.B are not variables. end example]</example>
   </paragraph>
 </clause>

@@ -30,26 +30,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.FileWebRequest" /> class implements the <see cref="T:System.Net.WebRequest" /> abstract base class for Uniform Resource Identifiers (URIs) that use the file:// scheme to request local files.</para
-      >
+        >The <see cref="T:System.Net.FileWebRequest" /> class implements the <see cref="T:System.Net.WebRequest" /> abstract base class for Uniform Resource Identifiers (URIs) that use the file:// scheme to request local files.</para>
       <para
-        >Do not use the <see cref="M:System.Net.FileWebRequest.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> constructor. Use the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method to initialize new instances of the <see cref="T:System.Net.FileWebRequest" /> class. If the URI scheme is file://, the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method returns a <see cref="T:System.Net.FileWebRequest" /> object.</para
-      >
+        >Do not use the <see cref="M:System.Net.FileWebRequest.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> constructor. Use the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method to initialize new instances of the <see cref="T:System.Net.FileWebRequest" /> class. If the URI scheme is file://, the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method returns a <see cref="T:System.Net.FileWebRequest" /> object.</para>
       <para
-        >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method makes a synchronous request for the file specified in the <see cref="P:System.Net.FileWebRequest.RequestUri" /> property and returns a <see cref="T:System.Net.FileWebResponse" /> object that contains the response. You can make an asynchronous request for the file using the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> methods.</para
-      >
+        >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method makes a synchronous request for the file specified in the <see cref="P:System.Net.FileWebRequest.RequestUri" /> property and returns a <see cref="T:System.Net.FileWebResponse" /> object that contains the response. You can make an asynchronous request for the file using the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> methods.</para>
       <para
-        >When you want to write data to a file, the <see cref="M:System.Net.FileWebRequest.GetRequestStream" /> method returns a <see cref="T:System.IO.Stream" /> instance to write to. The <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> methods provide asynchronous access to the write data stream.</para
-      >
+        >When you want to write data to a file, the <see cref="M:System.Net.FileWebRequest.GetRequestStream" /> method returns a <see cref="T:System.IO.Stream" /> instance to write to. The <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> methods provide asynchronous access to the write data stream.</para>
       <para
-        >The <see cref="T:System.Net.FileWebRequest" /> class relies on the <see cref="T:System.IO.File" /> class for error handling and code access security.</para
-      >
+        >The <see cref="T:System.Net.FileWebRequest" /> class relies on the <see cref="T:System.IO.File" /> class for error handling and code access security.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a file system implementation of the <see cref="T:System.Net.WebRequest" /> class.</para
-      >
+        >Provides a file system implementation of the <see cref="T:System.Net.WebRequest" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -82,29 +76,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.FileWebRequest" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.FileWebRequest" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information that is required to serialize the new <see cref="T:System.Net.FileWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that contains the information that is required to serialize the new <see cref="T:System.Net.FileWebRequest" /> object. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" /> object. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="Abort">
@@ -131,15 +121,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.Abort" /> method cancels a request to a resource. After a request is canceled, calling the <see cref="M:System.Net.FileWebRequest.GetResponse" />, <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />, <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />, <see cref="M:System.Net.FileWebRequest.GetRequestStream" />, <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />, or <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method causes a <see cref="T:System.Net.WebException" /> with the <see cref="P:System.Net.WebException.Status" /> property set to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.Abort" /> method cancels a request to a resource. After a request is canceled, calling the <see cref="M:System.Net.FileWebRequest.GetResponse" />, <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />, <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" />, <see cref="M:System.Net.FileWebRequest.GetRequestStream" />, <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />, or <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method causes a <see cref="T:System.Net.WebException" /> with the <see cref="P:System.Net.WebException.Status" /> property set to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para>
           <para
             >Note   This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
               <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
-                >[&lt;topic://conUsingNetworkTracing&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://conUsingNetworkTracing&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,35 +160,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method starts an asynchronous request for a stream used to send data to a file system resource. The callback method that implements the <see cref="T:System.AsyncCallback" /> delegate uses the <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method to return the request stream.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method starts an asynchronous request for a stream used to send data to a file system resource. The callback method that implements the <see cref="T:System.AsyncCallback" /> delegate uses the <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method to return the request stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request for a <see cref="T:System.IO.Stream" /> object to use to write data.</para
-          >
+            >Begins an asynchronous request for a <see cref="T:System.IO.Stream" /> object to use to write data.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> that references the asynchronous request.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> that references the asynchronous request.</para>
         </returns>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request. </param>
       </Docs>
     </Member>
     <Member MemberName="BeginGetResponse">
@@ -230,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous callback method that implements the <see cref="T:System.AsyncCallback" /> delegate uses the <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method to return the actual <see cref="T:System.Net.FileWebResponse" />.</para
-          >
+            >The asynchronous callback method that implements the <see cref="T:System.AsyncCallback" /> delegate uses the <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method to return the actual <see cref="T:System.Net.FileWebResponse" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,23 +221,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> that references the asynchronous request.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> that references the asynchronous request.</para>
         </returns>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> delegate. </param
-        >
+          />The <see cref="T:System.AsyncCallback" /> delegate. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains state information for this request. </param
-        >
+          />An object that contains state information for this request. </param>
       </Docs>
     </Member>
     <Member MemberName="ConnectionGroupName">
@@ -280,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.ConnectionGroupName" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.ConnectionGroupName" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -329,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.ContentType" /> property contains the media type of the data being sent. This is typically the MIME encoding of the content. The <see cref="P:System.Net.FileWebRequest.ContentType" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.ContentType" /> property contains the media type of the data being sent. This is typically the MIME encoding of the content. The <see cref="P:System.Net.FileWebRequest.ContentType" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -362,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Net.FileWebRequest" /> class does not authenticate requests for files from the local file system, it ignores the contents, if any, of the <see cref="P:System.Net.FileWebRequest.Credentials" /> property. Authentication for <see cref="T:System.Net.FileWebRequest" /> is handled by the access control lists for the file resource in the underlying file system.</para
-          >
+            >Because the <see cref="T:System.Net.FileWebRequest" /> class does not authenticate requests for files from the local file system, it ignores the contents, if any, of the <see cref="P:System.Net.FileWebRequest.Credentials" /> property. Authentication for <see cref="T:System.Net.FileWebRequest" /> is handled by the access control lists for the file resource in the underlying file system.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -396,33 +371,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method completes an asynchronous stream request that was started by the <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> method completes an asynchronous stream request that was started by the <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> method.</para>
           <block subset="none" type="note">
             <para
-              >To avoid timing issues with garbage collection, be sure to close the response stream by calling the <see cref="M:System.IO.Stream.Close" /> method on the stream returned by the <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method after calling the <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method.</para
-            >
+              >To avoid timing issues with garbage collection, be sure to close the response stream by calling the <see cref="M:System.IO.Stream.Close" /> method on the stream returned by the <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method after calling the <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends an asynchronous request for a <see cref="T:System.IO.Stream" /> instance that the application uses to write data.</para
-          >
+            >Ends an asynchronous request for a <see cref="T:System.IO.Stream" /> instance that the application uses to write data.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.Stream" /> object that the application uses to write data.</para
-          >
+            >A <see cref="T:System.IO.Stream" /> object that the application uses to write data.</para>
         </returns>
         <param name="asyncResult">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a stream. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a stream. </param>
       </Docs>
     </Member>
     <Member MemberName="EndGetResponse">
@@ -450,8 +420,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method completes an asynchronous request for a file system resource that was started with the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> method completes an asynchronous request for a file system resource that was started with the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -460,16 +429,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.WebResponse" /> that contains the response from the file system resource.</para
-          >
+            >A <see cref="T:System.Net.WebResponse" /> that contains the response from the file system resource.</para>
         </returns>
         <param name="asyncResult">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a response. </param
-        >
+          />An <see cref="T:System.IAsyncResult" /> that references the pending request for a response. </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -497,29 +464,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects that are included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para
-          >
+            >Any objects that are included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" />  that specifies the destination for this serialization. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" />  that specifies the destination for this serialization. </param>
       </Docs>
     </Member>
     <Member MemberName="GetRequestStream">
@@ -545,20 +508,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.GetRequestStream" /> method provides synchronous access to the <see cref="T:System.IO.Stream" />. For asynchronous access, use the <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> methods.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.GetRequestStream" /> method provides synchronous access to the <see cref="T:System.IO.Stream" />. For asynchronous access, use the <see cref="M:System.Net.FileWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetRequestStream(System.IAsyncResult)" /> methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.IO.Stream" /> object for writing data to the file system resource.</para
-          >
+            >Returns a <see cref="T:System.IO.Stream" /> object for writing data to the file system resource.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.Stream" /> for writing data to the file system resource.</para
-          >
+            >A <see cref="T:System.IO.Stream" /> for writing data to the file system resource.</para>
         </returns>
       </Docs>
     </Member>
@@ -585,11 +545,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method returns a <see cref="T:System.Net.WebResponse" /> object that contains the response from the file system resource.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method returns a <see cref="T:System.Net.WebResponse" /> object that contains the response from the file system resource.</para>
           <para
-            >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method provides synchronous access to the <see cref="T:System.Net.WebResponse" />. For asynchronous access, use the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> methods.</para
-          >
+            >The <see cref="M:System.Net.FileWebRequest.GetResponse" /> method provides synchronous access to the <see cref="T:System.Net.WebResponse" />. For asynchronous access, use the <see cref="M:System.Net.FileWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" /> and <see cref="M:System.Net.FileWebRequest.EndGetResponse(System.IAsyncResult)" /> methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -598,8 +556,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.WebResponse" /> that contains the response from the file system resource.</para
-          >
+            >A <see cref="T:System.Net.WebResponse" /> that contains the response from the file system resource.</para>
         </returns>
       </Docs>
     </Member>
@@ -626,8 +583,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.Headers" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.Headers" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -653,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.Method" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.Method" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -680,8 +635,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.PreAuthenticate" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.PreAuthenticate" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -713,8 +667,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.Proxy" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.Proxy" /> property is currently not used by the <see cref="T:System.Net.FileWebRequest" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -770,23 +723,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the required data to serialize the <see cref="T:System.Net.FileWebRequest" />.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the required data to serialize the <see cref="T:System.Net.FileWebRequest" />.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized data for the <see cref="T:System.Net.FileWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized data for the <see cref="T:System.Net.FileWebRequest" />. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.FileWebRequest" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Timeout">
@@ -807,8 +757,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Domain Name System (DNS) query may take up to 15 seconds to return or time out. If your request contains a host name that requires resolution and you set <see cref="P:System.Net.FileWebRequest.Timeout" /> to a value less than 15 seconds, it may take 15 seconds or more before a <see cref="T:System.Net.WebException" /> is thrown to indicate a time-out on your request.</para
-          >
+            >A Domain Name System (DNS) query may take up to 15 seconds to return or time out. If your request contains a host name that requires resolution and you set <see cref="P:System.Net.FileWebRequest.Timeout" /> to a value less than 15 seconds, it may take 15 seconds or more before a <see cref="T:System.Net.WebException" /> is thrown to indicate a time-out on your request.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -835,8 +784,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebRequest.UseDefaultCredentials" /> property is provided only for compatibility with other implementations of the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebResponse" /> classes. There is no reason to use <see cref="P:System.Net.FileWebRequest.UseDefaultCredentials" />.</para
-          >
+            >The <see cref="P:System.Net.FileWebRequest.UseDefaultCredentials" /> property is provided only for compatibility with other implementations of the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebResponse" /> classes. There is no reason to use <see cref="P:System.Net.FileWebRequest.UseDefaultCredentials" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can adjust the intrusiveness of garbage collection in your application by setting the <see cref="P:System.Runtime.GCSettings.LatencyMode" /> property to one of the enumeration values. </para
-      >
+        >You can adjust the intrusiveness of garbage collection in your application by setting the <see cref="P:System.Runtime.GCSettings.LatencyMode" /> property to one of the enumeration values. </para>
       <para
         >See <format type="text/html">
           <a href="96278bb7-6eab-4612-8594-ceebfc887d81">Latency Modes</a>
-        </format> for a discussion of how the runtime configuration settings for garbage collection affect the default value for this enumeration. </para
-      >
+        </format> for a discussion of how the runtime configuration settings for garbage collection affect the default value for this enumeration. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +52,7 @@
               <a href="503f55ba-26ed-45ac-a2ea-caf994da04cd">&lt;gcConcurrent&gt;</a>
             </format> runtime configuration setting. If <format type="text/html">
               <a href="503f55ba-26ed-45ac-a2ea-caf994da04cd">&lt;gcConcurrent&gt;</a>
-            </format> is enabled, switching to <see cref="F:System.Runtime.GCLatencyMode.Batch" /> mode prevents any further concurrent collections.</para
-          >
+            </format> is enabled, switching to <see cref="F:System.Runtime.GCLatencyMode.Batch" /> mode prevents any further concurrent collections.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables garbage collection concurrency and reclaims objects while the application is running. This is the default mode for garbage collection on a workstation and is less intrusive than <see cref="F:System.Runtime.GCLatencyMode.Batch" />. It balances responsiveness with throughput.</para
-          >
+            >Enables garbage collection concurrency and reclaims objects while the application is running. This is the default mode for garbage collection on a workstation and is less intrusive than <see cref="F:System.Runtime.GCLatencyMode.Batch" />. It balances responsiveness with throughput.</para>
         </summary>
       </Docs>
     </Member>

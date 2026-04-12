@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see cref="T:System.Security.AccessControl.FileSystemRights" /> as the access rights type, and then use the instance normally. In contrast, <see cref="T:System.Security.AccessControl.ObjectSecurity" /> always takes access rights of type int.</para
-      >
+        >Access rights (permissions) are type T, which you can type-cast to or from an int. For example, you can cast a <see cref="T:System.Security.AccessControl.FileSystemRights" /> as the access rights type, and then use the instance normally. In contrast, <see cref="T:System.Security.AccessControl.ObjectSecurity" /> always takes access rights of type int.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,15 +69,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param
-        >
+          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
         <param name="resourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of resource.</param
-        >
+          />The type of resource.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -114,25 +111,21 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param
-        >
+          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
         <param name="resourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of resource.</param
-        >
+          />The type of resource.</param>
         <param name="safeHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A handle.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A handle.</param>
         <param name="includeSections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sections to include.</param
-        >
+          />The sections to include.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -168,29 +161,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param
-        >
+          />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is a container object.</param>
         <param name="resourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of resource.</param
-        >
+          />The type of resource.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the securable object with which the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is associated.</param
-        >
+          />The name of the securable object with which the new <see cref="T:System.Security.AccessControl.ObjectSecurity`1" /> object is associated.</param>
         <param name="includeSections">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sections to include.</param
-        >
+          />The sections to include.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -330,39 +319,33 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Represents a user account.</param
-        >
+          />Represents a user account.</param>
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />The access type.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The access type.</param>
         <param name="isInherited">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the access rule is inherited; otherwise, false.</param
-        >
+          />true if the access rule is inherited; otherwise, false.</param>
         <param name="inheritanceFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies how to propagate access masks to child objects.</param
-        >
+          />Specifies how to propagate access masks to child objects.</param>
         <param name="propagationFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
-        >
+          />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether access is allowed or denied.</param
-        >
+          />Specifies whether access is allowed or denied.</param>
       </Docs>
     </Member>
     <Member MemberName="AccessRuleType">
@@ -466,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" /> class representing the specified audit rule for the specified user.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" /> class representing the specified audit rule for the specified user.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -478,43 +460,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Represents a user account. </param
-        >
+          />Represents a user account. </param>
         <param name="accessMask">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that specifies an access type.</param
-        >
+          />An integer that specifies an access type.</param>
         <param name="isInherited">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the access rule is inherited; otherwise, false.</param
-        >
+          />true if the access rule is inherited; otherwise, false.</param>
         <param name="inheritanceFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies how to propagate access masks to child objects.</param
-        >
+          />Specifies how to propagate access masks to child objects.</param>
         <param name="propagationFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param
-        >
+          />Specifies how to propagate Access Control Entries (ACEs) to child objects.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Describes the type of auditing to perform.</param
-        >
+          />Describes the type of auditing to perform.</param>
       </Docs>
     </Member>
     <Member MemberName="AuditRuleType">
@@ -569,8 +545,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The handle of the securable object with which this ObjectSecurity`1 object is associated.</param
-        >
+          />The handle of the securable object with which this ObjectSecurity`1 object is associated.</param>
       </Docs>
     </Member>
     <Member MemberName="Persist">
@@ -600,8 +575,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the securable object with which this ObjectSecurity`1 object is associated.</param
-        >
+          />The name of the securable object with which this ObjectSecurity`1 object is associated.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAccessRule">

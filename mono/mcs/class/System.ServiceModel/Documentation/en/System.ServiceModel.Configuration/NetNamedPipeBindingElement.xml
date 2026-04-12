@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -69,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class with the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> class with the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param
-        >
+          />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -189,8 +186,7 @@
           <para>If the buffer is full, excess data remains in the underlying socket until the buffer has space again.</para>
           <para>The value of this property must be less than or equal to MaxMessageSize and must be larger than the size of the headers of the message or the channel throws an exception. </para>
           <para
-            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception. </para
-          >
+            >If you receive more data than you can buffer, the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -279,16 +275,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified binding to this <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> instance.</para
-          >
+            >Applies the specified binding to this <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" /> instance.</para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding to be applied.</param
-        >
+          />The binding to be applied.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">
@@ -313,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>

@@ -30,14 +30,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a <see cref="T:System.Net.OpenWriteCompletedEventHandler" /> delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. </para
-      >
+        >When you create a <see cref="T:System.Net.OpenWriteCompletedEventHandler" /> delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Net.WebClient.OpenWriteCompleted" /> event of a <see cref="T:System.Net.WebClient" />.</para
-      >
+        >Represents the method that will handle the <see cref="E:System.Net.WebClient.OpenWriteCompleted" /> event of a <see cref="T:System.Net.WebClient" />.</para>
     </summary>
   </Docs>
 </Type>

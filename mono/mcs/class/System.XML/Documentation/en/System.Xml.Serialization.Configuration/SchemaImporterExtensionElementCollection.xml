@@ -24,14 +24,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The configuration section for the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" /> is found in the app.config file or the machine.config file (for globally setting how the importer works).</para
-      >
+        >The configuration section for the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" /> is found in the app.config file or the machine.config file (for globally setting how the importer works).</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure the operation of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />. This class cannot be inherited.</para
-      >
+        >Handles the XML elements used to configure the operation of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElementCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -81,8 +78,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to add to the collection.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -177,8 +173,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to find.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to find.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -248,8 +243,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the item to remove.</param
-        >
+          />The name of the item to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -281,8 +275,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to remove.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">

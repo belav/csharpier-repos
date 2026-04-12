@@ -53,23 +53,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.InfocardInteractiveChannelInitializer" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.InfocardInteractiveChannelInitializer" /> class.  </para>
         </summary>
         <param name="credentials">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> from which this method is called.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.ClientCredentials" /> from which this method is called.</param>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding on the service endpoint.</param
-        >
+          />The binding on the service endpoint.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginDisplayInitializationUI">
@@ -104,22 +101,19 @@
           <para>The <see cref="T:System.IAsyncResult" /> from this method.</para>
         </returns>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The channel.</param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The asynchronous callback method called when this method completes.</param
-        >
+          />The asynchronous callback method called when this method completes.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Holds the current state.</param
-        >
+          />Holds the current state.</param>
       </Docs>
     </Member>
     <Member MemberName="Binding">
@@ -177,8 +171,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IAsyncResult" /> from the corresponding Begin method.</param
-        >
+          />The <see cref="T:System.IAsyncResult" /> from the corresponding Begin method.</param>
       </Docs>
     </Member>
   </Members>

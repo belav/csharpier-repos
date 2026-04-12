@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -71,30 +70,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" /> class with a specified scheme type, binding, and binding configuration.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" /> class with a specified scheme type, binding, and binding configuration.</para>
         </summary>
         <param name="schemeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A communications protocol scheme.</param
-        >
+          />A communications protocol scheme.</param>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A communications protocol message format style.</param
-        >
+          />A communications protocol message format style.</param>
         <param name="bindingConfiguration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding settings for the configuration of the protocol mapping element.</param
-        >
+          />The binding settings for the configuration of the protocol mapping element.</param>
       </Docs>
     </Member>
     <Member MemberName="Binding">

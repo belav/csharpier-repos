@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> is used to compile custom resource files. You can have any number of build providers. The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the compilation information it contains.</para
-      >
+        >The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> is used to compile custom resource files. You can have any number of build providers. The <see cref="T:System.Web.Configuration.BuildProviderCollection" /> does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the compilation information it contains.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.Configuration.BuildProvider" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.Configuration.BuildProvider" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BuildProviderCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BuildProviderCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,22 +65,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="T:System.Web.Configuration.BuildProvider" /> object already exists in the collection, the build provider is ignored.</para
-          >
+            >If the <see cref="T:System.Web.Configuration.BuildProvider" /> object already exists in the collection, the build provider is ignored.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Configuration.BuildProvider" /> object to the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para
-          >
+            >Adds a <see cref="T:System.Web.Configuration.BuildProvider" /> object to the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
         </summary>
         <param name="buildProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.BuildProvider" /> object.</param
-        >
+          />A <see cref="T:System.Web.Configuration.BuildProvider" /> object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all <see cref="T:System.Web.Configuration.BuildProvider" /> objects from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para
-          >
+            >Clears all <see cref="T:System.Web.Configuration.BuildProvider" /> objects from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -232,22 +225,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="T:System.Web.Configuration.BuildProvider" /> does not exist in the collection, the build provider is ignored.</para
-          >
+            >If the <see cref="T:System.Web.Configuration.BuildProvider" /> does not exist in the collection, the build provider is ignored.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.BuildProvider" /> object from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.BuildProvider" /> object from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string value specifying the <see cref="T:System.Web.Configuration.BuildProvider" /> reference.</param
-        >
+          />A string value specifying the <see cref="T:System.Web.Configuration.BuildProvider" /> reference.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -267,22 +257,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the index does not specify a <see cref="T:System.Web.Configuration.BuildProvider" /> in the collection, an out-of-range exception is thrown. </para
-          >
+            >If the index does not specify a <see cref="T:System.Web.Configuration.BuildProvider" /> in the collection, an out-of-range exception is thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Web.Configuration.BuildProvider" /> object at the specified index from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para
-          >
+            >Removes the <see cref="T:System.Web.Configuration.BuildProvider" /> object at the specified index from the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer value specifying the location of a specific <see cref="T:System.Web.Configuration.BuildProvider" /> object within the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</param
-        >
+          />An integer value specifying the location of a specific <see cref="T:System.Web.Configuration.BuildProvider" /> object within the <see cref="T:System.Web.Configuration.BuildProviderCollection" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

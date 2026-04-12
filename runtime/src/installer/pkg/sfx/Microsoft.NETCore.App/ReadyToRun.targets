@@ -4,8 +4,7 @@
       <Crossgen2Dll>$([MSBuild]::NormalizePath('$(Crossgen2Dir)', 'tools', 'crossgen2.dll'))</Crossgen2Dll>
       <PublishReadyToRunPerfmapFormatVersion
         Condition="'$(PublishReadyToRunPerfmapFormatVersion)' == ''"
-        >1</PublishReadyToRunPerfmapFormatVersion
-      >
+        >1</PublishReadyToRunPerfmapFormatVersion>
     </PropertyGroup>
 
     <ItemGroup>

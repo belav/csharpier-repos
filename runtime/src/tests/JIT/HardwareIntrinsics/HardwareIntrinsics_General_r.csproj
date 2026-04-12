@@ -3,8 +3,7 @@
     <NumberOfStripesToUseInStress>8</NumberOfStripesToUseInStress>
 
     <GCStressIncompatible Condition="'$(TargetArchitecture)' == 'arm64' and '$(TargetOS)' == 'osx'"
-      >true</GCStressIncompatible
-    >
+      >true</GCStressIncompatible>
     <GCStressIncompatible Condition="'$(TargetArchitecture)' == 'arm'">true</GCStressIncompatible>
   </PropertyGroup>
 

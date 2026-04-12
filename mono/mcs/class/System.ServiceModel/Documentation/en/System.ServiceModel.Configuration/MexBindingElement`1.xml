@@ -56,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexBindingElement`1" /> class with the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexBindingElement`1" /> class with the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the binding.</param
-        >
+          />The name of the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -120,8 +118,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A binding configuration element.</param
-        >
+          />A binding configuration element.</param>
       </Docs>
     </Member>
   </Members>

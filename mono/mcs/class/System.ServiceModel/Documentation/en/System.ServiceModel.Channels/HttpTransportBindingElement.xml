@@ -30,17 +30,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class is the starting point for creating a custom binding that implements the HTTP transport protocol. HTTP is the primary transport used for interoperability purposes. This transport is supported by indigo1 to ensure interoperability with other non-indigo2 Web services stacks.</para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class is the starting point for creating a custom binding that implements the HTTP transport protocol. HTTP is the primary transport used for interoperability purposes. This transport is supported by indigo1 to ensure interoperability with other non-indigo2 Web services stacks.</para>
       <para
-        >The indigo2 service model uses this class to create factory objects that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> and <see cref="T:System.ServiceModel.Channels.IChannelListener" /> interfaces. These factory objects, in turn, create the channels and listeners that transmit SOAP messages using the HTTP protocol. </para
-      >
+        >The indigo2 service model uses this class to create factory objects that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> and <see cref="T:System.ServiceModel.Channels.IChannelListener" /> interfaces. These factory objects, in turn, create the channels and listeners that transmit SOAP messages using the HTTP protocol. </para>
       <para
-        >You configure the factories that this class creates by setting its properties, such as <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.AuthenticationScheme" />, <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostNameComparisonMode" />, and <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />. </para
-      >
+        >You configure the factories that this class creates by setting its properties, such as <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.AuthenticationScheme" />, <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostNameComparisonMode" />, and <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />. </para>
       <para
-        >You can also set properties on the base class, <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />, <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />, and <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />.</para
-      >
+        >You can also set properties on the base class, <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />, <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />, and <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class using another binding element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" /> class using another binding element.</para>
         </summary>
       </Docs>
     </Member>
@@ -196,15 +190,13 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel factory.</typeparam
-        >
+          />The type of channel factory.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -249,15 +241,13 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel factory.</typeparam
-        >
+          />The type of channel factory.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BypassProxyOnLocal">
@@ -325,15 +315,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel to check.</typeparam
-        >
+          />The type of channel to check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
@@ -378,15 +366,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel to check.</typeparam
-        >
+          />The type of channel to check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -498,29 +484,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para
-          >
+            >Gets a property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para
-          >
+            >The property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Channels.BindingContext" />.</param
-        >
+          />A <see cref="T:System.ServiceModel.Channels.BindingContext" />.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the property to get.</typeparam
-        >
+          />The type of the property to get.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
@@ -630,15 +612,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For streamed messages, if the size of the message headers is greater than this property, then a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. For a non-streamed message, if the message size is greater than this property, then the message is dropped.</para
-          >
+            >For streamed messages, if the size of the message headers is greater than this property, then a <see cref="T:System.ServiceModel.QuotaExceededException" /> is thrown. For a non-streamed message, if the message size is greater than this property, then the message is dropped.</para>
           <para>If not specified, this defaults to 65536.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the maximum size of the buffer to use. For buffered messages this value is the same as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />. For streamed messages, this value is the maximum size of the SOAP headers, which must be read in buffered mode.</para
-          >
+            >Gets or sets the maximum size of the buffer to use. For buffered messages this value is the same as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />. For streamed messages, this value is the maximum size of the SOAP headers, which must be read in buffered mode.</para>
         </summary>
       </Docs>
     </Member>
@@ -721,9 +701,7 @@
           <para
             >Servers use realms to partition protected resources; each partition can have its own authentication scheme or authorization database. Realms are used only for basic and digest authentication. After a client successfully authenticates, the authentication is valid for all resources in a given realm. For a detailed description of realms, see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=95943"
-              >RFC 2617</see
-            >.</para
-          >
+              >RFC 2617</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -778,14 +756,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method writes binding-related statements into the WSDL information exposed by a particular contract and is used by indigo1 to communicate to clients the existence of this custom binding element in the binding stack.</para>
           <para
-            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" /> and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />, <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />, and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" /> methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para
-          >
+            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" /> and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />, <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />, and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" /> methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para>
           <para
-            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" /> property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" /> that indicate where security policy assertions should be added.</para
-          >
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" /> property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" /> that indicate where security policy assertions should be added.</para>
           <para
-            >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface. </para
-          >
+            >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -796,15 +771,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that you can use to insert your custom policy assertion.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that you can use to insert your custom policy assertion.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportContract">
@@ -841,15 +814,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A context that provides mappings from exported WSDL elements to the contract description.</param
-        >
+          />A context that provides mappings from exported WSDL elements to the contract description.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
@@ -887,8 +858,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
       </Docs>
     </Member>
     <Member MemberName="TransferMode">
@@ -917,8 +887,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.TransferMode" /> = Streamed implies both StreamedRequest and StreamedResponse.</para
-          >
+            >Specifying <see cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.TransferMode" /> = Streamed implies both StreamedRequest and StreamedResponse.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -952,15 +921,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true and the first request over a particular connection is authenticated using NTLM, subsequent requests over the same connection are processed using the authentication information in <see cref="T:System.Security.Principal.IIdentity" /> of the initial request.</para
-          >
+            >When this property is set to true and the first request over a particular connection is authenticated using NTLM, subsequent requests over the same connection are processed using the authentication information in <see cref="T:System.Security.Principal.IIdentity" /> of the initial request.</para>
           <para>This property has no effect when NTLM is not the authentication protocol. </para>
           <block subset="none" type="note">
             <para>While setting this property to true increases performance because additional NTLM authentication challenges are not sent, there is a security risk in not requiring all requests to provide authentication information. You must determine whether the increase in performance is worth this risk.</para>
           </block>
           <para
-            >crdefault <see cref="P:System.Net.HttpListener.UnsafeConnectionNtlmAuthentication" />.</para
-          >
+            >crdefault <see cref="P:System.Net.HttpListener.UnsafeConnectionNtlmAuthentication" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -32,14 +32,12 @@
           <a href="0fb41e2d-64f7-44ab-993e-05892eac6d82">parameter</a>
         </format> elements within the <format type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
-        </format> element. Specifically, this allows the addition of types to the collection of known types.</para
-      >
+        </format> element. Specifically, this allows the addition of types to the collection of known types.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para
-      >
+        >Handles the XML elements used to configure serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElementCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElementCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +94,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to add to the collection.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -179,8 +175,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type to find.</param
-        >
+          />The name of the type to find.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateNewElement">
@@ -285,8 +280,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to find.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to find.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -348,8 +342,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> to remove.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -379,8 +372,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the element to remove.</param
-        >
+          />The position of the element to remove.</param>
       </Docs>
     </Member>
   </Members>

@@ -22,24 +22,21 @@
         The <see cref="T:Mono.Unix.UnixDriveInfo" /> class presents
         information about a Unix mount point or special file.  It allows basic
         querying about the filesystem
-      </para
-      >
+      </para>
       <list type="bullet">
         <item>
           <term>
           Total size and free disk space
           (<see cref="P:Mono.Unix.UnixDriveInfo.TotalSize" /> and
           <see cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />).
-        </term
-          >
+        </term>
         </item>
         <item>
           <term>
           Querying of all availble disk drives, 
           <see cref="M:Mono.Unix.UnixDriveInfo.GetDrives" />, 
           visible through <c>/etc/fstab</c>.
-        </term
-          >
+        </term>
         </item>
       </list>
       <para>
@@ -89,22 +86,18 @@
         <param name="mountPoint">
           A <see cref="T:System.String" /> containing the Unix mount point to
           get information about.
-        </param
-        >
+        </param>
         <summary>
           Creates a <see cref="T:Mono.Unix.UnixDriveInfo" /> instance
           containing information about a Unix mount point and volume.
-        </summary
-        >
+        </summary>
         <remarks></remarks>
         <exception cref="T:System.ArgumentException">
           <paramref name="mountPoint" /> isn't a valid mount point.
-        </exception
-        >
+        </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="mountPoint" /> is <see langword="null" />.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getfsfile" />
       </Docs>
     </Member>
@@ -125,21 +118,18 @@
         <value>
           A <see cref="T:System.Int64" /> containing the total available
           free space on the drive.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The available free space is the space that normal users are able
             to write to (in the absense of file system quotas which may
             further limit how much disk space users can fill).  The drive may
             have some space reserved for the super-user (<c>root</c>).
-          </para
-          >
+          </para>
           <para>
             Use <see cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" /> for
             the total free space, including space reserved for the super-user.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total disk space.  
@@ -163,13 +153,11 @@
         <summary>
           Retrieves the file system format of the 
           <paramref name="mountPoint" /> volume.
-        </summary
-        >
+        </summary>
         <value>
           A <see cref="T:System.String" /> containing the file system format
           of the specified mount point.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Fstab.fs_vfstype" />
       </Docs>
@@ -194,13 +182,11 @@
         <value>
           A <see cref="T:Mono.Unix.UnixDriveType" /> specifying which type of
           drive this mount point is.
-        </value
-        >
+        </value>
         <remarks>
           Currently, this always returns 
           <see cref="F:Mono.Unix.UnixDriveType.Unknown" />.
-        </remarks
-        >
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetDrives">
@@ -227,8 +213,7 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixDriveInfo" /> array containing all
           drives listed in <c>/etc/fstab</c>.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             This method only <i>conceptually</i> reads <c>/etc/fstab</c>;
@@ -236,21 +221,18 @@
             <see cref="T:Mono.Unix.Native.Syscall" /> APIs, which may or may 
             not actually read <c>/etc/fstab</c> (check your operating system
             documentation).
-          </para
-          >
+          </para>
           <para>
             This method does not return <c>/etc/fstab</c> entries which do not
             correspond to actual mount points.  
             <see cref="F:Mono.Unix.Native.Fstab.fs_file" /> must start with a 
             forward-slash ("/").
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.IO.IOException">
           There was an error calling 
           <see cref="M:Mono.Unix.Native.Syscall.setfsent" />.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.setfsent" />
         <altmember cref="M:Mono.Unix.Native.Syscall.getfsent" />
         <altmember cref="M:Mono.Unix.Native.Syscall.endfsent" />
@@ -281,18 +263,15 @@
         <param name="specialFile">
           A <see cref="T:System.String" /> containing the "special file"
           (block device, generally the first field in <c>/etc/fstab</c>).
-        </param
-        >
+        </param>
         <summary>
           Creates a <see cref="T:Mono.Unix.UnixDriveInfo" /> instance
           containing information about the specified block device name.
-        </summary
-        >
+        </summary>
         <returns>
           A <see cref="T:Mono.Unix.UnixDriveInfo" /> instance containing
           information about the specified special file (block device).
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getfsspec" />
       </Docs>
@@ -313,13 +292,11 @@
         <summary>
           Returns a <see cref="T:System.Boolean" /> indicating whether the
           specified mount point is connected and queryable.
-        </summary
-        >
+        </summary>
         <value>
           A <see cref="T:System.Boolean" /> indicating whether the
           specified mount point is connected and queryable.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This property generates no exceptions.
@@ -328,8 +305,7 @@
             If this property returns <see langword="true" />, then the other
             properties should not generate
             <see cref="T:System.InvalidOperationException" />s.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -351,8 +327,7 @@
           A <see cref="T:System.Int64" /> containing the maximum number of
           bytes that may make up a filename.  This value varies from
           filesystem to filesystem.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The operating system does not specify an encoding for filenames,
@@ -362,8 +337,7 @@
             filesystem.  Consequently the maximum filename length can
             <i>not</i> be directly compared against
             <see cref="P:System.String.Length" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the maximum filename length.
@@ -388,8 +362,7 @@
         <value>
           A <see cref="T:System.String" /> containinig the mount point of the
           Unix volume.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Fstab.fs_file" />
       </Docs>
@@ -417,8 +390,7 @@
         <value>
           A <see cref="T:Mono.Unix.UnixDirectoryInfo" /> instance containing
           information about the mount point directory.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Fstab.fs_file" />
       </Docs>
@@ -462,22 +434,19 @@
         <value>
           A <see cref="T:System.Int64" /> containing the total free space on
           the Unix volume.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The total free space includes all the free space on the Unix
             volume, and may include space the normal users are not able to
             write to, either because of disk quotas or because space is
             reserved for the super-user (<c>root</c>).
-          </para
-          >
+          </para>
           <para>
             Use <see cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" /> for
             the available free space, excluding space reserved for the 
             super-user.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total free space.  
@@ -502,8 +471,7 @@
         <value>
           A <see cref="T:System.Int64" /> containing the total size of the
           volume.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           There was an error retrieving the total size.  
@@ -528,8 +496,7 @@
         <value>
           A <see cref="T:System.String" /> containing the block device for
           this volume.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Fstab.fs_spec" />
       </Docs>

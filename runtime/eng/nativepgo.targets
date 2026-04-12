@@ -2,23 +2,18 @@
   <PropertyGroup>
     <NativeOptimizationDataSupported
       Condition="'$(TargetOS)' == 'windows' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'x86' Or '$(TargetArchitecture)' == 'arm64')"
-      >true</NativeOptimizationDataSupported
-    >
+      >true</NativeOptimizationDataSupported>
     <NativeOptimizationDataSupported
       Condition="'$(TargetOS)' == 'linux' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'arm64')"
-      >true</NativeOptimizationDataSupported
-    >
+      >true</NativeOptimizationDataSupported>
     <NativeOptimizationDataSupported Condition="'$(NoPgoOptimize)' == 'true'"
-      >false</NativeOptimizationDataSupported
-    >
+      >false</NativeOptimizationDataSupported>
     <NativeOptimizationDataSupported Condition="'$(Configuration)' != 'Release'"
-      >false</NativeOptimizationDataSupported
-    >
+      >false</NativeOptimizationDataSupported>
 
     <_NativeOptimizationDataPackageTarget>$(TargetOS)-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget>
     <_NativeOptimizationDataPackageTarget Condition="'$(TargetOS)' == 'windows'"
-      >windows_nt-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget
-    >
+      >windows_nt-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget>
   </PropertyGroup>
   <ItemGroup Condition="'$(optimizationPGOCoreCLRVersion)'!='' and '$(DotNetBuildFromSource)' != 'true'">
     <PackageReference

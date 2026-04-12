@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" /> event occurs when the mouse pointer hovers over a <see cref="T:System.Windows.Forms.ListViewItem" />.</para
-      >
+        >The <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" /> event occurs when the mouse pointer hovers over a <see cref="T:System.Windows.Forms.ListViewItem" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemMouseHover" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -43,16 +41,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemMouseHoverEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemMouseHoverEventArgs" /> class. </para>
         </summary>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ListViewItem" /> the mouse pointer is currently hovering over.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ListViewItem" /> the mouse pointer is currently hovering over.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

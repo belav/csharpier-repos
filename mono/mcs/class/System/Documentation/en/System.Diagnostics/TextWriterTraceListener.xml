@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class provides the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> property to get or set the text writer that receives the tracing or debugging output.</para
-      >
+        >The <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class provides the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> property to get or set the text writer that receives the tracing or debugging output.</para>
       <para
-        >This class also provides methods to <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> so that it no longer receives tracing or debugging output, to <see cref="M:System.Diagnostics.TextWriterTraceListener.Flush" /> the output buffer for the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />, and to <see cref="M:System.Diagnostics.TextWriterTraceListener.Write(System.String)" /> a message to the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para
-      >
+        >This class also provides methods to <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> so that it no longer receives tracing or debugging output, to <see cref="M:System.Diagnostics.TextWriterTraceListener.Flush" /> the output buffer for the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />, and to <see cref="M:System.Diagnostics.TextWriterTraceListener.Write(System.String)" /> a message to the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para>
       <para>You must enable tracing or debugging to use a trace listener. The following syntax is compiler specific. If you use compilers other than C# or Visual Basic, refer to the documentation for your compiler.</para>
       <list type="bullet">
         <item>
@@ -60,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Directs tracing or debugging output to a <see cref="T:System.IO.TextWriter" /> or to a <see cref="T:System.IO.Stream" />, such as <see cref="T:System.IO.FileStream" />.</para
-      >
+        >Directs tracing or debugging output to a <see cref="T:System.IO.TextWriter" /> or to a <see cref="T:System.IO.Stream" />, such as <see cref="T:System.IO.FileStream" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -83,14 +80,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <see cref="T:System.IO.TextWriter" /> stream as the recipient of the tracing or debugging output. Its <see cref="P:System.Diagnostics.TraceListener.Name" /> is initialized to "TextWriter".</para
-          >
+            >This constructor uses the <see cref="T:System.IO.TextWriter" /> stream as the recipient of the tracing or debugging output. Its <see cref="P:System.Diagnostics.TraceListener.Name" /> is initialized to "TextWriter".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with <see cref="T:System.IO.TextWriter" /> as the output recipient.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with <see cref="T:System.IO.TextWriter" /> as the output recipient.</para>
         </summary>
       </Docs>
     </Member>
@@ -117,22 +112,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class, using the stream as the recipient of the debugging and tracing output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class, using the stream as the recipient of the debugging and tracing output.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -158,22 +150,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class using the specified writer as recipient of the tracing or debugging output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class using the specified writer as recipient of the tracing or debugging output.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -196,22 +185,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to an empty string ("").</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class, using the file as the recipient of the debugging and tracing output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class, using the file as the recipient of the debugging and tracing output.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -238,29 +224,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter or to an empty string (""), if the <paramref name="name" /> parameter is null.</para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter or to an empty string (""), if the <paramref name="name" /> parameter is null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the stream as the recipient of the debugging and tracing output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the stream as the recipient of the debugging and tracing output.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that represents the stream the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -288,23 +270,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the specified writer as recipient of the tracing or debugging output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the specified writer as recipient of the tracing or debugging output.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that receives the output from the <see cref="T:System.Diagnostics.TextWriterTraceListener" />. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -331,29 +310,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter or to an empty string (""), if the <paramref name="name" /> parameter is null.</para
-          >
+            >This constructor initializes the <see cref="P:System.Diagnostics.TraceListener.Name" /> property to the <paramref name="name" /> parameter or to an empty string (""), if the <paramref name="name" /> parameter is null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the file as the recipient of the debugging and tracing output.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class with the specified name, using the file as the recipient of the debugging and tracing output.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param
-        >
+          />The name of the file the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> writes to. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the new instance. </param
-        >
+          />The name of the new instance. </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -376,14 +351,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling a <see cref="Overload:System.Diagnostics.TextWriterTraceListener.Write" /> or <see cref="Overload:System.Diagnostics.TextWriterTraceListener.WriteLine" /> method after calling <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> automatically reopens the stream.</para
-          >
+            >Calling a <see cref="Overload:System.Diagnostics.TextWriterTraceListener.Write" /> or <see cref="Overload:System.Diagnostics.TextWriterTraceListener.WriteLine" /> method after calling <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> automatically reopens the stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> so that it no longer receives tracing or debugging output.</para
-          >
+            >Closes the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> so that it no longer receives tracing or debugging output.</para>
         </summary>
       </Docs>
     </Member>
@@ -409,22 +382,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> method of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class to release the managed resources of a <see cref="T:System.Diagnostics.TextWriterTraceListener" /> object.</para
-          >
+            >Use the <see cref="M:System.Diagnostics.TextWriterTraceListener.Close" /> method of the <see cref="T:System.Diagnostics.TextWriterTraceListener" /> class to release the managed resources of a <see cref="T:System.Diagnostics.TextWriterTraceListener" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes this <see cref="T:System.Diagnostics.TextWriterTraceListener" /> object.</para
-          >
+            >Disposes this <see cref="T:System.Diagnostics.TextWriterTraceListener" /> object.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release managed resources; if false, <see cref="M:System.Diagnostics.TextWriterTraceListener.Dispose(System.Boolean)" /> has no effect.</param
-        >
+          />true to release managed resources; if false, <see cref="M:System.Diagnostics.TextWriterTraceListener.Dispose(System.Boolean)" /> has no effect.</param>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -448,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Flushes the output buffer for the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para
-          >
+            >Flushes the output buffer for the <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -476,12 +445,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a message to this instance's <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para
-          >
+            >Writes a message to this instance's <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A message to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -507,12 +478,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a message to this instance's <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> followed by a line terminator. The default line terminator is a carriage return followed by a line feed (\r\n).</para
-          >
+            >Writes a message to this instance's <see cref="P:System.Diagnostics.TextWriterTraceListener.Writer" /> followed by a line terminator. The default line terminator is a carriage return followed by a line feed (\r\n).</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />A message to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A message to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Writer">

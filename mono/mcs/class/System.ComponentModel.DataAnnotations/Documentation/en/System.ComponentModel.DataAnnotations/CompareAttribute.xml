@@ -47,16 +47,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CompareAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CompareAttribute" /> class.</para>
         </summary>
         <param name="otherProperty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property to compare with the current property.</param
-        >
+          />The property to compare with the current property.</param>
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
@@ -93,8 +91,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field that caused the validation failure.</param
-        >
+          />The name of the field that caused the validation failure.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -133,8 +130,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to validate.</param
-        >
+          />The object to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="OtherProperty">

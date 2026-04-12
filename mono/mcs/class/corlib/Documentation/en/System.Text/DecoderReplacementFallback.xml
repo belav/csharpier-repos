@@ -22,11 +22,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If an input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" /> object emits a replacement string into the output to represent the original input byte sequence. The conversion process then continues to decode the remainder of the original input. </para
-      >
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If an input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" /> object emits a replacement string into the output to represent the original input byte sequence. The conversion process then continues to decode the remainder of the original input. </para>
       <para
-        >The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the replacement string used to initialize that object.</para
-      >
+        >The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the replacement string used to initialize that object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,14 +49,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the replacement string that is the value of this <see cref="T:System.Text.DecoderReplacementFallback" /> object is "?".</para
-          >
+            >By default, the replacement string that is the value of this <see cref="T:System.Text.DecoderReplacementFallback" /> object is "?".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -84,22 +80,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="replacement" /> parameter initializes the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object. A commonly used value is the Unicode "Replacement Character" (U+FFFD), which is specifically intended to replace an incoming character having a value that is unknown or unrepresentable in Unicode.</para
-          >
+            >The <paramref name="replacement" /> parameter initializes the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object. A commonly used value is the Unicode "Replacement Character" (U+FFFD), which is specifically intended to replace an incoming character having a value that is unknown or unrepresentable in Unicode.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class using a specified replacement string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class using a specified replacement string.</para>
         </summary>
         <param name="replacement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that is emitted in a decoding operation in place of an input byte sequence that cannot be decoded.</param
-        >
+          />A string that is emitted in a decoding operation in place of an input byte sequence that cannot be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateFallbackBuffer">
@@ -126,14 +119,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Text.DecoderFallbackBuffer" /> object that is initialized with the replacement string of this <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para
-          >
+            >Creates a <see cref="T:System.Text.DecoderFallbackBuffer" /> object that is initialized with the replacement string of this <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Text.DecoderFallbackBuffer" /> object that specifies a string to use instead of the original decoding operation input.</para
-          >
+            >A <see cref="T:System.Text.DecoderFallbackBuffer" /> object that specifies a string to use instead of the original decoding operation input.</para>
         </returns>
       </Docs>
     </Member>
@@ -155,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para
-          >
+            >Gets the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -183,22 +173,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the value of a specified object is equal to the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para
-          >
+            >Indicates whether the value of a specified object is equal to the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="value" /> is a <see cref="T:System.Text.DecoderReplacementFallback" /> object having a <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property that is equal to the <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property of the current <see cref="T:System.Text.DecoderReplacementFallback" /> object; otherwise, false. </para
-          >
+            >true if <paramref name="value" /> is a <see cref="T:System.Text.DecoderReplacementFallback" /> object having a <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property that is equal to the <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property of the current <see cref="T:System.Text.DecoderReplacementFallback" /> object; otherwise, false. </para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Text.DecoderReplacementFallback" /> object.</param
-        >
+          />A <see cref="T:System.Text.DecoderReplacementFallback" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -221,14 +208,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the value of its <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property.</para
-          >
+            >The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the value of its <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the hash code for the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para
-          >
+            >Retrieves the hash code for the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -254,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of characters in the replacement string for the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para
-          >
+            >Gets the number of characters in the replacement string for the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
         </summary>
       </Docs>
     </Member>

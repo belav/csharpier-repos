@@ -37,8 +37,7 @@
     <CreatePackedPackage Condition="'$(CreatePackedPackage)' == ''">false</CreatePackedPackage>
 
     <SupportedPackageOSGroups Condition="'$(SupportedPackageOSGroups)' == ''"
-      >windows;osx;android;linux;freebsd;netbsd;illumos;solaris;haiku</SupportedPackageOSGroups
-    >
+      >windows;osx;android;linux;freebsd;netbsd;illumos;solaris;haiku</SupportedPackageOSGroups>
     <SupportedPackageOSGroups>;$(SupportedPackageOSGroups);</SupportedPackageOSGroups>
 
     <_isSupportedOSGroup>true</_isSupportedOSGroup>
@@ -48,16 +47,13 @@
   <PropertyGroup>
     <_derivedPackageTargetOSGroup
       Condition="'$(_derivedPackageTargetOSGroup)' == '' and '$(TargetOS)' != ''"
-      >$(TargetOS)</_derivedPackageTargetOSGroup
-    >
+      >$(TargetOS)</_derivedPackageTargetOSGroup>
     <_derivedPackageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == ''"
-      >linux</_derivedPackageTargetOSGroup
-    >
+      >linux</_derivedPackageTargetOSGroup>
 
     <_isSupportedOSGroup
       Condition="!$(SupportedPackageOSGroups.Contains(';$(_derivedPackageTargetOSGroup);'))"
-      >false</_isSupportedOSGroup
-    >
+      >false</_isSupportedOSGroup>
   </PropertyGroup>
 
   <!-- _packageTargetOSGroup is used to control the runtime package imports, don't import runtime package targets for
@@ -66,8 +62,7 @@
     <!-- Android will use Linux package definitions -->
     <_packageTargetOSGroup>$(_derivedPackageTargetOSGroup)</_packageTargetOSGroup>
     <_packageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == 'android'"
-      >linux</_packageTargetOSGroup
-    >
+      >linux</_packageTargetOSGroup>
   </PropertyGroup>
   <PropertyGroup>
     <SkipPackageFileCheck>true</SkipPackageFileCheck>

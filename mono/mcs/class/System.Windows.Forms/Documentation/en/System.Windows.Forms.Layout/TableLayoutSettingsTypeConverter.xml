@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Layout.TableLayoutSettingsTypeConverter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Layout.TableLayoutSettingsTypeConverter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -71,15 +70,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you want to convert from.</param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you want to convert from.</param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
@@ -113,15 +110,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you want to convert to.</param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you want to convert to.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -156,22 +151,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert.</param
-        >
+          />The <see cref="T:System.Object" /> to convert.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -207,29 +199,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param
-        >
+          />The <see cref="T:System.Globalization.CultureInfo" /> to use as the current culture.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert.</param
-        >
+          />The <see cref="T:System.Object" /> to convert.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to convert the value parameter to.</param
-        >
+          />The <see cref="T:System.Type" /> to convert the value parameter to.</param>
       </Docs>
     </Member>
   </Members>

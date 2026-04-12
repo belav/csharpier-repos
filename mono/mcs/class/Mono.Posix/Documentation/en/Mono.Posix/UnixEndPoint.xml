@@ -18,9 +18,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Net.EndPoint</BaseTypeName>
   </Base>
@@ -35,8 +33,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-      <see cref="T:Mono.Unix.UnixEndPoint" /> instead.</para
-      >
+      <see cref="T:Mono.Unix.UnixEndPoint" /> instead.</para>
       <example>
         <code lang="C#">
 try
@@ -75,8 +72,7 @@ catch (Exception ex)
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see cref="T:System.String" /> representing the socket name.</param
-        >
+          >a <see cref="T:System.String" /> representing the socket name.</param>
         <summary>Constructor with socketName as parameter.</summary>
         <remarks />
         <altmember cref="C:Mono.Unix.UnixEndPoint(System.String)" />

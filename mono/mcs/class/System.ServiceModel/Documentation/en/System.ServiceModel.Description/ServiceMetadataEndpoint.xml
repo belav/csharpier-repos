@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A standard endpoint with a fixed contract (<see cref="T:System.ServiceModel.Description.IMetadataExchange" />) and a default HTTP binding used for exposing metadata. </para
-      >
+        >A standard endpoint with a fixed contract (<see cref="T:System.ServiceModel.Description.IMetadataExchange" />) and a default HTTP binding used for exposing metadata. </para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class.</para
-          >
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class using the specified endpoint address.</para
-          >
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class using the specified endpoint address.</para>
         </summary>
       </Docs>
     </Member>
@@ -101,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class using the specified binding and endpoint address. </para
-          >
+            >Creates and initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> class using the specified binding and endpoint address. </para>
         </summary>
       </Docs>
     </Member>

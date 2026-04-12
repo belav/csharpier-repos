@@ -49,8 +49,7 @@
         <param name="display">an X Display</param>
         <param name="drawable">an X Drawable, (a Pixmap or a Window)</param>
         <param name="visual"
-          >the visual to use for drawing to drawable. The depth of the visual must match the depth of the drawable. Currently, only TrueColor visuals are fully supported.</param
-        >
+          >the visual to use for drawing to drawable. The depth of the visual must match the depth of the drawable. Currently, only TrueColor visuals are fully supported.</param>
         <param name="width">the current width of <paramref name="drawable" />.</param>
         <param name="height"> the current height of <paramref name="drawable" />.</param>
         <summary>Creates an Xlib surface that draws to the given drawable.</summary>
@@ -61,8 +60,7 @@
             type="note"
           >
 			If <paramref name="drawable" /> is a Window, then the function <see cref="M:Cairo.XlibSurface.SetSize()" /> must be called whenever the size of the window changes.
-		  </block
-          >
+		  </block>
         </remarks>
       </Docs>
       <AssemblyInfo>

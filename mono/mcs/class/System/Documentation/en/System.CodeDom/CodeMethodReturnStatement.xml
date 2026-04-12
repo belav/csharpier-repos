@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> can be used to represent a return value statement. The <see cref="P:System.CodeDom.CodeMethodReturnStatement.Expression" /> property specifies the value to return.</para
-      >
+        <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> can be used to represent a return value statement. The <see cref="P:System.CodeDom.CodeMethodReturnStatement.Expression" /> property specifies the value to return.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> class using the specified expression.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMethodReturnStatement" /> class using the specified expression.</para>
         </summary>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the return value. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the return value. </param>
       </Docs>
     </Member>
     <Member MemberName="Expression">

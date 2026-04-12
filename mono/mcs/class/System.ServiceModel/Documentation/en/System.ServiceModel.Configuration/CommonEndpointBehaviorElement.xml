@@ -19,8 +19,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement&lt;System.ServiceModel.Configuration.BehaviorExtensionElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TServiceModelExtensionElement"
-        >System.ServiceModel.Configuration.BehaviorExtensionElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.BehaviorExtensionElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CommonEndpointBehaviorElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CommonEndpointBehaviorElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>

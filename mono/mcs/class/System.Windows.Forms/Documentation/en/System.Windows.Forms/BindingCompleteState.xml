@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.BindingCompleteState" /> is used by the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" /> type.</para
-      >
+        >The <see cref="T:System.Windows.Forms.BindingCompleteState" /> is used by the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" /> type.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

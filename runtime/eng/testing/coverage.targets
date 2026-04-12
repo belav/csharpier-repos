@@ -45,25 +45,19 @@
   >
     <PropertyGroup>
       <CoverageOutputPath Condition="'$(CoverageOutputPath)' == ''"
-        >coverage.opencover.xml</CoverageOutputPath
-      >
+        >coverage.opencover.xml</CoverageOutputPath>
       <CoverageReportInputPath Condition="'$(CoverageReportInputPath)' == ''"
-        >$(CoverageOutputPath)</CoverageReportInputPath
-      >
+        >$(CoverageOutputPath)</CoverageReportInputPath>
       <CoverageReportDir Condition="'$(CoverageReportDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'report'))</CoverageReportDir
-      >
+        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'report'))</CoverageReportDir>
 
       <RunScriptCommand>"$(DotNetTool)" coverlet "$(TargetFileName)" --target "$(RunScriptHost)" --targetargs "$(RunScriptCommand.Replace('&quot;$(RunScriptHost)&quot;', ''))" --format "opencover" --output "$(CoverageOutputPath)" --verbosity "normal" --use-source-link --does-not-return-attribute DoesNotReturn</RunScriptCommand>
       <RunScriptCommand Condition="'@(CoverageExcludeByFile)' != ''"
-        >$(RunScriptCommand) --exclude-by-file @(CoverageExcludeByFile -> '"%(Identity)"', ' --exclude-by-file ')</RunScriptCommand
-      >
+        >$(RunScriptCommand) --exclude-by-file @(CoverageExcludeByFile -> '"%(Identity)"', ' --exclude-by-file ')</RunScriptCommand>
       <RunScriptCommand Condition="'@(CoverageIncludeDirectory)' != ''"
-        >$(RunScriptCommand) --include-directory @(CoverageIncludeDirectory -> '"$(RunScriptHostDir)%(Identity)"', ' --include-directory ')</RunScriptCommand
-      >
+        >$(RunScriptCommand) --include-directory @(CoverageIncludeDirectory -> '"$(RunScriptHostDir)%(Identity)"', ' --include-directory ')</RunScriptCommand>
       <RunScriptCommand Condition="'$(CoverageIncludeTests)' == 'true'"
-        >$(RunScriptCommand) --include-test-assembly</RunScriptCommand
-      >
+        >$(RunScriptCommand) --include-test-assembly</RunScriptCommand>
       <RunScriptCommand>$(RunScriptCommand) --include @(CoverageInclude -> '"[%(Identity)]*"', ' --include ')</RunScriptCommand>
       <CoverageReportCommandLine>"$(DotNetTool)" reportgenerator "-reports:$(CoverageReportInputPath)" "-targetdir:$(CoverageReportDir.TrimEnd('\/'))" "-reporttypes:Html" "-verbosity:Info"</CoverageReportCommandLine>
     </PropertyGroup>
@@ -86,15 +80,12 @@
 
     <PropertyGroup>
       <CoverageReportInputPath Condition="'$(CoverageReportInputPath)' == ''"
-        >%(CoverageOutputFile.Identity)</CoverageReportInputPath
-      >
+        >%(CoverageOutputFile.Identity)</CoverageReportInputPath>
       <CoverageReportTypes Condition="'$(CoverageReportTypes)' == ''">Html</CoverageReportTypes>
       <CoverageReportVerbosity Condition="'$(CoverageReportVerbosity)' == ''"
-        >Info</CoverageReportVerbosity
-      >
+        >Info</CoverageReportVerbosity>
       <CoverageReportDir Condition="'$(CoverageReportDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'TestResults', 'report'))</CoverageReportDir
-      >
+        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'TestResults', 'report'))</CoverageReportDir>
       <CoverageReportCommand>"$(DotNetTool)" reportgenerator "-reports:$(CoverageReportInputPath)" "-targetdir:$(CoverageReportDir.TrimEnd('\/'))" "-reporttypes:$(CoverageReportTypes)" "-verbosity:$(CoverageReportVerbosity)"</CoverageReportCommand>
     </PropertyGroup>
 

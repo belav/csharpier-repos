@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines access to securable objects. The derived classes <see cref="T:System.Security.AccessControl.AccessRule" /> and <see cref="T:System.Security.AccessControl.AuditRule" /> offer specializations for access and audit functionality.</para
-      >
+        >Determines access to securable objects. The derived classes <see cref="T:System.Security.AccessControl.AccessRule" /> and <see cref="T:System.Security.AccessControl.AuditRule" /> offer specializations for access and audit functionality.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,44 +51,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AuthorizationControl.AccessRule" /> class by using the specified values.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AuthorizationControl.AccessRule" /> class by using the specified values.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity to which the access rule applies.  This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param
-        >
+          />The identity to which the access rule applies.  This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
         <param name="accessMask">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
-        >
+          />The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param>
         <param name="isInherited">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inherit this rule from a parent container.</param
-        >
+          />true to inherit this rule from a parent container.</param>
         <param name="inheritanceFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inheritance properties of the access rule.</param
-        >
+          />The inheritance properties of the access rule.</param>
         <param name="propagationFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" /> is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param
-        >
+          />Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" /> is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
       </Docs>
     </Member>
     <Member MemberName="AccessMask">
@@ -137,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Security.Principal.IdentityReference" /> to which this rule applies.</para
-          >
+            >Gets the <see cref="T:System.Security.Principal.IdentityReference" /> to which this rule applies.</para>
         </summary>
       </Docs>
     </Member>
@@ -214,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the propagation flags, which determine how inheritance of this rule is propagated to child objects. This property is significant only when the value of the <see cref="T:System.Security.AccessControl.InheritanceFlags" /> enumeration is not <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</para
-          >
+            >Gets the value of the propagation flags, which determine how inheritance of this rule is propagated to child objects. This property is significant only when the value of the <see cref="T:System.Security.AccessControl.InheritanceFlags" /> enumeration is not <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</para>
         </summary>
       </Docs>
     </Member>

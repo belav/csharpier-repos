@@ -5,8 +5,7 @@
     <!-- NOTE: this test simply takes too long to complete under heap verify. It is not fundamentally incompatible. -->
     <GCStressIncompatible Condition="'$(TargetArchitecture)' == 'x86'">true</GCStressIncompatible>
     <HeapVerifyIncompatible Condition="'$(TargetArchitecture)' == 'x86'"
-      >true</HeapVerifyIncompatible
-    >
+      >true</HeapVerifyIncompatible>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>Full</DebugType>

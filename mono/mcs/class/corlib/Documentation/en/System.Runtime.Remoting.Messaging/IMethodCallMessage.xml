@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is generated as a result of a method called on a remote object, and is used to transport details about the remote method call to the server side.</para
-      >
+        >An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> is generated as a result of a method called on a remote object, and is used to transport details about the remote method call to the server side.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +72,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested in argument. </param
-        >
+          />The number of the requested in argument. </param>
       </Docs>
     </Member>
     <Member MemberName="GetInArgName">
@@ -110,8 +108,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested in argument. </param
-        >
+          />The number of the requested in argument. </param>
       </Docs>
     </Member>
     <Member MemberName="InArgCount">
@@ -152,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" /> property is redundant since the same functionality can be achieved with the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" /> and <see cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" /> methods, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para
-          >
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" /> property is redundant since the same functionality can be achieved with the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" /> and <see cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" /> methods, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

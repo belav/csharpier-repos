@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> enumeration can be passed to the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace(System.Xml.XPath.XPathNamespaceScope)" /> and <see cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace(System.Xml.XPath.XPathNamespaceScope)" /> methods of the <see cref="T:System.Xml.XPath.XPathNavigator" /> class to specify the type of namespace node to move to.</para
-      >
+        >The <see cref="T:System.Xml.XPath.XPathNamespaceScope" /> enumeration can be passed to the <see cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace(System.Xml.XPath.XPathNamespaceScope)" /> and <see cref="M:System.Xml.XPath.XPathNavigator.MoveToNextNamespace(System.Xml.XPath.XPathNamespaceScope)" /> methods of the <see cref="T:System.Xml.XPath.XPathNavigator" /> class to specify the type of namespace node to move to.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

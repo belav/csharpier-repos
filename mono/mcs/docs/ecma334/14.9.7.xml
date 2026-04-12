@@ -16,7 +16,6 @@ bool operator !=(string x, string y);
   </paragraph>
   <paragraph
     >The string equality operators compare string values rather than string references. When two separate string instances contain the exact same sequence of characters, the values of the strings are equal, but the references are different. <note
-      >[Note: As described in <hyperlink>14.9.6</hyperlink>, the reference type equality operators can be used to compare string references instead of string values. end note]</note
-    >
+      >[Note: As described in <hyperlink>14.9.6</hyperlink>, the reference type equality operators can be used to compare string references instead of string values. end note]</note>
   </paragraph>
 </clause>

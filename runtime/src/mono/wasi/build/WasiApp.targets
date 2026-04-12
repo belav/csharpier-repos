@@ -85,8 +85,7 @@
   <PropertyGroup>
     <WasmDedup Condition="'$(WasmDedup)' == ''">true</WasmDedup>
     <WasmEnableExceptionHandling Condition="'$(WasmEnableExceptionHandling)' == ''"
-      >false</WasmEnableExceptionHandling
-    >
+      >false</WasmEnableExceptionHandling>
     <WasmEnableSIMD Condition="'$(WasmEnableSIMD)' == ''">false</WasmEnableSIMD>
 
     <!--<WasmStripAOTAssemblies Condition="'$(AOTMode)' == 'LLVMOnlyInterp'">false</WasmStripAOTAssemblies>-->
@@ -97,44 +96,34 @@
 
     <IsWasiProject
       Condition="'$(IsWasiProject)' == '' and '$(RuntimeIdentifier)' == 'wasi-wasm' and '$(OutputType)' != 'Library'"
-      >true</IsWasiProject
-    >
+      >true</IsWasiProject>
     <IsBrowserWasmProject
       Condition="'$(IsBrowserWasmProject)' == '' and '$(RuntimeIdentifier)' == 'browser-wasm' and '$(OutputType)' != 'Library'"
-      >true</IsBrowserWasmProject
-    >
+      >true</IsBrowserWasmProject>
     <IsWasmProject
       Condition="'$(IsWasmProject)' == '' and ('$(IsWasiProject)' == 'true' or '$(IsBrowserWasmProject)' == 'true')"
-      >true</IsWasmProject
-    >
+      >true</IsWasmProject>
 
     <WasmBuildAppAfterThisTarget
       Condition="'$(WasmBuildAppAfterThisTarget)' == '' and '$(DisableAutoWasmBuildApp)' != 'true'"
-      >Build</WasmBuildAppAfterThisTarget
-    >
+      >Build</WasmBuildAppAfterThisTarget>
 
     <WasmTriggerPublishAppAfterThisTarget
       Condition="'$(DisableAutoWasmPublishApp)' != 'true' and '$(WasmBuildingForNestedPublish)' != 'true'"
-      >Publish</WasmTriggerPublishAppAfterThisTarget
-    >
+      >Publish</WasmTriggerPublishAppAfterThisTarget>
     <_WasmNestedPublishAppPreTarget Condition="'$(DisableAutoWasmPublishApp)' != 'true'"
-      >Publish</_WasmNestedPublishAppPreTarget
-    >
+      >Publish</_WasmNestedPublishAppPreTarget>
 
     <EnableDefaultWasmAssembliesToBundle Condition="'$(EnableDefaultWasmAssembliesToBundle)' == ''"
-      >true</EnableDefaultWasmAssembliesToBundle
-    >
+      >true</EnableDefaultWasmAssembliesToBundle>
     <WasmBuildOnlyAfterPublish
       Condition="'$(WasmBuildOnlyAfterPublish)' == '' and ('$(DeployOnBuild)' == 'true' or '$(_IsPublishing)' == 'true')"
-      >true</WasmBuildOnlyAfterPublish
-    >
+      >true</WasmBuildOnlyAfterPublish>
     <WasmGenerateAppBundle
       Condition="'$(WasmGenerateAppBundle)' == '' and '$(OutputType)' != 'Library'"
-      >true</WasmGenerateAppBundle
-    >
+      >true</WasmGenerateAppBundle>
     <WasmGenerateAppBundle Condition="'$(WasmGenerateAppBundle)' == ''"
-      >false</WasmGenerateAppBundle
-    >
+      >false</WasmGenerateAppBundle>
 
     <!-- FIXME: can't set to true because
       /workspaces/runtime/.dotnet/sdk/7.0.100-rc.1.22431.12/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Sdk.FrameworkReferenceResolution.targets(135,5): error NETSDK1084: There is no application host available for the specified RuntimeIdentifier 'wasi-wasm'.
@@ -145,26 +134,21 @@
 
     <!-- Temporarily `false`, till sdk gets a fix for supporting the new file -->
     <WasmEmitSymbolMap Condition="'$(WasmEmitSymbolMap)' == '' and '$(RunAOTCompilation)' != 'true'"
-      >false</WasmEmitSymbolMap
-    >
+      >false</WasmEmitSymbolMap>
 
     <!-- if DebuggerSupport==true, then ensure that WasmDebugLevel isn't disabling debugging -->
     <WasmDebugLevel
       Condition="('$(WasmDebugLevel)' == '' or '$(WasmDebugLevel)' == '0') and ('$(DebuggerSupport)' == 'true' or '$(Configuration)' == 'Debug')"
-      >-1</WasmDebugLevel
-    >
+      >-1</WasmDebugLevel>
 
     <WasmSingleFileBundle Condition="'$(WasmSingleFileBundle)' == ''">false</WasmSingleFileBundle>
     <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(WasmSingleFileBundle)' == 'true'"
-      >true</WasmBuildNative
-    >
+      >true</WasmBuildNative>
     <WasmBuildNative
       Condition="'$(WasmBuildNative)' == '' and '$(InvariantGlobalization)' == 'true'"
-      >true</WasmBuildNative
-    >
+      >true</WasmBuildNative>
     <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(InvariantTimezone)' == 'true'"
-      >true</WasmBuildNative
-    >
+      >true</WasmBuildNative>
 
     <WasiBundleAssemblies Condition="'$(WasiBundleAssemblies)' == ''">true</WasiBundleAssemblies>
     <WasiRunner Condition="'$(WasiRunner)' == ''">wasmtime</WasiRunner>
@@ -179,8 +163,7 @@
   <PropertyGroup Label="Identify app bundle directory to run from">
     <!-- Allow running from custom WasmAppDir -->
     <_AppBundleDirForRunCommand Condition="'$(WasmAppDir)' != ''"
-      >$(WasmAppDir)</_AppBundleDirForRunCommand
-    >
+      >$(WasmAppDir)</_AppBundleDirForRunCommand>
 
     <!--
       This is the default path. We have to build it explicitly because
@@ -195,41 +178,34 @@
     <!-- This is the only case where OutputPath needs an additional part -->
     <_AppBundleDirForRunCommand
       Condition="'$(_AppBundleDirForRunCommand)' == '' and '$(UseArtifactsOutput)' == '' and '$(AppendRuntimeIdentifierToOutputPath)' != 'false'"
-      >$([System.IO.Path]::Combine($(OutputPath), 'wasi-wasm', 'AppBundle'))</_AppBundleDirForRunCommand
-    >
+      >$([System.IO.Path]::Combine($(OutputPath), 'wasi-wasm', 'AppBundle'))</_AppBundleDirForRunCommand>
 
     <!--
       In case of UseArtifactsOutput==true, the path is like `OutputPath=./bin/wc0/debug_browser-wasm/`. And
       it remains the same even if `AppendRuntimeIdentifierToOutputPath`==true .
     -->
     <_AppBundleDirForRunCommand Condition="'$(_AppBundleDirForRunCommand)' == ''"
-      >$([System.IO.Path]::Combine($(OutputPath), 'AppBundle'))</_AppBundleDirForRunCommand
-    >
+      >$([System.IO.Path]::Combine($(OutputPath), 'AppBundle'))</_AppBundleDirForRunCommand>
 
     <!-- Ensure the path is absolute. In case of VS, the cwd might not be the correct one, so explicitly
          use $(MSBuildProjectDirectory). -->
     <_AppBundleDirForRunCommand
       Condition="'$(_AppBundleDirForRunCommand)' != '' and !$([System.IO.Path]::IsPathRooted($(_AppBundleDirForRunCommand)))"
-      >$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(_AppBundleDirForRunCommand)))</_AppBundleDirForRunCommand
-    >
+      >$([System.IO.Path]::Combine($(MSBuildProjectDirectory), $(_AppBundleDirForRunCommand)))</_AppBundleDirForRunCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(WasmGenerateAppBundle)' == 'true'">
     <RunCommand Condition="'$(DOTNET_HOST_PATH)' != '' and Exists($(DOTNET_HOST_PATH))"
-      >$(DOTNET_HOST_PATH)</RunCommand
-    >
+      >$(DOTNET_HOST_PATH)</RunCommand>
     <RunCommand Condition="'$(RunCommand)' == ''">dotnet</RunCommand>
 
     <_RuntimeConfigJsonPath>$([MSBuild]::NormalizePath($(_AppBundleDirForRunCommand), '$(AssemblyName).runtimeconfig.json'))</_RuntimeConfigJsonPath>
     <RunArguments Condition="'$(RunArguments)' == '' and '$(WasmSingleFileBundle)' != 'true'"
-      >exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; --runtime-config &quot;$(_RuntimeConfigJsonPath)&quot; $(WasmHostArguments)</RunArguments
-    >
+      >exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; --runtime-config &quot;$(_RuntimeConfigJsonPath)&quot; $(WasmHostArguments)</RunArguments>
     <RunArguments Condition="'$(RunArguments)' == '' and '$(WasmSingleFileBundle)' == 'true'"
-      >exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; $(WasmHostArguments)</RunArguments
-    >
+      >exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; $(WasmHostArguments)</RunArguments>
     <RunWorkingDirectory Condition="'$(RunWorkingDirectory)' == ''"
-      >$(_AppBundleDirForRunCommand)</RunWorkingDirectory
-    >
+      >$(_AppBundleDirForRunCommand)</RunWorkingDirectory>
   </PropertyGroup>
 
   <!-- PUBLISH -->
@@ -286,8 +262,7 @@
     <PropertyGroup>
       <_WasmRuntimeConfigFilePath
         Condition="$([System.String]::new(%(PublishItemsOutputGroupOutputs.Identity)).EndsWith('$(AssemblyName).runtimeconfig.json'))"
-        >@(PublishItemsOutputGroupOutputs)</_WasmRuntimeConfigFilePath
-      >
+        >@(PublishItemsOutputGroupOutputs)</_WasmRuntimeConfigFilePath>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(EnableDefaultWasmAssembliesToBundle)' == 'true' and '$(DisableAutoWasmPublishApp)' != 'true'">
@@ -298,8 +273,7 @@
     <PropertyGroup Condition="'$(_WasmRuntimeConfigFilePath)' == ''">
       <_WasmRuntimeConfigFilePath
         Condition="$([System.String]::new(%(PublishItemsOutputGroupOutputs.Identity)).EndsWith('$(AssemblyName).runtimeconfig.json'))"
-        >@(PublishItemsOutputGroupOutputs)</_WasmRuntimeConfigFilePath
-      >
+        >@(PublishItemsOutputGroupOutputs)</_WasmRuntimeConfigFilePath>
     </PropertyGroup>
   </Target>
 
@@ -332,12 +306,10 @@
 
     <PropertyGroup>
       <MicrosoftNetCoreAppRuntimePackDir Condition="'$(MicrosoftNetCoreAppRuntimePackDir)' == ''"
-        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir
-      >
+        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir>
       <MicrosoftNetCoreAppRuntimePackRidDir
         Condition="'$(MicrosoftNetCoreAppRuntimePackRidDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', $(RuntimeIdentifier)))</MicrosoftNetCoreAppRuntimePackRidDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', $(RuntimeIdentifier)))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir)))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidNativeDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir), 'native'))</MicrosoftNetCoreAppRuntimePackRidNativeDir>
 
@@ -345,21 +317,17 @@
       <_WasmRuntimePackSrcDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidNativeDir), 'src'))</_WasmRuntimePackSrcDir>
 
       <_WasmIntermediateOutputPath Condition="'$(WasmBuildingForNestedPublish)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'wasm', 'for-build'))</_WasmIntermediateOutputPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'wasm', 'for-build'))</_WasmIntermediateOutputPath>
       <_WasmIntermediateOutputPath Condition="'$(WasmBuildingForNestedPublish)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'wasm', 'for-publish'))</_WasmIntermediateOutputPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'wasm', 'for-publish'))</_WasmIntermediateOutputPath>
 
       <_DriverGenCPath>$(_WasmIntermediateOutputPath)driver-gen.c</_DriverGenCPath>
       <_WasmShouldAOT
         Condition="'$(WasmBuildingForNestedPublish)' == 'true' and '$(RunAOTCompilation)' == 'true'"
-        >true</_WasmShouldAOT
-      >
+        >true</_WasmShouldAOT>
       <_WasmShouldAOT
         Condition="'$(RunAOTCompilationAfterBuild)' == 'true' and '$(RunAOTCompilation)' == 'true'"
-        >true</_WasmShouldAOT
-      >
+        >true</_WasmShouldAOT>
       <_WasmShouldAOT Condition="'$(_WasmShouldAOT)' == ''">false</_WasmShouldAOT>
     </PropertyGroup>
 
@@ -411,38 +379,30 @@
 
     <PropertyGroup>
       <WasmAppDir Condition="'$(WasmAppDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(OutputPath), 'AppBundle'))</WasmAppDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(OutputPath), 'AppBundle'))</WasmAppDir>
 
       <WasmMainAssemblyFileName Condition="'$(WasmMainAssemblyFileName)' == ''"
-        >$(TargetFileName)</WasmMainAssemblyFileName
-      >
+        >$(TargetFileName)</WasmMainAssemblyFileName>
       <!-- Ensure this is only the filename -->
       <WasmMainAssemblyFileName Condition="'$(WasmMainAssemblyFileName)' != ''"
-        >$([System.IO.Path]::GetFileName($(WasmMainAssemblyFileName)))</WasmMainAssemblyFileName
-      >
+        >$([System.IO.Path]::GetFileName($(WasmMainAssemblyFileName)))</WasmMainAssemblyFileName>
 
       <_WasmOutputFileName Condition="'$(WasmSingleFileBundle)' == 'true'"
-        >$([System.IO.Path]::GetFileNameWithoutExtension('$(WasmMainAssemblyFileName)')).wasm</_WasmOutputFileName
-      >
+        >$([System.IO.Path]::GetFileNameWithoutExtension('$(WasmMainAssemblyFileName)')).wasm</_WasmOutputFileName>
       <_WasmOutputFileName Condition="'$(WasmSingleFileBundle)' != 'true'"
-        >dotnet.wasm</_WasmOutputFileName
-      >
+        >dotnet.wasm</_WasmOutputFileName>
       <_WasmOutputFileName>$([System.IO.Path]::Combine($(_WasmIntermediateOutputPath), $(_WasmOutputFileName)))</_WasmOutputFileName>
 
       <WasmAppDir>$([MSBuild]::NormalizeDirectory($(WasmAppDir)))</WasmAppDir>
 
       <_MainAssemblyPath
         Condition="'%(WasmAssembliesToBundle.FileName)' == $(AssemblyName) and '%(WasmAssembliesToBundle.Extension)' == '.dll' and $(WasmGenerateAppBundle) == 'true'"
-        >%(WasmAssembliesToBundle.Identity)</_MainAssemblyPath
-      >
+        >%(WasmAssembliesToBundle.Identity)</_MainAssemblyPath>
       <_WasmRuntimeConfigFilePath
         Condition="'$(_WasmRuntimeConfigFilePath)' == '' and $(_MainAssemblyPath) != ''"
-        >$([System.IO.Path]::ChangeExtension($(_MainAssemblyPath), '.runtimeconfig.json'))</_WasmRuntimeConfigFilePath
-      >
+        >$([System.IO.Path]::ChangeExtension($(_MainAssemblyPath), '.runtimeconfig.json'))</_WasmRuntimeConfigFilePath>
       <_ParsedRuntimeConfigFilePath Condition="'$(_WasmRuntimeConfigFilePath)' != ''"
-        >$([System.IO.Path]::GetDirectoryName($(_WasmRuntimeConfigFilePath)))\runtimeconfig.bin</_ParsedRuntimeConfigFilePath
-      >
+        >$([System.IO.Path]::GetDirectoryName($(_WasmRuntimeConfigFilePath)))\runtimeconfig.bin</_ParsedRuntimeConfigFilePath>
     </PropertyGroup>
 
     <Message
@@ -509,8 +469,7 @@
     <PropertyGroup>
       <_HasDotnetWasm
         Condition="'%(WasmNativeAsset.FileName)%(WasmNativeAsset.Extension)' == 'dotnet.wasm'"
-        >true</_HasDotnetWasm
-      >
+        >true</_HasDotnetWasm>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(InvariantGlobalization)' == 'true' or '$(WasmSingleFileBundle)' == 'true'">
@@ -561,14 +520,11 @@
   <Target Name="_GenerateRunWasmtimeScript">
     <PropertyGroup>
       <WasmRunWasmtimeScriptPath Condition="'$(WasmRunWasmtimeScriptPath)' == ''"
-        >$(WasmAppDir)run-wasmtime.sh</WasmRunWasmtimeScriptPath
-      >
+        >$(WasmAppDir)run-wasmtime.sh</WasmRunWasmtimeScriptPath>
       <_ScriptContent Condition="'$(WasmSingleFileBundle)' == 'true'"
-        >wasmtime run $([System.IO.Path]::GetFileNameWithoutExtension($(WasmMainAssemblyFileName))).wasm $*</_ScriptContent
-      >
+        >wasmtime run $([System.IO.Path]::GetFileNameWithoutExtension($(WasmMainAssemblyFileName))).wasm $*</_ScriptContent>
       <_ScriptContent Condition="'$(WasmSingleFileBundle)' != 'true'"
-        >wasmtime run --dir . dotnet.wasm $([System.IO.Path]::GetFileNameWithoutExtension($(WasmMainAssemblyFileName))) $*</_ScriptContent
-      >
+        >wasmtime run --dir . dotnet.wasm $([System.IO.Path]::GetFileNameWithoutExtension($(WasmMainAssemblyFileName))) $*</_ScriptContent>
     </PropertyGroup>
 
     <Error

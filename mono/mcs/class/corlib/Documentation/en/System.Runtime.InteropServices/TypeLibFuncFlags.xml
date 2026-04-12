@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.InteropServices.TypeLibFuncFlags" /> is used with the <see cref="T:System.Runtime.InteropServices.TypeLibFuncAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para
-      >
+        <see cref="T:System.Runtime.InteropServices.TypeLibFuncFlags" /> is used with the <see cref="T:System.Runtime.InteropServices.TypeLibFuncAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para>
       <para>For more information about FUNCFLAGS, see the MSDN library.</para>
     </remarks>
     <summary>
@@ -131,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The function that is displayed to the user as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibFuncFlags.FBindable" /> must also be set.</para
-          >
+            >The function that is displayed to the user as bindable. <see cref="F:System.Runtime.InteropServices.TypeLibFuncFlags.FBindable" /> must also be set.</para>
         </summary>
       </Docs>
     </Member>

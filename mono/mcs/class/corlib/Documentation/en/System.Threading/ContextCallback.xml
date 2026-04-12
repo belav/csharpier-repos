@@ -30,11 +30,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.ContextCallback" /> is used by the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" /> and the <see cref="M:System.Security.SecurityContext.Run(System.Security.SecurityContext,System.Threading.ContextCallback,System.Object)" /> methods. <see cref="T:System.Threading.ContextCallback" /> represents the method to be run in the provided context. Upon completion of the method execution, the context is restored to its previous state. </para
-      >
+        <see cref="T:System.Threading.ContextCallback" /> is used by the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" /> and the <see cref="M:System.Security.SecurityContext.Run(System.Security.SecurityContext,System.Threading.ContextCallback,System.Object)" /> methods. <see cref="T:System.Threading.ContextCallback" /> represents the method to be run in the provided context. Upon completion of the method execution, the context is restored to its previous state. </para>
       <para
-        >Create the delegate by passing your callback method to the <see cref="T:System.Threading.ContextCallback" /> constructor. Your method must have the signature shown here.</para
-      >
+        >Create the delegate by passing your callback method to the <see cref="T:System.Threading.ContextCallback" /> constructor. Your method must have the signature shown here.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

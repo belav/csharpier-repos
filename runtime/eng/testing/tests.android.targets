@@ -29,8 +29,7 @@
 
     <PropertyGroup>
       <MainLibraryFileName Condition="'$(MainLibraryFileName)' == ''"
-        >AndroidTestRunner.dll</MainLibraryFileName
-      >
+        >AndroidTestRunner.dll</MainLibraryFileName>
 
       <AndroidBuildDir>$(PublishDir)</AndroidBuildDir>
       <AndroidBundleDir>$(BundleDir)</AndroidBundleDir>
@@ -69,8 +68,7 @@
       <AndroidAssembliesToBundle Include="@(_PublishAssemblies)">
         <_InternalForceInterpret
           Condition="'$(UseMonoJustInterp)' == 'true' and '%(FileName)%(Extension)' != 'System.Private.CoreLib.dll'"
-          >true</_InternalForceInterpret
-        >
+          >true</_InternalForceInterpret>
         <_IsNative>false</_IsNative>
       </AndroidAssembliesToBundle>
 

@@ -70,8 +70,7 @@
   >
     <PropertyGroup>
       <WasmHelixTestAppRelativeDir Condition="'$(WasmHelixTestAppRelativeDir)' == ''"
-        >$(MSBuildProjectName)</WasmHelixTestAppRelativeDir
-      >
+        >$(MSBuildProjectName)</WasmHelixTestAppRelativeDir>
       <!-- Helix properties -->
       <!-- AnyCPU as Platform-->
       <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>

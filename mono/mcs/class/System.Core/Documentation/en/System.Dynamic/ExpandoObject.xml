@@ -40,29 +40,22 @@
         >The ExpandoObject class implements the standard Dynamic Language Runtime (DLR) interface <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" />, which enables you to share instances of the ExpandoObject class between languages that support the DLR interoperability model. For example, you can create an instance of the ExpandoObject class in C# and then pass it to an IronPython function. For more information, see <format type="text/html">
           <a href="f769a271-8aff-4bea-bfab-6160217ce23d">Dynamic Language Runtime Overview</a>
         </format> documentation on the <see cref="http://go.microsoft.com/fwlink/?LinkId=141028"
-          >CodePlex</see
-        > Web site, and <see cref="http://go.microsoft.com/fwlink/?LinkID=169157"
-          >Introducing the ExpandoObject</see
-        > on the C# Frequently Asked Questions Web site.</para
-      >
+          >CodePlex</see> Web site, and <see cref="http://go.microsoft.com/fwlink/?LinkID=169157"
+          >Introducing the ExpandoObject</see> on the C# Frequently Asked Questions Web site.</para>
       <para
-        >The ExpandoObject class is an implementation of the dynamic object concept that enables getting, setting, and invoking members. If you want to define types that have their own dynamic dispatch semantics, use the <see cref="T:System.Dynamic.DynamicObject" /> class. If you want to define how dynamic objects participate in the interoperability protocol and manage DLR fast dynamic dispatch caching, create your own implementation of the <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" /> interface.</para
-      >
+        >The ExpandoObject class is an implementation of the dynamic object concept that enables getting, setting, and invoking members. If you want to define types that have their own dynamic dispatch semantics, use the <see cref="T:System.Dynamic.DynamicObject" /> class. If you want to define how dynamic objects participate in the interoperability protocol and manage DLR fast dynamic dispatch caching, create your own implementation of the <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" /> interface.</para>
       <format type="text/html">
         <h2>Creating an Instance</h2>
       </format>
       <para
         >In C#, to enable late binding for an instance of the ExpandoObject class, you must use the dynamic keyword. For more information, see <format type="text/html">
           <a href="3828989d-c967-4a51-b948-857ebc8fdf26"
-            >Using Type Dynamic (C# Programming Guide)</a
-          >
-        </format>.</para
-      >
+            >Using Type Dynamic (C# Programming Guide)</a>
+        </format>.</para>
       <para
         >In Visual Basic, dynamic operations are supported by late binding. For more information, see <format type="text/html">
           <a href="d6ff7f1e-b94f-4205-ab8d-5cfa91758724">Early and Late Binding</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para>The following code example demonstrates how to create an instance of the ExpandoObject class.</para>
       <para>code reference: System.Dynamic.ExpandoObject#1</para>
       <format type="text/html">
@@ -136,8 +129,7 @@ End Module</code>
       </format>
       <para>The ExpandoObject class implements the IDictionary&lt;String, Object&gt; interface. This enables enumeration of members added to the instance of the ExpandoObject class at run time. This can be useful if you do not know at compile time what members an instance might have.</para>
       <para
-        >The following code example shows how you can cast an instance of the ExpandoObject class to the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface and enumerate the instance's members.</para
-      >
+        >The following code example shows how you can cast an instance of the ExpandoObject class to the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface and enumerate the instance's members.</para>
       <para>code reference: System.Dynamic.ExpandoObject#5</para>
       <para>In languages that do not have syntax for deleting members (such as C# and Visual Basic), you can delete a member by implicitly casting an instance of the ExpandoObject to the IDictionary&lt;String, Object&gt; interface and then deleting the member as a key/value pair. This is shown in the following example.</para>
       <para>code reference: System.Dynamic.ExpandoObject#6</para>
@@ -145,8 +137,7 @@ End Module</code>
         <h2>Receiving Notifications of Property Changes</h2>
       </format>
       <para
-        >The ExpandoObject class implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface and can raise a <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" /> event when a member is added, deleted, or modified. This enables ExpandoObject class integration with Windows Presentation Foundation (WPF) data binding and other environments that require notification about changes in the object content.</para
-      >
+        >The ExpandoObject class implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> interface and can raise a <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" /> event when a member is added, deleted, or modified. This enables ExpandoObject class integration with Windows Presentation Foundation (WPF) data binding and other environments that require notification about changes in the object content.</para>
       <para>The following code example demonstrates how to create an event handler for the PropertyChanged event.</para>
       <para>code reference: System.Dynamic.ExpandoObject#7</para>
     </remarks>
@@ -583,8 +574,7 @@ End Module</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -622,8 +612,7 @@ End Module</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression that represents the MetaObject to dispatch to the Dynamic virtual methods.</param
-        >
+          />The expression that represents the MetaObject to dispatch to the Dynamic virtual methods.</param>
       </Docs>
     </Member>
   </Members>

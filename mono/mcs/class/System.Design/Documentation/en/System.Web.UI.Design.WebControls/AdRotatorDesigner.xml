@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In a visual designer, when you switch from source view to design view, the markup that describes the <see cref="T:System.Web.UI.WebControls.AdRotator" /> control is parsed. A design-time version of the control is created on the design surface. When you switch back to source view, the design-time control code is persisted to the markup for the Web page. </para
-      >
+        >In a visual designer, when you switch from source view to design view, the markup that describes the <see cref="T:System.Web.UI.WebControls.AdRotator" /> control is parsed. A design-time version of the control is created on the design surface. When you switch back to source view, the design-time control code is persisted to the markup for the Web page. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.WebControls.AdRotator" /> control.</para
-      >
+        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.WebControls.AdRotator" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.AdRotatorDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.AdRotatorDesigner" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

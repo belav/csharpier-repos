@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" /> event and the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" /> event of a <see cref="T:System.Web.Compilation.ClientBuildManager" /> object.</para
-      >
+        >Represents the method that handles the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" /> event and the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" /> event of a <see cref="T:System.Web.Compilation.ClientBuildManager" /> object.</para>
     </summary>
   </Docs>
 </Type>

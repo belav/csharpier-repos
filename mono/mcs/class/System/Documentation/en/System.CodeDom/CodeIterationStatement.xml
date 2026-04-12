@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.CodeDom.CodeIterationStatement" /> can represent a for loop or while loop.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeIterationStatement" /> can represent a for loop or while loop.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeIterationStatement.InitStatement" /> property specifies the statement to execute before the first loop iteration. The <see cref="P:System.CodeDom.CodeIterationStatement.TestExpression" /> property specifies the loop continuation expression, which must evaluate to true at the end of each loop iteration for another iteration to begin. The <see cref="P:System.CodeDom.CodeIterationStatement.IncrementStatement" /> property specifies the statement to execute at the end of each loop iteration. The <see cref="P:System.CodeDom.CodeIterationStatement.Statements" /> property specifies the collection of statements to execute within the loop.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeIterationStatement.InitStatement" /> property specifies the statement to execute before the first loop iteration. The <see cref="P:System.CodeDom.CodeIterationStatement.TestExpression" /> property specifies the loop continuation expression, which must evaluate to true at the end of each loop iteration for another iteration to begin. The <see cref="P:System.CodeDom.CodeIterationStatement.IncrementStatement" /> property specifies the statement to execute at the end of each loop iteration. The <see cref="P:System.CodeDom.CodeIterationStatement.Statements" /> property specifies the collection of statements to execute within the loop.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIterationStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIterationStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -103,37 +100,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIterationStatement" /> class using the specified parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeIterationStatement" /> class using the specified parameters.</para>
         </summary>
         <param name="initStatement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the loop initialization statement. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the loop initialization statement. </param>
         <param name="testExpression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> containing the expression to test for exit condition. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> containing the expression to test for exit condition. </param>
         <param name="incrementStatement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the per-cycle increment statement. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeStatement" /> containing the per-cycle increment statement. </param>
         <param name="statements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements within the loop. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeStatement" /> containing the statements within the loop. </param>
       </Docs>
     </Member>
     <Member MemberName="IncrementStatement">
@@ -191,8 +183,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify an empty initialization statement by setting this property to a <see cref="T:System.CodeDom.CodeExpressionStatement" /> that contains a <see cref="T:System.CodeDom.CodeSnippetExpression" /> that contains an empty string.</para
-          >
+            >You can specify an empty initialization statement by setting this property to a <see cref="T:System.CodeDom.CodeExpressionStatement" /> that contains a <see cref="T:System.CodeDom.CodeSnippetExpression" /> that contains an empty string.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

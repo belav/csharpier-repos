@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see cref="T:System.DateTimeOffset" /> structures to and from various other representations.</para
-      >
+        >Provides a type converter to convert <see cref="T:System.DateTimeOffset" /> structures to and from various other representations.</para>
     </summary>
   </Docs>
   <Members>
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DateTimeOffsetConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DateTimeOffsetConverter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -72,29 +70,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether an object of the specified source type can be converted to a <see cref="T:System.DateTimeOffset" />.</para
-          >
+            >Returns a value that indicates whether an object of the specified source type can be converted to a <see cref="T:System.DateTimeOffset" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified type can be converted to a <see cref="T:System.DateTimeOffset" />; otherwise, false.</para
-          >
+            >true if the specified type can be converted to a <see cref="T:System.DateTimeOffset" />; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date format context.</param
-        >
+          />The date format context.</param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source type to check.</param
-        >
+          />The source type to check.</param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
@@ -122,29 +116,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether a <see cref="T:System.DateTimeOffset" /> can be converted to an object of the specified type.</para
-          >
+            >Returns a value that indicates whether a <see cref="T:System.DateTimeOffset" /> can be converted to an object of the specified type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a <see cref="T:System.DateTimeOffset" /> can be converted to the specified type; otherwise, false.</para
-          >
+            >true if a <see cref="T:System.DateTimeOffset" /> can be converted to the specified type; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date format context.</param
-        >
+          />The date format context.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination type to check.</param
-        >
+          />The destination type to check.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -177,26 +167,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.DateTimeOffset" /> that represents the specified object.</para
-          >
+            >A <see cref="T:System.DateTimeOffset" /> that represents the specified object.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date format context.</param
-        >
+          />The date format context.</param>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The date culture.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The date culture.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be converted.</param
-        >
+          />The object to be converted.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -226,39 +212,33 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see cref="T:System.DateTimeOffset" /> to an object of the specified type.</para
-          >
+            >Converts a <see cref="T:System.DateTimeOffset" /> to an object of the specified type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of the specified type that represents the <see cref="T:System.DateTimeOffset" />. </para
-          >
+            >An object of the specified type that represents the <see cref="T:System.DateTimeOffset" />. </para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The date format context.</param
-        >
+          />The date format context.</param>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The date culture.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The date culture.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTimeOffset" /> to be converted.</param
-        >
+          />The <see cref="T:System.DateTimeOffset" /> to be converted.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert to.</param
-        >
+          />The type to convert to.</param>
       </Docs>
     </Member>
   </Members>

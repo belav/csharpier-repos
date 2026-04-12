@@ -33,17 +33,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used to verify a digital signature made with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para
-      >
+        >This class is used to verify a digital signature made with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para>
       <para
-        >Use <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" /> to create digital signatures with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para
-      >
+        >Use <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" /> to create digital signatures with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Verifies an <see cref="T:System.Security.Cryptography.RSA" /> PKCS #1 version 1.5 signature.</para
-      >
+        >Verifies an <see cref="T:System.Security.Cryptography.RSA" /> PKCS #1 version 1.5 signature.</para>
     </summary>
   </Docs>
   <Members>
@@ -65,14 +62,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> and <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the key and hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para
-          >
+            >Use <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> and <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the key and hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,22 +94,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para
-          >
+            >Use <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> class with the specified key.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> class with the specified key.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param>
       </Docs>
     </Member>
     <Member MemberName="SetHashAlgorithm">
@@ -142,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para
-          >
+            >You must set a hash algorithm before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -154,8 +145,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for verifying the signature. </param
-        >
+          />The name of the hash algorithm to use for verifying the signature. </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -183,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a key before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para
-          >
+            >You must set a key before calling <see cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -195,8 +184,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.RSA" /> that holds the public key. </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -229,29 +217,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies the <see cref="T:System.Security.Cryptography.RSA" /> PKCS#1 signature for the specified data.</para
-          >
+            >Verifies the <see cref="T:System.Security.Cryptography.RSA" /> PKCS#1 signature for the specified data.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="rgbSignature" /> matches the signature computed using the specified hash algorithm and key on <paramref name="rgbHash" />; otherwise, false.</para
-          >
+            >true if <paramref name="rgbSignature" /> matches the signature computed using the specified hash algorithm and key on <paramref name="rgbHash" />; otherwise, false.</para>
         </returns>
         <param name="rgbHash">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data signed with <paramref name="rgbSignature" />. </param
-        >
+          />The data signed with <paramref name="rgbSignature" />. </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified for <paramref name="rgbHash" />. </param
-        >
+          />The signature to be verified for <paramref name="rgbHash" />. </param>
       </Docs>
     </Member>
   </Members>

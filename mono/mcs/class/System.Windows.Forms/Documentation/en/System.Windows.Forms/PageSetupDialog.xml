@@ -22,14 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.PageSetupDialog" /> dialog box modifies the <see cref="T:System.Drawing.Printing.PageSettings" /> and <see cref="T:System.Drawing.Printing.PrinterSettings" /> information for a given <see cref="P:System.Windows.Forms.PageSetupDialog.Document" />. The user can enable sections of the dialog box to manipulate printing and margins; paper orientation, size, and source; and to show Help and network buttons. The <see cref="P:System.Windows.Forms.PageSetupDialog.MinMargins" /> property defines the minimum margins a user can select.</para
-      >
+        >The <see cref="T:System.Windows.Forms.PageSetupDialog" /> dialog box modifies the <see cref="T:System.Drawing.Printing.PageSettings" /> and <see cref="T:System.Drawing.Printing.PrinterSettings" /> information for a given <see cref="P:System.Windows.Forms.PageSetupDialog.Document" />. The user can enable sections of the dialog box to manipulate printing and margins; paper orientation, size, and source; and to show Help and network buttons. The <see cref="P:System.Windows.Forms.PageSetupDialog.MinMargins" /> property defines the minimum margins a user can select.</para>
       <para
-        >When you create an instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" /> class, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PageSetupDialog.#ctor" /> constructor.</para
-      >
+        >When you create an instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" /> class, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PageSetupDialog.#ctor" /> constructor.</para>
       <para
-        >Because a <see cref="T:System.Windows.Forms.PageSetupDialog" /> needs page settings to display, you need to set the <see cref="P:System.Windows.Forms.PrintDialog.Document" />, <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />, or <see cref="P:System.Windows.Forms.PageSetupDialog.PageSettings" /> property before calling <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />; otherwise, an exception will occur.</para
-      >
+        >Because a <see cref="T:System.Windows.Forms.PageSetupDialog" /> needs page settings to display, you need to set the <see cref="P:System.Windows.Forms.PrintDialog.Document" />, <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />, or <see cref="P:System.Windows.Forms.PageSetupDialog.PageSettings" /> property before calling <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />; otherwise, an exception will occur.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +42,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an instance of <see cref="T:System.Windows.Forms.PageSetupDialog" /> is created, the following properties are initialized to the specified values.</para
-          >
+            >When an instance of <see cref="T:System.Windows.Forms.PageSetupDialog" /> is created, the following properties are initialized to the specified values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -164,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -262,15 +257,13 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Setting this property to true has no effect if the application is running on windowsver. The <ui>Printer</ui> button will not be shown.</para
-            >
+              >Setting this property to true has no effect if the application is running on windowsver. The <ui>Printer</ui> button will not be shown.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Printer</ui> button is enabled.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Printer</ui> button is enabled.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -298,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" /> to get page settings from.</para
-          >
+            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" /> to get page settings from.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -332,8 +324,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Printing.PageSettings" /> class measures <see cref="P:System.Drawing.Printing.PageSettings.Margins" /> in hundredths of an inch, but the <see cref="T:System.Windows.Forms.PageSetupDialog" /> allows users to set margins in inches or millimeters depending on the culture settings for the system running the application.</para
-          >
+            >The <see cref="T:System.Drawing.Printing.PageSettings" /> class measures <see cref="P:System.Drawing.Printing.PageSettings.Margins" /> in hundredths of an inch, but the <see cref="T:System.Windows.Forms.PageSetupDialog" /> allows users to set margins in inches or millimeters depending on the culture settings for the system running the application.</para>
           <para>In the .NET Framework version 2.0, you should set this property to true if your application could be used in cultures that measure document margins in millimeters. If you are doing this conversion yourself, as was required in versions of the .NET Framework earlier than version 2.0, you should use the default value of false.</para>
         </remarks>
         <summary>
@@ -513,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Network</ui> button is visible.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Network</ui> button is visible.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

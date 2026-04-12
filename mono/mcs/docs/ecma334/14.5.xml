@@ -66,12 +66,10 @@
   </paragraph>
   <paragraph
     >Primary expressions are divided between <non_terminal where="14.5.10.2"
-      >array-creation-expression</non_terminal
-    >s and  <non_terminal where="14.5"
-      >primary-no-array-creation-expression</non_terminal
-    >s. Treating <non_terminal where="14.5.10.2"
-      >array-creation-expression</non_terminal
-    > in this way, rather than listing it along with the other simple expression forms, enables the grammar to disallow potentially confusing code such as <code_example>
+      >array-creation-expression</non_terminal>s and  <non_terminal where="14.5"
+      >primary-no-array-creation-expression</non_terminal>s. Treating <non_terminal
+      where="14.5.10.2"
+      >array-creation-expression</non_terminal> in this way, rather than listing it along with the other simple expression forms, enables the grammar to disallow potentially confusing code such as <code_example>
       <![CDATA[
 object o = new int[3][1];  
 ]]>

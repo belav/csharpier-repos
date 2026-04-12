@@ -6,7 +6,6 @@
     <TestGroupName>SignalR</TestGroupName>
 
     <RuntimeIdentifier Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
-      >win-x86</RuntimeIdentifier
-    >
+      >win-x86</RuntimeIdentifier>
   </PropertyGroup>
 </Project>

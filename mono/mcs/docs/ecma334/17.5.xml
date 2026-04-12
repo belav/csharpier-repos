@@ -106,14 +106,11 @@
   </paragraph>
   <paragraph
     >A <non_terminal where="17.5"
-      >method-declaration</non_terminal
-    > may include a set of attributes (<hyperlink>24</hyperlink>) and a valid combination of the four access modifiers (<hyperlink>17.2.3</hyperlink>), the new (<hyperlink>17.2.2</hyperlink>), static (<hyperlink>17.5.2</hyperlink>), virtual (<hyperlink>17.5.3</hyperlink>), override (<hyperlink>17.5.4</hyperlink>), sealed (<hyperlink>17.5.5</hyperlink>), abstract (<hyperlink>17.5.6</hyperlink>), and extern (<hyperlink>17.5.7</hyperlink>) modifiers. </paragraph
-  >
+      >method-declaration</non_terminal> may include a set of attributes (<hyperlink>24</hyperlink>) and a valid combination of the four access modifiers (<hyperlink>17.2.3</hyperlink>), the new (<hyperlink>17.2.2</hyperlink>), static (<hyperlink>17.5.2</hyperlink>), virtual (<hyperlink>17.5.3</hyperlink>), override (<hyperlink>17.5.4</hyperlink>), sealed (<hyperlink>17.5.5</hyperlink>), abstract (<hyperlink>17.5.6</hyperlink>), and extern (<hyperlink>17.5.7</hyperlink>) modifiers. </paragraph>
   <paragraph
     >A declaration has a valid combination of modifiers if all of the following are true: <list>
       <list_item
-        > The declaration includes a valid combination of access modifiers (<hyperlink>17.2.3</hyperlink>). </list_item
-      >
+        > The declaration includes a valid combination of access modifiers (<hyperlink>17.2.3</hyperlink>). </list_item>
       <list_item> The declaration does not include the same modifier multiple times. </list_item>
       <list_item> The declaration includes at most one of the following modifiers: static, virtual, and override. </list_item>
       <list_item> The declaration includes at most one of the following modifiers: new and override. </list_item>
@@ -124,46 +121,31 @@
   </paragraph>
   <paragraph
     >The <non_terminal where="17.5"
-      >return-type</non_terminal
-    > of a method declaration specifies the type of the value computed and returned by the method. The <non_terminal
+      >return-type</non_terminal> of a method declaration specifies the type of the value computed and returned by the method. The <non_terminal
       where="17.5"
-      >return-type</non_terminal
-    > is <keyword>void</keyword> if the method does not return a value. </paragraph
-  >
+      >return-type</non_terminal> is <keyword>void</keyword> if the method does not return a value. </paragraph>
   <paragraph
     >The <non_terminal where="17.6"
-      >member-name</non_terminal
-    > specifies the name of the method. Unless the method is an explicit interface member implementation (<hyperlink>20.4.1</hyperlink>), the <non_terminal
+      >member-name</non_terminal> specifies the name of the method. Unless the method is an explicit interface member implementation (<hyperlink>20.4.1</hyperlink>), the <non_terminal
       where="17.6"
-      >member-name</non_terminal
-    > is simply an identifier. For an explicit interface member implementation, the <non_terminal
+      >member-name</non_terminal> is simply an identifier. For an explicit interface member implementation, the <non_terminal
       where="17.6"
-      >member-name</non_terminal
-    > consists of an <non_terminal where="11.2"
-      >interface-type</non_terminal
-    > followed by a &quot;.&quot; and an identifier. </paragraph
-  >
+      >member-name</non_terminal> consists of an <non_terminal where="11.2"
+      >interface-type</non_terminal> followed by a &quot;.&quot; and an identifier. </paragraph>
   <paragraph
     >The optional <non_terminal where="17.5.1"
-      >formal-parameter-list</non_terminal
-    > specifies the parameters of the method (<hyperlink>17.5.1</hyperlink>). </paragraph
-  >
+      >formal-parameter-list</non_terminal> specifies the parameters of the method (<hyperlink>17.5.1</hyperlink>). </paragraph>
   <paragraph
     >The <non_terminal where="17.5"
-      >return-type</non_terminal
-    > and each of the types referenced in the <non_terminal where="17.5.1"
-      >formal-parameter-list</non_terminal
-    > of a method must be at least as accessible as the method itself (<hyperlink>10.5.4</hyperlink>). </paragraph
-  >
+      >return-type</non_terminal> and each of the types referenced in the <non_terminal
+      where="17.5.1"
+      >formal-parameter-list</non_terminal> of a method must be at least as accessible as the method itself (<hyperlink>10.5.4</hyperlink>). </paragraph>
   <paragraph
     >For abstract and extern methods, the <non_terminal where="17.5"
-      >method-body</non_terminal
-    > consists simply of a semicolon. For all other methods, the <non_terminal where="17.5"
-      >method-body</non_terminal
-    > consists of a block, which specifies the statements to execute when the method is invoked. </paragraph
-  >
+      >method-body</non_terminal> consists simply of a semicolon. For all other methods, the <non_terminal
+      where="17.5"
+      >method-body</non_terminal> consists of a block, which specifies the statements to execute when the method is invoked. </paragraph>
   <paragraph
-    >The name and the formal parameter list of a method define the signature (<hyperlink>10.6</hyperlink>) of the method. Specifically, the signature of a method consists of its name and the number, modifiers, and types of its formal parameters. The return type is not part of a method's signature, nor are the names of the formal parameters. </paragraph
-  >
+    >The name and the formal parameter list of a method define the signature (<hyperlink>10.6</hyperlink>) of the method. Specifically, the signature of a method consists of its name and the number, modifiers, and types of its formal parameters. The return type is not part of a method's signature, nor are the names of the formal parameters. </paragraph>
   <paragraph>The name of a method must differ from the names of all other non-methods declared in the same class. In addition, the signature of a method must differ from the signatures of all other methods declared in the same class. </paragraph>
 </clause>

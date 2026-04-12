@@ -19,11 +19,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.ISupportInitialize" /> allows controls to optimize multiple property assignments. As a result, you can initialize co-dependent properties or batch set multiple properties at design time.</para
-      >
+        <see cref="T:System.ComponentModel.ISupportInitialize" /> allows controls to optimize multiple property assignments. As a result, you can initialize co-dependent properties or batch set multiple properties at design time.</para>
       <para
-        >Call the <see cref="M:System.ComponentModel.ISupportInitialize.BeginInit" /> method to signal the object that initialization is starting. Call the <see cref="M:System.ComponentModel.ISupportInitialize.EndInit" /> method to signal that initialization is complete.</para
-      >
+        >Call the <see cref="M:System.ComponentModel.ISupportInitialize.BeginInit" /> method to signal the object that initialization is starting. Call the <see cref="M:System.ComponentModel.ISupportInitialize.EndInit" /> method to signal that initialization is complete.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

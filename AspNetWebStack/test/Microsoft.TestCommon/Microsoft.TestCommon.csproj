@@ -4,8 +4,7 @@
     <TargetFrameworks>net462;netcoreapp2.1;net6.0</TargetFrameworks>
     <Configurations>$(Configurations);CodeAnalysis</Configurations>
     <DefineConstants Condition=" '$(Testing_NetStandard1_3)' == 'true' "
-      >$(DefineConstants);Testing_NetStandard1_3</DefineConstants
-    >
+      >$(DefineConstants);Testing_NetStandard1_3</DefineConstants>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>..\..\bin\$(Configuration)\Test\</OutputPath>
     <OutputPath Condition=" '$(Testing_NetStandard1_3)' == 'true' ">$(OutputPath)ns1_3\</OutputPath>

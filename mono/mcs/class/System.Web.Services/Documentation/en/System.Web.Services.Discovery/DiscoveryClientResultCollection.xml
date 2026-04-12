@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> objects. This class cannot be inherited.</para
-      >
+        >Contains a collection of <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -65,22 +63,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />.</para
-          >
+            >Adds a <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position into which the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> was inserted.</para
-          >
+            >The position into which the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> was inserted.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param
-        >
+          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -104,22 +99,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" /> contains a specific <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />.</para
-          >
+            >Determines whether the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" /> contains a specific <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> is found in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> is found in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to locate in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param
-        >
+          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to locate in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -165,22 +157,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> elements that follow the removed <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> move up to occupy the vacated spot.</para
-          >
+            >The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> elements that follow the removed <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> move up to occupy the vacated spot.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />.</para
-          >
+            >Removes the first occurrence of a specific <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param
-        >
+          />The <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" /> to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

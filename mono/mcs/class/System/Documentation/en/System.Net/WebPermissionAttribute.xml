@@ -40,23 +40,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Net.WebPermissionAttribute" /> allows you to declaratively specify which URI strings and regular expression strings your class can use.</para
-      >
+        <see cref="T:System.Net.WebPermissionAttribute" /> allows you to declaratively specify which URI strings and regular expression strings your class can use.</para>
       <para
-        >The security information specified in the <see cref="T:System.Net.WebPermissionAttribute" /> is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" /> is applied. The system accesses this information at run time. The <see cref="T:System.Security.Permissions.SecurityAction" /> passed to the constructor determines the allowable <see cref="T:System.Net.WebPermissionAttribute" /> targets. The system uses the <see cref="T:System.Net.WebPermission" /> returned by the <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" /> method to convert the security information of the attribute target to a serializable form stored in metadata.</para
-      >
+        >The security information specified in the <see cref="T:System.Net.WebPermissionAttribute" /> is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" /> is applied. The system accesses this information at run time. The <see cref="T:System.Security.Permissions.SecurityAction" /> passed to the constructor determines the allowable <see cref="T:System.Net.WebPermissionAttribute" /> targets. The system uses the <see cref="T:System.Net.WebPermission" /> returned by the <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" /> method to convert the security information of the attribute target to a serializable form stored in metadata.</para>
       <block subset="none" type="note">
         <para>
           <see cref="T:System.Net.WebPermissionAttribute" /> is used only for <format type="text/html">
             <a href="97E21EFD-6E89-4115-90D5-AD239513DAD8"
-              >[&lt;topic://cpcondeclarativesecurity&gt;]</a
-            >
+              >[&lt;topic://cpcondeclarativesecurity&gt;]</a>
           </format>. For <format type="text/html">
             <a href="15AAB1E1-6B7D-41AD-B102-C1ED7BEDEA27"
-              >[&lt;topic://cpconimperativesecurity&gt;]</a
-            >
-          </format>, use the corresponding <see cref="T:System.Net.WebPermission" />.</para
-        >
+              >[&lt;topic://cpconimperativesecurity&gt;]</a>
+          </format>, use the corresponding <see cref="T:System.Net.WebPermission" />.</para>
       </block>
     </remarks>
     <summary>
@@ -90,27 +85,23 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException">
-          <paramref name="action" /> is not a valid <see cref="T:System.Security.Permissions.SecurityAction" /> value. </exception
-        >
+          <paramref name="action" /> is not a valid <see cref="T:System.Security.Permissions.SecurityAction" /> value. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Permissions.SecurityAction" /> value passed to this constructor specifies the allowable security actions that can be performed on this class.</para
-          >
+            >The <see cref="T:System.Security.Permissions.SecurityAction" /> value passed to this constructor specifies the allowable security actions that can be performed on this class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebPermissionAttribute" /> class with a value that specifies the security actions that can be performed on this class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebPermissionAttribute" /> class with a value that specifies the security actions that can be performed on this class.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -135,23 +126,19 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that represents the URI accepted by the
-   current instance.</para
-          >
+   current instance.</para>
         </value>
         <exception cref="T:System.ArgumentException">
-          <see cref="P:System.Net.WebPermissionAttribute.Accept" />is being set and is not <see langword="null" />.</exception
-        >
+          <see cref="P:System.Net.WebPermissionAttribute.Accept" />is being set and is not <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what URI string will be accepted for use within your class. This permission is applied when the security system calls <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" />. This property is write-once.</para
-          >
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what URI string will be accepted for use within your class. This permission is applied when the security system calls <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" />. This property is write-once.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URI string accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para
-          >
+            >Gets or sets the URI string accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -173,14 +160,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what regular expression string will be accepted for use within your class. This property is write-once.</para
-          >
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what regular expression string will be accepted for use within your class. This property is write-once.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a regular expression pattern that describes the URI accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para
-          >
+            >Gets or sets a regular expression pattern that describes the URI accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -205,23 +190,19 @@
         <value>
           <para
             >A <see cref="T:System.String" /> that represents the connection controlled by the
-   current instance.</para
-          >
+   current instance.</para>
         </value>
         <exception cref="T:System.ArgumentException">
-          <see cref="P:System.Net.WebPermissionAttribute.Connect" /> is being set and is not <see langword="null" />.</exception
-        >
+          <see cref="P:System.Net.WebPermissionAttribute.Connect" /> is being set and is not <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what URI connection is accepted for use within your class. This property is write-once.</para
-          >
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what URI connection is accepted for use within your class. This property is write-once.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URI connection string controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para
-          >
+            >Gets or sets the URI connection string controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -243,14 +224,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what regular expression connect string is accepted for use within your class. This property is write-once.</para
-          >
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" /> to your class, this property specifies what regular expression connect string is accepted for use within your class. This property is write-once.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a regular expression pattern that describes the URI connection controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para
-          >
+            >Gets or sets a regular expression pattern that describes the URI connection controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -281,23 +260,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" /> method is called by the security system, not by application code.</para
-          >
+            >The <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" /> method is called by the security system, not by application code.</para>
           <para
-            >The security information described by <see cref="T:System.Net.WebPermissionAttribute" /> is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" /> is applied. The system accesses the information at run time. The system uses the <see cref="T:System.Net.WebPermission" /> returned by <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" /> to convert the security information of the attribute target to a serializable form stored in metadata.</para
-          >
+            >The security information described by <see cref="T:System.Net.WebPermissionAttribute" /> is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" /> is applied. The system accesses the information at run time. The system uses the <see cref="T:System.Net.WebPermission" /> returned by <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" /> to convert the security information of the attribute target to a serializable form stored in metadata.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of the <see cref="T:System.Net.WebPermission" /> class.</para
-          >
+            >Creates and returns a new instance of the <see cref="T:System.Net.WebPermission" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.WebPermission" /> corresponding to the security declaration.</para
-          >
+            >A <see cref="T:System.Net.WebPermission" /> corresponding to the security declaration.</para>
         </returns>
       </Docs>
       <Excluded>0</Excluded>

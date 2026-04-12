@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents one case of a <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para
-      >
+        >Represents one case of a <see cref="T:System.Linq.Expressions.SwitchExpression" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -75,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the values of this case. This case is selected for execution when the <see cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" /> matches any of these values.</para
-          >
+            >Gets the values of this case. This case is selected for execution when the <see cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" /> matches any of these values.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,14 +97,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para
-          >
+            >Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para
-          >
+            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -148,15 +144,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.SwitchCase.TestValues" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.SwitchCase.TestValues" /> property of the result.</param>
         <param name="body">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.SwitchCase.Body" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.SwitchCase.Body" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

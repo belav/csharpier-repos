@@ -24,8 +24,7 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +51,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnClose" /> notification indicates that an object is making the transition from the running state to the loaded state, so its container can take appropriate measures to ensure orderly shutdown. For example, an object handler must release its pointer to the object.</para
-          >
+            >An <see cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnClose" /> notification indicates that an object is making the transition from the running state to the loaded state, so its container can take appropriate measures to ensure orderly shutdown. For example, an object handler must release its pointer to the object.</para>
           <para>For more information about IAdviseSink::OnClose, see the MSDN Library.</para>
         </remarks>
         <summary>
@@ -132,8 +130,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the IMoniker interface on the new full moniker of the object.</param
-        >
+          />A pointer to the IMoniker interface on the new full moniker of the object.</param>
       </Docs>
     </Member>
     <Member MemberName="OnSave">
@@ -194,15 +191,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The aspect, or view, of the object. Contains a value taken from the <see cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" /> enumeration.</param
-        >
+          />The aspect, or view, of the object. Contains a value taken from the <see cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" /> enumeration.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The portion of the view that has changed. Currently, only -1 is valid.</param
-        >
+          />The portion of the view that has changed. Currently, only -1 is valid.</param>
       </Docs>
     </Member>
   </Members>

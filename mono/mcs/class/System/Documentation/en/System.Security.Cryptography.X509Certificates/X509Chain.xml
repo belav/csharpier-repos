@@ -19,14 +19,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object has a global error status called <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> that should be used for certificate validation. The rules governing certificate validation are complex, and it is easy to oversimplify the validation logic by ignoring the error status of one or more of the elements involved. The global error status takes into consideration the status of each element in the chain.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object has a global error status called <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" /> that should be used for certificate validation. The rules governing certificate validation are complex, and it is easy to oversimplify the validation logic by ignoring the error status of one or more of the elements involved. The global error status takes into consideration the status of each element in the chain.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a chain-building engine for <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificates.</para
-      >
+        >Represents a chain-building engine for <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> certificates.</para>
     </summary>
   </Docs>
   <Members>
@@ -48,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -72,22 +69,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used when the user profile is not loaded and the machine context needs to be used. When the <paramref name="useMachineContext" /> parameter is set to true, the local machine context (HCCE_LOCAL_MACHINE flag) is used to create the chain. If the parameter is set to false, the current user context (HCCE_CURRENT_USER flag) is used.</para
-          >
+            >This constructor can be used when the user profile is not loaded and the machine context needs to be used. When the <paramref name="useMachineContext" /> parameter is set to true, the local machine context (HCCE_LOCAL_MACHINE flag) is used to create the chain. If the parameter is set to false, the current user context (HCCE_CURRENT_USER flag) is used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class specifying a value that indicates whether the machine context should be used.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class specifying a value that indicates whether the machine context should be used.</para>
         </summary>
         <param name="useMachineContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to use the machine context; false to use the current user context. </param
-        >
+          />true to use the machine context; false to use the current user context. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -118,16 +112,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class using an <see cref="T:System.IntPtr" /> handle to an X.509 chain.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> class using an <see cref="T:System.IntPtr" /> handle to an X.509 chain.</para>
         </summary>
         <param name="chainContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IntPtr" /> handle to an X.509 chain.</param
-        >
+          />An <see cref="T:System.IntPtr" /> handle to an X.509 chain.</param>
       </Docs>
     </Member>
     <Member MemberName="Build">
@@ -163,14 +155,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that a valid X.509 certificate from a trusted issuer is valid only for the use specified in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> object. Certificates that meet these chain policy rules might still be invalid for specific uses with such features as Security/MIME (SMIME), Authenticode, or Secure Sockets Layer (SSL). If further processing is required to determine whether the certificate is valid for a specific policy, derive a class from <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> and override the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" /> method so that it calls the base class Build method first, and then does the additional processing.</para
-          >
+            >Note that a valid X.509 certificate from a trusted issuer is valid only for the use specified in the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> object. Certificates that meet these chain policy rules might still be invalid for specific uses with such features as Security/MIME (SMIME), Authenticode, or Secure Sockets Layer (SSL). If further processing is required to determine whether the certificate is valid for a specific policy, derive a class from <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> and override the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" /> method so that it calls the base class Build method first, and then does the additional processing.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Builds an X.509 chain using the policy specified in <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />.</para
-          >
+            >Builds an X.509 chain using the policy specified in <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -181,8 +171,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.</param
-        >
+          />An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="ChainContext">
@@ -237,17 +226,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> object is a representation of an element in the chain that was built during a call to the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" /> method.</para
-          >
+            >Each <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> object is a representation of an element in the chain that was built during a call to the <see cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" /> method.</para>
           <para
-            >A chain element consists of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object, an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainStatus" /> structure, and an extra information string (available only on Windows XP platforms).</para
-          >
+            >A chain element consists of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object, an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainStatus" /> structure, and an extra information string (available only on Windows XP platforms).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects.</para
-          >
+            >Gets a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects.</para>
         </summary>
       </Docs>
     </Member>
@@ -278,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> to use when building an X.509 certificate chain.</para
-          >
+            >Gets or sets the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> to use when building an X.509 certificate chain.</para>
         </summary>
       </Docs>
     </Member>
@@ -310,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the status of each element in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para
-          >
+            >Gets the status of each element in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -342,14 +326,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object after querying for the mapping defined in the CryptoConfig file, and maps the chain to that mapping.</para
-          >
+            >Creates an <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object after querying for the mapping defined in the CryptoConfig file, and maps the chain to that mapping.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para
-          >
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -374,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para
-          >
+            >Clears the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Chain" /> object.</para>
         </summary>
       </Docs>
     </Member>

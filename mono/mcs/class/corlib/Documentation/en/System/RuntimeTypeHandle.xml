@@ -42,13 +42,11 @@
   <Docs>
     <remarks>
       <para>
-        <see cref="T:System.RuntimeTypeHandle" /> objects are created through the use of the CIL instruction <see langword="ldtoken" />.</para
-      >
+        <see cref="T:System.RuntimeTypeHandle" /> objects are created through the use of the CIL instruction <see langword="ldtoken" />.</para>
       <para>
         <block subset="none" type="note"
           >For more information on <see langword="ldtoken" />, see Partition III of the CLI
-   Specification.</block
-        >
+   Specification.</block>
       </para>
     </remarks>
     <summary>
@@ -85,22 +83,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified object is equal to the current <see cref="T:System.RuntimeTypeHandle" /> structure.</para
-          >
+            >Indicates whether the specified object is equal to the current <see cref="T:System.RuntimeTypeHandle" /> structure.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is equal to the value of this instance; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is equal to the value of this instance; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to the current instance.</param
-        >
+          />An object to compare to the current instance.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -131,22 +126,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified <see cref="T:System.RuntimeTypeHandle" /> structure is equal to the current <see cref="T:System.RuntimeTypeHandle" /> structure.</para
-          >
+            >Indicates whether the specified <see cref="T:System.RuntimeTypeHandle" /> structure is equal to the current <see cref="T:System.RuntimeTypeHandle" /> structure.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref name="handle" /> is equal to the value of this instance; otherwise, false.</para
-          >
+            >true if the value of <paramref name="handle" /> is equal to the value of this instance; otherwise, false.</para>
         </returns>
         <param name="handle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.RuntimeTypeHandle" /> structure to compare to the current instance.</param
-        >
+          />The <see cref="T:System.RuntimeTypeHandle" /> structure to compare to the current instance.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -210,8 +202,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ModuleHandle" /> structure representing a handle to the module that contains the type represented by the current instance.</para
-          >
+            >A <see cref="T:System.ModuleHandle" /> structure representing a handle to the module that contains the type represented by the current instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -241,32 +232,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter is reserved; it does not currently participate in this operation.</para
-          >
+            >The <paramref name="context" /> parameter is reserved; it does not currently participate in this operation.</para>
           <para
-            >For more information about the serialization operation performed by this method, see the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" /> method.</para
-          >
+            >For more information about the serialization operation performed by this method, see the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data necessary to deserialize the type represented by the current instance.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data necessary to deserialize the type represented by the current instance.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be populated with serialization information. </param
-        >
+          />The object to be populated with serialization information. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />(Reserved) The location where serialized data will be stored and retrieved. </param
-        >
+          />(Reserved) The location where serialized data will be stored and retrieved. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -295,35 +281,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para
-          >
+            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether an object and a <see cref="T:System.RuntimeTypeHandle" /> structure are equal.</para
-          >
+            >Indicates whether an object and a <see cref="T:System.RuntimeTypeHandle" /> structure are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="left" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is equal to <paramref name="right" />; otherwise, false.</para
-          >
+            >true if <paramref name="left" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is equal to <paramref name="right" />; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to <paramref name="right" />.</param
-        >
+          />An object to compare to <paramref name="right" />.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="left" />.</param
-        >
+          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="left" />.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -351,35 +332,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para
-          >
+            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see cref="T:System.RuntimeTypeHandle" /> structure is equal to an object.</para
-          >
+            >Indicates whether a <see cref="T:System.RuntimeTypeHandle" /> structure is equal to an object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="right" /> is a <see cref="T:System.RuntimeTypeHandle" /> and is equal to <paramref name="left" />; otherwise, false.</para
-          >
+            >true if <paramref name="right" /> is a <see cref="T:System.RuntimeTypeHandle" /> and is equal to <paramref name="left" />; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="right" />.</param
-        >
+          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="right" />.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to <paramref name="left" />.</param
-        >
+          />An object to compare to <paramref name="left" />.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -408,35 +384,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para
-          >
+            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether an object and a <see cref="T:System.RuntimeTypeHandle" /> structure are not equal.</para
-          >
+            >Indicates whether an object and a <see cref="T:System.RuntimeTypeHandle" /> structure are not equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="left" /> is a <see cref="T:System.RuntimeTypeHandle" /> and is not equal to <paramref name="right" />; otherwise, false.</para
-          >
+            >true if <paramref name="left" /> is a <see cref="T:System.RuntimeTypeHandle" /> and is not equal to <paramref name="right" />; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to <paramref name="right" />.</param
-        >
+          />An object to compare to <paramref name="right" />.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="left" />.</param
-        >
+          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="left" />.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -464,35 +435,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para
-          >
+            >Using this operator to compare two variables of type <see cref="T:System.RuntimeTypeHandle" /> causes an ambiguous overload resolution error when compiled. Use the <see cref="Overload:System.RuntimeTypeHandle.Equals" /> method instead.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see cref="T:System.RuntimeTypeHandle" /> structure is not equal to an object.</para
-          >
+            >Indicates whether a <see cref="T:System.RuntimeTypeHandle" /> structure is not equal to an object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="right" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is not equal to <paramref name="left" />; otherwise, false.</para
-          >
+            >true if <paramref name="right" /> is a <see cref="T:System.RuntimeTypeHandle" /> structure and is not equal to <paramref name="left" />; otherwise, false.</para>
         </returns>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="right" />.</param
-        >
+          />A <see cref="T:System.RuntimeTypeHandle" /> structure to compare to <paramref name="right" />.</param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to <paramref name="left" />.</param
-        >
+          />An object to compare to <paramref name="left" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -516,8 +482,7 @@
         <value>
           <para
             > A <see cref="T:System.IntPtr" /> containing the value of the handle.
-   </para
-          >
+   </para>
         </value>
         <remarks>
           <para>This property is read-only.</para>

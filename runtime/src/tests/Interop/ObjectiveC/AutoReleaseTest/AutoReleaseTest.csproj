@@ -5,8 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CLRTestTargetUnsupported
       Condition="'$(TargetsOSX)' != 'true' and '$(TargetsiOS)' != 'true' and '$(TargetstvOS)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <AutoreleasePoolSupport>true</AutoreleasePoolSupport>
   </PropertyGroup>
   <ItemGroup>

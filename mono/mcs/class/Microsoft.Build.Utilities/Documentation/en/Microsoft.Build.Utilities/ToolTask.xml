@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class with the specified <see cref="T:System.Resources.ResourceManager" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class with the specified <see cref="T:System.Resources.ResourceManager" />.</para>
         </summary>
         <param name="taskResources">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Resources.ResourceManager" /> for task resources.</param
-        >
+          />The <see cref="T:System.Resources.ResourceManager" /> for task resources.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,23 +85,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class with the specified <see cref="T:System.Resources.ResourceManager" /> and Help keyword prefix.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.ToolTask" /> class with the specified <see cref="T:System.Resources.ResourceManager" /> and Help keyword prefix.</para>
         </summary>
         <param name="taskResources">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Resources.ResourceManager" /> for task resources.</param
-        >
+          />The <see cref="T:System.Resources.ResourceManager" /> for task resources.</param>
         <param name="helpKeywordPrefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to use for messages raised by the task.</param
-        >
+          />The Help keyword to use for messages raised by the task.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -210,22 +204,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the executable file.</param
-        >
+          />The path to the executable file.</param>
         <param name="responseFileCommands">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The command line arguments to place in the .rsp file.</param
-        >
+          />The command line arguments to place in the .rsp file.</param>
         <param name="commandLineCommands">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The command line arguments to pass directly to the executable file.</param
-        >
+          />The command line arguments to pass directly to the executable file.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -270,8 +261,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />.</para
-          >
+            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -298,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the value of the <see cref="P:Microsoft.Build.Utilities.ToolTask.ToolName" /> property if the tool is located in the system path.</para
-          >
+            >This method returns the value of the <see cref="P:Microsoft.Build.Utilities.ToolTask.ToolName" /> property if the tool is located in the system path.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -329,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />.</para
-          >
+            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -362,11 +350,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is only called if <see cref="M:Microsoft.Build.Utilities.ToolTask.GenerateResponseFileCommands" /> returns a non-empty string value.</para
-          >
+            >This method is only called if <see cref="M:Microsoft.Build.Utilities.ToolTask.GenerateResponseFileCommands" /> returns a non-empty string value.</para>
           <para
-            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" />, <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.GenerateResponseFileCommands" />.</para
-          >
+            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" />, <see cref="M:Microsoft.Build.Utilities.ToolTask.SkipTaskExecution" /> and <see cref="M:Microsoft.Build.Utilities.ToolTask.GenerateResponseFileCommands" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,8 +367,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full path to the temporary .rsp file.</param
-        >
+          />The full path to the temporary .rsp file.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -461,8 +446,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:Microsoft.Build.Utilities.HostObjectInitializationStatus" /> of the host object.</para
-          >
+            >The <see cref="T:Microsoft.Build.Utilities.HostObjectInitializationStatus" /> of the host object.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -495,8 +479,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single line of text for the method to parse.</param
-        >
+          />A single line of text for the method to parse.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -527,15 +510,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The executable file name.</param
-        >
+          />The executable file name.</param>
         <param name="pathToTool">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the executable file.</param
-        >
+          />The path to the executable file.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -565,8 +546,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A descriptive message to provide loggers, usually the command line and switches.</param
-        >
+          />A descriptive message to provide loggers, usually the command line and switches.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -609,8 +589,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" />.</para
-          >
+            >This method is called after <see cref="M:Microsoft.Build.Utilities.ToolTask.ValidateParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -644,8 +623,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Text.Encoding" /> of the standard error stream of the task.</para
-          >
+            >Gets the <see cref="T:System.Text.Encoding" /> of the standard error stream of the task.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -668,8 +646,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance" /> with which to log errors.</para
-          >
+            >Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance" /> with which to log errors.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -695,8 +672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Text.Encoding" /> of the standard output stream of the task.</para
-          >
+            >Gets the <see cref="T:System.Text.Encoding" /> of the standard output stream of the task.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -719,8 +695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance" /> with which to log errors.</para
-          >
+            >Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance" /> with which to log errors.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -30,11 +30,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeCatchClause" /> can be used to represent a catch exception block of a try/catch statement.</para
-      >
+        <see cref="T:System.CodeDom.CodeCatchClause" /> can be used to represent a catch exception block of a try/catch statement.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeCatchClause.CatchExceptionType" /> property specifies the type of exception to catch. The <see cref="P:System.CodeDom.CodeCatchClause.LocalName" /> property specifies a name for the variable representing the exception that has been caught. The <see cref="P:System.CodeDom.CodeCatchClause.Statements" /> collection property contains the statements for the catch block.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeCatchClause.CatchExceptionType" /> property specifies the type of exception to catch. The <see cref="P:System.CodeDom.CodeCatchClause.LocalName" /> property specifies a name for the variable representing the exception that has been caught. The <see cref="P:System.CodeDom.CodeCatchClause.Statements" /> collection property contains the statements for the catch block.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,16 +84,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local variable declared in the catch clause for the exception. This is optional. </param
-        >
+          />The name of the local variable declared in the catch clause for the exception. This is optional. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -124,23 +119,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception and exception type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception and exception type.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local variable declared in the catch clause for the exception. This is optional. </param
-        >
+          />The name of the local variable declared in the catch clause for the exception. This is optional. </param>
         <param name="catchExceptionType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of exception to catch. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of exception to catch. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -175,30 +167,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception, exception type and statement collection.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCatchClause" /> class using the specified local variable name for the exception, exception type and statement collection.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the local variable declared in the catch clause for the exception. This is optional. </param
-        >
+          />The name of the local variable declared in the catch clause for the exception. This is optional. </param>
         <param name="catchExceptionType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of exception to catch. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the type of exception to catch. </param>
         <param name="statements">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that represent the contents of the catch block. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects that represent the contents of the catch block. </param>
       </Docs>
     </Member>
     <Member MemberName="CatchExceptionType">
@@ -225,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a value for this property is not specified, the value of this property defaults to <see cref="T:System.Exception" />.</para
-          >
+            >If a value for this property is not specified, the value of this property defaults to <see cref="T:System.Exception" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

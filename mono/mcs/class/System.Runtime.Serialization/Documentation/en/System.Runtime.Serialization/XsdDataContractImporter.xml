@@ -20,19 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> if you are creating a Web service that must interoperate with an existing Web service, or to create data contract types from XML schemas. <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> will transform a set of XML schemas and create the dnprdnshort types that represent the data contract in a selected programming language. To create the code, use the classes in the <see cref="N:System.CodeDom" /> namespace.</para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> if you are creating a Web service that must interoperate with an existing Web service, or to create data contract types from XML schemas. <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> will transform a set of XML schemas and create the dnprdnshort types that represent the data contract in a selected programming language. To create the code, use the classes in the <see cref="N:System.CodeDom" /> namespace.</para>
       <para
-        >Conversely, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class when you have created a Web service that incorporates data represented by CLR types and when you need to export XML schemas for each data type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> transforms a set of CLR types into a set of XML schemas. </para
-      >
+        >Conversely, use the <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> class when you have created a Web service that incorporates data represented by CLR types and when you need to export XML schemas for each data type to be consumed by other Web services. That is, <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> transforms a set of CLR types into a set of XML schemas. </para>
       <block subset="none" type="note">
         <para
           >To generate CLR types from XML schemas at design time, use the <format type="text/html">
             <a href="1abf3d9f-b420-46f1-b628-df238751f308"
-              >Service Model Metadata Utility Tool (Svcutil.exe)</a
-            >
-          </format>. To generated code from XSD files, use the <userInput>/dataContractOnly</userInput> switch of the tool. You can also use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> if you need more control over the process or need to do it programmatically.</para
-        >
+              >Service Model Metadata Utility Tool (Svcutil.exe)</a>
+          </format>. To generated code from XSD files, use the <userInput>/dataContractOnly</userInput> switch of the tool. You can also use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> if you need more control over the process or need to do it programmatically.</para>
       </block>
     </remarks>
     <summary>
@@ -57,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -82,22 +77,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to add more code into a <see cref="T:System.CodeDom.CodeCompileUnit" /> that has already been generated.</para
-          >
+            >Use this constructor to add more code into a <see cref="T:System.CodeDom.CodeCompileUnit" /> that has already been generated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class with the <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to generate CLR code. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> class with the <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to generate CLR code. </para>
         </summary>
         <param name="codeCompileUnit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to store the code. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeCompileUnit" /> that will be used to store the code. </param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -124,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,8 +127,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform. </param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -168,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the specified set of types contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into CLR types generated into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para
-          >
+            >Gets a value that indicates whether the specified set of types contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into CLR types generated into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -180,15 +169,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform.</param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform.</param>
         <param name="typeNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.ICollection`1" /> of <see cref="T:System.Xml.XmlQualifiedName" /> that represents the set of schema types to import.</param
-        >
+          />An <see cref="T:System.Collections.Generic.ICollection`1" /> of <see cref="T:System.Xml.XmlQualifiedName" /> that represents the set of schema types to import.</param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -219,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether a specific schema element contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be imported.</para
-          >
+            >Gets a value that indicates whether a specific schema element contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be imported.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -231,15 +217,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> to import.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> to import.</param>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A specific <see cref="T:System.Xml.Schema.XmlSchemaElement" /> to check in the set of schemas.</param
-        >
+          />A specific <see cref="T:System.Xml.Schema.XmlSchemaElement" /> to check in the set of schemas.</param>
       </Docs>
     </Member>
     <Member MemberName="CanImport">
@@ -268,16 +252,13 @@
           <para
             >For more information about types that can be imported, see <format type="text/html">
               <a href="7381b200-437a-4506-9556-d77bf1bc3f34"
-                >Types Supported by the Data Contract Serializer</a
-              >
-            </format>.</para
-          >
+                >Types Supported by the Data Contract Serializer</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Gets a value that indicates whether the schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> can be transformed into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,15 +269,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IList" /> of <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the names of the schema types that need to be imported from the <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param
-        >
+          />An <see cref="T:System.Collections.IList" /> of <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the names of the schema types that need to be imported from the <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CodeCompileUnit">
@@ -320,14 +299,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this property after importing schemas using the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to access the <see cref="T:System.CodeDom.CodeCompileUnit" /> in which all the generated code is stored.</para
-          >
+            >Call this property after importing schemas using the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to access the <see cref="T:System.CodeDom.CodeCompileUnit" /> in which all the generated code is stored.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.CodeDom.CodeCompileUnit" /> used for storing the CLR types generated.</para
-          >
+            >Gets a <see cref="T:System.CodeDom.CodeCompileUnit" /> used for storing the CLR types generated.</para>
         </summary>
       </Docs>
     </Member>
@@ -354,28 +331,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to look up the reference to a generated CLR type after calling the <see cref="Overload:System.Runtime.Serialization.XsdDataContractImporter.Import" /> method. The <see cref="T:System.CodeDom.CodeTypeReference" /> contains the name of the generated type and can be used to look up the corresponding <see cref="T:System.CodeDom.CodeTypeDeclaration" /> in the <see cref="T:System.CodeDom.CodeCompileUnit" />.</para
-          >
+            >Use this method to look up the reference to a generated CLR type after calling the <see cref="Overload:System.Runtime.Serialization.XsdDataContractImporter.Import" /> method. The <see cref="T:System.CodeDom.CodeTypeReference" /> contains the name of the generated type and can be used to look up the corresponding <see cref="T:System.CodeDom.CodeTypeDeclaration" /> in the <see cref="T:System.CodeDom.CodeCompileUnit" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.CodeDom.CodeTypeReference" /> to the CLR type generated for the schema type with the specified <see cref="T:System.Xml.XmlQualifiedName" />.</para
-          >
+            >Returns a <see cref="T:System.CodeDom.CodeTypeReference" /> to the CLR type generated for the schema type with the specified <see cref="T:System.Xml.XmlQualifiedName" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.CodeDom.CodeTypeReference" /> reference to the CLR type generated for the schema type with the <paramref name="typeName" /> specified.</para
-          >
+            >A <see cref="T:System.CodeDom.CodeTypeReference" /> reference to the CLR type generated for the schema type with the <paramref name="typeName" /> specified.</para>
         </returns>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the schema type to look up.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the schema type to look up.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCodeTypeReference">
@@ -402,36 +375,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The schema element is needed for data about the type that is specified at the element scope. The main example of this is the XSD attribute nillable. In schema, setting nillable to true is specified on the containing schema element whereas the concept of null is expressed in the CLR type <see cref="T:System.Nullable`1" />. The element is passed in so that this importer can look up the element-level information and return the correct type reference accordingly. </para
-          >
+            >The schema element is needed for data about the type that is specified at the element scope. The main example of this is the XSD attribute nillable. In schema, setting nillable to true is specified on the containing schema element whereas the concept of null is expressed in the CLR type <see cref="T:System.Nullable`1" />. The element is passed in so that this importer can look up the element-level information and return the correct type reference accordingly. </para>
           <para>When importing WSDL, each parameter is imported separately and therefore the parameter elements need to be passed in separately.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.CodeDom.CodeTypeReference" /> for the specified XML qualified element and schema element.</para
-          >
+            >Returns a <see cref="T:System.CodeDom.CodeTypeReference" /> for the specified XML qualified element and schema element.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.CodeDom.CodeTypeReference" /> that represents the type that was generated for the specified schema type.</para
-          >
+            >A <see cref="T:System.CodeDom.CodeTypeReference" /> that represents the type that was generated for the specified schema type.</para>
         </returns>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the XML qualified name of the schema type to look up.</param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that specifies the XML qualified name of the schema type to look up.</param>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that specifies an element in an XML schema.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that specifies an element in an XML schema.</param>
       </Docs>
     </Member>
     <Member MemberName="GetKnownTypeReferences">
@@ -457,33 +425,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When generating CLR types for schema types, known types are also generated for all derived types that are present in the schema. In many cases, these known types are added using attributes to the generated code. (For example, see the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class. ) However, for the top-level type, there needs to be a way to return the set of known types generated. This method returns the <see cref="T:System.CodeDom.CodeTypeReference" /> for known types that were generated for a specific schema type.</para
-          >
+            >When generating CLR types for schema types, known types are also generated for all derived types that are present in the schema. In many cases, these known types are added using attributes to the generated code. (For example, see the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" /> class. ) However, for the top-level type, there needs to be a way to return the set of known types generated. This method returns the <see cref="T:System.CodeDom.CodeTypeReference" /> for known types that were generated for a specific schema type.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of <see cref="T:System.CodeDom.CodeTypeReference" /> objects that represents the known types generated when generating code for the specified schema type.</para
-          >
+            >Returns a list of <see cref="T:System.CodeDom.CodeTypeReference" /> objects that represents the known types generated when generating code for the specified schema type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.Generic.IList`1" /> of type <see cref="T:System.CodeDom.CodeTypeReference" />.</para
-          >
+            >A <see cref="T:System.Collections.Generic.IList`1" /> of type <see cref="T:System.CodeDom.CodeTypeReference" />.</para>
         </returns>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the schema type to look up known types for.</param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the schema type to look up known types for.</param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -510,16 +473,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the specified set of XML schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para
-          >
+            >Transforms the specified set of XML schemas contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />. </para>
         </summary>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations to generate CLR types for.</param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations to generate CLR types for.</param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -550,23 +511,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the specified set of schema types contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into CLR types generated into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para
-          >
+            >Transforms the specified set of schema types contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into CLR types generated into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para>
         </summary>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations.</param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations.</param>
         <param name="typeNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.Generic.ICollection`1" />  (of <see cref="T:System.Xml.XmlQualifiedName" />) that represents the set of schema types to import.</param
-        >
+          />A <see cref="T:System.Collections.Generic.ICollection`1" />  (of <see cref="T:System.Xml.XmlQualifiedName" />) that represents the set of schema types to import.</param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -594,29 +552,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the specified schema element in the set of specified XML schemas into a <see cref="T:System.CodeDom.CodeCompileUnit" /> and returns an <see cref="T:System.Xml.XmlQualifiedName" /> that represents the data contract name for the specified element.</para
-          >
+            >Transforms the specified schema element in the set of specified XML schemas into a <see cref="T:System.CodeDom.CodeCompileUnit" /> and returns an <see cref="T:System.Xml.XmlQualifiedName" /> that represents the data contract name for the specified element.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the specified element.</para
-          >
+            >An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the specified element.</para>
         </returns>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schemas to transform.</param>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that represents the specific schema element to transform. </param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaElement" /> that represents the specific schema element to transform. </param>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -644,23 +598,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the specified XML schema type contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para
-          >
+            >Transforms the specified XML schema type contained in an <see cref="T:System.Xml.Schema.XmlSchemaSet" /> into a <see cref="T:System.CodeDom.CodeCompileUnit" />.</para>
         </summary>
         <param name="schemas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" /> that contains the schema representations. </param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlQualifiedName" /> that represents a specific schema type to import.</param
-        >
+          />A <see cref="T:System.Xml.XmlQualifiedName" /> that represents a specific schema type to import.</param>
       </Docs>
     </Member>
     <Member MemberName="Options">
@@ -684,14 +635,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="T:System.Runtime.Serialization.ImportOptions" /> class to customize how the CLR types are generated during schema import.</para
-          >
+            >Use the <see cref="T:System.Runtime.Serialization.ImportOptions" /> class to customize how the CLR types are generated during schema import.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Runtime.Serialization.ImportOptions" /> that contains settable options for the import operation. </para
-          >
+            >Gets or sets an <see cref="T:System.Runtime.Serialization.ImportOptions" /> that contains settable options for the import operation. </para>
         </summary>
       </Docs>
     </Member>

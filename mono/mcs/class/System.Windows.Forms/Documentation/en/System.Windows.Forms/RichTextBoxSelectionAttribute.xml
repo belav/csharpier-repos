@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.RichTextBox" /> class uses this enumeration internally.</para
-      >
+        >The <see cref="T:System.Windows.Forms.RichTextBox" /> class uses this enumeration internally.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -18,14 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used to set the cache level specified by <see cref="T:System.Net.Cache.HttpRequestCachePolicy" /> objects.</para
-      >
+        >This enumeration is used to set the cache level specified by <see cref="T:System.Net.Cache.HttpRequestCachePolicy" /> objects.</para>
       <para
-        >This <see cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" /> value is the default cache behavior specified in the machine configuration file that ships with the .NET Framework. No entries are taken from caches, added to caches, or removed from caches between the client and server.</para
-      >
+        >This <see cref="F:System.Net.Cache.HttpRequestCacheLevel.BypassCache" /> value is the default cache behavior specified in the machine configuration file that ships with the .NET Framework. No entries are taken from caches, added to caches, or removed from caches between the client and server.</para>
       <para
-        >The <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" /> property is used to get or set the default cache policy for <see cref="T:System.Net.HttpWebRequest" /> instances. The <see cref="P:System.Net.WebRequest.CachePolicy" /> property is used to get or set the default cache policy for a <see cref="T:System.Net.WebRequest" /> instances. The <see cref="P:System.Net.WebRequest.CachePolicy" /> property is used to get or set the cache policy for a specific request. </para
-      >
+        >The <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" /> property is used to get or set the default cache policy for <see cref="T:System.Net.HttpWebRequest" /> instances. The <see cref="P:System.Net.WebRequest.CachePolicy" /> property is used to get or set the default cache policy for a <see cref="T:System.Net.WebRequest" /> instances. The <see cref="P:System.Net.WebRequest.CachePolicy" /> property is used to get or set the cache policy for a specific request. </para>
       <para>A copy of a resource is only added to the cache if the response stream for the resource is retrieved and read to the end of the stream. So another request for the same resource could use a cached copy, depending on the default cache policy level for this request. </para>
     </remarks>
     <summary>
@@ -97,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see cref="T:System.Net.WebException" /> exception is thrown if the item is not in the client cache.</para
-          >
+            >Satisfies a request using the locally cached resource; does not send a request for an item that is not in the cache. When this cache policy level is specified, a <see cref="T:System.Net.WebException" /> exception is thrown if the item is not in the client cache.</para>
         </summary>
       </Docs>
     </Member>
@@ -121,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Satisfies a request for a resource either from the local computer's cache or a remote cache on the local area network. If the request cannot be satisfied, a <see cref="T:System.Net.WebException" /> exception is thrown. In the HTTP caching protocol, this is achieved using the only-if-cached cache control directive.</para
-          >
+            >Satisfies a request for a resource either from the local computer's cache or a remote cache on the local area network. If the request cannot be satisfied, a <see cref="T:System.Net.WebException" /> exception is thrown. In the HTTP caching protocol, this is achieved using the only-if-cached cache control directive.</para>
         </summary>
       </Docs>
     </Member>

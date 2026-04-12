@@ -37,14 +37,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />-derived classes and to create instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />-derived classes from XML documents that represent RSS 2.0 items. If you need to serialize a <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance use the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> formatter.</para
-      >
+        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />-derived classes and to create instances of <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />-derived classes from XML documents that represent RSS 2.0 items. If you need to serialize a <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance use the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> formatter.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A class that serializes <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />-derived classes to and from RSS 2.0 format.</para
-      >
+        >A class that serializes <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />-derived classes to and from RSS 2.0 format.</para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -137,14 +134,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> derived class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> derived class. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class. </para
-          >
+            >A new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> class. </para>
         </returns>
       </Docs>
     </Member>

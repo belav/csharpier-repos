@@ -17,16 +17,13 @@
     >A while statement is executed as follows: <list>
       <list_item
         > The <non_terminal where="15.7.1"
-          >boolean-expression</non_terminal
-        > (<hyperlink>14.16</hyperlink>) is evaluated. </list_item
-      >
+          >boolean-expression</non_terminal> (<hyperlink>14.16</hyperlink>) is evaluated. </list_item>
       <list_item> If the boolean expression yields true, control is transferred to the embedded statement. When and if control reaches the end point of the embedded statement (possibly from execution of a continue statement), control is transferred to the beginning of the while statement. </list_item>
       <list_item> If the boolean expression yields false, control is transferred to the end point of the while statement. </list_item>
     </list>
   </paragraph>
   <paragraph
-    >Within the embedded statement of a while statement, a break statement (<hyperlink>15.9.1</hyperlink>) may be used to transfer control to the end point of the while statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink>15.9.2</hyperlink>) may be used to transfer control to the end point of the embedded statement (thus performing another iteration of the while statement). </paragraph
-  >
+    >Within the embedded statement of a while statement, a break statement (<hyperlink>15.9.1</hyperlink>) may be used to transfer control to the end point of the while statement (thus ending iteration of the embedded statement), and a continue statement (<hyperlink>15.9.2</hyperlink>) may be used to transfer control to the end point of the embedded statement (thus performing another iteration of the while statement). </paragraph>
   <paragraph>The embedded statement of a while statement is reachable if the while statement is reachable and the boolean expression does not have the constant value false. </paragraph>
   <paragraph
     >The end point of a while statement is reachable if at least one of the following is true: <list>

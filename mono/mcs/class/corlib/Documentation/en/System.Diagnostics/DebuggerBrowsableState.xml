@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> is used to simplify the view in the debug window. Use of the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> attribute using this enumeration can result in a much simpler and more pleasing view in the debug window. See the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class for information on the use of this enumeration.</para
-      >
+        <see cref="T:System.Diagnostics.DebuggerBrowsableState" /> is used to simplify the view in the debug window. Use of the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" /> attribute using this enumeration can result in a much simpler and more pleasing view in the debug window. See the <see cref="T:System.Diagnostics.DebuggerBrowsableAttribute" /> class for information on the use of this enumeration.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

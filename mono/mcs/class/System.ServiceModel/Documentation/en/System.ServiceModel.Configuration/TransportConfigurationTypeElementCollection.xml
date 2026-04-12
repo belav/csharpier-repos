@@ -19,8 +19,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection&lt;System.ServiceModel.Configuration.TransportConfigurationTypeElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="ConfigurationElementType"
-        >System.ServiceModel.Configuration.TransportConfigurationTypeElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.TransportConfigurationTypeElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -38,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see cref="T:System.ServiceModel.Configuration.TransportConfigurationTypeElement" /> elements.</para
-      >
+        >A collection of <see cref="T:System.ServiceModel.Configuration.TransportConfigurationTypeElement" /> elements.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TransportConfigurationTypeElementCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TransportConfigurationTypeElementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>

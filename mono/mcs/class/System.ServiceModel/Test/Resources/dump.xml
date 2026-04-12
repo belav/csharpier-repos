@@ -4,8 +4,7 @@
 >
   <s:Header>
     <a:Action s:mustUnderstand="1"
-      >http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse</a:Action
-    >
+      >http://schemas.xmlsoap.org/ws/2004/09/transfer/GetResponse</a:Action>
     <a:RelatesTo>urn:uuid:fc9042cc-b557-4ecc-a66d-5e007be384ff</a:RelatesTo>
   </s:Header>
   <s:Body>

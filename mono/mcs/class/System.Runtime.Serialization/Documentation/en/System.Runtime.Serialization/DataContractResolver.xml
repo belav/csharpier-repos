@@ -19,12 +19,10 @@
       <para
         >Developers should be careful about what data is being sent over the wire. You can use transport or message security to secure that data. crdefault see <format type="text/html">
           <a href="05d73638-30a9-43b4-8c86-f27f57b6eef1">Security</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >Only use <see cref="T:System.Runtime.Serialization.DataContractResolver" /> if you are completely sure of what information is being serialized. Malicious types can cause unexpected behavior.</para
-        >
+          >Only use <see cref="T:System.Runtime.Serialization.DataContractResolver" /> if you are completely sure of what information is being serialized. Malicious types can cause unexpected behavior.</para>
       </block>
     </remarks>
     <summary>
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractResolver" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractResolver" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -83,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to use the known type resolution logic inside your implementation, a reference to it is passed in as the <paramref name="knownTypeResolver" /> parameter.</para
-          >
+            >If you want to use the known type resolution logic inside your implementation, a reference to it is passed in as the <paramref name="knownTypeResolver" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -99,29 +95,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:type name to map.</param
-        >
+          />The xsi:type name to map.</param>
         <param name="typeNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The xsi:type namespace to map.</param
-        >
+          />The xsi:type namespace to map.</param>
         <param name="declaredType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type declared in the data contract.</param
-        >
+          />The type declared in the data contract.</param>
         <param name="knownTypeResolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The known type resolver.</param
-        >
+          />The known type resolver.</param>
       </Docs>
     </Member>
     <Member MemberName="TryResolveType">

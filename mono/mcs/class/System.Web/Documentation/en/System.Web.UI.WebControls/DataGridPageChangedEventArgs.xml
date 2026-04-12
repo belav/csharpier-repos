@@ -23,22 +23,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" /> event is raised when a button in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control is clicked.</para
-      >
+        >The <see cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" /> event is raised when a button in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control is clicked.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.DataGridPageChangedEventArgs.#ctor(System.Object,System.Int32)" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.DataGridPageChangedEventArgs.#ctor(System.Object,System.Int32)" /> constructor.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" /> event of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. This class cannot be inherited.</para
-      >
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DataGrid.PageIndexChanged" /> event of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -59,11 +55,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" /> class.</para
-          >
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" /> class.</para>
           <para
-            >When an instance of <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> is created by a call to this constructor, the following properties are initialized to the specified values.</para
-          >
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" /> is created by a call to this constructor, the following properties are initialized to the specified values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -120,8 +113,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.CommandSource" /> property to determine the source of the command that raised the event. Because this event is raised only when a button in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control is clicked, the returned source is a <see cref="T:System.Web.UI.WebControls.DataGridItem" /> object that represents the page selection element.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.CommandSource" /> property to determine the source of the command that raised the event. Because this event is raised only when a button in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control is clicked, the returned source is a <see cref="T:System.Web.UI.WebControls.DataGridItem" /> object that represents the page selection element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,14 +136,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.NewPageIndex" /> property to determine the index of the page selected by the user in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. This value is often used to set the <see cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" /> property of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control to display the selected page.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridPageChangedEventArgs.NewPageIndex" /> property to determine the index of the page selected by the user in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. This value is often used to set the <see cref="P:System.Web.UI.WebControls.DataGrid.CurrentPageIndex" /> property of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control to display the selected page.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the page selected by the user in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.</para
-          >
+            >Gets the index of the page selected by the user in the page selection element of the <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

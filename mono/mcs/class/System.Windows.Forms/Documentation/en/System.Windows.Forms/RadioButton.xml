@@ -37,23 +37,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.RadioButton" /> control can display text, an <see cref="T:System.Drawing.Image" />, or both.</para
-      >
+        >The <see cref="T:System.Windows.Forms.RadioButton" /> control can display text, an <see cref="T:System.Drawing.Image" />, or both.</para>
       <para
-        >When the user selects one option button (also known as a radio button) within a group, the others clear automatically. All <see cref="T:System.Windows.Forms.RadioButton" /> controls in a given container, such as a <see cref="T:System.Windows.Forms.Form" />, constitute a group. To create multiple groups on one form, place each group in its own container, such as a <see cref="T:System.Windows.Forms.GroupBox" /> or <see cref="T:System.Windows.Forms.Panel" /> control.</para
-      >
+        >When the user selects one option button (also known as a radio button) within a group, the others clear automatically. All <see cref="T:System.Windows.Forms.RadioButton" /> controls in a given container, such as a <see cref="T:System.Windows.Forms.Form" />, constitute a group. To create multiple groups on one form, place each group in its own container, such as a <see cref="T:System.Windows.Forms.GroupBox" /> or <see cref="T:System.Windows.Forms.Panel" /> control.</para>
       <para>
-        <see cref="T:System.Windows.Forms.RadioButton" /> and <see cref="T:System.Windows.Forms.CheckBox" /> controls have a similar function: they offer choices a user can select or clear. The difference is that multiple <see cref="T:System.Windows.Forms.CheckBox" /> controls can be selected at the same time, but option buttons are mutually exclusive.</para
-      >
+        <see cref="T:System.Windows.Forms.RadioButton" /> and <see cref="T:System.Windows.Forms.CheckBox" /> controls have a similar function: they offer choices a user can select or clear. The difference is that multiple <see cref="T:System.Windows.Forms.CheckBox" /> controls can be selected at the same time, but option buttons are mutually exclusive.</para>
       <para
-        >Use the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property to get or set the state of a <see cref="T:System.Windows.Forms.RadioButton" />. The option button's appearance can be altered to appear as a toggle-style button or as a standard option button by setting the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> property.</para
-      >
+        >Use the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property to get or set the state of a <see cref="T:System.Windows.Forms.RadioButton" />. The option button's appearance can be altered to appear as a toggle-style button or as a standard option button by setting the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables the user to select a single option from a group of choices when paired with other <see cref="T:System.Windows.Forms.RadioButton" /> controls.</para
-      >
+        >Enables the user to select a single option from a group of choices when paired with other <see cref="T:System.Windows.Forms.RadioButton" /> controls.</para>
     </summary>
   </Docs>
   <Members>
@@ -65,14 +60,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default view of the <see cref="T:System.Windows.Forms.RadioButton" /> has its text aligned to the right of the button and the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to true.</para
-          >
+            >The default view of the <see cref="T:System.Windows.Forms.RadioButton" /> has its text aligned to the right of the button and the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.RadioButton" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.RadioButton" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -102,14 +95,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> value is set to <see cref="F:System.Windows.Forms.Appearance.Normal" />, then the <see cref="T:System.Windows.Forms.RadioButton" /> control is drawn with a circular check box. If the value is set to <see cref="F:System.Windows.Forms.Appearance.Button" />, then the <see cref="T:System.Windows.Forms.RadioButton" /> is drawn as a control that can be toggled to an up or down state. Either type can display text, an image, or both.</para
-          >
+            >If the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> value is set to <see cref="F:System.Windows.Forms.Appearance.Normal" />, then the <see cref="T:System.Windows.Forms.RadioButton" /> control is drawn with a circular check box. If the value is set to <see cref="F:System.Windows.Forms.Appearance.Button" />, then the <see cref="T:System.Windows.Forms.RadioButton" /> is drawn as a control that can be toggled to an up or down state. Either type can display text, an image, or both.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value determining the appearance of the <see cref="T:System.Windows.Forms.RadioButton" />.</para
-          >
+            >Gets or sets a value determining the appearance of the <see cref="T:System.Windows.Forms.RadioButton" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,14 +120,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> property value changes.</para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.RadioButton.Appearance" /> property value changes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -160,17 +149,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> value is set to false, the <see cref="T:System.Windows.Forms.RadioButton" /> portion of the control must be checked in code in the <see cref="E:System.Windows.Forms.Control.Click" /> event handler. In addition, if the <see cref="T:System.Windows.Forms.RadioButton" /> is part of a <see cref="T:System.Windows.Forms.RadioButton" /> control group, this property ensures that only one of the controls is checked at a given time.</para
-          >
+            >If the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> value is set to false, the <see cref="T:System.Windows.Forms.RadioButton" /> portion of the control must be checked in code in the <see cref="E:System.Windows.Forms.Control.Click" /> event handler. In addition, if the <see cref="T:System.Windows.Forms.RadioButton" /> is part of a <see cref="T:System.Windows.Forms.RadioButton" /> control group, this property ensures that only one of the controls is checked at a given time.</para>
           <para
-            >If the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to false, a group of <see cref="T:System.Windows.Forms.RadioButton" /> controls will not act as a mutually exclusive group and the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property must be updated in code.</para
-          >
+            >If the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to false, a group of <see cref="T:System.Windows.Forms.RadioButton" /> controls will not act as a mutually exclusive group and the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property must be updated in code.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> value and the appearance of the control automatically change when the control is clicked.</para
-          >
+            >Gets or sets a value indicating whether the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> value and the appearance of the control automatically change when the control is clicked.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the location of the check box portion of the <see cref="T:System.Windows.Forms.RadioButton" />.</para
-          >
+            >Gets or sets the location of the check box portion of the <see cref="T:System.Windows.Forms.RadioButton" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -252,14 +237,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property changes.</para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property changes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -281,25 +264,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see cref="M:System.Windows.Forms.RadioButton.CreateAccessibilityInstance" /> method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property is referenced.</para
-          >
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.RadioButton.CreateAccessibilityInstance" /> method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property is referenced.</para>
           <block subset="none" type="note">
             <para
-              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the <see cref="N:Accessibility" /> assembly installed with the .NET Framework. </para
-            >
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the <see cref="N:Accessibility" /> assembly installed with the .NET Framework. </para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para
-          >
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Windows.Forms.RadioButton.RadioButtonAccessibleObject" /> for the control.</para
-          >
+            >A new <see cref="T:System.Windows.Forms.RadioButton.RadioButtonAccessibleObject" /> for the control.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -369,14 +348,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" /> style bit is set to false for the <see cref="T:System.Windows.Forms.RadioButton" /> control, and the <see cref="E:System.Windows.Forms.RadioButton.DoubleClick" /> event is not raised.  </para
-          >
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" /> style bit is set to false for the <see cref="T:System.Windows.Forms.RadioButton" /> control, and the <see cref="E:System.Windows.Forms.RadioButton.DoubleClick" /> event is not raised.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para
-          >
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -408,14 +385,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" /> style bit is set to false for the <see cref="T:System.Windows.Forms.RadioButton" /> control, and the <see cref="E:System.Windows.Forms.RadioButton.MouseDoubleClick" /> event is not raised.</para
-          >
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" /> style bit is set to false for the <see cref="T:System.Windows.Forms.RadioButton" /> control, and the <see cref="E:System.Windows.Forms.RadioButton.MouseDoubleClick" /> event is not raised.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.RadioButton" /> control with the mouse.</para
-          >
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.RadioButton" /> control with the mouse.</para>
         </summary>
       </Docs>
     </Member>
@@ -437,25 +412,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.RadioButton.OnCheckedChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.RadioButton.OnCheckedChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.CheckBox.CheckedChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.CheckBox.CheckedChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -475,8 +446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to true, the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property is set to true when the <see cref="T:System.Windows.Forms.RadioButton" /> control is clicked.</para
-          >
+            >If the <see cref="P:System.Windows.Forms.RadioButton.AutoCheck" /> property is set to true, the <see cref="P:System.Windows.Forms.RadioButton.Checked" /> property is set to true when the <see cref="T:System.Windows.Forms.RadioButton" /> control is clicked.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -487,8 +457,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -508,8 +477,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the user enters the <see cref="T:System.Windows.Forms.RadioButton" /> control by using the arrow keys, the <see cref="T:System.Windows.Forms.RadioButton" /> will raise the <see cref="E:System.Windows.Forms.Control.Click" /> event.</para
-          >
+            >If the user enters the <see cref="T:System.Windows.Forms.RadioButton" /> control by using the arrow keys, the <see cref="T:System.Windows.Forms.RadioButton" /> will raise the <see cref="E:System.Windows.Forms.Control.Click" /> event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -520,8 +488,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -545,16 +512,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" /> method.</para
-          >
+            >Overrides the <see cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" /> method.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -579,11 +544,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.RadioButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.RadioButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -594,8 +557,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -614,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a <see cref="E:System.Windows.Forms.Control.Click" /> event for the control, simulating a click by a user.</para
-          >
+            >Generates a <see cref="E:System.Windows.Forms.Control.Click" /> event for the control, simulating a click by a user.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -640,8 +601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" /> method.</para
-          >
+            >Overrides the <see cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -652,8 +612,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to process.</param
-        >
+          />The character to process.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -707,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alignment of the text on the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para
-          >
+            >Gets or sets the alignment of the text on the <see cref="T:System.Windows.Forms.RadioButton" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -728,14 +686,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="M:System.ComponentModel.Component.ToString" /> method.</para
-          >
+            >Overrides the <see cref="M:System.ComponentModel.Component.ToString" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see cref="T:System.Windows.Forms.RadioButton" /> that indicates whether it is checked.</para
-          >
+            >A string representation of the <see cref="T:System.Windows.Forms.RadioButton" /> that indicates whether it is checked.</para>
         </returns>
       </Docs>
       <AssemblyInfo>

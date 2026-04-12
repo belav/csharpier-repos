@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.InheritanceLevel" /> defines identifiers for numeric IDs that are used with the <see cref="T:System.ComponentModel.InheritanceAttribute" /> attribute to indicate various levels of inheritance.</para
-      >
+        <see cref="T:System.ComponentModel.InheritanceLevel" /> defines identifiers for numeric IDs that are used with the <see cref="T:System.ComponentModel.InheritanceAttribute" /> attribute to indicate various levels of inheritance.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Threading.ThreadExceptionEventArgs" /> is created by a thread when an unhandled exception occurs. <see cref="T:System.Threading.ThreadExceptionEventArgs" /> contains the <see cref="T:System.Exception" /> that occurred.</para
-      >
+        >A <see cref="T:System.Threading.ThreadExceptionEventArgs" /> is created by a thread when an unhandled exception occurs. <see cref="T:System.Threading.ThreadExceptionEventArgs" /> contains the <see cref="T:System.Exception" /> that occurred.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.Application.ThreadException" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.Application.ThreadException" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.ThreadExceptionEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadExceptionEventArgs" /> class.</para>
         </summary>
         <param name="t">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that occurred. </param
-        >
+          />The <see cref="T:System.Exception" /> that occurred. </param>
       </Docs>
     </Member>
     <Member MemberName="Exception">

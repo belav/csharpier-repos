@@ -41,9 +41,7 @@
   <paragraph
     >No semantic meaning is attached to a region; regions are intended for use by the programmer or by automated tools to mark a section of source code. The message specified in a <symbol>#region</symbol> or <symbol>#endregion</symbol> directive likewise has no semantic meaning; it merely serves to identify the region. Matching <symbol>#region</symbol> and <symbol>#endregion</symbol> directives may have different <non_terminal
       where="9.5.5"
-      >pp-message</non_terminal
-    >s. </paragraph
-  >
+      >pp-message</non_terminal>s. </paragraph>
   <paragraph
     >The lexical processing of a region: <code_example>
       <![CDATA[

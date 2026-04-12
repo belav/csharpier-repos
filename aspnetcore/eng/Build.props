@@ -74,14 +74,12 @@
         >
           <BuildInParallel
             Condition=" '%(Extension)' == '.npmproj' OR '%(Extension)' == '.vcxproj' "
-            >false</BuildInParallel
-          >
+            >false</BuildInParallel>
           <RestoreInParallel Condition=" '%(Extension)' == '.npmproj' ">false</RestoreInParallel>
           <!-- Also do not build in parallel w/in npm projects. -->
           <AdditionalProperties
             Condition=" '%(Extension)' == '.npmproj' OR '%(Extension)' == '.vcxproj' "
-            >BuildInParallel=false</AdditionalProperties
-          >
+            >BuildInParallel=false</AdditionalProperties>
         </ProjectToBuild>
       </ItemGroup>
     </When>

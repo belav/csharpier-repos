@@ -35,15 +35,13 @@
  }</code>
       <block subset="none" type="note">
         <para
-          >If an operation is comprised of multiple actions, it results in multiple events. For example, an <see cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" /> call may have to remove the node being appended from its previous parent. In this case you will see a NodeRemoved event followed by a NodeInserted event.</para
-        >
+          >If an operation is comprised of multiple actions, it results in multiple events. For example, an <see cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" /> call may have to remove the node being appended from its previous parent. In this case you will see a NodeRemoved event followed by a NodeInserted event.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Xml.XmlDocument.NodeChanged" />, <see cref="E:System.Xml.XmlDocument.NodeChanging" />, <see cref="E:System.Xml.XmlDocument.NodeInserted" />, <see cref="E:System.Xml.XmlDocument.NodeInserting" />, <see cref="E:System.Xml.XmlDocument.NodeRemoved" /> and <see cref="E:System.Xml.XmlDocument.NodeRemoving" /> events.</para
-      >
+        >Provides data for the <see cref="E:System.Xml.XmlDocument.NodeChanged" />, <see cref="E:System.Xml.XmlDocument.NodeChanging" />, <see cref="E:System.Xml.XmlDocument.NodeInserted" />, <see cref="E:System.Xml.XmlDocument.NodeInserting" />, <see cref="E:System.Xml.XmlDocument.NodeRemoved" /> and <see cref="E:System.Xml.XmlDocument.NodeRemoving" /> events.</para>
     </summary>
   </Docs>
   <Members>
@@ -75,51 +73,44 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlNodeChangedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlNodeChangedEventArgs" /> class.</para>
         </summary>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that generated the event.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that generated the event.</param>
         <param name="oldParent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old parent <see cref="T:System.Xml.XmlNode" /> of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param
-        >
+          />The old parent <see cref="T:System.Xml.XmlNode" /> of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param>
         <param name="newParent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new parent <see cref="T:System.Xml.XmlNode" /> of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param
-        >
+          />The new parent <see cref="T:System.Xml.XmlNode" /> of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param>
         <param name="oldValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old value of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param
-        >
+          />The old value of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param>
         <param name="newValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param
-        >
+          />The new value of the <see cref="T:System.Xml.XmlNode" /> that generated the event.</param>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNodeChangedAction" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlNodeChangedAction" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Action">
@@ -170,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see cref="P:System.Xml.XmlNode.ParentNode" /> after the operation completes.</para
-          >
+            >Gets the value of the <see cref="P:System.Xml.XmlNode.ParentNode" /> after the operation completes.</para>
         </summary>
       </Docs>
     </Member>
@@ -214,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.XmlNode" /> that is being added, removed or changed.</para
-          >
+            >Gets the <see cref="T:System.Xml.XmlNode" /> that is being added, removed or changed.</para>
         </summary>
       </Docs>
     </Member>
@@ -240,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see cref="P:System.Xml.XmlNode.ParentNode" /> before the operation began.</para
-          >
+            >Gets the value of the <see cref="P:System.Xml.XmlNode.ParentNode" /> before the operation began.</para>
         </summary>
       </Docs>
     </Member>

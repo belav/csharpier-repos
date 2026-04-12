@@ -6,18 +6,15 @@
     <_originalTargetOS>$(RuntimeIdentifier.SubString(0, $(RuntimeIdentifier.LastIndexOf('-'))))</_originalTargetOS>
     <_indexOfPeriod>$(_originalTargetOS.IndexOf('.'))</_indexOfPeriod>
     <_originalTargetOS Condition="'$(_indexOfPeriod)' &gt; -1"
-      >$(_originalTargetOS.SubString(0, $(_indexOfPeriod)))</_originalTargetOS
-    >
+      >$(_originalTargetOS.SubString(0, $(_indexOfPeriod)))</_originalTargetOS>
     <_originalTargetOS Condition="$(_originalTargetOS.StartsWith('win'))">win</_originalTargetOS>
 
     <!-- On non-Windows, determine _hostArchitecture from NETCoreSdkPortableRuntimeIdentifier -->
     <_hostArchitecture Condition="'$(OS)' != 'Windows_NT'"
-      >$(NETCoreSdkPortableRuntimeIdentifier.SubString($([MSBuild]::Add($(NETCoreSdkPortableRuntimeIdentifier.LastIndexOf('-')), 1))))</_hostArchitecture
-    >
+      >$(NETCoreSdkPortableRuntimeIdentifier.SubString($([MSBuild]::Add($(NETCoreSdkPortableRuntimeIdentifier.LastIndexOf('-')), 1))))</_hostArchitecture>
     <!-- On Windows, default to host that matches OS architecture on Windows. It allows compilation using msbuild.exe that is x86 by default -->
     <_hostArchitecture Condition="'$(OS)' == 'Windows_NT'"
-      >$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</_hostArchitecture
-    >
+      >$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</_hostArchitecture>
 
     <!-- Determine _targetArchitecture from RuntimeIdentifier -->
     <_targetArchitecture>$(RuntimeIdentifier.SubString($([MSBuild]::Add($(RuntimeIdentifier.LastIndexOf('-')), 1))))</_targetArchitecture>
@@ -29,8 +26,7 @@
     <_targetOS>$(_originalTargetOS)</_targetOS>
     <_linuxToken>linux-</_linuxToken>
     <_linuxLibcFlavor Condition="$(_targetOS.StartsWith($(_linuxToken)))"
-      >$(_targetOS.SubString($(_linuxToken.Length)))</_linuxLibcFlavor
-    >
+      >$(_targetOS.SubString($(_linuxToken.Length)))</_linuxLibcFlavor>
     <_targetOS Condition="$(_targetOS.StartsWith($(_linuxToken)))">linux</_targetOS>
   </PropertyGroup>
 
@@ -75,14 +71,11 @@
 
     <PropertyGroup>
       <IlcHostPackagePath Condition="'@(ResolvedILCompilerPack)' == '$(_hostPackageName)'"
-        >@(ResolvedILCompilerPack->'%(PackageDirectory)')</IlcHostPackagePath
-      >
+        >@(ResolvedILCompilerPack->'%(PackageDirectory)')</IlcHostPackagePath>
       <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == '$(_targetPackageName)'"
-        >@(ResolvedTargetILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath
-      >
+        >@(ResolvedTargetILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath>
       <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == ''"
-        >@(ResolvedILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath
-      >
+        >@(ResolvedILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath>
     </PropertyGroup>
   </Target>
 

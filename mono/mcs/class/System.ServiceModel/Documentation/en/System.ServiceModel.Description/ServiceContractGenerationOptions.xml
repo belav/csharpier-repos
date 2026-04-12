@@ -24,14 +24,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationOptions" /> enumeration with the <see cref="P:System.ServiceModel.Description.ServiceContractGenerator.Options" /> property to control the generated contract code.</para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationOptions" /> enumeration with the <see cref="P:System.ServiceModel.Description.ServiceContractGenerator.Options" /> property to control the generated contract code.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the contract generation options available using the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" />.</para
-      >
+        >Represents the contract generation options available using the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates an interface that derives from the contract interface and <see cref="T:System.ServiceModel.IClientChannel" />.</para
-          >
+            >Generates an interface that derives from the contract interface and <see cref="T:System.ServiceModel.IClientChannel" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a indigo1 client class that extends <see cref="T:System.ServiceModel.ClientBase`1" />.</para
-          >
+            >Generates a indigo1 client class that extends <see cref="T:System.ServiceModel.ClientBase`1" />.</para>
         </summary>
       </Docs>
     </Member>

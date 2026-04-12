@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ICMPV6 is a set of error and informational messages for use with Internet Protocol version 6 (IPv6). This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV6Statistics" /> method to return ICMPV6 traffic information.</para
-      >
+        >ICMPV6 is a set of error and informational messages for use with Internet Protocol version 6 (IPv6). This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV6Statistics" /> method to return ICMPV6 traffic information.</para>
       <para>The properties in this class correlate to the Management Information Base objects for ICMPv6 defined in IETF RFC 2466. ICMPv6 is defined in RFC 2463.</para>
     </remarks>
     <summary>
@@ -46,14 +45,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />.</para
-          >
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" /> class.</para>
         </summary>
       </Docs>
     </Member>

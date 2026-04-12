@@ -31,8 +31,7 @@ System.ComponentModel.Composition.ReflectionModel.ReflectionModelServices</Packa
   <PropertyGroup>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetFramework)' == 'netstandard2.0'"
-      >SR.PlatformNotSupported_ComponentModel_Composition</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_ComponentModel_Composition</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">

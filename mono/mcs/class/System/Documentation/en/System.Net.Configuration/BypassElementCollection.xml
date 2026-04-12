@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection holds instances of the add configuration element in the bypasslist configuration element. An add element specifies the address of a resource residing on a server. When an application requests a resource by using the <see cref="T:System.Net.WebRequest" /> or <see cref="T:System.Net.WebClient" /> classes, if the address of the resource is in the bypasslist, the request is sent directly to the server where the resource resides instead of being sent to the proxy server.</para
-      >
+        >This collection holds instances of the add configuration element in the bypasslist configuration element. An add element specifies the address of a resource residing on a server. When an application requests a resource by using the <see cref="T:System.Net.WebRequest" /> or <see cref="T:System.Net.WebClient" /> classes, if the address of the resource is in the bypasslist, the request is sent directly to the server where the resource resides instead of being sent to the proxy server.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see cref="T:System.Net.Configuration.BypassElementCollection" /> class. </para
-          >
+            >Initializes an empty instance of the <see cref="T:System.Net.Configuration.BypassElementCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +89,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Configuration.BypassElement" /> to add to the collection.</param
-        >
+          />The <see cref="T:System.Net.Configuration.BypassElement" /> to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -191,8 +188,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Configuration.BypassElement" />.</param
-        >
+          />A <see cref="T:System.Net.Configuration.BypassElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -231,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Configuration.BypassElement" />.</param
-        >
+          />A <see cref="T:System.Net.Configuration.BypassElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -328,8 +323,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Configuration.BypassElement" /> to remove.</param
-        >
+          />The <see cref="T:System.Net.Configuration.BypassElement" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -361,8 +355,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove.</param
-        >
+          />The key of the element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -394,8 +387,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to remove.</param
-        >
+          />The zero-based index of the element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="ThrowOnDuplicate">

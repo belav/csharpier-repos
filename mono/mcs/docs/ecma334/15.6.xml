@@ -2,8 +2,7 @@
 <clause number="15.6" title="Expression statements">
   <paragraph
     >An <non_terminal where="15.6"
-      >expression-statement</non_terminal
-    > evaluates a given expression. The value computed by the expression, if any, is discarded. <grammar_production>
+      >expression-statement</non_terminal> evaluates a given expression. The value computed by the expression, if any, is discarded. <grammar_production>
       <name>
         <non_terminal where="15.6">expression-statement</non_terminal>
       </name> : <rhs>
@@ -43,9 +42,6 @@
   <paragraph
     >Execution of an expression statement evaluates the contained expression and then transfers control to the end point of the expression statement. The end point of an <non_terminal
       where="15.6"
-      >expression-statement</non_terminal
-    > is reachable if that <non_terminal where="15.6"
-      >expression-statement</non_terminal
-    > is reachable. </paragraph
-  >
+      >expression-statement</non_terminal> is reachable if that <non_terminal where="15.6"
+      >expression-statement</non_terminal> is reachable. </paragraph>
 </clause>

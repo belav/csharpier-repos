@@ -22,14 +22,12 @@
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>. </para
-      >
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnDividerDoubleClick" /> event of a <see cref="T:System.Windows.Forms.DataGridView" />. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.ColumnDividerDoubleClick" /> event of a <see cref="T:System.Windows.Forms.DataGridView" />. </para>
     </summary>
   </Docs>
   <Members>
@@ -48,29 +46,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the value of the <see cref="P:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs.ColumnIndex" /> property using the <paramref name="columnIndex" /> value. The values of properties inherited from <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> are initialized to the values specified in <paramref name="e" />.</para
-          >
+            >This constructor initializes the value of the <see cref="P:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs.ColumnIndex" /> property using the <paramref name="columnIndex" /> value. The values of properties inherited from <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> are initialized to the values specified in <paramref name="e" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventArgs" /> class. </para>
         </summary>
         <param name="columnIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the column next to the column divider that was double-clicked. </param
-        >
+          />The index of the column next to the column divider that was double-clicked. </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A new <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> containing the inherited event data. </param
-        >
+          />A new <see cref="T:System.Windows.Forms.HandledMouseEventArgs" /> containing the inherited event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,11 +82,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method indicates the column to the left of the double-clicked divider if the <see cref="T:System.Windows.Forms.DataGridView" /> has a <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value of <see cref="F:System.Windows.Forms.RightToLeft.No" />; otherwise, it indicates the column to the right of the double-clicked divider. </para
-          >
+            >This method indicates the column to the left of the double-clicked divider if the <see cref="T:System.Windows.Forms.DataGridView" /> has a <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value of <see cref="F:System.Windows.Forms.RightToLeft.No" />; otherwise, it indicates the column to the right of the double-clicked divider. </para>
           <para
-            >The index is the zero-based index of the column in the <see cref="P:System.Windows.Forms.DataGridView.Columns" /> collection.</para
-          >
+            >The index is the zero-based index of the column in the <see cref="P:System.Windows.Forms.DataGridView.Columns" /> collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

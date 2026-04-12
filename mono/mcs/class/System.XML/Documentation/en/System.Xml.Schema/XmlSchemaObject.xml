@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the root class for the Xml schema object model hierarchy and serves as a base class for classes such as the <see cref="T:System.Xml.Schema.XmlSchema" /> class.</para
-      >
+        >Represents the root class for the Xml schema object model hierarchy and serves as a base class for classes such as the <see cref="T:System.Xml.Schema.XmlSchema" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaObject" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaObject" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >LineNumber is used to store the line number when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" /> for error handling.</para
-          >
+            >LineNumber is used to store the line number when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" /> for error handling.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is used to store the line position when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" /> for error handling.</para
-          >
+            >This is used to store the line position when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" /> for error handling.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -148,8 +144,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This gives the Schema Object Model (SOM) the ability to add xmlns declarations. This is useful when you want to declare a prefix to qualify declarations from an imported schema or use in the xpath attribute of the xs:selector element.</para>
           <para
-            >You can also use the <see cref="P:System.Xml.Schema.XmlSchemaObject.Namespaces" /> property to change namespace prefixes in a schema. For example, you can change the prefix used by a schema for the W3C XML Schema namespace from xs to xsd as illustrated in the following example.</para
-          >
+            >You can also use the <see cref="P:System.Xml.Schema.XmlSchemaObject.Namespaces" /> property to change namespace prefixes in a schema. For example, you can change the prefix used by a schema for the W3C XML Schema namespace from xs to xsd as illustrated in the following example.</para>
           <code>Dim namespaces As XmlSerializerNamespaces = New XmlSerializerNamespaces()
 namespaces.Add("myChangedPrefix", "myImportNamespace");
 s.Namespaces = namespaces;</code>
@@ -160,8 +155,7 @@ s.Namespaces = namespaces;</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> to use with this schema object.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> to use with this schema object.</para>
         </summary>
       </Docs>
     </Member>
@@ -194,8 +188,7 @@ s.Namespaces = namespaces;</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the parent of this <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para
-          >
+            >Gets or sets the parent of this <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para>
         </summary>
       </Docs>
     </Member>

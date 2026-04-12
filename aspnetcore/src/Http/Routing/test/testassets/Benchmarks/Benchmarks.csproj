@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <UseP2PReferences Condition="'$(UseP2PReferences)'=='' AND '$(BenchmarksTargetFramework)'==''"
-      >true</UseP2PReferences
-    >
+      >true</UseP2PReferences>
   </PropertyGroup>
 
   <!--These references are used when running locally-->

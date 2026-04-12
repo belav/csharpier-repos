@@ -38,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Handlers.TraceHandler" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Handlers.TraceHandler" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" /> instance.</para
-          >
+            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -86,11 +84,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method writes an <see cref="T:System.Web.HttpResponse" /> that includes all current trace information. The trace information includes calls to the protected <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />, <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />, and <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" /> methods.</para
-          >
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method writes an <see cref="T:System.Web.HttpResponse" /> that includes all current trace information. The trace information includes calls to the protected <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" />, <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />, and <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" /> methods.</para>
           <para
-            >The <see cref="T:System.Web.Handlers.TraceHandler" /> class implements the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method to delegate to the implementation of the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method. If you extend the <see cref="T:System.Web.Handlers.TraceHandler" /> class, implement your own <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method to display different tracing information.</para
-          >
+            >The <see cref="T:System.Web.Handlers.TraceHandler" /> class implements the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method to delegate to the implementation of the <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method. If you extend the <see cref="T:System.Web.Handlers.TraceHandler" /> class, implement your own <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" /> method to display different tracing information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -101,8 +97,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.HttpContext" /> object that provides access to the current Request and Response instances.</param
-        >
+          />An <see cref="T:System.Web.HttpContext" /> object that provides access to the current Request and Response instances.</param>
       </Docs>
     </Member>
     <Member MemberName="ShowDetails">
@@ -125,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" /> method writes tracing details to the response stream, including information about the application state, session state for the current session, control tree created for the current page, and HTTP request information such as the query string and form parameters. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para
-          >
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowDetails(System.Data.DataSet)" /> method writes tracing details to the response stream, including information about the application state, session state for the current session, control tree created for the current page, and HTTP request information such as the query string and form parameters. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,8 +131,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataSet" /> object that contains tracing information.</param
-        >
+          />A <see cref="T:System.Data.DataSet" /> object that contains tracing information.</param>
       </Docs>
     </Member>
     <Member MemberName="ShowRequests">
@@ -181,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" /> method writes tracing details to the response stream, including information on the most recent HTTP requests that ASP.NET has processed for the site. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para
-          >
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" /> method writes tracing details to the response stream, including information on the most recent HTTP requests that ASP.NET has processed for the site. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -193,8 +185,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A set of <see cref="T:System.Data.DataSet" /> objects that represent the recent HTTP requests the server has processed.</param
-        >
+          />A set of <see cref="T:System.Data.DataSet" /> objects that represent the recent HTTP requests the server has processed.</param>
       </Docs>
     </Member>
     <Member MemberName="ShowVersionDetails">
@@ -211,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" /> method writes tracing details on the Common Language Runtime (CLR) and ASP.NET versions currently in use. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para
-          >
+            >The <see cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" /> method writes tracing details on the Common Language Runtime (CLR) and ASP.NET versions currently in use. It is called by <see cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />, and cannot be overridden.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -235,14 +225,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit-interface member implementation. It can be used only when the <see cref="T:System.Web.Handlers.TraceHandler" /> instance is cast to an <see cref="T:System.Web.IHttpHandler" /> interface.</para
-          >
+            >This member is an explicit-interface member implementation. It can be used only when the <see cref="T:System.Web.Handlers.TraceHandler" /> instance is cast to an <see cref="T:System.Web.IHttpHandler" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" /> instance.</para
-          >
+            >Gets a value indicating whether another request can use the <see cref="T:System.Web.Handlers.TraceHandler" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -266,8 +254,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method writes all current trace information to the <see cref="T:System.Web.HttpResponse" />. The trace information includes information on the state of the Web server, the current session, the control tree for the current page, HTTP request parameters, and recent HTTP requests processed by the server.</para
-          >
+            >This method writes all current trace information to the <see cref="T:System.Web.HttpResponse" />. The trace information includes information on the state of the Web server, the current session, the control tree for the current page, HTTP request parameters, and recent HTTP requests processed by the server.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,8 +265,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Web.HttpContext" /> object that provides access to the current Request and Response instances.</param
-        >
+          />An <see cref="T:System.Web.HttpContext" /> object that provides access to the current Request and Response instances.</param>
       </Docs>
     </Member>
   </Members>

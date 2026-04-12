@@ -17,16 +17,13 @@
           <Freight SourceField="Freight" SourceTable="Orders">12.75</Freight>
           <ShipName ValidateOnSet="False" DataUpdatable="False">LILA-Supermercado</ShipName>
           <ShipAddress ForeignName="Error" DefaultValue=""
-            >Carrera 52 con Ave. Bol�var #65-98 Llano Largo</ShipAddress
-          >
+            >Carrera 52 con Ave. Bol�var #65-98 Llano Largo</ShipAddress>
           <ShipCity ValidationRule="">Barquisimeto</ShipCity>
           <ShipRegion>Lara</ShipRegion>
           <ShipPostalCode ValidationText="" Required="False" AllowZeroLength="False"
-            >3508</ShipPostalCode
-          >
+            >3508</ShipPostalCode>
           <ShipCountry FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >Venezuela</ShipCountry
-          >
+            >Venezuela</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -70,8 +67,7 @@
           <ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >43 rue St. Laurent</ShipAddress
-          >
+            >43 rue St. Laurent</ShipAddress>
           <ShipCity ColumnHidden="False" ColumnWidth="1395" Caption="Ship City">Montr�al</ShipCity>
           <ShipRegion>Qu�bec</ShipRegion>
           <ShipPostalCode DisplayControl="109" FilterLookup="1">H1J 1C3</ShipPostalCode>
@@ -94,8 +90,7 @@
           <Freight DataUpdatable="False" ForeignName="Error" DefaultValue="0">0.59</Freight>
           <ShipName>Wartian Herkku</ShipName>
           <ShipAddress ValidationRule="" ValidationText="" Required="False"
-            >Torikatu 38</ShipAddress
-          >
+            >Torikatu 38</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error">Oulu</ShipCity>
           <ShipRegion OriginalValue="Error"></ShipRegion>
           <ShipPostalCode VisibleValue="Error">90110</ShipPostalCode>
@@ -114,8 +109,7 @@
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
           Caption="Employee"
-          >8</EmployeeID
-        >
+          >8</EmployeeID>
         <OrderDates>
           <OrderDate>11/21/94</OrderDate>
           <?elem4_PI elem4-PI?>
@@ -170,8 +164,7 @@
   </OrderIDs>
   <OrderIDs>
     <bar:OrderID xmlns:bar="urn:cool man" DataUpdatable="False" ForeignName="Error"
-      >10337</bar:OrderID
-    >
+      >10337</bar:OrderID>
     <CustomerIDs>
       <CustomerID DefaultValue="">FRANK</CustomerID>
       <EmployeeIDs>
@@ -186,8 +179,7 @@
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
-            >Frankenversand</ShipName
-          >
+            >Frankenversand</ShipName>
           <ShipAddress>Berliner Platz 43</ShipAddress>
           <ShipCity>M�nchen</ShipCity>
           <ShipRegion ColumnHidden="False"></ShipRegion>
@@ -266,8 +258,7 @@
       Description="Unique order number."
       Caption="Order ID"
       FilterLookup="1"
-      >10341</bar:OrderID
-    >
+      >10341</bar:OrderID>
     <CustomerIDs>
       <CustomerID>SIMOB</CustomerID>
       <EmployeeIDs>
@@ -285,8 +276,7 @@
           <ShipCity2>Seattle</ShipCity2>
           <ShipRegion></ShipRegion>
           <ShipPostalCode ValidationText="" Required="False" AllowZeroLength="False"
-            >1734</ShipPostalCode
-          >
+            >1734</ShipPostalCode>
           <ShipCountry FieldSize="Error" OriginalValue="Error">Denmark</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -299,8 +289,7 @@
         VisibleValue="Error"
         Description="Same entry as in Customers table."
         ColumnOrder="0"
-        >FRANK</CustomerID
-      >
+        >FRANK</CustomerID>
       <EmployeeIDs>
         <EmployeeID>4</EmployeeID>
         <OrderDates>
@@ -311,8 +300,7 @@
           <Freight>54.83</Freight>
           <ShipName ColumnWidth="2895" Caption="Ship Name">Frankenversand</ShipName>
           <ShipAddress DisplayControl="109" FilterLookup="1" Value="Berliner Platz 43"
-            >Berliner Platz 43</ShipAddress
-          >
+            >Berliner Platz 43</ShipAddress>
           <ShipCity>M�nchen</ShipCity>
           <ShipRegion Attributes="2" CollatingOrder="1033"></ShipRegion>
           <ShipPostalCode Type="10" Name="ShipPostalCode">80805</ShipPostalCode>
@@ -325,8 +313,7 @@
           <ShipVia SourceField="ShipVia" SourceTable="Orders" ValidateOnSet="False">1</ShipVia>
           <Freight>110.37</Freight>
           <ShipName DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >Lehmanns Marktstand</ShipName
-          >
+            >Lehmanns Marktstand</ShipName>
           <ShipAddress>Magazinweg 7</ShipAddress>
           <ShipCity>Frankfurt a.M. </ShipCity>
           <ShipRegion ValidationRule="" ValidationText=""></ShipRegion>
@@ -341,8 +328,7 @@
           <ShipVia VisibleValue="Error" ColumnWidth="1800" ColumnOrder="0">2</ShipVia>
           <Freight>23.29</Freight>
           <ShipName ColumnHidden="False" ColumnWidth="2895" Caption="Ship Name"
-            >White Clover Markets</ShipName
-          >
+            >White Clover Markets</ShipName>
           <ShipAddress>1029 - 12th Ave. S.</ShipAddress>
           <ShipCity>Seattle</ShipCity>
           <ShipRegion>WA</ShipRegion>
@@ -362,8 +348,7 @@
           <OrderDate>12/5/94</OrderDate>
           <RequiredDate Size="8">1/2/95</RequiredDate>
           <ShippedDate SourceField="ShippedDate" SourceTable="Orders" ValidateOnSet="False"
-            >12/12/94</ShippedDate
-          >
+            >12/12/94</ShippedDate>
           <ShipVia DataUpdatable="False" ForeignName="Error" DefaultValue="">2</ShipVia>
           <Freight>249.06</Freight>
           <ShipName ValidationRule="">QUICK-Stop</ShipName>
@@ -385,14 +370,12 @@
         <OrderDates>
           <OrderDate>12/6/94</OrderDate>
           <RequiredDate Format="Medium Date" ColumnOrder="0" ColumnHidden="False"
-            >1/17/95</RequiredDate
-          >
+            >1/17/95</RequiredDate>
           <ShippedDate ColumnWidth="1440">12/9/94</ShippedDate>
           <ShipVia>3</ShipVia>
           <Freight>142.08</Freight>
           <ShipName Caption="Ship Name" DisplayControl="109" FilterLookup="1"
-            >Rattlesnake Canyon Grocery</ShipName
-          >
+            >Rattlesnake Canyon Grocery</ShipName>
           <ShipAddress Value="2817 Milton Dr.">2817 Milton Dr.</ShipAddress>
           <ShipCitys>
             <ShipCity Attributes="2">Albuquerque</ShipCity>
@@ -441,8 +424,7 @@
       <CustomerID>TOMSP</CustomerID>
       <EmployeeIDs>
         <yes:EmployeeID xmlns:yes="urn:testing2" Description="Same entry as in Employees table."
-          >6</yes:EmployeeID
-        >
+          >6</yes:EmployeeID>
         <OrderDates>
           <OrderDate>8/5/94</OrderDate>
           <RequiredDate Caption="Required Date">9/16/94</RequiredDate>
@@ -450,8 +432,7 @@
           <ShipVia>1</ShipVia>
           <Freight>11.61</Freight>
           <ShipName DisplayControl="109" FilterLookup="1" Value="Toms Spezialit�ten"
-            >Toms Spezialit�ten</ShipName
-          >
+            >Toms Spezialit�ten</ShipName>
           <ShipAddress>Luisenstr. 48</ShipAddress>
           <ShipCity>M�nster</ShipCity>
           <ShipRegion Attributes="2"></ShipRegion>
@@ -478,8 +459,7 @@
           <ShipCity DefaultValue="" ValidationRule="">Rio de Janeiro</ShipCity>
           <ShipRegion ValidationText="" Required="False" AllowZeroLength="False">RJ</ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >05454-876</ShipPostalCode
-          >
+            >05454-876</ShipPostalCode>
           <ShipCountry ColumnOrder="0" ColumnHidden="False">Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -494,8 +474,7 @@
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
           Caption="Employee"
-          >3</EmployeeID
-        >
+          >3</EmployeeID>
         <OrderDates>
           <OrderDate Value="8/8/94">8/8/94</OrderDate>
           <RequiredDate Attributes="1">9/5/94</RequiredDate>
@@ -521,16 +500,14 @@
         <OrderDates>
           <OrderDate ValidationRule="">8/9/94</OrderDate>
           <RequiredDate ValidationText="" Required="False" AllowZeroLength="False"
-            >9/6/94</RequiredDate
-          >
+            >9/6/94</RequiredDate>
           <ShippedDate>8/11/94</ShippedDate>
           <ShipVia FieldSize="Error">2</ShipVia>
           <Freight OriginalValue="Error">51.3</Freight>
           <ShipName
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
-            >Supr�mes d�lices</ShipName
-          >
+            >Supr�mes d�lices</ShipName>
           <ShipAddress>Boulevard Tirou, 255</ShipAddress>
           <ShipCity ColumnHidden="False" ColumnWidth="1395">Charleroi</ShipCity>
           <ShipRegion ColumnWidth="1410" Caption="Ship Region" DisplayControl="109"></ShipRegion>
@@ -557,8 +534,7 @@
           <ShipCity>Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode Required="False" AllowZeroLength="False" FieldSize="Error"
-            >05454-876</ShipPostalCode
-          >
+            >05454-876</ShipPostalCode>
           <ShipCountry>Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -578,13 +554,11 @@
           <Freight>22.98</Freight>
           <ShipName Name="ShipName" OrdinalPosition="8" Size="40">Chop-suey Chinese</ShipName>
           <ShipAddress SourceField="ShipAddress" SourceTable="Orders" ValidateOnSet="False"
-            >Hauptstr. 31</ShipAddress
-          >
+            >Hauptstr. 31</ShipAddress>
           <ShipCity>Bern</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >3012</ShipPostalCode
-          >
+            >3012</ShipPostalCode>
           <ShipCountry ValidationRule="" ValidationText="">Switzerland</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -598,8 +572,7 @@
       <CustomerID FieldSize="Error">RICSU</CustomerID>
       <EmployeeIDs>
         <lucky:EmployeeID OriginalValue="Error" xmlns:lucky="urn:ugly people" VisibleValue="Error"
-          >9</lucky:EmployeeID
-        >
+          >9</lucky:EmployeeID>
         <OrderDates>
           <OrderDate Format="Medium Date" ColumnOrder="0" ColumnHidden="False">8/12/94</OrderDate>
           <RequiredDate ColumnWidth="1515" Caption="Required Date">9/9/94</RequiredDate>
@@ -625,20 +598,17 @@
         <OrderDates>
           <OrderDate Size="8" SourceField="OrderDate">8/15/94</OrderDate>
           <RequiredDate SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >9/12/94</RequiredDate
-          >
+            >9/12/94</RequiredDate>
           <ShippedDate ForeignName="Error">8/17/94</ShippedDate>
           <ShipVia DefaultValue="" ValidationRule="">2</ShipVia>
           <Freight>13.97</Freight>
           <ShipName ValidationText="" Required="False" AllowZeroLength="False"
-            >Wellington Importadora</ShipName
-          >
+            >Wellington Importadora</ShipName>
           <ShipAddress FieldSize="Error" OriginalValue="Error">Rua do Mercado, 12</ShipAddress>
           <ShipCity VisibleValue="Error" ColumnOrder="0">Resende</ShipCity>
           <ShipRegion>SP</ShipRegion>
           <ShipPostalCode ColumnHidden="False" ColumnWidth="1785" Caption="Ship Postal Code"
-            >08737-363</ShipPostalCode
-          >
+            >08737-363</ShipPostalCode>
           <ShipCountry DisplayControl="109" FilterLookup="1">Brazil</ShipCountry>
         </OrderDates>
         <!-- Comment node -->
@@ -659,8 +629,7 @@
           <Freight>81.91</Freight>
           <ShipName OrdinalPosition="8" Size="40" SourceField="ShipName">HILARI�N-Abastos</ShipName>
           <ShipAddress SourceTable="Orders" ValidateOnSet="False"
-            >Carrera 22 con Ave. Carlos Soublette #8-35</ShipAddress
-          >
+            >Carrera 22 con Ave. Carlos Soublette #8-35</ShipAddress>
           <ShipCity DataUpdatable="False">San Crist�bal</ShipCity>
           <ShipRegion>T�chira</ShipRegion>
           <ShipPostalCode>5022</ShipPostalCode>
@@ -721,13 +690,11 @@
             OriginalValue="Error"
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Mehrheimerstr. 369</ShipAddress
-          >
+            >Mehrheimerstr. 369</ShipAddress>
           <ShipCity>K�ln</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False"></ShipRegion>
           <ShipPostalCode Caption="Ship Postal Code" DisplayControl="109" FilterLookup="1"
-            >50739</ShipPostalCode
-          >
+            >50739</ShipPostalCode>
           <ShipCountry>Germany</ShipCountry>
         </OrderDates>
         <OrderDates>
@@ -738,8 +705,7 @@
           <Freight OrdinalPosition="7" Size="8" SourceField="Freight">3.05</Freight>
           <ShipName>Que Del�cia</ShipName>
           <ShipAddress SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Rua da Panificadora, 12</ShipAddress
-          >
+            >Rua da Panificadora, 12</ShipAddress>
           <ShipCity>Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode>02389-673</ShipPostalCode>
@@ -765,8 +731,7 @@
           <ShipCity>Albuquerque</ShipCity>
           <ShipRegion FieldSize="Error">NM</ShipRegion>
           <ShipPostalCode OriginalValue="Error" VisibleValue="Error" ColumnOrder="0"
-            >87110</ShipPostalCode
-          >
+            >87110</ShipPostalCode>
           <ShipCountry ColumnHidden="False" ColumnWidth="1380">USA</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -787,11 +752,9 @@
           <ShipVia. OrdinalPosition="6" Size="4" SourceField="ShipVia">4</ShipVia.>
           <Freight>146.06</Freight>
           <ShipName SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Ernst Handel</ShipName
-          >
+            >Ernst Handel</ShipName>
           <ShipAddress ForeignName="Error" DefaultValue="" ValidationRule=""
-            >Kirchgasse 6</ShipAddress
-          >
+            >Kirchgasse 6</ShipAddress>
           <ShipCity>Graz</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>8010</ShipPostalCode>
@@ -808,11 +771,9 @@
           <ShipVia. OrdinalPosition="6" Size="4" SourceField="ShipVia">4</ShipVia.>
           <Freight>146.06</Freight>
           <ShipName SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Ernst Handel</ShipName
-          >
+            >Ernst Handel</ShipName>
           <ShipAddress ForeignName="Error" DefaultValue="" ValidationRule=""
-            >Kirchgasse 6</ShipAddress
-          >
+            >Kirchgasse 6</ShipAddress>
           <ShipCity>Graz</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>8010</ShipPostalCode>
@@ -828,8 +789,7 @@
       ValidationText=""
       Required="False"
       AllowZeroLength="False"
-      >10264</False:OrderID
-    >
+      >10264</False:OrderID>
     <Fred:CustomerIDs xmlns:Fred="urn:First name">
       <CustomerID FieldSize="Error" OriginalValue="Error">FOLKO</CustomerID>
       <ID:CustomerID xmlns:ID="urn:Dup" Value="ERNSH" Attributes="2">FOLKO2</ID:CustomerID>
@@ -843,8 +803,7 @@
             Description="Same as Shipper ID in Shippers table."
             DecimalPlaces="255"
             Caption="Ship Via"
-            >3</ShipVia
-          >
+            >3</ShipVia>
           <Freight Value="3.67" Attributes="1" CollatingOrder="1033">3.67</Freight>
           <ShipName Type="10" Name="ShipName" OrdinalPosition="8">Folk och f� HB</ShipName>
           <ShipAddress>�kergatan 24</ShipAddress>
@@ -859,11 +818,9 @@
         </testing:OrderDates>
         <Testing:OrderDates xmlns:Testing="urn:test">
           <OrderDate Format="Medium Date" ColumnOrder="0"
-            >8/24/94</OrderDate
-          >
+            >8/24/94</OrderDate>
 								                                        Bad Order
-                                </Testing:OrderDates
-        >
+                                </Testing:OrderDates>
       </EmployeeIDs>
     </Fred:CustomerIDs>
   </cool:OrderIDs>
@@ -872,8 +829,7 @@
     <OrderID Test="11234">10265a-false order</OrderID>
     <name:CustomerIDs xmlns:name="urn:cool namespace us?/">
       <CustomerID SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-        >BLONP</CustomerID
-      >
+        >BLONP</CustomerID>
       <space:EmployeeIDs xmlns:space="urn:cool namespace us?/">
         <EmployeeID>2</EmployeeID>
         <uh:OrderDates xmlns:uh="urn:cool namespace us?/">
@@ -886,12 +842,10 @@
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
-            >Blondel p�re et fils</ShipName
-          >
+            >Blondel p�re et fils</ShipName>
           <ShipAddress>24, place Kl�ber</ShipAddress>
           <ShipCity ColumnWidth="1395" Caption="Ship City" DisplayControl="109"
-            >Strasbourg</ShipCity
-          >
+            >Strasbourg</ShipCity>
           <ShipRegion DisplayControl="109" FilterLookup="1" Value=""></ShipRegion>
           <ShipPostalCode>67000</ShipPostalCode>
           <ShipCountry Attributes="2">France</ShipCountry>
@@ -906,8 +860,7 @@
     <OrderID Test="11234">10265a-false order</OrderID>
     <name:CustomerIDs xmlns:name="urn:cool namespace us?/">
       <CustomerID SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-        >BLONP</CustomerID
-      >
+        >BLONP</CustomerID>
       <space:EmployeeIDs xmlns:space="urn:cool namespace us?/">
         <EmployeeID>2</EmployeeID>
         <uh:OrderDates xmlns:uh="urn:cool namespace us?/">
@@ -920,12 +873,10 @@
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
-            >Blondel p�re et fils</ShipName
-          >
+            >Blondel p�re et fils</ShipName>
           <ShipAddress>24, place Kl�ber</ShipAddress>
           <ShipCity ColumnWidth="1395" Caption="Ship City" DisplayControl="109"
-            >Strasbourg</ShipCity
-          >
+            >Strasbourg</ShipCity>
           <ShipRegion DisplayControl="109" FilterLookup="1" Value=""></ShipRegion>
           <ShipPostalCode>67000</ShipPostalCode>
           <ShipCountry Attributes="2">France</ShipCountry>
@@ -968,13 +919,11 @@
         <OrderDates>
           <OrderDate>8/29/94</OrderDate>
           <RequiredDate ColumnHidden="False" ColumnWidth="1515" Caption="Required Date"
-            >9/26/94</RequiredDate
-          >
+            >9/26/94</RequiredDate>
           <ShippedDate>9/6/94</ShippedDate>
           <ShipVia Caption="Ship Via" DisplayControl="111" RowSourceType="Table/Query">1</ShipVia>
           <Freight Value="208.58" Attributes="1" CollatingOrder="1033" Type="5" Name="Freight"
-            >208.58</Freight
-          >
+            >208.58</Freight>
           <ShipName OrdinalPosition="8" Size="40" SourceField="ShipName">Frankenversand</ShipName>
           <ShipAddress>Berliner Platz 43</ShipAddress>
           <ShipCity SourceTable="Orders">M�nchen</ShipCity>
@@ -995,8 +944,7 @@
         <OrderDates>
           <OrderDate Required="False" AllowZeroLength="False" FieldSize="Error">8/30/94</OrderDate>
           <RequiredDate OriginalValue="Error" VisibleValue="Error" Format="Medium Date"
-            >9/27/94</RequiredDate
-          >
+            >9/27/94</RequiredDate>
           <ShippedDate>9/2/94</ShippedDate>
           <ShipVia ColumnOrder="0" ColumnHidden="False">3</ShipVia>
           <Freight>66.29</Freight>
@@ -1026,15 +974,12 @@
           <Freight SourceTable="Orders" ValidateOnSet="False">4.56</Freight>
           <ShipName DataUpdatable="False">White Clover Markets</ShipName>
           <ShipAddress ForeignName="Error" DefaultValue="" ValidationRule=""
-            >1029 - 12th Ave. S.</ShipAddress
-          >
+            >1029 - 12th Ave. S.</ShipAddress>
           <ShipCity ValidationText="" Required="False">Seattle</ShipCity>
           <ShipRegion AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >WA</ShipRegion
-          >
+            >WA</ShipRegion>
           <ShipPostalCode VisibleValue="Error" ColumnOrder="0" ColumnHidden="False"
-            >98124</ShipPostalCode
-          >
+            >98124</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -1054,8 +999,7 @@
           <Freight>136.54</Freight>
           <ShipName>Wartian Herkku</ShipName>
           <ShipAddress Size="60" SourceField="ShipAddress" SourceTable="Orders"
-            >Torikatu 38</ShipAddress
-          >
+            >Torikatu 38</ShipAddress>
           <ShipCity>Oulu</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>90110</ShipPostalCode>
@@ -1075,8 +1019,7 @@
           <Freight>136.54a</Freight>
           <ShipName>Wartian Herkkua</ShipName>
           <ShipAddress Size="60" SourceField="ShipAddress" SourceTable="Orders"
-            >Torikatu 38a</ShipAddress
-          >
+            >Torikatu 38a</ShipAddress>
           <ShipCity>Oulua</ShipCity>
           <ShipRegion>a</ShipRegion>
           <ShipPostalCode>90110a</ShipPostalCode>
@@ -1097,8 +1040,7 @@
           <OrderDate Required="False" AllowZeroLength="False">9/1/94</OrderDate>
           <RequiredDate>9/29/94</RequiredDate>
           <ShippedDate FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >9/30/94</ShippedDate
-          >
+            >9/30/94</ShippedDate>
           <ShipVia ColumnWidth="1800" ColumnOrder="0" ColumnHidden="False">2</ShipVia>
           <Freight ColumnHidden="False" ColumnWidth="840" FilterLookup="1">4.54</Freight>
           <ShipName>Split Rail Beer and Ale</ShipName>
@@ -1106,11 +1048,9 @@
           <ShipCity Value="Lander">Lander</ShipCity>
           <ShipRegion Attributes="2" CollatingOrder="1033" Type="10">WY</ShipRegion>
           <ShipPostalCode Name="ShipPostalCode" OrdinalPosition="12" Size="10"
-            >82520</ShipPostalCode
-          >
+            >82520</ShipPostalCode>
           <ShipCountry SourceField="ShipCountry" SourceTable="Orders" ValidateOnSet="False"
-            >USA</ShipCountry
-          >
+            >USA</ShipCountry>
         </OrderDates>
         <OrderDates>
           <OrderDate DataUpdatable="False">9/2/94</OrderDate>
@@ -1122,8 +1062,7 @@
           <ShipAddress OriginalValue="Error" VisibleValue="Error">2817 Milton Dr.</ShipAddress>
           <ShipCity>Albuquerque</ShipCity>
           <ShipRegion Description="State or province." ColumnOrder="0" ColumnHidden="False"
-            >NM</ShipRegion
-          >
+            >NM</ShipRegion>
           <ShipPostalCode>87110</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
@@ -1132,8 +1071,7 @@
     <CustomerIDs
       >Duplicate
 				                        <CustomerID DataUpdatable="False" ForeignName="Error"
-        >SPLIRb</CustomerID
-      >
+        >SPLIRb</CustomerID>
       <Custo world="hello">dumb name-b</Custo>
       <my:namespace xmlns:my="urn:hello there">test name2b</my:namespace>
       <EmployeeIDs>
@@ -1142,8 +1080,7 @@
           <OrderDate Required="False" AllowZeroLength="False">9/1/94</OrderDate>
           <RequiredDate>9/29/94</RequiredDate>
           <ShippedDate FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >9/30/94</ShippedDate
-          >
+            >9/30/94</ShippedDate>
           <ShipVia ColumnWidth="1800" ColumnOrder="0" ColumnHidden="False">2</ShipVia>
           <Freight ColumnHidden="False" ColumnWidth="840" FilterLookup="1">4.54</Freight>
           <ShipName>Split Rail Beer and Ale</ShipName>
@@ -1151,11 +1088,9 @@
           <ShipCity Value="Lander">Lander</ShipCity>
           <ShipRegion Attributes="2" CollatingOrder="1033" Type="10">WY</ShipRegion>
           <ShipPostalCode Name="ShipPostalCode" OrdinalPosition="12" Size="10"
-            >82520</ShipPostalCode
-          >
+            >82520</ShipPostalCode>
           <ShipCountry SourceField="ShipCountry" SourceTable="Orders" ValidateOnSet="False"
-            >USA</ShipCountry
-          >
+            >USA</ShipCountry>
         </OrderDates>
         <OrderDates>
           <OrderDate DataUpdatable="False">9/2/94</OrderDate>
@@ -1167,8 +1102,7 @@
           <ShipAddress OriginalValue="Error" VisibleValue="Error">2817 Milton Dr.</ShipAddress>
           <ShipCity>Albuquerque</ShipCity>
           <ShipRegion Description="State or province." ColumnOrder="0" ColumnHidden="False"
-            >NM</ShipRegion
-          >
+            >NM</ShipRegion>
           <ShipPostalCode>87110</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
@@ -1190,8 +1124,7 @@
           <ShipName>QUICK-Stop</ShipName>
           <ShipAddress Size="60">Taucherstra�e 10</ShipAddress>
           <ShipCity SourceField="ShipCity" SourceTable="Orders" ValidateOnSet="False"
-            >Cunewalde</ShipCity
-          >
+            >Cunewalde</ShipCity>
           <ShipRegion DataUpdatable="False" ForeignName="Error"></ShipRegion>
           <ShipPostalCode>01307</ShipPostalCode>
           <ShipCountry DefaultValue="" ValidationRule="" ValidationText="">Germany</ShipCountry>
@@ -1208,15 +1141,13 @@
         <OrderDates>
           <OrderDate FieldSize="Error">9/6/94</OrderDate>
           <RequiredDate OriginalValue="Error" VisibleValue="Error" Format="Medium Date"
-            >10/4/94</RequiredDate
-          >
+            >10/4/94</RequiredDate>
           <ShippedDate ColumnOrder="0">9/16/94</ShippedDate>
           <ShipVia
             ColumnHidden="False"
             Description="Same as Shipper ID in Shippers table."
             DecimalPlaces="255"
-            >1</ShipVia
-          >
+            >1</ShipVia>
           <Freight FilterLookup="1" Value="6.01" Attributes="1">6.01</Freight>
           <ShipName CollatingOrder="1033" Type="10">Vins et alcools Chevalier</ShipName>
           <ShipAddress Name="ShipAddress">59 rue de l'Abbaye</ShipAddress>
@@ -1276,8 +1207,7 @@
     <OrderID>10277</OrderID>
     <CustomerIDs>
       <CustomerID SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-        >MORGK</CustomerID
-      >
+        >MORGK</CustomerID>
       <EmployeeIDs>
         <EmployeeID>2</EmployeeID>
         <OrderDates>
@@ -1287,15 +1217,13 @@
           <ShipVia>3</ShipVia>
           <Freight>125.77</Freight>
           <ShipName ValidationText="" Required="False" AllowZeroLength="False"
-            >Morgenstern Gesundkost</ShipName
-          >
+            >Morgenstern Gesundkost</ShipName>
           <ShipAddress>Heerstr. 22</ShipAddress>
           <ShipCity>Leipzig</ShipCity>
           <ShipRegion FieldSize="Error" OriginalValue="Error"></ShipRegion>
           <ShipPostalCode VisibleValue="Error" ColumnOrder="0">04179</ShipPostalCode>
           <ShipCountry ColumnHidden="False" ColumnWidth="1380" Caption="Ship Country"
-            >Germany</ShipCountry
-          >
+            >Germany</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -1314,8 +1242,7 @@
           <Freight OrdinalPosition="7">92.69</Freight>
           <ShipName Size="40">Berglunds snabbk�p</ShipName>
           <ShipAddress SourceField="ShipAddress" SourceTable="Orders" ValidateOnSet="False"
-            >Berguvsv�gen  8</ShipAddress
-          >
+            >Berguvsv�gen  8</ShipAddress>
           <ShipCity DataUpdatable="False" ForeignName="Error">Lule�</ShipCity>
           <ShipRegion DefaultValue="" ValidationRule=""></ShipRegion>
           <ShipPostalCode>S-958 22</ShipPostalCode>
@@ -1329,8 +1256,7 @@
           <Freight VisibleValue="Error" Format="Currency" DecimalPlaces="255">25.83</Freight>
           <ShipName ColumnHidden="False" ColumnWidth="2895">Lehmanns Marktstand</ShipName>
           <ShipAddress Caption="Ship Address" DisplayControl="109" FilterLookup="1"
-            >Magazinweg 7</ShipAddress
-          >
+            >Magazinweg 7</ShipAddress>
           <ShipCity Value="Frankfurt a.M. ">Frankfurt a.M. </ShipCity>
           <ShipRegion Attributes="2" CollatingOrder="1033"></ShipRegion>
           <ShipPostalCode Type="10" Name="ShipPostalCode">60528</ShipPostalCode>
@@ -1364,15 +1290,13 @@
         <OrderDates>
           <OrderDate Required="False" AllowZeroLength="False" FieldSize="Error">9/14/94</OrderDate>
           <RequiredDate OriginalValue="Error" VisibleValue="Error" Format="Medium Date"
-            >9/28/94</RequiredDate
-          >
+            >9/28/94</RequiredDate>
           <ShippedDate>9/21/94</ShippedDate>
           <ShipVia
             ColumnOrder="0"
             ColumnHidden="False"
             Description="Same as Shipper ID in Shippers table."
-            >1</ShipVia
-          >
+            >1</ShipVia>
           <Freight>2.94</Freight>
           <ShipName>Romero y tomillo</ShipName>
           <ShipAddress>Gran V�a, 1</ShipAddress>
@@ -1388,8 +1312,7 @@
           <ShipVia>1</ShipVia>
           <Freight OrdinalPosition="7" Size="8">12.69</Freight>
           <ShipName SourceField="ShipName" SourceTable="Orders" ValidateOnSet="False"
-            >Romero y tomillo</ShipName
-          >
+            >Romero y tomillo</ShipName>
           <ShipAddress DataUpdatable="False">Gran V�a, 1</ShipAddress>
           <ShipCity>Madrid</ShipCity>
           <ShipRegion ForeignName="Error" DefaultValue=""></ShipRegion>
@@ -1408,8 +1331,7 @@
         <OrderDates>
           <OrderDate>9/16/94</OrderDate>
           <RequiredDate VisibleValue="Error" Format="Medium Date" ColumnOrder="0"
-            >10/14/94</RequiredDate
-          >
+            >10/14/94</RequiredDate>
           <ShippedDate ColumnHidden="False">9/23/94</ShippedDate>
           <ShipVia Description="Same as Shipper ID in Shippers table.">3</ShipVia>
           <Freight ColumnWidth="840">84.81</Freight>
@@ -1436,11 +1358,9 @@
           <ShipVia>1</ShipVia>
           <Freight ForeignName="Error" DefaultValue="0">76.56</Freight>
           <ShipName ValidationRule="" ValidationText="" Required="False"
-            >Lehmanns Marktstand</ShipName
-          >
+            >Lehmanns Marktstand</ShipName>
           <ShipAddress AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >Magazinweg 7</ShipAddress
-          >
+            >Magazinweg 7</ShipAddress>
           <ShipCity VisibleValue="Error" ColumnOrder="0">Frankfurt a.M. </ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>60528</ShipPostalCode>
@@ -1495,8 +1415,7 @@
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
             ColumnOrder="0"
-            >Av. Copacabana, 267</ShipAddress
-          >
+            >Av. Copacabana, 267</ShipAddress>
           <ShipCity>Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode>02389-890</ShipPostalCode>
@@ -1541,8 +1460,7 @@
           <Freight>22.77</Freight>
           <ShipName>B's Beverages</ShipName>
           <ShipAddress ValidationText="" Required="False" AllowZeroLength="False"
-            >Fauntleroy Circus</ShipAddress
-          >
+            >Fauntleroy Circus</ShipAddress>
           <ShipCity>London</ShipCity>
           <ShipRegion FieldSize="Error" OriginalValue="Error" VisibleValue="Error"></ShipRegion>
           <ShipPostalCode>EC2 5NT</ShipPostalCode>
@@ -1590,8 +1508,7 @@
           <ShipCity>Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >02389-673</ShipPostalCode
-          >
+            >02389-673</ShipPostalCode>
           <ShipCountry>Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -1605,16 +1522,14 @@
         <EmployeeID ColumnWidth="1995" ColumnOrder="0">1</EmployeeID>
         <OrderDates>
           <OrderDate ColumnHidden="False" ColumnWidth="1185" Caption="Order Date"
-            >9/28/94</OrderDate
-          >
+            >9/28/94</OrderDate>
           <RequiredDate FilterLookup="1" Value="10/26/94">10/26/94</RequiredDate>
           <ShippedDate>10/3/94</ShippedDate>
           <ShipVia Attributes="1" CollatingOrder="1033">2</ShipVia>
           <Freight Type="5" Name="Freight" OrdinalPosition="7">1.35</Freight>
           <ShipName Size="40" SourceField="ShipName">Tradi��o Hipermercados</ShipName>
           <ShipAddress SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Av. In�s de Castro, 414</ShipAddress
-          >
+            >Av. In�s de Castro, 414</ShipAddress>
           <ShipCity>S�o Paulo</ShipCity>
           <ShipRegion>SP</ShipRegion>
           <ShipPostalCode>05634-030</ShipPostalCode>
@@ -1623,8 +1538,7 @@
         <OrderDates>
           <OrderDate ForeignName="Error" DefaultValue="" ValidationRule="">9/29/94</OrderDate>
           <RequiredDate ValidationText="" Required="False" AllowZeroLength="True"
-            >10/27/94</RequiredDate
-          >
+            >10/27/94</RequiredDate>
           <ShippedDate>10/12/94</ShippedDate>
           <ShipVia FieldSize="Error" OriginalValue="Error" VisibleValue="Error">3</ShipVia>
           <Freight Format="Currency">21.18</Freight>
@@ -1670,8 +1584,7 @@
           <OrderDate DataUpdatable="False" ForeignName="Error" DefaultValue="">10/3/94</OrderDate>
           <RequiredDate ValidationRule="">10/31/94</RequiredDate>
           <ShippedDate ValidationText="" Required="False" AllowZeroLength="False"
-            >10/11/94</ShippedDate
-          >
+            >10/11/94</ShippedDate>
           <ShipVia FieldSize="Error" OriginalValue="Error">2</ShipVia>
           <Freight>1.15</Freight>
           <ShipName>Vins et alcools Chevalier</ShipName>
@@ -1679,8 +1592,7 @@
           <ShipCity VisibleValue="Error" ColumnOrder="0">Reims</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode ColumnHidden="False" ColumnWidth="1785" Caption="Ship Postal Code"
-            >51100</ShipPostalCode
-          >
+            >51100</ShipPostalCode>
           <ShipCountry>France</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -1717,8 +1629,7 @@
         <OrderDates>
           <OrderDate>10/5/94</OrderDate>
           <RequiredDate Required="False" AllowZeroLength="False" FieldSize="Error"
-            >11/16/94</RequiredDate
-          >
+            >11/16/94</RequiredDate>
           <ShippedDate>10/11/94</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight OriginalValue="Error" VisibleValue="Error">5.74</Freight>
@@ -1738,8 +1649,7 @@
       <CustomerID ColumnWidth="3090" Caption="Customer">HUNGO</CustomerID>
       <EmployeeIDs>
         <EmployeeID Caption="Employee" DisplayControl="111" RowSourceType="Table/Query"
-          >6</EmployeeID
-        >
+          >6</EmployeeID>
         <OrderDates>
           <OrderDate Value="10/6/94" Attributes="1">10/6/94</OrderDate>
           <RequiredDate CollatingOrder="1033">11/3/94</RequiredDate>
@@ -1769,8 +1679,7 @@
         <OrderDates>
           <OrderDate Required="False" AllowZeroLength="False" FieldSize="Error">10/7/94</OrderDate>
           <RequiredDate OriginalValue="Error" VisibleValue="Error" Format="Medium Date"
-            >11/4/94</RequiredDate
-          >
+            >11/4/94</RequiredDate>
           <ShippedDate>10/14/94</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight>29.76</Freight>
@@ -1797,8 +1706,7 @@
           <ShipVia SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False">2</ShipVia>
           <Freight ForeignName="Error" DefaultValue="0" ValidationRule="">17.68</Freight>
           <ShipName ValidationText="" Required="False" AllowZeroLength="False"
-            >Magazzini Alimentari Riuniti</ShipName
-          >
+            >Magazzini Alimentari Riuniti</ShipName>
           <ShipAddress>Via Ludovico il Moro 22</ShipAddress>
           <ShipCity FieldSize="Error" OriginalValue="Error" VisibleValue="Error">Bergamo</ShipCity>
           <ShipRegion></ShipRegion>
@@ -1822,8 +1730,7 @@
           <Freight>45.08</Freight>
           <ShipName Type="10" Name="ShipName">Die Wandernde Kuh</ShipName>
           <ShipAddress OrdinalPosition="9" Size="60" SourceField="ShipAddress"
-            >Adenauerallee 900</ShipAddress
-          >
+            >Adenauerallee 900</ShipAddress>
           <ShipCity>Stuttgart</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode SourceTable="Orders">70563</ShipPostalCode>
@@ -1845,8 +1752,7 @@
           <ShipVia>2</ShipVia>
           <Freight>6.27</Freight>
           <ShipName AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >Supr�mes d�lices</ShipName
-          >
+            >Supr�mes d�lices</ShipName>
           <ShipAddress VisibleValue="Error">Boulevard Tirou, 255</ShipAddress>
           <ShipCity ColumnOrder="0" ColumnHidden="False">Charleroi</ShipCity>
           <ShipRegion ColumnHidden="False" ColumnWidth="1410" Caption="Ship Region"></ShipRegion>
@@ -1869,14 +1775,12 @@
           <ShipVia SourceTable="Orders" ValidateOnSet="False">2</ShipVia>
           <Freight DataUpdatable="False" ForeignName="Error" DefaultValue="0">107.83</Freight>
           <ShipName ValidationRule="" ValidationText="" Required="False"
-            >Godos Cocina T�pica</ShipName
-          >
+            >Godos Cocina T�pica</ShipName>
           <ShipAddress>C/ Romero, 33</ShipAddress>
           <ShipCity>Sevilla</ShipCity>
           <ShipRegion AllowZeroLength="False" FieldSize="Error"></ShipRegion>
           <ShipPostalCode OriginalValue="Error" VisibleValue="Error" ColumnOrder="0"
-            >41101</ShipPostalCode
-          >
+            >41101</ShipPostalCode>
           <ShipCountry>Spain</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -1895,8 +1799,7 @@
           <ShipVia>2</ShipVia>
           <Freight Size="8">63.79</Freight>
           <ShipName SourceField="ShipName" SourceTable="Orders" ValidateOnSet="False"
-            >Tortuga Restaurante</ShipName
-          >
+            >Tortuga Restaurante</ShipName>
           <ShipAddress DataUpdatable="False">Avda. Azteca 123</ShipAddress>
           <ShipCity>M�xico D.F.</ShipCity>
           <ShipRegion></ShipRegion>
@@ -1922,8 +1825,7 @@
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
             ColumnHidden="False"
-            >Old World Delicatessen</ShipName
-          >
+            >Old World Delicatessen</ShipName>
           <ShipAddress ColumnWidth="2475">2743 Bering St.</ShipAddress>
           <ShipCity DisplayControl="109">Anchorage</ShipCity>
           <ShipRegion DisplayControl="109" FilterLookup="1">AK</ShipRegion>
@@ -1946,12 +1848,10 @@
           <ShipVia SourceTable="Orders" ValidateOnSet="False">3</ShipVia>
           <Freight DataUpdatable="False">7.56</Freight>
           <ShipName ForeignName="Error" DefaultValue="" ValidationRule=""
-            >Romero y tomillo</ShipName
-          >
+            >Romero y tomillo</ShipName>
           <ShipAddress ValidationText="" Required="False">Gran V�a, 1</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >Madrid</ShipCity
-          >
+            >Madrid</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>28001</ShipPostalCode>
           <ShipCountry>Spain</ShipCountry>
@@ -1969,8 +1869,7 @@
           <OrderDate ColumnHidden="False">10/18/94</OrderDate>
           <RequiredDate ColumnWidth="1515">11/15/94</RequiredDate>
           <ShippedDate Caption="Shipped Date" FilterLookup="1" Value="10/26/94"
-            >10/26/94</ShippedDate
-          >
+            >10/26/94</ShippedDate>
           <ShipVia Attributes="1">2</ShipVia>
           <Freight>0.56</Freight>
           <ShipName>Lonesome Pine Restaurant</ShipName>
@@ -1989,8 +1888,7 @@
       <CustomerID>ANATR</CustomerID>
       <EmployeeIDs>
         <EmployeeID SourceField="EmployeeID" SourceTable="Orders" ValidateOnSet="False"
-          >7</EmployeeID
-        >
+          >7</EmployeeID>
         <OrderDates>
           <OrderDate DataUpdatable="False">10/19/94</OrderDate>
           <RequiredDate ForeignName="Error" DefaultValue="">11/16/94</RequiredDate>
@@ -1998,8 +1896,7 @@
           <ShipVia ValidationRule="" ValidationText="" Required="False">3</ShipVia>
           <Freight AllowZeroLength="False">1.61</Freight>
           <ShipName FieldSize="Error" OriginalValue="Error"
-            >Ana Trujillo Emparedados y helados</ShipName
-          >
+            >Ana Trujillo Emparedados y helados</ShipName>
           <ShipAddress VisibleValue="Error">Avda. de la Constituci�n 2222</ShipAddress>
           <ShipCity>M�xico D.F.</ShipCity>
           <ShipRegion
@@ -2008,8 +1905,7 @@
             ColumnHidden="False"
           ></ShipRegion>
           <ShipPostalCode Caption="Ship Postal Code" DisplayControl="109" FilterLookup="1"
-            >05021</ShipPostalCode
-          >
+            >05021</ShipPostalCode>
           <ShipCountry>Mexico</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -2028,8 +1924,7 @@
           <ShipVia>1</ShipVia>
           <Freight SourceTable="Orders" ValidateOnSet="False">47.3</Freight>
           <ShipName DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >Hungry Owl All-Night Grocers</ShipName
-          >
+            >Hungry Owl All-Night Grocers</ShipName>
           <ShipAddress ValidationRule="">8 Johnstown Road</ShipAddress>
           <ShipCity>Cork</ShipCity>
           <ShipRegion>Co. Cork</ShipRegion>
@@ -2055,8 +1950,7 @@
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
             ColumnHidden="False"
-            >The Big Cheese</ShipName
-          >
+            >The Big Cheese</ShipName>
           <ShipAddress ColumnWidth="2475">89 Jefferson Way
 Suite 2</ShipAddress>
           <ShipCity DisplayControl="109" FilterLookup="1" Value="Portland">Portland</ShipCity>
@@ -2081,8 +1975,7 @@ Suite 2</ShipAddress>
           <Freight>24.69</Freight>
           <ShipName>Du monde entier</ShipName>
           <ShipAddress ValidationRule="" ValidationText=""
-            >67, rue des Cinquante Otages</ShipAddress
-          >
+            >67, rue des Cinquante Otages</ShipAddress>
           <ShipCity Required="False">Nantes</ShipCity>
           <ShipRegion AllowZeroLength="False" FieldSize="Error"></ShipRegion>
           <ShipPostalCode>44000</ShipPostalCode>
@@ -2100,15 +1993,13 @@ Suite 2</ShipAddress>
         <OrderDates>
           <OrderDate>10/24/94</OrderDate>
           <RequiredDate Format="Medium Date" ColumnOrder="0" ColumnHidden="False"
-            >11/21/94</RequiredDate
-          >
+            >11/21/94</RequiredDate>
           <ShippedDate>11/3/94</ShippedDate>
           <ShipVia Description="Same as Shipper ID in Shippers table.">2</ShipVia>
           <Freight ColumnWidth="840">40.26</Freight>
           <ShipName>Die Wandernde Kuh</ShipName>
           <ShipAddress DisplayControl="109" FilterLookup="1" Value="Adenauerallee 900"
-            >Adenauerallee 900</ShipAddress
-          >
+            >Adenauerallee 900</ShipAddress>
           <ShipCity Attributes="2" CollatingOrder="1033" Type="10">Stuttgart</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>70563</ShipPostalCode>
@@ -2118,8 +2009,7 @@ Suite 2</ShipAddress>
           <OrderDate>10/25/94</OrderDate>
           <RequiredDate SourceField="RequiredDate" SourceTable="Orders">11/22/94</RequiredDate>
           <ShippedDate ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >11/4/94</ShippedDate
-          >
+            >11/4/94</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight DefaultValue="0" ValidationRule="" ValidationText="">1.96</Freight>
           <ShipName>QUICK-Stop</ShipName>
@@ -2139,15 +2029,13 @@ Suite 2</ShipAddress>
         Description="Same entry as in Customers table."
         ColumnOrder="0"
         ColumnHidden="False"
-        >RATTC</CustomerID
-      >
+        >RATTC</CustomerID>
       <EmployeeIDs>
         <EmployeeID
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
           Caption="Employee"
-          >1</EmployeeID
-        >
+          >1</EmployeeID>
         <OrderDates>
           <OrderDate Value="10/26/94">10/26/94</OrderDate>
           <RequiredDate Attributes="1">11/23/94</RequiredDate>
@@ -2155,8 +2043,7 @@ Suite 2</ShipAddress>
           <ShipVia OrdinalPosition="6" Size="4" SourceField="ShipVia">2</ShipVia>
           <Freight SourceTable="Orders">74.16</Freight>
           <ShipName ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >Rattlesnake Canyon Grocery</ShipName
-          >
+            >Rattlesnake Canyon Grocery</ShipName>
           <ShipAddress>2817 Milton Dr.</ShipAddress>
           <ShipCity DefaultValue="" ValidationRule="" ValidationText="">Albuquerque</ShipCity>
           <ShipRegion Required="False" AllowZeroLength="False" FieldSize="Error">NM</ShipRegion>
@@ -2181,8 +2068,7 @@ Suite 2</ShipAddress>
           <ShipName>Island Trading</ShipName>
           <ShipAddress ColumnWidth="2475" Caption="Ship Address"
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity FilterLookup="1" Value="Cowes">Cowes</ShipCity>
           <ShipRegion Attributes="2">Isle of Wight</ShipRegion>
           <ShipPostalCode CollatingOrder="1033" Type="10">PO31 7PJ</ShipPostalCode>
@@ -2200,8 +2086,7 @@ Crowther Way</ShipAddress
         <OrderDates>
           <OrderDate>10/28/94</OrderDate>
           <RequiredDate SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >11/25/94</RequiredDate
-          >
+            >11/25/94</RequiredDate>
           <ShippedDate>11/8/94</ShippedDate>
           <ShipVia>3</ShipVia>
           <Freight ForeignName="Error" DefaultValue="0">150.15</Freight>
@@ -2246,18 +2131,15 @@ Crowther Way</ShipAddress
         <OrderDates>
           <OrderDate>11/1/94</OrderDate>
           <RequiredDate ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >11/29/94</RequiredDate
-          >
+            >11/29/94</RequiredDate>
           <ShippedDate>11/4/94</ShippedDate>
           <ShipVia DefaultValue="" ValidationRule="">2</ShipVia>
           <Freight ValidationText="" Required="False" AllowZeroLength="False">4.73</Freight>
           <ShipName FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >Island Trading</ShipName
-          >
+            >Island Trading</ShipName>
           <ShipAddress Description="Street address only -- no post-office box allowed."
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity>Cowes</ShipCity>
           <ShipRegion>Isle of Wight</ShipRegion>
           <ShipPostalCode ColumnHidden="False" ColumnWidth="1785">PO31 7PJ</ShipPostalCode>
@@ -2297,25 +2179,21 @@ Crowther Way</ShipAddress
           ColumnOrder="0"
           ColumnHidden="False"
           Description="Same entry as in Employees table."
-          >5</EmployeeID
-        >
+          >5</EmployeeID>
         <OrderDates>
           <OrderDate>11/3/94</OrderDate>
           <RequiredDate>11/17/94</RequiredDate>
           <ShippedDate Caption="Shipped Date" FilterLookup="1" Value="11/18/94"
-            >11/18/94</ShippedDate
-          >
+            >11/18/94</ShippedDate>
           <ShipVia Attributes="1" CollatingOrder="1033" Type="4">3</ShipVia>
           <Freight>34.57</Freight>
           <ShipName Name="ShipName" OrdinalPosition="8">Wartian Herkku</ShipName>
           <ShipAddress Size="60" SourceField="ShipAddress" SourceTable="Orders"
-            >Torikatu 38</ShipAddress
-          >
+            >Torikatu 38</ShipAddress>
           <ShipCity>Oulu</ShipCity>
           <ShipRegion ValidateOnSet="False" DataUpdatable="False"></ShipRegion>
           <ShipPostalCode ForeignName="Error" DefaultValue="" ValidationRule=""
-            >90110</ShipPostalCode
-          >
+            >90110</ShipPostalCode>
           <ShipCountry>Finland</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -2330,16 +2208,14 @@ Crowther Way</ShipAddress
         <OrderDates>
           <OrderDate FieldSize="Error" OriginalValue="Error">11/3/94</OrderDate>
           <RequiredDate VisibleValue="Error" Format="Medium Date" ColumnOrder="0"
-            >12/1/94</RequiredDate
-          >
+            >12/1/94</RequiredDate>
           <ShippedDate ColumnHidden="False">11/11/94</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight>3.43</Freight>
           <ShipName>Island Trading</ShipName>
           <ShipAddress ColumnWidth="2475" Caption="Ship Address"
             >Garden House
-Crowther Way</ShipAddress
-          >
+Crowther Way</ShipAddress>
           <ShipCity FilterLookup="1" Value="Cowes" Attributes="2">Cowes</ShipCity>
           <ShipRegion CollatingOrder="1033">Isle of Wight</ShipRegion>
           <ShipPostalCode>PO31 7PJ</ShipPostalCode>
@@ -2405,11 +2281,9 @@ Crowther Way</ShipAddress
           <ShipVia>1</ShipVia>
           <Freight ForeignName="Error">214.27</Freight>
           <ShipName DefaultValue="" ValidationRule="" ValidationText=""
-            >Save-a-lot Markets</ShipName
-          >
+            >Save-a-lot Markets</ShipName>
           <ShipAddress Required="False" AllowZeroLength="False" FieldSize="Error"
-            >187 Suffolk Ln.</ShipAddress
-          >
+            >187 Suffolk Ln.</ShipAddress>
           <ShipCity OriginalValue="Error">Boise</ShipCity>
           <ShipRegion>ID</ShipRegion>
           <ShipPostalCode VisibleValue="Error" ColumnOrder="0">83720</ShipPostalCode>
@@ -2457,8 +2331,7 @@ Crowther Way</ShipAddress
           <ShipCity>Madrid</ShipCity>
           <ShipRegion ColumnOrder="0"></ShipRegion>
           <ShipPostalCode ColumnWidth="1785" Caption="Ship Postal Code" DisplayControl="109"
-            >28023</ShipPostalCode
-          >
+            >28023</ShipPostalCode>
           <ShipCountry>Spain</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -2478,8 +2351,7 @@ Crowther Way</ShipAddress
           <Freight Size="8" SourceField="Freight" SourceTable="Orders">63.36</Freight>
           <ShipName>Folk och f� HB</ShipName>
           <ShipAddress ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >�kergatan 24</ShipAddress
-          >
+            >�kergatan 24</ShipAddress>
           <ShipCity>Br�cke</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>S-844 67</ShipPostalCode>
@@ -2501,8 +2373,7 @@ Crowther Way</ShipAddress
           <ShipVia Required="False">3</ShipVia>
           <Freight>87.03</Freight>
           <ShipName AllowZeroLength="False" FieldSize="Error"
-            >Furia Bacalhau e Frutos do Mar</ShipName
-          >
+            >Furia Bacalhau e Frutos do Mar</ShipName>
           <ShipAddress OriginalValue="Error">Jardim das rosas n. 32</ShipAddress>
           <ShipCity VisibleValue="Error" ColumnOrder="0" ColumnHidden="False">Lisboa</ShipCity>
           <ShipRegion></ShipRegion>
@@ -2520,8 +2391,7 @@ Crowther Way</ShipAddress
           <ShipCity SourceField="ShipCity" SourceTable="Orders">Lander</ShipCity>
           <ShipRegion>WY</ShipRegion>
           <ShipPostalCode ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >82520</ShipPostalCode
-          >
+            >82520</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
         <OrderDates>
@@ -2531,17 +2401,14 @@ Crowther Way</ShipAddress
           <ShipVia>3</ShipVia>
           <Freight ValidationRule="" ValidationText="">3.1</Freight>
           <ShipName Required="False" AllowZeroLength="False" FieldSize="Error"
-            >Familia Arquibaldo</ShipName
-          >
+            >Familia Arquibaldo</ShipName>
           <ShipAddress OriginalValue="Error" VisibleValue="Error">Rua Or�s, 92</ShipAddress>
           <ShipCity>S�o Paulo</ShipCity>
           <ShipRegion Description="State or province." ColumnOrder="0" ColumnHidden="False"
-            >SP</ShipRegion
-          >
+            >SP</ShipRegion>
           <ShipPostalCode>05442-030</ShipPostalCode>
           <ShipCountry Caption="Ship Country" DisplayControl="109" FilterLookup="1"
-            >Brazil</ShipCountry
-          >
+            >Brazil</ShipCountry>
         </OrderDates>
         <OrderDates>
           <OrderDate Value="12/8/94">12/8/94</OrderDate>
@@ -2550,15 +2417,13 @@ Crowther Way</ShipAddress
           <ShipVia Attributes="1" CollatingOrder="1033">2</ShipVia>
           <Freight Type="5" Name="Freight">0.78</Freight>
           <ShipName OrdinalPosition="8" Size="40" SourceField="ShipName"
-            >Die Wandernde Kuh</ShipName
-          >
+            >Die Wandernde Kuh</ShipName>
           <ShipAddress>Adenauerallee 900</ShipAddress>
           <ShipCity>Stuttgart</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode SourceTable="Orders" ValidateOnSet="False">70563</ShipPostalCode>
           <ShipCountry DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >Germany</ShipCountry
-          >
+            >Germany</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -2572,8 +2437,7 @@ Crowther Way</ShipAddress
         <OrderDates>
           <OrderDate>12/9/94</OrderDate>
           <RequiredDate ValidationText="" Required="False" AllowZeroLength="False"
-            >1/6/95</RequiredDate
-          >
+            >1/6/95</RequiredDate>
           <ShippedDate FieldSize="Error" OriginalValue="Error">12/16/94</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight>8.63</Freight>
@@ -2581,15 +2445,13 @@ Crowther Way</ShipAddress
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
-            >Split Rail Beer and Ale</ShipName
-          >
+            >Split Rail Beer and Ale</ShipName>
           <ShipAddress>P.O. Box 555</ShipAddress>
           <ShipCity ColumnWidth="1395">Lander</ShipCity>
           <ShipRegion>WY</ShipRegion>
           <ShipPostalCode>82520</ShipPostalCode>
           <ShipCountry Caption="Ship Country" DisplayControl="109" FilterLookup="1"
-            >USA</ShipCountry
-          >
+            >USA</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -2652,16 +2514,13 @@ Crowther Way</ShipAddress
           <Freight ForeignName="Error">1.3</Freight>
           <ShipName DefaultValue="" ValidationRule="">Furia Bacalhau e Frutos do Mar</ShipName>
           <ShipAddress ValidationText="" Required="False" AllowZeroLength="False"
-            >Jardim das rosas n. 32</ShipAddress
-          >
+            >Jardim das rosas n. 32</ShipAddress>
           <ShipCity>Lisboa</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >1675</ShipPostalCode
-          >
+            >1675</ShipPostalCode>
           <ShipCountry ColumnOrder="0" ColumnHidden="False" ColumnWidth="1380"
-            >Portugal</ShipCountry
-          >
+            >Portugal</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -2701,8 +2560,7 @@ Crowther Way</ShipAddress
           <ShipVia>3</ShipVia>
           <Freight ColumnOrder="0">53.8</Freight>
           <ShipName ColumnWidth="2895" Caption="Ship Name" DisplayControl="109"
-            >Pericles Comidas cl�sicas</ShipName
-          >
+            >Pericles Comidas cl�sicas</ShipName>
           <ShipAddress FilterLookup="1">Calle Dr. Jorge Cash 321</ShipAddress>
           <ShipCity Value="M�xico D.F." Attributes="2">M�xico D.F.</ShipCity>
           <ShipRegion></ShipRegion>
@@ -2725,17 +2583,14 @@ Crowther Way</ShipAddress
           <ShipVia>1</ShipVia>
           <Freight>41.95</Freight>
           <ShipName ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >Around the Horn</ShipName
-          >
+            >Around the Horn</ShipName>
           <ShipAddress DefaultValue="" ValidationRule=""
             >Brook Farm
-Stratford St. Mary</ShipAddress
-          >
+Stratford St. Mary</ShipAddress>
           <ShipCity>Colchester</ShipCity>
           <ShipRegion ValidationText="" Required="False" AllowZeroLength="False">Essex</ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >CO7 6JX</ShipPostalCode
-          >
+            >CO7 6JX</ShipPostalCode>
           <ShipCountry ColumnOrder="0" ColumnHidden="False" ColumnWidth="1380">UK</ShipCountry>
         </OrderDates>
         <OrderDates>
@@ -2749,8 +2604,7 @@ Stratford St. Mary</ShipAddress
           <ShipCity>Stuttgart</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode OrdinalPosition="12" Size="10" SourceField="ShipPostalCode"
-            >70563</ShipPostalCode
-          >
+            >70563</ShipPostalCode>
           <ShipCountry SourceTable="Orders" ValidateOnSet="False">Germany</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -2807,8 +2661,7 @@ Stratford St. Mary</ShipAddress
             OriginalValue="Error"
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
-            >Seven Seas Imports</ShipName
-          >
+            >Seven Seas Imports</ShipName>
           <ShipAddress ColumnOrder="0">90 Wadhurst Rd.</ShipAddress>
           <ShipCity>London</ShipCity>
           <ShipRegion ColumnHidden="False" ColumnWidth="1410" Caption="Ship Region"></ShipRegion>
@@ -2877,8 +2730,7 @@ Stratford St. Mary</ShipAddress
           <ShipName>Bon app'</ShipName>
           <ShipAddress>12, rue des Bouchers</ShipAddress>
           <ShipCity SourceField="ShipCity" SourceTable="Orders" ValidateOnSet="False"
-            >Marseille</ShipCity
-          >
+            >Marseille</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode DataUpdatable="False">13008</ShipPostalCode>
           <ShipCountry ForeignName="Error" DefaultValue="" ValidationRule="">France</ShipCountry>
@@ -2896,14 +2748,12 @@ Stratford St. Mary</ShipAddress
           <OrderDate>12/27/94</OrderDate>
           <RequiredDate>1/24/95</RequiredDate>
           <ShippedDate OriginalValue="Error" VisibleValue="Error" Format="Medium Date"
-            >1/4/95</ShippedDate
-          >
+            >1/4/95</ShippedDate>
           <ShipVia
             ColumnOrder="0"
             ColumnHidden="False"
             Description="Same as Shipper ID in Shippers table."
-            >3</ShipVia
-          >
+            >3</ShipVia>
           <Freight ColumnWidth="840">30.54</Freight>
           <ShipName>Drachenblut Delikatessen</ShipName>
           <ShipAddress DisplayControl="109">Walserweg 21</ShipAddress>
@@ -2924,15 +2774,13 @@ Stratford St. Mary</ShipAddress
         <OrderDates>
           <OrderDate>12/27/94</OrderDate>
           <RequiredDate ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >2/7/95</RequiredDate
-          >
+            >2/7/95</RequiredDate>
           <ShippedDate>1/4/95</ShippedDate>
           <ShipVia DefaultValue="">1</ShipVia>
           <Freight ValidationRule="" ValidationText="">71.97</Freight>
           <ShipName>Eastern Connection</ShipName>
           <ShipAddress Required="False" AllowZeroLength="False" FieldSize="Error"
-            >35 King George</ShipAddress
-          >
+            >35 King George</ShipAddress>
           <ShipCity OriginalValue="Error">London</ShipCity>
           <ShipRegion VisibleValue="Error"></ShipRegion>
           <ShipPostalCode ColumnOrder="0" ColumnHidden="False">WX3 6FW</ShipPostalCode>
@@ -2943,8 +2791,7 @@ Stratford St. Mary</ShipAddress
   </OrderIDs>
   <OrderIDs>
     <OrderID ColumnHidden="False" Description="Unique order number." Caption="Order ID"
-      >10365</OrderID
-    >
+      >10365</OrderID>
     <CustomerIDs>
       <CustomerID>ANTON</CustomerID>
       <EmployeeIDs>
@@ -2960,8 +2807,7 @@ Stratford St. Mary</ShipAddress
           <ShipCity ValidationText="" Required="False">M�xico D.F.</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >05023</ShipPostalCode
-          >
+            >05023</ShipPostalCode>
           <ShipCountry VisibleValue="Error" ColumnOrder="0">Mexico</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -2973,8 +2819,7 @@ Stratford St. Mary</ShipAddress
       <CustomerID>GALED</CustomerID>
       <EmployeeIDs>
         <EmployeeID ColumnHidden="False" Description="Same entry as in Employees table."
-          >8</EmployeeID
-        >
+          >8</EmployeeID>
         <OrderDates>
           <OrderDate Caption="Order Date">12/29/94</OrderDate>
           <RequiredDate>2/9/95</RequiredDate>
@@ -2986,8 +2831,7 @@ Stratford St. Mary</ShipAddress
           <ShipCity OrdinalPosition="10">Barcelona</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode Size="10" SourceField="ShipPostalCode" SourceTable="Orders"
-            >8022</ShipPostalCode
-          >
+            >8022</ShipPostalCode>
           <ShipCountry ValidateOnSet="False" DataUpdatable="False">Spain</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -3033,8 +2877,7 @@ Stratford St. Mary</ShipAddress
           <ShipRegion VisibleValue="Error"></ShipRegion>
           <ShipPostalCode ColumnOrder="0" ColumnHidden="False">8010</ShipPostalCode>
           <ShipCountry ColumnWidth="1380" Caption="Ship Country" DisplayControl="109"
-            >Austria</ShipCountry
-          >
+            >Austria</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -3075,8 +2918,7 @@ Stratford St. Mary</ShipAddress
           <Freight>1.17</Freight>
           <ShipName Required="False">Chop-suey Chinese</ShipName>
           <ShipAddress AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >Hauptstr. 31</ShipAddress
-          >
+            >Hauptstr. 31</ShipAddress>
           <ShipCity>Bern</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode VisibleValue="Error">3012</ShipPostalCode>
@@ -3103,8 +2945,7 @@ Stratford St. Mary</ShipAddress
           <ShipRegion></ShipRegion>
           <ShipPostalCode Size="10" SourceField="ShipPostalCode">31000</ShipPostalCode>
           <ShipCountry SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >France</ShipCountry
-          >
+            >France</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -3123,8 +2964,7 @@ Stratford St. Mary</ShipAddress
           <Freight>890.78</Freight>
           <ShipName Required="False" AllowZeroLength="False">Queen Cozinha</ShipName>
           <ShipAddress FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >Alameda dos Can�rios, 891</ShipAddress
-          >
+            >Alameda dos Can�rios, 891</ShipAddress>
           <ShipCity ColumnOrder="0">S�o Paulo</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False" ColumnWidth="1410">SP</ShipRegion>
           <ShipPostalCode DisplayControl="109">05487-020</ShipPostalCode>
@@ -3173,8 +3013,7 @@ Stratford St. Mary</ShipAddress
           <ShipRegion></ShipRegion>
           <ShipPostalCode>01-012</ShipPostalCode>
           <ShipCountry SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Poland</ShipCountry
-          >
+            >Poland</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -3194,8 +3033,7 @@ Stratford St. Mary</ShipAddress
           <ShipName>Hungry Coyote Import Store</ShipName>
           <ShipAddress ValidationText="" Required="False"
             >City Center Plaza
-516 Main St.</ShipAddress
-          >
+516 Main St.</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error">Elgin</ShipCity>
           <ShipRegion>OR</ShipRegion>
           <ShipPostalCode OriginalValue="Error" VisibleValue="Error">97827</ShipPostalCode>
@@ -3213,8 +3051,7 @@ Stratford St. Mary</ShipAddress
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
           Caption="Employee"
-          >1</EmployeeID
-        >
+          >1</EmployeeID>
         <OrderDates>
           <OrderDate>1/9/95</OrderDate>
           <RequiredDate Value="2/6/95">2/6/95</RequiredDate>
@@ -3226,8 +3063,7 @@ Stratford St. Mary</ShipAddress
           <ShipCity SourceField="ShipCity">Montr�al</ShipCity>
           <ShipRegion SourceTable="Orders">Qu�bec</ShipRegion>
           <ShipPostalCode ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >H1J 1C3</ShipPostalCode
-          >
+            >H1J 1C3</ShipPostalCode>
           <ShipCountry DefaultValue="">Canada</ShipCountry>
         </OrderDates>
         <OrderDates>
@@ -3285,8 +3121,7 @@ Stratford St. Mary</ShipAddress
             OriginalValue="Error"
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Rua da Panificadora, 12</ShipAddress
-          >
+            >Rua da Panificadora, 12</ShipAddress>
           <ShipCity ColumnHidden="False">Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode>02389-673</ShipPostalCode>
@@ -3301,8 +3136,7 @@ Stratford St. Mary</ShipAddress
       <CustomerID>HUNGO</CustomerID>
       <EmployeeIDs>
         <EmployeeID Description="Same entry as in Employees table." DecimalPlaces="255"
-          >8</EmployeeID
-        >
+          >8</EmployeeID>
         <OrderDates>
           <OrderDate FilterLookup="1">1/12/95</OrderDate>
           <RequiredDate>2/9/95</RequiredDate>
@@ -3310,8 +3144,7 @@ Stratford St. Mary</ShipAddress
           <ShipVia Value="3" Attributes="1" CollatingOrder="1033">3</ShipVia>
           <Freight>35.03</Freight>
           <ShipName Type="10" Name="ShipName" OrdinalPosition="8"
-            >Hungry Owl All-Night Grocers</ShipName
-          >
+            >Hungry Owl All-Night Grocers</ShipName>
           <ShipAddress Size="60" SourceField="ShipAddress">8 Johnstown Road</ShipAddress>
           <ShipCity>Cork</ShipCity>
           <ShipRegion SourceTable="Orders" ValidateOnSet="False">Co. Cork</ShipRegion>
@@ -3341,8 +3174,7 @@ Stratford St. Mary</ShipAddress
           <ShipAddress>Carrera 52 con Ave. Bol�var #65-98 Llano Largo</ShipAddress>
           <ShipCity>Barquisimeto</ShipCity>
           <ShipRegion ColumnWidth="1410" Caption="Ship Region" DisplayControl="109"
-            >Lara</ShipRegion
-          >
+            >Lara</ShipRegion>
           <ShipPostalCode Value="3508" Attributes="2" CollatingOrder="1033">3508</ShipPostalCode>
           <ShipCountry Type="10" Name="ShipCountry" OrdinalPosition="13">Venezuela</ShipCountry>
         </OrderDates>
@@ -3358,14 +3190,12 @@ Stratford St. Mary</ShipAddress
         <OrderDates>
           <OrderDate>1/13/95</OrderDate>
           <RequiredDate ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >2/10/95</RequiredDate
-          >
+            >2/10/95</RequiredDate>
           <ShippedDate>1/16/95</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight DefaultValue="0" ValidationRule="" ValidationText="">94.77</Freight>
           <ShipName Required="False" AllowZeroLength="False" FieldSize="Error"
-            >Ernst Handel</ShipName
-          >
+            >Ernst Handel</ShipName>
           <ShipAddress>Kirchgasse 6</ShipAddress>
           <ShipCity>Graz</ShipCity>
           <ShipRegion
@@ -3392,8 +3222,7 @@ Stratford St. Mary</ShipAddress
           <ShipVia>3</ShipVia>
           <Freight ColumnHidden="False" ColumnWidth="840">34.24</Freight>
           <ShipName DisplayControl="109" FilterLookup="1" Value="Around the Horn"
-            >Around the Horn</ShipName
-          >
+            >Around the Horn</ShipName>
           <ShipAddress>Brook Farm
 Stratford St. Mary</ShipAddress>
           <ShipCity>Colchester</ShipCity>
@@ -3439,11 +3268,9 @@ Stratford St. Mary</ShipAddress>
           <ShipVia>2</ShipVia>
           <Freight>30.96</Freight>
           <ShipName ColumnWidth="2895" Caption="Ship Name" DisplayControl="109"
-            >Split Rail Beer and Ale</ShipName
-          >
+            >Split Rail Beer and Ale</ShipName>
           <ShipAddress FilterLookup="1" Value="P.O. Box 555" Attributes="2"
-            >P.O. Box 555</ShipAddress
-          >
+            >P.O. Box 555</ShipAddress>
           <ShipCity>Lander</ShipCity>
           <ShipRegion>WY</ShipRegion>
           <ShipPostalCode CollatingOrder="1033">82520</ShipPostalCode>
@@ -3469,8 +3296,7 @@ Stratford St. Mary</ShipAddress>
             OriginalValue="Error"
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Rua Or�s, 92</ShipAddress
-          >
+            >Rua Or�s, 92</ShipAddress>
           <ShipCity>S�o Paulo</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False" ColumnWidth="1410">SP</ShipRegion>
           <ShipPostalCode DisplayControl="109">05442-030</ShipPostalCode>
@@ -3494,8 +3320,7 @@ Stratford St. Mary</ShipAddress>
           <ShipName OrdinalPosition="8">Sant� Gourmet</ShipName>
           <ShipAddress Size="60" SourceField="ShipAddress">Erling Skakkes gate 78</ShipAddress>
           <ShipCity SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >Stavern</ShipCity
-          >
+            >Stavern</ShipCity>
           <ShipRegion ForeignName="Error"></ShipRegion>
           <ShipPostalCode DefaultValue="" ValidationRule="">4110</ShipPostalCode>
           <ShipCountry ValidationText="" Required="False">Norway</ShipCountry>
@@ -3541,11 +3366,9 @@ Stratford St. Mary</ShipAddress>
           <ShipAddress ValidationText="" Required="False">23 Tsawassen Blvd.</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error">Tsawassen</ShipCity>
           <ShipRegion OriginalValue="Error" VisibleValue="Error" Description="State or province."
-            >BC</ShipRegion
-          >
+            >BC</ShipRegion>
           <ShipPostalCode ColumnHidden="False" ColumnWidth="1785" Caption="Ship Postal Code"
-            >T2F 8M4</ShipPostalCode
-          >
+            >T2F 8M4</ShipPostalCode>
           <ShipCountry DisplayControl="109">Canada</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -3582,20 +3405,17 @@ Stratford St. Mary</ShipAddress>
         <OrderDates>
           <OrderDate FieldSize="Error" OriginalValue="Error">1/23/95</OrderDate>
           <RequiredDate VisibleValue="Error" Format="Medium Date" ColumnOrder="0"
-            >2/20/95</RequiredDate
-          >
+            >2/20/95</RequiredDate>
           <ShippedDate>1/31/95</ShippedDate>
           <ShipVia ColumnHidden="False" Description="Same as Shipper ID in Shippers table."
-            >3</ShipVia
-          >
+            >3</ShipVia>
           <Freight ColumnWidth="840" FilterLookup="1" Value="5.45">5.45</Freight>
           <ShipName Attributes="2" CollatingOrder="1033">Drachenblut Delikatessen</ShipName>
           <ShipAddress>Walserweg 21</ShipAddress>
           <ShipCity Type="10" Name="ShipCity">Aachen</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode OrdinalPosition="12" Size="10" SourceField="ShipPostalCode"
-            >52066</ShipPostalCode
-          >
+            >52066</ShipPostalCode>
           <ShipCountry>Germany</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -3669,16 +3489,13 @@ Stratford St. Mary</ShipAddress>
           <OrderDate>1/26/95</OrderDate>
           <RequiredDate AllowZeroLength="False">2/23/95</RequiredDate>
           <ShippedDate FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >2/3/95</ShippedDate
-          >
+            >2/3/95</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight>184.41</Freight>
           <ShipName Description="Name of person or company to receive the shipment."
-            >HILARI�N-Abastos</ShipName
-          >
+            >HILARI�N-Abastos</ShipName>
           <ShipAddress ColumnOrder="0" ColumnHidden="False"
-            >Carrera 22 con Ave. Carlos Soublette #8-35</ShipAddress
-          >
+            >Carrera 22 con Ave. Carlos Soublette #8-35</ShipAddress>
           <ShipCity Caption="Ship City" DisplayControl="109">San Crist�bal</ShipCity>
           <ShipRegion>T�chira</ShipRegion>
           <ShipPostalCode FilterLookup="1" Value="5022" Attributes="2">5022</ShipPostalCode>
@@ -3719,14 +3536,12 @@ Stratford St. Mary</ShipAddress>
           <OrderDate VisibleValue="Error">1/27/95</OrderDate>
           <RequiredDate>2/24/95</RequiredDate>
           <ShippedDate Format="Medium Date" ColumnOrder="0" ColumnHidden="False"
-            >2/2/95</ShippedDate
-          >
+            >2/2/95</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight>60.26</Freight>
           <ShipName ColumnWidth="2895">Princesa Isabel Vinhos</ShipName>
           <ShipAddress Caption="Ship Address" DisplayControl="109" FilterLookup="1"
-            >Estrada da sa�de n. 58</ShipAddress
-          >
+            >Estrada da sa�de n. 58</ShipAddress>
           <ShipCity>Lisboa</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>1756</ShipPostalCode>
@@ -3749,13 +3564,11 @@ Stratford St. Mary</ShipAddress>
           <Freight ForeignName="Error" DefaultValue="0">89.16</Freight>
           <ShipName>Save-a-lot Markets</ShipName>
           <ShipAddress ValidationRule="" ValidationText="" Required="False"
-            >187 Suffolk Ln.</ShipAddress
-          >
+            >187 Suffolk Ln.</ShipAddress>
           <ShipCity>Boise</ShipCity>
           <ShipRegion AllowZeroLength="False">ID</ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >83720</ShipPostalCode
-          >
+            >83720</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -3787,8 +3600,7 @@ Stratford St. Mary</ShipAddress>
     <OrderID SourceField="OrderID">10400</OrderID>
     <CustomerIDs>
       <CustomerID SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-        >EASTC</CustomerID
-      >
+        >EASTC</CustomerID>
       <EmployeeIDs>
         <EmployeeID ForeignName="Error">1</EmployeeID>
         <OrderDates>
@@ -3816,8 +3628,7 @@ Stratford St. Mary</ShipAddress>
           <ShipRegion>NM</ShipRegion>
           <ShipPostalCode Size="10">87110</ShipPostalCode>
           <ShipCountry SourceField="ShipCountry" SourceTable="Orders" ValidateOnSet="False"
-            >USA</ShipCountry
-          >
+            >USA</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -3847,8 +3658,7 @@ Stratford St. Mary</ShipAddress>
         <OrderDates>
           <OrderDate>2/3/95</OrderDate>
           <RequiredDate ColumnHidden="False" ColumnWidth="1515" Caption="Required Date"
-            >3/3/95</RequiredDate
-          >
+            >3/3/95</RequiredDate>
           <ShippedDate FilterLookup="1" Value="2/9/95">2/9/95</ShippedDate>
           <ShipVia>3</ShipVia>
           <Freight>73.79</Freight>
@@ -3872,19 +3682,16 @@ Stratford St. Mary</ShipAddress>
           <OrderDate AllowZeroLength="False" FieldSize="Error">2/3/95</OrderDate>
           <RequiredDate OriginalValue="Error">3/3/95</RequiredDate>
           <ShippedDate VisibleValue="Error" Format="Medium Date" ColumnOrder="0"
-            >2/8/95</ShippedDate
-          >
+            >2/8/95</ShippedDate>
           <ShipVia ColumnHidden="False" Description="Same as Shipper ID in Shippers table."
-            >1</ShipVia
-          >
+            >1</ShipVia>
           <Freight ColumnWidth="840" FilterLookup="1" Value="155.97">155.97</Freight>
           <ShipName Attributes="2">Magazzini Alimentari Riuniti</ShipName>
           <ShipAddress CollatingOrder="1033">Via Ludovico il Moro 22</ShipAddress>
           <ShipCity Type="10" Name="ShipCity" OrdinalPosition="10">Bergamo</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode Size="10" SourceField="ShipPostalCode" SourceTable="Orders"
-            >24100</ShipPostalCode
-          >
+            >24100</ShipPostalCode>
           <ShipCountry ValidateOnSet="False">Italy</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -3903,17 +3710,14 @@ Stratford St. Mary</ShipAddress>
           <ShipVia>1</ShipVia>
           <Freight>34.82</Freight>
           <ShipName AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >LINO-Delicateses</ShipName
-          >
+            >LINO-Delicateses</ShipName>
           <ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >Ave. 5 de Mayo Porlamar</ShipAddress
-          >
+            >Ave. 5 de Mayo Porlamar</ShipAddress>
           <ShipCity>I. de Margarita</ShipCity>
           <ShipRegion ColumnOrder="0" ColumnHidden="False" ColumnWidth="1410"
-            >Nueva Esparta</ShipRegion
-          >
+            >Nueva Esparta</ShipRegion>
           <ShipPostalCode>4980</ShipPostalCode>
           <ShipCountry>Venezuela</ShipCountry>
         </OrderDates>
@@ -3938,8 +3742,7 @@ Stratford St. Mary</ShipAddress>
           <ShipRegion>SP</ShipRegion>
           <ShipPostalCode ValidateOnSet="False">05487-020</ShipPostalCode>
           <ShipCountry DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >Brazil</ShipCountry
-          >
+            >Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -3953,8 +3756,7 @@ Stratford St. Mary</ShipAddress>
         <OrderDates>
           <OrderDate ValidationText="" Required="False" AllowZeroLength="False">2/7/95</OrderDate>
           <RequiredDate FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >3/7/95</RequiredDate
-          >
+            >3/7/95</RequiredDate>
           <ShippedDate>3/2/95</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight Format="Currency" DecimalPlaces="255">91.48</Freight>
@@ -4005,8 +3807,7 @@ Stratford St. Mary</ShipAddress>
           <ShipName>Oc�ano Atl�ntico Ltda.</ShipName>
           <ShipAddress Caption="Ship Address" DisplayControl="109"
             >Ing. Gustavo Moncada 8585
-Piso 20-A</ShipAddress
-          >
+Piso 20-A</ShipAddress>
           <ShipCity Value="Buenos Aires" Attributes="2">Buenos Aires</ShipCity>
           <ShipRegion CollatingOrder="1033"></ShipRegion>
           <ShipPostalCode Type="10" Name="ShipPostalCode" OrdinalPosition="12">1010</ShipPostalCode>
@@ -4015,8 +3816,7 @@ Piso 20-A</ShipAddress
         <OrderDates>
           <OrderDate SourceTable="Orders">2/10/95</OrderDate>
           <RequiredDate ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >3/10/95</RequiredDate
-          >
+            >3/10/95</RequiredDate>
           <ShippedDate>2/15/95</ShippedDate>
           <ShipVia DefaultValue="" ValidationRule="" ValidationText="">3</ShipVia>
           <Freight>2.4</Freight>
@@ -4043,8 +3843,7 @@ Piso 20-A</ShipAddress
           <ShipVia VisibleValue="Error">3</ShipVia>
           <Freight Format="Currency">23.65</Freight>
           <ShipName ColumnOrder="0" ColumnHidden="False" ColumnWidth="2895"
-            >Bottom-Dollar Markets</ShipName
-          >
+            >Bottom-Dollar Markets</ShipName>
           <ShipAddress Caption="Ship Address">23 Tsawassen Blvd.</ShipAddress>
           <ShipCity>Tsawassen</ShipCity>
           <ShipRegion DisplayControl="109" FilterLookup="1" Value="BC">BC</ShipRegion>
@@ -4090,8 +3889,7 @@ Piso 20-A</ShipAddress
           <Freight AllowZeroLength="False">95.66</Freight>
           <ShipName>La maison d'Asie</ShipName>
           <ShipAddress FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >1 rue Alsace-Lorraine</ShipAddress
-          >
+            >1 rue Alsace-Lorraine</ShipAddress>
           <ShipCity>Toulouse</ShipCity>
           <ShipRegion
             Description="State or province."
@@ -4110,12 +3908,10 @@ Piso 20-A</ShipAddress
       <CustomerID ColumnWidth="3090" Caption="Customer">FAMIA</CustomerID>
       <EmployeeIDs>
         <EmployeeID Caption="Employee" DisplayControl="111" RowSourceType="Table/Query"
-          >2</EmployeeID
-        >
+          >2</EmployeeID>
         <OrderDates>
           <OrderDate Value="2/14/95" Attributes="1" CollatingOrder="1033" Type="8"
-            >2/14/95</OrderDate
-          >
+            >2/14/95</OrderDate>
           <RequiredDate Name="RequiredDate" OrdinalPosition="4">3/14/95</RequiredDate>
           <ShippedDate Size="8" SourceField="ShippedDate">2/17/95</ShippedDate>
           <ShipVia>3</ShipVia>
@@ -4148,8 +3944,7 @@ Piso 20-A</ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
             >City Center Plaza
-516 Main St.</ShipAddress
-          >
+516 Main St.</ShipAddress>
           <ShipCity ColumnHidden="False">Elgin</ShipCity>
           <ShipRegion ColumnHidden="False" ColumnWidth="1410">OR</ShipRegion>
           <ShipPostalCode DisplayControl="109" FilterLookup="1">97827</ShipPostalCode>
@@ -4216,19 +4011,16 @@ Piso 20-A</ShipAddress
           <OrderDate DataUpdatable="False">2/20/95</OrderDate>
           <RequiredDate ForeignName="Error" DefaultValue="" ValidationRule="">3/20/95</RequiredDate>
           <ShippedDate ValidationText="" Required="False" AllowZeroLength="False"
-            >3/2/95</ShippedDate
-          >
+            >3/2/95</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight FieldSize="Error" OriginalValue="Error" VisibleValue="Error">137.35</Freight>
           <ShipName
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
             ColumnHidden="False"
-            >Richter Supermarkt</ShipName
-          >
+            >Richter Supermarkt</ShipName>
           <ShipAddress ColumnWidth="2475" Caption="Ship Address" DisplayControl="109"
-            >Starenweg 5</ShipAddress
-          >
+            >Starenweg 5</ShipAddress>
           <ShipCity>Gen�ve</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode Value="1204" Attributes="2" CollatingOrder="1033">1204</ShipPostalCode>
@@ -4250,8 +4042,7 @@ Piso 20-A</ShipAddress
           <ShipVia>1</ShipVia>
           <Freight>44.12</Freight>
           <ShipName SourceField="ShipName" SourceTable="Orders" ValidateOnSet="False"
-            >Wellington Importadora</ShipName
-          >
+            >Wellington Importadora</ShipName>
           <ShipAddress>Rua do Mercado, 12</ShipAddress>
           <ShipCity DataUpdatable="False" ForeignName="Error" DefaultValue="">Resende</ShipCity>
           <ShipRegion>SP</ShipRegion>
@@ -4300,8 +4091,7 @@ Piso 20-A</ShipAddress
           <ShipCity DefaultValue="" ValidationRule="">Torino</ShipCity>
           <ShipRegion ValidationText="" Required="False" AllowZeroLength="False"></ShipRegion>
           <ShipPostalCode FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >10100</ShipPostalCode
-          >
+            >10100</ShipPostalCode>
           <ShipCountry ColumnOrder="0" ColumnHidden="False">Italy</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
@@ -4324,11 +4114,9 @@ Piso 20-A</ShipAddress
           <ShipCity OrdinalPosition="10">Campinas</ShipCity>
           <ShipRegion Size="15">SP</ShipRegion>
           <ShipPostalCode SourceField="ShipPostalCode" SourceTable="Orders"
-            >04876-786</ShipPostalCode
-          >
+            >04876-786</ShipPostalCode>
           <ShipCountry ValidateOnSet="False" DataUpdatable="False" ForeignName="Error"
-            >Brazil</ShipCountry
-          >
+            >Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -4347,8 +4135,7 @@ Piso 20-A</ShipAddress
           <Freight FilterLookup="1">370.61</Freight>
           <ShipName Value="M�re Paillarde" Attributes="2">M�re Paillarde</ShipName>
           <ShipAddress CollatingOrder="1033" Type="10" Name="ShipAddress"
-            >43 rue St. Laurent</ShipAddress
-          >
+            >43 rue St. Laurent</ShipAddress>
           <ShipCity OrdinalPosition="10">Montr�al</ShipCity>
           <ShipRegion Size="15" SourceField="ShipRegion">Qu�bec</ShipRegion>
           <ShipPostalCode SourceTable="Orders">H1J 1C3</ShipPostalCode>
@@ -4371,8 +4158,7 @@ Piso 20-A</ShipAddress
           <Freight Required="False" AllowZeroLength="False">7.93</Freight>
           <ShipName>La maison d'Asie</ShipName>
           <ShipAddress FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >1 rue Alsace-Lorraine</ShipAddress
-          >
+            >1 rue Alsace-Lorraine</ShipAddress>
           <ShipCity>Toulouse</ShipCity>
           <ShipRegion
             Description="State or province."
@@ -4402,8 +4188,7 @@ Piso 20-A</ShipAddress
           <ShipCity>Barcelona</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-            >8022</ShipPostalCode
-          >
+            >8022</ShipPostalCode>
           <ShipCountry ForeignName="Error" DefaultValue="" ValidationRule="">Spain</ShipCountry>
         </OrderDates>
         <OrderDates>
@@ -4417,8 +4202,7 @@ Piso 20-A</ShipAddress
             Description="Street address only -- no post-office box allowed."
             ColumnOrder="0"
             ColumnHidden="False"
-            >Geislweg 14</ShipAddress
-          >
+            >Geislweg 14</ShipAddress>
           <ShipCity Caption="Ship City" DisplayControl="109">Salzburg</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>5020</ShipPostalCode>
@@ -4463,8 +4247,7 @@ Piso 20-A</ShipAddress
           <Freight>56.63</Freight>
           <ShipName>Hungry Owl All-Night Grocers</ShipName>
           <ShipAddress Description="Street address only -- no post-office box allowed."
-            >8 Johnstown Road</ShipAddress
-          >
+            >8 Johnstown Road</ShipAddress>
           <ShipCity ColumnHidden="False" ColumnWidth="1395">Cork</ShipCity>
           <ShipRegion ColumnWidth="1410" Caption="Ship Region">Co. Cork</ShipRegion>
           <ShipPostalCode></ShipPostalCode>
@@ -4487,8 +4270,7 @@ Piso 20-A</ShipAddress
           <Freight ValidateOnSet="False" DataUpdatable="False" ForeignName="Error">458.78</Freight>
           <ShipName>Ernst Handel</ShipName>
           <ShipAddress DefaultValue="" ValidationRule="" ValidationText=""
-            >Kirchgasse 6</ShipAddress
-          >
+            >Kirchgasse 6</ShipAddress>
           <ShipCity Required="False" AllowZeroLength="False">Graz</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode>8010</ShipPostalCode>
@@ -4502,8 +4284,7 @@ Piso 20-A</ShipAddress
           <Freight Format="Currency" DecimalPlaces="255" ColumnOrder="0">44.17</Freight>
           <ShipName ColumnWidth="2895" Caption="Ship Name">Bottom-Dollar Markets</ShipName>
           <ShipAddress DisplayControl="109" FilterLookup="1" Value="23 Tsawassen Blvd."
-            >23 Tsawassen Blvd.</ShipAddress
-          >
+            >23 Tsawassen Blvd.</ShipAddress>
           <ShipCity>Tsawassen</ShipCity>
           <ShipRegion Attributes="2" CollatingOrder="1033" Type="10">BC</ShipRegion>
           <ShipPostalCode Name="ShipPostalCode">T2F 8M4</ShipPostalCode>
@@ -4516,8 +4297,7 @@ Piso 20-A</ShipAddress
     <OrderID>10432</OrderID>
     <CustomerIDs>
       <CustomerID SourceTable="Orders" ValidateOnSet="False" DataUpdatable="False"
-        >SPLIR</CustomerID
-      >
+        >SPLIR</CustomerID>
       <EmployeeIDs>
         <EmployeeID>3</EmployeeID>
         <OrderDates>
@@ -4530,12 +4310,10 @@ Piso 20-A</ShipAddress
           <ShipAddress>P.O. Box 555</ShipAddress>
           <ShipCity>Lander</ShipCity>
           <ShipRegion OriginalValue="Error" VisibleValue="Error" Description="State or province."
-            >WY</ShipRegion
-          >
+            >WY</ShipRegion>
           <ShipPostalCode>82520</ShipPostalCode>
           <ShipCountry ColumnHidden="False" ColumnWidth="1380" Caption="Ship Country"
-            >USA</ShipCountry
-          >
+            >USA</ShipCountry>
         </OrderDates>
         <OrderDates>
           <OrderDate>3/6/95</OrderDate>
@@ -4602,8 +4380,7 @@ Piso 20-A</ShipAddress
         <OrderDates>
           <OrderDate FieldSize="Error" OriginalValue="Error" VisibleValue="Error">3/8/95</OrderDate>
           <RequiredDate Format="Medium Date" ColumnOrder="0" ColumnHidden="False"
-            >4/5/95</RequiredDate
-          >
+            >4/5/95</RequiredDate>
           <ShippedDate ColumnWidth="1440" Caption="Shipped Date">3/14/95</ShippedDate>
           <ShipVia>2</ShipVia>
           <Freight FilterLookup="1">156.66</Freight>
@@ -4627,8 +4404,7 @@ Piso 20-A</ShipAddress
           <OrderDate>3/8/95</OrderDate>
           <RequiredDate ValidationRule="">4/5/95</RequiredDate>
           <ShippedDate ValidationText="" Required="False" AllowZeroLength="False"
-            >3/15/95</ShippedDate
-          >
+            >3/15/95</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight>19.97</Freight>
           <ShipName>Wartian Herkku</ShipName>
@@ -4655,8 +4431,7 @@ Piso 20-A</ShipAddress
             ColumnOrder="0"
             ColumnHidden="False"
             Description="Same as Shipper ID in Shippers table."
-            >2</ShipVia
-          >
+            >2</ShipVia>
           <Freight>8.24</Freight>
           <ShipName>Toms Spezialit�ten</ShipName>
           <ShipAddress>Luisenstr. 48</ShipAddress>
@@ -4683,8 +4458,7 @@ Piso 20-A</ShipAddress
           <ShipName OrdinalPosition="8" Size="40">M�re Paillarde</ShipName>
           <ShipAddress>43 rue St. Laurent</ShipAddress>
           <ShipCity SourceField="ShipCity" SourceTable="Orders" ValidateOnSet="False"
-            >Montr�al</ShipCity
-          >
+            >Montr�al</ShipCity>
           <ShipRegion>Qu�bec</ShipRegion>
           <ShipPostalCode>H1J 1C3</ShipPostalCode>
           <ShipCountry>Canada</ShipCountry>
@@ -4705,8 +4479,7 @@ Piso 20-A</ShipAddress
           <ShipVia AllowZeroLength="False" FieldSize="Error" OriginalValue="Error">2</ShipVia>
           <Freight VisibleValue="Error">86.53</Freight>
           <ShipName Description="Name of person or company to receive the shipment." ColumnOrder="0"
-            >Save-a-lot Markets</ShipName
-          >
+            >Save-a-lot Markets</ShipName>
           <ShipAddress ColumnHidden="False" ColumnWidth="2475">187 Suffolk Ln.</ShipAddress>
           <ShipCity>Boise</ShipCity>
           <ShipRegion Caption="Ship Region" DisplayControl="109" FilterLookup="1">ID</ShipRegion>
@@ -4725,19 +4498,16 @@ Piso 20-A</ShipAddress
         <OrderDates>
           <OrderDate OrdinalPosition="3">3/13/95</OrderDate>
           <RequiredDate Size="8" SourceField="RequiredDate" SourceTable="Orders"
-            >4/24/95</RequiredDate
-          >
+            >4/24/95</RequiredDate>
           <ShippedDate>4/14/95</ShippedDate>
           <ShipVia ValidateOnSet="False">2</ShipVia>
           <Freight>73.02</Freight>
           <ShipName>Old World Delicatessen</ShipName>
           <ShipAddress DataUpdatable="False" ForeignName="Error" DefaultValue=""
-            >2743 Bering St.</ShipAddress
-          >
+            >2743 Bering St.</ShipAddress>
           <ShipCity ValidationRule="" ValidationText="" Required="False">Anchorage</ShipCity>
           <ShipRegion AllowZeroLength="False" FieldSize="Error" OriginalValue="Error"
-            >AK</ShipRegion
-          >
+            >AK</ShipRegion>
           <ShipPostalCode VisibleValue="Error" ColumnOrder="0">99508</ShipPostalCode>
           <ShipCountry>USA</ShipCountry>
         </OrderDates>
@@ -4749,8 +4519,7 @@ Piso 20-A</ShipAddress
             ColumnHidden="False"
             Description="Same as Shipper ID in Shippers table."
             DecimalPlaces="255"
-            >2</ShipVia
-          >
+            >2</ShipVia>
           <Freight FilterLookup="1">47.94</Freight>
           <ShipName>Ernst Handel</ShipName>
           <ShipAddress Value="Kirchgasse 6">Kirchgasse 6</ShipAddress>
@@ -4791,15 +4560,13 @@ Piso 20-A</ShipAddress
         VisibleValue="Error"
         Description="Same entry as in Customers table."
         ColumnOrder="0"
-        >BERGS</CustomerID
-      >
+        >BERGS</CustomerID>
       <EmployeeIDs>
         <EmployeeID
           ColumnHidden="False"
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
-          >3</EmployeeID
-        >
+          >3</EmployeeID>
         <OrderDates>
           <OrderDate FilterLookup="1">3/15/95</OrderDate>
           <RequiredDate Value="4/12/95">4/12/95</RequiredDate>
@@ -4811,15 +4578,13 @@ Piso 20-A</ShipAddress
           <ShipCity>Lule�</ShipCity>
           <ShipRegion></ShipRegion>
           <ShipPostalCode Size="10" SourceField="ShipPostalCode" SourceTable="Orders"
-            >S-958 22</ShipPostalCode
-          >
+            >S-958 22</ShipPostalCode>
           <ShipCountry ValidateOnSet="False" DataUpdatable="False">Sweden</ShipCountry>
         </OrderDates>
         <OrderDates>
           <OrderDate ForeignName="Error" DefaultValue="" ValidationRule="">3/16/95</OrderDate>
           <RequiredDate ValidationText="" Required="False" AllowZeroLength="False"
-            >4/13/95</RequiredDate
-          >
+            >4/13/95</RequiredDate>
           <ShippedDate>3/23/95</ShippedDate>
           <ShipVia>1</ShipVia>
           <Freight FieldSize="Error">9.3</Freight>
@@ -4827,8 +4592,7 @@ Piso 20-A</ShipAddress
             OriginalValue="Error"
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
-            >Berglunds snabbk�p</ShipName
-          >
+            >Berglunds snabbk�p</ShipName>
           <ShipAddress ColumnOrder="0" ColumnHidden="False">Berguvsv�gen  8</ShipAddress>
           <ShipCity>Lule�</ShipCity>
           <ShipRegion ColumnWidth="1410" Caption="Ship Region"></ShipRegion>
@@ -4877,8 +4641,7 @@ Piso 20-A</ShipAddress
           <ShipCity>Rio de Janeiro</ShipCity>
           <ShipRegion>RJ</ShipRegion>
           <ShipPostalCode DisplayControl="109" FilterLookup="1" Value="02389-890"
-            >02389-890</ShipPostalCode
-          >
+            >02389-890</ShipPostalCode>
           <ShipCountry>Brazil</ShipCountry>
         </OrderDates>
       </EmployeeIDs>

@@ -6,8 +6,7 @@
       Needs to happen in Directory.Build.targets to allow all the pkgproj's to set Version property first.
     -->
     <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'"
-      >$(Version)</StableVersion
-    >
+      >$(Version)</StableVersion>
 
     <!--
       Explicitly re-set the symbol package output path. The pkgproj files here end up importing the targets from
@@ -118,8 +117,7 @@
     <PropertyGroup>
       <NeedsPlaceholderPdb
         Condition="'@(ExistingNonWindowsSymbolFile)'!='' AND '@(ExistingWindowsSymbolFile)'==''"
-        >true</NeedsPlaceholderPdb
-      >
+        >true</NeedsPlaceholderPdb>
     </PropertyGroup>
 
     <ItemGroup>
@@ -146,8 +144,7 @@
       <_PackageIdentity Include="$(Id)">
         <Version>$(PackageVersion)</Version>
         <TargetRuntime Condition="'$(PackageTargetRuntime)' != ''"
-          >$(PackageTargetRuntime)</TargetRuntime
-        >
+          >$(PackageTargetRuntime)</TargetRuntime>
       </_PackageIdentity>
     </ItemGroup>
   </Target>

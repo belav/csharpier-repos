@@ -28,19 +28,16 @@
       <para
         >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >You should never create an instance of the <see cref="T:System.ComponentModel.ArrayConverter" /> class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para
-        >
+          >You should never create an instance of the <see cref="T:System.ComponentModel.ArrayConverter" /> class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see cref="T:System.Array" /> objects to and from various other representations.</para
-      >
+        >Provides a type converter to convert <see cref="T:System.Array" /> objects to and from various other representations.</para>
     </summary>
   </Docs>
   <Members>
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ArrayConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ArrayConverter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +93,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This converter can convert an array to a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
           <block subset="none" type="note">
             <para>The converted result will be shown in the property browser. For example, if you are converting a char array into a string, it will be displayed as char[] array.</para>
           </block>
@@ -116,29 +111,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture into which <paramref name="value" /> will be converted.</param
-        >
+          />The culture into which <paramref name="value" /> will be converted.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to convert the value to. </param
-        >
+          />The <see cref="T:System.Type" /> to convert the value to. </param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -168,31 +159,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
           <para
-            >The attributes array will be used to filter the array. The <paramref name="attributes" /> parameter can specify a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para
-          >
+            >The attributes array will be used to filter the array. The <paramref name="attributes" /> parameter can specify a mix of <see cref="T:System.Type" /> and <see cref="T:System.Attribute" /> objects. Filtering is defined by the following rules: </para>
           <list type="bullet">
             <item>
               <para
-                >A <see cref="T:System.Type" /> will be treated as a wildcard; it will match any property that has the <see cref="T:System.Type" /> in its set of attributes.</para
-              >
+                >A <see cref="T:System.Type" /> will be treated as a wildcard; it will match any property that has the <see cref="T:System.Type" /> in its set of attributes.</para>
             </item>
             <item>
               <para
-                >If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para
-              >
+                >If a property does not have an <see cref="T:System.Attribute" /> of the same class, the property will not be included in the returned array.</para>
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match or it will not be included in the returned array.</para
-              >
+                >If the attribute is an instance of <see cref="T:System.Attribute" />, the property must be an exact match or it will not be included in the returned array.</para>
             </item>
             <item>
               <para
-                >If an <see cref="T:System.Attribute" /> instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" /> in the property.</para
-              >
+                >If an <see cref="T:System.Attribute" /> instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" /> in the property.</para>
             </item>
           </list>
         </remarks>
@@ -203,30 +188,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that are exposed for an array, or null if there are no properties.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that are exposed for an array, or null if there are no properties.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that specifies the type of array to get the properties for. </param
-        >
+          />An <see cref="T:System.Object" /> that specifies the type of array to get the properties for. </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that will be used as a filter. </param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that will be used as a filter. </param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesSupported">
@@ -254,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -264,16 +244,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true because <see cref="M:System.ComponentModel.ArrayConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" /> should be called to find the properties of this object. This method never returns false.</para
-          >
+            >true because <see cref="M:System.ComponentModel.ArrayConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" /> should be called to find the properties of this object. This method never returns false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
   </Members>

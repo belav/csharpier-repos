@@ -28,11 +28,9 @@
       <CSharpCodeStyleFixesArtifactsBinDir>$(ArtifactsBinDir)Microsoft.CodeAnalysis.CSharp.CodeStyle.Fixes\$(Configuration)\$(TargetFramework)</CSharpCodeStyleFixesArtifactsBinDir>
       <CSharpCodeStyleTargetsFileName>Microsoft.CodeAnalysis.CSharp.CodeStyle.targets</CSharpCodeStyleTargetsFileName>
       <DotNetExecutable Condition="'$(OS)' == 'Windows_NT'"
-        >$(DotNetRoot)dotnet.exe</DotNetExecutable
-      >
+        >$(DotNetRoot)dotnet.exe</DotNetExecutable>
       <DotNetExecutable Condition="'$(DotNetExecutable)' == ''"
-        >$(DotNetRoot)dotnet</DotNetExecutable
-      >
+        >$(DotNetRoot)dotnet</DotNetExecutable>
     </PropertyGroup>
 
     <Exec Command="&quot;$(DotNetExecutable)&quot; &quot;$(ArtifactsBinDir)CodeStyleConfigFileGenerator\$(Configuration)\net8.0\CodeStyleConfigFileGenerator.dll&quot; &quot;CSharp&quot; &quot;$(CSharpCodeStyleFixesArtifactsBinDir)&quot; &quot;$(CSharpCodeStyleTargetsFileName)&quot; &quot;$(CodeStyleAnalyzerArtifactsBinDir)\Microsoft.CodeAnalysis.CodeStyle.dll;$(CSharpCodeStyleAnalyzerArtifactsBinDir)\Microsoft.CodeAnalysis.CSharp.CodeStyle.dll&quot;" />

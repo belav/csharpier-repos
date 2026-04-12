@@ -8,8 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);EDITOR_FEATURES</DefineConstants>
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
-      >full</ApplyNgenOptimization
-    >
+      >full</ApplyNgenOptimization>
 
     <!-- NuGet -->
     <PackageId>Microsoft.CodeAnalysis.EditorFeatures.Common</PackageId>

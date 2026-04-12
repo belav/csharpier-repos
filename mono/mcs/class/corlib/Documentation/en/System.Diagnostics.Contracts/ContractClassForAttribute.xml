@@ -55,23 +55,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following example shows how to use the <see cref="M:System.Diagnostics.Contracts.ContractClassAttribute.#ctor(System.Type)" /> constructor to specify that the contracts in the type apply to the IArray interface. This code example is part of a larger example provided for the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" /> class.</para
-          >
+            >The following example shows how to use the <see cref="M:System.Diagnostics.Contracts.ContractClassAttribute.#ctor(System.Type)" /> constructor to specify that the contracts in the type apply to the IArray interface. This code example is part of a larger example provided for the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" /> class.</para>
           <para>code reference: ContractExample#4</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassForAttribute" /> class, specifying the type the current class is a contract for. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassForAttribute" /> class, specifying the type the current class is a contract for. </para>
         </summary>
         <param name="typeContractsAreFor">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type the current class is a contract for.</param
-        >
+          />The type the current class is a contract for.</param>
       </Docs>
     </Member>
     <Member MemberName="TypeContractsAreFor">

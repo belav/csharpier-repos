@@ -24,8 +24,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.PeerCred" /> instead.</para
-      >
+    <see cref="T:Mono.Unix.PeerCred" /> instead.</para>
     </remarks>
     <altmember cref="T:Mono.Unix.PeerCred" />
   </Docs>

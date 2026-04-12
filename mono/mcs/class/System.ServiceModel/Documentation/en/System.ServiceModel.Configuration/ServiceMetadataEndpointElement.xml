@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Makes metadata ready and available for subsequent distribution and deployment in a server environment by adding a <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> into the service configuration element.</para
-      >
+        >Makes metadata ready and available for subsequent distribution and deployment in a server environment by adding a <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" /> into the service configuration element.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointElement" /> class.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -101,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the current <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />.</para
-          >
+            >Gets the type of the current <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />.</para>
         </summary>
       </Docs>
     </Member>

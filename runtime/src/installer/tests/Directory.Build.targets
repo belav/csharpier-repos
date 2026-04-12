@@ -127,11 +127,9 @@
     <PropertyGroup>
       <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(PackageRID)</TestTargetRid>
       <TestsOutputName Condition="'$(TestsOutputName)' == ''"
-        >$(MSBuildProjectName)</TestsOutputName
-      >
+        >$(MSBuildProjectName)</TestsOutputName>
       <TestsOutputDir Condition="'$(TestsOutputDir)' == ''"
-        >$(TestArtifactsOutputRoot)$(TestsOutputName)/</TestsOutputDir
-      >
+        >$(TestArtifactsOutputRoot)$(TestsOutputName)/</TestsOutputDir>
     </PropertyGroup>
   </Target>
 

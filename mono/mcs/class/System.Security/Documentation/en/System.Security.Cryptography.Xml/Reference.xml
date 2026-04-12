@@ -15,9 +15,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -26,11 +24,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.Reference" /> object represents the &lt;reference&gt; element of an XML digital signature defined by the XML digital signature specification.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.Reference" /> object represents the &lt;reference&gt; element of an XML digital signature defined by the XML digital signature specification.</para>
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to specify the following information:</para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to specify the following information:</para>
       <list type="bullet">
         <item>
           <para>The digest algorithm used to sign of the data object.  This value is required. </para>
@@ -75,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with default properties.</para>
         </summary>
       </Docs>
     </Member>
@@ -100,22 +95,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to the hash value that corresponds to the <paramref name="stream" /> parameter.</para
-          >
+            >This constructor initializes the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to the hash value that corresponds to the <paramref name="stream" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with a hash value of the specified <see cref="T:System.IO.Stream" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with a hash value of the specified <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> with which to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.Reference" />. </param
-        >
+          />The <see cref="T:System.IO.Stream" /> with which to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.Reference" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -138,22 +130,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to the data at the URI with special processing for "", #xpointer(/), and #xxxx. </para
-          >
+            >This constructor initializes the <see cref="T:System.Security.Cryptography.Xml.Reference" /> object to the data at the URI with special processing for "", #xpointer(/), and #xxxx. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with the specified <see cref="T:System.Uri" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Reference" /> class with the specified <see cref="T:System.Uri" />.</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> with which to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.Reference" />. </param
-        >
+          />The <see cref="T:System.Uri" /> with which to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.Reference" />. </param>
       </Docs>
     </Member>
     <Member MemberName="AddTransform">
@@ -181,24 +170,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.Xml.Reference.AddTransform(System.Security.Cryptography.Xml.Transform)" /> method modifies the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para
-          >
+            >The <see cref="M:System.Security.Cryptography.Xml.Reference.AddTransform(System.Security.Cryptography.Xml.Transform)" /> method modifies the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para>
           <para>Transforms are applied in the order in which they were added. If no transforms are specified, the minimum required transforms are added automatically.</para>
           <para>For more information about XML digital signatures, see the W3C specification at www.w3.org/TR/xmldsig-core/.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to the list of transforms to be performed on the data before passing it to the digest algorithm.</para
-          >
+            >Adds a <see cref="T:System.Security.Cryptography.Xml.Transform" /> object to the list of transforms to be performed on the data before passing it to the digest algorithm.</para>
         </summary>
         <param name="transform">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The transform to be added to the list of transforms. </param
-        >
+          />The transform to be added to the list of transforms. </param>
       </Docs>
     </Member>
     <Member MemberName="DigestMethod">
@@ -219,18 +205,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestMethod" /> property uses a URI string to represent the &lt;DigestMethod&gt; element of an XML digital signature.</para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestMethod" /> property uses a URI string to represent the &lt;DigestMethod&gt; element of an XML digital signature.</para>
           <para
-            >The digest method is the algorithm used to hash the <see cref="T:System.Security.Cryptography.Xml.Reference" />. The default algorithm is <see cref="T:System.Security.Cryptography.SHA1" />. </para
-          >
+            >The digest method is the algorithm used to hash the <see cref="T:System.Security.Cryptography.Xml.Reference" />. The default algorithm is <see cref="T:System.Security.Cryptography.SHA1" />. </para>
           <para>For more information about XML digital signatures, see the W3C specification at www.w3.org/TR/xmldsig-core/. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the digest method Uniform Resource Identifier (URI) of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Gets or sets the digest method Uniform Resource Identifier (URI) of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -252,21 +235,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property uses an array of bytes to represent the &lt;DigestValue&gt; element of an XML digital signature.  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property uses an array of bytes to represent the &lt;DigestValue&gt; element of an XML digital signature.  </para>
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property contains the Base 64 encoded value of the digest of the object described by the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property.</para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property contains the Base 64 encoded value of the digest of the object described by the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property.</para>
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property is automatically populated with the appropriate value whenever you make a call to <see cref="Overload:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />.</para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.DigestValue" /> property is automatically populated with the appropriate value whenever you make a call to <see cref="Overload:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />.</para>
           <para>For more information about XML digital signatures, see the W3C specification at www.w3.org/TR/xmldsig-core/. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the digest value of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Gets or sets the digest value of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -291,14 +270,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -320,14 +297,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Security.Cryptography.Xml.Reference.Id" /> property to add a string ID to the XML representation of the current <see cref="T:System.Security.Cryptography.Xml.Reference" /> element. The ID is used to reference the <see cref="T:System.Security.Cryptography.Xml.Reference" /> element from another location.</para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.Xml.Reference.Id" /> property to add a string ID to the XML representation of the current <see cref="T:System.Security.Cryptography.Xml.Reference" /> element. The ID is used to reference the <see cref="T:System.Security.Cryptography.Xml.Reference" /> element from another location.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the ID of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Gets or sets the ID of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -354,16 +329,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see cref="T:System.Security.Cryptography.Xml.Reference" /> state from an XML element.</para
-          >
+            >Loads a <see cref="T:System.Security.Cryptography.Xml.Reference" /> state from an XML element.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.Reference" /> state. </param
-        >
+          />The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.Reference" /> state. </param>
       </Docs>
     </Member>
     <Member MemberName="TransformChain">
@@ -395,18 +368,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.TransformChain" /> property represents the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.TransformChain" /> property represents the &lt;Transform&gt; element and associated subelements of an XML digital signature.  </para>
           <para
-            >The transform chain is an ordered list of transforms. The output of these transforms constitutes the input to the hash algorithm specified in the <see cref="P:System.Security.Cryptography.Xml.Reference.DigestMethod" /> property.</para
-          >
+            >The transform chain is an ordered list of transforms. The output of these transforms constitutes the input to the hash algorithm specified in the <see cref="P:System.Security.Cryptography.Xml.Reference.DigestMethod" /> property.</para>
           <para>For more information about XML digital signatures, see the W3C specification at www.w3.org/TR/xmldsig-core/.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the transform chain of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Gets the transform chain of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -450,14 +420,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property uses a string Uniform Resource Identifier (URI) to represent the &lt;URI&gt; element of an XML digital signature.</para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property uses a string Uniform Resource Identifier (URI) to represent the &lt;URI&gt; element of an XML digital signature.</para>
           <para
-            >Use the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property to specify the location of a document to sign, and to specify which element of the current XML document to sign or to indicate that the entire document should be signed.  </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property to specify the location of a document to sign, and to specify which element of the current XML document to sign or to indicate that the entire document should be signed.  </para>
           <para
-            >To successfully create an XML digital signature, you must set the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property. The following table describes the values that you can pass to the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property.  </para
-          >
+            >To successfully create an XML digital signature, you must set the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property. The following table describes the values that you can pass to the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property.  </para>
           <list type="table">
             <listheader>
               <item>
@@ -466,8 +433,7 @@
                 </term>
                 <description>
                   <para
-                    >Value passed to the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property</para
-                  >
+                    >Value passed to the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" /> property</para>
                 </description>
               </item>
             </listheader>
@@ -485,8 +451,7 @@
               </term>
               <description>
                 <para
-                  >The name of an XML element identified by an attribute name ID. The string should take the following form where <paramref name="IDname" /> is the name of a valid attribute name ID:</para
-                >
+                  >The name of an XML element identified by an attribute name ID. The string should take the following form where <paramref name="IDname" /> is the name of a valid attribute name ID:</para>
                 <para>"#Idname"</para>
               </description>
             </item>
@@ -504,8 +469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Uri" /> of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para
-          >
+            >Gets or sets the <see cref="T:System.Uri" /> of the current <see cref="T:System.Security.Cryptography.Xml.Reference" />.</para>
         </summary>
       </Docs>
     </Member>

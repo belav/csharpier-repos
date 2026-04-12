@@ -37,35 +37,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This is the default implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para
-      >
+        >This is the default implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para>
       <para
-        >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> supports key sizes from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key sizes from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> supports key sizes from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key sizes from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed.</para>
       <para
         >Valid key sizes are dependent on the cryptographic service provider (CSP) that is used by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> instance. Windows CSPs enable keys sizes of 384 to 16384 bits for Windows versions prior to win81, and key sizes of 512 to 16384 bits for win81. For more information, see <see
           cref="http://msdn.microsoft.com/library/aa379941(v=vs.85).aspx"
-          >CryptGenKey</see
-        > function in the Windows documentation.</para
-      >
+          >CryptGenKey</see> function in the Windows documentation.</para>
       <format type="text/html">
         <h2>Interoperation with the Microsoft Cryptographic API (CAPI)</h2>
       </format>
       <para
-        >Unlike the RSA implementation in unmanaged CAPI, the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class reverses the order of an encrypted array of bytes after encryption and before decryption.  By default, data encrypted by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class cannot be decrypted by the CAPI CryptDecrypt function and data encrypted by the CAPI CryptEncrypt method cannot be decrypted by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class.</para
-      >
+        >Unlike the RSA implementation in unmanaged CAPI, the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class reverses the order of an encrypted array of bytes after encryption and before decryption.  By default, data encrypted by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class cannot be decrypted by the CAPI CryptDecrypt function and data encrypted by the CAPI CryptEncrypt method cannot be decrypted by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class.</para>
       <para
-        >If you do not compensate for the reverse ordering when interoperating between APIs, the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class throws a <see cref="T:System.Security.Cryptography.CryptographicException" />.</para
-      >
+        >If you do not compensate for the reverse ordering when interoperating between APIs, the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class throws a <see cref="T:System.Security.Cryptography.CryptographicException" />.</para>
       <para
-        >To interoperate with CAPI, you must manually reverse the order of encrypted bytes before the encrypted data interoperates with another API.  You can easily reverse the order of a managed byte array by calling the <see cref="M:System.Array.Reverse(System.Array)" /> method. </para
-      >
+        >To interoperate with CAPI, you must manually reverse the order of encrypted bytes before the encrypted data interoperates with another API.  You can easily reverse the order of a managed byte array by calling the <see cref="M:System.Array.Reverse(System.Array)" /> method. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Performs asymmetric encryption and decryption using the implementation of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm provided by the cryptographic service provider (CSP). This class cannot be inherited.</para
-      >
+        >Performs asymmetric encryption and decryption using the implementation of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm provided by the cryptographic service provider (CSP). This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -88,14 +80,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If no default key is found, a new key is created.</para>
           <para
-            >This constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).</para
-          >
+            >This constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class using the default key.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class using the default key.</para>
         </summary>
       </Docs>
     </Member>
@@ -120,22 +110,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If no default key is found, a new key is created.</para>
           <para
-            >This constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).</para
-          >
+            >This constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified key size.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified key size.</para>
         </summary>
         <param name="dwKeySize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the key to use in bits. </param
-        >
+          />The size of the key to use in bits. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -161,34 +148,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates or reuses a key container specified using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field of the <paramref name="parameters" /> parameter. </para
-          >
+            >This constructor creates or reuses a key container specified using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field of the <paramref name="parameters" /> parameter. </para>
           <para
-            >By default, this constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para
-          >
+            >By default, this constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para>
           <para
-            >You can create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair suitable for authenticating (digitally signed) messages or files by setting the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field of the <paramref name="parameters" /> parameter to the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value. This type of key corresponds to the <paramref name="AT_SIGNATURE" /> value used in CAPI.</para
-          >
+            >You can create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair suitable for authenticating (digitally signed) messages or files by setting the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field of the <paramref name="parameters" /> parameter to the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value. This type of key corresponds to the <paramref name="AT_SIGNATURE" /> value used in CAPI.</para>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value specified and then create another <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value specified, both keys will be placed in a single container if both objects specify the same key container name.</para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value specified and then create another <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value specified, both keys will be placed in a single container if both objects specify the same key container name.</para>
           <para
-            >To create a key that is compatible with stong-name signing using the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class, you must create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair.    </para
-          >
+            >To create a key that is compatible with stong-name signing using the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class, you must create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair.    </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified parameters.</para>
         </summary>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters to be passed to the cryptographic service provider (CSP). </param
-        >
+          />The parameters to be passed to the cryptographic service provider (CSP). </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -215,41 +195,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates or reuses a key container specified using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field of the <paramref name="parameters" /> parameter. </para
-          >
+            >This constructor creates or reuses a key container specified using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field of the <paramref name="parameters" /> parameter. </para>
           <para
-            >By default, this constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para
-          >
+            >By default, this constructor creates an <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> key pair suitable to encrypt session keys so that they can be safely stored and exchanged with other users.  The generated key corresponds to a key generated using the <paramref name="AT_KEYEXCHANGE" /> value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para>
           <para
-            >You can create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair suitable for authenticating (digitally signed) messages or files by setting the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field of the <paramref name="parameters" /> parameter to the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value. This type of key corresponds to the <paramref name="AT_SIGNATURE" /> value used in CAPI.</para
-          >
+            >You can create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair suitable for authenticating (digitally signed) messages or files by setting the <see cref="F:System.Security.Cryptography.CspParameters.KeyNumber" /> field of the <paramref name="parameters" /> parameter to the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value. This type of key corresponds to the <paramref name="AT_SIGNATURE" /> value used in CAPI.</para>
           <para
-            >If you create an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value specified and then create another <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value specified, both keys will be placed in a single container if both objects specify the same key container name.</para
-          >
+            >If you create an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Exchange" /> value specified and then create another <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with the <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> value specified, both keys will be placed in a single container if both objects specify the same key container name.</para>
           <para
-            >To create a key that is compatible with stong-name signing using the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class, you must create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair.    </para
-          >
+            >To create a key that is compatible with stong-name signing using the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class, you must create a <see cref="F:System.Security.Cryptography.KeyNumber.Signature" /> key pair.    </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified key size and parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class with the specified key size and parameters.</para>
         </summary>
         <param name="dwKeySize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the key to use in bits. </param
-        >
+          />The size of the key to use in bits. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters to be passed to the cryptographic service provider (CSP). </param
-        >
+          />The parameters to be passed to the cryptographic service provider (CSP). </param>
       </Docs>
     </Member>
     <Member MemberName="CspKeyContainerInfo">
@@ -280,17 +252,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.CspKeyContainerInfo" /> property to retrieve additional information about a cryptographic key pair.  The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object describes whether the key is exportable, and specifies the key container name, information about the provider, and other information.    </para
-          >
+            >Use the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.CspKeyContainerInfo" /> property to retrieve additional information about a cryptographic key pair.  The returned <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object describes whether the key is exportable, and specifies the key container name, information about the provider, and other information.    </para>
           <para
-            >In cases where a random key is generated, a key container will not be created until you call a method that uses the key.  Some properties of the <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object returned by the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property will throw a <see cref="T:System.Security.Cryptography.CryptographicException" /> if a key container has not been created.  To make sure that a key container has been created, call a method such as <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(System.Byte[],System.Boolean)" />, <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(System.Byte[],System.Boolean)" />, <see cref="Overload:System.Security.Cryptography.RSACryptoServiceProvider.SignData" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />, and so on, before you call the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property.  </para
-          >
+            >In cases where a random key is generated, a key container will not be created until you call a method that uses the key.  Some properties of the <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object returned by the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property will throw a <see cref="T:System.Security.Cryptography.CryptographicException" /> if a key container has not been created.  To make sure that a key container has been created, call a method such as <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(System.Byte[],System.Boolean)" />, <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(System.Byte[],System.Boolean)" />, <see cref="Overload:System.Security.Cryptography.RSACryptoServiceProvider.SignData" />, <see cref="M:System.Security.Cryptography.DSACryptoServiceProvider.SignHash(System.Byte[],System.String)" />, and so on, before you call the <see cref="P:System.Security.Cryptography.DSACryptoServiceProvider.CspKeyContainerInfo" /> property.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object that describes additional information about a cryptographic key pair. </para
-          >
+            >Gets a <see cref="T:System.Security.Cryptography.CspKeyContainerInfo" /> object that describes additional information about a cryptographic key pair. </para>
         </summary>
       </Docs>
     </Member>
@@ -317,14 +286,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(System.Byte[],System.Boolean)" /> to encrypt data for decryption with this method.</para
-          >
+            >Use <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(System.Byte[],System.Boolean)" /> to encrypt data for decryption with this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decrypts data with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para
-          >
+            >Decrypts data with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -335,15 +302,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to be decrypted. </param
-        >
+          />The data to be decrypted. </param>
         <param name="fOAEP">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to perform direct <see cref="T:System.Security.Cryptography.RSA" /> decryption using OAEP padding (only available on a computer running Microsoft Windows XP or later); otherwise, false to use PKCS#1 v1.5 padding. </param
-        >
+          />true to perform direct <see cref="T:System.Security.Cryptography.RSA" /> decryption using OAEP padding (only available on a computer running Microsoft Windows XP or later); otherwise, false to use PKCS#1 v1.5 padding. </param>
       </Docs>
     </Member>
     <Member MemberName="DecryptValue">
@@ -392,8 +357,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to be decrypted. </param
-        >
+          />The data to be decrypted. </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -419,22 +383,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the disposing parameter set to true. Finalize invokes Dispose with disposing set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="Encrypt">
@@ -460,8 +421,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the padding supported by different versions of Microsoft Windows and the maximum length of <paramref name="rgb" /> allowed by the different combinations of operating systems and padding.</para
-          >
+            >The following table describes the padding supported by different versions of Microsoft Windows and the maximum length of <paramref name="rgb" /> allowed by the different combinations of operating systems and padding.</para>
           <list type="table">
             <listheader>
               <item>
@@ -511,14 +471,12 @@
             </item>
           </list>
           <para
-            >Use <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(System.Byte[],System.Boolean)" /> to decrypt the results of this method.</para
-          >
+            >Use <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(System.Byte[],System.Boolean)" /> to decrypt the results of this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Encrypts data with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para
-          >
+            >Encrypts data with the <see cref="T:System.Security.Cryptography.RSA" /> algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -529,15 +487,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to be encrypted. </param
-        >
+          />The data to be encrypted. </param>
         <param name="fOAEP">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to perform direct <see cref="T:System.Security.Cryptography.RSA" /> encryption using OAEP padding (only available on a computer running Microsoft Windows XP or later); otherwise, false to use PKCS#1 v1.5 padding. </param
-        >
+          />true to perform direct <see cref="T:System.Security.Cryptography.RSA" /> encryption using OAEP padding (only available on a computer running Microsoft Windows XP or later); otherwise, false to use PKCS#1 v1.5 padding. </param>
       </Docs>
     </Member>
     <Member MemberName="EncryptValue">
@@ -586,8 +542,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to be encrypted. </param
-        >
+          />The data to be encrypted. </param>
       </Docs>
     </Member>
     <Member MemberName="ExportCspBlob">
@@ -620,28 +575,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.ExportCspBlob(System.Boolean)" /> method returns a blob containing key information that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).   </para
-          >
+            >The <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.ExportCspBlob(System.Boolean)" /> method returns a blob containing key information that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).   </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports a blob containing the key information associated with an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.  </para
-          >
+            >Exports a blob containing the key information associated with an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.  </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A byte array containing the key information associated with an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.</para
-          >
+            >A byte array containing the key information associated with an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.</para>
         </returns>
         <param name="includePrivateParameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include the private key; otherwise, false.</param
-        >
+          />true to include the private key; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="ExportParameters">
@@ -667,8 +618,7 @@
       </Parameters>
       <Docs>
         <remarks
-          >You are responsable to zeroize the private key (<see cref="T:System.Security.Cryptography.RSAParameters" /> parameters <see cref="M:System.Security.Cryptography.RSAParameters.D" />, <see cref="M:System.Security.Cryptography.RSAParameters.P" />, <see cref="M:System.Security.Cryptography.RSAParameters.Q" />, <see cref="M:System.Security.Cryptography.RSAParameters.DP" />, <see cref="M:System.Security.Cryptography.RSAParameters.DQ" /> and <see cref="M:System.Security.Cryptography.RSAParameters.InverseQ" />) if you export it from the instance.</remarks
-        >
+          >You are responsable to zeroize the private key (<see cref="T:System.Security.Cryptography.RSAParameters" /> parameters <see cref="M:System.Security.Cryptography.RSAParameters.D" />, <see cref="M:System.Security.Cryptography.RSAParameters.P" />, <see cref="M:System.Security.Cryptography.RSAParameters.Q" />, <see cref="M:System.Security.Cryptography.RSAParameters.DP" />, <see cref="M:System.Security.Cryptography.RSAParameters.DQ" /> and <see cref="M:System.Security.Cryptography.RSAParameters.InverseQ" />) if you export it from the instance.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Exports the <see cref="T:System.Security.Cryptography.RSAParameters" />.</para>
@@ -682,8 +632,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include private parameters; otherwise, false. </param
-        >
+          />true to include private parameters; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -734,8 +683,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.ImportCspBlob(System.Byte[])" /> method initializes the key data of an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object using a blob that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).</para
-          >
+            >The <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.ImportCspBlob(System.Byte[])" /> method initializes the key data of an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object using a blob that is compatible with the unmanaged Microsoft Cryptographic API (CAPI).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -746,8 +694,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that represents an RSA key blob.</param
-        >
+          />A byte array that represents an RSA key blob.</param>
       </Docs>
     </Member>
     <Member MemberName="ImportParameters">
@@ -777,16 +724,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports the specified <see cref="T:System.Security.Cryptography.RSAParameters" />.</para
-          >
+            >Imports the specified <see cref="T:System.Security.Cryptography.RSAParameters" />.</para>
         </summary>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameters for <see cref="T:System.Security.Cryptography.RSA" />. </param
-        >
+          />The parameters for <see cref="T:System.Security.Cryptography.RSA" />. </param>
       </Docs>
     </Member>
     <Member MemberName="KeyExchangeAlgorithm">
@@ -810,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the key exchange algorithm available with this implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para
-          >
+            >Gets the name of the key exchange algorithm available with this implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -832,17 +776,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> supports key sizes from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key sizes from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed. </para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> supports key sizes from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key sizes from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed. </para>
           <para
             >Valid key sizes are dependent on the cryptographic service provider (CSP) that is used by the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> instance. Windows CSPs enable key sizes of 384 to 16384 bits for Windows versions prior to win81, and key sizes of 512 to 16384 bits for win81. For more information, see <see
               cref="http://msdn.microsoft.com/library/aa379941(v=vs.85).aspx"
-              >CryptGenKey</see
-            > function in the Windows documentation.</para
-          >
+              >CryptGenKey</see> function in the Windows documentation.</para>
           <para
-            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class does not allow you to change key sizes using the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.KeySize" /> property.  Any value written to this property will fail to update the property without error.  To change the key size, use one of the constructor overloads.   </para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class does not allow you to change key sizes using the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.KeySize" /> property.  Any value written to this property will fail to update the property without error.  To change the key size, use one of the constructor overloads.   </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -868,11 +808,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this property to persist a key in a key container.</para>
           <para
-            >The <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PersistKeyInCsp" /> property is automatically set to true when you specify a key container name in a <see cref="T:System.Security.Cryptography.CspParameters" /> object and use it to initialize an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.  You can specify a container name using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field. </para
-          >
+            >The <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PersistKeyInCsp" /> property is automatically set to true when you specify a key container name in a <see cref="T:System.Security.Cryptography.CspParameters" /> object and use it to initialize an <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object.  You can specify a container name using the <see cref="F:System.Security.Cryptography.CspParameters.KeyContainerName" /> field. </para>
           <para
-            >If you set the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PersistKeyInCsp" /> property to true without initializing the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with a <see cref="T:System.Security.Cryptography.CspParameters" /> object, a random key container name prepended with "CLR" is created. </para
-          >
+            >If you set the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PersistKeyInCsp" /> property to true without initializing the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object with a <see cref="T:System.Security.Cryptography.CspParameters" /> object, a random key container name prepended with "CLR" is created. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -902,14 +840,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class can be initialized either with a public key only or with both a public and private key.  Use the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PublicOnly" /> property to determine whether the current instance contains only a public key or both a public and private key.    </para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> class can be initialized either with a public key only or with both a public and private key.  Use the <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.PublicOnly" /> property to determine whether the current instance contains only a public key or both a public and private key.    </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object contains only a public key.</para
-          >
+            >Gets a value that indicates whether the <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> object contains only a public key.</para>
         </summary>
       </Docs>
     </Member>
@@ -934,8 +870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the signature algorithm available with this implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para
-          >
+            >Gets the name of the signature algorithm available with this implementation of <see cref="T:System.Security.Cryptography.RSA" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -962,11 +897,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyData(System.Byte[],System.Object,System.Byte[])" /> method.</para
-          >
+            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyData(System.Byte[],System.Object,System.Byte[])" /> method.</para>
           <para
-            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para
-          >
+            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -975,23 +908,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input data for which to compute the hash. </param
-        >
+          />The input data for which to compute the hash. </param>
         <param name="halg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm to use to create the hash value. </param
-        >
+          />The hash algorithm to use to create the hash value. </param>
       </Docs>
     </Member>
     <Member MemberName="SignData">
@@ -1020,8 +950,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para
-          >
+            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1030,23 +959,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para>
         </returns>
         <param name="inputStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input data for which to compute the hash. </param
-        >
+          />The input data for which to compute the hash. </param>
         <param name="halg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm to use to create the hash value. </param
-        >
+          />The hash algorithm to use to create the hash value. </param>
       </Docs>
     </Member>
     <Member MemberName="SignData">
@@ -1077,11 +1003,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyData(System.Byte[],System.Object,System.Byte[])" /> method.</para
-          >
+            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyData(System.Byte[],System.Object,System.Byte[])" /> method.</para>
           <para
-            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />. The string value can be one of the following:</para
-          >
+            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />. The string value can be one of the following:</para>
           <list type="bullet">
             <item>
               <para>The object identifier (OID) friendly name of the hash algorithm to use, either a name registered in the crypto config file or one in the Crypto API OID table.</para>
@@ -1099,37 +1023,32 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified data.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input data for which to compute the hash. </param
-        >
+          />The input data for which to compute the hash. </param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the array from which to begin using data. </param
-        >
+          />The offset into the array from which to begin using data. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the array to use as data. </param
-        >
+          />The number of bytes in the array to use as data. </param>
         <param name="halg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm to use to create the hash value. </param
-        >
+          />The hash algorithm to use to create the hash value. </param>
       </Docs>
     </Member>
     <Member MemberName="SignHash">
@@ -1155,11 +1074,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyHash(System.Byte[],System.String,System.Byte[])" /> method.</para
-          >
+            >This method creates a digital signature that is verified using the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.VerifyHash(System.Byte[],System.String,System.Byte[])" /> method.</para>
           <para
-            >The valid hash algorithms are <see cref="T:System.Security.Cryptography.SHA1" /> and <see cref="T:System.Security.Cryptography.MD5" />. The algorithm identifier can be derived from the hash name by using the <see cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" /> method.</para
-          >
+            >The valid hash algorithms are <see cref="T:System.Security.Cryptography.SHA1" /> and <see cref="T:System.Security.Cryptography.MD5" />. The algorithm identifier can be derived from the hash name by using the <see cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1168,23 +1085,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified hash value.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.RSA" /> signature for the specified hash value.</para>
         </returns>
         <param name="rgbHash">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash value of the data to be signed. </param
-        >
+          />The hash value of the data to be signed. </param>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm identifier (OID) used to create the hash value of the data. </param
-        >
+          />The hash algorithm identifier (OID) used to create the hash value of the data. </param>
       </Docs>
     </Member>
     <Member MemberName="UseMachineKeyStore">
@@ -1204,8 +1118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property to true is equivalent to passing the <see cref="F:System.Security.Cryptography.CspProviderFlags.UseMachineKeyStore" /> flag to a <see cref="T:System.Security.Cryptography.CspParameters" /> object. The <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.UseMachineKeyStore" /> property applies to all code in the current application domain, whereas the <see cref="T:System.Security.Cryptography.CspParameters" /> object applies only to classes that explicitly reference it. These settings are useful when impersonating or running under an account whose user profile is not loaded. Setting <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.UseMachineKeyStore" /> affects the key store location only if <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> is initialized with no parameters.</para
-          >
+            >Setting this property to true is equivalent to passing the <see cref="F:System.Security.Cryptography.CspProviderFlags.UseMachineKeyStore" /> flag to a <see cref="T:System.Security.Cryptography.CspParameters" /> object. The <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.UseMachineKeyStore" /> property applies to all code in the current application domain, whereas the <see cref="T:System.Security.Cryptography.CspParameters" /> object applies only to classes that explicitly reference it. These settings are useful when impersonating or running under an account whose user profile is not loaded. Setting <see cref="P:System.Security.Cryptography.RSACryptoServiceProvider.UseMachineKeyStore" /> affects the key store location only if <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> is initialized with no parameters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1240,11 +1153,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method verifies the <see cref="T:System.Security.Cryptography.RSA" /> digital signature produced by the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignData(System.IO.Stream,System.Object)" /> method. The signature is verified by obtaining the hash value from the signature using the public key it was signed with, and comparing that value to the hash value of the provided data.</para
-          >
+            >This method verifies the <see cref="T:System.Security.Cryptography.RSA" /> digital signature produced by the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignData(System.IO.Stream,System.Object)" /> method. The signature is verified by obtaining the hash value from the signature using the public key it was signed with, and comparing that value to the hash value of the provided data.</para>
           <para
-            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para
-          >
+            >The <paramref name="halg" /> parameter can accept a <see cref="T:System.String" />, a <see cref="T:System.Security.Cryptography.HashAlgorithm" />, or a <see cref="T:System.Type" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1259,22 +1170,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data that was signed. </param
-        >
+          />The data that was signed. </param>
         <param name="halg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm used to create the hash value of the data. </param
-        >
+          />The name of the hash algorithm used to create the hash value of the data. </param>
         <param name="signature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature data to be verified. </param
-        >
+          />The signature data to be verified. </param>
       </Docs>
     </Member>
     <Member MemberName="VerifyHash">
@@ -1304,11 +1212,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method verifies the <see cref="T:System.Security.Cryptography.RSA" /> digital signature produced by the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignHash(System.Byte[],System.String)" /> method. The signature is verified by obtaining the hash value from the signature using the public key it was signed with, and comparing that value to the hash value of the provided data.</para
-          >
+            >This method verifies the <see cref="T:System.Security.Cryptography.RSA" /> digital signature produced by the <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.SignHash(System.Byte[],System.String)" /> method. The signature is verified by obtaining the hash value from the signature using the public key it was signed with, and comparing that value to the hash value of the provided data.</para>
           <para
-            >The valid hash algorithms are <see cref="T:System.Security.Cryptography.SHA1" /> and <see cref="T:System.Security.Cryptography.MD5" />. The algorithm identifier can be derived from the hash name by using the <see cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" /> method.</para
-          >
+            >The valid hash algorithms are <see cref="T:System.Security.Cryptography.SHA1" /> and <see cref="T:System.Security.Cryptography.MD5" />. The algorithm identifier can be derived from the hash name by using the <see cref="M:System.Security.Cryptography.CryptoConfig.MapNameToOID(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1323,22 +1229,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash value of the signed data. </param
-        >
+          />The hash value of the signed data. </param>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm identifier (OID) used to create the hash value of the data. </param
-        >
+          />The hash algorithm identifier (OID) used to create the hash value of the data. </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature data to be verified. </param
-        >
+          />The signature data to be verified. </param>
       </Docs>
     </Member>
   </Members>

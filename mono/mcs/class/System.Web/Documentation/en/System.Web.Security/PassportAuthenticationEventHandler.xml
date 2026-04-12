@@ -27,15 +27,12 @@
       <para
         >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
           cref="http://go.microsoft.com/fwlink/?LinkId=106346"
-          >Windows Live ID SDK</see
-        >.</para
-      >
+          >Windows Live ID SDK</see>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the PassportAuthentication_OnAuthenticate event of a <see cref="T:System.Web.Security.PassportAuthenticationModule" />. This class is deprecated.</para
-      >
+        >Represents the method that handles the PassportAuthentication_OnAuthenticate event of a <see cref="T:System.Web.Security.PassportAuthenticationModule" />. This class is deprecated.</para>
     </summary>
   </Docs>
   <Members />

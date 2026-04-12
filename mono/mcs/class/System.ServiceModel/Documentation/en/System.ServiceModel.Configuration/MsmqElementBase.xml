@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class with members common to the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" /> and <see cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />.</para
-      >
+        >Provides the base class with members common to the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" /> and <see cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqElementBase" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqElementBase" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +75,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A binding element that contains the settings to be applied.</param
-        >
+          />A binding element that contains the settings to be applied.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
@@ -108,16 +105,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies settings from a specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> to this binding element.</para
-          >
+            >Copies settings from a specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> to this binding element.</para>
         </summary>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> that contains the values to be copied.</param
-        >
+          />The <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> that contains the values to be copied.</param>
       </Docs>
     </Member>
     <Member MemberName="CustomDeadLetterQueue">
@@ -144,11 +139,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The dead-letter queue is a queue on the queue manager of the sending application for expired messages that have failed to be delivered.</para>
           <para
-            >The URI that is specified by <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> must use the Net.msmq scheme.</para
-          >
+            >The URI that is specified by <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> must use the Net.msmq scheme.</para>
           <para
-            >If <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> is set to <see cref="F:System.ServiceModel.DeadLetterQueue.None" /> or <see cref="F:System.ServiceModel.DeadLetterQueue.System" />, then <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> must be set to null. If <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> is not null, then <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> must be set to <see cref="F:System.ServiceModel.DeadLetterQueue.Custom" />.</para
-          >
+            >If <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> is set to <see cref="F:System.ServiceModel.DeadLetterQueue.None" /> or <see cref="F:System.ServiceModel.DeadLetterQueue.System" />, then <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> must be set to null. If <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> is not null, then <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> must be set to <see cref="F:System.ServiceModel.DeadLetterQueue.Custom" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,18 +178,15 @@
           <list type="bullet">
             <item>
               <para
-                >None: If no dead-letter queue is required. Thus, if a message were to fail delivery, no record of it would be maintained in the dead-letter queue. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to false.</para
-              >
+                >None: If no dead-letter queue is required. Thus, if a message were to fail delivery, no record of it would be maintained in the dead-letter queue. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to false.</para>
             </item>
             <item>
               <para
-                >System: The system-wide dead-letter queue would be used to record messages that fail delivery. Message Queuing (also known as MSMQ) has a transactional system dead-letter queue and a nontransactional system dead-letter queue to record messages that failed delivery from transactional and nontransactional queues, respectively. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to true.</para
-              >
+                >System: The system-wide dead-letter queue would be used to record messages that fail delivery. Message Queuing (also known as MSMQ) has a transactional system dead-letter queue and a nontransactional system dead-letter queue to record messages that failed delivery from transactional and nontransactional queues, respectively. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to true.</para>
             </item>
             <item>
               <para
-                >Custom: The queue specified in the <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> is used to record messages that fail delivery.</para
-              >
+                >Custom: The queue specified in the <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> is used to record messages that fail delivery.</para>
             </item>
           </list>
           <para>The reasons that a message can fail to reach the receiving application include: </para>
@@ -260,8 +250,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A durable message survives a queue manager crash, while a volatile message does not. Volatile messages are useful when applications can tolerate occasional lost messages.</para>
           <para
-            >If <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to true, the messages must be durable.</para
-          >
+            >If <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to true, the messages must be durable.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -290,17 +279,13 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message can be sent with or without assurances. An assurance enables an application to ensure that a sent message reached the receiving message queue, or if it did not, the application can determine this by reading the dead-letter queue.</para>
           <para
-            >Messages sent with <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> set to true must be sent only to a transactional queue.</para
-          >
+            >Messages sent with <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> set to true must be sent only to a transactional queue.</para>
           <para>
-            <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />, when set to true, indicates that Message Queuing (also known as MSMQ) will ensure that a sent message is delivered to the receiving message queue once and only once, and if delivery fails, the message is sent to the dead-letter queue.</para
-          >
+            <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />, when set to true, indicates that Message Queuing (also known as MSMQ) will ensure that a sent message is delivered to the receiving message queue once and only once, and if delivery fails, the message is sent to the dead-letter queue.</para>
           <para
-            >For messages that require <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> to be false, the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property defaults to null.</para
-          >
+            >For messages that require <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> to be false, the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property defaults to null.</para>
           <para
-            >For messages that require <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> to be true, the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property defaults to a transactional system-wide dead-letter queue in Message Queuing.</para
-          >
+            >For messages that require <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> to be true, the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property defaults to a transactional system-wide dead-letter queue in Message Queuing.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -338,8 +323,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A binding element that contains the settings to be used to initialize this binding element.</param
-        >
+          />A binding element that contains the settings to be used to initialize this binding element.</param>
       </Docs>
     </Member>
     <Member MemberName="MaxRetryCycles">
@@ -365,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single retry cycle attempts to deliver a message to an application a specified number of times. The number of attempts made is set by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to consume the message after the attempts at delivery have been exhausted, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property specifies the number of retry cycles that the application uses to attempt to deliver the message.</para
-          >
+            >A single retry cycle attempts to deliver a message to an application a specified number of times. The number of attempts made is set by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to consume the message after the attempts at delivery have been exhausted, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property specifies the number of retry cycles that the application uses to attempt to deliver the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -401,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" /> instance that encapsulates the transport security settings for a binding.</para
-          >
+            >Gets an <see cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" /> instance that encapsulates the transport security settings for a binding.</para>
         </summary>
       </Docs>
     </Member>
@@ -428,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>
@@ -459,17 +440,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the channel listener is faulted and a <see cref="T:System.ServiceModel.ProtocolException" /> (wrapping a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />) is traced and thrown. The offending message is left in the queue and needs to be removed by some manual method. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the offending message from the poison-message queue.</para
-          >
+            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Fault" />, the channel listener is faulted and a <see cref="T:System.ServiceModel.ProtocolException" /> (wrapping a <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />) is traced and thrown. The offending message is left in the queue and needs to be removed by some manual method. The <see cref="T:System.ServiceModel.MsmqPoisonMessageException" /> contains a <see cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" /> that can be used to identify and manually remove the offending message from the poison-message queue.</para>
           <para
-            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Drop" />, the offending message is simply dropped.</para
-          >
+            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Drop" />, the offending message is simply dropped.</para>
           <para
-            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Reject" />, a negative acknowledgment is sent to the client and the offending message is removed from the poison-message queue. This option is available only on Message Queuing (also known as MSMQ) 4.0.</para
-          >
+            >When this property is set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Reject" />, a negative acknowledgment is sent to the client and the offending message is removed from the poison-message queue. This option is available only on Message Queuing (also known as MSMQ) 4.0.</para>
           <para
-            >When set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Move" />, the offending message is moved to the final poison subqueue. This option is available only on Message Queuing 4.0.</para
-          >
+            >When set to <see cref="F:System.ServiceModel.ReceiveErrorHandling.Move" />, the offending message is moved to the final poison subqueue. This option is available only on Message Queuing 4.0.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -500,11 +477,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the maximum number of delivery attempts is reached and the message is not consumed by the application, then the message is sent to a retry queue for redelivery at some later point in time. The amount of time before the message is transferred back to the sending queue is controlled by <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />. If retry cycles reach the <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.MaxRetryCycles" /> value, then either the message is sent to the poison-message queue, or a negative acknowledgment is sent back to the sender.</para
-          >
+            >If the maximum number of delivery attempts is reached and the message is not consumed by the application, then the message is sent to a retry queue for redelivery at some later point in time. The amount of time before the message is transferred back to the sending queue is controlled by <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />. If retry cycles reach the <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.MaxRetryCycles" /> value, then either the message is sent to the poison-message queue, or a negative acknowledgment is sent back to the sender.</para>
           <para
-            >For more information, see <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.MaxRetryCycles" /> and <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />.</para
-          >
+            >For more information, see <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.MaxRetryCycles" /> and <see cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -535,8 +510,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single retry cycle attempts to deliver a message to a receiving application a specified number of times. The number of attempts made is specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to consume the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The number of retry cycles is specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property.</para
-          >
+            >A single retry cycle attempts to deliver a message to a receiving application a specified number of times. The number of attempts made is specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.ReceiveRetryCount" /> property. If the application fails to consume the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" /> property. The number of retry cycles is specified by the <see cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -567,8 +541,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.MsmqBindingBase.TimeToLive" /> property is set to ensure that time-sensitive messages do not become stale before they are processed by the receiving applications. A message in a queue that is not consumed by the receiving application within the time interval specified is said to be expired. Expired messages are sent to a special queue called the dead-letter queue. The location of the dead-letter queue is set with the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property or to the appropriate default, based on assurances.</para
-          >
+            >The <see cref="P:System.ServiceModel.MsmqBindingBase.TimeToLive" /> property is set to ensure that time-sensitive messages do not become stale before they are processed by the receiving applications. A message in a queue that is not consumed by the receiving application within the time interval specified is said to be expired. Expired messages are sent to a special queue called the dead-letter queue. The location of the dead-letter queue is set with the <see cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" /> property or to the appropriate default, based on assurances.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

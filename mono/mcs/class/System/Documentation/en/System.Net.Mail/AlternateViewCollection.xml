@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Net.Mail.AlternateView" /> class to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
-      >
+        >Use the <see cref="T:System.Net.Mail.AlternateView" /> class to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Net.Mail.AlternateView" /> objects.</para
-      >
+        >Represents a collection of <see cref="T:System.Net.Mail.AlternateView" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -80,14 +78,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method invokes <see cref="M:System.Net.Mail.AlternateView.Dispose(System.Boolean)" /> on all views in this collection. This method is called by the <see cref="M:System.Net.Mail.MailMessage.Dispose" /> method. You do not need to call it in your application.</para
-          >
+            >This method invokes <see cref="M:System.Net.Mail.AlternateView.Dispose(System.Boolean)" /> on all views in this collection. This method is called by the <see cref="M:System.Net.Mail.MailMessage.Dispose" /> method. You do not need to call it in your application.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Net.Mail.AlternateViewCollection" />.</para
-          >
+            >Releases all resources used by the <see cref="T:System.Net.Mail.AlternateViewCollection" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -117,23 +113,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see cref="T:System.Net.Mail.AlternateView" /> object into this collection, at the specified index location.</para
-          >
+            >Inserts a <see cref="T:System.Net.Mail.AlternateView" /> object into this collection, at the specified index location.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified location at which to insert the <see cref="T:System.Net.Mail.AlternateView" /> object.</param
-        >
+          />The specified location at which to insert the <see cref="T:System.Net.Mail.AlternateView" /> object.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Mail.AlternateView" /> object to be inserted.</param
-        >
+          />The <see cref="T:System.Net.Mail.AlternateView" /> object to be inserted.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveItem">
@@ -185,23 +178,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the <see cref="T:System.Net.Mail.AlternateView" /> element at the specified location in the collection with the new <see cref="T:System.Net.Mail.AlternateView" /> object.</para
-          >
+            >Replaces the <see cref="T:System.Net.Mail.AlternateView" /> element at the specified location in the collection with the new <see cref="T:System.Net.Mail.AlternateView" /> object.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the element in this collection to be replaced.</param
-        >
+          />The index of the element in this collection to be replaced.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Mail.AlternateView" /> object to replace the specified element in the collection.</param
-        >
+          />The <see cref="T:System.Net.Mail.AlternateView" /> object to replace the specified element in the collection.</param>
       </Docs>
     </Member>
   </Members>

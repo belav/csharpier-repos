@@ -23,12 +23,10 @@
   </Attributes>
   <Docs>
     <summary
-      >File and directory change notification flags for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />.</summary
-    >
+      >File and directory change notification flags for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />.</summary>
     <remarks>
       <para
-        >These values may be bitwise ORed together to form the <paramref name="arg" /> parameter for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />.  They may only be used with the <see cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" /> command.</para
-      >
+        >These values may be bitwise ORed together to form the <paramref name="arg" /> parameter for <see cref="M:Mono.Unix.Native.Syscall.fcntl" />.  They may only be used with the <see cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" /> command.</para>
       <para>Directory notification flags are not part of POSIX.</para>
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.fcntl" />

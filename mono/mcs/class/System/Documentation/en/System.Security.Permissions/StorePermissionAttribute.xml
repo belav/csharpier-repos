@@ -30,17 +30,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" /> value that is used.</para
-      >
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" /> value that is used.</para>
       <para
-        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. The <see cref="T:System.Security.Permissions.StorePermissionAttribute" /> attribute is used only for declarative security. For imperative security, use the <see cref="T:System.Security.Permissions.StorePermission" /> class.</para
-      >
+        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. The <see cref="T:System.Security.Permissions.StorePermissionAttribute" /> attribute is used only for declarative security. For imperative security, use the <see cref="T:System.Security.Permissions.StorePermission" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see cref="T:System.Security.Permissions.StorePermission" /> to be applied to code using declarative security. This class cannot be inherited.</para
-      >
+        >Allows security actions for <see cref="T:System.Security.Permissions.StorePermission" /> to be applied to code using declarative security. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -67,16 +64,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermissionAttribute" /> class with the specified security action.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermissionAttribute" /> class with the specified security action.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="AddToStore">
@@ -131,14 +126,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see cref="T:System.Security.Permissions.StorePermission" />.</para
-          >
+            >Creates and returns a new <see cref="T:System.Security.Permissions.StorePermission" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.Permissions.StorePermission" /> that corresponds to the attribute.</para
-          >
+            >A <see cref="T:System.Security.Permissions.StorePermission" /> that corresponds to the attribute.</para>
         </returns>
       </Docs>
     </Member>
@@ -159,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New stores are created by calling the <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" /> method.</para
-          >
+            >New stores are created by calling the <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,8 +177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> class.</para
-          >
+            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -235,8 +226,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> class.</para
-          >
+            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -270,8 +260,7 @@
             <para>Many of these flags are powerful and permit access to stores that should be granted only to highly trusted code.</para>
           </block>
           <para
-            >The most powerful of the flags are <see cref="F:System.Security.Permissions.StorePermissionFlags.AddToStore" />, <see cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />, <see cref="F:System.Security.Permissions.StorePermissionFlags.DeleteStore" />, and <see cref="F:System.Security.Permissions.StorePermissionFlags.AllFlags" />. For specific threats posed by the use of these flags, see individual flag descriptions.</para
-          >
+            >The most powerful of the flags are <see cref="F:System.Security.Permissions.StorePermissionFlags.AddToStore" />, <see cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />, <see cref="F:System.Security.Permissions.StorePermissionFlags.DeleteStore" />, and <see cref="F:System.Security.Permissions.StorePermissionFlags.AllFlags" />. For specific threats posed by the use of these flags, see individual flag descriptions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

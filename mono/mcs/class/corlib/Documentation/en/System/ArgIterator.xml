@@ -21,11 +21,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Developers who write compilers use the <see cref="T:System.ArgIterator" /> structure to enumerate the mandatory and optional arguments in an argument list. The <see cref="T:System.ArgIterator" /> structure is not generally useful for applications other than compilers.</para
-      >
+        >Developers who write compilers use the <see cref="T:System.ArgIterator" /> structure to enumerate the mandatory and optional arguments in an argument list. The <see cref="T:System.ArgIterator" /> structure is not generally useful for applications other than compilers.</para>
       <para
-        >The functionality in the <see cref="T:System.ArgIterator" /> structure is typically hidden in the syntax of a specific programming language. For example, in the C++ programming language you declare a variable-length argument list by specifying an ellipsis ("...") at the end of the argument list. The <see cref="T:System.ArgIterator" /> structure is useful primarily when a development language does not provide direct support for accessing variable-length parameters.</para
-      >
+        >The functionality in the <see cref="T:System.ArgIterator" /> structure is typically hidden in the syntax of a specific programming language. For example, in the C++ programming language you declare a variable-length argument list by specifying an ellipsis ("...") at the end of the argument list. The <see cref="T:System.ArgIterator" /> structure is useful primarily when a development language does not provide direct support for accessing variable-length parameters.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,22 +51,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see cref="T:System.ArgIterator" /> object enumerates the argument list starting from the first optional argument.</para
-          >
+            >The new <see cref="T:System.ArgIterator" /> object enumerates the argument list starting from the first optional argument.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArgIterator" /> structure using the specified argument list.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArgIterator" /> structure using the specified argument list.</para>
         </summary>
         <param name="arglist">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list consisting of mandatory and optional arguments. </param
-        >
+          />An argument list consisting of mandatory and optional arguments. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -100,29 +95,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see cref="T:System.ArgIterator" /> object enumerates the argument list starting from the argument specified by <paramref name="ptr" />, or the first mandatory argument if <paramref name="ptr" /> is null.</para
-          >
+            >The new <see cref="T:System.ArgIterator" /> object enumerates the argument list starting from the argument specified by <paramref name="ptr" />, or the first mandatory argument if <paramref name="ptr" /> is null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ArgIterator" /> structure using the specified argument list and a pointer to an item in the list.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ArgIterator" /> structure using the specified argument list and a pointer to an item in the list.</para>
         </summary>
         <param name="arglist">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list consisting of mandatory and optional arguments. </param
-        >
+          />An argument list consisting of mandatory and optional arguments. </param>
         <param name="ptr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the argument in <paramref name="arglist" /> to access first, or the first mandatory argument in <paramref name="arglist" /> if <paramref name="ptr" /> is null.</param
-        >
+          />A pointer to the argument in <paramref name="arglist" /> to access first, or the first mandatory argument in <paramref name="arglist" /> if <paramref name="ptr" /> is null.</param>
       </Docs>
     </Member>
     <Member MemberName="End">
@@ -145,11 +136,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Conceptually, <see cref="M:System.ArgIterator.End" /> concludes the processing of a variable-length argument list. However, this method has no actual implementation; the <see cref="M:System.ArgIterator.End" /> method body is empty. You can use this method in your code as a marker to indicate where variable-length argument list processing logically ends.</para
-          >
+            >Conceptually, <see cref="M:System.ArgIterator.End" /> concludes the processing of a variable-length argument list. However, this method has no actual implementation; the <see cref="M:System.ArgIterator.End" /> method body is empty. You can use this method in your code as a marker to indicate where variable-length argument list processing logically ends.</para>
           <para
-            >The <see cref="M:System.ArgIterator.End" /> method corresponds to the va_end method in the C standard library.</para
-          >
+            >The <see cref="M:System.ArgIterator.End" /> method corresponds to the va_end method in the C standard library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -180,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is not supported, and always throws <see cref="T:System.NotSupportedException" />.</para
-          >
+            >This method is not supported, and always throws <see cref="T:System.NotSupportedException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -192,8 +180,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to be compared to this instance. </param
-        >
+          />An object to be compared to this instance. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -304,8 +291,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A runtime type handle that identifies the type of the argument to retrieve. </param
-        >
+          />A runtime type handle that identifies the type of the argument to retrieve. </param>
       </Docs>
     </Member>
     <Member MemberName="GetNextArgType">
@@ -329,8 +315,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not advance the iterator to the next argument.</para>
           <para>
-            <see cref="M:System.ArgIterator.GetNextArgType" /> returns the type of the argument as specified in the calling function. For example, if an argument is type <see cref="T:System.String" />, but the calling function specifies the argument as type <see cref="T:System.Object" />, <see cref="M:System.ArgIterator.GetNextArgType" /> reports the argument as type <see cref="T:System.Object" />.</para
-          >
+            <see cref="M:System.ArgIterator.GetNextArgType" /> returns the type of the argument as specified in the calling function. For example, if an argument is type <see cref="T:System.String" />, but the calling function specifies the argument as type <see cref="T:System.Object" />, <see cref="M:System.ArgIterator.GetNextArgType" /> reports the argument as type <see cref="T:System.Object" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

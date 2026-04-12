@@ -4,30 +4,24 @@
     <BundleDir>$([MSBuild]::NormalizeDirectory('$(OutDir)', 'AppBundle'))</BundleDir>
     <PublishDir
       Condition="'$(UseAppBundleRootForBuildingTests)' == 'true' and '$(IgnoreForCI)' != 'true' and '$(IsFunctionalTest)' != 'true'"
-      >$(AppBundleRoot)tests\$(AssemblyName)</PublishDir
-    >
+      >$(AppBundleRoot)tests\$(AssemblyName)</PublishDir>
     <PublishDir
       Condition="'$(UseAppBundleRootForBuildingTests)' == 'true' and '$(IgnoreForCI)' != 'true' and '$(IsFunctionalTest)' == 'true'"
-      >$(AppBundleRoot)runonly\$(AssemblyName)</PublishDir
-    >
+      >$(AppBundleRoot)runonly\$(AssemblyName)</PublishDir>
     <BundleDir
       Condition="'$(UseAppBundleRootForBuildingTests)' == 'true' and '$(IgnoreForCI)' != 'true'"
-      >$([MSBuild]::NormalizeDirectory('$(PublishDir)', 'AppBundle'))</BundleDir
-    >
+      >$([MSBuild]::NormalizeDirectory('$(PublishDir)', 'AppBundle'))</BundleDir>
     <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(BundleDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
 
     <PublishingTestsRun>true</PublishingTestsRun>
     <PublishTestAsSelfContainedDependsOn Condition="'$(PublishTestAsSelfContainedDependsOn)' == ''"
-      >Publish</PublishTestAsSelfContainedDependsOn
-    >
+      >Publish</PublishTestAsSelfContainedDependsOn>
     <PublishTestAsSelfContainedAfterTargets
       Condition="'$(PublishTestAsSelfContainedAfterTargets)' == ''"
-      >Build</PublishTestAsSelfContainedAfterTargets
-    >
+      >Build</PublishTestAsSelfContainedAfterTargets>
 
     <SkipWorkloadsTestingTargetsImport Condition="'$(SkipWorkloadsTestingTargetsImport)' == ''"
-      >true</SkipWorkloadsTestingTargetsImport
-    >
+      >true</SkipWorkloadsTestingTargetsImport>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos'">
@@ -52,18 +46,14 @@
 
     <!-- Reduce library test app size by trimming framework library features  -->
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(Configuration)' != 'Debug'"
-      >false</DebuggerSupport
-    >
+      >false</DebuggerSupport>
     <EnableUnsafeUTF7Encoding Condition="'$(EnableUnsafeUTF7Encoding)' == ''"
-      >false</EnableUnsafeUTF7Encoding
-    >
+      >false</EnableUnsafeUTF7Encoding>
     <EventSourceSupport Condition="'$(EventSourceSupport)' == ''">false</EventSourceSupport>
     <HttpActivityPropagationSupport Condition="'$(HttpActivityPropagationSupport)' == ''"
-      >false</HttpActivityPropagationSupport
-    >
+      >false</HttpActivityPropagationSupport>
     <UseSystemResourceKeys Condition="'$(UseSystemResourceKeys)' == ''"
-      >false</UseSystemResourceKeys
-    >
+      >false</UseSystemResourceKeys>
     <UseNativeHttpHandler Condition="'$(UseNativeHttpHandler)' == ''">false</UseNativeHttpHandler>
   </PropertyGroup>
 
@@ -84,34 +74,28 @@
 
   <PropertyGroup>
     <AdditionalXHarnessArguments Condition="'$(ExpectedExitCode)' != ''"
-      >$(AdditionalXHarnessArguments) --expected-exit-code $(ExpectedExitCode)</AdditionalXHarnessArguments
-    >
+      >$(AdditionalXHarnessArguments) --expected-exit-code $(ExpectedExitCode)</AdditionalXHarnessArguments>
   </PropertyGroup>
 
   <PropertyGroup>
     <DiagnosticPorts Condition="'$(DiagnosticStartupMode)' != ''"
-      >$(DiagnosticPorts),$(DiagnosticStartupMode)</DiagnosticPorts
-    >
+      >$(DiagnosticPorts),$(DiagnosticStartupMode)</DiagnosticPorts>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetOS)' == 'android'">
     <!-- The -arg flag for xharness passes the arguments along to the instrumentation app -->
     <AdditionalXHarnessArguments Condition="'$(XUnitMethodName)' != ''"
-      >$(AdditionalXHarnessArguments) --arg=-m=$(XUnitMethodName)</AdditionalXHarnessArguments
-    >
+      >$(AdditionalXHarnessArguments) --arg=-m=$(XUnitMethodName)</AdditionalXHarnessArguments>
     <AdditionalXHarnessArguments Condition="'$(XUnitClassName)' != ''"
-      >$(AdditionalXHarnessArguments) --arg=-c=$(XUnitClassName)</AdditionalXHarnessArguments
-    >
+      >$(AdditionalXHarnessArguments) --arg=-c=$(XUnitClassName)</AdditionalXHarnessArguments>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetOS)' == 'maccatalyst' or '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator'">
     <!-- Pass the -m or -c flag along to the app bundle, note that due to the double hyphen this needs to be the last argument -->
     <AdditionalXHarnessArguments Condition="'$(XUnitMethodName)' != ''"
-      >$(AdditionalXHarnessArguments) -- -m=$(XUnitMethodName)</AdditionalXHarnessArguments
-    >
+      >$(AdditionalXHarnessArguments) -- -m=$(XUnitMethodName)</AdditionalXHarnessArguments>
     <AdditionalXHarnessArguments Condition="'$(XUnitClassName)' != ''"
-      >$(AdditionalXHarnessArguments) -- -c=$(XUnitClassName)</AdditionalXHarnessArguments
-    >
+      >$(AdditionalXHarnessArguments) -- -c=$(XUnitClassName)</AdditionalXHarnessArguments>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(XUnitUseRandomizedTestOrderer)' == 'true'">

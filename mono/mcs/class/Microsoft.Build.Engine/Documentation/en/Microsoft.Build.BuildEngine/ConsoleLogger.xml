@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -58,16 +57,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />.</para>
         </summary>
         <param name="verbosity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> to apply to the logger.</param
-        >
+          />The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> to apply to the logger.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -91,37 +88,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />, <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" />, and <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" /> values.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> class with the specified <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" />, <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" />, and <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" /> values.</para>
         </summary>
         <param name="verbosity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> to apply to the logger.</param
-        >
+          />The <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> to apply to the logger.</param>
         <param name="write">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" /> for the logger to use.</param
-        >
+          />The <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" /> for the logger to use.</param>
         <param name="colorSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" /> for the logger to use.</param
-        >
+          />The <see cref="T:Microsoft.Build.BuildEngine.ColorSetter" /> for the logger to use.</param>
         <param name="colorReset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" /> for the logger to use.</param
-        >
+          />The <see cref="T:Microsoft.Build.BuildEngine.ColorResetter" /> for the logger to use.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,15 +144,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter name to add to the logger.</param
-        >
+          />The parameter name to add to the logger.</param>
         <param name="parameterValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter value to assign to the <paramref name="parameterName" />.</param
-        >
+          />The parameter value to assign to the <paramref name="parameterName" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -186,16 +176,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildFinished" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -221,16 +209,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -256,16 +242,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,16 +275,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ErrorRaised" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ErrorRaised" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -330,8 +312,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.Framework.IEventSource" /> to register with the logger.</param
-        >
+          />The <see cref="T:Microsoft.Build.Framework.IEventSource" /> to register with the logger.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -357,16 +338,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -385,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the parameters passed to the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />.</para
-          >
+            >Gets or sets the parameters passed to the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -413,16 +391,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -448,16 +424,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -543,16 +517,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetFinished" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetFinished" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -578,16 +550,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -613,16 +583,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskFinished" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -648,16 +616,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskStarted" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.TaskStarted" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -679,8 +645,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> level of the logger.</para
-          >
+            >Gets or sets the <see cref="T:Microsoft.Build.Framework.LoggerVerbosity" /> level of the logger.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -707,16 +672,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.WarningRaised" /> event.</para
-          >
+            >Handles the <see cref="E:Microsoft.Build.Framework.IEventSource.WarningRaised" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event.</param
-        >
+          />The source of the event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -738,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets to the <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" /> delegate for the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />.</para
-          >
+            >Gets or sets to the <see cref="T:Microsoft.Build.BuildEngine.WriteHandler" /> delegate for the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -53,8 +53,7 @@
       <Docs>
         <summary>To be added</summary>
         <param name="context"
-          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param
-        >
+          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param>
         <returns>To be added: an object of type 'bool'</returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -74,8 +73,7 @@
       <Docs>
         <summary>To be added</summary>
         <param name="context"
-          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param
-        >
+          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param>
         <returns>To be added: an object of type 'bool'</returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -95,8 +93,7 @@
       <Docs>
         <summary>To be added</summary>
         <param name="context"
-          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param
-        >
+          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param>
         <returns>To be added: an object of type 'ComponentModel.TypeConverter+StandardValuesCollection'</returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -118,8 +115,7 @@
       <Docs>
         <summary>To be added</summary>
         <param name="context"
-          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param
-        >
+          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param>
         <param name="culture">To be added: an object of type 'Globalization.CultureInfo'</param>
         <param name="value">To be added: an object of type 'object'</param>
         <returns>To be added: an object of type 'object'</returns>
@@ -142,8 +138,7 @@
       <Docs>
         <summary>To be added</summary>
         <param name="context"
-          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param
-        >
+          >To be added: an object of type 'ComponentModel.ITypeDescriptorContext'</param>
         <param name="sourceType">To be added: an object of type 'Type'</param>
         <returns>To be added: an object of type 'bool'</returns>
         <remarks>To be added</remarks>

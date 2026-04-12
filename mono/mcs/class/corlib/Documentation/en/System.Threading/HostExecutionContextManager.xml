@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the current <see cref="T:System.AppDomainManager" /> has a reference to a <see cref="T:System.Threading.HostExecutionContextManager" /> in its <see cref="P:System.AppDomainManager.HostExecutionContextManager" /> property, then the common language runtime calls the manager every time a call to the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" /> method occurs, to allow the host to participate in the flow of the execution context.</para
-      >
+        >If the current <see cref="T:System.AppDomainManager" /> has a reference to a <see cref="T:System.Threading.HostExecutionContextManager" /> in its <see cref="P:System.AppDomainManager.HostExecutionContextManager" /> property, then the common language runtime calls the manager every time a call to the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" /> method occurs, to allow the host to participate in the flow of the execution context.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.HostExecutionContextManager" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.HostExecutionContextManager" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -74,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Threading.HostExecutionContext" /> is created using a safe handle containing the IUnknown pointer for the host executing the current thread.</para
-          >
+            >The <see cref="T:System.Threading.HostExecutionContext" /> is created using a safe handle containing the IUnknown pointer for the host executing the current thread.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -84,8 +81,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Threading.HostExecutionContext" /> object representing the host execution context of the current thread.</para
-          >
+            >A <see cref="T:System.Threading.HostExecutionContext" /> object representing the host execution context of the current thread.</para>
         </returns>
       </Docs>
     </Member>
@@ -116,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="previousState" /> must be the object returned by the <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method.</para
-          >
+            <paramref name="previousState" /> must be the object returned by the <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -128,8 +123,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The previous context state to revert to.</param
-        >
+          />The previous context state to revert to.</param>
       </Docs>
     </Member>
     <Member MemberName="SetHostExecutionContext">
@@ -157,11 +151,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method sets the host execution context for the current <see cref="T:System.Threading.HostExecutionContext" />.  A <see cref="T:System.Threading.HostExecutionContext" /> that has been used as the argument to another <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method call cannot be passed in as the parameter for this method. Instead, use the <see cref="M:System.Threading.HostExecutionContext.CreateCopy" /> method to create a copy of a <see cref="T:System.Threading.HostExecutionContext" /> object and then use the copy to set the host execution context.</para
-          >
+            >The <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method sets the host execution context for the current <see cref="T:System.Threading.HostExecutionContext" />.  A <see cref="T:System.Threading.HostExecutionContext" /> that has been used as the argument to another <see cref="M:System.Threading.HostExecutionContextManager.SetHostExecutionContext(System.Threading.HostExecutionContext)" /> method call cannot be passed in as the parameter for this method. Instead, use the <see cref="M:System.Threading.HostExecutionContext.CreateCopy" /> method to create a copy of a <see cref="T:System.Threading.HostExecutionContext" /> object and then use the copy to set the host execution context.</para>
           <para
-            >Call the <see cref="M:System.Threading.HostExecutionContextManager.Revert(System.Object)" /> method using the object returned by this method to restore the <see cref="T:System.Threading.HostExecutionContext" /> to its previous state.</para
-          >
+            >Call the <see cref="M:System.Threading.HostExecutionContextManager.Revert(System.Object)" /> method using the object returned by this method to restore the <see cref="T:System.Threading.HostExecutionContext" /> to its previous state.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -170,16 +162,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object for restoring the <see cref="T:System.Threading.HostExecutionContext" /> to its previous state.</para
-          >
+            >An object for restoring the <see cref="T:System.Threading.HostExecutionContext" /> to its previous state.</para>
         </returns>
         <param name="hostExecutionContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.HostExecutionContext" /> to be set.</param
-        >
+          />The <see cref="T:System.Threading.HostExecutionContext" /> to be set.</param>
       </Docs>
     </Member>
   </Members>

@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> is used to apply individual application settings properties and property groups to indicate that special, predefined services are to be provided for them. The <see cref="T:System.Configuration.SettingsManageability" /> enumeration lists the services that are available. Most of these services will be provided by the Windows operating system.</para
-      >
+        >The <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> is used to apply individual application settings properties and property groups to indicate that special, predefined services are to be provided for them. The <see cref="T:System.Configuration.SettingsManageability" /> enumeration lists the services that are available. Most of these services will be provided by the Windows operating system.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,8 +47,7 @@
           <para
             >Enables application settings to be stored in roaming user profiles. For more information about roaming user profiles, see <format type="text/html">
               <a href="d3cca593-4521-408d-b323-ea398d226de3">Isolated Storage and Roaming</a>
-            </format>.</para
-          >
+            </format>.</para>
         </summary>
       </Docs>
     </Member>

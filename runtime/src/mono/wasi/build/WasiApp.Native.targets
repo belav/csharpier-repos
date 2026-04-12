@@ -58,27 +58,22 @@
     <PropertyGroup>
       <_ToolchainMissingPaths
         Condition="'$(_ToolchainMissingPaths)' == '' and ('$(WasiClang)' == '' or !Exists('$(WasiClang)'))"
-        >%24(WasiClang)=$(WasiClang) </_ToolchainMissingPaths
-      >
+        >%24(WasiClang)=$(WasiClang) </_ToolchainMissingPaths>
     </PropertyGroup>
 
     <PropertyGroup>
       <_ToolchainMissingErrorMessage Condition="'$(WASI_SDK_PATH)' == '' and '$(WasiSdkRoot)' == ''"
-        >Could not find wasi-sdk. Install wasi-sdk and set %24(WASI_SDK_PATH) . It can be obtained from https://github.com/WebAssembly/wasi-sdk/releases</_ToolchainMissingErrorMessage
-      >
+        >Could not find wasi-sdk. Install wasi-sdk and set %24(WASI_SDK_PATH) . It can be obtained from https://github.com/WebAssembly/wasi-sdk/releases</_ToolchainMissingErrorMessage>
       <_ToolchainMissingErrorMessage
         Condition="'$(_ToolchainMissingErrorMessage)' == '' and '$(_ToolchainMissingPaths)' != ''"
-        >Using WASI_SDK_PATH=$(WASI_SDK_PATH), cannot find $(_ToolchainMissingPaths) .</_ToolchainMissingErrorMessage
-      >
+        >Using WASI_SDK_PATH=$(WASI_SDK_PATH), cannot find $(_ToolchainMissingPaths) .</_ToolchainMissingErrorMessage>
       <_IsToolchainMissing Condition="'$(_ToolchainMissingErrorMessage)' != ''"
-        >true</_IsToolchainMissing
-      >
+        >true</_IsToolchainMissing>
     </PropertyGroup>
 
     <PropertyGroup>
       <WasiSdkBinPath Condition="'$(WasiSdkBinPath)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(WasiSdkBinPath)))</WasiSdkBinPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(WasiSdkBinPath)))</WasiSdkBinPath>
     </PropertyGroup>
   </Target>
 
@@ -99,24 +94,19 @@
       <!-- build AOT, only if explicitly requested -->
       <WasmBuildNative
         Condition="'$(RunAOTCompilation)' == 'true' and '$(RunAOTCompilationAfterBuild)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(WasmEnableSIMD)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(InvariantTimezone)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and '$(InvariantGlobalization)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and @(NativeFileReference->Count()) > 0"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
@@ -127,28 +117,22 @@
       <WasmBuildNative Condition="'$(RunAOTCompilation)' == 'true'">true</WasmBuildNative>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and @(NativeFileReference->Count()) > 0"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(WasmEnableSIMD)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(InvariantTimezone)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and '$(InvariantGlobalization)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <!-- not aot, not trimmed app, no reason to relink -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(PublishTrimmed)' != 'true'"
-        >false</WasmBuildNative
-      >
+        >false</WasmBuildNative>
 
       <!-- default to relinking in Release config -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(Configuration)' == 'Release'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
@@ -162,8 +146,7 @@
     <PropertyGroup>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == 'true' and '$(_IsToolchainMissing)' == 'true'"
-        >false</WasmBuildNative
-      >
+        >false</WasmBuildNative>
     </PropertyGroup>
   </Target>
 
@@ -186,12 +169,10 @@
       <_WasiClangDefaultLinkFlagsRsp>$([MSBuild]::NormalizePath($(_WasmRuntimePackSrcDir), 'wasi-link.rsp'))</_WasiClangDefaultLinkFlagsRsp>
       <WasmNativeStrip
         Condition="'$(WasmNativeStrip)' == '' and '$(Configuration)' == 'Debug' and '$(WasmBuildingForNestedPublish)' != 'true'"
-        >false</WasmNativeStrip
-      >
+        >false</WasmNativeStrip>
       <WasmNativeStrip Condition="'$(WasmNativeStrip)' == ''">true</WasmNativeStrip>
       <WasmNativeDebugSymbols Condition="'$(WasmNativeDebugSymbols)' == ''"
-        >true</WasmNativeDebugSymbols
-      >
+        >true</WasmNativeDebugSymbols>
       <WasmLinkIcalls Condition="'$(WasmLinkIcalls)' == ''">$(WasmBuildNative)</WasmLinkIcalls>
 
       <_WasmICallTablePath>$(_WasmIntermediateOutputPath)icall-table.h</_WasmICallTablePath>
@@ -202,48 +183,37 @@
       <_DriverGenCPath>$(_WasmIntermediateOutputPath)driver-gen.c</_DriverGenCPath>
       <DisableParallelAot Condition="'$(DisableParallelAot)' == ''">false</DisableParallelAot>
       <DisableParallelEmccCompile Condition="'$(DisableParallelEmccCompile)' == ''"
-        >$(DisableParallelAot)</DisableParallelEmccCompile
-      >
+        >$(DisableParallelAot)</DisableParallelEmccCompile>
 
       <_DriverGenCNeeded Condition="'$(_DriverGenCNeeded)' == '' and '$(_WasmShouldAOT)' == 'true'"
-        >true</_DriverGenCNeeded
-      >
+        >true</_DriverGenCNeeded>
 
       <_WasmDevel
         Condition="'$(_WasmDevel)' == '' and '$(WasmBuildNative)' == 'true' and '$(Configuration)' == 'Debug'"
-        >true</_WasmDevel
-      >
+        >true</_WasmDevel>
 
       <!--<_EmccAssertionLevelDefault Condition="'$(_EmccAssertionLevelDefault)' == ''">0</_EmccAssertionLevelDefault>-->
       <_WasiClangOptimizationFlagDefault Condition="'$(_WasmDevel)' == 'true'"
-        >-O0</_WasiClangOptimizationFlagDefault
-      >
+        >-O0</_WasiClangOptimizationFlagDefault>
       <_WasiClangOptimizationFlagDefault
         Condition="'$(_WasiClangOptimizationFlagDefault)' == '' and '$(Configuration)' == 'Debug' and '$(WasmBuildingForNestedPublish)' != 'true'"
-        >-O1</_WasiClangOptimizationFlagDefault
-      >
+        >-O1</_WasiClangOptimizationFlagDefault>
       <_WasiClangOptimizationFlagDefault Condition="'$(_WasiClangOptimizationFlagDefault)' == ''"
-        >-Oz</_WasiClangOptimizationFlagDefault
-      >
+        >-Oz</_WasiClangOptimizationFlagDefault>
 
       <WasiClangCompileOptimizationFlag Condition="'$(WasiClangCompileOptimizationFlag)' == ''"
-        >$(_WasiClangOptimizationFlagDefault)</WasiClangCompileOptimizationFlag
-      >
+        >$(_WasiClangOptimizationFlagDefault)</WasiClangCompileOptimizationFlag>
       <WasiClangLinkOptimizationFlag
         Condition="'$(WasiClangLinkOptimizationFlag)' == '' and '$(Configuration)' == 'Release'"
-        >-O2</WasiClangLinkOptimizationFlag
-      >
+        >-O2</WasiClangLinkOptimizationFlag>
       <WasiClangLinkOptimizationFlag Condition="'$(WasiClangLinkOptimizationFlag)' == ''"
-        >$(WasiClangCompileOptimizationFlag)</WasiClangLinkOptimizationFlag
-      >
+        >$(WasiClangCompileOptimizationFlag)</WasiClangLinkOptimizationFlag>
 
       <_WasiClangCompileRsp>$(_WasmIntermediateOutputPath)wasi-compile.rsp</_WasiClangCompileRsp>
       <_WasiClangCompileOutputMessageImportance Condition="'$(WasiClangVerbose)' == 'true'"
-        >Normal</_WasiClangCompileOutputMessageImportance
-      >
+        >Normal</_WasiClangCompileOutputMessageImportance>
       <_WasiClangCompileOutputMessageImportance Condition="'$(WasiClangVerbose)' != 'true'"
-        >Low</_WasiClangCompileOutputMessageImportance
-      >
+        >Low</_WasiClangCompileOutputMessageImportance>
 
       <_WasiClangCompileBitcodeRsp>$(_WasmIntermediateOutputPath)wasi-compile-bc.rsp</_WasiClangCompileBitcodeRsp>
       <_WasiClangLinkRsp>$(_WasmIntermediateOutputPath)clang-link.rsp</_WasiClangLinkRsp>
@@ -358,11 +328,9 @@
     <PropertyGroup>
       <_HasMscorlib
         Condition="'%(_WasmAssembliesInternal.FileName)%(_WasmAssembliesInternal.Extension)' == 'mscorlib.dll'"
-        >true</_HasMscorlib
-      >
+        >true</_HasMscorlib>
       <_MscorlibPath Condition="'$(_HasMscorlib)' != 'true'"
-        >$([System.IO.Path]::Combine($(MicrosoftNetCoreAppRuntimePackRidLibTfmDir), 'mscorlib.dll'))</_MscorlibPath
-      >
+        >$([System.IO.Path]::Combine($(MicrosoftNetCoreAppRuntimePackRidLibTfmDir), 'mscorlib.dll'))</_MscorlibPath>
     </PropertyGroup>
 
     <Error
@@ -493,21 +461,17 @@
     <PropertyGroup>
       <!-- FIXME: eh case -->
       <_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' == 'true'"
-        >libmono-wasm-eh-wasm.a</_WasmEHLib
-      >
+        >libmono-wasm-eh-wasm.a</_WasmEHLib>
       <!--<_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' != 'true'">libmono-wasm-eh-js.a</_WasmEHLib>-->
       <!--<_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' == 'true'">libmono-wasm-eh-js.a</_WasmEHLibToExclude>-->
       <_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' != 'true'"
-        >libmono-wasm-eh-wasm.a</_WasmEHLibToExclude
-      >
+        >libmono-wasm-eh-wasm.a</_WasmEHLibToExclude>
       <_WasmSIMDLib Condition="'$(WasmEnableSIMD)' == 'true'">libmono-wasm-simd.a</_WasmSIMDLib>
       <_WasmSIMDLib Condition="'$(WasmEnableSIMD)' != 'true'">libmono-wasm-nosimd.a</_WasmSIMDLib>
       <_WasmSIMDLibToExclude Condition="'$(WasmEnableSIMD)' != 'true'"
-        >libmono-wasm-simd.a</_WasmSIMDLibToExclude
-      >
+        >libmono-wasm-simd.a</_WasmSIMDLibToExclude>
       <_WasmSIMDLibToExclude Condition="'$(WasmEnableSIMD)' == 'true'"
-        >libmono-wasm-nosimd.a</_WasmSIMDLibToExclude
-      >
+        >libmono-wasm-nosimd.a</_WasmSIMDLibToExclude>
     </PropertyGroup>
 
     <ItemGroup>

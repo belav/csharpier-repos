@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> provides security information about a manifest-activated application using information obtained from the application's manifests and its <see cref="T:System.ActivationContext" />.</para
-      >
+        <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> provides security information about a manifest-activated application using information obtained from the application's manifests and its <see cref="T:System.ActivationContext" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,22 +54,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ActivationContext" /> object contains an <see cref="T:System.ApplicationIdentity" /> object that uniquely identifies an application by its full name and location.</para
-          >
+            >The <see cref="T:System.ActivationContext" /> object contains an <see cref="T:System.ApplicationIdentity" /> object that uniquely identifies an application by its full name and location.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> class using the provided activation context. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> class using the provided activation context. </para>
         </summary>
         <param name="activationContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ActivationContext" /> object that uniquely identifies the target application.</param
-        >
+          />An <see cref="T:System.ActivationContext" /> object that uniquely identifies the target application.</param>
       </Docs>
     </Member>
     <Member MemberName="ApplicationEvidence">
@@ -153,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the property has not been set, the get accessor returns a <see cref="T:System.Security.PermissionSet" /> with a permission state of <see cref="F:System.Security.Permissions.PermissionState.None" />.</para
-          >
+            >If the property has not been set, the get accessor returns a <see cref="T:System.Security.PermissionSet" /> with a permission state of <see cref="F:System.Security.Permissions.PermissionState.None" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

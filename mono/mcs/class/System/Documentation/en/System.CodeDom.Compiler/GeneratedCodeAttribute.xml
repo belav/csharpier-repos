@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class can be used by code analysis tools to identify computer-generated code, and to provide an analysis based on the tool and the version of the tool that generated the code.</para
-      >
+        >The <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class can be used by code analysis tools to identify computer-generated code, and to provide an analysis based on the tool and the version of the tool that generated the code.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,23 +56,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class specifying the name and version of the tool that generated the code.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" /> class specifying the name and version of the tool that generated the code.</para>
         </summary>
         <param name="tool">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the tool that generated the code.</param
-        >
+          />The name of the tool that generated the code.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the tool that generated the code.</param
-        >
+          />The version of the tool that generated the code.</param>
       </Docs>
     </Member>
     <Member MemberName="Tool">

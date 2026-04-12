@@ -16,16 +16,13 @@
           <Freight SourceField="Freight" SourceTable="Orders">12.75</Freight>
           <ShipName ValidateOnSet="False" DataUpdatable="False">LILA-Supermercado</ShipName>
           <ShipAddress ForeignName="Error" DefaultValue=""
-            >Carrera 52 con Ave. Bol�var #65-98 Llano Largo</ShipAddress
-          >
+            >Carrera 52 con Ave. Bol�var #65-98 Llano Largo</ShipAddress>
           <ShipCity ValidationRule="">Barquisimeto</ShipCity>
           <ShipRegion>Lara</ShipRegion>
           <ShipPostalCode ValidationText="" Required="False" AllowZeroLength="False"
-            >3508</ShipPostalCode
-          >
+            >3508</ShipPostalCode>
           <ShipCountry FieldSize="Error" OriginalValue="Error" VisibleValue="Error"
-            >Venezuela</ShipCountry
-          >
+            >Venezuela</ShipCountry>
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
@@ -68,8 +65,7 @@
           <ShipAddress
             VisibleValue="Error"
             Description="Street address only -- no post-office box allowed."
-            >43 rue St. Laurent</ShipAddress
-          >
+            >43 rue St. Laurent</ShipAddress>
           <ShipCity ColumnHidden="False" ColumnWidth="1395" Caption="Ship City">Montr�al</ShipCity>
           <ShipRegion>Qu�bec</ShipRegion>
           <ShipPostalCode DisplayControl="109" FilterLookup="1">H1J 1C3</ShipPostalCode>
@@ -92,8 +88,7 @@
           <Freight DataUpdatable="False" ForeignName="Error" DefaultValue="0">0.59</Freight>
           <ShipName>Wartian Herkku</ShipName>
           <ShipAddress ValidationRule="" ValidationText="" Required="False"
-            >Torikatu 38</ShipAddress
-          >
+            >Torikatu 38</ShipAddress>
           <ShipCity AllowZeroLength="False" FieldSize="Error">Oulu</ShipCity>
           <ShipRegion OriginalValue="Error"></ShipRegion>
           <ShipPostalCode VisibleValue="Error">90110</ShipPostalCode>
@@ -111,8 +106,7 @@
           Description="Same entry as in Employees table."
           DecimalPlaces="255"
           Caption="Employee"
-          >8</EmployeeID
-        >
+          >8</EmployeeID>
         <OrderDates>
           <OrderDate>11/21/94</OrderDate>
           <RequiredDate Value="12/19/94">12/19/94</RequiredDate>
@@ -166,8 +160,7 @@
   </OrderIDs>
   <OrderIDs>
     <bar:OrderID xmlns:bar="urn:cool man" DataUpdatable="False" ForeignName="Error"
-      >10337</bar:OrderID
-    >
+      >10337</bar:OrderID>
     <CustomerIDs>
       <CustomerID DefaultValue="">FRANK</CustomerID>
       <EmployeeIDs>
@@ -182,8 +175,7 @@
             VisibleValue="Error"
             Description="Name of person or company to receive the shipment."
             ColumnOrder="0"
-            >Frankenversand</ShipName
-          >
+            >Frankenversand</ShipName>
           <ShipAddress>Berliner Platz 43</ShipAddress>
           <ShipCity>M�nchen</ShipCity>
           <ShipRegion ColumnHidden="False"></ShipRegion>

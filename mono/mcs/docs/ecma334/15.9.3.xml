@@ -48,21 +48,16 @@ class Test
    }  
 }  
 ]]>
-      </code_example>a goto statement is used to transfer control out of a nested scope. end note]</note
-    >
+      </code_example>a goto statement is used to transfer control out of a nested scope. end note]</note>
   </paragraph>
   <paragraph
     >The target of a goto case statement is the statement list in the immediately enclosing switch statement (<hyperlink>15.7.2</hyperlink>) which contains a case label with the given constant value. If the goto case statement is not enclosed by a switch statement, if the <non_terminal
       where="14.15"
-      >constant-expression</non_terminal
-    > is not implicitly convertible (<hyperlink>13.1</hyperlink>) to the governing type of the nearest enclosing switch statement, or if the nearest enclosing switch statement does not contain a case label with the given constant value, a compile-time error occurs. </paragraph
-  >
+      >constant-expression</non_terminal> is not implicitly convertible (<hyperlink>13.1</hyperlink>) to the governing type of the nearest enclosing switch statement, or if the nearest enclosing switch statement does not contain a case label with the given constant value, a compile-time error occurs. </paragraph>
   <paragraph
-    >The target of a goto default statement is the statement list in the immediately enclosing switch statement (<hyperlink>15.7.2</hyperlink>), which contains a default label. If the goto default statement is not enclosed by a switch statement, or if the nearest enclosing switch statement does not contain a default label, a compile-time error occurs. </paragraph
-  >
+    >The target of a goto default statement is the statement list in the immediately enclosing switch statement (<hyperlink>15.7.2</hyperlink>), which contains a default label. If the goto default statement is not enclosed by a switch statement, or if the nearest enclosing switch statement does not contain a default label, a compile-time error occurs. </paragraph>
   <paragraph
-    >A goto statement cannot exit a finally block (<hyperlink>15.10</hyperlink>). When a goto statement occurs within a finally block, the target of the goto statement must be within the same finally block, or otherwise a compile-time error occurs. </paragraph
-  >
+    >A goto statement cannot exit a finally block (<hyperlink>15.10</hyperlink>). When a goto statement occurs within a finally block, the target of the goto statement must be within the same finally block, or otherwise a compile-time error occurs. </paragraph>
   <paragraph
     >A goto statement is executed as follows: <list>
       <list_item> If the goto statement exits one or more try blocks with associated finally blocks, control is initially transferred to the finally block of the innermost try statement. When and if control reaches the end point of a finally block, control is transferred to the finally block of the next enclosing try statement. This process is repeated until the finally blocks of all intervening try statements have been executed. </list_item>

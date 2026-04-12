@@ -19,12 +19,10 @@ This file contains the logic for providing Execution Script generation.
   <PropertyGroup>
     <_CLRTestNeedsToRun Condition=" '$(_CLRTestNeedsToRun)' == '' ">true</_CLRTestNeedsToRun>
     <_CLRTestBuildsExecutable Condition=" '$(_CLRTestBuildsExecutable)' == '' "
-      >true</_CLRTestBuildsExecutable
-    >
+      >true</_CLRTestBuildsExecutable>
     <CLRTestIsHosted Condition=" '$(CLRTestIsHosted)' == '' ">true</CLRTestIsHosted>
     <_CLRTestNeedsProjectToRun Condition=" '$(_CLRTestNeedsProjectToRun)' == '' "
-      >false</_CLRTestNeedsProjectToRun
-    >
+      >false</_CLRTestNeedsProjectToRun>
   </PropertyGroup>
 
   <!--
@@ -33,11 +31,9 @@ This file contains the logic for providing Execution Script generation.
   -->
   <PropertyGroup Condition="'$(CLRTestIsHosted)' != 'true'">
     <UnloadabilityIncompatible Condition="'$(UnloadabilityIncompatible)' == ''"
-      >true</UnloadabilityIncompatible
-    >
+      >true</UnloadabilityIncompatible>
     <TieringTestIncompatible Condition="'$(TieringTestIncompatible)' == ''"
-      >true</TieringTestIncompatible
-    >
+      >true</TieringTestIncompatible>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -83,8 +79,7 @@ This file contains the logic for providing Execution Script generation.
     <BatchScriptSnippetGen></BatchScriptSnippetGen>
     <GetExecuteScriptTarget>GetExecuteShFullPath</GetExecuteScriptTarget>
     <GetExecuteScriptTarget Condition="'$(TestWrapperTargetsWindows)' == 'true'"
-      >GetExecuteCmdFullPath</GetExecuteScriptTarget
-    >
+      >GetExecuteCmdFullPath</GetExecuteScriptTarget>
   </PropertyGroup>
 
   <Import Project="CLRTest.Jit.targets" />
@@ -106,11 +101,9 @@ This file contains the logic for providing Execution Script generation.
 
     <PropertyGroup>
       <InputAssemblyName Condition="'$(CLRTestKind)' == 'RunOnly'"
-        >$([MSBuild]::MakeRelative($(OutputPath), $(_CLRTestToRunFileFullPath)))</InputAssemblyName
-      >
+        >$([MSBuild]::MakeRelative($(OutputPath), $(_CLRTestToRunFileFullPath)))</InputAssemblyName>
       <InputAssemblyName Condition="'$(CLRTestKind)' == 'BuildAndRun'"
-        >$(AssemblyName).dll</InputAssemblyName
-      >
+        >$(AssemblyName).dll</InputAssemblyName>
     </PropertyGroup>
   </Target>
 

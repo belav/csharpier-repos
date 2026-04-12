@@ -50,8 +50,7 @@ class Test
    }  
 }  
 ]]>
-      </code_example>the finally blocks associated with two try statements are executed before control is transferred to the target of the jump statement. </example
-    >
+      </code_example>the finally blocks associated with two try statements are executed before control is transferred to the target of the jump statement. </example>
   </paragraph>
   <paragraph>
     <example
@@ -62,7 +61,6 @@ Innermost finally block
 Outermost finally block  
 After break  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

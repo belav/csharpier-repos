@@ -11,11 +11,9 @@
       Condition=" '$(AddPublicApiAnalyzers)' == '' AND
         '$(IsImplementationProject)' == 'true' AND
         ! $(RepoRelativeProjectDir.Contains('Tools')) "
-      >true</AddPublicApiAnalyzers
-    >
+      >true</AddPublicApiAnalyzers>
     <AddPublicApiAnalyzers Condition=" '$(AddPublicApiAnalyzers)' == '' "
-      >false</AddPublicApiAnalyzers
-    >
+      >false</AddPublicApiAnalyzers>
 
     <!-- Public members should not use oblivious types. Not done with all nullable annotations. -->
     <NoWarn>$(NoWarn);RS0041</NoWarn>
@@ -24,8 +22,7 @@
       Condition="'$(IsImplementationProject)' == 'true' OR
         '$(IsAnalyzersProject)' == true OR
         '$(IsSpecificationTestProject)' == 'true'"
-      >true</_IsSrcProject
-    >
+      >true</_IsSrcProject>
 
     <Nullable Condition=" '$(Nullable)' == '' AND '$(_IsSrcProject)' == 'true'">enable</Nullable>
 
@@ -39,8 +36,7 @@
         '$(ISBenchmarkProject)' == 'true' OR
         '$(IsSampleProject)' == 'true' OR
         '$(IsMicrobenchmarksProject)' == 'true'"
-      >$(NoWarn);CA1416</NoWarn
-    >
+      >$(NoWarn);CA1416</NoWarn>
 
     <!-- Turn off unused usings warning for multi-targeted projects. Fixing them using ifdefs looks worse than ignoring the warnings. -->
     <NoWarn Condition="'$(TargetFrameworks)' != ''">$(NoWarn);IDE0005</NoWarn>
@@ -50,18 +46,15 @@
       Since we don't have a good way to detect this, we'll use the presence of ns2.0 as a proxy.
      -->
     <NoWarn Condition="'$(_IsSrcProject)' != 'true' OR !$(TargetFrameworks.Contains('netstandard'))"
-      >$(NoWarn);CA2007</NoWarn
-    >
+      >$(NoWarn);CA2007</NoWarn>
 
     <!-- Enable .NET code style analysis during build for src projects. -->
     <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''"
-      >true</EnforceCodeStyleInBuild
-    >
+      >true</EnforceCodeStyleInBuild>
 
     <!-- Enable trimming annotation validation in DI. See https://github.com/dotnet/runtime/blob/main/docs/workflow/trimming/feature-switches.md -->
     <VerifyDependencyInjectionOpenGenericServiceTrimmability Condition=" $(IsTestProject) "
-      >true</VerifyDependencyInjectionOpenGenericServiceTrimmability
-    >
+      >true</VerifyDependencyInjectionOpenGenericServiceTrimmability>
   </PropertyGroup>
 
   <!-- Enable implicit usings for projects that target the default TFM -->

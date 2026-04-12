@@ -2,16 +2,14 @@
   <PropertyGroup>
     <TargetFramework>$(_TargetFrameworkForXHarness)</TargetFramework>
     <TargetFramework Condition="'$(TargetFramework)' == ''"
-      >$(AspNetCoreAppCurrent)</TargetFramework
-    >
+      >$(AspNetCoreAppCurrent)</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <OutputType>Exe</OutputType>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
 
     <DefineConstants Condition="'$(GenevaTelemetry)' == 'true'"
-      >$(DefineConstants);GENEVA_TELEMETRY</DefineConstants
-    >
+      >$(DefineConstants);GENEVA_TELEMETRY</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

@@ -25,17 +25,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class is the base class used for ASP.NET controls that retrieve data from an ASP.NET hierarchical data source control and bind user-interface elements of the control to that data for display. The <see cref="T:System.Web.UI.WebControls.TreeView" /> and <see cref="T:System.Web.UI.WebControls.Menu" /> classes derive from <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />. </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class is the base class used for ASP.NET controls that retrieve data from an ASP.NET hierarchical data source control and bind user-interface elements of the control to that data for display. The <see cref="T:System.Web.UI.WebControls.TreeView" /> and <see cref="T:System.Web.UI.WebControls.Menu" /> classes derive from <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />. </para>
       <para
-        >Page developers do not use the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class directly; instead, they use controls that derive from this class. </para
-      >
+        >Page developers do not use the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class directly; instead, they use controls that derive from this class. </para>
       <para
-        >Controls developers extend this class to create data-bound controls that work with classes that implement the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface and classes that derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> and <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> classes. When deriving a class from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class, override the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method to bind the user-interface elements of your control to data retrieved by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method. In most cases, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method is the only method you will override in your derived class. </para
-      >
+        >Controls developers extend this class to create data-bound controls that work with classes that implement the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface and classes that derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> and <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> classes. When deriving a class from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class, override the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method to bind the user-interface elements of your control to data retrieved by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method. In most cases, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method is the only method you will override in your derived class. </para>
       <para
-        >For ASP.NET 2.0 data-bound controls, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method is the equivalent of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method, and is called to bind data at run time. The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method calls the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> and <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> methods.</para
-      >
+        >For ASP.NET 2.0 data-bound controls, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method is the equivalent of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method, and is called to bind data at run time. The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method calls the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> and <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> methods.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -99,28 +94,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method retrieves a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object from the associated data source control by calling the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" /> method. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method retrieves a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object from the associated data source control by calling the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object that the data-bound control uses to perform data operations.</para
-          >
+            >Retrieves a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object that the data-bound control uses to perform data operations.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object that the data-bound control uses to perform data operations. </para
-          >
+            >The <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object that the data-bound control uses to perform data operations. </para>
         </returns>
         <param name="viewPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hierarchical path of the view to retrieve.</param
-        >
+          />The hierarchical path of the view to retrieve.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -141,20 +132,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method calls the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" /> method internally. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetData(System.String)" /> method calls the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.GetDataSource" /> method internally. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> that the data-bound control is associated with, if any.</para
-          >
+            >Retrieves the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> that the data-bound control is associated with, if any.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.IHierarchicalDataSource" /> instance that represents the data source identified by the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" /> property. </para
-          >
+            >An <see cref="T:System.Web.UI.IHierarchicalDataSource" /> instance that represents the data source identified by the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" /> property. </para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -188,8 +176,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data-bound control maintains a value in view state that indicates whether it is currently bound to data. The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.MarkAsDataBound" /> method sets the value to true.</para
-          >
+            >The data-bound control maintains a value in view state that indicates whether it is currently bound to data. The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.MarkAsDataBound" /> method sets the value to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -212,8 +199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnDataPropertyChanged" /> method is called when the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> or <see cref="P:System.Web.UI.WebControls.HierarchicalDataBoundControl.DataSourceID" /> is changed any time after the page's <see cref="E:System.Web.UI.Control.PreRender" /> event.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnDataPropertyChanged" /> method is called when the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> or <see cref="P:System.Web.UI.WebControls.HierarchicalDataBoundControl.DataSourceID" /> is changed any time after the page's <see cref="E:System.Web.UI.Control.PreRender" /> event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -242,29 +228,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class handles the <see cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" /> event to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true.</para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class handles the <see cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" /> event to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> instance that the data-bound control works with raises the <see cref="E:System.Web.UI.IDataSource.DataSourceChanged" /> event.</para
-          >
+            >Called when the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> instance that the data-bound control works with raises the <see cref="E:System.Web.UI.IDataSource.DataSourceChanged" /> event.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the event, the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> object. </param
-        >
+          />The source of the event, the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> object. </param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -286,8 +268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> handles the Load event to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true if the HTTP request is not a postback.</para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> handles the Load event to set the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true if the HTTP request is not a postback.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -298,8 +279,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> object that contains event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> object that contains event data.</param>
       </Docs>
     </Member>
     <Member MemberName="OnPagePreLoad">
@@ -320,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see cref="T:System.Web.UI.WebControls.Wizard" /> and <see cref="T:System.Web.UI.WebControls.MultiView" /> where the visibility of the control is changed at run time.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" /> sets the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" /> property to true in cases where the HTTP request is a postback and view state is enabled but the data-bound control has not yet been bound. This scenario is common with controls such as <see cref="T:System.Web.UI.WebControls.Wizard" /> and <see cref="T:System.Web.UI.WebControls.MultiView" /> where the visibility of the control is changed at run time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -332,15 +311,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Page" /> that raised the event.</param
-        >
+          />The <see cref="T:System.Web.UI.Page" /> that raised the event.</param>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -360,11 +337,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement this method instead of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method when you derive a data-bound control from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class. Placing your control's data-binding logic in <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> keeps the <see cref="E:System.Web.UI.Control.DataBinding" /> and <see cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" /> events from being raised in the wrong order.</para
-          >
+            >Implement this method instead of the <see cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" /> method when you derive a data-bound control from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class. Placing your control's data-binding logic in <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> keeps the <see cref="E:System.Web.UI.Control.DataBinding" /> and <see cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" /> events from being raised in the wrong order.</para>
           <para
-            >While the base <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class provides no specific implementation for this method, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method is called by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method to bind the values of any user interface controls to the data that is retrieved by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method.</para
-          >
+            >While the base <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class provides no specific implementation for this method, the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformDataBinding" /> method is called by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method to bind the values of any user interface controls to the data that is retrieved by the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -384,8 +359,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method is called, after data is retrieved, to bind data to elements of the data-bound control. Derived types override this method to retrieve data only if the default implementation is not adequate. </para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.PerformSelect" /> method is called, after data is retrieved, to bind data to elements of the data-bound control. Derived types override this method to retrieve data only if the default implementation is not adequate. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -413,8 +387,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.ValidateDataSource(System.Object)" /> method is called only in the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class's mutator (setter) for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property. The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class checks the type of the object that is set for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property to ensure that it is an instance of the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> or <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interfaces.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.ValidateDataSource(System.Object)" /> method is called only in the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class's mutator (setter) for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property. The <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class checks the type of the object that is set for the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property to ensure that it is an instance of the <see cref="T:System.Web.UI.IHierarchicalEnumerable" /> or <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interfaces.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -425,8 +398,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object set to the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property.</param
-        >
+          />An object set to the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

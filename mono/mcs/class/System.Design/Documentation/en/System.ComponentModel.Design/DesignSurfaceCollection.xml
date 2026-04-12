@@ -51,23 +51,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection members to the specified <see cref="T:System.ComponentModel.Design.DesignSurface" /> array beginning at the specified destination index.</para
-          >
+            >Copies the collection members to the specified <see cref="T:System.ComponentModel.Design.DesignSurface" /> array beginning at the specified destination index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy collection members to.</param
-        >
+          />The array to copy collection members to.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination index to begin copying to.</param
-        >
+          />The destination index to begin copying to.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -85,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the total number of design surfaces in the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />.</para
-          >
+            >Gets the total number of design surfaces in the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -108,14 +104,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para
-          >
+            >Returns an enumerator that can iterate through the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -158,29 +152,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" /> method.</para
-          >
+            >For a description of this member, see the <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" /> method.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />.</param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" />.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in <paramref name="array" /> where copying begins.</param
-        >
+          />The index in <paramref name="array" /> where copying begins.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -197,14 +187,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="P:System.Collections.ICollection.Count" /> property.</para
-          >
+            >For a description of this member, see the <see cref="P:System.Collections.ICollection.Count" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -225,14 +213,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property.</para
-          >
+            >For a description of this member, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -253,14 +239,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property.</para
-          >
+            >For a description of this member, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -281,20 +265,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para
-          >
+            >For a description of this member, see the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.ComponentModel.Design.DesignSurfaceCollection" /> instance.</para>
         </returns>
       </Docs>
     </Member>

@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.LockRecursionException" /> is thrown for several reasons, including the following:</para
-      >
+        <see cref="T:System.Threading.LockRecursionException" /> is thrown for several reasons, including the following:</para>
       <list type="bullet">
         <item>
           <para
-            >If a thread tries to enter an instance of <see cref="T:System.Threading.ReaderWriterLockSlim" /> recursively, but the instance does not support recursion.</para
-          >
+            >If a thread tries to enter an instance of <see cref="T:System.Threading.ReaderWriterLockSlim" /> recursively, but the instance does not support recursion.</para>
         </item>
         <item>
           <para
-            >If a thread tries to enter a <see cref="T:System.Threading.ReaderWriterLockSlim" /> instance in write mode or upgradeable mode when the thread initially entered the lock in read mode. This represents a potential deadlock and therefore is not allowed.</para
-          >
+            >If a thread tries to enter a <see cref="T:System.Threading.ReaderWriterLockSlim" /> instance in write mode or upgradeable mode when the thread initially entered the lock in read mode. This represents a potential deadlock and therefore is not allowed.</para>
         </item>
         <item>
           <para>If allowing one more level of recursion would exceed the maximum value for the internal storage counter used to track recursions. This limit is so large that applications should never encounter it.</para>
@@ -61,11 +58,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Recursive read lock acquisitions not allowed in this mode." This message takes the current system culture into account.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Recursive read lock acquisitions not allowed in this mode." This message takes the current system culture into account.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.InsufficientMemoryException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.InsufficientMemoryException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -102,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a system-supplied message that describes the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a system-supplied message that describes the error.</para>
         </summary>
       </Docs>
     </Member>
@@ -124,11 +118,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new exception with the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor must make sure that this string has been localized for the current system culture. </para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new exception with the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor must make sure that this string has been localized for the current system culture. </para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.LockRecursionException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.LockRecursionException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -165,16 +157,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a specified message that describes the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a specified message that describes the error.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the exception. The caller of this constructor must make sure that this string has been localized for the current system culture. </param
-        >
+          />The message that describes the exception. The caller of this constructor must make sure that this string has been localized for the current system culture. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -200,29 +190,25 @@
           <para
             >This constructor is called during deserialization to reconstitute an exception object that is transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data.</param
-        >
+          />The object that holds the serialized object data.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination.</param
-        >
+          />The contextual information about the source or destination.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -246,11 +232,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.LockRecursionException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.LockRecursionException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -287,23 +271,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.LockRecursionException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the exception. The caller of this constructor must make sure that this string has been localized for the current system culture. </param
-        >
+          />The message that describes the exception. The caller of this constructor must make sure that this string has been localized for the current system culture. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that caused the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that caused the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
     </Member>
   </Members>

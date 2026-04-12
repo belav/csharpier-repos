@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can add an XML comment as a child node of an element. You can also add an XML comment to an <see cref="T:System.Xml.Linq.XDocument" /> as a sibling of the root element node.</para
-      >
+        >You can add an XML comment as a child node of an element. You can also add an XML comment to an <see cref="T:System.Xml.Linq.XDocument" /> as a sibling of the root element node.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,16 +43,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" /> class with the specified string content. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" /> class with the specified string content. </para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the contents of the new <see cref="T:System.Xml.Linq.XComment" /> object.</param
-        >
+          />A string that contains the contents of the new <see cref="T:System.Xml.Linq.XComment" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -77,16 +74,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" /> class from an existing comment node. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XComment" /> class from an existing comment node. </para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XComment" /> node to copy from.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XComment" /> node to copy from.</param>
       </Docs>
     </Member>
     <Member MemberName="NodeType">
@@ -110,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para
-          >
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -134,11 +128,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike <see cref="T:System.Xml.Linq.XElement" /> and <see cref="T:System.Xml.Linq.XAttribute" />, you cannot retrieve the contents of a comment by casting it to a string. Instead, you must use this property to retrieve the contents. </para
-          >
+            >Unlike <see cref="T:System.Xml.Linq.XElement" /> and <see cref="T:System.Xml.Linq.XAttribute" />, you cannot retrieve the contents of a comment by casting it to a string. Instead, you must use this property to retrieve the contents. </para>
           <para
-            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -169,8 +161,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para
-          >
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -181,8 +172,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> into which this method will write.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> into which this method will write.</param>
       </Docs>
     </Member>
   </Members>

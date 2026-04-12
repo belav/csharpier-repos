@@ -21,14 +21,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.IO.Pipes.PipeOptions" /> enumeration to specify advanced pipe options.</para
-      >
+        >Use the <see cref="T:System.IO.Pipes.PipeOptions" /> enumeration to specify advanced pipe options.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides options for creating a <see cref="T:System.IO.Pipes.PipeStream" /> object. This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para
-      >
+        >Provides options for creating a <see cref="T:System.IO.Pipes.PipeStream" /> object. This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para>
     </summary>
   </Docs>
   <Members>

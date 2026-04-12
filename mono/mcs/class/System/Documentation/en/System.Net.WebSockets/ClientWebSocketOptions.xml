@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Options to use with a  <see cref="T:System.Net.WebSockets.ClientWebSocket" /> object.</para
-      >
+        >Options to use with a  <see cref="T:System.Net.WebSockets.ClientWebSocket" /> object.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,8 +65,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The WebSocket sub-protocol to add.</param
-        >
+          />The WebSocket sub-protocol to add.</param>
       </Docs>
     </Member>
     <Member MemberName="ClientCertificates">
@@ -220,15 +218,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of the client receive buffer.</param
-        >
+          />The size, in bytes, of the client receive buffer.</param>
         <param name="sendBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of the client send buffer.</param
-        >
+          />The size, in bytes, of the client send buffer.</param>
       </Docs>
     </Member>
     <Member MemberName="SetBuffer">
@@ -263,22 +259,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of the client receive buffer.</param
-        >
+          />The size, in bytes, of the client receive buffer.</param>
         <param name="sendBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of the client send buffer.</param
-        >
+          />The size, in bytes, of the client send buffer.</param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The receive buffer to use.</param
-        >
+          />The receive buffer to use.</param>
       </Docs>
     </Member>
     <Member MemberName="SetRequestHeader">
@@ -312,15 +305,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the HTTP header.</param
-        >
+          />The name of the HTTP header.</param>
         <param name="headerValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the HTTP header.</param
-        >
+          />The value of the HTTP header.</param>
       </Docs>
     </Member>
     <Member MemberName="UseDefaultCredentials">
@@ -339,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Boolean" /> value that indicates if default credentials should be used during WebSocket handshake.</para
-          >
+            >Gets or sets a <see cref="T:System.Boolean" /> value that indicates if default credentials should be used during WebSocket handshake.</para>
         </summary>
       </Docs>
     </Member>

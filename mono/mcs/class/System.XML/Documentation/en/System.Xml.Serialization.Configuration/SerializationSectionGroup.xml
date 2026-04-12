@@ -21,10 +21,8 @@
       <para
         >This class is used to handle the <format type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec"
-            >&lt;system.xml.serialization&gt; Element</a
-          >
-        </format>.</para
-      >
+            >&lt;system.xml.serialization&gt; Element</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.SerializationSectionGroup" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.SerializationSectionGroup" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the <see cref="T:System.DateTime" /> serialization configuration element.</para
-          >
+            >Gets the object that represents the <see cref="T:System.DateTime" /> serialization configuration element.</para>
         </summary>
       </Docs>
     </Member>
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the section that contains configuration elements for the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />.</para
-          >
+            >Gets the object that represents the section that contains configuration elements for the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -123,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that represents the configuration group for the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para
-          >
+            >Gets the object that represents the configuration group for the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para>
         </summary>
       </Docs>
     </Member>

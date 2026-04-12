@@ -8,8 +8,7 @@
   <PropertyGroup>
     <!-- $(RepoRoot) is normally set globally and Arcade overrides it to ensure a trailing slash. -->
     <RepoRoot Condition=" '$(RepoRoot)' == '' OR !HasTrailingSlash('$(RepoRoot)') "
-      >$(MSBuildThisFileDirectory)</RepoRoot
-    >
+      >$(MSBuildThisFileDirectory)</RepoRoot>
 
     <RepositoryUrl>https://github.com/dotnet/aspnetcore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -29,57 +28,45 @@
       Condition=" $(MSBuildProjectName.EndsWith('.Performance')) OR
         $(RepoRelativeProjectDir.Contains('perf')) OR
         $(RepoRelativeProjectDir.Contains('benchmarkapps')) "
-      >true</IsBenchmarkProject
-    >
+      >true</IsBenchmarkProject>
     <IsMicrobenchmarksProject Condition=" $(MSBuildProjectName.EndsWith('.Microbenchmarks')) "
-      >true</IsMicrobenchmarksProject
-    >
+      >true</IsMicrobenchmarksProject>
     <IsSpecificationTestProject Condition="$(MSBuildProjectName.EndsWith('.Specification.Tests'))"
-      >true</IsSpecificationTestProject
-    >
+      >true</IsSpecificationTestProject>
     <IsUnitTestProject
       Condition=" '$(IsUnitTestProject)' == '' AND
         '$(IsSpecificationTestProject)' != 'true' AND
         ( $(MSBuildProjectName.EndsWith('Tests')) OR
           $(MSBuildProjectName.EndsWith('.Test')) OR
           $(MSBuildProjectName.EndsWith('.FunctionalTest')) ) "
-      >true</IsUnitTestProject
-    >
+      >true</IsUnitTestProject>
     <IsUnitTestProject Condition=" '$(IsUnitTestProject)' == '' ">false</IsUnitTestProject>
     <IsTrimmingTestProject Condition="$(MSBuildProjectName.EndsWith('.TrimmingTests'))"
-      >true</IsTrimmingTestProject
-    >
+      >true</IsTrimmingTestProject>
     <IsNativeAotTestProject Condition="$(MSBuildProjectName.EndsWith('.NativeAotTests'))"
-      >true</IsNativeAotTestProject
-    >
+      >true</IsNativeAotTestProject>
     <IsPublishedAppTestProject
       Condition="'$(IsTrimmingTestProject)' == 'true' or '$(IsNativeAotTestProject)' == 'true'"
-      >true</IsPublishedAppTestProject
-    >
+      >true</IsPublishedAppTestProject>
     <IsTestAssetProject
       Condition=" $(RepoRelativeProjectDir.Contains('testassets')) OR $(MSBuildProjectName.Contains('TestCommon'))"
-      >true</IsTestAssetProject
-    >
+      >true</IsTestAssetProject>
     <IsProjectTemplateProject
       Condition=" ($(RepoRelativeProjectDir.Contains('ProjectTemplates')) OR $(MSBuildProjectName.Contains('ProjectTemplates')) ) AND
         '$(IsUnitTestProject)' != 'true' AND
         '$(IsTestAssetProject)' != 'true' "
-      >true</IsProjectTemplateProject
-    >
+      >true</IsProjectTemplateProject>
     <IsSampleProject Condition=" $(RepoRelativeProjectDir.ToUpperInvariant().Contains('SAMPLE')) "
-      >true</IsSampleProject
-    >
+      >true</IsSampleProject>
     <IsAnalyzersProject Condition="$(MSBuildProjectName.EndsWith('.Analyzers'))"
-      >true</IsAnalyzersProject
-    >
+      >true</IsAnalyzersProject>
     <IsShipping
       Condition=" '$(IsSampleProject)' == 'true' OR
         '$(IsTestAssetProject)' == 'true' OR
         '$(IsBenchmarkProject)' == 'true' OR
         '$(IsPublishedAppTestProject)' == 'true' OR
         $(IsUnitTestProject) "
-      >false</IsShipping
-    >
+      >false</IsShipping>
 
     <!--
       Following logic mimics core-setup approach as well as
@@ -156,8 +143,7 @@
 
     <!-- For local builds, don't make missing XML docs a fatal build error, but still surface so we have visibility into undocumented APIs. -->
     <WarningsNotAsErrors Condition=" '$(ContinuousIntegrationBuild)' != 'true' "
-      >$(WarningsNotAsErrors);CS1591</WarningsNotAsErrors
-    >
+      >$(WarningsNotAsErrors);CS1591</WarningsNotAsErrors>
 
     <!-- xUnit1004 = warns about skipped tests. Make this a non-fatal build warning. -->
     <WarningsNotAsErrors>$(WarningsNotAsErrors);xUnit1004</WarningsNotAsErrors>
@@ -199,20 +185,17 @@
          The list is a semicolon separated list of RIDs. Whitespace may not be added to the property. -->
     <SupportedRuntimeIdentifiers>win-x64;win-x86;win-arm;win-arm64;osx-x64;osx-arm64;linux-musl-x64;linux-musl-arm;linux-musl-arm64;linux-x64;linux-arm;linux-arm64;freebsd-x64</SupportedRuntimeIdentifiers>
     <SupportedRuntimeIdentifiers Condition=" '$(PortableBuild)' == 'false' "
-      >$(SupportedRuntimeIdentifiers);$(TargetRuntimeIdentifier)</SupportedRuntimeIdentifiers
-    >
+      >$(SupportedRuntimeIdentifiers);$(TargetRuntimeIdentifier)</SupportedRuntimeIdentifiers>
 
     <!-- Playwright provides binaries for Windows (x86 and x64), macOS (x64) and Linux (x64, non musl). We can't use it on other architectures. -->
     <IsPlaywrightAvailable
       Condition="'$(TargetOsName)' == 'linux-musl' OR ('$(TargetArchitecture)' != 'x86' AND '$(TargetArchitecture)' != 'x64')"
-      >false</IsPlaywrightAvailable
-    >
+      >false</IsPlaywrightAvailable>
     <IsPlaywrightAvailable Condition="'$(IsPlaywrightAvailable)' == ''">true</IsPlaywrightAvailable>
 
     <!-- Make error messages clickable in VS Code's console -->
     <GenerateFullPaths Condition="'$(VSCODE_CWD)' != '' OR '$(TERM_PROGRAM)' == 'vscode'"
-      >true</GenerateFullPaths
-    >
+      >true</GenerateFullPaths>
 
     <!-- Fixes a common error in targets implementing a NoBuild mode. -->
     <BuildProjectReferences Condition=" '$(NoBuild)' == 'true' ">false</BuildProjectReferences>
@@ -245,8 +228,7 @@
       Source-build doesn't run tests, so the property is simply conditioned out.
     -->
     <NetCoreTargetingPackRoot Condition="'$(DotNetBuildFromSource)' != 'true'"
-      >$(LocalDotNetRoot)packs\</NetCoreTargetingPackRoot
-    >
+      >$(LocalDotNetRoot)packs\</NetCoreTargetingPackRoot>
   </PropertyGroup>
 
   <Import
@@ -261,16 +243,14 @@
     -->
     <DeterministicSourcePaths
       Condition="'$(IsSampleProject)' == 'true' OR '$(IsTestAssetProject)' == 'true'"
-      >false</DeterministicSourcePaths
-    >
+      >false</DeterministicSourcePaths>
     <!-- Projects which reference Microsoft.AspNetCore.Mvc.Testing should import this targets file to ensure dependency .deps.json files are copied into test output. -->
     <MvcTestingTargets>$(MSBuildThisFileDirectory)src\Mvc\Mvc.Testing\src\Microsoft.AspNetCore.Mvc.Testing.targets</MvcTestingTargets>
     <_MvcTestingTasksAssembly>$(ArtifactsBinDir)\Microsoft.AspNetCore.Mvc.Testing.Tasks\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Mvc.Testing.Tasks.dll</_MvcTestingTasksAssembly>
     <!-- IIS native projects can only be built on Windows for x86/x64/ARM64. -->
     <UseIisNativeAssets
       Condition=" '$(TargetOsName)' == 'win' AND ('$(TargetArchitecture)' == 'x86' OR '$(TargetArchitecture)' == 'x64' OR '$(TargetArchitecture)' == 'ARM64') "
-      >true</UseIisNativeAssets
-    >
+      >true</UseIisNativeAssets>
     <!-- This property is shared by several projects to layout the AspNetCore.App targeting pack for installers -->
     <TargetingPackLayoutRoot>$(ArtifactsObjDir)TargetingPack.Layout\$(Configuration)\</TargetingPackLayoutRoot>
     <!-- This property is shared by several projects to layout the AspNetCore.App shared framework for installers -->

@@ -13,9 +13,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>Mono.Security.Cryptography.DiffieHellman</BaseTypeName>
   </Base>
@@ -53,23 +51,18 @@
       </Parameters>
       <Docs>
         <param name="p"
-          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
-        >
+          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
         <param name="g"
-          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
-        >
+          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
         <param name="x"
-          >The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b>Nothing</b> in Visual Basic), a secret value of the default size will be generated.</param
-        >
+          >The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b>Nothing</b> in Visual Basic), a secret value of the default size will be generated.</param>
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
         <remarks>
           <para
-            >An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para
-          >
+            >An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para>
           <para
             >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para
-          >
+</para>
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -91,26 +84,20 @@
       </Parameters>
       <Docs>
         <param name="p"
-          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
-        >
+          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
         <param name="g"
-          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
-        >
+          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
         <param name="l"
-          >The length, in bits, of the private value. If 0 is specified, the default value will be used.</param
-        >
+          >The length, in bits, of the private value. If 0 is specified, the default value will be used.</param>
         <summary>The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</summary>
         <remarks>
           <para
-            >An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para
-          >
+            >An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para>
           <para
-            >An <see cref="T:System.ArgumentException" /> if <paramref name="l" /> is invalid.</para
-          >
+            >An <see cref="T:System.ArgumentException" /> if <paramref name="l" /> is invalid.</para>
           <para
             >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para
-          >
+</para>
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -133,17 +120,14 @@
       <Docs>
         <param name="bitLength">The length, in bits, of the public P parameter.</param>
         <param name="l"
-          >The length, in bits, of the secret value X. This parameter can be set to 0 to use the default size.</param
-        >
+          >The length, in bits, of the secret value X. This parameter can be set to 0 to use the default size.</param>
         <param name="method"
-          >One of the <see cref="T:Mono.Security.Cryptography.DHKeyGeneration" /> values.</param
-        >
+          >One of the <see cref="T:Mono.Security.Cryptography.DHKeyGeneration" /> values.</param>
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
         <remarks>
           <para>The larger the bit length, the more secure the algorithm is. The default is 1024 bits. The minimum bit length is 128 bits.</para>
           <para
-            >An <see cref="T:System.ArgumentException" /> is thrown if the specified bit length is invalid.</para
-          >
+            >An <see cref="T:System.ArgumentException" /> is thrown if the specified bit length is invalid.</para>
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -224,8 +208,7 @@
       </Parameters>
       <Docs>
         <param name="includePrivateParameters">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param
-        >
+          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
         <summary>Exports the DH parameters.</summary>
         <returns>The parameters for DiffieHellman.</returns>
         <remarks>To be added</remarks>
@@ -267,8 +250,7 @@
         <param name="parameters">The parameters for DiffieHellman.</param>
         <summary>Imports the specified DH parameters.</summary>
         <remarks
-          >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="P" /> or <paramref name="G" /> is a null reference (<b>Nothing</b> in Visual Basic) -or- <paramref name="P" /> is not a prime number.</remarks
-        >
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="P" /> or <paramref name="G" /> is a null reference (<b>Nothing</b> in Visual Basic) -or- <paramref name="P" /> is not a prime number.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -23,8 +23,7 @@
 
     <PropertyGroup>
       <UserRequestedHelp Condition="'%(InvalidSpecifiedSubsetName.Identity)' == 'help'"
-        >true</UserRequestedHelp
-      >
+        >true</UserRequestedHelp>
     </PropertyGroup>
   </Target>
 

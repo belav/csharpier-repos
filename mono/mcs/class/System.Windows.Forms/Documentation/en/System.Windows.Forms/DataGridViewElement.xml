@@ -14,14 +14,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework supplies two specialized classes that derive from <see cref="T:System.Windows.Forms.DataGridViewElement" />: <see cref="T:System.Windows.Forms.DataGridViewCell" />, which represents individual elements, and <see cref="T:System.Windows.Forms.DataGridViewBand" />, which represents a series of grouped subelements.</para
-      >
+        >The .NET Framework supplies two specialized classes that derive from <see cref="T:System.Windows.Forms.DataGridViewElement" />: <see cref="T:System.Windows.Forms.DataGridViewCell" />, which represents individual elements, and <see cref="T:System.Windows.Forms.DataGridViewBand" />, which represents a series of grouped subelements.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class for elements of a <see cref="T:System.Windows.Forms.DataGridView" /> control.</para
-      >
+        >Provides the base class for elements of a <see cref="T:System.Windows.Forms.DataGridView" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -34,14 +32,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" /> property to null.</para
-          >
+            >This constructor sets the <see cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" /> property to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewElement" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Windows.Forms.DataGridView" /> control associated with this element.</para
-          >
+            >Gets the <see cref="T:System.Windows.Forms.DataGridView" /> control associated with this element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the element is associated with a different <see cref="T:System.Windows.Forms.DataGridView" />.</para
-          >
+            >Called when the element is associated with a different <see cref="T:System.Windows.Forms.DataGridView" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,16 +113,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellClick" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -152,16 +144,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentClick" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -185,16 +175,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -218,16 +206,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -251,16 +237,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridView.DataError" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -290,8 +274,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.MouseEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -312,8 +295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The states specified by the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values are enforced by the UI but may be programmatically overruled.</para
-          >
+            >The states specified by the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values are enforced by the UI but may be programmatically overruled.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

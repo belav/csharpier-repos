@@ -24,16 +24,14 @@
       <para
         >This class corresponds to the <format type="text/html">
           <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for System.Net</a>
-        </format> configuration element.</para
-      >
+        </format> configuration element.</para>
       <para>This class is used to access information about SMTP settings for the local computer.</para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Initializes a new instance of the <see cref="T:System.Net.Configuration.MailSettingsSectionGroup" /> class.</para
-      >
+        >Initializes a new instance of the <see cref="T:System.Net.Configuration.MailSettingsSectionGroup" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.MailSettingsSectionGroup" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.MailSettingsSectionGroup" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -83,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Mail settings affect the behavior of the <see cref="T:System.Net.Mail.SmtpClient" /> class.</para
-          >
+            >Mail settings affect the behavior of the <see cref="T:System.Net.Mail.SmtpClient" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -76,16 +75,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> class from an existing element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> class from an existing element.</para>
         </summary>
         <param name="elementToBeCloned">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> used to initialize the new element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.PrivacyNoticeBindingElement" /> used to initialize the new element.</param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -114,8 +111,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.BindingElement" /> that is a copy of the current element.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.BindingElement" /> that is a copy of the current element.</para>
         </returns>
       </Docs>
     </Member>
@@ -149,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls <see cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" /> on the next binding element in the binding context.</para
-          >
+            >Calls <see cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" /> on the next binding element in the binding context.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -165,15 +160,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the current binding element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the current binding element.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The interface whose support is being tested.</typeparam
-        >
+          />The interface whose support is being tested.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IPolicyExportExtension.ExportPolicy">
@@ -207,15 +200,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that contains the binding assertions and elements associated with the policy.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that contains the binding assertions and elements associated with the policy.</param>
       </Docs>
     </Member>
     <Member MemberName="Url">

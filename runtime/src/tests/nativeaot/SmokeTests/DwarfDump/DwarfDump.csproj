@@ -6,8 +6,7 @@
     <CLRTestTargetUnsupported Condition="'$(TargetOS)' != 'linux'">true</CLRTestTargetUnsupported>
     <!-- There are a lot more symbols on sanitized builds, so this test times out -->
     <CLRTestTargetUnsupported Condition="'$(EnableNativeSanitizers)' != ''"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <StripSymbols>false</StripSymbols>
   </PropertyGroup>
 

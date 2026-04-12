@@ -37,17 +37,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A writing system is the collection of scripts and orthographic rules required to represent a language as text. The <see cref="T:System.Globalization.TextInfo" /> class represents a writing system.  </para
-      >
+        >A writing system is the collection of scripts and orthographic rules required to represent a language as text. The <see cref="T:System.Globalization.TextInfo" /> class represents a writing system.  </para>
       <para
-        >The application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property to obtain the <see cref="T:System.Globalization.TextInfo" /> object for a particular <see cref="T:System.Globalization.CultureInfo" /> object. If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property of the object returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to ensure that the behavior of the operation is consistent regardless of the operating system culture settings.  </para
-      >
+        >The application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property to obtain the <see cref="T:System.Globalization.TextInfo" /> object for a particular <see cref="T:System.Globalization.CultureInfo" /> object. If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.TextInfo" /> property of the object returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> property to ensure that the behavior of the operation is consistent regardless of the operating system culture settings.  </para>
       <format type="text/html">
         <h2>Overrides</h2>
       </format>
       <para
-        >The user might use the regional and language options portion of Control Panel to override the values associated with the current culture of Windows. For example, the user might choose to display the date in a different format or to use a currency other than the default for the culture. If the <see cref="P:System.Globalization.CultureInfo.UseUserOverride" /> property is set to true, the property values of the objects returned by the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />, <see cref="P:System.Globalization.CultureInfo.NumberFormat" />, and <see cref="P:System.Globalization.CultureInfo.TextInfo" /> properties are also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see cref="T:System.Globalization.CultureInfo" />, for example, if the selected calendar is not one of the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />, the results of the methods and the values of the properties are undefined.</para
-      >
+        >The user might use the regional and language options portion of Control Panel to override the values associated with the current culture of Windows. For example, the user might choose to display the date in a different format or to use a currency other than the default for the culture. If the <see cref="P:System.Globalization.CultureInfo.UseUserOverride" /> property is set to true, the property values of the objects returned by the <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />, <see cref="P:System.Globalization.CultureInfo.NumberFormat" />, and <see cref="P:System.Globalization.CultureInfo.TextInfo" /> properties are also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see cref="T:System.Globalization.CultureInfo" />, for example, if the selected calendar is not one of the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />, the results of the methods and the values of the properties are undefined.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the American National Standards Institute (ANSI) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >Gets the American National Standards Institute (ANSI) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -107,14 +103,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >Creates a new object that is a copy of the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see cref="T:System.Object" /> that is the memberwise clone of the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >A new instance of <see cref="T:System.Object" /> that is the memberwise clone of the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -140,20 +134,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Globalization.TextInfo" /> object is created from a specific culture, and the <see cref="P:System.Globalization.TextInfo.CultureName" /> property returns the name of that culture. </para
-          >
+            >A <see cref="T:System.Globalization.TextInfo" /> object is created from a specific culture, and the <see cref="P:System.Globalization.TextInfo.CultureName" /> property returns the name of that culture. </para>
           <para
-            >The <see cref="P:System.Globalization.TextInfo.CultureName" /> property always reflects a specific culture rather than a neutral culture. If <see cref="P:System.Globalization.CultureInfo.Name" /> has a neutral culture as its value, then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> has as its value an arbitrary specific culture that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "en" for the English neutral culture, but the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> property might return "en-US" for the English (United States) culture. If the <see cref="T:System.Globalization.TextInfo" /> object is associated with a specific culture instead of a neutral culture, the value of its <see cref="P:System.Globalization.TextInfo.CultureName" /> property is always identical to the <see cref="P:System.Globalization.CultureInfo.Name" /> property value of its associated <see cref="T:System.Globalization.CultureInfo" /> object. </para
-          >
+            >The <see cref="P:System.Globalization.TextInfo.CultureName" /> property always reflects a specific culture rather than a neutral culture. If <see cref="P:System.Globalization.CultureInfo.Name" /> has a neutral culture as its value, then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> has as its value an arbitrary specific culture that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.Name" /> property returns "en" for the English neutral culture, but the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> property might return "en-US" for the English (United States) culture. If the <see cref="T:System.Globalization.TextInfo" /> object is associated with a specific culture instead of a neutral culture, the value of its <see cref="P:System.Globalization.TextInfo.CultureName" /> property is always identical to the <see cref="P:System.Globalization.CultureInfo.Name" /> property value of its associated <see cref="T:System.Globalization.CultureInfo" /> object. </para>
           <para
-            >Similarly, the <see cref="P:System.Globalization.TextInfo.CultureName" /> property never reflects a particular sort. It always corresponds to a default sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.Name" /> is es-ES_tradnl (Spanish with the traditional sort order) then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> is es-ES (Spanish with the default international sort order).</para
-          >
+            >Similarly, the <see cref="P:System.Globalization.TextInfo.CultureName" /> property never reflects a particular sort. It always corresponds to a default sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.Name" /> is es-ES_tradnl (Spanish with the traditional sort order) then the corresponding <see cref="P:System.Globalization.TextInfo.CultureName" /> is es-ES (Spanish with the default international sort order).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the culture associated with the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >Gets the name of the culture associated with the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -175,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Extended Binary Coded Decimal Interchange Code (EBCDIC) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >Gets the Extended Binary Coded Decimal Interchange Code (EBCDIC) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -206,22 +195,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object represents the same writing system as the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >Determines whether the specified object represents the same writing system as the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> represents the same writing system as the current <see cref="T:System.Globalization.TextInfo" />; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> represents the same writing system as the current <see cref="T:System.Globalization.TextInfo" />; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current <see cref="T:System.Globalization.TextInfo" />. </param
-        >
+          />The object to compare with the current <see cref="T:System.Globalization.TextInfo" />. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -245,14 +231,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method overrides <see cref="M:System.Object.GetHashCode" />.</para>
           <para
-            >This method generates the same hash code for two objects that are equal according to the <see cref="M:System.Globalization.TextInfo.Equals(System.Object)" /> method.</para
-          >
+            >This method generates the same hash code for two objects that are equal according to the <see cref="M:System.Globalization.TextInfo.Equals(System.Object)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the current <see cref="T:System.Globalization.TextInfo" />, suitable for hashing algorithms and data structures, such as a hash table.</para
-          >
+            >Serves as a hash function for the current <see cref="T:System.Globalization.TextInfo" />, suitable for hashing algorithms and data structures, such as a hash table.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,14 +266,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="P:System.Globalization.TextInfo.IsReadOnly" /> property is true, the application cannot change any of the properties of the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >If the <see cref="P:System.Globalization.TextInfo.IsReadOnly" /> property is true, the application cannot change any of the properties of the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see cref="T:System.Globalization.TextInfo" /> object is read-only.</para
-          >
+            >Gets a value indicating whether the current <see cref="T:System.Globalization.TextInfo" /> object is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -315,14 +297,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Globalization.TextInfo.IsRightToLeft" /> property indicates the dominant direction of written text and the relative position of user interface elements such as buttons and scroll bars.</para
-          >
+            >The <see cref="P:System.Globalization.TextInfo.IsRightToLeft" /> property indicates the dominant direction of written text and the relative position of user interface elements such as buttons and scroll bars.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see cref="T:System.Globalization.TextInfo" /> object represents a writing system where text flows from right to left.</para
-          >
+            >Gets a value indicating whether the current <see cref="T:System.Globalization.TextInfo" /> object represents a writing system where text flows from right to left.</para>
         </summary>
       </Docs>
     </Member>
@@ -350,25 +330,19 @@
           <para
             >Certain predefined culture names and identifiers are accepted and used by this and other classes in the <see cref="N:System.Globalization" /> namespace, as well as the Windows API. The detailed culture information is defined in the <see
               cref="../../../../Users/a-bewilk/Documents/~tmp/NLS%20information%20page%20at%20the%20Go%20Global%20Developer%20Center"
-              >NLS information page at the Go Global Developer Center</see
-            >
+              >NLS information page at the Go Global Developer Center</see>
             <see cref=""> (</see>
             <see cref="http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx"
-              >http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx</see
-            >.</para
-          >
+              >http://msdn.microsoft.com/en-us/goglobal/bb896001.aspx</see>.</para>
           <para
-            >The <see cref="P:System.Globalization.TextInfo.LCID" /> property always reflects a specific culture identifier instead of a neutral culture identifier. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to a neutral culture identifier, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> has as its value an arbitrary specific culture identifier that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.LCID" /> property returns 0x0009 for the English neutral culture, named "en". However, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> property might return 0x0409 for the English (United States) culture, named en-US. </para
-          >
+            >The <see cref="P:System.Globalization.TextInfo.LCID" /> property always reflects a specific culture identifier instead of a neutral culture identifier. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to a neutral culture identifier, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> has as its value an arbitrary specific culture identifier that uses the same language. For example, the <see cref="P:System.Globalization.CultureInfo.LCID" /> property returns 0x0009 for the English neutral culture, named "en". However, the corresponding <see cref="P:System.Globalization.TextInfo.LCID" /> property might return 0x0409 for the English (United States) culture, named en-US. </para>
           <para
-            >Similarly, the <see cref="P:System.Globalization.TextInfo.LCID" /> property always corresponds to a default sort order, and never reflects a specific sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to "0x040A" (Spanish with the traditional sort order), the corresponding <see cref="P:System.Globalization.TextInfo.LCID" />  value is "0x0C0A" (Spanish with the default international sort order). </para
-          >
+            >Similarly, the <see cref="P:System.Globalization.TextInfo.LCID" /> property always corresponds to a default sort order, and never reflects a specific sort order. For example, the default sort order for Spanish (Spain) is the international sort order. If <see cref="P:System.Globalization.CultureInfo.LCID" /> is set to "0x040A" (Spanish with the traditional sort order), the corresponding <see cref="P:System.Globalization.TextInfo.LCID" />  value is "0x0C0A" (Spanish with the default international sort order). </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the culture identifier for the culture associated with the current <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >Gets the culture identifier for the culture associated with the current <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -416,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Macintosh code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >Gets the Macintosh code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -439,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the original equipment manufacturer (OEM) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >Gets the original equipment manufacturer (OEM) code page used by the writing system represented by the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -475,26 +447,22 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a read-only version of the specified <see cref="T:System.Globalization.TextInfo" /> object.</para
-          >
+            >Returns a read-only version of the specified <see cref="T:System.Globalization.TextInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Globalization.TextInfo" /> object specified by the <paramref name="textInfo" /> parameter, if <paramref name="textInfo" /> is read-only.</para
-          >
+            >The <see cref="T:System.Globalization.TextInfo" /> object specified by the <paramref name="textInfo" /> parameter, if <paramref name="textInfo" /> is read-only.</para>
           <para>-or-</para>
           <para
-            >A read-only memberwise clone of the <see cref="T:System.Globalization.TextInfo" /> object specified by <paramref name="textInfo" />, if <paramref name="textInfo" /> is not read-only.</para
-          >
+            >A read-only memberwise clone of the <see cref="T:System.Globalization.TextInfo" /> object specified by <paramref name="textInfo" />, if <paramref name="textInfo" /> is not read-only.</para>
         </returns>
         <param name="textInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.TextInfo" /> object.</param
-        >
+          />A <see cref="T:System.Globalization.TextInfo" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IDeserializationCallback.OnDeserialization">
@@ -529,8 +497,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event. </param
-        >
+          />The source of the deserialization event. </param>
       </Docs>
     </Member>
     <Member MemberName="ToLower">
@@ -556,11 +523,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Casing semantics depend on the culture in use. For the invariant culture, the casing semantics are not culture-sensitive. For a specific culture, the casing semantics are sensitive to that culture.</para>
           <para
-            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
-          >
+            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para>
           <para
-            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para
-          >
+            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -575,8 +540,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to convert to lowercase. </param
-        >
+          />The character to convert to lowercase. </param>
       </Docs>
     </Member>
     <Member MemberName="ToLower">
@@ -603,11 +567,9 @@
           <para>The returned string might differ in length from the input string. For more information on casing, refer to the Unicode Technical Report #21 "Case Mappings," published by the Unicode Consortium (http://www.unicode.org). The current implementation preserves the length of the string. However, this behavior is not guaranteed and could change in future implementations.</para>
           <para>Casing semantics depend on the culture in use. For the invariant culture, the casing semantics are not culture-sensitive. For a specific culture, the casing semantics are sensitive to that culture.</para>
           <para
-            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
-          >
+            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para>
           <para
-            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para
-          >
+            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -622,8 +584,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to lowercase. </param
-        >
+          />The string to convert to lowercase. </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -650,14 +611,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see cref="T:System.Globalization.TextInfo" />.</para
-          >
+            >A string that represents the current <see cref="T:System.Globalization.TextInfo" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -744,11 +703,9 @@
             </item>
           </list>
           <para
-            >As illustrated above, the <see cref="M:System.Globalization.TextInfo.ToTitleCase(System.String)" /> method provides an arbitrary casing behavior which is not necessarily linguistically correct. A linguistically correct solution would require additional rules, and the current algorithm is somewhat simpler and faster. We reserve the right to make this API slower in the future.</para
-          >
+            >As illustrated above, the <see cref="M:System.Globalization.TextInfo.ToTitleCase(System.String)" /> method provides an arbitrary casing behavior which is not necessarily linguistically correct. A linguistically correct solution would require additional rules, and the current algorithm is somewhat simpler and faster. We reserve the right to make this API slower in the future.</para>
           <para
-            >The current implementation of the <see cref="M:System.Globalization.TextInfo.ToTitleCase(System.String)" /> method yields an output string that is the same length as the input string. However, this behavior is not guaranteed and could change in a future implementation.</para
-          >
+            >The current implementation of the <see cref="M:System.Globalization.TextInfo.ToTitleCase(System.String)" /> method yields an output string that is the same length as the input string. However, this behavior is not guaranteed and could change in a future implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -763,8 +720,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to title case. </param
-        >
+          />The string to convert to title case. </param>
       </Docs>
     </Member>
     <Member MemberName="ToUpper">
@@ -790,11 +746,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Casing semantics depend on the culture in use. For the invariant culture, the casing semantics are not culture-sensitive. For a specific culture, the casing semantics are sensitive to that culture.</para>
           <para
-            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
-          >
+            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para>
           <para
-            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para
-          >
+            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -809,8 +763,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to convert to uppercase. </param
-        >
+          />The character to convert to uppercase. </param>
       </Docs>
     </Member>
     <Member MemberName="ToUpper">
@@ -837,11 +790,9 @@
           <para>The returned string might differ in length from the input string. For more information on casing, refer to the Unicode Technical Report #21 "Case Mappings," published by the Unicode Consortium (http://www.unicode.org). The current implementation preserves the length of the string. However, this behavior is not guaranteed and could change in future implementations.</para>
           <para>Casing semantics depend on the culture in use. For the invariant culture, the casing semantics are not culture-sensitive. For a specific culture, the casing semantics are sensitive to that culture.</para>
           <para
-            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para
-          >
+            >If a security decision depends on a string comparison or a case-change operation, the application should use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" /> to ensure that the behavior is consistent regardless of the culture settings of the system. However, the invariant culture must be used only by processes that require culture-independent results, such as system services. Otherwise, it produces results that might be linguistically incorrect or culturally inappropriate.</para>
           <para
-            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para
-          >
+            >For more information on cultures, see <see cref="T:System.Globalization.CultureInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -856,8 +807,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to convert to uppercase. </param
-        >
+          />The string to convert to uppercase. </param>
       </Docs>
     </Member>
   </Members>

@@ -11,31 +11,25 @@
     <!-- set this when provisioning emsdk on CI -->
     <EMSDK_PATH
       Condition="'$(EMSDK_PATH)' == '' and '$(ContinuousIntegrationBuild)' == 'true' and '$(MonoProjectRoot)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(MonoProjectRoot), 'wasm', 'emsdk'))</EMSDK_PATH
-    >
+      >$([MSBuild]::NormalizeDirectory($(MonoProjectRoot), 'wasm', 'emsdk'))</EMSDK_PATH>
 
     <!--
       - For regular library tests, it will use the symbols file from the runtime pack.
       - for AOT library tests, we use WasmNativeStrip=false, so we already have symbols
     -->
     <WasmNativeStrip Condition="'$(WasmNativeStrip)' == '' and '$(RunAOTCompilation)' == 'true'"
-      >false</WasmNativeStrip
-    >
+      >false</WasmNativeStrip>
     <WasmEmitSymbolMap Condition="'$(WasmEmitSymbolMap)' == ''">true</WasmEmitSymbolMap>
 
     <_WasmMainJSFileName Condition="'$(WasmMainJSPath)' != ''"
-      >$([System.IO.Path]::GetFileName('$(WasmMainJSPath)'))</_WasmMainJSFileName
-    >
+      >$([System.IO.Path]::GetFileName('$(WasmMainJSPath)'))</_WasmMainJSFileName>
     <_WasmStrictVersionMatch Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-      >true</_WasmStrictVersionMatch
-    >
+      >true</_WasmStrictVersionMatch>
     <WasmIgnoreNet6WorkloadInstallErrors Condition="'$(WasmIgnoreNet6WorkloadInstallErrors)' == ''"
-      >true</WasmIgnoreNet6WorkloadInstallErrors
-    >
+      >true</WasmIgnoreNet6WorkloadInstallErrors>
     <WasmIgnoreNet6WorkloadInstallErrors
       Condition="'$(WasmIgnoreNet6WorkloadInstallErrors)' != 'true'"
-      >false</WasmIgnoreNet6WorkloadInstallErrors
-    >
+      >false</WasmIgnoreNet6WorkloadInstallErrors>
     <!--<InstallWorkloadUsingArtifactsDependsOn>_GetWorkloadsToInstall;$(InstallWorkloadUsingArtifactsDependsOn)</InstallWorkloadUsingArtifactsDependsOn>-->
     <GetWorkloadInputsDependsOn>_GetWorkloadsToInstall;$(GetWorkloadInputsDependsOn)</GetWorkloadInputsDependsOn>
     <!-- '/.dockerenv' - is to check if this is running in a codespace -->
@@ -43,27 +37,22 @@
       Condition="'$(InstallChromeForTests)' == '' and
                                         ('$(ContinuousIntegrationBuild)' != 'true' or Exists('/.dockerenv')) and
                                         '$(Scenario)' == 'WasmTestOnBrowser'"
-      >true</InstallChromeForTests
-    >
+      >true</InstallChromeForTests>
     <InstallV8ForTests
       Condition="'$(InstallV8ForTests)' == '' and
                                         ('$(ContinuousIntegrationBuild)' == 'true' or Exists('/.dockerenv')) and
                                         ($([MSBuild]::IsOSPlatform('windows')) or $([MSBuild]::IsOSPlatform('linux')))"
-      >true</InstallV8ForTests
-    >
+      >true</InstallV8ForTests>
 
     <GetNuGetsToBuildForWorkloadTestingDependsOn>_GetRuntimePackNuGetsToBuild;_GetNugetsForAOT;$(GetNuGetsToBuildForWorkloadTestingDependsOn)</GetNuGetsToBuildForWorkloadTestingDependsOn>
     <_BundleAOTTestWasmAppForHelixDependsOn>$(_BundleAOTTestWasmAppForHelixDependsOn);PrepareForWasmBuildApp;_PrepareForAOTOnHelix</_BundleAOTTestWasmAppForHelixDependsOn>
     <WasmEnableLegacyJsInterop Condition="'$(WasmEnableLegacyJsInterop)' == ''"
-      >true</WasmEnableLegacyJsInterop
-    >
+      >true</WasmEnableLegacyJsInterop>
     <UseSystemResourceKeys Condition="'$(UseSystemResourceKeys)' == ''"
-      >false</UseSystemResourceKeys
-    >
+      >false</UseSystemResourceKeys>
     <EventSourceSupport Condition="'$(EventSourceSupport)' == ''">true</EventSourceSupport>
     <NullabilityInfoContextSupport Condition="'$(NullabilityInfoContextSupport)' == ''"
-      >true</NullabilityInfoContextSupport
-    >
+      >true</NullabilityInfoContextSupport>
   </PropertyGroup>
 
   <!-- We expect WASM users to indicate they would like to have bigger download size by adding WasmIncludeFullIcuData, -->
@@ -86,8 +75,7 @@
       So, set those parameters explicitly here.
       -->
     <_ExtraTrimmerArgs Condition="'$(WasmEnableLegacyJsInterop)' == 'false'"
-      >$(_ExtraTrimmerArgs) --substitutions &quot;$(MonoProjectRoot)\wasm\build\ILLink.Substitutions.LegacyJsInterop.xml&quot;</_ExtraTrimmerArgs
-    >
+      >$(_ExtraTrimmerArgs) --substitutions &quot;$(MonoProjectRoot)\wasm\build\ILLink.Substitutions.LegacyJsInterop.xml&quot;</_ExtraTrimmerArgs>
   </PropertyGroup>
 
   <!-- On CI this is installed as part of pretest, but it should still be installed
@@ -99,20 +87,16 @@
 
   <PropertyGroup>
     <_WasmBrowserPathForTests Condition="'$(BROWSER_PATH_FOR_TESTS)' != ''"
-      >$(BROWSER_PATH_FOR_TESTS)</_WasmBrowserPathForTests
-    >
+      >$(BROWSER_PATH_FOR_TESTS)</_WasmBrowserPathForTests>
     <_WasmBrowserPathForTests
       Condition="'$(_WasmBrowserPathForTests)' == '' and '$(InstallChromeForTests)' == 'true'"
-      >$(ChromeBinaryPath)</_WasmBrowserPathForTests
-    >
+      >$(ChromeBinaryPath)</_WasmBrowserPathForTests>
 
     <_WasmJSEnginePathForTests Condition="'$(V8_PATH_FOR_TESTS)' != ''"
-      >$(V8_PATH_FOR_TESTS)</_WasmJSEnginePathForTests
-    >
+      >$(V8_PATH_FOR_TESTS)</_WasmJSEnginePathForTests>
     <_WasmJSEnginePathForTests
       Condition="'$(_WasmJSEnginePathForTests)' == '' and '$(InstallV8ForTests)' == 'true'"
-      >$(V8BinaryPath)</_WasmJSEnginePathForTests
-    >
+      >$(V8BinaryPath)</_WasmJSEnginePathForTests>
   </PropertyGroup>
 
   <!--
@@ -174,92 +158,71 @@
   <PropertyGroup>
     <_AppArgs
       Condition="'$(IsFunctionalTest)' != 'true' and '$(Scenario)' != 'BuildWasmApps' and '$(WasmMainAssemblyFileName)' == ''"
-      >--run WasmTestRunner.dll $(AssemblyName).dll</_AppArgs
-    >
+      >--run WasmTestRunner.dll $(AssemblyName).dll</_AppArgs>
     <_AppArgs Condition="'$(IsFunctionalTest)' != 'true' and '$(WasmMainAssemblyFileName)' != ''"
-      >--run $(WasmMainAssemblyFileName)</_AppArgs
-    >
+      >--run $(WasmMainAssemblyFileName)</_AppArgs>
     <_AppArgs Condition="'$(IsFunctionalTest)' == 'true'">--run $(AssemblyName).dll</_AppArgs>
 
     <_AppArgs Condition="'$(WasmTestAppArgs)' != ''">$(_AppArgs) $(WasmTestAppArgs)</_AppArgs>
 
     <WasmXHarnessMonoArgs Condition="'$(XunitShowProgress)' == 'true'"
-      >$(WasmXHarnessMonoArgs) --setenv=XHARNESS_LOG_TEST_START=1</WasmXHarnessMonoArgs
-    >
+      >$(WasmXHarnessMonoArgs) --setenv=XHARNESS_LOG_TEST_START=1</WasmXHarnessMonoArgs>
     <!-- snapshots are not yet supported with threads -->
     <WasmXHarnessMonoArgs Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
-      >$(WasmXHarnessMonoArgs) --no-memory-snapshot</WasmXHarnessMonoArgs
-    >
+      >$(WasmXHarnessMonoArgs) --no-memory-snapshot</WasmXHarnessMonoArgs>
     <!-- help unit test with PlatformDetection.IsThreadingSupported via IsBrowserThreadingSupported env variable -->
     <WasmXHarnessMonoArgs Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
-      >$(WasmXHarnessMonoArgs) --setenv=IsBrowserThreadingSupported=true</WasmXHarnessMonoArgs
-    >
+      >$(WasmXHarnessMonoArgs) --setenv=IsBrowserThreadingSupported=true</WasmXHarnessMonoArgs>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(RunScriptCommand)' == ''">
     <_XHarnessArgs Condition="'$(OS)' != 'Windows_NT'"
-      >wasm $XHARNESS_COMMAND --app=. --output-directory=$XHARNESS_OUT</_XHarnessArgs
-    >
+      >wasm $XHARNESS_COMMAND --app=. --output-directory=$XHARNESS_OUT</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(OS)' == 'Windows_NT'"
-      >wasm %XHARNESS_COMMAND% --app=. --output-directory=%XHARNESS_OUT%</_XHarnessArgs
-    >
+      >wasm %XHARNESS_COMMAND% --app=. --output-directory=%XHARNESS_OUT%</_XHarnessArgs>
 
     <_XHarnessArgs Condition="'$(IsFunctionalTest)' == 'true'"
-      >$(_XHarnessArgs) --expected-exit-code=$(ExpectedExitCode)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --expected-exit-code=$(ExpectedExitCode)</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessArgs)' != ''"
-      >$(_XHarnessArgs) $(WasmXHarnessArgs)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) $(WasmXHarnessArgs)</_XHarnessArgs>
     <_XHarnessArgs
       Condition="'$(MonoWasmBuildVariant)' == 'multithread' and '$(_XHarnessArs.Contains(&quot;--web-server-use-cop&quot;)' != 'true'"
-      >$(_XHarnessArgs) --web-server-use-cop</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --web-server-use-cop</_XHarnessArgs>
     <_XHarnessArgs>$(_XHarnessArgs) -s dotnet.native.js.symbols</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(_UseWasmSymbolicator)' == 'true'"
-      >$(_XHarnessArgs) --symbol-patterns wasm-symbol-patterns.txt</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --symbol-patterns wasm-symbol-patterns.txt</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(_UseWasmSymbolicator)' == 'true'"
-      >$(_XHarnessArgs) --symbolicator WasmSymbolicator.dll,Microsoft.WebAssembly.Internal.SymbolicatorWrapperForXHarness</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --symbolicator WasmSymbolicator.dll,Microsoft.WebAssembly.Internal.SymbolicatorWrapperForXHarness</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(_WasmBrowserPathForTests)' != ''"
-      >$(_XHarnessArgs) &quot;--browser-path=$(_WasmBrowserPathForTests)&quot;</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) &quot;--browser-path=$(_WasmBrowserPathForTests)&quot;</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessTestsTimeout)' != ''"
-      >$(_XHarnessArgs) &quot;--timeout=$(WasmXHarnessTestsTimeout)&quot;</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) &quot;--timeout=$(WasmXHarnessTestsTimeout)&quot;</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessArgsCli)' != ''"
-      >$(_XHarnessArgs) $(WasmXHarnessArgsCli)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) $(WasmXHarnessArgsCli)</_XHarnessArgs>
 
     <!-- There two flavors of WasmXHarnessArgs and WasmXHarnessMonoArgs, one is MSBuild property and the other is environment variable -->
     <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-      >$HARNESS_RUNNER $(_XHarnessArgs) %24XHARNESS_ARGS %24WasmXHarnessArgs -- $(WasmXHarnessMonoArgs) %24WasmXHarnessMonoArgs $(_AppArgs) %24WasmTestAppArgs</RunScriptCommand
-    >
+      >$HARNESS_RUNNER $(_XHarnessArgs) %24XHARNESS_ARGS %24WasmXHarnessArgs -- $(WasmXHarnessMonoArgs) %24WasmXHarnessMonoArgs $(_AppArgs) %24WasmTestAppArgs</RunScriptCommand>
     <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-      >%HARNESS_RUNNER% $(_XHarnessArgs) %XHARNESS_ARGS% %WasmXHarnessArgs%  -- $(WasmXHarnessMonoArgs) %WasmXHarnessMonoArgs% $(_AppArgs) %WasmTestAppArgs%</RunScriptCommand
-    >
+      >%HARNESS_RUNNER% $(_XHarnessArgs) %XHARNESS_ARGS% %WasmXHarnessArgs%  -- $(WasmXHarnessMonoArgs) %WasmXHarnessMonoArgs% $(_AppArgs) %WasmTestAppArgs%</RunScriptCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildAOTTestsOnHelix)' == 'true'">
     <_AOTBuildCommand Condition="'$(BrowserHost)' != 'windows'"
-      >_buildAOTFunc publish/ProxyProjectForAOTOnHelix.proj $XHARNESS_OUT/AOTBuild.binlog</_AOTBuildCommand
-    >
+      >_buildAOTFunc publish/ProxyProjectForAOTOnHelix.proj $XHARNESS_OUT/AOTBuild.binlog</_AOTBuildCommand>
     <_AOTBuildCommand Condition="'$(BrowserHost)' == 'windows'"
-      >dotnet msbuild publish/ProxyProjectForAOTOnHelix.proj /bl:%XHARNESS_OUT%/AOTBuild.binlog</_AOTBuildCommand
-    >
+      >dotnet msbuild publish/ProxyProjectForAOTOnHelix.proj /bl:%XHARNESS_OUT%/AOTBuild.binlog</_AOTBuildCommand>
 
     <!-- running aot-helix tests locally, so we can test with the same project file as CI -->
     <_AOTBuildCommand Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >$(_AOTBuildCommand) /p:RuntimeSrcDir=$(RepoRoot) /p:RuntimeConfig=$(Configuration) /p:TasksConfiguration=$(TasksConfiguration)</_AOTBuildCommand
-    >
+      >$(_AOTBuildCommand) /p:RuntimeSrcDir=$(RepoRoot) /p:RuntimeConfig=$(Configuration) /p:TasksConfiguration=$(TasksConfiguration)</_AOTBuildCommand>
 
     <_AOTBuildCommand>$(_AOTBuildCommand) /p:RunAOTCompilation=$(RunAOTCompilation)</_AOTBuildCommand>
     <_AOTBuildCommand>$(_AOTBuildCommand) $(_ShellCommandSeparator) cd wasm_build/AppBundle</_AOTBuildCommand>
 
     <RunScriptCommand Condition="'$(RunScriptCommand)' == ''">$(_AOTBuildCommand)</RunScriptCommand>
     <RunScriptCommand Condition="'$(RunScriptCommand)' != ''"
-      >$(_AOTBuildCommand) $(_ShellCommandSeparator) $(RunScriptCommand)</RunScriptCommand
-    >
+      >$(_AOTBuildCommand) $(_ShellCommandSeparator) $(RunScriptCommand)</RunScriptCommand>
   </PropertyGroup>
 
   <!-- Don't include InTree.props here, because the test projects themselves can set the target* properties -->
@@ -288,11 +251,9 @@
     <PropertyGroup>
       <WasmAppDir>$(BundleDir)</WasmAppDir>
       <WasmMainAssemblyFileName Condition="'$(WasmMainAssemblyFileName)' == ''"
-        >WasmTestRunner.dll</WasmMainAssemblyFileName
-      >
+        >WasmTestRunner.dll</WasmMainAssemblyFileName>
       <WasmMainJSPath Condition="'$(WasmMainJSPath)' == ''"
-        >$(MonoProjectRoot)\wasm\test-main.js</WasmMainJSPath
-      >
+        >$(MonoProjectRoot)\wasm\test-main.js</WasmMainJSPath>
       <WasmMainJSFileName>$([System.IO.Path]::GetFileName('$(WasmMainJSPath)'))</WasmMainJSFileName>
       <WasmMainHtmlPath>$(PublishDir)index.html</WasmMainHtmlPath>
       <WasmInvariantGlobalization>$(InvariantGlobalization)</WasmInvariantGlobalization>
@@ -300,8 +261,7 @@
 
       <WasmNativeDebugSymbols
         Condition="'$(DebuggerSupport)' == 'true' and '$(WasmNativeDebugSymbols)' == ''"
-        >true</WasmNativeDebugSymbols
-      >
+        >true</WasmNativeDebugSymbols>
       <!--
         Do this *after* importing WasmApp.targets. tests.wasm.targets sets this to `reset-to-zero` to indicate
         that we want to force this value to zero.
@@ -367,17 +327,14 @@
   <Target Name="_PrepareForAOTOnHelix">
     <PropertyGroup Condition="'$(IsHighAotMemoryUsageTest)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'">
       <DisableParallelEmccCompile Condition="'$(DisableParallelEmccCompile)' == ''"
-        >true</DisableParallelEmccCompile
-      >
+        >true</DisableParallelEmccCompile>
       <EmccLinkOptimizationFlag Condition="'$(EmccLinkOptimizationFlag)' == ''"
-        >-O2</EmccLinkOptimizationFlag
-      >
+        >-O2</EmccLinkOptimizationFlag>
     </PropertyGroup>
 
     <PropertyGroup>
       <EmccLinkOptimizationFlag Condition="'$(EmccLinkOptimizationFlag)' == ''"
-        >-O2 -Wl,-O0 -Wl,--lto-O0</EmccLinkOptimizationFlag
-      >
+        >-O2 -Wl,-O0 -Wl,--lto-O0</EmccLinkOptimizationFlag>
     </PropertyGroup>
 
     <ItemGroup>
@@ -495,8 +452,7 @@
   >
     <PropertyGroup>
       <_DefaultBuildVariant Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
-        >.multithread.</_DefaultBuildVariant
-      >
+        >.multithread.</_DefaultBuildVariant>
       <_DefaultBuildVariant Condition="'$(_DefaultBuildVariant)' == ''">.</_DefaultBuildVariant>
 
       <_DefaultRuntimePackNuGetPath>$(LibrariesShippingPackagesDir)Microsoft.NETCore.App.Runtime.Mono$(_DefaultBuildVariant)$(RuntimeIdentifier).$(PackageVersionForWorkloadManifests).nupkg</_DefaultRuntimePackNuGetPath>

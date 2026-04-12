@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Hosting.VirtualDirectory" /> class is the base class for objects that represent directories in a virtual file system. Typically, you would implement a descendent of the <see cref="T:System.Web.Hosting.VirtualDirectory" /> class for each <see cref="T:System.Web.Hosting.VirtualPathProvider" /> class descendent in your Web application.</para
-      >
+        >The <see cref="T:System.Web.Hosting.VirtualDirectory" /> class is the base class for objects that represent directories in a virtual file system. Typically, you would implement a descendent of the <see cref="T:System.Web.Hosting.VirtualDirectory" /> class for each <see cref="T:System.Web.Hosting.VirtualPathProvider" /> class descendent in your Web application.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,16 +37,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Hosting.VirtualDirectory" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.VirtualDirectory" /> class. </para>
         </summary>
         <param name="virtualPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path to the resource represented by this instance.</param
-        >
+          />The virtual path to the resource represented by this instance.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property contains both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects that represent the files and directories contained in this virtual directory. To return only the <see cref="T:System.Web.Hosting.VirtualFile" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property. To return only the <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property.</para
-          >
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property contains both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects that represent the files and directories contained in this virtual directory. To return only the <see cref="T:System.Web.Hosting.VirtualFile" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property. To return only the <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property contains <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects that represent the directories contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualFile" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property. To return both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property.</para
-          >
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property contains <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects that represent the directories contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualFile" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property. To return both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property contains <see cref="T:System.Web.Hosting.VirtualFile" /> objects that represent the files contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property. To return both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property.</para
-          >
+            >The <see cref="P:System.Web.Hosting.VirtualDirectory.Files" /> property contains <see cref="T:System.Web.Hosting.VirtualFile" /> objects that represent the files contained in this virtual directory. To return the <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Directories" /> property. To return both <see cref="T:System.Web.Hosting.VirtualFile" /> and <see cref="T:System.Web.Hosting.VirtualDirectory" /> objects, use the <see cref="P:System.Web.Hosting.VirtualDirectory.Children" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

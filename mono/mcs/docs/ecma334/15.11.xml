@@ -3,8 +3,7 @@
   <paragraph
     >The checked and unchecked statements are used to control the overflow checking context for  <non_terminal
       where="11.1"
-      >integral-type</non_terminal
-    > arithmetic operations and conversions. <grammar_production>
+      >integral-type</non_terminal> arithmetic operations and conversions. <grammar_production>
       <name>
         <non_terminal where="15.11">checked-statement</non_terminal>
       </name> : <rhs>
@@ -23,6 +22,5 @@
   </paragraph>
   <paragraph>The checked statement causes all expressions in the block to be evaluated in a checked context, and the unchecked statement causes all expressions in the block to be evaluated in an unchecked context. </paragraph>
   <paragraph
-    >The checked and unchecked statements are precisely equivalent to the checked and unchecked operators (<hyperlink>14.5.12</hyperlink>), except that they operate on blocks instead of expressions. </paragraph
-  >
+    >The checked and unchecked statements are precisely equivalent to the checked and unchecked operators (<hyperlink>14.5.12</hyperlink>), except that they operate on blocks instead of expressions. </paragraph>
 </clause>

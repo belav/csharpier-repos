@@ -8,14 +8,11 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>An abstract representation of RELAX NG grammar element.</summary>
     <remarks
-      >This class does not represent "element" pattern (see <see cref="T:Commons.Xml.Relaxng.RelaxngElement" />).</remarks
-    >
+      >This class does not represent "element" pattern (see <see cref="T:Commons.Xml.Relaxng.RelaxngElement" />).</remarks>
   </Docs>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -37,8 +34,7 @@
       <Docs>
         <summary>Writes the whole element to the XmlWriter.</summary>
         <param name="writer"
-          >an <see cref="T:System.Xml.XmlWriter" /> that is used to output this element.</param
-        >
+          >an <see cref="T:System.Xml.XmlWriter" /> that is used to output this element.</param>
         <remarks>
 		Each of the derived class in Commons.Xml.Relaxng.dll can be created by its own default constructor.
 		</remarks>
@@ -90,8 +86,7 @@
       <Docs>
         <summary>Represents the base URI of this element, if provided by the source.</summary>
         <value
-          >a <see cref="T:System.String" /> that represents the base URI of this element.</value
-        >
+          >a <see cref="T:System.String" /> that represents the base URI of this element.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

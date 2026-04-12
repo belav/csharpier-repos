@@ -22,103 +22,85 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Drawing.Design.IToolboxService" /> interface provides properties and methods for adding and removing toolbox items and toolbox creator callback delegates, serializing and deserializing toolbox items, and retrieving toolbox state information and managing toolbox state.</para
-      >
+        >The <see cref="T:System.Drawing.Design.IToolboxService" /> interface provides properties and methods for adding and removing toolbox items and toolbox creator callback delegates, serializing and deserializing toolbox items, and retrieving toolbox state information and managing toolbox state.</para>
       <para>You can retrieve information about the contents of the toolbox with the following methods: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="P:System.Drawing.Design.IToolboxService.CategoryNames" /> property indicates the categories currently available on the toolbox.</para
-          >
+            >The <see cref="P:System.Drawing.Design.IToolboxService.CategoryNames" /> property indicates the categories currently available on the toolbox.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.Drawing.Design.IToolboxService.SelectedCategory" /> property indicates the currently selected toolbox category.</para
-          >
+            >The <see cref="P:System.Drawing.Design.IToolboxService.SelectedCategory" /> property indicates the currently selected toolbox category.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.GetToolboxItems" /> method retrieves the items on the toolbox, optionally filtered by a specified toolbox category.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.GetToolboxItems" /> method retrieves the items on the toolbox, optionally filtered by a specified toolbox category.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.GetSelectedToolboxItem" /> method retrieves the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.GetSelectedToolboxItem" /> method retrieves the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.SetSelectedToolboxItem(System.Drawing.Design.ToolboxItem)" /> method selects the specified <see cref="T:System.Drawing.Design.ToolboxItem" /> as the current toolbox item.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SetSelectedToolboxItem(System.Drawing.Design.ToolboxItem)" /> method selects the specified <see cref="T:System.Drawing.Design.ToolboxItem" /> as the current toolbox item.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.IsSupported(System.Object,System.ComponentModel.Design.IDesignerHost)" /> method indicates whether the specified serialized object, if it is a <see cref="T:System.Drawing.Design.ToolboxItem" />, is supported by the specified designer host, or whether it matches the specified attributes.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.IsSupported(System.Object,System.ComponentModel.Design.IDesignerHost)" /> method indicates whether the specified serialized object, if it is a <see cref="T:System.Drawing.Design.ToolboxItem" />, is supported by the specified designer host, or whether it matches the specified attributes.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.IsToolboxItem(System.Object)" /> method indicates whether the specified serialized object is a <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.IsToolboxItem(System.Object)" /> method indicates whether the specified serialized object is a <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </item>
       </list>
       <para>You can add and remove toolbox items with the following methods: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.AddToolboxItem(System.Drawing.Design.ToolboxItem)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItem" /> to the toolbox, creating the optionally specified category if it does not exist.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddToolboxItem(System.Drawing.Design.ToolboxItem)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItem" /> to the toolbox, creating the optionally specified category if it does not exist.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.AddLinkedToolboxItem(System.Drawing.Design.ToolboxItem,System.ComponentModel.Design.IDesignerHost)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItem" /> that is only enabled for the current project to the toolbox.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddLinkedToolboxItem(System.Drawing.Design.ToolboxItem,System.ComponentModel.Design.IDesignerHost)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItem" /> that is only enabled for the current project to the toolbox.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveToolboxItem(System.Drawing.Design.ToolboxItem)" /> method removes the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveToolboxItem(System.Drawing.Design.ToolboxItem)" /> method removes the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> delegate capable of converting some type of data stored on the toolbox to a <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> method adds a <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> delegate capable of converting some type of data stored on the toolbox to a <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveCreator(System.String)" /> method removes any <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> delegates for the specified data type.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveCreator(System.String)" /> method removes any <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> delegates for the specified data type.</para>
         </item>
       </list>
       <para>You can refresh the toolbox, mark a toolbox item as used, or set the mouse cursor to a cursor that represents the current toolbox item using the following methods: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" /> method refreshes the toolbox display to reflect the current state of the toolbox items.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" /> method refreshes the toolbox display to reflect the current state of the toolbox items.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.SelectedToolboxItemUsed" /> method signals the toolbox that the selected toolbox item has been used.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SelectedToolboxItemUsed" /> method signals the toolbox that the selected toolbox item has been used.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.SetCursor" /> method sets the mouse cursor to a cursor that represents the current toolbox item.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SetCursor" /> method sets the mouse cursor to a cursor that represents the current toolbox item.</para>
         </item>
       </list>
       <para>You can use the toolbox to serialize or deserialize a toolbox item using the following methods: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.DeserializeToolboxItem(System.Object)" /> method attempts to return a <see cref="T:System.Drawing.Design.ToolboxItem" /> from the specified serialized toolbox item object.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.DeserializeToolboxItem(System.Object)" /> method attempts to return a <see cref="T:System.Drawing.Design.ToolboxItem" /> from the specified serialized toolbox item object.</para>
         </item>
         <item>
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.SerializeToolboxItem(System.Drawing.Design.ToolboxItem)" /> method returns a serialized object representing the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SerializeToolboxItem(System.Drawing.Design.ToolboxItem)" /> method returns a serialized object representing the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </item>
       </list>
     </remarks>
@@ -145,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />. If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> more than once. Unexpected behavior may result if you add more than one creator for the same format.</para
-          >
+            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />. If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> more than once. Unexpected behavior may result if you add more than one creator for the same format.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,15 +138,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> that can create a component when the toolbox item is invoked. </param
-        >
+          />A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> that can create a component when the toolbox item is invoked. </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data format that the creator handles. </param
-        >
+          />The data format that the creator handles. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -190,11 +169,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />. If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> more than once. Unexpected behavior may result if you add more than one creator for the same format.</para
-          >
+            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />. If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" /> more than once. Unexpected behavior may result if you add more than one creator for the same format.</para>
           <para
-            >If the <paramref name="host" /> parameter is set to null, the creator will be available to all designers. If a designer host is supplied, the creator will only be available to designers using the specified host.</para
-          >
+            >If the <paramref name="host" /> parameter is set to null, the creator will be available to all designers. If a designer host is supplied, the creator will only be available to designers using the specified host.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -205,22 +182,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> that can create a component when the toolbox item is invoked. </param
-        >
+          />A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" /> that can create a component when the toolbox item is invoked. </param>
         <param name="format">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data format that the creator handles. </param
-        >
+          />The data format that the creator handles. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that represents the designer host to associate with the creator. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that represents the designer host to associate with the creator. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -254,15 +228,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The linked <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param
-        >
+          />The linked <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current design document. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current design document. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -297,22 +269,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The linked <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param
-        >
+          />The linked <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The toolbox item category to add the toolbox item to. </param
-        >
+          />The toolbox item category to add the toolbox item to. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current design document. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the current design document. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -342,8 +311,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -374,15 +342,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to add to the toolbox. </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The toolbox item category to add the <see cref="T:System.Drawing.Design.ToolboxItem" /> to. </param
-        >
+          />The toolbox item category to add the <see cref="T:System.Drawing.Design.ToolboxItem" /> to. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -432,16 +398,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> created from the serialized object.</para
-          >
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> created from the serialized object.</para>
         </returns>
         <param name="serializedObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param
-        >
+          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -470,23 +434,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> created from deserialization.</para
-          >
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> created from deserialization.</para>
         </returns>
         <param name="serializedObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param
-        >
+          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to associate with this <see cref="T:System.Drawing.Design.ToolboxItem" />. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to associate with this <see cref="T:System.Drawing.Design.ToolboxItem" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -512,8 +473,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> that is currently selected, or null if no toolbox item has been selected.</para
-          >
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> that is currently selected, or null if no toolbox item has been selected.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -537,8 +497,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> if it is not designer specific, and only returns a designer-specific currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> if the type of the designer host specified in the <paramref name="host" /> parameter matches the type of designer that the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> supports.</para
-          >
+            >This method returns the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> if it is not designer specific, and only returns a designer-specific currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> if the type of the designer host specified in the <paramref name="host" /> parameter matches the type of designer that the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" /> supports.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -547,16 +506,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> that is currently selected, or null if no toolbox item is currently selected.</para
-          >
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" /> that is currently selected, or null if no toolbox item is currently selected.</para>
         </returns>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that the selected tool must be associated with for it to be returned. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that the selected tool must be associated with for it to be returned. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -582,8 +539,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items.</para
-          >
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -612,16 +568,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified designer host.</para
-          >
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified designer host.</para>
         </returns>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the toolbox items to retrieve. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the toolbox items to retrieve. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -649,16 +603,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified category.</para
-          >
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified category.</para>
         </returns>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The toolbox item category to retrieve all the toolbox items from. </param
-        >
+          />The toolbox item category to retrieve all the toolbox items from. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -687,23 +639,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified category and designer host.</para
-          >
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" /> that contains the current toolbox items that are associated with the specified category and designer host.</para>
         </returns>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The toolbox item category to retrieve the toolbox items from. </param
-        >
+          />The toolbox item category to retrieve the toolbox items from. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the toolbox items to retrieve. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the toolbox items to retrieve. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -738,15 +687,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param
-        >
+          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param>
         <param name="filterAttributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.ICollection" /> that contains the attributes to test the serialized object for. </param
-        >
+          />An <see cref="T:System.Collections.ICollection" /> that contains the attributes to test the serialized object for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -781,15 +728,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param
-        >
+          />The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" /> to retrieve. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to test for support for the <see cref="T:System.Drawing.Design.ToolboxItem" />. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> to test for support for the <see cref="T:System.Drawing.Design.ToolboxItem" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -820,8 +765,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to inspect. </param
-        >
+          />The object to inspect. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -856,15 +800,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to inspect. </param
-        >
+          />The object to inspect. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is making this request. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is making this request. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -882,8 +824,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" /> method is used to indicate to the toolbox service that the user wants to update the cache of toolbox items. If the toolbox service maintains a live list of toolbox item containers, then this method will do nothing. If it maintains a snapshot of toolbox item containers, calling this method should ensure that the snapshot is up to date.</para
-          >
+            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" /> method is used to indicate to the toolbox service that the user wants to update the cache of toolbox items. If the toolbox service maintains a live list of toolbox item containers, then this method will do nothing. If it maintains a snapshot of toolbox item containers, calling this method should ensure that the snapshot is up to date.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -915,8 +856,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data format of the creator to remove. </param
-        >
+          />The data format of the creator to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -947,15 +887,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data format of the creator to remove. </param
-        >
+          />The data format of the creator to remove. </param>
         <param name="host">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the creator to remove. </param
-        >
+          />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> that is associated with the creator to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -985,8 +923,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to remove from the toolbox. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to remove from the toolbox. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1017,15 +954,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to remove from the toolbox. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to remove from the toolbox. </param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The toolbox item category to remove the <see cref="T:System.Drawing.Design.ToolboxItem" /> from. </param
-        >
+          />The toolbox item category to remove the <see cref="T:System.Drawing.Design.ToolboxItem" /> from. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1087,8 +1022,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serializes the specified <see cref="T:System.Drawing.Design.ToolboxItem" /> to an object that can be persisted. The returned object can be stored in a stream or passed around in a drag-and-drop or clipboard operation.</para
-          >
+            >This method serializes the specified <see cref="T:System.Drawing.Design.ToolboxItem" /> to an object that can be persisted. The returned object can be stored in a stream or passed around in a drag-and-drop or clipboard operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1097,16 +1031,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para
-          >
+            >An object that represents the specified <see cref="T:System.Drawing.Design.ToolboxItem" />.</para>
         </returns>
         <param name="toolboxItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to serialize. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to serialize. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1162,8 +1094,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to select. </param
-        >
+          />The <see cref="T:System.Drawing.Design.ToolboxItem" /> to select. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

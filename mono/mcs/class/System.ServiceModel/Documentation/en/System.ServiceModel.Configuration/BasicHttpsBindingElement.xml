@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" /> class.</para
-          >
+            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -66,12 +65,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" /> class with specified name.</para
-          >
+            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" /> class with specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -122,8 +119,7 @@
           <para>Initializes the binding element using specified binding.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The binding.</param>
       </Docs>
     </Member>
     <Member MemberName="MessageEncoding">
@@ -182,8 +178,7 @@
           <para>Raises the apply configuration event.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The binding.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">

@@ -486,8 +486,7 @@
       </Parameters>
       <Docs>
         <param name="disposing"
-          >Whether or not the class is being explicitly or implicitly disposed</param
-        >
+          >Whether or not the class is being explicitly or implicitly disposed</param>
         <summary>
             Disposes of the command and clears all member variables
             </summary>

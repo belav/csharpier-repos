@@ -35,19 +35,15 @@
       <para
         >You can apply this attribute to assemblies, interfaces, classes, enumerations, structures, or delegates, although the <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
-            >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
-          >
-        </format> can apply it for you when it imports a type library.</para
-      >
+            >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a>
+        </format> can apply it for you when it imports a type library.</para>
       <para
-        >The string passed to the attribute must be in a format that is an acceptable constructor argument for the type <see cref="T:System.Guid" />. To avoid conflicts with the type <see cref="T:System.Guid" />, use the long name <see cref="T:System.Runtime.InteropServices.GuidAttribute" /> explicitly. Only use an explicit GUID when a type must have a specific GUID. If the attribute is omitted, a GUID is assigned automatically.</para
-      >
+        >The string passed to the attribute must be in a format that is an acceptable constructor argument for the type <see cref="T:System.Guid" />. To avoid conflicts with the type <see cref="T:System.Guid" />, use the long name <see cref="T:System.Runtime.InteropServices.GuidAttribute" /> explicitly. Only use an explicit GUID when a type must have a specific GUID. If the attribute is omitted, a GUID is assigned automatically.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supplies an explicit <see cref="T:System.Guid" /> when an automatic GUID is undesirable.</para
-      >
+        >Supplies an explicit <see cref="T:System.Guid" /> when an automatic GUID is undesirable.</para>
     </summary>
   </Docs>
   <Members>
@@ -72,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.GuidAttribute" /> class with the specified GUID.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.GuidAttribute" /> class with the specified GUID.</para>
         </summary>
         <param name="guid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Guid" /> to be assigned. </param
-        >
+          />The <see cref="T:System.Guid" /> to be assigned. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

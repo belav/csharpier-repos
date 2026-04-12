@@ -49,11 +49,9 @@
       <para
         >crabout vstecasp compatibility mode, see <format type="text/html">
           <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
-        </format>. </para
-      >
+        </format>. </para>
       <para
-        >Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" /> property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />.</para
-      >
+        >Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" /> property to do this. At runtime, applications can detect if vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -77,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -105,11 +102,9 @@
           <para
             >Use the <see cref="P:System.ServiceModel.Activation.AspNetCompatibilityRequirementsAttribute.RequirementsMode" /> property to set the hosting mode in code. This can also be done by setting an application-level configuration flag aspNetCompatibilityEnabled. crdefault <format type="text/html">
               <a href="4f8a7c4f-e735-4987-979a-b74fcdae2652">serviceHostingEnvironment</a>
-            </format>. </para
-          >
+            </format>. </para>
           <para
-            >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />. </para
-          >
+            >At runtime, applications can detect whether vstecasp compatibility mode is enabled by checking the value of the static property <see cref="P:System.ServiceModel.ServiceHostingEnvironment.AspNetCompatibilityEnabled" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -159,29 +154,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param
-        >
+          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> used to host the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> used to host the service.</param>
         <param name="endpoints">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> that contains the endpoints for the service.</param
-        >
+          />The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> that contains the endpoints for the service.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> that contains the parameters that the binding elements for the service can access.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> that contains the parameters that the binding elements for the service can access.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior">
@@ -218,15 +209,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param
-        >
+          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IServiceBehavior.Validate">
@@ -263,15 +252,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param
-        >
+          />The <see cref="T:System.ServiceModel.Description.ServiceDescription" /> of the service. </param>
         <param name="serviceHostBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.ServiceHostBase" /> for hosting the service.</param>
       </Docs>
     </Member>
   </Members>

@@ -21,8 +21,7 @@
     performance for common tasks.  The default caching behavior may not be
     appropriate for some tasks.  The <c>FileAccessPattern</c> enumeration
     contains possible alternate caching behaviors that your operating system
-    may support.</para
-      >
+    may support.</para>
     </remarks>
     <altmember cref="M:Mono.Unix.FileHandleOperations.AdviseFileAccessPattern" />
     <altmember cref="M:Mono.Unix.UnixStream.AdviseFileAccessPattern" />

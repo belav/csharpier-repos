@@ -38,13 +38,10 @@
       <para
         >You can apply this attribute to assemblies, although the <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
-            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a
-          >
-        </format> typically applies it for you when it a type library.</para
-      >
+            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a>
+        </format> typically applies it for you when it a type library.</para>
       <para
-        >The primary use of the attribute is to capture the original source of the type information. For example, you can import A.tlb as an interop assembly called A.dll and have assembly B.dll reference A.dll. When you export B.dll to B.tlb, this attribute causes the references in B.tlb that point to A.dll to point instead to A.tlb. This should not be confused with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />, which specifies that an individual type is implemented in COM.</para
-      >
+        >The primary use of the attribute is to capture the original source of the type information. For example, you can import A.tlb as an interop assembly called A.dll and have assembly B.dll reference A.dll. When you export B.dll to B.tlb, this attribute causes the references in B.tlb that point to A.dll to point instead to A.tlb. This should not be confused with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />, which specifies that an individual type is implemented in COM.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,16 +73,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ImportedFromTypeLibAttribute" /> class with the name of the original type library file.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ImportedFromTypeLibAttribute" /> class with the name of the original type library file.</para>
         </summary>
         <param name="tlbFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location of the original type library file. </param
-        >
+          />The location of the original type library file. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

@@ -41,17 +41,14 @@
       <para>Use this attribute to specify at compile time that a decimal value is a constant value. </para>
       <para>You can apply this attribute to fields or parameters.</para>
       <para
-        >For more information about constant attributes, see the <see cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" /> class.</para
-      >
+        >For more information about constant attributes, see the <see cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" /> class.</para>
       <para
-        >The classes in <see cref="N:System.Runtime.CompilerServices" /> are for compiler writers use only.</para
-      >
+        >The classes in <see cref="N:System.Runtime.CompilerServices" /> are for compiler writers use only.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores the value of a <see cref="T:System.Decimal" /> constant in metadata. This class cannot be inherited.</para
-      >
+        >Stores the value of a <see cref="T:System.Decimal" /> constant in metadata. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -82,44 +79,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute" /> class with the specified signed integer values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute" /> class with the specified signed integer values. </para>
         </summary>
         <param name="scale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The power of 10 scaling factor that indicates the number of digits to the right of the decimal point. Valid values are 0 through 28 inclusive.</param
-        >
+          />The power of 10 scaling factor that indicates the number of digits to the right of the decimal point. Valid values are 0 through 28 inclusive.</param>
         <param name="sign">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value.</param
-        >
+          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value.</param>
         <param name="hi">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param
-        >
+          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param>
         <param name="mid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param
-        >
+          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param>
         <param name="low">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param
-        >
+          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -159,82 +150,70 @@
           <para>
             <block subset="none" type="note"
               >For representations of <see cref="T:System.Decimal" /> whose values can have scales exceeding 255, the constructor <see cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute.System.DecimalConstantAttribute" />
-              <see langword="(System.String)" />  must be used instead.</block
-            >
+              <see langword="(System.String)" />  must be used instead.</block>
           </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="scale" /> &gt; 28.</exception
-        >
+          <paramref name="scale" /> &gt; 28.</exception>
         <param name="sign">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value. </param
-        >
+          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value. </param>
         <param name="hi">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
         <param name="mid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
         <param name="low">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute" /> class with the specified unsigned integer values.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute" /> class with the specified unsigned integer values.</para>
         </summary>
         <param name="scale">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The power of 10 scaling factor that indicates the number of digits to the right of the decimal point. Valid values are 0 through 28 inclusive. </param
-        >
+          />The power of 10 scaling factor that indicates the number of digits to the right of the decimal point. Valid values are 0 through 28 inclusive. </param>
         <param name="sign">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value. </param
-        >
+          />A value of 0 indicates a positive value, and a value of 1 indicates a negative value. </param>
         <param name="hi">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The high 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
         <param name="mid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The middle 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
         <param name="low">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param
-        >
+          />The low 32 bits of the 96-bit <see cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

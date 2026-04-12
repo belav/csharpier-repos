@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a configuration element that specifies the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to be used. This class cannot be inherited.</para
-      >
+        >Represents a configuration element that specifies the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to be used. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.DataContractSerializerElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.DataContractSerializerElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

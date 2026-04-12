@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the collections for contained elements in the <see cref="T:System.Xml.Schema.XmlSchema" /> class (for example, Attributes, AttributeGroups, Elements, and so on).</para
-      >
+        >Provides the collections for contained elements in the <see cref="T:System.Xml.Schema.XmlSchema" /> class (for example, Attributes, AttributeGroups, Elements, and so on).</para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Xml.Schema.XmlSchemaObjectTable.Contains(System.Xml.XmlQualifiedName)" /> returns false if a null value is supplied because there is not a qualified name for a null name.</para
-          >
+            <see cref="M:System.Xml.Schema.XmlSchemaObjectTable.Contains(System.Xml.XmlQualifiedName)" /> returns false if a null value is supplied because there is not a qualified name for a null name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,8 +66,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of items contained in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para
-          >
+            >Gets the number of items contained in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -119,14 +115,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para
-          >
+            >Returns an enumerator that can iterate through the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IDictionaryEnumerator" /> that can iterate through <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para
-          >
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" /> that can iterate through <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -179,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of all the named elements in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para
-          >
+            >Returns a collection of all the named elements in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -208,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of all the values for all the elements in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para
-          >
+            >Returns a collection of all the values for all the elements in the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />.</para>
         </summary>
       </Docs>
     </Member>

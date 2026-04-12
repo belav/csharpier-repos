@@ -5,11 +5,9 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Security.Principal"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Security.Principal.IdentityNotMappedException</ClassName
-  >
+    >System.Security.Principal.IdentityNotMappedException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Some or all identity references could not be translated.</Message
-  >
+    >Some or all identity references could not be translated.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

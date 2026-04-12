@@ -67,8 +67,7 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display the contents of an XML document without formatting or using XSL Transformations.</para
-      >
+        >Use the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display the contents of an XML document without formatting or using XSL Transformations.</para>
       <format type="text/html">
         <a href="#specifying_xml_data" />
       </format>
@@ -76,8 +75,7 @@
         <h2>Specifying XML Data</h2>
       </format>
       <para
-        >The XML document to display is specified by setting one of three properties. These three properties represent the different types of XML documents that can be displayed. You can display a <see cref="T:System.Xml.XmlDocument" />, an XML string, or an XML file by setting the appropriate property. The following table lists the properties for specifying the XML document.</para
-      >
+        >The XML document to display is specified by setting one of three properties. These three properties represent the different types of XML documents that can be displayed. You can display a <see cref="T:System.Xml.XmlDocument" />, an XML string, or an XML file by setting the appropriate property. The following table lists the properties for specifying the XML document.</para>
       <list type="table">
         <listheader>
           <item>
@@ -97,12 +95,10 @@
           </term>
           <description>
             <para
-              >Sets the XML document using a <see cref="T:System.Xml.XmlDocument" /> object. </para
-            >
+              >Sets the XML document using a <see cref="T:System.Xml.XmlDocument" /> object. </para>
             <block subset="none" type="note">
               <para
-                >This property is obsolete. Use one of the other properties listed in this section to set the XML content for the <see cref="T:System.Web.UI.WebControls.Xml" /> control. </para
-              >
+                >This property is obsolete. Use one of the other properties listed in this section to set the XML content for the <see cref="T:System.Web.UI.WebControls.Xml" /> control. </para>
             </block>
           </description>
         </item>
@@ -116,8 +112,7 @@
             <para>Sets the XML document using a string.</para>
             <block subset="none" type="note">
               <para
-                >This property is commonly set declaratively by placing text between the opening and closing &lt;asp:Xml&gt; tags of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-              >
+                >This property is commonly set declaratively by placing text between the opening and closing &lt;asp:Xml&gt; tags of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
             </block>
           </description>
         </item>
@@ -142,8 +137,7 @@
         <h2>Specifying an XSL Transformation</h2>
       </format>
       <para
-        >You can optionally specify an XSL Transformation (XSLT) style sheet that formats the XML document before it is written to the output stream by setting one of two properties. The two properties represent the different types of XSL Transformation style sheets that can be used to format the XML document. You can format the XML document with a <see cref="T:System.Xml.Xsl.XslCompiledTransform" /> object or with an XSL Transformation style sheet file by setting the appropriate property. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The following table lists the properties for specifying an XSL Transformation style sheet.</para
-      >
+        >You can optionally specify an XSL Transformation (XSLT) style sheet that formats the XML document before it is written to the output stream by setting one of two properties. The two properties represent the different types of XSL Transformation style sheets that can be used to format the XML document. You can format the XML document with a <see cref="T:System.Xml.Xsl.XslCompiledTransform" /> object or with an XSL Transformation style sheet file by setting the appropriate property. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The following table lists the properties for specifying an XSL Transformation style sheet.</para>
       <list type="table">
         <listheader>
           <item>
@@ -163,12 +157,10 @@
           </term>
           <description>
             <para
-              >Formats the XML document using the specified <see cref="T:System.Xml.Xsl.XslTransform" /> object.</para
-            >
+              >Formats the XML document using the specified <see cref="T:System.Xml.Xsl.XslTransform" /> object.</para>
             <block subset="none" type="note">
               <para
-                >Using a <see cref="T:System.Xml.Xsl.XslTransform" /> object requires Full Trust permissions.</para
-              >
+                >Using a <see cref="T:System.Xml.Xsl.XslTransform" /> object requires Full Trust permissions.</para>
             </block>
           </description>
         </item>
@@ -185,12 +177,10 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The XSL Transformation style sheet is optional. You do not need to set the <see cref="P:System.Web.UI.WebControls.Xml.Transform" /> or the <see cref="P:System.Web.UI.WebControls.Xml.TransformSource" /> property. If both XSL Transformation style sheet properties are set, the last property set determines which XSL Transformation style sheet is used to format the XML document. The other property is ignored.</para
-        >
+          >The XSL Transformation style sheet is optional. You do not need to set the <see cref="P:System.Web.UI.WebControls.Xml.Transform" /> or the <see cref="P:System.Web.UI.WebControls.Xml.TransformSource" /> property. If both XSL Transformation style sheet properties are set, the last property set determines which XSL Transformation style sheet is used to format the XML document. The other property is ignored.</para>
       </block>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.Xml" /> class also provides the <see cref="P:System.Web.UI.WebControls.Xml.TransformArgumentList" /> property, which enables you to provide the XSL Transformation style sheet with optional arguments. The arguments can be either XSL Transformations (XSLT) parameters or extension objects.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.Xml" /> class also provides the <see cref="P:System.Web.UI.WebControls.Xml.TransformArgumentList" /> property, which enables you to provide the XSL Transformation style sheet with optional arguments. The arguments can be either XSL Transformations (XSLT) parameters or extension objects.</para>
       <format type="text/html">
         <a href="#declarative_syntax" />
       </format>
@@ -213,8 +203,7 @@
     SkinID="string"
     TransformSource="string"
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
-/&gt;</code
-      >
+/&gt;</code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -232,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -261,8 +249,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.LiteralControl" /> to add.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the <see cref="T:System.Web.UI.LiteralControl" /> to add.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -290,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="P:System.Web.UI.Control.ClientID" /> property and returns the base server control identifier.</para
-          >
+            >Overrides the <see cref="P:System.Web.UI.Control.ClientID" /> property and returns the base server control identifier.</para>
         </summary>
       </Docs>
     </Member>
@@ -319,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="P:System.Web.UI.Control.Controls" /> property and returns the base <see cref="T:System.Web.UI.ControlCollection" /> collection.</para
-          >
+            >Overrides the <see cref="P:System.Web.UI.Control.Controls" /> property and returns the base <see cref="T:System.Web.UI.ControlCollection" /> collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -341,8 +326,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.Xml.CreateControlCollection" /> method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.Xml.CreateControlCollection" /> method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -366,17 +350,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.Xml.Document" /> property is obsolete. To specify the XML that will be displayed in the <see cref="T:System.Web.UI.WebControls.Xml" /> control, use the <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property or the <see cref="P:System.Web.UI.WebControls.Xml.DocumentSource" /> property. For more information about these alternatives, see the class overview for the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.Xml.Document" /> property is obsolete. To specify the XML that will be displayed in the <see cref="T:System.Web.UI.WebControls.Xml" /> control, use the <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property or the <see cref="P:System.Web.UI.WebControls.Xml.DocumentSource" /> property. For more information about these alternatives, see the class overview for the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
           <para
-            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.Document" /> property is used to specify a <see cref="T:System.Xml.XmlDocument" /> (representing an XML document) to display in the control.</para
-          >
+            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.Document" /> property is used to specify a <see cref="T:System.Xml.XmlDocument" /> (representing an XML document) to display in the control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.XmlDocument" /> to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.XmlDocument" /> to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -407,19 +388,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property is used to specify an XML string (representing an XML document) to display in the control. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property is not typically programmatically set, or set as an attribute of the control. Instead, the XML string is usually set declaratively by placing text between the opening and closing &lt;asp:Xml&gt; tags of the control.</para
-          >
+            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property is used to specify an XML string (representing an XML document) to display in the control. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property is not typically programmatically set, or set as an attribute of the control. Instead, the XML string is usually set declaratively by placing text between the opening and closing &lt;asp:Xml&gt; tags of the control.</para>
           <block subset="none" type="note">
             <para
-              >Although the <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property contains both get and set accessors, only the set accessor is useful. If you use the get accessor, <see cref="F:System.String.Empty" /> is returned.</para
-            >
+              >Although the <see cref="P:System.Web.UI.WebControls.Xml.DocumentContent" /> property contains both get and set accessors, only the set accessor is useful. If you use the get accessor, <see cref="F:System.String.Empty" /> is returned.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a string that contains the XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >Sets a string that contains the XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -447,14 +425,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentSource" /> property is used to specify the path to an XML file (representing an XML document) to display in the control. You can use a relative or an absolute path. A relative path relates the location of the file to the location of the Web Forms page or user control, without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the file in code. An absolute path provides the complete path, so moving the site to another directory requires updating the code.</para
-          >
+            >The XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control is specified in one of three ways. You can specify a <see cref="T:System.Xml.XmlDocument" /> object, an XML string, or an XML file by setting the appropriate property. The <see cref="P:System.Web.UI.WebControls.Xml.DocumentSource" /> property is used to specify the path to an XML file (representing an XML document) to display in the control. You can use a relative or an absolute path. A relative path relates the location of the file to the location of the Web Forms page or user control, without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the file in code. An absolute path provides the complete path, so moving the site to another directory requires updating the code.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the path to an XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >Gets or sets the path to an XML document to display in the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -498,14 +474,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.Xml.EnableTheming" /> property is inherited from the <see cref="T:System.Web.UI.Control" /> class, but is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to set the value of this property throws a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.Xml.EnableTheming" /> property is inherited from the <see cref="T:System.Web.UI.Control" /> class, but is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to set the value of this property throws a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="P:System.Web.UI.Control.EnableTheming" /> property. This property is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para
-          >
+            >Overrides the <see cref="P:System.Web.UI.Control.EnableTheming" /> property. This property is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -544,8 +518,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier for the control to be found.</param
-        >
+          />The identifier for the control to be found.</param>
       </Docs>
     </Member>
     <Member MemberName="Focus">
@@ -567,14 +540,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.Xml.Focus" /> method is inherited from the <see cref="T:System.Web.UI.Control" /> class, but it is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to invoke the method throws a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.Xml.Focus" /> method is inherited from the <see cref="T:System.Web.UI.Control" /> class, but it is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to invoke the method throws a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="M:System.Web.UI.Control.Focus" /> method. This method is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para
-          >
+            >Overrides the <see cref="M:System.Web.UI.Control.Focus" /> method. This method is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -595,8 +566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.Xml.GetDesignModeState" /> method is a helper method used to get the current design-time state of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.Xml.GetDesignModeState" /> method is a helper method used to get the current design-time state of the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -605,8 +575,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IDictionary" /> containing the design-time data for the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >An <see cref="T:System.Collections.IDictionary" /> containing the design-time data for the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </returns>
       </Docs>
     </Member>
@@ -660,8 +629,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The result of the output stream.</param
-        >
+          />The result of the output stream.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -693,14 +661,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.Xml.SkinID" /> property is inherited from the <see cref="T:System.Web.UI.Control" /> class, but is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to set the value of this property throws a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.Xml.SkinID" /> property is inherited from the <see cref="T:System.Web.UI.Control" /> class, but is not applicable to the <see cref="T:System.Web.UI.WebControls.Xml" /> class. Any attempt to set the value of this property throws a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see cref="P:System.Web.UI.Control.SkinID" /> property. This property is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para
-          >
+            >Overrides the <see cref="P:System.Web.UI.Control.SkinID" /> property. This property is not supported by the <see cref="T:System.Web.UI.WebControls.Xml" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -719,19 +685,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display an XML document, you can optionally specify an Extensible Stylesheet Language Transformation (XSLT) style sheet that formats the XML document, before it is written to the output stream in one of two ways. You can format the XML document with either a <see cref="T:System.Xml.Xsl.XslTransform" /> object or an XSL Transformation style sheet file. If no XSL Transform document is specified, the XML document is displayed using the default format. The <see cref="P:System.Web.UI.WebControls.Xml.Transform" /> property is used to specify a <see cref="T:System.Xml.Xsl.XslTransform" /> object (representing an XSL Transform document) used to format the XML document before it is written to the output stream.</para
-          >
+            >When using the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display an XML document, you can optionally specify an Extensible Stylesheet Language Transformation (XSLT) style sheet that formats the XML document, before it is written to the output stream in one of two ways. You can format the XML document with either a <see cref="T:System.Xml.Xsl.XslTransform" /> object or an XSL Transformation style sheet file. If no XSL Transform document is specified, the XML document is displayed using the default format. The <see cref="P:System.Web.UI.WebControls.Xml.Transform" /> property is used to specify a <see cref="T:System.Xml.Xsl.XslTransform" /> object (representing an XSL Transform document) used to format the XML document before it is written to the output stream.</para>
           <block subset="none" type="note">
             <para
-              >Using a <see cref="T:System.Xml.Xsl.XslTransform" /> object requires Full Trust permissions.</para
-            >
+              >Using a <see cref="T:System.Xml.Xsl.XslTransform" /> object requires Full Trust permissions.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.Xsl.XslTransform" /> object that formats the XML document before it is written to the output stream.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.Xsl.XslTransform" /> object that formats the XML document before it is written to the output stream.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -762,21 +725,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.Xml.TransformArgumentList" /> property to provide the XSL Transformation style sheet with optional arguments. The arguments can be either XSLT parameters or extension objects.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.Xml.TransformArgumentList" /> property to provide the XSL Transformation style sheet with optional arguments. The arguments can be either XSLT parameters or extension objects.</para>
           <para
             >For more information about using the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> class, see <format type="text/html">
               <a href="DE2F0DCE-6B98-4908-BBA7-ED150CC50355"
-                >Xslt Argument List For Stylesheet Parameters Extension Objects</a
-              >
-            </format>.</para
-          >
+                >Xslt Argument List For Stylesheet Parameters Extension Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Xml.Xsl.XsltArgumentList" /> that contains a list of optional arguments passed to the style sheet and used during the Extensible Stylesheet Language Transformation (XSLT).</para
-          >
+            >Gets or sets a <see cref="T:System.Xml.Xsl.XsltArgumentList" /> that contains a list of optional arguments passed to the style sheet and used during the Extensible Stylesheet Language Transformation (XSLT).</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -804,8 +763,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display an XML document, you can optionally specify an XSL Transformation style sheet that formats the XML document before it is written to the output stream in one of two ways. You can either format the XML document with a <see cref="T:System.Xml.Xsl.XslTransform" /> object or with an XSL Transformation style sheet file. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The <see cref="P:System.Web.UI.WebControls.Xml.TransformSource" /> property is used to specify the path to an XSL Transformation style sheet file (representing an XSL Transformation style sheet) used to format the XML document before it is written to the output stream. You can use a relative or an absolute path. A relative path relates the location of the file to the location of the Web Forms page or user control, without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the file in code. An absolute path provides the complete path, so moving the site to another directory requires updating the code.</para
-          >
+            >When using the <see cref="T:System.Web.UI.WebControls.Xml" /> control to display an XML document, you can optionally specify an XSL Transformation style sheet that formats the XML document before it is written to the output stream in one of two ways. You can either format the XML document with a <see cref="T:System.Xml.Xsl.XslTransform" /> object or with an XSL Transformation style sheet file. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The <see cref="P:System.Web.UI.WebControls.Xml.TransformSource" /> property is used to specify the path to an XSL Transformation style sheet file (representing an XSL Transformation style sheet) used to format the XML document before it is written to the output stream. You can use a relative or an absolute path. A relative path relates the location of the file to the location of the Web Forms page or user control, without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the file in code. An absolute path provides the complete path, so moving the site to another directory requires updating the code.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -850,17 +808,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be used to associate an <see cref="T:System.Xml.XPath.XPathNavigator" /> object with the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >This property can be used to associate an <see cref="T:System.Xml.XPath.XPathNavigator" /> object with the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
           <para
-            >An <see cref="T:System.Xml.XPath.XPathNavigator" /> object is created from a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface, such as the <see cref="T:System.Xml.XPath.XPathDocument" /> and <see cref="T:System.Xml.XmlDocument" /> classes. <see cref="T:System.Xml.XPath.XPathNavigator" /> objects created by <see cref="T:System.Xml.XPath.XPathDocument" /> objects are read-only, and <see cref="T:System.Xml.XPath.XPathNavigator" /> objects created by <see cref="T:System.Xml.XmlDocument" /> objects can be edited. An <see cref="T:System.Xml.XPath.XPathNavigator" /> object's read-only or editable status is determined using the <see cref="P:System.Xml.XPath.XPathNavigator.CanEdit" /> property of the <see cref="T:System.Xml.XPath.XPathNavigator" /> class.</para
-          >
+            >An <see cref="T:System.Xml.XPath.XPathNavigator" /> object is created from a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface, such as the <see cref="T:System.Xml.XPath.XPathDocument" /> and <see cref="T:System.Xml.XmlDocument" /> classes. <see cref="T:System.Xml.XPath.XPathNavigator" /> objects created by <see cref="T:System.Xml.XPath.XPathDocument" /> objects are read-only, and <see cref="T:System.Xml.XPath.XPathNavigator" /> objects created by <see cref="T:System.Xml.XmlDocument" /> objects can be edited. An <see cref="T:System.Xml.XPath.XPathNavigator" /> object's read-only or editable status is determined using the <see cref="P:System.Xml.XPath.XPathNavigator.CanEdit" /> property of the <see cref="T:System.Xml.XPath.XPathNavigator" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a cursor model for navigating and editing the XML data associated with the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para
-          >
+            >Gets or sets a cursor model for navigating and editing the XML data associated with the <see cref="T:System.Web.UI.WebControls.Xml" /> control.</para>
         </summary>
       </Docs>
     </Member>

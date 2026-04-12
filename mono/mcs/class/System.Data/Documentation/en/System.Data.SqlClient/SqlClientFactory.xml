@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of methods for creating instances of the <see cref="N:System.Data.SqlClient" /> provider's implementation of the data source classes.</para
-      >
+        >Represents a set of methods for creating instances of the <see cref="N:System.Data.SqlClient" /> provider's implementation of the data source classes.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,14 +37,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.Common.DbProviderFactory" /> class provides the <see cref="P:System.Data.Common.DbProviderFactory.CanCreateDataSourceEnumerator" /> property so that inheritors can indicate whether they can provide a data source enumerator. The <see cref="T:System.Data.SqlClient.SqlClientFactory" /> displays this property, but its value is always true.</para
-          >
+            >The <see cref="T:System.Data.Common.DbProviderFactory" /> class provides the <see cref="P:System.Data.Common.DbProviderFactory.CanCreateDataSourceEnumerator" /> property so that inheritors can indicate whether they can provide a data source enumerator. The <see cref="T:System.Data.SqlClient.SqlClientFactory" /> displays this property, but its value is always true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if a <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" /> can be created; otherwise false .</para
-          >
+            >Returns true if a <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" /> can be created; otherwise false .</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,14 +65,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbCommand" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbCommand" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbCommand" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbCommand" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -98,14 +93,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbCommandBuilder" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbCommandBuilder" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbCommandBuilder" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbCommandBuilder" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -128,14 +121,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbConnection" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbConnection" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbConnection" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbConnection" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -160,14 +151,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -187,14 +176,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbDataAdapter" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbDataAdapter" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbDataAdapter" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbDataAdapter" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -243,14 +230,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a strongly typed <see cref="T:System.Data.Common.DbParameter" /> instance.</para
-          >
+            >Returns a strongly typed <see cref="T:System.Data.Common.DbParameter" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new strongly typed instance of <see cref="T:System.Data.Common.DbParameter" />.</para
-          >
+            >A new strongly typed instance of <see cref="T:System.Data.Common.DbParameter" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -281,16 +266,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strongly typed instance of <see cref="T:System.Security.CodeAccessPermission" />.</para
-          >
+            >A strongly typed instance of <see cref="T:System.Security.CodeAccessPermission" />.</para>
         </returns>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A member of the <see cref="T:System.Security.Permissions.PermissionState" /> enumeration.</param
-        >
+          />A member of the <see cref="T:System.Security.Permissions.PermissionState" /> enumeration.</param>
       </Docs>
     </Member>
     <Member MemberName="Instance">
@@ -308,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an instance of the <see cref="T:System.Data.SqlClient.SqlClientFactory" />. This can be used to retrieve strongly typed data objects.</para
-          >
+            >Gets an instance of the <see cref="T:System.Data.SqlClient.SqlClientFactory" />. This can be used to retrieve strongly typed data objects.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

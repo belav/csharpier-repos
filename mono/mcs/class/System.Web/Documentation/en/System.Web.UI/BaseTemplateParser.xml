@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.BaseTemplateParser" /> class provides parser functionality for the <see cref="T:System.Web.UI.TemplateControl" /> and <see cref="T:System.Web.UI.PageTheme" /> classes. Because the <see cref="T:System.Web.UI.BaseTemplateParser" /> class is abstract, an instance of this class is not created directly. </para
-      >
+        >The <see cref="T:System.Web.UI.BaseTemplateParser" /> class provides parser functionality for the <see cref="T:System.Web.UI.TemplateControl" /> and <see cref="T:System.Web.UI.PageTheme" /> classes. Because the <see cref="T:System.Web.UI.BaseTemplateParser" /> class is abstract, an instance of this class is not created directly. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.BaseTemplateParser" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.BaseTemplateParser" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,23 +78,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see cref="T:System.Web.UI.PageParserFilter" /> object is defined and its <see cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" /> property is false, the <see cref="M:System.Web.UI.BaseTemplateParser.GetUserControlType(System.String)" /> method raises an <see cref="T:System.Web.HttpException" /> exception.</para
-          >
+            >If a <see cref="T:System.Web.UI.PageParserFilter" /> object is defined and its <see cref="M:System.Web.UI.PageParserFilter.AllowVirtualReference(System.String,System.Web.UI.VirtualReferenceType)" /> property is false, the <see cref="M:System.Web.UI.BaseTemplateParser.GetUserControlType(System.String)" /> method raises an <see cref="T:System.Web.HttpException" /> exception.</para>
           <para
             >Additionally, if the <see cref="T:System.Web.UI.UserControl" /> object that is referenced by the virtual path is marked as a no-compile control, an <see cref="T:System.Web.HttpException" /> exception will be thrown. To force a <see cref="T:System.Web.UI.UserControl" /> to be compiled, set the compilation mode attribute in its <format type="text/html">
               <a href="5fd824c2-7d70-4f8a-ab47-0c7e0e43578b">@ Control</a>
             </format> directive to the <see cref="F:System.Web.UI.CompilationMode.Always" /> field. To set the compilation mode for pages and controls across an application, set the compilationMode attribute of the <format type="text/html">
               <a href="4123bb66-3fe4-4d62-b70e-33758656b458"
-                >pages Element (ASP.NET Settings Schema)</a
-              >
-            </format> in the Web.config file.</para
-          >
+                >pages Element (ASP.NET Settings Schema)</a>
+            </format> in the Web.config file.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles and returns the type of the <see cref="T:System.Web.UI.UserControl" /> object that is specified by the virtual path.</para
-          >
+            >Compiles and returns the type of the <see cref="T:System.Web.UI.UserControl" /> object that is specified by the virtual path.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,8 +101,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path of the <see cref="T:System.Web.UI.UserControl" />. </param
-        >
+          />The virtual path of the <see cref="T:System.Web.UI.UserControl" />. </param>
       </Docs>
     </Member>
   </Members>

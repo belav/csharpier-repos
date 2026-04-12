@@ -5,8 +5,7 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.IO.IsolatedStorage"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.IO.IsolatedStorage.IsolatedStorageException</ClassName
-  >
+    >System.IO.IsolatedStorage.IsolatedStorageException</ClassName>
   <Message i:type="x:string" xmlns="">An error occurred while accessing IsolatedStorage.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

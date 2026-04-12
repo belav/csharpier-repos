@@ -30,14 +30,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> enables control of <see cref="T:System.Xml.Serialization.XmlSerializer" /> options, such as the <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" /> property of the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> enables control of <see cref="T:System.Xml.Serialization.XmlSerializer" /> options, such as the <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" /> property of the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls run-time behavior of the <see cref="T:System.Xml.Serialization.XmlSerializer" /> associated with an operation.</para
-      >
+        >Controls run-time behavior of the <see cref="T:System.Xml.Serialization.XmlSerializer" /> associated with an operation.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,16 +60,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class with a specific operation.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class with a specific operation.</para>
         </summary>
         <param name="operation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> to export or serialize.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> to export or serialize.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -97,16 +93,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" /> class.  </para>
         </summary>
         <param name="operation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> to export or serialize.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.OperationDescription" /> to export or serialize.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXmlMappings">
@@ -135,8 +129,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of <see cref="T:System.Xml.Serialization.XmlMapping" />s that contains the mappings.</para
-          >
+            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of <see cref="T:System.Xml.Serialization.XmlMapping" />s that contains the mappings.</para>
         </returns>
       </Docs>
     </Member>
@@ -177,15 +170,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param
-        >
+          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> that contains the parameters.</param
-        >
+          />A <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> that contains the parameters.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IOperationBehavior.ApplyClientBehavior">
@@ -222,15 +213,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.OperationDescription" /> that represents the operation.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.OperationDescription" /> that represents the operation.</param>
         <param name="proxy">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> that represents a client operation.</param
-        >
+          />A <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" /> that represents a client operation.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IOperationBehavior.ApplyDispatchBehavior">
@@ -267,15 +256,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param
-        >
+          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" />.</param>
         <param name="dispatch">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" /> to apply.</param
-        >
+          />The <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" /> to apply.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IOperationBehavior.Validate">
@@ -311,8 +298,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" /> to validate.</param
-        >
+          />The target <see cref="T:System.ServiceModel.Description.OperationDescription" /> to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportContract">
@@ -353,8 +339,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> to use for the export.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> to use for the export.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
@@ -395,8 +380,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> to use for the export.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> to use for the export.</param>
       </Docs>
     </Member>
     <Member MemberName="XmlSerializerFormatAttribute">

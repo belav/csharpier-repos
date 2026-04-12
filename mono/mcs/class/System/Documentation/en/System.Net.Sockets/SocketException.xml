@@ -35,11 +35,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Net.Sockets.SocketException" /> is thrown by the <see cref="T:System.Net.Sockets.Socket" /> and <see cref="T:System.Net.Dns" /> classes when an error occurs with the network.</para
-      >
+        >A <see cref="T:System.Net.Sockets.SocketException" /> is thrown by the <see cref="T:System.Net.Sockets.Socket" /> and <see cref="T:System.Net.Dns" /> classes when an error occurs with the network.</para>
       <para
-        >The default constructor for the <see cref="M:System.Net.Sockets.SocketException.#ctor" /> class sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system socket error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation on MSDN.</para
-      >
+        >The default constructor for the <see cref="M:System.Net.Sockets.SocketException.#ctor" /> class sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system socket error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation on MSDN.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,14 +67,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.Sockets.SocketException.#ctor" /> constructor sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system socket error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winsock/winsock/windows_sockets_error_codes_2.asp).</para
-          >
+            >The <see cref="M:System.Net.Sockets.SocketException.#ctor" /> constructor sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system socket error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winsock/winsock/windows_sockets_error_codes_2.asp).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class with the last operating system error code.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class with the last operating system error code.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -101,14 +97,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.Sockets.SocketException.#ctor" /> constructor sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to <paramref name="errorCode" />.</para
-          >
+            >The <see cref="M:System.Net.Sockets.SocketException.#ctor" /> constructor sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to <paramref name="errorCode" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class with the specified error code.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class with the specified error code.</para>
         </summary>
       </Docs>
     </Member>
@@ -137,14 +131,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.Sockets.SocketException" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.Sockets.SocketException" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SocketException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para>
         </summary>
       </Docs>
     </Member>
@@ -165,11 +157,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property contains the error code that is associated with the error that caused the exception.</para
-          >
+            >The <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property contains the error code that is associated with the error that caused the exception.</para>
           <para
-            >The default constructor for <see cref="T:System.Net.Sockets.SocketException" /> sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation in MSDN.</para
-          >
+            >The default constructor for <see cref="T:System.Net.Sockets.SocketException" /> sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation in MSDN.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -218,11 +208,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.Sockets.SocketException.SocketErrorCode" /> property contains the error code that is associated with the error that caused the exception.</para
-          >
+            >The <see cref="P:System.Net.Sockets.SocketException.SocketErrorCode" /> property contains the error code that is associated with the error that caused the exception.</para>
           <para
-            >The default constructor for <see cref="T:System.Net.Sockets.SocketException" /> sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation in MSDN.</para
-          >
+            >The default constructor for <see cref="T:System.Net.Sockets.SocketException" /> sets the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" /> property to the last operating system error that occurred. For more information about socket error codes, see the Windows Sockets version 2 API error code documentation in MSDN.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

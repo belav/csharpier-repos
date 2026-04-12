@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeNamespaceImport" /> can be used to represent a namespace import directive.</para
-      >
+        <see cref="T:System.CodeDom.CodeNamespaceImport" /> can be used to represent a namespace import directive.</para>
       <para>In most languages, a namespace import directive causes visibility of the types within the imported namespaces to code that references types in the imported namespaces.</para>
       <block subset="none" type="note">
         <para>Use fully qualified type references to avoid potential ambiguity.</para>
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImport" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImport" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -92,16 +90,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImport" /> class using the specified namespace to import.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImport" /> class using the specified namespace to import.</para>
         </summary>
         <param name="nameSpace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the namespace to import. </param
-        >
+          />The name of the namespace to import. </param>
       </Docs>
     </Member>
     <Member MemberName="LinePragma">

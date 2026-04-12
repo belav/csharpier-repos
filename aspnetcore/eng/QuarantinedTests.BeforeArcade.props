@@ -11,10 +11,8 @@
 
   <PropertyGroup>
     <TestRunnerAdditionalArguments Condition="'$(RunQuarantinedTests)' == ''"
-      >$(_NonQuarantinedTestRunAdditionalArgs) $(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments
-    >
+      >$(_NonQuarantinedTestRunAdditionalArgs) $(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments>
     <TestRunnerAdditionalArguments Condition="'$(RunQuarantinedTests)' == 'true'"
-      >$(_QuarantinedTestRunAdditionalArgs) $(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments
-    >
+      >$(_QuarantinedTestRunAdditionalArgs) $(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments>
   </PropertyGroup>
 </Project>

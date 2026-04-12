@@ -14,8 +14,7 @@
     >The definite assignment state of v can be either: <list>
       <list_item> Definitely assigned. This indicates that on all possible control flows to this point, v has been assigned a value. </list_item>
       <list_item
-        > Not definitely assigned. For the state of a variable at the end of an expression of type <keyword>bool</keyword>, the state of a variable that isn't definitely assigned may (but doesn't necessarily) fall into one of the following sub-states: </list_item
-      >
+        > Not definitely assigned. For the state of a variable at the end of an expression of type <keyword>bool</keyword>, the state of a variable that isn't definitely assigned may (but doesn't necessarily) fall into one of the following sub-states: </list_item>
       <list>
         <list_item> Definitely assigned after true expression. This state indicates that v is definitely assigned if the boolean expression evaluated as true, but is not necessarily assigned if the boolean expression evaluated as false. </list_item>
         <list_item> Definitely assigned after false expression. This state indicates that v is definitely assigned if the boolean expression evaluated as false, but is not necessarily assigned if the boolean expression evaluated as true. </list_item>

@@ -19,17 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" /> event is raised when the user suspends or resumes the operating system, or when a system power status notification occurs. A system power status notification can occur when a weak or charging power source is detected, or when a transition from AC or battery power source occurs.</para
-      >
+        >A <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" /> event is raised when the user suspends or resumes the operating system, or when a system power status notification occurs. A system power status notification can occur when a weak or charging power source is detected, or when a transition from AC or battery power source occurs.</para>
       <para
-        >The <see cref="P:Microsoft.Win32.PowerModeChangedEventArgs.Mode" /> property of a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> indicates the type of power mode event that has occurred.</para
-      >
+        >The <see cref="P:Microsoft.Win32.PowerModeChangedEventArgs.Mode" /> property of a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> indicates the type of power mode event that has occurred.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,22 +52,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to create a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> that indicates a type of power mode event.</para
-          >
+            >This constructor can be used to create a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> that indicates a type of power mode event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> class using the specified power mode event type.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" /> class using the specified power mode event type.</para>
         </summary>
         <param name="mode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:Microsoft.Win32.PowerModes" /> values that represents the type of power mode event. </param
-        >
+          />One of the <see cref="T:Microsoft.Win32.PowerModes" /> values that represents the type of power mode event. </param>
       </Docs>
     </Member>
     <Member MemberName="Mode">

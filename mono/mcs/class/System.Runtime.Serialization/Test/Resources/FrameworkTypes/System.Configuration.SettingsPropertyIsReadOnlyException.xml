@@ -5,8 +5,7 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Configuration"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Configuration.SettingsPropertyIsReadOnlyException</ClassName
-  >
+    >System.Configuration.SettingsPropertyIsReadOnlyException</ClassName>
   <Message i:nil="true" xmlns="" />
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

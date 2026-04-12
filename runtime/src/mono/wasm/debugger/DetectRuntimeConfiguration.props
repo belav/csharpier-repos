@@ -4,22 +4,18 @@
     <_DotnetJsRelativePath>$([System.IO.Path]::Combine('runtimes', 'browser-wasm', 'native', 'dotnet.js'))</_DotnetJsRelativePath>
     <_ReleaseConfigDetected
       Condition="Exists('$(_TopDir)artifacts/bin/microsoft.netcore.app.runtime.browser-wasm/Release/runtimes/browser-wasm/native/dotnet.js')"
-      >true</_ReleaseConfigDetected
-    >
+      >true</_ReleaseConfigDetected>
     <_DebugConfigDetected
       Condition="Exists('$(_TopDir)artifacts/bin/microsoft.netcore.app.runtime.browser-wasm/Debug/runtimes/browser-wasm/native/dotnet.js')"
-      >true</_DebugConfigDetected
-    >
+      >true</_DebugConfigDetected>
 
     <_OriginalRuntimeConfiguration>$(RuntimeConfiguration)</_OriginalRuntimeConfiguration>
     <RuntimeConfiguration
       Condition="'$(RuntimeConfiguration)' == '' and '$(_ReleaseConfigDetected)' == 'true'"
-      >Release</RuntimeConfiguration
-    >
+      >Release</RuntimeConfiguration>
     <RuntimeConfiguration
       Condition="'$(RuntimeConfiguration)' == '' and '$(_DebugConfigDetected)' == 'true'"
-      >Debug</RuntimeConfiguration
-    >
+      >Debug</RuntimeConfiguration>
 
     <RuntimeConfiguration Condition="'$(RuntimeConfiguration)' == ''">Release</RuntimeConfiguration>
   </PropertyGroup>

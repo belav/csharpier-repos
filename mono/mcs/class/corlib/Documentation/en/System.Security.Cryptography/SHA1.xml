@@ -31,14 +31,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The hash is used as a unique value of fixed size representing a large amount of data. Hashes of two sets of data should match if the corresponding data also matches. Small changes to the data result in large, unpredictable changes in the hash.</para>
       <para
-        >The hash size for the <see cref="T:System.Security.Cryptography.SHA1" /> algorithm is 160 bits.</para
-      >
+        >The hash size for the <see cref="T:System.Security.Cryptography.SHA1" /> algorithm is 160 bits.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see cref="T:System.Security.Cryptography.SHA1" /> hash for the input data.</para
-      >
+        >Computes the <see cref="T:System.Security.Cryptography.SHA1" /> hash for the input data.</para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.SHA1" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.SHA1" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -92,14 +89,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of <see cref="T:System.Security.Cryptography.SHA1" /> is <see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" />.</para
-          >
+            >The default implementation of <see cref="T:System.Security.Cryptography.SHA1" /> is <see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the default implementation of <see cref="T:System.Security.Cryptography.SHA1" />.</para
-          >
+            >Creates an instance of the default implementation of <see cref="T:System.Security.Cryptography.SHA1" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -133,22 +128,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the specified implementation of <see cref="T:System.Security.Cryptography.SHA1" />.</para
-          >
+            >Creates an instance of the specified implementation of <see cref="T:System.Security.Cryptography.SHA1" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see cref="T:System.Security.Cryptography.SHA1" /> using the specified implementation.</para
-          >
+            >A new instance of <see cref="T:System.Security.Cryptography.SHA1" /> using the specified implementation.</para>
         </returns>
         <param name="hashName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.SHA1" /> to be used. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.SHA1" /> to be used. </param>
       </Docs>
     </Member>
   </Members>

@@ -6,8 +6,7 @@
 >
   <NativeErrorCode i:type="x:int" xmlns="">0</NativeErrorCode>
   <ClassName i:type="x:string" xmlns=""
-    >System.Net.NetworkInformation.NetworkInformationException</ClassName
-  >
+    >System.Net.NetworkInformation.NetworkInformationException</ClassName>
   <Message i:type="x:string" xmlns="">The operation completed successfully</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

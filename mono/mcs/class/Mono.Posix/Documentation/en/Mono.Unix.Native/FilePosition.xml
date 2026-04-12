@@ -35,13 +35,11 @@
         <c>FilePosition</c> is an alternate mechanism for specifying a
     location within a file, which can take into account text vs. binary
     <c>FILE</c> stream differences.  It exists to support platforms for which
-    file positions can exceed the size of <see langword="long" />.</para
-      >
+    file positions can exceed the size of <see langword="long" />.</para>
       <para>
         <c>FilePosition</c> wraps unmanaged memory.  It contains a finalizer
     to free this memory, but using <see cref="M:Mono.Unix.Native.FilePosition.Dispose" /> is highly recommended to avoid
-    additional GC pressure.</para
-      >
+    additional GC pressure.</para>
     </remarks>
     <altmember cref="M:Mono.Unix.StdioFileStream.RestoreFilePosition" />
     <altmember cref="M:Mono.Unix.StdioFileStream.SaveFilePosition" />
@@ -87,8 +85,7 @@
         <summary>Frees the wrapped <c>fpos_t</c> instance.</summary>
         <remarks
           >This method should be called whenever a <c>FilePosition</c>
-        is no longer needed.</remarks
-        >
+        is no longer needed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">

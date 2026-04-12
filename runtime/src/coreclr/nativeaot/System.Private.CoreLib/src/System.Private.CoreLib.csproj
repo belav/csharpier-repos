@@ -524,19 +524,15 @@
   <PropertyGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <DefineConstants>INPLACE_RUNTIME;$(DefineConstants)</DefineConstants>
     <DefineConstants Condition="'$(Platform)' == 'arm'"
-      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
-    >
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
     <DefineConstants Condition="'$(Platform)' == 'armel'"
-      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
-    >
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
     <DefineConstants Condition="'$(Platform)' == 'wasm'"
-      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
-    >
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
 
     <IntermediatesDir>$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir>
     <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))"
-      >$(IntermediatesDir)\ide</IntermediatesDir
-    >
+      >$(IntermediatesDir)\ide</IntermediatesDir>
   </PropertyGroup>
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="$(RuntimeBasePath)System\Runtime\CachedInterfaceDispatch.cs">

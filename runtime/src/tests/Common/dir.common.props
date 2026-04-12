@@ -19,8 +19,7 @@
     <TestSrcDir>$([MSBuild]::NormalizePath('$(RepoRoot)/src/tests/'))</TestSrcDir>
     <TestSrcDir
       Condition="$([System.String]::new('$(MSBuildProjectDirectory)').StartsWith('$(BaseOutputPathWithConfig)'))"
-      >$(BaseOutputPathWithConfig)</TestSrcDir
-    >
+      >$(BaseOutputPathWithConfig)</TestSrcDir>
     <BuildProjectRelativeDir>$([MSBuild]::MakeRelative($(TestSrcDir), $(MSBuildProjectDirectory)))\$(MSBuildProjectName)\</BuildProjectRelativeDir>
 
     <!-- BaseIntermediateOutputPath is used by the SDK as the location
@@ -29,21 +28,17 @@
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
     <UseVisualStudioNativeBinariesLayout
       Condition="'$(UseVisualStudioNativeBinariesLayout)' == '' and '$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform(Windows))"
-      >true</UseVisualStudioNativeBinariesLayout
-    >
+      >true</UseVisualStudioNativeBinariesLayout>
     <__NativeTestIntermediatesDir
       Condition="'$(__NativeTestIntermediatesDir)' == '' and '$(UseVisualStudioNativeBinariesLayout)' != 'true'"
-      >$(BaseOutputPath)\obj\$(OSPlatformConfig)\Native\</__NativeTestIntermediatesDir
-    >
+      >$(BaseOutputPath)\obj\$(OSPlatformConfig)\Native\</__NativeTestIntermediatesDir>
     <__NativeTestIntermediatesDir
       Condition="'$(__NativeTestIntermediatesDir)' == '' and '$(UseVisualStudioNativeBinariesLayout)' == 'true'"
-      >$(BaseOutputPath)\obj\$(OSPlatformConfig)\Native\ide\</__NativeTestIntermediatesDir
-    >
+      >$(BaseOutputPath)\obj\$(OSPlatformConfig)\Native\ide\</__NativeTestIntermediatesDir>
 
     <BasePackagePath>$(BaseOutputPath)\packages\$(BuildProjectRelativeDir)</BasePackagePath>
     <BasePackagePath Condition="'$(PackageRuntimeIdentifier)' != ''"
-      >$([System.IO.Path]::GetFullPath($(IntermediateOutputPath)\$(PackageRuntimeIdentifier)))</BasePackagePath
-    >
+      >$([System.IO.Path]::GetFullPath($(IntermediateOutputPath)\$(PackageRuntimeIdentifier)))</BasePackagePath>
 
     <PackageOutputPath>$(BasePackagePath)</PackageOutputPath>
     <RestoreOutputPath>$(BasePackagePath)</RestoreOutputPath>

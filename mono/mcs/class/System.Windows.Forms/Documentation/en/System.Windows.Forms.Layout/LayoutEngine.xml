@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class when you want to create custom layout behavior at run time. Derive your own class from the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class and override the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" /> method to define your custom layout behavior. </para
-      >
+        >Use the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class when you want to create custom layout behavior at run time. Derive your own class from the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class and override the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.Layout(System.Object,System.Windows.Forms.LayoutEventArgs)" /> method to define your custom layout behavior. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Layout.LayoutEngine" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,8 +57,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Optionally provide initialization logic in the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" /> method. </para
-          >
+            >Optionally provide initialization logic in the <see cref="M:System.Windows.Forms.Layout.LayoutEngine.InitLayout(System.Object,System.Windows.Forms.BoundsSpecified)" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,15 +68,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The container on which the layout engine will operate.</param
-        >
+          />The container on which the layout engine will operate.</param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The bounds defining the container's size and position.</param
-        >
+          />The bounds defining the container's size and position.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when the layout engine is to perform a layout operation on the <paramref name="container" /> parameter. You can check the value of the <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />, <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedComponent" />, and <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" /> properties on <paramref name="layoutEventArgs" /> to decide if a layout operation is necessary.</para
-          >
+            >This method is called when the layout engine is to perform a layout operation on the <paramref name="container" /> parameter. You can check the value of the <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />, <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedComponent" />, and <see cref="P:System.Windows.Forms.LayoutEventArgs.AffectedControl" /> properties on <paramref name="layoutEventArgs" /> to decide if a layout operation is necessary.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -113,23 +107,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if layout should be performed again by the parent of <paramref name="container" />; otherwise, false.</para
-          >
+            >true if layout should be performed again by the parent of <paramref name="container" />; otherwise, false.</para>
         </returns>
         <param name="container">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The container on which the layout engine will operate.</param
-        >
+          />The container on which the layout engine will operate.</param>
         <param name="layoutEventArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An event argument from a <see cref="E:System.Windows.Forms.Control.Layout" /> event.</param
-        >
+          />An event argument from a <see cref="E:System.Windows.Forms.Control.Layout" /> event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -30,14 +30,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event occurs when settings are retrieved from a provider. This event fires once for each provider.</para
-      >
+        >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event occurs when settings are retrieved from a provider. This event fires once for each provider.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event.</para
-      >
+        >Represents the method that will handle the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event.</para>
     </summary>
   </Docs>
 </Type>

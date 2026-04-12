@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" /> method of a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" /> object returns the unmanaged blocks of memory for working with views of memory-mapped files.</para
-      >
+        >The <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" /> method of a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" /> object returns the unmanaged blocks of memory for working with views of memory-mapped files.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -74,30 +72,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, and capacity.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, and capacity.</para>
         </summary>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to contain the accessor.</param
-        >
+          />The buffer to contain the accessor.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte at which to start the accessor.</param
-        >
+          />The byte at which to start the accessor.</param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of memory to allocate.</param
-        >
+          />The size, in bytes, of memory to allocate.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -124,37 +118,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, capacity, and access right.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> class with a specified buffer, offset, capacity, and access right.</para>
         </summary>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to contain the accessor.</param
-        >
+          />The buffer to contain the accessor.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte at which to start the accessor.</param
-        >
+          />The byte at which to start the accessor.</param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of memory to allocate.</param
-        >
+          />The size, in bytes, of memory to allocate.</param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param
-        >
+          />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -233,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" />. </para
-          >
+            >Releases all resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" />. </para>
         </summary>
       </Docs>
     </Member>
@@ -258,25 +246,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.UnmanagedMemoryAccessor" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.UnmanagedMemoryAccessor" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -315,29 +299,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer to contain the accessor.</param
-        >
+          />The buffer to contain the accessor.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte at which to start the accessor.</param
-        >
+          />The byte at which to start the accessor.</param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size, in bytes, of memory to allocate.</param
-        >
+          />The size, in bytes, of memory to allocate.</param>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param
-        >
+          />The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />.</param>
       </Docs>
     </Member>
     <Member MemberName="IsOpen">
@@ -469,8 +449,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading. </param
-        >
+          />The number of bytes into the accessor at which to begin reading. </param>
       </Docs>
     </Member>
     <Member MemberName="ReadByte">
@@ -504,8 +483,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadChar">
@@ -539,8 +517,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDecimal">
@@ -574,8 +551,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDouble">
@@ -609,8 +585,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt16">
@@ -644,8 +619,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt32">
@@ -679,8 +653,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt64">
@@ -714,8 +687,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadSByte">
@@ -754,8 +726,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadSingle">
@@ -789,8 +760,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadUInt16">
@@ -829,8 +799,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadUInt32">
@@ -869,8 +838,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadUInt64">
@@ -909,8 +877,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin reading.</param
-        >
+          />The number of bytes into the accessor at which to begin reading.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -941,11 +908,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -976,11 +941,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1011,11 +974,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1046,11 +1007,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1081,11 +1040,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1116,11 +1073,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1151,11 +1106,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1186,11 +1139,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1226,11 +1177,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1261,11 +1210,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1301,11 +1248,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1341,11 +1286,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1381,11 +1324,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes into the accessor at which to begin writing.</param
-        >
+          />The number of bytes into the accessor at which to begin writing.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="Write&lt;T&gt;">

@@ -58,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointCollectionElement`2" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointCollectionElement`2" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -119,8 +118,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of an endpoint element.</param
-        >
+          />The name of an endpoint element.</param>
       </Docs>
     </Member>
     <Member MemberName="Endpoints">
@@ -194,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a local instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" /> class. </para
-          >
+            >Creates a local instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" /> class. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -264,22 +261,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier of the element to add to the collection.</param
-        >
+          />The identifier of the element to add to the collection.</param>
         <param name="endpoint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The endpoint element to add.</param
-        >
+          />The endpoint element to add.</param>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration file – not implemented.</param
-        >
+          />The configuration file – not implemented.</param>
       </Docs>
     </Member>
   </Members>

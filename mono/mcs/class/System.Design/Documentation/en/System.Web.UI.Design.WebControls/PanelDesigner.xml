@@ -17,23 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.Panel" /> control is used as a container for other controls, especially when controls are generated programmatically.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.Panel" /> control is used as a container for other controls, especially when controls are generated programmatically.</para>
       <para
-        >The <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class provides design-time support for <see cref="T:System.Web.UI.WebControls.Panel" /> controls in a visual designer. However, for all new implementations of the Panel control, use the <see cref="T:System.Web.UI.Design.WebControls.PanelContainerDesigner" /> instead of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" />.</para
-      >
+        >The <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class provides design-time support for <see cref="T:System.Web.UI.WebControls.Panel" /> controls in a visual designer. However, for all new implementations of the Panel control, use the <see cref="T:System.Web.UI.Design.WebControls.PanelContainerDesigner" /> instead of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" />.</para>
       <para
-        >In a visual designer, when you switch from Source to Design view, the markup source code that describes the associated <see cref="T:System.Web.UI.WebControls.Panel" /> control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to markup source code and edited into the markup for the Web page. </para
-      >
+        >In a visual designer, when you switch from Source to Design view, the markup source code that describes the associated <see cref="T:System.Web.UI.WebControls.Panel" /> control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to markup source code and edited into the markup for the Web page. </para>
       <para
-        >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method maps a specified property and value to a specified markup style. The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> method provides notification when a behavior is attached to the designer.</para
-      >
+        >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method maps a specified property and value to a specified markup style. The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> method provides notification when a behavior is attached to the designer.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.WebControls.Panel" /> control.</para
-      >
+        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.WebControls.Panel" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,14 +40,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class when it creates the associated <see cref="T:System.Web.UI.WebControls.Panel" /> control or a copy of that control on the design surface.</para
-          >
+            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class when it creates the associated <see cref="T:System.Web.UI.WebControls.Panel" /> control or a copy of that control on the design surface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.PanelDesigner" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -79,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method provides special handling for the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> and <see cref="P:System.Web.UI.WebControls.Panel.HorizontalAlign" /> properties, but calls the <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.MapPropertyToStyle(System.String,System.Object)" /> base method for all other values of the <paramref name="propName" /> parameter.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method provides special handling for the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> and <see cref="P:System.Web.UI.WebControls.Panel.HorizontalAlign" /> properties, but calls the <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.MapPropertyToStyle(System.String,System.Object)" /> base method for all other values of the <paramref name="propName" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> method calls the <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.OnBehaviorAttached" /> base method. Then the <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> maps the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> and <see cref="P:System.Web.UI.WebControls.Panel.HorizontalAlign" /> properties to the appropriate style by using the <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method, if these properties are defined.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> method calls the <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.OnBehaviorAttached" /> base method. Then the <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached" /> maps the <see cref="P:System.Web.UI.WebControls.Panel.BackImageUrl" /> and <see cref="P:System.Web.UI.WebControls.Panel.HorizontalAlign" /> properties to the appropriate style by using the <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)" /> method, if these properties are defined.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

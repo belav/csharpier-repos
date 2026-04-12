@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -98,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -128,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,8 +155,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -276,8 +270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -334,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -364,8 +356,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -394,8 +385,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -424,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides the properties specifying default values as well as the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides the properties specifying default values as well as the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -454,8 +443,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" /> method.</para
-          >
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricKeyWrapAlgorithmSupported(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -484,8 +472,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" /> method.</para
-          >
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -514,8 +501,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the method <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />.</para
-          >
+            >When overridden, provides a string value that will be used for comparison in the method <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsCanonicalizationAlgorithmSupported(System.String)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -541,8 +527,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" /> method.</para
-          >
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -571,8 +556,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" /> method.</para
-          >
+            >When overridden, provides a string value that will be used for comparison in the <see cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -605,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default encryption key derivation length as an <see cref="T:System.Int32" /> value.</para
-          >
+            >Gets the default encryption key derivation length as an <see cref="T:System.Int32" /> value.</para>
         </summary>
       </Docs>
     </Member>
@@ -635,8 +618,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default signature key derivation length as an <see cref="T:System.Int32" /> value.</para
-          >
+            >Gets the default signature key derivation length as an <see cref="T:System.Int32" /> value.</para>
         </summary>
       </Docs>
     </Member>
@@ -665,8 +647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default symmetric key length as an <see cref="T:System.Int32" /> value.</para
-          >
+            >Gets the default symmetric key length as an <see cref="T:System.Int32" /> value.</para>
         </summary>
       </Docs>
     </Member>
@@ -757,8 +738,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key length to check.</param
-        >
+          />The key length to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsAsymmetricKeyWrapAlgorithmSupported">
@@ -784,8 +764,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />.</para
-          >
+            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -800,8 +779,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm to check.</param
-        >
+          />The algorithm to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsAsymmetricSignatureAlgorithmSupported">
@@ -827,8 +805,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />.</para
-          >
+            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -843,8 +820,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsCanonicalizationAlgorithmSupported">
@@ -870,8 +846,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />.</para
-          >
+            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -886,8 +861,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDigestAlgorithmSupported">
@@ -913,8 +887,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />.</para
-          >
+            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -929,8 +902,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsEncryptionAlgorithmSupported">
@@ -956,8 +928,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />.</para
-          >
+            <paramref name="algorithm" /> gets compared to the string returned from <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -972,8 +943,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsEncryptionKeyDerivationAlgorithmSupported">
@@ -1010,8 +980,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSignatureKeyDerivationAlgorithmSupported">
@@ -1048,8 +1017,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricKeyLengthSupported">
@@ -1075,8 +1043,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="length" /> is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref name="length" /> is between 192 and 256, inclusive.</para
-          >
+            >The <paramref name="length" /> is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref name="length" /> is between 192 and 256, inclusive.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1091,8 +1058,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key length to check.</param
-        >
+          />The key length to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricKeyWrapAlgorithmSupported">
@@ -1129,8 +1095,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSymmetricSignatureAlgorithmSupported">
@@ -1167,8 +1132,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm name to check.</param
-        >
+          />The algorithm name to check.</param>
       </Docs>
     </Member>
     <Member MemberName="TripleDes">
@@ -1192,8 +1156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1222,8 +1185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1252,8 +1214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1282,8 +1243,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

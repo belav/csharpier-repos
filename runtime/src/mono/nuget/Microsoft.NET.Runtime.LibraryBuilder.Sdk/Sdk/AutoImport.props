@@ -2,13 +2,11 @@
 <Project>
   <PropertyGroup>
     <TargetOS Condition="'$(RuntimeIdentifier)' != '' and $(RuntimeIdentifier.Contains('-'))"
-      >$(RuntimeIdentifier.Substring(0, $(RuntimeIdentifier.IndexOf('-'))))</TargetOS
-    >
+      >$(RuntimeIdentifier.Substring(0, $(RuntimeIdentifier.IndexOf('-'))))</TargetOS>
 
     <TargetsAppleMobile
       Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'maccatalyst' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator'"
-      >true</TargetsAppleMobile
-    >
+      >true</TargetsAppleMobile>
     <TargetsAndroid Condition="'$(TargetOS)' == 'android'">true</TargetsAndroid>
   </PropertyGroup>
 </Project>

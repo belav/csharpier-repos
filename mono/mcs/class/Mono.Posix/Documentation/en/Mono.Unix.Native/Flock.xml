@@ -27,15 +27,13 @@
   </Interfaces>
   <Docs>
     <summary>
-      <see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2) advisory file locking information.</summary
-    >
+      <see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2) advisory file locking information.</summary>
     <remarks
       >This can only be used with 
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />, 
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />, and
     <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />.
-    </remarks
-    >
+    </remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.fcntl(int,Mono.Unix.Native.FcntlCommand,Mono.Unix.Native.Flock&amp;)" />
   </Docs>
   <Members>

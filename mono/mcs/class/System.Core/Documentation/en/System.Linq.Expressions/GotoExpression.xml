@@ -102,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para
-          >
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -148,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para
-          >
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
         </summary>
       </Docs>
     </Member>
@@ -188,15 +186,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.GotoExpression.Target" /> property of the result. </param
-        >
+          />The <see cref="P:System.Linq.Expressions.GotoExpression.Target" /> property of the result. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.GotoExpression.Value" /> property of the result. </param
-        >
+          />The <see cref="P:System.Linq.Expressions.GotoExpression.Value" /> property of the result. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

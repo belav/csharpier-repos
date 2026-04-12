@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Base class from which <see cref="T:System.Web.Configuration.RemoteWebConfigurationHostServer" /> extends.</para
-      >
+        >Base class from which <see cref="T:System.Web.Configuration.RemoteWebConfigurationHostServer" /> extends.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,14 +59,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Conditionally encrypts or decrypts the value of the string referenced by the <paramref name="xmlString" /> parameter.</para
-          >
+            >Conditionally encrypts or decrypts the value of the string referenced by the <paramref name="xmlString" /> parameter.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing either the encrypted or decrypted value of the <paramref name="xmlString" />.</para
-          >
+            >A string containing either the encrypted or decrypted value of the <paramref name="xmlString" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -162,29 +159,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The level of the configuration file.</param
-        >
+          />The level of the configuration file.</param>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Path to the remote configuration file to be accessed.</param
-        >
+          />Path to the remote configuration file to be accessed.</param>
         <param name="site">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Path to the remote machine.</param
-        >
+          />Path to the remote machine.</param>
         <param name="locationSubPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The subpath of the location of the configuration file.</param
-        >
+          />The subpath of the location of the configuration file.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

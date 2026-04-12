@@ -24,14 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used in conjunction with the <see cref="T:System.Security.Policy.NetCodeGroup" /> class to control how executing code can connect back to the site it was downloaded from. These classes provide programmatic control of the <see cref="T:System.Net.WebPermission" /> granted to executing code that controls what schemes and ports the code can use access its origin site. You can specify scheme and port pairs that are permitted based on the scheme in the URL where the code originates. </para
-      >
+        >This class is used in conjunction with the <see cref="T:System.Security.Policy.NetCodeGroup" /> class to control how executing code can connect back to the site it was downloaded from. These classes provide programmatic control of the <see cref="T:System.Net.WebPermission" /> granted to executing code that controls what schemes and ports the code can use access its origin site. You can specify scheme and port pairs that are permitted based on the scheme in the URL where the code originates. </para>
       <para
-        >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object based on the code's origin scheme, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" /> method.</para
-      >
+        >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object based on the code's origin scheme, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" /> method.</para>
       <para
-        >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that can use any scheme but is restricted by port, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" /> method.</para
-      >
+        >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that can use any scheme but is restricted by port, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,32 +59,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> property is set using the <paramref name="allowScheme" /> parameter. The scheme is converted to lowercase. The value of <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> controls the scheme that executing code can use to connect to a network resource.</para
-          >
+            >The <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> property is set using the <paramref name="allowScheme" /> parameter. The scheme is converted to lowercase. The value of <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> controls the scheme that executing code can use to connect to a network resource.</para>
           <para
-            >The <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> property is set using the <paramref name="allowPort" /> parameter. The value of <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> controls the port that executing code can use to connect to a network resource.</para
-          >
+            >The <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> property is set using the <paramref name="allowPort" /> parameter. The value of <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> controls the port that executing code can use to connect to a network resource.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.CodeConnectAccess" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.CodeConnectAccess" /> class. </para>
         </summary>
         <param name="allowScheme">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI scheme represented by the current instance.</param
-        >
+          />The URI scheme represented by the current instance.</param>
         <param name="allowPort">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port represented by the current instance.</param
-        >
+          />The port represented by the current instance.</param>
       </Docs>
     </Member>
     <Member MemberName="AnyScheme">
@@ -106,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As an alternative to constructing a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object using this value, you can call the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" /> method to obtain a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that represents a specified port and any scheme.</para
-          >
+            >As an alternative to constructing a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object using this value, you can call the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateAnySchemeAccess(System.Int32)" /> method to obtain a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that represents a specified port and any scheme.</para>
           <para>The value of this field is "*".</para>
         </remarks>
         <summary>
@@ -141,28 +132,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance returned by this method uses the scheme wildcard value <see cref="F:System.Security.Policy.CodeConnectAccess.AnyScheme" /> ("*") to represent the scheme.</para
-          >
+            >The <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance returned by this method uses the scheme wildcard value <see cref="F:System.Security.Policy.CodeConnectAccess.AnyScheme" /> ("*") to represent the scheme.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance that represents access to the specified port using any scheme.</para
-          >
+            >Returns a <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance that represents access to the specified port using any scheme.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance for the specified port.</para
-          >
+            >A <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance for the specified port.</para>
         </returns>
         <param name="allowPort">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port represented by the returned instance.</param
-        >
+          />The port represented by the returned instance.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateOriginSchemeAccess">
@@ -190,28 +177,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance returned by this method has the scheme value <see cref="F:System.Security.Policy.CodeConnectAccess.OriginScheme" />. The origin scheme is the scheme value from the URI where the code originated.</para
-          >
+            >The <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance returned by this method has the scheme value <see cref="F:System.Security.Policy.CodeConnectAccess.OriginScheme" />. The origin scheme is the scheme value from the URI where the code originated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance that represents access to the specified port using the code's scheme of origin.</para
-          >
+            >Returns a <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance that represents access to the specified port using the code's scheme of origin.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance for the specified port.</para
-          >
+            >A <see cref="T:System.Security.Policy.CodeConnectAccess" /> instance for the specified port.</para>
         </returns>
         <param name="allowPort">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port represented by the returned instance.</param
-        >
+          />The port represented by the returned instance.</param>
       </Docs>
     </Member>
     <Member MemberName="DefaultPort">
@@ -231,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that has the default port for a specified scheme, use this field as the <paramref name="allowPort" /> parameter of the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor.</para
-          >
+            >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that has the default port for a specified scheme, use this field as the <paramref name="allowPort" /> parameter of the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor.</para>
           <para>The value of this field is -3.</para>
         </remarks>
         <summary>
@@ -263,14 +245,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects are equal if their <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> and <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> property values are equal.</para
-          >
+            >Two <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects are equal if their <see cref="P:System.Security.Policy.CodeConnectAccess.Scheme" /> and <see cref="P:System.Security.Policy.CodeConnectAccess.Port" /> property values are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects represent the same scheme and port.</para
-          >
+            >Returns a value indicating whether two <see cref="T:System.Security.Policy.CodeConnectAccess" /> objects represent the same scheme and port.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -281,8 +261,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare to the current <see cref="T:System.Security.Policy.CodeConnectAccess" /> object.</param
-        >
+          />The object to compare to the current <see cref="T:System.Security.Policy.CodeConnectAccess" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -324,8 +303,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that has the same port as the port in the executing code's URL evidence, use this field as the <paramref name="allowPort" /> parameter of the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor.</para
-          >
+            >To create a <see cref="T:System.Security.Policy.CodeConnectAccess" /> object that has the same port as the port in the executing code's URL evidence, use this field as the <paramref name="allowPort" /> parameter of the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor.</para>
           <para>The value of this field is -4.</para>
         </remarks>
         <summary>
@@ -350,8 +328,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this field with the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor. Instead, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" /> method.</para
-          >
+            >Do not use this field with the <see cref="M:System.Security.Policy.CodeConnectAccess.#ctor(System.String,System.Int32)" /> constructor. Instead, use the <see cref="M:System.Security.Policy.CodeConnectAccess.CreateOriginSchemeAccess(System.Int32)" /> method.</para>
           <para>The value of this field is "$origin".</para>
         </remarks>
         <summary>
@@ -377,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Port values are between 0 and 65,535. The port value is specified when you create an instance of <see cref="T:System.Security.Policy.CodeConnectAccess" />.</para
-          >
+            >Port values are between 0 and 65,535. The port value is specified when you create an instance of <see cref="T:System.Security.Policy.CodeConnectAccess" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -403,8 +379,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The scheme value is specified when you create an instance of <see cref="T:System.Security.Policy.CodeConnectAccess" />.</para
-          >
+            >The scheme value is specified when you create an instance of <see cref="T:System.Security.Policy.CodeConnectAccess" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

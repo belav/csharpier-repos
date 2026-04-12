@@ -19,14 +19,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event, which occurs when settings are retrieved from a provider. </para
-      >
+        >The <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event, which occurs when settings are retrieved from a provider. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,16 +51,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsLoadedEventArgs" /> class. </para>
         </summary>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.SettingsProvider" /> object from which settings are loaded.</param
-        >
+          />A <see cref="T:System.Configuration.SettingsProvider" /> object from which settings are loaded.</param>
       </Docs>
     </Member>
     <Member MemberName="Provider">

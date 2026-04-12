@@ -4,8 +4,7 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum)</TargetFrameworks>
     <TargetFramework />
     <DisableImplicitFrameworkReferences Condition="'$(TargetFramework)' != '$(NetCoreAppCurrent)'"
-      >false</DisableImplicitFrameworkReferences
-    >
+      >false</DisableImplicitFrameworkReferences>
   </PropertyGroup>
 
   <ItemGroup>

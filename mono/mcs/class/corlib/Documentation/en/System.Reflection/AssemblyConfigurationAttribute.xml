@@ -67,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyConfigurationAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyConfigurationAttribute" /> class.</para>
         </summary>
         <param name="configuration">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly configuration. </param
-        >
+          />The assembly configuration. </param>
       </Docs>
     </Member>
     <Member MemberName="Configuration">

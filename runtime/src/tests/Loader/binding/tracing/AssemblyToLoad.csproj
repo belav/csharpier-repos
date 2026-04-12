@@ -2,8 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <AssemblyName Condition="'$(AssemblyNameSuffix)'!=''"
-      >$(AssemblyName)_$(AssemblyNameSuffix)</AssemblyName
-    >
+      >$(AssemblyName)_$(AssemblyNameSuffix)</AssemblyName>
     <CleanFile>$(AssemblyName).FileListAbsolute.txt</CleanFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(AssemblyV2)'=='true'">

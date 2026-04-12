@@ -14,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Implementation of a closable scalable non-zero indicator. It has the same API than <see cref="T:System.Theading.Snzi" /> but also allow to temporarily disable state change.</summary
-    >
+      >Implementation of a closable scalable non-zero indicator. It has the same API than <see cref="T:System.Theading.Snzi" /> but also allow to temporarily disable state change.</summary>
     <remarks />
   </Docs>
   <Members>
@@ -53,8 +52,7 @@
         <summary>Increment the state of the CSnzi object.</summary>
         <returns>Returns the internal node where the increment action occured. Returns null if CSnzi is closed.</returns>
         <remarks
-          >To undo an Arrive, you must call <see cref="M:Mono.Threading.CSnzi.Depart()" /> using the returned node object as an argument.</remarks
-        >
+          >To undo an Arrive, you must call <see cref="M:Mono.Threading.CSnzi.Depart()" /> using the returned node object as an argument.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -73,11 +71,9 @@
       <Parameters />
       <Docs>
         <summary
-          >Close the CSnzi object to subsequent Arrive or Depart action until <see cref="M:Mono.Threading.CSnzi.Open()" /> is called.</summary
-        >
+          >Close the CSnzi object to subsequent Arrive or Depart action until <see cref="M:Mono.Threading.CSnzi.Open()" /> is called.</summary>
         <returns
-          >True if the state of the CSnzi was zero or if it was already closed, <see langword="false" /> otherwise.</returns
-        >
+          >True if the state of the CSnzi was zero or if it was already closed, <see langword="false" /> otherwise.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -101,11 +97,9 @@
         <param name="node">The node to execute the decrement operation on.</param>
         <summary>Decrement the state of the CSnzi object.</summary>
         <returns
-          >True if the CSnzi is open and its state is zero, <see langword="false" /> otherwise.</returns
-        >
+          >True if the CSnzi is open and its state is zero, <see langword="false" /> otherwise.</returns>
         <remarks
-          >Node argument must have been returned by a prior <see cref="M:Mono.Threading.CSnzi.Arrive()" /> call.</remarks
-        >
+          >Node argument must have been returned by a prior <see cref="M:Mono.Threading.CSnzi.Arrive()" /> call.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -147,8 +141,7 @@
       <Docs>
         <summary>Returns the current state of the CSnzi object.</summary>
         <returns
-          >A <see cref="T:System.Threading.QueryReturn" /> object with CSnzi current state informations.</returns
-        >
+          >A <see cref="T:System.Threading.QueryReturn" /> object with CSnzi current state informations.</returns>
         <remarks />
       </Docs>
     </Member>

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeExpression" /> provides a base class for code expressions within the <see cref="N:System.CodeDom" /> namespace. <see cref="T:System.CodeDom.CodeExpression" /> is never instantiated. Instead it provides an abstract base class for other types of code expressions.</para
-      >
+        <see cref="T:System.CodeDom.CodeExpression" /> provides a base class for code expressions within the <see cref="N:System.CodeDom" /> namespace. <see cref="T:System.CodeDom.CodeExpression" /> is never instantiated. Instead it provides an abstract base class for other types of code expressions.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpression" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpression" /> class. </para>
         </summary>
       </Docs>
     </Member>

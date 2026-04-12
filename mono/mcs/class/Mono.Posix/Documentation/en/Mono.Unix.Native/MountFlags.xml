@@ -24,8 +24,7 @@
   <Docs>
     <summary
       >Possible <see cref="F:Mono.Unix.Native.Statvfs.f_flag" /> 
-    values.</summary
-    >
+    values.</summary>
     <remarks></remarks>
     <altmember cref="F:Mono.Unix.Native.Statvfs.f_flag" />
   </Docs>
@@ -203,8 +202,7 @@
         <see cref="F:Mono.Unix.Native.FilePermissions.S_ISUID" /> and
         <see cref="F:Mono.Unix.Native.FilePermissions.S_ISGID" />
         file mode bits are not supported by, or are disabled on, this file
-        system.</summary
-        >
+        system.</summary>
       </Docs>
     </Member>
     <Member MemberName="ST_RDONLY">

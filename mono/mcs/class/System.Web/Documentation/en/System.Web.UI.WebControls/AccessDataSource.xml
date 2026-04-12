@@ -25,36 +25,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class is a data source control that works with Microsoft Access databases. Like its base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control uses SQL queries to perform data retrieval.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class is a data source control that works with Microsoft Access databases. Like its base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control uses SQL queries to perform data retrieval.</para>
       <para
-        >One of the unique characteristics of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control is that you do not set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property. All you need to do is set the location of the Access (.mdb) file in the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property and the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> takes care of the underlying connection to the database. You should place Access databases in the App_Data directory of the Web site and reference them by a relative path (for example, ~/App_Data/Northwind.mdb). This location offers additional security for data files, because they are not served if they are requested directly by the client Web browser.</para
-      >
+        >One of the unique characteristics of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control is that you do not set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property. All you need to do is set the location of the Access (.mdb) file in the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property and the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> takes care of the underlying connection to the database. You should place Access databases in the App_Data directory of the Web site and reference them by a relative path (for example, ~/App_Data/Northwind.mdb). This location offers additional security for data files, because they are not served if they are requested directly by the client Web browser.</para>
       <para
-        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class does not support connecting to Access databases that are protected by a user name or password, because you cannot set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property. If your Access database is protected by a user name or password, use the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to connect to it so that you can specify a complete connection string.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class does not support connecting to Access databases that are protected by a user name or password, because you cannot set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property. If your Access database is protected by a user name or password, use the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control to connect to it so that you can specify a complete connection string.</para>
       <para
         >You bind data-bound controls to an <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> using the DataSourceID property of the data-bound control. For more information about binding a data-bound control to data source controls, see <format type="text/html">
           <a href="e41adfff-8fb8-449e-9cd1-9bd49788c5f7"
-            >Binding to Data Using a Data Source Control</a
-          >
-        </format>.</para
-      >
+            >Binding to Data Using a Data Source Control</a>
+        </format>.</para>
       <para
         >Because the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control is specific to only one database product, it always uses the same provider—the <see cref="N:System.Data.OleDb" /> .NET data provider. For this reason, the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" /> property is read-only. When using the <see cref="N:System.Data.OleDb" /> provider, the order of the parameters in a parameterized SQL statement is significant; any parameterized SQL queries that you specify in the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" />, <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />, <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />, and <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" /> properties must match the order of any <see cref="T:System.Web.UI.WebControls.Parameter" /> objects that are in the corresponding parameter collection. If no parameter collection is specified on the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />, the order of parameters that are supplied to these operations must match the order in which they appear in the underlying SQL statement. For more information, see <format type="text/html">
           <a href="403ff44a-dd0b-484d-968e-dcd1dcd4c295"
-            >Using the SqlDataSource and AccessDataSource Controls with Parameters</a
-          >
-        </format>.</para
-      >
+            >Using the SqlDataSource and AccessDataSource Controls with Parameters</a>
+        </format>.</para>
       <para
         >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control supports the same caching behavior that its base class supports. Use caching to increase the performance of pages that use the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control. For more information about data source caching, see <format type="text/html">
           <a href="8f534a06-3136-4048-bb2e-6563a8238d15">Caching Data using Data Source Controls</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
-        >The following table describes the features of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control.</para
-      >
+        >The following table describes the features of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control.</para>
       <list type="table">
         <listheader>
           <item>
@@ -72,8 +63,7 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value.</para>
           </description>
         </item>
         <item>
@@ -82,8 +72,7 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" /> property to a filtering expression used to filter the data when the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" /> method is called.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" /> property to a filtering expression used to filter the data when the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" /> method is called.</para>
           </description>
         </item>
         <item>
@@ -92,8 +81,7 @@
           </term>
           <description>
             <para
-              >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> does not support direct paging operations on an Access database. A data-bound control, such as the <see cref="T:System.Web.UI.WebControls.GridView" />, can page over the items returned by the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />, if the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property is set to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value. </para
-            >
+              >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> does not support direct paging operations on an Access database. A data-bound control, such as the <see cref="T:System.Web.UI.WebControls.GridView" />, can page over the items returned by the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />, if the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property is set to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value. </para>
           </description>
         </item>
         <item>
@@ -102,8 +90,7 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" /> property to a SQL statement used to update data. This statement is typically parameterized.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" /> property to a SQL statement used to update data. This statement is typically parameterized.</para>
           </description>
         </item>
         <item>
@@ -112,8 +99,7 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DeleteCommand" /> property to a SQL statement used to delete data. This statement is typically parameterized.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DeleteCommand" /> property to a SQL statement used to delete data. This statement is typically parameterized.</para>
           </description>
         </item>
         <item>
@@ -122,8 +108,7 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.InsertCommand" /> property to a SQL statement used to insert data. This statement is typically parameterized.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.InsertCommand" /> property to a SQL statement used to insert data. This statement is typically parameterized.</para>
           </description>
         </item>
         <item>
@@ -132,17 +117,14 @@
           </term>
           <description>
             <para
-              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value, the <see cref="P:System.Web.UI.WebControls.SqlDataSource.EnableCaching" /> property to true, and the <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" /> and <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" /> properties according to the caching behavior you want for your cached data.</para
-            >
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" /> property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" /> value, the <see cref="P:System.Web.UI.WebControls.SqlDataSource.EnableCaching" /> property to true, and the <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" /> and <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" /> properties according to the caching behavior you want for your cached data.</para>
           </description>
         </item>
       </list>
       <para
-        >As with all data source controls, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control is associated with a strongly typed data source view class. Just as the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control extends the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, the <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> class extends the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class. The <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> class overrides a few of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> methods to use the <see cref="N:System.Data.OleDb" /> .NET data provider.</para
-      >
+        >As with all data source controls, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control is associated with a strongly typed data source view class. Just as the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control extends the <see cref="T:System.Web.UI.WebControls.SqlDataSource" /> control, the <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> class extends the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> class. The <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> class overrides a few of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" /> methods to use the <see cref="N:System.Data.OleDb" /> .NET data provider.</para>
       <para
-        >There is no visual rendering of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control; it is implemented as a control to enable declarative persistence and to permit, optionally, participation in state management. As a result, you cannot set properties that support visual features, such as the <see cref="P:System.Web.UI.DataSourceControl.EnableTheming" /> and <see cref="P:System.Web.UI.DataSourceControl.SkinID" /> properties.</para
-      >
+        >There is no visual rendering of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control; it is implemented as a control to enable declarative persistence and to permit, optionally, participation in state management. As a result, you cannot set properties that support visual features, such as the <see cref="P:System.Web.UI.DataSourceControl.EnableTheming" /> and <see cref="P:System.Web.UI.DataSourceControl.SkinID" /> properties.</para>
       <format type="text/html">
         <a href="#DeclarativeSyntax" />
       </format>
@@ -589,8 +571,7 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
         &lt;/UpdateParameters&gt;
-&lt;/asp:AccessDataSource&gt;</code
-      >
+&lt;/asp:AccessDataSource&gt;</code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -632,23 +612,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class with the specified data file path and <system>Select</system> command.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class with the specified data file path and <system>Select</system> command.</para>
         </summary>
         <param name="dataFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location of the Access .mdb file. The location can be relative to the current Web form's folder, an absolute physical path, or a virtual path.</param
-        >
+          />The location of the Access .mdb file. The location can be relative to the current Web form's folder, an absolute physical path, or a virtual path.</param>
         <param name="selectCommand">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see cref="T:System.Web.UI.WebControls.Parameter" /> objects to the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" /> collection. </param
-        >
+          />The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see cref="T:System.Web.UI.WebControls.Parameter" /> objects to the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" /> collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,8 +654,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control can be used only with the <see cref="N:System.Data.OleDb" /> .NET data provider, and the connection string that <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> uses is specific to this provider. Therefore, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control exposes connection string settings, such as the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property, as a property and constructs a connection string at run time using the values of the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property, if set.</para
-          >
+            >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control can be used only with the <see cref="N:System.Data.OleDb" /> .NET data provider, and the connection string that <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> uses is specific to this provider. Therefore, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control exposes connection string settings, such as the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property, as a property and constructs a connection string at run time using the values of the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" /> property, if set.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -706,8 +682,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class can override the <see cref="M:System.Web.UI.WebControls.AccessDataSource.CreateDataSourceView(System.String)" /> method to return strongly typed data source view objects.</para
-          >
+            >Classes that derive from the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> class can override the <see cref="M:System.Web.UI.WebControls.AccessDataSource.CreateDataSourceView(System.String)" /> method to return strongly typed data source view objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -716,16 +691,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> object that is associated with the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> instance.</para
-          >
+            >An <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" /> object that is associated with the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> instance.</para>
         </returns>
         <param name="viewName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the data source view.</param
-        >
+          />The name of the data source view.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -754,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property is a virtual, absolute, or UNC directory path to the Access .mdb file that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control represents. If only the name of the file is entered, this indicates that the .mdb file is found in the same directory as the currently executing Web Forms page or code. Relative paths with both forward and backward slashes are supported. For example, "./test/test/Northwind.mdb" maps to the same path as ".\test\test\Northwind.mdb" and "test/test/Northwind.mdb". UNC paths, such as "\\mymachine\somedatadirectory\Northwind.mdb", are also supported. Although absolute physical paths are supported, you should avoid using them because they can complicate deployment.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" /> property is a virtual, absolute, or UNC directory path to the Access .mdb file that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control represents. If only the name of the file is entered, this indicates that the .mdb file is found in the same directory as the currently executing Web Forms page or code. Relative paths with both forward and backward slashes are supported. For example, "./test/test/Northwind.mdb" maps to the same path as ".\test\test\Northwind.mdb" and "test/test/Northwind.mdb". UNC paths, such as "\\mymachine\somedatadirectory\Northwind.mdb", are also supported. Although absolute physical paths are supported, you should avoid using them because they can complicate deployment.</para>
           <format type="text/html">
             <h2>Configuring Permissions for an Access Database</h2>
           </format>
@@ -792,8 +764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see cref="T:System.Data.Common.DbProviderFactory" /> object that is associated with the .NET data provider that is identified by the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property.</para
-          >
+            >Retrieves a <see cref="T:System.Data.Common.DbProviderFactory" /> object that is associated with the .NET data provider that is identified by the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -824,14 +795,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control exposes the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property because it is inherited from its base class, attempting to set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" /> property results in a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >While the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control exposes the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" /> property because it is inherited from its base class, attempting to set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" /> property results in a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the .NET data provider that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control uses to connect to a Microsoft Access database.</para
-          >
+            >Gets the name of the .NET data provider that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" /> control uses to connect to a Microsoft Access database.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -861,14 +830,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property gets or sets a semicolon-delimited string that indicates which databases and tables to use for the Microsoft SQL Server cache dependency. Cache dependency is not supported by Microsoft Access, and any access to the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property results in a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >In the base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />, the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property gets or sets a semicolon-delimited string that indicates which databases and tables to use for the Microsoft SQL Server cache dependency. Cache dependency is not supported by Microsoft Access, and any access to the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property results in a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property overrides the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SqlCacheDependency" /> property.</para
-          >
+            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" /> property overrides the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SqlCacheDependency" /> property.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

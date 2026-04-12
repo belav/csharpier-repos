@@ -35,8 +35,7 @@
       <para
         >Represents the include element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class is used to include declarations and definitions from an external schema. The included declarations and definitions are then available for processing in the containing schema.</para
-      >
+        </format>. This class is used to include declarations and definitions from an external schema. The included declarations and definitions are then available for processing in the containing schema.</para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInclude" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInclude" /> class.</para>
         </summary>
       </Docs>
     </Member>

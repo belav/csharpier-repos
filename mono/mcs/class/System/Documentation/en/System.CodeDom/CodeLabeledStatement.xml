@@ -34,15 +34,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeLabeledStatement" /> represents a label and optionally, an associated statement. A label can be used to indicate the target of a <see cref="T:System.CodeDom.CodeGotoStatement" />.</para
-      >
+        <see cref="T:System.CodeDom.CodeLabeledStatement" /> represents a label and optionally, an associated statement. A label can be used to indicate the target of a <see cref="T:System.CodeDom.CodeGotoStatement" />.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" /> property is optional. To create only a label, leave the <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" /> property uninitialized.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" /> property is optional. To create only a label, leave the <see cref="P:System.CodeDom.CodeLabeledStatement.Statement" /> property uninitialized.</para>
       <block subset="none" type="note">
         <para
-          >Not all languages support goto statements and labels, so you should test wheter a code generator supports goto statements and labels by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" /> method with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" /> flag.</para
-        >
+          >Not all languages support goto statements and labels, so you should test wheter a code generator supports goto statements and labels by calling the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" /> method with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" /> flag.</para>
       </block>
     </remarks>
     <summary>
@@ -70,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -96,16 +92,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class using the specified label name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class using the specified label name.</para>
         </summary>
         <param name="label">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the label. </param
-        >
+          />The name of the label. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,23 +127,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class using the specified label name and statement.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLabeledStatement" /> class using the specified label name and statement.</para>
         </summary>
         <param name="label">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the label. </param
-        >
+          />The name of the label. </param>
         <param name="statement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> to associate with the label. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> to associate with the label. </param>
       </Docs>
     </Member>
     <Member MemberName="Label">
@@ -198,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is not set, the <see cref="T:System.CodeDom.CodeLabeledStatement" /> represents only a label, rather than a labeled statement.</para
-          >
+            >If this property is not set, the <see cref="T:System.CodeDom.CodeLabeledStatement" /> represents only a label, rather than a labeled statement.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -25,17 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.IWebRequestCreate" /> interface defines the method that <see cref="T:System.Net.WebRequest" /> descendants must use to register with the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method.</para
-      >
+        >The <see cref="T:System.Net.IWebRequestCreate" /> interface defines the method that <see cref="T:System.Net.WebRequest" /> descendants must use to register with the <see cref="M:System.Net.WebRequest.Create(System.String)" /> method.</para>
       <para
-        >Classes that implement the <see cref="T:System.Net.IWebRequestCreate" /> interface can be registered with the <see cref="T:System.Net.WebRequest" /> class and associated with a specific URI scheme so that the <see cref="T:System.Net.WebRequest" /> calls the class's <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" /> method when a URI that matches that scheme is requested.</para
-      >
+        >Classes that implement the <see cref="T:System.Net.IWebRequestCreate" /> interface can be registered with the <see cref="T:System.Net.WebRequest" /> class and associated with a specific URI scheme so that the <see cref="T:System.Net.WebRequest" /> calls the class's <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" /> method when a URI that matches that scheme is requested.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base interface for creating <see cref="T:System.Net.WebRequest" /> instances.</para
-      >
+        >Provides the base interface for creating <see cref="T:System.Net.WebRequest" /> instances.</para>
     </summary>
   </Docs>
   <Members>
@@ -65,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" /> method must return an initialized instance of the <see cref="T:System.Net.WebRequest" /> descendant that is capable of performing a standard request/response transaction for the protocol without needing any protocol-specific fields modified.</para
-          >
+            >The <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" /> method must return an initialized instance of the <see cref="T:System.Net.WebRequest" /> descendant that is capable of performing a standard request/response transaction for the protocol without needing any protocol-specific fields modified.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,8 +77,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The uniform resource identifier (URI) of the Web resource. </param
-        >
+          />The uniform resource identifier (URI) of the Web resource. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

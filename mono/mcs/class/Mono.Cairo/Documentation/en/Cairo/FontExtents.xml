@@ -20,8 +20,7 @@
   twice as big, but the reported text extents will not be
   doubled. They will change slightly due to hinting (so you can not
   assume that metrics are independent of the transformation matrix),
-  but otherwise will remain unchanged.</para
-      >
+  but otherwise will remain unchanged.</para>
     </remarks>
   </Docs>
   <Members>

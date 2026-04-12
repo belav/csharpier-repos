@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ApplicationIdentity" /> class is used in the activation of manifest-based applications.</para
-      >
+        >The <see cref="T:System.ApplicationIdentity" /> class is used in the activation of manifest-based applications.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,19 +61,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The format of the <paramref name="applicationIdentityFullName" /> parameter is a comma-delimited Unicode string that begins with the name, as follows:</para
-          >
+            >The format of the <paramref name="applicationIdentityFullName" /> parameter is a comma-delimited Unicode string that begins with the name, as follows:</para>
           <code
-            >applicationURL<codeFeaturedElement>#</codeFeaturedElement>deploymentIdentity<codeFeaturedElement>\</codeFeaturedElement>applicationIdentity </code
-          >
+            >applicationURL<codeFeaturedElement>#</codeFeaturedElement>deploymentIdentity<codeFeaturedElement>\</codeFeaturedElement>applicationIdentity </code>
           <para>Where deploymentIdentity = </para>
           <code
-            >deploymentManifest<codeFeaturedElement>, Version = </codeFeaturedElement>Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>processorArchitecture</code
-          >
+            >deploymentManifest<codeFeaturedElement>, Version = </codeFeaturedElement>Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>processorArchitecture</code>
           <para>And applicationIdentity =</para>
           <code
-            >applicationName<codeFeaturedElement>, Version = </codeFeaturedElement>Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>processorArchitecture<codeFeaturedElement>, type=</codeFeaturedElement>OsType</code
-          >
+            >applicationName<codeFeaturedElement>, Version = </codeFeaturedElement>Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>processorArchitecture<codeFeaturedElement>, type=</codeFeaturedElement>OsType</code>
           <para>The following is an example of the full name for an application named ActivationContext:</para>
           <code>http://testserver/ActivationContext/ActivationContext.application
 #ActivationContext.application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ae13aad84c1a3490, processorArchitecture=msil
@@ -84,16 +79,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ApplicationIdentity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ApplicationIdentity" /> class. </para>
         </summary>
         <param name="applicationIdentityFullName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the application.</param
-        >
+          />The full name of the application.</param>
       </Docs>
     </Member>
     <Member MemberName="CodeBase">
@@ -113,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are two examples of <see cref="P:System.ApplicationIdentity.CodeBase" /> property values for an application named ActivationContext:</para
-          >
+            >The following are two examples of <see cref="P:System.ApplicationIdentity.CodeBase" /> property values for an application named ActivationContext:</para>
           <list type="bullet">
             <item>
               <para>http://testserver/ActivationContext/ActivationContext.application</para>
@@ -147,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of the format of the <see cref="P:System.ApplicationIdentity.FullName" /> property, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" /> constructor.</para
-          >
+            >For a description of the format of the <see cref="P:System.ApplicationIdentity.FullName" /> property, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -183,23 +174,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the data needed to serialize the target object.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the data needed to serialize the target object.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" />) structure for the serialization.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" />) structure for the serialization.</param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -222,8 +210,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of the format of a full name for a manifest activated application, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" /> constructor.</para
-          >
+            >For a description of the format of a full name for a manifest activated application, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

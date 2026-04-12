@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
-      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks
-    >
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- Suppress CA2249: Consider using String.Contains instead of String.IndexOf to avoid ifdefs. -->
     <NoWarn>$(NoWarn);CA2249</NoWarn>
@@ -30,15 +29,12 @@ System.Data.OleDb.OleDbTransaction</PackageDescription>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_OleDb</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_OleDb</GeneratePlatformNotSupportedAssemblyMessage>
     <NoWarn Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
-      >$(NoWarn);CS0618</NoWarn
-    >
+      >$(NoWarn);CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

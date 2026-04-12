@@ -36,11 +36,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.Collections.IDictionaryEnumerator.Entry" /> method returns an instance of this type.</para
-      >
+        >The <see cref="P:System.Collections.IDictionaryEnumerator.Entry" /> method returns an instance of this type.</para>
       <para
-        >The foreach statement of the C# language (for each in Visual C++, For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.IDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example: </para
-      >
+        >The foreach statement of the C# language (for each in Visual C++, For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.IDictionary" /> is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. For example: </para>
       <para>code reference: System.Collections.DictionaryEntry#01</para>
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
     </remarks>
@@ -73,8 +71,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />.</exception
-        >
+          <paramref name="key" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In the dnprdnlong <paramref name="key" /> can be null.</para>
@@ -82,23 +79,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Collections.DictionaryEntry" /> type with the specified key and value.</para
-          >
+            >Initializes an instance of the <see cref="T:System.Collections.DictionaryEntry" /> type with the specified key and value.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object defined in each key/value pair. </param
-        >
+          />The object defined in each key/value pair. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The definition associated with <paramref name="key" />. </param
-        >
+          />The definition associated with <paramref name="key" />. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -123,13 +117,11 @@
         <value>
           <para
             >A <see cref="T:System.Object" /> representing the
-   key of the current <see cref="T:System.Collections.DictionaryEntry" /> .</para
-          >
+   key of the current <see cref="T:System.Collections.DictionaryEntry" /> .</para>
         </value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException"
-          >Set <paramref name="value" /> is <see langword="null" />.</exception
-        >
+          >Set <paramref name="value" /> is <see langword="null" />.</exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Gets or sets the key in the key/value pair.</para>
@@ -158,8 +150,7 @@
         <value>
           <para
             >A <see cref="T:System.Object" /> representing the
-   content of the current <see cref="T:System.Collections.DictionaryEntry" /> .</para
-          >
+   content of the current <see cref="T:System.Collections.DictionaryEntry" /> .</para>
         </value>
         <remarks>To be added.</remarks>
         <summary>

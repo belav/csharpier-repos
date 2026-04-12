@@ -48,16 +48,13 @@
   <PropertyGroup>
     <DisableProjectBuild
       Condition="'$(IsMergedTestRunnerAssembly)' == 'true' and $(BuildAsStandalone)"
-      >true</DisableProjectBuild
-    >
+      >true</DisableProjectBuild>
     <OutputType
       Condition="('$(IsMergedTestRunnerAssembly)' == 'true' and !$(BuildAsStandalone)) or ('$(RequiresProcessIsolation)' == 'true' and '$(CLRTestKind)' != 'SharedLibrary')"
-      >Exe</OutputType
-    >
+      >Exe</OutputType>
 
     <CLRTestKind Condition="'$(CLRTestKind)' == '' and '$(OutputType)' == 'Exe'"
-      >BuildAndRun</CLRTestKind
-    >
+      >BuildAndRun</CLRTestKind>
     <CLRTestKind Condition="'$(CLRTestKind)' == ''">SharedLibrary</CLRTestKind>
     <CLRTestPriority Condition="'$(CLRTestPriority)' == ''">0</CLRTestPriority>
 
@@ -108,8 +105,7 @@
     <_CLRTestNeedsProjectToRun>false</_CLRTestNeedsProjectToRun>
     <_CLRTestNeedsProjectToRun
       Condition=" '$(_CLRTestNeedsToRun)' and '!$(_CLRTestBuildsExecutable)' "
-      >true</_CLRTestNeedsProjectToRun
-    >
+      >true</_CLRTestNeedsProjectToRun>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -136,53 +132,41 @@
 
   <PropertyGroup Condition="'$(RequiresCodeFlowEnforcement)' == 'true'">
     <CLRTestTargetUnsupported Condition="'$(UseCodeFlowEnforcement)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
   </PropertyGroup>
 
   <!-- Determine if this project should be built or not -->
   <PropertyGroup>
     <BuildAllProjects Condition="'$(BuildAllProjects)' == ''">false</BuildAllProjects>
     <_WillCLRTestProjectBuild Condition="'$(_WillCLRTestProjectBuild)' == ''"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild Condition="'$(BuildAllProjects)' != 'true'"
-      >true</_WillCLRTestProjectBuild
-    >
+      >true</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild
       Condition="'$(BuildAllProjects)' == 'true' And '$(CLRTestPriority)' &lt;= '$(CLRTestPriorityToBuild)'"
-      >true</_WillCLRTestProjectBuild
-    >
+      >true</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild
       Condition="'$(CLRTestBuildAllTargets)' != 'allTargets' And '$(CLRTestTargetUnsupported)' == 'true'"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild Condition="'$(DisableProjectBuild)' == 'true'"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild
       Condition="'$(NativeAotIncompatible)' == 'true' and '$(TestBuildMode)' == 'nativeaot'"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild
       Condition="'$(RuntimeFlavor)' == 'mono' And '$(AlwaysUseCrossgen2)' == 'true'"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
     <_WillCLRTestProjectBuild
       Condition="'$(EnableNativeSanitizers)' != '' And '$(AlwaysUseCrossgen2)' == 'true'"
-      >false</_WillCLRTestProjectBuild
-    >
+      >false</_WillCLRTestProjectBuild>
   </PropertyGroup>
   <PropertyGroup>
     <_CopyNativeProjectBinaries Condition="'$(__CopyNativeTestBinaries)' != '1'"
-      >$(__CopyNativeProjectsAfterCombinedTestBuild)</_CopyNativeProjectBinaries
-    >
+      >$(__CopyNativeProjectsAfterCombinedTestBuild)</_CopyNativeProjectBinaries>
     <_CopyNativeProjectBinaries Condition="'$(_WillCLRTestProjectBuild)' != 'true'"
-      >false</_CopyNativeProjectBinaries
-    >
+      >false</_CopyNativeProjectBinaries>
     <_CopyNativeProjectBinaries Condition="'$(_CopyNativeProjectBinaries)' == ''"
-      >true</_CopyNativeProjectBinaries
-    >
+      >true</_CopyNativeProjectBinaries>
   </PropertyGroup>
 
   <!-- We enable auto-unification of assembly references after importing the common targets.  Binding redirects are not needed
@@ -195,20 +179,16 @@
   <!-- TODO: This might just be the Language property -->
   <PropertyGroup Condition="'$(ProjectLanguage)' == ''">
     <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.ilproj' OR '$(Language)' == 'IL'"
-      >IL</ProjectLanguage
-    >
+      >IL</ProjectLanguage>
     <ProjectLanguage
       Condition="'$(MSBuildProjectExtension)' == '.csproj' OR '$(Language)' == 'C#' OR '$(ProjectLanguage)'==''"
-      >CSharp</ProjectLanguage
-    >
+      >CSharp</ProjectLanguage>
 
     <SkipImportILTargets Condition="'$(CLRTestPriority)' &gt; '$(CLRTestPriorityToBuild)'"
-      >true</SkipImportILTargets
-    >
+      >true</SkipImportILTargets>
     <SkipImportILTargets
       Condition="'$(CLRTestBuildAllTargets)' != '' And '$(CLRTestNeedTarget)' != '$(CLRTestBuildAllTargets)'"
-      >true</SkipImportILTargets
-    >
+      >true</SkipImportILTargets>
   </PropertyGroup>
 
   <!-- If a test in a merged test directory (e.g., under JIT\Directed where Directed_1.csproj and siblings -->
@@ -693,8 +673,7 @@
 
   <PropertyGroup Condition="'$(Language)' == 'C#' and '$(_CLRTestNeedsToRun)' == 'true' and ('$(BuildAsStandalone)' == 'true' or '$(RequiresProcessIsolation)' == 'true' or '$(InMergedTestDirectory)' == 'true' or '$(IsMergedTestRunnerAssembly)' == 'true')">
     <ReferenceXUnitWrapperGenerator Condition="'$(ReferenceXUnitWrapperGenerator)' == ''"
-      >true</ReferenceXUnitWrapperGenerator
-    >
+      >true</ReferenceXUnitWrapperGenerator>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ReferenceXUnitWrapperGenerator)' == 'true'">
@@ -740,8 +719,7 @@
     <!-- NativeAOT compiled output is placed into a 'native' subdirectory: we need to tweak
          rpath so that the test can load its native library dependencies if there's any -->
     <IlcRPath Condition="'$(TargetOS)' == 'osx' or '$(TargetsAppleMobile)' == 'true'"
-      >@executable_path/..</IlcRPath
-    >
+      >@executable_path/..</IlcRPath>
     <IlcRPath Condition="'$(IlcRPath)' == ''">$ORIGIN/..</IlcRPath>
 
     <!-- Works around "Error: Native compilation can run on x64 and arm64 hosts only" -->
@@ -757,8 +735,7 @@
     <IlcToolsPath>$(CoreCLRILCompilerDir)</IlcToolsPath>
     <IlcToolsPath
       Condition="'$(TargetArchitecture)' != '$(BuildArchitecture)' or '$(TargetOS)' != '$(HostOS)' or '$(EnableNativeSanitizers)' != ''"
-      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath
-    >
+      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath>
     <IlcBuildTasksPath>$(CoreCLRILCompilerDir)netstandard/ILCompiler.Build.Tasks.dll</IlcBuildTasksPath>
     <IlcSdkPath>$(CoreCLRAotSdkDir)</IlcSdkPath>
     <IlcFrameworkPath>$(MicrosoftNetCoreAppRuntimePackRidLibTfmDir)</IlcFrameworkPath>
@@ -766,17 +743,13 @@
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
 
     <SysRoot Condition="'$(CrossBuild)' == 'true' and '$(HostOS)' != 'windows'"
-      >$(ROOTFS_DIR)</SysRoot
-    >
+      >$(ROOTFS_DIR)</SysRoot>
     <BuildNativeAotFrameworkObjects Condition="'$(IlcMultiModule)' == 'true'"
-      >true</BuildNativeAotFrameworkObjects
-    >
+      >true</BuildNativeAotFrameworkObjects>
     <DisableFrameworkLibGeneration Condition="'$(BuildNativeAotFrameworkObjects)' == 'true'"
-      >true</DisableFrameworkLibGeneration
-    >
+      >true</DisableFrameworkLibGeneration>
     <FrameworkLibPath Condition="'$(BuildNativeAotFrameworkObjects)' == 'true'"
-      >$(IlcSdkPath)</FrameworkLibPath
-    >
+      >$(IlcSdkPath)</FrameworkLibPath>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TestBuildMode)' == 'nativeaot'">

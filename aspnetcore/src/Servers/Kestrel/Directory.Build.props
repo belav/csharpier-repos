@@ -3,8 +3,7 @@
 
   <PropertyGroup>
     <DefineConstants Condition="'$(InnerLoop)' != ''"
-      >$(DefineConstants);INNER_LOOP</DefineConstants
-    >
+      >$(DefineConstants);INNER_LOOP</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>

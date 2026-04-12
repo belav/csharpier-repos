@@ -18,8 +18,7 @@
       <remarks>
         <see cref="T:Mono.DocTest.Color" />.
               Namespace Test: [<see cref="N:Mono.DocTest" />]
-            </remarks
-      >
+            </remarks>
     </member>
     <member name="F:Mono.DocTest.Color.AnotherGreen">
       <summary>To be added.</summary>
@@ -49,8 +48,7 @@
       <remarks>
         <para>
               cref=<c>T:Mono.DocTest.DocAttribute</c>.
-             </para
-        >
+             </para>
         <format type="text/html">
           <table width="100%">
             <tr>
@@ -142,8 +140,7 @@ class Example {
       <summary>To be added.</summary>
       <remarks>
         <para>
-          <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para
-        >
+          <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para>
         <para>
           <see cref="M:System.Collections.Generic.List{System.Int32}.Remove(`0)" />
         </para>
@@ -152,22 +149,18 @@ class Example {
     </member>
     <member name="M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})">
       <param name="list"
-        >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />.</param
-      >
+        >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks
-      >
+        <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})">
       <typeparam name="T">Something Else</typeparam>
       <param name="list"
-        >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />.</param
-      >
+        >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks
-      >
+        <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}+Helper{``1,``2})">
       <typeparam name="T">
@@ -180,12 +173,10 @@ class Example {
         <c>V</c>
       </typeparam>
       <param name="helper"
-        >A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />.</param
-      >
+        >A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks
-      >
+        <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
     </member>
     <member name="T:Mono.DocTest.Widget">
       <summary>To be added.</summary>
@@ -347,8 +338,7 @@ class Example {
       <param name="v">A <see cref="T:Mono.DocTest.DocValueType" />.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[,],System.Int64[][])">
       <param name="x1">A <see cref="T:System.Int16" /> array.</param>
@@ -356,16 +346,14 @@ class Example {
       <param name="x3">A <see cref="T:System.Int64" /> array.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[,,][])">
       <param name="x3">Another <see cref="T:System.Int64" /> array.</param>
       <param name="x4">A <see cref="T:Mono.DocTest.Widget" /> array.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Widget.M4(System.Char*,Mono.DocTest.Color**)">
       <param name="pc">A <see cref="T:System.Char" /> pointer.</param>
@@ -389,8 +377,7 @@ class Example {
       <param name="a">To be added.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks>
     </member>
     <member name="F:Mono.DocTest.Widget.message">
       <summary>To be added.</summary>
@@ -406,8 +393,7 @@ class Example {
       <summary>To be added.</summary>
       <returns>A <see cref="T:Mono.DocTest.Widget" /> instance (2).</returns>
       <remarks>
-        <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks>
     </member>
     <member name="F:Mono.DocTest.Widget.op_Division">
       <summary>To be added.</summary>
@@ -585,8 +571,7 @@ class Example {
       <summary>
         <see cref="T:System.Collections.Generic.IEnumerable{System.Int32}" /> 
               extension method.
-            </summary
-      >
+            </summary>
       <returns>To be added.</returns>
       <remarks>
         <c>M:Mono.DocTest.Generic.Extensions.ToDouble</c>
@@ -597,8 +582,7 @@ class Example {
       <param name="val">To be added.</param>
       <summary>
         <see cref="T:Mono.DocTest.Generic.IFoo`1" /> extension method.
-            </summary
-      >
+            </summary>
       <returns>To be added.</returns>
       <remarks>
         <c>M:Mono.DocTest.Generic.Extensions.ToDouble</c>
@@ -749,8 +733,7 @@ class Example {
       <param name="helper">A <see cref="T:Mono.DocTest.Generic.MyList`1.Helper`2" />.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
     </member>
     <member name="T:Mono.DocTest.Generic.MyList`1.Helper`2">
       <typeparam name="U">Seriously!</typeparam>
@@ -816,8 +799,7 @@ class Example {
       <summary>To be added.</summary>
       <returns>To be added.</returns>
       <remarks>
-        <c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.Generic.MyList`2.Mono#DocTest#Generic#IFoo{A}#Method``1(`0,``0)</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Generic.MyList`2.MoveNext">
       <summary>To be added.</summary>
@@ -834,44 +816,38 @@ class Example {
       <param name="item">The item to add.</param>
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Add(`0)</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#ICollection{A}#Clear">
       <summary>To be added.</summary>
       <remarks>
-        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks
-      >
+        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#ICollection{A}#Contains(A)">
       <param name="item">The item to check for</param>
       <summary>To be added.</summary>
       <returns>A <see cref="T:System.Boolean" /> instance (<see langword="false" />).</returns>
       <remarks>
-        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>.</remarks>
     </member>
     <member name="P:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly">
       <summary>To be added.</summary>
       <value>A <see cref="T:System.Boolean" />.</value>
       <remarks>
-        <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks
-      >
+        <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#ICollection{A}#Remove(A)">
       <param name="item">the item to remove</param>
       <summary>To be added.</summary>
       <returns>Whether the item was removed.</returns>
       <remarks>
-        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks
-      >
+        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Remove(`0)</c>.</remarks>
     </member>
     <member name="M:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator">
       <summary>To be added.</summary>
       <returns>A <see cref="T:System.Collections.Generic.IEnumerator{`0}" />.</returns>
       <remarks>
-        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks
-      >
+        <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>.</remarks>
     </member>
     <member name="P:Mono.DocTest.Generic.MyList`2.System#Collections#Generic#IEnumerator{A}#Current">
       <summary>To be added.</summary>
@@ -941,8 +917,7 @@ class Example {
     <member name="M:System.Environment.GetFolderPath(System.Environment+SpecialFolder)">
       <param name="folder">
               A <see cref="T:System.Environment+SpecialFolder" /> instance.
-            </param
-      >
+            </param>
       <summary>To be added.</summary>
       <returns>To be added.</returns>
       <remarks>

@@ -30,7 +30,6 @@
       folder, unless already an absolute path.
     -->
     <OpenApiDocumentsDirectory Condition=" '$(OpenApiDocumentsDirectory)' == '' "
-      >$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory
-    >
+      >$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory>
   </PropertyGroup>
 </Project>

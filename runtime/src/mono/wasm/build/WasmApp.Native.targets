@@ -35,21 +35,17 @@
     </_BeforeWasmBuildAppDependsOn>
 
     <_EmccDefaultFlags Condition="'$(WasmEnableExceptionHandling)' == 'false'"
-      >-fexceptions</_EmccDefaultFlags
-    >
+      >-fexceptions</_EmccDefaultFlags>
     <_EmccDefaultFlags Condition="'$(WasmEnableExceptionHandling)' != 'false'"
-      >-fwasm-exceptions</_EmccDefaultFlags
-    >
+      >-fwasm-exceptions</_EmccDefaultFlags>
     <_EmccDefaultFlags Condition="'$(WasmEnableSIMD)' == 'true'">-msimd128</_EmccDefaultFlags>
     <_ExeExt Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">.exe</_ExeExt>
     <WasmUseEMSDK_PATH
       Condition="'$(WasmUseEMSDK_PATH)' == '' and '$(EMSDK_PATH)' != '' and Exists('$(MSBuildThisFileDirectory)WasmApp.InTree.targets')"
-      >true</WasmUseEMSDK_PATH
-    >
+      >true</WasmUseEMSDK_PATH>
     <!-- compare versions only when emsdk is not from the workload -->
     <_WasmStrictVersionMatch Condition="'$(WasmUseEMSDK_PATH)' == 'true'"
-      >true</_WasmStrictVersionMatch
-    >
+      >true</_WasmStrictVersionMatch>
   </PropertyGroup>
 
   <ItemGroup>
@@ -69,50 +65,40 @@
     <PropertyGroup>
       <_EMSDKMissingPaths
         Condition="'$(_EMSDKMissingPaths)' == '' and ('$(EmscriptenSdkToolsPath)' == '' or !Exists('$(EmscriptenSdkToolsPath)'))"
-        >%24(EmscriptenSdkToolsPath)=$(EmscriptenSdkToolsPath) </_EMSDKMissingPaths
-      >
+        >%24(EmscriptenSdkToolsPath)=$(EmscriptenSdkToolsPath) </_EMSDKMissingPaths>
       <_EMSDKMissingPaths
         Condition="'$(_EMSDKMissingPaths)' == '' and ('$(EmscriptenNodeToolsPath)' == '' or !Exists('$(EmscriptenNodeToolsPath)'))"
-        >%24(EmscriptenNodeToolsPath)=$(EmscriptenNodeToolsPath) </_EMSDKMissingPaths
-      >
+        >%24(EmscriptenNodeToolsPath)=$(EmscriptenNodeToolsPath) </_EMSDKMissingPaths>
       <_EMSDKMissingPaths
         Condition="'$(_EMSDKMissingPaths)' == '' and ('$(EmscriptenUpstreamBinPath)' == '' or !Exists('$(EmscriptenUpstreamBinPath)'))"
-        >%24(EmscriptenUpstreamBinPath)=$(EmscriptenUpstreamBinPath) </_EMSDKMissingPaths
-      >
+        >%24(EmscriptenUpstreamBinPath)=$(EmscriptenUpstreamBinPath) </_EMSDKMissingPaths>
     </PropertyGroup>
 
     <PropertyGroup>
       <_EMSDKMissingErrorMessage
         Condition="'$(EMSDK_PATH)' == '' and '$(EmscriptenSdkToolsPath)' == ''"
-        >Could not find emscripten sdk. Either set %24(EMSDK_PATH), or use workloads to get the sdk.</_EMSDKMissingErrorMessage
-      >
+        >Could not find emscripten sdk. Either set %24(EMSDK_PATH), or use workloads to get the sdk.</_EMSDKMissingErrorMessage>
 
       <_EMSDKMissingErrorMessage
         Condition="'$(_EMSDKMissingErrorMessage)' == '' and '$(_UsingEMSDK_PATH)' != 'true' and '$(_EMSDKMissingPaths)' != ''"
-        >Emscripten from the workload is missing some paths: $(_EMSDKMissingPaths).</_EMSDKMissingErrorMessage
-      >
+        >Emscripten from the workload is missing some paths: $(_EMSDKMissingPaths).</_EMSDKMissingErrorMessage>
       <_EMSDKMissingErrorMessage
         Condition="'$(_EMSDKMissingErrorMessage)' == '' and '$(_UsingEMSDK_PATH)' == 'true' and !Exists($(EMSDK_PATH))"
-        >Could not find Emscripten sdk at %24(EMSDK_PATH)=$(EMSDK_PATH) .</_EMSDKMissingErrorMessage
-      >
+        >Could not find Emscripten sdk at %24(EMSDK_PATH)=$(EMSDK_PATH) .</_EMSDKMissingErrorMessage>
       <_EMSDKMissingErrorMessage
         Condition="'$(_EMSDKMissingErrorMessage)' == '' and '$(_UsingEMSDK_PATH)' == 'true' and '$(_EMSDKMissingPaths)' != ''"
-        >Specified Emscripten sdk at %24(EMSDK_PATH)=$(EMSDK_PATH) is missing some paths: $(_EMSDKMissingPaths).</_EMSDKMissingErrorMessage
-      >
+        >Specified Emscripten sdk at %24(EMSDK_PATH)=$(EMSDK_PATH) is missing some paths: $(_EMSDKMissingPaths).</_EMSDKMissingErrorMessage>
 
       <_IsEMSDKMissing Condition="'$(_EMSDKMissingErrorMessage)' != ''">true</_IsEMSDKMissing>
     </PropertyGroup>
 
     <PropertyGroup>
       <EmscriptenSdkToolsPath Condition="'$(EmscriptenSdkToolsPath)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(EmscriptenSdkToolsPath)))</EmscriptenSdkToolsPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(EmscriptenSdkToolsPath)))</EmscriptenSdkToolsPath>
       <EmscriptenNodeToolsPath Condition="'$(EmscriptenNodeToolsPath)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(EmscriptenNodeToolsPath)))</EmscriptenNodeToolsPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(EmscriptenNodeToolsPath)))</EmscriptenNodeToolsPath>
       <EmscriptenUpstreamBinPath Condition="'$(EmscriptenUpstreamBinPath)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(EmscriptenUpstreamBinPath)))</EmscriptenUpstreamBinPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(EmscriptenUpstreamBinPath)))</EmscriptenUpstreamBinPath>
     </PropertyGroup>
 
     <!-- Environment variables required for running emsdk commands like `emcc` -->
@@ -197,8 +183,7 @@
         Condition="'$(WasmBuildNative)' == '' and
                           '$(%(_BoolPropertiesThatTriggerRelinking.Identity))' != '' and
                           '$(%(_BoolPropertiesThatTriggerRelinking.Identity))' != '%(_BoolPropertiesThatTriggerRelinking.DefaultValueInRuntimePack)'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
     </PropertyGroup>
 
     <!-- When Building -->
@@ -206,13 +191,11 @@
       <!-- build AOT, only if explicitly requested -->
       <WasmBuildNative
         Condition="'$(RunAOTCompilation)' == 'true' and '$(RunAOTCompilationAfterBuild)' == 'true'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and @(NativeFileReference->Count()) > 0"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
 
@@ -222,18 +205,15 @@
       <WasmBuildNative Condition="'$(RunAOTCompilation)' == 'true'">true</WasmBuildNative>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and @(NativeFileReference->Count()) > 0"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <!-- not aot, not trimmed app, no reason to relink -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(PublishTrimmed)' != 'true'"
-        >false</WasmBuildNative
-      >
+        >false</WasmBuildNative>
 
       <!-- default to relinking in Release config -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(Configuration)' == 'Release'"
-        >true</WasmBuildNative
-      >
+        >true</WasmBuildNative>
 
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
@@ -246,8 +226,7 @@
 
     <PropertyGroup>
       <WasmBuildNative Condition="'$(WasmBuildNative)' == 'true' and '$(_IsEMSDKMissing)' == 'true'"
-        >false</WasmBuildNative
-      >
+        >false</WasmBuildNative>
     </PropertyGroup>
   </Target>
 
@@ -256,8 +235,7 @@
       <!-- Build+relink+config=debug -->
       <WasmNativeStrip
         Condition="'$(WasmBuildingForNestedPublish)' != 'true' and '$(WasmBuildNative)' == 'true' and '$(Configuration)' == 'Debug'"
-        >false</WasmNativeStrip
-      >
+        >false</WasmNativeStrip>
       <WasmNativeStrip Condition="'$(WasmNativeStrip)' == ''">true</WasmNativeStrip>
     </PropertyGroup>
   </Target>
@@ -279,8 +257,7 @@
       <_EmccDefaultFlagsRsp>$([MSBuild]::NormalizePath($(_WasmRuntimePackSrcDir), 'emcc-default.rsp'))</_EmccDefaultFlagsRsp>
       <_EmccDefaultLinkFlagsRsp>$([MSBuild]::NormalizePath($(_WasmRuntimePackSrcDir), 'emcc-link.rsp'))</_EmccDefaultLinkFlagsRsp>
       <WasmNativeDebugSymbols Condition="'$(WasmNativeDebugSymbols)' == ''"
-        >true</WasmNativeDebugSymbols
-      >
+        >true</WasmNativeDebugSymbols>
       <WasmLinkIcalls Condition="'$(WasmLinkIcalls)' == ''">$(WasmBuildNative)</WasmLinkIcalls>
 
       <_WasmICallTablePath>$(_WasmIntermediateOutputPath)icall-table.h</_WasmICallTablePath>
@@ -292,61 +269,47 @@
       <_DriverGenCPath>$(_WasmIntermediateOutputPath)driver-gen.c</_DriverGenCPath>
       <DisableParallelAot Condition="'$(DisableParallelAot)' == ''">false</DisableParallelAot>
       <DisableParallelEmccCompile Condition="'$(DisableParallelEmccCompile)' == ''"
-        >$(DisableParallelAot)</DisableParallelEmccCompile
-      >
+        >$(DisableParallelAot)</DisableParallelEmccCompile>
 
       <_DriverGenCNeeded Condition="'$(_DriverGenCNeeded)' == '' and '$(_WasmShouldAOT)' == 'true'"
-        >true</_DriverGenCNeeded
-      >
+        >true</_DriverGenCNeeded>
 
       <_WasmDevel
         Condition="'$(_WasmDevel)' == '' and '$(WasmBuildNative)' == 'true' and '$(Configuration)' == 'Debug' and '$(WasmBuildingForNestedPublish)' != 'true'"
-        >true</_WasmDevel
-      >
+        >true</_WasmDevel>
 
       <_EmccOptimizationFlagDefault Condition="'$(_WasmDevel)' == 'true'"
-        >-O0</_EmccOptimizationFlagDefault
-      >
+        >-O0</_EmccOptimizationFlagDefault>
       <_EmccOptimizationFlagDefault
         Condition="'$(_EmccOptimizationFlagDefault)' == '' and '$(Configuration)' == 'Debug' and '$(WasmBuildingForNestedPublish)' != 'true'"
-        >-O1</_EmccOptimizationFlagDefault
-      >
+        >-O1</_EmccOptimizationFlagDefault>
       <_EmccOptimizationFlagDefault Condition="'$(_EmccOptimizationFlagDefault)' == ''"
-        >-Oz</_EmccOptimizationFlagDefault
-      >
+        >-Oz</_EmccOptimizationFlagDefault>
 
       <EmccCompileOptimizationFlag Condition="'$(EmccCompileOptimizationFlag)' == ''"
-        >$(_EmccOptimizationFlagDefault)</EmccCompileOptimizationFlag
-      >
+        >$(_EmccOptimizationFlagDefault)</EmccCompileOptimizationFlag>
       <EmccLinkOptimizationFlag
         Condition="'$(EmccLinkOptimizationFlag)' == '' and '$(Configuration)' == 'Release'"
-        >-O2</EmccLinkOptimizationFlag
-      >
+        >-O2</EmccLinkOptimizationFlag>
       <EmccLinkOptimizationFlag Condition="'$(EmccLinkOptimizationFlag)' == ''"
-        >$(EmccCompileOptimizationFlag)</EmccLinkOptimizationFlag
-      >
+        >$(EmccCompileOptimizationFlag)</EmccLinkOptimizationFlag>
 
       <_EmccCompileRsp>$(_WasmIntermediateOutputPath)emcc-compile.rsp</_EmccCompileRsp>
       <_EmccCompileOutputMessageImportance Condition="'$(EmccVerbose)' == 'true'"
-        >Normal</_EmccCompileOutputMessageImportance
-      >
+        >Normal</_EmccCompileOutputMessageImportance>
       <_EmccCompileOutputMessageImportance Condition="'$(EmccVerbose)' != 'true'"
-        >Low</_EmccCompileOutputMessageImportance
-      >
+        >Low</_EmccCompileOutputMessageImportance>
 
       <_EmccCompileBitcodeRsp>$(_WasmIntermediateOutputPath)emcc-compile-bc.rsp</_EmccCompileBitcodeRsp>
       <_EmccLinkRsp>$(_WasmIntermediateOutputPath)emcc-link.rsp</_EmccLinkRsp>
 
       <EmccInitialHeapSize Condition="'$(EmccInitialHeapSize)' == ''"
-        >$(EmccTotalMemory)</EmccInitialHeapSize
-      >
+        >$(EmccTotalMemory)</EmccInitialHeapSize>
       <EmccStackSize Condition="'$(EmccStackSize)' == ''">5MB</EmccStackSize>
       <WasmAllowUndefinedSymbols Condition="'$(WasmAllowUndefinedSymbols)' == ''"
-        >false</WasmAllowUndefinedSymbols
-      >
+        >false</WasmAllowUndefinedSymbols>
       <WasmEnableLegacyJsInterop Condition="'$(WasmEnableLegacyJsInterop)' == ''"
-        >true</WasmEnableLegacyJsInterop
-      >
+        >true</WasmEnableLegacyJsInterop>
     </PropertyGroup>
 
     <ItemGroup>
@@ -533,11 +496,9 @@
     <PropertyGroup>
       <_HasMscorlib
         Condition="'%(_WasmAssembliesInternal.FileName)%(_WasmAssembliesInternal.Extension)' == 'mscorlib.dll'"
-        >true</_HasMscorlib
-      >
+        >true</_HasMscorlib>
       <_MscorlibPath Condition="'$(_HasMscorlib)' != 'true'"
-        >$([System.IO.Path]::Combine($(MicrosoftNetCoreAppRuntimePackRidLibTfmDir), 'mscorlib.dll'))</_MscorlibPath
-      >
+        >$([System.IO.Path]::Combine($(MicrosoftNetCoreAppRuntimePackRidLibTfmDir), 'mscorlib.dll'))</_MscorlibPath>
     </PropertyGroup>
 
     <Error
@@ -692,8 +653,7 @@
     <PropertyGroup>
       <EmccInitialHeapSize
         Condition="'$(EmccInitialHeapSize)' == '' and '$(_WasmCalculatedInitialHeapSize)' != '' and $(_WasmCalculatedInitialHeapSize) > 16777216"
-        >$(_WasmCalculatedInitialHeapSize)</EmccInitialHeapSize
-      >
+        >$(_WasmCalculatedInitialHeapSize)</EmccInitialHeapSize>
       <EmccInitialHeapSize Condition="'$(EmccInitialHeapSize)' == ''">16777216</EmccInitialHeapSize>
     </PropertyGroup>
   </Target>
@@ -704,25 +664,19 @@
   >
     <PropertyGroup>
       <_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' == 'true'"
-        >libmono-wasm-eh-wasm.a</_WasmEHLib
-      >
+        >libmono-wasm-eh-wasm.a</_WasmEHLib>
       <_WasmEHLib Condition="'$(WasmEnableExceptionHandling)' != 'true'"
-        >libmono-wasm-eh-js.a</_WasmEHLib
-      >
+        >libmono-wasm-eh-js.a</_WasmEHLib>
       <_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' == 'true'"
-        >libmono-wasm-eh-js.a</_WasmEHLibToExclude
-      >
+        >libmono-wasm-eh-js.a</_WasmEHLibToExclude>
       <_WasmEHLibToExclude Condition="'$(WasmEnableExceptionHandling)' != 'true'"
-        >libmono-wasm-eh-wasm.a</_WasmEHLibToExclude
-      >
+        >libmono-wasm-eh-wasm.a</_WasmEHLibToExclude>
       <_WasmSIMDLib Condition="'$(WasmEnableSIMD)' == 'true'">libmono-wasm-simd.a</_WasmSIMDLib>
       <_WasmSIMDLib Condition="'$(WasmEnableSIMD)' != 'true'">libmono-wasm-nosimd.a</_WasmSIMDLib>
       <_WasmSIMDLibToExclude Condition="'$(WasmEnableSIMD)' != 'true'"
-        >libmono-wasm-simd.a</_WasmSIMDLibToExclude
-      >
+        >libmono-wasm-simd.a</_WasmSIMDLibToExclude>
       <_WasmSIMDLibToExclude Condition="'$(WasmEnableSIMD)' == 'true'"
-        >libmono-wasm-nosimd.a</_WasmSIMDLibToExclude
-      >
+        >libmono-wasm-nosimd.a</_WasmSIMDLibToExclude>
       <_EmccExportedLibraryFunction>&quot;[@(EmccExportedLibraryFunction -> '%27%(Identity)%27', ',')]&quot;</_EmccExportedLibraryFunction>
       <_EmccExportedRuntimeMethods>&quot;[@(EmccExportedRuntimeMethod -> '%27%(Identity)%27', ',')]&quot;</_EmccExportedRuntimeMethods>
       <_EmccExportedFunctions>@(EmccExportedFunction -> '%(Identity)',',')</_EmccExportedFunctions>

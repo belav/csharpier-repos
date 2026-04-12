@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.SpinWait" /> encapsulates common spinning logic. On single-processor machines, yields are always used instead of busy waits, and on computers with Intel processors employing Hyper-Threading technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of spinning and true yielding. </para
-      >
+        <see cref="T:System.Threading.SpinWait" /> encapsulates common spinning logic. On single-processor machines, yields are always used instead of busy waits, and on computers with Intel processors employing Hyper-Threading technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of spinning and true yielding. </para>
       <para>
-        <see cref="T:System.Threading.SpinWait" /> is a value type, which means that low-level code can utilize SpinWait without fear of unnecessary allocation overheads. SpinWait is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework, such as <see cref="T:System.Threading.Monitor" />. For most purposes where spin waiting is required, however, the <see cref="T:System.Threading.SpinWait" /> type should be preferred over the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method. </para
-      >
+        <see cref="T:System.Threading.SpinWait" /> is a value type, which means that low-level code can utilize SpinWait without fear of unnecessary allocation overheads. SpinWait is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework, such as <see cref="T:System.Threading.Monitor" />. For most purposes where spin waiting is required, however, the <see cref="T:System.Threading.SpinWait" /> type should be preferred over the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of times <see cref="M:System.Threading.SpinWait.SpinOnce" /> has been called on this instance.</para
-          >
+            >Gets the number of times <see cref="M:System.Threading.SpinWait.SpinOnce" /> has been called on this instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -65,14 +62,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On a single-CPU machine, <see cref="M:System.Threading.SpinWait.SpinOnce" /> always yields the processor. On machines with multiple CPUs, <see cref="M:System.Threading.SpinWait.SpinOnce" /> may yield after an unspecified number of calls.</para
-          >
+            >On a single-CPU machine, <see cref="M:System.Threading.SpinWait.SpinOnce" /> always yields the processor. On machines with multiple CPUs, <see cref="M:System.Threading.SpinWait.SpinOnce" /> may yield after an unspecified number of calls.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the next call to <see cref="M:System.Threading.SpinWait.SpinOnce" /> will yield the processor, triggering a forced context switch.</para
-          >
+            >Gets whether the next call to <see cref="M:System.Threading.SpinWait.SpinOnce" /> will yield the processor, triggering a forced context switch.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +89,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This makes <see cref="M:System.Threading.SpinWait.SpinOnce" /> and <see cref="P:System.Threading.SpinWait.NextSpinWillYield" /> behave as though no calls to <see cref="M:System.Threading.SpinWait.SpinOnce" /> had been issued on this instance. If a <see cref="T:System.Threading.SpinWait" /> instance is reused many times, it may be useful to reset it to avoid yielding too soon.</para
-          >
+            >This makes <see cref="M:System.Threading.SpinWait.SpinOnce" /> and <see cref="P:System.Threading.SpinWait.NextSpinWillYield" /> behave as though no calls to <see cref="M:System.Threading.SpinWait.SpinOnce" /> had been issued on this instance. If a <see cref="T:System.Threading.SpinWait" /> instance is reused many times, it may be useful to reset it to avoid yielding too soon.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is typically called in a loop, and may change in behavior based on the number of times a <see cref="M:System.Threading.SpinWait.SpinOnce" /> has been called thus far on this instance. Each spin results in the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method being called. A count is kept of the number of times <see cref="M:System.Threading.SpinWait.SpinOnce" /> is called, and after a threshold count is reached, the <see cref="M:System.Threading.Thread.Yield" /> method is called.</para
-          >
+            >This is typically called in a loop, and may change in behavior based on the number of times a <see cref="M:System.Threading.SpinWait.SpinOnce" /> has been called thus far on this instance. Each spin results in the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" /> method being called. A count is kept of the number of times <see cref="M:System.Threading.SpinWait.SpinOnce" /> is called, and after a threshold count is reached, the <see cref="M:System.Threading.Thread.Yield" /> method is called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,8 +153,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to be executed over and over until it returns true.</param
-        >
+          />A delegate to be executed over and over until it returns true.</param>
       </Docs>
     </Member>
     <Member MemberName="SpinUntil">
@@ -199,15 +191,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to be executed over and over until it returns true.</param
-        >
+          />A delegate to be executed over and over until it returns true.</param>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" /> (-1) to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="SpinUntil">
@@ -245,15 +235,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A delegate to be executed over and over until it returns true.</param
-        >
+          />A delegate to be executed over and over until it returns true.</param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a TimeSpan that represents -1 milliseconds to wait indefinitely.</param>
       </Docs>
     </Member>
   </Members>

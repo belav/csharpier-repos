@@ -10,13 +10,11 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_Principal</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_Principal</GeneratePlatformNotSupportedAssemblyMessage>
     <!-- Work around 'notsupported.cs' source generation of explicit interface implementations issue -->
     <!-- https://github.com/dotnet/arcade/issues/4722 -->
     <Nullable Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
-      >annotations</Nullable
-    >
+      >annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

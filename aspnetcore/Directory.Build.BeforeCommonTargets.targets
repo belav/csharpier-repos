@@ -9,8 +9,7 @@
             '$(MSBuildProjectName)' != '$(TargetingPackName)' and
             '$(IsAnalyzersProject)' != 'true' and
             '$(IsProjectTemplateProject)' != 'true'"
-      >true</ExcludeFromSourceBuild
-    >
+      >true</ExcludeFromSourceBuild>
 
     <!-- If the user has specified that they want to skip building any test related projects with SkipTestBuild,
      suppress all targets for TestProjects using ExcludeFromBuild. -->
@@ -24,7 +23,6 @@
          '$(IsSampleProject)' == 'true' or
          '$(IsSpecificationTestProject)' == 'true' or
          '$(IsMicrobenchmarksProject)' == 'true')"
-      >true</ExcludeFromBuild
-    >
+      >true</ExcludeFromBuild>
   </PropertyGroup>
 </Project>

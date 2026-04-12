@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates using the <see cref="T:System.Text.UTF8Encoding" /> class to convert one character array to two byte
-arrays.</para
-      >
+arrays.</para>
       <code lang="C#"
         >using System;
 using System.Text;
@@ -86,25 +85,20 @@ public class EncoderExample
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To obtain an instance of an implementation of the <see cref="T:System.Text.Encoder" /> class, the application should use the <see cref="M:System.Text.Encoding.GetEncoder" /> method of an <see cref="T:System.Text.Encoding" /> implementation.</para
-      >
+        >To obtain an instance of an implementation of the <see cref="T:System.Text.Encoder" /> class, the application should use the <see cref="M:System.Text.Encoding.GetEncoder" /> method of an <see cref="T:System.Text.Encoding" /> implementation.</para>
       <para
-        >The <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> method performs the actual encoding. There are several versions of both of these methods available in the <see cref="T:System.Text.Encoder" /> class. For more information, see <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" />.</para
-      >
+        >The <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" /> method determines how many bytes result in encoding a set of Unicode characters, and the <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> method performs the actual encoding. There are several versions of both of these methods available in the <see cref="T:System.Text.Encoder" /> class. For more information, see <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" />.</para>
       <para
-        >A <see cref="T:System.Text.Encoder" /> object maintains state information between successive calls to GetBytes or <see cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> methods so that it can correctly encode character sequences that span blocks. The <see cref="T:System.Text.Encoder" /> also preserves trailing characters at the end of data blocks and uses the trailing characters in the next encoding operation. For example, a data block might end with an unmatched high surrogate, and the matching low surrogate might be in the next data block. Therefore, <see cref="M:System.Text.Encoding.GetDecoder" /> and <see cref="M:System.Text.Encoding.GetEncoder" /> are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para
-      >
+        >A <see cref="T:System.Text.Encoder" /> object maintains state information between successive calls to GetBytes or <see cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> methods so that it can correctly encode character sequences that span blocks. The <see cref="T:System.Text.Encoder" /> also preserves trailing characters at the end of data blocks and uses the trailing characters in the next encoding operation. For example, a data block might end with an unmatched high surrogate, and the matching low surrogate might be in the next data block. Therefore, <see cref="M:System.Text.Encoding.GetDecoder" /> and <see cref="M:System.Text.Encoding.GetEncoder" /> are useful for network transmission and file operations, because those operations often deal with blocks of data instead of a complete data stream.</para>
       <block subset="none" type="note">
         <para
-          >When the application is done with a stream of data it should make sure that the state information is flushed by setting the <paramref name="flush" /> parameter to true in the appropriate method call. If an exception occurs or if the application switches streams, it should call <see cref="M:System.Text.Encoder.Reset" /> to clear the internal state of the Encoder object.</para
-        >
+          >When the application is done with a stream of data it should make sure that the state information is flushed by setting the <paramref name="flush" /> parameter to true in the appropriate method call. If an exception occurs or if the application switches streams, it should call <see cref="M:System.Text.Encoder.Reset" /> to clear the internal state of the Encoder object.</para>
       </block>
       <format type="text/html">
         <h2>Version Considerations</h2>
       </format>
       <para
-        >A <see cref="T:System.Text.Decoder" /> or <see cref="T:System.Text.Encoder" /> object can be serialized during a conversion operation. The state of the object is retained if it is deserialized in the same version of the .NET Framework, but lost if it is deserialized in another version. </para
-      >
+        >A <see cref="T:System.Text.Decoder" /> or <see cref="T:System.Text.Encoder" /> object can be serialized during a conversion operation. The state of the object is retained if it is deserialized in the same version of the .NET Framework, but lost if it is deserialized in another version. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -134,8 +128,7 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain an instance of an implementation of this class, the application should use the <see cref="M:System.Text.Encoding.GetEncoder" /> method of an <see cref="T:System.Text.Encoding" /> implementation.</para
-          >
+            >To obtain an instance of an implementation of this class, the application should use the <see cref="M:System.Text.Encoding.GetEncoder" /> method of an <see cref="T:System.Text.Encoding" /> implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -271,14 +264,12 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para
-          >
+            >The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Text.EncoderFallback" /> object for the current <see cref="T:System.Text.Encoder" /> object.</para
-          >
+            >Gets or sets a <see cref="T:System.Text.EncoderFallback" /> object for the current <see cref="T:System.Text.Encoder" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -310,14 +301,12 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Text.Encoder.FallbackBuffer" /> object represents data used by the <see cref="T:System.Text.EncoderFallback" /> object. The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para
-          >
+            >The <see cref="P:System.Text.Encoder.FallbackBuffer" /> object represents data used by the <see cref="T:System.Text.EncoderFallback" /> object. The <see cref="T:System.Text.EncoderFallback" /> object represents an error handler that is invoked when a character cannot be converted into an encoded byte sequence. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Text.EncoderFallbackBuffer" /> object associated with the current <see cref="T:System.Text.Encoder" /> object.</para
-          >
+            >Gets the <see cref="T:System.Text.EncoderFallbackBuffer" /> object associated with the current <see cref="T:System.Text.Encoder" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -357,11 +346,9 @@ public class EncoderExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not affect the state of the encoder.</para>
           <para
-            >To calculate the exact array size that <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> requires to store the resulting bytes, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />.</para
-          >
+            >To calculate the exact array size that <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> requires to store the resulting bytes, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />.</para>
           <para
-            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing characters at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
-          >
+            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing characters at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -376,22 +363,19 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode. </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param
-        >
+          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetByteCount">
@@ -424,8 +408,7 @@ public class EncoderExample
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="chars " /> is <see langword="null" />. </exception
-        >
+          <paramref name="chars " /> is <see langword="null" />. </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>Return value is greater than <see cref="F:System.Int32.MaxValue" />. </para>
           <para>-or- </para>
@@ -434,18 +417,15 @@ public class EncoderExample
           <para><paramref name="count" /> &lt; 0. </para>
           <para> -or- </para>
           <para>
-            <paramref name="index" /> and <paramref name="count" /> do not specify a valid range in <paramref name="chars" /> (i.e. (<paramref name="index" /> + <paramref name="count" />) &gt; <paramref name="chars" />.Length).</para
-          >
+            <paramref name="index" /> and <paramref name="count" /> do not specify a valid range in <paramref name="chars" /> (i.e. (<paramref name="index" /> + <paramref name="count" />) &gt; <paramref name="chars" />.Length).</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not affect the state of the encoder.</para>
           <para
-            >To calculate the exact array size that <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> requires to store the resulting bytes, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />.</para
-          >
+            >To calculate the exact array size that <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> requires to store the resulting bytes, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />.</para>
           <para
-            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing characters at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
-          >
+            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing characters at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -460,29 +440,25 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode. </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param
-        >
+          />true to simulate clearing the internal state of the encoder after the calculation; otherwise, false. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -523,17 +499,13 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para
-          >
+            >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para>
           <para
-            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />. </para
-          >
+            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />. </para>
           <para
-            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
-          >
+            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para>
           <para
-            >If your application is to convert many segments of an input stream, consider using the <see cref="M:System.Text.Encoder.Convert(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> method. <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> will throw an exception if the output buffer isn't large enough, but <see cref="M:System.Text.Encoder.Convert(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> will fill as much space as possible and return the chars read and bytes written. Also see the <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> topic for more comments.</para
-          >
+            >If your application is to convert many segments of an input stream, consider using the <see cref="M:System.Text.Encoder.Convert(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> method. <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> will throw an exception if the output buffer isn't large enough, but <see cref="M:System.Text.Encoder.Convert(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> will fill as much space as possible and return the chars read and bytes written. Also see the <see cref="M:System.Text.Encoding.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32)" /> topic for more comments.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -542,44 +514,38 @@ public class EncoderExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The actual number of bytes written at the location indicated by the <paramref name="bytes" /> parameter.</para
-          >
+            >The actual number of bytes written at the location indicated by the <paramref name="bytes" /> parameter.</para>
         </returns>
         <param name="chars">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the first character to encode. </param
-        >
+          />A pointer to the first character to encode. </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode. </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A pointer to the location at which to start writing the resulting sequence of bytes. </param
-        >
+          />A pointer to the location at which to start writing the resulting sequence of bytes. </param>
         <param name="byteCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes to write. </param
-        >
+          />The maximum number of bytes to write. </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param
-        >
+          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -615,8 +581,7 @@ public class EncoderExample
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="bytes" /> does not contain sufficient space to store the encoded characters.</para
-          >
+            <paramref name="bytes" /> does not contain sufficient space to store the encoded characters.</para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para><paramref name="chars " />is <see langword="null" /> . </para>
@@ -631,25 +596,20 @@ public class EncoderExample
           <para><paramref name="byteIndex " /> &lt; 0. </para>
           <para> -or- </para>
           <para
-            >(<paramref name="chars" />.Length - <paramref name="charIndex" />) &lt; <paramref name="charCount" />.</para
-          >
+            >(<paramref name="chars" />.Length - <paramref name="charIndex" />) &lt; <paramref name="charCount" />.</para>
           <para>-or-</para>
           <para><paramref name="byteIndex" /> &gt; <paramref name="bytes" />.Length.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para
-          >
+            >Remember that the <see cref="T:System.Text.Encoder" /> object saves state between calls to <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" />. When the application is done with a stream of data, it should set the <paramref name="flush" /> parameter to true in the last call to GetBytes to make sure that the state information is flushed and that the encoded bytes are properly terminated. With this setting, the encoder ignores invalid bytes at the end of the data block, such as unmatched surrogates or incomplete combining sequences, and clears the internal buffer.</para>
           <para
-            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />. </para
-          >
+            >To calculate the exact buffer size that GetBytes requires to store the resulting characters, the application should use <see cref="M:System.Text.Encoder.GetByteCount(System.Char[],System.Int32,System.Int32,System.Boolean)" />. </para>
           <para
-            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para
-          >
+            >If GetBytes is called with <paramref name="flush" /> set to false, the encoder stores trailing bytes at the end of the data block in an internal buffer and uses them in the next encoding operation. The application should call GetByteCount on a block of data immediately before calling GetBytes on the same block, so that any trailing characters from the previous block are included in the calculation.</para>
           <para
-            >If your application is to convert many segments of an input stream, consider using the <see cref="M:System.Text.Encoder.Convert(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> method. <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> will throw an exception if the output buffer isn't large enough, but <see cref="M:System.Text.Encoder.Convert(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> will fill as much space as possible and return the chars read and bytes written. Also see the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> topic for more comments.</para
-          >
+            >If your application is to convert many segments of an input stream, consider using the <see cref="M:System.Text.Encoder.Convert(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> method. <see cref="M:System.Text.Encoder.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)" /> will throw an exception if the output buffer isn't large enough, but <see cref="M:System.Text.Encoder.Convert(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" /> will fill as much space as possible and return the chars read and bytes written. Also see the <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)" /> topic for more comments.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -664,43 +624,37 @@ public class EncoderExample
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the set of characters to encode. </param
-        >
+          />The character array containing the set of characters to encode. </param>
         <param name="charIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first character to encode. </param
-        >
+          />The index of the first character to encode. </param>
         <param name="charCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to encode. </param
-        >
+          />The number of characters to encode. </param>
         <param name="bytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to contain the resulting sequence of bytes. </param
-        >
+          />The byte array to contain the resulting sequence of bytes. </param>
         <param name="byteIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to start writing the resulting sequence of bytes. </param
-        >
+          />The index at which to start writing the resulting sequence of bytes. </param>
         <param name="flush">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param
-        >
+          />true to clear the internal state of the encoder after the conversion; otherwise, false. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -729,11 +683,9 @@ public class EncoderExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method clears the internal state of the <see cref="T:System.Text.Encoder" /> object. The method clears any state information preserved from a previous call to <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> or <see cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />, including trailing characters at the end of the previous data block, such as an unmatched high surrogate.</para
-          >
+            >This method clears the internal state of the <see cref="T:System.Text.Encoder" /> object. The method clears any state information preserved from a previous call to <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> or <see cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />, including trailing characters at the end of the previous data block, such as an unmatched high surrogate.</para>
           <para
-            >Your application should call the Reset method if it wants to reuse the same encoder even after an exception is thrown by <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> or <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />, or if the application switches streams.</para
-          >
+            >Your application should call the Reset method if it wants to reuse the same encoder even after an exception is thrown by <see cref="M:System.Text.Encoder.GetBytes(System.Char*,System.Int32,System.Byte*,System.Int32,System.Boolean)" /> or <see cref="M:System.Text.Encoder.GetByteCount(System.Char*,System.Int32,System.Boolean)" />, or if the application switches streams.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

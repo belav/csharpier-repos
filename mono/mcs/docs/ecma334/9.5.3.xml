@@ -40,11 +40,9 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The processing of a <symbol>#define</symbol> directive causes the given conditional compilation symbol to become defined, starting with the source line that follows the directive. Likewise, the processing of an <symbol>#undef</symbol> directive causes the given conditional compilation symbol to become undefined, starting with the source line that follows the directive. </paragraph
-  >
+    >The processing of a <symbol>#define</symbol> directive causes the given conditional compilation symbol to become defined, starting with the source line that follows the directive. Likewise, the processing of an <symbol>#undef</symbol> directive causes the given conditional compilation symbol to become undefined, starting with the source line that follows the directive. </paragraph>
   <paragraph
-    >Any <symbol>#define</symbol> and <symbol>#undef</symbol> directives in a source file must occur before the first token (<hyperlink>9.4</hyperlink>) in the source file; otherwise a compile-time error occurs. In intuitive terms, <symbol>#define</symbol> and <symbol>#undef</symbol> directives must precede any &quot;real code&quot; in the source file. </paragraph
-  >
+    >Any <symbol>#define</symbol> and <symbol>#undef</symbol> directives in a source file must occur before the first token (<hyperlink>9.4</hyperlink>) in the source file; otherwise a compile-time error occurs. In intuitive terms, <symbol>#define</symbol> and <symbol>#undef</symbol> directives must precede any &quot;real code&quot; in the source file. </paragraph>
   <paragraph>
     <example
       >[Example: The example: <code_example>
@@ -60,8 +58,7 @@ namespace Megacorp.Data
    #endif  
 }  
 ]]>
-      </code_example>is valid because the <symbol>#define</symbol> directives precede the first token (the namespace keyword) in the source file. end example]</example
-    >
+      </code_example>is valid because the <symbol>#define</symbol> directives precede the first token (the namespace keyword) in the source file. end example]</example>
   </paragraph>
   <paragraph>
     <example
@@ -76,8 +73,7 @@ namespace N
    #endif  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >A <symbol>#define</symbol> may define a conditional compilation symbol that is already defined, without there being any intervening <symbol>#undef</symbol> for that symbol. <example
@@ -100,7 +96,6 @@ namespace N
 #undef A  
 #undef A  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

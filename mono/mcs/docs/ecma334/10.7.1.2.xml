@@ -8,8 +8,7 @@
     </list>
   </paragraph>
   <paragraph
-    >The rules governing operator declarations (<hyperlink>17.9</hyperlink>) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another. </paragraph
-  >
+    >The rules governing operator declarations (<hyperlink>17.9</hyperlink>) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another. </paragraph>
   <paragraph
     >Contrary to hiding a name from an outer scope, hiding an accessible name from an inherited scope causes a warning to be reported. <example
       >[Example: In the example <code_example>
@@ -23,8 +22,7 @@ class Derived: Base
    public void F() {}    // Warning, hiding an inherited name  
 }  
 ]]>
-      </code_example>the declaration of F in Derived causes a warning to be reported. Hiding an inherited name is specifically not an error, since that would preclude separate evolution of base classes. For example, the above situation might have come about because a later version of Base introduced an F method that wasn't present in an earlier version of the class. Had the above situation been an error, then any change made to a base class in a separately versioned class library could potentially cause derived classes to become invalid. end example]</example
-    >
+      </code_example>the declaration of F in Derived causes a warning to be reported. Hiding an inherited name is specifically not an error, since that would preclude separate evolution of base classes. For example, the above situation might have come about because a later version of Base introduced an F method that wasn't present in an earlier version of the class. Had the above situation been an error, then any change made to a base class in a separately versioned class library could potentially cause derived classes to become invalid. end example]</example>
   </paragraph>
   <paragraph
     >The warning caused by hiding an inherited name can be eliminated through use of the new modifier: <example

@@ -17,6 +17,5 @@ public class Trig
     </example>
   </paragraph>
   <paragraph>
-    <example>The Trig class groups related methods and constants, but is not intended to be instantiated. Therefore, it declares a single empty private instance constructor. end example]</example> At least one instance constructor must be declared to suppress the automatic generation of a default constructor. </paragraph
-  >
+    <example>The Trig class groups related methods and constants, but is not intended to be instantiated. Therefore, it declares a single empty private instance constructor. end example]</example> At least one instance constructor must be declared to suppress the automatic generation of a default constructor. </paragraph>
 </clause>

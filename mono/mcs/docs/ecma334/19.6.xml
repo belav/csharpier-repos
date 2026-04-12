@@ -47,14 +47,12 @@
         <![CDATA[
 int[] a = {0, 2, 4, 6, 8};  
 ]]>
-      </code_example>end example]</example
-    > it is simply shorthand for an equivalent array creation expression: <example
+      </code_example>end example]</example> it is simply shorthand for an equivalent array creation expression: <example
       >[Example: <code_example>
         <![CDATA[
 int[] a = new int[] {0, 2, 4, 6, 8};  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >For a single-dimensional array, the array initializer must consist of a sequence of expressions that are assignment compatible with the element type of the array. The expressions initialize array elements in increasing order, starting with the element at index zero. The number of expressions in the array initializer determines the length of the array instance being created. <example
@@ -62,8 +60,7 @@ int[] a = new int[] {0, 2, 4, 6, 8};
         <![CDATA[
 a[0] = 0; a[1] = 2; a[2] = 4; a[3] = 6; a[4] = 8;  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >For a multi-dimensional array, the array initializer must have as many levels of nesting as there are dimensions in the array. The outermost nesting level corresponds to the leftmost dimension and the innermost nesting level corresponds to the rightmost dimension. The length of each dimension of the array is determined by the number of elements at the corresponding nesting level in the array initializer. For each nested array initializer, the number of elements must be the same as the other array initializers at the same level. <example
@@ -83,8 +80,7 @@ b[2, 0] = 4; b[2, 1] = 5;
 b[3, 0] = 6; b[3, 1] = 7;  
 b[4, 0] = 8; b[4, 1] = 9;  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >When an array creation expression includes both explicit dimension lengths and an array initializer, the lengths must be constant expressions and the number of elements at each nesting level must match the corresponding dimension length. <example

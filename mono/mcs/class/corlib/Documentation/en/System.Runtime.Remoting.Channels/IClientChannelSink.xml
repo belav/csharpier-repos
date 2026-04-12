@@ -76,29 +76,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of channel sinks that called this sink. </param
-        >
+          />A stack of channel sinks that called this sink. </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to process. </param
-        >
+          />The message to process. </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to add to the outgoing message heading to the server. </param
-        >
+          />The headers to add to the outgoing message heading to the server. </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream headed to the transport sink. </param
-        >
+          />The stream headed to the transport sink. </param>
       </Docs>
     </Member>
     <Member MemberName="AsyncProcessResponse">
@@ -139,29 +135,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of sinks that called this sink. </param
-        >
+          />A stack of sinks that called this sink. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information generated on the request side that is associated with this sink. </param
-        >
+          />Information generated on the request side that is associated with this sink. </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers retrieved from the server response stream. </param
-        >
+          />The headers retrieved from the server response stream. </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream coming back from the transport sink. </param
-        >
+          />The stream coming back from the transport sink. </param>
       </Docs>
     </Member>
     <Member MemberName="GetRequestStream">
@@ -190,35 +182,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.GetRequestStream(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders)" /> method is called by the formatter sink before it serializes the message.</para
-          >
+            >The <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.GetRequestStream(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders)" /> method is called by the formatter sink before it serializes the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.IO.Stream" /> onto which the provided message is to be serialized.</para
-          >
+            >Returns the <see cref="T:System.IO.Stream" /> onto which the provided message is to be serialized.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IO.Stream" /> onto which the provided message is to be serialized.</para
-          >
+            >The <see cref="T:System.IO.Stream" /> onto which the provided message is to be serialized.</para>
         </returns>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> containing details about the method call. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> containing details about the method call. </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to add to the outgoing message heading to the server. </param
-        >
+          />The headers to add to the outgoing message heading to the server. </param>
       </Docs>
     </Member>
     <Member MemberName="NextChannelSink">
@@ -285,13 +272,11 @@
       </Parameters>
       <Docs>
         <param name="msg"
-          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param
-        >
+          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param>
         <param name="requestHeaders">To be added: an object of type 'ITransportHeaders'</param>
         <param name="requestStream">To be added: an object of type 'IO.Stream'</param>
         <param name="responseHeaders"
-          >To be added: an object of type 'ITransportHeaders&amp;'</param
-        >
+          >To be added: an object of type 'ITransportHeaders&amp;'</param>
         <param name="responseStream">To be added: an object of type 'IO.Stream&amp;'</param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>

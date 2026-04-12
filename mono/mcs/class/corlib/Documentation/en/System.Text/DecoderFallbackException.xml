@@ -43,14 +43,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
-          >
+            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -73,18 +71,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
-          >
+            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. A parameter specifies the error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. A parameter specifies the error message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,25 +105,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
-          >
+            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. Parameters specify the error message and the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. Parameters specify the error message and the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that caused this exception.</param
-        >
+          />The exception that caused this exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -155,32 +146,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
-          >
+            >The <see cref="P:System.Exception.HResult" /> property for this exception is set to COR_E_ARGUMENT (0x80070057).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. Parameters specify the error message, the array of bytes being decoded, and the index of the byte that cannot be decoded.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackException" /> class. Parameters specify the error message, the array of bytes being decoded, and the index of the byte that cannot be decoded.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An error message.</param>
         <param name="bytesUnknown">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input byte array.</param
-        >
+          />The input byte array.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index position in <paramref name="bytesUnknown" /> of the byte that cannot be decoded.</param
-        >
+          />The index position in <paramref name="bytesUnknown" /> of the byte that cannot be decoded.</param>
       </Docs>
     </Member>
     <Member MemberName="BytesUnknown">
@@ -200,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application uses the <see cref="P:System.Text.DecoderFallbackException.Index" /> property to get the position in the input byte array of the byte that cannot be decoded.</para
-          >
+            >The application uses the <see cref="P:System.Text.DecoderFallbackException.Index" /> property to get the position in the input byte array of the byte that cannot be decoded.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -226,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application uses the <see cref="P:System.Text.DecoderFallbackException.BytesUnknown" /> property to retrieve the input byte array that contains the byte that cannot be decoded.</para
-          >
+            >The application uses the <see cref="P:System.Text.DecoderFallbackException.BytesUnknown" /> property to retrieve the input byte array that contains the byte that cannot be decoded.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

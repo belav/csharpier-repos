@@ -37,21 +37,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> is the base class for <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />. </para
-      >
+        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> is the base class for <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />. </para>
       <para>
-        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" /> can be used as the base classes for channels and channel sinks that provide named properties.</para
-      >
+        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" /> and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" /> can be used as the base classes for channels and channel sinks that provide named properties.</para>
       <para>
-        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> handles the complex task of asking a channel object for its properties.</para
-      >
+        <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> handles the complex task of asking a channel object for its properties.</para>
       <para
         >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" /> is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">Link Demands</a>
         </format> and <format type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9">Inheritance Demands</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -106,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para
-          >
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,11 +112,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key that is associated with the object in the <paramref name="value" /> parameter. </param
-        >
+          />The key that is associated with the object in the <paramref name="value" /> parameter. </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value to add. </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -145,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para
-          >
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -187,8 +178,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the property to look for. </param
-        >
+          />The key of the property to look for. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -221,15 +211,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the properties to. </param
-        >
+          />The array to copy the properties to. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to begin copying. </param
-        >
+          />The index at which to begin copying. </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -277,14 +265,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Collections.IDictionaryEnumerator" /> that enumerates over all the properties associated with the channel object.</para
-          >
+            >Returns a <see cref="T:System.Collections.IDictionaryEnumerator" /> that enumerates over all the properties associated with the channel object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.IDictionaryEnumerator" /> that enumerates over all the properties associated with the channel object.</para
-          >
+            >A <see cref="T:System.Collections.IDictionaryEnumerator" /> that enumerates over all the properties associated with the channel object.</para>
         </returns>
       </Docs>
     </Member>
@@ -305,8 +291,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> always returns true.</para
-          >
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> always returns true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -331,8 +316,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsReadOnly" /> always returns false.</para
-          >
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsReadOnly" /> always returns false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -357,8 +341,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsSynchronized" /> always returns false.</para
-          >
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsSynchronized" /> always returns false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -412,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a <see cref="T:System.Collections.ICollection" /> of keys that the channel object properties are associated with.</para
-          >
+            >When overridden in a derived class, gets a <see cref="T:System.Collections.ICollection" /> of keys that the channel object properties are associated with.</para>
         </summary>
       </Docs>
     </Member>
@@ -444,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.IDictionary" /> of the channel properties associated with the channel object.</para
-          >
+            >Gets a <see cref="T:System.Collections.IDictionary" /> of the channel properties associated with the channel object.</para>
         </summary>
       </Docs>
     </Member>
@@ -471,8 +452,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para
-          >
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" /> is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" /> returns true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -483,8 +463,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the object to be removed. </param
-        >
+          />The key of the object to be removed. </param>
       </Docs>
     </Member>
     <Member MemberName="SyncRoot">
@@ -504,14 +483,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.SyncRoot" /> returns a reference to the current instance of <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />.</para
-          >
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.SyncRoot" /> returns a reference to the current instance of <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that is used to synchronize access to the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />.</para
-          >
+            >Gets an object that is used to synchronize access to the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -539,14 +516,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Collections.IEnumerator" /> that enumerates over all the properties that are associated with the channel object.</para
-          >
+            >Returns a <see cref="T:System.Collections.IEnumerator" /> that enumerates over all the properties that are associated with the channel object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.IEnumerator" /> that enumerates over all the properties that are associated with the channel object.</para
-          >
+            >A <see cref="T:System.Collections.IEnumerator" /> that enumerates over all the properties that are associated with the channel object.</para>
         </returns>
       </Docs>
     </Member>
@@ -574,8 +549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.ICollection" /> of the values of the properties associated with the channel object.</para
-          >
+            >Gets a <see cref="T:System.Collections.ICollection" /> of the values of the properties associated with the channel object.</para>
         </summary>
       </Docs>
     </Member>

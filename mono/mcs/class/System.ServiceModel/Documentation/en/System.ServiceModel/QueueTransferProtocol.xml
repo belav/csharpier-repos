@@ -20,13 +20,11 @@
           <a href="a68b44d7-7799-43a3-9e63-f07c782810a6">netMsmqBinding Element</a>
         </format> and the <format type="text/html">
           <a href="edf277f3-e3bf-4ed8-9f55-83b5788430a7">msmqIntegrationBinding element</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >For more information about addressing queues, see <format type="text/html">
           <a href="7d2d59d7-f08b-44ed-bd31-913908b83d97">Service Endpoints and Queue Addressing</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -3,8 +3,7 @@
     <Description>ASP.NET Core logic to protect and unprotect data, similar to DPAPI.</Description>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);netstandard2.0;$(DefaultNetCoreTargetFramework)</TargetFrameworks>
     <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'"
-      >$(DefaultNetCoreTargetFramework)</TargetFrameworks
-    >
+      >$(DefaultNetCoreTargetFramework)</TargetFrameworks>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +11,7 @@
     <SuppressNullableAttributesImport>true</SuppressNullableAttributesImport>
     <Nullable>annotations</Nullable>
     <Nullable Condition="'$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)'"
-      >enable</Nullable
-    >
+      >enable</Nullable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 

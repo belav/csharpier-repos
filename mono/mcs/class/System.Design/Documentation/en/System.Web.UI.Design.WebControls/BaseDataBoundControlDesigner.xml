@@ -19,17 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In a visual designer, when you switch from Source to Design view, the markup that describes a control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control code is persisted to the markup source and edited into the markup for the Web page. </para
-      >
+        >In a visual designer, when you switch from Source to Design view, the markup that describes a control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control code is persisted to the markup source and edited into the markup for the Web page. </para>
       <para
-        >Designers that are derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> abstract base class provide design-time support for controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para
-      >
+        >Designers that are derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> abstract base class provide design-time support for controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para
-      >
+        >Provides design-time support in a visual designer for controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,14 +41,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs a new instance of a designer that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class when it creates the associated control on the design surface.</para
-          >
+            >The .NET Framework internally constructs a new instance of a designer that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class when it creates the associated control on the design surface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -69,8 +64,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.ConnectToDataSource" /> method typically involves unhooking events from the previous data source, and then attaching new events to the new data source.</para
-          >
+            >The implementation of the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.ConnectToDataSource" /> method typically involves unhooking events from the previous data source, and then attaching new events to the new data source.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates a new data source for the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para
-          >
+            >When overridden in a derived class, creates a new data source for the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -121,22 +114,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you override the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataBind(System.Web.UI.WebControls.BaseDataBoundControl)" /> method in a designer that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class, perform the necessary actions to set up the data-bound control so that when the design-time markup is retrieved, the control renders properly. Typically, you will associate a design-time data source rather than the live data source, for performance reasons.</para
-          >
+            >When you override the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataBind(System.Web.UI.WebControls.BaseDataBoundControl)" /> method in a designer that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class, perform the necessary actions to set up the data-bound control so that when the design-time markup is retrieved, the control renders properly. Typically, you will associate a design-time data source rather than the live data source, for performance reasons.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, performs the necessary actions to set up the associated control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para
-          >
+            >When overridden in a derived class, performs the necessary actions to set up the associated control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class.</para>
         </summary>
         <param name="dataBoundControl">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> with which this designer is associated.</param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> with which this designer is associated.</param>
       </Docs>
     </Member>
     <Member MemberName="DataSource">
@@ -153,14 +143,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property is used to shadow the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property of the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class that is associated with this designer. The value of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property is persisted by the designer as a data-binding expression on the tag that is generated for the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para
-          >
+            >The <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property is used to shadow the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property of the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class that is associated with this designer. The value of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property is persisted by the designer as a data-binding expression on the tag that is generated for the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property for the associated control.</para
-          >
+            >Gets or sets the value of the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" /> property for the associated control.</para>
         </summary>
       </Docs>
     </Member>
@@ -178,14 +166,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSourceID" /> property is used to shadow the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property of the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para
-          >
+            >The <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSourceID" /> property is used to shadow the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property of the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property of the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para
-          >
+            >Gets or sets the value of the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" /> property of the underlying <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -223,22 +209,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Dispose(System.Boolean)" /> method unhooks the event handlers for the designer from all data source events.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Dispose(System.Boolean)" /> method unhooks the event handlers for the designer from all data source events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> object, and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> object, and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="GetDesignTimeHtml">
@@ -255,8 +238,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class retrieves sample data that is used for binding purposes at design time before rendering the control. If the control is not data bound, it calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.GetEmptyDesignTimeHtml" /> method. If there is an error rendering the control, it calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.GetErrorDesignTimeHtml(System.Exception)" /> method.</para
-          >
+            >The <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class retrieves sample data that is used for binding purposes at design time before rendering the control. If the control is not data bound, it calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.GetEmptyDesignTimeHtml" /> method. If there is an error rendering the control, it calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.GetErrorDesignTimeHtml(System.Exception)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +264,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class retrieves sample data that is used for binding purposes at design time before rendering the control. The empty design-time control renders as a placeholder that contains the type name and control name.</para
-          >
+            >The <see cref="T:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner" /> class retrieves sample data that is used for binding purposes at design time before rendering the control. The empty design-time control renders as a placeholder that contains the type name and control name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -328,8 +309,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that was thrown.</param
-        >
+          />The <see cref="T:System.Exception" /> that was thrown.</param>
       </Docs>
     </Member>
     <Member MemberName="Initialize">
@@ -351,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The designer host calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method when it is ready to use the designer to render a control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class. The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method and its base methods configure properties and connect events that are necessary for the operation of the designer.</para
-          >
+            >The designer host calls the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method when it is ready to use the designer to render a control that is derived from the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class. The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.Initialize(System.ComponentModel.IComponent)" /> method and its base methods configure properties and connect events that are necessary for the operation of the designer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -363,8 +342,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A control derived from <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />, which implements <see cref="T:System.ComponentModel.IComponent" />.</param
-        >
+          />A control derived from <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />, which implements <see cref="T:System.ComponentModel.IComponent" />.</param>
       </Docs>
     </Member>
     <Member MemberName="OnDataSourceChanged">
@@ -386,22 +364,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.OnDataSourceChanged(System.Boolean)" /> method connects to the current data source. If the current data source is different from the data source to which the control was previously connected, or <paramref name="forceUpdateView" /> is true, the associated control is redrawn on the design surface.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.OnDataSourceChanged(System.Boolean)" /> method connects to the current data source. If the current data source is different from the data source to which the control was previously connected, or <paramref name="forceUpdateView" /> is true, the associated control is redrawn on the design surface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the data source of the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object changes. </para
-          >
+            >Called when the data source of the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object changes. </para>
         </summary>
         <param name="forceUpdateView">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to force the update of design-time markup; otherwise, false.</param
-        >
+          />true to force the update of design-time markup; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="OnSchemaRefreshed">
@@ -418,14 +393,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.Design.WebControls.DetailsViewDesigner.OnSchemaRefreshed" /> method handles the <see cref="E:System.Web.UI.Design.IDataSourceDesigner.SchemaRefreshed" /> event, which is raised when the schema of the data source to which the associated control is bound changes. Override the <see cref="M:System.Web.UI.Design.WebControls.DetailsViewDesigner.OnSchemaRefreshed" /> method to perform additional actions that are required when new schema is available.</para
-          >
+            >The <see cref="M:System.Web.UI.Design.WebControls.DetailsViewDesigner.OnSchemaRefreshed" /> method handles the <see cref="E:System.Web.UI.Design.IDataSourceDesigner.SchemaRefreshed" /> event, which is raised when the schema of the data source to which the associated control is bound changes. Override the <see cref="M:System.Web.UI.Design.WebControls.DetailsViewDesigner.OnSchemaRefreshed" /> method to perform additional actions that are required when new schema is available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the data source of the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object loads a new schema. </para
-          >
+            >Called when the data source of the associated <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> object loads a new schema. </para>
         </summary>
       </Docs>
     </Member>
@@ -448,25 +421,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Control designers use methods that are derived from the <see cref="M:System.ComponentModel.Design.ComponentDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method to shadow various control properties with corresponding design-time properties that the designer implements, and to add or remove properties from the <ui>Properties</ui> grid.</para
-          >
+            >Control designers use methods that are derived from the <see cref="M:System.ComponentModel.Design.ComponentDesigner.PreFilterProperties(System.Collections.IDictionary)" /> method to shadow various control properties with corresponding design-time properties that the designer implements, and to add or remove properties from the <ui>Properties</ui> grid.</para>
           <para
-            >For the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class, the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> shadows the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property of the control. It makes a copy of the attribute array of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" />, and then adds these attributes to the shadowed property. It sets the <see cref="P:System.ComponentModel.BrowsableAttribute.Browsable" /> attribute of the shadowed <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property to false unless the <see cref="P:System.ComponentModel.BrowsableAttribute.Browsable" /> attribute of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSourceID" /> property of the control is already set to true.</para
-          >
+            >For the <see cref="T:System.Web.UI.WebControls.BaseDataBoundControl" /> class, the <see cref="M:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.PreFilterProperties(System.Collections.IDictionary)" /> shadows the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property of the control. It makes a copy of the attribute array of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" />, and then adds these attributes to the shadowed property. It sets the <see cref="P:System.ComponentModel.BrowsableAttribute.Browsable" /> attribute of the shadowed <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSource" /> property to false unless the <see cref="P:System.ComponentModel.BrowsableAttribute.Browsable" /> attribute of the <see cref="P:System.Web.UI.Design.WebControls.BaseDataBoundControlDesigner.DataSourceID" /> property of the control is already set to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used by the designer to remove or add additional properties for display in the <ui>Properties</ui> grid or to shadow properties of the associated control.</para
-          >
+            >Used by the designer to remove or add additional properties for display in the <ui>Properties</ui> grid or to shadow properties of the associated control.</para>
         </summary>
         <param name="properties">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.IDictionary" /> containing the properties to filter.</param
-        >
+          />The <see cref="T:System.Collections.IDictionary" /> containing the properties to filter.</param>
       </Docs>
     </Member>
     <Member MemberName="ShowCreateDataSourceDialog">

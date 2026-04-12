@@ -9,8 +9,7 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <OptimizeForSize
       Condition="'$(TargetPlatformIdentifier)' == 'browser' or '$(TargetPlatformIdentifier)' == 'android' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</OptimizeForSize
-    >
+      >true</OptimizeForSize>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(OptimizeForSize)' == true">

@@ -14,9 +14,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -34,8 +32,7 @@
       <para>See Stat structure for more information.</para>
       <para
         >This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.Native.FilePermissions" /> instead.</para
-      >
+    <see cref="T:Mono.Unix.Native.FilePermissions" /> instead.</para>
     </remarks>
     <altmember cref="T:Mono.Unix.Native.FilePermissions" />
   </Docs>

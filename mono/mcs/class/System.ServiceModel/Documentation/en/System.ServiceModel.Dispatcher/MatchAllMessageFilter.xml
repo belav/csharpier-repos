@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a filter that allows every message through. Specifically, the <see cref="Overload:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match" /> methods returns true for every message that is not null. </para
-      >
+        >This class provides a filter that allows every message through. Specifically, the <see cref="Overload:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match" /> methods returns true for every message that is not null. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,14 +48,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to create distinct instances of <see cref="T:System.ServiceModel.Dispatcher.MatchAllMessageFilter" />. </para
-          >
+            >This constructor can be used to create distinct instances of <see cref="T:System.ServiceModel.Dispatcher.MatchAllMessageFilter" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MatchAllMessageFilter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.MatchAllMessageFilter" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -83,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The difference between the two overloads of the <see cref="Overload:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match" /> method is that one takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> parameter and buffers the entire contents of a message (including its body) into memory, while the other takes the <see cref="T:System.ServiceModel.Channels.Message" /> parameter and does not buffer the body.</para
-          >
+            >The difference between the two overloads of the <see cref="Overload:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match" /> method is that one takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> parameter and buffers the entire contents of a message (including its body) into memory, while the other takes the <see cref="T:System.ServiceModel.Channels.Message" /> parameter and does not buffer the body.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -99,8 +95,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Message" /> object to test.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Message" /> object to test.</param>
       </Docs>
     </Member>
     <Member MemberName="Match">
@@ -127,14 +122,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> parameter, which buffers the entire contents of a message (including its body) into memory, and allows the body to be inspected.</para
-          >
+            >This method takes the <see cref="T:System.ServiceModel.Channels.MessageBuffer" /> parameter, which buffers the entire contents of a message (including its body) into memory, and allows the body to be inspected.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match(System.ServiceModel.MessageBuffer)" /> method returns true for every message that is not null.</para
-          >
+            >The <see cref="M:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match(System.ServiceModel.MessageBuffer)" /> method returns true for every message that is not null.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

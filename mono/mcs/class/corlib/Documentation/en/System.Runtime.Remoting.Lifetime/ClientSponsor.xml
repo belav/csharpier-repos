@@ -34,18 +34,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The current lifetime sponsor implementation can be used to sponsor objects by specifying the required renewal <see cref="T:System.TimeSpan" />.</para
-      >
+        >The current lifetime sponsor implementation can be used to sponsor objects by specifying the required renewal <see cref="T:System.TimeSpan" />.</para>
       <block subset="none" type="note">
         <para
           >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" /> is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format> and <format type="text/html">
             <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9"
-              >[&lt;topic://cpconInheritanceDemands&gt;]</a
-            >
-          </format>.</para
-        >
+              >[&lt;topic://cpconInheritanceDemands&gt;]</a>
+          </format>.</para>
       </block>
     </remarks>
     <summary>
@@ -72,14 +69,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default time by which the lifetime of a sponsored object is increased when renewal is requested to 2 minutes. For more information on the renewal time, see the <see cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.RenewOnCallTime" /> property.</para
-          >
+            >The default time by which the lifetime of a sponsored object is increased when renewal is requested to 2 minutes. For more information on the renewal time, see the <see cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.RenewOnCallTime" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> class with default values.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> class with default values.</para>
         </summary>
       </Docs>
     </Member>
@@ -104,16 +99,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> class with the renewal time of the sponsored object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> class with the renewal time of the sponsored object.</para>
         </summary>
         <param name="renewalTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.TimeSpan" /> by which to increase the lifetime of the sponsored objects when renewal is requested. </param
-        >
+          />The <see cref="T:System.TimeSpan" /> by which to increase the lifetime of the sponsored objects when renewal is requested. </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -137,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Empties the list objects registered with the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />.</para
-          >
+            >Empties the list objects registered with the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -163,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees the resources of the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> before the garbage collector reclaims them.</para
-          >
+            >Frees the resources of the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" /> before the garbage collector reclaims them.</para>
         </summary>
       </Docs>
     </Member>
@@ -188,20 +179,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see cref="M:System.MarshalByRefObject.InitializeLifetimeService" />.</para
-          >
+            >For more information, see <see cref="M:System.MarshalByRefObject.InitializeLifetimeService" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />, providing a lease for the current object.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />, providing a lease for the current object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Runtime.Remoting.Lifetime.ILease" /> for the current object.</para
-          >
+            >An <see cref="T:System.Runtime.Remoting.Lifetime.ILease" /> for the current object.</para>
         </returns>
       </Docs>
     </Member>
@@ -228,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the specified <see cref="T:System.MarshalByRefObject" /> for sponsorship.</para
-          >
+            >Registers the specified <see cref="T:System.MarshalByRefObject" /> for sponsorship.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register for sponsorship with the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />. </param
-        >
+          />The object to register for sponsorship with the <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Renewal">
@@ -269,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Remoting.Lifetime.ISponsor.Renewal(System.Runtime.Remoting.Lifetime.ILease)" /> method is called by the distributed garbage collector to renew the lease for the specified object.</para
-          >
+            >The <see cref="M:System.Runtime.Remoting.Lifetime.ISponsor.Renewal(System.Runtime.Remoting.Lifetime.ILease)" /> method is called by the distributed garbage collector to renew the lease for the specified object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -285,8 +270,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The lifetime lease of the object that requires lease renewal. </param
-        >
+          />The lifetime lease of the object that requires lease renewal. </param>
       </Docs>
     </Member>
     <Member MemberName="RenewalTime">
@@ -310,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.TimeSpan" /> by which to increase the lifetime of the sponsored objects when renewal is requested.</para
-          >
+            >Gets or sets the <see cref="T:System.TimeSpan" /> by which to increase the lifetime of the sponsored objects when renewal is requested.</para>
         </summary>
       </Docs>
     </Member>
@@ -338,16 +321,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unregisters the specified <see cref="T:System.MarshalByRefObject" /> from the list of objects sponsored by the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />.</para
-          >
+            >Unregisters the specified <see cref="T:System.MarshalByRefObject" /> from the list of objects sponsored by the current <see cref="T:System.Runtime.Remoting.Lifetime.ClientSponsor" />.</para>
         </summary>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to unregister. </param
-        >
+          />The object to unregister. </param>
       </Docs>
     </Member>
   </Members>

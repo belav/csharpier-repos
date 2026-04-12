@@ -28,8 +28,7 @@
       <para
         >Represents the element element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class is the base class for all particle types and is used to describe an element in an XML document.</para
-      >
+        </format>. This class is the base class for all particle types and is used to describe an element in an XML document.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -351,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Xml.Schema.XmlSchemaType" /> object representing the type of the element based on the <see cref="P:System.Xml.Schema.XmlSchemaElement.SchemaType" /> or <see cref="P:System.Xml.Schema.XmlSchemaElement.SchemaTypeName" /> values of the element.</para
-          >
+            >Gets an <see cref="T:System.Xml.Schema.XmlSchemaType" /> object representing the type of the element based on the <see cref="P:System.Xml.Schema.XmlSchemaElement.SchemaType" /> or <see cref="P:System.Xml.Schema.XmlSchemaElement.SchemaTypeName" /> values of the element.</para>
         </summary>
       </Docs>
     </Member>
@@ -381,20 +378,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object can be <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> if the element has a built-in XML Schema type or <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> if the element has a user-defined type.</para
-          >
+            >The object can be <see cref="T:System.Xml.Schema.XmlSchemaDatatype" /> if the element has a built-in XML Schema type or <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> if the element has a user-defined type.</para>
           <para>This property is a post-schema-validation infoset property.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="P:System.Xml.Schema.XmlSchemaElement.ElementType" /> property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaElement.ElementSchemaType" /> property.</para
-            >
+              >The <see cref="P:System.Xml.Schema.XmlSchemaElement.ElementType" /> property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaElement.ElementSchemaType" /> property.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a common language runtime (CLR) object based on the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> or <see cref="T:System.Xml.Schema.XmlSchemaElement" /> of the element, which holds the post-compilation value of the ElementType property.</para
-          >
+            >Gets a common language runtime (CLR) object based on the <see cref="T:System.Xml.Schema.XmlSchemaElement" /> or <see cref="T:System.Xml.Schema.XmlSchemaElement" /> of the element, which holds the post-compilation value of the ElementType property.</para>
         </summary>
       </Docs>
     </Member>
@@ -483,8 +477,7 @@
             </item>
           </list>
           <para
-            >See also <see cref="T:System.Xml.Schema.XmlSchemaElement" />. Substitution, List, and Union derivation methods are not allowed for this property.</para
-          >
+            >See also <see cref="T:System.Xml.Schema.XmlSchemaElement" />. Substitution, List, and Union derivation methods are not allowed for this property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -797,8 +790,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Xml.Schema.XmlSchemaElement.QualifiedName" /> is the name that a ref attribute refers to. The qualified name consists of the NCName of the element. For example, element name = "NCName", and the prefix used to describe the targetNamespace of the schema. This property holds the post-compilation value of the QualifiedName property.</para
-          >
+            <see cref="P:System.Xml.Schema.XmlSchemaElement.QualifiedName" /> is the name that a ref attribute refers to. The qualified name consists of the NCName of the element. For example, element name = "NCName", and the prefix used to describe the targetNamespace of the schema. This property holds the post-compilation value of the QualifiedName property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

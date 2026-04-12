@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> indicates the type of refresh mode to use when refreshing a <see cref="T:System.Windows.Forms.PropertyGrid" /> control.</para
-      >
+        >The <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> indicates the type of refresh mode to use when refreshing a <see cref="T:System.Windows.Forms.PropertyGrid" /> control.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,22 +62,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> class is used for refreshing the design-time view.</para
-          >
+            >The <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> class is used for refreshing the design-time view.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.RefreshPropertiesAttribute" /> class.</para>
         </summary>
         <param name="refresh">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.RefreshProperties" /> value indicating the nature of the refresh.</param
-        >
+          />A <see cref="T:System.ComponentModel.RefreshProperties" /> value indicating the nature of the refresh.</param>
       </Docs>
     </Member>
     <Member MemberName="All">
@@ -104,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify this attribute on a property to query again and refresh all properties in the <see cref="T:System.Windows.Forms.PropertyGrid" /> when the property value changes. The <see cref="T:System.Windows.Forms.PropertyGrid" /> caches data. The <see cref="F:System.ComponentModel.RefreshProperties.All" /> mode causes the Properties window to query each property again and refresh its view.</para
-          >
+            >Specify this attribute on a property to query again and refresh all properties in the <see cref="T:System.Windows.Forms.PropertyGrid" /> when the property value changes. The <see cref="T:System.Windows.Forms.PropertyGrid" /> caches data. The <see cref="F:System.ComponentModel.RefreshProperties.All" /> mode causes the Properties window to query each property again and refresh its view.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -280,8 +275,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify this attribute on a property to repaint all properties in the <see cref="T:System.Windows.Forms.PropertyGrid" /> when the property value changes.</para
-          >
+            >Specify this attribute on a property to repaint all properties in the <see cref="T:System.Windows.Forms.PropertyGrid" /> when the property value changes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -25,17 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />, <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" />, and <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> methods enable you to add and remove individual controls from the collection. You can also use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> methods to add or remove all the controls from the collection.</para
-      >
+        >The <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />, <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" />, and <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> methods enable you to add and remove individual controls from the collection. You can also use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> methods to add or remove all the controls from the collection.</para>
       <para
-        >You can determine whether a <see cref="T:System.Windows.Forms.ToolStripItem" /> is a member of the collection by passing the control into the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Contains(System.Windows.Forms.ToolStripItem)" /> method. To get the index value of the location of a <see cref="T:System.Windows.Forms.ToolStripItem" /> in the collection, pass the control into the <see cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOf(System.Windows.Forms.ToolStripItem)" /> method. The collection can be copied into an array by calling the <see cref="M:System.Windows.Forms.ToolStripItemCollection.CopyTo(System.Windows.Forms.ToolStripItem[],System.Int32)" /> method.</para
-      >
+        >You can determine whether a <see cref="T:System.Windows.Forms.ToolStripItem" /> is a member of the collection by passing the control into the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Contains(System.Windows.Forms.ToolStripItem)" /> method. To get the index value of the location of a <see cref="T:System.Windows.Forms.ToolStripItem" /> in the collection, pass the control into the <see cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOf(System.Windows.Forms.ToolStripItem)" /> method. The collection can be copied into an array by calling the <see cref="M:System.Windows.Forms.ToolStripItemCollection.CopyTo(System.Windows.Forms.ToolStripItem[],System.Int32)" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Windows.Forms.ToolStripItem" /> objects.</para
-      >
+        >Represents a collection of <see cref="T:System.Windows.Forms.ToolStripItem" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,23 +52,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> class with the specified container <see cref="T:System.Windows.Forms.ToolStrip" /> and the specified array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> class with the specified container <see cref="T:System.Windows.Forms.ToolStrip" /> and the specified array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls.</para>
         </summary>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to which this <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> belongs. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to which this <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> belongs. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> containing the initial controls for this <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />An array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> containing the initial controls for this <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -95,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image to the collection.</para
-          >
+            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,8 +100,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -132,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified text to the collection.</para
-          >
+            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified text to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,8 +135,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -173,16 +163,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Int32" /> representing the zero-based index of the new item in the collection.</para
-          >
+            >An <see cref="T:System.Int32" /> representing the zero-based index of the new item in the collection.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to add to the end of the collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to add to the end of the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -207,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image and text to the collection.</para
-          >
+            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image and text to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -219,15 +206,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
         <param name="image">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -253,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image and text to the collection and that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event.</para
-          >
+            >Adds a <see cref="T:System.Windows.Forms.ToolStripItem" /> that displays the specified image and text to the collection and that raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -265,22 +249,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The text to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
         <param name="image">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to be displayed on the <see cref="T:System.Windows.Forms.ToolStripItem" />.</param>
         <param name="onClick">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event.</param
-        >
+          />Raises the <see cref="E:System.Windows.Forms.ToolStripItem.Click" /> event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -303,22 +284,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> to copy a <see cref="T:System.Windows.Forms.ToolStripItem" /> array to a <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. Use the overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> that takes a <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> parameter to merge one <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> with another.</para
-          >
+            >Use this overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> to copy a <see cref="T:System.Windows.Forms.ToolStripItem" /> array to a <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. Use the overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> that takes a <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> parameter to merge one <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> with another.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to the collection.</para
-          >
+            >Adds an array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to the collection.</para>
         </summary>
         <param name="toolStripItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls. </param
-        >
+          />An array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -341,25 +319,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> to merge one <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> with another. You typically use this method with <see cref="T:System.Windows.Forms.ToolStripOverflow" />, and you can easily use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />, <see cref="M:System.Windows.Forms.ToolStripItemCollection.Insert(System.Int32,System.Windows.Forms.ToolStripItem)" />, and <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> methods to modify the merged <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.</para
-          >
+            >Use this overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> to merge one <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> with another. You typically use this method with <see cref="T:System.Windows.Forms.ToolStripOverflow" />, and you can easily use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />, <see cref="M:System.Windows.Forms.ToolStripItemCollection.Insert(System.Int32,System.Windows.Forms.ToolStripItem)" />, and <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> methods to modify the merged <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.</para>
           <para
-            >Use the overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> that takes a <see cref="T:System.Windows.Forms.ToolStripItem" /> array to copy an array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to a <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.</para
-          >
+            >Use the overload of <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> that takes a <see cref="T:System.Windows.Forms.ToolStripItem" /> array to copy an array of <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to a <see cref="T:System.Windows.Forms.ToolStripItemCollection" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to the current collection.</para
-          >
+            >Adds a <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to the current collection.</para>
         </summary>
         <param name="toolStripItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to be added to the current collection. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> to be added to the current collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -377,14 +351,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method to remove the entire collection of controls from a parent control.</para
-          >
+            >Use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method to remove the entire collection of controls from a parent control.</para>
           <para
-            >To remove an individual control from the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> method.</para
-          >
+            >To remove an individual control from the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> method.</para>
           <para
-            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> method.</para
-          >
+            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> controls to the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -417,16 +388,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Windows.Forms.ToolStripItem" /> is a member of the current <see cref="T:System.Windows.Forms.ToolStripItemCollection" />; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Windows.Forms.ToolStripItem" /> is a member of the current <see cref="T:System.Windows.Forms.ToolStripItemCollection" />; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -446,8 +415,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -456,16 +424,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> contains a <see cref="T:System.Windows.Forms.ToolStripItem" /> with the specified key; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> contains a <see cref="T:System.Windows.Forms.ToolStripItem" /> with the specified key; otherwise, false.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The key to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -490,23 +456,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection into the specified position of the specified <see cref="T:System.Windows.Forms.ToolStripItem" /> array.</para
-          >
+            >Copies the collection into the specified position of the specified <see cref="T:System.Windows.Forms.ToolStripItem" /> array.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> to which to copy the collection. </param
-        >
+          />The array of type <see cref="T:System.Windows.Forms.ToolStripItem" /> to which to copy the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the <see cref="T:System.Windows.Forms.ToolStripItem" /> array at which to paste the collection. </param
-        >
+          />The position in the <see cref="T:System.Windows.Forms.ToolStripItem" /> array at which to paste the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -535,23 +498,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Windows.Forms.ToolStripItem" /> array of the search results.</para
-          >
+            >A <see cref="T:System.Windows.Forms.ToolStripItem" /> array of the search results.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item name to search the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> for.</param
-        >
+          />The item name to search the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> for.</param>
         <param name="searchAllChildren">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to search child items of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter; otherwise, false. </param
-        >
+          />true to search child items of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter; otherwise, false. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -579,16 +539,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A zero-based index value that represents the position of the specified <see cref="T:System.Windows.Forms.ToolStripItem" /> in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, if found; otherwise, -1.</para
-          >
+            >A zero-based index value that represents the position of the specified <see cref="T:System.Windows.Forms.ToolStripItem" /> in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, if found; otherwise, -1.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to locate in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -608,11 +566,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para>
           <para
-            >If <see cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOfKey(System.String)" /> is called successively, the last returned index will be checked for a key match first, and if there is no match, the search starts at the beginning of the collection.</para
-          >
+            >If <see cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOfKey(System.String)" /> is called successively, the last returned index will be checked for a key match first, and if there is no match, the search starts at the beginning of the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -621,16 +577,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A zero-based index value that represents the position of the first occurrence of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter, if found; otherwise, -1.</para
-          >
+            >A zero-based index value that represents the position of the first occurrence of the <see cref="T:System.Windows.Forms.ToolStripItem" /> specified by the <paramref name="key" /> parameter, if found; otherwise, -1.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for. </param
-        >
+          />The name of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to search for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -661,15 +615,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> at which to insert the <see cref="T:System.Windows.Forms.ToolStripItem" />. </param
-        >
+          />The location in the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> at which to insert the <see cref="T:System.Windows.Forms.ToolStripItem" />. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to insert. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to insert. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -688,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> is read-only.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> is read-only.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -759,14 +710,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see cref="T:System.Windows.Forms.ToolStripItem" /> is removed from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, all subsequent controls are moved up one position in the collection.</para
-          >
+            >When a <see cref="T:System.Windows.Forms.ToolStripItem" /> is removed from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, all subsequent controls are moved up one position in the collection.</para>
           <para
-            >You can also remove a <see cref="T:System.Windows.Forms.ToolStripItem" /> by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> method, or remove all controls by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method.</para
-          >
+            >You can also remove a <see cref="T:System.Windows.Forms.ToolStripItem" /> by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" /> method, or remove all controls by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method.</para>
           <para
-            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> methods.</para
-          >
+            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -777,8 +725,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -798,14 +745,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see cref="T:System.Windows.Forms.ToolStripItem" /> is removed from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, all subsequent controls are moved up one position in the collection.</para
-          >
+            >When a <see cref="T:System.Windows.Forms.ToolStripItem" /> is removed from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />, all subsequent controls are moved up one position in the collection.</para>
           <para
-            >You can also remove a <see cref="T:System.Windows.Forms.ToolStripItem" /> by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> method, or remove all controls by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method.</para
-          >
+            >You can also remove a <see cref="T:System.Windows.Forms.ToolStripItem" /> by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" /> method, or remove all controls by using the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" /> method.</para>
           <para
-            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> methods.</para
-          >
+            >To add new <see cref="T:System.Windows.Forms.ToolStripItem" /> objects to the collection, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" /> or <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> methods.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -816,8 +760,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index value of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param
-        >
+          />The index value of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -837,8 +780,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para
-          >
+            >The <paramref name="key" /> parameter value corresponds to the <see cref="P:System.Windows.Forms.ToolStripItem.Name" /> property. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -849,8 +791,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param
-        >
+          />The key of the <see cref="T:System.Windows.Forms.ToolStripItem" /> to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -872,8 +813,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -888,8 +828,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to add to the collection.</param
-        >
+          />The item to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Clear">
@@ -906,8 +845,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -931,8 +869,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -941,16 +878,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="value" /> is contained in the collection; otherwise, false.</para
-          >
+            >true if <paramref name="value" /> is contained in the collection; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to locate in the collection.</param
-        >
+          />The item to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -969,8 +904,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -985,8 +919,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to locate in the collection.</param
-        >
+          />The item to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -1006,8 +939,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1018,15 +950,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to insert <paramref name="value" />.</param
-        >
+          />The zero-based index at which to insert <paramref name="value" />.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to insert into the collection.</param
-        >
+          />The item to insert into the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -1043,8 +973,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1090,8 +1019,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1102,8 +1030,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to remove from the collection.</param
-        >
+          />The item to remove from the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.RemoveAt">
@@ -1122,8 +1049,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.ToolStripItemCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1134,8 +1060,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove.</param
-        >
+          />The zero-based index of the item to remove.</param>
       </Docs>
     </Member>
   </Members>

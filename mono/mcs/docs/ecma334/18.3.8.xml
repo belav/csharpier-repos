@@ -23,8 +23,7 @@ struct Point
 Point p1 = new Point();  
 Point p2 = new Point(0, 0);  
 ]]>
-      </code_example>both create a Point with x and y initialized to zero. end example]</example
-    >
+      </code_example>both create a Point with x and y initialized to zero. end example]</example>
   </paragraph>
   <paragraph>A struct instance constructor is not permitted to include a constructor initializer of the form base(...). </paragraph>
   <paragraph

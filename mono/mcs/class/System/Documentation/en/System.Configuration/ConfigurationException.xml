@@ -26,12 +26,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.ConfigurationException" /> exception is thrown if the application attempts to read or write data to the configuration file but is unsuccessful. Some possible reasons for this can include malformed XML in the configuration file, file permission issues, and configuration properties with values that are not valid.</para
-      >
+        >The <see cref="T:System.Configuration.ConfigurationException" /> exception is thrown if the application attempts to read or write data to the configuration file but is unsuccessful. Some possible reasons for this can include malformed XML in the configuration file, file permission issues, and configuration properties with values that are not valid.</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Configuration.ConfigurationException" /> object is maintained for backward compatibility. The <see cref="T:System.Configuration.ConfigurationErrorsException" /> object replaces it for the configuration system.</para
-        >
+          >The <see cref="T:System.Configuration.ConfigurationException" /> object is maintained for backward compatibility. The <see cref="T:System.Configuration.ConfigurationErrorsException" /> object replaces it for the configuration system.</para>
       </block>
     </remarks>
     <summary>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -95,16 +92,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -132,23 +127,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the information to deserialize.</param
-        >
+          />The object that holds the information to deserialize.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Contextual information about the source or destination.</param
-        >
+          />Contextual information about the source or destination.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -181,23 +173,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param
-        >
+          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -230,23 +219,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -280,30 +266,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param
-        >
+          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -337,30 +319,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
         <param name="filename">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the configuration file that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param
-        >
+          />The path to the configuration file that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number within the configuration file at which this <see cref="T:System.Configuration.ConfigurationException" /> was thrown.</param
-        >
+          />The line number within the configuration file at which this <see cref="T:System.Configuration.ConfigurationException" /> was thrown.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -395,37 +373,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigurationException" /> class. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param
-        >
+          />A message describing why this <see cref="T:System.Configuration.ConfigurationException" /> exception was thrown.</param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param
-        >
+          />The inner exception that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown, if any.</param>
         <param name="filename">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the configuration file that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param
-        >
+          />The path to the configuration file that caused this <see cref="T:System.Configuration.ConfigurationException" /> to be thrown.</param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number within the configuration file at which this <see cref="T:System.Configuration.ConfigurationException" /> was thrown.</param
-        >
+          />The line number within the configuration file at which this <see cref="T:System.Configuration.ConfigurationException" /> was thrown.</param>
       </Docs>
     </Member>
     <Member MemberName="BareMessage">
@@ -445,8 +418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.ConfigurationException.BareMessage" /> property does not contain the name of the configuration file, nor the line number at which this <see cref="T:System.Configuration.ConfigurationException" /> exception occurred. If you want a message that contains the name of the configuration file and the line number, along with the message returned by the <see cref="P:System.Configuration.ConfigurationException.BareMessage" /> property, use the <see cref="P:System.Configuration.ConfigurationException.Message" /> property.</para
-          >
+            >The <see cref="P:System.Configuration.ConfigurationException.BareMessage" /> property does not contain the name of the configuration file, nor the line number at which this <see cref="T:System.Configuration.ConfigurationException" /> exception occurred. If you want a message that contains the name of the configuration file and the line number, along with the message returned by the <see cref="P:System.Configuration.ConfigurationException.BareMessage" /> property, use the <see cref="P:System.Configuration.ConfigurationException.Message" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -501,29 +473,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Configuration.ConfigurationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the file name and line number at which this <see cref="T:System.Configuration.ConfigurationException" /> exception occurred. During deserialization, the <see cref="T:System.Configuration.ConfigurationException" /> exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that is transmitted over the stream.</para
-          >
+            >The <see cref="M:System.Configuration.ConfigurationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the file name and line number at which this <see cref="T:System.Configuration.ConfigurationException" /> exception occurred. During deserialization, the <see cref="T:System.Configuration.ConfigurationException" /> exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that is transmitted over the stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the file name and line number at which this configuration exception occurred.</para
-          >
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the file name and line number at which this configuration exception occurred.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the information to be serialized.</param
-        >
+          />The object that holds the information to be serialized.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination.</param
-        >
+          />The contextual information about the source or destination.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXmlNodeFilename">
@@ -557,8 +525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the path to the configuration file from which the internal <see cref="T:System.Xml.XmlNode" /> object was loaded when this configuration exception was thrown.</para
-          >
+            >Gets the path to the configuration file from which the internal <see cref="T:System.Xml.XmlNode" /> object was loaded when this configuration exception was thrown.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -569,8 +536,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> exception to be thrown.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> exception to be thrown.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXmlNodeLineNumber">
@@ -604,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the line number within the configuration file that the internal <see cref="T:System.Xml.XmlNode" /> object represented when this configuration exception was thrown.</para
-          >
+            >Gets the line number within the configuration file that the internal <see cref="T:System.Xml.XmlNode" /> object represented when this configuration exception was thrown.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -616,8 +581,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> exception to be thrown.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that caused this <see cref="T:System.Configuration.ConfigurationException" /> exception to be thrown.</param>
       </Docs>
     </Member>
     <Member MemberName="Line">
@@ -658,8 +622,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.ConfigurationException.Message" /> property contains a concatenation of the <see cref="P:System.Configuration.ConfigurationException.BareMessage" />, <see cref="P:System.Configuration.ConfigurationException.Filename" />, and <see cref="P:System.Configuration.ConfigurationException.Line" /> properties.</para
-          >
+            >The <see cref="P:System.Configuration.ConfigurationException.Message" /> property contains a concatenation of the <see cref="P:System.Configuration.ConfigurationException.BareMessage" />, <see cref="P:System.Configuration.ConfigurationException.Filename" />, and <see cref="P:System.Configuration.ConfigurationException.Line" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

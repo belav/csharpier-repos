@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the <see cref="T:System.Collections.ICollection" /> interface.</para
-      >
+        >This class implements the <see cref="T:System.Collections.ICollection" /> interface.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Security.Cryptography.Oid" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Security.Cryptography.Oid" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.OidCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.OidCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -88,28 +85,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add an <see cref="T:System.Security.Cryptography.Oid" /> object to an existing collection at the current location.</para
-          >
+            >Use this method to add an <see cref="T:System.Security.Cryptography.Oid" /> object to an existing collection at the current location.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see cref="T:System.Security.Cryptography.Oid" /> object to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para
-          >
+            >Adds an <see cref="T:System.Security.Cryptography.Oid" /> object to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the added <see cref="T:System.Security.Cryptography.Oid" /> object.</para
-          >
+            >The index of the added <see cref="T:System.Security.Cryptography.Oid" /> object.</para>
         </returns>
         <param name="oid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.Oid" /> object to add to the collection.</param
-        >
+          />The <see cref="T:System.Security.Cryptography.Oid" /> object to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -138,29 +131,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array at the specified location.</para
-          >
+            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array at the specified location.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</para
-          >
+            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object into.</param
-        >
+          />The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object into.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location where the copy operation starts.</param
-        >
+          />The location where the copy operation starts.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -181,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection. </para
-          >
+            >Gets the number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection. </para>
         </summary>
       </Docs>
     </Member>
@@ -209,14 +197,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.OidEnumerator" /> class implements the <see cref="T:System.Collections.IEnumerator" /> interface, which allows you to move within a collection.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.OidEnumerator" /> class implements the <see cref="T:System.Collections.IEnumerator" /> interface, which allows you to move within a collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para
-          >
+            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object is thread safe.</para
-          >
+            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object is thread safe.</para>
         </summary>
       </Docs>
     </Member>
@@ -323,14 +308,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Security.Cryptography.OidCollection" /> is not thread safe. Derived classes can provide their own synchronized version of the <see cref="T:System.Security.Cryptography.OidCollection" /> class using this property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.OidCollection.SyncRoot" /> property of the <see cref="T:System.Security.Cryptography.OidCollection" /> object, not directly on the object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might simultaneously be modifying the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para
-          >
+            <see cref="T:System.Security.Cryptography.OidCollection" /> is not thread safe. Derived classes can provide their own synchronized version of the <see cref="T:System.Security.Cryptography.OidCollection" /> class using this property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.OidCollection.SyncRoot" /> property of the <see cref="T:System.Security.Cryptography.OidCollection" /> object, not directly on the object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might simultaneously be modifying the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para
-          >
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -356,29 +339,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array at the specified location.</para
-          >
+            >This method copies an <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array at the specified location.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</para
-          >
+            >Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object to.</param
-        >
+          />The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object to.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location where the copy operation starts.</param
-        >
+          />The location where the copy operation starts.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -403,20 +382,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.OidEnumerator" /> class implements the <see cref="T:System.Collections.IEnumerator" /> interface, which allows you to move within a collection.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.OidEnumerator" /> class implements the <see cref="T:System.Collections.IEnumerator" /> interface, which allows you to move within a collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para
-          >
+            >Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the collection.</para
-          >
+            >An <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the collection.</para>
         </returns>
       </Docs>
     </Member>

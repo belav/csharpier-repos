@@ -57,11 +57,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of arguments.</param
-        >
+          />The number of arguments.</param>
         <param name="argNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The argument names.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The argument names.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -95,11 +93,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of arguments.</param
-        >
+          />The number of arguments.</param>
         <param name="argNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The argument names.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The argument names.</param>
       </Docs>
     </Member>
     <Member MemberName="ArgumentCount">
@@ -177,8 +173,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Dynamic.CallInfo" /> to compare with the current instance.</param
-        >
+          />The instance of <see cref="T:System.Dynamic.CallInfo" /> to compare with the current instance.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -200,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the current <see cref="T:System.Dynamic.CallInfo" />.</para
-          >
+            >Serves as a hash function for the current <see cref="T:System.Dynamic.CallInfo" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

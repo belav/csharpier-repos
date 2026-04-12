@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.MessagePropertyAttribute" /> attribute to attach data to the custom message type as it passes through the indigo1 system without serializing the data into a SOAP message.</para
-      >
+        >Use the <see cref="T:System.ServiceModel.MessagePropertyAttribute" /> attribute to attach data to the custom message type as it passes through the indigo1 system without serializing the data into a SOAP message.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessagePropertyAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessagePropertyAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

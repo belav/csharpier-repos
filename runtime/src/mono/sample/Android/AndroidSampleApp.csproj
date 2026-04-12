@@ -69,8 +69,7 @@
 
     <PropertyGroup>
       <AndroidLibraryMinApiLevel Condition="'$(AndroidLibraryMinApiLevel)' == ''"
-        >21</AndroidLibraryMinApiLevel
-      >
+        >21</AndroidLibraryMinApiLevel>
     </PropertyGroup>
 
     <NdkToolFinderTask

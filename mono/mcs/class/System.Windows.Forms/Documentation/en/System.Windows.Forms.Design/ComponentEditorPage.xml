@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> class is a complete implementation for a component editor page that consists of an empty window. You can extend this page to add your own controls. <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> is used by a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" /> of a <see cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />.</para
-      >
+        >The <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> class is a complete implementation for a component editor page that consists of an empty window. You can extend this page to add your own controls. <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> is used by a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" /> of a <see cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base implementation for a <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />.</para
-      >
+        >Provides a base implementation for a <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,11 +231,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" /> method to indicate that its part of the load process is completed.</para
-          >
+            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" /> method to indicate that its part of the load process is completed.</para>
           <para
-            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is non-zero.</para
-          >
+            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is non-zero.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -261,11 +256,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" /> method to indicate that its part of the load process is completed.</para
-          >
+            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" /> completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" /> method to indicate that its part of the load process is completed.</para>
           <para
-            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is non-zero.</para
-          >
+            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" /> property is non-zero.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -315,8 +308,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.Control" /> that represents the window for this page.</para
-          >
+            >The <see cref="T:System.Windows.Forms.Control" /> that represents the window for this page.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -606,8 +598,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to be edited. </param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to be edited. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -656,8 +647,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The site for this page. </param
-        >
+          />The site for this page. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -675,8 +665,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is only called if <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.SupportsHelp" /> returns true. The Help system calls the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" /> method to provide Help for the page. <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" /> is usually called in response to F1 or when the Help button is clicked to allow the page to bring up its associated Help topic.</para
-          >
+            >This is only called if <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.SupportsHelp" /> returns true. The Help system calls the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" /> method to provide Help for the page. <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" /> is usually called in response to F1 or when the Help button is clicked to allow the page to bring up its associated Help topic.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

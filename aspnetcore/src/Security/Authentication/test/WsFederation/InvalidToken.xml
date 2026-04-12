@@ -5,12 +5,10 @@
   <t:Lifetime>
     <wsu:Created
       xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-      >2014-04-18T20:21:17.341Z</wsu:Created
-    >
+      >2014-04-18T20:21:17.341Z</wsu:Created>
     <wsu:Expires
       xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-      >2014-04-19T08:21:17.341Z</wsu:Expires
-    >
+      >2014-04-19T08:21:17.341Z</wsu:Expires>
   </t:Lifetime>
   <wsp:AppliesTo xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
     <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
@@ -89,8 +87,7 @@
     >
       <KeyIdentifier
         ValueType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID"
-        >_660ec874-f70a-4997-a9c4-bd591f1c7469</KeyIdentifier
-      >
+        >_660ec874-f70a-4997-a9c4-bd591f1c7469</KeyIdentifier>
     </SecurityTokenReference>
   </t:RequestedAttachedReference>
   <t:RequestedUnattachedReference>
@@ -101,8 +98,7 @@
     >
       <KeyIdentifier
         ValueType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID"
-        >_660ec874-f70a-4997-a9c4-bd591f1c7469</KeyIdentifier
-      >
+        >_660ec874-f70a-4997-a9c4-bd591f1c7469</KeyIdentifier>
     </SecurityTokenReference>
   </t:RequestedUnattachedReference>
   <t:TokenType>http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0</t:TokenType>

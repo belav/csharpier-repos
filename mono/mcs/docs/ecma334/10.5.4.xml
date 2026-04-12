@@ -23,8 +23,7 @@
 class A {...}  
 public class B: A {...}  
 ]]>
-      </code_example>the B class results in a compile-time error because A is not at least as accessible as B. end example]</example
-    >
+      </code_example>the B class results in a compile-time error because A is not at least as accessible as B. end example]</example>
   </paragraph>
   <paragraph>
     <example
@@ -38,7 +37,6 @@ public class B
    public A H() {...}  
 }  
 ]]>
-      </code_example>the H method in B results in a compile-time error because the return type A is not at least as accessible as the method. end example]</example
-    >
+      </code_example>the H method in B results in a compile-time error because the return type A is not at least as accessible as the method. end example]</example>
   </paragraph>
 </clause>

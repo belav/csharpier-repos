@@ -34,14 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeSnippetStatement" /> can represent a statement using a literal code fragment that will be included directly in the source without modification.</para
-      >
+        <see cref="T:System.CodeDom.CodeSnippetStatement" /> can represent a statement using a literal code fragment that will be included directly in the source without modification.</para>
       <para
-        >A <see cref="T:System.CodeDom.CodeSnippetStatement" /> stores a section of code exactly in its original format as a string. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output in their original format. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeSnippetStatement" /> stores a section of code exactly in its original format as a string. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output in their original format. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeSnippetStatement.Value" /> property contains the literal code for the snippet statement.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeSnippetStatement.Value" /> property contains the literal code for the snippet statement.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +90,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" /> class using the specified code fragment.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetStatement" /> class using the specified code fragment.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The literal code fragment of the statement to represent. </param
-        >
+          />The literal code fragment of the statement to represent. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

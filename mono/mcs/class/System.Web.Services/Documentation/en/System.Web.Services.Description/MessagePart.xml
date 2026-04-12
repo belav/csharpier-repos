@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Services.Description.MessagePart" /> class corresponds to a Web Services Description Language (WSDL) part element enclosed by the message element, which is in turn enclosed by the definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
-      >
+        >The <see cref="T:System.Web.Services.Description.MessagePart" /> class corresponds to a Web Services Description Language (WSDL) part element enclosed by the message element, which is in turn enclosed by the definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MessagePart" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MessagePart" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,14 +61,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the element attribute of the part element for which the <see cref="T:System.Web.Services.Description.MessagePart" /> class serves as a wrapper.</para
-          >
+            >This property corresponds to the element attribute of the part element for which the <see cref="T:System.Web.Services.Description.MessagePart" /> class serves as a wrapper.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the XML element that corresponds to the current <see cref="T:System.Web.Services.Description.MessagePart" />.</para
-          >
+            >Gets or sets the name of the XML element that corresponds to the current <see cref="T:System.Web.Services.Description.MessagePart" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" /> associated with this <see cref="T:System.Web.Services.Description.MessagePart" />.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" /> associated with this <see cref="T:System.Web.Services.Description.MessagePart" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.Message" /> of which the <see cref="T:System.Web.Services.Description.MessagePart" /> is a member.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.Message" /> of which the <see cref="T:System.Web.Services.Description.MessagePart" /> is a member.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -172,14 +166,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the type attribute of the part element for which the <see cref="T:System.Web.Services.Description.MessagePart" /> class serves as a wrapper. In general, it refers to a data type defined in the XSD schema, but it can also be extended, as long as the XML namespace used is different from that of Web Services Description Language (WSDL).</para
-          >
+            >This property corresponds to the type attribute of the part element for which the <see cref="T:System.Web.Services.Description.MessagePart" /> class serves as a wrapper. In general, it refers to a data type defined in the XSD schema, but it can also be extended, as long as the XML namespace used is different from that of Web Services Description Language (WSDL).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the XML data type of the <see cref="T:System.Web.Services.Description.MessagePart" />.</para
-          >
+            >Gets or sets the XML data type of the <see cref="T:System.Web.Services.Description.MessagePart" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

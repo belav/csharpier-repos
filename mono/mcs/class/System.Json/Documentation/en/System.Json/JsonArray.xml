@@ -58,16 +58,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para>
         </summary>
         <param name="items">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration of objects of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param
-        >
+          />The enumeration of objects of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -94,16 +92,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para>
         </summary>
         <param name="items">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param
-        >
+          />The array of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -133,8 +129,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Json.JsonValue" /> object to add.</param
-        >
+          />The <see cref="T:System.Json.JsonValue" /> object to add.</param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -164,16 +159,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements from a collection of type <see cref="T:System.Json.JsonValue" /> to the array.</para
-          >
+            >Adds the elements from a collection of type <see cref="T:System.Json.JsonValue" /> to the array.</para>
         </summary>
         <param name="items">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection of types to add.</param
-        >
+          />The collection of types to add.</param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -206,16 +199,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements from an array of type <see cref="T:System.Json.JsonValue" /> to the array.</para
-          >
+            >Adds the elements from an array of type <see cref="T:System.Json.JsonValue" /> to the array.</para>
         </summary>
         <param name="items">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of type <see cref="T:System.Json.JsonValue" /> to be added to the array.</param
-        >
+          />The array of type <see cref="T:System.Json.JsonValue" /> to be added to the array.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -261,22 +252,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a specified JSON CLR type is in the <see cref="T:System.Json.JsonArray" />.</para
-          >
+            >Indicates whether a specified JSON CLR type is in the <see cref="T:System.Json.JsonArray" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the item is found in the <see cref="T:System.Json.JsonArray" />; otherwise, false.</para
-          >
+            >true if the item is found in the <see cref="T:System.Json.JsonArray" />; otherwise, false.</para>
         </returns>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Json.JsonValue" /> to check for in the array.</param
-        >
+          />The <see cref="T:System.Json.JsonValue" /> to check for in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -310,15 +298,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination array to which the elements of the current array are copied.</param
-        >
+          />The destination array to which the elements of the current array are copied.</param>
         <param name="arrayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the destination array at which the copying of the elements of the JSON CLR array begins.</param
-        >
+          />The zero-based index in the destination array at which the copying of the elements of the JSON CLR array begins.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -337,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Json.JsonValue" /> elements in the array.</para
-          >
+            >Gets the number of <see cref="T:System.Json.JsonValue" /> elements in the array.</para>
         </summary>
       </Docs>
     </Member>
@@ -373,8 +358,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Json.JsonValue" /> object to look up.</param
-        >
+          />The <see cref="T:System.Json.JsonValue" /> object to look up.</param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -408,15 +392,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which the item should be inserted.</param
-        >
+          />The zero-based index at which the item should be inserted.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Json.JsonValue" /> object to insert.</param
-        >
+          />The <see cref="T:System.Json.JsonValue" /> object to insert.</param>
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -435,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="T:System.Json.JsonArray" /> is read-only.</para
-          >
+            >Gets a value that indicates whether the <see cref="T:System.Json.JsonArray" /> is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -522,8 +503,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The JSON value to remove from the array.</param
-        >
+          />The JSON value to remove from the array.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -553,8 +533,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to remove the JSON value.</param
-        >
+          />The zero-based index at which to remove the JSON value.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -624,14 +603,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> objects in the array.</para
-          >
+            >Returns an enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> objects in the array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> elements in the array.</para
-          >
+            >An enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> elements in the array.</para>
         </returns>
       </Docs>
     </Member>

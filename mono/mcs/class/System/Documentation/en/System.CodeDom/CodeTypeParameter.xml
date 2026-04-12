@@ -27,18 +27,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.CodeTypeParameter" /> class represents a type parameter in the declaration of a generic type or method. </para
-      >
+        >The <see cref="T:System.CodeDom.CodeTypeParameter" /> class represents a type parameter in the declaration of a generic type or method. </para>
       <para
-        >A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see cref="T:System.Collections.Generic.List`1" /> class contains the type parameter <paramref name="T" />.</para
-      >
+        >A generic type or method declaration contains one or more unspecified types known as type parameters. A type parameter name stands for the type within the body of the generic declaration. For example, the generic declaration for the <see cref="T:System.Collections.Generic.List`1" /> class contains the type parameter <paramref name="T" />.</para>
       <para
         >For more information on generics, see <format type="text/html">
           <a href="afdd5477-6770-4686-8297-f58a4d749daf"
-            >Generics in the .NET Framework Class Library</a
-          >
-        </format>. </para
-      >
+            >Generics in the .NET Framework Class Library</a>
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,14 +59,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor, you should set the <see cref="P:System.CodeDom.CodeTypeParameter.Name" /> property.</para
-          >
+            >If you use this constructor, you should set the <see cref="P:System.CodeDom.CodeTypeParameter.Name" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +88,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class with the specified type parameter name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameter" /> class with the specified type parameter name. </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type parameter.</param
-        >
+          />The name of the type parameter.</param>
       </Docs>
     </Member>
     <Member MemberName="Constraints">

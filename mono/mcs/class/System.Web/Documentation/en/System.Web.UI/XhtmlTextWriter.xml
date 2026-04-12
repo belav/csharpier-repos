@@ -17,35 +17,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XHTML is an XML-compliant markup language, based on HTML 4.1, which allows you to create Web sites that are suitable for multiple device types. It merges the ease of use provided by HTML with the strict element guidelines provided by XML to produce a markup language with a wide range of format and style options, and with reduced markup tag ambiguity. The <see cref="T:System.Web.UI.XhtmlTextWriter" /> class provides formatting capabilities that ASP.NET server controls use when rendering XHTML content to clients. You can use the <see cref="M:System.Web.UI.XhtmlTextWriter.SetDocType(System.Web.UI.XhtmlMobileDocType)" /> method to specify which type of XHTML the text writer renders. Supported document types are defined in the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration.</para
-      >
+        >XHTML is an XML-compliant markup language, based on HTML 4.1, which allows you to create Web sites that are suitable for multiple device types. It merges the ease of use provided by HTML with the strict element guidelines provided by XML to produce a markup language with a wide range of format and style options, and with reduced markup tag ambiguity. The <see cref="T:System.Web.UI.XhtmlTextWriter" /> class provides formatting capabilities that ASP.NET server controls use when rendering XHTML content to clients. You can use the <see cref="M:System.Web.UI.XhtmlTextWriter.SetDocType(System.Web.UI.XhtmlMobileDocType)" /> method to specify which type of XHTML the text writer renders. Supported document types are defined in the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration.</para>
       <para
         >The <see cref="T:System.Web.UI.XhtmlTextWriter" /> class renders two sets of attributes for elements. One set is a collection of common attributes, as referenced in the <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> property. The second set is a collection of element-specific attributes, as referenced in the <see cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" /> property. For more information on the elements and styles that are rendered, see the XHTML modularization specification at the <see
           cref="http://go.microsoft.com/fwlink/?linkid=37125"
-          >World Wide Web Consortium (W3C) Web site</see
-        >.</para
-      >
+          >World Wide Web Consortium (W3C) Web site</see>.</para>
       <para
-        >You can use the members of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class and any derived classes to create custom text writers to use in custom XHTML page adapters or class adapters. You can also create derived classes that override the standard behavior of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class. </para
-      >
+        >You can use the members of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class and any derived classes to create custom text writers to use in custom XHTML page adapters or class adapters. You can also create derived classes that override the standard behavior of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class. </para>
       <para
         >By default, when you are working with browsers that support HTML 4.0, ASP.NET pages and controls render markup that is compatible with the XHTML 1.1 standard. For more information, see <format type="text/html">
           <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >The <see cref="T:System.Web.UI.HtmlTextWriter" /> outputs XHTML unless you configure ASP.NET specifically to not render XHTML markup. For more information, see <format type="text/html">
           <a href="42483a54-f1ae-44e1-88e6-4370f8690149"
-            >How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a
-          >
-        </format>. </para
-      >
+            >How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a>
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Writes Extensible Hypertext Markup Language (XHTML)-specific characters, including all variations of XHTML modules that derive from XTHML, to the output stream for an ASP.NET server control for mobile devices. Override the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class to provide custom XHTML rendering for ASP.NET pages and server controls.</para
-      >
+        >Writes Extensible Hypertext Markup Language (XHTML)-specific characters, including all variations of XHTML modules that derive from XTHML, to the output stream for an ASP.NET server control for mobile devices. Override the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class to provide custom XHTML rendering for ASP.NET pages and server controls.</para>
     </summary>
   </Docs>
   <Members>
@@ -63,32 +55,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.XhtmlTextWriter.#ctor(System.IO.TextWriter)" /> constructor that takes a <see cref="T:System.IO.TextWriter" /> object as a parameter calls the second constructor, passing two parameter values: </para
-          >
+            >The <see cref="M:System.Web.UI.XhtmlTextWriter.#ctor(System.IO.TextWriter)" /> constructor that takes a <see cref="T:System.IO.TextWriter" /> object as a parameter calls the second constructor, passing two parameter values: </para>
           <list type="bullet">
             <item>
               <para>The <see cref="T:System.IO.TextWriter" /> instance.</para>
             </item>
             <item>
               <para
-                >The string value that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" /> field, which defines the tab spacing that is used by the XHTML text writer.</para
-              >
+                >The string value that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" /> field, which defines the tab spacing that is used by the XHTML text writer.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class that uses the line indentation that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" /> field. Use the <see cref="M:System.Web.UI.XhtmlTextWriter.#ctor(System.IO.TextWriter)" /> constructor if you do not want to change the default line indentation.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class that uses the line indentation that is specified in the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" /> field. Use the <see cref="M:System.Web.UI.XhtmlTextWriter.#ctor(System.IO.TextWriter)" /> constructor if you do not want to change the default line indentation.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> instance that renders the XHTML content. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> instance that renders the XHTML content. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,23 +98,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class with the specified line indentation.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class with the specified line indentation.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> instance that renders the XHTML content. </param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> instance that renders the XHTML content. </param>
         <param name="tabString">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string used to render a line indentation.</param
-        >
+          />The string used to render a line indentation.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -150,29 +135,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" /> method to add an attribute to an XHTML element. The added attribute can then be recognized and rendered by the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object. To prevent the writer from rendering a common attribute of an XHTML element, use the <see cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" /> method.</para
-          >
+            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" /> method to add an attribute to an XHTML element. The added attribute can then be recognized and rendered by the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object. To prevent the writer from rendering a common attribute of an XHTML element, use the <see cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an attribute to an XHTML element. The collection of element-specific attributes for the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object is referenced by the <see cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" /> property.</para
-          >
+            >Adds an attribute to an XHTML element. The collection of element-specific attributes for the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object is referenced by the <see cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" /> property.</para>
         </summary>
         <param name="elementName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XHTML element to add the attribute to.</param
-        >
+          />The XHTML element to add the attribute to.</param>
         <param name="attributeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to add.</param
-        >
+          />The attribute to add.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -195,12 +176,9 @@
           <para
             >The <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> collection contains attributes that are allowed in XHTML elements and that are not suppressed in the <see cref="P:System.Web.UI.XhtmlTextWriter.SuppressCommonAttributes" /> property. For more information on common attributes, see the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37125"
-              >World Wide Web Consortium (W3C) Web site</see
-            >.</para
-          >
+              >World Wide Web Consortium (W3C) Web site</see>.</para>
           <para
-            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the common attributes that are initialized are:</para
-          >
+            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the common attributes that are initialized are:</para>
           <list type="bullet">
             <item>
               <para>class</para>
@@ -219,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.Hashtable" /> object containing common attributes of the markup tags for the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object.</para
-          >
+            >Gets a <see cref="T:System.Collections.Hashtable" /> object containing common attributes of the markup tags for the <see cref="T:System.Web.UI.XhtmlTextWriter" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -242,11 +219,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" /> method to add recognized attributes to an XHTML element. To remove common attributes on an XHTML element, use the <see cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" /> method.</para
-          >
+            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.AddRecognizedAttribute(System.String,System.String)" /> method to add recognized attributes to an XHTML element. To remove common attributes on an XHTML element, use the <see cref="M:System.Web.UI.XhtmlTextWriter.RemoveRecognizedAttribute(System.String,System.String)" /> method.</para>
           <para
-            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the <see cref="T:System.Collections.Hashtable" /> object of element-specific attributes is populated with the attributes shown in the following table.</para
-          >
+            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the <see cref="T:System.Collections.Hashtable" /> object of element-specific attributes is populated with the attributes shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -486,15 +461,12 @@
           <para
             >For more information on the elements and styles that are rendered, see the XHTML modularization specification at the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37125"
-              >World Wide Web Consortium (W3C) Web site</see
-            >.</para
-          >
+              >World Wide Web Consortium (W3C) Web site</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.Hashtable" /> object containing element-specific attributes.</para
-          >
+            >Gets a <see cref="T:System.Collections.Hashtable" /> object containing element-specific attributes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -532,8 +504,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute name to check. </param
-        >
+          />The attribute name to check. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -569,22 +540,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XHTML attribute to render. </param
-        >
+          />The XHTML attribute to render. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value assigned to the XHTML attribute. </param
-        >
+          />The value assigned to the XHTML attribute. </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" /> enumeration value associated with the XHTML attribute. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" /> enumeration value associated with the XHTML attribute. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -620,22 +588,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XHTML style attribute to render. </param
-        >
+          />The XHTML style attribute to render. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value assigned to the XHTML style attribute. </param
-        >
+          />The value assigned to the XHTML style attribute. </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.HtmlTextWriterStyle" /> enumeration value associated with the XHTML style attribute. </param
-        >
+          />The <see cref="T:System.Web.UI.HtmlTextWriterStyle" /> enumeration value associated with the XHTML style attribute. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -660,23 +625,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an attribute from the <see cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" /> collection of an element.</para
-          >
+            >Removes an attribute from the <see cref="P:System.Web.UI.XhtmlTextWriter.ElementSpecificAttributes" /> collection of an element.</para>
         </summary>
         <param name="elementName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XHTML element to remove an attribute from.</param
-        >
+          />The XHTML element to remove an attribute from.</param>
         <param name="attributeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to remove from the specified XHTML element.</param
-        >
+          />The attribute to remove from the specified XHTML element.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -699,8 +661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.SetDocType(System.Web.UI.XhtmlMobileDocType)" /> method in a custom page adapter to define the type of XHTML that you want to render to the requesting device. Supported document types are defined in the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration.</para
-          >
+            >Use the <see cref="M:System.Web.UI.XhtmlTextWriter.SetDocType(System.Web.UI.XhtmlMobileDocType)" /> method in a custom page adapter to define the type of XHTML that you want to render to the requesting device. Supported document types are defined in the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -711,8 +672,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration values. </param
-        >
+          />One of the <see cref="T:System.Web.UI.XhtmlMobileDocType" /> enumeration values. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -733,11 +693,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The suppressed attribute collection includes a list of XHTML elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are not rendered. </para
-          >
+            >The suppressed attribute collection includes a list of XHTML elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are not rendered. </para>
           <para
-            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the <see cref="T:System.Collections.Hashtable" /> object of elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are suppressed includes: </para
-          >
+            >When a new instance of the <see cref="T:System.Web.UI.XhtmlTextWriter" /> class is created, the <see cref="T:System.Collections.Hashtable" /> object of elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are suppressed includes: </para>
           <list type="bullet">
             <item>
               <para>base</para>
@@ -765,8 +723,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.Hashtable" /> object of elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are suppressed.</para
-          >
+            >Gets a <see cref="T:System.Collections.Hashtable" /> object of elements for which <see cref="P:System.Web.UI.XhtmlTextWriter.CommonAttributes" /> attributes are suppressed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

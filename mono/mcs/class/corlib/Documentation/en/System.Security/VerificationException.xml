@@ -36,8 +36,7 @@
     <remarks>
       <block subset="none" type="note">
         <para
-          >The following CIL instructions throw <see cref="T:System.Security.VerificationException" />:</para
-        >
+          >The following CIL instructions throw <see cref="T:System.Security.VerificationException" />:</para>
         <list type="bullet">
           <item>
             <term>ldloc</term>
@@ -76,14 +75,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Security.VerificationException" /> uses the HRESULT COR_E_VERIFICATION.</para
-          >
+            <see cref="T:System.Security.VerificationException" /> uses the HRESULT COR_E_VERIFICATION.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with default properties.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -114,26 +111,22 @@
             >This constructor initializes the <see cref="!:System.Security.VerificationException.Message" /> property of the new 
    instance using <paramref name="message. " />If <paramref name="message" /> is <see langword="null" />,
    the <see cref="!:System.Security.VerificationException.Message" /> property is initialized to the system-supplied
-   message provided by the constructor that takes no arguments. </para
-          >
+   message provided by the constructor that takes no arguments. </para>
           <para
             > The <see cref="!:System.Security.VerificationException.InnerException" />
-property is initialized to <see langword="null" /> .</para
-          >
+property is initialized to <see langword="null" /> .</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with an explanatory message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with an explanatory message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message indicating the reason the exception occurred. </param
-        >
+          />A message indicating the reason the exception occurred. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -164,23 +157,20 @@ property is initialized to <see langword="null" /> .</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -211,11 +201,9 @@ property is initialized to <see langword="null" /> .</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Security.VerificationException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.VerificationException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -252,23 +240,20 @@ property is initialized to <see langword="null" /> .</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.VerificationException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

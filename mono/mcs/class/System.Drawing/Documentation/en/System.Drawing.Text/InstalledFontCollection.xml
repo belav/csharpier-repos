@@ -23,11 +23,9 @@
       <para
         >The <see cref="T:System.Drawing.Text.InstalledFontCollection" /> allows you to get a list of fonts families that are installed on the computer running the application with its <see cref="P:System.Drawing.Text.FontCollection.Families" /> property. For additional information on fonts and text, including example code, see <format type="text/html">
           <a href="d43640f3-da94-4df2-a29d-a9d021a1c069">Using Fonts and Text</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
-        > Do not use the <see cref="T:System.Drawing.Text.InstalledFontCollection" /> class to install a font to Windows. Instead use the ndptecgdi AddFontResource function. An <see cref="T:System.Drawing.Text.InstalledFontCollection" /> object sees only fonts that are installed in Windows before the object is created.</para
-      >
+        > Do not use the <see cref="T:System.Drawing.Text.InstalledFontCollection" /> class to install a font to Windows. Instead use the ndptecgdi AddFontResource function. An <see cref="T:System.Drawing.Text.InstalledFontCollection" /> object sees only fonts that are installed in Windows before the object is created.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Drawing.Text.InstalledFontCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Drawing.Text.InstalledFontCollection" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.Win32.UserPreferenceCategory" /> provides identifiers that can represent a category of user preferences.</para
-      >
+        <see cref="T:Microsoft.Win32.UserPreferenceCategory" /> provides identifiers that can represent a category of user preferences.</para>
       <para>Some of the user preferences in these categories can be changed using the Windows Control Panel, the Computer Management console, or programatically using an appropriate API.</para>
     </remarks>
     <summary>

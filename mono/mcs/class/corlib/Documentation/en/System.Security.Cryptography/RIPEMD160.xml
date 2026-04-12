@@ -30,8 +30,7 @@
       <para>RIPEMD-160 is a 160-bit cryptographic hash function. It is intended for use as a replacement for the 128-bit hash functions MD4, MD5, and RIPEMD. RIPEMD was developed in the framework of the EU project RIPE (RACE Integrity Primitives Evaluation, 1988-1992).</para>
       <block subset="none" type="note">
         <para>
-          <see cref="T:System.Security.Cryptography.RIPEMD160" /> has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see cref="T:System.Security.Cryptography.SHA256" /> and <see cref="T:System.Security.Cryptography.SHA512" /> offer better security and performance than <see cref="T:System.Security.Cryptography.RIPEMD160" />. Use <see cref="T:System.Security.Cryptography.RIPEMD160" /> only for compatibility with legacy applications and data.</para
-        >
+          <see cref="T:System.Security.Cryptography.RIPEMD160" /> has been superseded by the Secure Hash Algorithms SHA-256 and SHA-512 and their derived classes. <see cref="T:System.Security.Cryptography.SHA256" /> and <see cref="T:System.Security.Cryptography.SHA512" /> offer better security and performance than <see cref="T:System.Security.Cryptography.RIPEMD160" />. Use <see cref="T:System.Security.Cryptography.RIPEMD160" /> only for compatibility with legacy applications and data.</para>
       </block>
     </remarks>
     <summary>
@@ -57,14 +56,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para
-          >
+            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,20 +88,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para
-          >
+            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the default implementation of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para
-          >
+            >Creates an instance of the default implementation of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para
-          >
+            >A new instance of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para>
         </returns>
       </Docs>
     </Member>
@@ -133,28 +127,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para
-          >
+            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For more information, see the <see cref="T:System.Security.Cryptography.RIPEMD160Managed" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the specified implementation of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para
-          >
+            >Creates an instance of the specified implementation of the <see cref="T:System.Security.Cryptography.RIPEMD160" /> hash algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the specified implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" />.</para
-          >
+            >A new instance of the specified implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" />.</para>
         </returns>
         <param name="hashName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.RIPEMD160" /> to use. </param>
       </Docs>
     </Member>
   </Members>

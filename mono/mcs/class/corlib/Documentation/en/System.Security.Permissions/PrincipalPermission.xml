@@ -40,26 +40,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By passing identity information (user name and role) to the constructor, <see cref="T:System.Security.Permissions.PrincipalPermission" /> can be used to demand that the identity of the active principal matches this information.</para
-      >
+        >By passing identity information (user name and role) to the constructor, <see cref="T:System.Security.Permissions.PrincipalPermission" /> can be used to demand that the identity of the active principal matches this information.</para>
       <para
-        >To match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />, both the specified identity and role must match. If null identity string is used, it is interpreted as a request to match any identity. Use of null role string will match any role. By implication, passing null parameter for <paramref name="name" /> or <paramref name="role" /> to <see cref="T:System.Security.Permissions.PrincipalPermission" /> will match the identity and roles in any <see cref="T:System.Security.Principal.IPrincipal" />. It is also possible to construct a <see cref="T:System.Security.Permissions.PrincipalPermission" /> that only determines whether the <see cref="T:System.Security.Principal.IIdentity" /> represents an authenticated or unauthenticated entity. In this case, <paramref name="name" /> and <paramref name="role" /> are ignored.</para
-      >
+        >To match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />, both the specified identity and role must match. If null identity string is used, it is interpreted as a request to match any identity. Use of null role string will match any role. By implication, passing null parameter for <paramref name="name" /> or <paramref name="role" /> to <see cref="T:System.Security.Permissions.PrincipalPermission" /> will match the identity and roles in any <see cref="T:System.Security.Principal.IPrincipal" />. It is also possible to construct a <see cref="T:System.Security.Permissions.PrincipalPermission" /> that only determines whether the <see cref="T:System.Security.Principal.IIdentity" /> represents an authenticated or unauthenticated entity. In this case, <paramref name="name" /> and <paramref name="role" /> are ignored.</para>
       <para
-        >Unlike most other permissions, <see cref="T:System.Security.Permissions.PrincipalPermission" /> does not extend <see cref="T:System.Security.CodeAccessPermission" />. It does, however, implement the <see cref="T:System.Security.IPermission" /> interface. This is because <see cref="T:System.Security.Permissions.PrincipalPermission" /> is not a code access permission; that is, it is not granted based on the identity of the executing assembly. Instead, it allows code to perform actions (<see cref="M:System.Security.Permissions.PrincipalPermission.Demand" />, <see cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.PrincipalPermission.Intersect(System.Security.IPermission)" />, and so on) against the current user identity in a manner consistent with the way those actions are performed for code access and code identity permissions.</para
-      >
+        >Unlike most other permissions, <see cref="T:System.Security.Permissions.PrincipalPermission" /> does not extend <see cref="T:System.Security.CodeAccessPermission" />. It does, however, implement the <see cref="T:System.Security.IPermission" /> interface. This is because <see cref="T:System.Security.Permissions.PrincipalPermission" /> is not a code access permission; that is, it is not granted based on the identity of the executing assembly. Instead, it allows code to perform actions (<see cref="M:System.Security.Permissions.PrincipalPermission.Demand" />, <see cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" />, <see cref="M:System.Security.Permissions.PrincipalPermission.Intersect(System.Security.IPermission)" />, and so on) against the current user identity in a manner consistent with the way those actions are performed for code access and code identity permissions.</para>
       <block subset="none" type="note">
         <para
-          >Prior to a demand for principal permission it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />. By default, the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />. If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />, a demand for principal permission will fail. The following code should be executed before the principal permission is demanded: </para
-        >
+          >Prior to a demand for principal permission it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />. By default, the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />. If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />, a demand for principal permission will fail. The following code should be executed before the principal permission is demanded: </para>
         <para>AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal).</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows checks against the active principal (see <see cref="T:System.Security.Principal.IPrincipal" />) using the language constructs defined for both declarative and imperative security actions. This class cannot be inherited.</para
-      >
+        >Allows checks against the active principal (see <see cref="T:System.Security.Principal.IPrincipal" />) using the language constructs defined for both declarative and imperative security actions. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -86,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >None matches only the unauthenticated principal (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" /> is the empty string (""), no <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" /> is false). Unrestricted matches all principals (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" /> is null, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" /> is null).</para
-          >
+            >None matches only the unauthenticated principal (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" /> is the empty string (""), no <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Authenticated" /> is false). Unrestricted matches all principals (<see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" /> is null, <see cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" /> is null).</para>
           <block subset="none" type="note">
             <para>This constructor is included for consistency with the design of other permissions, but is not useful in practice.</para>
           </block>
@@ -95,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -131,29 +123,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <paramref name="name" /> parameter and the <paramref name="role" /> parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />. Set <paramref name="name" /> to null to check for any user in a role.</para
-          >
+            >Both the <paramref name="name" /> parameter and the <paramref name="role" /> parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />. Set <paramref name="name" /> to null to check for any user in a role.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class for the specified <paramref name="name" /> and <paramref name="role" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class for the specified <paramref name="name" /> and <paramref name="role" />.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user. </param
-        >
+          />The name of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user. </param>
         <param name="role">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The role of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user (for example, Administrator). </param
-        >
+          />The role of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user (for example, Administrator). </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -181,36 +169,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <paramref name="name" /> parameter and the <paramref name="role" /> parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />.</para
-          >
+            >Both the <paramref name="name" /> parameter and the <paramref name="role" /> parameter must match for this permission to match the active <see cref="T:System.Security.Principal.IPrincipal" /> and associated <see cref="T:System.Security.Principal.IIdentity" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class for the specified <paramref name="name" />, <paramref name="role" />, and authentication status.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PrincipalPermission" /> class for the specified <paramref name="name" />, <paramref name="role" />, and authentication status.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user. </param
-        >
+          />The name of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user. </param>
         <param name="role">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The role of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user (for example, Administrator). </param
-        >
+          />The role of the <see cref="T:System.Security.Principal.IPrincipal" /> object's user (for example, Administrator). </param>
         <param name="isAuthenticated">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to signify that the user is authenticated; otherwise, false. </param
-        >
+          />true to signify that the user is authenticated; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -264,13 +247,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see cref="T:System.Security.SecurityException" /> is raised, <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" /> succeeds.</para
-          >
+            >If no <see cref="T:System.Security.SecurityException" /> is raised, <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" /> succeeds.</para>
           <para>This method acts against the principal attached to the calling thread.</para>
           <block subset="none" type="note">
             <para
-              >Prior to calling the <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" /> method, it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />. By default the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />. If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />, a demand for principal permission will fail. The following code should be executed before the demand for principal permission occurs: </para
-            >
+              >Prior to calling the <see cref="M:System.Security.Permissions.PrincipalPermission.Demand" /> method, it is necessary to set the current application domain's principal policy to the enumeration value <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />. By default the principal policy is set to <see cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />. If you do not set the principal policy to <see cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />, a demand for principal permission will fail. The following code should be executed before the demand for principal permission occurs: </para>
             <para>AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal).</para>
           </block>
         </remarks>
@@ -307,28 +288,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />.</para
-          >
+            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Security.Permissions.PrincipalPermission" /> object is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" />.</para
-          >
+            >Determines whether the specified <see cref="T:System.Security.Permissions.PrincipalPermission" /> object is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see cref="T:System.Security.Permissions.PrincipalPermission" /> is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" /> object; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Security.Permissions.PrincipalPermission" /> is equal to the current <see cref="T:System.Security.Permissions.PrincipalPermission" /> object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Permissions.PrincipalPermission" /> object to compare with the current <see cref="T:System.Security.Permissions.PrincipalPermission" />. </param
-        >
+          />The <see cref="T:System.Security.Permissions.PrincipalPermission" /> object to compare with the current <see cref="T:System.Security.Permissions.PrincipalPermission" />. </param>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -363,8 +340,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -392,20 +368,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see cref="T:System.Security.Permissions.PrincipalPermission" /> objects.</para
-          >
+            >The hash code for two instances of the same permission might be different, hence a hash code should not be used to compare two <see cref="T:System.Security.Permissions.PrincipalPermission" /> objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for the <see cref="T:System.Security.Permissions.PrincipalPermission" /> object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
-          >
+            >Gets a hash code for the <see cref="T:System.Security.Permissions.PrincipalPermission" /> object that is suitable for use in hashing algorithms and data structures such as a hash table.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see cref="T:System.Security.Permissions.PrincipalPermission" /> object.</para
-          >
+            >A hash code for the current <see cref="T:System.Security.Permissions.PrincipalPermission" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -434,8 +407,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because two users never intersect, this method is not useful for <see cref="T:System.Security.Permissions.PrincipalPermission" />. For example,</para
-          >
+            >Because two users never intersect, this method is not useful for <see cref="T:System.Security.Permissions.PrincipalPermission" />. For example,</para>
           <para>code reference: System.Security.Permissions.PrincipalPermission#1</para>
           <para>is equivalent to</para>
           <para>code reference: System.Security.Permissions.PrincipalPermission#2</para>
@@ -454,8 +426,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -497,8 +468,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -521,8 +491,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unrestricted <see cref="T:System.Security.Permissions.PrincipalPermission" /> matches any principal.</para
-          >
+            >An unrestricted <see cref="T:System.Security.Permissions.PrincipalPermission" /> matches any principal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -637,8 +606,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" /> creates a permission representing the criteria of a given set of individual <see cref="T:System.Security.Permissions.PrincipalPermission" /> objects. It is useful for compactly representing a set of conditions to test. For example, with the declarations</para
-          >
+            <see cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" /> creates a permission representing the criteria of a given set of individual <see cref="T:System.Security.Permissions.PrincipalPermission" /> objects. It is useful for compactly representing a set of conditions to test. For example, with the declarations</para>
           <para>code reference: System.Security.Permissions.PrincipalPermission#3</para>
           <para>(ppBob.Union(ppLouise)).Demand() will succeed if the current principal represents Bob in the role of Administrator or Louise in the role of Administrator.</para>
         </remarks>
@@ -655,8 +623,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

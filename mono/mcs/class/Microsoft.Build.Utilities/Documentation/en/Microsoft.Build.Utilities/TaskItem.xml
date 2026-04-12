@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.Build.Utilities.TaskItem" /> objects do not exactly correspond to item elements in project files. If they did, then tasks would have access to data that was not explicitly passed into the task through the project file. This is not a security issue, but rather an issue with project file clarity and transparency.</para
-      >
+        <see cref="T:Microsoft.Build.Utilities.TaskItem" /> objects do not exactly correspond to item elements in project files. If they did, then tasks would have access to data that was not explicitly passed into the task through the project file. This is not a security issue, but rather an issue with project file clarity and transparency.</para>
       <para>This class has to be sealed since the build engine instantiates its own copy of this type. If a third party were to extend this class, then the build engine will yield an undesired behavior.</para>
     </remarks>
     <summary>
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,12 +65,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified source <see cref="T:Microsoft.Build.Framework.ITaskItem" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified source <see cref="T:Microsoft.Build.Framework.ITaskItem" />.</para>
         </summary>
         <param name="sourceItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to copy.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item to copy.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,16 +86,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string.</para>
         </summary>
         <param name="itemSpec">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item specification.</param
-        >
+          />The item specification.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -121,23 +115,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string and its metadata.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskItem" /> class using the specified item-specification string and its metadata.</para>
         </summary>
         <param name="itemSpec">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item specification.</param
-        >
+          />The item specification.</param>
         <param name="itemMetadata">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom metadata for the item specification.</param
-        >
+          />The custom metadata for the item specification.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -166,8 +157,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IDictionary" /> that represents a clone of the custom metadata.</para
-          >
+            >An <see cref="T:System.Collections.IDictionary" /> that represents a clone of the custom metadata.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -202,8 +192,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item that this method will copy metadata to.</param
-        >
+          />The item that this method will copy metadata to.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -234,8 +223,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the metadata to retrieve.</param
-        >
+          />The name of the metadata to retrieve.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para
-          >
+            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para>
           <code>&lt;ItemGroup&gt;
     &lt;Compile Include="File.cs"/&gt;
 &lt;/ItemGroup&gt;</code>
@@ -378,8 +365,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of metadata to remove.</param
-        >
+          />The name of metadata to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -410,15 +396,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of metadata to set or modify.</param
-        >
+          />The name of metadata to set or modify.</param>
         <param name="metadataValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new value of metadata.</param
-        >
+          />The new value of metadata.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

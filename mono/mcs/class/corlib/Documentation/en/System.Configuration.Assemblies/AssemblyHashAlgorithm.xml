@@ -26,8 +26,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >A <paramref name="hash function" />
-        <paramref name="H" /> is a transformation that takes an input <paramref name="m" /> and returns a fixed-size string, which is called the hash value <paramref name="h" /> (that is, <paramref name="h" /> = <paramref name="H" /> (<paramref name="m" />)). Hash functions with just this property have a variety of general computational uses, but when employed in cryptography, the hash functions are usually chosen to have some additional properties.</para
-      >
+        <paramref name="H" /> is a transformation that takes an input <paramref name="m" /> and returns a fixed-size string, which is called the hash value <paramref name="h" /> (that is, <paramref name="h" /> = <paramref name="H" /> (<paramref name="m" />)). Hash functions with just this property have a variety of general computational uses, but when employed in cryptography, the hash functions are usually chosen to have some additional properties.</para>
       <para>The basic requirements for a cryptographic hash function are: </para>
       <list type="bullet">
         <item>
@@ -38,8 +37,7 @@
         </item>
         <item>
           <para>
-            <paramref name="H" /> (<paramref name="x)" /> is relatively easy to compute for any given x.</para
-          >
+            <paramref name="H" /> (<paramref name="x)" /> is relatively easy to compute for any given x.</para>
         </item>
         <item>
           <para><paramref name="H" /> (<paramref name="x" />) is one-way.</para>

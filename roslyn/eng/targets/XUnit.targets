@@ -53,11 +53,9 @@
   <Target Name="AddDefaultTestAppConfig">
     <PropertyGroup>
       <_AlreadyHasAppConfig Condition="'%(None.Filename)%(None.Extension)' == 'app.config'"
-        >true</_AlreadyHasAppConfig
-      >
+        >true</_AlreadyHasAppConfig>
       <_DefaultAppConfigFile Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
-        >$(RepositoryEngineeringDir)config\test\Desktop\app.config</_DefaultAppConfigFile
-      >
+        >$(RepositoryEngineeringDir)config\test\Desktop\app.config</_DefaultAppConfigFile>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(_AlreadyHasAppConfig)' != 'true'">

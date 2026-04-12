@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.MembershipSection" /> class provides a way to programmatically access and modify the membership section in a configuration file.</para
-      >
+        >The <see cref="T:System.Web.Configuration.MembershipSection" /> class provides a way to programmatically access and modify the membership section in a configuration file.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,14 +34,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.MembershipSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.MembershipSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para
-          >
+            >The <see cref="M:System.Web.Configuration.MembershipSection.#ctor" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.MembershipSection" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.MembershipSection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.MembershipSection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -69,8 +66,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> must match a named value in the providers subsection of the membership section of the configuration file. An empty string ("") is not a valid value for the <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> property.</para
-          >
+            >The <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> must match a named value in the providers subsection of the membership section of the configuration file. An empty string ("") is not a valid value for the <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -98,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, the membership system binds to the appropriate hash algorithm type, and then uses this type when encrypting membership information. If the <see cref="P:System.Web.Configuration.MembershipSection.HashAlgorithmType" /> property is not set, the membership system defaults to the <see cref="P:System.Web.Configuration.MachineKeySection.Validation" /> property within the <see cref="T:System.Web.Configuration.MachineKeySection" /> class.</para
-          >
+            >At run time, the membership system binds to the appropriate hash algorithm type, and then uses this type when encrypting membership information. If the <see cref="P:System.Web.Configuration.MembershipSection.HashAlgorithmType" /> property is not set, the membership system defaults to the <see cref="P:System.Web.Configuration.MachineKeySection.Validation" /> property within the <see cref="T:System.Web.Configuration.MachineKeySection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -150,14 +145,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Membership providers are components that provide access to the membership for a site. You can specify membership providers in the providers subsection of the membership section of the configuration file.</para>
           <para
-            >The <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> property contains the name of the provider that is used by default.</para
-          >
+            >The <see cref="P:System.Web.Configuration.MembershipSection.DefaultProvider" /> property contains the name of the provider that is used by default.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ProviderSettingsCollection" /> object of <see cref="T:System.Configuration.ProviderSettings" /> objects.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ProviderSettingsCollection" /> object of <see cref="T:System.Configuration.ProviderSettings" /> objects.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -187,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value for the <see cref="P:System.Web.Configuration.MembershipSection.UserIsOnlineTimeWindow" /> property is calculated by comparing the current time minus the <see cref="P:System.Web.Configuration.MembershipSection.UserIsOnlineTimeWindow" /> property with the <see cref="P:System.Web.Security.MembershipUser.LastActivityDate" /> value for the user.</para
-          >
+            >The value for the <see cref="P:System.Web.Configuration.MembershipSection.UserIsOnlineTimeWindow" /> property is calculated by comparing the current time minus the <see cref="P:System.Web.Configuration.MembershipSection.UserIsOnlineTimeWindow" /> property with the <see cref="P:System.Web.Security.MembershipUser.LastActivityDate" /> value for the user.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

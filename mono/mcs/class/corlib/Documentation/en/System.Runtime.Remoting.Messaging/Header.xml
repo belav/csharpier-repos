@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects are used to convey information about a remote function call (for example, transaction ID or a method signature). For more information, see <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para
-      >
+        <see cref="T:System.Runtime.Remoting.Messaging.Header" /> objects are used to convey information about a remote function call (for example, transaction ID or a method signature). For more information, see <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> and <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,23 +56,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class with the given name and value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class with the given name and value.</para>
         </summary>
         <param name="_Name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,30 +98,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class with the given name, value, and additional configuration information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class with the given name, value, and additional configuration information.</para>
         </summary>
         <param name="_Name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
         <param name="_MustUnderstand">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the receiving end must understand the out-of-band data. </param
-        >
+          />Indicates whether the receiving end must understand the out-of-band data. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -155,37 +147,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.Header" /> class.</para>
         </summary>
         <param name="_Name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
         <param name="_Value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the value of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param
-        >
+          />The object that contains the value of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />. </param>
         <param name="_MustUnderstand">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether the receiving end must understand out-of-band data. </param
-        >
+          />Indicates whether the receiving end must understand out-of-band data. </param>
         <param name="_HeaderNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.Messaging.Header" /> XML namespace. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.Messaging.Header" /> XML namespace. </param>
       </Docs>
     </Member>
     <Member MemberName="HeaderNamespace">
@@ -206,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the XML namespace that the current <see cref="T:System.Runtime.Remoting.Messaging.Header" /> belongs to.</para
-          >
+            >Indicates the XML namespace that the current <see cref="T:System.Runtime.Remoting.Messaging.Header" /> belongs to.</para>
         </summary>
       </Docs>
     </Member>
@@ -250,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Contains the name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.</para
-          >
+            >Contains the name of the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -273,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.</para
-          >
+            >Contains the value for the <see cref="T:System.Runtime.Remoting.Messaging.Header" />.</para>
         </summary>
       </Docs>
     </Member>

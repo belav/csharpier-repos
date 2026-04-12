@@ -34,24 +34,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Windows.Forms.ComboBox" /> displays a text box combined with a <see cref="T:System.Windows.Forms.ListBox" />, which enables the user to select items from the list or enter a new value. </para
-      >
+        >A <see cref="T:System.Windows.Forms.ComboBox" /> displays a text box combined with a <see cref="T:System.Windows.Forms.ListBox" />, which enables the user to select items from the list or enter a new value. </para>
       <para
-        >The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property also specifies whether the text portion can be edited. See <see cref="T:System.Windows.Forms.ComboBoxStyle" /> for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see cref="T:System.Windows.Forms.ListBox" /> control.</para
-      >
+        >The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property also specifies whether the text portion can be edited. See <see cref="T:System.Windows.Forms.ComboBoxStyle" /> for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see cref="T:System.Windows.Forms.ListBox" /> control.</para>
       <para
-        >To add or remove objects in the list at run time, use methods of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). You can assign an array of object references with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method. The list then displays the default string value for each object. You can add individual objects with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method. You can delete items with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or clear the entire list with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Clear" /> method.</para
-      >
+        >To add or remove objects in the list at run time, use methods of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). You can assign an array of object references with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method. The list then displays the default string value for each object. You can add individual objects with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method. You can delete items with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or clear the entire list with the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Clear" /> method.</para>
       <para
-        >In addition to display and selection functionality, the <see cref="T:System.Windows.Forms.ComboBox" /> also provides features that enable you to efficiently add items to the <see cref="T:System.Windows.Forms.ComboBox" /> and to find text within the items of the list. With the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> and <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> methods, you can add a large number of items to the <see cref="T:System.Windows.Forms.ComboBox" /> without the control being repainted each time an item is added to the list. The <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> and <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> methods enable you to search for an item in the list that contains a specific search string.</para
-      >
+        >In addition to display and selection functionality, the <see cref="T:System.Windows.Forms.ComboBox" /> also provides features that enable you to efficiently add items to the <see cref="T:System.Windows.Forms.ComboBox" /> and to find text within the items of the list. With the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> and <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> methods, you can add a large number of items to the <see cref="T:System.Windows.Forms.ComboBox" /> without the control being repainted each time an item is added to the list. The <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> and <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> methods enable you to search for an item in the list that contains a specific search string.</para>
       <para
-        >You can use these properties to manage the currently selected item in the list, the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to specify the string displayed in the editing field, the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property to get or set the current item, and the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property to get or set a reference to the object.</para
-      >
+        >You can use these properties to manage the currently selected item in the list, the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to specify the string displayed in the editing field, the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property to get or set the current item, and the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property to get or set a reference to the object.</para>
       <block subset="none" type="note">
         <para
-          >If you have a <see cref="T:System.Windows.Forms.ListBox" />, <see cref="T:System.Windows.Forms.ComboBox" />, or <see cref="T:System.Windows.Forms.CheckedListBox" /> on a base Windows Forms page and want to modify the string collections of those controls in a derived form, the string collections of those controls in the base form must be empty. If the string collections are not empty, they become read-only when you derive another form.</para
-        >
+          >If you have a <see cref="T:System.Windows.Forms.ListBox" />, <see cref="T:System.Windows.Forms.ComboBox" />, or <see cref="T:System.Windows.Forms.CheckedListBox" /> on a base Windows Forms page and want to modify the string collections of those controls in a derived form, the string collections of those controls in the base form must be empty. If the string collections are not empty, they become read-only when you derive another form.</para>
       </block>
     </remarks>
     <summary>
@@ -69,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ComboBox" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ComboBox" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,8 +90,7 @@
           <para>Adds the specified items to the combo box.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The items to add.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The items to add.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -144,14 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered. If there are duplicate entries in the maintained source, automatic completion behaves unpredictably.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered. If there are duplicate entries in the maintained source, automatic completion behaves unpredictably.</para>
           <para
-            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to CustomSource in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para
-          >
+            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to CustomSource in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para>
           <para
-            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para
-          >
+            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para>
           <block subset="none" type="note">
             <para>The operating system might limit the number of custom strings that it can display at once. For strings that contain a forward slash (/) or backward slash (\), automatic completion appends all characters only up to and including the slash.</para>
           </block>
@@ -159,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a custom <see cref="T:System.Collections.Specialized.StringCollection" /> to use when the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property is set to CustomSource.</para
-          >
+            >Gets or sets a custom <see cref="T:System.Collections.Specialized.StringCollection" /> to use when the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property is set to CustomSource.</para>
         </summary>
       </Docs>
     </Member>
@@ -192,20 +180,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered. If there are duplicate entries in the maintained source, automatic completion behaves unpredictably.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered. If there are duplicate entries in the maintained source, automatic completion behaves unpredictably.</para>
           <para
-            >If you set <see cref="T:System.Windows.Forms.ComboBoxStyle" /> to <see cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList" />, the list displays only if <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> is <see cref="F:System.Windows.Forms.AutoCompleteMode.Suggest" /> or <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />.</para
-          >
+            >If you set <see cref="T:System.Windows.Forms.ComboBoxStyle" /> to <see cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList" />, the list displays only if <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> is <see cref="F:System.Windows.Forms.AutoCompleteMode.Suggest" /> or <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />.</para>
           <para
-            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to <see cref="F:System.Windows.Forms.AutoCompleteSource.CustomSource" /> in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para
-          >
+            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to <see cref="F:System.Windows.Forms.AutoCompleteSource.CustomSource" /> in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para>
           <para
-            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para
-          >
+            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para>
           <para
-            >With <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> set to <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> set to <see cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />, the behavior is as follows:</para
-          >
+            >With <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> set to <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> set to <see cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />, the behavior is as follows:</para>
           <list type="bullet">
             <item>
               <para>If the list of strings is empty, pressing the BACKSPACE or DELETE key does nothing.</para>
@@ -227,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an option that controls how automatic completion works for the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets an option that controls how automatic completion works for the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -260,17 +242,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />, <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />, and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties to create a <see cref="T:System.Windows.Forms.ComboBox" /> that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see cref="T:System.Windows.Forms.ComboBox" /> controls in which URLs, addresses, file names, or commands will be frequently entered.</para>
           <para
-            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to <see cref="F:System.Windows.Forms.AutoCompleteSource.CustomSource" /> in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para
-          >
+            >The use of the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" /> property is optional, but you must set the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> property to <see cref="F:System.Windows.Forms.AutoCompleteSource.CustomSource" /> in order to use <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />.</para>
           <para
-            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para
-          >
+            >You must use the <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> properties together.</para>
           <para
-            >With <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> set to <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> set to <see cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />, the behavior is as follows:</para
-          >
+            >With <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" /> set to <see cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" /> and <see cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" /> set to <see cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />, the behavior is as follows:</para>
           <list type="bullet">
             <item>
               <para>If the list of strings is empty, pressing the BACKSPACE or DELETE key does nothing.</para>
@@ -372,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.ComboBox.BackgroundImage" /> property changes.</para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ComboBox.BackgroundImage" /> property changes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -410,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background image layout as defined in the <see cref="T:System.Windows.Forms.ImageLayout" /> enumeration.</para
-          >
+            >Gets or sets the background image layout as defined in the <see cref="T:System.Windows.Forms.ImageLayout" /> enumeration.</para>
         </summary>
       </Docs>
     </Member>
@@ -443,8 +419,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.BackgroundImageLayout" /> property changes.</para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.BackgroundImageLayout" /> property changes.</para>
         </summary>
       </Docs>
     </Member>
@@ -459,17 +434,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method prevents the control from painting until the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method is called.</para
-          >
+            >This method prevents the control from painting until the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method is called.</para>
           <para
-            >The preferred way to add items to the <see cref="T:System.Windows.Forms.ComboBox" /> is to use the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). This enables you to add an array of items to the list at one time. However, if you want to add items one at a time using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class, you can use the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method to prevent the control from repainting the <see cref="T:System.Windows.Forms.ComboBox" /> each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method to enable the <see cref="T:System.Windows.Forms.ComboBox" /> to repaint. This way of adding items can prevent flicker during the drawing of the <see cref="T:System.Windows.Forms.ComboBox" /> when a large number of items are being added to the list.</para
-          >
+            >The preferred way to add items to the <see cref="T:System.Windows.Forms.ComboBox" /> is to use the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). This enables you to add an array of items to the list at one time. However, if you want to add items one at a time using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class, you can use the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method to prevent the control from repainting the <see cref="T:System.Windows.Forms.ComboBox" /> each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method to enable the <see cref="T:System.Windows.Forms.ComboBox" /> to repaint. This way of adding items can prevent flicker during the drawing of the <see cref="T:System.Windows.Forms.ComboBox" /> when a large number of items are being added to the list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Maintains performance when items are added to the <see cref="T:System.Windows.Forms.ComboBox" /> one at a time.</para
-          >
+            >Maintains performance when items are added to the <see cref="T:System.Windows.Forms.ComboBox" /> one at a time.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -516,8 +488,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is overridden in <see cref="T:System.Windows.Forms.ComboBox" /> to avoid multiple layouts during handle creation due to <see cref="T:System.Windows.Forms.ComboBox" /> size change.</para
-          >
+            >This method is overridden in <see cref="T:System.Windows.Forms.ComboBox" /> to avoid multiple layouts during handle creation due to <see cref="T:System.Windows.Forms.ComboBox" /> size change.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -573,14 +544,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data source can be a database, a Web service, or an object that can later be used to generate data-bound controls. When the <see cref="P:System.Windows.Forms.ComboBox.DataSource" /> property is set, the items collection cannot be modified.</para
-          >
+            >A data source can be a database, a Web service, or an object that can later be used to generate data-bound controls. When the <see cref="P:System.Windows.Forms.ComboBox.DataSource" /> property is set, the items collection cannot be modified.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the data source for this <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the data source for this <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -619,25 +588,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" /> method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" /> method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ComboBox" /> references. This method invokes the Dispose method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ComboBox" /> references. This method invokes the Dispose method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ComboBox" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -685,19 +650,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is used by an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" />. You can use this event to perform the tasks needed to draw items in the <see cref="T:System.Windows.Forms.ComboBox" />. If you have a variable sized item (when the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to the OwnerDrawVariable value of <see cref="T:System.Windows.Forms.DrawMode" />), before drawing an item, the <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event is raised. You can create an event handler for the <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event to specify the size for the item that you are going to draw in your event handler for the <see cref="E:System.Windows.Forms.ComboBox.DrawItem" /> event.</para
-          >
+            >This event is used by an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" />. You can use this event to perform the tasks needed to draw items in the <see cref="T:System.Windows.Forms.ComboBox" />. If you have a variable sized item (when the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to the OwnerDrawVariable value of <see cref="T:System.Windows.Forms.DrawMode" />), before drawing an item, the <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event is raised. You can create an event handler for the <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event to specify the size for the item that you are going to draw in your event handler for the <see cref="E:System.Windows.Forms.ComboBox.DrawItem" /> event.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a visual aspect of an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> changes.</para
-          >
+            >Occurs when a visual aspect of an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> changes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -747,14 +709,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the drop-down portion of a <see cref="T:System.Windows.Forms.ComboBox" /> is shown.</para
-          >
+            >Occurs when the drop-down portion of a <see cref="T:System.Windows.Forms.ComboBox" /> is shown.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -775,19 +735,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed" /> event to restore the state of the <see cref="T:System.Windows.Forms.ComboBox" /> from changes you made in response to the <see cref="E:System.Windows.Forms.ComboBox.DropDown" /> event.</para
-          >
+            >Use the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed" /> event to restore the state of the <see cref="T:System.Windows.Forms.ComboBox" /> from changes you made in response to the <see cref="E:System.Windows.Forms.ComboBox.DropDown" /> event.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" /> is no longer visible.</para
-          >
+            >Occurs when the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" /> is no longer visible.</para>
         </summary>
       </Docs>
     </Member>
@@ -816,14 +773,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see cref="P:System.Windows.Forms.ComboBox.DropDownHeight" /> property resets the <see cref="P:System.Windows.Forms.ComboBox.IntegralHeight" /> property to false.</para
-          >
+            >Setting the <see cref="P:System.Windows.Forms.ComboBox.DropDownHeight" /> property resets the <see cref="P:System.Windows.Forms.ComboBox.IntegralHeight" /> property to false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height in pixels of the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the height in pixels of the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -849,8 +804,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property also specifies whether the text portion can be edited. See <see cref="T:System.Windows.Forms.ComboBoxStyle" /> for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see cref="T:System.Windows.Forms.ListBox" /> control.</para
-          >
+            >The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property also specifies whether the text portion can be edited. See <see cref="T:System.Windows.Forms.ComboBoxStyle" /> for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see cref="T:System.Windows.Forms.ListBox" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -874,14 +828,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property has changed.</para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> property has changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -900,12 +852,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a value has not been set for the <see cref="P:System.Windows.Forms.ComboBox.DropDownWidth" />, this property returns the <see cref="P:System.Windows.Forms.Control.Width" /> of the combo box.</para
-          >
+            >If a value has not been set for the <see cref="P:System.Windows.Forms.ComboBox.DropDownWidth" />, this property returns the <see cref="P:System.Windows.Forms.Control.Width" /> of the combo box.</para>
           <block subset="none" type="note">
             <para
-              >The width of the drop-down cannot be smaller than the <see cref="T:System.Windows.Forms.ComboBox" /> width.</para
-            >
+              >The width of the drop-down cannot be smaller than the <see cref="T:System.Windows.Forms.ComboBox" /> width.</para>
           </block>
         </remarks>
         <summary>
@@ -956,14 +906,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The preferred way to add items to the <see cref="T:System.Windows.Forms.ComboBox" /> is to use the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). This enables you to add an array of items to the list at one time. However, if you want to add items one at a time using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class, you can use the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method to prevent the control from repainting the <see cref="T:System.Windows.Forms.ComboBox" /> each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method to enable the <see cref="T:System.Windows.Forms.ComboBox" /> to repaint. This way of adding items can prevent flickered drawing of the <see cref="T:System.Windows.Forms.ComboBox" /> when a large number of items are being added to the list.</para
-          >
+            >The preferred way to add items to the <see cref="T:System.Windows.Forms.ComboBox" /> is to use the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class (through the <see cref="P:System.Windows.Forms.ComboBox.Items" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />). This enables you to add an array of items to the list at one time. However, if you want to add items one at a time using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" /> method of the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class, you can use the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method to prevent the control from repainting the <see cref="T:System.Windows.Forms.ComboBox" /> each time an item is added to the list. Once you have completed the task of adding items to the list, call the <see cref="M:System.Windows.Forms.ComboBox.EndUpdate" /> method to enable the <see cref="T:System.Windows.Forms.ComboBox" /> to repaint. This way of adding items can prevent flickered drawing of the <see cref="T:System.Windows.Forms.ComboBox" /> when a large number of items are being added to the list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resumes painting the <see cref="T:System.Windows.Forms.ComboBox" /> control after painting is suspended by the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method.</para
-          >
+            >Resumes painting the <see cref="T:System.Windows.Forms.ComboBox" /> control after painting is suspended by the <see cref="M:System.Windows.Forms.ComboBox.BeginUpdate" /> method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -984,14 +932,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, and returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see cref="T:System.Windows.Forms.ComboBox" />, you must use the version of the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method that provides a parameter for specifying a starting index within the <see cref="T:System.Windows.Forms.ComboBox" />. If you want to perform a search for an exact word match instead of a partial match, use the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method.</para
-          >
+            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, and returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see cref="T:System.Windows.Forms.ComboBox" />, you must use the version of the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method that provides a parameter for specifying a starting index within the <see cref="T:System.Windows.Forms.ComboBox" />. If you want to perform a search for an exact word match instead of a partial match, use the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the first item in the <see cref="T:System.Windows.Forms.ComboBox" /> that starts with the specified string.</para
-          >
+            >Returns the index of the first item in the <see cref="T:System.Windows.Forms.ComboBox" /> that starts with the specified string.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1002,8 +948,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1024,35 +969,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. This method is typically used after a call has been made using the version of this method that does not specify a starting index. Once an initial item has been found in the list, this method is typically used to find further instances of the search text by specifying the index position in the <paramref name="startIndex" /> parameter of the item after the first found instance of the search text. If you want to perform a search for an exact word match instead of a partial match, use the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method.</para
-          >
+            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. This method is typically used after a call has been made using the version of this method that does not specify a starting index. Once an initial item has been found in the list, this method is typically used to find further instances of the search text by specifying the index position in the <paramref name="startIndex" /> parameter of the item after the first found instance of the search text. If you want to perform a search for an exact word match instead of a partial match, use the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the first item in the <see cref="T:System.Windows.Forms.ComboBox" /> beyond the specified index that contains the specified string. The search is not case sensitive.</para
-          >
+            >Returns the index of the first item in the <see cref="T:System.Windows.Forms.ComboBox" /> beyond the specified index that contains the specified string. The search is not case sensitive.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para
-          >
+            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para>
         </returns>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for. </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1072,8 +1012,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see cref="T:System.Windows.Forms.ComboBox" />, you must use the version of the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method that provides a parameter for specifying a starting index within the <see cref="T:System.Windows.Forms.ComboBox" />. If you want to perform partial word search instead of an exact word match, use the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method.</para
-          >
+            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. Once you have found the specified text, if you want to search for other instances of the text in the <see cref="T:System.Windows.Forms.ComboBox" />, you must use the version of the <see cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" /> method that provides a parameter for specifying a starting index within the <see cref="T:System.Windows.Forms.ComboBox" />. If you want to perform partial word search instead of an exact word match, use the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1082,16 +1021,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para
-          >
+            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para>
         </returns>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1115,11 +1052,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. This method is typically used after a call has been made using the version of this method that does not specify a starting index. Once an initial item has been found in the list, this method is typically used to find further instances of the search text by specifying the index position in the <paramref name="startIndex" /> parameter of the item after the first found instance of the search text. If you want to perform partial word search instead of an exact word match, use the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method.</para
-          >
+            >The search performed by this method is not case-sensitive. The <paramref name="s" /> parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" /> method or changing the item's text. This method is typically used after a call has been made using the version of this method that does not specify a starting index. Once an initial item has been found in the list, this method is typically used to find further instances of the search text by specifying the index position in the <paramref name="startIndex" /> parameter of the item after the first found instance of the search text. If you want to perform partial word search instead of an exact word match, use the <see cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" /> method.</para>
           <para
-            >The search performed by this method is circular. Although the search starts at the next index after the <paramref name="startIndex" /> parameter, the search restarts at 0 when the end of the collection is reached. However, note that if the <paramref name="startIndex" /> parameter itself is equal to the last index in the collection, an exception is thrown.</para
-          >
+            >The search performed by this method is circular. Although the search starts at the next index after the <paramref name="startIndex" /> parameter, the search restarts at 0 when the end of the collection is reached. However, note that if the <paramref name="startIndex" /> parameter itself is equal to the last index in the collection, an exception is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1128,23 +1063,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para
-          >
+            >The zero-based index of the first item found; returns -1 if no match is found, or 0 if the <paramref name="s" /> parameter specifies <see cref="F:System.String.Empty" />.</para>
         </returns>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> to search for. </param
-        >
+          />The <see cref="T:System.String" /> to search for. </param>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param
-        >
+          />The zero-based index of the item before the first item to be searched. Set to -1 to search from the beginning of the control. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1177,8 +1109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the appearance of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the appearance of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1194,8 +1125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ComboBox" /> has focus.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ComboBox" /> has focus.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1238,17 +1168,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> is not set to OwnerDrawVariable, the value of the <paramref name="index" /> parameter is ignored because all items in a standard <see cref="T:System.Windows.Forms.ComboBox" /> are the same size. You can use this property when you are using an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> to determine the size of any item within the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >If <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> is not set to OwnerDrawVariable, the value of the <paramref name="index" /> parameter is ignored because all items in a standard <see cref="T:System.Windows.Forms.ComboBox" /> are the same size. You can use this property when you are using an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> to determine the size of any item within the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
           <para
-            >For more information about specifying the height for items in an owner-drawn list, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event.</para
-          >
+            >For more information about specifying the height for items in an owner-drawn list, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the height of an item in the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Returns the height of an item in the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1259,8 +1186,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the item to return the height of. </param
-        >
+          />The index of the item to return the height of. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1286,15 +1212,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, the control automatically resizes to ensure that an item is not partially displayed. If you want to maintain the original size of the <see cref="T:System.Windows.Forms.ComboBox" /> based on the space requirements of your form, set this property to false. If the <see cref="T:System.Windows.Forms.ComboBox" /> does not contain any items, this property has no effect.</para
-          >
+            >When this property is set to true, the control automatically resizes to ensure that an item is not partially displayed. If you want to maintain the original size of the <see cref="T:System.Windows.Forms.ComboBox" /> based on the space requirements of your form, set this property to false. If the <see cref="T:System.Windows.Forms.ComboBox" /> does not contain any items, this property has no effect.</para>
           <para
-            >Setting the <see cref="P:System.Windows.Forms.ComboBox.DropDownHeight" /> property resets the <see cref="P:System.Windows.Forms.ComboBox.IntegralHeight" /> property to false.</para
-          >
+            >Setting the <see cref="P:System.Windows.Forms.ComboBox.DropDownHeight" /> property resets the <see cref="P:System.Windows.Forms.ComboBox.IntegralHeight" /> property to false.</para>
           <block subset="none" type="note">
             <para
-              >If the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to OwnerDrawVariable, this property has no effect.</para
-            >
+              >If the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to OwnerDrawVariable, this property has no effect.</para>
           </block>
         </remarks>
         <summary>
@@ -1323,8 +1246,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.IsInputKey(System.Windows.Forms.Keys)" /> method returns true when the <paramref name="keyData" /> parameter includes the <see cref="F:System.Windows.Forms.Keys.Return" /> or <see cref="F:System.Windows.Forms.Keys.Escape" /> value and the <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> property is true.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.IsInputKey(System.Windows.Forms.Keys)" /> method returns true when the <paramref name="keyData" /> parameter includes the <see cref="F:System.Windows.Forms.Keys.Return" /> or <see cref="F:System.Windows.Forms.Keys.Escape" /> value and the <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> property is true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1339,8 +1261,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.Keys" /> values.</param
-        >
+          />One of the <see cref="T:System.Windows.Forms.Keys" /> values.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1363,11 +1284,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to OwnerDrawFixed, all items have the same height. When the <see cref="T:System.Windows.Forms.DrawMode" /> property is set to OwnerDrawVariable, the <see cref="P:System.Windows.Forms.ComboBox.ItemHeight" /> property specifies the height of each item added to the <see cref="T:System.Windows.Forms.ComboBox" />. Because each item in an owner-drawn list can have a different height, you can use the <see cref="M:System.Windows.Forms.ComboBox.GetItemHeight(System.Int32)" /> method to get the height of a specific item in the <see cref="T:System.Windows.Forms.ComboBox" />. If you use the <see cref="P:System.Windows.Forms.ComboBox.ItemHeight" /> property on a <see cref="T:System.Windows.Forms.ComboBox" /> with items of variable height, this property returns the height of the first item in the control.</para
-          >
+            >When the <see cref="P:System.Windows.Forms.ComboBox.DrawMode" /> property is set to OwnerDrawFixed, all items have the same height. When the <see cref="T:System.Windows.Forms.DrawMode" /> property is set to OwnerDrawVariable, the <see cref="P:System.Windows.Forms.ComboBox.ItemHeight" /> property specifies the height of each item added to the <see cref="T:System.Windows.Forms.ComboBox" />. Because each item in an owner-drawn list can have a different height, you can use the <see cref="M:System.Windows.Forms.ComboBox.GetItemHeight(System.Int32)" /> method to get the height of a specific item in the <see cref="T:System.Windows.Forms.ComboBox" />. If you use the <see cref="P:System.Windows.Forms.ComboBox.ItemHeight" /> property on a <see cref="T:System.Windows.Forms.ComboBox" /> with items of variable height, this property returns the height of the first item in the control.</para>
           <para
-            >For more information about specifying the height for items in an owner-drawn list, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event.</para
-          >
+            >For more information about specifying the height for items in an owner-drawn list, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" /> event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1407,20 +1326,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to obtain a reference to the list of items that are currently stored in the <see cref="T:System.Windows.Forms.ComboBox" />. With this reference, you can add items, remove items, and obtain a count of the items in the collection. </para
-          >
+            >This property enables you to obtain a reference to the list of items that are currently stored in the <see cref="T:System.Windows.Forms.ComboBox" />. With this reference, you can add items, remove items, and obtain a count of the items in the collection. </para>
           <para
-            >Although the <see cref="T:System.Windows.Forms.ComboBox" /> is typically used to display text items, you can add any object to the <see cref="T:System.Windows.Forms.ComboBox" />. Typically, the representation of an object in the <see cref="T:System.Windows.Forms.ComboBox" /> is the string returned by that object's <see cref="M:System.Object.ToString" /> method. If you want to have a member of the object displayed instead, choose the member that will be displayed by setting the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property to the name of the appropriate member. You can also choose a member of the object that will represent the value returned by the object by setting the <see cref="P:System.Windows.Forms.ListControl.ValueMember" /> property. For more information, see <see cref="T:System.Windows.Forms.ListControl" />.</para
-          >
+            >Although the <see cref="T:System.Windows.Forms.ComboBox" /> is typically used to display text items, you can add any object to the <see cref="T:System.Windows.Forms.ComboBox" />. Typically, the representation of an object in the <see cref="T:System.Windows.Forms.ComboBox" /> is the string returned by that object's <see cref="M:System.Object.ToString" /> method. If you want to have a member of the object displayed instead, choose the member that will be displayed by setting the <see cref="P:System.Windows.Forms.ListControl.DisplayMember" /> property to the name of the appropriate member. You can also choose a member of the object that will represent the value returned by the object by setting the <see cref="P:System.Windows.Forms.ListControl.ValueMember" /> property. For more information, see <see cref="T:System.Windows.Forms.ListControl" />.</para>
           <para
-            >For more information about the tasks that can be performed with the item collection, see the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class reference topics.</para
-          >
+            >For more information about the tasks that can be performed with the item collection, see the <see cref="T:System.Windows.Forms.ComboBox.ObjectCollection" /> class reference topics.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object representing the collection of the items contained in this <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets an object representing the collection of the items contained in this <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1448,8 +1363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the maximum number of items to be shown in the drop-down portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1475,8 +1389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size that is the upper limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify.</para
-          >
+            >Gets or sets the size that is the upper limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify.</para>
         </summary>
       </Docs>
     </Member>
@@ -1500,8 +1413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of characters a user can type into the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the number of characters a user can type into the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1522,19 +1434,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can create an event handler for this event to specify the size an item is made before it is drawn in the <see cref="E:System.Windows.Forms.ComboBox.DrawItem" /> event.</para
-          >
+            >You can create an event handler for this event to specify the size an item is made before it is drawn in the <see cref="E:System.Windows.Forms.ComboBox.DrawItem" /> event.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and when the sizes of the list items are determined.</para
-          >
+            >Occurs each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and when the sizes of the list items are determined.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1560,8 +1469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size that is the lower limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify.</para
-          >
+            >Gets or sets the size that is the lower limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify.</para>
         </summary>
       </Docs>
     </Member>
@@ -1582,16 +1490,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.BackColorChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.BackColorChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1615,16 +1521,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ListControl.DataSourceChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ListControl.DataSourceChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1648,16 +1552,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ListControl.DisplayMemberChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ListControl.DisplayMemberChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1680,16 +1582,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and after <see cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" /> is called. For more information, see <see cref="E:System.Windows.Forms.ComboBox.DrawItem" />.</para
-          >
+            >This method is called each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and after <see cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" /> is called. For more information, see <see cref="E:System.Windows.Forms.ComboBox.DrawItem" />.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1700,8 +1599,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.DrawItemEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1724,11 +1622,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDown(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDown(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1739,8 +1635,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1768,25 +1663,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDownClosed(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDownClosed(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownClosed" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="OnDropDownStyleChanged">
@@ -1805,30 +1696,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when you set <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> to a new value.</para
-          >
+            >This event is raised when you set <see cref="P:System.Windows.Forms.ComboBox.DropDownStyle" /> to a new value.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDownStyleChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnDropDownStyleChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownStyleChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ComboBox.DropDownStyleChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1855,8 +1741,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1880,16 +1765,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.ForeColorChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.ForeColorChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1911,11 +1794,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnGotFocus(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnGotFocus(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1926,8 +1807,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1957,11 +1837,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnHandleCreated(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnHandleCreated(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1972,8 +1850,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1998,25 +1875,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnHandleDestroyed(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnHandleDestroyed(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2042,11 +1915,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnKeyDown(System.Windows.Forms.KeyEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnKeyDown(System.Windows.Forms.KeyEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2057,8 +1928,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2085,8 +1955,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see cref="P:System.Windows.Forms.KeyPressEventArgs.KeyChar" /> property of <paramref name="e" /> is <see cref="F:System.Windows.Forms.Keys.Return" /> or <see cref="F:System.Windows.Forms.Keys.Escape" /> and the <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> property is true, the <see cref="M:System.Windows.Forms.ComboBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" /> method sets <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> to false.</para
-          >
+            >If the value of the <see cref="P:System.Windows.Forms.KeyPressEventArgs.KeyChar" /> property of <paramref name="e" /> is <see cref="F:System.Windows.Forms.Keys.Return" /> or <see cref="F:System.Windows.Forms.Keys.Escape" /> and the <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> property is true, the <see cref="M:System.Windows.Forms.ComboBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" /> method sets <see cref="P:System.Windows.Forms.ComboBox.DroppedDown" /> to false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2097,8 +1966,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.Windows.Forms.KeyPressEventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2120,11 +1988,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnLostFocus(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnLostFocus(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2135,8 +2001,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2164,16 +2029,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and before <see cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" /> is called. For more information, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" />.</para
-          >
+            >This method is called each time an owner-drawn <see cref="T:System.Windows.Forms.ComboBox" /> item needs to be drawn and before <see cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" /> is called. For more information, see <see cref="E:System.Windows.Forms.ComboBox.MeasureItem" />.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2184,8 +2046,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that was raised. </param
-        >
+          />The <see cref="T:System.Windows.Forms.MeasureItemEventArgs" /> that was raised. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2208,11 +2069,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnMouseEnter(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnMouseEnter(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2223,8 +2082,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2246,11 +2104,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnMouseLeave(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnMouseLeave(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2261,8 +2117,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2286,25 +2141,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnParentBackColorChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnParentBackColorChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.BackColorChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.BackColorChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.  </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.  </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2326,11 +2177,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnResize(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnResize(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2341,8 +2190,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2365,30 +2213,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when you select a new item from the list or when you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property.</para
-          >
+            >This event is raised when you select a new item from the list or when you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedIndexChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedIndexChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2411,30 +2254,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when you select a new item from the list or when you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property.</para
-          >
+            >This event is raised when you select a new item from the list or when you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedItemChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedItemChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2459,25 +2297,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedValueChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectedValueChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2500,30 +2334,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> is raised only when the user changes the combo box selection. Do not use <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> to capture user changes, because those events are also raised when the selection changes programmatically. This event is also raised when you set <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />.</para
-          >
+            <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> is raised only when the user changes the combo box selection. Do not use <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> to capture user changes, because those events are also raised when the selection changes programmatically. This event is also raised when you set <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectionChangeCommitted(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnSelectionChangeCommitted(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2546,11 +2375,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnTextChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnTextChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2561,8 +2388,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2591,11 +2417,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnTextUpdate(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnTextUpdate(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2606,8 +2430,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
     </Member>
     <Member MemberName="OnValidating">
@@ -2629,11 +2452,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ComboBox.OnValidating(System.ComponentModel.CancelEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ComboBox.OnValidating(System.ComponentModel.CancelEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2644,8 +2465,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CancelEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2744,8 +2564,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="T:System.Windows.Forms.ComboBox" /> control is redrawn.</para
-          >
+            >Occurs when the <see cref="T:System.Windows.Forms.ComboBox" /> control is redrawn.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2776,8 +2595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the preferred height of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets the preferred height of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2828,8 +2646,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location of the item to refresh.</param
-        >
+          />The location of the item to refresh.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2869,8 +2686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see cref="P:System.Windows.Forms.Control.Text" /> property to its default value.</para
-          >
+            >Resets the <see cref="P:System.Windows.Forms.Control.Text" /> property to its default value.</para>
         </summary>
       </Docs>
     </Member>
@@ -2901,15 +2717,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The factor by which the height and width of the control will be scaled.</param
-        >
+          />The factor by which the height and width of the control will be scaled.</param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.BoundsSpecified" /> value that specifies the bounds of the control to use when defining its size and position.</param
-        >
+          />A <see cref="T:System.Windows.Forms.BoundsSpecified" /> value that specifies the bounds of the control to use when defining its size and position.</param>
       </Docs>
     </Member>
     <Member MemberName="Select">
@@ -2926,34 +2740,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to set the start position to the first character in the control's text, set the <paramref name="start" /> parameter to zero. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para
-          >
+            >If you want to set the start position to the first character in the control's text, set the <paramref name="start" /> parameter to zero. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para>
           <block subset="none" type="note">
             <para>
-              <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> value, it will be 6 rather than 10.</para
-            >
+              <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> value, it will be 6 rather than 10.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects a range of text in the editable portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Selects a range of text in the editable portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the first character in the current text selection within the text box. </param
-        >
+          />The position of the first character in the current text selection within the text box. </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to select. </param
-        >
+          />The number of characters to select. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2972,8 +2781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects all the text in the editable portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Selects all the text in the editable portion of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3000,27 +2808,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property indicates the zero-based index of the currently selected item in the combo box list. Setting a new index raises the <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> event.</para
-          >
+            >This property indicates the zero-based index of the currently selected item in the combo box list. Setting a new index raises the <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> event.</para>
           <para>
-            <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />, <see cref="P:System.Windows.Forms.ListControl.SelectedValue" />, and <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> are related as follows:</para
-          >
+            <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />, <see cref="P:System.Windows.Forms.ListControl.SelectedValue" />, and <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> are related as follows:</para>
           <list type="bullet">
             <item>
               <para
-                >If <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> is false, <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> will not be set to -1 when <see cref="P:System.Windows.Forms.ListControl.SelectedValue" /> is blank.</para
-              >
+                >If <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> is false, <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> will not be set to -1 when <see cref="P:System.Windows.Forms.ListControl.SelectedValue" /> is blank.</para>
             </item>
             <item>
               <para
-                >If <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> is true, <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> will be set to -1 when <see cref="P:System.Windows.Forms.ListControl.SelectedValue" /> is blank.</para
-              >
+                >If <see cref="P:System.Windows.Forms.ListControl.FormattingEnabled" /> is true, <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> will be set to -1 when <see cref="P:System.Windows.Forms.ListControl.SelectedValue" /> is blank.</para>
             </item>
           </list>
           <block subset="none" type="note">
             <para
-              >To deselect the currently selected item, set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to -1. You cannot set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> of a <see cref="T:System.Windows.Forms.ComboBox" /> item to -1 if the item is a data-bound item.</para
-            >
+              >To deselect the currently selected item, set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to -1. You cannot set the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> of a <see cref="T:System.Windows.Forms.ComboBox" /> item to -1 if the item is a data-bound item.</para>
           </block>
         </remarks>
         <summary>
@@ -3043,19 +2846,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can create an event handler for this event to determine when the selected index in the <see cref="T:System.Windows.Forms.ComboBox" /> has been changed. This can be useful when you need to display information in other controls based on the current selection in the <see cref="T:System.Windows.Forms.ComboBox" />. You can use the event handler for this event to load the information in the other controls.</para
-          >
+            >You can create an event handler for this event to determine when the selected index in the <see cref="T:System.Windows.Forms.ComboBox" /> has been changed. This can be useful when you need to display information in other controls based on the current selection in the <see cref="T:System.Windows.Forms.ComboBox" />. You can use the event handler for this event to load the information in the other controls.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property has changed.</para
-          >
+            >Occurs when the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property has changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3085,19 +2885,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property to an object, the <see cref="T:System.Windows.Forms.ComboBox" /> attempts to make that object the currently selected one in the list. If the object is found in the list, it is displayed in the edit portion of the <see cref="T:System.Windows.Forms.ComboBox" /> and the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property is set to the corresponding index. If the object does not exist in the list, the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property is left at its current value.</para
-          >
+            >When you set the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property to an object, the <see cref="T:System.Windows.Forms.ComboBox" /> attempts to make that object the currently selected one in the list. If the object is found in the list, it is displayed in the edit portion of the <see cref="T:System.Windows.Forms.ComboBox" /> and the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property is set to the corresponding index. If the object does not exist in the list, the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> property is left at its current value.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Windows.Forms.ComboBox" /> class searches for the specified object by using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.IndexOf(System.Object)" /> method. This method uses the <see cref="M:System.Object.Equals(System.Object)" /> method to determine equality. </para
-            >
+              >The <see cref="T:System.Windows.Forms.ComboBox" /> class searches for the specified object by using the <see cref="M:System.Windows.Forms.ComboBox.ObjectCollection.IndexOf(System.Object)" /> method. This method uses the <see cref="M:System.Object.Equals(System.Object)" /> method to determine equality. </para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets currently selected item in the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets currently selected item in the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3124,23 +2921,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property to retrieve or change the currently selected text in a <see cref="T:System.Windows.Forms.ComboBox" /> control. However, you should be aware that the selection can change automatically because of user interaction. For example, if you retrieve the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a button <see cref="E:System.Windows.Forms.Control.Click" /> event handler, the value will be an empty string. This is because the selection is automatically cleared when the input focus moves from the combo box to the button. </para
-          >
+            >You can use the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property to retrieve or change the currently selected text in a <see cref="T:System.Windows.Forms.ComboBox" /> control. However, you should be aware that the selection can change automatically because of user interaction. For example, if you retrieve the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a button <see cref="E:System.Windows.Forms.Control.Click" /> event handler, the value will be an empty string. This is because the selection is automatically cleared when the input focus moves from the combo box to the button. </para>
           <para
-            >When the combo box loses focus, the selection point moves to the beginning of the text and any selected text becomes unselected. In this case, getting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property retrieves an empty string, and setting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property adds the specified value to the beginning of the text. </para
-          >
+            >When the combo box loses focus, the selection point moves to the beginning of the text and any selected text becomes unselected. In this case, getting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property retrieves an empty string, and setting the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> property adds the specified value to the beginning of the text. </para>
           <para
-            >When the combo box gains focus, the full text in the control is automatically selected. If you call the control's <see cref="M:System.Windows.Forms.Control.Focus" /> method to set the input focus, the full text is selected regardless of whether the control already had focus. </para
-          >
+            >When the combo box gains focus, the full text in the control is automatically selected. If you call the control's <see cref="M:System.Windows.Forms.Control.Focus" /> method to set the input focus, the full text is selected regardless of whether the control already had focus. </para>
           <para
-            >When the user selects an item from the drop-down list or by using the UP ARROW and DOWN ARROW keys, the text for the new item is automatically selected. However, if you try to get the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, the property returns an empty string. This is because, at the time of these events, the previous <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value has been cleared and the new value has not yet been set. To retrieve the current value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, use the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property instead. </para
-          >
+            >When the user selects an item from the drop-down list or by using the UP ARROW and DOWN ARROW keys, the text for the new item is automatically selected. However, if you try to get the <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, the property returns an empty string. This is because, at the time of these events, the previous <see cref="P:System.Windows.Forms.ComboBox.SelectedText" /> value has been cleared and the new value has not yet been set. To retrieve the current value in a <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> event handler, use the <see cref="P:System.Windows.Forms.ComboBox.SelectedItem" /> property instead. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text that is selected in the editable portion of a <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Gets or sets the text that is selected in the editable portion of a <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3158,22 +2950,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> is raised only when the user changes the combo box selection. Do not use <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> to capture user changes, because those events are also raised when the selection changes programmatically.</para
-          >
+            <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> is raised only when the user changes the combo box selection. Do not use <see cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" /> or <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" /> to capture user changes, because those events are also raised when the selection changes programmatically.</para>
           <para
-            >You can create a <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> event handler to provide special handling for the <see cref="T:System.Windows.Forms.ComboBox" /> when the user changes the selected item in the list.</para
-          >
+            >You can create a <see cref="E:System.Windows.Forms.ComboBox.SelectionChangeCommitted" /> event handler to provide special handling for the <see cref="T:System.Windows.Forms.ComboBox" /> when the user changes the selected item in the list.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the selected item has changed and that change is displayed in the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Occurs when the selected item has changed and that change is displayed in the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3200,8 +2988,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine whether any characters are currently selected in the combo box control before performing operations on the selected text. When the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is set to a value that is larger than the number of characters within the text of the control, the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is set to the entire length of text within the control minus the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property (if any value is specified for the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property).</para
-          >
+            >You can use this property to determine whether any characters are currently selected in the combo box control before performing operations on the selected text. When the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is set to a value that is larger than the number of characters within the text of the control, the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is set to the entire length of text within the control minus the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property (if any value is specified for the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3232,12 +3019,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no text is selected in the control, this property indicates the insertion point for new text. If you set this property to a location beyond the length of the text in the control, the selection start position is placed after the last character. When text is selected in the text box control, changing this property can release the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property. If the remaining text in the control after the position indicated by the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property is less than the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property, the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is automatically decreased. The value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property never causes an increase in the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property.</para
-          >
+            >If no text is selected in the control, this property indicates the insertion point for new text. If you set this property to a location beyond the length of the text in the control, the selection start position is placed after the last character. When text is selected in the text box control, changing this property can release the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property. If the remaining text in the control after the position indicated by the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property is less than the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property, the value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property is automatically decreased. The value of the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> property never causes an increase in the <see cref="P:System.Windows.Forms.ComboBox.SelectionLength" /> property.</para>
           <block subset="none" type="note">
             <para>
-              <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> value, it will be 6 rather than 10.</para
-            >
+              <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see cref="P:System.Windows.Forms.ComboBox.SelectionStart" /> value, it will be 6 rather than 10.</para>
           </block>
         </remarks>
         <summary>
@@ -3271,44 +3056,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the size and location of the <see cref="T:System.Windows.Forms.ComboBox" />.</para
-          >
+            >Sets the size and location of the <see cref="T:System.Windows.Forms.ComboBox" />.</para>
         </summary>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal location in pixels of the control. </param
-        >
+          />The horizontal location in pixels of the control. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical location in pixels of the control. </param
-        >
+          />The vertical location in pixels of the control. </param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The width in pixels of the control. </param
-        >
+          />The width in pixels of the control. </param>
         <param name="height">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The height in pixels of the control. </param
-        >
+          />The height in pixels of the control. </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3339,11 +3118,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array index of the object.</param
-        >
+          />The array index of the object.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3369,8 +3146,7 @@
           <para>When overridden in a derived class, sets the specified array of objects in a collection in the derived class.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of items.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />An array of items.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3393,11 +3169,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies whether the <see cref="T:System.Windows.Forms.ComboBox" /> sorts existing entries and add new entries to the appropriate sorted position in the list. You can use this property to automatically sort items in a <see cref="T:System.Windows.Forms.ComboBox" />. As items are added to a sorted <see cref="T:System.Windows.Forms.ComboBox" />, the items are moved to the appropriate location in the sorted list. When you set the property to false, new items are added to the end of the existing list. The sort is case-insensitive and in alphabetically ascending order.</para
-          >
+            >This property specifies whether the <see cref="T:System.Windows.Forms.ComboBox" /> sorts existing entries and add new entries to the appropriate sorted position in the list. You can use this property to automatically sort items in a <see cref="T:System.Windows.Forms.ComboBox" />. As items are added to a sorted <see cref="T:System.Windows.Forms.ComboBox" />, the items are moved to the appropriate location in the sorted list. When you set the property to false, new items are added to the end of the existing list. The sort is case-insensitive and in alphabetically ascending order.</para>
           <para
-            >Attempting to set the <see cref="P:System.Windows.Forms.ComboBox.Sorted" /> property on a data-bound control raises an <see cref="T:System.ArgumentException" />. You must sort the data using the underlying data model.</para
-          >
+            >Attempting to set the <see cref="P:System.Windows.Forms.ComboBox.Sorted" /> property on a data-bound control raises an <see cref="T:System.ArgumentException" />. You must sort the data using the underlying data model.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3428,8 +3202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to null or an empty string ("") sets the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to -1. Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to a value that is in the <see cref="P:System.Windows.Forms.ComboBox.Items" /> collection sets the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to the index of that item. Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to a value that is not in the collection leaves the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> unchanged.</para
-          >
+            >Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to null or an empty string ("") sets the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to -1. Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to a value that is in the <see cref="P:System.Windows.Forms.ComboBox.Items" /> collection sets the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> to the index of that item. Setting the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property to a value that is not in the collection leaves the <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" /> unchanged.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3454,13 +3227,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="E:System.Windows.Forms.ComboBox.TextUpdate" /> event to validate the text before it is actually shown. <see cref="E:System.Windows.Forms.ComboBox.TextUpdate" /> is not fired if the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property is programmatically changed.</para
-          >
+            >Use the <see cref="E:System.Windows.Forms.ComboBox.TextUpdate" /> event to validate the text before it is actually shown. <see cref="E:System.Windows.Forms.ComboBox.TextUpdate" /> is not fired if the <see cref="P:System.Windows.Forms.ComboBox.Text" /> property is programmatically changed.</para>
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3480,14 +3251,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see cref="T:System.Windows.Forms.ComboBox" /> control.</para
-          >
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.ComboBox" /> control.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.Windows.Forms.ComboBox" />. The string includes the type and the number of items in the <see cref="T:System.Windows.Forms.ComboBox" /> control.</para
-          >
+            >A <see cref="T:System.String" /> that represents the current <see cref="T:System.Windows.Forms.ComboBox" />. The string includes the type and the number of items in the <see cref="T:System.Windows.Forms.ComboBox" /> control.</para>
         </returns>
       </Docs>
       <AssemblyInfo>

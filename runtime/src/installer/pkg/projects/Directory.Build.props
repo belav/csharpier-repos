@@ -12,8 +12,7 @@
     <BuildLineupPackage Condition="'$(BuildLineupPackage)' == ''">true</BuildLineupPackage>
 
     <PackProjectDependencies Condition="'$(PackProjectDependencies)' == ''"
-      >true</PackProjectDependencies
-    >
+      >true</PackProjectDependencies>
 
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 
@@ -39,8 +38,7 @@
     <!-- During a build from source, only current-RID assets are available from upstream repos. -->
     <RestoreAllBuildRids
       Condition="'$(RestoreAllBuildRids)' == '' and '$(DotNetBuildFromSource)' == 'true'"
-      >false</RestoreAllBuildRids
-    >
+      >false</RestoreAllBuildRids>
     <!--
       Normally, it is necessary to restore all RIDs so that assets are available to inspect. For
       example, the platform manifest includes data from all RIDs.
@@ -66,15 +64,13 @@
 
   <PropertyGroup>
     <TargetFramework Condition="'$(TargetFramework)' == ''"
-      >$(PackageTargetFramework)</TargetFramework
-    >
+      >$(PackageTargetFramework)</TargetFramework>
     <TargetFramework Condition="'$(TargetFramework)' == ''">$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
     <RIDPropsFile Condition="'$(RIDPropsFile)' == ''"
-      >$(MSBuildThisFileDirectory)\netcoreappRIDs.props</RIDPropsFile
-    >
+      >$(MSBuildThisFileDirectory)\netcoreappRIDs.props</RIDPropsFile>
   </PropertyGroup>
 
   <Import Project="$(RIDPropsFile)" />
@@ -100,8 +96,7 @@
       a project can depend on another to produce runtime packages with a different base ID.
     -->
     <RuntimeProjectFile Condition="'$(RuntimeProjectFile)' == ''"
-      >$(MSBuildProjectFullPath)</RuntimeProjectFile
-    >
+      >$(MSBuildProjectFullPath)</RuntimeProjectFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(HasRuntimePackages)' != 'false'">
@@ -133,8 +128,7 @@
   <PropertyGroup>
     <!-- During NuGet restore, grab assets for all applicable RIDs. -->
     <RuntimeIdentifiers Condition="'$(RestoreAllBuildRids)' == 'true'"
-      >@(RestoreBuildRID)</RuntimeIdentifiers
-    >
+      >@(RestoreBuildRID)</RuntimeIdentifiers>
     <!-- When resolving assets to pack, use the target runtime (if any). -->
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
   </PropertyGroup>

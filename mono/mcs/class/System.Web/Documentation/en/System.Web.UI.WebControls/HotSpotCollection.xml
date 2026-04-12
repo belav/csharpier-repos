@@ -22,20 +22,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class represents a collection that enables an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control to maintain a list of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects it contains.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class represents a collection that enables an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control to maintain a list of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects it contains.</para>
       <para
-        >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method to add a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at the end of an ordinal index array. Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method to add a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at a specified index location. Use the <see cref="P:System.Web.UI.WebControls.HotSpotCollection.Item(System.Int32)" /> indexer to directly access a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object in the collection at a specified index, using simple array notation.</para
-      >
+        >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method to add a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at the end of an ordinal index array. Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method to add a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at a specified index location. Use the <see cref="P:System.Web.UI.WebControls.HotSpotCollection.Item(System.Int32)" /> indexer to directly access a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object in the collection at a specified index, using simple array notation.</para>
       <para
-        >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method to remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the end of the collection. Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method to remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from a specified index location.</para
-      >
+        >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method to remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the end of the collection. Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method to remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from a specified index location.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects inside an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects inside an <see cref="T:System.Web.UI.WebControls.ImageMap" /> control. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -48,14 +44,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, this constructor initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class.</para
-          >
+            >When overridden in a derived class, this constructor initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -79,14 +73,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method adds the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the collection. To add a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at a specific index location, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method adds the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the collection. To add a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at a specific index location, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection.</para
-          >
+            >Appends a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -97,8 +89,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to append to the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to append to the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.CreateKnownType(System.Int32)" /> method creates an instance of a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object according to the index of the type returned by the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method. The index values correspond to the types shown in the following table.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.CreateKnownType(System.Int32)" /> method creates an instance of a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object according to the index of the type returned by the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method. The index values correspond to the types shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -164,11 +154,9 @@
             </item>
           </list>
           <para
-            >For example, if you specify 0 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object. If you specify 1 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object. </para
-          >
+            >For example, if you specify 0 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object. If you specify 1 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object. </para>
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method returns an <see cref="T:System.Collections.ArrayList" /> object containing the known types of controls derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method returns an <see cref="T:System.Collections.ArrayList" /> object containing the known types of controls derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para>
           <block subset="none" type="note">
             <para>This method is used only by control developers.</para>
           </block>
@@ -176,14 +164,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default instance of a type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para
-          >
+            >Creates a default instance of a type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of a specified type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para
-          >
+            >An object of a specified type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -202,11 +188,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method returns an array of <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that the collection can contain. The array contains the <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object, the <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object, and the <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.GetKnownTypes" /> method returns an array of <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that the collection can contain. The array contains the <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object, the <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object, and the <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object.</para>
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.CreateKnownType(System.Int32)" /> method to return an instance of one of the types contained in the array. If you specify 0 for the method's <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object. If you specify 1 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object. If you specify 2 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object.</para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.CreateKnownType(System.Int32)" /> method to return an instance of one of the types contained in the array. If you specify 0 for the method's <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.CircleHotSpot" /> object. If you specify 1 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" /> object. If you specify 2 for the <paramref name="index" /> parameter, the method returns a <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> object.</para>
           <block subset="none" type="note">
             <para>This method is used only by control developers.</para>
           </block>
@@ -214,14 +198,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an array of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that a <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection can contain. </para
-          >
+            >Creates an array of the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that a <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection can contain. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that a <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection can contain.</para
-          >
+            >An array of <see cref="T:System.Web.UI.WebControls.HotSpot" /> object-derived types that a <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection can contain.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -247,22 +229,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method adds the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at the specified index location. To append a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method adds the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the collection at the specified index location. To append a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to the end of the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object into the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection at the specified index location.</para
-          >
+            >Inserts a specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object into the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection at the specified index location.</para>
         </summary>
         <param name="spot">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to add to the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -305,8 +284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method checks the specified <see cref="T:System.Object" /> to determine whether it is a valid type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class. Only an object of type <see cref="T:System.Web.UI.WebControls.CircleHotSpot" />, <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" />, or <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> is considered a valid type. </para
-          >
+            >This method checks the specified <see cref="T:System.Object" /> to determine whether it is a valid type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class. Only an object of type <see cref="T:System.Web.UI.WebControls.CircleHotSpot" />, <see cref="T:System.Web.UI.WebControls.RectangleHotSpot" />, or <see cref="T:System.Web.UI.WebControls.PolygonHotSpot" /> is considered a valid type. </para>
           <block subset="none" type="note">
             <para>This method is used only by control developers.</para>
           </block>
@@ -314,16 +292,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks the specified object to determine whether it is a valid type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para
-          >
+            >Checks the specified object to determine whether it is a valid type derived from the <see cref="T:System.Web.UI.WebControls.HotSpot" /> class.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to validate. </param
-        >
+          />The object to validate. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -346,25 +322,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method removes the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection. To remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection at a specified index location, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method removes the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection. To remove a <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection at a specified index location, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method.</para>
           <para
-            >To add new <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects to the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> or the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para
-          >
+            >To add new <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects to the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> or the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection.</para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the <see cref="T:System.Web.UI.WebControls.HotSpotCollection" /> collection.</para>
         </summary>
         <param name="spot">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to remove from the collection. </param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to remove from the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -385,17 +357,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method removes the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object at the specified index location from the collection. To remove a specific <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection by name, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.HotSpotCollection.RemoveAt(System.Int32)" /> method removes the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object at the specified index location from the collection. To remove a specific <see cref="T:System.Web.UI.WebControls.HotSpot" /> object from the collection by name, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Remove(System.Web.UI.WebControls.HotSpot)" /> method.</para>
           <para
-            >To add new <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects to the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> or the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para
-          >
+            >To add new <see cref="T:System.Web.UI.WebControls.HotSpot" /> objects to the collection, use the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Add(System.Web.UI.WebControls.HotSpot)" /> or the <see cref="M:System.Web.UI.WebControls.HotSpotCollection.Insert(System.Int32,System.Web.UI.WebControls.HotSpot)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object at the specified index location from the collection.</para
-          >
+            >Removes the <see cref="T:System.Web.UI.WebControls.HotSpot" /> object at the specified index location from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -416,8 +385,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method marks the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object as changed since it was last loaded or saved from view state. This allows the object to save its entire view state.</para
-          >
+            >This method marks the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object as changed since it was last loaded or saved from view state. This allows the object to save its entire view state.</para>
           <block subset="none" type="note">
             <para>This method is used only by control developers.</para>
           </block>
@@ -425,16 +393,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object as changed since it was last loaded or saves from view state.</para
-          >
+            >Marks the specified <see cref="T:System.Web.UI.WebControls.HotSpot" /> object as changed since it was last loaded or saves from view state.</para>
         </summary>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to mark as changed since it was last loaded or saved from view state.</param
-        >
+          />The <see cref="T:System.Web.UI.WebControls.HotSpot" /> object to mark as changed since it was last loaded or saved from view state.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

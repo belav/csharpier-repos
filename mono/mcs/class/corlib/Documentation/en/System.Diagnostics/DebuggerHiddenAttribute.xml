@@ -33,21 +33,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The common language runtime attaches no semantics to this attribute. It is provided for use by source code debuggers. For example, the vsprvslong debugger does not stop in a method marked with this attribute and does not allow a breakpoint to be set in the method. Other debugger attributes recognized by the vsprvslong debugger are the <see cref="T:System.Diagnostics.DebuggerNonUserCodeAttribute" /> and the <see cref="T:System.Diagnostics.DebuggerStepThroughAttribute" />.</para
-      >
+        >The common language runtime attaches no semantics to this attribute. It is provided for use by source code debuggers. For example, the vsprvslong debugger does not stop in a method marked with this attribute and does not allow a breakpoint to be set in the method. Other debugger attributes recognized by the vsprvslong debugger are the <see cref="T:System.Diagnostics.DebuggerNonUserCodeAttribute" /> and the <see cref="T:System.Diagnostics.DebuggerStepThroughAttribute" />.</para>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
-            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the <see cref="T:System.Diagnostics.DebuggerHiddenAttribute" />. This class cannot be inherited.</para
-      >
+        >Specifies the <see cref="T:System.Diagnostics.DebuggerHiddenAttribute" />. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -70,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerHiddenAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerHiddenAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

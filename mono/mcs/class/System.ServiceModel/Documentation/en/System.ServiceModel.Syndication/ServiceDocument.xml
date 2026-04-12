@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> class.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -69,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> class, initializing it with the specified collection of <see cref="T:System.ServiceModel.Syndication.Workspace" /> instances.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> class, initializing it with the specified collection of <see cref="T:System.ServiceModel.Syndication.Workspace" /> instances.</para>
         </summary>
         <param name="workspaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of workspaces.</param
-        >
+          />A collection of workspaces.</param>
       </Docs>
     </Member>
     <Member MemberName="AttributeExtensions">
@@ -122,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.</para
-          >
+            >Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -149,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.Workspace" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -211,15 +206,13 @@ A new workspace.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter" /> instance.</para
-          >
+            >Gets a <see cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 A <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> instance.
-</para
-          >
+</para>
         </returns>
       </Docs>
     </Member>
@@ -266,23 +259,20 @@ A <see cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" /> inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a service document from the specified <see cref="T:System.Xml.XmlReader" /> into a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.</para
-          >
+            >Loads a service document from the specified <see cref="T:System.Xml.XmlReader" /> into a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 A <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.
-</para
-          >
+</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read the service document from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read the service document from.</param>
       </Docs>
     </Member>
     <Member MemberName="Load&lt;TServiceDocument&gt;">
@@ -317,8 +307,7 @@ A <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a service document from the specified <see cref="T:System.Xml.XmlReader" /> into a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> derived instance.</para
-          >
+            >Loads a service document from the specified <see cref="T:System.Xml.XmlReader" /> into a <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> derived instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -329,15 +318,13 @@ A <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read the service document from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read the service document from.</param>
         <typeparam name="TServiceDocument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the service document.</typeparam
-        >
+          />The type of the service document.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -361,16 +348,14 @@ A <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance to the specified <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Saves the <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance to the specified <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to save the service document to.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to save the service document to.</param>
       </Docs>
     </Member>
     <Member MemberName="TryParseAttribute">
@@ -406,37 +391,32 @@ A <see cref="T:System.ServiceModel.Syndication.ServiceDocument" /> instance.
           <para
             >true if the attribute is successfully parsed; otherwise, false.
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the element.</param
-        >
+          />The name of the element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element.</param
-        >
+          />The namespace of the element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to parse.</param
-        >
+          />The attribute to parse.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="TryParseElement">
@@ -474,15 +454,13 @@ Returns <see cref="T:System.Boolean" />.
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="Workspaces">
@@ -535,23 +513,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementExtensions">
@@ -579,23 +554,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para
-          >
+            >Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
   </Members>

@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values in this enumeration are used by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.Supports(System.Net.NetworkInformation.NetworkInterfaceComponent)" /> method to specify the Internet Protocol version supported by a network interface.</para
-      >
+        >The values in this enumeration are used by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.Supports(System.Net.NetworkInformation.NetworkInterfaceComponent)" /> method to specify the Internet Protocol version supported by a network interface.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

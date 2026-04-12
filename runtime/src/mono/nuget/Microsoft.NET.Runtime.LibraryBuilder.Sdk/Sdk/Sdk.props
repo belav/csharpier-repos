@@ -6,8 +6,7 @@
     <PublishTrimmed Condition="'$(PublishTrimmed)' == ''">true</PublishTrimmed>
     <DevTeamProvisioning
       Condition="'$(TargetsAppleMobile)' == 'true' and '$(DevTeamProvisioning)' == ''"
-      >-</DevTeamProvisioning
-    >
+      >-</DevTeamProvisioning>
     <EnableDefaultAssembliesToBundle>true</EnableDefaultAssembliesToBundle>
   </PropertyGroup>
 </Project>

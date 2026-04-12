@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> indicates that special, predefined services are to be provided to individual application settings properties and property groups. Most of these services will be provided by the Windows operating system.</para
-      >
+        >The <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> indicates that special, predefined services are to be provided to individual application settings properties and property groups. Most of these services will be provided by the Windows operating system.</para>
       <para
         >For more information about application settings properties and their use, see <format type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,22 +64,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiple services can be requested by combining together values defined by the <see cref="T:System.Configuration.SettingsManageability" /> enumeration with the logical OR operator.</para
-          >
+            >Multiple services can be requested by combining together values defined by the <see cref="T:System.Configuration.SettingsManageability" /> enumeration with the logical OR operator.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsManageabilityAttribute" /> class.</para>
         </summary>
         <param name="manageability">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.SettingsManageability" /> value that enumerates the services being requested. </param
-        >
+          />A <see cref="T:System.Configuration.SettingsManageability" /> value that enumerates the services being requested. </param>
       </Docs>
     </Member>
     <Member MemberName="Manageability">
@@ -107,8 +102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set in the <see cref="M:System.Configuration.SettingsManageabilityAttribute.#ctor(System.Configuration.SettingsManageability)" /> constructor.</para
-          >
+            >This property is set in the <see cref="M:System.Configuration.SettingsManageabilityAttribute.#ctor(System.Configuration.SettingsManageability)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

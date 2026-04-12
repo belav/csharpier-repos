@@ -39,14 +39,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Threading.SynchronizationLockException" /> is thrown by calling the <see cref="M:System.Threading.Monitor.Exit(System.Object)" />, <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />, <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods of the <see cref="T:System.Threading.Monitor" /> class from an unsynchronized block of code.</para
-      >
+        <see cref="T:System.Threading.SynchronizationLockException" /> is thrown by calling the <see cref="M:System.Threading.Monitor.Exit(System.Object)" />, <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />, <see cref="M:System.Threading.Monitor.PulseAll(System.Object)" />, and <see cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" /> methods of the <see cref="T:System.Threading.Monitor" /> class from an unsynchronized block of code.</para>
       <para>
-        <see cref="T:System.Threading.SynchronizationLockException" /> uses the HRESULT COR_E_SYNCHRONIZATIONLOCK, which has the value 0x80131518.</para
-      >
+        <see cref="T:System.Threading.SynchronizationLockException" /> uses the HRESULT COR_E_SYNCHRONIZATIONLOCK, which has the value 0x80131518.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />, see the <see cref="M:System.Threading.SynchronizationLockException.#ctor" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />, see the <see cref="M:System.Threading.SynchronizationLockException.#ctor" /> constructors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -76,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -114,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with default properties.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -147,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -185,16 +179,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -223,29 +215,25 @@
           <para
             >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F">XML and SOAP Serialization</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -276,11 +264,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.SynchronizationLockException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -317,23 +303,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.SynchronizationLockException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

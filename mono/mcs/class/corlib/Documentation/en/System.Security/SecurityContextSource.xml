@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.SecurityContextSource" /> enumeration is used to supply parameters for some assembly load methods.</para
-      >
+        >The <see cref="T:System.Security.SecurityContextSource" /> enumeration is used to supply parameters for some assembly load methods.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,11 +23,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A security token is a cryptographically signed data unit that transfers authentication and authorization information, based on a credential. The derived class is used by a security token manager to specify what is required of a security token, such as the key size, key type, and how the key can be used. When a security token can be identified that matches the specified criteria, a <see cref="T:System.IdentityModel.Selectors.SecurityTokenProvider" /> and <see cref="T:System.IdentityModel.Selectors.SecurityTokenAuthenticator" /> can be created to provide security tokens for outgoing SOAP messages and to authenticate security tokens for incoming SOAP messages, respectively. For example, the default security token manager for outgoing SOAP messages has the CreateSecurityTokenProvider method that takes a <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> parameter that can be called to obtain a security token provider that matches the security token provider.</para
-      >
+        >A security token is a cryptographically signed data unit that transfers authentication and authorization information, based on a credential. The derived class is used by a security token manager to specify what is required of a security token, such as the key size, key type, and how the key can be used. When a security token can be identified that matches the specified criteria, a <see cref="T:System.IdentityModel.Selectors.SecurityTokenProvider" /> and <see cref="T:System.IdentityModel.Selectors.SecurityTokenAuthenticator" /> can be created to provide security tokens for outgoing SOAP messages and to authenticate security tokens for incoming SOAP messages, respectively. For example, the default security token manager for outgoing SOAP messages has the CreateSecurityTokenProvider method that takes a <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> parameter that can be called to obtain a security token provider that matches the security token provider.</para>
       <para
-        >This class's base class, <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />, contains a dictionary, <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />, which maps property names to their values. This class has numerous properties whose name ends in the word "Property". These properties return a string, which is the key used to get or set the corresponding value from the dictionary. For example, <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.AuditLogLocationProperty" /> is the key for the value of the <see cref="P:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement.AuditLogLocation" /> property.</para
-      >
+        >This class's base class, <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />, contains a dictionary, <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />, which maps property names to their values. This class has numerous properties whose name ends in the word "Property". These properties return a string, which is the key used to get or set the corresponding value from the dictionary. For example, <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.AuditLogLocationProperty" /> is the key for the value of the <see cref="P:System.ServiceModel.Security.Tokens.RecipientServiceModelSecurityTokenRequirement.AuditLogLocation" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,14 +48,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" /> is set to false.</para
-          >
+            >The <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty" /> is set to false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -79,23 +75,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.AuditLogLocation" />, which is an enumeration with the following members:</para
-          >
+            >The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.AuditLogLocation" />, which is an enumeration with the following members:</para>
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />: The Application log in the operating system Event Log.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLogLocation.Application" />: The Application log in the operating system Event Log.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />: The default location, which is determined by the operating system.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLogLocation.Default" />: The default location, which is determined by the operating system.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />: The Security log in the Event Log.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLogLocation.Security" />: The Security log in the Event Log.</para>
             </item>
           </list>
         </remarks>
@@ -126,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para
-          >
+            >The value that corresponds to this property name is of type <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies the name of the index in the <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" /> collection for the DuplexClientLocalAddress property.</para
-          >
+            >Gets a value that specifies the name of the index in the <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" /> collection for the DuplexClientLocalAddress property.</para>
         </summary>
       </Docs>
     </Member>
@@ -180,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />,where the generic type is <see cref="T:System.ServiceModel.EndpointAddress" />.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />,where the generic type is <see cref="T:System.ServiceModel.EndpointAddress" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -229,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.Net.AuthenticationSchemes" />.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.Net.AuthenticationSchemes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -322,14 +310,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" /> that contains information about the token if the requirement is for an issued token.</para
-          >
+            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" /> that contains information about the token if the requirement is for an issued token.</para>
         </summary>
       </Docs>
     </Member>
@@ -373,14 +359,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.EndpointAddress" />.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.EndpointAddress" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.EndpointAddress" /> of the issuing party if the requirement is for an issued token.</para
-          >
+            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.EndpointAddress" /> of the issuing party if the requirement is for an issued token.</para>
         </summary>
       </Docs>
     </Member>
@@ -430,14 +414,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.BindingContext" />. This property is added to the token requirements relating to secure conversation and SPNEGO/TLSNEGO authentication.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.BindingContext" />. This property is added to the token requirements relating to secure conversation and SPNEGO/TLSNEGO authentication.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.BindingContext" /> to use to talk to the issuing party if the requirement is for an issued token.</para
-          >
+            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.BindingContext" /> to use to talk to the issuing party if the requirement is for an issued token.</para>
         </summary>
       </Docs>
     </Member>
@@ -456,8 +438,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value corresponding to this key is of type <see cref="T:System.ServiceModel.Channels.Binding" />.</para
-          >
+            >The value corresponding to this key is of type <see cref="T:System.ServiceModel.Channels.Binding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -505,28 +486,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.AuditLevel" />, which is an enumeration with the following members:</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.AuditLevel" />, which is an enumeration with the following members:</para>
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Failure" />: Only failed security-related events are recorded.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLevel.Failure" />: Only failed security-related events are recorded.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.None" />: No events are recorded.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLevel.None" />: No events are recorded.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.Success" />: Only successful security-related events are recorded.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLevel.Success" />: Only successful security-related events are recorded.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />: Both failed and successful security-related events are recorded.</para
-              >
+                <see cref="F:System.ServiceModel.AuditLevel.SuccessOrFailure" />: Both failed and successful security-related events are recorded.</para>
             </item>
           </list>
         </remarks>
@@ -554,14 +530,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Description.MessageDirection" />. This property can be used by credential implementations to provide different tokens for processing the request and the response. An example is a credential implementation where the endpoint can specify a different certificate that it signs outgoing messages with and a different certificate to be used by other parties to encrypt messages for it. </para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Description.MessageDirection" />. This property can be used by credential implementations to provide different tokens for processing the request and the response. An example is a credential implementation where the endpoint can specify a different certificate that it signs outgoing messages with and a different certificate to be used by other parties to encrypt messages for it. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the member of the <see cref="T:System.ServiceModel.Description.MessageDirection" /> enumeration to use and that indicates whether the token provider is needed for messages sent from client to server or server to client. </para
-          >
+            >Gets the key for the token requirement property whose value is the member of the <see cref="T:System.ServiceModel.Description.MessageDirection" /> enumeration to use and that indicates whether the token provider is needed for messages sent from client to server or server to client. </para>
         </summary>
       </Docs>
     </Member>
@@ -586,8 +560,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para
-          >
+            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -613,14 +586,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message. The <see cref="T:System.ServiceModel.Channels.MessageVersion" /> can be used by token provider and token authenticator implementations to obtain a token from the endpoint (for example, for secure conversation).</para
-          >
+            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message. The <see cref="T:System.ServiceModel.Channels.MessageVersion" /> can be used by token provider and token authenticator implementations to obtain a token from the endpoint (for example, for secure conversation).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.MessageVersion" /> that the channel is configured with.</para
-          >
+            >Gets the key for the token requirement property whose value is the <see cref="T:System.ServiceModel.Channels.MessageVersion" /> that the channel is configured with.</para>
         </summary>
       </Docs>
     </Member>
@@ -660,8 +631,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.Uri" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.Uri" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -687,8 +657,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.Int32" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.Int32" />. This property can be used to display the link in the user interface (UI) similar to the way infocard does.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -745,8 +714,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />.</para
-          >
+            >The value that corresponds to this key is of type <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -775,8 +743,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -877,14 +844,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The SupportingTokenAttachmentMode property is a member of the <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. Supporting tokens provide additional claims beyond those contained in the principal tokens for the binding.</para
-          >
+            >The SupportingTokenAttachmentMode property is a member of the <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. Supporting tokens provide additional claims beyond those contained in the principal tokens for the binding.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key for the token requirement property whose value is the associated <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. </para
-          >
+            >Gets the key for the token requirement property whose value is the associated <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" /> enumeration member if the request is for a supporting token. </para>
         </summary>
       </Docs>
     </Member>
@@ -1016,8 +981,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement.Via" /> property contains the URI of an intermediate destination.</para
-          >
+            >The <see cref="P:System.ServiceModel.Security.Tokens.InitiatorServiceModelSecurityTokenRequirement.Via" /> property contains the URI of an intermediate destination.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

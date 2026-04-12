@@ -44,18 +44,15 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <!-- Optimize the framework using the crossgen2 tool. Crossgen2 is not currently supported on s390x or ppc64le or armv6 or loongarch64. -->
     <CrossgenOutput
       Condition=" '$(TargetArchitecture)' == 's390x' OR '$(TargetArchitecture)' == 'armv6' OR '$(TargetArchitecture)' == 'ppc64le' OR '$(TargetArchitecture)' == 'loongarch64' "
-      >false</CrossgenOutput
-    >
+      >false</CrossgenOutput>
     <CrossgenOutput Condition=" '$(CrossgenOutput)' == '' AND '$(Configuration)' != 'Debug' "
-      >true</CrossgenOutput
-    >
+      >true</CrossgenOutput>
 
     <!-- Produce crossgen2 profiling symbols (.ni.pdb or .r2rmap files). -->
     <GenerateCrossgenProfilingSymbols>true</GenerateCrossgenProfilingSymbols>
     <GenerateCrossgenProfilingSymbols
       Condition=" '$(CrossgenOutput)' != 'true' OR '$(TargetOsName)' == 'osx' "
-      >false</GenerateCrossgenProfilingSymbols
-    >
+      >false</GenerateCrossgenProfilingSymbols>
 
     <!-- Always generated, even though output type == Library -->
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -101,8 +98,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <!-- crossgen2 executable name -->
     <Crossgen2ToolFileName>crossgen2</Crossgen2ToolFileName>
     <Crossgen2ToolFileName Condition=" '$(TargetOsName)' == 'win' "
-      >$(Crossgen2ToolFileName).exe</Crossgen2ToolFileName
-    >
+      >$(Crossgen2ToolFileName).exe</Crossgen2ToolFileName>
 
     <!-- E.g. "PkgMicrosoft_NETCore_App_Runtime_win-x64" (set in obj/Microsoft.AspNetCore.App.Runtime.csproj.nuget.g.props). -->
     <RuntimePackageRootVariableName>PkgMicrosoft_NETCore_App_Runtime_$(RuntimeIdentifier.Replace('.', '_'))</RuntimePackageRootVariableName>
@@ -114,17 +110,13 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     -->
     <BuildOsName>$(TargetOsName)</BuildOsName>
     <BuildOsName Condition="'$(TargetOsName)' == 'linux-musl' and '$(TargetArchitecture)' != 'x64'"
-      >linux</BuildOsName
-    >
+      >linux</BuildOsName>
     <BuildOsName Condition=" '$(PortableBuild)' == 'false' "
-      >$(TargetRuntimeIdentifier.Substring(0,$(TargetRuntimeIdentifier.IndexOf('-'))))</BuildOsName
-    >
+      >$(TargetRuntimeIdentifier.Substring(0,$(TargetRuntimeIdentifier.IndexOf('-'))))</BuildOsName>
     <Crossgen2BuildArchitecture Condition=" '$(BuildOsName)' == 'win' "
-      >x64</Crossgen2BuildArchitecture
-    >
+      >x64</Crossgen2BuildArchitecture>
     <Crossgen2BuildArchitecture Condition=" '$(Crossgen2BuildArchitecture)' == '' "
-      >$(BuildArchitecture)</Crossgen2BuildArchitecture
-    >
+      >$(BuildArchitecture)</Crossgen2BuildArchitecture>
     <Crossgen2PackageRootVariableName>PkgMicrosoft_NETCore_App_Crossgen2_$(BuildOsName.Replace('.', '_'))-$(Crossgen2BuildArchitecture)</Crossgen2PackageRootVariableName>
 
     <AssetTargetFallback>$(AssetTargetFallback);native,Version=0.0</AssetTargetFallback>
@@ -502,8 +494,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <CrossgenToolPath>$([System.IO.Path]::Combine('$(Crossgen2PackageRoot)', 'tools', '$(Crossgen2ToolFileName)'))</CrossgenToolPath>
       <CrossgenSymbolsTargetDir>$(TargetDir)</CrossgenSymbolsTargetDir>
       <CrossgenOptimizationData Condition="'$(RuntimePackageRoot)' != ''"
-        >$(RuntimePackageRoot)tools\StandardOptimizationData.mibc</CrossgenOptimizationData
-      >
+        >$(RuntimePackageRoot)tools\StandardOptimizationData.mibc</CrossgenOptimizationData>
       <CrossgenOptimizationData
         Condition="!Exists('$(CrossgenOptimizationData)')"
       ></CrossgenOptimizationData>
@@ -511,8 +502,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <!-- Escaping (double backslash at end) required due to the way batch processes backslashes. -->
       <CrossgenSymbolsTargetDir
         Condition="HasTrailingSlash($(CrossgenSymbolsTargetDir)) AND '$(OS)' == 'Windows_NT'"
-        >$(TargetDir)\</CrossgenSymbolsTargetDir
-      >
+        >$(TargetDir)\</CrossgenSymbolsTargetDir>
     </PropertyGroup>
 
     <RemoveDir Directories="$(CrossgenToolDir)" />
@@ -553,16 +543,13 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <Crossgen2Args>$(Crossgen2Args) -O</Crossgen2Args>
       <Crossgen2Args>$(Crossgen2Args) @&quot;$(CrossgenToolDir)PlatformAssembliesPathsCrossgen2.rsp&quot;</Crossgen2Args>
       <Crossgen2Args Condition="'$(CrossgenOptimizationData)' != ''"
-        >$(Crossgen2Args) &quot;-m:$(CrossgenOptimizationData)&quot;</Crossgen2Args
-      >
+        >$(Crossgen2Args) &quot;-m:$(CrossgenOptimizationData)&quot;</Crossgen2Args>
       <Crossgen2Args
         Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' == 'win'"
-        >$(Crossgen2Args) --pdb --pdb-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args
-      >
+        >$(Crossgen2Args) --pdb --pdb-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args>
       <Crossgen2Args
         Condition="'$(GenerateCrossgenProfilingSymbols)' == 'true' and '$(TargetOsName)' != 'win'"
-        >$(Crossgen2Args) --perfmap --perfmap-format-version:1 --perfmap-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args
-      >
+        >$(Crossgen2Args) --perfmap --perfmap-format-version:1 --perfmap-path:&quot;$(CrossgenSymbolsTargetDir)&quot;</Crossgen2Args>
     </PropertyGroup>
 
     <Message Text="Running crossgen with $(CrossgenToolPath)" Importance="High" />
@@ -590,8 +577,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       <PartialCompositeAssemblyListPath>$(MSBuildThisFileDirectory)\PartialCompositeAssemblyList.txt</PartialCompositeAssemblyListPath>
       <InstructionSetSupport
         Condition="'$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'x86'"
-        >+x86-x64-v3</InstructionSetSupport
-      >
+        >+x86-x64-v3</InstructionSetSupport>
     </PropertyGroup>
 
     <RemoveDir Directories="$(CompositeTargetDir)" />
@@ -742,11 +728,9 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <ItemGroup>
       <_InitialSharedFxContent Condition="'%(_InitialSharedFxContent.Extension)' == '.dll'">
         <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' == 'true'"
-          >$(NativeAssetsPackagePath)</PackagePath
-        >
+          >$(NativeAssetsPackagePath)</PackagePath>
         <PackagePath Condition="'%(_InitialSharedFxContent.IsNativeImage)' != 'true'"
-          >$(ManagedAssetsPackagePath)</PackagePath
-        >
+          >$(ManagedAssetsPackagePath)</PackagePath>
       </_InitialSharedFxContent>
     </ItemGroup>
   </Target>

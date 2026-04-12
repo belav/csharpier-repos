@@ -55,8 +55,7 @@
             <para>
               <format type="text/html">
                 <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                  >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                >
+                  >[&lt;topic://cpconwritingtexttofile&gt;]</a>
               </format>
             </para>
           </description>
@@ -69,8 +68,7 @@
             <para>
               <format type="text/html">
                 <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                  >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                >
+                  >[&lt;topic://cpconwritingtexttofile&gt;]</a>
               </format>
             </para>
           </description>
@@ -83,8 +81,7 @@
             <para>
               <format type="text/html">
                 <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                  >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                >
+                  >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
               </format>
             </para>
           </description>
@@ -97,8 +94,7 @@
             <para>
               <format type="text/html">
                 <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                  >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                >
+                  >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
               </format>
             </para>
             <para>
@@ -157,8 +153,7 @@
             <para>
               <format type="text/html">
                 <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                >
+                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
               </format>
             </para>
           </description>
@@ -171,8 +166,7 @@
             <para>
               <format type="text/html">
                 <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                >
+                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
               </format>
             </para>
           </description>
@@ -182,8 +176,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements a <see cref="T:System.IO.TextWriter" /> for writing information to a string. The information is stored in an underlying <see cref="T:System.Text.StringBuilder" />.</para
-      >
+        >Implements a <see cref="T:System.IO.TextWriter" /> for writing information to a string. The information is stored in an underlying <see cref="T:System.Text.StringBuilder" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -209,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Text.StringBuilder" /> is automatically created and associated with the new StringWriter.</para
-          >
+            >A new <see cref="T:System.Text.StringBuilder" /> is automatically created and associated with the new StringWriter.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -231,8 +223,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -245,8 +236,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -259,8 +249,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -273,8 +262,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -333,8 +321,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -347,8 +334,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -358,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -410,8 +395,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -424,8 +408,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -438,8 +421,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -452,8 +434,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -512,8 +493,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -526,8 +506,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -537,16 +516,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class with the specified format control.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class with the specified format control.</para>
         </summary>
         <param name="formatProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -572,8 +549,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="sb" /> is <see langword="null" />.</exception
-        >
+          <paramref name="sb" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists examples of other typical or related I/O tasks.</para>
@@ -596,8 +572,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -610,8 +585,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -624,8 +598,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -638,8 +611,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -698,8 +670,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -712,8 +683,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -723,16 +693,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class that writes to the specified <see cref="T:System.Text.StringBuilder" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class that writes to the specified <see cref="T:System.Text.StringBuilder" />.</para>
         </summary>
         <param name="sb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StringBuilder to write to. </param
-        >
+          />The StringBuilder to write to. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -762,15 +730,13 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="sb" /> is <see langword="null" />.</exception
-        >
+          <paramref name="sb" /> is <see langword="null" />.</exception>
         <param name="formatProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists examples of other typical or related I/O tasks.</para>
@@ -793,8 +759,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -807,8 +772,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -821,8 +785,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -835,8 +798,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -895,8 +857,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -909,8 +870,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -920,23 +880,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class that writes to the specified <see cref="T:System.Text.StringBuilder" /> and has the specified format provider.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.StringWriter" /> class that writes to the specified <see cref="T:System.Text.StringBuilder" /> and has the specified format provider.</para>
         </summary>
         <param name="sb">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The StringBuilder to write to. </param
-        >
+          />The StringBuilder to write to. </param>
         <param name="formatProvider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param
-        >
+          />An <see cref="T:System.IFormatProvider" /> object that controls formatting. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -963,31 +920,24 @@
           <para
             >For an example of creating a file and writing text to a file, see <format type="text/html">
               <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                >[&lt;topic://cpconwritingtexttofile&gt;]</a
-              >
+                >[&lt;topic://cpconwritingtexttofile&gt;]</a>
             </format>. For an example of reading text from a file, see <format type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-              >
+                >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
             </format>. For an example of reading from and writing to a binary file, see <format type="text/html">
               <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
+            </format>.</para>
           <para>This method overrides <see cref="M:System.IO.Stream.Close" />.</para>
           <para
-            >This implementation of Close calls the <see cref="M:System.IO.StringWriter.Dispose(System.Boolean)" /> method passing a true value.</para
-          >
+            >This implementation of Close calls the <see cref="M:System.IO.StringWriter.Dispose(System.Boolean)" /> method passing a true value.</para>
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
-          >
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the current <see cref="T:System.IO.StringWriter" /> and the underlying stream.</para
-          >
+            >Closes the current <see cref="T:System.IO.StringWriter" /> and the underlying stream.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -1018,22 +968,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StringWriter" /> references. This method invokes the Dispose method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StringWriter" /> references. This method invokes the Dispose method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.IO.StringWriter" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.StringWriter" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1087,8 +1034,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1101,8 +1047,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1115,8 +1060,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1126,8 +1070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Text.Encoding" /> in which the output is written.</para
-          >
+            >Gets the <see cref="T:System.Text.Encoding" /> in which the output is written.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -1208,8 +1151,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1222,8 +1164,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1236,8 +1177,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1298,8 +1238,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1312,8 +1251,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1326,8 +1264,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1372,8 +1309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para
-          >
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -1394,8 +1330,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1408,8 +1343,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1422,8 +1356,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1436,8 +1369,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -1496,8 +1428,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1510,8 +1441,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1527,8 +1457,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write. </param
-        >
+          />The character to write. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1559,8 +1488,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para
-          >
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para>
           <para>If the specified string is null, nothing is written.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
@@ -1582,8 +1510,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1596,8 +1523,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1610,8 +1536,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1624,8 +1549,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -1684,8 +1608,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1698,8 +1621,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1715,8 +1637,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. </param
-        >
+          />The string to write. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1749,8 +1670,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="buffer" /> is <see langword="null" />.</exception
-        >
+          <paramref name="buffer" /> is <see langword="null" />.</exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index" /> &lt; 0</para>
           <para> -or-</para>
@@ -1758,17 +1678,14 @@
         </exception>
         <exception cref="T:System.ArgumentException"
           >(<paramref name="index" /> + <paramref name="count" /> ) &gt; <paramref name="buffer" />
-          <see langword="." />Length.</exception
-        >
+          <see langword="." />Length.</exception>
         <exception cref="T:System.ObjectDisposedException">The writer is closed.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para
-          >
+            >This method overrides <see cref="M:System.IO.TextWriter.Write(System.Char)" />.</para>
           <para
-            >This method writes <paramref name="count" /> characters of data to this StringWriter from <paramref name="buffer" />, starting at position <paramref name="index" />.</para
-          >
+            >This method writes <paramref name="count" /> characters of data to this StringWriter from <paramref name="buffer" />, starting at position <paramref name="index" />.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -1789,8 +1706,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1803,8 +1719,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1817,8 +1732,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1831,8 +1745,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -1891,8 +1804,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1905,8 +1817,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1922,22 +1833,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the buffer at which to start reading data.</param
-        >
+          />The position in the buffer at which to start reading data.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1975,8 +1883,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write to the string.</param
-        >
+          />The character to write to the string.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAsync">
@@ -2013,8 +1920,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. If <paramref name="value" /> is null, nothing is written to the text stream.</param
-        >
+          />The string to write. If <paramref name="value" /> is null, nothing is written to the text stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAsync">
@@ -2053,22 +1959,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from.</param
-        >
+          />The character array to write data from.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the buffer at which to start reading data.</param
-        >
+          />The position in the buffer at which to start reading data.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write.</param
-        >
+          />The maximum number of characters to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -2094,8 +1997,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2110,8 +2012,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write to the string.</param
-        >
+          />The character to write to the string.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -2137,8 +2038,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2153,8 +2053,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write. If the value is null, only a line terminator is written.</param
-        >
+          />The string to write. If the value is null, only a line terminator is written.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineAsync">
@@ -2182,8 +2081,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para
-          >
+            >The line terminator is defined by the <see cref="P:System.IO.TextWriter.NewLine" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2198,22 +2096,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from.</param
-        >
+          />The character array to write data from.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the buffer at which to start reading data.</param
-        >
+          />The position in the buffer at which to start reading data.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to write. </param
-        >
+          />The maximum number of characters to write. </param>
       </Docs>
     </Member>
   </Members>

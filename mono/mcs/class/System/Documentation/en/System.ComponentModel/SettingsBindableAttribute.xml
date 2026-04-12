@@ -48,16 +48,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.SettingsBindableAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.SettingsBindableAttribute" /> class. </para>
         </summary>
         <param name="bindable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify that a property is appropriate to bind settings to; otherwise, false.</param
-        >
+          />true to specify that a property is appropriate to bind settings to; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="Bindable">
@@ -105,16 +103,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see cref="T:System.ComponentModel.SettingsBindableAttribute" /> objects are equal.</para
-          >
+            >Determines whether two <see cref="T:System.ComponentModel.SettingsBindableAttribute" /> objects are equal.</para>
         </summary>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to compare to.</param
-        >
+          />The value to compare to.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

@@ -37,14 +37,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission is typically used to provide limited access to user-specified files when <see cref="T:System.Security.Permissions.FileIOPermission" /> is not granted.</para
-      >
+        >This permission is typically used to provide limited access to user-specified files when <see cref="T:System.Security.Permissions.FileIOPermission" /> is not granted.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls the ability to access files or folders through a <ui>File</ui> dialog box. This class cannot be inherited.</para
-      >
+        >Controls the ability to access files or folders through a <ui>File</ui> dialog box. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -72,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" /> class with the specified access.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" /> class with the specified access.</para>
         </summary>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileDialogPermissionAccess" /> values. </param
-        >
+          />A bitwise combination of the <see cref="T:System.Security.Permissions.FileDialogPermissionAccess" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -107,22 +103,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates either fully restricted (None) or Unrestricted access to <ui>File</ui> dialog boxes.</para
-          >
+            >Creates either fully restricted (None) or Unrestricted access to <ui>File</ui> dialog boxes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" /> class with either restricted or unrestricted permission, as specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" /> class with either restricted or unrestricted permission, as specified.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values (Unrestricted or None). </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values (Unrestricted or None). </param>
       </Docs>
     </Member>
     <Member MemberName="Access">
@@ -215,8 +208,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the permission. </param
-        >
+          />The XML encoding used to reconstruct the permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -258,8 +250,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -287,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.Open" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.OpenSave" /> access.</para
-          >
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.Open" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.OpenSave" /> access.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -303,8 +293,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -372,8 +361,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This override of the <see cref="M:System.Security.CodeAccessPermission.ToString" /> method is not implemented in the dnprdnext and later.</para
-            >
+              >This override of the <see cref="M:System.Security.CodeAccessPermission.ToString" /> method is not implemented in the dnprdnext and later.</para>
           </block>
         </remarks>
         <summary>
@@ -447,8 +435,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.FileDialogPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.FileDialogPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -463,8 +450,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

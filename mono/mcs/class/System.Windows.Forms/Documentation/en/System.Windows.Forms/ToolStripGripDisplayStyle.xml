@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the orientation of the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para
-      >
+        >Specifies the orientation of the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para>
     </summary>
   </Docs>
   <Members>
@@ -30,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies a horizontal orientation for the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para
-          >
+            >Specifies a horizontal orientation for the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies a vertical orientation for the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para
-          >
+            >Specifies a vertical orientation for the <see cref="T:System.Windows.Forms.ToolStrip" /> move handle (grip).</para>
         </summary>
       </Docs>
       <AssemblyInfo>

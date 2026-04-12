@@ -2,8 +2,7 @@
 <clause number="18.1.3" title="Struct body">
   <paragraph
     >The <non_terminal where="18.1.3"
-      >struct-body</non_terminal
-    > of a struct defines the members of the struct. <grammar_production>
+      >struct-body</non_terminal> of a struct defines the members of the struct. <grammar_production>
       <name>
         <non_terminal where="18.1.3">struct-body</non_terminal>
       </name> : <rhs>

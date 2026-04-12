@@ -25,14 +25,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> type allows access to the elements of the authorization section collection.</para
-      >
+        >The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> type allows access to the elements of the authorization section collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -71,22 +68,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain the <see cref="T:System.Web.Configuration.AuthorizationRule" /> object you are adding.</para
-          >
+            >The collection must not already contain the <see cref="T:System.Web.Configuration.AuthorizationRule" /> object you are adding.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection.</para
-          >
+            >Adds a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection.</para>
         </summary>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to add to the collection. </param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to add to the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -132,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of this <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />.</para
-          >
+            >Gets the type of this <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -184,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> object.</para
-          >
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,8 +187,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Name of the <see cref="T:System.Configuration.ConfigurationElement" /> to be created. </param
-        >
+          />Name of the <see cref="T:System.Configuration.ConfigurationElement" /> to be created. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -240,22 +230,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para
-          >
+            >Gets the <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para
-          >
+            >The <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> index. </param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> index. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -279,22 +266,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />. </para
-          >
+            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />. </para
-          >
+            >The <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Configuration.ConfigurationElement" /> whose key is returned.</param
-        >
+          />The <see cref="T:System.Configuration.ConfigurationElement" /> whose key is returned.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -318,22 +302,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para
-          >
+            >Gets the collection index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para
-          >
+            >The index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para>
         </returns>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object whose index is returned.</param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object whose index is returned.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -367,8 +348,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The element name to check.</param
-        >
+          />The element name to check.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -437,16 +417,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection.</para>
         </summary>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" />  object to remove.</param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" />  object to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -470,16 +448,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection at the specified index.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index location of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> to remove.</param
-        >
+          />The index location of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -504,23 +480,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection at the specified index.</para
-          >
+            >Adds the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> object. </param
-        >
+          />The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> object. </param>
         <param name="rule">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to be added.</param
-        >
+          />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to be added.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

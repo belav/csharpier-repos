@@ -21,22 +21,17 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a <see cref="T:System.Data.SqlClient.SqlDataReader" />, you must call the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" /> method of the <see cref="T:System.Data.SqlClient.SqlCommand" /> object, instead of directly using a constructor.</para
-      >
+        >To create a <see cref="T:System.Data.SqlClient.SqlDataReader" />, you must call the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" /> method of the <see cref="T:System.Data.SqlClient.SqlCommand" /> object, instead of directly using a constructor.</para>
       <para
-        >While the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is being used, the associated <see cref="T:System.Data.SqlClient.SqlConnection" /> is busy serving the <see cref="T:System.Data.SqlClient.SqlDataReader" />, and no other operations can be performed on the <see cref="T:System.Data.SqlClient.SqlConnection" /> other than closing it. This is the case until the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> method of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is called. For example, you cannot retrieve output parameters until after you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />.</para
-      >
+        >While the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is being used, the associated <see cref="T:System.Data.SqlClient.SqlConnection" /> is busy serving the <see cref="T:System.Data.SqlClient.SqlDataReader" />, and no other operations can be performed on the <see cref="T:System.Data.SqlClient.SqlConnection" /> other than closing it. This is the case until the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> method of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is called. For example, you cannot retrieve output parameters until after you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />.</para>
       <para>Changes made to a result set by another process or thread while data is being read may be visible to the user of the SqlDataReader. However, the precise behavior is timing dependent.</para>
       <para>
-        <see cref="P:System.Data.SqlClient.SqlDataReader.IsClosed" /> and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is closed. Although the <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> property may be accessed while the <see cref="T:System.Data.SqlClient.SqlDataReader" /> exists, always call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> before returning the value of <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> to guarantee an accurate return value.</para
-      >
+        <see cref="P:System.Data.SqlClient.SqlDataReader.IsClosed" /> and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is closed. Although the <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> property may be accessed while the <see cref="T:System.Data.SqlClient.SqlDataReader" /> exists, always call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> before returning the value of <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> to guarantee an accurate return value.</para>
       <para
-        >When using sequential access (<see cref="CommandBehavior.SequentialAccess" />), an <see cref="T:System.InvalidOperationException" /> will be raised if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> position is advanced and another read operation is attempted on the previous column.</para
-      >
+        >When using sequential access (<see cref="CommandBehavior.SequentialAccess" />), an <see cref="T:System.InvalidOperationException" /> will be raised if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> position is advanced and another read operation is attempted on the previous column.</para>
       <block subset="none" type="note">
         <para
-          >For optimal performance, <see cref="T:System.Data.SqlClient.SqlDataReader" /> avoids creating unnecessary objects or making unnecessary copies of data. Therefore, multiple calls to methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" /> return a reference to the same object. Use caution if you are modifying the underlying value of the objects returned by methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />.</para
-        >
+          >For optimal performance, <see cref="T:System.Data.SqlClient.SqlDataReader" /> avoids creating unnecessary objects or making unnecessary copies of data. Therefore, multiple calls to methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" /> return a reference to the same object. Use caution if you are modifying the underlying value of the objects returned by methods such as <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />.</para>
       </block>
     </remarks>
     <summary>
@@ -56,17 +51,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must explicitly call the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> method when you are through using the <see cref="T:System.Data.SqlClient.SqlDataReader" /> to use the associated <see cref="T:System.Data.SqlClient.SqlConnection" /> for any other purpose.</para
-          >
+            >You must explicitly call the <see cref="M:System.Data.SqlClient.SqlDataReader.Close" /> method when you are through using the <see cref="T:System.Data.SqlClient.SqlDataReader" /> to use the associated <see cref="T:System.Data.SqlClient.SqlConnection" /> for any other purpose.</para>
           <para
-            >The Close method fills in the values for output parameters, return values and RecordsAffected, increasing the time that it takes to close a SqlDataReader that was used to process a large or complex query. When the return values and the number of records affected by a query are not significant, the time that it takes to close the SqlDataReader can be reduced by calling the <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" /> method of the associated <see cref="T:System.Data.SqlClient.SqlCommand" /> object before calling the Close method.</para
-          >
+            >The Close method fills in the values for output parameters, return values and RecordsAffected, increasing the time that it takes to close a SqlDataReader that was used to process a large or complex query. When the return values and the number of records affected by a query are not significant, the time that it takes to close the SqlDataReader can be reduced by calling the <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" /> method of the associated <see cref="T:System.Data.SqlClient.SqlCommand" /> object before calling the Close method.</para>
           <block subset="none" type="note">
             <para
               >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
-              </format>.</para
-            >
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -97,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.SqlClient.SqlConnection" /> associated with the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para
-          >
+            >Gets the <see cref="T:System.Data.SqlClient.SqlConnection" /> associated with the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -135,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executing a query that, by its nature, does not return rows (such as a DELETE query), sets <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" /> to 0. However. this should not be confused with a query that returns 0 rows (such as SELECT * FROM table WHERE 1 = 2) in which case <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" /> returns the number of columns in the table, including hidden fields. Use <see cref="P:System.Data.SqlClient.SqlDataReader.VisibleFieldCount" /> to exclude hidden fields.</para
-          >
+            >Executing a query that, by its nature, does not return rows (such as a DELETE query), sets <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" /> to 0. However. this should not be confused with a query that returns 0 rows (such as SELECT * FROM table WHERE 1 = 2) in which case <see cref="P:System.Data.SqlClient.SqlDataReader.FieldCount" /> returns the number of columns in the table, including hidden fields. Use <see cref="P:System.Data.SqlClient.SqlDataReader.VisibleFieldCount" /> to exclude hidden fields.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -162,8 +152,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a Boolean, or an exception is generated.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -178,8 +167,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -200,8 +188,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a byte.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +203,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -244,11 +230,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" /> returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />.</para
-          >
+            <see cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" /> returns the number of available bytes in the field. Most of the time this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />.</para>
           <para
-            >If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" /> returns the length of the entire field in bytes, not the remaining size based on the buffer offset parameter.</para
-          >
+            >If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" /> returns the length of the entire field in bytes, not the remaining size based on the buffer offset parameter.</para>
           <para>No conversions are performed; therefore, the data retrieved must already be a byte array.</para>
         </remarks>
         <summary>
@@ -264,36 +248,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
         <param name="dataIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the field from which to begin the read operation.</param
-        >
+          />The index within the field from which to begin the read operation.</param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer into which to read the stream of bytes. </param
-        >
+          />The buffer into which to read the stream of bytes. </param>
         <param name="bufferIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the <paramref name="buffer" /> where the write operation is to start. </param
-        >
+          />The index within the <paramref name="buffer" /> where the write operation is to start. </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length to copy into the buffer. </param
-        >
+          />The maximum length to copy into the buffer. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -327,8 +306,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -360,16 +338,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />.</para
-          >
+            <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> returns the number of available characters in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetChars has already been used to obtain characters from the field. This may be the case, for example, if the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is reading a large data structure into a buffer. For more information, see the SequentialAccess setting for <see cref="T:System.Data.CommandBehavior" />.</para>
           <para
-            >The actual number of characters read can be less than the requested length, if the end of the field is reached. If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> returns the length of the entire field in characters, not the remaining size based on the buffer offset parameter.</para
-          >
+            >The actual number of characters read can be less than the requested length, if the end of the field is reached. If you pass a buffer that is null, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> returns the length of the entire field in characters, not the remaining size based on the buffer offset parameter.</para>
           <para>No conversions are performed; therefore. the data retrieved must already be a character array.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> method returns 0 when <paramref name="dataIndex" /> is negative.</para
-            >
+              >The <see cref="M:System.Data.SqlClient.SqlDataReader.GetChars(System.Int32,System.Int64,System.Char[],System.Int32,System.Int32)" /> method returns 0 when <paramref name="dataIndex" /> is negative.</para>
           </block>
         </remarks>
         <summary>
@@ -385,36 +360,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
         <param name="dataIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the field from which to begin the read operation.</param
-        >
+          />The index within the field from which to begin the read operation.</param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer into which to read the stream of bytes. </param
-        >
+          />The buffer into which to read the stream of bytes. </param>
         <param name="bufferIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the <paramref name="buffer" /> where the write operation is to start. </param
-        >
+          />The index within the <paramref name="buffer" /> where the write operation is to start. </param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length to copy into the buffer. </param
-        >
+          />The maximum length to copy into the buffer. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -435,18 +405,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Data.IDataReader" /> for the specified column ordinal.</para
-          >
+            >Returns an <see cref="T:System.Data.IDataReader" /> for the specified column ordinal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.IDataReader" /> instance for the specified column ordinal.</para
-          >
+            >The <see cref="T:System.Data.IDataReader" /> instance for the specified column ordinal.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />A column ordinal.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A column ordinal.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -485,8 +452,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based ordinal position of the column to find.</param
-        >
+          />The zero-based ordinal position of the column to find.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -506,17 +472,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.DateTime" /> object.</para
-          >
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.DateTime" /> object.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.DateTime" /> object.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.DateTime" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -527,8 +490,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -548,17 +510,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.Decimal" /> object.</para
-          >
+            >No conversions are performed; therefore, the data retrieved must already be a <see cref="T:System.Decimal" /> object.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Decimal" /> object.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Decimal" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -569,8 +528,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -591,8 +549,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed. Therefore, the data retrieved must already be a double-precision floating point number.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -607,8 +564,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -636,14 +592,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Collections.IEnumerator" /> that iterates through the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para
-          >
+            >Returns an <see cref="T:System.Collections.IEnumerator" /> that iterates through the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -665,16 +619,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Type" /> that is the data type of the object. If the type does not exist on the client, in the case of a User-Defined Type (UDT) returned from the database, GetFieldType returns null.</para
-          >
+            >The <see cref="T:System.Type" /> that is the data type of the object. If the type does not exist on the client, in the case of a User-Defined Type (UDT) returned from the database, GetFieldType returns null.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -695,8 +647,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed. Therefore, the data retrieved must already be a single-precision floating point number.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -711,8 +662,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -733,8 +683,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a GUID.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -749,8 +698,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -771,8 +719,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 16-bit signed integer.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -787,8 +734,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -809,8 +755,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 32-bit signed integer.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -825,8 +770,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -847,8 +791,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a 64-bit signed integer.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -863,8 +806,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -895,8 +837,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -932,8 +873,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column. </param
-        >
+          />The name of the column. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -964,16 +904,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Object" /> that is a representation of the underlying provider-specific field type.</para
-          >
+            >Gets an <see cref="T:System.Object" /> that is a representation of the underlying provider-specific field type.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> representing the column ordinal. </param
-        >
+          />An <see cref="T:System.Int32" /> representing the column ordinal. </param>
       </Docs>
     </Member>
     <Member MemberName="GetProviderSpecificValue">
@@ -1000,16 +938,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that is a representation of the underlying provider specific value.</para
-          >
+            >An <see cref="T:System.Object" /> that is a representation of the underlying provider specific value.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> representing the column ordinal. </param
-        >
+          />An <see cref="T:System.Int32" /> representing the column ordinal. </param>
       </Docs>
     </Member>
     <Member MemberName="GetProviderSpecificValues">
@@ -1042,8 +978,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Object" /> into which to copy the column values.</param
-        >
+          />An array of <see cref="T:System.Object" /> into which to copy the column values.</param>
       </Docs>
     </Member>
     <Member MemberName="GetSchemaTable">
@@ -1060,8 +995,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" /> method returns metadata about each column in the following order: </para
-          >
+            >For the <see cref="M:System.Data.SqlClient.SqlDataReader.GetSchemaTable" /> method returns metadata about each column in the following order: </para>
           <list type="table">
             <listheader>
               <item>
@@ -1111,8 +1045,7 @@
               </term>
               <description>
                 <para
-                  >The name of the instance of Microsoft SQL Server used by the <see cref="T:System.Data.SqlClient.SqlDataReader" />. </para
-                >
+                  >The name of the instance of Microsoft SQL Server used by the <see cref="T:System.Data.SqlClient.SqlDataReader" />. </para>
               </description>
             </item>
             <item>
@@ -1259,8 +1192,7 @@
               </term>
               <description>
                 <para
-                  >The type of the column irrespective of the current Type System Version specified in the connection string. The returned value is from the <see cref="T:System.Data.SqlDbType" /> enumeration.</para
-                >
+                  >The type of the column irrespective of the current Type System Version specified in the connection string. The returned value is from the <see cref="T:System.Data.SqlDbType" /> enumeration.</para>
               </description>
             </item>
             <item>
@@ -1301,8 +1233,7 @@
               </term>
               <description>
                 <para
-                  >If the column is a user-defined type (UDT), this is the qualified name of the UDT's assembly as per <see cref="P:System.Type.AssemblyQualifiedName" />. If the column is not a UDT, this is null.</para
-                >
+                  >If the column is a user-defined type (UDT), this is the qualified name of the UDT's assembly as per <see cref="P:System.Type.AssemblyQualifiedName" />. If the column is not a UDT, this is null.</para>
               </description>
             </item>
             <item>
@@ -1332,15 +1263,13 @@
           </list>
           <block subset="none" type="note">
             <para
-              >To make sure that metadata columns return the correct information, you must call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" /> with the <paramref name="behavior" /> parameter set to KeyInfo. Otherwise, some of the columns in the schema table may return default, null, or incorrect data.</para
-            >
+              >To make sure that metadata columns return the correct information, you must call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" /> with the <paramref name="behavior" /> parameter set to KeyInfo. Otherwise, some of the columns in the schema table may return default, null, or incorrect data.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Data.DataTable" /> that describes the column metadata of the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para
-          >
+            >Returns a <see cref="T:System.Data.DataTable" /> that describes the column metadata of the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1372,22 +1301,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBinary" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBinary" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBinary" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBinary" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1414,8 +1340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBoolean" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlBoolean" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1426,8 +1351,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1454,22 +1378,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlByte" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlByte" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlByte" />.</para
-          >
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlByte" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1496,22 +1417,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Gets the value of the specified column as <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
     </Member>
     <Member MemberName="GetSqlDateTime">
@@ -1534,22 +1452,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDateTime" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDateTime" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDateTime" />.</para
-          >
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDateTime" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1576,22 +1491,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1618,22 +1530,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1660,22 +1569,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlGuid" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlGuid" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlGuid" />.</para
-          >
+            >The value of the column expressed as a  <see cref="T:System.Data.SqlTypes.SqlGuid" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1702,22 +1608,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1744,22 +1647,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1786,22 +1686,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1828,22 +1725,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1870,22 +1764,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1912,22 +1803,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlString" />.</para
-          >
+            >Gets the value of the specified column as a <see cref="T:System.Data.SqlTypes.SqlString" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlString" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlTypes.SqlString" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1947,8 +1835,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Data.SqlClient.SqlDataReader.GetSqlValue(System.Int32)" /> returns data using the native SQL Server types. To retrieve data using the .NET Framework types, see <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />.</para
-          >
+            <see cref="M:System.Data.SqlClient.SqlDataReader.GetSqlValue(System.Int32)" /> returns data using the native SQL Server types. To retrieve data using the .NET Framework types, see <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1957,16 +1844,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the column expressed as a <see cref="T:System.Data.SqlDbType" />.</para
-          >
+            >The value of the column expressed as a <see cref="T:System.Data.SqlDbType" />.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1986,14 +1871,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the values for all the columns in the record in a single call, using the SQL type system instead of the CLR type system. The length of the <see cref="T:System.Object" /> array does not need to match the number of columns in the record. You can pass an <see cref="T:System.Object" /> array that contains fewer than the number of columns contained in the record. Only the amount of data the <see cref="T:System.Object" /> array holds is copied to the array, starting at the column with ordinal 0. You can also pass an <see cref="T:System.Object" /> array whose length is more than the number of columns contained in the resulting row. Any remaining columns are untouched.</para
-          >
+            >Returns the values for all the columns in the record in a single call, using the SQL type system instead of the CLR type system. The length of the <see cref="T:System.Object" /> array does not need to match the number of columns in the record. You can pass an <see cref="T:System.Object" /> array that contains fewer than the number of columns contained in the record. Only the amount of data the <see cref="T:System.Object" /> array holds is copied to the array, starting at the column with ordinal 0. You can also pass an <see cref="T:System.Object" /> array whose length is more than the number of columns contained in the resulting row. Any remaining columns are untouched.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Fills an array of <see cref="T:System.Object" /> that contains the values for all the columns in the record, expressed as SQL Server types.</para
-          >
+            >Fills an array of <see cref="T:System.Object" /> that contains the values for all the columns in the record, expressed as SQL Server types.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2004,8 +1887,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Object" /> into which to copy the values. The column values are expressed as SQL Server types.</param
-        >
+          />An array of <see cref="T:System.Object" /> into which to copy the values. The column values are expressed as SQL Server types.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2032,8 +1914,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be an XML value.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2042,16 +1923,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlXml" /> value that contains the XML stored within the corresponding field. </para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlXml" /> value that contains the XML stored within the corresponding field. </para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal.</param
-        >
+          />The zero-based column ordinal.</param>
       </Docs>
     </Member>
     <Member MemberName="GetString">
@@ -2068,8 +1947,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>No conversions are performed; therefore, the data retrieved must already be a string.</para>
           <para
-            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para
-          >
+            >Call <see cref="M:System.Data.SqlClient.SqlDataReader.IsDBNull(System.Int32)" /> to check for null values before calling this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2084,8 +1962,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2105,8 +1982,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" /> returns data using the .NET Framework types.</para
-          >
+            <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" /> returns data using the .NET Framework types.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2121,8 +1997,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2143,8 +2018,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For most applications, this method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para>
           <para
-            >You can pass an <see cref="T:System.Object" /> array that contains fewer than the number of columns contained in the resulting row. Only the amount of data the <see cref="T:System.Object" /> array holds is copied to the array. You can also pass an <see cref="T:System.Object" /> array whose length is more than the number of columns contained in the resulting row.</para
-          >
+            >You can pass an <see cref="T:System.Object" /> array that contains fewer than the number of columns contained in the resulting row. Only the amount of data the <see cref="T:System.Object" /> array holds is copied to the array. You can also pass an <see cref="T:System.Object" /> array whose length is more than the number of columns contained in the resulting row.</para>
           <para>This method returns <see cref="T:System.DBNull" /> for null database columns.</para>
         </remarks>
         <summary>
@@ -2160,8 +2034,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Object" /> into which to copy the attribute columns. </param
-        >
+          />An array of <see cref="T:System.Object" /> into which to copy the attribute columns. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2184,8 +2057,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlDataReader" /> contains one or more rows.</para
-          >
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlDataReader" /> contains one or more rows.</para>
         </summary>
       </Docs>
     </Member>
@@ -2200,14 +2072,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is not possible to read from a <see cref="T:System.Data.SqlClient.SqlDataReader" /> instance that is closed.</para
-          >
+            >It is not possible to read from a <see cref="T:System.Data.SqlClient.SqlDataReader" /> instance that is closed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a Boolean value that indicates whether the specified <see cref="T:System.Data.SqlClient.SqlDataReader" /> instance has been closed. </para
-          >
+            >Retrieves a Boolean value that indicates whether the specified <see cref="T:System.Data.SqlClient.SqlDataReader" /> instance has been closed. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2238,22 +2108,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Data.CommandBehavior" /> matches that of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> .</para
-          >
+            >Determines whether the specified <see cref="T:System.Data.CommandBehavior" /> matches that of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> .</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see cref="T:System.Data.CommandBehavior" /> is true, false otherwise.</para
-          >
+            >true if the specified <see cref="T:System.Data.CommandBehavior" /> is true, false otherwise.</para>
         </returns>
         <param name="condition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.CommandBehavior" /> enumeration.</param
-        >
+          />A <see cref="T:System.Data.CommandBehavior" /> enumeration.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDBNull">
@@ -2269,8 +2136,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />, and so on) to avoid raising an error.</para
-          >
+            >Call this method to check for null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />, <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />, and so on) to avoid raising an error.</para>
           <para>code reference: SqlDataReader_IsDbNull#1</para>
         </remarks>
         <summary>
@@ -2280,16 +2146,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified column value is equivalent to <see cref="T:System.DBNull" />; otherwise false.</para
-          >
+            >true if the specified column value is equivalent to <see cref="T:System.DBNull" />; otherwise false.</para>
         </returns>
         <param name="i">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based column ordinal. </param
-        >
+          />The zero-based column ordinal. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2374,17 +2238,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is before the first record. Therefore, you must call <see cref="M:System.Data.SqlClient.SqlDataReader.Read" /> to begin accessing any data.</para
-          >
+            >The default position of the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is before the first record. Therefore, you must call <see cref="M:System.Data.SqlClient.SqlDataReader.Read" /> to begin accessing any data.</para>
           <para
-            >Only one SqlDataReader per associated <see cref="T:System.Data.SqlClient.SqlConnection" /> may be open at a time, and any attempt to open another will fail until the first one is closed. Similarly, while the SqlDataReader is being used, the associated SqlConnection is busy serving it until you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />.</para
-          >
+            >Only one SqlDataReader per associated <see cref="T:System.Data.SqlClient.SqlConnection" /> may be open at a time, and any attempt to open another will fail until the first one is closed. Similarly, while the SqlDataReader is being used, the associated SqlConnection is busy serving it until you call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see cref="T:System.Data.SqlClient.SqlDataReader" /> to the next record.</para
-          >
+            >Advances the <see cref="T:System.Data.SqlClient.SqlDataReader" /> to the next record.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2407,12 +2268,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> property is not set until all rows are read and you close the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para
-          >
+            >The <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> property is not set until all rows are read and you close the <see cref="T:System.Data.SqlClient.SqlDataReader" />.</para>
           <para>The value of this property is cumulative. For example, if two records are inserted in batch mode, the value of RecordsAffected will be two.</para>
           <para>
-            <see cref="P:System.Data.SqlClient.SqlDataReader.IsClosed" /> and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is closed.</para
-          >
+            <see cref="P:System.Data.SqlClient.SqlDataReader.IsClosed" /> and <see cref="P:System.Data.SqlClient.SqlDataReader.RecordsAffected" /> are the only properties that you can call after the <see cref="T:System.Data.SqlClient.SqlDataReader" /> is closed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2481,14 +2340,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is used to determine how many fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" /> are visible. For example, a SELECT on a partial primary key returns the remaining parts of the key as hidden fields. The hidden fields are always appended behind the visible fields.</para
-          >
+            >This value is used to determine how many fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" /> are visible. For example, a SELECT on a partial primary key returns the remaining parts of the key as hidden fields. The hidden fields are always appended behind the visible fields.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" /> that are not hidden. </para
-          >
+            >Gets the number of fields in the <see cref="T:System.Data.SqlClient.SqlDataReader" /> that are not hidden. </para>
         </summary>
       </Docs>
     </Member>

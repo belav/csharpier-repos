@@ -28,18 +28,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>indigo1 uses this class to import reliable session binding elements to binding policy assertions in metadata. This class takes the reliable session binding elements and writes custom policy assertions into the WSDL file when on the service. On the client, it looks for those assertions and inserts a corresponding binding element back into the client binding. Note that the presence of a reliable session in a binding is rendered as the reliable message assertion described in the WS-Reliable Messaging Policy specification.</para>
       <para
-        >crabout exchanging policy assertions between bindings to WSDL information see the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> and <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interfaces:</para
-      >
+        >crabout exchanging policy assertions between bindings to WSDL information see the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> and <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interfaces:</para>
       <list type="bullet">
         <item>
           <para
-            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface to search WSDL information exposed by a particular endpoint for custom policy assertions about endpoint capabilities or requirements.</para
-          >
+            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface to search WSDL information exposed by a particular endpoint for custom policy assertions about endpoint capabilities or requirements.</para>
         </item>
         <item>
           <para
-            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interface on a <see cref="T:System.ServiceModel.Channels.BindingElement" /> object to write statements about endpoint capabilities or requirements into the WSDL information exposed by a particular endpoint.</para
-          >
+            >Implement the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" /> interface on a <see cref="T:System.ServiceModel.Channels.BindingElement" /> object to write statements about endpoint capabilities or requirements into the WSDL information exposed by a particular endpoint.</para>
         </item>
       </list>
     </remarks>
@@ -65,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElementImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElementImporter" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -94,8 +90,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" /> method.</para
-          >
+            >Implements the <see cref="M:System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -106,15 +101,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataImporter" /> that imports the WSDL metadata into the binding element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataImporter" /> that imports the WSDL metadata into the binding element.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> for the service endpoint that contains the binding policy assertions that must be converted into binding elements.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> for the service endpoint that contains the binding policy assertions that must be converted into binding elements.</param>
       </Docs>
     </Member>
   </Members>

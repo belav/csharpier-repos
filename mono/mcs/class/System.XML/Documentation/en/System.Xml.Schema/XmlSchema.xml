@@ -31,8 +31,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >Exceptions raised as a result of using the <see cref="T:System.Xml.Schema.XmlSchema" /> class, such as the <see cref="T:System.Xml.Schema.XmlSchemaException" /> class may contain sensitive information that should not be exposed in untrusted scenarios. For example, the <see cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaException" /> returns the URI path to the schema file that caused the exception. The <see cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" /> property should not be exposed in untrusted scenarios. Exceptions should be properly handled so that this sensitive information is not exposed in untrusted scenarios.</para
-        >
+          >Exceptions raised as a result of using the <see cref="T:System.Xml.Schema.XmlSchema" /> class, such as the <see cref="T:System.Xml.Schema.XmlSchemaException" /> class may contain sensitive information that should not be exposed in untrusted scenarios. For example, the <see cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" /> property of an <see cref="T:System.Xml.Schema.XmlSchemaException" /> returns the URI path to the schema file that caused the exception. The <see cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" /> property should not be exposed in untrusted scenarios. Exceptions should be properly handled so that this sensitive information is not exposed in untrusted scenarios.</para>
       </block>
     </remarks>
     <summary>
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchema" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchema" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value must be one of the <see cref="T:System.Xml.Schema.XmlSchemaForm" /> values shown in the following table.</para
-          >
+            >The value must be one of the <see cref="T:System.Xml.Schema.XmlSchemaForm" /> values shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -246,8 +243,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The block attribute prevents a complexType or element that has the specified type of derivation from being used in place of the inherited complexType or element. This attribute's value can either be a white space separated list of restriction, extension and substitution or the value can contain #all or a list that is a subset of extension, restriction, or substitution.</para>
           <para
-            >The following table lists the possible values of <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />.</para
-          >
+            >The following table lists the possible values of <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -354,8 +350,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler)" /> method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method.</para
-            >
+              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler)" /> method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method.</para>
           </block>
         </remarks>
         <summary>
@@ -367,8 +362,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about XML Schema validation errors. </param
-        >
+          />The validation event handler that receives information about XML Schema validation errors. </param>
       </Docs>
     </Member>
     <Member MemberName="Compile">
@@ -404,13 +398,11 @@
           <para>If the SOM references other namespaces through the import or include elements, the XmlResolver is used to resolve these references. If the resolver is set to null, this indicates that the user does not care about resolving import or include elements. In this case, the references are not resolved. The resolver is not cached after the Compile method completes.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlResolver)" /> method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method.</para
-            >
+              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlResolver)" /> method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see cref="M:System.Xml.Schema.XmlSchemaSet.Compile" /> method.</para>
           </block>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlResolver)" /> method uses the <see cref="T:System.Xml.XmlUrlResolver" /> class to resolve external schemas referenced in include, import, or redefine elements by default. You can disable resolution of external schemas by passing null as the <see cref="T:System.Xml.XmlResolver" /> parameter.</para
-            >
+              >The <see cref="M:System.Xml.Schema.XmlSchema.Compile(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlResolver)" /> method uses the <see cref="T:System.Xml.XmlUrlResolver" /> class to resolve external schemas referenced in include, import, or redefine elements by default. You can disable resolution of external schemas by passing null as the <see cref="T:System.Xml.XmlResolver" /> parameter.</para>
           </block>
         </remarks>
         <summary>
@@ -422,15 +414,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema validation errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema validation errors. </param>
         <param name="resolver">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlResolver used to resolve namespaces referenced in include and import elements. </param
-        >
+          />The XmlResolver used to resolve namespaces referenced in include and import elements. </param>
       </Docs>
     </Member>
     <Member MemberName="ElementFormDefault">
@@ -465,8 +455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value must be one of the <see cref="T:System.Xml.Schema.XmlSchemaForm" /> values shown in the following table.</para
-          >
+            >The value must be one of the <see cref="T:System.Xml.Schema.XmlSchemaForm" /> values shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -582,8 +571,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The final attribute prevents the specified type of derivation of an element or complex type. This value can contain #all or a list that is a subset of extension or restriction.</para>
           <para
-            >The following table lists the possible values of <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />.</para
-          >
+            >The following table lists the possible values of <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -752,8 +740,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaObjectCollection.Add(System.Xml.Schema.XmlSchemaObject)" /> method expects only <see cref="T:System.Xml.Schema.XmlSchemaExternal" /> and its derived types (<see cref="T:System.Xml.Schema.XmlSchemaImport" />, <see cref="T:System.Xml.Schema.XmlSchemaInclude" />, and <see cref="T:System.Xml.Schema.XmlSchemaRedefine" />) as parameters. The following example illustrates adding an included schema to the <see cref="P:System.Xml.Schema.XmlSchema.Includes" /> collection of an existing <see cref="T:System.Xml.Schema.XmlSchema" /> object.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaObjectCollection.Add(System.Xml.Schema.XmlSchemaObject)" /> method expects only <see cref="T:System.Xml.Schema.XmlSchemaExternal" /> and its derived types (<see cref="T:System.Xml.Schema.XmlSchemaImport" />, <see cref="T:System.Xml.Schema.XmlSchemaInclude" />, and <see cref="T:System.Xml.Schema.XmlSchemaRedefine" />) as parameters. The following example illustrates adding an included schema to the <see cref="P:System.Xml.Schema.XmlSchema.Includes" /> collection of an existing <see cref="T:System.Xml.Schema.XmlSchema" /> object.</para>
           <code>Dim schema As XmlSchema = New XmlSchema()
 
 Dim textReader As XmlTextReader = New XmlTextReader("include.xsd")
@@ -876,8 +863,7 @@ schema.Includes.Add(include);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection of <see cref="T:System.Xml.Schema.XmlSchemaAnnotation" />, <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />, <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />, <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />, <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />, <see cref="T:System.Xml.Schema.XmlSchemaElement" />, <see cref="T:System.Xml.Schema.XmlSchemaGroup" />, or <see cref="T:System.Xml.Schema.XmlSchemaNotation" />.</para
-          >
+            >The collection of <see cref="T:System.Xml.Schema.XmlSchemaAnnotation" />, <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />, <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />, <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />, <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />, <see cref="T:System.Xml.Schema.XmlSchemaElement" />, <see cref="T:System.Xml.Schema.XmlSchemaGroup" />, or <see cref="T:System.Xml.Schema.XmlSchemaNotation" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -969,23 +955,20 @@ schema.Includes.Add(include);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para>
         </returns>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplied data stream. </param
-        >
+          />The supplied data stream. </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about XML Schema syntax errors. </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1019,23 +1002,20 @@ schema.Includes.Add(include);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextReader containing the XML Schema to read. </param
-        >
+          />The TextReader containing the XML Schema to read. </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema syntax errors. </param>
       </Docs>
     </Member>
     <Member MemberName="Read">
@@ -1069,23 +1049,20 @@ schema.Includes.Add(include);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchema" /> object representing the XML Schema.</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlReader containing the XML Schema to read. </param
-        >
+          />The XmlReader containing the XML Schema to read. </param>
         <param name="validationEventHandler">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The validation event handler that receives information about the XML Schema syntax errors. </param
-        >
+          />The validation event handler that receives information about the XML Schema syntax errors. </param>
       </Docs>
     </Member>
     <Member MemberName="SchemaTypes">
@@ -1143,8 +1120,7 @@ schema.Includes.Add(include);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Schema.XmlSchema.TargetNamespace" /> is the namespace of all schema components in this schema as well as any schema included using the include element. Included schemas must either have the same target namespace as the containing schema or have no target namespace specified.</para
-          >
+            >The <see cref="P:System.Xml.Schema.XmlSchema.TargetNamespace" /> is the namespace of all schema components in this schema as well as any schema included using the include element. Included schemas must either have the same target namespace as the containing schema or have no target namespace specified.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1241,8 +1217,7 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplied data stream. </param
-        >
+          />The supplied data stream. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1274,8 +1249,7 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to write to.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1307,8 +1281,7 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to. </param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1338,30 +1311,26 @@ schema.Includes.Add(include);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para
-            >
+              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the XML Schema to the supplied <see cref="T:System.IO.Stream" /> using the <see cref="T:System.Xml.XmlNamespaceManager" /> specified.</para
-          >
+            >Writes the XML Schema to the supplied <see cref="T:System.IO.Stream" /> using the <see cref="T:System.Xml.XmlNamespaceManager" /> specified.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The supplied data stream. </param
-        >
+          />The supplied data stream. </param>
         <param name="namespaceManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1391,8 +1360,7 @@ schema.Includes.Add(include);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para
-            >
+              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para>
           </block>
         </remarks>
         <summary>
@@ -1404,15 +1372,13 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to write to.</param>
         <param name="namespaceManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -1442,8 +1408,7 @@ schema.Includes.Add(include);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para
-            >
+              >Supplying an <see cref="T:System.Xml.XmlNamespaceManager" /> disables automatic namespace prefix mapping.</para>
           </block>
         </remarks>
         <summary>
@@ -1455,15 +1420,13 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="namespaceManager">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlNamespaceManager" />. </param>
       </Docs>
     </Member>
   </Members>

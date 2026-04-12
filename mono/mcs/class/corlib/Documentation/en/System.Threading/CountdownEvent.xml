@@ -47,22 +47,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >iI <paramref name="initialCount" /> is 0, the event is created in a signaled state.</para
-          >
+            >iI <paramref name="initialCount" /> is 0, the event is created in a signaled state.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Threading.CountdownEvent" /> class with the specified count.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Threading.CountdownEvent" /> class with the specified count.</para>
         </summary>
         <param name="initialCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of signals initially required to set the <see cref="T:System.Threading.CountdownEvent" />.</param
-        >
+          />The number of signals initially required to set the <see cref="T:System.Threading.CountdownEvent" />.</param>
       </Docs>
     </Member>
     <Member MemberName="AddCount">
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Increments the <see cref="T:System.Threading.CountdownEvent" />'s current count by one.</para
-          >
+            >Increments the <see cref="T:System.Threading.CountdownEvent" />'s current count by one.</para>
         </summary>
       </Docs>
     </Member>
@@ -110,16 +106,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Increments the <see cref="T:System.Threading.CountdownEvent" />'s current count by a specified value.</para
-          >
+            >Increments the <see cref="T:System.Threading.CountdownEvent" />'s current count by a specified value.</para>
         </summary>
         <param name="signalCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value by which to increase <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</param
-        >
+          />The value by which to increase <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CurrentCount">
@@ -159,26 +153,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Threading.CountdownEvent" />. The Dispose method leaves the <see cref="T:System.Threading.CountdownEvent" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.CountdownEvent" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.CountdownEvent" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.CountdownEvent" />. The Dispose method leaves the <see cref="T:System.Threading.CountdownEvent" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.CountdownEvent" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.CountdownEvent" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.CountdownEvent" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.CountdownEvent" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.CountdownEvent" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.CountdownEvent" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.Threading.CountdownEvent" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.CountdownEvent" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -202,22 +192,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, <see cref="M:System.Threading.CountdownEvent.Dispose" /> is not thread-safe and may not be used concurrently with other members of this instance.</para
-          >
+            >Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, <see cref="M:System.Threading.CountdownEvent.Dispose" /> is not thread-safe and may not be used concurrently with other members of this instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Threading.CountdownEvent" />, and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Threading.CountdownEvent" />, and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="InitialCount">
@@ -276,14 +263,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, Reset is not thread-safe and may not be used concurrently with other members of this instance.</para
-          >
+            >Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, Reset is not thread-safe and may not be used concurrently with other members of this instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> to the value of <see cref="P:System.Threading.CountdownEvent.InitialCount" />.</para
-          >
+            >Resets the <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> to the value of <see cref="P:System.Threading.CountdownEvent.InitialCount" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -307,22 +292,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method resets <see cref="P:System.Threading.CountdownEvent.InitialCount" /> for all subsequent accesses of the property on the current instance. Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, Reset is not thread-safe and may not be used concurrently with other members of this instance.</para
-          >
+            >This method resets <see cref="P:System.Threading.CountdownEvent.InitialCount" /> for all subsequent accesses of the property on the current instance. Unlike most of the members of <see cref="T:System.Threading.CountdownEvent" />, Reset is not thread-safe and may not be used concurrently with other members of this instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see cref="P:System.Threading.CountdownEvent.InitialCount" /> property to a specified value.</para
-          >
+            >Resets the <see cref="P:System.Threading.CountdownEvent.InitialCount" /> property to a specified value.</para>
         </summary>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of signals required to set the <see cref="T:System.Threading.CountdownEvent" />.</param
-        >
+          />The number of signals required to set the <see cref="T:System.Threading.CountdownEvent" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Signal">
@@ -344,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a signal with the <see cref="T:System.Threading.CountdownEvent" />, decrementing the value of <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</para
-          >
+            >Registers a signal with the <see cref="T:System.Threading.CountdownEvent" />, decrementing the value of <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -374,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers multiple signals with the <see cref="T:System.Threading.CountdownEvent" />, decrementing the value of <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by the specified amount.</para
-          >
+            >Registers multiple signals with the <see cref="T:System.Threading.CountdownEvent" />, decrementing the value of <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by the specified amount.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -386,8 +366,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of signals to register.</param
-        >
+          />The number of signals to register.</param>
       </Docs>
     </Member>
     <Member MemberName="TryAddCount">
@@ -409,14 +388,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to increment <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by one.</para
-          >
+            >Attempts to increment <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by one.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the increment succeeded; otherwise, false. If <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> is already at zero, this method will return false.</para
-          >
+            >true if the increment succeeded; otherwise, false. If <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> is already at zero, this method will return false.</para>
         </returns>
       </Docs>
     </Member>
@@ -441,22 +418,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to increment <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by a specified value.</para
-          >
+            >Attempts to increment <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> by a specified value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the increment succeeded; otherwise, false. If <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> is already at zero this will return false.</para
-          >
+            >true if the increment succeeded; otherwise, false. If <see cref="P:System.Threading.CountdownEvent.CurrentCount" /> is already at zero this will return false.</para>
         </returns>
         <param name="signalCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value by which to increase <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</param
-        >
+          />The value by which to increase <see cref="P:System.Threading.CountdownEvent.CurrentCount" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -481,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set.</para>
         </summary>
       </Docs>
     </Member>
@@ -507,22 +480,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a 32-bit signed integer to measure the timeout.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a 32-bit signed integer to measure the timeout.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -548,22 +518,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The caller of this method blocks indefinitely until the current instance is set. The caller will return immediately if the event is currently in a set state. If the <see cref="T:System.Threading.CancellationToken" /> being observed is canceled during the wait operation, an <see cref="T:System.OperationCanceledException" /> will be thrown.</para
-          >
+            >The caller of this method blocks indefinitely until the current instance is set. The caller will return immediately if the event is currently in a set state. If the <see cref="T:System.Threading.CancellationToken" /> being observed is canceled during the wait operation, an <see cref="T:System.OperationCanceledException" /> will be thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -587,22 +554,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the timeout.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the timeout.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -630,29 +594,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a 32-bit signed integer to measure the timeout, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a 32-bit signed integer to measure the timeout, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -680,29 +640,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the timeout, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the timeout, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.CountdownEvent" /> was set; otherwise, false.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="WaitHandle">
@@ -726,14 +682,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Threading.CountdownEvent.WaitHandle" /> should only be used if it's needed for integration with code bases that rely on having a WaitHandle. If all that's needed is to wait for the <see cref="T:System.Threading.CountdownEvent" /> to be set, the <see cref="M:System.Threading.CountdownEvent.Wait" /> method should be preferred.</para
-          >
+            <see cref="P:System.Threading.CountdownEvent.WaitHandle" /> should only be used if it's needed for integration with code bases that rely on having a WaitHandle. If all that's needed is to wait for the <see cref="T:System.Threading.CountdownEvent" /> to be set, the <see cref="M:System.Threading.CountdownEvent.Wait" /> method should be preferred.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Threading.WaitHandle" /> that is used to wait for the event to be set.</para
-          >
+            >Gets a <see cref="T:System.Threading.WaitHandle" /> that is used to wait for the event to be set.</para>
         </summary>
       </Docs>
     </Member>

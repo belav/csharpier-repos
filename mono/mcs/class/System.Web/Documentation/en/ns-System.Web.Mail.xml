@@ -12,8 +12,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The classes in this namespace have been deprecated. Use the <see cref="N:System.Net.Mail" /> namespace instead. The <see cref="N:System.Web.Mail" /> namespace contains classes that enable you to construct and send messages using the CDOSYS (Collaboration Data Objects for Windows 2000) message component. The mail message is delivered either through the SMTP mail service built into Microsoft Windows 2000 or through an arbitrary SMTP server. The classes in this namespace can be used from ASP.NET or from any managed application.</para
-      >
+        >The classes in this namespace have been deprecated. Use the <see cref="N:System.Net.Mail" /> namespace instead. The <see cref="N:System.Web.Mail" /> namespace contains classes that enable you to construct and send messages using the CDOSYS (Collaboration Data Objects for Windows 2000) message component. The mail message is delivered either through the SMTP mail service built into Microsoft Windows 2000 or through an arbitrary SMTP server. The classes in this namespace can be used from ASP.NET or from any managed application.</para>
     </summary>
   </Docs>
 </Namespace>

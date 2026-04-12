@@ -19,8 +19,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelConfigurationElementCollection&lt;System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="ConfigurationElementType"
-        >System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -38,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see cref="T:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement" /> instances. This class cannot be inherited.</para
-      >
+        >Contains a collection of <see cref="T:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement" /> instances. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElementCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>

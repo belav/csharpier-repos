@@ -22,51 +22,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains the following information about the results of a compilation by an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> interface implementation: </para
-      >
+        >This class contains the following information about the results of a compilation by an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" /> interface implementation: </para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" /> property indicates the compiled assembly.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" /> property indicates the compiled assembly.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Evidence" /> property indicates the security evidence for the assembly.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Evidence" /> property indicates the security evidence for the assembly.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" /> property indicates the path to the compiled assembly, if it was not generated only in memory.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.PathToAssembly" /> property indicates the path to the compiled assembly, if it was not generated only in memory.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Errors" /> property indicates any compiler errors and warnings.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Errors" /> property indicates any compiler errors and warnings.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Output" /> property contains the compiler output messages.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.Output" /> property contains the compiler output messages.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.NativeCompilerReturnValue" /> property indicates result code value returned by the compiler.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.NativeCompilerReturnValue" /> property indicates result code value returned by the compiler.</para>
         </item>
         <item>
           <para
-            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.TempFiles" /> property indicates the temporary files generated during compilation and linking.</para
-          >
+            >The <see cref="P:System.CodeDom.Compiler.CompilerResults.TempFiles" /> property indicates the temporary files generated during compilation and linking.</para>
         </item>
       </list>
       <block subset="none" type="note">
         <para
           >This class contains an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" /> is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
     </remarks>
     <summary>
@@ -99,16 +90,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerResults" /> class that uses the specified temporary files.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerResults" /> class that uses the specified temporary files.</para>
         </summary>
         <param name="tempFiles">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param
-        >
+          />A <see cref="T:System.CodeDom.Compiler.TempFileCollection" /> with which to manage and store references to intermediate files generated during compilation. </param>
       </Docs>
     </Member>
     <Member MemberName="CompiledAssembly">
@@ -136,8 +125,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The get accessor for the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" /> property calls the <see cref="Overload:System.AppDomain.Load" /> method to load the compiled assembly into the current application domain.  After calling the get accessor, the compiled assembly cannot be deleted until the current <see cref="T:System.AppDomain" /> is unloaded.</para
-            >
+              >The get accessor for the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" /> property calls the <see cref="Overload:System.AppDomain.Load" /> method to load the compiled assembly into the current application domain.  After calling the get accessor, the compiled assembly cannot be deleted until the current <see cref="T:System.AppDomain" /> is unloaded.</para>
           </block>
         </remarks>
         <summary>
@@ -169,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >File and line number information is associated with each <see cref="T:System.CodeDom.Compiler.CompilerError" />, so that user code to locate and display the code that generated an error or warning, where possible, can be implemented.</para
-          >
+            >File and line number information is associated with each <see cref="T:System.CodeDom.Compiler.CompilerError" />, so that user code to locate and display the code that generated an error or warning, where possible, can be implemented.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

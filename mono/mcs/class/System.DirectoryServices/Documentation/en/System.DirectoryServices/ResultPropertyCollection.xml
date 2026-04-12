@@ -123,8 +123,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based array index at which to begin copying the properties.</param
-        >
+          />The zero-based array index at which to begin copying the properties.</param>
       </Docs>
     </Member>
     <Member MemberName="PropertyNames">
@@ -187,14 +186,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.DirectoryServices.SearchResult" /> instances are similar to <see cref="T:System.DirectoryServices.DirectoryEntry" /> instances. The notable difference is that the <see cref="T:System.DirectoryServices.DirectoryEntry" /> retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see cref="T:System.DirectoryServices.SearchResult" /> is already available in the <see cref="T:System.DirectoryServices.SearchResultCollection" /> that a <see cref="T:System.DirectoryServices.DirectorySearcher" /> query returns. If you try to get a <see cref="T:System.DirectoryServices.SearchResult" /> property that your query did not specify for retrieval, the property will not be available.</para
-      >
+        <see cref="T:System.DirectoryServices.SearchResult" /> instances are similar to <see cref="T:System.DirectoryServices.DirectoryEntry" /> instances. The notable difference is that the <see cref="T:System.DirectoryServices.DirectoryEntry" /> retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see cref="T:System.DirectoryServices.SearchResult" /> is already available in the <see cref="T:System.DirectoryServices.SearchResultCollection" /> that a <see cref="T:System.DirectoryServices.DirectorySearcher" /> query returns. If you try to get a <see cref="T:System.DirectoryServices.SearchResult" /> property that your query did not specify for retrieval, the property will not be available.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the properties of a <see cref="T:System.DirectoryServices.SearchResult" /> instance.          </para
-      >
+        >Contains the properties of a <see cref="T:System.DirectoryServices.SearchResult" /> instance.          </para>
     </summary>
   </Docs>
 </Type>

@@ -104,26 +104,19 @@
         <_Audience>dword:00000003</_Audience>
         <!-- default: Local -->
         <_Audience Condition="'%(PkgDefBrokeredService.Audience)' == 'Process'"
-          >dword:00000001</_Audience
-        >
+          >dword:00000001</_Audience>
         <_Audience Condition="'%(PkgDefBrokeredService.Audience)' == 'RemoteExclusiveClient'"
-          >dword:00000100</_Audience
-        >
+          >dword:00000100</_Audience>
         <_Audience Condition="'%(PkgDefBrokeredService.Audience)' == 'LiveShareGuest'"
-          >dword:00000400</_Audience
-        >
+          >dword:00000400</_Audience>
         <_Audience Condition="'%(PkgDefBrokeredService.Audience)' == 'RemoteExclusiveServer'"
-          >dword:00000800</_Audience
-        >
+          >dword:00000800</_Audience>
         <_Audience Condition="'%(PkgDefBrokeredService.Audience)' == 'AllClientsIncludingGuests'"
-          >dword:00000503</_Audience
-        >
+          >dword:00000503</_Audience>
         <_ServiceLocation Condition="'%(PkgDefBrokeredService.SubFolder)' == ''"
-          >"$PackageFolder$"</_ServiceLocation
-        >
+          >"$PackageFolder$"</_ServiceLocation>
         <_ServiceLocation Condition="'%(PkgDefBrokeredService.SubFolder)' != ''"
-          >"$PackageFolder$\%(PkgDefBrokeredService.SubFolder)"</_ServiceLocation
-        >
+          >"$PackageFolder$\%(PkgDefBrokeredService.SubFolder)"</_ServiceLocation>
       </PkgDefBrokeredService>
     </ItemGroup>
   </Target>
@@ -139,19 +132,16 @@
     <PropertyGroup>
       <_AssemblyCodeBase>$([System.IO.Path]::Combine('$PackageFolder$', '$(AssemblyVSIXSubPath)', '$(TargetFileName)'))</_AssemblyCodeBase>
       <_AssemblyOrCodeBase Condition="'$(UseCodeBase)' != 'true'"
-        >"Assembly"="$(AssemblyName), Version=$(AssemblyVersion), Culture=neutral, PublicKeyToken=$(PublicKeyToken)"</_AssemblyOrCodeBase
-      >
+        >"Assembly"="$(AssemblyName), Version=$(AssemblyVersion), Culture=neutral, PublicKeyToken=$(PublicKeyToken)"</_AssemblyOrCodeBase>
       <_AssemblyOrCodeBase Condition="'$(UseCodeBase)' == 'true'"
-        >"CodeBase"="$(_AssemblyCodeBase)"</_AssemblyOrCodeBase
-      >
+        >"CodeBase"="$(_AssemblyCodeBase)"</_AssemblyOrCodeBase>
     </PropertyGroup>
     <ItemGroup>
       <PkgDefPackageRegistration Update="@(PkgDefPackageRegistration)">
         <_AllowsBackgroundLoad>dword:00000000</_AllowsBackgroundLoad>
         <_AllowsBackgroundLoad
           Condition="'%(PkgDefPackageRegistration.AllowsBackgroundLoad)' == 'true'"
-          >dword:00000001</_AllowsBackgroundLoad
-        >
+          >dword:00000001</_AllowsBackgroundLoad>
         <_AssemblyOrCodeBase>$(_AssemblyOrCodeBase)</_AssemblyOrCodeBase>
       </PkgDefPackageRegistration>
     </ItemGroup>

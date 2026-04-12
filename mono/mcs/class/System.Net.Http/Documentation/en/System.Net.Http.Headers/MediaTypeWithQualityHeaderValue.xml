@@ -25,13 +25,10 @@
       <para
         >The <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> class provides support for the media type and quality in a Content-Type header as defined in <see
           cref="http://go.microsoft.com/fwlink/?LinkID=241642"
-          >RFC 2616</see
-        > by the IETF.</para
-      >
+          >RFC 2616</see> by the IETF.</para>
       <para>Quality factors allow the user agent to indicate the relative degree of preference for the media type in a Content-Type header. Quality uses a scale from 0 to 1. The default value is q=1.</para>
       <para
-        >This type derives from <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue" />.</para
-      >
+        >This type derives from <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,16 +57,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> class.</para>
         </summary>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> represented as string to initialize the new instance. </param
-        >
+          />A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> represented as string to initialize the new instance. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -94,23 +89,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> class.</para>
         </summary>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> represented as string to initialize the new instance.</param
-        >
+          />A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> represented as string to initialize the new instance.</param>
         <param name="quality">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quality associated with this header value.</param
-        >
+          />The quality associated with this header value.</param>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -137,25 +129,21 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> instance.</para
-          >
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />.</para
-          >
+            >Returns <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />.</para>
           <para
-            >An <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> instance.</para
-          >
+            >An <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" /> instance.</para>
         </returns>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents media type with quality header value information.</param
-        >
+          />A string that represents media type with quality header value information.</param>
       </Docs>
     </Member>
     <Member MemberName="Quality">
@@ -177,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or set the quality value for the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />.</para
-          >
+            >Get or set the quality value for the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />.</para>
         </summary>
       </Docs>
     </Member>

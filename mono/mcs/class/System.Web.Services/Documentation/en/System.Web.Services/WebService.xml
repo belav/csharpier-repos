@@ -20,14 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you don't need access to the common ASP.NET objects, you can still create an XML Web service without deriving from <see cref="T:System.Web.Services.WebService" />. Additional ASP.NET objects can be accessed through <see cref="P:System.Web.Services.WebService.Context" />.</para
-      >
+        >If you don't need access to the common ASP.NET objects, you can still create an XML Web service without deriving from <see cref="T:System.Web.Services.WebService" />. Additional ASP.NET objects can be accessed through <see cref="P:System.Web.Services.WebService.Context" />.</para>
       <para
-        >XML Web service methods that have the <see cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.OneWay" /> property of either <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> set to true, do not have access to their <see cref="T:System.Web.HttpContext" />. As such, accessing any of the properties of the <see cref="T:System.Web.Services.WebService" /> class, from within that XML Web service method, return null.</para
-      >
+        >XML Web service methods that have the <see cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.OneWay" /> property of either <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> set to true, do not have access to their <see cref="T:System.Web.HttpContext" />. As such, accessing any of the properties of the <see cref="T:System.Web.Services.WebService" /> class, from within that XML Web service method, return null.</para>
       <para
-        >If you are using the .NET Framework version 1.0 XML Web service methods that have either the <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> attribute applied to them with the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of set to true, do not have access to their <see cref="T:System.Web.HttpContext" /> using the static <see cref="P:System.Web.HttpContext.Current" /> property. To access the <see cref="T:System.Web.HttpContext" />, derive the class implementing the XML Web service method from <see cref="T:System.Web.Services.WebService" /> and access the <see cref="P:System.Web.Services.WebService.Context" /> property.</para
-      >
+        >If you are using the .NET Framework version 1.0 XML Web service methods that have either the <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> attribute applied to them with the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of set to true, do not have access to their <see cref="T:System.Web.HttpContext" /> using the static <see cref="P:System.Web.HttpContext.Current" /> property. To access the <see cref="T:System.Web.HttpContext" />, derive the class implementing the XML Web service method from <see cref="T:System.Web.Services.WebService" /> and access the <see cref="P:System.Web.Services.WebService.Context" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.WebService" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.WebService" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -69,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >XML Web services can use both application state and session state. Application state is maintained across all sessions accessing an XML Web service regardless of whether session state is turned off for a method(by using the <see cref="P:System.Web.Services.WebMethodAttribute.EnableSession" /> property of the <see cref="T:System.Web.Services.WebMethodAttribute" />).</para
-          >
+            >XML Web services can use both application state and session state. Application state is maintained across all sessions accessing an XML Web service regardless of whether session state is turned off for a method(by using the <see cref="P:System.Web.Services.WebMethodAttribute.EnableSession" /> property of the <see cref="T:System.Web.Services.WebMethodAttribute" />).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,14 +100,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >XML Web service methods that have either the <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> attribute applied to them with the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of set to true, do not have access to their <see cref="T:System.Web.HttpContext" /> using the static <see cref="P:System.Web.HttpContext.Current" /> property. To access the <see cref="T:System.Web.HttpContext" />, derive the class implementing the XML Web service method from <see cref="T:System.Web.Services.WebService" /> and access the <see cref="P:System.Web.Services.WebService.Context" /> property.</para
-          >
+            >XML Web service methods that have either the <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> attribute applied to them with the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of set to true, do not have access to their <see cref="T:System.Web.HttpContext" /> using the static <see cref="P:System.Web.HttpContext.Current" /> property. To access the <see cref="T:System.Web.HttpContext" />, derive the class implementing the XML Web service method from <see cref="T:System.Web.Services.WebService" /> and access the <see cref="P:System.Web.Services.WebService.Context" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ASP.NET <see cref="T:System.Web.HttpContext" /> for the current request, which encapsulates all HTTP-specific context used by the HTTP server to process Web requests.</para
-          >
+            >Gets the ASP.NET <see cref="T:System.Web.HttpContext" /> for the current request, which encapsulates all HTTP-specific context used by the HTTP server to process Web requests.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -140,14 +133,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.HttpServerUtility" /> class provides several methods that can be used in the processing of Web requests, including <see cref="M:System.Web.HttpServerUtility.CreateObject(System.String)" /> (for instantiating COM objects).</para
-          >
+            >The <see cref="T:System.Web.HttpServerUtility" /> class provides several methods that can be used in the processing of Web requests, including <see cref="M:System.Web.HttpServerUtility.CreateObject(System.String)" /> (for instantiating COM objects).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.HttpServerUtility" /> for the current request.</para
-          >
+            >Gets the <see cref="T:System.Web.HttpServerUtility" /> for the current request.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -179,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.SessionState.HttpSessionState" /> instance for the current request.</para
-          >
+            >Gets the <see cref="T:System.Web.SessionState.HttpSessionState" /> instance for the current request.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -224,11 +214,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the SOAP protocol was not used to communicate with the XML Web service, such as HTTP-GET or HTTP-POST, the value of the <see cref="P:System.Web.Services.WebService.SoapVersion" /> property is <see cref="F:System.Web.Services.Protocols.SoapProtocolVersion.Default" />.</para
-          >
+            >If the SOAP protocol was not used to communicate with the XML Web service, such as HTTP-GET or HTTP-POST, the value of the <see cref="P:System.Web.Services.WebService.SoapVersion" /> property is <see cref="F:System.Web.Services.Protocols.SoapProtocolVersion.Default" />.</para>
           <para
-            >For XML Web services that do not derive from the <see cref="T:System.Web.Services.WebService" /> class, the version of the SOAP protocol used to make the SOAP request to the XML Web service can be also be accessed using the "WebServiceSoapVersion" entry of the <see cref="P:System.Web.HttpContext.Items" /> property. That entry is of type <see cref="T:System.Web.Services.Protocols.SoapProtocolVersion" />.</para
-          >
+            >For XML Web services that do not derive from the <see cref="T:System.Web.Services.WebService" /> class, the version of the SOAP protocol used to make the SOAP request to the XML Web service can be also be accessed using the "WebServiceSoapVersion" entry of the <see cref="P:System.Web.HttpContext.Items" /> property. That entry is of type <see cref="T:System.Web.Services.Protocols.SoapProtocolVersion" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -251,8 +239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both Internet Information Services (IIS) and the .NET Framework need to be configured for authentication in order for the <see cref="P:System.Web.Services.WebService.User" /> property to be meaningful. Authentication is the process of accepting credentials from a user and validating those credentials against some authority. If the credentials are valid, you have an authenticated identity. Authentication in the .NET Framework is configured by placing entries in the web.config file.</para
-          >
+            >Both Internet Information Services (IIS) and the .NET Framework need to be configured for authentication in order for the <see cref="P:System.Web.Services.WebService.User" /> property to be meaningful. Authentication is the process of accepting credentials from a user and validating those credentials against some authority. If the credentials are valid, you have an authenticated identity. Authentication in the .NET Framework is configured by placing entries in the web.config file.</para>
           <para>The following example demonstrates the entries you place in the web.config file to enable Windows authentication.</para>
           <code> &lt;security&gt;
   &lt;authentication mode="Windows"&gt; &lt;!-- Mode Options are Windows, Cookie, Passport and None or Empty String --&gt;
@@ -261,16 +248,13 @@
           <para
             >For more information on setting up security for an XML Web service see <format type="text/html">
               <a href="354B2AB1-2782-4542-B32A-DC560178B90C"
-                >[&lt;topic://cpconSecuringASPNETWebServices&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconSecuringASPNETWebServices&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ASP.NET server <see cref="P:System.Web.HttpContext.User" /> object. Can be used to authenticate whether a user is authorized to execute the request.</para
-          >
+            >Gets the ASP.NET server <see cref="P:System.Web.HttpContext.User" /> object. Can be used to authenticate whether a user is authorized to execute the request.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -28,13 +28,11 @@
   </Attributes>
   <Docs>
     <remarks
-      >You are encouraged to use this class for generating all DSA signatures to ensure code portability with all DSA implementation. Some DSA implementations, like <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, provides some helper methods but these methods will limit your code to use this specific class.</remarks
-    >
+      >You are encouraged to use this class for generating all DSA signatures to ensure code portability with all DSA implementation. Some DSA implementations, like <see cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />, provides some helper methods but these methods will limit your code to use this specific class.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates a Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature.</para
-      >
+        >Creates a Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureFormatter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureFormatter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -94,16 +91,14 @@ f.SetKey (dsa);
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureFormatter" /> class with the specified key.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.DSASignatureFormatter" /> class with the specified key.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) that holds the key. </param
-        >
+          />The instance of the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) that holds the key. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignature">
@@ -131,14 +126,12 @@ f.SetKey (dsa);
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting signature data can be verified by using <see cref="M:System.Security.Cryptography.DSASignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para
-          >
+            >The resulting signature data can be verified by using <see cref="M:System.Security.Cryptography.DSASignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) PKCS #1 signature for the specified data.</para
-          >
+            >Creates the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) PKCS #1 signature for the specified data.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -149,8 +142,7 @@ f.SetKey (dsa);
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to be signed. </param
-        >
+          />The data to be signed. </param>
       </Docs>
     </Member>
     <Member MemberName="SetHashAlgorithm">
@@ -178,22 +170,19 @@ f.SetKey (dsa);
         <remarks>
           <para>
 This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> hash algorithm. Any name that resolves in another hash algorithm (or anything else) will throw a <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" />. This is a restriction of the DSA algorithm (FIPS 186) not of the class library.
-</para
-          >
+</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the hash algorithm for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature formatter.</para
-          >
+            >Specifies the hash algorithm for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature formatter.</para>
         </summary>
         <param name="strName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for the signature formatter. </param
-        >
+          />The name of the hash algorithm to use for the signature formatter. </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -219,21 +208,18 @@ This class only support the <see cref="T:System.Security.Cryptography.SHA1" /> h
       </Parameters>
       <Docs>
         <remarks>
-          <see cref="M:System.Security.Cryptography.DSASignatureFormatter.CreateSignature" /> will only be successful if the key object has it's private key available. </remarks
-        >
+          <see cref="M:System.Security.Cryptography.DSASignatureFormatter.CreateSignature" /> will only be successful if the key object has it's private key available. </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the key to be used for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature formatter.</para
-          >
+            >Specifies the key to be used for the Digital Signature Algorithm (<see cref="T:System.Security.Cryptography.DSA" />) signature formatter.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of <see cref="T:System.Security.Cryptography.DSA" /> that holds the key. </param
-        >
+          />The instance of <see cref="T:System.Security.Cryptography.DSA" /> that holds the key. </param>
       </Docs>
     </Member>
   </Members>

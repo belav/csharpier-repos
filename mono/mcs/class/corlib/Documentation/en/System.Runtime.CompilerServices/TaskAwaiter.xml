@@ -102,16 +102,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the action to perform when the <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" /> object stops waiting for the asynchronous task to complete.</para
-          >
+            >Sets the action to perform when the <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" /> object stops waiting for the asynchronous task to complete.</para>
         </summary>
         <param name="continuation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action to perform when the wait operation completes.</param
-        >
+          />The action to perform when the wait operation completes.</param>
       </Docs>
     </Member>
     <Member MemberName="UnsafeOnCompleted">
@@ -141,8 +139,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The action to invoke when the await operation completes.</param
-        >
+          />The action to invoke when the await operation completes.</param>
       </Docs>
     </Member>
   </Members>

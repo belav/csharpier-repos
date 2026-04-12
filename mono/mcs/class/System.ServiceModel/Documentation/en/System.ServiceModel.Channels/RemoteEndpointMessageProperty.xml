@@ -56,23 +56,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.RemoteEndpointMessageProperty" /> class for a specified IP address and port that identify the client from which the message was sent.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.RemoteEndpointMessageProperty" /> class for a specified IP address and port that identify the client from which the message was sent.</para>
         </summary>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IP address of the remote endpoint associated with the message.</param
-        >
+          />The IP address of the remote endpoint associated with the message.</param>
         <param name="port">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number of the remote endpoint associated with the message.</param
-        >
+          />The port number of the remote endpoint associated with the message.</param>
       </Docs>
     </Member>
     <Member MemberName="Address">

@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.ProcessModule" /> objects.</para
-      >
+        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.ProcessModule" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessModuleCollection" /> class, with no associated <see cref="T:System.Diagnostics.ProcessModule" /> instances.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessModuleCollection" /> class, with no associated <see cref="T:System.Diagnostics.ProcessModule" /> instances.</para>
         </summary>
       </Docs>
     </Member>
@@ -83,16 +81,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessModuleCollection" /> class, using the specified array of <see cref="T:System.Diagnostics.ProcessModule" /> instances.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessModuleCollection" /> class, using the specified array of <see cref="T:System.Diagnostics.ProcessModule" /> instances.</para>
         </summary>
         <param name="processModules">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.ProcessModule" /> instances with which to initialize this <see cref="T:System.Diagnostics.ProcessModuleCollection" /> instance. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.ProcessModule" /> instances with which to initialize this <see cref="T:System.Diagnostics.ProcessModuleCollection" /> instance. </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -134,8 +130,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.ProcessModule" /> instance that indicates the module to find in this collection. </param
-        >
+          />A <see cref="T:System.Diagnostics.ProcessModule" /> instance that indicates the module to find in this collection. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -165,23 +160,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an array of <see cref="T:System.Diagnostics.ProcessModule" /> instances to the collection, at the specified index.</para
-          >
+            >Copies an array of <see cref="T:System.Diagnostics.ProcessModule" /> instances to the collection, at the specified index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.ProcessModule" /> instances to add to the collection. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.ProcessModule" /> instances to add to the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location at which to add the new instances. </param
-        >
+          />The location at which to add the new instances. </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -214,16 +206,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index that defines the location of the module within the <see cref="T:System.Diagnostics.ProcessModuleCollection" />.</para
-          >
+            >The zero-based index that defines the location of the module within the <see cref="T:System.Diagnostics.ProcessModuleCollection" />.</para>
         </returns>
         <param name="module">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.ProcessModule" /> whose index is retrieved. </param
-        >
+          />The <see cref="T:System.Diagnostics.ProcessModule" /> whose index is retrieved. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">

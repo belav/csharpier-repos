@@ -6,8 +6,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <DefineConstants Condition="'$(StabilizePackageVersion)' == 'true'"
-      >$(DefineConstants);STABILIZE_PACKAGE_VERSION</DefineConstants
-    >
+      >$(DefineConstants);STABILIZE_PACKAGE_VERSION</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

@@ -35,14 +35,11 @@ WARNING:   When setting properties based on their current state (for example:
 
   <PropertyGroup>
     <_IlasmSwitches Condition="'$(DebugType)' == 'Full' and '$(Optimize)' != 'True'"
-      >$(_IlasmSwitches) -DEBUG</_IlasmSwitches
-    >
+      >$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
     <_IlasmSwitches Condition="'$(DebugType)' == 'Impl' and '$(Optimize)' != 'True'"
-      >$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches
-    >
+      >$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches>
     <_IlasmSwitches Condition="'$(DebugType)' == 'PdbOnly' and '$(Optimize)' != 'True'"
-      >$(_IlasmSwitches) -DEBUG</_IlasmSwitches
-    >
+      >$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
   </PropertyGroup>
 
   <Target
@@ -133,13 +130,11 @@ IF NOT DEFINED DoLink (
       <HasDisasmCheck>false</HasDisasmCheck>
       <HasDisasmCheck
         Condition="@(DisasmCheckFiles->Count()) &gt; 0 And '$(CLRTestKind)' == 'BuildAndRun'"
-        >true</HasDisasmCheck
-      >
+        >true</HasDisasmCheck>
 
       <GCStressIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</GCStressIncompatible>
       <HeapVerifyIncompatible Condition="'$(HasDisasmCheck)' == 'true'"
-        >true</HeapVerifyIncompatible
-      >
+        >true</HeapVerifyIncompatible>
     </PropertyGroup>
   </Target>
 
@@ -163,15 +158,12 @@ IF NOT DEFINED DoLink (
       <HasBashDisasmCheck>false</HasBashDisasmCheck>
       <HasBashDisasmCheck
         Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr' and ('$(TargetOS)' == 'linux' or '$(TargetOS)' == 'osx') and ('$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'arm64')"
-        >true</HasBashDisasmCheck
-      >
+        >true</HasBashDisasmCheck>
 
       <BashDisasmOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'"
-        >$(scriptPath)__jit_disasm.out</BashDisasmOutputFile
-      >
+        >$(scriptPath)__jit_disasm.out</BashDisasmOutputFile>
       <BashDisasmListOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'"
-        >$(scriptPath)__jit_disasm_list.out</BashDisasmListOutputFile
-      >
+        >$(scriptPath)__jit_disasm_list.out</BashDisasmListOutputFile>
 
       <CLRTestBashPreCommands Condition="'$(HasBashDisasmCheck)' == 'true'">
         <![CDATA[
@@ -215,15 +207,12 @@ fi
       <HasBatchDisasmCheck>false</HasBatchDisasmCheck>
       <HasBatchDisasmCheck
         Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr'"
-        >true</HasBatchDisasmCheck
-      >
+        >true</HasBatchDisasmCheck>
 
       <BatchDisasmOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'"
-        >$(scriptPath)__jit_disasm.out</BatchDisasmOutputFile
-      >
+        >$(scriptPath)__jit_disasm.out</BatchDisasmOutputFile>
       <BatchDisasmListOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'"
-        >$(scriptPath)__jit_disasm_list.out</BatchDisasmListOutputFile
-      >
+        >$(scriptPath)__jit_disasm_list.out</BatchDisasmListOutputFile>
 
       <CLRTestBatchPreCommands Condition="'$(HasBatchDisasmCheck)' == 'true'">
         <![CDATA[

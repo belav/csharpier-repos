@@ -36,15 +36,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Security.SecurityException" /> exception is thrown when a caller does not have the permissions required to access a resource. The following example instantiates a <see cref="T:System.Security.PermissionSet" /> object that includes a <see cref="T:System.Security.Permissions.UIPermission" /> object to allow access to UI objects and the Clipboard and a <see cref="T:System.Security.Permissions.RegistryPermission" /> object to prevent registry access. The call to the <see cref="M:System.Security.PermissionSet.PermitOnly" /> method means that these permissions will apply regardless of the permissions assigned to the caller. As a result, the attempt to create a registry key throws a <see cref="T:System.Security.SecurityException" />. </para
-      >
+        >A <see cref="T:System.Security.SecurityException" /> exception is thrown when a caller does not have the permissions required to access a resource. The following example instantiates a <see cref="T:System.Security.PermissionSet" /> object that includes a <see cref="T:System.Security.Permissions.UIPermission" /> object to allow access to UI objects and the Clipboard and a <see cref="T:System.Security.Permissions.RegistryPermission" /> object to prevent registry access. The call to the <see cref="M:System.Security.PermissionSet.PermitOnly" /> method means that these permissions will apply regardless of the permissions assigned to the caller. As a result, the attempt to create a registry key throws a <see cref="T:System.Security.SecurityException" />. </para>
       <para>code reference: System.SecurityException.Class#1</para>
       <para>
-        <see cref="T:System.Security.SecurityException" /> uses the HRESULT COR_E_SECURITY, which has the value 0x8013150A.</para
-      >
+        <see cref="T:System.Security.SecurityException" /> uses the HRESULT COR_E_SECURITY, which has the value 0x8013150A.</para>
       <para
-        >For a list of the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class, see a specific <see cref="Overload:System.Security.SecurityException.#ctor" /> constructor.</para
-      >
+        >For a list of the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class, see a specific <see cref="Overload:System.Security.SecurityException.#ctor" /> constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -74,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para
-          >
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para>
           <list type="table">
             <listheader>
               <item>
@@ -112,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with default properties.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -142,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para
-          >
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para>
           <list type="table">
             <listheader>
               <item>
@@ -180,16 +174,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -217,8 +209,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. </para>
           <para
-            >This constructor sets the following property values based on the information in the <paramref name="info" /> parameter:</para
-          >
+            >This constructor sets the following property values based on the information in the <paramref name="info" /> parameter:</para>
           <list type="bullet">
             <item>
               <para>
@@ -275,23 +266,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -322,11 +310,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para
-          >
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Security.SecurityException" /> class.</para>
           <list type="table">
             <listheader>
               <item>
@@ -363,23 +349,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -425,8 +408,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message string specified by <paramref name="message" />. </para
-                >
+                  >The localized error message string specified by <paramref name="message" />. </para>
               </description>
             </item>
             <item>
@@ -437,8 +419,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Type" /> of the permission that failed, specified by <paramref name="type" />.</para
-                >
+                  >The <see cref="T:System.Type" /> of the permission that failed, specified by <paramref name="type" />.</para>
               </description>
             </item>
           </list>
@@ -446,23 +427,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message and the permission type that caused the exception to be thrown.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message and the permission type that caused the exception to be thrown.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the permission that caused the exception to be thrown. </param
-        >
+          />The type of the permission that caused the exception to be thrown. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -508,8 +486,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message string specified by <paramref name="message" />. </para
-                >
+                  >The localized error message string specified by <paramref name="message" />. </para>
               </description>
             </item>
             <item>
@@ -520,8 +497,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Type" /> of the permission that failed, specified by <paramref name="type" />.</para
-                >
+                  >The <see cref="T:System.Type" /> of the permission that failed, specified by <paramref name="type" />.</para>
               </description>
             </item>
             <item>
@@ -539,30 +515,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message, the permission type that caused the exception to be thrown, and the permission state.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class with a specified error message, the permission type that caused the exception to be thrown, and the permission state.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the permission that caused the exception to be thrown. </param
-        >
+          />The type of the permission that caused the exception to be thrown. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The state of the permission that caused the exception to be thrown. </param
-        >
+          />The state of the permission that caused the exception to be thrown. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -611,8 +583,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message string specified by <paramref name="message" />. </para
-                >
+                  >The localized error message string specified by <paramref name="message" />. </para>
               </description>
             </item>
             <item>
@@ -623,8 +594,7 @@
               </term>
               <description>
                 <para
-                  >The first permission in the permission set or permission set collection specified by <paramref name="permThatFailed" />.</para
-                >
+                  >The first permission in the permission set or permission set collection specified by <paramref name="permThatFailed" />.</para>
               </description>
             </item>
             <item>
@@ -645,8 +615,7 @@
               </term>
               <description>
                 <para
-                  >The security permission, permission set, or permission set collection specified by <paramref name="demanded" />.</para
-                >
+                  >The security permission, permission set, or permission set collection specified by <paramref name="demanded" />.</para>
               </description>
             </item>
             <item>
@@ -667,8 +636,7 @@
               </term>
               <description>
                 <para
-                  >The denied security permission, permission set, or permission set collection specified by <paramref name="deny" />.</para
-                >
+                  >The denied security permission, permission set, or permission set collection specified by <paramref name="deny" />.</para>
               </description>
             </item>
             <item>
@@ -679,8 +647,7 @@
               </term>
               <description>
                 <para
-                  >The permission, permission set, or permission set collection specified by <paramref name="permitOnly" />.</para
-                >
+                  >The permission, permission set, or permission set collection specified by <paramref name="permitOnly" />.</para>
               </description>
             </item>
             <item>
@@ -701,8 +668,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Reflection.MethodInfo" /> specified by <paramref name="method" />.</para
-                >
+                  >The <see cref="T:System.Reflection.MethodInfo" /> specified by <paramref name="method" />.</para>
               </description>
             </item>
             <item>
@@ -730,51 +696,44 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class for an exception caused by a Deny on the stack.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class for an exception caused by a Deny on the stack.  </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception.</param
-        >
+          />The error message that explains the reason for the exception.</param>
         <param name="deny">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The denied permission or permission set.</param
-        >
+          />The denied permission or permission set.</param>
         <param name="permitOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permit-only permission or permission set.</param
-        >
+          />The permit-only permission or permission set.</param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.MethodInfo" /> that identifies the method that encountered the exception.</param
-        >
+          />A <see cref="T:System.Reflection.MethodInfo" /> that identifies the method that encountered the exception.</param>
         <param name="demanded">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The demanded permission, permission set, or permission set collection.</param
-        >
+          />The demanded permission, permission set, or permission set collection.</param>
         <param name="permThatFailed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.IPermission" /> that identifies the permission that failed.</param
-        >
+          />An <see cref="T:System.Security.IPermission" /> that identifies the permission that failed.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -827,8 +786,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message string specified by <paramref name="message" />. </para
-                >
+                  >The localized error message string specified by <paramref name="message" />. </para>
               </description>
             </item>
             <item>
@@ -839,8 +797,7 @@
               </term>
               <description>
                 <para
-                  >The first permission in the permission set or permission set collection specified by <paramref name="permThatFailed" />.</para
-                >
+                  >The first permission in the permission set or permission set collection specified by <paramref name="permThatFailed" />.</para>
               </description>
             </item>
             <item>
@@ -851,8 +808,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Security.PermissionSet" /> specified by <paramref name="grant" />.</para
-                >
+                  >The <see cref="T:System.Security.PermissionSet" /> specified by <paramref name="grant" />.</para>
               </description>
             </item>
             <item>
@@ -863,8 +819,7 @@
               </term>
               <description>
                 <para
-                  >The demanded security permission, permission set, or permission set collection that failed, specified by <paramref name="demanded" />.</para
-                >
+                  >The demanded security permission, permission set, or permission set collection that failed, specified by <paramref name="demanded" />.</para>
               </description>
             </item>
             <item>
@@ -875,8 +830,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Security.PermissionSet" /> specified by <paramref name="refused" />.</para
-                >
+                  >The <see cref="T:System.Security.PermissionSet" /> specified by <paramref name="refused" />.</para>
               </description>
             </item>
             <item>
@@ -907,8 +861,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Reflection.AssemblyName" /> specified by <paramref name="assemblyName" />.</para
-                >
+                  >The <see cref="T:System.Reflection.AssemblyName" /> specified by <paramref name="assemblyName" />.</para>
               </description>
             </item>
             <item>
@@ -919,8 +872,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Reflection.MethodInfo" /> specified by <paramref name="method" />.</para
-                >
+                  >The <see cref="T:System.Reflection.MethodInfo" /> specified by <paramref name="method" />.</para>
               </description>
             </item>
             <item>
@@ -931,8 +883,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Security.SecurityZone" /> value  from the <see cref="T:System.Security.Policy.Evidence" /> specified by <paramref name="evidence" />.</para
-                >
+                  >The <see cref="T:System.Security.SecurityZone" /> value  from the <see cref="T:System.Security.Policy.Evidence" /> specified by <paramref name="evidence" />.</para>
               </description>
             </item>
             <item>
@@ -943,8 +894,7 @@
               </term>
               <description>
                 <para
-                  >The URL from the <see cref="T:System.Security.Policy.Evidence" /> specified by <paramref name="evidence" />.</para
-                >
+                  >The URL from the <see cref="T:System.Security.Policy.Evidence" /> specified by <paramref name="evidence" />.</para>
               </description>
             </item>
           </list>
@@ -952,72 +902,62 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class for an exception caused by an insufficient grant set. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.SecurityException" /> class for an exception caused by an insufficient grant set. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception.</param
-        >
+          />The error message that explains the reason for the exception.</param>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Reflection.AssemblyName" /> that specifies the name of the assembly that caused the exception.</param
-        >
+          />An <see cref="T:System.Reflection.AssemblyName" /> that specifies the name of the assembly that caused the exception.</param>
         <param name="grant">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.PermissionSet" /> that represents the permissions granted the assembly.</param
-        >
+          />A <see cref="T:System.Security.PermissionSet" /> that represents the permissions granted the assembly.</param>
         <param name="refused">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Security.PermissionSet" /> that represents the refused permission or permission set.</param
-        >
+          />A <see cref="T:System.Security.PermissionSet" /> that represents the refused permission or permission set.</param>
         <param name="method">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Reflection.MethodInfo" /> that represents the method that encountered the exception.</param
-        >
+          />A <see cref="T:System.Reflection.MethodInfo" /> that represents the method that encountered the exception.</param>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values.</param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values.</param>
         <param name="demanded">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The demanded permission, permission set, or permission set collection.</param
-        >
+          />The demanded permission, permission set, or permission set collection.</param>
         <param name="permThatFailed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.IPermission" /> that represents the permission that failed.</param
-        >
+          />An <see cref="T:System.Security.IPermission" /> that represents the permission that failed.</param>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> for the assembly that caused the exception.</param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> for the assembly that caused the exception.</param>
       </Docs>
     </Member>
     <Member MemberName="Action">
@@ -1048,11 +988,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.SecurityException.Action" /> property contains the security action that caused the security check failure. Many of the security actions can cause a security exception to be thrown. For example, a demand on a permission set checks that all callers on the call stack have the necessary permissions in the permission set. If any caller on the call stack lacks a required permission, the security check fails. Alternatively, a method in the call chain can modify the outcome of the stack walk by placing a stack walk modifier, such as <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" />, on the stack to limit the allowed permissions. For example, a method on the call stack might deny all of its callers a set of permissions named PSET1, such that any demand for a permission that is part of PSET1 fails for those callers. The <see cref="P:System.Security.SecurityException.Action" /> property contains the security action that caused the exception to be thrown.</para
-          >
+            >The <see cref="P:System.Security.SecurityException.Action" /> property contains the security action that caused the security check failure. Many of the security actions can cause a security exception to be thrown. For example, a demand on a permission set checks that all callers on the call stack have the necessary permissions in the permission set. If any caller on the call stack lacks a required permission, the security check fails. Alternatively, a method in the call chain can modify the outcome of the stack walk by placing a stack walk modifier, such as <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" />, on the stack to limit the allowed permissions. For example, a method on the call stack might deny all of its callers a set of permissions named PSET1, such that any demand for a permission that is part of PSET1 fails for those callers. The <see cref="P:System.Security.SecurityException.Action" /> property contains the security action that caused the exception to be thrown.</para>
           <para>
-            <see cref="T:System.Security.Permissions.SecurityAction" /> is an enumeration in the <see cref="T:System.Security.Permissions.SecurityAction" /> namespace that provides the security action value for the <see cref="P:System.Security.SecurityException.Action" /> property. Typically this property contains one of the values shown in the following table.</para
-          >
+            <see cref="T:System.Security.Permissions.SecurityAction" /> is an enumeration in the <see cref="T:System.Security.Permissions.SecurityAction" /> namespace that provides the security action value for the <see cref="P:System.Security.SecurityException.Action" /> property. Typically this property contains one of the values shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -1072,8 +1010,7 @@
               </term>
               <description>
                 <para
-                  >A full stack walk failed due to a demand made against the assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property. </para
-                >
+                  >A full stack walk failed due to a demand made against the assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property. </para>
               </description>
             </item>
             <item>
@@ -1084,8 +1021,7 @@
               </term>
               <description>
                 <para
-                  >A link demand against the assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property failed. </para
-                >
+                  >A link demand against the assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property failed. </para>
               </description>
             </item>
             <item>
@@ -1096,8 +1032,7 @@
               </term>
               <description>
                 <para
-                  >An assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property failed to meet an inheritance demand. </para
-                >
+                  >An assembly identified by the <see cref="P:System.Security.SecurityException.FailedAssemblyInfo" /> property failed to meet an inheritance demand. </para>
               </description>
             </item>
             <item>
@@ -1108,8 +1043,7 @@
               </term>
               <description>
                 <para
-                  >A demanded permission did not match any permission in the <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> permission set. The method that placed the <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> on the call stack is identified by the <see cref="P:System.Security.SecurityException.Method" /> property. </para
-                >
+                  >A demanded permission did not match any permission in the <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> permission set. The method that placed the <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> on the call stack is identified by the <see cref="P:System.Security.SecurityException.Method" /> property. </para>
               </description>
             </item>
             <item>
@@ -1120,8 +1054,7 @@
               </term>
               <description>
                 <para
-                  >A demanded permission matched a permission in the deny permission set on the call stack. The method that placed the <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> on the call stack is identified by the <see cref="P:System.Security.SecurityException.Method" /> property. </para
-                >
+                  >A demanded permission matched a permission in the deny permission set on the call stack. The method that placed the <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> on the call stack is identified by the <see cref="P:System.Security.SecurityException.Method" /> property. </para>
               </description>
             </item>
           </list>
@@ -1187,8 +1120,7 @@
               <a href="bc62316a-d41f-4f90-8300-c6f4f0556e43">is</a>
             </format> operator in C# or the <format type="text/html">
               <a href="33f65296-659a-4b9a-9a29-c2a91cff68b2">TypeOf</a>
-            </format> operator in Visual Basic.  </para
-          >
+            </format> operator in Visual Basic.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1224,12 +1156,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains an <see cref="T:System.Reflection.AssemblyName" /> object that identifies the assembly that caused the security check to fail.</para
-          >
+            >This property contains an <see cref="T:System.Reflection.AssemblyName" /> object that identifies the assembly that caused the security check to fail.</para>
           <block subset="none" type="note">
             <para
-              >This property is not populated when a security exception occurs in a <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> stack frame, because the assembly issuing the <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> security action is not the assembly that failed the stack walk. In these cases, the security exception is created with a constructor that does not require an assembly name, granted set information, or refused set information.</para
-            >
+              >This property is not populated when a security exception occurs in a <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> stack frame, because the assembly issuing the <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> or <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> security action is not the assembly that failed the stack walk. In these cases, the security exception is created with a constructor that does not require an assembly name, granted set information, or refused set information.</para>
           </block>
         </remarks>
         <summary>
@@ -1261,8 +1191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the demanded object is a permission set or permission set collection, the <see cref="P:System.Security.SecurityException.FirstPermissionThatFailed" /> represents only the first permission that caused the exception. Additional permissions in the set or collection can also cause a demand failure.</para
-          >
+            >If the demanded object is a permission set or permission set collection, the <see cref="P:System.Security.SecurityException.FirstPermissionThatFailed" /> represents only the first permission that caused the exception. Additional permissions in the set or collection can also cause a demand failure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1296,29 +1225,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >GetObjectData sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para
-          >
+            >GetObjectData sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the <see cref="T:System.Security.SecurityException" />.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName="GrantedSet">
@@ -1338,14 +1263,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property might not contain relevant data in security exceptions other than exceptions involving checks for the <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />.</para
-          >
+            >This property might not contain relevant data in security exceptions other than exceptions involving checks for the <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the granted permission set of the assembly that caused the <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >Gets or sets the granted permission set of the assembly that caused the <see cref="T:System.Security.SecurityException" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1383,16 +1306,14 @@
             </item>
             <item>
               <para
-                >Information about the method that placed either a <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> or <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> security action on the call stack, in the case of a failure due to a <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> or <see cref="F:System.Security.Permissions.SecurityAction.Deny" />.</para
-              >
+                >Information about the method that placed either a <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> or <see cref="F:System.Security.Permissions.SecurityAction.Deny" /> security action on the call stack, in the case of a failure due to a <see cref="F:System.Security.Permissions.SecurityAction.PermitOnly" /> or <see cref="F:System.Security.Permissions.SecurityAction.Deny" />.</para>
             </item>
             <item>
               <para>null, in the case of a failure that is impossible to attribute to a specific method.</para>
             </item>
           </list>
           <para
-            >The <see cref="T:System.Reflection.MethodInfo" /> object provides the method name, class name, and assembly name information that uniquely identifies the method.</para
-          >
+            >The <see cref="T:System.Reflection.MethodInfo" /> object provides the method name, class name, and assembly name information that uniquely identifies the method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1467,15 +1388,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.SecurityException.PermitOnlySetInstance" /> property represents the permitted permission, permission set, or permission set collection contained in the stack frame that caused the security exception. For instance, when a security exception occurs because of a <see cref="M:System.Security.PermissionSet.Demand" /> failure, the permitted permission appears in this property and the demanded <see cref="T:System.Security.PermissionSet" /> is contained in the <see cref="P:System.Security.SecurityException.Demanded" /> property.</para
-          >
+            >The <see cref="P:System.Security.SecurityException.PermitOnlySetInstance" /> property represents the permitted permission, permission set, or permission set collection contained in the stack frame that caused the security exception. For instance, when a security exception occurs because of a <see cref="M:System.Security.PermissionSet.Demand" /> failure, the permitted permission appears in this property and the demanded <see cref="T:System.Security.PermissionSet" /> is contained in the <see cref="P:System.Security.SecurityException.Demanded" /> property.</para>
           <para
             >This property is of type <see cref="T:System.Object" /> because permissions, permission sets, or permission set collections can all be demanded and <see cref="T:System.Object" /> is their common base class.  To test the run-time type of this property, you can use the <see cref="M:System.Object.GetType" /> method or a specific language operator, such as the <format type="text/html">
               <a href="bc62316a-d41f-4f90-8300-c6f4f0556e43">is</a>
             </format> operator in C# or the <format type="text/html">
               <a href="33f65296-659a-4b9a-9a29-c2a91cff68b2">TypeOf</a>
-            </format> operator in Visual Basic.</para
-          >
+            </format> operator in Visual Basic.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1500,14 +1419,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property might not contain relevant data in security exceptions other than exceptions involving checks for the <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />.</para
-          >
+            >This property might not contain relevant data in security exceptions other than exceptions involving checks for the <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the refused permission set of the assembly that caused the <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >Gets or sets the refused permission set of the assembly that caused the <see cref="T:System.Security.SecurityException" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1531,20 +1448,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.SecurityException.ToString" /> method returns the full description of the <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >The <see cref="M:System.Security.SecurityException.ToString" /> method returns the full description of the <see cref="T:System.Security.SecurityException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a representation of the current <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >Returns a representation of the current <see cref="T:System.Security.SecurityException" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the current <see cref="T:System.Security.SecurityException" />.</para
-          >
+            >A string representation of the current <see cref="T:System.Security.SecurityException" />.</para>
         </returns>
       </Docs>
     </Member>

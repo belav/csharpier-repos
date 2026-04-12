@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> objects are retrieved by the <see cref="P:System.Windows.Forms.DataGridViewRow.Cells" /> property.</para
-      >
+        <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> objects are retrieved by the <see cref="P:System.Windows.Forms.DataGridViewRow.Cells" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of cells in a <see cref="T:System.Windows.Forms.DataGridViewRow" />.</para
-      >
+        >Represents a collection of cells in a <see cref="T:System.Windows.Forms.DataGridViewRow" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,16 +50,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> class.</para>
         </summary>
         <param name="dataGridViewRow">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewRow" /> that owns the collection.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewRow" /> that owns the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -84,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.</para
-          >
+            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,8 +95,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCell" /> to add to the collection.</param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCell" /> to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -130,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to populate a <see cref="T:System.Windows.Forms.DataGridViewRow" /> with cells before you add the row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +135,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Windows.Forms.DataGridViewCell" /> objects to add to the collection.</param
-        >
+          />The array of <see cref="T:System.Windows.Forms.DataGridViewCell" /> objects to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -166,8 +158,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -221,16 +212,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="dataGridViewCell" /> is in the collection; otherwise, false.</para
-          >
+            >true if <paramref name="dataGridViewCell" /> is in the collection; otherwise, false.</para>
         </returns>
         <param name="dataGridViewCell">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCell" /> to locate in the collection.</param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCell" /> to locate in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -261,15 +250,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination array to which the contents will be copied.</param
-        >
+          />The destination array to which the contents will be copied.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the element in <paramref name="array" /> at which to start copying.</param
-        >
+          />The index of the element in <paramref name="array" /> at which to start copying.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -297,16 +284,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the value of <paramref name="dataGridViewCell" /> parameter, if it is found in the collection; otherwise, -1.</para
-          >
+            >The zero-based index of the value of <paramref name="dataGridViewCell" /> parameter, if it is found in the collection; otherwise, -1.</para>
         </returns>
         <param name="dataGridViewCell">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cell to locate in the collection.</param
-        >
+          />The cell to locate in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -330,8 +315,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -342,15 +326,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which to place <paramref name="dataGridViewCell" />.</param
-        >
+          />The zero-based index at which to place <paramref name="dataGridViewCell" />.</param>
         <param name="dataGridViewCell">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to insert.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to insert.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -418,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.ArrayList" /> containing <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> objects.</para
-          >
+            >Gets an <see cref="T:System.Collections.ArrayList" /> containing <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> objects.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -445,25 +426,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.DataGridViewCellCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.DataGridViewCellCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.DataGridViewCellCollection.CollectionChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.DataGridViewCellCollection.CollectionChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -486,8 +463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -498,8 +474,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to remove from the collection.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -519,8 +494,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para
-          >
+            >Use this method to alter the collection before you add the containing row to a <see cref="T:System.Windows.Forms.DataGridView" /> control. Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -531,8 +505,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> to be removed.</param
-        >
+          />The zero-based index of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> to be removed.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -555,8 +528,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -571,8 +543,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to add to the collection.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Contains">
@@ -591,8 +562,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -601,16 +571,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref name="value" /> is found in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />; otherwise, false.</para
-          >
+            >true if the <paramref name="value" /> is found in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to locate in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />.</param
-        >
+          />The object to locate in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -629,8 +597,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -645,8 +612,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to locate in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />.</param
-        >
+          />The object to locate in the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" />.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -667,8 +633,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -679,15 +644,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which value should be inserted. </param
-        >
+          />The zero-based index at which value should be inserted. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to insert into the <see cref="M:System.Windows.Forms.DataGridViewCellCollection.System#Collections#IList#Insert(System.Int32,System.Object)" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to insert into the <see cref="M:System.Windows.Forms.DataGridViewCellCollection.System#Collections#IList#Insert(System.Int32,System.Object)" />.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -704,8 +667,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -752,8 +714,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Once you add the row to a control, the number of cells it contains always matches the number of columns in the control, so this method is no longer useful. </para>
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -764,8 +725,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to remove from the collection.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to remove from the collection.</param>
       </Docs>
     </Member>
   </Members>

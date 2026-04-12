@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" /> attribute to a field to indicate that it should be treated as a fixed-length inline array. The type of the field that the attribute is applied to must have a size that can contain the indicated number of elements.</para
-      >
+        >Apply the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" /> attribute to a field to indicate that it should be treated as a fixed-length inline array. The type of the field that the attribute is applied to must have a size that can contain the indicated number of elements.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,23 +56,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" /> class. </para>
         </summary>
         <param name="elementType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the elements contained in the buffer.</param
-        >
+          />The type of the elements contained in the buffer.</param>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the buffer.</param
-        >
+          />The number of elements in the buffer.</param>
       </Docs>
     </Member>
     <Member MemberName="ElementType">

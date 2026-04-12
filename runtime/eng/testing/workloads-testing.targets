@@ -3,8 +3,7 @@
     <!-- for non-ci builds, we install the sdk when tests are run -->
     <InstallWorkloadForTesting
       Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(ArchiveTests)' == 'true'"
-      >true</InstallWorkloadForTesting
-    >
+      >true</InstallWorkloadForTesting>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(InstallWorkloadForTesting)' == 'true'">
@@ -16,8 +15,7 @@
     <_DotNetPath Condition="$([MSBuild]::IsOSPlatform('windows'))">$(_DotNetPath).exe</_DotNetPath>
 
     <PreparePackagesForWorkloadInstall Condition="'$(PreparePackagesForWorkloadInstall)' == ''"
-      >true</PreparePackagesForWorkloadInstall
-    >
+      >true</PreparePackagesForWorkloadInstall>
     <InstallWorkloadUsingArtifactsDependsOn>
       $(InstallWorkloadUsingArtifactsDependsOn);
       _ProvisionDotNetForWorkloadTesting;
@@ -34,31 +32,25 @@
 
   <PropertyGroup>
     <_DotNetInstallScriptName Condition="!$([MSBuild]::IsOSPlatform('windows'))"
-      >dotnet-install.sh</_DotNetInstallScriptName
-    >
+      >dotnet-install.sh</_DotNetInstallScriptName>
     <_DotNetInstallScriptName Condition=" $([MSBuild]::IsOSPlatform('windows'))"
-      >dotnet-install.ps1</_DotNetInstallScriptName
-    >
+      >dotnet-install.ps1</_DotNetInstallScriptName>
 
     <_DotNetInstallScriptPath>$(ArtifactsObjDir)$(_DotNetInstallScriptName)</_DotNetInstallScriptPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(SdkVersionForWorkloadTesting)' != ''">
     <_DotNetInstallCommand Condition="!$([MSBuild]::IsOSPlatform('windows'))"
-      >$(_DotNetInstallScriptPath) -i $(_SdkWithNoWorkloadPath) -v $(SdkVersionForWorkloadTesting)</_DotNetInstallCommand
-    >
+      >$(_DotNetInstallScriptPath) -i $(_SdkWithNoWorkloadPath) -v $(SdkVersionForWorkloadTesting)</_DotNetInstallCommand>
     <_DotNetInstallCommand Condition="$([MSBuild]::IsOSPlatform('windows'))"
-      >$(_DotNetInstallScriptPath) -InstallDir $(_SdkWithNoWorkloadPath) -Version $(SdkVersionForWorkloadTesting)</_DotNetInstallCommand
-    >
+      >$(_DotNetInstallScriptPath) -InstallDir $(_SdkWithNoWorkloadPath) -Version $(SdkVersionForWorkloadTesting)</_DotNetInstallCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(SdkVersionForWorkloadTesting)' == ''">
     <_DotNetInstallCommand Condition="!$([MSBuild]::IsOSPlatform('windows'))"
-      >$(_DotNetInstallScriptPath) -i $(_SdkWithNoWorkloadPath) -v latest -q daily --channel 9.0</_DotNetInstallCommand
-    >
+      >$(_DotNetInstallScriptPath) -i $(_SdkWithNoWorkloadPath) -v latest -q daily --channel 9.0</_DotNetInstallCommand>
     <_DotNetInstallCommand Condition="$([MSBuild]::IsOSPlatform('windows'))"
-      >$(_DotNetInstallScriptPath) -InstallDir $(_SdkWithNoWorkloadPath) -Quality daily -Channel 9.0</_DotNetInstallCommand
-    >
+      >$(_DotNetInstallScriptPath) -InstallDir $(_SdkWithNoWorkloadPath) -Quality daily -Channel 9.0</_DotNetInstallCommand>
   </PropertyGroup>
 
   <ItemGroup>
@@ -200,8 +192,7 @@
       <!-- Used for workload testing -->
       <PackageVersionForWorkloadManifests>$(PackageVersion)</PackageVersionForWorkloadManifests>
       <PackageVersionForWorkloadManifests Condition="'$(StabilizePackageVersion)' == 'true'"
-        >$(ProductVersion)</PackageVersionForWorkloadManifests
-      >
+        >$(ProductVersion)</PackageVersionForWorkloadManifests>
     </PropertyGroup>
 
     <Error

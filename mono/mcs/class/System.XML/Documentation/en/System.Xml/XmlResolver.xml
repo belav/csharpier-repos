@@ -32,34 +32,28 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>XmlResolver is used to resolve external XML resources, such as entities, document type definitions (DTDs), or schemas. It is also used to process include and import elements found in Extensible StyleSheet Language (XSL) style sheets or XML Schema definition language (XSD) schemas.</para>
       <para>
-        <see cref="T:System.Xml.XmlUrlResolver" /> is a concrete implementation of XmlResolver and is the default resolver for all classes in the System.Xml namespace. You can also create your own resolver.</para
-      >
+        <see cref="T:System.Xml.XmlUrlResolver" /> is a concrete implementation of XmlResolver and is the default resolver for all classes in the System.Xml namespace. You can also create your own resolver.</para>
       <format type="text/html">
         <h2>Security Considerations</h2>
       </format>
       <para
-        >Consider the following items when working with the <see cref="T:System.Xml.XmlResolver" /> class.</para
-      >
+        >Consider the following items when working with the <see cref="T:System.Xml.XmlResolver" /> class.</para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.Xml.XmlResolver" /> objects can contain sensitive information such as user credentials. You should be careful when caching <see cref="T:System.Xml.XmlResolver" /> objects and should not pass the <see cref="T:System.Xml.XmlResolver" /> object to an untrusted component.</para
-          >
+            <see cref="T:System.Xml.XmlResolver" /> objects can contain sensitive information such as user credentials. You should be careful when caching <see cref="T:System.Xml.XmlResolver" /> objects and should not pass the <see cref="T:System.Xml.XmlResolver" /> object to an untrusted component.</para>
         </item>
         <item>
           <para
-            >If you are designing a class property that uses the <see cref="T:System.Xml.XmlResolver" /> class, the property should be defined as a write-only property. The property can be used to specify the <see cref="T:System.Xml.XmlResolver" /> to use, but it cannot be used to return an <see cref="T:System.Xml.XmlResolver" /> object.</para
-          >
+            >If you are designing a class property that uses the <see cref="T:System.Xml.XmlResolver" /> class, the property should be defined as a write-only property. The property can be used to specify the <see cref="T:System.Xml.XmlResolver" /> to use, but it cannot be used to return an <see cref="T:System.Xml.XmlResolver" /> object.</para>
         </item>
         <item>
           <para
-            >If your application accepts <see cref="T:System.Xml.XmlResolver" /> objects from untrusted code, you cannot assume that the URI passed into the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method will be the same as that returned by the <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" /> method. Classes derived from the <see cref="T:System.Xml.XmlResolver" /> class can override the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method and return data that is different than what was contained in the original URI.</para
-          >
+            >If your application accepts <see cref="T:System.Xml.XmlResolver" /> objects from untrusted code, you cannot assume that the URI passed into the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method will be the same as that returned by the <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" /> method. Classes derived from the <see cref="T:System.Xml.XmlResolver" /> class can override the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method and return data that is different than what was contained in the original URI.</para>
         </item>
         <item>
           <para
-            >Your application can mitigate memory Denial of Service threats to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method.</para
-          >
+            >Your application can mitigate memory Denial of Service threats to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method.</para>
         </item>
       </list>
     </remarks>
@@ -92,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlResolver" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlResolver" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -126,20 +119,17 @@
           <para
             >A <see cref="T:System.Net.ICredentials" /> instance
    containing the
-   credentials.</para
-          >
+   credentials.</para>
         </value>
         <example>
           <para
-            >See <see cref="P:System.Xml.XmlUrlResolver.Credentials" /> for an example using this property.</para
-          >
+            >See <see cref="P:System.Xml.XmlUrlResolver.Credentials" /> for an example using this property.</para>
         </example>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the virtual directory does not require authentication, this property does not need to be set. Otherwise, the credentials of the user must be supplied.</para>
           <para
-            >The following C# code sets credentials on the <see cref="T:System.Xml.XmlResolver" /> object.</para
-          >
+            >The following C# code sets credentials on the <see cref="T:System.Xml.XmlResolver" /> object.</para>
           <code>NetworkCredential nc = new NetWorkCredential(UserName,SecurelyStoredPassword,Domain);
 XmlUrlResolver resolver = new XmlUrlResolver();
 resolver.Credentials = nc;</code>
@@ -187,24 +177,19 @@ resolver.Credentials = myCache;</code>
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="absoluteUri" /> is <see langword="null" />.</exception
-        >
+          <paramref name="absoluteUri" /> is <see langword="null" />.</exception>
         <exception cref="T:System.Xml.XmlException">
-          <paramref name="ofObjectToReturn" /> is not a supported type.</exception
-        >
+          <paramref name="ofObjectToReturn" /> is not a supported type.</exception>
         <exception cref="T:System.NullReferenceException">
-          <paramref name="absoluteUri" /> is <see langword="null" />.</exception
-        >
+          <paramref name="absoluteUri" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is used when the caller wants to map a given URI into the object containing the actual resource that the URI represents. The type of object returned is negotiable; however, the implementation must always support System.IO.Stream.</para>
           <para
-            >For the asynchronous version of this method, see <see cref="M:System.Xml.XmlResolver.GetEntityAsync(System.Uri,System.String,System.Type)" />.</para
-          >
+            >For the asynchronous version of this method, see <see cref="M:System.Xml.XmlResolver.GetEntityAsync(System.Uri,System.String,System.Type)" />.</para>
           <block subset="none" type="note">
             <para
-              >Your application can mitigate memory Denial of Service threats to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method.</para
-            >
+              >Your application can mitigate memory Denial of Service threats to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" /> method.</para>
           </block>
         </remarks>
         <summary>
@@ -214,30 +199,26 @@ resolver.Credentials = myCache;</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.Stream" /> object or null if a type other than stream is specified.</para
-          >
+            >A <see cref="T:System.IO.Stream" /> object or null if a type other than stream is specified.</para>
         </returns>
         <param name="absoluteUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI returned from <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />.</param
-        >
+          />The URI returned from <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />.</param>
         <param name="role">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
-        >
+          />The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param>
         <param name="ofObjectToReturn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to return. The current version only returns System.IO.Stream objects.</param
-        >
+          />The type of object to return. The current version only returns System.IO.Stream objects.</param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -266,8 +247,7 @@ resolver.Credentials = myCache;</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the asynchronous version of <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />, with the same functionality. To use this method, you must set the <see cref="P:System.Xml.XmlReaderSettings.Async" /> flag to true.</para
-          >
+            >This is the asynchronous version of <see cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />, with the same functionality. To use this method, you must set the <see cref="P:System.Xml.XmlReaderSettings.Async" /> flag to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -276,30 +256,26 @@ resolver.Credentials = myCache;</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.Stream" /> object or null if a type other than stream is specified.</para
-          >
+            >A <see cref="T:System.IO.Stream" /> object or null if a type other than stream is specified.</para>
         </returns>
         <param name="absoluteUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI returned from <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />.</param
-        >
+          />The URI returned from <see cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />.</param>
         <param name="role">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
-        >
+          />The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param>
         <param name="ofObjectToReturn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object to return. The current version only returns <see cref="T:System.IO.Stream" /> objects.</param
-        >
+          />The type of object to return. The current version only returns <see cref="T:System.IO.Stream" /> objects.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolveUri">
@@ -330,11 +306,9 @@ resolver.Credentials = myCache;</code>
       </Parameters>
       <Docs>
         <exception cref="T:System.Xml.XmlException">
-          <paramref name="baseUri" /> and <paramref name="relativeUri" /> are <see langword="null" />.</exception
-        >
+          <paramref name="baseUri" /> and <paramref name="relativeUri" /> are <see langword="null" />.</exception>
         <exception cref="T:System.Xml.ArgumentException">
-          <paramref name="baseUri" /> and <paramref name="relativeUri" /> are <see langword="null" />.</exception
-        >
+          <paramref name="baseUri" /> and <paramref name="relativeUri" /> are <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The absolute URI may be used as the base URI for any subsequent requests for entities that are relative to this URI.</para>
@@ -346,23 +320,20 @@ resolver.Credentials = myCache;</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Uri" /> representing the absolute URI or null if the relative URI cannot be resolved.</para
-          >
+            >A <see cref="T:System.Uri" /> representing the absolute URI or null if the relative URI cannot be resolved.</para>
         </returns>
         <param name="baseUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base URI used to resolve the relative URI.</param
-        >
+          />The base URI used to resolve the relative URI.</param>
         <param name="relativeUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI to resolve. The URI can be absolute or relative. If absolute, this value effectively replaces the <paramref name="baseUri" /> value. If relative, it combines with the <paramref name="baseUri" /> to make an absolute URI.</param
-        >
+          />The URI to resolve. The URI can be absolute or relative. If absolute, this value effectively replaces the <paramref name="baseUri" /> value. If relative, it combines with the <paramref name="baseUri" /> to make an absolute URI.</param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -391,19 +362,16 @@ resolver.Credentials = myCache;</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the ability for the resolver to return other types than just <see cref="T:System.IO.Stream" />.</para
-          >
+            >Adds the ability for the resolver to return other types than just <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the <paramref name="type" /> is supported; otherwise, false.</para>
         </returns>
         <param name="absoluteUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The URI.</param>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to return.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The type to return.</param>
       </Docs>
     </Member>
   </Members>

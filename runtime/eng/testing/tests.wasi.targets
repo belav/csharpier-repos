@@ -7,21 +7,18 @@
 
     <WasmSingleFileBundle Condition="'$(WasmSingleFileBundle)' == ''">false</WasmSingleFileBundle>
     <WasmMainAssemblyFileName Condition="'$(WasmMainAssemblyFileName)' == ''"
-      >WasmTestRunner.dll</WasmMainAssemblyFileName
-    >
+      >WasmTestRunner.dll</WasmMainAssemblyFileName>
 
     <InstallWasmtimeForTests
       Condition="'$(InstallWasmtimeForTests)' == '' and
                                         ('$(ContinuousIntegrationBuild)' != 'true' or Exists('/.dockerenv'))"
-      >true</InstallWasmtimeForTests
-    >
+      >true</InstallWasmtimeForTests>
 
     <!--<InstallWorkloadUsingArtifactsDependsOn>_GetWorkloadsToInstall;$(InstallWorkloadUsingArtifactsDependsOn)</InstallWorkloadUsingArtifactsDependsOn>-->
     <GetWorkloadInputsDependsOn>_GetWorkloadsToInstall;$(GetWorkloadInputsDependsOn)</GetWorkloadInputsDependsOn>
     <GetNuGetsToBuildForWorkloadTestingDependsOn>_GetNugetsForAOT;$(GetNuGetsToBuildForWorkloadTestingDependsOn)</GetNuGetsToBuildForWorkloadTestingDependsOn>
     <WASI_SDK_PATH Condition="'$(WASI_SDK_PATH)' == ''"
-      >$([MSBuild]::NormalizeDirectory($(MonoProjectRoot), 'wasi', 'wasi-sdk'))</WASI_SDK_PATH
-    >
+      >$([MSBuild]::NormalizeDirectory($(MonoProjectRoot), 'wasi', 'wasi-sdk'))</WASI_SDK_PATH>
 
     <_BundleAOTTestWasmAppForHelixDependsOn>$(_BundleAOTTestWasmAppForHelixDependsOn);PrepareForWasiBuildApp;_PrepareForAOTOnHelix</_BundleAOTTestWasmAppForHelixDependsOn>
   </PropertyGroup>
@@ -32,90 +29,70 @@
 
   <PropertyGroup>
     <_AppArgs Condition="'$(WasmSingleFileBundle)' == 'true'"
-      >$([System.IO.Path]::GetFileNameWithoutExtension('$(WasmMainAssemblyFileName)')).wasm</_AppArgs
-    >
+      >$([System.IO.Path]::GetFileNameWithoutExtension('$(WasmMainAssemblyFileName)')).wasm</_AppArgs>
     <_AppArgs Condition="'$(WasmSingleFileBundle)' != 'true'">dotnet.wasm WasmTestRunner</_AppArgs>
 
     <_AppArgs Condition="'$(IsFunctionalTest)' != 'true' and '$(WasmSingleFileBundle)' != 'true'"
-      >$(_AppArgs) managed/$(AssemblyName).dll</_AppArgs
-    >
+      >$(_AppArgs) managed/$(AssemblyName).dll</_AppArgs>
     <_AppArgs Condition="'$(IsFunctionalTest)' != 'true' and '$(WasmSingleFileBundle)' == 'true'"
-      >$(_AppArgs) $(AssemblyName).dll</_AppArgs
-    >
+      >$(_AppArgs) $(AssemblyName).dll</_AppArgs>
     <_AppArgs Condition="'$(WasmTestAppArgs)' != ''">$(_AppArgs) -- $(WasmTestAppArgs)</_AppArgs>
 
     <!-- FIXME: wasttime specific param name -->
     <WasmXHarnessMonoArgs Condition="'$(XunitShowProgress)' == 'true'"
-      >$(WasmXHarnessMonoArgs) --env=XHARNESS_LOG_TEST_START=1</WasmXHarnessMonoArgs
-    >
+      >$(WasmXHarnessMonoArgs) --env=XHARNESS_LOG_TEST_START=1</WasmXHarnessMonoArgs>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(RunScriptCommand)' == ''">
     <_XHarnessArgs Condition="'$(OS)' != 'Windows_NT'"
-      >wasi $XHARNESS_COMMAND --app=. --output-directory=$XHARNESS_OUT</_XHarnessArgs
-    >
+      >wasi $XHARNESS_COMMAND --app=. --output-directory=$XHARNESS_OUT</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(OS)' == 'Windows_NT'"
-      >wasi %XHARNESS_COMMAND% --app=. --output-directory=%XHARNESS_OUT%</_XHarnessArgs
-    >
+      >wasi %XHARNESS_COMMAND% --app=. --output-directory=%XHARNESS_OUT%</_XHarnessArgs>
 
     <!-- FIXME: workaround till xharness correctly defaults to using wasmtime.exe -->
     <_XHarnessArgs Condition="'$(OS)' == 'Windows_NT' and '$(ContinuousIntegrationBuild)' != 'true'"
-      >$(_XHarnessArgs) --wasm-engine-path=$(WasmtimeDir)wasmtime.exe</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --wasm-engine-path=$(WasmtimeDir)wasmtime.exe</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(OS)' == 'Windows_NT' and '$(ContinuousIntegrationBuild)' == 'true'"
-      >$(_XHarnessArgs) --wasm-engine-path=%HELIX_CORRELATION_PAYLOAD%\wasmtime\wasmtime.exe</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --wasm-engine-path=%HELIX_CORRELATION_PAYLOAD%\wasmtime\wasmtime.exe</_XHarnessArgs>
 
     <_XHarnessArgs Condition="'$(WasmSingleFileBundle)' != 'true'"
-      >$(_XHarnessArgs) --engine-arg=--dir=.</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --engine-arg=--dir=.</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(IsFunctionalTest)' == 'true'"
-      >$(_XHarnessArgs) --expected-exit-code=$(ExpectedExitCode)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) --expected-exit-code=$(ExpectedExitCode)</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessArgs)' != ''"
-      >$(_XHarnessArgs) $(WasmXHarnessArgs)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) $(WasmXHarnessArgs)</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessTestsTimeout)' != ''"
-      >$(_XHarnessArgs) &quot;--timeout=$(WasmXHarnessTestsTimeout)&quot;</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) &quot;--timeout=$(WasmXHarnessTestsTimeout)&quot;</_XHarnessArgs>
     <_XHarnessArgs>$(_XHarnessArgs) --engine-arg=--max-wasm-stack=134217728</_XHarnessArgs>
     <_XHarnessArgs Condition="'$(WasmXHarnessArgsCli)' != ''"
-      >$(_XHarnessArgs) $(WasmXHarnessArgsCli)</_XHarnessArgs
-    >
+      >$(_XHarnessArgs) $(WasmXHarnessArgsCli)</_XHarnessArgs>
 
     <_InvariantGlobalization Condition="'$(InvariantGlobalization)' == 'true'"
-      >--env=DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true</_InvariantGlobalization
-    >
+      >--env=DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true</_InvariantGlobalization>
 
     <!-- There two flavors of WasmXHarnessArgs and WasmXHarnessMonoArgs, one is MSBuild property and the other is environment variable -->
     <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-      >$HARNESS_RUNNER $(_XHarnessArgs) %24XHARNESS_ARGS %24WasmXHarnessArgs -- $(WasmXHarnessMonoArgs) %24WasmXHarnessMonoArgs $(_InvariantGlobalization) %24_InvariantGlobalization  $(_AppArgs) %24WasmTestAppArgs</RunScriptCommand
-    >
+      >$HARNESS_RUNNER $(_XHarnessArgs) %24XHARNESS_ARGS %24WasmXHarnessArgs -- $(WasmXHarnessMonoArgs) %24WasmXHarnessMonoArgs $(_InvariantGlobalization) %24_InvariantGlobalization  $(_AppArgs) %24WasmTestAppArgs</RunScriptCommand>
     <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-      >%HARNESS_RUNNER% $(_XHarnessArgs) %XHARNESS_ARGS% %WasmXHarnessArgs%  -- $(WasmXHarnessMonoArgs) %WasmXHarnessMonoArgs% $(_InvariantGlobalization) %_InvariantGlobalization% $(_AppArgs) %WasmTestAppArgs%</RunScriptCommand
-    >
+      >%HARNESS_RUNNER% $(_XHarnessArgs) %XHARNESS_ARGS% %WasmXHarnessArgs%  -- $(WasmXHarnessMonoArgs) %WasmXHarnessMonoArgs% $(_InvariantGlobalization) %_InvariantGlobalization% $(_AppArgs) %WasmTestAppArgs%</RunScriptCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildAOTTestsOnHelix)' == 'true'">
     <_AOTBuildCommand Condition="'$(BrowserHost)' != 'windows'"
-      >_buildAOTFunc publish/ProxyProjectForAOTOnHelix.proj $XHARNESS_OUT/AOTBuild.binlog</_AOTBuildCommand
-    >
+      >_buildAOTFunc publish/ProxyProjectForAOTOnHelix.proj $XHARNESS_OUT/AOTBuild.binlog</_AOTBuildCommand>
     <_AOTBuildCommand Condition="'$(BrowserHost)' == 'windows'"
-      >dotnet msbuild publish/ProxyProjectForAOTOnHelix.proj /bl:%XHARNESS_OUT%/AOTBuild.binlog</_AOTBuildCommand
-    >
+      >dotnet msbuild publish/ProxyProjectForAOTOnHelix.proj /bl:%XHARNESS_OUT%/AOTBuild.binlog</_AOTBuildCommand>
 
     <!-- running aot-helix tests locally, so we can test with the same project file as CI -->
     <_AOTBuildCommand Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >$(_AOTBuildCommand) /p:RuntimeSrcDir=$(RepoRoot) /p:RuntimeConfig=$(Configuration) /p:TasksConfiguration=$(TasksConfiguration)</_AOTBuildCommand
-    >
+      >$(_AOTBuildCommand) /p:RuntimeSrcDir=$(RepoRoot) /p:RuntimeConfig=$(Configuration) /p:TasksConfiguration=$(TasksConfiguration)</_AOTBuildCommand>
 
     <_AOTBuildCommand>$(_AOTBuildCommand) /p:RunAOTCompilation=$(RunAOTCompilation)</_AOTBuildCommand>
     <_AOTBuildCommand>$(_AOTBuildCommand) $(_ShellCommandSeparator) cd wasm_build/AppBundle</_AOTBuildCommand>
 
     <RunScriptCommand Condition="'$(RunScriptCommand)' == ''">$(_AOTBuildCommand)</RunScriptCommand>
     <RunScriptCommand Condition="'$(RunScriptCommand)' != ''"
-      >$(_AOTBuildCommand) $(_ShellCommandSeparator) $(RunScriptCommand)</RunScriptCommand
-    >
+      >$(_AOTBuildCommand) $(_ShellCommandSeparator) $(RunScriptCommand)</RunScriptCommand>
   </PropertyGroup>
 
   <!-- Don't include InTree.props here, because the test projects themselves can set the target* properties -->
@@ -147,8 +124,7 @@
 
       <WasmNativeDebugSymbols
         Condition="'$(DebuggerSupport)' == 'true' and '$(WasmNativeDebugSymbols)' == ''"
-        >true</WasmNativeDebugSymbols
-      >
+        >true</WasmNativeDebugSymbols>
       <!--
         Do this *after* importing WasmApp.targets. tests.wasm.targets sets this to `reset-to-zero` to indicate
         that we want to force this value to zero.

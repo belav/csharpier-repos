@@ -145,8 +145,7 @@
       </Parameters>
       <Docs>
         <param name="contextData"
-          >Your own assigned contextData, provided for you so you can return your final results.</param
-        >
+          >Your own assigned contextData, provided for you so you can return your final results.</param>
         <summary>
             Aggregate functions override this method to finish their aggregate processing.
             </summary>
@@ -269,11 +268,9 @@
       <Docs>
         <param name="args">The arguments for the command to process</param>
         <param name="stepNumber"
-          >The 1-based step number.  This is incrememted each time the step method is called.</param
-        >
+          >The 1-based step number.  This is incrememted each time the step method is called.</param>
         <param name="contextData"
-          >A placeholder for implementers to store contextual data pertaining to the current context.</param
-        >
+          >A placeholder for implementers to store contextual data pertaining to the current context.</param>
         <summary>
             Aggregate functions override this method to do their magic.
             </summary>

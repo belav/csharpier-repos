@@ -1,25 +1,20 @@
 <Project>
   <PropertyGroup Condition="'$(HELIX_CORRELATION_PAYLOAD)' != ''">
     <AppleBuildSupportDir Condition="'$(AppleBuildSupportDir)' == ''"
-      >$(HELIX_CORRELATION_PAYLOAD)\build\</AppleBuildSupportDir
-    >
+      >$(HELIX_CORRELATION_PAYLOAD)\build\</AppleBuildSupportDir>
     <_AppleTargetsDir>$(AppleBuildSupportDir)\apple\</_AppleTargetsDir>
     <_CommonTargetsDir>$(AppleBuildSupportDir)\common\</_CommonTargetsDir>
   </PropertyGroup>
 
   <PropertyGroup>
     <_AppleTargetsDir Condition="'$(_AppleTargetsDir)' == '' and '$(RuntimeSrcDir)' != ''"
-      >$(RuntimeSrcDir)\src\mono\msbuild\apple\build\</_AppleTargetsDir
-    >
+      >$(RuntimeSrcDir)\src\mono\msbuild\apple\build\</_AppleTargetsDir>
     <_AppleTargetsDir Condition="'$(_AppleTargetsDir)' != ''"
-      >$([MSBuild]::EnsureTrailingSlash($(_AppleTargetsDir)))</_AppleTargetsDir
-    >
+      >$([MSBuild]::EnsureTrailingSlash($(_AppleTargetsDir)))</_AppleTargetsDir>
     <_CommonTargetsDir Condition="'$(_CommonTargetsDir)' == '' and '$(RuntimeSrcDir)' != ''"
-      >$(RuntimeSrcDir)\src\mono\msbuild\common\</_CommonTargetsDir
-    >
+      >$(RuntimeSrcDir)\src\mono\msbuild\common\</_CommonTargetsDir>
     <_CommonTargetsDir Condition="'$(_CommonTargetsDir)' != ''"
-      >$([MSBuild]::EnsureTrailingSlash($(_CommonTargetsDir)))</_CommonTargetsDir
-    >
+      >$([MSBuild]::EnsureTrailingSlash($(_CommonTargetsDir)))</_CommonTargetsDir>
   </PropertyGroup>
 
   <Import

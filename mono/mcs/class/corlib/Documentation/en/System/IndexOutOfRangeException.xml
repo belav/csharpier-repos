@@ -39,8 +39,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see cref="T:System.IndexOutOfRangeException" /> exception.</para
-      >
+      a <see cref="T:System.IndexOutOfRangeException" /> exception.</para>
       <code lang="C#"
         >using System;
 public class IndexRangeTest {
@@ -69,8 +68,7 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.IndexOutOfRangeException" /> : </para
-      >
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.IndexOutOfRangeException" /> : </para>
       <list type="bullet">
         <item>
           <para>ldelem.&lt;type&gt; </para>
@@ -83,18 +81,14 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         </item>
       </list>
       <para>
-        <see cref="T:System.IndexOutOfRangeException" /> uses the HRESULT COR_E_INDEXOUTOFRANGE, which has the value 0x80131508.</para
-      >
+        <see cref="T:System.IndexOutOfRangeException" /> uses the HRESULT COR_E_INDEXOUTOFRANGE, which has the value 0x80131508.</para>
       <para
         >The most common causes of this exception are miscalculating a lookup index, or using the wrong start or end point when iterating. For other causes, see <format type="text/html">
           <a href="9e28623c-93fc-4111-a0cb-c380e0b5de0c"
-            >Troubleshooting Exceptions: System.IndexOutOfRangeException</a
-          >
-        </format>.</para
-      >
+            >Troubleshooting Exceptions: System.IndexOutOfRangeException</a>
+        </format>.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />, see the <see cref="T:System.IndexOutOfRangeException" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />, see the <see cref="T:System.IndexOutOfRangeException" /> constructors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -124,11 +118,9 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "An array index is out of range." This message takes into account the current system culture.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "An array index is out of range." This message takes into account the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -165,8 +157,7 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -195,11 +186,9 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new exception using the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new exception using the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -236,16 +225,14 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that describes the error. </param
-        >
+          />The message that describes the error. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -277,11 +264,9 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The InnerException property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the InnerException property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The InnerException property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the InnerException property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.IndexOutOfRangeException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -318,23 +303,20 @@ Error: System.IndexOutOfRangeException: Index was outside the bounds of the arra
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IndexOutOfRangeException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

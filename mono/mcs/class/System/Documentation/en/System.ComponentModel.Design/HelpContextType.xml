@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.Design.HelpContextType" /> defines identifiers that are used by the Help system to determine the context in which a Help request was initiated.</para
-      >
+        <see cref="T:System.ComponentModel.Design.HelpContextType" /> defines identifiers that are used by the Help system to determine the context in which a Help request was initiated.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

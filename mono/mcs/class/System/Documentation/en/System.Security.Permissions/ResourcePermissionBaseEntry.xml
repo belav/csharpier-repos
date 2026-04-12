@@ -47,14 +47,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to zero.</para
-          >
+            >The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to zero.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -83,23 +81,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> class with the specified permission access and permission access path.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" /> class with the specified permission access and permission access path.</para>
         </summary>
         <param name="permissionAccess">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The integer representation of the permission access level enumeration value. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to this value. </param
-        >
+          />The integer representation of the permission access level enumeration value. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" /> property is set to this value. </param>
         <param name="permissionAccessPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of strings that identify the resource you are protecting. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> property is set to this value. </param
-        >
+          />The array of strings that identify the resource you are protecting. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> property is set to this value. </param>
       </Docs>
     </Member>
     <Member MemberName="PermissionAccess">
@@ -140,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> has two properties, <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" /> and <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> for <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> returns <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" /> + "\\" + <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />. For example, "myMachine\\myCategory".</para
-          >
+            <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> has two properties, <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" /> and <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" /> for <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> returns <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" /> + "\\" + <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />. For example, "myMachine\\myCategory".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -44,8 +44,7 @@ class SmtpExample
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides properties and methods for constructing an e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-      >
+        >Provides properties and methods for constructing an e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +58,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Mail.MailMessage" /> class. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Mail.MailMessage" /> class. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,14 +78,12 @@ class SmtpExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New attachments can be added to the mail message by a call to Message.Attachments.Add(MyMailMessage). See <see cref="M:System.Web.Mail.SmtpMail.Send(System.String,System.String,System.String,System.String)" /> for an example of <see cref="T:System.Web.Mail.SmtpMail" /> usage.</para
-          >
+            >New attachments can be added to the mail message by a call to Message.Attachments.Add(MyMailMessage). See <see cref="M:System.Web.Mail.SmtpMail.Send(System.String,System.String,System.String,System.String)" /> for an example of <see cref="T:System.Web.Mail.SmtpMail" /> usage.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the collection of attachments that are transmitted with the message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Specifies the collection of attachments that are transmitted with the message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -108,14 +104,12 @@ class SmtpExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Recipients in the semicolon-delimited list can be either email addresses or address book display names.</para>
           <para
-            >The primary and carbon copy (<see cref="P:System.Web.Mail.MailMessage.Cc" />) recipients do not see the addresses in the Bcc field.</para
-          >
+            >The primary and carbon copy (<see cref="P:System.Web.Mail.MailMessage.Cc" />) recipients do not see the addresses in the Bcc field.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a semicolon-delimited list of email addresses that receive a blind carbon copy (BCC) of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets a semicolon-delimited list of email addresses that receive a blind carbon copy (BCC) of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,8 +130,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -161,8 +154,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the encoding type of the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the encoding type of the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -186,8 +178,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the content type of the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the content type of the body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -211,8 +202,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a semicolon-delimited list of e-mail addresses that receive a carbon copy (CC) of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets a semicolon-delimited list of e-mail addresses that receive a carbon copy (CC) of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,14 +224,12 @@ class SmtpExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Mail.MailMessage.Fields" /> property is used to set extended properties for Collaboration Data Objects (CDO). For more information about CDO, see "Collaboration Data Objects" and "Configuration CoClass" in the MSDN library at http://msdn.microsoft.com/library.</para
-          >
+            >The <see cref="P:System.Web.Mail.MailMessage.Fields" /> property is used to set extended properties for Collaboration Data Objects (CDO). For more information about CDO, see "Collaboration Data Objects" and "Configuration CoClass" in the MSDN library at http://msdn.microsoft.com/library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of objects that map to Microsoft Collaboration Data Objects (CDO) fields. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets a collection of objects that map to Microsoft Collaboration Data Objects (CDO) fields. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -262,8 +250,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the e-mail address of the sender. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the e-mail address of the sender. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -287,8 +274,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the custom headers that are transmitted with the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Specifies the custom headers that are transmitted with the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -312,8 +298,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the priority of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the priority of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -334,8 +319,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the subject line of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the subject line of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -359,8 +343,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a semicolon-delimited list of recipient e-mail addresses. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets a semicolon-delimited list of recipient e-mail addresses. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -381,8 +364,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Content-Base HTTP header, the URL base of all relative URLs used within the HTML-encoded body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the Content-Base HTTP header, the URL base of all relative URLs used within the HTML-encoded body of the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -403,8 +385,7 @@ class SmtpExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Content-Location HTTP header for the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para
-          >
+            >Gets or sets the Content-Location HTTP header for the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -6,24 +6,21 @@
       <argument>IL2062</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.AddRootComponent(System.String,System.String)</property
-      >
+        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.AddRootComponent(System.String,System.String)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2067</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.CreateEventCallbackWithSingleParameter(System.Type,Microsoft.JSInterop.IJSObjectReference)</property
-      >
+        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.CreateEventCallbackWithSingleParameter(System.Type,Microsoft.JSInterop.IJSObjectReference)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2067</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.ParameterTypeCache.#ctor(System.Type)</property
-      >
+        >M:Microsoft.AspNetCore.Components.Web.Infrastructure.JSComponentInterop.ParameterTypeCache.#ctor(System.Type)</property>
     </attribute>
   </assembly>
 </linker>

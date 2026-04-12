@@ -14,8 +14,7 @@
     <!-- https://github.com/dotnet/runtime/issues/53321 -->
     <JitOptimizationSensitive
       Condition="'$(TargetArchitecture)' == 'arm64' And '$(TargetOS)' == 'osx'"
-      >true</JitOptimizationSensitive
-    >
+      >true</JitOptimizationSensitive>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>Full</DebugType>

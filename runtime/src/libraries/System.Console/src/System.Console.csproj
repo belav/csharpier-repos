@@ -9,14 +9,11 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.PlatformNotSupported_SystemConsole</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_SystemConsole</GeneratePlatformNotSupportedAssemblyMessage>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'Browser'"
-      >$(DefineConstants);TARGET_BROWSER</DefineConstants
-    >
+      >$(DefineConstants);TARGET_BROWSER</DefineConstants>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'wasi'"
-      >$(DefineConstants);TARGET_WASI</DefineConstants
-    >
+      >$(DefineConstants);TARGET_WASI</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

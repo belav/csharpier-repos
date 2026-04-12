@@ -15,9 +15,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -26,14 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class to store information or metadata directly in an XML signature.  For example, you can store the signature generation date or the signer's identity.  The <see cref="T:System.Security.Cryptography.Xml.DataObject" />  class may or may not be covered by the XML signature.   </para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class to store information or metadata directly in an XML signature.  For example, you can store the signature generation date or the signer's identity.  The <see cref="T:System.Security.Cryptography.Xml.DataObject" />  class may or may not be covered by the XML signature.   </para>
       <para
         >The class corresponds to the &lt;Object&gt; element in the World Wide Web Consortium (W3C) specification for XML Signatures. For more information about the W3C specification, see <see
           cref="http://www.w3.org/TR/xmldsig-core/"
-          >http://www.w3.org/TR/xmldsig-core/</see
-        >.</para
-      >
+          >http://www.w3.org/TR/xmldsig-core/</see>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,14 +54,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class is used with XML signatures. After you have initialized the <see cref="T:System.Security.Cryptography.Xml.DataObject" />, you can assign the <see cref="P:System.Security.Cryptography.Xml.DataObject.Data" /> and <see cref="P:System.Security.Cryptography.Xml.DataObject.Id" /> properties.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class is used with XML signatures. After you have initialized the <see cref="T:System.Security.Cryptography.Xml.DataObject" />, you can assign the <see cref="P:System.Security.Cryptography.Xml.DataObject.Data" /> and <see cref="P:System.Security.Cryptography.Xml.DataObject.Id" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -96,43 +89,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class is used with XML signatures. The <paramref name="id" /> parameter refers to the name of the element that contains the data to be used. The <paramref name="data" /> parameter refers to the XML node list that contains the <paramref name="id" /> parameter element.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class is used with XML signatures. The <paramref name="id" /> parameter refers to the name of the element that contains the data to be used. The <paramref name="data" /> parameter refers to the XML node list that contains the <paramref name="id" /> parameter element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class with the specified identification, MIME type, encoding, and data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> class with the specified identification, MIME type, encoding, and data.</para>
         </summary>
         <param name="id">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identification to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" /> with. </param
-        >
+          />The identification to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" /> with. </param>
         <param name="mimeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME type of the data used to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" />. </param
-        >
+          />The MIME type of the data used to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" />. </param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding of the data used to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" />. </param
-        >
+          />The encoding of the data used to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" />. </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" /> with. </param
-        >
+          />The data to initialize the new instance of <see cref="T:System.Security.Cryptography.Xml.DataObject" /> with. </param>
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -156,14 +143,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is the XML node list that contains the element described in the <see cref="P:System.Security.Cryptography.Xml.DataObject.Id" /> property.</para
-          >
+            >This property is the XML node list that contains the element described in the <see cref="P:System.Security.Cryptography.Xml.DataObject.Id" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the data value of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >Gets or sets the data value of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -189,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the encoding of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >Gets or sets the encoding of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -214,20 +198,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to output XML for a <see cref="T:System.Security.Cryptography.Xml.DataObject" />.</para
-          >
+            >Use this method to output XML for a <see cref="T:System.Security.Cryptography.Xml.DataObject" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -249,14 +230,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The identification is used to reference the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> from another location. The default value of this property is null, which implies that no identification is present. This property is commonly referenced by the <see cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" /> property.</para
-          >
+            >The identification is used to reference the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> from another location. The default value of this property is null, which implies that no identification is present. This property is commonly referenced by the <see cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the identification of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >Gets or sets the identification of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -282,22 +261,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to add additional XML elements to a <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para
-          >
+            >This method can be used to add additional XML elements to a <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see cref="T:System.Security.Cryptography.Xml.DataObject" /> state from an XML element.</para
-          >
+            >Loads a <see cref="T:System.Security.Cryptography.Xml.DataObject" /> state from an XML element.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element to load the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> state from. </param
-        >
+          />The XML element to load the <see cref="T:System.Security.Cryptography.Xml.DataObject" /> state from. </param>
       </Docs>
     </Member>
     <Member MemberName="MimeType">
@@ -318,14 +294,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The MIME type describes the data within the <see cref="T:System.Security.Cryptography.Xml.DataObject" />.</para
-          >
+            >The MIME type describes the data within the <see cref="T:System.Security.Cryptography.Xml.DataObject" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the MIME type of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object. </para
-          >
+            >Gets or sets the MIME type of the current <see cref="T:System.Security.Cryptography.Xml.DataObject" /> object. </para>
         </summary>
       </Docs>
     </Member>

@@ -237,8 +237,7 @@
         <summary>Try to atomically change the value from false to true.</summary>
         <returns>To be added.</returns>
         <remarks
-          >This method is lighter than <see cref="M:Mono.Threading.AtomicBoolean.TrySet()" /> in the case the AtomicBoolean is already set to true because it first uses a normal read to check the value.</remarks
-        >
+          >This method is lighter than <see cref="M:Mono.Threading.AtomicBoolean.TrySet()" /> in the case the AtomicBoolean is already set to true because it first uses a normal read to check the value.</remarks>
       </Docs>
     </Member>
     <Member MemberName="TrySet">

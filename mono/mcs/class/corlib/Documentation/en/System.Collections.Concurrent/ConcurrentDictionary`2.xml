@@ -52,11 +52,9 @@
       <para
         >For very large <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> objects, you can increase the maximum array size to 2 gigabytes (GB) on a 64-bit system by setting the <format type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">&lt;gcAllowVeryLargeObjects&gt;</a>
-        </format> configuration element to true in the run-time environment.</para
-      >
+        </format> configuration element to true in the run-time environment.</para>
       <para
-        >Like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> implements the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface. In addition, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.  </para
-      >
+        >Like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> implements the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface. In addition, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.  </para>
       <list type="table">
         <listheader>
           <item>
@@ -95,8 +93,7 @@
           </description>
           <description>
             <para
-              >This method checks whether the key has a specified value, and if it does, updates the key with a new value. It's similar to the <see cref="Overload:System.Threading.Interlocked.CompareExchange" /> method, except that it's used for dictionary elements.</para
-            >
+              >This method checks whether the key has a specified value, and if it does, updates the key with a new value. It's similar to the <see cref="Overload:System.Threading.Interlocked.CompareExchange" /> method, except that it's used for dictionary elements.</para>
           </description>
         </item>
         <item>
@@ -125,11 +122,9 @@
           </description>
           <description>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,`1,System.Func{`0,`1,`1})" /> accepts the key and two delegates. It uses the first delegate if the key doesn’t exist in the dictionary; it accepts the key and returns the value that should be added for the key. It uses the second delegate if the key does exist; it accepts the key and its current value, and it returns the new value that should be set for the key.</para
-            >
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,`1,System.Func{`0,`1,`1})" /> accepts the key and two delegates. It uses the first delegate if the key doesn’t exist in the dictionary; it accepts the key and returns the value that should be added for the key. It uses the second delegate if the key does exist; it accepts the key and its current value, and it returns the new value that should be set for the key.</para>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,System.Func{`0,`1},System.Func{`0,`1,`1})" /> accepts the key, a value to add, and the update delegate. This is the same as the previous overload, except that it doesn't use a delegate to add a key.</para
-            >
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,System.Func{`0,`1},System.Func{`0,`1,`1})" /> accepts the key, a value to add, and the update delegate. This is the same as the previous overload, except that it doesn't use a delegate to add a key.</para>
           </description>
         </item>
         <item>
@@ -148,17 +143,14 @@
           <description>
             <para>These overloads provide lazy initialization for a key/value pair in the dictionary, adding the value only if it’s not there.</para>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,`1)" /> takes the value to be added if the key doesn’t exist.</para
-            >
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,`1)" /> takes the value to be added if the key doesn’t exist.</para>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,System.Func{`0,`1})" /> takes a delegate that will generate the value if the key doesn’t exist.</para
-            >
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,System.Func{`0,`1})" /> takes a delegate that will generate the value if the key doesn’t exist.</para>
           </description>
         </item>
       </list>
       <para
-        >All these operations are atomic and are thread-safe with regards to all other operations on the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class. The only exceptions are the methods that accept a delegate, that is, <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate" /> and <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd" />. For modifications and write operations to the dictionary, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> uses fine-grained locking to ensure thread safety. (Read operations on the dictionary are performed in a lock-free manner.) However, delegates for these methods are called outside the locks to avoid the problems that can arise from executing unknown code under a lock. Therefore, the code executed by these delegates is not subject to the atomicity of the operation.</para
-      >
+        >All these operations are atomic and are thread-safe with regards to all other operations on the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class. The only exceptions are the methods that accept a delegate, that is, <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate" /> and <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd" />. For modifications and write operations to the dictionary, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> uses fine-grained locking to ensure thread safety. (Read operations on the dictionary are performed in a lock-free manner.) However, delegates for these methods are called outside the locks to avoid the problems that can arise from executing unknown code under a lock. Therefore, the code executed by these delegates is not subject to the atomicity of the operation.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the default concurrency level, has the default initial capacity, and uses the default comparer for the key type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the default concurrency level, has the default initial capacity, and uses the default comparer for the key type.</para>
         </summary>
       </Docs>
     </Member>
@@ -292,23 +283,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the specified concurrency level and capacity, and uses the default comparer for the key type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the specified concurrency level and capacity, and uses the default comparer for the key type.</para>
         </summary>
         <param name="concurrencyLevel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The estimated number of threads that will update the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> concurrently.</param
-        >
+          />The estimated number of threads that will update the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> concurrently.</param>
         <param name="capacity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initial number of elements that the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> can contain.</param
-        >
+          />The initial number of elements that the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> can contain.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -451,8 +439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all keys and values from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >Removes all keys and values from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -494,14 +481,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property has snapshot semantics and represents the number of items in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> at the moment when the property was accessed.</para
-          >
+            >This property has snapshot semantics and represents the number of items in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> at the moment when the property was accessed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -526,20 +511,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para
-          >
+            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -612,8 +594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> is empty.</para
-          >
+            >Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> is empty.</para>
         </summary>
       </Docs>
     </Member>
@@ -659,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection containing the keys in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para
-          >
+            >Gets a collection containing the keys in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -872,16 +852,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see cref="T:System.Collections.ICollection" /> to an array, starting at the specified array index.</para
-          >
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" /> to an array, starting at the specified array index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array that is the destination of the elements copied from the <see cref="T:System.Collections.ICollection" />. The array must have zero-based indexing.</param
-        >
+          />The one-dimensional array that is the destination of the elements copied from the <see cref="T:System.Collections.ICollection" />. The array must have zero-based indexing.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
@@ -906,8 +884,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized with the SyncRoot.</para
-          >
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized with the SyncRoot.</para>
         </summary>
       </Docs>
     </Member>
@@ -933,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />. This property is not supported.</para
-          >
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />. This property is not supported.</para>
         </summary>
       </Docs>
     </Member>
@@ -966,15 +942,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to use as the key.</param
-        >
+          />The object to use as the key.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to use as the value.</param
-        >
+          />The object to use as the value.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Contains">
@@ -998,22 +972,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key.</para
-          >
+            >Gets whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key; otherwise, false.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</param
-        >
+          />The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.GetEnumerator">
@@ -1038,14 +1009,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para
-          >
+            >Provides a <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para
-          >
+            >A <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -1071,8 +1040,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> has a fixed size.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> has a fixed size.</para>
         </summary>
       </Docs>
     </Member>
@@ -1098,8 +1066,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> is read-only.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -1151,8 +1118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.ICollection" /> that contains the keys of the  <see cref="T:System.Collections.Generic.IDictionary`2" />.</para
-          >
+            >Gets an <see cref="T:System.Collections.ICollection" /> that contains the keys of the  <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1177,16 +1143,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />.</para
-          >
+            >Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove.</param
-        >
+          />The key of the element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Values">
@@ -1211,8 +1175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.ICollection" /> that contains the values in the <see cref="T:System.Collections.IDictionary" />.</para
-          >
+            >Gets an <see cref="T:System.Collections.ICollection" /> that contains the values in the <see cref="T:System.Collections.IDictionary" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1237,20 +1200,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para
-          >
+            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -1276,14 +1236,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the key and value pairs stored in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> to a new array.</para
-          >
+            >Copies the key and value pairs stored in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> to a new array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new array containing a snapshot of key and value pairs copied from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para
-          >
+            >A new array containing a snapshot of key and value pairs copied from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -1417,8 +1375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection that contains the values in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para
-          >
+            >Gets a collection that contains the values in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para>
         </summary>
       </Docs>
     </Member>

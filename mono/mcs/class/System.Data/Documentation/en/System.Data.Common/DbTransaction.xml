@@ -79,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction.</para
-          >
+            >Specifies the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction.</para
-          >
+            >Specifies the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -126,14 +124,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />.</para
-          >
+            <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" />.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -154,22 +150,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />.</para
-          >
+            <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" /> is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, this method releases all resources held by any managed objects that this <see cref="T:System.Data.Common.DbTransaction" /> references.</param
-        >
+          />If true, this method releases all resources held by any managed objects that this <see cref="T:System.Data.Common.DbTransaction" /> references.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -191,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see cref="T:System.Data.IsolationLevel" /> for this transaction.</para
-          >
+            >Specifies the <see cref="T:System.Data.IsolationLevel" /> for this transaction.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -236,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction, or a null reference if the transaction is no longer valid.</para
-          >
+            >Gets the <see cref="T:System.Data.Common.DbConnection" /> object associated with the transaction, or a null reference if the transaction is no longer valid.</para>
         </summary>
       </Docs>
     </Member>

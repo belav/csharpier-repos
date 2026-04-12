@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.MultilineStringConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.MultilineStringConverter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -85,29 +84,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" />. If null is passed, the current culture is assumed.</param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" />. If null is passed, the current culture is assumed.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert.</param
-        >
+          />The <see cref="T:System.Object" /> to convert.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to convert the value parameter to.</param
-        >
+          />The <see cref="T:System.Type" /> to convert the value parameter to.</param>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
@@ -137,36 +132,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of properties for the type of array specified by the <paramref name="value" /> parameter, using the specified context and attributes.</para
-          >
+            >Returns a collection of properties for the type of array specified by the <paramref name="value" /> parameter, using the specified context and attributes.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that are exposed for this data type, or null if there are no properties.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> with the properties that are exposed for this data type, or null if there are no properties.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that specifies the type of array for which to get properties.</param
-        >
+          />An <see cref="T:System.Object" /> that specifies the type of array for which to get properties.</param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesSupported">
@@ -201,16 +191,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see cref="Overload:System.ComponentModel.MultilineStringConverter.GetProperties" /> should be called to find the properties of this object; otherwise, false.</para
-          >
+            >true if <see cref="Overload:System.ComponentModel.MultilineStringConverter.GetProperties" /> should be called to find the properties of this object; otherwise, false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />  that provides a format context.</param>
       </Docs>
     </Member>
   </Members>

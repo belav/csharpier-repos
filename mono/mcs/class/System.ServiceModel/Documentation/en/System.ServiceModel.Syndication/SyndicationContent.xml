@@ -57,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -83,16 +82,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </summary>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance to use to initialize the new instance.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance to use to initialize the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName="AttributeExtensions">
@@ -116,8 +113,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. The syndication object model allows you to add custom attributes to a syndication content type (for example, <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />). When serialized to Atom 1.0, these attributes appear within the &lt;content&gt; element. When serialized to RSS 2.0, these attribute are ignored.</para
-          >
+            >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. The syndication object model allows you to add custom attributes to a syndication content type (for example, <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />). When serialized to Atom 1.0, these attributes appear within the &lt;content&gt; element. When serialized to RSS 2.0, these attribute are ignored.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -147,14 +143,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >Creates a copy of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >A copy of the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -185,22 +179,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified HTML content.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified HTML content.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para
-          >
+            >A <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para>
         </returns>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the content.</param
-        >
+          />The text of the content.</param>
       </Docs>
     </Member>
     <Member MemberName="CreatePlaintextContent">
@@ -227,22 +218,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified plain text content.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified plain text content.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para>
         </returns>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The plain text content.</param
-        >
+          />The plain text content.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUrlContent">
@@ -271,36 +259,30 @@
           <para
             >The media type parameter can be set to any known MIME type value as defined in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=95720"
-              >RFC 2046</see
-            >.</para
-          >
+              >RFC 2046</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance with the specified <see cref="T:System.Uri" /> and media type.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance with the specified <see cref="T:System.Uri" /> and media type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para>
         </returns>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> of the content.</param
-        >
+          />The <see cref="T:System.Uri" /> of the content.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The media type of the content.</param
-        >
+          />The media type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateXhtmlContent">
@@ -327,18 +309,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified XHTML content.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance with the specified XHTML content.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" /> instance.</para>
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XHTML content.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XHTML content.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateXmlContent">
@@ -365,22 +344,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified data contract object.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified data contract object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para>
         </returns>
         <param name="dataContractObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract object.</param
-        >
+          />The data contract object.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateXmlContent">
@@ -412,8 +388,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class that contains the new content.</para
-          >
+            >An instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class that contains the new content.</para>
         </returns>
       </Docs>
     </Member>
@@ -445,29 +420,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified data contract object and data contract serializer.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified data contract object and data contract serializer.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para>
         </returns>
         <param name="dataContractObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract object.</param
-        >
+          />The data contract object.</param>
         <param name="dataContractSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract serializer.</param
-        >
+          />The data contract serializer.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateXmlContent">
@@ -495,21 +466,17 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified object and XML serializer.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance with the specified object and XML serializer.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para>
         </returns>
         <param name="xmlSerializerObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The object.</param>
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML serializer.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XML serializer.</param>
       </Docs>
     </Member>
     <Member MemberName="Type">
@@ -527,8 +494,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is abstract, so it must be accessed on an instance of a syndication content type (a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />). The dnprdnshort defines the following syndication content types: </para
-          >
+            >This property is abstract, so it must be accessed on an instance of a syndication content type (a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />). The dnprdnshort defines the following syndication content types: </para>
           <list type="bullet">
             <item>
               <para>
@@ -614,22 +580,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only writes the content contained in the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />.</para
-          >
+            >This method only writes the content contained in the <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of this <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> object to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the contents of this <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> object to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -661,30 +624,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of this object to the specified <see cref="T:System.Xml.XmlWriter" /> within the specified element and element namespace.</para
-          >
+            >Writes the contents of this object to the specified <see cref="T:System.Xml.XmlWriter" /> within the specified element and element namespace.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="outerElementName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the element.</param
-        >
+          />The name of the element.</param>
         <param name="outerElementNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element.</param
-        >
+          />The namespace of the element.</param>
       </Docs>
     </Member>
   </Members>

@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
@@ -62,8 +60,7 @@
       <Parameters></Parameters>
       <Docs>
         <summary
-          >Represents the private <b>X</b> parameter of the Diffie-Hellman algorithm.</summary
-        >
+          >Represents the private <b>X</b> parameter of the Diffie-Hellman algorithm.</summary>
         <remarks>For security reason this field isn't serialized.</remarks>
       </Docs>
       <AssemblyInfo>

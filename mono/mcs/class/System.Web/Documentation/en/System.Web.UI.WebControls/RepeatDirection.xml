@@ -15,14 +15,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.RepeatDirection" /> enumeration represents the different directions in which the items of a list control can be displayed.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.RepeatDirection" /> enumeration represents the different directions in which the items of a list control can be displayed.</para>
       <block subset="none" type="note">
         <para>The number of columns displayed is always determined by the RepeatColumns property of the list control.</para>
       </block>
       <para>
-        <see cref="F:System.Web.UI.WebControls.RepeatDirection.Horizontal" /> specifies that the items of a list control are displayed in rows loaded from left to right, then top to bottom, until all items are rendered. For example, if the RepeatColumns property of the list control is set to three, the items of the list control are displayed in three columns.</para
-      >
+        <see cref="F:System.Web.UI.WebControls.RepeatDirection.Horizontal" /> specifies that the items of a list control are displayed in rows loaded from left to right, then top to bottom, until all items are rendered. For example, if the RepeatColumns property of the list control is set to three, the items of the list control are displayed in three columns.</para>
       <list type="table">
         <item>
           <term>
@@ -57,8 +55,7 @@
         </item>
       </list>
       <para>
-        <see cref="F:System.Web.UI.WebControls.RepeatDirection.Vertical" /> specifies that the items of a list control are displayed in columns loaded from top to bottom, then left to right, until all items are rendered. For example, if the RepeatColumns property of the list control is set to three, the items of the list control are displayed in rows of three items.</para
-      >
+        <see cref="F:System.Web.UI.WebControls.RepeatDirection.Vertical" /> specifies that the items of a list control are displayed in columns loaded from top to bottom, then left to right, until all items are rendered. For example, if the RepeatColumns property of the list control is set to three, the items of the list control are displayed in rows of three items.</para>
       <list type="table">
         <item>
           <term>

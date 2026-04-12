@@ -22,8 +22,7 @@
     <summary>System logging levels.</summary>
     <remarks
       >Possible <see cref="M:Mono.Unix.Native.Syscall.syslog" />
-      <paramref name="level" /> values.</remarks
-    >
+      <paramref name="level" /> values.</remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.syslog" />
     <altmember cref="M:Mono.Unix.Native.Syscall.setlogmask" />
   </Docs>

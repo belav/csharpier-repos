@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" /> with the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> to specify whether metadata is downloaded using an HTTP GET or WS-Transfer Get request.</para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" /> with the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" /> to specify whether metadata is downloaded using an HTTP GET or WS-Transfer Get request.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

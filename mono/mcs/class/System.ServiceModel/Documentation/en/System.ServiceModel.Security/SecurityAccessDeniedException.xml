@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -69,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified message. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error condition.</param
-        >
+          />The description of the error condition.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -103,23 +100,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified serialization information and context objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified serialization information and context objects. </para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information relevant to the deserialization process.</param
-        >
+          />Information relevant to the deserialization process.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context of the deserialization process.</param
-        >
+          />The context of the deserialization process.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -144,23 +138,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified message and the inner exception. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityAccessDeniedException" /> class using the specified message and the inner exception. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error condition.</param
-        >
+          />The description of the error condition.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception to be used.</param
-        >
+          />The inner exception to be used.</param>
       </Docs>
     </Member>
   </Members>

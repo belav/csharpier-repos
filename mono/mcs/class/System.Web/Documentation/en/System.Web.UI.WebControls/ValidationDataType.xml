@@ -15,14 +15,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.ValidationDataType" /> enumeration represents the different data types that the <see cref="T:System.Web.UI.WebControls.CompareValidator" /> and <see cref="T:System.Web.UI.WebControls.RangeValidator" /> controls can validate. When you specify a data type for validation control and the input control being validated passes validation, the value of the input control can be parsed to the specified data type.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.ValidationDataType" /> enumeration represents the different data types that the <see cref="T:System.Web.UI.WebControls.CompareValidator" /> and <see cref="T:System.Web.UI.WebControls.RangeValidator" /> controls can validate. When you specify a data type for validation control and the input control being validated passes validation, the value of the input control can be parsed to the specified data type.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the validation data types used by the <see cref="T:System.Web.UI.WebControls.CompareValidator" /> and <see cref="T:System.Web.UI.WebControls.RangeValidator" /> controls.</para
-      >
+        >Specifies the validation data types used by the <see cref="T:System.Web.UI.WebControls.CompareValidator" /> and <see cref="T:System.Web.UI.WebControls.RangeValidator" /> controls.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A monetary data type. The value is treated as a <see cref="T:System.Decimal" />. However, currency and grouping symbols are still allowed.</para
-          >
+            >A monetary data type. The value is treated as a <see cref="T:System.Decimal" />. However, currency and grouping symbols are still allowed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A double precision floating point number data type. The value is treated as a <see cref="T:System.Double" />.</para
-          >
+            >A double precision floating point number data type. The value is treated as a <see cref="T:System.Double" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -99,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit signed integer data type. The value is treated as a <see cref="T:System.Int32" />.</para
-          >
+            >A 32-bit signed integer data type. The value is treated as a <see cref="T:System.Int32" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

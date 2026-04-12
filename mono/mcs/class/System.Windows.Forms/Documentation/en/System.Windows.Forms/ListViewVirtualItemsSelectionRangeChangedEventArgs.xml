@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" /> event occurs when the <see cref="T:System.Windows.Forms.ListView" /> is in virtual mode, and the selection state of a range of items is changed.</para
-      >
+        >The <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" /> event occurs when the <see cref="T:System.Windows.Forms.ListView" /> is in virtual mode, and the selection state of a range of items is changed.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -47,36 +45,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" /> parameter indicates the current state of the range of items.</para
-          >
+            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" /> parameter indicates the current state of the range of items.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> class. </para>
         </summary>
         <param name="startIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the first item in the range that has changed.</param
-        >
+          />The index of the first item in the range that has changed.</param>
         <param name="endIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the last item in the range that has changed.</param
-        >
+          />The index of the last item in the range that has changed.</param>
         <param name="isSelected">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate the items are selected; false to indicate the items are deselected.</param
-        >
+          />true to indicate the items are selected; false to indicate the items are deselected.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -113,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" /> parameter indicates the current state of the range of items.</para
-          >
+            >The <see cref="T:System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventArgs" /> occurs when items are changed from selected to deselected, and deselected to selected. The <paramref name="isSelected" /> parameter indicates the current state of the range of items.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

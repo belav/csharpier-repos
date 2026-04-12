@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> object can be thought of as a strongly typed <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object because of the addition of the <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject.Oid" /> property.</para
-      >
+        >A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> object can be thought of as a strongly typed <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object because of the addition of the <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject.Oid" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,16 +75,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object as its attribute type and value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object as its attribute type and value.</para>
         </summary>
         <param name="asnEncodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the PKCS #9 attribute type and value to use.</param
-        >
+          />An object that contains the PKCS #9 attribute type and value to use.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -113,23 +109,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified <see cref="T:System.Security.Cryptography.Oid" /> object as the attribute type and a specified ASN.1 encoded data as the attribute value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified <see cref="T:System.Security.Cryptography.Oid" /> object as the attribute type and a specified ASN.1 encoded data as the attribute value.</para>
         </summary>
         <param name="oid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents the PKCS #9 attribute type.</param
-        >
+          />An object that represents the PKCS #9 attribute type.</param>
         <param name="encodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of byte values that represents the PKCS #9 attribute value.</param
-        >
+          />An array of byte values that represents the PKCS #9 attribute value.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -156,23 +149,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified string representation of an object identifier (OID) as the attribute type and a specified ASN.1 encoded data as the attribute value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> class using a specified string representation of an object identifier (OID) as the attribute type and a specified ASN.1 encoded data as the attribute value.</para>
         </summary>
         <param name="oid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string representation of an OID that represents the PKCS #9 attribute type.</param
-        >
+          />The string representation of an OID that represents the PKCS #9 attribute type.</param>
         <param name="encodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of byte values that contains the PKCS #9 attribute value.</param
-        >
+          />An array of byte values that contains the PKCS #9 attribute value.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
@@ -201,16 +191,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies a PKCS #9 attribute type and value for this <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> from the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para
-          >
+            >Copies a PKCS #9 attribute type and value for this <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> from the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para>
         </summary>
         <param name="asnEncodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the PKCS #9 attribute type and value to use.</param
-        >
+          />An object that contains the PKCS #9 attribute type and value to use.</param>
       </Docs>
     </Member>
     <Member MemberName="Oid">
@@ -234,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Security.Cryptography.Oid" /> object that represents the type of attribute associated with this <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> object.</para
-          >
+            >Gets an <see cref="T:System.Security.Cryptography.Oid" /> object that represents the type of attribute associated with this <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" /> object.</para>
         </summary>
       </Docs>
     </Member>

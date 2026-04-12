@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpSecurity" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpSecurity" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -63,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default security settings are: a <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.ClientCredentialType" /> of <see cref="F:System.ServiceModel.BasicHttpMessageCredentialType.UserName" />; and an <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.AlgorithmSuite" /> of <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.Basic256" />.</para
-          >
+            >The default security settings are: a <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.ClientCredentialType" /> of <see cref="F:System.ServiceModel.BasicHttpMessageCredentialType.UserName" />; and an <see cref="P:System.ServiceModel.BasicHttpMessageSecurity.AlgorithmSuite" /> of <see cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.Basic256" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -93,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property affects which settings in <see cref="P:System.ServiceModel.BasicHttpSecurity.Transport" /> or <see cref="P:System.ServiceModel.BasicHttpSecurity.Message" /> become effective.</para
-          >
+            >The value of this property affects which settings in <see cref="P:System.ServiceModel.BasicHttpSecurity.Transport" /> or <see cref="P:System.ServiceModel.BasicHttpSecurity.Message" /> become effective.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -123,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.HttpTransportSecurity" /> object returned by this property contains properties that control authentication parameters for the HTTP transport.</para
-          >
+            >The <see cref="T:System.ServiceModel.HttpTransportSecurity" /> object returned by this property contains properties that control authentication parameters for the HTTP transport.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

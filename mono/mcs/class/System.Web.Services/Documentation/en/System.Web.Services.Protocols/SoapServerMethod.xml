@@ -28,8 +28,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para
-          >
+            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,23 +51,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para
-          >
+            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</para>
         </summary>
         <param name="serverType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to which this method belongs.</param
-        >
+          />The <see cref="T:System.Type" /> to which this method belongs.</param>
         <param name="methodInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> with which to initialize this <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</param
-        >
+          />The <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> with which to initialize this <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.Services.Description.SoapBindingUse" /> value that specifies whether the parts of SOAP messages sent to this XML Web service method are encoded as abstract type definitions or concrete schema definitions.</para
-          >
+            >Gets a <see cref="T:System.Web.Services.Description.SoapBindingUse" /> value that specifies whether the parts of SOAP messages sent to this XML Web service method are encoded as abstract type definitions or concrete schema definitions.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -133,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP requests to this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP requests to this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -157,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP requests to this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP requests to this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -181,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> associated with this XML Web service method.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /> associated with this XML Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -202,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> that indicates whether an XML Web service client waits for the Web server to finish processing this XML Web service method.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> that indicates whether an XML Web service client waits for the Web server to finish processing this XML Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -226,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP responses from this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" /> used with SOAP responses from this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -250,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP responses from this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with SOAP responses from this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -274,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with parameters that are passed to this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with parameters that are passed to this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -298,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" /> object that specifies how parameters are formatted in SOAP messages sent to this XML Web service method.</para
-          >
+            >Gets a <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" /> object that specifies how parameters are formatted in SOAP messages sent to this XML Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -322,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with return values from this Web service method.</para
-          >
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" /> used with return values from this Web service method.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -343,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> that indicates whether SOAP messages sent to and from this XML Web service method use RPC formatting.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> that indicates whether SOAP messages sent to and from this XML Web service method use RPC formatting.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -367,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.Services.WsiProfiles" /> value that indicates the Web Services Interoperability (WSI) specification to which this Web service claims to conform.</para
-          >
+            >Gets a <see cref="T:System.Web.Services.WsiProfiles" /> value that indicates the Web Services Interoperability (WSI) specification to which this Web service claims to conform.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -34,8 +34,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Assert(System.Boolean,System.String)" /> method enables a designer to assert on a condition inside a design-time environment.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Assert(System.Boolean,System.String)" /> method enables a designer to assert on a condition inside a design-time environment.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,15 +45,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to prevent <paramref name="message" /> from being displayed; otherwise, false.</param
-        >
+          />true to prevent <paramref name="message" /> from being displayed; otherwise, false.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display.</param
-        >
+          />The message to display.</param>
       </Docs>
     </Member>
     <Member MemberName="Fail">
@@ -73,16 +70,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Fail(System.String)" /> method enables a designer to log failure messages inside a design-time environment.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Fail(System.String)" /> method enables a designer to log failure messages inside a design-time environment.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a failure message inside a design-time environment.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message to log.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to log.</param>
       </Docs>
     </Member>
     <Member MemberName="IndentLevel">
@@ -99,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.IndentLevel" /> property enables a designer to change the indent level for debug output.</para
-          >
+            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.IndentLevel" /> property enables a designer to change the indent level for debug output.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -125,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.Listeners" /> property enables objects to monitor design-time debugging output.</para
-          >
+            >The <see cref="P:System.ComponentModel.Design.IComponentDesignerDebugService.Listeners" /> property enables objects to monitor design-time debugging output.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -151,23 +144,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Trace(System.String,System.String)" /> method enables a designer to log debug messages inside a design-time environment.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.IComponentDesignerDebugService.Trace(System.String,System.String)" /> method enables a designer to log debug messages inside a design-time environment.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a debug message inside a design-time environment.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message to log.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message to log.</param>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The category of <paramref name="message" />.</param
-        >
+          />The category of <paramref name="message" />.</param>
       </Docs>
     </Member>
   </Members>

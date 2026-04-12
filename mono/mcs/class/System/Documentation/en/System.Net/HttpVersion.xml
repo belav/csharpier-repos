@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.HttpVersion" /> class defines the HTTP versions that are supported by the <see cref="T:System.Net.HttpWebRequest" /> and <see cref="T:System.Net.HttpWebResponse" /> classes. The HTTP version number is used to control version-specific features of HTTP, such as pipelining and chunking.</para
-      >
+        >The <see cref="T:System.Net.HttpVersion" /> class defines the HTTP versions that are supported by the <see cref="T:System.Net.HttpWebRequest" /> and <see cref="T:System.Net.HttpWebResponse" /> classes. The HTTP version number is used to control version-specific features of HTTP, such as pipelining and chunking.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the HTTP version numbers that are supported by the <see cref="T:System.Net.HttpWebRequest" /> and <see cref="T:System.Net.HttpWebResponse" /> classes.</para
-      >
+        >Defines the HTTP version numbers that are supported by the <see cref="T:System.Net.HttpWebRequest" /> and <see cref="T:System.Net.HttpWebResponse" /> classes.</para>
     </summary>
   </Docs>
   <Members>
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.HttpVersion" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.HttpVersion" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -90,8 +87,7 @@
         <remarks>
           <para
             >This field represents a <see cref="T:System.Version" /> with a <see cref="P:System.Version.Major" /> value
- equal to 1, and a <see cref="P:System.Version.Minor" /> value equal to 0.</para
-          >
+ equal to 1, and a <see cref="P:System.Version.Minor" /> value equal to 0.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -124,8 +120,7 @@
         <remarks>
           <para
             >This field represents a <see cref="T:System.Version" /> with a <see cref="P:System.Version.Major" /> value
- equal to 1, and a <see cref="P:System.Version.Minor" /> value equal to 1.</para
-          >
+ equal to 1, and a <see cref="P:System.Version.Minor" /> value equal to 1.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

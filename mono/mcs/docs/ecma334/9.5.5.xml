@@ -49,8 +49,6 @@ class Test {...}
 ]]>
       </code_example>always produces a warning (&quot;Code review needed before check-in&quot;), and produces a compile-time error if the pre-processing identifiers Debug and Retail are both defined. Note that a <non_terminal
         where="9.5.5"
-        >pp-message</non_terminal
-      > can contain arbitrary text; specifically, it need not contain well-formed tokens, as shown by the single quote in the word can't. end example]</example
-    >
+        >pp-message</non_terminal> can contain arbitrary text; specifically, it need not contain well-formed tokens, as shown by the single quote in the word can't. end example]</example>
   </paragraph>
 </clause>

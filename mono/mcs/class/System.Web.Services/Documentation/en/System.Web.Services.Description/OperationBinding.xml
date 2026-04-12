@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see cref="T:System.Web.Services.Description.Binding" /> class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
-      >
+        >The OperationBinding class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see cref="T:System.Web.Services.Description.Binding" /> class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.OperationBinding" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.OperationBinding" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,14 +65,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member of the <see cref="P:System.Web.Services.Description.Binding.Operations" /> collection.</para
-          >
+            >The current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member of the <see cref="P:System.Web.Services.Description.Binding.Operations" /> collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.Binding" /> of which the current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.Binding" /> of which the current <see cref="T:System.Web.Services.Description.OperationBinding" /> is a member.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements specific to the current <see cref="T:System.Web.Services.Description.OperationBinding" />.</para
-          >
+            >Gets the collection of extensibility elements specific to the current <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Services.Description.FaultBindingCollection" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" /> instance.</para
-          >
+            >Gets the <see cref="T:System.Web.Services.Description.FaultBindingCollection" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" /> instance.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -162,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Web.Services.Description.InputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para
-          >
+            >Gets or sets the <see cref="T:System.Web.Services.Description.InputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -217,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Web.Services.Description.OutputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para
-          >
+            >Gets or sets the <see cref="T:System.Web.Services.Description.OutputBinding" /> associated with the <see cref="T:System.Web.Services.Description.OperationBinding" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

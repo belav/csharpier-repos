@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.FieldDirection" /> allows for passing arguments to functions by reference, or using incoming or outgoing parameters.</para
-      >
+        <see cref="T:System.CodeDom.FieldDirection" /> allows for passing arguments to functions by reference, or using incoming or outgoing parameters.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

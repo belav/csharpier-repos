@@ -46,29 +46,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</para
-          >
+            >A new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</para>
         </returns>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags for the argument.</param
-        >
+          />The flags for the argument.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the argument, if named; otherwise null.</param
-        >
+          />The name of the argument, if named; otherwise null.</param>
       </Docs>
     </Member>
   </Members>

@@ -18,12 +18,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.MaskedTextBox" /> control delegates the actual responsibility for parsing the input characters to the <see cref="T:System.ComponentModel.MaskedTextProvider" /> class. Many of the methods of <see cref="T:System.ComponentModel.MaskedTextProvider" />, in addition to returning a <see cref="T:System.Boolean" /> success result, also provide an additional output parameter of type <see cref="T:System.ComponentModel.MaskedTextResultHint" />. This enumeration provides additional information about the operation of the method. </para
-      >
+        >The <see cref="T:System.Windows.Forms.MaskedTextBox" /> control delegates the actual responsibility for parsing the input characters to the <see cref="T:System.ComponentModel.MaskedTextProvider" /> class. Many of the methods of <see cref="T:System.ComponentModel.MaskedTextProvider" />, in addition to returning a <see cref="T:System.Boolean" /> success result, also provide an additional output parameter of type <see cref="T:System.ComponentModel.MaskedTextResultHint" />. This enumeration provides additional information about the operation of the method. </para>
       <block subset="none" type="note">
         <para
-          >The <see cref="M:System.ComponentModel.MaskedTextProvider.GetOperationResultFromHint(System.ComponentModel.MaskedTextResultHint)" /> method can be used to convert a <see cref="T:System.ComponentModel.MaskedTextResultHint" /> value into a <see cref="T:System.Boolean" /> success value.</para
-        >
+          >The <see cref="M:System.ComponentModel.MaskedTextProvider.GetOperationResultFromHint(System.ComponentModel.MaskedTextResultHint)" /> method can be used to convert a <see cref="T:System.ComponentModel.MaskedTextResultHint" /> value into a <see cref="T:System.Boolean" /> success value.</para>
       </block>
     </remarks>
     <summary>
@@ -95,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Success. The operation succeeded because a literal, prompt or space character was an escaped character. For more information about escaped characters, see the <see cref="M:System.ComponentModel.MaskedTextProvider.VerifyEscapeChar(System.Char,System.Int32)" /> method.</para
-          >
+            >Success. The operation succeeded because a literal, prompt or space character was an escaped character. For more information about escaped characters, see the <see cref="M:System.ComponentModel.MaskedTextProvider.VerifyEscapeChar(System.Char,System.Int32)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -141,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Operation did not succeed. The program encountered an  input character that was not valid. For more information about characters that are not valid, see the <see cref="M:System.ComponentModel.MaskedTextProvider.IsValidInputChar(System.Char)" /> method.</para
-          >
+            >Operation did not succeed. The program encountered an  input character that was not valid. For more information about characters that are not valid, see the <see cref="M:System.ComponentModel.MaskedTextProvider.IsValidInputChar(System.Char)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -253,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Operation did not succeed. The prompt character is not valid at input, perhaps because the <see cref="P:System.ComponentModel.MaskedTextProvider.AllowPromptAsInput" /> property is set to false. </para
-          >
+            >Operation did not succeed. The prompt character is not valid at input, perhaps because the <see cref="P:System.ComponentModel.MaskedTextProvider.AllowPromptAsInput" /> property is set to false. </para>
         </summary>
       </Docs>
     </Member>
@@ -277,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Success. The primary operation was not performed because it was not needed, but the method produced a side effect. For example, the <see cref="Overload:System.ComponentModel.MaskedTextProvider.RemoveAt" /> method can delete an unassigned edit position, which causes left-shifting of subsequent characters in the formatted string. </para
-          >
+            >Success. The primary operation was not performed because it was not needed, but the method produced a side effect. For example, the <see cref="Overload:System.ComponentModel.MaskedTextProvider.RemoveAt" /> method can delete an unassigned edit position, which causes left-shifting of subsequent characters in the formatted string. </para>
         </summary>
       </Docs>
     </Member>

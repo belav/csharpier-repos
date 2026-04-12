@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" /> interface on a contract behavior (a <see cref="T:System.ServiceModel.Description.IContractBehavior" /> type) to enable you to modify the code generated when a contract or endpoint is compiled into code. </para
-      >
+        >Implement the <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" /> interface on a contract behavior (a <see cref="T:System.ServiceModel.Description.IContractBehavior" /> type) to enable you to modify the code generated when a contract or endpoint is compiled into code. </para>
       <para
-        >Typically, a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> inserts a custom contract behavior into the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> collection during the call to <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> or <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />.</para
-      >
+        >Typically, a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" /> inserts a custom contract behavior into the <see cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" /> collection during the call to <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" /> or <see cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +53,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" /> to modify the contract, operations, or the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> prior to code generation.</para
-          >
+            >Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" /> to modify the contract, operations, or the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> prior to code generation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,8 +64,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The code generated context to use to modify the code document prior to generation.</param
-        >
+          />The code generated context to use to modify the code document prior to generation.</param>
       </Docs>
     </Member>
   </Members>

@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,32 +76,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The header <paramref name="values" /> will be parsed and validated.</para>
           <para
-            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.Collections.Generic.IEnumerable{System.String})" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.Collections.Generic.IEnumerable{System.String})" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the specified header is already present, <paramref name="values" /> are added to the comma-separated list of values associated with the header.</para
-          >
+            >If the specified header is already present, <paramref name="values" /> are added to the comma-separated list of values associated with the header.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified header and its values into the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Adds the specified header and its values into the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection.</param
-        >
+          />The header to add to the collection.</param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of header values to add to the collection.</param
-        >
+          />A list of header values to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -127,32 +121,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The header <paramref name="value" /> will be parsed and validated.</para>
           <para
-            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the specified header does not exist, the <see cref="M:System.Net.Http.Headers.HttpHeaders.Add(System.String,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para
-          >
+            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified header and its value into the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Adds the specified header and its value into the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection.</param
-        >
+          />The header to add to the collection.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header.</param
-        >
+          />The content of the header.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -174,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all headers from the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Removes all headers from the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -200,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns if  a specific header exists in the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Returns if  a specific header exists in the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -209,8 +196,11 @@
           <para>true is the specified header exists in the collection; otherwise false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The specific header.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The specific header.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -235,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> instance.</para
-          >
+            >Returns an enumerator that can iterate through the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns all header values for a specified header stored in the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Returns all header values for a specified header stored in the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +270,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified header to return values for.</param
-        >
+          />The specified header to return values for.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -307,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified header from the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para
-          >
+            >Removes the specified header from the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -319,8 +305,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the header to remove from the collection. </param
-        >
+          />The name of the header to remove from the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -345,15 +330,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />.</para
-          >
+            >Gets an enumerator that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Collections.IEnumerator" />.</para>
           <para
-            >An instance of an implementation of an <see cref="T:System.Collections.IEnumerator" /> that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />.</para
-          >
+            >An instance of an implementation of an <see cref="T:System.Collections.IEnumerator" /> that can iterate through a <see cref="T:System.Net.Http.Headers.HttpHeaders" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -376,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.HttpHeaders" /> object.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.HttpHeaders" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -414,30 +396,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified header and its values were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection without validating the provided information.</para
-          >
+            >Returns a value that indicates whether the specified header and its values were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection without validating the provided information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
           <para
-            >true if the specified header <paramref name="name" /> and <paramref name="values" /> could be added to the collection; otherwise false.</para
-          >
+            >true if the specified header <paramref name="name" /> and <paramref name="values" /> could be added to the collection; otherwise false.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection.</param
-        >
+          />The header to add to the collection.</param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The values of the header.</param
-        >
+          />The values of the header.</param>
       </Docs>
     </Member>
     <Member MemberName="TryAddWithoutValidation">
@@ -465,30 +443,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified header and its value were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection without validating the provided information.</para
-          >
+            >Returns a value that indicates whether the specified header and its value were added to the <see cref="T:System.Net.Http.Headers.HttpHeaders" /> collection without validating the provided information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
           <para
-            >true if the specified header <paramref name="name" /> and <paramref name="value" /> could be added to the collection; otherwise false.</para
-          >
+            >true if the specified header <paramref name="name" /> and <paramref name="value" /> could be added to the collection; otherwise false.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection.</param
-        >
+          />The header to add to the collection.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header.</param
-        >
+          />The content of the header.</param>
       </Docs>
     </Member>
     <Member MemberName="TryGetValues">

@@ -23,28 +23,22 @@ The .NET Foundation licenses this file to you under the MIT license.
     <FullRuntimeName>Runtime.WorkstationGC</FullRuntimeName>
     <FullRuntimeName
       Condition="'$(ServerGarbageCollection)' == 'true' or '$(ControlFlowGuard)' == 'Guard'"
-      >Runtime.ServerGC</FullRuntimeName
-    >
+      >Runtime.ServerGC</FullRuntimeName>
     <BootstrapperName>bootstrapper</BootstrapperName>
     <BootstrapperName Condition="'$(NativeLib)' != '' or '$(CustomNativeMain)' == 'true'"
-      >bootstrapperdll</BootstrapperName
-    >
+      >bootstrapperdll</BootstrapperName>
     <VxSortSupportName>Runtime.VxsortEnabled</VxSortSupportName>
     <VxSortSupportName
       Condition="'$(ControlFlowGuard)' != 'Guard' and ('$(OptimizationPreference)' == 'Size' or '$(IlcDisableVxsort)' == 'true')"
-      >Runtime.VxsortDisabled</VxSortSupportName
-    >
+      >Runtime.VxsortDisabled</VxSortSupportName>
     <StandaloneGCSupportName>standalonegc-disabled</StandaloneGCSupportName>
     <StandaloneGCSupportName Condition="'$(IlcStandaloneGCSupport)' == 'true'"
-      >standalonegc-enabled</StandaloneGCSupportName
-    >
+      >standalonegc-enabled</StandaloneGCSupportName>
     <EntryPointSymbol Condition="'$(EntryPointSymbol)' == ''">wmainCRTStartup</EntryPointSymbol>
     <LinkerSubsystem Condition="'$(OutputType)' == 'WinExe' and '$(LinkerSubsystem)' == ''"
-      >WINDOWS</LinkerSubsystem
-    >
+      >WINDOWS</LinkerSubsystem>
     <LinkerSubsystem Condition="'$(OutputType)' == 'Exe' and '$(LinkerSubsystem)' == ''"
-      >CONSOLE</LinkerSubsystem
-    >
+      >CONSOLE</LinkerSubsystem>
     <EventPipeName>eventpipe-disabled</EventPipeName>
     <EventPipeName Condition="'$(EventSourceSupport)' == 'true'">eventpipe-enabled</EventPipeName>
   </PropertyGroup>

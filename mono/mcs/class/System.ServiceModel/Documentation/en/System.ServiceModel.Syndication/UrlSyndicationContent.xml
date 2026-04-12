@@ -45,16 +45,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> class with the specified <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> class with the specified <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para>
         </summary>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -80,30 +78,25 @@
           <para
             >The media type parameter can be set to any known MIME type value as defined in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=95720"
-              >RFC 2046</see
-            >.</para
-          >
+              >RFC 2046</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> class with the specified <see cref="T:System.Uri" /> and media type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> class with the specified <see cref="T:System.Uri" /> and media type.</para>
         </summary>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" />. </param
-        >
+          />The <see cref="T:System.Uri" />. </param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The media type of the resource referenced by the <see cref="T:System.Uri" />.</param
-        >
+          />The media type of the resource referenced by the <see cref="T:System.Uri" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -128,14 +121,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para
-          >
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance that contains the new copy of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance that contains the new copy of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -156,15 +147,12 @@
           <para
             >The content type can be set to any known MIME type value as defined in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=95720"
-              >RFC 2046</see
-            >.</para
-          >
+              >RFC 2046</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para
-          >
+            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -184,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Uri" /> for the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para
-          >
+            >Gets the <see cref="T:System.Uri" /> for the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -213,16 +200,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" /> instance to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
   </Members>

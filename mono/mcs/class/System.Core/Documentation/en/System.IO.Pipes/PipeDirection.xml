@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Anonymous pipes must have a pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.In" /> or <see cref="F:System.IO.Pipes.PipeDirection.Out" />. A <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" /> is not supported by anonymous pipes because they are defined to be one-way only.</para
-      >
+        >Anonymous pipes must have a pipe direction of <see cref="F:System.IO.Pipes.PipeDirection.In" /> or <see cref="F:System.IO.Pipes.PipeDirection.Out" />. A <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" /> is not supported by anonymous pipes because they are defined to be one-way only.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

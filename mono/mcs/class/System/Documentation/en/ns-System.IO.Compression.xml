@@ -5,8 +5,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.IO.Compression" /> namespace contains classes that provide basic compression and decompression services for streams. </para
-      >
+        >The <see cref="N:System.IO.Compression" /> namespace contains classes that provide basic compression and decompression services for streams. </para>
     </summary>
   </Docs>
 </Namespace>

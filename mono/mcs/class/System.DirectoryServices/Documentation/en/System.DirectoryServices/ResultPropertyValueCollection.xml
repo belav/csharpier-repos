@@ -90,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" /> method determines whether a specified property value is in this collection.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" /> method determines whether a specified property value is in this collection.          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -102,8 +101,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property value to find.</param
-        >
+          />The property value to find.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -122,16 +120,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" /> method copies the property values from this collection to an array, starting at a particular index of the array.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" /> method copies the property values from this collection to an array, starting at a particular index of the array.          </para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based array index at which to begin copying the property values.</param
-        >
+          />The zero-based array index at which to begin copying the property values.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -148,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" /> method retrieves the index of a specified property value in this collection.          </para
-          >
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" /> method retrieves the index of a specified property value in this collection.          </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,8 +155,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The property value to find.</param
-        >
+          />The property value to find.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -185,14 +179,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.DirectoryServices.SearchResult" /> instances are similar to <see cref="T:System.DirectoryServices.DirectoryEntry" /> instances. The notable difference is that the <see cref="T:System.DirectoryServices.DirectoryEntry" /> retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see cref="T:System.DirectoryServices.SearchResult" /> is already available in the <see cref="T:System.DirectoryServices.SearchResultCollection" /> that a <see cref="T:System.DirectoryServices.DirectorySearcher" /> query returns. If you try to get a <see cref="T:System.DirectoryServices.SearchResult" /> property that your query did not specify for retrieval, the property will not be available.</para
-      >
+        <see cref="T:System.DirectoryServices.SearchResult" /> instances are similar to <see cref="T:System.DirectoryServices.DirectoryEntry" /> instances. The notable difference is that the <see cref="T:System.DirectoryServices.DirectoryEntry" /> retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see cref="T:System.DirectoryServices.SearchResult" /> is already available in the <see cref="T:System.DirectoryServices.SearchResultCollection" /> that a <see cref="T:System.DirectoryServices.DirectorySearcher" /> query returns. If you try to get a <see cref="T:System.DirectoryServices.SearchResult" /> property that your query did not specify for retrieval, the property will not be available.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the values of a <see cref="T:System.DirectoryServices.SearchResult" /> property.          </para
-      >
+        >Contains the values of a <see cref="T:System.DirectoryServices.SearchResult" /> property.          </para>
     </summary>
   </Docs>
 </Type>

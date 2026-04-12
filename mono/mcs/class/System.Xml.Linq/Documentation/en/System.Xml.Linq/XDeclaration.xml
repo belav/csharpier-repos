@@ -20,8 +20,7 @@
       <para
         >Just as in the XML standard, declarations are associated with a document. When you create a document, you have the option to specify the declaration for the document. The <see cref="T:System.Xml.Linq.XDocument" /> class contains the <see cref="P:System.Xml.Linq.XDocument.Declaration" /> property, which allows you to set or get the declaration. For information about how to serialize an XML tree with an XML declaration, see <format type="text/html">
           <a href="30f1b564-62b5-4e5d-9c36-884e51113feb">Saving With an XML Declaration</a>
-        </format>. </para
-      >
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,16 +52,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" /> class from another <see cref="T:System.Xml.Linq.XDeclaration" /> object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" /> class from another <see cref="T:System.Xml.Linq.XDeclaration" /> object. </para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XDeclaration" /> used to initialize this <see cref="T:System.Xml.Linq.XDeclaration" /> object.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XDeclaration" /> used to initialize this <see cref="T:System.Xml.Linq.XDeclaration" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -88,30 +85,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" /> class with the specified version, encoding, and standalone status.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XDeclaration" /> class with the specified version, encoding, and standalone status.</para>
         </summary>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the XML, usually "1.0".</param
-        >
+          />The version of the XML, usually "1.0".</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The encoding for the XML document.</param
-        >
+          />The encoding for the XML document.</param>
         <param name="standalone">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing "yes" or "no" that specifies whether the XML is standalone or requires external entities to be resolved.</param
-        >
+          />A string containing "yes" or "no" that specifies whether the XML is standalone or requires external entities to be resolved.</param>
       </Docs>
     </Member>
     <Member MemberName="Encoding">
@@ -129,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any value returned by <see cref="P:System.Text.Encoding.WebName" /> is a valid value.</para
-          >
+            >Any value returned by <see cref="P:System.Text.Encoding.WebName" /> is a valid value.</para>
           <para>If you read an encoded document, then this property will be set to the code page name.</para>
           <para>If you set this property to a valid code page name, then when serializing, LINQ to XML will serialize with the specified encoding.</para>
         </remarks>

@@ -24,11 +24,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A message header contains optional metadata that describe a message encapsulated by the <see cref="T:System.ServiceModel.Channels.Message" /> class.  </para
-      >
+        >A message header contains optional metadata that describe a message encapsulated by the <see cref="T:System.ServiceModel.Channels.Message" /> class.  </para>
       <para
-        >A <see cref="T:System.ServiceModel.Channels.Message" /> can have zero or more headers that are used as an extension mechanism to pass information in messages that are application-specific. You can use <see cref="P:System.ServiceModel.Channels.Message.Headers" /> to add message headers to a message by calling the <see cref="M:System.ServiceModel.Channels.MessageHeaders.Add(System.ServiceModel.Channels.MessageHeader)" /> method. </para
-      >
+        >A <see cref="T:System.ServiceModel.Channels.Message" /> can have zero or more headers that are used as an extension mechanism to pass information in messages that are application-specific. You can use <see cref="P:System.ServiceModel.Channels.Message.Headers" /> to add message headers to a message by calling the <see cref="M:System.ServiceModel.Channels.MessageHeaders.Add(System.ServiceModel.Channels.MessageHeader)" /> method. </para>
       <para>indigo1 provides a number of predefined message headers: </para>
       <list type="table">
         <listheader>
@@ -135,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified collection of message headers.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified collection of message headers.</para>
         </summary>
       </Docs>
     </Member>
@@ -161,16 +158,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified message version.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified message version.</para>
         </summary>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SOAP version of the message.</param
-        >
+          />The SOAP version of the message.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -196,16 +191,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified message version and size.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaders" /> class with the specified message version and size.</para>
         </summary>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The SOAP version of the message.</param
-        >
+          />The SOAP version of the message.</param>
       </Docs>
     </Member>
     <Member MemberName="Action">
@@ -225,9 +218,7 @@
           <para
             >This property corresponds to the &lt;Action&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -265,8 +256,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message header to be added to the collection.</param
-        >
+          />A message header to be added to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -439,8 +429,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the array at which copying begins. </param
-        >
+          />The zero-based index in the array at which copying begins. </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -485,9 +474,7 @@
           <para
             >This property corresponds to the &lt;FaultTo&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -527,15 +514,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="FindHeader">
@@ -580,22 +565,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
         <param name="actors">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The targeted recipient of the message header.</param
-        >
+          />The targeted recipient of the message header.</param>
       </Docs>
     </Member>
     <Member MemberName="From">
@@ -621,9 +603,7 @@
           <para
             >This property corresponds to the &lt;From&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -657,8 +637,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -685,8 +664,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para
-          >
+            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -701,15 +679,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the header to get.</param
-        >
+          />The zero-based index of the header to get.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the message header.</typeparam
-        >
+          />The type of the message header.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetHeader&lt;T&gt;">
@@ -750,22 +726,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the header to get.</param
-        >
+          />The zero-based index of the header to get.</param>
         <param name="serializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> that is used to serialize the header.</param
-        >
+          />An <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> that is used to serialize the header.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the message header.</typeparam
-        >
+          />The type of the message header.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetHeader&lt;T&gt;">
@@ -795,8 +768,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or the DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para
-          >
+            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or the DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -811,22 +783,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the message header.</typeparam
-        >
+          />The type of the message header.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetHeader&lt;T&gt;">
@@ -868,29 +837,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
         <param name="serializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> that is used to serialize the header.</param
-        >
+          />An <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> that is used to serialize the header.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the message header.</typeparam
-        >
+          />The type of the message header.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetHeader&lt;T&gt;">
@@ -927,8 +892,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para
-          >
+            >This method only uses the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />. It does not try to detect from the type whether it should use the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> or DataContractSerializer. To use the XML serializer, call <see cref="M:System.ServiceModel.Channels.MessageHeaders.GetHeader``1(System.String,System.String,System.Runtime.Serialization.XmlObjectSerializer)" /> or obtain the reader at the contents and call directly into the serializer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -943,29 +907,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
         <param name="actors">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The targeted recipient of the message header.</param
-        >
+          />The targeted recipient of the message header.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the message header.</typeparam
-        >
+          />The type of the message header.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetReaderAtHeader">
@@ -997,8 +957,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlDictionaryReader" /> object that consumes the message header at the specified location of the collection.</para
-          >
+            >An <see cref="T:System.Xml.XmlDictionaryReader" /> object that consumes the message header at the specified location of the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -1028,8 +987,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the recipients specified by <paramref name="actors" /> have properly interpreted and processed all the message headers marked with MustUnderstand; otherwise, false.</para
-          >
+            >true if the recipients specified by <paramref name="actors" /> have properly interpreted and processed all the message headers marked with MustUnderstand; otherwise, false.</para>
         </returns>
       </Docs>
     </Member>
@@ -1070,16 +1028,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the recipients specified by <paramref name="actors" /> have properly interpreted and processed all the message headers marked with MustUnderstand; otherwise, false.</para
-          >
+            >true if the recipients specified by <paramref name="actors" /> have properly interpreted and processed all the message headers marked with MustUnderstand; otherwise, false.</para>
         </returns>
         <param name="actors">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The targeted recipient of the message header.</param
-        >
+          />The targeted recipient of the message header.</param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -1114,8 +1070,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message header to insert.</param
-        >
+          />A message header to insert.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -1164,9 +1119,7 @@
           <para
             >This property corresponds to the &lt;MessageID&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1219,9 +1172,7 @@
           <para
             >This property corresponds to the &lt;RelateTo&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1257,15 +1208,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The LocalName of the header XML element.</param
-        >
+          />The LocalName of the header XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the header XML element.</param
-        >
+          />The namespace URI of the header XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -1316,9 +1265,7 @@
           <para
             >This property corresponds to the &lt;ReplyTo&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1356,8 +1303,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A description of how the message should be processed.</param
-        >
+          />A description of how the message should be processed.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -1386,8 +1332,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -1408,9 +1353,7 @@
           <para
             >This property corresponds to the &lt;To&gt; element described in the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1478,8 +1421,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the header.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the header.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteHeader">
@@ -1514,8 +1456,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the header.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the header.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteHeaderContents">
@@ -1550,8 +1491,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the header contents.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the header contents.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteHeaderContents">
@@ -1586,8 +1526,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the header contents.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the header contents.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartHeader">
@@ -1622,8 +1561,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the start header.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> that is used to serialize the start header.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartHeader">
@@ -1658,8 +1596,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the start header.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> that is used to serialize the start header.</param>
       </Docs>
     </Member>
   </Members>

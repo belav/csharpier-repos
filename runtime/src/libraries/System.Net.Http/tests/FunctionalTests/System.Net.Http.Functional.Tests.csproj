@@ -18,11 +18,9 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >$(DefineConstants);TargetsWindows</DefineConstants
-    >
+      >$(DefineConstants);TargetsWindows</DefineConstants>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'browser'"
-      >$(DefineConstants);TARGETS_BROWSER</DefineConstants
-    >
+      >$(DefineConstants);TARGETS_BROWSER</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">

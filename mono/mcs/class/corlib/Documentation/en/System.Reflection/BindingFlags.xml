@@ -38,8 +38,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>These BindingFlags control binding for a great many classes in the System, System.Reflection, and System.Runtime namespaces that invoke, create, get, set, and find members and types.</para>
       <para
-        >BindingFlags are used in the following <see cref="T:System.Type" /> methods and other places such as <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> : </para
-      >
+        >BindingFlags are used in the following <see cref="T:System.Type" /> methods and other places such as <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> : </para>
       <list type="bullet">
         <item>
           <para>
@@ -205,8 +204,7 @@
         <para>You must specify Instance or Static along with Public or NonPublic or no members will be returned.</para>
       </block>
       <para
-        >The following table lists the coercions performed by the default <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />. This table applies especially to the ExactBinding binding flag.</para
-      >
+        >The following table lists the coercions performed by the default <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />. This table applies especially to the ExactBinding binding flag.</para>
       <list type="table">
         <listheader>
           <item>
@@ -439,11 +437,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reflection models the accessibility rules of the common type system. For example, if the caller is in the same assembly, the caller does not need special permissions for internal members. Otherwise, the caller needs <see cref="T:System.Security.Permissions.ReflectionPermission" />. This is consistent with lookup of members that are protected, private, and so on.</para
-          >
+            >Reflection models the accessibility rules of the common type system. For example, if the caller is in the same assembly, the caller does not need special permissions for internal members. Otherwise, the caller needs <see cref="T:System.Security.Permissions.ReflectionPermission" />. This is consistent with lookup of members that are protected, private, and so on.</para>
           <para
-            >The general principle is that <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" /> should perform only widening coercions, which never lose data. An example of a widening coercion is coercing a value that is a 32-bit signed integer to a value that is a 64-bit signed integer. This is distinguished from a narrowing coercion, which may lose data. An example of a narrowing coercion is coercing a 64-bit signed integer to a 32-bit signed integer.</para
-          >
+            >The general principle is that <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" /> should perform only widening coercions, which never lose data. An example of a widening coercion is coercing a value that is a 32-bit signed integer to a value that is a 64-bit signed integer. This is distinguished from a narrowing coercion, which may lose data. An example of a narrowing coercion is coercing a 64-bit signed integer to a 32-bit signed integer.</para>
           <para>The default binder ignores this flag, while custom binders can implement the semantics of this flag.</para>
         </remarks>
         <summary>
@@ -710,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the set of members whose parameter count matches the number of supplied arguments. This binding flag is used for methods with parameters that have default values and methods with variable arguments (varargs). This flag should only be used with <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />.</para
-          >
+            >Returns the set of members whose parameter count matches the number of supplied arguments. This binding flag is used for methods with parameters that have default values and methods with variable arguments (varargs). This flag should only be used with <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

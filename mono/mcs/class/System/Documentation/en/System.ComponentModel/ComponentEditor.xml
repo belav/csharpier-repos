@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A component editor is used to edit a component as a whole and can be used to implement a user interface similar to that of the property pages. You associate a component editor with a component by using the <see cref="T:System.ComponentModel.EditorAttribute" /> attribute.</para
-      >
+        >A component editor is used to edit a component as a whole and can be used to implement a user interface similar to that of the property pages. You associate a component editor with a component by using the <see cref="T:System.ComponentModel.EditorAttribute" /> attribute.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentEditor" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentEditor" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +89,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to be edited. </param
-        >
+          />The component to be edited. </param>
       </Docs>
     </Member>
     <Member MemberName="EditComponent">
@@ -135,15 +132,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional context object that can be used to obtain further information about the edit. </param
-        >
+          />An optional context object that can be used to obtain further information about the edit. </param>
         <param name="component">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component to be edited. </param
-        >
+          />The component to be edited. </param>
       </Docs>
     </Member>
   </Members>

@@ -24,8 +24,7 @@
       Unix file special attributes are a part of the Unix file system entry 
       (see <see cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />)
       and control filesystem- and operating system-specific behavior.
-    </remarks
-    >
+    </remarks>
     <altmember cref="P:Mono.Unix.UnixFileSystemInfo.FileSpecialAttributes" />
     <altmember cref="P:Mono.Unix.UnixStream.FileSpecialAttributes" />
   </Docs>
@@ -53,8 +52,7 @@
           (<see cref="P:Mono.Unix.UnixEnvironment.EffectiveGroupId" />)
           to the owner group of the file
           (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />).
-        </summary
-        >
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="SetUserId">
@@ -80,8 +78,7 @@
           (<see cref="P:Mono.Unix.UnixEnvironment.EffectiveUserId" />)
           to the owner of the file
           (<see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />).
-        </summary
-        >
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="Sticky">
