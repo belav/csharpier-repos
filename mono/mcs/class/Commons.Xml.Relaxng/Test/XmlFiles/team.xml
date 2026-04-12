@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 
-
-
 <!--
 
      Please, keep this file at 2-space indents.
 
 -->
 
-
-
 <contributors xmlns="http://go-mono.org/team.xsd">
-
   <contributor>
-
     <name>
-
       <first-name>Alejandro</first-name>
 
-      <last-name>Sánchez Acosta</last-name>
-
+      <last-name>Sï¿½nchez Acosta</last-name>
     </name>
 
     <e-mail>asanchez@gnu.org</e-mail>
@@ -33,7 +25,6 @@
     <description>Mono contributor.</description>
 
     <tasks>
-
       <task>Documentation.</task>
 
       <task>Gtk# stuff.</task>
@@ -43,20 +34,14 @@
       <task>Mcs tests samples.</task>
 
       <task>MONO Hispano Manager.</task>
-
     </tasks>
-
   </contributor>
 
-
   <contributor>
-
     <name>
-
       <first-name>Tim</first-name>
 
       <last-name>Haynes</last-name>
-
     </name>
 
     <e-mail>thaynes@openlinksw.co.uk</e-mail>
@@ -70,22 +55,15 @@
     <description>http://www.openlinksw.com/</description>
 
     <tasks>
-
       <task>Anything related to using mono to host the CLR from other applications</task>
-
     </tasks>
-
   </contributor>
 
-
   <contributor>
-
     <name>
-
       <first-name>Duncan</first-name>
 
       <last-name>Mak</last-name>
-
     </name>
 
     <e-mail>duncan@ximian.com</e-mail>
@@ -99,25 +77,19 @@
     <description>Ximian intern</description>
 
     <tasks>
-
       <task>XML Schema</task>
 
       <task>Documentation</task>
 
       <task>Other useful stuff</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Miguel</first-name>
 
       <last-name>de Icaza</last-name>
-
     </name>
 
     <e-mail>miguel@ximian.com</e-mail>
@@ -131,7 +103,6 @@
     <description>Ximian CTO</description>
 
     <tasks>
-
       <task>Mono Project Manager</task>
 
       <task>MCS compiler</task>
@@ -139,19 +110,14 @@
       <task>Core class libraries</task>
 
       <task>MonoDoc, Gtk#</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Gaurav</first-name>
 
       <last-name>Vaish</last-name>
-
     </name>
 
     <e-mail>gvaish_mono.nospam@nospam.lycos.com</e-mail>
@@ -165,23 +131,17 @@
     <description>Not a nerd yet</description>
 
     <tasks>
-
       <task>WebControls</task>
 
       <task>MobileControls</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Paolo</first-name>
 
       <last-name>Molaro</last-name>
-
     </name>
 
     <e-mail>lupus@ximian.com</e-mail>
@@ -195,25 +155,19 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>Runtime implementation</task>
 
       <task>Core class libraries</task>
 
       <task>JIT compiler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Dietmar</first-name>
 
       <last-name>Maurer</last-name>
-
     </name>
 
     <e-mail>dietmar@ximian.com</e-mail>
@@ -227,25 +181,19 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>Runtime implementation</task>
 
       <task>Core class libraries</task>
 
       <task>JIT compiler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Patrik</first-name>
 
       <last-name>Torstensson</last-name>
-
     </name>
 
     <e-mail>Patrik.Torstensson AT intel.com</e-mail>
@@ -259,7 +207,6 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>System.Web core classes (ASP.NET)</task>
 
       <task>Runtime implementation</task>
@@ -267,19 +214,14 @@
       <task>Core class libraries (Threading, Remoting)</task>
 
       <task>Random fixes (JIT)</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Juli</first-name>
 
       <last-name>Mallett</last-name>
-
     </name>
 
     <e-mail>jmallett@FreeBSD.org</e-mail>
@@ -287,23 +229,17 @@
     <location>Kansas City</location>
 
     <tasks>
-
       <task>(Runtime) Portability</task>
 
       <task>FreeBSD packaging</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Pedro</first-name>
 
       <last-name>Martinez</last-name>
-
     </name>
 
     <e-mail>yoros@wanadoo.es</e-mail>
@@ -317,23 +253,17 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>Testing core class libraries</task>
 
       <task>Fixing little bugs</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Alp</first-name>
 
       <last-name>Toker</last-name>
-
     </name>
 
     <e-mail>alp@atoker.com</e-mail>
@@ -341,25 +271,19 @@
     <location>London, UK</location>
 
     <tasks>
-
       <task>Debian packaging</task>
 
       <task>Gtk# hacks</task>
 
       <task>Random fixes</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Marco</first-name>
 
       <last-name>Ridoni</last-name>
-
     </name>
 
     <e-mail>marco.ridoni@virgilio.it</e-mail>
@@ -367,23 +291,17 @@
     <location>Rome, Italy</location>
 
     <tasks>
-
       <task>MonoBasic</task>
 
       <task>MonoBasic runtime</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Tim</first-name>
 
       <last-name>Coleman</last-name>
-
     </name>
 
     <e-mail>tim@timcoleman.com</e-mail>
@@ -393,25 +311,19 @@
     <location>Kitchener-Waterloo, Canada</location>
 
     <tasks>
-
       <task>ADO.NET</task>
 
       <task>Web Services</task>
 
       <task>Class library hacking</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Martin Willemoes</first-name>
 
       <last-name>Hansen</last-name>
-
     </name>
 
     <e-mail>mwh -AT- sysrq.dkNOSPAM</e-mail>
@@ -423,7 +335,6 @@
     <description>Wannabe mono hacker</description>
 
     <tasks>
-
       <task>NUnit1 -&gt; NUnit2 conversion</task>
 
       <task>Stubbing</task>
@@ -431,19 +342,14 @@
       <task>Mono Handbook work</task>
 
       <task>Various fixes</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Piers</first-name>
 
       <last-name>Haken</last-name>
-
     </name>
 
     <e-mail>piersh@friskit.com</e-mail>
@@ -455,23 +361,17 @@
     <organization>Friskit Inc.</organization>
 
     <tasks>
-
       <task>XPath</task>
 
       <task>corcompare / class-status</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Johannes</first-name>
 
       <last-name>Roith</last-name>
-
     </name>
 
     <e-mail>johannes@jroith.de</e-mail>
@@ -485,23 +385,17 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>Mono Handbook</task>
 
       <task>Windows packaging</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Per</first-name>
 
       <last-name>Arneng</last-name>
-
     </name>
 
     <e-mail>pt99par@student.bth.se</e-mail>
@@ -515,23 +409,17 @@
     <description>Job seeking student</description>
 
     <tasks>
-
       <task>Class libraries</task>
 
       <task>Class Documentation</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Sebastien</first-name>
 
       <last-name>Pouliot</last-name>
-
     </name>
 
     <e-mail>spouliot@motus.com</e-mail>
@@ -545,23 +433,17 @@
     <description>Cryptoman</description>
 
     <tasks>
-
       <task>Cryptography</task>
 
       <task>Security</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Cesar</first-name>
 
       <last-name>Lopez Nataren</last-name>
-
     </name>
 
     <e-mail>cesar@ciencias.unam.mx</e-mail>
@@ -573,23 +455,17 @@
     <description>Contributor</description>
 
     <tasks>
-
       <task>Random little patches</task>
 
       <task>JScript compiler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Hector</first-name>
 
       <last-name>Gomez Morales</last-name>
-
     </name>
 
     <e-mail>hgomez_36@flashmail.com</e-mail>
@@ -601,23 +477,17 @@
     <description>Contributor</description>
 
     <tasks>
-
       <task>Random little patches</task>
 
       <task>Documentation</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Jackson </first-name>
 
       <last-name>Harper</last-name>
-
     </name>
 
     <e-mail>jackson@latitudegeo.com</e-mail>
@@ -629,25 +499,19 @@
     <description>Hacker</description>
 
     <tasks>
-
       <task>Misc Bug fixes</task>
 
       <task>Cscompmgd</task>
 
       <task>IL Assembler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Nick</first-name>
 
       <last-name>Drochak</last-name>
-
     </name>
 
     <e-mail>ndrochak AT gol.com</e-mail>
@@ -661,23 +525,17 @@
     <description>Programmer-type dude</description>
 
     <tasks>
-
       <task>Unit Tests</task>
 
       <task>Quality Assurance</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Alan, Siu Lung</first-name>
 
       <last-name>Tam</last-name>
-
     </name>
 
     <e-mail>Tam@SiuLung.com</e-mail>
@@ -689,25 +547,19 @@
     <description>Programmer-type dude</description>
 
     <tasks>
-
       <task>ADO.NET</task>
 
       <task>Chinese encodings</task>
 
       <task>Misc bug fixes</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Lluis</first-name>
 
       <last-name>Sanchez</last-name>
-
     </name>
 
     <e-mail>lluis@ideary.com</e-mail>
@@ -721,23 +573,17 @@
     <description>Mono Hacker</description>
 
     <tasks>
-
       <task>Remoting</task>
 
       <task>Binary serialization</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Martin</first-name>
 
       <last-name>Baulig</last-name>
-
     </name>
 
     <e-mail>martin@ximian.com</e-mail>
@@ -751,23 +597,17 @@
     <description>Ximian intern</description>
 
     <tasks>
-
       <task>Debugger/Debugging support</task>
 
       <task>C# compiler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Mike</first-name>
 
       <last-name>Kestner</last-name>
-
     </name>
 
     <e-mail>mkestner@ximian.com</e-mail>
@@ -781,21 +621,15 @@
     <description>Evolution developer</description>
 
     <tasks>
-
       <task>Gtk# language binding</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Rachel</first-name>
 
       <last-name>Hestilow</last-name>
-
     </name>
 
     <e-mail>rachel@nullenvoid.com</e-mail>
@@ -809,23 +643,17 @@
     <description></description>
 
     <tasks>
-
       <task>Gtk# language binding</task>
 
       <task>MonoLOGO</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Jonathan</first-name>
 
       <last-name>Pryor</last-name>
-
     </name>
 
     <e-mail>jonpryor@vt.edu</e-mail>
@@ -839,22 +667,17 @@
     <description>Graduate Student</description>
 
     <tasks>
-
       <task>Type Reflector</task>
       <task>S.Diagnostics Trace/Debug/Listeners</task>
       <task>Config File Support</task>
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Ben</first-name>
 
       <last-name>Maurer</last-name>
-
     </name>
 
     <e-mail>bmaurer@users.sf.net</e-mail>
@@ -868,23 +691,17 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>Mono.Math.BigInteger</task>
 
       <task>Other random stuff.</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Daniel</first-name>
 
       <last-name>Morgan</last-name>
-
     </name>
 
     <e-mail>danmorg@sc.rr.com</e-mail>
@@ -898,23 +715,17 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>ADO.NET</task>
 
       <task>SQL# Query Tool</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Gonzalo</first-name>
 
       <last-name>Paniagua Javier</last-name>
-
     </name>
 
     <e-mail>gonzalo@ximian.com</e-mail>
@@ -928,7 +739,6 @@
     <description>Mono hacker</description>
 
     <tasks>
-
       <task>System.Web core classes (ASP.NET)</task>
 
       <task>Core class libraries</task>
@@ -936,19 +746,14 @@
       <task>Gtk#</task>
 
       <task>nunit-gtk (NUnit2 Gtk# frontend)</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Rafael</first-name>
 
       <last-name>Teixeira</last-name>
-
     </name>
 
     <e-mail>rafaelteixeirabr@hotmail.com</e-mail>
@@ -962,7 +767,6 @@
     <description>Mono/MonoQLE hacker</description>
 
     <tasks>
-
       <task>MonoBASIC (mbas)</task>
 
       <task>Mono.GetOptions</task>
@@ -974,19 +778,14 @@
       <task>System.Configuration.Install</task>
 
       <task>System.DirectoryServices</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Atsushi</first-name>
 
       <last-name>Enomoto</last-name>
-
     </name>
 
     <e-mail>ginga@kit.hi-ho.ne.jp</e-mail>
@@ -998,21 +797,15 @@
     <description>MIDI Programmer</description>
 
     <tasks>
-
       <task>XML</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Ravi</first-name>
 
       <last-name>Pratap M</last-name>
-
     </name>
 
     <e-mail>ravi@ximian.com</e-mail>
@@ -1026,21 +819,15 @@
     <description>Ximian hacker</description>
 
     <tasks>
-
       <task>MCS Compiler</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Mark</first-name>
 
       <last-name>Crichton</last-name>
-
     </name>
 
     <e-mail>reverse_gro.pmig@nothcirc</e-mail>
@@ -1054,25 +841,19 @@
     <description>Research Asst.</description>
 
     <tasks>
-
       <task>Vorbis#</task>
 
       <task>GtkMozEmbed#</task>
 
       <task>SPARC Work</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Dick</first-name>
 
       <last-name>Porter</last-name>
-
     </name>
 
     <e-mail>dick@ximian.com</e-mail>
@@ -1086,25 +867,19 @@
     <description>Hacker</description>
 
     <tasks>
-
       <task>Runtime implementation</task>
 
       <task>Core class libraries</task>
 
       <task>Host system integration</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Alexandre</first-name>
 
       <last-name>Pigolkine</last-name>
-
     </name>
 
     <e-mail>pigolkine@gmx.de</e-mail>
@@ -1116,21 +891,15 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>System.Windows.Forms</task>
-
     </tasks>
-
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Lee</first-name>
 
       <last-name>Mallabone</last-name>
-
     </name>
 
     <e-mail>mono-docs@fonicmonkey.net</e-mail>
@@ -1142,23 +911,17 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>Gtk#</task>
 
       <task>Technical documentation</task>
-
     </tasks>
-
   </contributor>
 
-    <contributor>
-
+  <contributor>
     <name>
-
       <first-name>Eduardo</first-name>
 
       <last-name>Garcia Cebollero</last-name>
-
     </name>
 
     <e-mail>kiwnix@yahoo.es</e-mail>
@@ -1170,24 +933,17 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>Small Bugfixes</task>
 
       <task>NUnit Tests</task>
-
     </tasks>
-
   </contributor>
 
-
   <contributor>
-
     <name>
-
       <first-name>Reggie</first-name>
 
       <last-name>Burnett</last-name>
-
     </name>
 
     <e-mail>reggie@bytefx.com</e-mail>
@@ -1201,23 +957,17 @@
     <description>Consultant</description>
 
     <tasks>
-
       <task>MySQL ADO.Net Provider</task>
 
       <task>SWF libraries</task>
-
     </tasks>
-
   </contributor>
-  
+
   <contributor>
-
     <name>
-
       <first-name>Jean-Marc</first-name>
 
       <last-name>Andre</last-name>
-
     </name>
 
     <e-mail>jean-marc.andre@polymtl.ca</e-mail>
@@ -1231,13 +981,10 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>SOAP formatting</task>
 
       <task>NUnit tests</task>
-
     </tasks>
-
   </contributor>
   <contributor>
     <name>
@@ -1268,13 +1015,10 @@
   </contributor>
 
   <contributor>
-
     <name>
-
       <first-name>Charles Iliya</first-name>
 
       <last-name>Krempeaux</last-name>
-
     </name>
 
     <e-mail>charles@reptile.ca</e-mail>
@@ -1288,22 +1032,16 @@
     <description>Consultant</description>
 
     <tasks>
-
       <task>Gtk# - GNOME .NET binding</task>
 
       <task>System.Drawing.Printing</task>
-
     </tasks>
-
   </contributor>
   <contributor>
-
     <name>
-
       <first-name>Vladimir</first-name>
 
       <last-name>Kaluzhny</last-name>
-
     </name>
 
     <e-mail>vkaluzhny@openlinksw.co.uk</e-mail>
@@ -1317,22 +1055,16 @@
     <description>External Contributor</description>
 
     <tasks>
-
       <task>System.Windows.Forms</task>
 
       <task>WineLib</task>
-
     </tasks>
-
   </contributor>
   <contributor>
-
     <name>
-
       <first-name>Jaime</first-name>
 
       <last-name>Anguiano Olarra</last-name>
-
     </name>
 
     <e-mail>jaime@gnome.org</e-mail>
@@ -1346,20 +1078,14 @@
     <description>Wanabee, MWN maintainer</description>
 
     <tasks>
-
       <task>I try to help everywhere I can</task>
-
     </tasks>
-    
   </contributor>
   <contributor>
-
     <name>
-
       <first-name>Zoltan</first-name>
 
       <last-name>Varga</last-name>
-
     </name>
 
     <e-mail>vargaz -AT- NOSPAM.freemail.hu</e-mail>
@@ -1373,12 +1099,9 @@
     <description></description>
 
     <tasks>
-
       <task>IKVM port</task>
 
       <task>Runtime hacking</task>
-
     </tasks>
-    
   </contributor>
 </contributors>

@@ -1,10 +1,12 @@
 <Type Name="Asn1Decoder" FullName="Novell.Directory.Ldap.Asn1.Asn1Decoder">
-  <TypeSignature Language="C#" Value="public abstract interface Asn1Decoder : System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract interface Asn1Decoder : System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -48,7 +50,10 @@
   </Attributes>
   <Members>
     <Member MemberName="decode">
-      <MemberSignature Language="C#" Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(sbyte[] value_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(sbyte[] value_Renamed)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Object</ReturnType>
@@ -64,7 +69,10 @@
       </Docs>
     </Member>
     <Member MemberName="decode">
-      <MemberSignature Language="C#" Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(System.IO.Stream in_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(System.IO.Stream in_Renamed)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Object</ReturnType>
@@ -80,7 +88,10 @@
       </Docs>
     </Member>
     <Member MemberName="decode">
-      <MemberSignature Language="C#" Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(System.IO.Stream in_Renamed, int[] length)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract Novell.Directory.Ldap.Asn1.Asn1Object decode(System.IO.Stream in_Renamed, int[] length)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Object</ReturnType>
@@ -98,7 +109,10 @@
       </Docs>
     </Member>
     <Member MemberName="decodeBoolean">
-      <MemberSignature Language="C#" Value="public virtual abstract object decodeBoolean(System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract object decodeBoolean(System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -116,7 +130,10 @@
       </Docs>
     </Member>
     <Member MemberName="decodeNumeric">
-      <MemberSignature Language="C#" Value="public virtual abstract object decodeNumeric(System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract object decodeNumeric(System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -134,7 +151,10 @@
       </Docs>
     </Member>
     <Member MemberName="decodeOctetString">
-      <MemberSignature Language="C#" Value="public virtual abstract object decodeOctetString(System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract object decodeOctetString(System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -152,7 +172,10 @@
       </Docs>
     </Member>
     <Member MemberName="decodeCharacterString">
-      <MemberSignature Language="C#" Value="public virtual abstract object decodeCharacterString(System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract object decodeCharacterString(System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>

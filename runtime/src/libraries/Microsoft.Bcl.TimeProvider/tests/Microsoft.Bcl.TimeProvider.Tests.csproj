@@ -4,11 +4,13 @@
     <DefineConstants>$(DefineConstants);TESTEXTENSIONS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\TimeProviderTests.cs" Link="CommonTest\System\TimeProviderTests.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\TimeProviderTests.cs"
+      Link="CommonTest\System\TimeProviderTests.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\Microsoft.Bcl.TimeProvider.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"></ItemGroup>
 </Project>

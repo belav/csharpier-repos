@@ -51,11 +51,19 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <!-- Package overrides and platform manifest metadata. -->
     <PackageOverridesFileName>PackageOverrides.txt</PackageOverridesFileName>
     <!-- PackageOverrides.txt is written in GeneratePackageOverrides target unless servicing. -->
-    <ReferencePackageOverridesPath Condition="'$(IsServicingBuild)' != 'true'">$(BaseIntermediateOutputPath)$(PackageOverridesFileName)</ReferencePackageOverridesPath>
-    <ReferencePackageOverridesPath Condition="'$(IsServicingBuild)' == 'true'">$(RepoRoot)eng\$(PackageOverridesFileName)</ReferencePackageOverridesPath>
+    <ReferencePackageOverridesPath Condition="'$(IsServicingBuild)' != 'true'"
+      >$(BaseIntermediateOutputPath)$(PackageOverridesFileName)</ReferencePackageOverridesPath
+    >
+    <ReferencePackageOverridesPath Condition="'$(IsServicingBuild)' == 'true'"
+      >$(RepoRoot)eng\$(PackageOverridesFileName)</ReferencePackageOverridesPath
+    >
     <!-- PlatformManifest.txt is written in App.Runtime's GenerateSharedFxDepsFile target but not used here when servicing. -->
-    <ReferencePlatformManifestPath Condition="'$(IsServicingBuild)' != 'true'">$(PlatformManifestOutputPath)</ReferencePlatformManifestPath>
-    <ReferencePlatformManifestPath Condition="'$(IsServicingBuild)' == 'true'">$(RepoRoot)eng\PlatformManifest.txt</ReferencePlatformManifestPath>
+    <ReferencePlatformManifestPath Condition="'$(IsServicingBuild)' != 'true'"
+      >$(PlatformManifestOutputPath)</ReferencePlatformManifestPath
+    >
+    <ReferencePlatformManifestPath Condition="'$(IsServicingBuild)' == 'true'"
+      >$(RepoRoot)eng\PlatformManifest.txt</ReferencePlatformManifestPath
+    >
 
     <!--
       Package is needed when publishing for Helix tests. Set GeneratePackageOnBuild here, though sometimes
@@ -69,23 +77,31 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <Reference Include="@(AspNetCoreAppReference);@(AspNetCoreAppReferenceAndPackage);@(ExternalAspNetCoreAppReference)" />
 
     <!-- Ensure prerequisite analyzers are built. -->
-    <ProjectReference Include="..\..\AspNetCoreAnalyzers\src\CodeFixes\Microsoft.AspNetCore.App.CodeFixes.csproj"
-      Private="false"
-      ReferenceOutputAssembly="false" />
-
-    <ProjectReference Include="$(RepoRoot)src\Components\Analyzers\src\Microsoft.AspNetCore.Components.Analyzers.csproj"
-      Private="false"
-      ReferenceOutputAssembly="false" />
-
-    <ProjectReference Include="$(RepoRoot)src\Http\Http.Extensions\gen\Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj"
-      Private="false"
-      ReferenceOutputAssembly="false" />
-
-    <!-- Enforce build order. Targeting pack needs to bundle analyzers and information about the runtime. -->
-    <ProjectReference Include="..\..\App.Runtime\src\Microsoft.AspNetCore.App.Runtime.csproj"
+    <ProjectReference
+      Include="..\..\AspNetCoreAnalyzers\src\CodeFixes\Microsoft.AspNetCore.App.CodeFixes.csproj"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
+    />
+
+    <ProjectReference
+      Include="$(RepoRoot)src\Components\Analyzers\src\Microsoft.AspNetCore.Components.Analyzers.csproj"
+      Private="false"
+      ReferenceOutputAssembly="false"
+    />
+
+    <ProjectReference
+      Include="$(RepoRoot)src\Http\Http.Extensions\gen\Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj"
+      Private="false"
+      ReferenceOutputAssembly="false"
+    />
+
+    <!-- Enforce build order. Targeting pack needs to bundle analyzers and information about the runtime. -->
+    <ProjectReference
+      Include="..\..\App.Runtime\src\Microsoft.AspNetCore.App.Runtime.csproj"
+      Private="false"
+      ReferenceOutputAssembly="false"
+      SkipGetTargetFrameworkProperties="true"
+    />
   </ItemGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
@@ -115,7 +131,9 @@ This package is an internal implementation of the .NET Core SDK and is not meant
       _ResolveTargetingPackContent;
     </ResolveTargetingPackContentDependsOn>
     <!-- If Build won't run in the GenerateNuspec context, need to update _PackageFiles. -->
-    <GenerateNuspecDependsOn Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' ">
+    <GenerateNuspecDependsOn
+      Condition=" '$(NoBuild)' == 'true' AND '$(GeneratePackageOnBuild)' != 'true' "
+    >
       $(GenerateNuspecDependsOn);
       $(ResolveTargetingPackContentDependsOn)
     </GenerateNuspecDependsOn>
@@ -132,17 +150,27 @@ This package is an internal implementation of the .NET Core SDK and is not meant
   <Target Name="CopyFilesToOutputDirectory" />
 
   <!-- This target finds the reference assemblies. -->
-  <Target Name="_ResolveInitialTargetingPackContent"
-          Returns="@(AspNetCoreReferenceAssemblyPath)"
-          DependsOnTargets="ResolveReferences;FindReferenceAssembliesForReferences">
+  <Target
+    Name="_ResolveInitialTargetingPackContent"
+    Returns="@(AspNetCoreReferenceAssemblyPath)"
+    DependsOnTargets="ResolveReferences;FindReferenceAssembliesForReferences"
+  >
     <ItemGroup>
       <!-- Exclude a dependency that we don't want to expose. -->
       <_DisallowedReferenceAssemblies Include="System.Net.Quic.dll" />
-      <_AvailableRuntimeRefAssemblies Include="$(RuntimeTransportReferenceDirectory)*.dll"
-          Exclude="@(_DisallowedReferenceAssemblies->'$(RuntimeTransportReferenceDirectory)%(Filename)%(Extension)')" />
+      <_AvailableRuntimeRefAssemblies
+        Include="$(RuntimeTransportReferenceDirectory)*.dll"
+        Exclude="@(_DisallowedReferenceAssemblies->'$(RuntimeTransportReferenceDirectory)%(Filename)%(Extension)')"
+      />
     </ItemGroup>
 
-    <JoinItems Left="@(ReferencePathWithRefAssemblies)" Right="@(_AvailableRuntimeRefAssemblies)" LeftKey="Filename" RightKey="Filename" ItemSpecToUse="Left">
+    <JoinItems
+      Left="@(ReferencePathWithRefAssemblies)"
+      Right="@(_AvailableRuntimeRefAssemblies)"
+      LeftKey="Filename"
+      RightKey="Filename"
+      ItemSpecToUse="Left"
+    >
       <Output TaskParameter="JoinResult" ItemName="_ReferencedRuntimeRefAssemblies" />
     </JoinItems>
 
@@ -155,72 +183,109 @@ This package is an internal implementation of the .NET Core SDK and is not meant
         for all but System.Security.Cryptography.Pkcs are available in the transport package.
       -->
       <AspNetCoreReferenceAssemblyPath
-          Include="@(ReferencePathWithRefAssemblies)"
-          Exclude="
+        Include="@(ReferencePathWithRefAssemblies)"
+        Exclude="
             @(ReferencePathWithRefAssemblies->WithMetadataValue('NuGetPackageId', 'Microsoft.NETCore.App.Ref'));
             @(ReferencePathWithRefAssemblies->WithMetadataValue('NuGetPackageId', 'Microsoft.Internal.Runtime.AspNetCore.Transport'));
             @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.Diagnostics.EventLog'));
             @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.IO.Pipelines'));
             @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.Security.Cryptography.Pkcs'));
             @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.Security.Cryptography.Xml'));
-            @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.Threading.RateLimiting'))"/>
+            @(ReferencePathWithRefAssemblies->WithMetadataValue('Filename', 'System.Threading.RateLimiting'))"
+      />
 
-      <AspNetCoreReferenceAssemblyPath
-          Include="@(_ReferencedRuntimeRefAssemblies->'$(RuntimeTransportReferenceDirectory)%(FileName)%(Extension)')" />
+      <AspNetCoreReferenceAssemblyPath Include="@(_ReferencedRuntimeRefAssemblies->'$(RuntimeTransportReferenceDirectory)%(FileName)%(Extension)')" />
 
-      <AspNetCoreReferenceDocXml Include="@(_ResolvedProjectReferencePaths->'%(RootDir)%(Directory)%(FileName).xml')"
-          Condition="Exists('%(RootDir)%(Directory)%(FileName).xml')" />
+      <AspNetCoreReferenceDocXml
+        Include="@(_ResolvedProjectReferencePaths->'%(RootDir)%(Directory)%(FileName).xml')"
+        Condition="Exists('%(RootDir)%(Directory)%(FileName).xml')"
+      />
       <AspNetCoreReferenceDocXml Include="@(_ReferencedRuntimeRefAssemblies->'$(RuntimeTransportReferenceDirectory)%(FileName).xml')" />
       <!-- Grab remaining .xml files from packages -->
       <AspNetCoreReferenceDocXml
-          Include="@(AspNetCoreReferenceAssemblyPath->WithMetadataValue('ExternallyResolved', 'true')->'%(RootDir)%(Directory)%(Filename).xml')"
-          Condition="Exists('%(RootDir)%(Directory)%(Filename).xml')" />
+        Include="@(AspNetCoreReferenceAssemblyPath->WithMetadataValue('ExternallyResolved', 'true')->'%(RootDir)%(Directory)%(Filename).xml')"
+        Condition="Exists('%(RootDir)%(Directory)%(Filename).xml')"
+      />
 
-      <_InitialRefPackContent Include="$(PkgMicrosoft_Internal_Runtime_AspNetCore_Transport)\$(AnalyzersPackagePath)**\*.*" PackagePath="$(AnalyzersPackagePath)" />
-      <_InitialRefPackContent Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.App.Analyzers\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.App.Analyzers.dll" PackagePath="$(AnalyzersPackagePath)dotnet/cs/" />
-      <_InitialRefPackContent Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Components.Analyzers\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Components.Analyzers.dll" PackagePath="$(AnalyzersPackagePath)dotnet/cs/" />
-      <_InitialRefPackContent Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.App.CodeFixes\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.App.CodeFixes.dll" PackagePath="$(AnalyzersPackagePath)dotnet/cs/" />
-      <_InitialRefPackContent Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Http.RequestDelegateGenerator\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Http.RequestDelegateGenerator.dll" PackagePath="$(AnalyzersPackagePath)dotnet/cs/" />
+      <_InitialRefPackContent
+        Include="$(PkgMicrosoft_Internal_Runtime_AspNetCore_Transport)\$(AnalyzersPackagePath)**\*.*"
+        PackagePath="$(AnalyzersPackagePath)"
+      />
+      <_InitialRefPackContent
+        Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.App.Analyzers\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.App.Analyzers.dll"
+        PackagePath="$(AnalyzersPackagePath)dotnet/cs/"
+      />
+      <_InitialRefPackContent
+        Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Components.Analyzers\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Components.Analyzers.dll"
+        PackagePath="$(AnalyzersPackagePath)dotnet/cs/"
+      />
+      <_InitialRefPackContent
+        Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.App.CodeFixes\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.App.CodeFixes.dll"
+        PackagePath="$(AnalyzersPackagePath)dotnet/cs/"
+      />
+      <_InitialRefPackContent
+        Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Http.RequestDelegateGenerator\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Http.RequestDelegateGenerator.dll"
+        PackagePath="$(AnalyzersPackagePath)dotnet/cs/"
+      />
 
-      <_InitialRefPackContent Include="@(AspNetCoreReferenceAssemblyPath)" PackagePath="$(RefAssemblyPackagePath)" />
-      <_InitialRefPackContent Include="@(AspNetCoreReferenceDocXml)" PackagePath="$(RefAssemblyPackagePath)" />
-      <_InitialRefPackContent Include="$(ReferencePlatformManifestPath)" PackagePath="$(ManifestsPackagePath)" />
+      <_InitialRefPackContent
+        Include="@(AspNetCoreReferenceAssemblyPath)"
+        PackagePath="$(RefAssemblyPackagePath)"
+      />
+      <_InitialRefPackContent
+        Include="@(AspNetCoreReferenceDocXml)"
+        PackagePath="$(RefAssemblyPackagePath)"
+      />
+      <_InitialRefPackContent
+        Include="$(ReferencePlatformManifestPath)"
+        PackagePath="$(ManifestsPackagePath)"
+      />
     </ItemGroup>
   </Target>
 
   <Target Name="_ResolveTargetingPackContent">
     <ItemGroup>
       <RefPackContent Include="@(_InitialRefPackContent)" />
-      <RefPackContent Include="$(ReferencePackageOverridesPath)" PackagePath="$(ManifestsPackagePath)" />
+      <RefPackContent
+        Include="$(ReferencePackageOverridesPath)"
+        PackagePath="$(ManifestsPackagePath)"
+      />
       <RefPackContent Include="$(FrameworkListOutputPath)" PackagePath="$(ManifestsPackagePath)" />
       <_PackageFiles Include="@(RefPackContent)" />
     </ItemGroup>
   </Target>
 
-  <Target Name="ResolveTargetingPackContent"
-      DependsOnTargets="$(ResolveTargetingPackContentDependsOn)"
-      Returns="@(AspNetCoreReferenceAssemblyPath)" />
+  <Target
+    Name="ResolveTargetingPackContent"
+    DependsOnTargets="$(ResolveTargetingPackContentDependsOn)"
+    Returns="@(AspNetCoreReferenceAssemblyPath)"
+  />
 
   <Target Name="GeneratePackageOverrides" Condition=" '$(IsServicingBuild)' != 'true' ">
     <ItemGroup>
       <!-- Use package version for non-Runtime references. -->
-      <_AspNetCoreAppPackageOverrides Include="@(AspNetCoreReferenceAssemblyPath->'%(NuGetPackageId)|%(NuGetPackageVersion)')"
-          Condition="!Exists('$(RuntimeTransportReferenceDirectory)%(AspNetCoreReferenceAssemblyPath.NuGetPackageId).dll') AND
+      <_AspNetCoreAppPackageOverrides
+        Include="@(AspNetCoreReferenceAssemblyPath->'%(NuGetPackageId)|%(NuGetPackageVersion)')"
+        Condition="!Exists('$(RuntimeTransportReferenceDirectory)%(AspNetCoreReferenceAssemblyPath.NuGetPackageId).dll') AND
             '%(AspNetCoreReferenceAssemblyPath.NuGetPackageId)' != 'Microsoft.NETCore.App' AND
             '%(AspNetCoreReferenceAssemblyPath.NuGetPackageId)' != 'Microsoft.Internal.Runtime.AspNetCore.Transport' AND
-            '%(AspNetCoreReferenceAssemblyPath.NuGetSourceType)' == 'Package' " />
+            '%(AspNetCoreReferenceAssemblyPath.NuGetSourceType)' == 'Package' "
+      />
 
       <!-- Use NETCore.App.Runtime version for Runtime references. -->
       <_AspNetCoreAppPackageOverrides Include="@(_ReferencedRuntimeRefAssemblies->'%(FileName)|$(MicrosoftNETCoreAppRuntimeVersion)')" />
 
-      <_AspNetCoreAppPackageOverrides Include="@(AspNetCoreReferenceAssemblyPath->'%(FileName)|$(ReferencePackSharedFxVersion)')"
-          Condition=" '%(AspNetCoreReferenceAssemblyPath.ReferenceSourceTarget)' == 'ProjectReference' " />
+      <_AspNetCoreAppPackageOverrides
+        Include="@(AspNetCoreReferenceAssemblyPath->'%(FileName)|$(ReferencePackSharedFxVersion)')"
+        Condition=" '%(AspNetCoreReferenceAssemblyPath.ReferenceSourceTarget)' == 'ProjectReference' "
+      />
     </ItemGroup>
 
     <WriteLinesToFile
-        Lines="@(_AspNetCoreAppPackageOverrides)"
-        File="$(ReferencePackageOverridesPath)"
-        Overwrite="true" />
+      Lines="@(_AspNetCoreAppPackageOverrides)"
+      File="$(ReferencePackageOverridesPath)"
+      Overwrite="true"
+    />
   </Target>
 
   <!--
@@ -229,52 +294,68 @@ This package is an internal implementation of the .NET Core SDK and is not meant
   -->
   <Target Name="_CleanLayout" BeforeTargets="_BatchCopyToLayoutTargetDir">
     <ItemGroup>
-      <_ExtraLayoutFiles Include="$(LayoutTargetDir)**\*.*"
-          Exclude="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')" />
+      <_ExtraLayoutFiles
+        Include="$(LayoutTargetDir)**\*.*"
+        Exclude="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+      />
     </ItemGroup>
     <Delete Files="@(_ExtraLayoutFiles)" />
   </Target>
 
-  <Target Name="_BatchCopyToLayoutTargetDir"
-          Inputs="@(RefPackContent)"
-          Outputs="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')">
-    <Copy SourceFiles="@(RefPackContent)"
-          DestinationFiles="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
-          UseHardlinksIfPossible="true" />
+  <Target
+    Name="_BatchCopyToLayoutTargetDir"
+    Inputs="@(RefPackContent)"
+    Outputs="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+  >
+    <Copy
+      SourceFiles="@(RefPackContent)"
+      DestinationFiles="@(RefPackContent->'$(LayoutTargetDir)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+      UseHardlinksIfPossible="true"
+    />
     <Message Importance="High" Text="$(MSBuildProjectName) -> $(LayoutTargetDir)" />
   </Target>
 
   <Target Name="_CleanLocalDotNet" BeforeTargets="_InstallTargetingPackIntoLocalDotNet">
     <ItemGroup>
-      <_ExtraDotNetFiles Include="$(LocalInstallationOutputPath)**\*.*"
-          Exclude="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')" />
+      <_ExtraDotNetFiles
+        Include="$(LocalInstallationOutputPath)**\*.*"
+        Exclude="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+      />
     </ItemGroup>
     <Delete Files="@(_ExtraDotNetFiles)" />
   </Target>
 
   <!-- Workaround https://github.com/dotnet/sdk/issues/2910 by copying targeting pack into local installation. -->
-  <Target Name="_InstallTargetingPackIntoLocalDotNet"
-          Condition="'$(DotNetBuildFromSource)' != 'true'"
-          Inputs="@(RefPackContent)"
-          Outputs="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')">
-    <Copy SourceFiles="@(RefPackContent)"
-          DestinationFiles="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
-          UseHardlinksIfPossible="true" />
+  <Target
+    Name="_InstallTargetingPackIntoLocalDotNet"
+    Condition="'$(DotNetBuildFromSource)' != 'true'"
+    Inputs="@(RefPackContent)"
+    Outputs="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+  >
+    <Copy
+      SourceFiles="@(RefPackContent)"
+      DestinationFiles="@(RefPackContent->'$(LocalInstallationOutputPath)%(PackagePath)%(RecursiveDir)%(FileName)%(Extension)')"
+      UseHardlinksIfPossible="true"
+    />
     <Message Importance="High" Text="$(MSBuildProjectName) -> $(LocalInstallationOutputPath)" />
   </Target>
 
-  <Target Name="_CreateTargetingPackArchive"
-          Inputs="@(RefPackContent)"
-          Outputs="$(ArchiveOutputPath)">
+  <Target
+    Name="_CreateTargetingPackArchive"
+    Inputs="@(RefPackContent)"
+    Outputs="$(ArchiveOutputPath)"
+  >
     <ZipDirectory
       SourceDirectory="$(TargetingPackLayoutRoot)"
       DestinationFile="$(ArchiveOutputPath)"
       Overwrite="true"
-      Condition="'$(ArchiveExtension)' == '.zip'" />
+      Condition="'$(ArchiveExtension)' == '.zip'"
+    />
     <Exec
       Command="tar -czf $(ArchiveOutputPath) ."
       WorkingDirectory="$(TargetingPackLayoutRoot)"
-      Condition="'$(ArchiveExtension)' == '.tar.gz'" />
+      Condition="'$(ArchiveExtension)' == '.tar.gz'"
+    />
     <Message Importance="High" Text="$(MSBuildProjectName) -> $(ArchiveOutputPath)" />
   </Target>
 
@@ -282,6 +363,7 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <RepoTasks.CreateFrameworkListFile
       Files="@(_InitialRefPackContent)"
       TargetFile="$(FrameworkListOutputPath)"
-      RootAttributes="@(FrameworkListRootAttributes)" />
+      RootAttributes="@(FrameworkListRootAttributes)"
+    />
   </Target>
 </Project>

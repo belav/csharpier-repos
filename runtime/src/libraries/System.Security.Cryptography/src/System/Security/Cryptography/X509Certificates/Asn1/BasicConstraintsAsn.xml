@@ -3,8 +3,8 @@
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="BasicConstraintsAsn"
   namespace="System.Security.Cryptography.X509Certificates.Asn1"
-  rebind="false">
-    
+  rebind="false"
+>
   <!--
     https://tools.ietf.org/html/rfc5280#section-4.2.1.9
 

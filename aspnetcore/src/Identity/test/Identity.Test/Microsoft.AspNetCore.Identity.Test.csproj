@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -21,9 +20,16 @@
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
   </ItemGroup>
 
-  <Target Name="AddProjectReferenceAssemblyInfo" BeforeTargets="GetAssemblyAttributes" DependsOnTargets="ResolveAssemblyReferences">
+  <Target
+    Name="AddProjectReferenceAssemblyInfo"
+    BeforeTargets="GetAssemblyAttributes"
+    DependsOnTargets="ResolveAssemblyReferences"
+  >
     <ItemGroup>
-      <_IdentityUIDefaultUI Include="@(ReferencePath)" Condition="'%(ReferencePath.FileName)' == 'Microsoft.AspNetCore.Identity.UI'" />
+      <_IdentityUIDefaultUI
+        Include="@(ReferencePath)"
+        Condition="'%(ReferencePath.FileName)' == 'Microsoft.AspNetCore.Identity.UI'"
+      />
     </ItemGroup>
     <ItemGroup>
       <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
@@ -38,11 +44,20 @@
       <_IdentityUIContent Include="$(MSBuildThisFileDirectory)..\..\UI\src\assets\**\*" />
       <_IdentityUIPages Include="$(MSBuildThisFileDirectory)..\..\UI\src\Areas\Identity\Pages\**\*" />
     </ItemGroup>
-    <Copy SourceFiles="@(_IdentityUIContent)" DestinationFiles="$(PublishDir)\UI\assets\%(_IdentityUIContent.RecursiveDir)\%(_IdentityUIContent.FileName)%(_IdentityUIContent.Extension)" />
-    <Copy SourceFiles="@(_IdentityUIPages)" DestinationFiles="$(PublishDir)UI\Areas\Identity\Pages\%(_IdentityUIPages.RecursiveDir)\%(_IdentityUIPages.FileName)%(_IdentityUIPages.Extension)" />
+    <Copy
+      SourceFiles="@(_IdentityUIContent)"
+      DestinationFiles="$(PublishDir)\UI\assets\%(_IdentityUIContent.RecursiveDir)\%(_IdentityUIContent.FileName)%(_IdentityUIContent.Extension)"
+    />
+    <Copy
+      SourceFiles="@(_IdentityUIPages)"
+      DestinationFiles="$(PublishDir)UI\Areas\Identity\Pages\%(_IdentityUIPages.RecursiveDir)\%(_IdentityUIPages.FileName)%(_IdentityUIPages.Extension)"
+    />
     <!-- Drop a dummy sln to specify content root location -->
-    <WriteLinesToFile File="$(PublishDir)\contentroot.sln" Lines="Ignored" Overwrite="true" Encoding="Unicode" />
+    <WriteLinesToFile
+      File="$(PublishDir)\contentroot.sln"
+      Lines="Ignored"
+      Overwrite="true"
+      Encoding="Unicode"
+    />
   </Target>
-
-
 </Project>

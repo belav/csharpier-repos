@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageIndex Condition="'$(MSBuildProjectExtension)' == '.pkgproj'" Include="$(PackageIndexFile)" />
+    <PackageIndex
+      Condition="'$(MSBuildProjectExtension)' == '.pkgproj'"
+      Include="$(PackageIndexFile)"
+    />
   </ItemGroup>
 </Project>

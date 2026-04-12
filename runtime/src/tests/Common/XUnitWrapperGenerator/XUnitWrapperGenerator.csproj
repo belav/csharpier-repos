@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -8,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="$(MicrosoftCodeAnalysisVersion_LatestVS)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion_LatestVS)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis"
+      Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <ItemGroup>

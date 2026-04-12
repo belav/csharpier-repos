@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>illink</AssemblyName>
     <Description>IL Linker</Description>
@@ -13,5 +12,4 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.Cecil" Version="$(MicrosoftDotNetCecilVersion)" />
   </ItemGroup>
-
 </Project>

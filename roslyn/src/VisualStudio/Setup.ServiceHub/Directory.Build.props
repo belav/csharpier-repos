@@ -18,8 +18,10 @@
        if the package isn't already present in `Microsoft.CodeAnalysis.LanguageServices` component. We should remove this workaround
        once our integration CI moves to VS 17.7 Preview 2.
     -->
-    <VisualStudioInsertionComponent Condition="'$(OfficialBuild)' == 'true'">Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent>
-    
+    <VisualStudioInsertionComponent Condition="'$(OfficialBuild)' == 'true'"
+      >Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent
+    >
+
     <!-- ServiceHub AssemblyPath -->
     <!-- Path to our servicehub entry point dll in the vsix directory relative 
          to our servicehub.servicehub.json files in the same vsix directory -->
@@ -36,6 +38,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="$(SQLitePCLRawbundle_greenVersion)" />
+    <PackageReference
+      Include="SQLitePCLRaw.bundle_green"
+      Version="$(SQLitePCLRawbundle_greenVersion)"
+    />
   </ItemGroup>
 </Project>

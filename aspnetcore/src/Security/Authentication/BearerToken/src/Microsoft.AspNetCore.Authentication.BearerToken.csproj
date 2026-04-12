@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core authentication handler that enables an application to receive an opaque bearer token.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,5 +12,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication" />
   </ItemGroup>
-
 </Project>

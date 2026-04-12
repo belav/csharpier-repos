@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core integration with Azure AppServices.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

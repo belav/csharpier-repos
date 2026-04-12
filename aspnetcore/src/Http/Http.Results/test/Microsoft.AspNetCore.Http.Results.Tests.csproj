@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -13,10 +12,25 @@
     <ProjectReference Include="..\tools\ResultsOfTGenerator\ResultsOfTGenerator.csproj" />
 
     <Compile Include="$(SharedSourceRoot)ResultsTests\*.cs" LinkBase="Shared" />
-    <Content Include="$(HttpResultsSourceRoot)\ResultsCache.StatusCodes.tt" LinkBase="Shared\GeneratedContent" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="$(HttpResultsSourceRoot)\ResultsCache.StatusCodes.cs" LinkBase="Shared\GeneratedContent" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="$(HttpResultsSourceRoot)\ResultsOfT.Generated.cs" LinkBase="Shared\GeneratedContent" CopyToOutputDirectory="PreserveNewest" />
-    <Compile Update="ResultsOfTTests.Generated.cs" Link="Shared\GeneratedContent\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content
+      Include="$(HttpResultsSourceRoot)\ResultsCache.StatusCodes.tt"
+      LinkBase="Shared\GeneratedContent"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="$(HttpResultsSourceRoot)\ResultsCache.StatusCodes.cs"
+      LinkBase="Shared\GeneratedContent"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Content
+      Include="$(HttpResultsSourceRoot)\ResultsOfT.Generated.cs"
+      LinkBase="Shared\GeneratedContent"
+      CopyToOutputDirectory="PreserveNewest"
+    />
+    <Compile
+      Update="ResultsOfTTests.Generated.cs"
+      Link="Shared\GeneratedContent\%(RecursiveDir)%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
-
 </Project>

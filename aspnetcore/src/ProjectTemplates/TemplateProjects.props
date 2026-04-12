@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <EnableDefaultItems>False</EnableDefaultItems>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
@@ -20,5 +19,4 @@
   <ItemGroup>
     <None Include="content/**" />
   </ItemGroup>
-
 </Project>

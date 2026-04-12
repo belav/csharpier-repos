@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core diagnostics middleware abstractions and feature interface definitions.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,5 +12,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
   </ItemGroup>
-
 </Project>

@@ -6,5 +6,4 @@
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\rulesets\EFCore.test.ruleset</CodeAnalysisRuleSet>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
-
 </Project>

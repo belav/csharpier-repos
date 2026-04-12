@@ -4,7 +4,10 @@
     <TestRuntime>true</TestRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <RuntimeHostConfigurationOption Include="System.Diagnostics.DefaultActivityIdFormatIsHierarchial" Value="true" />
+    <RuntimeHostConfigurationOption
+      Include="System.Diagnostics.DefaultActivityIdFormatIsHierarchial"
+      Value="true"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityTests.cs" />

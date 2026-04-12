@@ -1,10 +1,12 @@
 <Type Name="RfcControl" FullName="Novell.Directory.Ldap.Rfc2251.RfcControl">
-  <TypeSignature Language="C#" Value="public class RfcControl : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcControl : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="controlType" Type="Novell.Directory.Ldap.Rfc2251.RfcLdapOID" />
@@ -63,7 +68,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType, Novell.Directory.Ldap.Asn1.Asn1Boolean criticality)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType, Novell.Directory.Ldap.Asn1.Asn1Boolean criticality)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="controlType" Type="Novell.Directory.Ldap.Rfc2251.RfcLdapOID" />
@@ -77,7 +85,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType, Novell.Directory.Ldap.Asn1.Asn1Boolean criticality, Novell.Directory.Ldap.Asn1.Asn1OctetString controlValue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcControl(Novell.Directory.Ldap.Rfc2251.RfcLdapOID controlType, Novell.Directory.Ldap.Asn1.Asn1Boolean criticality, Novell.Directory.Ldap.Asn1.Asn1OctetString controlValue)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="controlType" Type="Novell.Directory.Ldap.Rfc2251.RfcLdapOID" />
@@ -93,7 +104,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcControl(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcControl(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -114,7 +128,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcControl(Novell.Directory.Ldap.Asn1.Asn1Sequence seqObj)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcControl(Novell.Directory.Ldap.Asn1.Asn1Sequence seqObj)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="seqObj" Type="Novell.Directory.Ldap.Asn1.Asn1Sequence" />
@@ -126,7 +143,10 @@
       </Docs>
     </Member>
     <Member MemberName="ControlType">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1OctetString ControlType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1OctetString ControlType { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1OctetString</ReturnType>
@@ -138,7 +158,10 @@
       </Docs>
     </Member>
     <Member MemberName="Criticality">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Boolean Criticality { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Boolean Criticality { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Boolean</ReturnType>
@@ -150,7 +173,10 @@
       </Docs>
     </Member>
     <Member MemberName="ControlValue">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1OctetString ControlValue { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1OctetString ControlValue { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1OctetString</ReturnType>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppToolCurrent)-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -11,5 +10,4 @@
   <ItemGroup>
     <ProjectReference Include="..\DependencyGraphViewer.csproj" />
   </ItemGroup>
-
 </Project>

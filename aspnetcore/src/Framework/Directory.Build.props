@@ -10,15 +10,21 @@
 
     <!-- Platform manifest and package override metadata -->
     <ReferencePackSharedFxVersion>$(AspNetCoreMajorMinorVersion).0</ReferencePackSharedFxVersion>
-    <ReferencePackSharedFxVersion Condition="'$(VersionSuffix)' != ''">$(ReferencePackSharedFxVersion)-$(VersionSuffix)</ReferencePackSharedFxVersion>
+    <ReferencePackSharedFxVersion Condition="'$(VersionSuffix)' != ''"
+      >$(ReferencePackSharedFxVersion)-$(VersionSuffix)</ReferencePackSharedFxVersion
+    >
   </PropertyGroup>
 
   <ItemGroup>
     <FrameworkListRootAttributes Include="Name" Value="$(AspNetCoreAppFrameworkBrandName)" />
-    <FrameworkListRootAttributes Include="TargetFrameworkIdentifier" Value="$(NETCoreAppFrameworkIdentifier)" />
-    <FrameworkListRootAttributes Include="TargetFrameworkVersion"
-      Value="$([MSBuild]::GetTargetFrameworkVersion('$(DefaultNetCoreTargetFramework)', 2))" />
+    <FrameworkListRootAttributes
+      Include="TargetFrameworkIdentifier"
+      Value="$(NETCoreAppFrameworkIdentifier)"
+    />
+    <FrameworkListRootAttributes
+      Include="TargetFrameworkVersion"
+      Value="$([MSBuild]::GetTargetFrameworkVersion('$(DefaultNetCoreTargetFramework)', 2))"
+    />
     <FrameworkListRootAttributes Include="FrameworkName" Value="$(SharedFxName)" />
   </ItemGroup>
-
 </Project>

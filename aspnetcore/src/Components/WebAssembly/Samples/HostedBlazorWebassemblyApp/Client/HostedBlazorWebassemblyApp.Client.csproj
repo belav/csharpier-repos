@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsShippingPackage>false</IsShippingPackage>
@@ -14,5 +13,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared\HostedBlazorWebassemblyApp.Shared.csproj" />
   </ItemGroup>
-
 </Project>

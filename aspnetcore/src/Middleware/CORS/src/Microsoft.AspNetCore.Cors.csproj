@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>CORS middleware and policy for ASP.NET Core to enable cross-origin resource sharing.
 Commonly used types:

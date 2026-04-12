@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  DefaultTargets="Build"
+  ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <ItemGroup Label="shim_libraries">
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_calendarData.c">
       <CompileAs>CompileAsCpp</CompileAs>
@@ -12,22 +16,22 @@
     </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_idna.c">
       <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile> 
+    </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_locale.c">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_localeNumberData.c">
       <CompileAs>CompileAsCpp</CompileAs>
-    </ClCompile> 
+    </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_localeStringData.c">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_normalization.c">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
-      <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_icushim.c">
-        <CompileAs>CompileAsCpp</CompileAs>
-      </ClCompile>
+    <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_icushim.c">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="$(SHIM_GLOBALIZATION)\pal_timeZoneInfo.c">
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>

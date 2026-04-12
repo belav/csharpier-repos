@@ -14,6 +14,9 @@
   <ItemGroup>
     <!-- The Roslyn4.4 project uses multi-targeting to enable nullability annotations,
          so we need to explicitly reference the ns2.0 TFM used by the production source generator -->
-    <ProjectReference Include="..\..\gen\System.Text.Json.SourceGeneration.Roslyn4.4.csproj" SetTargetFramework="TargetFramework=netstandard2.0" />
+    <ProjectReference
+      Include="..\..\gen\System.Text.Json.SourceGeneration.Roslyn4.4.csproj"
+      SetTargetFramework="TargetFramework=netstandard2.0"
+    />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -36,12 +35,13 @@
 
   <ItemGroup>
     <!-- Common or Common-branched source files -->
-    <Compile Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs"
-             Link="Common\System\Buffers\ArrayBufferWriter.cs" />
+    <Compile
+      Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs"
+      Link="Common\System\Buffers\ArrayBufferWriter.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
   </ItemGroup>
-
 </Project>

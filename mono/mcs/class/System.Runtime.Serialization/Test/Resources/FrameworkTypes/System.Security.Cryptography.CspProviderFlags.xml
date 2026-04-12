@@ -1,1 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CspProviderFlags xmlns="http://schemas.datacontract.org/2004/07/System.Security.Cryptography">NoFlags</CspProviderFlags>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CspProviderFlags xmlns="http://schemas.datacontract.org/2004/07/System.Security.Cryptography"
+  >NoFlags</CspProviderFlags
+>

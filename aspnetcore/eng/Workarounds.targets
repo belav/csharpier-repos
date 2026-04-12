@@ -13,11 +13,17 @@
     The web sdk adds an implicit framework reference. This removes it until we can update our build to use framework references.
   -->
   <ItemGroup>
-    <FrameworkReference Remove="Microsoft.AspNetCore.App" Condition="'$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' != 'true'" />
+    <FrameworkReference
+      Remove="Microsoft.AspNetCore.App"
+      Condition="'$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' != 'true'"
+    />
     <!-- Required because the Razor SDK will generate attributes -->
-    <Reference Include="Microsoft.AspNetCore.Mvc" Condition="'$(UsingMicrosoftNETSdkWeb)' == 'true' AND
+    <Reference
+      Include="Microsoft.AspNetCore.Mvc"
+      Condition="'$(UsingMicrosoftNETSdkWeb)' == 'true' AND
       '$(TargetFrameworkIdentifier)' == '$(NETCoreAppFrameworkIdentifier)' AND
-      '$(GenerateRazorAssemblyInfo)' == 'true'" />
+      '$(GenerateRazorAssemblyInfo)' == 'true'"
+    />
   </ItemGroup>
 
   <!-- Workaround for netstandard2.1 projects until we can get a preview 8 SDK containing https://github.com/dotnet/sdk/pull/3463 fix. -->
@@ -35,10 +41,12 @@
   </Target>
 
   <!-- Work around https://github.com/dotnet/aspnetcore/issues/18393 -->
-  <Target Name="_UpdateRazorGenerateAssemblyReferences"
-          AfterTargets="ResolveAssemblyReferenceRazorGenerateInputs"
-          DependsOnTargets="FindReferenceAssembliesForReferences"
-          Condition="'$(CompileUsingReferenceAssemblies)' != 'false'">
+  <Target
+    Name="_UpdateRazorGenerateAssemblyReferences"
+    AfterTargets="ResolveAssemblyReferenceRazorGenerateInputs"
+    DependsOnTargets="FindReferenceAssembliesForReferences"
+    Condition="'$(CompileUsingReferenceAssemblies)' != 'false'"
+  >
     <ItemGroup>
       <RazorReferencePath Remove="@(ReferencePath)" />
       <RazorReferencePath Include="@(ReferencePathWithRefAssemblies)" />
@@ -46,11 +54,21 @@
   </Target>
 
   <!-- Work around https://github.com/dotnet/aspnetcore/issues/34048 -->
-  <Target Name="_RemoveDuplicateLoggingSourceGenerator" AfterTargets="ResolvePackageAssets" Condition="'$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' AND
-      ('$(IsAspNetCoreApp)' == 'true' OR '$(UseAspNetCoreSharedRuntime)' == 'true')">
+  <Target
+    Name="_RemoveDuplicateLoggingSourceGenerator"
+    AfterTargets="ResolvePackageAssets"
+    Condition="'$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' AND
+      ('$(IsAspNetCoreApp)' == 'true' OR '$(UseAspNetCoreSharedRuntime)' == 'true')"
+  >
     <ItemGroup>
-      <ResolvedAnalyzers Remove="@(ResolvedAnalyzers)" Condition="'%(ResolvedAnalyzers.NuGetPackageId)' == 'Microsoft.Extensions.Logging.Abstractions'" />
-      <ResolvedAnalyzers Remove="@(ResolvedAnalyzers)" Condition="'%(ResolvedAnalyzers.NuGetPackageId)' == 'System.Text.Json'" />
+      <ResolvedAnalyzers
+        Remove="@(ResolvedAnalyzers)"
+        Condition="'%(ResolvedAnalyzers.NuGetPackageId)' == 'Microsoft.Extensions.Logging.Abstractions'"
+      />
+      <ResolvedAnalyzers
+        Remove="@(ResolvedAnalyzers)"
+        Condition="'%(ResolvedAnalyzers.NuGetPackageId)' == 'System.Text.Json'"
+      />
     </ItemGroup>
   </Target>
 </Project>

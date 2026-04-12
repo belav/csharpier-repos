@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(TargetFrameworkForNETSDK)</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">$(TargetFrameworks);net462</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'"
+      >$(TargetFrameworks);net462</TargetFrameworks
+    >
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -31,5 +32,4 @@
     <ProjectReference Include="..\System.CommandLine.NamingConventionBinder\System.CommandLine.NamingConventionBinder.csproj" />
     <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" />
   </ItemGroup>
-
 </Project>

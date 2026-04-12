@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core HTTP server that uses the Windows HTTP Server API.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -13,9 +12,11 @@
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <None Include="$(SharedSourceRoot)HttpSys\RequestProcessing\RequestHeaders.Generated.tt" Link="RequestProcessing\RequestHeaders.Generated.tt">
+    <None
+      Include="$(SharedSourceRoot)HttpSys\RequestProcessing\RequestHeaders.Generated.tt"
+      Link="RequestProcessing\RequestHeaders.Generated.tt"
+    >
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RequestHeaders.Generated.cs</LastGenOutput>
     </None>
@@ -25,8 +26,14 @@
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <Compile Include="$(SharedSourceRoot)HttpSys\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)Buffers.MemoryPool\*.cs" LinkBase="MemoryPool" />
-    <Compile Include="$(SharedSourceRoot)ServerInfrastructure\StringUtilities.cs" LinkBase="ServerInfrastructure\StringUtilities.cs" />
-    <Compile Include="$(SharedSourceRoot)ServerInfrastructure\HttpCharacters.cs" LinkBase="ServerInfrastructure\HttpCharacters.cs" />
+    <Compile
+      Include="$(SharedSourceRoot)ServerInfrastructure\StringUtilities.cs"
+      LinkBase="ServerInfrastructure\StringUtilities.cs"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)ServerInfrastructure\HttpCharacters.cs"
+      LinkBase="ServerInfrastructure\HttpCharacters.cs"
+    />
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" />
   </ItemGroup>
 
@@ -59,5 +66,4 @@
       <DependentUpon>RequestHeaders.Generated.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

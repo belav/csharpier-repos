@@ -1,4 +1,6 @@
 <linker>
-    <assembly fullname="test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
-    </assembly>
+  <assembly
+    fullname="test, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    preserve="all"
+  ></assembly>
 </linker>

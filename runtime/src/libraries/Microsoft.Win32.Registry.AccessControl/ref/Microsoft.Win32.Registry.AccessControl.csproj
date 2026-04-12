@@ -9,7 +9,13 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
-    <PackageReference Include="System.Security.AccessControl" Version="$(SystemSecurityAccessControlVersion)" />
+    <PackageReference
+      Include="Microsoft.Win32.Registry"
+      Version="$(MicrosoftWin32RegistryVersion)"
+    />
+    <PackageReference
+      Include="System.Security.AccessControl"
+      Version="$(SystemSecurityAccessControlVersion)"
+    />
   </ItemGroup>
 </Project>

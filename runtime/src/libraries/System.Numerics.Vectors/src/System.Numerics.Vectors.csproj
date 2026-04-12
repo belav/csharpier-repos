@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
@@ -9,5 +8,4 @@
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
   </ItemGroup>
-
 </Project>

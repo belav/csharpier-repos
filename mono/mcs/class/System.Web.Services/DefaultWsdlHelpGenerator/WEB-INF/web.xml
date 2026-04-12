@@ -2,7 +2,6 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app id="WebApp_ID">
-
   <display-name>Mainsoft for Java EE application</display-name>
   <description>Mainsoft for Java EE application.</description>
   <context-param>
@@ -13,7 +12,6 @@
     <param-name>DataDirectory</param-name>
     <param-value>App_Data</param-value>
   </context-param>
-
 
   <context-param>
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -85,7 +83,6 @@
     <servlet-name>VmwDynamicServlet</servlet-name>
     <url-pattern>*.ctrl</url-pattern>
   </servlet-mapping>
-
 
   <servlet-mapping>
     <servlet-name>VmwDynamicServlet</servlet-name>
@@ -229,5 +226,4 @@
   <welcome-file-list>
     <welcome-file>Default.aspx</welcome-file>
   </welcome-file-list>
-
 </web-app>

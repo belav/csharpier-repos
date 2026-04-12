@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware for HTTP Request decompression.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -25,5 +24,4 @@
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)SizeLimitedStream.cs" LinkBase="Shared" />
   </ItemGroup>
-
 </Project>

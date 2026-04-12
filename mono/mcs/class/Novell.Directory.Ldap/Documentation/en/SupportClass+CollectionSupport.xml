@@ -1,10 +1,12 @@
 <Type Name="SupportClass+CollectionSupport" FullName="SupportClass+CollectionSupport">
-  <TypeSignature Language="C#" Value="public class CollectionSupport : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class CollectionSupport : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -82,7 +84,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddAll">
-      <MemberSignature Language="C#" Value="public virtual bool AddAll(System.Collections.ICollection collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool AddAll(System.Collections.ICollection collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -98,7 +103,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddAll">
-      <MemberSignature Language="C#" Value="public virtual bool AddAll(SupportClass+CollectionSupport collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool AddAll(SupportClass+CollectionSupport collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -130,7 +138,10 @@
       </Docs>
     </Member>
     <Member MemberName="ContainsAll">
-      <MemberSignature Language="C#" Value="public virtual bool ContainsAll(System.Collections.ICollection collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool ContainsAll(System.Collections.ICollection collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -146,7 +157,10 @@
       </Docs>
     </Member>
     <Member MemberName="ContainsAll">
-      <MemberSignature Language="C#" Value="public virtual bool ContainsAll(SupportClass+CollectionSupport collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool ContainsAll(SupportClass+CollectionSupport collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -191,7 +205,10 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
-      <MemberSignature Language="C#" Value="public virtual bool RemoveAll(System.Collections.ICollection collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RemoveAll(System.Collections.ICollection collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -207,7 +224,10 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
-      <MemberSignature Language="C#" Value="public virtual bool RemoveAll(SupportClass+CollectionSupport collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RemoveAll(SupportClass+CollectionSupport collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -223,7 +243,10 @@
       </Docs>
     </Member>
     <Member MemberName="RetainAll">
-      <MemberSignature Language="C#" Value="public virtual bool RetainAll(System.Collections.ICollection collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RetainAll(System.Collections.ICollection collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -239,7 +262,10 @@
       </Docs>
     </Member>
     <Member MemberName="RetainAll">
-      <MemberSignature Language="C#" Value="public virtual bool RetainAll(SupportClass+CollectionSupport collection)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RetainAll(SupportClass+CollectionSupport collection)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -284,7 +310,10 @@
       </Docs>
     </Member>
     <Member MemberName="ToCollectionSupport">
-      <MemberSignature Language="C#" Value="public static SupportClass+CollectionSupport ToCollectionSupport(object[] array)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static SupportClass+CollectionSupport ToCollectionSupport(object[] array)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>SupportClass+CollectionSupport</ReturnType>

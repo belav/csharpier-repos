@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DirectFBSurface (IntPtr dfb, IntPtr dfb_surface);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DirectFBSurface (IntPtr dfb, IntPtr dfb_surface);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -1,10 +1,12 @@
 <Type Name="LdapSchema" FullName="Novell.Directory.Ldap.LdapSchema">
-  <TypeSignature Language="C#" Value="public class LdapSchema : Novell.Directory.Ldap.LdapEntry, System.IComparable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapSchema : Novell.Directory.Ldap.LdapEntry, System.IComparable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapSchema(Novell.Directory.Ldap.LdapEntry ent)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapSchema(Novell.Directory.Ldap.LdapEntry ent)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="ent" Type="Novell.Directory.Ldap.LdapEntry" />
@@ -63,7 +68,10 @@
       </Docs>
     </Member>
     <Member MemberName="getAttributeSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapAttributeSchema getAttributeSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapAttributeSchema getAttributeSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapAttributeSchema</ReturnType>
@@ -79,7 +87,10 @@
       </Docs>
     </Member>
     <Member MemberName="getDITContentRuleSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapDITContentRuleSchema getDITContentRuleSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapDITContentRuleSchema getDITContentRuleSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapDITContentRuleSchema</ReturnType>
@@ -95,7 +106,10 @@
       </Docs>
     </Member>
     <Member MemberName="getDITStructureRuleSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapDITStructureRuleSchema getDITStructureRuleSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapDITStructureRuleSchema getDITStructureRuleSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapDITStructureRuleSchema</ReturnType>
@@ -111,7 +125,10 @@
       </Docs>
     </Member>
     <Member MemberName="getDITStructureRuleSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapDITStructureRuleSchema getDITStructureRuleSchema(int ID)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapDITStructureRuleSchema getDITStructureRuleSchema(int ID)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapDITStructureRuleSchema</ReturnType>
@@ -127,7 +144,10 @@
       </Docs>
     </Member>
     <Member MemberName="getMatchingRuleSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapMatchingRuleSchema getMatchingRuleSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapMatchingRuleSchema getMatchingRuleSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapMatchingRuleSchema</ReturnType>
@@ -143,7 +163,10 @@
       </Docs>
     </Member>
     <Member MemberName="getMatchingRuleUseSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapMatchingRuleUseSchema getMatchingRuleUseSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapMatchingRuleUseSchema getMatchingRuleUseSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapMatchingRuleUseSchema</ReturnType>
@@ -159,7 +182,10 @@
       </Docs>
     </Member>
     <Member MemberName="getNameFormSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapNameFormSchema getNameFormSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapNameFormSchema getNameFormSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapNameFormSchema</ReturnType>
@@ -175,7 +201,10 @@
       </Docs>
     </Member>
     <Member MemberName="getObjectClassSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapObjectClassSchema getObjectClassSchema(string name)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapObjectClassSchema getObjectClassSchema(string name)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapObjectClassSchema</ReturnType>
@@ -191,7 +220,10 @@
       </Docs>
     </Member>
     <Member MemberName="getSyntaxSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSyntaxSchema getSyntaxSchema(string oid)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSyntaxSchema getSyntaxSchema(string oid)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSyntaxSchema</ReturnType>
@@ -207,7 +239,10 @@
       </Docs>
     </Member>
     <Member MemberName="AttributeSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator AttributeSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator AttributeSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -219,7 +254,10 @@
       </Docs>
     </Member>
     <Member MemberName="DITContentRuleSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator DITContentRuleSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator DITContentRuleSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -231,7 +269,10 @@
       </Docs>
     </Member>
     <Member MemberName="DITStructureRuleSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator DITStructureRuleSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator DITStructureRuleSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -243,7 +284,10 @@
       </Docs>
     </Member>
     <Member MemberName="MatchingRuleSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator MatchingRuleSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator MatchingRuleSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -255,7 +299,10 @@
       </Docs>
     </Member>
     <Member MemberName="MatchingRuleUseSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator MatchingRuleUseSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator MatchingRuleUseSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -267,7 +314,10 @@
       </Docs>
     </Member>
     <Member MemberName="NameFormSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator NameFormSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator NameFormSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -279,7 +329,10 @@
       </Docs>
     </Member>
     <Member MemberName="ObjectClassSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator ObjectClassSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator ObjectClassSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -291,7 +344,10 @@
       </Docs>
     </Member>
     <Member MemberName="SyntaxSchemas">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator SyntaxSchemas { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator SyntaxSchemas { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -303,7 +359,10 @@
       </Docs>
     </Member>
     <Member MemberName="AttributeNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator AttributeNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator AttributeNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -315,7 +374,10 @@
       </Docs>
     </Member>
     <Member MemberName="DITContentRuleNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator DITContentRuleNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator DITContentRuleNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -327,7 +389,10 @@
       </Docs>
     </Member>
     <Member MemberName="DITStructureRuleNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator DITStructureRuleNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator DITStructureRuleNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -339,7 +404,10 @@
       </Docs>
     </Member>
     <Member MemberName="MatchingRuleNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator MatchingRuleNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator MatchingRuleNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -351,7 +419,10 @@
       </Docs>
     </Member>
     <Member MemberName="MatchingRuleUseNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator MatchingRuleUseNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator MatchingRuleUseNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -363,7 +434,10 @@
       </Docs>
     </Member>
     <Member MemberName="NameFormNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator NameFormNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator NameFormNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -375,7 +449,10 @@
       </Docs>
     </Member>
     <Member MemberName="ObjectClassNames">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator ObjectClassNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator ObjectClassNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

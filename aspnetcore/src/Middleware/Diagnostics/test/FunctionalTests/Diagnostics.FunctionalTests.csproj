@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <SignAssembly>false</SignAssembly>
     <AssemblyName>Diagnostics.FunctionalTests</AssemblyName>
-    <TestDependsOnMssql>true</TestDependsOnMssql> 
+    <TestDependsOnMssql>true</TestDependsOnMssql>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +19,4 @@
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />
   </ItemGroup>
-
 </Project>

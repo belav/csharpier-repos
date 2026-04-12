@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="Microsoft.Win32.PowerModeChangedEventArgs" />
     <ForwardedType Include="Microsoft.Win32.PowerModeChangedEventHandler" />
@@ -21,7 +20,4 @@
     <ForwardedType Include="Microsoft.Win32.UserPreferenceChangingEventArgs" />
     <ForwardedType Include="Microsoft.Win32.UserPreferenceChangingEventHandler" />
   </ItemGroup>
-
 </Project>
-
-    

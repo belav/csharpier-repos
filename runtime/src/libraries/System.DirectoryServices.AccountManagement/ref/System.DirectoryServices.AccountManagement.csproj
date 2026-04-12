@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
-    <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" />
+    <PackageReference
+      Include="System.Security.Principal.Windows"
+      Version="$(SystemSecurityPrincipalWindowsVersion)"
+    />
   </ItemGroup>
 </Project>

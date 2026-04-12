@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- Arcade uses by default xunit as test runner, illink uses nunit instead. -->
@@ -15,25 +14,41 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Cecil" Version="$(MicrosoftDotNetCecilVersion)" PrivateAssets="All" Publish="True" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.Cecil"
+      Version="$(MicrosoftDotNetCecilVersion)"
+      PrivateAssets="All"
+      Publish="True"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+    />
     <ProjectReference Include="$(RepoRoot)\src\coreclr\tools\ILVerification\ILVerification.csproj" />
     <!-- This reference is purely so that the ILLink can resolve this
          dependency of mscorlib. It is not actually required to build
          the tests. -->
-    <PackageReference Include="System.Threading.AccessControl" Version="$(SystemThreadingAccessControlVersion)" />
+    <PackageReference
+      Include="System.Threading.AccessControl"
+      Version="$(SystemThreadingAccessControlVersion)"
+    />
 
-    <ProjectReference Include="..\..\src\linker\Mono.Linker.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\..\src\linker\Mono.Linker.csproj"
+      SkipUseReferenceAssembly="true"
+    />
     <ProjectReference Include="..\Mono.Linker.Tests.Cases\**\*.csproj" />
     <ProjectReference Include="..\Mono.Linker.Tests.Cases.Expectations\Mono.Linker.Tests.Cases.Expectations.csproj" />
   </ItemGroup>
 
   <!-- Tests require ilasm so we make sure that it is live built before executing the tests. -->
   <ItemGroup>
-    <ProjectReference Include="$(CoreClrProjectRoot)runtime.proj"
-                      AdditionalProperties="ClrILToolsSubset=true;Configuration=$(CoreCLRConfiguration)"
-                      ReferenceOutputAssembly="false"
-                      SkipGetTargetFrameworkProperties="true" />
+    <ProjectReference
+      Include="$(CoreClrProjectRoot)runtime.proj"
+      AdditionalProperties="ClrILToolsSubset=true;Configuration=$(CoreCLRConfiguration)"
+      ReferenceOutputAssembly="false"
+      SkipGetTargetFrameworkProperties="true"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,5 +77,4 @@
   </ItemGroup>
 
   <Import Project="..\Trimming.Tests.Shared\Trimming.Tests.Shared.projitems" Label="Shared" />
-
 </Project>

@@ -19,7 +19,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateValidator">
-      <MemberSignature Language="C#" Value="public abstract System.Xml.XmlReader CreateValidator (System.Xml.XmlReader reader, System.Xml.XmlResolver resolver);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Xml.XmlReader CreateValidator (System.Xml.XmlReader reader, System.Xml.XmlResolver resolver);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.XmlReader</ReturnType>
@@ -37,7 +40,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateAttributeValidator">
-      <MemberSignature Language="C#" Value="public virtual System.Xml.XmlReader CreateAttributeValidator (System.Xml.XmlReader reader, System.Xml.XmlResolver resolver);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Xml.XmlReader CreateAttributeValidator (System.Xml.XmlReader reader, System.Xml.XmlResolver resolver);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Xml.XmlReader</ReturnType>
@@ -55,7 +61,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddOption">
-      <MemberSignature Language="C#" Value="public abstract bool AddOption (string name, string arg);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool AddOption (string name, string arg);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
